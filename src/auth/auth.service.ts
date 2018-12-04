@@ -10,6 +10,12 @@ export class AuthService {
     this._oauth = new OAuth2Server({ model: new AuthPasswordModel() });
   }
 
+  public assert<E>(claim: boolean, fail: () => E) {
+    if (!claim) {
+      throw fail();
+    }
+  }
+
   public async validate(token: string) {
     const req = new OAuth2Server.Request({
       method: 'GET',
