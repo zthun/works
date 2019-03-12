@@ -1,12 +1,12 @@
 {
-  "name": "@zthun/auth.services",
+  "name": "@zthun/auth",
   "version": "1.0.0",
-  "description": "An unauthenticated microservice to control a docker system on a remote machine.",
+  "description": "An unauthenticated microservice that manages authentication using oauth2.",
   "author": "Anthony Bonta",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zthun/zdocker.services"
+    "url": "https://github.com/zthun/zauth"
   },
   "main": "dist/app/main.js",
   "scripts": {
