@@ -63,12 +63,12 @@ export class ZUsersController {
    */
   @Post()
   public async create(@Body() user: IZUser): Promise<IZUser> {
-    const filter = pick(user, 'name');
-    ZHttpAssert.assert(!!user.name, () => new BadRequestException('User name is required.'));
+    const filter = pick(user, 'email');
+    ZHttpAssert.assert(!!user.email, () => new BadRequestException('User email is required.'));
     ZHttpAssert.assert(!!user.password, () => new BadRequestException('Password is required.'));
 
     const count = await this._dal.count(ZUsersController.Collection).filter(filter).run();
-    ZHttpAssert.assert(count === 0, () => new ConflictException('User name is already taken.'));
+    ZHttpAssert.assert(count === 0, () => new ConflictException('User email is already taken.'));
 
     const create = ZUserBuilder.empty().merge(user).salt(v4()).encode().user();
     delete create._id;
@@ -91,14 +91,14 @@ export class ZUsersController {
   @Put(':id')
   public async update(@Param() params: { id: string }, @Body() user: Partial<IZUser>): Promise<IZUser> {
     const pid = params.id;
-    const name = user.name;
+    const email = user.email;
 
     const idFilter = { _id: pid };
     const existingList = await this._dal.read<IZUser>(ZUsersController.Collection).filter(idFilter).run();
     ZHttpAssert.assert(existingList.length > 0, () => new NotFoundException());
 
-    const nameFilter = { name, _id: { $ne: pid } };
-    const count = await this._dal.count(ZUsersController.Collection).filter(nameFilter).run();
+    const emailFilter = { email, _id: { $ne: pid } };
+    const count = await this._dal.count(ZUsersController.Collection).filter(emailFilter).run();
     ZHttpAssert.assert(count === 0, () => new ConflictException('User name is already taken.'));
 
     const current = existingList[0];

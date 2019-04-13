@@ -26,7 +26,7 @@ export class ZUserBuilder {
    * @return This object.
    */
   public static public(from: IZUser): ZUserBuilder {
-    return ZUserBuilder.empty().id(from._id).name(from.name);
+    return ZUserBuilder.empty().id(from._id).email(from.email);
   }
 
   private _user: IZUser;
@@ -36,7 +36,7 @@ export class ZUserBuilder {
    */
   private constructor() {
     this._user = {
-      name: ''
+      email: ''
     };
   }
 
@@ -53,14 +53,14 @@ export class ZUserBuilder {
   }
 
   /**
-   * Sets the user name.
+   * Sets the user email.
    *
    * @param val The value to set.
    *
    * @return This object.
    */
-  public name(val: string): ZUserBuilder {
-    this._user.name = val;
+  public email(val: string): ZUserBuilder {
+    this._user.email = val;
     return this;
   }
 

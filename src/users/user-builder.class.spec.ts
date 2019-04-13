@@ -22,7 +22,7 @@ describe('ZUserBuilder', () => {
 
     it('sets the name.', () => {
       const name = v4();
-      assertPropertySet(name, (t) => t.name(name), (u) => u.name);
+      assertPropertySet(name, (t) => t.email(name), (u) => u.email);
     });
 
     it('sets the password.', () => {
@@ -39,7 +39,7 @@ describe('ZUserBuilder', () => {
   describe('Redaction', () => {
     it('removes the password.', () => {
       // Arrange
-      const target = ZUserBuilder.empty().id('id').name('name').password('password').salt('salt').user();
+      const target = ZUserBuilder.empty().id('id').email('name').password('password').salt('salt').user();
       // Act
       const actual = ZUserBuilder.public(target).user();
       // Assert
@@ -48,7 +48,7 @@ describe('ZUserBuilder', () => {
 
     it('removes the salt.', () => {
       // Arrange
-      const target = ZUserBuilder.empty().id('id').name('name').password('password').salt('salt').user();
+      const target = ZUserBuilder.empty().id('id').email('name').password('password').salt('salt').user();
       // Act
       const actual = ZUserBuilder.public(target).user();
       // Assert

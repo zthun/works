@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ZDatabaseMemory } from '@zthun/dal';
+import { ZHealthController } from './health/health.controller';
 import { TokensController } from './tokens/tokens.controller';
 import { TokensService } from './tokens/tokens.service';
 import { ZUsersController } from './users/users.controller';
@@ -8,7 +9,8 @@ import { ZUsersController } from './users/users.controller';
 @Module({
   controllers: [
     ZUsersController,
-    TokensController
+    TokensController,
+    ZHealthController
   ],
   providers: [
     TokensService,

@@ -12,10 +12,10 @@ describe('ZUsersController', () => {
   let userWonderWoman: IZUser;
 
   beforeEach(() => {
-    userSuperman = ZUserBuilder.empty().name('superman').password('superman-secret').user();
-    userBatman = ZUserBuilder.empty().name('batman').password('batman-secret').user();
-    userFlash = ZUserBuilder.empty().name('flash').password('flash-secret').user();
-    userWonderWoman = ZUserBuilder.empty().name('wonder-woman').password('wonder-woman-secret').user();
+    userSuperman = ZUserBuilder.empty().email('superman').password('superman-secret').user();
+    userBatman = ZUserBuilder.empty().email('batman').password('batman-secret').user();
+    userFlash = ZUserBuilder.empty().email('flash').password('flash-secret').user();
+    userWonderWoman = ZUserBuilder.empty().email('wonder-woman').password('wonder-woman-secret').user();
     dal = ZDatabaseMemory.connect('auth');
   });
 
@@ -32,11 +32,11 @@ describe('ZUsersController', () => {
       // Arrange
       const target = createTestTarget();
       await dal.create<IZUser>(ZUsersController.Collection, [userSuperman, userBatman, userFlash, userWonderWoman]).run();
-      const expected = [userSuperman, userBatman, userFlash, userWonderWoman].map((usr) => usr.name);
+      const expected = [userSuperman, userBatman, userFlash, userWonderWoman].map((usr) => usr.email);
       // Act
       const actual = await target.list();
       // Assert
-      expect(actual.map((usr) => usr.name)).toEqual(expected);
+      expect(actual.map((usr) => usr.email)).toEqual(expected);
     });
   });
 
@@ -44,12 +44,12 @@ describe('ZUsersController', () => {
     it('creates the user.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = userSuperman.name;
+      const expected = userSuperman.email;
       // Act
       const user = await target.create(userSuperman);
       const actual = await target.read({ id: user._id });
       // Assert
-      expect(actual.name).toEqual(expected);
+      expect(actual.email).toEqual(expected);
     });
 
     it('secures the password.', async () => {
@@ -64,7 +64,7 @@ describe('ZUsersController', () => {
       expect(actual.password).toEqual(expected.password);
     });
 
-    it('throws a ConflictException if a user with an equivalent name already exists.', async () => {
+    it('throws a ConflictException if a user with an equivalent email already exists.', async () => {
       // Arrange
       const target = createTestTarget();
       await target.create(userSuperman);
@@ -73,10 +73,10 @@ describe('ZUsersController', () => {
       await expect(target.create(userSuperman)).rejects.toBeInstanceOf(ConflictException);
     });
 
-    it('throws a BadRequestException if the user has no name.', async () => {
+    it('throws a BadRequestException if the user has no email.', async () => {
       // Arrange
       const target = createTestTarget();
-      delete userSuperman.name;
+      delete userSuperman.email;
       // Act
       // Assert
       await expect(target.create(userSuperman)).rejects.toBeInstanceOf(BadRequestException);
@@ -110,25 +110,25 @@ describe('ZUsersController', () => {
       userBatman = added[0];
     });
 
-    it('updates the user name.', async () => {
+    it('updates the user email.', async () => {
       // Arrange
       const target = createTestTarget();
-      const userSupermanUpdate: Partial<IZUser> = { name: 'super-man-2' };
+      const userSupermanUpdate: Partial<IZUser> = { email: 'super-man-2' };
       // Act
       const updated = await target.update({ id: userSuperman._id }, userSupermanUpdate);
       // Assert
       expect(updated._id).toEqual(userSuperman._id);
-      expect(updated.name).toEqual(userSupermanUpdate.name);
+      expect(updated.email).toEqual(userSupermanUpdate.email);
     });
 
-    it('does not update the name if the name is not set.', async () => {
+    it('does not update the email if the email is not set.', async () => {
       // Arrange
       const target = createTestTarget();
       const userSupermanUpdate: Partial<IZUser> = { password: 'super-password' };
       // Act
       const updated = await target.update({ id: userSuperman._id }, userSupermanUpdate);
       // Assert
-      expect(updated.name).toEqual(userSuperman.name);
+      expect(updated.email).toEqual(userSuperman.email);
     });
 
     it('updates the password.', async () => {
@@ -156,10 +156,10 @@ describe('ZUsersController', () => {
       expect(actual.password).toEqual(userSuperman.password);
     });
 
-    it('throws a ConflictException if another user has the name already.', async () => {
+    it('throws a ConflictException if another user has the email already.', async () => {
       // Arrange
       const target = createTestTarget();
-      const user = ZUserBuilder.empty().name(userBatman.name).user();
+      const user = ZUserBuilder.empty().email(userBatman.email).user();
       // Act
       // Assert
       await expect(target.update({ id: userSuperman._id }, user)).rejects.toBeInstanceOf(ConflictException);
