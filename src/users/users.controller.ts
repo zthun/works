@@ -1,41 +1,135 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { IPrivateUser } from './private-user.interface';
-import { IPublicUser } from './public-user.interface';
-import { IUserEmail } from './user-email.interface';
-import { IUserPassword } from './user-password.interface';
-import { UsersService } from './users.service';
+import { BadRequestException, Body, ConflictException, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { IZDatabase } from '@zthun/dal';
+import { pick } from 'lodash';
+import { v4 } from 'uuid';
+import { ZHttpAssert } from '../util/http-assert.class';
+import { ZUserBuilder } from './user-builder.class';
+import { IZUser } from './user.interface';
 
+/**
+ * Represents a service to retrieve users.
+ */
 @Controller('users')
-export class UsersController {
-  public constructor(private service: UsersService) { }
+export class ZUsersController {
+  /**
+   * The collection that this controller modifies.
+   */
+  public static readonly Collection = 'users';
 
+  /**
+   * Initializes a new instance of this object.
+   *
+   * @param _dal The data access layer.
+   */
+  public constructor(@Inject('AuthDatabase') private readonly _dal: IZDatabase) { }
+
+  /**
+   * Gets a list of all users.
+   *
+   * @return A promise that, when resolved, has returned all users.
+   */
   @Get()
-  public list(): Promise<IPublicUser[]> {
-    return this.service.list();
+  public async list(): Promise<IZUser[]> {
+    const users = await this._dal.read<IZUser>(ZUsersController.Collection).run();
+    return users.map((user) => ZUserBuilder.public(user).user());
   }
 
+  /**
+   * Gets a specific user.
+   *
+   * @param params The url params.
+   *
+   * @return A promise that, when resolved, has the found user.
+   *
+   * @throws NotFoundException If the user does not exist.
+   */
   @Get(':id')
-  public read(@Param() params: any): Promise<IPublicUser> {
-    return this.service.read(params.id);
+  public async read(@Param() params: { id: string }): Promise<IZUser> {
+    const pid = params.id;
+    const filter = { _id: pid };
+    const user = await this._dal.read<IZUser>(ZUsersController.Collection).filter(filter).run();
+    ZHttpAssert.assert(user.length > 0, () => new NotFoundException());
+    return ZUserBuilder.public(user[0]).user();
   }
 
+  /**
+   * Creates a new user.
+   *
+   * @param user The user to create.
+   *
+   * @return A promise that, when resolved, has returned the new user.
+   *
+   * @throws ConflictException If a user already has the same name or already exists.
+   */
   @Post()
-  public async create(@Body() user: IPrivateUser): Promise<IPublicUser> {
-    return await this.service.create(user);
+  public async create(@Body() user: IZUser): Promise<IZUser> {
+    const filter = pick(user, 'name');
+    ZHttpAssert.assert(!!user.name, () => new BadRequestException('User name is required.'));
+    ZHttpAssert.assert(!!user.password, () => new BadRequestException('Password is required.'));
+
+    const count = await this._dal.count(ZUsersController.Collection).filter(filter).run();
+    ZHttpAssert.assert(count === 0, () => new ConflictException('User name is already taken.'));
+
+    const create = ZUserBuilder.empty().merge(user).salt(v4()).encode().user();
+    delete create._id;
+    const list = await this._dal.create(ZUsersController.Collection, [create]).run();
+    const created = list[0];
+    return ZUserBuilder.public(created).user();
   }
 
-  @Put(':id/emails')
-  public updateEmail(@Param() params: any, @Body() email: IUserEmail): Promise<IPublicUser> {
-    return this.service.updateEmail(params.id, email);
+  /**
+   * Updates an existing user.
+   *
+   * @param params The param that contains the id to update.
+   * @param user The user template to update.
+   *
+   * @return A promise that, when resolved, has returned the updated user.
+   *
+   * @throws NotFoundException If not user exists with the given id.
+   * @throws ConflictException If the name of the user changes and there is already another user with the same name.
+   */
+  @Put(':id')
+  public async update(@Param() params: { id: string }, @Body() user: Partial<IZUser>): Promise<IZUser> {
+    const pid = params.id;
+    const name = user.name;
+
+    const idFilter = { _id: pid };
+    const existingList = await this._dal.read<IZUser>(ZUsersController.Collection).filter(idFilter).run();
+    ZHttpAssert.assert(existingList.length > 0, () => new NotFoundException());
+
+    const nameFilter = { name, _id: { $ne: pid } };
+    const count = await this._dal.count(ZUsersController.Collection).filter(nameFilter).run();
+    ZHttpAssert.assert(count === 0, () => new ConflictException('User name is already taken.'));
+
+    const current = existingList[0];
+    let update = ZUserBuilder.empty().merge(current).merge(user);
+
+    if (user.password) {
+      update = update.salt(v4()).encode();
+    }
+
+    await this._dal.update<IZUser>(ZUsersController.Collection, update.user()).filter(idFilter).run();
+
+    return ZUserBuilder.public(update.user()).user();
   }
 
-  @Put(':id/passwords')
-  public updatePassword(@Param() params: any, @Body() pwd: IUserPassword): Promise<IPublicUser> {
-    return this.service.updatePassword(params.id, pwd);
-  }
-
+  /**
+   * Deletes an existing user.
+   *
+   * @param params The param that contains the id to delete.
+   *
+   * @return A promise that, when resolve, has returned the deleted user.
+   *
+   * @throws NotFoundException If no user with the given id exists.
+   */
   @Delete(':id')
-  public remove(@Param() params: any): Promise<IPublicUser> {
-    return this.service.remove(params.id);
+  public async remove(@Param() params: { id: string }): Promise<IZUser> {
+    const pid = params.id;
+    const filter = { _id: pid };
+    const user = await this._dal.read<IZUser>(ZUsersController.Collection).filter(filter).run();
+    ZHttpAssert.assert(user.length > 0, () => new NotFoundException());
+
+    await this._dal.delete('users').filter(filter).run();
+    return ZUserBuilder.public(user[0]).user();
   }
 }
