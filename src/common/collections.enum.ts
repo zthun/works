@@ -1,0 +1,22 @@
+/**
+ * The name of the database.
+ */
+export const DatabaseName = 'auth';
+
+/**
+ * The collections inside the database.
+ */
+export enum Collections {
+  /**
+   * The users collection.
+   */
+  Users = 'users',
+  /**
+   * The tokens collection.
+   */
+  Tokens = 'tokens',
+  /**
+   * The permissions collection.
+   */
+  Permissions = 'permissions'
+}

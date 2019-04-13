@@ -1,13 +1,16 @@
-import { env } from 'process';
 import { v4 } from 'uuid';
 import { ZUserBuilder } from './user-builder.class';
 import { IZUser } from './user.interface';
 
 describe('ZUserBuilder', () => {
+  function createTestTarget() {
+    return new ZUserBuilder();
+  }
+
   describe('Properties', () => {
     function assertPropertySet<T>(expected: T, buildFn: (target: ZUserBuilder) => ZUserBuilder, actualFn: (user: IZUser) => T) {
       // Arrange
-      const target = ZUserBuilder.empty();
+      const target = createTestTarget();
       // Act
       const user = buildFn(target).user();
       const actual = actualFn(user);
@@ -37,55 +40,34 @@ describe('ZUserBuilder', () => {
   });
 
   describe('Redaction', () => {
-    it('removes the password.', () => {
+    function assertRedactsProperty<T>(propFn: (u: IZUser) => T) {
       // Arrange
-      const target = ZUserBuilder.empty().id('id').email('name').password('password').salt('salt').user();
+      const target = createTestTarget().id(v4()).email(v4()).password(v4()).salt(v4());
       // Act
-      const actual = ZUserBuilder.public(target).user();
+      const user = target.redact().user();
+      const actual = propFn(user);
       // Assert
-      expect(actual.password).toBeFalsy();
+      expect(actual).toBeUndefined();
+    }
+
+    it('removes the password.', () => {
+      assertRedactsProperty((u) => u.password);
     });
 
     it('removes the salt.', () => {
-      // Arrange
-      const target = ZUserBuilder.empty().id('id').email('name').password('password').salt('salt').user();
-      // Act
-      const actual = ZUserBuilder.public(target).user();
-      // Assert
-      expect(actual.salt).toBeFalsy();
+      assertRedactsProperty((u) => u.salt);
     });
   });
 
-  describe('Security', () => {
-    let pepper: string;
-
-    beforeEach(() => {
-      pepper = env.AUTH_PEPPER;
-    });
-
-    afterEach(() => {
-      env.AUTH_PEPPER = pepper;
-    });
-
-    it('encrypts the password.', () => {
+  describe('Clone', () => {
+    it('copies another user.', () => {
       // Arrange
-      const pwd = 'password1';
-      const target = ZUserBuilder.empty().salt(v4()).password(pwd);
+      const userA = createTestTarget().email(v4()).password(v4()).salt(v4()).id(v4()).user();
+      const target = createTestTarget();
       // Act
-      const actual = target.encode().user();
+      const actual = target.copy(userA).user();
       // Assert
-      expect(actual.password).not.toEqual(pwd);
-    });
-
-    it('encrypts the password with a pepper of env.AUTH_PEPPER', () => {
-      // Arrange
-      env.AUTH_PEPPER = v4();
-      const pwd = 'password1';
-      const target = ZUserBuilder.empty().salt(v4()).password(pwd);
-      // Act
-      const actual = target.encode().user();
-      // Assert
-      expect(actual.password).not.toEqual(pwd);
+      expect(JSON.stringify(actual)).toEqual(JSON.stringify(userA));
     });
   });
 });

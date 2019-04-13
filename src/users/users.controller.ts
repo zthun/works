@@ -2,7 +2,11 @@ import { BadRequestException, Body, ConflictException, Controller, Delete, Get, 
 import { IZDatabase } from '@zthun/dal';
 import { pick } from 'lodash';
 import { v4 } from 'uuid';
-import { ZHttpAssert } from '../util/http-assert.class';
+import { Collections } from '../common/collections.enum';
+import { zsha256 } from '../common/hash.function';
+import { ZHttpAssert } from '../common/http-assert.class';
+import { DatabaseToken } from '../common/injection.constants';
+import { IZLogin } from './login.interface';
 import { ZUserBuilder } from './user-builder.class';
 import { IZUser } from './user.interface';
 
@@ -12,16 +16,11 @@ import { IZUser } from './user.interface';
 @Controller('users')
 export class ZUsersController {
   /**
-   * The collection that this controller modifies.
-   */
-  public static readonly Collection = 'users';
-
-  /**
    * Initializes a new instance of this object.
    *
    * @param _dal The data access layer.
    */
-  public constructor(@Inject('AuthDatabase') private readonly _dal: IZDatabase) { }
+  public constructor(@Inject(DatabaseToken) private readonly _dal: IZDatabase) { }
 
   /**
    * Gets a list of all users.
@@ -30,8 +29,8 @@ export class ZUsersController {
    */
   @Get()
   public async list(): Promise<IZUser[]> {
-    const users = await this._dal.read<IZUser>(ZUsersController.Collection).run();
-    return users.map((user) => ZUserBuilder.public(user).user());
+    const users = await this._dal.read<IZUser>(Collections.Users).run();
+    return users.map((user) => new ZUserBuilder().copy(user).redact().user());
   }
 
   /**
@@ -47,9 +46,11 @@ export class ZUsersController {
   public async read(@Param() params: { id: string }): Promise<IZUser> {
     const pid = params.id;
     const filter = { _id: pid };
-    const user = await this._dal.read<IZUser>(ZUsersController.Collection).filter(filter).run();
-    ZHttpAssert.assert(user.length > 0, () => new NotFoundException());
-    return ZUserBuilder.public(user[0]).user();
+    const userBlobs = await this._dal.read<IZUser>(Collections.Users).filter(filter).run();
+    ZHttpAssert.assert(userBlobs.length > 0, () => new NotFoundException());
+
+    const user = userBlobs[0];
+    return new ZUserBuilder().copy(user).redact().user();
   }
 
   /**
@@ -62,26 +63,28 @@ export class ZUsersController {
    * @throws ConflictException If a user already has the same name or already exists.
    */
   @Post()
-  public async create(@Body() user: IZUser): Promise<IZUser> {
-    const filter = pick(user, 'email');
-    ZHttpAssert.assert(!!user.email, () => new BadRequestException('User email is required.'));
-    ZHttpAssert.assert(!!user.password, () => new BadRequestException('Password is required.'));
+  public async create(@Body() login: IZLogin): Promise<IZUser> {
+    const filter = pick(login, 'email');
+    ZHttpAssert.assert(!!login.email, () => new BadRequestException('User email is required.'));
+    ZHttpAssert.assert(!!login.password, () => new BadRequestException('Password is required.'));
+    ZHttpAssert.assert(login.password === login.confirm, () => new BadRequestException('Passwords do not match'));
 
-    const count = await this._dal.count(ZUsersController.Collection).filter(filter).run();
+    const count = await this._dal.count(Collections.Users).filter(filter).run();
     ZHttpAssert.assert(count === 0, () => new ConflictException('User email is already taken.'));
 
-    const create = ZUserBuilder.empty().merge(user).salt(v4()).encode().user();
-    delete create._id;
-    const list = await this._dal.create(ZUsersController.Collection, [create]).run();
-    const created = list[0];
-    return ZUserBuilder.public(created).user();
+    const salt = v4();
+    const password = zsha256(login.password, salt);
+    const create = new ZUserBuilder().email(login.email).password(password).salt(salt).user();
+    const createdBlobs = await this._dal.create(Collections.Users, [create]).run();
+    const created = createdBlobs[0];
+    return new ZUserBuilder().copy(created).redact().user();
   }
 
   /**
    * Updates an existing user.
    *
    * @param params The param that contains the id to update.
-   * @param user The user template to update.
+   * @param login The user template to update.
    *
    * @return A promise that, when resolved, has returned the updated user.
    *
@@ -89,28 +92,39 @@ export class ZUsersController {
    * @throws ConflictException If the name of the user changes and there is already another user with the same name.
    */
   @Put(':id')
-  public async update(@Param() params: { id: string }, @Body() user: Partial<IZUser>): Promise<IZUser> {
+  public async update(@Param() params: { id: string }, @Body() login: Partial<IZLogin>): Promise<IZUser> {
     const pid = params.id;
-    const email = user.email;
 
     const idFilter = { _id: pid };
-    const existingList = await this._dal.read<IZUser>(ZUsersController.Collection).filter(idFilter).run();
-    ZHttpAssert.assert(existingList.length > 0, () => new NotFoundException());
+    const currentBlobs = await this._dal.read<IZUser>(Collections.Users).filter(idFilter).run();
+    ZHttpAssert.assert(currentBlobs.length > 0, () => new NotFoundException());
 
-    const emailFilter = { email, _id: { $ne: pid } };
-    const count = await this._dal.count(ZUsersController.Collection).filter(emailFilter).run();
-    ZHttpAssert.assert(count === 0, () => new ConflictException('User name is already taken.'));
+    const template: Partial<IZUser> = {};
 
-    const current = existingList[0];
-    let update = ZUserBuilder.empty().merge(current).merge(user);
-
-    if (user.password) {
-      update = update.salt(v4()).encode();
+    if (login.email) {
+      const emailFilter = { email: login.email, _id: { $ne: pid } };
+      const count = await this._dal.count(Collections.Users).filter(emailFilter).run();
+      ZHttpAssert.assert(count === 0, () => new ConflictException('User name is already taken.'));
+      template.email = login.email;
     }
 
-    await this._dal.update<IZUser>(ZUsersController.Collection, update.user()).filter(idFilter).run();
+    if (login.password || login.confirm) {
+      ZHttpAssert.assert(!!login.password, () => new BadRequestException('Password is required'));
+      ZHttpAssert.assert(!!login.confirm, () => new BadRequestException('Password confirmation is required'));
+      ZHttpAssert.assert(login.password === login.confirm, () => new BadRequestException('Passwords do not match.'));
+      template.salt = v4();
+      template.password = zsha256(login.password, template.salt);
+    }
 
-    return ZUserBuilder.public(update.user()).user();
+    if (!template.email && !template.password && !template.salt) {
+      const current = currentBlobs[0];
+      return new ZUserBuilder().copy(current).redact().user();
+    }
+
+    await this._dal.update<IZUser>(Collections.Users, template).filter(idFilter).run();
+    const updatedBlobs = await this._dal.read<IZUser>(Collections.Users).filter(idFilter).run();
+    const updated = updatedBlobs[0];
+    return new ZUserBuilder().copy(updated).redact().user();
   }
 
   /**
@@ -126,10 +140,11 @@ export class ZUsersController {
   public async remove(@Param() params: { id: string }): Promise<IZUser> {
     const pid = params.id;
     const filter = { _id: pid };
-    const user = await this._dal.read<IZUser>(ZUsersController.Collection).filter(filter).run();
-    ZHttpAssert.assert(user.length > 0, () => new NotFoundException());
+    const userBlobs = await this._dal.read<IZUser>(Collections.Users).filter(filter).run();
+    ZHttpAssert.assert(userBlobs.length > 0, () => new NotFoundException());
 
+    const user = userBlobs[0];
     await this._dal.delete('users').filter(filter).run();
-    return ZUserBuilder.public(user[0]).user();
+    return new ZUserBuilder().copy(user).redact().user();
   }
 }

@@ -1,21 +1,32 @@
 import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
 import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
+import { v4 } from 'uuid';
+import { Collections } from '../common/collections.enum';
+import { zsha256 } from '../common/hash.function';
+import { ZLoginBuilder } from './login-builder.class';
+import { IZLogin } from './login.interface';
 import { ZUserBuilder } from './user-builder.class';
 import { IZUser } from './user.interface';
 import { ZUsersController } from './users.controller';
 
 describe('ZUsersController', () => {
   let dal: IZDatabase;
-  let userSuperman: IZUser;
-  let userBatman: IZUser;
-  let userFlash: IZUser;
-  let userWonderWoman: IZUser;
+  let userA: IZUser;
+  let userB: IZUser;
+  let loginA: IZLogin;
+  let loginB: IZLogin;
 
   beforeEach(() => {
-    userSuperman = ZUserBuilder.empty().email('superman').password('superman-secret').user();
-    userBatman = ZUserBuilder.empty().email('batman').password('batman-secret').user();
-    userFlash = ZUserBuilder.empty().email('flash').password('flash-secret').user();
-    userWonderWoman = ZUserBuilder.empty().email('wonder-woman').password('wonder-woman-secret').user();
+    const salt = v4();
+    loginA = new ZLoginBuilder().email('a@gmail.com').password('super-secret-a').autoConfirm().login();
+    loginB = new ZLoginBuilder().email('b@yahoo.com').password('super-secret-b').autoConfirm().login();
+
+    const saltA = v4();
+    const saltB = v4();
+
+    userA = new ZUserBuilder().email(loginA.email).salt(saltA).password(zsha256(loginA.password, saltA)).user();
+    userB = new ZUserBuilder().email(loginB.email).salt(saltB).password(zsha256(loginB.password, saltB)).user();
+
     dal = ZDatabaseMemory.connect('auth');
   });
 
@@ -28,71 +39,119 @@ describe('ZUsersController', () => {
   }
 
   describe('List', () => {
+    beforeEach(async () => {
+      const blobs = await dal.create(Collections.Users, [userA, userB]).run();
+      userA = blobs[0];
+      userB = blobs[1];
+    });
+
     it('returns all users.', async () => {
       // Arrange
       const target = createTestTarget();
-      await dal.create<IZUser>(ZUsersController.Collection, [userSuperman, userBatman, userFlash, userWonderWoman]).run();
-      const expected = [userSuperman, userBatman, userFlash, userWonderWoman].map((usr) => usr.email);
+      const expected = [userA, userB].map((usr) => new ZUserBuilder().copy(usr).redact().user());
       // Act
       const actual = await target.list();
       // Assert
-      expect(actual.map((usr) => usr.email)).toEqual(expected);
+      expect(actual).toEqual(expected);
     });
   });
 
   describe('Create', () => {
+    beforeEach(async () => {
+      const blobs = await dal.create(Collections.Users, [userB]).run();
+      userB = blobs[0];
+    });
+
     it('creates the user.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = userSuperman.email;
       // Act
-      const user = await target.create(userSuperman);
-      const actual = await target.read({ id: user._id });
+      const created = await target.create(loginA);
+      const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
+      const actual = actualBlobs[0];
       // Assert
-      expect(actual.email).toEqual(expected);
+      expect(actual._id).toBeTruthy();
+      expect(actual.email).toEqual(loginA.email);
+    });
+
+    it('returns a redacted user.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const created = await target.create(loginA);
+      // Assert
+      expect(created.salt).toBeFalsy();
+      expect(created.password).toBeFalsy();
     });
 
     it('secures the password.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const created = await target.create(userSuperman);
-      const list = await dal.read<IZUser>(ZUsersController.Collection).filter({ _id: created._id }).run();
-      const actual = list[0];
-      const expected = ZUserBuilder.empty().merge(actual).password(userSuperman.password).encode().user();
+      const created = await target.create(loginA);
+      const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
+      const actual = actualBlobs[0];
+      const expected = zsha256(loginA.password, actual.salt);
       // Assert
-      expect(actual.password).toEqual(expected.password);
+      expect(actual.salt).toBeTruthy();
+      expect(actual.password).toEqual(expected);
     });
 
     it('throws a ConflictException if a user with an equivalent email already exists.', async () => {
       // Arrange
       const target = createTestTarget();
-      await target.create(userSuperman);
       // Act
       // Assert
-      await expect(target.create(userSuperman)).rejects.toBeInstanceOf(ConflictException);
+      await expect(target.create(loginB)).rejects.toBeInstanceOf(ConflictException);
     });
 
     it('throws a BadRequestException if the user has no email.', async () => {
       // Arrange
       const target = createTestTarget();
-      delete userSuperman.email;
+      delete loginA.email;
       // Act
       // Assert
-      await expect(target.create(userSuperman)).rejects.toBeInstanceOf(BadRequestException);
+      await expect(target.create(loginA)).rejects.toBeInstanceOf(BadRequestException);
     });
 
     it('throws a BadRequestException if the user has no password.', async () => {
       // Arrange
       const target = createTestTarget();
-      delete userSuperman.password;
+      delete loginA.password;
       // Act
       // Assert
-      await expect(target.create(userSuperman)).rejects.toBeInstanceOf(BadRequestException);
+      await expect(target.create(loginA)).rejects.toBeInstanceOf(BadRequestException);
+    });
+
+    it('throws a BadRequestException if the user has a password that is not confirmed.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      loginA.confirm = '';
+      // Act
+      // Assert
+      await expect(target.create(loginA)).rejects.toBeInstanceOf(BadRequestException);
     });
   });
 
   describe('Read', () => {
+    beforeEach(async () => {
+      const blobs = await dal.create(Collections.Users, [userA, userB]).run();
+      userA = blobs[0];
+      userB = blobs[1];
+    });
+
+    it('reads a redacted user.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.read({ id: userA._id });
+      // Assert
+      expect(actual._id).toEqual(userA._id);
+      expect(actual.email).toEqual(userA.email);
+      expect(actual.password).toBeFalsy();
+      expect(actual.salt).toBeFalsy();
+    });
+
     it('throws a NotFoundException if no user exists.', async () => {
       // Arrange
       const target = createTestTarget();
@@ -104,65 +163,92 @@ describe('ZUsersController', () => {
 
   describe('Update', () => {
     beforeEach(async () => {
-      let added = await dal.create<IZUser>(ZUsersController.Collection, [userSuperman]).run();
-      userSuperman = added[0];
-      added = await dal.create<IZUser>(ZUsersController.Collection, [userBatman]).run();
-      userBatman = added[0];
+      const blobs = await dal.create<IZUser>(Collections.Users, [userA, userB]).run();
+      userA = blobs[0];
+      userB = blobs[1];
     });
 
     it('updates the user email.', async () => {
       // Arrange
       const target = createTestTarget();
-      const userSupermanUpdate: Partial<IZUser> = { email: 'super-man-2' };
+      const expected = 'super-user';
+      const template: Partial<IZLogin> = { email: expected };
       // Act
-      const updated = await target.update({ id: userSuperman._id }, userSupermanUpdate);
+      await target.update({ id: userA._id }, template);
+      const blobs = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
+      const actual = blobs[0];
       // Assert
-      expect(updated._id).toEqual(userSuperman._id);
-      expect(updated.email).toEqual(userSupermanUpdate.email);
+      expect(actual.email).toEqual(expected);
     });
 
     it('does not update the email if the email is not set.', async () => {
       // Arrange
       const target = createTestTarget();
-      const userSupermanUpdate: Partial<IZUser> = { password: 'super-password' };
+      const template: Partial<IZLogin> = { password: 'super-password', confirm: 'super-password' };
       // Act
-      const updated = await target.update({ id: userSuperman._id }, userSupermanUpdate);
+      const updated = await target.update({ id: userA._id }, template);
       // Assert
-      expect(updated.email).toEqual(userSuperman.email);
+      expect(updated.email).toEqual(userA.email);
     });
 
     it('updates the password.', async () => {
       // Arrange
       const target = createTestTarget();
-      const userSupermanUpdate: Partial<IZUser> = { password: 'super-man-secret-2' };
+      const template: Partial<IZLogin> = { password: 'super-password', confirm: 'super-password' };
       // Act
-      await target.update({ id: userSuperman._id }, userSupermanUpdate);
-      const list = await dal.read<IZUser>(ZUsersController.Collection).filter({ _id: userSuperman._id }).run();
-      const actual = list[0];
-      const expected = ZUserBuilder.empty().merge(actual).password(userSupermanUpdate.password).encode().user();
+      await target.update({ id: userA._id }, template);
+      const blobs = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
+      const actual = blobs[0];
+      const expected = zsha256(template.password, actual.salt);
       // Assert
-      expect(actual.password).toEqual(expected.password);
+      expect(actual.password).toEqual(expected);
     });
 
     it('does not update the password if it is not set.', async () => {
       // Arrange
       const target = createTestTarget();
-      const userSupermanUpdate: Partial<IZUser> = {};
       // Act
-      const updated = await target.update({ id: userSuperman._id }, userSupermanUpdate);
-      const list = await dal.read<IZUser>(ZUsersController.Collection).filter({ _id: userSuperman._id }).run();
+      await target.update({ id: userA._id }, {});
+      const list = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
       const actual = list[0];
       // Assert
-      expect(actual.password).toEqual(userSuperman.password);
+      expect(actual.password).toEqual(userA.password);
     });
 
     it('throws a ConflictException if another user has the email already.', async () => {
       // Arrange
       const target = createTestTarget();
-      const user = ZUserBuilder.empty().email(userBatman.email).user();
+      const template: Partial<IZLogin> = { email: userB.email };
       // Act
       // Assert
-      await expect(target.update({ id: userSuperman._id }, user)).rejects.toBeInstanceOf(ConflictException);
+      await expect(target.update({ id: userA._id }, template)).rejects.toBeInstanceOf(ConflictException);
+    });
+
+    it('throws a BadRequestException if the confirm is set but the password is not.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const template = { confirm: 'super-password' };
+      // Act
+      // Assert
+      await expect(target.update({ id: userA._id }, template)).rejects.toBeInstanceOf(BadRequestException);
+    });
+
+    it('throws a BadRequestException if the password is set but the confirm is not.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const template = { password: 'super-password' };
+      // Act
+      // Assert
+      await expect(target.update({ id: userA._id }, template)).rejects.toBeInstanceOf(BadRequestException);
+    });
+
+    it('throws a BadRequestException if the password does not match the confirm.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const template = { password: 'super-password', confirm: 'super' };
+      // Act
+      // Assert
+      await expect(target.update({ id: userA._id }, template)).rejects.toBeInstanceOf(BadRequestException);
     });
 
     it('throws a NotFoundException if there is no id to update.', async () => {
@@ -175,14 +261,18 @@ describe('ZUsersController', () => {
   });
 
   describe('Delete', () => {
+    beforeEach(async () => {
+      const blobs = await dal.create(Collections.Users, [userA]).run();
+      userA = blobs[0];
+    });
     it('deletes the user.', async () => {
       // Arrange
       const target = createTestTarget();
-      const batman = await target.create(userBatman);
       // Act
-      await target.remove({ id: batman._id });
+      await target.remove({ id: userA._id });
+      const blobs = await dal.read(Collections.Users).filter({ _id: userA._id }).run();
       // Assert
-      await expect(target.read({ id: batman._id })).rejects.toBeInstanceOf(NotFoundException);
+      expect(blobs.length).toEqual(0);
     });
 
     it('throws a NotFoundException if there is no id.', async () => {
@@ -191,7 +281,6 @@ describe('ZUsersController', () => {
       // Act
       // Assert
       await expect(target.remove({ id: 'n/a' })).rejects.toBeInstanceOf(NotFoundException);
-
     });
   });
 });

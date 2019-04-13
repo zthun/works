@@ -1,42 +1,18 @@
-import { sha256 } from 'js-sha256';
-import { env } from 'process';
-import { v4 } from 'uuid';
 import { IZUser } from './user.interface';
 
 /**
  * Represents a builder object for a user.
  */
 export class ZUserBuilder {
-  /**
-   * Constructs a new empty user.
-   *
-   * @return A new builder object.
-   */
-  public static empty(): ZUserBuilder {
-    return new ZUserBuilder();
-  }
-
-  /**
-   * Takes an existing user and strips secret information from it.
-   *
-   * This removes the password and salt from the user.
-   *
-   * @param from The user to redact.
-   *
-   * @return This object.
-   */
-  public static public(from: IZUser): ZUserBuilder {
-    return ZUserBuilder.empty().id(from._id).email(from.email);
-  }
-
   private _user: IZUser;
 
   /**
    * Initializes a new instance of this object.
    */
-  private constructor() {
+  public constructor() {
     this._user = {
-      email: ''
+      _id: null,
+      email: null
     };
   }
 
@@ -65,7 +41,9 @@ export class ZUserBuilder {
   }
 
   /**
-   * Sets the password for the user without hashing.
+   * Sets the password for the user.
+   *
+   * This should be a hashed value.
    *
    * @param val The value to set.
    *
@@ -89,25 +67,25 @@ export class ZUserBuilder {
   }
 
   /**
-   * Encodes the password.
+   * Removes unsafe properties to show users.
    *
    * @return This object.
    */
-  public encode(): ZUserBuilder {
-    const pepper = env.AUTH_PEPPER || 'f7f642b7-1dd0-4185-96ea-567f45212fe7';
-    const pwd = sha256(`${this._user.salt}${this._user.password}${pepper}`);
-    return this.password(pwd);
+  public redact(): ZUserBuilder {
+    delete this._user.password;
+    delete this._user.salt;
+    return this;
   }
 
   /**
-   * Merges other's set properties into this user.
+   * Copies everything from the other user.
    *
-   * @param other The object to merge.
+   * @param other The other user to copy.
    *
    * @return This object.
    */
-  public merge(other: Partial<IZUser>): ZUserBuilder {
-    this._user = { ...this._user, ...other };
+  public copy(other: IZUser): ZUserBuilder {
+    this._user = { ...other };
     return this;
   }
 
@@ -117,6 +95,6 @@ export class ZUserBuilder {
    * @return The constructed user.
    */
   public user(): IZUser {
-    return this._user;
+    return { ...this._user };
   }
 }
