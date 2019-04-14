@@ -15,7 +15,7 @@ export interface IZLogin {
   /**
    * The password confirmation.
    *
-   * Required on a create or update.
+   * Required when creating a user or updating a user.
    */
   confirm?: string;
 }

@@ -1,7 +1,7 @@
 import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
 import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
+import { compare, hash } from 'bcrypt';
 import { Collections } from '../common/collections.enum';
-import { zhash, zhashcmp } from '../common/hash.function';
 import { ZLoginBuilder } from './login-builder.class';
 import { IZLogin } from './login.interface';
 import { ZUserBuilder } from './user-builder.class';
@@ -19,8 +19,8 @@ describe('ZUsersController', () => {
     loginA = new ZLoginBuilder().email('a@gmail.com').password('super-secret-a').autoConfirm().login();
     loginB = new ZLoginBuilder().email('b@yahoo.com').password('super-secret-b').autoConfirm().login();
 
-    const pwdA = await zhash(loginA.password);
-    const pwdB = await zhash(loginB.password);
+    const pwdA = await hash(loginA.password, ZUsersController.Rounds);
+    const pwdB = await hash(loginB.password, ZUsersController.Rounds);
 
     userA = new ZUserBuilder().email(loginA.email).password(pwdA).user();
     userB = new ZUserBuilder().email(loginB.email).password(pwdB).user();
@@ -88,7 +88,7 @@ describe('ZUsersController', () => {
       const created = await target.create(loginA);
       const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
       const actual = actualBlobs[0];
-      const same = await zhashcmp(loginA.password, actual.password);
+      const same = await compare(loginA.password, actual.password);
       // Assert
       expect(same).toBeTruthy();
     });
@@ -194,7 +194,7 @@ describe('ZUsersController', () => {
       await target.update({ id: userA._id }, template);
       const blobs = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
       const actual = blobs[0];
-      const same = await zhashcmp(template.password, actual.password);
+      const same = await compare(template.password, actual.password);
       // Assert
       expect(same).toBeTruthy();
     });

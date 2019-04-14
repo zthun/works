@@ -1,8 +1,8 @@
 import { BadRequestException, Body, ConflictException, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { IZDatabase } from '@zthun/dal';
+import { hash } from 'bcrypt';
 import { pick } from 'lodash';
 import { Collections } from '../common/collections.enum';
-import { zhash } from '../common/hash.function';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
 import { IZLogin } from './login.interface';
@@ -14,6 +14,8 @@ import { IZUser } from './user.interface';
  */
 @Controller('users')
 export class ZUsersController {
+  public static readonly Rounds = 10;
+
   /**
    * Initializes a new instance of this object.
    *
@@ -55,7 +57,7 @@ export class ZUsersController {
   /**
    * Creates a new user.
    *
-   * @param user The user to create.
+   * @param login The user to create.
    *
    * @return A promise that, when resolved, has returned the new user.
    *
@@ -71,7 +73,7 @@ export class ZUsersController {
     const count = await this._dal.count(Collections.Users).filter(filter).run();
     ZHttpAssert.assert(count === 0, () => new ConflictException('User email is already taken.'));
 
-    const password = await zhash(login.password);
+    const password = await hash(login.password, ZUsersController.Rounds);
     const create = new ZUserBuilder().email(login.email).password(password).user();
     const createdBlobs = await this._dal.create(Collections.Users, [create]).run();
     const created = createdBlobs[0];
@@ -110,7 +112,7 @@ export class ZUsersController {
       ZHttpAssert.assert(!!login.password, () => new BadRequestException('Password is required'));
       ZHttpAssert.assert(!!login.confirm, () => new BadRequestException('Password confirmation is required'));
       ZHttpAssert.assert(login.password === login.confirm, () => new BadRequestException('Passwords do not match.'));
-      template.password = await zhash(login.password);
+      template.password = await hash(login.password, ZUsersController.Rounds);
     }
 
     if (!template.email && !template.password) {
