@@ -3,7 +3,6 @@ import { IZDatabase } from '@zthun/dal';
 import { Request } from 'express';
 import * as OAuth2Server from 'oauth2-server';
 import { Collections } from '../common/collections.enum';
-import { zsha256 } from '../common/hash.function';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken, OAuthModelToken } from '../common/injection.constants';
 import { OAuthModel } from '../oauth/oauth-modal.type';
@@ -59,9 +58,9 @@ export class TokensController {
     ZHttpAssert.assert(userBlobs.length > 0, () => new UnauthorizedException('The email or password is incorrect.'));
 
     // Validate the user password
-    const user = userBlobs[0];
-    const hash = zsha256(login.password, user.salt);
-    ZHttpAssert.assert(user.password === hash, () => new UnauthorizedException('The email or password is incorrect.'));
+    // const user = userBlobs[0];
+    // const hash = zsha256(login.password, user.salt);
+    // ZHttpAssert.assert(user.password === hash, () => new UnauthorizedException('The email or password is incorrect.'));
 
     // Create the token
     request.body = new ZOAuthParamsBuilder().username(login.email).password(login.password).params();

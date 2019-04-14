@@ -1,15 +1,15 @@
-import { sha256 } from 'js-sha256';
-import { env } from 'process';
+import { compare, hash } from 'bcrypt';
 
 /**
- * A default static pepper in case the environment pepper is not set.
+ * Hashes a password.
+ *
+ * @param pwd The password to hash.
  */
-export const STATIC_PEPPER = 'f7f642b7-1dd0-4185-96ea-567f45212fe7';
+export function zhash(pwd: string): Promise<string> {
+  const rounds = 10;
+  return hash(pwd, rounds);
+}
 
-/**
- * Uses a sha256 hash to encode a password.
- */
-export function zsha256(pwd: string, salt: string): string {
-  const pepper = env.AUTH_PEPPER || STATIC_PEPPER;
-  return sha256(`${salt}${pwd}${pepper}`);
+export function zhashcmp(pwd: string, encrypted: string): Promise<boolean> {
+  return compare(pwd, encrypted);
 }

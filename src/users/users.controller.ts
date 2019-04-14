@@ -1,9 +1,8 @@
 import { BadRequestException, Body, ConflictException, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { IZDatabase } from '@zthun/dal';
 import { pick } from 'lodash';
-import { v4 } from 'uuid';
 import { Collections } from '../common/collections.enum';
-import { zsha256 } from '../common/hash.function';
+import { zhash } from '../common/hash.function';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
 import { IZLogin } from './login.interface';
@@ -72,9 +71,8 @@ export class ZUsersController {
     const count = await this._dal.count(Collections.Users).filter(filter).run();
     ZHttpAssert.assert(count === 0, () => new ConflictException('User email is already taken.'));
 
-    const salt = v4();
-    const password = zsha256(login.password, salt);
-    const create = new ZUserBuilder().email(login.email).password(password).salt(salt).user();
+    const password = await zhash(login.password);
+    const create = new ZUserBuilder().email(login.email).password(password).user();
     const createdBlobs = await this._dal.create(Collections.Users, [create]).run();
     const created = createdBlobs[0];
     return new ZUserBuilder().copy(created).redact().user();
@@ -112,11 +110,10 @@ export class ZUsersController {
       ZHttpAssert.assert(!!login.password, () => new BadRequestException('Password is required'));
       ZHttpAssert.assert(!!login.confirm, () => new BadRequestException('Password confirmation is required'));
       ZHttpAssert.assert(login.password === login.confirm, () => new BadRequestException('Passwords do not match.'));
-      template.salt = v4();
-      template.password = zsha256(login.password, template.salt);
+      template.password = await zhash(login.password);
     }
 
-    if (!template.email && !template.password && !template.salt) {
+    if (!template.email && !template.password) {
       const current = currentBlobs[0];
       return new ZUserBuilder().copy(current).redact().user();
     }

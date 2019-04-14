@@ -32,17 +32,12 @@ describe('ZUserBuilder', () => {
       const pwd = v4();
       assertPropertySet(pwd, (t) => t.password(pwd), (u) => u.password);
     });
-
-    it('sets the salt.', () => {
-      const salt = v4();
-      assertPropertySet(salt, (t) => t.salt(salt), (u) => u.salt);
-    });
   });
 
   describe('Redaction', () => {
     function assertRedactsProperty<T>(propFn: (u: IZUser) => T) {
       // Arrange
-      const target = createTestTarget().id(v4()).email(v4()).password(v4()).salt(v4());
+      const target = createTestTarget().id(v4()).email(v4()).password(v4());
       // Act
       const user = target.redact().user();
       const actual = propFn(user);
@@ -53,16 +48,12 @@ describe('ZUserBuilder', () => {
     it('removes the password.', () => {
       assertRedactsProperty((u) => u.password);
     });
-
-    it('removes the salt.', () => {
-      assertRedactsProperty((u) => u.salt);
-    });
   });
 
   describe('Clone', () => {
     it('copies another user.', () => {
       // Arrange
-      const userA = createTestTarget().email(v4()).password(v4()).salt(v4()).id(v4()).user();
+      const userA = createTestTarget().email(v4()).password(v4()).id(v4()).user();
       const target = createTestTarget();
       // Act
       const actual = target.copy(userA).user();

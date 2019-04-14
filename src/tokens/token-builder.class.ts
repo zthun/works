@@ -7,7 +7,6 @@ export class ZTokenBuilder {
   public constructor() {
     this._token = {
       _id: null,
-      accessToken: null,
       accessTokenExpiresAt: null,
       refreshToken: null,
       refreshTokenExpiresAt: null
@@ -21,11 +20,6 @@ export class ZTokenBuilder {
 
   public userId(val: string): ZTokenBuilder {
     this._token.userId = val;
-    return this;
-  }
-
-  public accessToken(val: string): ZTokenBuilder {
-    this._token.accessToken = val;
     return this;
   }
 
@@ -45,8 +39,7 @@ export class ZTokenBuilder {
   }
 
   public copyOauth(oToken: Token): ZTokenBuilder {
-    return this.id(oToken._id)
-      .accessToken(oToken.accessToken)
+    return this.id(oToken.accessToken)
       .accessTokenExpiresAt(oToken.accessTokenExpiresAt)
       .refreshToken(oToken.refreshToken)
       .refreshTokenExpiresAt(oToken.refreshTokenExpiresAt)
@@ -60,6 +53,8 @@ export class ZTokenBuilder {
 
   public redact(): ZTokenBuilder {
     delete this._token.userId;
+    delete this._token.refreshToken;
+    delete this._token.refreshTokenExpiresAt;
     return this;
   }
 

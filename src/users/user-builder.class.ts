@@ -55,25 +55,12 @@ export class ZUserBuilder {
   }
 
   /**
-   * Sets the salt used to secure the password.
-   *
-   * @param val The value to set.
-   *
-   * @return This object.
-   */
-  public salt(val: string): ZUserBuilder {
-    this._user.salt = val;
-    return this;
-  }
-
-  /**
    * Removes unsafe properties to show users.
    *
    * @return This object.
    */
   public redact(): ZUserBuilder {
     delete this._user.password;
-    delete this._user.salt;
     return this;
   }
 

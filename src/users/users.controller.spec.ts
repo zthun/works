@@ -1,8 +1,7 @@
 import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
 import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
-import { v4 } from 'uuid';
 import { Collections } from '../common/collections.enum';
-import { zsha256 } from '../common/hash.function';
+import { zhash, zhashcmp } from '../common/hash.function';
 import { ZLoginBuilder } from './login-builder.class';
 import { IZLogin } from './login.interface';
 import { ZUserBuilder } from './user-builder.class';
@@ -16,16 +15,15 @@ describe('ZUsersController', () => {
   let loginA: IZLogin;
   let loginB: IZLogin;
 
-  beforeEach(() => {
-    const salt = v4();
+  beforeEach(async () => {
     loginA = new ZLoginBuilder().email('a@gmail.com').password('super-secret-a').autoConfirm().login();
     loginB = new ZLoginBuilder().email('b@yahoo.com').password('super-secret-b').autoConfirm().login();
 
-    const saltA = v4();
-    const saltB = v4();
+    const pwdA = await zhash(loginA.password);
+    const pwdB = await zhash(loginB.password);
 
-    userA = new ZUserBuilder().email(loginA.email).salt(saltA).password(zsha256(loginA.password, saltA)).user();
-    userB = new ZUserBuilder().email(loginB.email).salt(saltB).password(zsha256(loginB.password, saltB)).user();
+    userA = new ZUserBuilder().email(loginA.email).password(pwdA).user();
+    userB = new ZUserBuilder().email(loginB.email).password(pwdB).user();
 
     dal = ZDatabaseMemory.connect('auth');
   });
@@ -80,7 +78,6 @@ describe('ZUsersController', () => {
       // Act
       const created = await target.create(loginA);
       // Assert
-      expect(created.salt).toBeFalsy();
       expect(created.password).toBeFalsy();
     });
 
@@ -91,10 +88,9 @@ describe('ZUsersController', () => {
       const created = await target.create(loginA);
       const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
       const actual = actualBlobs[0];
-      const expected = zsha256(loginA.password, actual.salt);
+      const same = await zhashcmp(loginA.password, actual.password);
       // Assert
-      expect(actual.salt).toBeTruthy();
-      expect(actual.password).toEqual(expected);
+      expect(same).toBeTruthy();
     });
 
     it('throws a ConflictException if a user with an equivalent email already exists.', async () => {
@@ -149,7 +145,6 @@ describe('ZUsersController', () => {
       expect(actual._id).toEqual(userA._id);
       expect(actual.email).toEqual(userA.email);
       expect(actual.password).toBeFalsy();
-      expect(actual.salt).toBeFalsy();
     });
 
     it('throws a NotFoundException if no user exists.', async () => {
@@ -199,9 +194,9 @@ describe('ZUsersController', () => {
       await target.update({ id: userA._id }, template);
       const blobs = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
       const actual = blobs[0];
-      const expected = zsha256(template.password, actual.salt);
+      const same = await zhashcmp(template.password, actual.password);
       // Assert
-      expect(actual.password).toEqual(expected);
+      expect(same).toBeTruthy();
     });
 
     it('does not update the password if it is not set.', async () => {

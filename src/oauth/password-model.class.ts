@@ -43,26 +43,26 @@ export class ZPasswordModel implements PasswordModel {
    * @return A promise that, when resolved, will return the client.
    */
   public getClient(clientId: string, clientSecret: string, callback?: Callback<Client>): Promise<Client> {
-    const oneWeek = 604800; // 7 * 24 * 60 * 60
-
     const client: Client = {
       id: clientId,
       grants: ['password'],
-      accessTokenLifetime: oneWeek
     };
 
     callback(null, client);
     return Promise.resolve(client);
   }
 
-  public async saveToken(token: Token, client: Client, user: User, callback?: Callback<Token>): Promise<Token> {
+  public async saveToken(oauthToken: Token, client: Client, user: User, callback?: Callback<Token>): Promise<Token> {
+    const token = { ...oauthToken };
+    token._id = token.accessToken;
+    delete token.accessToken;
     token.userId = user._id;
-    const blobs = await this._dal.create<Token>(Collections.Tokens, [token]).run();
-    const created = blobs[0];
-    created.client = client;
-    created.user = user;
-    callback(null, created);
-    return created;
+    await this._dal.create<Token>(Collections.Tokens, [token]).run();
+    token.client = client;
+    token.user = user;
+    const result = { ...oauthToken, ...token };
+    callback(null, result);
+    return result;
   }
 
   public async getAccessToken(accessToken: string, callback?: Callback<Token>): Promise<Token> {
