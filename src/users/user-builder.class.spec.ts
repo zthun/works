@@ -32,6 +32,14 @@ describe('ZUserBuilder', () => {
       const pwd = v4();
       assertPropertySet(pwd, (t) => t.password(pwd), (u) => u.password);
     });
+
+    it('sets the login.', () => {
+      assertPropertySet(true, (t) => t.login(), (u) => !!u.login);
+    });
+
+    it('sets the logout.', () => {
+      assertPropertySet(true, (t) => t.logout(), (u) => !!u.logout);
+    });
   });
 
   describe('Redaction', () => {

@@ -5,7 +5,7 @@ import { pick } from 'lodash';
 import { Collections } from '../common/collections.enum';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
-import { IZLogin } from './login.interface';
+import { IZLogin } from '../logins/login.interface';
 import { ZUserBuilder } from './user-builder.class';
 import { IZUser } from './user.interface';
 

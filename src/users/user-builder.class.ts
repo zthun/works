@@ -1,3 +1,4 @@
+import { utc } from 'moment';
 import { IZUser } from './user.interface';
 
 /**
@@ -51,6 +52,26 @@ export class ZUserBuilder {
    */
   public password(val: string): ZUserBuilder {
     this._user.password = val;
+    return this;
+  }
+
+  /**
+   * Marks the login as now.
+   *
+   * @return This object.
+   */
+  public login(): ZUserBuilder {
+    this._user.login = utc().unix();
+    return this;
+  }
+
+  /**
+   * Marks the logout as now.
+   *
+   * @return This object.
+   */
+  public logout(): ZUserBuilder {
+    this._user.logout = utc().unix();
     return this;
   }
 

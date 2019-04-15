@@ -26,8 +26,7 @@ export class ZLoginBuilder {
   }
 
   public autoConfirm(): ZLoginBuilder {
-    this._login.confirm = this._login.password;
-    return this;
+    return this.confirm(this._login.password);
   }
 
   public login() {
