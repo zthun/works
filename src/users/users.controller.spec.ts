@@ -16,6 +16,7 @@ describe('ZUsersController', () => {
   let loginB: IZLogin;
 
   beforeEach(async () => {
+    await ZDatabaseMemory.start();
     loginA = new ZLoginBuilder().email('a@gmail.com').password('super-secret-a').autoConfirm().login();
     loginB = new ZLoginBuilder().email('b@yahoo.com').password('super-secret-b').autoConfirm().login();
 

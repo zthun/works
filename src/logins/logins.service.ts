@@ -9,6 +9,12 @@ import { ZUserBuilder } from '../users/user-builder.class';
 import { IZUser } from '../users/user.interface';
 import { IZLogin } from './login.interface';
 
+/**
+ * Represents a service to log an existing user into the system.
+ *
+ * Technically, this doesn't do much except set a timestamp on the
+ * last time the user logged in.
+ */
 @Injectable()
 export class ZLoginsService {
   /**
@@ -25,7 +31,7 @@ export class ZLoginsService {
    *
    * @param login The login that contains the email and password.
    *
-   * @return The user that was logged in.
+   * @return A promise that, when resolved, has updated the user that logged in.
    *
    * @throws UnauthorizedException if the user cannot be logged in.
    * @throws BadRequestException if the login has no email.
@@ -51,8 +57,12 @@ export class ZLoginsService {
    * Marks the user as logged out.
    *
    * @param id The id of the user to log out.
+   *
+   * @return A promise that, when resolved, has logged the user out.
+   *
+   * @throws NotFoundException if there is no user with the given id.
    */
-  public async logout(id: string) {
+  public async logout(id: string): Promise<IZUser> {
     const blobs = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     ZHttpAssert.assert(blobs.length > 0, () => new NotFoundException('Unable to log out a user that does not exist.'));
     const user = blobs[0];
