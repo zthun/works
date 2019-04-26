@@ -10,7 +10,6 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "start": "node dist/app/main.js",
     "lint": "zlint",
     "test": "jest --coverage",
     "build": "tsc -p ./tsconfig.prod.json",
@@ -53,10 +52,6 @@
   "zlint": {
     "tsFiles": [
       "src/**/*.ts"
-    ],
-    "jsonFiles": [
-      "./.json",
-      "src/**/*.json"
     ]
   }
 }
