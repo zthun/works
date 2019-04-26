@@ -1,4 +1,3 @@
 # Description
 
-This package contains an unauthenticated microservice for controller a docker instance on a remote environment.  
-
+This package contains the micro application for doing oauth2 requests.
