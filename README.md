@@ -1,3 +1,3 @@
 # Description
 
-This package contains the micro application for doing oauth2 requests.
+This is a micro application that enables the oauth2 workflow.

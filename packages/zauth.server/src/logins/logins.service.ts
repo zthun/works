@@ -1,13 +1,11 @@
 import { BadRequestException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { IZLogin, IZUser, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { compare } from 'bcrypt';
 import { utc } from 'moment';
 import { Collections } from '../common/collections.enum';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
-import { ZUserBuilder } from '../users/user-builder.class';
-import { IZUser } from '../users/user.interface';
-import { IZLogin } from './login.interface';
 
 /**
  * Represents a service to log an existing user into the system.

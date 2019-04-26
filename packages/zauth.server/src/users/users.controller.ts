@@ -1,13 +1,11 @@
 import { BadRequestException, Body, ConflictException, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { IZLogin, IZUser, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { hash } from 'bcrypt';
 import { pick } from 'lodash';
 import { Collections } from '../common/collections.enum';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
-import { IZLogin } from '../logins/login.interface';
-import { ZUserBuilder } from './user-builder.class';
-import { IZUser } from './user.interface';
 
 /**
  * Represents a service to retrieve users.
