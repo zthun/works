@@ -15,6 +15,12 @@ describe('ZUsersController', () => {
   let loginA: IZLogin;
   let loginB: IZLogin;
 
+  beforeAll(async () => {
+    await ZDatabaseMemory.start();
+    dal = ZDatabaseMemory.connect('users-controller-test');
+
+  });
+
   beforeEach(async () => {
     await ZDatabaseMemory.start();
     loginA = new ZLoginBuilder().email('a@gmail.com').password('super-secret-a').autoConfirm().login();
@@ -25,12 +31,10 @@ describe('ZUsersController', () => {
 
     userA = new ZUserBuilder().email(loginA.email).password(pwdA).user();
     userB = new ZUserBuilder().email(loginB.email).password(pwdB).user();
-
-    dal = ZDatabaseMemory.connect('auth');
   });
 
   afterEach(async () => {
-    await ZDatabaseMemory.kill();
+    await dal.delete(Collections.Users).run();
   });
 
   function createTestTarget() {

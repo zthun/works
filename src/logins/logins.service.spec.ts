@@ -2,7 +2,7 @@ import { BadRequestException, NotFoundException, UnauthorizedException } from '@
 import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
 import { hash } from 'bcrypt';
 import { utc } from 'moment';
-import { Collections, DatabaseName } from '../common/collections.enum';
+import { Collections } from '../common/collections.enum';
 import { ZUserBuilder } from '../users/user-builder.class';
 import { IZUser } from '../users/user.interface';
 import { ZLoginBuilder } from './login-builder.class';
@@ -18,9 +18,12 @@ describe('ZLoginsService', () => {
     return new ZLoginsService(dal);
   }
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     await ZDatabaseMemory.start();
-    dal = ZDatabaseMemory.connect(DatabaseName);
+    dal = ZDatabaseMemory.connect('logins-service-test');
+  });
+
+  beforeEach(async () => {
     login = new ZLoginBuilder().email('batman@gmail.com').password('bat-plane').autoConfirm().login();
 
     const passwordForLogin = await hash(login.password, 10);
@@ -30,7 +33,7 @@ describe('ZLoginsService', () => {
   });
 
   afterEach(async () => {
-    await ZDatabaseMemory.kill();
+    await dal.delete(Collections.Users).run();
   });
 
   describe('Login', () => {
