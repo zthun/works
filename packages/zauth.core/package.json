@@ -8,12 +8,11 @@
     "type": "git",
     "url": "https://github.com/zthun/zauth"
   },
-  "files": [
-    "/../../dist/packages/zauth.core/src/**"
-  ],
-  "main": "./dist/packages/zauth.core/index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "package": "npm pack"
+    "clean": "rimraf dist *.tgz",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "moment": "=2.24.0"

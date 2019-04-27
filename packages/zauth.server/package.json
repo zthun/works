@@ -8,20 +8,23 @@
     "type": "git",
     "url": "https://github.com/zthun/zauth"
   },
+  "main": "dist/main.js",
   "scripts": {
-    "package": "npm pack",
-    "start": "node dist/app/main.js",
+    "clean": "rimraf dist *.tgz",
+    "build": "tsc",
+    "start": "node dist/main.js",
     "debug": "nodemon"
   },
   "dependencies": {
-    "@nestjs/common": "=6.1.0",
-    "@nestjs/core": "=6.1.0",
-    "@zthun/dal": "=1.0.0",
+    "@nestjs/common": "=6.1.1",
+    "@nestjs/core": "=6.1.1",
+    "@nestjs/platform-express": "^6.1.1",
     "@zthun/auth.core": "=1.0.0-0",
+    "@zthun/dal": "=1.0.0",
     "bcrypt": "=3.0.6",
     "lodash": "=4.17.11",
     "reflect-metadata": "=0.1.13",
-    "rxjs": "=6.4.0",
+    "rxjs": "=6.5.1",
     "uuid": "=3.3.2"
   }
 }

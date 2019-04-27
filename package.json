@@ -9,12 +9,11 @@
     "url": "https://github.com/zthun/zauth"
   },
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist reports *.tgz && lerna run clean",
     "test": "jest --coverage",
     "lint": "zlint",
-    "build": "tsc -p ./tsconfig.prod.json",
+    "build": "lerna run build",
     "make": "npm run clean && npm run lint && npm run test && npm run build",
-    "package": "lerna run package",
     "publish": "lerna run publish",
     "start": "lerna run debug",
     "pack": "lerna run pack",
@@ -52,16 +51,16 @@
     "moduleNameMapper": {
       "@zthun/auth.core": "<rootDir>/zauth.core/src/index"
     },
-    "coverageDirectory": "../dist/coverage",
+    "coverageDirectory": "../reports/coverage",
     "testEnvironment": "node"
   },
   "zlint": {
     "tsFiles": [
-      "src/**/*.ts"
+      "packages/**/*.ts"
     ],
     "jsonFiles": [
-      "./.json",
-      "src/**/*.json"
+      "./*.json",
+      "packages/**/*.json"
     ]
   }
 }

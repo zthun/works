@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Put } from '@nestjs/common';
+import { IZLogin, IZUser } from '@zthun/auth.core';
 import { ZLoginsService } from './logins.service';
-import { IZUser, IZLogin } from '@zthun/auth.core';
 
 /**
  * Represents a controller for managing logins.

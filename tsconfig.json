@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "baseUrl": "packages",
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
@@ -9,16 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "declaration": true,
-    "outDir": "dist/packages",
     "target": "es6",
-    "sourceMap": true,
-    "paths": {
-      "@zthun/auth.core": [
-        "zauth.core/src/index"
-      ]
-    }
-  },
-  "include": [
-    "**/*.ts"
-  ]
+    "sourceMap": false
+  }
 }

@@ -1,6 +1,16 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "emitDecoratorMetadata": false
-  }
+    "emitDecoratorMetadata": false,
+    "baseUrl": "packages",
+    "paths": {
+      "@zthun/auth.core": [
+        "zauth.core/src/index"
+      ]
+    },
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": []
 }
