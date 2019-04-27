@@ -5,6 +5,14 @@ import { compare, hash } from 'bcrypt';
 import { Collections } from '../common/collections.enum';
 import { ZUsersController } from './users.controller';
 
+beforeAll(async () => {
+  await ZDatabaseMemory.start();
+});
+
+afterAll(async () => {
+  await ZDatabaseMemory.kill();
+});
+
 describe('ZUsersController', () => {
   let dal: IZDatabase;
   let userA: IZUser;
@@ -12,14 +20,9 @@ describe('ZUsersController', () => {
   let loginA: IZLogin;
   let loginB: IZLogin;
 
-  beforeAll(async () => {
-    await ZDatabaseMemory.start();
+  beforeEach(async () => {
     dal = ZDatabaseMemory.connect('users-controller-test');
 
-  });
-
-  beforeEach(async () => {
-    await ZDatabaseMemory.start();
     loginA = new ZLoginBuilder().email('a@gmail.com').password('super-secret-a').autoConfirm().login();
     loginB = new ZLoginBuilder().email('b@yahoo.com').password('super-secret-b').autoConfirm().login();
 
@@ -262,6 +265,7 @@ describe('ZUsersController', () => {
       const blobs = await dal.create(Collections.Users, [userA]).run();
       userA = blobs[0];
     });
+
     it('deletes the user.', async () => {
       // Arrange
       const target = createTestTarget();

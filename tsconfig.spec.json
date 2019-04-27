@@ -7,7 +7,7 @@
       "@zthun/auth.core": [
         "zauth.core/src/index"
       ]
-    },
+    }
   },
   "include": [
     "**/*.ts"

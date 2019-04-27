@@ -6,6 +6,14 @@ import { utc } from 'moment';
 import { Collections } from '../common/collections.enum';
 import { ZLoginsService } from './logins.service';
 
+beforeAll(async () => {
+  await ZDatabaseMemory.start();
+});
+
+afterAll(async () => {
+  await ZDatabaseMemory.kill();
+});
+
 describe('ZLoginsService', () => {
   let dal: IZDatabase;
   let user: IZUser;
@@ -15,12 +23,9 @@ describe('ZLoginsService', () => {
     return new ZLoginsService(dal);
   }
 
-  beforeAll(async () => {
-    await ZDatabaseMemory.start();
-    dal = ZDatabaseMemory.connect('logins-service-test');
-  });
-
   beforeEach(async () => {
+    dal = ZDatabaseMemory.connect('logins-service-test');
+
     login = new ZLoginBuilder().email('batman@gmail.com').password('bat-plane').autoConfirm().login();
 
     const passwordForLogin = await hash(login.password, 10);
