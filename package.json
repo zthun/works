@@ -15,9 +15,9 @@
     "build": "lerna run build",
     "make": "npm run clean && npm run lint && npm run test && npm run build",
     "publish": "lerna run publish",
-    "start": "lerna run debug",
+    "start": "lerna run --parallel debug",
     "pack": "lerna run pack",
-    "bootstrap": "npm install && lerna bootstrap --hoist"
+    "bootstrap": "npm install && lerna bootstrap"
   },
   "devDependencies": {
     "@types/bcrypt": "=3.0.0",
