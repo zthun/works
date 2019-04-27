@@ -1,11 +1,8 @@
 import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
+import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
 import { compare, hash } from 'bcrypt';
 import { Collections } from '../common/collections.enum';
-import { ZLoginBuilder } from '../logins/login-builder.class';
-import { IZLogin } from '../logins/login.interface';
-import { ZUserBuilder } from './user-builder.class';
-import { IZUser } from './user.interface';
 import { ZUsersController } from './users.controller';
 
 describe('ZUsersController', () => {

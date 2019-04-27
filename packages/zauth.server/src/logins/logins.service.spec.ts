@@ -1,12 +1,9 @@
 import { BadRequestException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
 import { hash } from 'bcrypt';
 import { utc } from 'moment';
 import { Collections } from '../common/collections.enum';
-import { ZUserBuilder } from '../users/user-builder.class';
-import { IZUser } from '../users/user.interface';
-import { ZLoginBuilder } from './login-builder.class';
-import { IZLogin } from './login.interface';
 import { ZLoginsService } from './logins.service';
 
 describe('ZLoginsService', () => {

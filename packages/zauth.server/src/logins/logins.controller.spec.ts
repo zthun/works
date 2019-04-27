@@ -1,9 +1,5 @@
-
+import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { v4 } from 'uuid';
-import { ZUserBuilder } from '../users/user-builder.class';
-import { IZUser } from '../users/user.interface';
-import { ZLoginBuilder } from './login-builder.class';
-import { IZLogin } from './login.interface';
 import { ZLoginsController } from './logins.controller';
 import { ZLoginsService } from './logins.service';
 
