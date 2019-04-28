@@ -27,7 +27,7 @@
     "@angular/common": "=7.2.14",
     "@angular/compiler": "=7.2.14",
     "@angular/compiler-cli": "=7.2.14",
-    "@angular/core": "=7.1.1",
+    "@angular/core": "=7.2.14",
     "@angular/forms": "=7.2.14",
     "@angular/http": "=7.2.14",
     "@angular/language-service": "=7.2.14",
@@ -49,18 +49,19 @@
     "jest": "=24.7.1",
     "lerna": "=3.13.4",
     "lodash": "=4.17.11",
-    "ng-packagr": "=5.1.0",
+    "ng-packagr": "=4.7.1",
     "nodemon": "=1.18.11",
     "reflect-metadata": "=0.1.13",
     "rimraf": "=2.6.3",
+    "rollup": "^1.10.1",
     "rxjs": "=6.5.1",
     "ts-jest": "=24.0.2",
     "ts-node": "=8.1.0",
-    "tsickle": "=0.35.0",
+    "tsickle": "=0.34.0",
     "tslib": "=1.9.3",
-    "typescript": "=3.4.5",
+    "typescript": "=3.2.4",
     "uuid": "=3.3.2",
-    "zone.js": "=0.9.0"
+    "zone.js": "=0.8.29"
   },
   "jest": {
     "globals": {

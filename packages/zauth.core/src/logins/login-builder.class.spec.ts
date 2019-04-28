@@ -7,6 +7,19 @@ describe('ZLoginBuilder', () => {
     return new ZLoginBuilder();
   }
 
+  describe('From', () => {
+    it('creates a copy', () => {
+      // Arrange
+      const other = new ZLoginBuilder().email(v4()).password(v4()).autoConfirm().login();
+      const target = createTestTarget();
+      // Act
+      const actual = target.from(other).login();
+      // Assert
+      expect(actual).not.toBe(other);
+      expect(actual).toEqual(other);
+    });
+  });
+
   describe('Properties', () => {
     function assertPropertySet<T>(expected: T, buildFn: (target: ZLoginBuilder) => ZLoginBuilder, actualFn: (user: IZLogin) => T) {
       // Arrange

@@ -2,11 +2,11 @@
     <form>
         <div class="form-group">
             <label class="form-label" zfor="email" i18n>Email:</label>
-            <input class="form-component" zid="email" type="email" [ngModel]="email()" (ngModelChange)="email($event)" i18n-placeholder placeholder="Email" />
+            <input class="form-component" zid="email" type="email" [ngModel]="login.email" (ngModelChange)="email($event)" i18n-placeholder placeholder="Email" />
         </div>
         <div class="form-group">
             <label class="form-label" zfor="password" i18n>Password:</label>
-            <input class="form-component" zid="password" type="password" [ngModel]="password()" (ngModelChange)="password($event)" i18n-placeholder placeholder="Password" />
+            <input class="form-component" zid="password" type="password" [ngModel]="login.password" (ngModelChange)="password($event)" i18n-placeholder placeholder="Password" />
         </div>
         <div class="form-group">
             <button class="btn btn-primary" type="submit" (submit)="login" i18n>Login</button>

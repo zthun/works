@@ -10,6 +10,13 @@ export class ZLoginBuilder {
     };
   }
 
+  public from(other: IZLogin): ZLoginBuilder {
+    this._login.email = other.email;
+    this._login.password = other.password;
+    this._login.confirm = other.confirm;
+    return this;
+  }
+
   public email(val: string): ZLoginBuilder {
     this._login.email = val;
     return this;

@@ -8,10 +8,11 @@
     "type": "git",
     "url": "https://github.com/zthun/zauth"
   },
-  "main": "./dist/index.js",
+  "main": "./dist/esm5/index.js",
+  "browser": "./dist/bundle/zauth.core.umd.js",
   "scripts": {
     "clean": "rimraf dist *.tgz",
-    "build": "tsc",
+    "build": "tsc && rollup",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
