@@ -12,8 +12,8 @@
   "scripts": {
     "clean": "rimraf dist *.tgz",
     "build": "tsc",
-    "start": "node dist/main.js",
-    "debug": "nodemon"
+    "debug": "nodemon",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@nestjs/common": "=6.1.1",

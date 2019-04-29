@@ -15,8 +15,7 @@
     "lint": "zlint",
     "build": "lerna run build",
     "publish": "lerna run publish",
-    "start": "lerna run --parallel debug",
-    "pack": "lerna run pack",
+    "debug": "lerna run --parallel debug",
     "make": "npm run clean && npm run lint && npm run test && npm run build"
   },
   "devDependencies": {

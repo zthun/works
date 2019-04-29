@@ -12,9 +12,13 @@
   },
   "author": "Anthony Bonta",
   "license": "MIT",
+  "main": "./dist/esm5/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist *.tgz",
-    "build": "ng build && rimraf dist/package.json"
+    "build": "ng build && rimraf dist/package.json",
+    "debug": "ng build --configuration debug && rimraf dist/package.json",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "@angular/common": "^7.2.0",

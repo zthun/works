@@ -2,16 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist/esm5",
-    "baseUrl": ".",
-    "declarationDir": "dist/types",
-    "paths": {
-      "@zthun/auth.core": [
-        "node_modules/@zthun/auth.core/src/index"
-      ],
-      "@zthun/auth.angular": [
-        "node_modules/@zthun/auth.angular/src/index"
-      ]
-    }
+    "declarationDir": "dist/types"
   },
   "include": [
     "src/**/*.ts"

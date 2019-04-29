@@ -15,8 +15,9 @@
   "main": "dist/app/main.js",
   "scripts": {
     "clean": "rimraf dist *.tgz",
-    "debug": "ng serve --source-map=true",
-    "build": "ng build"
+    "debug": "ng serve",
+    "build": "ng build",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@zthun/auth.angular": "=1.0.0-0",

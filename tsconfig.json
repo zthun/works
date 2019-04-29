@@ -9,8 +9,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "declaration": true,
-    "target": "esnext",
-    "sourceMap": false,
+    "target": "es5",
+    "sourceMap": true,
     "lib": [
       "es2017",
       "dom"
