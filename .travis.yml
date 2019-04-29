@@ -2,6 +2,6 @@ language: node_js
 node_js: 10.2.1
 sudo: required
 install:
-  - npm install
+  - npm run bootstrap
 script:
   - npm run make
