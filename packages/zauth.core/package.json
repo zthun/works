@@ -10,9 +10,10 @@
   },
   "main": "./dist/esm5/index.js",
   "browser": "./dist/bundle/zauth.core.umd.js",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
     "clean": "rimraf dist *.tgz",
-    "build": "tsc && rollup",
+    "build": "tsc && rollup -c",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
