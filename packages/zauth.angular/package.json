@@ -12,8 +12,6 @@
   },
   "author": "Anthony Bonta",
   "license": "MIT",
-  "main": "dist/esm5/index.js",
-  "types": "dist/types/index.d.ts",
   "scripts": {
     "clean": "rimraf dist *.tgz",
     "build": "ng build"

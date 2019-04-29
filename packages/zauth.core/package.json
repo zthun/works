@@ -9,11 +9,22 @@
     "url": "https://github.com/zthun/zauth"
   },
   "main": "./dist/esm5/index.js",
-  "browser": "./dist/bundle/zauth.core.umd.js",
+  "browser": "./dist/bundles/zauth.core.umd.js",
+  "module": "./dist/esm2015/index.js",
+  "es2015": "./dist/fesm2015/zauth.core.js",
+  "umd": "./dist/bundles/zauth.core.umd.js",
+  "umdMin": "./dist/bundles/zauth.core.umd.min.js",
+  "esm5": "./dist/esm5/index.js",
+  "esm2015": "./dist/esm2015/index.js",
+  "fesm5": "./dist/fesm5/zauth.core.js",
+  "fesm5Min": "./dist/fesm5/zauth.core.min.js",
+  "fesm2015": "./dist/fesm2015/zauth.core.js",
+  "fesm2015Min": "./dist/fesm2015/zauth.core.min.js",
   "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
   "scripts": {
     "clean": "rimraf dist *.tgz",
-    "build": "tsc && rollup -c",
+    "build": "tsc && tsc -p ./tsconfig.esm2015.json && rollup -c",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
