@@ -14,6 +14,8 @@
   "license": "MIT",
   "main": "./dist/esm5/index.js",
   "types": "./dist/index.d.ts",
+  "typings": "./dist/zthun-auth.angular.d.ts",
+  "metadata": "./dist/zthun-auth.angular.metadata.json",
   "scripts": {
     "clean": "rimraf dist *.tgz",
     "build": "ng build && rimraf dist/package.json",

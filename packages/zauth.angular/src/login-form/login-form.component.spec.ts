@@ -1,4 +1,4 @@
-import { IZLogin, ZLoginBuilder } from '@zthun/auth.core';
+import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { v4 } from 'uuid';
 import { ZLoginService } from '../login/login.service';
 import { ZLoginFormComponent } from './login-form.component';
@@ -6,6 +6,7 @@ import { ZLoginFormComponent } from './login-form.component';
 describe('ZLoginFormComponent', () => {
   let service: ZLoginService;
   let login: IZLogin;
+  let user: IZUser;
 
   function createTestTarget() {
     const target = new ZLoginFormComponent(service);
@@ -15,8 +16,10 @@ describe('ZLoginFormComponent', () => {
 
   beforeEach(() => {
     login = new ZLoginBuilder().email('batman@gmail.com').password(v4()).autoConfirm().login();
+    user = new ZUserBuilder().email(login.email).password(login.password).id(v4()).redact().user();
+
     service = {} as ZLoginService;
-    service.login = jest.fn();
+    service.create = jest.fn(() => Promise.resolve(user));
   });
 
   describe('Form', () => {

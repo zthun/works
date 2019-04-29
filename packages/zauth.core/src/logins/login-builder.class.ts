@@ -10,7 +10,7 @@ export class ZLoginBuilder {
     };
   }
 
-  public from(other: IZLogin): ZLoginBuilder {
+  public copy(other: IZLogin): ZLoginBuilder {
     this._login.email = other.email;
     this._login.password = other.password;
     this._login.confirm = other.confirm;

@@ -41,7 +41,7 @@ export class ZLoginFormComponent {
   @Input()
   public set login(val: IZLogin) {
     let builder = new ZLoginBuilder();
-    builder = val ? builder.from(val) : builder;
+    builder = val ? builder.copy(val) : builder;
     this._login = builder.login();
   }
 
@@ -76,7 +76,7 @@ export class ZLoginFormComponent {
    */
   public email(val: string) {
     this.login.email = val;
-    this.loginChange.emit(new ZLoginBuilder().from(this.login).login());
+    this.loginChange.emit(new ZLoginBuilder().copy(this.login).login());
   }
 
   /**
@@ -86,7 +86,7 @@ export class ZLoginFormComponent {
    */
   public password(val?: string) {
     this.login.password = val;
-    this.loginChange.emit(new ZLoginBuilder().from(this.login).login());
+    this.loginChange.emit(new ZLoginBuilder().copy(this.login).login());
   }
 
   /**
