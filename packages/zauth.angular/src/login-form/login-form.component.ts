@@ -9,7 +9,7 @@ import { ZLoginService } from '../login/login.service';
  * and don't want to build and style your own.
  */
 @Component({
-  selector: 'zauth-login-form',
+  selector: 'z-login-form',
   templateUrl: 'login-form.component.html'
 })
 export class ZLoginFormComponent {

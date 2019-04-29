@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { ZLoginModule } from '@zthun/auth.angular';
 import { ZAuthAppComponent } from './auth-app.component';
 
@@ -7,6 +9,8 @@ import { ZAuthAppComponent } from './auth-app.component';
     ZAuthAppComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    BrowserModule,
     ZLoginModule,
   ],
   bootstrap: [ZAuthAppComponent]

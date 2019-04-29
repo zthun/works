@@ -15,13 +15,14 @@
     "lint": "zlint",
     "build": "lerna run build",
     "publish": "lerna run publish",
-    "debug": "lerna run --parallel debug",
+    "debug": "lerna run debug && lerna run --parallel run",
     "make": "npm run clean && npm run lint && npm run test && npm run build"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "=0.13.8",
     "@angular-devkit/build-ng-packagr": "=0.13.8",
     "@angular/animations": "=7.2.14",
+    "@angular/cdk": "=7.3.7",
     "@angular/cli": "=7.3.8",
     "@angular/common": "=7.2.14",
     "@angular/compiler": "=7.2.14",
@@ -30,6 +31,7 @@
     "@angular/forms": "=7.2.14",
     "@angular/http": "=7.2.14",
     "@angular/language-service": "=7.2.14",
+    "@angular/material": "=7.3.7",
     "@angular/platform-browser": "=7.2.14",
     "@angular/platform-browser-dynamic": "=7.2.14",
     "@angular/router": "=7.2.14",
