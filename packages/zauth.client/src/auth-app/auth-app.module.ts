@@ -3,11 +3,12 @@ import { ZLoginModule } from '@zthun/auth.angular';
 import { ZAuthAppComponent } from './auth-app.component';
 
 @NgModule({
-    imports: [
-        ZLoginModule,
-    ],
-    bootstrap: [ZAuthAppComponent]
+  declarations: [
+    ZAuthAppComponent
+  ],
+  imports: [
+    ZLoginModule,
+  ],
+  bootstrap: [ZAuthAppComponent]
 })
-export class ZAuthAppModule {
-
-}
+export class ZAuthAppModule { }

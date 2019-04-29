@@ -1,25 +1,23 @@
 {
-  "compileOnSave": false,
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "outDir": "dist/esm5",
     "baseUrl": ".",
-    "outDir": "dist/app",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es5",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "declarationDir": "dist/types",
     "paths": {
       "@zthun/auth.core": [
-        "../zauth.core/src/index"
+        "node_modules/@zthun/auth.core/src/index"
       ],
       "@zthun/auth.angular": [
-        "../zauth.angular/src/index"
+        "node_modules/@zthun/auth.angular/src/index"
       ]
     }
-  }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.ts"
+  ]
 }

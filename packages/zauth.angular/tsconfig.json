@@ -8,6 +8,13 @@
       "@zthun/auth.core": [
         "node_modules/@zthun/auth.core/src/index"
       ]
-    },
-  }
+    }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.ts"
+  ]
 }

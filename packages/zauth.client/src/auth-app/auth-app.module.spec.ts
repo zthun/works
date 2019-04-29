@@ -1,8 +1,8 @@
-import { ZAuthAppComponent } from './auth-app.component';
+import { ZAuthAppModule } from './auth-app.module';
 
-describe('ZAuthAppComponent', () => {
+describe('ZAuthAppModule', () => {
   function createTestTarget() {
-    return new ZAuthAppComponent();
+    return new ZAuthAppModule();
   }
 
   it('can create.', () => {

@@ -77,8 +77,8 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "moduleNameMapper": {
-      "@zthun/auth.angular": "<rootDir>/zauth.angular/src/index",
-      "@zthun/auth.core": "<rootDir>/zauth.core/src/index"
+      "@zthun/auth.core": "<rootDir>/zauth.core/src/index",
+      "@zthun/auth.angular": "<rootDir>/zauth.angular/src/index"
     },
     "coverageDirectory": "../reports/coverage",
     "testEnvironment": "node"
@@ -93,10 +93,18 @@
     "esFiles": [
       "packages/zauth.core/*.js"
     ],
+    "sassFiles": [
+      "packages/zauth.angular/src/**/*.scss",
+      "packages/zauth.client/src/**/*.scss"
+    ],
+    "htmlFiles": [
+      "packages/zauth.angular/src/**/*.html",
+      "packages/zauth.client/src/**/*.html"
+    ],
     "jsonFiles": [
       "*.json",
-      "packages/zauth.angular/src/**/*.json",
-      "packages/zauth.client/src/**/*.json",
+      "packages/zauth.angular/*.json",
+      "packages/zauth.client/*.json",
       "packages/zauth.core/*.json",
       "packages/zauth.server/*.json"
     ],
