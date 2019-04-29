@@ -6,6 +6,8 @@ import { utc } from 'moment';
 import { Collections } from '../common/collections.enum';
 import { ZLoginsService } from './logins.service';
 
+jest.setTimeout(60000);
+
 beforeAll(async () => {
   await ZDatabaseMemory.start();
 });

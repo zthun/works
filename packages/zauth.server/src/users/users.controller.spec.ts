@@ -5,6 +5,8 @@ import { compare, hash } from 'bcrypt';
 import { Collections } from '../common/collections.enum';
 import { ZUsersController } from './users.controller';
 
+jest.setTimeout(60000);
+
 beforeAll(async () => {
   await ZDatabaseMemory.start();
 });
