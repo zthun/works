@@ -6,7 +6,8 @@ import { ZLoginService } from '../login/login.service';
  * Represents the form data for a username and password box.
  *
  * This is useful if you need a prebuilt login component
- * and don't want to build and style your own.
+ * and don't want to build and style your own.  This
+ * uses angular material.
  */
 @Component({
   selector: 'z-login-form',
