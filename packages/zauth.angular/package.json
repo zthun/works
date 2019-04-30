@@ -1,6 +1,6 @@
 {
   "name": "@zthun/auth.angular",
-  "version": "1.0.0-0",
+  "version": "1.0.0-1.0.0-alpha.0.0",
   "description": "An reusable angular package that provides login forms and user components.",
   "keywords": [
     "oauth2",
@@ -33,6 +33,6 @@
     "@angular/material": "^7.3.0"
   },
   "dependencies": {
-    "@zthun/auth.core": "=1.0.0-0"
+    "@zthun/auth.core": "^1.0.0-1.0.0-alpha.0.0"
   }
 }
