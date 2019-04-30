@@ -13,6 +13,9 @@
     "build": "tsc",
     "debug": "nodemon"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@nestjs/common": "=6.1.1",
     "@nestjs/core": "=6.1.1",

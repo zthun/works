@@ -4,6 +4,7 @@
   "description": "A microapplication that supports the oauth2 workflow in a distributed environment for first party applications.",
   "author": "Anthony Bonta",
   "license": "MIT",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/zauth"
@@ -18,8 +19,8 @@
     "build:client": "ng build --project zauth.angular && ng build --project zauth.client",
     "build:server": "lerna run build --stream",
     "build": "npm run build:server && npm run build:client",
-    "publish": "lerna run publish",
-    "make": "npm run clean && npm run lint && npm run test && npm run build"
+    "make": "npm run clean && npm run lint && npm run test && npm run build",
+    "release": "npm run make && lerna publish"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "=0.13.8",
