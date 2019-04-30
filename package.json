@@ -9,8 +9,8 @@
     "url": "https://github.com/zthun/zauth"
   },
   "scripts": {
-    "bootstrap": "npm install && lerna bootstrap",
-    "clean": "rimraf dist reports *.tgz && lerna run clean",
+    "bootstrap": "npm install && lerna bootstrap --hoist",
+    "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz",
     "test": "jest --coverage --runInBand",
     "lint": "zlint",
     "debug:client": "ng build --project zauth.angular --configuration debug && ng serve --project zauth.client",

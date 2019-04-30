@@ -12,9 +12,6 @@
   },
   "author": "Anthony Bonta",
   "license": "MIT",
-  "scripts": {
-    "clean": "rimraf dist *.tgz"
-  },
   "dependencies": {
     "@zthun/auth.angular": "=1.0.0-0",
     "@zthun/auth.core": "=1.0.0-0"
