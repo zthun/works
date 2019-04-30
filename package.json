@@ -1,6 +1,6 @@
 {
   "name": "@zthun/auth",
-  "version": "1.0.0-0",
+  "version": "0.0.0",
   "description": "A microapplication that supports the oauth2 workflow in a distributed environment for first party applications.",
   "author": "Anthony Bonta",
   "license": "MIT",
