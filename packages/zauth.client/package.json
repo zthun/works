@@ -12,15 +12,11 @@
   },
   "author": "Anthony Bonta",
   "license": "MIT",
-  "main": "dist/app/main.js",
   "scripts": {
-    "clean": "rimraf dist *.tgz",
-    "run": "ng serve",
-    "build": "ng build",
-    "prepublishOnly": "npm run build"
+    "clean": "rimraf dist *.tgz"
   },
   "dependencies": {
     "@zthun/auth.angular": "=1.0.0-0",
-    "@zthun/auth.core": "1.0.0-0"
+    "@zthun/auth.core": "=1.0.0-0"
   }
 }

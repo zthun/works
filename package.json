@@ -13,9 +13,12 @@
     "clean": "rimraf dist reports *.tgz && lerna run clean",
     "test": "jest --coverage --runInBand",
     "lint": "zlint",
-    "build": "lerna run build",
+    "debug:client": "ng build --project zauth.angular --configuration debug && ng serve --project zauth.client",
+    "debug:server": "lerna run debug --stream",
+    "build:client": "ng build --project zauth.angular && ng build --project zauth.client",
+    "build:server": "lerna run build --stream",
+    "build": "npm run build:server && npm run build:client",
     "publish": "lerna run publish",
-    "debug": "lerna run debug && lerna run --parallel run",
     "make": "npm run clean && npm run lint && npm run test && npm run build"
   },
   "devDependencies": {
@@ -46,7 +49,7 @@
     "ajv": "=6.10.0",
     "classlist.js": "=1.1.20150312",
     "codelyzer": "=5.0.1",
-    "core-js": "=3.0.1",
+    "core-js": "=2.6.5",
     "jest": "=24.7.1",
     "lerna": "=3.13.4",
     "lodash": "=4.17.11",

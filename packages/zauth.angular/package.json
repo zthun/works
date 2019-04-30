@@ -13,14 +13,18 @@
   "author": "Anthony Bonta",
   "license": "MIT",
   "main": "./dist/esm5/index.js",
+  "browser": "./dist/bundles/zthun-auth.angular.umd.js",
+  "module": "./dist/esm2015/index.js",
   "types": "./dist/index.d.ts",
+  "es2015": "./dist/fesm2015/zthun-auth.angular.js",
+  "esm5": "./dist/esm5/zthun-auth.angular.js",
+  "esm2015": "./dist/esm2015/zthun-auth.angular.js",
+  "fesm5": "./dist/fesm5/zthun-auth.angular.js",
+  "fesm2015": "./dist/fesm2015/zthun-auth.angular.js",
   "typings": "./dist/zthun-auth.angular.d.ts",
   "metadata": "./dist/zthun-auth.angular.metadata.json",
   "scripts": {
-    "clean": "rimraf dist *.tgz",
-    "build": "ng build && rimraf dist/package.json",
-    "debug": "ng build --configuration debug && rimraf dist/package.json",
-    "prepublishOnly": "npm run build"
+    "clean": "rimraf dist *.tgz"
   },
   "peerDependencies": {
     "@angular/common": "^7.2.0",

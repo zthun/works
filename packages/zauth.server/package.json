@@ -12,7 +12,7 @@
   "scripts": {
     "clean": "rimraf dist *.tgz",
     "build": "tsc",
-    "run": "nodemon",
+    "debug": "nodemon",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

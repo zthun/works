@@ -25,8 +25,7 @@
   "scripts": {
     "clean": "rimraf dist *.tgz",
     "build": "tsc -p ./tsconfig.prod.json && tsc -p ./tsconfig.esm2015.json && rollup -c",
-    "debug": "tsc -p tsconfig.json",
-    "prepublishOnly": "npm run build"
+    "debug": "tsc -p tsconfig.json"
   },
   "dependencies": {
     "moment": "=2.24.0"
