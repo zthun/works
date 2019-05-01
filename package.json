@@ -10,7 +10,7 @@
     "url": "https://github.com/zthun/zauth"
   },
   "scripts": {
-    "bootstrap": "npm install && lerna bootstrap --hoist",
+    "bootstrap": "npm ci && lerna bootstrap --hoist",
     "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz",
     "test": "jest --coverage --runInBand",
     "lint": "zlint",
