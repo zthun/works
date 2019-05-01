@@ -114,6 +114,42 @@
           }
         }
       }
+    },
+    "zauth.angular.playground": {
+      "root": "packages/zauth.angular",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "packages/zauth.angular/dist/playground",
+            "index": "packages/zauth.angular/src/index.html",
+            "main": "packages/zauth.angular/src/main.playground.ts",
+            "polyfills": "packages/zauth.angular/src/polyfills.ts",
+            "tsConfig": "packages/zauth.angular/tsconfig.json",
+            "assets": [],
+            "styles": [],
+            "scripts": [],
+            "optimization": false,
+            "outputHashing": "all",
+            "sourceMap": true,
+            "extractCss": false,
+            "namedChunks": false,
+            "aot": false,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": false
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "zauth.angular.playground:build",
+            "port": 4201
+          }
+        }
+      }
     }
   },
   "defaultProject": "zauth.client"

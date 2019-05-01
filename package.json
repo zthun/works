@@ -10,17 +10,18 @@
     "url": "https://github.com/zthun/zauth"
   },
   "scripts": {
-    "bootstrap": "npm ci && lerna bootstrap --hoist",
+    "bootstrap": "npm ci && lerna bootstrap",
     "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz",
     "test": "jest --coverage --runInBand",
     "lint": "zlint",
     "debug:client": "ng build --project zauth.angular --configuration debug && ng serve --project zauth.client",
     "debug:server": "lerna run debug --stream",
-    "build:client": "ng build --project zauth.angular && ng build --project zauth.client",
+    "build:client": "ng build --project zauth.angular && ng build --project zauth.angular.playground && ng build --project zauth.client",
     "build:server": "lerna run build --stream",
     "build": "npm run build:server && npm run build:client",
     "make": "npm run clean && npm run lint && npm run test && npm run build",
-    "release": "npm run make && lerna publish"
+    "release": "npm run make && lerna publish",
+    "playground": "angular-playground --config packages/zauth.angular/angular-playground.json"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "=0.13.8",
@@ -68,7 +69,8 @@
     "tslib": "=1.9.3",
     "typescript": "=3.2.4",
     "uuid": "=3.3.2",
-    "zone.js": "=0.8.29"
+    "zone.js": "=0.8.29",
+    "angular-playground": "^5.4.3"
   },
   "jest": {
     "globals": {
@@ -116,5 +118,6 @@
     "yamlFiles": [
       "./*.yml"
     ]
-  }
+  },
+  "dependencies": {}
 }
