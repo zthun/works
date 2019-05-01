@@ -32,6 +32,7 @@
     "@angular/forms": "^7.2.0"
   },
   "dependencies": {
+    "@angular/cdk": "^7.3.0",
     "@angular/material": "^7.3.0",
     "@zthun/auth.core": "^1.0.0-2"
   }
