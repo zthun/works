@@ -5,22 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material';
 import { ZLoginFormComponent } from './login-form/login-form.component';
 
+export const ZLoginDeclarations: any[] = [
+  ZLoginFormComponent
+];
+
+export const ZLoginImports: any[] = [
+  HttpClientModule,
+  CommonModule,
+  MatInputModule,
+  FormsModule
+];
+
 @NgModule({
-  declarations: [
-    ZLoginFormComponent
-  ],
-  imports: [
-    HttpClientModule,
-    CommonModule,
-    MatInputModule,
-    FormsModule
-  ],
-  exports: [
-    HttpClientModule,
-    CommonModule,
-    FormsModule,
-    MatInputModule,
-    ZLoginFormComponent
-  ]
+  declarations: ZLoginDeclarations.slice(),
+  imports: ZLoginImports.slice(),
+  exports: ZLoginImports.concat(ZLoginDeclarations)
 })
 export class ZLoginModule { }
