@@ -1,6 +1,6 @@
 {
   "name": "@zthun/auth.server",
-  "version": "1.0.0-1",
+  "version": "1.0.0-2",
   "description": "The server side package for the zauth platform.",
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "@nestjs/common": "=6.1.1",
     "@nestjs/core": "=6.1.1",
     "@nestjs/platform-express": "=6.1.1",
-    "@zthun/auth.core": "=1.0.0-1",
+    "@zthun/auth.core": "^1.0.0-2",
     "@zthun/dal": "=1.0.0",
     "bcrypt": "=3.0.6",
     "lodash": "=4.17.11",
