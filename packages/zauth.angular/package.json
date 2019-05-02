@@ -27,13 +27,16 @@
   "typings": "./dist/zthun-auth.angular.d.ts",
   "metadata": "./dist/zthun-auth.angular.metadata.json",
   "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0",
-    "@angular/forms": "^7.2.0"
+    "@angular/core": "^7.2.0"
   },
   "dependencies": {
     "@angular/cdk": "^7.3.0",
+    "@angular/common": "^7.2.0",
+    "@angular/forms": "^7.2.0",
     "@angular/material": "^7.3.0",
     "@zthun/auth.core": "^1.0.0-2"
-  }
+  },
+  "files": [
+    "dist/**"
+  ]
 }

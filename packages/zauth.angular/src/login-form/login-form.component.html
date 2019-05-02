@@ -1,15 +1,13 @@
-<div class="p-4 border border-solid border-gray bg-white" zid="login">
+<mat-card>
   <form>
-    <div>
-      <label zfor="email" i18n>Email:</label>
-      <input zid="email" name="email" type="email" [ngModel]="login.email" (ngModelChange)="email($event)" i18n-placeholder placeholder="Email" />
-    </div>
-    <div>
-      <label zfor="password" i18n>Password:</label>
-      <input zid="password" name="password" type="password" [ngModel]="login.password" (ngModelChange)="password($event)" i18n-placeholder placeholder="Password" />
-    </div>
-    <div>
-      <button type="submit" (submit)="login" i18n>Login</button>
-    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput zid="email" name="email" type="email" [ngModel]="login.email" (ngModelChange)="email($event)" i18n-placeholder placeholder="Email" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput zid="password" name="password" type="password" [ngModel]="login.password" (ngModelChange)="password($event)" i18n-placeholder placeholder="Password" />
+    </mat-form-field>
+    <button mat-raised-button type="submit" (submit)="login" i18n>Login</button>
   </form>
-</div>
+</mat-card>

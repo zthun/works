@@ -11,7 +11,8 @@ import { ZLoginService } from '../login/login.service';
  */
 @Component({
   selector: 'z-login-form',
-  templateUrl: 'login-form.component.html'
+  templateUrl: 'login-form.component.html',
+  styleUrls: ['./login-form.component.scss']
 })
 export class ZLoginFormComponent {
   /**

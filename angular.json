@@ -129,7 +129,9 @@
             "polyfills": "packages/zauth.angular/src/polyfills.ts",
             "tsConfig": "packages/zauth.angular/tsconfig.json",
             "assets": [],
-            "styles": [],
+            "styles": [
+              "packages/zauth.angular/src/index.scss"
+            ],
             "scripts": [],
             "optimization": false,
             "outputHashing": "all",
