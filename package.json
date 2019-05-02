@@ -10,7 +10,7 @@
     "url": "https://github.com/zthun/zauth"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist",
+    "bootstrap": "lerna bootstrap",
     "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz",
     "test": "jest --coverage --runInBand",
     "lint": "zlint",
@@ -26,18 +26,9 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
     "@angular-devkit/build-ng-packagr": "~0.13.0",
-    "@angular/animations": "^7.0.0",
     "@angular/cli": "^7.0.0",
-    "@angular/common": "^7.0.0",
     "@angular/compiler": "^7.0.0",
     "@angular/compiler-cli": "^7.0.0",
-    "@angular/core": "^7.0.0",
-    "@angular/forms": "^7.0.0",
-    "@angular/http": "^7.0.0",
-    "@angular/language-service": "^7.0.0",
-    "@angular/platform-browser": "^7.0.0",
-    "@angular/platform-browser-dynamic": "^7.0.0",
-    "@angular/router": "^7.0.0",
     "@types/bcrypt": "^3.0.0",
     "@types/express": "^4.0.0",
     "@types/jest": "^24.0.0",
@@ -117,11 +108,5 @@
     "yamlFiles": [
       "./*.yml"
     ]
-  },
-  "dependencies": {
-    "@zthun/auth.angular": "file:packages/zauth.angular",
-    "@zthun/auth.client": "file:packages/zauth.client",
-    "@zthun/auth.core": "file:packages/zauth.core",
-    "@zthun/auth.server": "file:packages/zauth.server"
   }
 }

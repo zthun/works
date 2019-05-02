@@ -16,7 +16,11 @@
   "author": "Anthony Bonta",
   "license": "MIT",
   "dependencies": {
-    "@zthun/auth.client": "^1.0.0-2",
+    "@angular/core": "^7.0.0",
+    "@angular/platform-browser": "^7.0.0",
+    "@angular/platform-browser-dynamic": "^7.0.0",
+    "@angular/animations": "^7.0.0",
+    "@zthun/auth.angular": "^1.0.0-2",
     "@zthun/auth.core": "^1.0.0-2"
   },
   "files": [
