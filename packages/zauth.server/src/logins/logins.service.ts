@@ -2,7 +2,6 @@ import { BadRequestException, Inject, Injectable, NotFoundException, Unauthorize
 import { IZLogin, IZUser, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { compare } from 'bcrypt';
-import { utc } from 'moment';
 import { Collections } from '../common/collections.enum';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
@@ -46,7 +45,7 @@ export class ZLoginsService {
     const passwordsMatch = await compare(dto.password, user.password);
     ZHttpAssert.assert(passwordsMatch, () => new UnauthorizedException('User email or password is incorrect.'));
 
-    await this._dal.update<IZUser>(Collections.Users, { login: utc().unix() }).filter({ _id: user._id }).run();
+    await this._dal.update<IZUser>(Collections.Users, { login: Date.now() }).filter({ _id: user._id }).run();
     const updated = await this._dal.read<IZUser>(Collections.Users).filter({ _id: user._id }).run();
     return new ZUserBuilder().copy(updated[0]).redact().user();
   }
@@ -65,7 +64,7 @@ export class ZLoginsService {
     ZHttpAssert.assert(blobs.length > 0, () => new NotFoundException('Unable to log out a user that does not exist.'));
     const user = blobs[0];
 
-    await this._dal.update(Collections.Users, { logout: utc().unix() }).filter({ _id: user._id }).run();
+    await this._dal.update(Collections.Users, { logout: Date.now() }).filter({ _id: user._id }).run();
     const updated = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     return new ZUserBuilder().copy(updated[0]).redact().user();
   }

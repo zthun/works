@@ -2,7 +2,6 @@ import { BadRequestException, NotFoundException, UnauthorizedException } from '@
 import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
 import { hash } from 'bcrypt';
-import { utc } from 'moment';
 import { Collections } from '../common/collections.enum';
 import { ZLoginsService } from './logins.service';
 
@@ -91,7 +90,7 @@ describe('ZLoginsService', () => {
 
     it('marks the user as logged in.', async () => {
       // Arrange
-      const expected = utc().unix();
+      const expected = Date.now();
       const target = createTestTarget();
       // Act
       await target.login(login);
@@ -113,7 +112,7 @@ describe('ZLoginsService', () => {
 
     it('marks the user as logged out.', async () => {
       // Arrange
-      const expected = utc().unix();
+      const expected = Date.now();
       const target = createTestTarget();
       // Act
       user = await target.login(login);

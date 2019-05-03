@@ -1,4 +1,3 @@
-import { utc } from 'moment';
 import { IZUser } from './user.interface';
 
 /**
@@ -61,7 +60,7 @@ export class ZUserBuilder {
    * @return This object.
    */
   public login(): ZUserBuilder {
-    this._user.login = utc().unix();
+    this._user.login = Date.now();
     return this;
   }
 
@@ -71,7 +70,7 @@ export class ZUserBuilder {
    * @return This object.
    */
   public logout(): ZUserBuilder {
-    this._user.logout = utc().unix();
+    this._user.logout = Date.now();
     return this;
   }
 

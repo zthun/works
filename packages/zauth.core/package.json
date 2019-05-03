@@ -30,9 +30,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "peerDependencies": {
-    "moment": "^2.0.0"
-  },
   "files": [
     "dist/**"
   ]

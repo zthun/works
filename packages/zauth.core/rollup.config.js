@@ -6,17 +6,13 @@ function output(file, format) {
   return {
     name: 'zauth.core',
     file: file,
-    format: format,
-    globals: {
-      moment: 'moment'
-    }
+    format: format
   };
 }
 
 export default [
   {
     input: 'src/index.ts',
-    external: ['moment'],
     output: [
       output(pkg.umd, 'umd'),
       output(pkg.fesm5, 'cjs'),
@@ -28,7 +24,6 @@ export default [
   },
   {
     input: 'src/index.ts',
-    external: ['moment'],
     output: [
       output(pkg.umdMin, 'umd')
     ],

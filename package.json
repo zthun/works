@@ -58,14 +58,13 @@
     "core-js": "^2.0.0",
     "jest": "^24.0.0",
     "lerna": "^3.0.0",
-    "moment": "^2.0.0",
     "ng-packagr": "^4.0.0",
     "nodemon": "^1.0.0",
     "reflect-metadata": "~0.1.0",
     "rimraf": "^2.0.0",
     "rollup": "^1.0.0",
     "rollup-plugin-terser": "^4.0.0",
-    "rollup-plugin-typescript2": "^0.21.0",
+    "rollup-plugin-typescript2": "~0.21.0",
     "rxjs": "^6.0.0",
     "ts-jest": "~24.0.0",
     "ts-node": "~8.1.0",
@@ -74,59 +73,5 @@
     "typescript": "~3.2.0",
     "uuid": "^3.0.0",
     "zone.js": "~0.8.0"
-  },
-  "jest": {
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "./tsconfig.spec.json"
-      }
-    },
-    "rootDir": "packages",
-    "testRegex": ".spec.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "modulePathIgnorePatterns": [
-      "<rootDir>/zauth.core/dist",
-      "<rootDir>/zauth.angular/dist"
-    ],
-    "moduleNameMapper": {
-      "@zthun/auth.core": "<rootDir>/zauth.core/src/index",
-      "@zthun/auth.angular": "<rootDir>/zauth.angular/src/index"
-    },
-    "coverageDirectory": "../reports/coverage",
-    "testEnvironment": "node"
-  },
-  "zlint": {
-    "tsFiles": [
-      "packages/zauth.angular/src/**/*.ts",
-      "packages/zauth.client/src/**/*.ts",
-      "packages/zauth.core/src/**/*.ts",
-      "packages/zauth.server/src/**/*.ts"
-    ],
-    "esFiles": [
-      "packages/zauth.core/*.js"
-    ],
-    "sassFiles": [
-      "packages/zauth.angular/src/**/*.scss",
-      "packages/zauth.client/src/**/*.scss"
-    ],
-    "htmlFiles": [
-      "packages/zauth.angular/src/**/*.html",
-      "packages/zauth.client/src/**/*.html"
-    ],
-    "jsonFiles": [
-      "*.json",
-      "packages/zauth.angular/*.json",
-      "packages/zauth.client/*.json",
-      "packages/zauth.core/*.json",
-      "packages/zauth.server/*.json"
-    ],
-    "yamlFiles": [
-      "./*.yml"
-    ]
-  },
-  "dependencies": {
-    "rollup-plugin-typescript": "^1.0.1"
   }
 }

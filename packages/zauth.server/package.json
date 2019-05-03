@@ -27,7 +27,6 @@
     "@zthun/auth.core",
     "@zthun/dal",
     "bcrypt",
-    "moment",
     "reflect-metadata",
     "rxjs"
   ],
