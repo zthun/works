@@ -1,13 +1,19 @@
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule, MatCardModule, MatInputModule } from '@angular/material';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlaygroundModule } from 'angular-playground';
-import { ZLoginModule } from './login.module';
 
 PlaygroundModule.configure({
   selector: 'z-auth-angular-playground',
   overlay: false,
   modules: [
-    ZLoginModule,
+    CommonModule,
+    FormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
     BrowserAnimationsModule
   ]
 });
