@@ -11,7 +11,7 @@ import { ZAuthAppComponent } from './auth-app.component';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
-    ZLoginModule,
+    ZLoginModule
   ],
   bootstrap: [ZAuthAppComponent]
 })

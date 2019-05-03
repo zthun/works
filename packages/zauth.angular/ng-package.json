@@ -4,10 +4,5 @@
   "deleteDestPath": true,
   "lib": {
     "entryFile": "src/index.ts"
-  },
-  "whitelistedNonPeerDependencies": [
-    "@angular/cdk",
-    "@angular/material",
-    "@zthun/auth.core"
-  ]
+  }
 }
