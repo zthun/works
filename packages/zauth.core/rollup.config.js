@@ -1,26 +1,26 @@
 import pkg from './package.json';
-import typescript from 'rollup-plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
+
+function output(file, format) {
+  return {
+    name: 'zauth.core',
+    file: file,
+    format: format,
+    globals: {
+      moment: 'moment'
+    }
+  };
+}
 
 export default [
   {
     input: 'src/index.ts',
+    external: ['moment'],
     output: [
-      {
-        name: 'zauth.core',
-        file: pkg.umd,
-        format: 'umd'
-      },
-      {
-        name: 'zauth.core',
-        file: pkg.fesm5,
-        format: 'cjs'
-      },
-      {
-        name: 'zauth.core',
-        file: pkg.fesm2015,
-        format: 'es'
-      }
+      output(pkg.umd, 'umd'),
+      output(pkg.fesm5, 'cjs'),
+      output(pkg.fesm2015, 'es')
     ],
     plugins: [
       typescript()
@@ -28,12 +28,9 @@ export default [
   },
   {
     input: 'src/index.ts',
+    external: ['moment'],
     output: [
-      {
-        name: 'zauth.core',
-        file: pkg.umdMin,
-        format: 'umd'
-      }
+      output(pkg.umdMin, 'umd')
     ],
     plugins: [
       typescript(),

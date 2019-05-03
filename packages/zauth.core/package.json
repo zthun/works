@@ -29,7 +29,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
+  "peerDependencies": {
     "moment": "^2.0.0"
   },
   "files": [

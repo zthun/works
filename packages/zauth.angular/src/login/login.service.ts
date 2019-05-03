@@ -11,11 +11,11 @@ import { IZLogin, IZUser } from '@zthun/auth.core';
 export class ZLoginService {
   public constructor(private _http: HttpClient) { }
 
-  public create(login: IZLogin): Promise<IZUser> {
+  public create(/*login: IZLogin*/): Promise<IZUser> {
     return Promise.reject('This method is not yet implemented');
   }
 
-  public delete(email: string): Promise<IZUser> {
+  public delete(/*email: string*/): Promise<IZUser> {
     return Promise.reject('This method is not yet implemented');
   }
 }

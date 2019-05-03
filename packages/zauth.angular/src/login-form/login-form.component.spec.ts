@@ -9,7 +9,7 @@ describe('ZLoginFormComponent', () => {
   let user: IZUser;
 
   function createTestTarget() {
-    const target = new ZLoginFormComponent(service);
+    const target = new ZLoginFormComponent(/*service*/);
     target.login = login;
     return target;
   }

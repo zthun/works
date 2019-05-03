@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IZLogin, ZLoginBuilder } from '@zthun/auth.core';
-import { ZLoginService } from '../login/login.service';
 
-/**
+/**ß
  * Represents the form data for a username and password box.
  *
  * This is useful if you need a prebuilt login component
@@ -63,7 +62,7 @@ export class ZLoginFormComponent {
    *
    * @param _service The service that can be used to run the auth workflow.
    */
-  public constructor(private _service: ZLoginService) {
+  public constructor(/*private _service: ZLoginService*/) {
     this.login = new ZLoginBuilder().login();
     this.redirect = null;
     this.loginChange = new EventEmitter<IZLogin>();

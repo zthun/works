@@ -6,3 +6,4 @@ reports
 *.lerna_backup
 *.log
 *.tgz
+.rpt2_cache
