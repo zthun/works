@@ -34,6 +34,13 @@
     "@angular/material": "^7.0.0",
     "@zthun/auth.core": "^1.0.0-2"
   },
+  "devDependencies": {
+    "@zthun/auth.core": "file:../zauth.core"
+  },
+  "scripts": {
+    "build": "ng build --project zauth.angular",
+    "client": "ng build --project zauth.angular --configuration debug"
+  },
   "files": [
     "dist/**"
   ],

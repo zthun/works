@@ -11,22 +11,25 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "tsc",
-    "debug": "nodemon"
+    "server": "nodemon"
   },
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@nestjs/common": "^6.0.0",
-    "@nestjs/core": "^6.0.0",
-    "@nestjs/platform-express": "^6.0.0",
-    "@zthun/auth.core": "^1.0.0-2",
-    "@zthun/dal": "^1.0.0",
-    "bcrypt": "^3.0.0",
-    "moment": "^2.0.0",
-    "reflect-metadata": "~0.1.0",
-    "rxjs": "^6.0.0"
+  "devDependencies": {
+    "@zthun/auth.core": "file:../zauth.core"
   },
+  "bundledDependencies": [
+    "@nestjs/common",
+    "@nestjs/core",
+    "@nestjs/platform-express",
+    "@zthun/auth.core",
+    "@zthun/dal",
+    "bcrypt",
+    "moment",
+    "reflect-metadata",
+    "rxjs"
+  ],
   "files": [
     "dist/**"
   ]

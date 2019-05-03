@@ -3,6 +3,5 @@ node_js: 10.15.3
 sudo: required
 install:
   - npm ci
-  - npm run bootstrap
 script:
   - npm run make

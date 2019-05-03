@@ -24,7 +24,8 @@
   "typings": "./dist/types/index.d.ts",
   "scripts": {
     "build": "tsc -p ./tsconfig.prod.json && tsc -p ./tsconfig.esm2015.json && rollup -c",
-    "debug": "tsc -p tsconfig.json"
+    "client": "tsc -p tsconfig.json",
+    "server": "npm run client"
   },
   "publishConfig": {
     "access": "public"
