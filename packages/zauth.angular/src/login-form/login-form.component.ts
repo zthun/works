@@ -25,7 +25,7 @@ export class ZLoginFormComponent {
   public set login(val: IZLogin) {
     let builder = new ZLoginBuilder();
     builder = val ? builder.copy(val) : builder;
-    this._login = builder.login();
+    this._login = builder.build();
   }
 
   /**
@@ -37,13 +37,13 @@ export class ZLoginFormComponent {
   @Output()
   public loginChange = new EventEmitter<IZLogin>();
 
-  private _login: IZLogin = new ZLoginBuilder().login();
+  private _login: IZLogin = new ZLoginBuilder().build();
 
   /**
    * Publishes the login change event.
    */
   public publish() {
-    const login = new ZLoginBuilder().copy(this._login).login();
+    const login = new ZLoginBuilder().copy(this._login).build();
     this.loginChange.emit(login);
   }
 }

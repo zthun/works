@@ -13,8 +13,8 @@ describe('ZLoginsController', () => {
   }
 
   beforeEach(() => {
-    login = new ZLoginBuilder().email(v4()).password(v4()).login();
-    user = new ZUserBuilder().id(v4()).email(login.email).password(v4()).logout().login().user();
+    login = new ZLoginBuilder().email(v4()).password(v4()).build();
+    user = new ZUserBuilder().id(v4()).email(login.email).password(v4()).logout().login().build();
 
     service = jest.fn() as unknown as ZLoginsService;
     service.login = jest.fn(() => Promise.resolve(user));

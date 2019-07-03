@@ -27,10 +27,10 @@ describe('ZLoginsService', () => {
   beforeEach(async () => {
     dal = ZDatabaseMemory.connect('logins-service-test');
 
-    login = new ZLoginBuilder().email('batman@gmail.com').password('bat-plane').autoConfirm().login();
+    login = new ZLoginBuilder().email('batman@gmail.com').password('bat-plane').autoConfirm().build();
 
     const passwordForLogin = await hash(login.password, 10);
-    const template = new ZUserBuilder().email(login.email).password(passwordForLogin).user();
+    const template = new ZUserBuilder().email(login.email).password(passwordForLogin).build();
     const blobs = await dal.create(Collections.Users, [template]).run();
     user = blobs[0];
   });

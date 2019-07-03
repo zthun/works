@@ -36,7 +36,7 @@ export class ZLoginBuilder {
     return this.confirm(this._login.password);
   }
 
-  public login() {
+  public build() {
     return { ...this._login };
   }
 }

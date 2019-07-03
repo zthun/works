@@ -10,10 +10,10 @@ describe('ZLoginBuilder', () => {
   describe('Copy', () => {
     it('creates a copy', () => {
       // Arrange
-      const other = new ZLoginBuilder().email(v4()).password(v4()).autoConfirm().login();
+      const other = new ZLoginBuilder().email(v4()).password(v4()).autoConfirm().build();
       const target = createTestTarget();
       // Act
-      const actual = target.copy(other).login();
+      const actual = target.copy(other).build();
       // Assert
       expect(actual).not.toBe(other);
       expect(actual).toEqual(other);
@@ -25,7 +25,7 @@ describe('ZLoginBuilder', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const login = buildFn(target).login();
+      const login = buildFn(target).build();
       const actual = actualFn(login);
       // Assert
       expect(actual).toEqual(expected);
@@ -52,7 +52,7 @@ describe('ZLoginBuilder', () => {
       // Arrange
       const target = createTestTarget().password('foo');
       // Act
-      const actual = target.autoConfirm().login();
+      const actual = target.autoConfirm().build();
       // Assert
       expect(actual.confirm).toEqual(actual.password);
     });

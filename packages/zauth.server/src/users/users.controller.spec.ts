@@ -25,14 +25,14 @@ describe('ZUsersController', () => {
   beforeEach(async () => {
     dal = ZDatabaseMemory.connect('users-controller-test');
 
-    loginA = new ZLoginBuilder().email('a@gmail.com').password('super-secret-a').autoConfirm().login();
-    loginB = new ZLoginBuilder().email('b@yahoo.com').password('super-secret-b').autoConfirm().login();
+    loginA = new ZLoginBuilder().email('a@gmail.com').password('super-secret-a').autoConfirm().build();
+    loginB = new ZLoginBuilder().email('b@yahoo.com').password('super-secret-b').autoConfirm().build();
 
     const pwdA = await hash(loginA.password, ZUsersController.Rounds);
     const pwdB = await hash(loginB.password, ZUsersController.Rounds);
 
-    userA = new ZUserBuilder().email(loginA.email).password(pwdA).user();
-    userB = new ZUserBuilder().email(loginB.email).password(pwdB).user();
+    userA = new ZUserBuilder().email(loginA.email).password(pwdA).build();
+    userB = new ZUserBuilder().email(loginB.email).password(pwdB).build();
   });
 
   afterEach(async () => {
@@ -53,7 +53,7 @@ describe('ZUsersController', () => {
     it('returns all users.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = [userA, userB].map((usr) => new ZUserBuilder().copy(usr).redact().user());
+      const expected = [userA, userB].map((usr) => new ZUserBuilder().copy(usr).redact().build());
       // Act
       const actual = await target.list();
       // Assert

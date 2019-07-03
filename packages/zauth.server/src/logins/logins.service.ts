@@ -47,7 +47,7 @@ export class ZLoginsService {
 
     await this._dal.update<IZUser>(Collections.Users, { login: Date.now() }).filter({ _id: user._id }).run();
     const updated = await this._dal.read<IZUser>(Collections.Users).filter({ _id: user._id }).run();
-    return new ZUserBuilder().copy(updated[0]).redact().user();
+    return new ZUserBuilder().copy(updated[0]).redact().build();
   }
 
   /**
@@ -66,6 +66,6 @@ export class ZLoginsService {
 
     await this._dal.update(Collections.Users, { logout: Date.now() }).filter({ _id: user._id }).run();
     const updated = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
-    return new ZUserBuilder().copy(updated[0]).redact().user();
+    return new ZUserBuilder().copy(updated[0]).redact().build();
   }
 }

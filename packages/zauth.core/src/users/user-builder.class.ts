@@ -101,7 +101,7 @@ export class ZUserBuilder {
    *
    * @return The constructed user.
    */
-  public user(): IZUser {
+  public build(): IZUser {
     return { ...this._user };
   }
 }

@@ -12,7 +12,7 @@ describe('ZUserBuilder', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const user = buildFn(target).user();
+      const user = buildFn(target).build();
       const actual = actualFn(user);
       // Assert
       expect(actual).toEqual(expected);
@@ -47,7 +47,7 @@ describe('ZUserBuilder', () => {
       // Arrange
       const target = createTestTarget().id(v4()).email(v4()).password(v4());
       // Act
-      const user = target.redact().user();
+      const user = target.redact().build();
       const actual = propFn(user);
       // Assert
       expect(actual).toBeUndefined();
@@ -61,10 +61,10 @@ describe('ZUserBuilder', () => {
   describe('Clone', () => {
     it('copies another user.', () => {
       // Arrange
-      const userA = createTestTarget().email(v4()).password(v4()).id(v4()).user();
+      const userA = createTestTarget().email(v4()).password(v4()).id(v4()).build();
       const target = createTestTarget();
       // Act
-      const actual = target.copy(userA).user();
+      const actual = target.copy(userA).build();
       // Assert
       expect(JSON.stringify(actual)).toEqual(JSON.stringify(userA));
     });

@@ -29,7 +29,7 @@ export class ZUsersController {
   @Get()
   public async list(): Promise<IZUser[]> {
     const users = await this._dal.read<IZUser>(Collections.Users).run();
-    return users.map((user) => new ZUserBuilder().copy(user).redact().user());
+    return users.map((user) => new ZUserBuilder().copy(user).redact().build());
   }
 
   /**
@@ -49,7 +49,7 @@ export class ZUsersController {
     ZHttpAssert.assert(userBlobs.length > 0, () => new NotFoundException());
 
     const user = userBlobs[0];
-    return new ZUserBuilder().copy(user).redact().user();
+    return new ZUserBuilder().copy(user).redact().build();
   }
 
   /**
@@ -72,10 +72,10 @@ export class ZUsersController {
     ZHttpAssert.assert(count === 0, () => new ConflictException('User email is already taken.'));
 
     const password = await hash(login.password, ZUsersController.Rounds);
-    const create = new ZUserBuilder().email(login.email).password(password).user();
+    const create = new ZUserBuilder().email(login.email).password(password).build();
     const createdBlobs = await this._dal.create(Collections.Users, [create]).run();
     const created = createdBlobs[0];
-    return new ZUserBuilder().copy(created).redact().user();
+    return new ZUserBuilder().copy(created).redact().build();
   }
 
   /**
@@ -115,13 +115,13 @@ export class ZUsersController {
 
     if (!template.email && !template.password) {
       const current = currentBlobs[0];
-      return new ZUserBuilder().copy(current).redact().user();
+      return new ZUserBuilder().copy(current).redact().build();
     }
 
     await this._dal.update<IZUser>(Collections.Users, template).filter(idFilter).run();
     const updatedBlobs = await this._dal.read<IZUser>(Collections.Users).filter(idFilter).run();
     const updated = updatedBlobs[0];
-    return new ZUserBuilder().copy(updated).redact().user();
+    return new ZUserBuilder().copy(updated).redact().build();
   }
 
   /**
@@ -142,6 +142,6 @@ export class ZUsersController {
 
     const user = userBlobs[0];
     await this._dal.delete('users').filter(filter).run();
-    return new ZUserBuilder().copy(user).redact().user();
+    return new ZUserBuilder().copy(user).redact().build();
   }
 }

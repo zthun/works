@@ -10,13 +10,13 @@ describe('ZLoginFormComponent', () => {
   }
 
   beforeEach(() => {
-    login = new ZLoginBuilder().email('batman@gmail.com').password(v4()).autoConfirm().login();
+    login = new ZLoginBuilder().email('batman@gmail.com').password(v4()).autoConfirm().build();
   });
 
   it('sets the login to the default when the login is set to falsy.', () => {
     // Arrange
     const target = createTestTarget();
-    const expected = new ZLoginBuilder().login();
+    const expected = new ZLoginBuilder().build();
     target.login = login;
     // Act
     target.login = null;
