@@ -1,10 +1,6 @@
 import { ExtraOptions, Route } from '@angular/router';
 import { ZLoginPageComponent } from '../login-page/login-page.component';
-
-export const ZLoginPageUrl = 'login';
-export const ZForgotPageUrl = 'forgot';
-export const ZProfilePageUrl = 'profile';
-export const ZCreateAccountPageUrl = 'create-account';
+import { ZCreateAccountPageUrl, ZForgotPageUrl, ZLoginPageUrl, ZProfilePageUrl } from './auth-app.routes';
 
 export const ZLoginPageRoute: Route = {
   path: ZLoginPageUrl,

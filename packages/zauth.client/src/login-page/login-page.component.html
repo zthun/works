@@ -1,3 +1,11 @@
 <div class="login-page mx-auto">
-  <z-login-form></z-login-form>
+  <div>
+    <z-login-form [login]="login" (loginChange)="authenticate($event)"></z-login-form>
+  </div>
+  <div class="mt-md">
+    <z-login-form-create (create)="create()"></z-login-form-create>
+  </div>
+  <div class="mt-md">
+    <z-login-form-forgot (forgot)="forgot()"></z-login-form-forgot>
+  </div>
 </div>

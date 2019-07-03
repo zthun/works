@@ -8,37 +8,15 @@
   </mat-card-header>
   <mat-card-content>
     <form>
-      <div>
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label i18n>Email</mat-label>
-          <input matInput zid="email" name="email" type="email" [ngModel]="login.email" (ngModelChange)="email($event)" i18n-placeholder placeholder="Email" />
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label i18n>Password</mat-label>
-          <input matInput zid="password" name="password" type="password" [ngModel]="login.password" (ngModelChange)="password($event)" i18n-placeholder placeholder="Password" />
-        </mat-form-field>
-      </div>
-      <div class="mt-sm">
-        <button class="w-100" mat-raised-button color="primary" type="submit" (submit)="authenticate()" i18n>Login</button>
-      </div>
-      <div class="mt-sm">
-        <a class="w-100" mat-stroked-button color="accent" i18n>I forgot my password</a>
-      </div>
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label i18n>Email</mat-label>
+        <input matInput zid="email" name="email" type="email" [(ngModel)]="login.email" i18n-placeholder placeholder="Email" />
+      </mat-form-field>
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label i18n>Password</mat-label>
+        <input matInput zid="password" name="password" type="password" [(ngModel)]="login.password" i18n-placeholder placeholder="Password" />
+      </mat-form-field>
+      <button class="w-100" mat-raised-button color="primary" type="submit" (click)="publish()" i18n>Login</button>
     </form>
-  </mat-card-content>
-</mat-card>
-
-<mat-card class="mt-md">
-  <mat-card-header>
-    <div mat-card-avatar class="mr-sm">
-      <fa-icon icon="user" size="3x"></fa-icon>
-    </div>
-    <mat-card-title i18n>New user?</mat-card-title>
-    <mat-card-subtitle i18n>Let's create an account</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <button class="w-100" mat-stroked-button color="primary" i18n>Get started</button>
   </mat-card-content>
 </mat-card>

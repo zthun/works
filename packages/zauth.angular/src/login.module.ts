@@ -1,19 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatCardModule, MatInputModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faQuestionCircle, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { ZLoginFormCreateComponent } from './login-form-create/login-form-create.component';
+import { ZLoginFormForgotComponent } from './login-form-forgot/login-form-forgot.component';
 import { ZLoginFormComponent } from './login-form/login-form.component';
 
 @NgModule({
   declarations: [
-    ZLoginFormComponent
+    ZLoginFormComponent,
+    ZLoginFormCreateComponent,
+    ZLoginFormForgotComponent
   ],
   imports: [
-    HttpClientModule,
     CommonModule,
     MatInputModule,
     MatButtonModule,
@@ -23,7 +25,8 @@ import { ZLoginFormComponent } from './login-form/login-form.component';
   ],
   exports: [
     ZLoginFormComponent,
-    HttpClientModule,
+    ZLoginFormCreateComponent,
+    ZLoginFormForgotComponent,
     CommonModule,
     MatInputModule,
     MatButtonModule,
@@ -34,6 +37,7 @@ import { ZLoginFormComponent } from './login-form/login-form.component';
 })
 export class ZLoginModule {
   public constructor() {
+    library.add(faQuestionCircle);
     library.add(faUser);
     library.add(faSignInAlt);
   }

@@ -1,8 +1,8 @@
-import { ZLoginModule } from './login.module';
+import { ZLoginFormForgotComponent } from './login-form-forgot.component';
 
-describe('ZLoginModule', () => {
+describe('ZLoginFormForgotComponent', () => {
   function createTestTarget() {
-    return new ZLoginModule();
+    return new ZLoginFormForgotComponent();
   }
 
   it('should create.', () => {

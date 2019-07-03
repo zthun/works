@@ -1,8 +1,8 @@
-import { ZLoginModule } from './login.module';
+import { ZLoginFormCreateComponent } from './login-form-create.component';
 
-describe('ZLoginModule', () => {
+describe('ZLoginFormCreateComponent', () => {
   function createTestTarget() {
-    return new ZLoginModule();
+    return new ZLoginFormCreateComponent();
   }
 
   it('should create.', () => {
