@@ -5,9 +5,6 @@
     "outDir": "dist/esm5",
     "declarationDir": "dist/types"
   },
-  "angularCompilerOptions": {
-    "enableResourceInlining": true
-  },
   "include": [
     "src/**/*.ts"
   ],
