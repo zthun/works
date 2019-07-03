@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@zthun/auth.angular": [
+        "../zauth.angular/src/index.ts"
+      ],
+      "@zthun/auth.core": [
+        "../zauth.core/src/index.ts"
+      ]
+    }
+  }
+}

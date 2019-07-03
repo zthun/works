@@ -5,6 +5,9 @@
   "lib": {
     "entryFile": "src/index.ts",
     "umdModuleIds": {
+      "@fortawesome/fontawesome-svg-core": "fontawesomeSvgCore",
+      "@fortawesome/angular-fontawesome": "fortawesome.angular-fontawesome",
+      "@fortawesome/free-solid-svg-icons": "free-solid-svg-icons",
       "@zthun/auth.core": "zauth.core"
     }
   }

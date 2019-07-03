@@ -42,7 +42,9 @@
             "main": "packages/zauth.client/src/main.ts",
             "tsConfig": "packages/zauth.client/tsconfig.prod.json",
             "assets": [],
-            "styles": [],
+            "styles": [
+              "packages/zauth.client/src/styles.scss"
+            ],
             "scripts": [],
             "optimization": true,
             "outputHashing": "all",
@@ -56,7 +58,7 @@
           },
           "configurations": {
             "debug": {
-              "tsConfig": "packages/zauth.client/tsconfig.json",
+              "tsConfig": "packages/zauth.client/tsconfig.dev.json",
               "optimization": false,
               "sourceMap": true,
               "buildOptimizer": false
@@ -111,44 +113,6 @@
             "debug": {
               "tsConfig": "packages/zauth.angular/tsconfig.json"
             }
-          }
-        }
-      }
-    },
-    "zauth.angular.playground": {
-      "root": "packages/zauth.angular",
-      "sourceRoot": "src",
-      "projectType": "application",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "packages/zauth.angular/dist/playground",
-            "index": "packages/zauth.angular/src/index.html",
-            "main": "packages/zauth.angular/src/main.playground.ts",
-            "polyfills": "packages/zauth.angular/src/polyfills.ts",
-            "tsConfig": "packages/zauth.angular/tsconfig.json",
-            "assets": [],
-            "styles": [
-              "packages/zauth.angular/src/index.scss"
-            ],
-            "scripts": [],
-            "optimization": false,
-            "outputHashing": "all",
-            "sourceMap": true,
-            "extractCss": false,
-            "namedChunks": false,
-            "aot": false,
-            "extractLicenses": true,
-            "vendorChunk": false,
-            "buildOptimizer": false
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "zauth.angular.playground:build",
-            "port": 4201
           }
         }
       }

@@ -1,0 +1,16 @@
+// sass-lint:disable no-important
+
+@mixin sizing($name, $units) {
+  .w-#{$name} {
+    width: $units !important;
+  }
+
+  .h-#{$name} {
+    height: $units !important;
+  }
+}
+
+@include sizing(25, 25%);
+@include sizing(50, 50%);
+@include sizing(75, 75%);
+@include sizing(100, 100%);

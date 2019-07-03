@@ -1,6 +1,0 @@
-{
-  "sourceRoot": "packages/zauth.angular/src",
-  "angularCli": {
-    "appName": "zauth.angular.playground"
-  }
-}

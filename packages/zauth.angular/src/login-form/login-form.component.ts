@@ -10,8 +10,7 @@ import { IZLogin, ZLoginBuilder } from '@zthun/auth.core';
  */
 @Component({
   selector: 'z-login-form',
-  templateUrl: 'login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+  templateUrl: 'login-form.component.html'
 })
 export class ZLoginFormComponent {
   /**
@@ -98,7 +97,7 @@ export class ZLoginFormComponent {
    * will be displayed, but will warn the user that it could
    * not redirect them back to the previous page.
    */
-  public submit() {
+  public authenticate() {
     return undefined;
   }
 }

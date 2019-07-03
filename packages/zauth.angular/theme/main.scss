@@ -1,0 +1,9 @@
+// Third party libs.
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+// Main css utilities.
+@import 'core/variables';
+@import 'core/page';
+
+@import 'utility/spacing';
+@import 'utility/sizing';
