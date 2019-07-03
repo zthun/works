@@ -1,0 +1,5 @@
+describe('ZLoginPageComponent', () => {
+  function createTestTarget() {
+
+  }
+});

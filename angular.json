@@ -58,7 +58,7 @@
           },
           "configurations": {
             "debug": {
-              "tsConfig": "packages/zauth.client/tsconfig.dev.json",
+              "tsConfig": "packages/zauth.client/tsconfig.json",
               "optimization": false,
               "sourceMap": true,
               "buildOptimizer": false

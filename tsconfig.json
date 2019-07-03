@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "moduleResolution": "node",
     "noImplicitAny": false,
     "removeComments": true,
