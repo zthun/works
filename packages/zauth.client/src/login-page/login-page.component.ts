@@ -8,8 +8,7 @@ import { ZCreateAccountPageUrl, ZForgotPageUrl } from '../auth-app/auth-app.rout
  */
 @Component({
   selector: 'z-login-page',
-  templateUrl: 'login-page.component.html',
-  styleUrls: ['login-page.component.scss']
+  templateUrl: 'login-page.component.html'
 })
 export class ZLoginPageComponent {
   public login: IZLogin = null;

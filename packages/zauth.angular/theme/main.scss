@@ -1,9 +1,13 @@
 // Third party libs.
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-// Main css utilities.
+// Core variables.
 @import 'core/variables';
 @import 'core/page';
 
+// Components
+@import 'component/login-form-container';
+
+// Utilities
 @import 'utility/spacing';
 @import 'utility/sizing';
