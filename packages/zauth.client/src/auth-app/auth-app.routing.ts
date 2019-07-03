@@ -1,5 +1,6 @@
 import { ExtraOptions, Route } from '@angular/router';
 import { ZCreatePageComponent } from '../create-page/create-page.component';
+import { ZForgotPageComponent } from '../forgot-page/forgot-page.component';
 import { ZLoginPageComponent } from '../login-page/login-page.component';
 import { ZCreateAccountPageUrl, ZForgotPageUrl, ZLoginPageUrl, ZProfilePageUrl } from './auth-app.routes';
 
@@ -10,7 +11,7 @@ export const ZLoginPageRoute: Route = {
 
 export const ZForgotPageRoute: Route = {
   path: ZForgotPageUrl,
-  component: ZLoginPageComponent
+  component: ZForgotPageComponent
 };
 
 export const ZProfilePageRoute: Route = {

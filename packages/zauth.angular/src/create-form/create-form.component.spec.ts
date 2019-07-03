@@ -2,7 +2,7 @@ import { IZLogin, ZLoginBuilder } from '@zthun/auth.core';
 import { v4 } from 'uuid';
 import { ZCreateFormComponent } from './create-form.component';
 
-describe('CreateFormComponent', () => {
+describe('ZCreateFormComponent', () => {
   let login: IZLogin;
 
   function createTestTarget() {

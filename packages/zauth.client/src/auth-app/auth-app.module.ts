@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ZLoginModule } from '@zthun/auth.angular';
 import { ZCreatePageComponent } from '../create-page/create-page.component';
+import { ZForgotPageComponent } from '../forgot-page/forgot-page.component';
 import { ZLoginPageComponent } from '../login-page/login-page.component';
 import { ZAuthAppComponent } from './auth-app.component';
 import { ZAuthAppRoutes, ZAuthAppRoutesOptions } from './auth-app.routing';
@@ -12,7 +13,8 @@ import { ZAuthAppRoutes, ZAuthAppRoutesOptions } from './auth-app.routing';
   declarations: [
     ZAuthAppComponent,
     ZLoginPageComponent,
-    ZCreatePageComponent
+    ZCreatePageComponent,
+    ZForgotPageComponent
   ],
   imports: [
     BrowserAnimationsModule,

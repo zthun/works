@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="mr-sm">
+      <fa-icon icon="question-circle" size="3x"></fa-icon>
+    </div>
+    <mat-card-title i18n>Account recovery</mat-card-title>
+    <mat-card-subtitle i18n>Get back into your account</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label i18n>Email</mat-label>
+        <input matInput zid="email" name="email" type="email" [(ngModel)]="email" required i18n-placeholder placeholder="Email" />
+      </mat-form-field>
+      <button class="w-100 mr-xs" mat-raised-button color="primary" type="submit" (click)="reset.emit(email)" i18n>Request password reset</button>
+    </form>
+  </mat-card-content>
+</mat-card>

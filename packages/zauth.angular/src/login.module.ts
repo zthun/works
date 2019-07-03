@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faQuestionCircle, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ZCreateFormComponent } from './create-form/create-form.component';
+import { ZForgotFormComponent } from './forgot-form/forgot-form.component';
 import { ZLoginFormCreateComponent } from './login-form-create/login-form-create.component';
 import { ZLoginFormForgotComponent } from './login-form-forgot/login-form-forgot.component';
 import { ZLoginFormComponent } from './login-form/login-form.component';
@@ -15,7 +16,8 @@ import { ZLoginFormComponent } from './login-form/login-form.component';
     ZLoginFormComponent,
     ZLoginFormCreateComponent,
     ZLoginFormForgotComponent,
-    ZCreateFormComponent
+    ZCreateFormComponent,
+    ZForgotFormComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { ZLoginFormComponent } from './login-form/login-form.component';
     ZLoginFormCreateComponent,
     ZLoginFormForgotComponent,
     ZCreateFormComponent,
+    ZForgotFormComponent,
     CommonModule,
     MatInputModule,
     MatButtonModule,
