@@ -13,8 +13,6 @@
     "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz",
     "test": "jest --coverage --runInBand",
     "lint": "zlint",
-    "client": "lerna run client --stream",
-    "server": "lerna run server --stream",
     "build": "lerna run build --stream",
     "make": "npm run clean && npm run lint && npm run test && npm run build",
     "start": "lerna run debug --stream",

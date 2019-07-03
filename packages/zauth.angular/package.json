@@ -40,7 +40,7 @@
   },
   "scripts": {
     "build": "ng build --project zauth.angular",
-    "client": "ng build --project zauth.angular --configuration debug"
+    "debug": "ng build --project zauth.angular --configuration debug"
   },
   "files": [
     "dist/**"
