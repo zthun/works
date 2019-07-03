@@ -3,7 +3,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist/esm5",
-    "declarationDir": "dist/types"
+    "declarationDir": "dist/types",
+    "paths": {
+      "@zthun/auth.core": [
+        "../zauth.core/src/index.ts"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts"

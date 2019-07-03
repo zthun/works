@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "ng build --project zauth.client",
-    "client": "ng serve --project zauth.client"
+    "debug": "ng serve --project zauth.client &"
   },
   "author": "Anthony Bonta",
   "license": "MIT",

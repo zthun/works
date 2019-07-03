@@ -17,7 +17,7 @@
     "server": "lerna run server --stream",
     "build": "lerna run build --stream",
     "make": "npm run clean && npm run lint && npm run test && npm run build",
-    "start": "lerna run client --stream & lerna run server --stream",
+    "start": "lerna run debug --stream",
     "release": "npm run make && lerna publish"
   },
   "devDependencies": {
