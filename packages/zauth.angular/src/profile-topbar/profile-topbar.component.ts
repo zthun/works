@@ -5,7 +5,7 @@ import { IZUser } from '@zthun/auth.core';
   selector: 'z-profile-topbar',
   templateUrl: 'profile-topbar.component.html'
 })
-export class ZProfileTopbar {
+export class ZProfileTopbarComponent {
   @Input()
   public user: IZUser;
 }

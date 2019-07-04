@@ -10,7 +10,7 @@ import { ZForgotFormComponent } from './forgot-form/forgot-form.component';
 import { ZLoginFormCreateComponent } from './login-form-create/login-form-create.component';
 import { ZLoginFormForgotComponent } from './login-form-forgot/login-form-forgot.component';
 import { ZLoginFormComponent } from './login-form/login-form.component';
-import { ZProfileTopbar } from './profile-topbar/profile-topbar.component';
+import { ZProfileTopbarComponent } from './profile-topbar/profile-topbar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { ZProfileTopbar } from './profile-topbar/profile-topbar.component';
     ZLoginFormForgotComponent,
     ZCreateFormComponent,
     ZForgotFormComponent,
-    ZProfileTopbar
+    ZProfileTopbarComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +36,7 @@ import { ZProfileTopbar } from './profile-topbar/profile-topbar.component';
     ZLoginFormForgotComponent,
     ZCreateFormComponent,
     ZForgotFormComponent,
-    ZProfileTopbar,
+    ZProfileTopbarComponent,
     CommonModule,
     MatInputModule,
     MatButtonModule,

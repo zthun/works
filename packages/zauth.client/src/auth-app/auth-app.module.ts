@@ -6,9 +6,9 @@ import { ZLoginModule } from '@zthun/auth.angular';
 import { ZCreatePageComponent } from '../create-page/create-page.component';
 import { ZForgotPageComponent } from '../forgot-page/forgot-page.component';
 import { ZLoginPageComponent } from '../login-page/login-page.component';
+import { ZProfilePageComponent } from '../profile-page/profile-page.component';
 import { ZAuthAppComponent } from './auth-app.component';
 import { ZAuthAppRoutes, ZAuthAppRoutesOptions } from './auth-app.routing';
-import { ZProfilePageComponent } from '../profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
