@@ -8,13 +8,15 @@ import { ZForgotPageComponent } from '../forgot-page/forgot-page.component';
 import { ZLoginPageComponent } from '../login-page/login-page.component';
 import { ZAuthAppComponent } from './auth-app.component';
 import { ZAuthAppRoutes, ZAuthAppRoutesOptions } from './auth-app.routing';
+import { ZProfilePageComponent } from '../profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
     ZAuthAppComponent,
     ZLoginPageComponent,
     ZCreatePageComponent,
-    ZForgotPageComponent
+    ZForgotPageComponent,
+    ZProfilePageComponent
   ],
   imports: [
     BrowserAnimationsModule,

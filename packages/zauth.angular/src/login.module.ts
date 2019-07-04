@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatInputModule, MatToolbarModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faQuestionCircle, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faKey, faQuestionCircle, faSignInAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ZCreateFormComponent } from './create-form/create-form.component';
 import { ZForgotFormComponent } from './forgot-form/forgot-form.component';
 import { ZLoginFormCreateComponent } from './login-form-create/login-form-create.component';
 import { ZLoginFormForgotComponent } from './login-form-forgot/login-form-forgot.component';
 import { ZLoginFormComponent } from './login-form/login-form.component';
+import { ZProfileTopbar } from './profile-topbar/profile-topbar.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +18,15 @@ import { ZLoginFormComponent } from './login-form/login-form.component';
     ZLoginFormCreateComponent,
     ZLoginFormForgotComponent,
     ZCreateFormComponent,
-    ZForgotFormComponent
+    ZForgotFormComponent,
+    ZProfileTopbar
   ],
   imports: [
     CommonModule,
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    MatToolbarModule,
     FormsModule,
     FontAwesomeModule
   ],
@@ -33,16 +36,19 @@ import { ZLoginFormComponent } from './login-form/login-form.component';
     ZLoginFormForgotComponent,
     ZCreateFormComponent,
     ZForgotFormComponent,
+    ZProfileTopbar,
     CommonModule,
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    MatToolbarModule,
     FormsModule,
     FontAwesomeModule
   ]
 })
 export class ZLoginModule {
   public constructor() {
+    library.add(faKey);
     library.add(faQuestionCircle);
     library.add(faUser);
     library.add(faSignInAlt);
