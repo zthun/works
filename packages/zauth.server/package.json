@@ -18,7 +18,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@zthun/auth.core": "file:../packages/zauth.core"
+    "@zthun/auth.core": "file:../zauth.core"
   },
   "files": [
     "dist/**"
