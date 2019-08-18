@@ -17,6 +17,10 @@
     "build": "ng build --project zauth.angular.client",
     "debug": "ng serve --project zauth.angular.client"
   },
+  "devDependencies": {
+    "@zthun/auth.angular": "file:../packages/zauth.angular",
+    "@zthun/auth.core": "file:../packages/zauth.core"
+  },
   "author": "Anthony Bonta",
   "license": "MIT",
   "files": [

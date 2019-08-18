@@ -17,6 +17,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "devDependencies": {
+    "@zthun/auth.core": "file:../packages/zauth.core"
+  },
   "files": [
     "dist/**"
   ]
