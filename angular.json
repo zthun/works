@@ -3,8 +3,8 @@
   "version": 1,
   "newProjectRoot": "packages",
   "projects": {
-    "zauth.client": {
-      "root": "packages/zauth.client",
+    "zauth.angular.client": {
+      "root": "packages/zauth.angular.client",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "z",
@@ -36,14 +36,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "packages/zauth.client/dist",
-            "polyfills": "packages/zauth.client/src/polyfills.ts",
-            "index": "packages/zauth.client/src/index.html",
-            "main": "packages/zauth.client/src/main.ts",
-            "tsConfig": "packages/zauth.client/tsconfig.prod.json",
+            "outputPath": "packages/zauth.angular.client/dist",
+            "polyfills": "packages/zauth.angular.client/src/polyfills.ts",
+            "index": "packages/zauth.angular.client/src/index.html",
+            "main": "packages/zauth.angular.client/src/main.ts",
+            "tsConfig": "packages/zauth.angular.client/tsconfig.prod.json",
             "assets": [],
             "styles": [
-              "packages/zauth.client/src/styles.scss"
+              "packages/zauth.angular.client/src/styles.scss"
             ],
             "scripts": [],
             "optimization": true,
@@ -58,7 +58,7 @@
           },
           "configurations": {
             "debug": {
-              "tsConfig": "packages/zauth.client/tsconfig.json",
+              "tsConfig": "packages/zauth.angular.client/tsconfig.json",
               "optimization": false,
               "sourceMap": true,
               "buildOptimizer": false
@@ -68,7 +68,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "zauth.client:build:debug"
+            "browserTarget": "zauth.angular.client:build:debug"
           }
         }
       }
@@ -118,5 +118,5 @@
       }
     }
   },
-  "defaultProject": "zauth.client"
+  "defaultProject": "zauth.angular.client"
 }

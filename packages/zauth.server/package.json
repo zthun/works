@@ -19,15 +19,5 @@
   },
   "files": [
     "dist/**"
-  ],
-  "dependencies": {
-    "@nestjs/common": "6.1.1",
-    "@nestjs/core": "6.1.1",
-    "@nestjs/platform-express": "6.1.1",
-    "@zthun/auth.core": "^1.0.0-3",
-    "@zthun/dal": "1.0.0",
-    "bcrypt": "3.0.6",
-    "reflect-metadata": "0.1.13",
-    "rxjs": "6.5.1"
-  }
+  ]
 }

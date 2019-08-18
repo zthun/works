@@ -35,9 +35,6 @@
     "@fortawesome/angular-fontawesome": "~0.4.0",
     "@zthun/auth.core": "^1.0.0"
   },
-  "devDependencies": {
-    "@zthun/auth.core": "file:../zauth.core"
-  },
   "scripts": {
     "build": "ng build --project zauth.angular",
     "debug": "ng build --project zauth.angular --configuration debug"
