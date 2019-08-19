@@ -7,8 +7,14 @@ module.exports = {
   rootDir: 'packages',
   testRegex: '.spec.ts$',
   transform: {
-    '^.+\\.(t|j)s$': 'ts-jest'
+    '^.+\\.(t|j)s$': 'ts-jest',
+    '^.+\\.vue$': 'vue-jest'
   },
+  moduleFileExtensions: [
+    'js',
+    'ts',
+    'vue'
+  ],
   modulePathIgnorePatterns: [
     '<rootDir>/zauth.core/dist',
     '<rootDir>/zauth.angular/dist',

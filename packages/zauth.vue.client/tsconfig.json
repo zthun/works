@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "declaration": false
+  },
+  "include": [
+    "src/**/*.vue",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.vue",
+    "src/**/*.spec.ts"
+  ]
+}

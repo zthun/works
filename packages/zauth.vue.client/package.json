@@ -1,0 +1,21 @@
+{
+  "name": "@zthun/auth.vue.client",
+  "version": "1.0.0-3",
+  "description": "The client application written in vue.",
+  "author": "Anthony Bonta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zthun/zauth"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "debug": "rollup -cw"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/**"
+  ]
+}
