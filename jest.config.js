@@ -5,9 +5,9 @@ module.exports = {
     }
   },
   rootDir: 'packages',
-  testRegex: '.spec.ts$',
+  testRegex: '.spec.(tsx|ts)$',
   transform: {
-    '^.+\\.(t|j)s$': 'ts-jest'
+    '^.+\\.(tsx|ts)$': 'ts-jest'
   },
   moduleFileExtensions: [
     'js',

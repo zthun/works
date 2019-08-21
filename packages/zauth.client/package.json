@@ -6,6 +6,7 @@
     "oauth2",
     "zauth"
   ],
+  "browser": "./dist/zauth.client.umd.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/zauth"
@@ -14,8 +15,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "echo build",
-    "debug": "echo debug"
+    "build": "rollup -c",
+    "debug": "rollup -cw"
   },
   "devDependencies": {
     "@zthun/auth.core": "file:../zauth.core"

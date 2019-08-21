@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
-    "module": "es2015",
+    "module": "esnext",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
+    "jsx": "react",
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
