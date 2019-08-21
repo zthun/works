@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
     "moduleResolution": "node",
-    "noImplicitAny": false,
     "removeComments": true,
-    "noLib": false,
     "jsx": "react",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

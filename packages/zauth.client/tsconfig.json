@@ -6,7 +6,7 @@
     "declaration": false
   },
   "include": [
-    "src/**/*.tsx",
+    "src/**/*.tsx"
   ],
   "exclude": [
     "node_modules",
