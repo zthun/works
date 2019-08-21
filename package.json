@@ -36,8 +36,6 @@
     "@zthun/auth.core": "file:./packages/zauth.core",
     "@zthun/dal": "^1.0.0",
     "@zthun/web-styles": "^7.0.0",
-    "acorn": "^7.0.0",
-    "ajv": "^6.10.2",
     "bcrypt": "^3.0.0",
     "jest": "^24.0.0",
     "lerna": "^3.0.0",
