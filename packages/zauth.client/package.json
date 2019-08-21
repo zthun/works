@@ -14,11 +14,10 @@
     "access": "public"
   },
   "scripts": {
-    "build": "ng build --project zauth.client",
-    "debug": "ng serve --project zauth.client"
+    "build": "echo build",
+    "debug": "echo debug"
   },
   "devDependencies": {
-    "@zthun/auth.angular": "file:../zauth.angular",
     "@zthun/auth.core": "file:../zauth.core"
   },
   "author": "Anthony Bonta",

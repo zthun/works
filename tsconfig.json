@@ -5,9 +5,6 @@
     "paths": {
       "@zthun/auth.core": [
         "zauth.core/src/index"
-      ],
-      "@zthun/auth.angular": [
-        "zauth.angular/src/index"
       ]
     }
   },
