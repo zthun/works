@@ -1,7 +1,7 @@
 {
   "tsFiles": [
     "packages/zauth.angular/src/**/*.ts",
-    "packages/zauth.angular.client/src/**/*.ts",
+    "packages/zauth.client/src/**/*.ts",
     "packages/zauth.core/src/**/*.ts",
     "packages/zauth.server/src/**/*.ts"
   ],
@@ -10,16 +10,16 @@
   ],
   "sassFiles": [
     "packages/zauth.angular/src/**/*.scss",
-    "packages/zauth.angular.client/src/**/*.scss"
+    "packages/zauth.client/src/**/*.scss"
   ],
   "htmlFiles": [
     "packages/zauth.angular/src/**/*.html",
-    "packages/zauth.angular.client/src/**/*.html"
+    "packages/zauth.client/src/**/*.html"
   ],
   "jsonFiles": [
     "*.json",
     "packages/zauth.angular/*.json",
-    "packages/zauth.angular.client/*.json",
+    "packages/zauth.client/*.json",
     "packages/zauth.core/*.json",
     "packages/zauth.server/*.json"
   ],

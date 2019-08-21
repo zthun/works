@@ -14,8 +14,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "ng build --project zauth.angular.client",
-    "debug": "ng serve --project zauth.angular.client"
+    "build": "ng build --project zauth.client",
+    "debug": "ng serve --project zauth.client"
   },
   "devDependencies": {
     "@zthun/auth.angular": "file:../zauth.angular",
