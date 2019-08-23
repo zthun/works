@@ -10,17 +10,17 @@
   }
 }
 
-@for $multiplier from 1 through 4 {
+@for $multiplier from 1 through 5 {
   $percent: $multiplier * 25;
   @include sizing($percent, #{$percent}\%);
 }
 
-@for $em from 1 through 5 {
+@for $em from 1 through 6 {
   @include sizing(font-#{$em}, #{$em}em);
   @include sizing(root-font-#{$em}, #{$em}rem);
 }
 
-@for $multiplier from 1 through 10 {
+@for $multiplier from 1 through 11 {
   $em: $multiplier * 5;
   @include sizing(font-#{$em}, #{$em}em);
   @include sizing(root-font-#{$em}, #{$em}rem);

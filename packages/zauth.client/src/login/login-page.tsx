@@ -6,7 +6,7 @@ import { ZNewUserForm } from './new-user-form';
 export class ZLoginPage extends React.Component {
   public render() {
     return (
-      <div className='mx-auto w-font-25 mb-em-5'>
+      <div className='mx-auto w-font-25 mt-em-5'>
         <div className='mb-sm'>
           <ZLoginForm />
         </div>

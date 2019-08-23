@@ -78,7 +78,7 @@
 @include spacing-padding('lg', $spacing-base * $spacing-multiplier-lg);
 @include spacing-padding('xl', $spacing-base * $spacing-multiplier-xl);
 
-@for $em from 1 to 5 {
+@for $em from 1 to 6 {
   @include spacing-margin(em-#{$em}, #{$em}em);
   @include spacing-padding(em-#{$em}, #{$em}em);
 }
