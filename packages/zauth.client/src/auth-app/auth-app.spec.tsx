@@ -1,12 +1,14 @@
 import React from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
-import { act } from 'react-dom/test-utils';
-import { ZAuthApp } from './auth-app.rc';
+import { unmountComponentAtNode } from 'react-dom';
+import { act, createRenderer, ShallowRenderer } from 'react-dom/test-utils';
+import { ZAuthApp } from './auth-app';
 
 describe('ZAuthApp', () => {
   let container: HTMLElement;
+  let renderer: ShallowRenderer;
 
   beforeEach(() => {
+    renderer = createRenderer();
     container = document.createElement('div');
     document.body.appendChild(container);
   });
@@ -20,7 +22,7 @@ describe('ZAuthApp', () => {
   it('renders the application', async () => {
     // Arrange
     // Act
-    await act(() => Promise.resolve(render(<ZAuthApp name='Anthony' />, container)));
+    await act(() => Promise.resolve(renderer.render(<ZAuthApp />, container)));
     // Assert
     expect(container.innerHTML).toBeTruthy();
   });

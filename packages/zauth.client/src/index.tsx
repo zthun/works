@@ -1,5 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { ZAuthApp } from './auth-app/auth-app.rc';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import '../theme/index.scss';
+import { ZAuthApp } from './auth-app/auth-app';
 
-ReactDOM.render(<ZAuthApp name='Anthony' />, document.getElementById('z-auth-client'));
+ReactDOM.render(<ZAuthApp />, document.getElementById('z-auth-client'));

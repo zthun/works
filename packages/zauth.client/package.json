@@ -15,8 +15,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c",
-    "debug": "rollup -cw"
+    "build": "webpack",
+    "debug": "echo debug"
   },
   "devDependencies": {
     "@zthun/auth.core": "file:../zauth.core"
