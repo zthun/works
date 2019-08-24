@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 
-export class ZNewUserForm extends React.Component {
+export class ZNewUserForm extends Component {
   public render() {
     return (
       <div>

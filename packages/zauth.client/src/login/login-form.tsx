@@ -1,9 +1,9 @@
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Card, CardContent, CardHeader, TextField, Typography } from '@material-ui/core';
-import * as React from 'react';
+import React, { Component } from 'react';
 
-export class ZLoginForm extends React.Component {
+export class ZLoginForm extends Component {
   public render() {
     return (
       <Card>

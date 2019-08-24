@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist/esm5",
-    "declaration": false
+    "declaration": false,
+    "module": "es2015"
   },
   "include": [
     "src/**/*.tsx"

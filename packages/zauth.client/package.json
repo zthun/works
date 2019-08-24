@@ -6,7 +6,7 @@
     "oauth2",
     "zauth"
   ],
-  "browser": "./dist/zauth.client.umd.min.js",
+  "browser": "./dist/zauth.client.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/zauth"
@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "debug": "echo debug"
+    "debug": "webpack-dev-server --config webpack.dev.config.js"
   },
   "devDependencies": {
     "@zthun/auth.core": "file:../zauth.core"
@@ -25,5 +25,6 @@
   "license": "MIT",
   "files": [
     "dist/**"
-  ]
+  ],
+  "sideEffects": false
 }
