@@ -22,6 +22,5 @@ describe('ZLoginPage', () => {
     const target = createTestTarget();
     // Assert
     expect(target.type).toEqual('div');
-    expect(target.props.children).toEqual(<ZLoginForm />);
   });
 });

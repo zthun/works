@@ -17,6 +17,5 @@ describe('ZAuthApp', () => {
     const actual = renderer.getRenderOutput();
     // Assert
     expect(actual.type).toEqual('div');
-    expect(actual.props.children).toEqual(<ZLoginPage />);
   });
 });

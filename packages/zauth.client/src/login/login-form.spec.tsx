@@ -4,7 +4,7 @@ import { ZLoginForm } from './login-form';
 
 describe('ZLoginForm', () => {
   function createTestTarget() {
-    return render(<ZLoginForm />);
+    return render(<ZLoginForm forgotPasswordRoute='f-p' createAccountRoute='c-a' />);
   }
 
   describe('Existing user', () => {

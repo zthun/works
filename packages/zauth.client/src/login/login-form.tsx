@@ -2,8 +2,21 @@ import { faQuestionCircle, faSignInAlt, faUser } from '@fortawesome/free-solid-s
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Card, CardContent, CardHeader, TextField } from '@material-ui/core';
 import React, { Component } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { IZLoginProperties } from './login-properties';
 
-export class ZLoginForm extends Component {
+export class ZLoginFormBase extends Component<IZLoginProperties & RouteComponentProps> {
+  public createAccountClick = this.createAccount.bind(this);
+  public recoverPasswordClick = this.recoverPassword.bind(this);
+
+  public createAccount() {
+    this.props.history.push(this.props.createAccountRoute);
+  }
+
+  public recoverPassword() {
+    this.props.history.push(this.props.forgotPasswordRoute);
+  }
+
   public render() {
     return (
       <div className='ZLoginForm-root' data-testid='ZLoginForm-root'>
@@ -35,7 +48,7 @@ export class ZLoginForm extends Component {
             />
             <CardContent>
               <form noValidate={true} autoComplete='off'>
-                <Button fullWidth={true} variant='outlined' color='primary'>Get started</Button>
+                <Button fullWidth={true} variant='outlined' color='primary' onClick={this.createAccountClick}>Get started</Button>
               </form>
             </CardContent>
           </Card>
@@ -51,7 +64,7 @@ export class ZLoginForm extends Component {
             />
             <CardContent>
               <form noValidate={true} autoComplete='off'>
-                <Button fullWidth={true} variant='outlined' color='secondary'>I forgot my password</Button>
+                <Button fullWidth={true} variant='outlined' color='secondary' onClick={this.recoverPasswordClick}>I forgot my password</Button>
               </form>
             </CardContent>
           </Card>
@@ -60,3 +73,5 @@ export class ZLoginForm extends Component {
     );
   }
 }
+
+export const ZLoginForm = withRouter(ZLoginFormBase);
