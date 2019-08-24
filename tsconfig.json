@@ -2,6 +2,7 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": "packages",
+    "module": "es2015",
     "paths": {
       "@zthun/auth.core": [
         "zauth.core/src/index"

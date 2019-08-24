@@ -4,7 +4,9 @@ import { ZLoginPage } from '../login/login-page';
 export class ZAuthApp extends React.Component {
   public render() {
     return (
-      <ZLoginPage />
+      <div className='ZLoginPage-root'>
+        <ZLoginPage />
+      </div>
     );
   }
 }

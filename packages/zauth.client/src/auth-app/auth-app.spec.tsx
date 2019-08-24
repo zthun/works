@@ -1,29 +1,22 @@
 import React from 'react';
-import { unmountComponentAtNode } from 'react-dom';
-import { act, createRenderer, ShallowRenderer } from 'react-dom/test-utils';
+import { createRenderer, ShallowRenderer } from 'react-test-renderer/shallow';
+import { ZLoginPage } from '../login/login-page';
 import { ZAuthApp } from './auth-app';
 
 describe('ZAuthApp', () => {
-  let container: HTMLElement;
   let renderer: ShallowRenderer;
 
   beforeEach(() => {
     renderer = createRenderer();
-    container = document.createElement('div');
-    document.body.appendChild(container);
-  });
-
-  afterEach(() => {
-    unmountComponentAtNode(container);
-    container.remove();
-    container = null;
   });
 
   it('renders the application', async () => {
     // Arrange
+    renderer.render(<ZAuthApp />);
     // Act
-    await act(() => Promise.resolve(renderer.render(<ZAuthApp />, container)));
+    const actual = renderer.getRenderOutput();
     // Assert
-    expect(container.innerHTML).toBeTruthy();
+    expect(actual.type).toEqual('div');
+    expect(actual.props.children).toEqual(<ZLoginPage />);
   });
 });
