@@ -34,7 +34,7 @@ export class ZNewUserFormBase extends Component<IZNewUserProperties & RouteCompo
           </Card>
         </div>
         <div className='ZNewUserForm-return-to-sign-in' data-testid='ZNewUserForm-return-to-sign-in'>
-          <Button fullWidth={true} variant='text' color='secondary' onClick={this.signInClick}>Already have an account? Sign in.</Button>
+          <Button className='ZNewUserForm-return-to-sign-in-btn' fullWidth={true} variant='text' color='secondary' onClick={this.signInClick}>Already have an account? Sign in.</Button>
         </div>
       </div>
     );

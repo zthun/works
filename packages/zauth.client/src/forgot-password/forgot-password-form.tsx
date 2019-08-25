@@ -14,8 +14,8 @@ export class ZForgotPasswordFormBase extends Component<IZForgotPasswordPropertie
 
   public render() {
     return (
-      <div className='ZNewUserForm-root' data-testid='ZNewUserForm-root'>
-        <div className='ZNewUserForm-create-account mb-md' data-testid='ZNewUserForm-create-account'>
+      <div className='ZForgotPasswordForm-root'>
+        <div className='ZForgotPasswordForm-recover-account mb-md'>
           <Card>
             <CardHeader
               classes={{ root: 'pb-sm' }}
@@ -31,8 +31,8 @@ export class ZForgotPasswordFormBase extends Component<IZForgotPasswordPropertie
             </CardContent>
           </Card>
         </div>
-        <div className='ZNewUserForm-return-to-sign-in' data-testid='ZNewUserForm-return-to-sign-in'>
-          <Button fullWidth={true} variant='text' color='secondary' onClick={this.signInClick}>Cancel and return to sign in.</Button>
+        <div className='ZForgotPasswordForm-return-to-sign-in'>
+          <Button className='ZForgotPasswordForm-return-to-sign-in-btn' fullWidth={true} variant='text' color='secondary' onClick={this.signInClick}>Cancel and return to sign in.</Button>
         </div>
       </div>
     );

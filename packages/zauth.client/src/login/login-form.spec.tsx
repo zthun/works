@@ -7,7 +7,7 @@ describe('ZLoginForm', () => {
   const ForgotRoute = 'forgot';
   const CreateAccountRoute = 'create';
   let _target: ShallowWrapper;
-  let history: History<any>;
+  let history: History;
 
   function createTestTarget() {
     _target = shallow((<ZLoginFormBase forgotPasswordRoute={ForgotRoute} createAccountRoute={CreateAccountRoute} match={null} location={null} history={history} />));
@@ -17,7 +17,7 @@ describe('ZLoginForm', () => {
   beforeEach(() => {
     history = {
       push: jest.fn()
-    } as unknown as History<any>;
+    } as unknown as History;
   });
 
   afterEach(() => {

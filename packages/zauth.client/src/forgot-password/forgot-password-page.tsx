@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ZForgotPasswordForm } from './forgot-password-form';
 import { IZForgotPasswordProperties } from './forgot-password-properties';
 

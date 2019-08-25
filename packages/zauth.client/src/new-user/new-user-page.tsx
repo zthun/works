@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { ZNewUserForm } from './new-user-form';
 import { IZNewUserProperties } from './new-user-properties';
 
-export class ZNewUserPageBase extends Component<Partial<IZNewUserProperties> & RouteComponentProps> {
+export class ZNewUserPage extends Component<Partial<IZNewUserProperties>> {
   public static defaultProps: Partial<IZNewUserProperties> & Partial<RouteComponentProps> = {
     signInRoute: 'login'
   };
@@ -16,5 +16,3 @@ export class ZNewUserPageBase extends Component<Partial<IZNewUserProperties> & R
     );
   }
 }
-
-export const ZNewUserPage = withRouter(ZNewUserPageBase);
