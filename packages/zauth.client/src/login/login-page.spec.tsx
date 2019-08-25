@@ -1,26 +1,19 @@
 
+import { shallow } from 'enzyme';
 import React from 'react';
-import { createRenderer, ShallowRenderer } from 'react-test-renderer/shallow';
-import { ZLoginForm } from './login-form';
 import { ZLoginPage } from './login-page';
 
 describe('ZLoginPage', () => {
-  let renderer: ShallowRenderer;
-
   function createTestTarget() {
-    renderer.render(<ZLoginPage />);
-    return renderer.getRenderOutput();
+    return shallow(<ZLoginPage />);
   }
 
-  beforeEach(() => {
-    renderer = createRenderer();
-  });
-
-  it('renders the application', () => {
+  it('renders the page', () => {
     // Arrange
-    // Act
     const target = createTestTarget();
+    // Act
+    const actual = target.find('.ZLoginPage-root');
     // Assert
-    expect(target.type).toEqual('div');
+    expect(actual.length).toBeGreaterThan(0);
   });
 });

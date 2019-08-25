@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ZLoginForm } from './login-form';
 import { IZLoginProperties } from './login-properties';
 
-export class ZLoginPageBase extends Component<Partial<IZLoginProperties> & RouteComponentProps> {
-  public static defaultProps: Partial<IZLoginProperties> & Partial<RouteComponentProps> = {
+export class ZLoginPage extends Component<Partial<IZLoginProperties>> {
+  public static defaultProps: Partial<IZLoginProperties> = {
     forgotPasswordRoute: 'forgot-password',
     createAccountRoute: 'create-account'
   };
@@ -17,5 +16,3 @@ export class ZLoginPageBase extends Component<Partial<IZLoginProperties> & Route
     );
   }
 }
-
-export const ZLoginPage = withRouter(ZLoginPageBase);

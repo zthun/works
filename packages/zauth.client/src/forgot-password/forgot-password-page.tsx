@@ -3,8 +3,8 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { ZForgotPasswordForm } from './forgot-password-form';
 import { IZForgotPasswordProperties } from './forgot-password-properties';
 
-export class ZForgotPasswordPageBase extends Component<Partial<IZForgotPasswordProperties> & RouteComponentProps> {
-  public static defaultProps: Partial<IZForgotPasswordProperties> & Partial<RouteComponentProps> = {
+export class ZForgotPasswordPage extends Component<Partial<IZForgotPasswordProperties>> {
+  public static defaultProps: Partial<IZForgotPasswordProperties> = {
     signInRoute: 'login'
   };
 
@@ -16,5 +16,3 @@ export class ZForgotPasswordPageBase extends Component<Partial<IZForgotPasswordP
     );
   }
 }
-
-export const ZForgotPasswordPage = withRouter(ZForgotPasswordPageBase);

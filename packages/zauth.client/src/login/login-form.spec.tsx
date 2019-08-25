@@ -1,20 +1,37 @@
-import { render } from '@testing-library/react';
+import { shallow, ShallowWrapper } from 'enzyme';
+import { History } from 'history';
 import React from 'react';
-import { ZLoginForm } from './login-form';
+import { ZLoginFormBase } from './login-form';
 
 describe('ZLoginForm', () => {
+  const ForgotRoute = 'forgot';
+  const CreateAccountRoute = 'create';
+  let _target: ShallowWrapper;
+  let history: History<any>;
+
   function createTestTarget() {
-    return render(<ZLoginForm forgotPasswordRoute='f-p' createAccountRoute='c-a' />);
+    _target = shallow((<ZLoginFormBase forgotPasswordRoute={ForgotRoute} createAccountRoute={CreateAccountRoute} match={null} location={null} history={history} />));
+    return _target;
   }
+
+  beforeEach(() => {
+    history = {
+      push: jest.fn()
+    } as unknown as History<any>;
+  });
+
+  afterEach(() => {
+    _target.unmount();
+  });
 
   describe('Existing user', () => {
     it('renders the form.', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = target.getByTestId('ZLoginForm-existing-user');
+      const actual = target.find('.ZLoginForm-existing-user');
       // Assert
-      expect(actual).toBeTruthy();
+      expect(actual.length).toBeGreaterThan(0);
     });
   });
 
@@ -23,9 +40,19 @@ describe('ZLoginForm', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = target.getByTestId('ZLoginForm-new-user');
+      const actual = target.find('.ZLoginForm-new-user');
       // Assert
-      expect(actual).toBeTruthy();
+      expect(actual.length).toBeGreaterThan(0);
+    });
+
+    it('redirects the user to the create account route when the button is clicked.', () => {
+      // Arrange
+      const target = createTestTarget();
+      const btn = target.find('.ZLoginForm-new-user-btn').first();
+      // Act
+      btn.simulate('click');
+      // Assert
+      expect(history.push).toHaveBeenCalledWith(CreateAccountRoute);
     });
   });
 
@@ -34,9 +61,19 @@ describe('ZLoginForm', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = target.getByTestId('ZLoginForm-forgot-password');
+      const actual = target.find('.ZLoginForm-forgot-password');
       // Assert
-      expect(actual).toBeTruthy();
+      expect(actual.length).toBeGreaterThan(0);
+    });
+
+    it('redirects the user to the recover account route when the button is clicked.', () => {
+      // Arrange
+      const target = createTestTarget();
+      const btn = target.find('.ZLoginForm-forgot-password-btn').first();
+      // Act
+      btn.simulate('click');
+      // Assert
+      expect(history.push).toHaveBeenCalledWith(ForgotRoute);
     });
   });
 });

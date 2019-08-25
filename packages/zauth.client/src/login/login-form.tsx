@@ -48,7 +48,7 @@ export class ZLoginFormBase extends Component<IZLoginProperties & RouteComponent
             />
             <CardContent>
               <form noValidate={true} autoComplete='off'>
-                <Button fullWidth={true} variant='outlined' color='primary' onClick={this.createAccountClick}>Get started</Button>
+                <Button className='ZLoginForm-new-user-btn' fullWidth={true} variant='outlined' color='primary' onClick={this.createAccountClick}>Get started</Button>
               </form>
             </CardContent>
           </Card>
@@ -64,7 +64,7 @@ export class ZLoginFormBase extends Component<IZLoginProperties & RouteComponent
             />
             <CardContent>
               <form noValidate={true} autoComplete='off'>
-                <Button fullWidth={true} variant='outlined' color='secondary' onClick={this.recoverPasswordClick}>I forgot my password</Button>
+                <Button className='ZLoginForm-forgot-password-btn' fullWidth={true} variant='outlined' color='secondary' onClick={this.recoverPasswordClick}>I forgot my password</Button>
               </form>
             </CardContent>
           </Card>

@@ -5,22 +5,20 @@ import { compare, hash } from 'bcrypt';
 import { Collections } from '../common/collections.enum';
 import { ZUsersController } from './users.controller';
 
-jest.setTimeout(60000);
-
-beforeAll(async () => {
-  await ZDatabaseMemory.start();
-});
-
-afterAll(async () => {
-  await ZDatabaseMemory.kill();
-});
-
 describe('ZUsersController', () => {
   let dal: IZDatabase;
   let userA: IZUser;
   let userB: IZUser;
   let loginA: IZLogin;
   let loginB: IZLogin;
+
+  beforeAll(async () => {
+    await ZDatabaseMemory.start();
+  });
+
+  afterAll(async () => {
+    await ZDatabaseMemory.kill();
+  });
 
   beforeEach(async () => {
     dal = ZDatabaseMemory.connect('users-controller-test');

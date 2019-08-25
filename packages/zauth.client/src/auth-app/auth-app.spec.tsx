@@ -1,21 +1,18 @@
+import { shallow } from 'enzyme';
 import React from 'react';
-import { createRenderer, ShallowRenderer } from 'react-test-renderer/shallow';
-import { ZLoginPage } from '../login/login-page';
 import { ZAuthApp } from './auth-app';
 
 describe('ZAuthApp', () => {
-  let renderer: ShallowRenderer;
+  function createTestTarget() {
+    return shallow(<ZAuthApp />);
+  }
 
-  beforeEach(() => {
-    renderer = createRenderer();
-  });
-
-  it('renders the application', async () => {
+  it('renders the application', () => {
     // Arrange
-    renderer.render(<ZAuthApp />);
+    const target = createTestTarget();
     // Act
-    const actual = renderer.getRenderOutput();
+    const actual = target.find('.ZAuthApp-root');
     // Assert
-    expect(actual.type).toEqual('div');
+    expect(actual).toBeTruthy();
   });
 });
