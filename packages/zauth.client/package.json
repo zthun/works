@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "webpack --env.production",
-    "debug": "webpack-dev-server --config webpack.dev.config.js",
+    "debug": "webpack-dev-server --env.development",
     "package": "npm pack"
   },
   "devDependencies": {

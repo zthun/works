@@ -38,7 +38,7 @@ function config(env) {
       usedExports: true
     },
     devServer: {
-      contentBase: path,
+      contentBase: dir,
       compress: false,
       port: 4200
     }
