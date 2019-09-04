@@ -8,26 +8,23 @@
     "type": "git",
     "url": "https://github.com/zthun/zauth"
   },
+  "private": true,
   "main": "dist/main.js",
   "bin": {
     "zauth-server": "./dist/main.js"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.prod.json",
+    "build": "tsc -p tsconfig.prod.json && npm pack",
     "debug": "nodemon &",
-    "start": "node ./dist/main.js",
-    "package": "npm pack"
-  },
-  "publishConfig": {
-    "access": "public"
+    "start": "node ./dist/main.js"
   },
   "dependencies": {
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
     "@nestjs/platform-express": "^6.0.0",
-    "@zthun/auth.core": "1.0.0-3",
+    "@zthun/auth.core": "^1.0.0-3",
     "@zthun/dal": "^1.0.0",
-    "bcrypt": "^3.0.0",
+    "bcryptjs": "^2.4.3",
     "uuid": "^3.3.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3"

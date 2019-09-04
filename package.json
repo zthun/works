@@ -11,7 +11,7 @@
   },
   "scripts": {
     "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz",
-    "test": "jest --coverage --runInBand",
+    "test": "jest --coverage",
     "lint": "zlint",
     "build": "lerna run build --stream",
     "make": "npm run clean && npm run lint && npm run test && npm run build",
@@ -28,7 +28,6 @@
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
     "@nestjs/platform-express": "^6.0.0",
-    "@types/bcrypt": "^3.0.0",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/express": "^4.0.0",
@@ -46,7 +45,7 @@
     "acorn": "^7.0.0",
     "ajv": "^6.10.2",
     "awesome-typescript-loader": "^5.2.1",
-    "bcrypt": "^3.0.0",
+    "bcryptjs": "^2.4.3",
     "css-loader": "^3.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
@@ -77,6 +76,6 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
-    "@zthun/auth.server": "file:packages/zauth.server/zthun-auth.server-1.0.0-3.tgz"
+    "@types/bcryptjs": "^2.4.2"
   }
 }

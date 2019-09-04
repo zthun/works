@@ -1,7 +1,7 @@
 import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
 import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
-import { compare, hash } from 'bcrypt';
+import { compare, hash } from 'bcryptjs';
 import { Collections } from '../common/collections.enum';
 import { ZUsersController } from './users.controller';
 
@@ -12,6 +12,7 @@ describe('ZUsersController', () => {
   let loginA: IZLogin;
   let loginB: IZLogin;
 
+  /*
   beforeAll(async () => {
     await ZDatabaseMemory.start();
   });
@@ -19,6 +20,7 @@ describe('ZUsersController', () => {
   afterAll(async () => {
     await ZDatabaseMemory.kill();
   });
+  */
 
   beforeEach(async () => {
     dal = ZDatabaseMemory.connect('users-controller-test');

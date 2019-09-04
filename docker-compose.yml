@@ -3,15 +3,19 @@ services:
   client:
     build: packages/zauth.client
     ports:
-      - 32767:80
+      - 3001:80
+  server:
+    build: packages/zauth.server
+    ports:
+      - 3000:3000
   database:
     image: mongo:4.2.0
     ports:
-      - 32769:27017
+      - 27017:27017
   database-viewer:
     image: mongo-express:0.49
     ports:
-      - 32770:8081
+      - 27018:8081
     depends_on:
       - database
     environment:

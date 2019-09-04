@@ -1,17 +1,9 @@
 import { BadRequestException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
-import { hash } from 'bcrypt';
+import { hash } from 'bcryptjs';
 import { Collections } from '../common/collections.enum';
 import { ZLoginsService } from './logins.service';
-
-beforeAll(async () => {
-  await ZDatabaseMemory.start();
-});
-
-afterAll(async () => {
-  await ZDatabaseMemory.kill();
-});
 
 describe('ZLoginsService', () => {
   let dal: IZDatabase;
@@ -21,6 +13,16 @@ describe('ZLoginsService', () => {
   function createTestTarget() {
     return new ZLoginsService(dal);
   }
+
+  /*
+  beforeAll(async () => {
+    await ZDatabaseMemory.start();
+  });
+
+  afterAll(async () => {
+    await ZDatabaseMemory.kill();
+  });
+  */
 
   beforeEach(async () => {
     dal = ZDatabaseMemory.connect('logins-service-test');
