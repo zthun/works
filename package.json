@@ -15,8 +15,9 @@
     "lint": "zlint",
     "build": "lerna run build --stream",
     "make": "npm run clean && npm run lint && npm run test && npm run build",
-    "start": "lerna run debug --stream",
-    "watch": "lerna run watch --stream",
+    "debug": "lerna run debug --stream",
+    "start": "lerna run start --stream",
+    "package": "lerna run package --stream",
     "release": "npm run make && lerna publish"
   },
   "devDependencies": {
@@ -63,6 +64,7 @@
     "rollup": "^1.20.1",
     "rollup-plugin-terser": "^5.0.0",
     "rollup-plugin-typescript2": "^0.23.0",
+    "rxjs": "^6.5.3",
     "sass-loader": "^7.3.1",
     "style-loader": "^1.0.0",
     "ts-jest": "^24.0.0",
@@ -74,5 +76,7 @@
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@zthun/auth.server": "file:packages/zauth.server/zthun-auth.server-1.0.0-3.tgz"
+  }
 }

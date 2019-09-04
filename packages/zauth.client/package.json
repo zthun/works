@@ -15,8 +15,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "webpack",
-    "debug": "webpack-dev-server --config webpack.dev.config.js"
+    "build": "webpack --env.production",
+    "debug": "webpack-dev-server --config webpack.dev.config.js",
+    "package": "npm pack"
   },
   "devDependencies": {
     "@zthun/auth.core": "file:../zauth.core"
