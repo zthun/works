@@ -2,12 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist",
-    "paths": {
-      "@zthun/auth.core": [
-        "../zauth.core/index.ts"
-      ]
-    }
+    "outDir": "dist"
   },
   "include": [
     "src/**/*.ts"
@@ -15,5 +10,5 @@
   "exclude": [
     "node_modules",
     "src/**/*.spec.ts"
-  ],
+  ]
 }
