@@ -1,5 +1,6 @@
 
-import { shallow } from 'enzyme';
+import { configure, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import { ZLoginPage } from './login-page';
 
@@ -7,6 +8,10 @@ describe('ZLoginPage', () => {
   function createTestTarget() {
     return shallow(<ZLoginPage />);
   }
+
+  beforeAll(() => {
+    configure({ adapter: new Adapter() });
+  });
 
   it('renders the page', () => {
     // Arrange

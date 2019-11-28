@@ -1,4 +1,5 @@
-import { shallow, ShallowWrapper } from 'enzyme';
+import { configure, shallow, ShallowWrapper } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { History } from 'history';
 import React from 'react';
 import { ZNewUserFormBase } from './new-user-form';
@@ -12,6 +13,10 @@ describe('ZLoginForm', () => {
     _target = shallow((<ZNewUserFormBase signInRoute={SignInRoute} match={null} location={null} history={history} />));
     return _target;
   }
+
+  beforeAll(() => {
+    configure({ adapter: new Adapter() });
+  });
 
   beforeEach(() => {
     history = {

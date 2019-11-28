@@ -23,8 +23,7 @@ module.exports = {
     '@zthun/auth.core': '<rootDir>/zauth.core/src/index',
     '@zthun/auth.react': '<rootDir>/zauth.react/src/index'
   },
-  setupFilesAfterEnv: [
-    '<rootDir>/../jest.setup.ts'
-  ],
+  globalSetup: '<rootDir>/../jest.setup.js',
+  globalTeardown: '<rootDir>/../jest.teardown.js',
   coverageDirectory: '../reports/coverage'
 };
