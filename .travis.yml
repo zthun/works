@@ -4,4 +4,6 @@ sudo: required
 install:
   - npm ci
 script:
-  - npm run make
+  - npm run lint
+  - npm test -- --forceExit
+  - npm run build
