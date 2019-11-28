@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "webpack --env.production && npm pack",
-    "debug": "webpack-dev-server --env.development"
+    "debug": "webpack-dev-server --env.development &"
   },
   "devDependencies": {
     "@zthun/auth.core": "file:../zauth.core"
