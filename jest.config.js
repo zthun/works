@@ -5,6 +5,7 @@ module.exports = {
     }
   },
   rootDir: 'packages',
+  testTimeout: 60000,
   testRegex: '.spec.(tsx|ts)$',
   transform: {
     '^.+\\.(tsx|ts)$': 'ts-jest'
