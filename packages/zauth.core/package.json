@@ -31,5 +31,8 @@
   },
   "files": [
     "dist/**"
-  ]
+  ],
+  "peerDependencies": {
+    "url-parse": "^1.4.7"
+  }
 }
