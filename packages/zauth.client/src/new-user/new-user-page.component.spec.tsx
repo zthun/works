@@ -2,7 +2,7 @@
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
-import { ZNewUserPage } from './new-user-page';
+import { ZNewUserPage } from './new-user-page.component';
 
 describe('ZNewUserPage', () => {
   function createTestTarget() {

@@ -2,15 +2,16 @@ import { configure, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { History } from 'history';
 import React from 'react';
-import { ZNewUserFormBase } from './new-user-form';
+import { ZNewUserFormBase } from './new-user-form.component';
 
 describe('ZLoginForm', () => {
   const SignInRoute = 'login';
+  const NewUserEndpoint = 'api.newuser';
   let _target: ShallowWrapper;
   let history: History;
 
   function createTestTarget() {
-    _target = shallow((<ZNewUserFormBase signInRoute={SignInRoute} match={null} location={null} history={history} />));
+    _target = shallow((<ZNewUserFormBase signInRoute={SignInRoute} newUserEndpoint={NewUserEndpoint} match={null} location={null} history={history} />));
     return _target;
   }
 

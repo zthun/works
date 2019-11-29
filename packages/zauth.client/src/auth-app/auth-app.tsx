@@ -2,7 +2,7 @@ import React from 'react';
 import { HashRouter, Redirect, Route } from 'react-router-dom';
 import { ZForgotPasswordPage } from '../forgot-password/forgot-password-page';
 import { ZLoginPage } from '../login/login-page';
-import { ZNewUserPage } from '../new-user/new-user-page';
+import { ZNewUserPage } from '../new-user/new-user-page.component';
 
 export class ZAuthApp extends React.Component {
   public render() {

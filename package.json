@@ -15,8 +15,8 @@
     "lint": "zlint",
     "build": "lerna run build --stream",
     "make": "npm run clean && npm run lint && npm run test && npm run build",
-    "debug": "lerna run debug --stream",
-    "start": "lerna run start --stream",
+    "debug:client": "lerna run debug --scope @zthun/auth.client --stream",
+    "debug:server": "lerna run debug --scope @zthun/auth.server --stream",
     "package": "lerna run package --stream",
     "release": "npm run make && lerna publish"
   },

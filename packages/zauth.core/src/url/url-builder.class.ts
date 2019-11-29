@@ -76,6 +76,29 @@ export class ZUrlBuilder {
   }
 
   /**
+   * Fills the information from the current location data.
+   *
+   * @returns This object.
+   */
+  public location(): this {
+    this.protocol(location.protocol)
+      .hostname(location.hostname)
+      .hash(location.hash)
+      .path(location.pathname)
+      .port(location.port ? +location.port : null);
+
+    let search = location.search;
+
+    if (search.startsWith('?')) {
+      search = search.slice(1);
+      const pairs = search.split('&');
+      pairs.map((pair) => pair.split('=')).forEach((matrix) => this.param(matrix[0], matrix[1]));
+    }
+
+    return this;
+  }
+
+  /**
    * Parses an existing url and sets all properties.
    *
    * If you give this a path without the protocol and hostname, then it will
