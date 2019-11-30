@@ -1,6 +1,5 @@
-import { RouteComponentProps } from 'react-router';
 
-export interface IZNewUserProperties extends RouteComponentProps {
+export interface IZNewUserProperties {
   signInRoute: string;
   newUserEndpoint: string;
 }
