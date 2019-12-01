@@ -11,9 +11,13 @@ export function ZRouteButton(props: IZRouteButtonProperties) {
   }
 
   return (
-    <div className='ZRouteButton-root' data-testid='ZRouteButton-root'>
-      <Button className='ZRouteButton-btn' fullWidth={true} variant='text' color={props.color} onClick={route}>{props.children}</Button>
+    <div className='ZRouteButton-root'>
+      <Button className='ZRouteButton-btn' fullWidth={true} variant='text' color={props.color} onClick={route} disabled={props.disabled}>{props.children}</Button>
     </div>
   );
-
 }
+
+ZRouteButton.defaultProps = {
+  disabled: false,
+  color: 'secondary'
+};

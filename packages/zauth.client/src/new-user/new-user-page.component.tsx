@@ -1,20 +1,19 @@
-import { ZUrlBuilder } from '@zthun/auth.core';
+import { IZLogin } from '@zthun/auth.core';
 import React from 'react';
-import { ZRouteButton } from '../route-button/route-button.component';
 import { ZNewUserForm } from './new-user-form.component';
-import { IZNewUserProperties } from './new-user-properties.interface';
 
-export function ZNewUserPage(props: IZNewUserProperties) {
+export function ZNewUserPage() {
+  function handleCreate(login: IZLogin): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(resolve, 2000);
+    });
+  }
+
   return (
     <div className='ZNewUserPage-root'>
       <div className='ZNewUserPage-form mx-auto w-font-25 mt-em-5'>
-        <ZNewUserForm signInRoute={props.signInRoute} newUserEndpoint={props.newUserEndpoint} />
+        <ZNewUserForm signInRoute='login' onCreate={handleCreate} />
       </div>
     </div>
   );
 }
-
-ZNewUserPage.defaultProps = {
-  signInRoute: 'login',
-  newUserEndpoint: new ZUrlBuilder().location().subdomain('api').build()
-};

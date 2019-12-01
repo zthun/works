@@ -78,16 +78,18 @@ export class ZUrlBuilder {
   /**
    * Fills the information from the current location data.
    *
+   * @param loc The optional location object to populate with.
+   *
    * @returns This object.
    */
-  public location(): this {
-    this.protocol(location.protocol)
-      .hostname(location.hostname)
-      .hash(location.hash)
-      .path(location.pathname)
-      .port(location.port ? +location.port : null);
+  public location(loc: Location = location): this {
+    this.protocol(loc.protocol)
+      .hostname(loc.hostname)
+      .hash(loc.hash)
+      .path(loc.pathname)
+      .port(+loc.port);
 
-    let search = location.search;
+    let search = loc.search;
 
     if (search.startsWith('?')) {
       search = search.slice(1);

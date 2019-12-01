@@ -9,6 +9,10 @@ describe('ZUrlBuilder', () => {
     host = 'facebook.com';
   });
 
+  function createTestTarget() {
+    return new ZUrlBuilder();
+  }
+
   function assertBuildsUrl(expected: string, buildFn: (target: ZUrlBuilder) => ZUrlBuilder) {
     // Arrange
     const target = new ZUrlBuilder(protocol, host);
@@ -107,15 +111,12 @@ describe('ZUrlBuilder', () => {
   });
 
   describe('Parsing', () => {
-    function createParseTestTarget(url) {
-      return new ZUrlBuilder().parse(url);
-    }
-
     it('correctly parses a url.', () => {
       // Arrange
       const url = 'https://user:password@www.google.com:9086/foo/bar/?valA=a&valB=b#hhh';
+      const target = createTestTarget();
       // Act
-      const actual = createParseTestTarget(url).build();
+      const actual = target.parse(url).build();
       // Assert
       expect(actual).toEqual(url);
     });
@@ -123,8 +124,9 @@ describe('ZUrlBuilder', () => {
     it('supports partial uri values.', () => {
       // Arrange
       const expected = '/foo/bar/?valA=a&valB=b#hhh';
+      const target = createTestTarget();
       // Act
-      const actual = new ZUrlBuilder().parse(expected).build();
+      const actual = target.parse(expected).build();
       // Assert
       expect(actual.endsWith(expected)).toBeTruthy();
     });
@@ -133,8 +135,9 @@ describe('ZUrlBuilder', () => {
       // Arrange
       const url = 'https://google.com:9086/foo/bar#hhh';
       const expected = 'http://user:password@mail.google.com:9099/a/b/c/?valA=c&valB=d#h32';
+      const target = createTestTarget();
       // Act
-      const actual = createParseTestTarget(url)
+      const actual = target.parse(url)
         .protocol('http')
         .port(9099)
         .path('a')
@@ -154,10 +157,52 @@ describe('ZUrlBuilder', () => {
       // Arrange
       const url = 'https://www.google.com';
       const expected = 'https://www.google.com:9999';
+      const target = createTestTarget();
       // Act
-      const actual = createParseTestTarget(url).port(9999).build();
+      const actual = target.parse(url).port(9999).build();
       // Assert
       expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('Location', () => {
+    let loc: Location;
+
+    beforeEach(() => {
+      loc = {
+        ancestorOrigins: null,
+        hash: '',
+        host: '',
+        hostname: 'localhost',
+        href: '',
+        origin: '',
+        pathname: '',
+        port: '',
+        protocol: 'https',
+        search: '',
+        assign: jest.fn(),
+        reload: jest.fn(),
+        replace: jest.fn()
+      };
+    });
+
+    it('initializes with the default location.', () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = target.location().build();
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('it constructs the search params.', () => {
+      // Arrange
+      const target = createTestTarget();
+      loc.search = '?a=b';
+      // Act
+      const actual = target.location(loc).build();
+      // Assert
+      expect(actual.endsWith('a=b')).toBeTruthy();
     });
   });
 });
