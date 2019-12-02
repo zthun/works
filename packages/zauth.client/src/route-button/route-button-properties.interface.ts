@@ -4,5 +4,6 @@ export interface IZRouteButtonProperties {
   route: string;
   color: PropTypes.Color;
   disabled: boolean;
-  children?: any;
+  children: any;
+  variant?: 'text' | 'outlined' | 'contained';
 }
