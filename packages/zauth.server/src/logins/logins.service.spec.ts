@@ -14,16 +14,6 @@ describe('ZLoginsService', () => {
     return new ZLoginsService(dal);
   }
 
-  /*
-  beforeAll(async () => {
-    await ZDatabaseMemory.start();
-  });
-
-  afterAll(async () => {
-    await ZDatabaseMemory.kill();
-  });
-  */
-
   beforeEach(async () => {
     dal = ZDatabaseMemory.connect('logins-service-test');
 

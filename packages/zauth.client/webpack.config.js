@@ -22,8 +22,8 @@ function config(env) {
           use: ['awesome-typescript-loader']
         },
         {
-          test: /\.scss$/,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
+          test: /\.less$/,
+          use: ['style-loader', 'css-loader', 'less-loader'],
           sideEffects: true
         }
       ]
@@ -41,7 +41,8 @@ function config(env) {
     devServer: {
       contentBase: dir,
       compress: false,
-      port: 4200
+      port: 4200,
+      disableHostCheck: true
     }
   }
 

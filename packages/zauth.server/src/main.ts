@@ -17,7 +17,7 @@ import { ZUsersController } from './users/users.controller';
   ],
   providers: [
     ZLoginsService,
-    { provide: DatabaseToken, useValue: ZDatabaseMongo.connect('auth', 'database', 27017) },
+    { provide: DatabaseToken, useValue: ZDatabaseMongo.connect('auth', 'database.auth.zthunworks.com', 27017) },
   ]
 })
 export class MainModule {

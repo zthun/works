@@ -12,16 +12,6 @@ describe('ZUsersController', () => {
   let loginA: IZLogin;
   let loginB: IZLogin;
 
-  /*
-  beforeAll(async () => {
-    await ZDatabaseMemory.start();
-  });
-
-  afterAll(async () => {
-    await ZDatabaseMemory.kill();
-  });
-  */
-
   beforeEach(async () => {
     dal = ZDatabaseMemory.connect('users-controller-test');
 
