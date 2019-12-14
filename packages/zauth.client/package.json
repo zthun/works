@@ -6,7 +6,6 @@
     "oauth2",
     "zauth"
   ],
-  "private": true,
   "browser": "./dist/zauth.client.min.js",
   "repository": {
     "type": "git",
