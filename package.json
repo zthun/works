@@ -9,16 +9,19 @@
     "type": "git",
     "url": "https://github.com/zthun/zauth"
   },
+  "workspaces": [
+    "packages/zauth.core",
+    "packages/zauth.client",
+    "packages/zauth.server"
+  ],
   "scripts": {
     "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz",
     "test": "jest --coverage",
     "lint": "zlint",
-    "build": "lerna run build --stream",
-    "make": "npm run clean && npm run lint && npm run test && npm run build",
-    "debug:client": "lerna run debug --scope @zthun/auth.client --stream",
-    "debug:server": "lerna run debug --scope @zthun/auth.server --stream",
-    "package": "lerna run package --stream",
-    "release": "npm run make && lerna publish"
+    "build": "yarn workspaces run build",
+    "debug:client": "yarn --cwd packages/zauth.client run debug",
+    "debug:server": "yarn --cwd packages/zauth.server run debug",
+    "package": "lerna run package --stream"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
@@ -74,13 +77,12 @@
     "style-loader": "^1.0.0",
     "ts-jest": "^24.0.0",
     "ts-node": "^8.0.0",
-    "tslint-react": "^4.0.0",
+    "tslint-react": "~4.0.0",
     "typescript": "^3.5.3",
     "url-parse": "^1.4.7",
     "uuid": "^3.3.3",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0"
-  },
-  "dependencies": {}
+  }
 }
