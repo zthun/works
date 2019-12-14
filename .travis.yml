@@ -2,8 +2,8 @@ language: node_js
 node_js: 10.17.0
 sudo: required
 install:
-  - npm ci
+  - yarn install
 script:
-  - npm run lint
-  - npm test -- --forceExit
-  - npm run build
+  - yarn lint
+  - yarn test -- --forceExit
+  - yarn build

@@ -4,11 +4,8 @@
     "packages/zauth.core/src/**/*.ts",
     "packages/zauth.server/src/**/*.ts"
   ],
-  "esFiles": [
-    "packages/zauth.core/*.js"
-  ],
-  "sassFiles": [
-    "packages/zauth.client/src/**/*.scss"
+  "lessFiles": [
+    "packages/zauth.theme"
   ],
   "htmlFiles": [
     "packages/zauth.client/src/**/*.html"

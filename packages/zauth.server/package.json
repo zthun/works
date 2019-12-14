@@ -22,7 +22,7 @@
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
     "@nestjs/platform-express": "^6.0.0",
-    "@zthun/auth.core": "^1.0.0-4",
+    "@zthun/auth.core": "file:../zauth.core",
     "@zthun/dal": "^1.0.0",
     "bcryptjs": "^2.4.3",
     "reflect-metadata": "^0.1.13",

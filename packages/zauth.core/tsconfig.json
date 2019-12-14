@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist/esm5",
-    "declarationDir": "dist/types",
-    "paths": {}
+    "declarationDir": "dist/types"
   },
   "include": [
     "src/**/*.ts"
