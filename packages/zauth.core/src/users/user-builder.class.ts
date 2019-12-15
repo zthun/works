@@ -3,8 +3,8 @@ import { IZUser } from './user.interface';
 /**
  * Represents a builder object for a user.
  */
-export class ZUserBuilder {
-  private _user: IZUser;
+export class ZUserBuilder<TMeta = any> {
+  private _user: IZUser<TMeta>;
 
   /**
    * Initializes a new instance of this object.
@@ -23,7 +23,7 @@ export class ZUserBuilder {
    *
    * @return This object.
    */
-  public id(val: string): ZUserBuilder {
+  public id(val: string): this {
     this._user._id = val;
     return this;
   }
@@ -35,7 +35,7 @@ export class ZUserBuilder {
    *
    * @return This object.
    */
-  public email(val: string): ZUserBuilder {
+  public email(val: string): this {
     this._user.email = val;
     return this;
   }
@@ -49,8 +49,16 @@ export class ZUserBuilder {
    *
    * @return This object.
    */
-  public password(val: string): ZUserBuilder {
+  public password(val: string): this {
     this._user.password = val;
+    return this;
+  }
+
+  /**
+   * Sets the user as the super user.
+   */
+  public super(): this {
+    this._user.super = true;
     return this;
   }
 
@@ -59,7 +67,7 @@ export class ZUserBuilder {
    *
    * @return This object.
    */
-  public login(): ZUserBuilder {
+  public login(): this {
     this._user.login = Date.now();
     return this;
   }
@@ -69,8 +77,20 @@ export class ZUserBuilder {
    *
    * @return This object.
    */
-  public logout(): ZUserBuilder {
+  public logout(): this {
     this._user.logout = Date.now();
+    return this;
+  }
+
+  /**
+   * Sets the metadata for the user.
+   *
+   * @param meta The user metadata.
+   *
+   * @return This object.
+   */
+  public metadata(meta: TMeta): this {
+    this._user.metadata = meta;
     return this;
   }
 
@@ -79,8 +99,9 @@ export class ZUserBuilder {
    *
    * @return This object.
    */
-  public redact(): ZUserBuilder {
+  public redact(): this {
     delete this._user.password;
+    delete this._user.super;
     return this;
   }
 
@@ -91,7 +112,7 @@ export class ZUserBuilder {
    *
    * @return This object.
    */
-  public copy(other: IZUser): ZUserBuilder {
+  public copy(other: IZUser): this {
     this._user = { ...other };
     return this;
   }

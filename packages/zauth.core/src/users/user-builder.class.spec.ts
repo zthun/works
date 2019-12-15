@@ -33,6 +33,15 @@ describe('ZUserBuilder', () => {
       assertPropertySet(pwd, (t) => t.password(pwd), (u) => u.password);
     });
 
+    it('sets the super flag.', () => {
+      assertPropertySet(true, (t) => t.super(), (u) => u.super);
+    });
+
+    it('sets the user metadata.', () => {
+      const metadata = v4();
+      assertPropertySet(metadata, (t) => t.metadata(metadata), (u) => u.metadata);
+    });
+
     it('sets the login.', () => {
       assertPropertySet(true, (t) => t.login(), (u) => !!u.login);
     });
@@ -45,7 +54,7 @@ describe('ZUserBuilder', () => {
   describe('Redaction', () => {
     function assertRedactsProperty<T>(propFn: (u: IZUser) => T) {
       // Arrange
-      const target = createTestTarget().id(v4()).email(v4()).password(v4());
+      const target = createTestTarget().id(v4()).email(v4()).password(v4()).super().metadata(v4()).login().logout();
       // Act
       const user = target.redact().build();
       const actual = propFn(user);
@@ -55,6 +64,10 @@ describe('ZUserBuilder', () => {
 
     it('removes the password.', () => {
       assertRedactsProperty((u) => u.password);
+    });
+
+    it('removes the super flag.', () => {
+      assertRedactsProperty((u) => u.super);
     });
   });
 

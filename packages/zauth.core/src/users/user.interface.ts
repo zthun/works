@@ -1,7 +1,7 @@
 /**
  * Represents a user in the system.
  */
-export interface IZUser {
+export interface IZUser<TMeta = any> {
   /**
    * The user id.
    */
@@ -16,6 +16,11 @@ export interface IZUser {
    * The hashed password for the user.
    */
   password?: string;
+
+  /**
+   * Gets a value that indicates whether or not the user is the super user.
+   */
+  super?: boolean;
 
   /**
    * The last time the user logged into the system.
@@ -40,4 +45,12 @@ export interface IZUser {
    * logged in.
    */
   logout?: number;
+
+  /**
+   * Optional metadata about the user.
+   *
+   * This is determined by the needs of the application using this
+   * system.
+   */
+  metadata?: TMeta;
 }

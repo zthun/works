@@ -57,7 +57,7 @@ describe('ZUsersController', () => {
       userB = blobs[0];
     });
 
-    it('creates the user.', async () => {
+    it('creates a user.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
@@ -67,6 +67,29 @@ describe('ZUsersController', () => {
       // Assert
       expect(actual._id).toBeTruthy();
       expect(actual.email).toEqual(loginA.email);
+    });
+
+    it('creates the super user if the new user is the first in the system.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      await dal.delete(Collections.Users).run();
+      // Act
+      const created = await target.create(loginA);
+      const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
+      const actual = actualBlobs[0];
+      // Assert
+      expect(actual.super).toBeTruthy();
+    });
+
+    it('creates a normal user if there is already a super user.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const created = await target.create(loginA);
+      const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
+      const actual = actualBlobs[0];
+      // Assert
+      expect(actual.super).toBeFalsy();
     });
 
     it('returns a redacted user.', async () => {

@@ -71,8 +71,10 @@ export class ZUsersController {
     const count = await this._dal.count(Collections.Users).filter(filter).run();
     ZHttpAssert.assert(count === 0, () => new ConflictException('User email is already taken.'));
 
+    const total = await this._dal.count(Collections.Users).run();
     const password = await hash(login.password, ZUsersController.Rounds);
-    const create = new ZUserBuilder().email(login.email).password(password).build();
+    const builder = new ZUserBuilder().email(login.email).password(password);
+    const create = total === 0 ? builder.super().build() : builder.build();
     const createdBlobs = await this._dal.create(Collections.Users, [create]).run();
     const created = createdBlobs[0];
     return new ZUserBuilder().copy(created).redact().build();
