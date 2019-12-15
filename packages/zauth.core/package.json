@@ -20,8 +20,11 @@
   "files": [
     "dist/**"
   ],
-  "peerDependencies": {
+  "dependencies": {
     "url-parse": "^1.4.7"
+  },
+  "devDependencies": {
+    "@types/url-parse": "^1.4.3"
   },
   "sideEffects": false
 }
