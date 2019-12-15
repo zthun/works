@@ -24,6 +24,7 @@
     "@zthun/auth.core": "file:../zauth.core",
     "@zthun/dal": "^1.0.0",
     "bcryptjs": "^2.4.3",
+    "lodash": "^4.17.15",
     "oauth2-server": "^3.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",

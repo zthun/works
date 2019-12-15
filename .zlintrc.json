@@ -1,4 +1,5 @@
 {
+  "tsConfig": "./tslint.json",
   "tsFiles": [
     "packages/zauth.client/src/**/*.ts",
     "packages/zauth.core/src/**/*.ts",
