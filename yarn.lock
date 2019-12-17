@@ -1700,10 +1700,10 @@
   dependencies:
     url-parse "^1.4.7"
 
-"@zthun/dal@^1.0.1-0":
-  version "1.0.1-0"
-  resolved "https://registry.yarnpkg.com/@zthun/dal/-/dal-1.0.1-0.tgz#ab905543132e8bf5da0cc90a9ca528f648db7ead"
-  integrity sha512-S18ZqVYmjqqy7TPks0UlGTqQazyYxC69rW8zbZPS8FhcTSh9KmFMETunvSmdSQvnNbZnqjkPRucPXoh4DUXlYQ==
+"@zthun/dal@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@zthun/dal/-/dal-1.0.1.tgz#7009220e93ed49a57b5895dc021b6cc77265423e"
+  integrity sha512-5P0CgA4Vl2yFShgchSJKBQXImPhayUx5GSmBi1t08a6yoSQwVloeqrfY72dDsAD4Arzc94wgepw/XeqNT/pLnw==
   dependencies:
     "@types/mongodb" "~3.1.32"
     mongodb "~3.1.13"
