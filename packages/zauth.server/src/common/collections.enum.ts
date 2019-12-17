@@ -11,4 +11,8 @@ export enum Collections {
    * The users collection.
    */
   Users = 'users',
+  /**
+   * The token collection.
+   */
+  Tokens = 'tokens'
 }

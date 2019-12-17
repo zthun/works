@@ -5,18 +5,16 @@ import { NestFactory } from '@nestjs/core';
 import { ZDatabaseMongo } from '@zthun/dal';
 import { DatabaseToken } from './common/injection.constants';
 import { ZHealthController } from './health/health.controller';
-import { ZLoginsController } from './logins/logins.controller';
-import { ZLoginsService } from './logins/logins.service';
+import { ZTokensController } from './tokens/tokens.controller';
 import { ZUsersController } from './users/users.controller';
 
 @Module({
   controllers: [
     ZUsersController,
-    ZLoginsController,
+    ZTokensController,
     ZHealthController
   ],
   providers: [
-    ZLoginsService,
     { provide: DatabaseToken, useValue: ZDatabaseMongo.connect('auth', 'database.auth.zthunworks.com', 27017) },
   ]
 })

@@ -14,15 +14,16 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.prod.json && npm pack",
-    "debug": "nodemon &",
+    "debug": "nodemon",
     "start": "node ./dist/main.js"
   },
   "dependencies": {
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
     "@nestjs/platform-express": "^6.0.0",
+    "@types/oauth2-server": "^3.0.12",
     "@zthun/auth.core": "file:../zauth.core",
-    "@zthun/dal": "^1.0.0",
+    "@zthun/dal": "^1.0.1-0",
     "bcryptjs": "^2.4.3",
     "lodash": "^4.17.15",
     "oauth2-server": "^3.0.1",
