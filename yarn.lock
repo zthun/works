@@ -6581,6 +6581,11 @@ jest-config@^24.9.0:
     pretty-format "^24.9.0"
     realpath-native "^1.1.0"
 
+jest-createspyobj@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/jest-createspyobj/-/jest-createspyobj-1.2.2.tgz#d39d3eefa029f22931558e7eb64996da2a7d6911"
+  integrity sha512-qxR/EqGX3OUpeoXV1FqeNcyQfNlKOct4yoKhPtXp4pTOjdmzZEXz/devgw2mua4aL4JY3VNXrtzysTxucmdSJg==
+
 jest-diff@^24.3.0, jest-diff@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-24.9.0.tgz#931b7d0d5778a1baf7452cb816e325e3724055da"

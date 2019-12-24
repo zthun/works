@@ -3,6 +3,7 @@ import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
 import { compare, hash } from 'bcryptjs';
 import { Collections } from '../common/collections.enum';
+import { BcryptRounds } from '../common/crypt.constants';
 import { ZUsersController } from './users.controller';
 
 describe('ZUsersController', () => {
@@ -12,14 +13,16 @@ describe('ZUsersController', () => {
   let loginA: IZLogin;
   let loginB: IZLogin;
 
-  beforeEach(async () => {
-    dal = ZDatabaseMemory.connect('users-controller-test');
+  beforeAll(() => {
+    dal = ZDatabaseMemory.connect('user-controller-test');
+  });
 
+  beforeEach(async () => {
     loginA = new ZLoginBuilder().email('a@gmail.com').password('super-secret-a').autoConfirm().build();
     loginB = new ZLoginBuilder().email('b@yahoo.com').password('super-secret-b').autoConfirm().build();
 
-    const pwdA = await hash(loginA.password, ZUsersController.Rounds);
-    const pwdB = await hash(loginB.password, ZUsersController.Rounds);
+    const pwdA = await hash(loginA.password, BcryptRounds);
+    const pwdB = await hash(loginB.password, BcryptRounds);
 
     userA = new ZUserBuilder().email(loginA.email).password(pwdA).build();
     userB = new ZUserBuilder().email(loginB.email).password(pwdB).build();

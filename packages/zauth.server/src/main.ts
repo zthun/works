@@ -5,6 +5,8 @@ import { NestFactory } from '@nestjs/core';
 import { ZDatabaseMongo } from '@zthun/dal';
 import { DatabaseToken } from './common/injection.constants';
 import { ZHealthController } from './health/health.controller';
+import { ZOauthPasswordService } from './oauth/oauth-password.service';
+import { ZOauthServerService } from './oauth/oauth-server.service';
 import { ZTokensController } from './tokens/tokens.controller';
 import { ZUsersController } from './users/users.controller';
 
@@ -16,6 +18,8 @@ import { ZUsersController } from './users/users.controller';
   ],
   providers: [
     { provide: DatabaseToken, useValue: ZDatabaseMongo.connect('auth', 'database.auth.zthunworks.com', 27017) },
+    ZOauthPasswordService,
+    ZOauthServerService,
   ]
 })
 export class MainModule {

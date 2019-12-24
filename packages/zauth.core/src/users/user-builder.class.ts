@@ -63,26 +63,6 @@ export class ZUserBuilder<TMeta = any> {
   }
 
   /**
-   * Marks the login as now.
-   *
-   * @return This object.
-   */
-  public login(): this {
-    this._user.login = Date.now();
-    return this;
-  }
-
-  /**
-   * Marks the logout as now.
-   *
-   * @return This object.
-   */
-  public logout(): this {
-    this._user.logout = Date.now();
-    return this;
-  }
-
-  /**
    * Sets the metadata for the user.
    *
    * @param meta The user metadata.

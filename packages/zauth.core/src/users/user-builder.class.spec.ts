@@ -41,20 +41,12 @@ describe('ZUserBuilder', () => {
       const metadata = v4();
       assertPropertySet(metadata, (t) => t.metadata(metadata), (u) => u.metadata);
     });
-
-    it('sets the login.', () => {
-      assertPropertySet(true, (t) => t.login(), (u) => !!u.login);
-    });
-
-    it('sets the logout.', () => {
-      assertPropertySet(true, (t) => t.logout(), (u) => !!u.logout);
-    });
   });
 
   describe('Redaction', () => {
     function assertRedactsProperty<T>(propFn: (u: IZUser) => T) {
       // Arrange
-      const target = createTestTarget().id(v4()).email(v4()).password(v4()).super().metadata(v4()).login().logout();
+      const target = createTestTarget().id(v4()).email(v4()).password(v4()).super().metadata(v4());
       // Act
       const user = target.redact().build();
       const actual = propFn(user);

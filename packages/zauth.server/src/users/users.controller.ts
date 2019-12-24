@@ -4,6 +4,7 @@ import { IZDatabase } from '@zthun/dal';
 import { hash } from 'bcryptjs';
 import { pick } from 'lodash';
 import { Collections } from '../common/collections.enum';
+import { BcryptRounds } from '../common/crypt.constants';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
 
@@ -12,8 +13,6 @@ import { DatabaseToken } from '../common/injection.constants';
  */
 @Controller('users')
 export class ZUsersController {
-  public static readonly Rounds = 10;
-
   /**
    * Initializes a new instance of this object.
    *
@@ -72,7 +71,7 @@ export class ZUsersController {
     ZHttpAssert.assert(count === 0, () => new ConflictException('User email is already taken.'));
 
     const total = await this._dal.count(Collections.Users).run();
-    const password = await hash(login.password, ZUsersController.Rounds);
+    const password = await hash(login.password, BcryptRounds);
     const builder = new ZUserBuilder().email(login.email).password(password);
     const create = total === 0 ? builder.super().build() : builder.build();
     const createdBlobs = await this._dal.create(Collections.Users, [create]).run();
@@ -112,7 +111,7 @@ export class ZUsersController {
       ZHttpAssert.assert(!!login.password, () => new BadRequestException('Password is required'));
       ZHttpAssert.assert(!!login.confirm, () => new BadRequestException('Password confirmation is required'));
       ZHttpAssert.assert(login.password === login.confirm, () => new BadRequestException('Passwords do not match.'));
-      template.password = await hash(login.password, ZUsersController.Rounds);
+      template.password = await hash(login.password, BcryptRounds);
     }
 
     if (!template.email && !template.password) {
