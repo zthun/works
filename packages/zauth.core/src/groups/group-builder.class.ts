@@ -91,6 +91,34 @@ export class ZGroupBuilder {
   }
 
   /**
+   * Copies all available properties in other to this object.
+   *
+   * @param other The properties to copy.
+   *
+   * @returns This object.
+   */
+  public assign(other: Partial<IZGroup>): this {
+    this._group = Object.assign(this._group, other);
+    this._group.permissions = this._group.permissions.slice();
+    this._group.users = this._group.users.slice();
+    return this;
+  }
+
+  /**
+   * Copies other into the current object.
+   *
+   * @param other The group to copy.
+   *
+   * @returns This object.
+   */
+  public copy(other: IZGroup): this {
+    this._group = Object.assign({}, other);
+    this._group.permissions = this._group.permissions.slice();
+    this._group.users = this._group.users.slice();
+    return this;
+  }
+
+  /**
    * Builds the group and returns it.
    *
    * The return value will be a deep copy.

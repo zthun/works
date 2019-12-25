@@ -60,4 +60,29 @@ describe('ZGroupBuilder', () => {
       assertPropertySet([], (t) => t.permission(red).permissions(null), (g) => g.permissions);
     });
   });
+
+  describe('Copy', () => {
+    it('copies another permission.', () => {
+      // Arrange
+      const expected = createTestTarget().name('copied-group').id('copy').build();
+      const target = createTestTarget();
+      // Act
+      const actual = target.copy(expected).build();
+      // Assert
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('Assign', () => {
+    it('assigns updated properties.', () => {
+      // Arrange
+      const original = createTestTarget().id('p-id').name('p-name').users(users).permissions(permissions).build();
+      const expected = createTestTarget().copy(original).name('updated-name').permissions([]).build();
+      const target = createTestTarget().copy(original);
+      // Act
+      const actual = target.assign({ name: expected.name, permissions: expected.permissions }).build();
+      // Assert
+      expect(actual).toEqual(expected);
+    });
+  });
 });

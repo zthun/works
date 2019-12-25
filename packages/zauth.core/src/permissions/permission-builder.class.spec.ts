@@ -41,7 +41,7 @@ describe('ZPermissionBuilder', () => {
       // Act
       const actual = target.copy(expected).build();
       // Assert
-      expect(JSON.stringify(actual)).toEqual(JSON.stringify(expected));
+      expect(actual).toEqual(expected);
     });
   });
 
@@ -54,7 +54,7 @@ describe('ZPermissionBuilder', () => {
       // Act
       const actual = target.assign({ description: expected.description }).build();
       // Assert
-      expect(JSON.stringify(actual)).toEqual(JSON.stringify(expected));
+      expect(actual).toEqual(expected);
     });
   });
 });
