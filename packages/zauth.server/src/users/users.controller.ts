@@ -103,7 +103,7 @@ export class ZUsersController {
     if (login.email) {
       const emailFilter = { email: login.email, _id: { $ne: pid } };
       const count = await this._dal.count(Collections.Users).filter(emailFilter).run();
-      ZHttpAssert.assert(count === 0, () => new ConflictException('User name is already taken.'));
+      ZHttpAssert.assert(count === 0, () => new ConflictException('User name is not available.'));
       template.email = login.email;
     }
 

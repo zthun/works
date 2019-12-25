@@ -12,6 +12,14 @@ export enum Collections {
    */
   Users = 'users',
   /**
+   * The groups collection.
+   */
+  Groups = 'groups',
+  /**
+   * The permissions collection.
+   */
+  Permissions = 'permissions',
+  /**
    * The token collection.
    */
   Tokens = 'tokens'
