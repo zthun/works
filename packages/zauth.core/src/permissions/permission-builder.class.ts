@@ -53,6 +53,16 @@ export class ZPermissionBuilder {
   }
 
   /**
+   * Marks the permission as a system permission.
+   *
+   * @returns This object.
+   */
+  public system(): this {
+    this._permission.system = true;
+    return this;
+  }
+
+  /**
    * Updates all properties with the existing properties of other.
    *
    * @param other The object to assign.

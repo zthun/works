@@ -1,14 +1,9 @@
+import { IZIdentifiable } from '../common/identifiable.interface';
+
 /**
  * Represents a user permission.
  */
-export interface IZPermission {
-  /**
-   * The id of the permission.
-   *
-   * Usually, you want this to be a unique value that is easily accessable.
-   * It's not a good idea to make this a guid.
-   */
-  _id: string;
+export interface IZPermission extends IZIdentifiable {
   /**
    * The name of the permission.
    */
@@ -17,4 +12,11 @@ export interface IZPermission {
    * An optional description of the permission.
    */
   description?: string;
+  /**
+   * Marks the permission as a system permission.
+   *
+   * System permissions are hardcoded into the system and
+   * should not be deleted.
+   */
+  system?: boolean;
 }

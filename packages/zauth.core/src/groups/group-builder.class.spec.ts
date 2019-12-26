@@ -44,6 +44,10 @@ describe('ZGroupBuilder', () => {
       assertPropertySet(users, (t) => t.users(users), (g) => g.users);
     });
 
+    it('sets the system flag', () => {
+      assertPropertySet(true, (t) => t.system(), (g) => g.system);
+    });
+
     it('reinitializes the users.', () => {
       assertPropertySet([], (t) => t.user(batman).users(null), (g) => g.users);
     });

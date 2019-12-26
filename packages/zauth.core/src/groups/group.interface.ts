@@ -1,21 +1,21 @@
+import { IZIdentifiable } from '../common/identifiable.interface';
+
 /**
  * Represents a group of users that are given permissions.
  *
  * This can be thought of as a collection of scopes.
  */
-export interface IZGroup {
-  /**
-   * The id of the group.
-   */
-  _id: string;
+export interface IZGroup extends IZIdentifiable {
   /**
    * The name of the group.
    */
   name: string;
+
   /**
    * The collection of permission ids available to the group.
    */
   permissions: string[];
+
   /**
    * The users that belong to the group.
    *
@@ -24,4 +24,11 @@ export interface IZGroup {
    * orphans and can be safely ignored.
    */
   users: string[];
+
+  /**
+   * Whether or not the group is a system group.
+   *
+   * System groups are usually hardcoded in the system itself and should not be deleted.
+   */
+  system?: boolean;
 }

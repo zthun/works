@@ -1,12 +1,9 @@
+import { IZIdentifiable } from '../common/identifiable.interface';
+
 /**
  * Represents a user in the system.
  */
-export interface IZUser<TMeta = any> {
-  /**
-   * The user id.
-   */
-  _id: string;
-
+export interface IZUser<TMeta = any> extends IZIdentifiable {
   /**
    * The users email.  This must be unique.
    */

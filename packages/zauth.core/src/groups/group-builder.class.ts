@@ -105,6 +105,16 @@ export class ZGroupBuilder {
   }
 
   /**
+   * Marks the group as a system group.
+   *
+   * @returns This object.
+   */
+  public system(): this {
+    this._group.system = true;
+    return this;
+  }
+
+  /**
    * Copies other into the current object.
    *
    * @param other The group to copy.

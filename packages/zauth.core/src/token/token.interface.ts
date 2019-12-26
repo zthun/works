@@ -1,11 +1,9 @@
+import { IZIdentifiable } from '../common/identifiable.interface';
+
 /**
  * Represents an auth token.
  */
-export interface IZToken {
-  /**
-   * The token id / bearer auth.
-   */
-  _id: string;
+export interface IZToken extends IZIdentifiable {
   /**
    * The expiration date of the token.
    */

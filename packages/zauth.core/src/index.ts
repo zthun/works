@@ -1,3 +1,4 @@
+export * from './common/identifiable.interface';
 export * from './groups/group-builder.class';
 export * from './groups/group.interface';
 export * from './logins/login-builder.class';

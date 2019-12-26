@@ -31,6 +31,10 @@ describe('ZPermissionBuilder', () => {
       const desc = 'Test Description';
       assertPropertySet(desc, (t) => t.description(desc), (p) => p.description);
     });
+
+    it('sets the system flag.', () => {
+      assertPropertySet(true, (t) => t.system(), (p) => p.system);
+    });
   });
 
   describe('Copy', () => {
