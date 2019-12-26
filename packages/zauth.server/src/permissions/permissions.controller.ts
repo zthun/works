@@ -1,56 +1,60 @@
-import { BadRequestException, Body, ConflictException, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, ConflictException, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { IZPermission, ZPermissionBuilder } from '@zthun/auth.core';
-import { IZDatabase } from '@zthun/dal';
+import { identity } from 'lodash';
 import { Collections } from '../common/collections.enum';
 import { ZHttpAssert } from '../common/http-assert.class';
-import { DatabaseToken } from '../common/injection.constants';
+import { identityAsync } from '../common/identity-async.function';
+import { IZCrudFlow } from '../crud/crud-flow.interface';
+import { ZCrudService } from '../crud/crud.service';
 
 @Controller('permissions')
-export class ZPermissionsController {
-  public constructor(@Inject(DatabaseToken) private readonly _dal: IZDatabase) { }
+export class ZPermissionsController implements IZCrudFlow<IZPermission> {
+  public collection: () => string = identity.bind(this, Collections.Permissions);
+  public sanitize: (item: IZPermission) => Promise<IZPermission> = identityAsync;
+
+  public constructor(private readonly _crud: ZCrudService) { }
 
   @Get()
   public async list(): Promise<IZPermission[]> {
-    return await this._dal.read<IZPermission>(Collections.Permissions).run();
+    return this._crud.list<IZPermission>(this);
   }
 
   @Get(':_id')
   public async read(@Param() param: { _id: string }): Promise<IZPermission> {
-    const blobs = await this._dal.read<IZPermission>(Collections.Permissions).filter({ _id: param._id }).run();
-    ZHttpAssert.assert(blobs.length > 0, () => new NotFoundException());
-    return blobs[0];
+    return this._crud.read(param._id, this);
   }
 
   @Post()
   public async create(@Body() template: IZPermission): Promise<IZPermission> {
-    ZHttpAssert.assert(!!template._id, () => new BadRequestException('Permission id is required.'));
-    ZHttpAssert.assert(!!template.name, () => new BadRequestException('Permission name is required.'));
-    const count = await this._dal.count(Collections.Permissions).filter({ _id: template._id }).run();
-    ZHttpAssert.assert(count === 0, () => new ConflictException('Permission id is already taken.'));
-    const blobs = await this._dal.create(Collections.Permissions, [template]).run();
-    return blobs[0];
+    return this._crud.create(template, this);
   }
 
   @Put(':_id')
   public async update(@Param() param: { _id: string }, @Body() template: Partial<IZPermission>): Promise<IZPermission> {
-    const filter = { _id: param._id };
-    let blobs = await this._dal.read<IZPermission>(Collections.Permissions).filter(filter).run();
-    ZHttpAssert.assert(blobs.length > 0, () => new NotFoundException());
-    const existing = blobs[0];
-    const updated = new ZPermissionBuilder().copy(existing).assign(template).id(existing._id).build();
-    ZHttpAssert.assert(!!updated.name, () => new BadRequestException('Permission name is required.'));
-    await this._dal.update<IZPermission>(Collections.Permissions, updated).filter(filter).run();
-    blobs = await this._dal.read<IZPermission>(Collections.Permissions).filter(filter).run();
-    return blobs[0];
+    return this._crud.update(param._id, template, this);
   }
 
   @Delete(':_id')
-  public async remove(@Param() param: { _id: string }): Promise<IZPermission> {
-    const filter = { _id: param._id };
-    const blobs = await this._dal.read<IZPermission>(Collections.Permissions).filter(filter).run();
-    ZHttpAssert.assert(blobs.length > 0, () => new NotFoundException());
-    const permission = blobs[0];
-    await this._dal.delete(Collections.Permissions).filter(filter).run();
-    return permission;
+  public remove(@Param() param: { _id: string }): Promise<IZPermission> {
+    return this._crud.remove(param._id, this);
+  }
+
+  public async validateCreate(template: IZPermission): Promise<IZPermission> {
+    const create = new ZPermissionBuilder().copy(template).build();
+    ZHttpAssert.assertNotBlank(create._id, () => new BadRequestException('Permission id is required.'));
+    ZHttpAssert.assertNotBlank(create.name, () => new BadRequestException('Permission name is requiered.'));
+    const existing = await this._crud.find(create._id, this);
+    ZHttpAssert.assert(!existing, () => new ConflictException('Permission id is already taken.'));
+    return create;
+  }
+
+  public async validateUpdate(original: IZPermission, template: Partial<IZPermission>): Promise<IZPermission> {
+    const update = new ZPermissionBuilder().copy(original).assign(template).id(original._id).build();
+    ZHttpAssert.assertNotBlank(update.name, () => new BadRequestException('Permission name is required.'));
+    return update;
+  }
+
+  public async validateRemove(pending: IZPermission): Promise<void> {
+    ZHttpAssert.assert(!pending.system, () => new BadRequestException('You cannot delete a system permission.'));
   }
 }

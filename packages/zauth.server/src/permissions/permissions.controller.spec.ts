@@ -1,178 +1,163 @@
-import { BadRequestException, ConflictException, NotFoundException, UseGuards } from '@nestjs/common';
+import { BadRequestException, ConflictException } from '@nestjs/common';
 import { IZPermission, ZPermissionBuilder } from '@zthun/auth.core';
-import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
-import { Collections } from '../common/collections.enum';
+import { createSpyObj } from 'jest-createspyobj';
+import { ZCrudService } from '../crud/crud.service';
 import { ZPermissionsController } from './permissions.controller';
 
 describe('ZPermissionsController', () => {
-  let dal: IZDatabase;
-  let permissionA: IZPermission;
-  let permissionB: IZPermission;
-
-  beforeAll(() => {
-    dal = ZDatabaseMemory.connect('permission-controller-test');
-  });
-
-  beforeEach(async () => {
-    permissionA = new ZPermissionBuilder().id('permission-a').name('Permission A').description('First permission').build();
-    permissionB = new ZPermissionBuilder().id('permission-b').name('Permission B').description('Second permission').build();
-  });
-
-  afterEach(async () => {
-    await dal.delete(Collections.Permissions).run();
-  });
+  let permission: IZPermission;
+  let crud: jest.Mocked<ZCrudService>;
 
   function createTestTarget() {
-    return new ZPermissionsController(dal);
+    return new ZPermissionsController(crud);
   }
 
-  describe('List', () => {
-    beforeEach(async () => {
-      await dal.create(Collections.Permissions, [permissionA, permissionB]).run();
-    });
+  beforeEach(() => {
+    permission = new ZPermissionBuilder().id('do-the-things').name('Do the things').description('Test mock permission.').build();
 
-    it('returns all permissions.', async () => {
+    crud = createSpyObj(ZCrudService, ['list', 'read', 'create', 'update', 'remove', 'find']);
+    crud.list.mockResolvedValue([permission]);
+    crud.read.mockResolvedValue(permission);
+    crud.create.mockResolvedValue(permission);
+    crud.update.mockResolvedValue(permission);
+    crud.remove.mockResolvedValue(permission);
+    crud.find.mockResolvedValue(null);
+  });
+
+  describe('List', () => {
+    it('returns the items from the crud service.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = [permissionA, permissionB];
       // Act
       const actual = await target.list();
       // Assert
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual([permission]);
     });
   });
 
   describe('Create', () => {
-    it('creates a permission.', async () => {
+    it('creates the items from the crud service.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const created = await target.create(permissionA);
-      const blobs = await dal.read<IZPermission>(Collections.Permissions).filter({ _id: created._id }).run();
-      const actual = blobs[0];
+      const actual = await target.create(permission);
       // Assert
-      expect(actual._id).toEqual(permissionA._id);
-    });
-
-    it('throws a ConflictException if the id already exists.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      await dal.create(Collections.Permissions, [permissionA]).run();
-      // Act
-      // Assert
-      await expect(target.create(permissionA)).rejects.toBeInstanceOf(ConflictException);
-    });
-
-    it('throws a BadRequestException if the id is not set.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      delete permissionA._id;
-      // Act
-      // Assert
-      await expect(target.create(permissionA)).rejects.toBeInstanceOf(BadRequestException);
-    });
-
-    it('throws a BadRequestException if the name is not set.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      delete permissionA.name;
-      // Act
-      // Assert
-      await expect(target.create(permissionA)).rejects.toBeInstanceOf(BadRequestException);
+      expect(actual).toEqual(permission);
     });
   });
 
   describe('Read', () => {
-    beforeEach(async () => {
-      await dal.create(Collections.Permissions, [permissionA, permissionB]).run();
-    });
-
-    it('reads a permission.', async () => {
+    it('reads an item from the crud service.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = await target.read({ _id: permissionA._id });
+      const actual = await target.read({ _id: permission._id });
       // Assert
-      expect(actual._id).toEqual(permissionA._id);
-    });
-
-    it('throws a NotFoundException if no permission exists.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      // Act
-      // Assert
-      await expect(target.read({ _id: 'no-permission-exists' })).rejects.toBeInstanceOf(NotFoundException);
+      expect(actual).toEqual(permission);
     });
   });
 
   describe('Update', () => {
-    beforeEach(async () => {
-      await dal.create(Collections.Permissions, [permissionA, permissionB]).run();
-    });
-
-    it('updates the permission.', async () => {
+    it('updates an item from the crud service.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = new ZPermissionBuilder().copy(permissionA).name('updated-permission-a').build();
       // Act
-      await target.update({ _id: permissionA._id }, expected);
-      expected._id = permissionA._id;
-      const blobs = await dal.read<IZPermission>(Collections.Permissions).filter({ _id: permissionA._id }).run();
-      const actual = blobs[0];
+      const actual = await target.update({ _id: permission._id }, permission);
       // Assert
-      expect(actual).toEqual(expected);
-    });
-
-    it('updates only the description if the name is undefined.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      const expected = new ZPermissionBuilder().copy(permissionA).description('updated-description').build();
-      // Act
-      const actual = await target.update({ _id: permissionA._id }, { description: expected.description });
-      // Assert
-      expect(actual).toEqual(expected);
-    });
-
-    it('throws a NotFoundException if the permission does not exist.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      const permission = new ZPermissionBuilder().name('some-name').build();
-      // Act
-      // Assert
-      await expect(target.update({ _id: 'does-not-exist' }, permission)).rejects.toBeInstanceOf(NotFoundException);
-    });
-
-    it('throws a BadRequestException if the name is falsy.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      const permission = new ZPermissionBuilder().copy(permissionA).name('').build();
-      // Act
-      // Assert
-      await expect(target.update({ _id: permissionA._id }, permission)).rejects.toBeInstanceOf(BadRequestException);
+      expect(actual).toEqual(permission);
     });
   });
 
   describe('Delete', () => {
-    beforeEach(async () => {
-      await dal.create(Collections.Permissions, [permissionA]).run();
-    });
-
-    it('deletes the permission.', async () => {
+    it('deletes the item from the crud service.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      await target.remove({ _id: permissionA._id });
-      const blobs = await dal.read(Collections.Permissions).filter({ _id: permissionA._id }).run();
+      const actual = await target.remove({ _id: permission._id });
       // Assert
-      expect(blobs.length).toEqual(0);
+      expect(actual).toEqual(permission);
+    });
+  });
+
+  describe('Validation', () => {
+    describe('Create', () => {
+      it('returns the item on valid groups.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        const expected = new ZPermissionBuilder().copy(permission).build();
+        // Act
+        const actual = await target.validateCreate(permission);
+        // Assert
+        expect(actual).toEqual(expected);
+      });
+
+      it('throws a BadRequestException if the name is blank.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        permission.name = '\t \r';
+        // Act
+        // Assert
+        await expect(target.validateCreate(permission)).rejects.toBeInstanceOf(BadRequestException);
+      });
+
+      it('throws a BadRequestException if the id is blank.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        permission._id = '\t \r';
+        // Act
+        // Assert
+        await expect(target.validateCreate(permission)).rejects.toBeInstanceOf(BadRequestException);
+      });
+
+      it('throws a ConflictException if the id already exists.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        crud.find.mockResolvedValue(permission);
+        // Act
+        // Assert
+        await expect(target.validateCreate(permission)).rejects.toBeInstanceOf(ConflictException);
+      });
     });
 
-    it('throws a NotFoundException if there is no permission.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      // Act
-      // Assert
-      await expect(target.remove({ _id: 'n/a' })).rejects.toBeInstanceOf(NotFoundException);
+    describe('Update', () => {
+      it('returns the item with the orignal id and the updated properties on valid permissions.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        const name = 'renamed-item';
+        const expected = new ZPermissionBuilder().copy(permission).name(name).build();
+        // Act
+        const actual = await target.validateUpdate(permission, { _id: 'should-be-ignored', name });
+        // Assert
+        expect(actual).toEqual(expected);
+      });
+
+      it('throws a BadRequestException if the name is blank.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        // Act
+        // Assert
+        await expect(target.validateUpdate(permission, { name: '\r  \n' })).rejects.toBeInstanceOf(BadRequestException);
+      });
+    });
+
+    describe('Remove', () => {
+      it('throws a BadRequestException if system is truthy.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        permission.system = true;
+        // Act
+        // Assert
+        await expect(target.validateRemove(permission)).rejects.toBeInstanceOf(BadRequestException);
+      });
+
+      it('returns if pending is ready for delete.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        // Act
+        const actual = await target.validateRemove(permission);
+        // Assert
+        expect(actual).toBeUndefined();
+      });
     });
   });
 });
