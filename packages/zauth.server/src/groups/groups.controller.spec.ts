@@ -14,7 +14,7 @@ describe('ZGroupsController', () => {
   }
 
   beforeEach(() => {
-    group = new ZGroupBuilder().id(v4()).name('dc').user('batman').permission('everything').build();
+    group = new ZGroupBuilder().id(v4()).name('dc').build();
 
     crud = createSpyObj(ZCrudService, ['list', 'read', 'create', 'update', 'remove']);
     crud.list.mockReturnValue(Promise.resolve([group]));

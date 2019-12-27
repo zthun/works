@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 import { ZDatabaseMongo } from '@zthun/dal';
 import { DatabaseToken } from '../common/injection.constants';
 import { ZCrudService } from '../crud/crud.service';
@@ -9,6 +9,7 @@ import { ZOauthServerService } from '../oauth/oauth-server.service';
 import { ZPermissionsController } from '../permissions/permissions.controller';
 import { ZTokensController } from '../tokens/tokens.controller';
 import { ZUsersController } from '../users/users.controller';
+import { ZAuthService } from './auth.service';
 
 @Module({
   controllers: [
@@ -19,10 +20,21 @@ import { ZUsersController } from '../users/users.controller';
     ZHealthController
   ],
   providers: [
-    { provide: DatabaseToken, useValue: ZDatabaseMongo.connect('auth', 'database.auth.zthunworks.com', 27017) },
+    {
+      provide: DatabaseToken,
+      useValue: ZDatabaseMongo.connect('auth', 'database.auth.zthunworks.com', 27017)
+    },
     ZOauthPasswordService,
     ZOauthServerService,
-    ZCrudService
+    ZCrudService,
+    ZAuthService
   ]
 })
-export class ZAuthModule { }
+export class ZAuthModule implements OnModuleInit {
+  public constructor(private readonly _auth: ZAuthService) { }
+
+  public async onModuleInit() {
+    await this._auth.setupSystemPermissions();
+    await this._auth.setupSystemGroups();
+  }
+}

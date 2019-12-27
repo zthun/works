@@ -12,9 +12,7 @@ export class ZGroupBuilder {
   public constructor() {
     this._group = {
       _id: null,
-      name: '',
-      permissions: [],
-      users: []
+      name: ''
     };
   }
 
@@ -43,54 +41,6 @@ export class ZGroupBuilder {
   }
 
   /**
-   * Sets all the permissions for this group.
-   *
-   * @param val The permission array to set.  If this is falsy, then an empty array is set.
-   *
-   * @returns This object.
-   */
-  public permissions(val: string[]): this {
-    this._group.permissions = val || [];
-    return this;
-  }
-
-  /**
-   * Adds a permission.
-   *
-   * @param val The permission to add.
-   *
-   * @returns This object.
-   */
-  public permission(val: string): this {
-    this._group.permissions.push(val);
-    return this;
-  }
-
-  /**
-   * Sets all the users for this group.
-   *
-   * @param val The user array to set.  If this is falsy, then an empty array is set.
-   *
-   * @returns This object.
-   */
-  public users(val: string[]): this {
-    this._group.users = val || [];
-    return this;
-  }
-
-  /**
-   * Adds a user.
-   *
-   * @param val The user to add.
-   *
-   * @returns This object.
-   */
-  public user(val: string): this {
-    this._group.users.push(val);
-    return this;
-  }
-
-  /**
    * Copies all available properties in other to this object.
    *
    * @param other The properties to copy.
@@ -99,8 +49,6 @@ export class ZGroupBuilder {
    */
   public assign(other: Partial<IZGroup>): this {
     this._group = Object.assign(this._group, other);
-    this._group.permissions = this._group.permissions.slice();
-    this._group.users = this._group.users.slice();
     return this;
   }
 
@@ -123,8 +71,6 @@ export class ZGroupBuilder {
    */
   public copy(other: IZGroup): this {
     this._group = Object.assign({}, other);
-    this._group.permissions = this._group.permissions.slice();
-    this._group.users = this._group.users.slice();
     return this;
   }
 
