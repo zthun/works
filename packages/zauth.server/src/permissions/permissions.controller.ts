@@ -6,6 +6,8 @@ import { ZHttpAssert } from '../common/http-assert.class';
 import { identityAsync } from '../common/identity-async.function';
 import { IZCrudFlow } from '../crud/crud-flow.interface';
 import { ZCrudService } from '../crud/crud.service';
+import { ZPermissionCreateDto } from './permission-create.dto';
+import { ZPermissionUpdateDto } from './permission-update.dto';
 
 @Controller('permissions')
 export class ZPermissionsController implements IZCrudFlow<IZPermission> {
@@ -25,12 +27,12 @@ export class ZPermissionsController implements IZCrudFlow<IZPermission> {
   }
 
   @Post()
-  public async create(@Body() template: IZPermission): Promise<IZPermission> {
+  public async create(@Body() template: ZPermissionCreateDto): Promise<IZPermission> {
     return this._crud.create(template, this);
   }
 
   @Put(':_id')
-  public async update(@Param() param: { _id: string }, @Body() template: Partial<IZPermission>): Promise<IZPermission> {
+  public async update(@Param() param: { _id: string }, @Body() template: ZPermissionUpdateDto): Promise<IZPermission> {
     return this._crud.update(param._id, template, this);
   }
 
@@ -41,8 +43,6 @@ export class ZPermissionsController implements IZCrudFlow<IZPermission> {
 
   public async validateCreate(template: IZPermission): Promise<IZPermission> {
     const create = new ZPermissionBuilder().copy(template).build();
-    ZHttpAssert.assertNotBlank(create._id, () => new BadRequestException('Permission id is required.'));
-    ZHttpAssert.assertNotBlank(create.name, () => new BadRequestException('Permission name is requiered.'));
     const existing = await this._crud.find(create._id, this);
     ZHttpAssert.assert(!existing, () => new ConflictException('Permission id is already taken.'));
     return create;
@@ -50,7 +50,6 @@ export class ZPermissionsController implements IZCrudFlow<IZPermission> {
 
   public async validateUpdate(original: IZPermission, template: Partial<IZPermission>): Promise<IZPermission> {
     const update = new ZPermissionBuilder().copy(original).assign(template).id(original._id).build();
-    ZHttpAssert.assertNotBlank(update.name, () => new BadRequestException('Permission name is required.'));
     return update;
   }
 

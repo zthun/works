@@ -90,15 +90,6 @@ describe('ZGroupsController', () => {
         // Assert
         expect(actual).toEqual(expected);
       });
-
-      it('throws a BadRequestException if the name is blank.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        group.name = '\t \r';
-        // Act
-        // Assert
-        await expect(target.validateCreate(group)).rejects.toBeInstanceOf(BadRequestException);
-      });
     });
 
     describe('Update', () => {
@@ -111,14 +102,6 @@ describe('ZGroupsController', () => {
         const actual = await target.validateUpdate(group, { name });
         // Assert
         expect(actual).toEqual(expected);
-      });
-
-      it('throws a BadRequestException if the name is blank.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        // Act
-        // Assert
-        await expect(target.validateUpdate(group, { name: '\r  \n' })).rejects.toBeInstanceOf(BadRequestException);
       });
     });
 

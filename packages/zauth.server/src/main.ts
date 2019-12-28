@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ZAuthModule } from './auth/auth.module';
 
@@ -10,6 +10,7 @@ import { ZAuthModule } from './auth/auth.module';
 export class ZMainModule {
   public static async run() {
     const app = await NestFactory.create(ZMainModule);
+    app.useGlobalPipes(new ValidationPipe());
     await app.listen(3000);
   }
 }

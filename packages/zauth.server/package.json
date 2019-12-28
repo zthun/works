@@ -25,6 +25,8 @@
     "@zthun/auth.core": "link:../zauth.core",
     "@zthun/dal": "^2.0.0",
     "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.11.0",
     "lodash": "^4.17.15",
     "oauth2-server": "^3.0.1",
     "reflect-metadata": "^0.1.13",

@@ -91,24 +91,6 @@ describe('ZPermissionsController', () => {
         expect(actual).toEqual(expected);
       });
 
-      it('throws a BadRequestException if the name is blank.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        permission.name = '\t \r';
-        // Act
-        // Assert
-        await expect(target.validateCreate(permission)).rejects.toBeInstanceOf(BadRequestException);
-      });
-
-      it('throws a BadRequestException if the id is blank.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        permission._id = '\t \r';
-        // Act
-        // Assert
-        await expect(target.validateCreate(permission)).rejects.toBeInstanceOf(BadRequestException);
-      });
-
       it('throws a ConflictException if the id already exists.', async () => {
         // Arrange
         const target = createTestTarget();
@@ -129,14 +111,6 @@ describe('ZPermissionsController', () => {
         const actual = await target.validateUpdate(permission, { _id: 'should-be-ignored', name });
         // Assert
         expect(actual).toEqual(expected);
-      });
-
-      it('throws a BadRequestException if the name is blank.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        // Act
-        // Assert
-        await expect(target.validateUpdate(permission, { name: '\r  \n' })).rejects.toBeInstanceOf(BadRequestException);
       });
     });
 
