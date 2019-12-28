@@ -1,5 +1,5 @@
 import { IZGroup, IZPermission, ZAuthSystemGroup, ZAuthSystemPermission } from '@zthun/auth.core';
-import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
+import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { Collections } from '../common/collections.enum';
 import { ZAuthService } from './auth.service';
 
@@ -7,7 +7,7 @@ describe('ZAuthService', () => {
   let dal: IZDatabase;
 
   beforeAll(() => {
-    dal = ZDatabaseMemory.connect('auth-service-test');
+    dal = ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('auth-service-test').build());
   });
 
   afterEach(async () => {

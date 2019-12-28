@@ -1,5 +1,5 @@
 import { Module, OnModuleInit } from '@nestjs/common';
-import { ZDatabaseMongo } from '@zthun/dal';
+import { ZDatabaseMongo, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { DatabaseToken } from '../common/injection.constants';
 import { ZCrudService } from '../crud/crud.service';
 import { ZGroupsController } from '../groups/groups.controller';
@@ -22,7 +22,7 @@ import { ZAuthService } from './auth.service';
   providers: [
     {
       provide: DatabaseToken,
-      useValue: ZDatabaseMongo.connect('auth', 'database.auth.zthunworks.com', 27017)
+      useValue: ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().database('auth').host('database.auth.zthunworks.com').port(27017).build())
     },
     ZOauthPasswordService,
     ZOauthServerService,

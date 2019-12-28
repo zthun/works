@@ -1,6 +1,6 @@
 import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
 import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
-import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
+import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { compare, hash } from 'bcryptjs';
 import { Collections } from '../common/collections.enum';
 import { BcryptRounds } from '../common/crypt.constants';
@@ -14,7 +14,7 @@ describe('ZUsersController', () => {
   let loginB: IZLogin;
 
   beforeAll(() => {
-    dal = ZDatabaseMemory.connect('user-controller-test');
+    dal = ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('user-controller-test').build());
   });
 
   beforeEach(async () => {

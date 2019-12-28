@@ -1,5 +1,5 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
+import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { createSpyObj } from 'jest-createspyobj';
 import { identityAsync } from '../common/identity-async.function';
 import { noopAsync } from '../common/noop-async.function';
@@ -14,7 +14,7 @@ describe('ZCrudService', () => {
   let flow: jest.Mocked<IZCrudFlow<any>>;
 
   beforeAll(() => {
-    dal = ZDatabaseMemory.connect('crud-service-test');
+    dal = ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('crud-service-test').build());
   });
 
   beforeEach(async () => {

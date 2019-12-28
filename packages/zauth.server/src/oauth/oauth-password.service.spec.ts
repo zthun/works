@@ -1,5 +1,5 @@
 import { IZToken, IZUser, ZTokenBuilder, ZUserBuilder } from '@zthun/auth.core';
-import { IZDatabase, ZDatabaseMemory } from '@zthun/dal';
+import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { hash } from 'bcryptjs';
 import { Client, Token, User } from 'oauth2-server';
 import { v4 } from 'uuid';
@@ -15,7 +15,7 @@ describe('ZOauthPasswordService', () => {
   let dal: IZDatabase;
 
   beforeAll(async () => {
-    dal = ZDatabaseMemory.connect('outh-password-service-test');
+    dal = ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('outh-password-service-test').build());
     const crypted = await hash(password, BcryptRounds);
     const user = new ZUserBuilder().email('test-user@zauth.com').password(crypted).id(userid).build();
     await dal.create<IZUser>(Collections.Users, [user]).run();
