@@ -1,10 +1,12 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
+import { validateOrReject } from 'class-validator';
 import { createSpyObj } from 'jest-createspyobj';
 import { identityAsync } from '../common/identity-async.function';
-import { noopAsync } from '../common/noop-async.function';
 import { IZCrudFlow } from './crud-flow.interface';
 import { ZCrudService } from './crud.service';
+
+jest.mock('class-validator');
 
 describe('ZCrudService', () => {
   const collection = 'Identifiers';
@@ -25,7 +27,6 @@ describe('ZCrudService', () => {
     flow.collection.mockReturnValue(collection);
     flow.validateCreate.mockImplementation(identityAsync);
     flow.validateUpdate.mockImplementation((o, t) => Object.assign({}, o, t));
-    flow.validateRemove.mockImplementation(noopAsync);
     flow.sanitize.mockImplementation(identityAsync);
   });
 
@@ -166,13 +167,13 @@ describe('ZCrudService', () => {
       await expect(target.remove('n/a', flow)).rejects.toBeInstanceOf(NotFoundException);
     });
 
-    it('throws an HttpException if the validation fails.', async () => {
+    it('throws a bad request exception if the validation fails.', async () => {
       // Arrange
       const target = createTestTarget();
-      flow.validateRemove.mockRejectedValue(new BadRequestException());
+      (validateOrReject as unknown as jest.Mock).mockRejectedValue('failed');
       // Act
       // Assert
-      await expect(target.remove(red._id, flow)).rejects.toBeInstanceOf(BadRequestException);
+      await expect(target.remove(red._id, flow, Object)).rejects.toBeInstanceOf(BadRequestException);
     });
   });
 });

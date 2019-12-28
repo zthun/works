@@ -4,7 +4,6 @@ import { IsNotWhiteSpace, validateIsNotWhiteSpace } from './is-not-white-space.f
 jest.mock('class-validator');
 
 describe('IsNotWhiteSpace', () => {
-
   describe('Validator', () => {
     it('registers the decorator.', () => {
       // Arrange

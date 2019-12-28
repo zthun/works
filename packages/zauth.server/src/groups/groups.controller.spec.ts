@@ -104,25 +104,5 @@ describe('ZGroupsController', () => {
         expect(actual).toEqual(expected);
       });
     });
-
-    describe('Remove', () => {
-      it('throws a BadRequestException if system is truthy.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        group.system = true;
-        // Act
-        // Assert
-        await expect(target.validateRemove(group)).rejects.toBeInstanceOf(BadRequestException);
-      });
-
-      it('returns if pending is ready for delete.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        // Act
-        const actual = await target.validateRemove(group);
-        // Assert
-        expect(actual).toBeUndefined();
-      });
-    });
   });
 });

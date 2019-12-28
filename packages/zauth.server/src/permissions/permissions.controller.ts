@@ -1,4 +1,4 @@
-import { BadRequestException, Body, ConflictException, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, ConflictException, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { IZPermission, ZPermissionBuilder } from '@zthun/auth.core';
 import { identity } from 'lodash';
 import { Collections } from '../common/collections.enum';
@@ -7,6 +7,7 @@ import { identityAsync } from '../common/identity-async.function';
 import { IZCrudFlow } from '../crud/crud-flow.interface';
 import { ZCrudService } from '../crud/crud.service';
 import { ZPermissionCreateDto } from './permission-create.dto';
+import { ZPermissionRemoveDto } from './permission-remove.dto';
 import { ZPermissionUpdateDto } from './permission-update.dto';
 
 @Controller('permissions')
@@ -38,7 +39,7 @@ export class ZPermissionsController implements IZCrudFlow<IZPermission> {
 
   @Delete(':_id')
   public remove(@Param() param: { _id: string }): Promise<IZPermission> {
-    return this._crud.remove(param._id, this);
+    return this._crud.remove(param._id, this, ZPermissionRemoveDto);
   }
 
   public async validateCreate(template: IZPermission): Promise<IZPermission> {
@@ -51,9 +52,5 @@ export class ZPermissionsController implements IZCrudFlow<IZPermission> {
   public async validateUpdate(original: IZPermission, template: Partial<IZPermission>): Promise<IZPermission> {
     const update = new ZPermissionBuilder().copy(original).assign(template).id(original._id).build();
     return update;
-  }
-
-  public async validateRemove(pending: IZPermission): Promise<void> {
-    ZHttpAssert.assert(!pending.system, () => new BadRequestException('You cannot delete a system permission.'));
   }
 }

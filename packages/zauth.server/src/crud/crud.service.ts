@@ -1,5 +1,7 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, Type, BadRequestException } from '@nestjs/common';
 import { IZDatabase } from '@zthun/dal';
+import { plainToClass } from 'class-transformer';
+import { validate, validateOrReject } from 'class-validator';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
 import { IZCrudFlow } from './crud-flow.interface';
@@ -96,13 +98,18 @@ export class ZCrudService {
    * @throws NotFoundException if there is no item with the given id.
    * @throws HttpException if a validation exception occurs.
    */
-  public async remove<T>(_id: string, wf: IZCrudFlow<T>): Promise<T> {
+  public async remove<T, D>(_id: string, wf: IZCrudFlow<T>, dto?: Type<D>): Promise<T> {
     const filter = { _id };
     const collection = wf.collection();
     const blobs = await this._dal.read<T>(collection).filter(filter).run();
     ZHttpAssert.assert(blobs.length > 0, () => new NotFoundException());
-    const blob = blobs[0];
-    await wf.validateRemove(blob);
+    const [blob] = blobs;
+
+    if (dto) {
+      const obj = plainToClass(dto, blob);
+      await validateOrReject(obj).catch((err) => Promise.reject(new BadRequestException(err)));
+    }
+
     await this._dal.delete(collection).filter(filter).run();
     return blob;
   }

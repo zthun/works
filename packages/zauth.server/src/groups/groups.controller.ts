@@ -8,6 +8,7 @@ import { IZCrudFlow } from '../crud/crud-flow.interface';
 import { ZCrudService } from '../crud/crud.service';
 import { ZGroupCreateDto } from './group-create.dto';
 import { ZGroupUpdateDto } from './group-update.dto';
+import { ZGroupRemoveDto } from './group-remove.dto';
 
 @Controller('groups')
 export class ZGroupsController implements IZCrudFlow<IZGroup> {
@@ -38,7 +39,7 @@ export class ZGroupsController implements IZCrudFlow<IZGroup> {
 
   @Delete(':_id')
   public remove(@Param() param: { _id: string }): Promise<IZGroup> {
-    return this._crud.remove(param._id, this);
+    return this._crud.remove(param._id, this, ZGroupRemoveDto);
   }
 
   public async validateCreate(template: IZGroup): Promise<IZGroup> {
@@ -49,9 +50,5 @@ export class ZGroupsController implements IZCrudFlow<IZGroup> {
   public async validateUpdate(original: IZGroup, template: Partial<IZGroup>): Promise<IZGroup> {
     const update = new ZGroupBuilder().copy(original).assign(template).id(original._id).build();
     return update;
-  }
-
-  public async validateRemove(pending: IZGroup): Promise<void> {
-    ZHttpAssert.assert(!pending.system, () => new BadRequestException('You cannot delete a system group.'));
   }
 }
