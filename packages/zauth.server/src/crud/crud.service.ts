@@ -1,7 +1,7 @@
-import { Inject, Injectable, NotFoundException, Type, BadRequestException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, NotFoundException, Type } from '@nestjs/common';
 import { IZDatabase } from '@zthun/dal';
 import { plainToClass } from 'class-transformer';
-import { validate, validateOrReject } from 'class-validator';
+import { validateOrReject } from 'class-validator';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
 import { IZCrudFlow } from './crud-flow.interface';

@@ -1,14 +1,13 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { IZGroup, ZGroupBuilder } from '@zthun/auth.core';
 import { identity } from 'lodash';
 import { Collections } from '../common/collections.enum';
-import { ZHttpAssert } from '../common/http-assert.class';
 import { identityAsync } from '../common/identity-async.function';
 import { IZCrudFlow } from '../crud/crud-flow.interface';
 import { ZCrudService } from '../crud/crud.service';
 import { ZGroupCreateDto } from './group-create.dto';
-import { ZGroupUpdateDto } from './group-update.dto';
 import { ZGroupRemoveDto } from './group-remove.dto';
+import { ZGroupUpdateDto } from './group-update.dto';
 
 @Controller('groups')
 export class ZGroupsController implements IZCrudFlow<IZGroup> {
