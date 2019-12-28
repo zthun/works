@@ -113,25 +113,5 @@ describe('ZPermissionsController', () => {
         expect(actual).toEqual(expected);
       });
     });
-
-    describe('Remove', () => {
-      it('throws a BadRequestException if system is truthy.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        permission.system = true;
-        // Act
-        // Assert
-        await expect(target.validateRemove(permission)).rejects.toBeInstanceOf(BadRequestException);
-      });
-
-      it('returns if pending is ready for delete.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        // Act
-        const actual = await target.validateRemove(permission);
-        // Assert
-        expect(actual).toBeUndefined();
-      });
-    });
   });
 });
