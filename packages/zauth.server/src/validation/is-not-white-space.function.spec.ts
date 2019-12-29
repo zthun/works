@@ -1,5 +1,5 @@
 import { registerDecorator } from 'class-validator';
-import { IsNotWhiteSpace, validateIsNotWhiteSpace } from './is-not-white-space.function';
+import { IsNotWhiteSpace, IsNotWhiteSpaceValidator } from './is-not-white-space.function';
 
 jest.mock('class-validator');
 
@@ -10,15 +10,16 @@ describe('IsNotWhiteSpace', () => {
       // Act
       IsNotWhiteSpace()({}, 'name');
       // Assert
-      expect(registerDecorator).toHaveBeenCalledWith(expect.objectContaining({ validator: { validate: validateIsNotWhiteSpace } }));
+      expect(registerDecorator).toHaveBeenCalledWith(expect.objectContaining({ validator: IsNotWhiteSpaceValidator }));
     });
   });
 
   describe('Validate', () => {
     function assertValid(expected: boolean, value: any) {
       // Arrange
+      const target = new IsNotWhiteSpaceValidator();
       // Act
-      const actual = validateIsNotWhiteSpace(value);
+      const actual = target.validate(value);
       // Assert
       expect(actual).toEqual(expected);
     }

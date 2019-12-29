@@ -1,21 +1,20 @@
-import { registerDecorator, ValidationDecoratorOptions, ValidationOptions } from 'class-validator';
+import { registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 import { trim } from 'lodash';
 
-export function validateIsNotWhiteSpace(value: any) {
-  return typeof value === 'string' && !!trim(value);
+@ValidatorConstraint({ name: 'white-space', async: false })
+export class IsNotWhiteSpaceValidator implements ValidatorConstraintInterface {
+  public validate(value: any) {
+    return typeof value === 'string' && !!trim(value);
+  }
 }
 
-export function IsNotWhiteSpace(validationOptions?: ValidationOptions) {
+export function IsNotWhiteSpace(options?: ValidationOptions) {
   return (object: any, propertyName: string) => {
-    const decorator: ValidationDecoratorOptions = {
-      name: 'isNotWhiteSpace',
+    registerDecorator({
       target: object.constructor,
       propertyName,
-      options: validationOptions,
-      validator: {
-        validate: validateIsNotWhiteSpace
-      }
-    };
-    registerDecorator(decorator);
+      options,
+      validator: IsNotWhiteSpaceValidator
+    });
   };
 }

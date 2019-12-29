@@ -10,7 +10,7 @@ import { ZAuthModule } from './auth/auth.module';
 export class ZMainModule {
   public static async run() {
     const app = await NestFactory.create(ZMainModule);
-    app.useGlobalPipes(new ValidationPipe());
+    app.useGlobalPipes(new ValidationPipe({ validationError: { value: false, target: false } }));
     await app.listen(3000);
   }
 }

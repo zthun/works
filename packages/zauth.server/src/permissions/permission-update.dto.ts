@@ -11,4 +11,8 @@ export class ZPermissionUpdateDto implements Partial<IZPermission> {
   @IsOptional()
   @Equals(undefined, { message: 'You cannot change the id of an existing permission' })
   public _id?: string;
+
+  @IsOptional()
+  @Equals(undefined, { message: 'You cannot change the system flag of a system permission.' })
+  public system?: boolean;
 }
