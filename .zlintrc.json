@@ -1,12 +1,15 @@
 {
   "tsConfig": "./tslint.json",
+  "esFiles": [
+    "*.js"
+  ],
   "tsFiles": [
     "packages/zauth.client/src/**/*.ts",
     "packages/zauth.core/src/**/*.ts",
     "packages/zauth.server/src/**/*.ts"
   ],
   "lessFiles": [
-    "packages/zauth.theme"
+    "packages/zauth.theme/**/*.less"
   ],
   "htmlFiles": [
     "packages/zauth.client/src/**/*.html"
