@@ -18,7 +18,7 @@
     "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz",
     "test": "jest --coverage",
     "lint": "zlint",
-    "build": "yarn workspaces run build",
+    "build": "lerna run build --stream",
     "make": "yarn clean && yarn lint && yarn test && yarn build",
     "debug:client": "yarn --cwd packages/zauth.client run debug",
     "debug:server": "yarn --cwd packages/zauth.server run debug"
