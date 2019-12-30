@@ -22,6 +22,34 @@ describe('ZExceptionFactory', () => {
     };
   });
 
+  describe('Message Format', () => {
+    function assertFormat(expected: string | string[], messages: string[]) {
+      // Arrange
+      // Act
+      const actual = ZExceptionFactory.messageFormat(messages);
+      // Assert
+      expect(actual).toEqual(expected);
+    }
+
+    it('returns the empty string for falsy.', () => {
+      assertFormat('', null);
+    });
+
+    it('returns the empty string for an empty array.', () => {
+      assertFormat('', []);
+    });
+
+    it('returns the first string if there is only one message.', () => {
+      const msg = 'message';
+      assertFormat(msg, [msg]);
+    });
+
+    it('returns the messages array if there is more than one message.', () => {
+      const msgs = ['a', 'b'];
+      assertFormat(msgs, msgs);
+    });
+  });
+
   describe('Message Only', () => {
     it('formats the constrains as a list of messages.', () => {
       // Arrange

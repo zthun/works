@@ -1,117 +1,174 @@
-import { BadRequestException, ConflictException } from '@nestjs/common';
+import { ConflictException, ForbiddenException, NotFoundException } from '@nestjs/common';
 import { IZPermission, ZPermissionBuilder } from '@zthun/auth.core';
-import { createSpyObj } from 'jest-createspyobj';
-import { ZCrudService } from '../crud/crud.service';
+import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
+import { Collections } from '../common/collections.enum';
 import { ZPermissionsController } from './permissions.controller';
 
 describe('ZPermissionsController', () => {
-  let permission: IZPermission;
-  let crud: jest.Mocked<ZCrudService>;
+  let read: IZPermission;
+  let write: IZPermission;
+  let execute: IZPermission;
+  let dal: IZDatabase;
 
   function createTestTarget() {
-    return new ZPermissionsController(crud);
+    return new ZPermissionsController(dal);
   }
 
-  beforeEach(() => {
-    permission = new ZPermissionBuilder().id('do-the-things').name('Do the things').description('Test mock permission.').build();
+  beforeAll(() => {
+    dal = ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('permissions-controller-test').build());
+  });
 
-    crud = createSpyObj(ZCrudService, ['list', 'read', 'create', 'update', 'remove', 'find']);
-    crud.list.mockResolvedValue([permission]);
-    crud.read.mockResolvedValue(permission);
-    crud.create.mockResolvedValue(permission);
-    crud.update.mockResolvedValue(permission);
-    crud.remove.mockResolvedValue(permission);
-    crud.find.mockResolvedValue(null);
+  beforeEach(async () => {
+    read = new ZPermissionBuilder().id('read').name('Read').build();
+    write = new ZPermissionBuilder().id('write').name('Write').build();
+    execute = new ZPermissionBuilder().id('execute').name('Execute').system().build();
+    await dal.create(Collections.Permissions, [execute]).run();
+  });
+
+  afterEach(async () => {
+    await dal.delete(Collections.Permissions).run();
   });
 
   describe('List', () => {
-    it('returns the items from the crud service.', async () => {
+    beforeEach(async () => {
+      [read, write] = await dal.create(Collections.Permissions, [read, write]).run();
+    });
+
+    it('returns the items.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
       const actual = await target.list();
       // Assert
-      expect(actual).toEqual([permission]);
+      expect(actual).toEqual([execute, read, write]);
     });
   });
 
   describe('Create', () => {
-    it('creates the items from the crud service.', async () => {
+    it('creates the item.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = await target.create(permission);
+      const created = await target.create(read);
+      const [actual] = await dal.read(Collections.Permissions).filter({ _id: created._id }).run();
       // Assert
-      expect(actual).toEqual(permission);
+      expect(actual).toEqual(created);
+    });
+
+    it('throws a ConflictException if the name exists.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const old = new ZPermissionBuilder().copy(read).id('read-existing').build();
+      await dal.create(Collections.Permissions, [old]).run();
+      // Act
+      const promise = target.create(read);
+      // Assert
+      await expect(promise).rejects.toBeInstanceOf(ConflictException);
+    });
+
+    it('throws a ConflictException if the id exists.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const old = new ZPermissionBuilder().copy(read).name('Read Existing').build();
+      await dal.create(Collections.Permissions, [old]).run();
+      // Act
+      const promise = target.create(read);
+      // Assert
+      await expect(promise).rejects.toBeInstanceOf(ConflictException);
     });
   });
 
   describe('Read', () => {
-    it('reads an item from the crud service.', async () => {
+    it('reads an item.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = await target.read({ _id: permission._id });
+      const actual = await target.read({ _id: execute._id });
       // Assert
-      expect(actual).toEqual(permission);
+      expect(actual).toEqual(execute);
+    });
+
+    it('throws a NotFoundException if the item does not exist.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const promise = target.read({ _id: 'not-a-valid-id' });
+      // Assert
+      await expect(promise).rejects.toBeInstanceOf(NotFoundException);
     });
   });
 
   describe('Update', () => {
-    it('updates an item from the crud service.', async () => {
+    it('updates an item.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const expected = Object.assign({}, execute, { name: 'Execute Permission' });
+      // Act
+      const actual = await target.update({ _id: execute._id }, { name: 'Execute Permission' });
+      // Assert
+      expect(actual).toEqual(expected);
+    });
+
+    it('updates an item with itself (identity).', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const expected = execute;
+      // Act
+      const actual = await target.update({ _id: execute._id }, { name: execute.name });
+      // Assert
+      expect(actual).toEqual(expected);
+    });
+
+    it('throws a NotFoundException if the item does not exist.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = await target.update({ _id: permission._id }, permission);
+      const promise = target.update({ _id: 'not-an-item' }, { name: 'What?' });
       // Assert
-      expect(actual).toEqual(permission);
+      await expect(promise).rejects.toBeInstanceOf(NotFoundException);
+    });
+
+    it('throws a ConflictException if the update name conflicts with another item.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      await dal.create(Collections.Permissions, [read]).run();
+      // Act
+      const promise = target.update({ _id: execute._id }, { name: read.name });
+      // Assert
+      await expect(promise).rejects.toBeInstanceOf(ConflictException);
     });
   });
 
   describe('Delete', () => {
-    it('deletes the item from the crud service.', async () => {
+    beforeEach(async () => {
+      [read] = await dal.create(Collections.Permissions, [read]).run();
+    });
+
+    it('deletes the item.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = await target.remove({ _id: permission._id });
+      const actual = await target.remove({ _id: read._id });
       // Assert
-      expect(actual).toEqual(permission);
-    });
-  });
-
-  describe('Validation', () => {
-    describe('Create', () => {
-      it('returns the item on valid groups.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        const expected = new ZPermissionBuilder().copy(permission).build();
-        // Act
-        const actual = await target.validateCreate(permission);
-        // Assert
-        expect(actual).toEqual(expected);
-      });
-
-      it('throws a ConflictException if the id already exists.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        crud.find.mockResolvedValue(permission);
-        // Act
-        // Assert
-        await expect(target.validateCreate(permission)).rejects.toBeInstanceOf(ConflictException);
-      });
+      expect(actual).toEqual(read);
     });
 
-    describe('Update', () => {
-      it('returns the item with the orignal id and the updated properties on valid permissions.', async () => {
-        // Arrange
-        const target = createTestTarget();
-        const name = 'renamed-item';
-        const expected = new ZPermissionBuilder().copy(permission).name(name).build();
-        // Act
-        const actual = await target.validateUpdate(permission, { _id: 'should-be-ignored', name });
-        // Assert
-        expect(actual).toEqual(expected);
-      });
+    it('throws a NotFouncException if the item does not exist.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const promise = target.remove({ _id: write._id });
+      // Assert
+      await expect(promise).rejects.toBeInstanceOf(NotFoundException);
+    });
+
+    it('throws a ForbiddenException if the permission is a system permission.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const promise = target.remove({ _id: execute._id });
+      // Assert
+      await expect(promise).rejects.toBeInstanceOf(ForbiddenException);
     });
   });
 });
