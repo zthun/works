@@ -16,6 +16,14 @@ export enum Collections {
    */
   Groups = 'groups',
   /**
+   * The collection that references groups to permissions.
+   */
+  GroupsPermissions = 'groups-permissions',
+  /**
+   * The collection that references groups to users.
+   */
+  GroupsUsers = 'groups-users',
+  /**
    * The permissions collection.
    */
   Permissions = 'permissions',

@@ -1,6 +1,7 @@
 import { Module, OnModuleInit } from '@nestjs/common';
 import { ZDatabaseMongo, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { DatabaseToken } from '../common/injection.constants';
+import { ZGroupsPermissionsController } from '../groups/groups-permissions.controller';
 import { ZGroupsController } from '../groups/groups.controller';
 import { ZHealthController } from '../health/health.controller';
 import { ZOauthPasswordService } from '../oauth/oauth-password.service';
@@ -16,6 +17,7 @@ import { ZAuthService } from './auth.service';
     ZTokensController,
     ZPermissionsController,
     ZGroupsController,
+    ZGroupsPermissionsController,
     ZHealthController
   ],
   providers: [
