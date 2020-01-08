@@ -1,5 +1,5 @@
 import { ConflictException, Controller, Delete, Get, Inject, NotFoundException, Param, Put } from '@nestjs/common';
-import { IZPermission } from '@zthun/auth.core';
+import { IZGroup, IZPermission } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { Collections } from '../common/collections.enum';
 import { IZGroupsPermissions } from '../common/groups-permissions.interface';
@@ -12,17 +12,22 @@ export class ZGroupsPermissionsController {
 
   @Get()
   public async list(@Param() { groupId }: { groupId: string }): Promise<IZPermission[]> {
+    const [group] = await this._dal.read<IZGroup>(Collections.Groups).filter({ _id: groupId }).run();
+    ZHttpAssert.assert(!!group, () => new NotFoundException(`The group with id, ${groupId}, could not be found.`));
     const permissions = await this._dal.read<IZGroupsPermissions>(Collections.GroupsPermissions).join(Collections.Permissions, 'permissionId', '_id', 'permission').filter({ groupId }).run();
     return permissions.map((p) => p.permission[0]);
   }
 
   @Put(':permissionId')
   public async update(@Param() { groupId, permissionId }: { groupId: string, permissionId: string }): Promise<IZPermission> {
+    const [group] = await this._dal.read<IZGroup>(Collections.Groups).filter({ _id: groupId }).run();
+    ZHttpAssert.assert(!!group, () => new NotFoundException(`The group with id, ${groupId}, does not exist.`));
+    const [permission] = await this._dal.read<IZPermission>(Collections.Permissions).filter({ _id: permissionId }).run();
+    ZHttpAssert.assert(!!permission, () => new NotFoundException(`The permission with id, ${permissionId}, does not exist.`));
     const assignment: IZGroupsPermissions = { groupId, permissionId };
     const [current] = await this._dal.read<IZGroupsPermissions>(Collections.GroupsPermissions).filter(assignment).run();
     ZHttpAssert.assert(!current, () => new ConflictException('That permission is already assigned to the group.'));
-    const [created] = await this._dal.create<IZGroupsPermissions>(Collections.GroupsPermissions, [assignment]).run();
-    const [permission] = await this._dal.read<IZPermission>(Collections.Permissions).filter({ _id: created.permissionId }).run();
+    await this._dal.create<IZGroupsPermissions>(Collections.GroupsPermissions, [assignment]).run();
     return permission;
   }
 
