@@ -11,6 +11,7 @@ describe('ZGroupsPermissionsController', () => {
   let marvel: IZGroup;
   let read: IZPermission;
   let write: IZPermission;
+  let assignment: IZGroupsPermissions;
 
   function createTestTarget() {
     return new ZGroupsPermissionsController(dal);
@@ -26,6 +27,15 @@ describe('ZGroupsPermissionsController', () => {
 
     [dc, marvel] = await dal.create(Collections.Groups, [dc, marvel]).run();
     [read, write] = await dal.create(Collections.Permissions, [read, write]).run();
+  });
+
+  afterAll(async () => {
+    await dal.delete(Collections.Groups).run();
+    await dal.delete(Collections.Permissions).run();
+  });
+
+  beforeEach(() => {
+    assignment = { groupId: dc._id, permissionId: read._id };
   });
 
   afterEach(async () => {
@@ -58,12 +68,6 @@ describe('ZGroupsPermissionsController', () => {
   });
 
   describe('Update', () => {
-    let assignment: IZGroupsPermissions;
-
-    beforeEach(() => {
-      assignment = { groupId: dc._id, permissionId: read._id };
-    });
-
     it('assigns a given permission to a group.', async () => {
       // Arrange
       const target = createTestTarget();
@@ -103,16 +107,47 @@ describe('ZGroupsPermissionsController', () => {
   });
 
   describe('Delete', () => {
-    it('removes the permission from the group.', () => {
-      expect(true).toBeTruthy();
+
+    beforeEach(async () => {
+      await dal.create(Collections.GroupsPermissions, [assignment]).run();
     });
 
-    it('throws a not found exception if the group does not exist.', () => {
-      expect(true).toBeTruthy();
+    it('removes the permission from the group.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.remove(assignment);
+      const [actual] = await dal.read<IZGroupsPermissions>(Collections.GroupsPermissions).filter(assignment).run();
+      // Assert
+      expect(actual).toBeFalsy();
     });
 
-    it('throws a not found exception if the permission does not exist.', () => {
-      expect(true).toBeTruthy();
+    it('throws a not found exception if the assignment does not exist.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      assignment.groupId = marvel._id;
+      assignment.permissionId = write._id;
+      // Act
+      // Assert
+      await expect(target.remove(assignment)).rejects.toBeInstanceOf(NotFoundException);
+    });
+
+    it('throws a not found exception if the group does not exist.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      assignment.groupId = 'i-do-not-exist';
+      // Act
+      // Assert
+      await expect(target.remove(assignment)).rejects.toBeInstanceOf(NotFoundException);
+    });
+
+    it('throws a not found exception if the permission does not exist.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      assignment.permissionId = 'i-do-not-exist';
+      // Act
+      // Assert
+      await expect(target.remove(assignment)).rejects.toBeInstanceOf(NotFoundException);
     });
   });
 });
