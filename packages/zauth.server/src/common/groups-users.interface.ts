@@ -1,6 +1,6 @@
-import { IZGroup, IZUser } from '@zthun/auth.core';
+import { IZGroup, IZIdentifiable, IZUser } from '@zthun/auth.core';
 
-export interface IZGroupsUsers {
+export interface IZGroupsUsers extends IZIdentifiable {
   groupId: string;
   userId: string;
   group?: IZGroup;

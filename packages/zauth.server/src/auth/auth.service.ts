@@ -3,6 +3,8 @@ import { IZIdentifiable, ZAuthSystemGroup, ZAuthSystemPermission, ZGroupBuilder,
 import { IZDatabase } from '@zthun/dal';
 import { keyBy } from 'lodash';
 import { Collections } from '../common/collections.enum';
+import { ZGroupPermissionBuilder } from '../common/group-permission-builder.class';
+import { IZGroupPermission } from '../common/group-permission.interface';
 import { DatabaseToken } from '../common/injection.constants';
 
 @Injectable()
@@ -67,6 +69,13 @@ export class ZAuthService {
   public async setupSystemGroups() {
     const groups = this.constructSystemGroups();
     await this._setupSystemItems(groups, Collections.Groups);
+  }
+
+  public async setupDefaultGroupPermissions() {
+    const system = this.constructSystemPermissions();
+    const admin = this.constructSystemGroupAdministrators();
+    const wanted: IZGroupPermission[] = system.map((per) => new ZGroupPermissionBuilder().group(admin).permission(per).redact().build());
+    await this._setupSystemItems(wanted, Collections.GroupsPermissions);
   }
 
   private async _setupSystemItems<T extends IZIdentifiable>(items: T[], collection: string) {

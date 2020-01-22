@@ -36,5 +36,6 @@ export class ZAuthModule implements OnModuleInit {
   public async onModuleInit() {
     await this._auth.setupSystemPermissions();
     await this._auth.setupSystemGroups();
+    await this._auth.setupDefaultGroupPermissions();
   }
 }

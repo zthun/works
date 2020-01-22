@@ -2,8 +2,9 @@ import { ConflictException, NotFoundException } from '@nestjs/common';
 import { IZGroup, IZPermission, ZGroupBuilder, ZPermissionBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { Collections } from '../common/collections.enum';
-import { IZGroupsPermissions } from '../common/groups-permissions.interface';
+import { IZGroupPermission } from '../common/group-permission.interface';
 import { ZGroupsPermissionsController } from './groups-permissions.controller';
+import { ZGroupPermissionBuilder } from '../common/group-permission-builder.class';
 
 describe('ZGroupsPermissionsController', () => {
   let dal: IZDatabase;
@@ -11,7 +12,7 @@ describe('ZGroupsPermissionsController', () => {
   let marvel: IZGroup;
   let read: IZPermission;
   let write: IZPermission;
-  let assignment: IZGroupsPermissions;
+  let assignment: IZGroupPermission;
 
   function createTestTarget() {
     return new ZGroupsPermissionsController(dal);
@@ -35,7 +36,7 @@ describe('ZGroupsPermissionsController', () => {
   });
 
   beforeEach(() => {
-    assignment = { groupId: dc._id, permissionId: read._id };
+    assignment = new ZGroupPermissionBuilder().groupId(dc._id).permissionId(read._id).build();
   });
 
   afterEach(async () => {
@@ -44,8 +45,8 @@ describe('ZGroupsPermissionsController', () => {
 
   describe('List', () => {
     beforeEach(async () => {
-      const dcread: IZGroupsPermissions = { groupId: dc._id, permissionId: read._id };
-      const dcwrite: IZGroupsPermissions = { groupId: dc._id, permissionId: write._id };
+      const dcread: IZGroupPermission = new ZGroupPermissionBuilder().groupId(dc._id).permissionId(read._id).build();
+      const dcwrite: IZGroupPermission = new ZGroupPermissionBuilder().groupId(dc._id).permissionId(write._id).build();
       await dal.create(Collections.GroupsPermissions, [dcread, dcwrite]).run();
     });
 
@@ -107,7 +108,6 @@ describe('ZGroupsPermissionsController', () => {
   });
 
   describe('Delete', () => {
-
     beforeEach(async () => {
       await dal.create(Collections.GroupsPermissions, [assignment]).run();
     });
@@ -117,7 +117,7 @@ describe('ZGroupsPermissionsController', () => {
       const target = createTestTarget();
       // Act
       await target.remove(assignment);
-      const [actual] = await dal.read<IZGroupsPermissions>(Collections.GroupsPermissions).filter(assignment).run();
+      const [actual] = await dal.read<IZGroupPermission>(Collections.GroupsPermissions).filter(assignment).run();
       // Assert
       expect(actual).toBeFalsy();
     });

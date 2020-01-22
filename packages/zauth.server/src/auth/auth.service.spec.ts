@@ -1,6 +1,8 @@
 import { IZGroup, IZPermission, ZAuthSystemGroup, ZAuthSystemPermission } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { Collections } from '../common/collections.enum';
+import { ZGroupPermissionBuilder } from '../common/group-permission-builder.class';
+import { IZGroupPermission } from '../common/group-permission.interface';
 import { ZAuthService } from './auth.service';
 
 describe('ZAuthService', () => {
@@ -15,7 +17,9 @@ describe('ZAuthService', () => {
       dal.delete(Collections.Groups).run(),
       dal.delete(Collections.Permissions).run(),
       dal.delete(Collections.Users).run(),
-      dal.delete(Collections.Tokens).run()
+      dal.delete(Collections.Tokens).run(),
+      dal.delete(Collections.GroupsPermissions).run(),
+      dal.delete(Collections.GroupsUsers).run()
     ]);
   });
 
@@ -23,7 +27,57 @@ describe('ZAuthService', () => {
     return new ZAuthService(dal);
   }
 
-  describe('Permission setup.', () => {
+  describe('Groups Permissions setup', () => {
+    describe('Administrators', () => {
+      it('adds all of the system permissions to the administrators group.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        const admin = target.constructSystemGroupAdministrators();
+        const expected = target.constructSystemPermissions().map((per) => per._id).sort();
+        // Act
+        await target.setupDefaultGroupPermissions();
+        const links = await dal.read<IZGroupPermission>(Collections.GroupsPermissions).filter({ groupId: admin._id }).run();
+        const actual = links.slice().map((lk) => lk.permissionId).sort();
+        // Assert
+        expect(actual).toEqual(expected);
+      });
+
+      it('adds all of the system permissions that are missing from the associations in the admin group.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        const admin = target.constructSystemGroupAdministrators();
+        const readGroups = target.constructSystemPermissionReadGroups();
+        const writeUsers = target.constructSystemPermissionEditUsers();
+        const expected = target.constructSystemPermissions().map((per) => per._id).sort();
+        const readGroupsAssignment = new ZGroupPermissionBuilder().group(admin).permission(readGroups).redact().build();
+        const writeUsersAssignment = new ZGroupPermissionBuilder().group(admin).permission(writeUsers).redact().build();
+        const existing = [readGroupsAssignment, writeUsersAssignment];
+        await dal.create(Collections.GroupsPermissions, existing).run();
+        // Act
+        await target.setupDefaultGroupPermissions();
+        const links = await dal.read<IZGroupPermission>(Collections.GroupsPermissions).filter({ groupId: admin._id }).run();
+        const actual = links.slice().map((lk) => lk.permissionId).sort();
+        // Assert
+        expect(actual).toEqual(expected);
+      });
+
+      it('adds nothing if the user already has all of the system permissions.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        const admin = target.constructSystemGroupAdministrators();
+        const expected = target.constructSystemPermissions().map((per) => per._id).sort();
+        await dal.create(Collections.GroupsPermissions, expected.map((permissionId) => new ZGroupPermissionBuilder().group(admin).permissionId(permissionId).redact().build())).run();
+        // Act
+        await target.setupDefaultGroupPermissions();
+        const links = await dal.read<IZGroupPermission>(Collections.GroupsPermissions).filter({ groupId: admin._id }).run();
+        const actual = links.slice().map((lk) => lk.permissionId).sort();
+        // Assert
+        expect(actual).toEqual(expected);
+      });
+    });
+  });
+
+  describe('Permission setup', () => {
     it('adds all of the system permissions if there are not already there.', async () => {
       // Arrange
       const target = createTestTarget();
