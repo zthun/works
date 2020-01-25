@@ -2,8 +2,11 @@ import { BadRequestException, ConflictException, NotFoundException } from '@nest
 import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { compare, hash } from 'bcryptjs';
+import { v4 } from 'uuid';
+import { ZAuthService } from '../auth/auth.service';
 import { Collections } from '../common/collections.enum';
 import { BcryptRounds } from '../common/crypt.constants';
+import { ZGroupUserBuilder } from '../common/group-user-builder.class';
 import { ZUsersController } from './users.controller';
 
 describe('ZUsersController', () => {
@@ -29,6 +32,7 @@ describe('ZUsersController', () => {
   });
 
   afterEach(async () => {
+    await dal.delete(Collections.GroupsUsers).run();
     await dal.delete(Collections.Users).run();
   });
 
@@ -65,8 +69,7 @@ describe('ZUsersController', () => {
       const target = createTestTarget();
       // Act
       const created = await target.create(loginA);
-      const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
-      const actual = actualBlobs[0];
+      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
       // Assert
       expect(actual._id).toBeTruthy();
       expect(actual.email).toEqual(loginA.email);
@@ -82,6 +85,19 @@ describe('ZUsersController', () => {
       const actual = actualBlobs[0];
       // Assert
       expect(actual.super).toBeTruthy();
+    });
+
+    it('adds the super user to the admin group.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const admin = ZAuthService.constructSystemGroupAdministrators();
+      await dal.delete(Collections.Users).run();
+      // Act
+      const created = await target.create(loginA);
+      const expected = new ZGroupUserBuilder().group(admin).user(created).redact().build();
+      const [actual] = await dal.read<IZUser>(Collections.GroupsUsers).filter({ _id: expected._id }).run();
+      // Assert
+      expect(actual).toEqual(expected);
     });
 
     it('creates a normal user if there is already a super user.', async () => {
@@ -280,8 +296,7 @@ describe('ZUsersController', () => {
 
   describe('Delete', () => {
     beforeEach(async () => {
-      const blobs = await dal.create(Collections.Users, [userA]).run();
-      userA = blobs[0];
+      [userA, userB] = await dal.create(Collections.Users, [userA, userB]).run();
     });
 
     it('deletes the user.', async () => {
@@ -292,6 +307,20 @@ describe('ZUsersController', () => {
       const blobs = await dal.read(Collections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(blobs.length).toEqual(0);
+    });
+
+    it('deletes the user from all groups.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      let assignmentA = new ZGroupUserBuilder().groupId(v4()).user(userA).redact().build();
+      let assignmentB = new ZGroupUserBuilder().groupId(v4()).user(userA).redact().build();
+      let assignmentC = new ZGroupUserBuilder().groupId(assignmentB.groupId).user(userB).redact().build();
+      [assignmentA, assignmentB, assignmentC] = await dal.create(Collections.GroupsUsers, [assignmentA, assignmentB, assignmentC]).run();
+      // Act
+      await target.remove({ id: userA._id });
+      const assignments = await dal.read(Collections.GroupsUsers).run();
+      // Assert
+      expect(assignments.length).toEqual(1);
     });
 
     it('throws a NotFoundException if there is no id.', async () => {

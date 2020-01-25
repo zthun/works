@@ -11,77 +11,77 @@ import { DatabaseToken } from '../common/injection.constants';
 
 @Injectable()
 export class ZAuthService {
-  public constructor(@Inject(DatabaseToken) private _dal: IZDatabase) { }
-
-  public constructSystemPermissionReadUsers() {
+  public static constructSystemPermissionReadUsers() {
     return new ZPermissionBuilder().id(ZAuthSystemPermission.ReadUsers).name('Read Users').description('The ability to read information about the users in the system.').system().build();
   }
 
-  public constructSystemPermissionEditUsers() {
+  public static constructSystemPermissionEditUsers() {
     return new ZPermissionBuilder().id(ZAuthSystemPermission.EditUsers).name('Edit Users').description('The ability to edit information about the users in the system.').system().build();
   }
 
-  public constructSystemPermissionReadPermissions() {
+  public static constructSystemPermissionReadPermissions() {
     return new ZPermissionBuilder().id(ZAuthSystemPermission.ReadPermissions).name('Read Permissions').description('The ability to read information about the permissions in the system.').system().build();
   }
 
-  public constructSystemPermissionEditPermissions() {
+  public static constructSystemPermissionEditPermissions() {
     return new ZPermissionBuilder().id(ZAuthSystemPermission.EditPermissions).name('Edit Permissions').description('The ability to edit permission keys in the system.').system().build();
   }
 
-  public constructSystemPermissionReadGroups() {
+  public static constructSystemPermissionReadGroups() {
     return new ZPermissionBuilder().id(ZAuthSystemPermission.ReadGroups).name('Read Groups').description('The ability to read information about the system groups.').system().build();
   }
 
-  public constructSystemPermissionEditGroups() {
+  public static constructSystemPermissionEditGroups() {
     return new ZPermissionBuilder().id(ZAuthSystemPermission.EditGroups).name('Edit Groups').description('The ability to edit system groups.').system().build();
   }
 
-  public constructSystemPermissions() {
+  public static constructSystemPermissions() {
     return [
-      this.constructSystemPermissionReadUsers(),
-      this.constructSystemPermissionEditUsers(),
-      this.constructSystemPermissionReadPermissions(),
-      this.constructSystemPermissionEditPermissions(),
-      this.constructSystemPermissionReadGroups(),
-      this.constructSystemPermissionEditGroups()
+      ZAuthService.constructSystemPermissionReadUsers(),
+      ZAuthService.constructSystemPermissionEditUsers(),
+      ZAuthService.constructSystemPermissionReadPermissions(),
+      ZAuthService.constructSystemPermissionEditPermissions(),
+      ZAuthService.constructSystemPermissionReadGroups(),
+      ZAuthService.constructSystemPermissionEditGroups()
     ];
   }
 
-  public constructSystemGroupAdministrators() {
+  public static constructSystemGroupAdministrators() {
     return new ZGroupBuilder().id(ZAuthSystemGroup.Administrators).name('Administrators').system().build();
   }
 
-  public constructSystemGroupBasicUsers() {
+  public static constructSystemGroupBasicUsers() {
     return new ZGroupBuilder().id(ZAuthSystemGroup.BasicUsers).name('Basic Users').system().build();
   }
 
-  public constructSystemGroups() {
+  public static constructSystemGroups() {
     return [
-      this.constructSystemGroupAdministrators(),
-      this.constructSystemGroupBasicUsers()
+      ZAuthService.constructSystemGroupAdministrators(),
+      ZAuthService.constructSystemGroupBasicUsers()
     ];
   }
 
+  public constructor(@Inject(DatabaseToken) private _dal: IZDatabase) { }
+
   public async setupSystemPermissions() {
-    const permissions = this.constructSystemPermissions();
+    const permissions = ZAuthService.constructSystemPermissions();
     await this._setupSystemItems(permissions, Collections.Permissions);
   }
 
   public async setupSystemGroups() {
-    const groups = this.constructSystemGroups();
+    const groups = ZAuthService.constructSystemGroups();
     await this._setupSystemItems(groups, Collections.Groups);
   }
 
   public async setupDefaultGroupPermissions() {
-    const system = this.constructSystemPermissions();
-    const admin = this.constructSystemGroupAdministrators();
+    const system = ZAuthService.constructSystemPermissions();
+    const admin = ZAuthService.constructSystemGroupAdministrators();
     const wanted: IZGroupPermission[] = system.map((per) => new ZGroupPermissionBuilder().group(admin).permission(per).redact().build());
     await this._setupSystemItems(wanted, Collections.GroupsPermissions);
   }
 
   public async setupDefaultGroupUsers() {
-    const admin = this.constructSystemGroupAdministrators();
+    const admin = ZAuthService.constructSystemGroupAdministrators();
     const users = await this._dal.read<IZUser>(Collections.Users).filter({ super: true }).run();
     const wanted: IZGroupUser[] = users.map((superUser) => new ZGroupUserBuilder().group(admin).user(superUser).redact().build());
     await this._setupSystemItems(wanted, Collections.GroupsUsers);

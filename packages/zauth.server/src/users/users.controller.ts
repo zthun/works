@@ -1,10 +1,11 @@
 import { BadRequestException, Body, ConflictException, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put } from '@nestjs/common';
-import { IZLogin, IZUser, ZUserBuilder } from '@zthun/auth.core';
+import { IZLogin, IZUser, ZAuthSystemGroup, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { hash } from 'bcryptjs';
 import { pick } from 'lodash';
 import { Collections } from '../common/collections.enum';
 import { BcryptRounds } from '../common/crypt.constants';
+import { ZGroupUserBuilder } from '../common/group-user-builder.class';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
 
@@ -17,6 +18,7 @@ export class ZUsersController {
    * Initializes a new instance of this object.
    *
    * @param _dal The data access layer.
+   * @param _auth The auth service for simple tasks.
    */
   public constructor(@Inject(DatabaseToken) private readonly _dal: IZDatabase) { }
 
@@ -74,8 +76,13 @@ export class ZUsersController {
     const password = await hash(login.password, BcryptRounds);
     const builder = new ZUserBuilder().email(login.email).password(password);
     const create = total === 0 ? builder.super().build() : builder.build();
-    const createdBlobs = await this._dal.create(Collections.Users, [create]).run();
-    const created = createdBlobs[0];
+    const [created] = await this._dal.create(Collections.Users, [create]).run();
+
+    if (created.super) {
+      const assignment = new ZGroupUserBuilder().groupId(ZAuthSystemGroup.Administrators).user(created).redact().build();
+      await this._dal.create(Collections.GroupsUsers, [assignment]).run();
+    }
+
     return new ZUserBuilder().copy(created).redact().build();
   }
 
@@ -135,14 +142,11 @@ export class ZUsersController {
    * @throws NotFoundException If no user with the given id exists.
    */
   @Delete(':id')
-  public async remove(@Param() params: { id: string }): Promise<IZUser> {
-    const pid = params.id;
-    const filter = { _id: pid };
-    const userBlobs = await this._dal.read<IZUser>(Collections.Users).filter(filter).run();
-    ZHttpAssert.assert(userBlobs.length > 0, () => new NotFoundException());
-
-    const user = userBlobs[0];
-    await this._dal.delete('users').filter(filter).run();
+  public async remove(@Param() { id }: { id: string }): Promise<IZUser> {
+    const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
+    ZHttpAssert.assert(!!user, () => new NotFoundException());
+    await this._dal.delete(Collections.GroupsUsers).filter({ userId: id }).run();
+    await this._dal.delete(Collections.Users).filter({ _id: id }).run();
     return new ZUserBuilder().copy(user).redact().build();
   }
 }

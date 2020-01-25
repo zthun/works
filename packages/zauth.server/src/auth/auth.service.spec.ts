@@ -34,8 +34,8 @@ describe('ZAuthService', () => {
       it('adds all of the system permissions to the administrators group.', async () => {
         // Arrange
         const target = createTestTarget();
-        const admin = target.constructSystemGroupAdministrators();
-        const expected = target.constructSystemPermissions().map((per) => per._id).sort();
+        const admin = ZAuthService.constructSystemGroupAdministrators();
+        const expected = ZAuthService.constructSystemPermissions().map((per) => per._id).sort();
         // Act
         await target.setupDefaultGroupPermissions();
         const links = await dal.read<IZGroupPermission>(Collections.GroupsPermissions).filter({ groupId: admin._id }).run();
@@ -47,10 +47,10 @@ describe('ZAuthService', () => {
       it('adds all of the system permissions that are missing from the associations in the admin group.', async () => {
         // Arrange
         const target = createTestTarget();
-        const admin = target.constructSystemGroupAdministrators();
-        const readGroups = target.constructSystemPermissionReadGroups();
-        const writeUsers = target.constructSystemPermissionEditUsers();
-        const expected = target.constructSystemPermissions().map((per) => per._id).sort();
+        const admin = ZAuthService.constructSystemGroupAdministrators();
+        const readGroups = ZAuthService.constructSystemPermissionReadGroups();
+        const writeUsers = ZAuthService.constructSystemPermissionEditUsers();
+        const expected = ZAuthService.constructSystemPermissions().map((per) => per._id).sort();
         const readGroupsAssignment = new ZGroupPermissionBuilder().group(admin).permission(readGroups).redact().build();
         const writeUsersAssignment = new ZGroupPermissionBuilder().group(admin).permission(writeUsers).redact().build();
         const existing = [readGroupsAssignment, writeUsersAssignment];
@@ -66,8 +66,8 @@ describe('ZAuthService', () => {
       it('adds nothing if the user already has all of the system permissions.', async () => {
         // Arrange
         const target = createTestTarget();
-        const admin = target.constructSystemGroupAdministrators();
-        const expected = target.constructSystemPermissions().map((per) => per._id).sort();
+        const admin = ZAuthService.constructSystemGroupAdministrators();
+        const expected = ZAuthService.constructSystemPermissions().map((per) => per._id).sort();
         await dal.create(Collections.GroupsPermissions, expected.map((permissionId) => new ZGroupPermissionBuilder().group(admin).permissionId(permissionId).redact().build())).run();
         // Act
         await target.setupDefaultGroupPermissions();
@@ -84,7 +84,7 @@ describe('ZAuthService', () => {
       it('adds all of the super users.', async () => {
         // Arrange
         const target = createTestTarget();
-        const admin = target.constructSystemGroupAdministrators();
+        const admin = ZAuthService.constructSystemGroupAdministrators();
         let superUser = new ZUserBuilder().email('admin@whatever.com').password('crummy-password').super().build();
         let normal = new ZUserBuilder().email('normal@gmail.com').password('also-crummy-password').build();
         [superUser, normal] = await dal.create(Collections.Users, [superUser, normal]).run();
@@ -99,7 +99,7 @@ describe('ZAuthService', () => {
       it('does not add any additional users if all the super users have already been added.', async () => {
         // Arrange
         const target = createTestTarget();
-        const admin = target.constructSystemGroupAdministrators();
+        const admin = ZAuthService.constructSystemGroupAdministrators();
         let superUser = new ZUserBuilder().email('admin@whatever.com').password('crummy-password').super().build();
         [superUser] = await dal.create(Collections.Users, [superUser]).run();
         let expected = new ZGroupUserBuilder().group(admin).user(superUser).redact().build();
@@ -117,7 +117,7 @@ describe('ZAuthService', () => {
     it('adds all of the system permissions if there are not already there.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = target.constructSystemPermissions();
+      const expected = ZAuthService.constructSystemPermissions();
       // Act
       await target.setupSystemPermissions();
       const actual = await dal.read<IZPermission>(Collections.Permissions).run();
@@ -128,7 +128,7 @@ describe('ZAuthService', () => {
     it('does not overwrite the system permissions if they already exist.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = target.constructSystemPermissions();
+      const expected = ZAuthService.constructSystemPermissions();
       await target.setupSystemPermissions();
       // Act
       await target.setupSystemPermissions();
@@ -141,7 +141,7 @@ describe('ZAuthService', () => {
       // Arrange
       const target = createTestTarget();
       const sorter = (a: IZPermission, b: IZPermission) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0);
-      const expected = target.constructSystemPermissions().sort(sorter);
+      const expected = ZAuthService.constructSystemPermissions().sort(sorter);
       await target.setupSystemPermissions();
       await dal.delete(Collections.Permissions).filter({ _id: ZAuthSystemPermission.EditGroups }).run();
       await dal.delete(Collections.Permissions).filter({ _id: ZAuthSystemPermission.ReadPermissions }).run();
@@ -158,7 +158,7 @@ describe('ZAuthService', () => {
     it('adds all of the system groups if there are not already there.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = target.constructSystemGroups();
+      const expected = ZAuthService.constructSystemGroups();
       // Act
       await target.setupSystemGroups();
       const actual = await dal.read<IZGroup>(Collections.Groups).run();
@@ -169,7 +169,7 @@ describe('ZAuthService', () => {
     it('does not overwrite the system groups if they already exist.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = target.constructSystemGroups();
+      const expected = ZAuthService.constructSystemGroups();
       await target.setupSystemGroups();
       // Act
       await target.setupSystemGroups();
@@ -182,7 +182,7 @@ describe('ZAuthService', () => {
       // Arrange
       const target = createTestTarget();
       const sorter = (a: IZGroup, b: IZGroup) => a.name < b.name ? -1 : (a.name > b.name ? 1 : 0);
-      const expected = target.constructSystemGroups().sort(sorter);
+      const expected = ZAuthService.constructSystemGroups().sort(sorter);
       await target.setupSystemGroups();
       await dal.delete(Collections.Groups).filter({ _id: ZAuthSystemGroup.Administrators }).run();
       // Act
