@@ -12,7 +12,7 @@ describe('ZAuthModule', () => {
   }
 
   beforeEach(() => {
-    auth = createSpyObj(ZAuthModule, ['setupSystemPermissions', 'setupSystemGroups', 'setupDefaultGroupPermissions']) as unknown as jest.Mocked<ZAuthService>;
+    auth = createSpyObj(ZAuthModule, ['setupSystemPermissions', 'setupSystemGroups', 'setupDefaultGroupPermissions', 'setupDefaultGroupUsers']) as unknown as jest.Mocked<ZAuthService>;
     auth.setupSystemGroups.mockResolvedValue(null);
     auth.setupSystemPermissions.mockResolvedValue(null);
   });
@@ -39,5 +39,13 @@ describe('ZAuthModule', () => {
     await createTestTarget();
     // Assert
     expect(auth.setupDefaultGroupPermissions).toHaveBeenCalledTimes(1);
+  });
+
+  it('sets up the default group users.', async () => {
+    // Arrange
+    // Act
+    await createTestTarget();
+    // Assert
+    expect(auth.setupDefaultGroupUsers).toHaveBeenCalled();
   });
 });

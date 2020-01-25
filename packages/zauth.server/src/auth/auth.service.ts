@@ -1,10 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IZIdentifiable, ZAuthSystemGroup, ZAuthSystemPermission, ZGroupBuilder, ZPermissionBuilder } from '@zthun/auth.core';
+import { IZIdentifiable, IZUser, ZAuthSystemGroup, ZAuthSystemPermission, ZGroupBuilder, ZPermissionBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { keyBy } from 'lodash';
 import { Collections } from '../common/collections.enum';
 import { ZGroupPermissionBuilder } from '../common/group-permission-builder.class';
 import { IZGroupPermission } from '../common/group-permission.interface';
+import { ZGroupUserBuilder } from '../common/group-user-builder.class';
+import { IZGroupUser } from '../common/group-user.interface';
 import { DatabaseToken } from '../common/injection.constants';
 
 @Injectable()
@@ -76,6 +78,13 @@ export class ZAuthService {
     const admin = this.constructSystemGroupAdministrators();
     const wanted: IZGroupPermission[] = system.map((per) => new ZGroupPermissionBuilder().group(admin).permission(per).redact().build());
     await this._setupSystemItems(wanted, Collections.GroupsPermissions);
+  }
+
+  public async setupDefaultGroupUsers() {
+    const admin = this.constructSystemGroupAdministrators();
+    const users = await this._dal.read<IZUser>(Collections.Users).filter({ super: true }).run();
+    const wanted: IZGroupUser[] = users.map((superUser) => new ZGroupUserBuilder().group(admin).user(superUser).redact().build());
+    await this._setupSystemItems(wanted, Collections.GroupsUsers);
   }
 
   private async _setupSystemItems<T extends IZIdentifiable>(items: T[], collection: string) {

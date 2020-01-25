@@ -2,6 +2,7 @@ import { Module, OnModuleInit } from '@nestjs/common';
 import { ZDatabaseMongo, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { DatabaseToken } from '../common/injection.constants';
 import { ZGroupsPermissionsController } from '../groups/groups-permissions.controller';
+import { ZGroupsUsersController } from '../groups/groups-users.controller';
 import { ZGroupsController } from '../groups/groups.controller';
 import { ZHealthController } from '../health/health.controller';
 import { ZOauthPasswordService } from '../oauth/oauth-password.service';
@@ -18,6 +19,7 @@ import { ZAuthService } from './auth.service';
     ZPermissionsController,
     ZGroupsController,
     ZGroupsPermissionsController,
+    ZGroupsUsersController,
     ZHealthController
   ],
   providers: [
@@ -37,5 +39,6 @@ export class ZAuthModule implements OnModuleInit {
     await this._auth.setupSystemPermissions();
     await this._auth.setupSystemGroups();
     await this._auth.setupDefaultGroupPermissions();
+    await this._auth.setupDefaultGroupUsers();
   }
 }

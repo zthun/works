@@ -1,8 +1,10 @@
-import { IZGroup, IZPermission, ZAuthSystemGroup, ZAuthSystemPermission } from '@zthun/auth.core';
+import { IZGroup, IZPermission, ZAuthSystemGroup, ZAuthSystemPermission, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { Collections } from '../common/collections.enum';
 import { ZGroupPermissionBuilder } from '../common/group-permission-builder.class';
 import { IZGroupPermission } from '../common/group-permission.interface';
+import { ZGroupUserBuilder } from '../common/group-user-builder.class';
+import { IZGroupUser } from '../common/group-user.interface';
 import { ZAuthService } from './auth.service';
 
 describe('ZAuthService', () => {
@@ -73,6 +75,40 @@ describe('ZAuthService', () => {
         const actual = links.slice().map((lk) => lk.permissionId).sort();
         // Assert
         expect(actual).toEqual(expected);
+      });
+    });
+  });
+
+  describe('Groups Users setup', () => {
+    describe('Administrators', () => {
+      it('adds all of the super users.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        const admin = target.constructSystemGroupAdministrators();
+        let superUser = new ZUserBuilder().email('admin@whatever.com').password('crummy-password').super().build();
+        let normal = new ZUserBuilder().email('normal@gmail.com').password('also-crummy-password').build();
+        [superUser, normal] = await dal.create(Collections.Users, [superUser, normal]).run();
+        const expected = new ZGroupUserBuilder().group(admin).user(superUser).redact().build();
+        // Act
+        await target.setupDefaultGroupUsers();
+        const links = await dal.read<IZGroupUser>(Collections.GroupsUsers).filter({ groupId: admin._id }).run();
+        // Assert
+        expect(links).toEqual([expected]);
+      });
+
+      it('does not add any additional users if all the super users have already been added.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        const admin = target.constructSystemGroupAdministrators();
+        let superUser = new ZUserBuilder().email('admin@whatever.com').password('crummy-password').super().build();
+        [superUser] = await dal.create(Collections.Users, [superUser]).run();
+        let expected = new ZGroupUserBuilder().group(admin).user(superUser).redact().build();
+        [expected] = await dal.create(Collections.GroupsUsers, [expected]).run();
+        // Act
+        await target.setupDefaultGroupUsers();
+        const links = await dal.read<IZGroupUser>(Collections.GroupsUsers).filter({ groupId: admin._id }).run();
+        // Assert
+        expect(links).toEqual([expected]);
       });
     });
   });
