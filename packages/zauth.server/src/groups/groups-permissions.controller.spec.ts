@@ -2,9 +2,9 @@ import { ConflictException, NotFoundException } from '@nestjs/common';
 import { IZGroup, IZPermission, ZGroupBuilder, ZPermissionBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { Collections } from '../common/collections.enum';
+import { ZGroupPermissionBuilder } from '../common/group-permission-builder.class';
 import { IZGroupPermission } from '../common/group-permission.interface';
 import { ZGroupsPermissionsController } from './groups-permissions.controller';
-import { ZGroupPermissionBuilder } from '../common/group-permission-builder.class';
 
 describe('ZGroupsPermissionsController', () => {
   let dal: IZDatabase;
