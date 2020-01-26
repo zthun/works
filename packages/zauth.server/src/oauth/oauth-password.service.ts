@@ -34,9 +34,8 @@ export class ZOauthPasswordService implements PasswordModel {
    * @throws UnauthorizedException if the email or password is incorrect.
    */
   public async getUser(username: string, password: string, callback: Callback<User>): Promise<User> {
-    const blobs = await this._dal.read<IZUser>(Collections.Users).filter({ email: username }).run();
-    ZHttpAssert.assert(blobs.length > 0, () => new UnauthorizedException('User email or password is incorrect.'));
-    const user = blobs[0];
+    const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ email: username }).run();
+    ZHttpAssert.assert(!!user, () => new UnauthorizedException('User email or password is incorrect.'));
     const passwordsMatch = await compare(password, user.password);
     ZHttpAssert.assert(passwordsMatch, () => new UnauthorizedException('User email or password is incorrect.'));
     callback(null, user);
@@ -88,15 +87,13 @@ export class ZOauthPasswordService implements PasswordModel {
    * @returns A promise that, when resolved, has the token information.
    */
   public async getAccessToken(accessToken: string, callback: Callback<Token>): Promise<Token> {
-    const tks = await this._dal.read<IZToken>(Collections.Tokens).filter({ _id: accessToken }).run();
-    ZHttpAssert.assert(!!tks.length, () => new UnauthorizedException('Unauthorized'));
-    const tk = tks[0];
+    const [tk] = await this._dal.read<IZToken>(Collections.Tokens).filter({ _id: accessToken }).run();
+    ZHttpAssert.assert(!!tk, () => new UnauthorizedException('Unauthorized'));
     const now = new Date();
     const exp = new Date(tk.exp);
     ZHttpAssert.assert(exp.getTime() > now.getTime(), () => new UnauthorizedException('Session expired.  Please login again.'));
-    const users = await this._dal.read<IZUser>(Collections.Users).filter({ _id: tk.userId }).run();
-    ZHttpAssert.assert(!!users.length, () => new UnauthorizedException('User is no longer authorized for any actions.'));
-    const user = users[0];
+    const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: tk.userId }).run();
+    ZHttpAssert.assert(!!user, () => new UnauthorizedException('User is no longer authorized for any actions.'));
     const client = await this.getClient('internal', null, noop);
 
     const otk = {

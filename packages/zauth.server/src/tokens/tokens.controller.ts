@@ -1,8 +1,8 @@
-import { BadRequestException, Body, Controller, Delete, Get, NotImplementedException, Post, Put, Res } from '@nestjs/common';
-import { IZLogin, IZToken, ZTokenBuilder } from '@zthun/auth.core';
+import { Body, Controller, Delete, Get, NotImplementedException, Post, Put, Res } from '@nestjs/common';
+import { IZToken, ZTokenBuilder } from '@zthun/auth.core';
 import { Response } from 'express';
-import { ZHttpAssert } from '../common/http-assert.class';
 import { ZOauthServerService } from '../oauth/oauth-server.service';
+import { ZTokenCreateDto } from './token-create.dto.class';
 
 @Controller('tokens')
 export class ZTokensController {
@@ -34,9 +34,7 @@ export class ZTokensController {
    *          error.
    */
   @Post()
-  public async create(@Body() login: IZLogin, @Res() res: Response): Promise<IZToken> {
-    ZHttpAssert.assert(!!login.email, () => new BadRequestException('User email is required.'));
-    ZHttpAssert.assert(!!login.password, () => new BadRequestException('Password is required.'));
+  public async create(@Body() login: ZTokenCreateDto, @Res() res: Response): Promise<IZToken> {
     const token = await this._oauth.create(login.email, login.password);
     res.cookie('Authorization', `Bearer ${token.accessToken}`, { expires: token.accessTokenExpiresAt, secure: true, httpOnly: true });
     return new ZTokenBuilder().token(token.accessToken).expire(token.accessTokenExpiresAt).user(token.user._id).redact().build();

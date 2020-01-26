@@ -48,24 +48,6 @@ describe('ZTokensController', () => {
       expect(new Date(actual.exp).toJSON()).toEqual(token.accessTokenExpiresAt.toJSON());
     });
 
-    it('throws a bad request exception if the email is not defined.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      delete login.email;
-      // Act
-      // Assert
-      await expect(target.create(login, response)).rejects.toHaveProperty('status', 400);
-    });
-
-    it('throws a bad request exception if the password is not defined.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      delete login.password;
-      // Act
-      // Assert
-      await expect(target.create(login, response)).rejects.toHaveProperty('status', 400);
-    });
-
     it('sets an auth cookie.', async () => {
       // Arrange
       const target = createTestTarget();

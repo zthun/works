@@ -80,8 +80,7 @@ describe('ZUsersController', () => {
       await dal.delete(Collections.Users).run();
       // Act
       const created = await target.create(plainToClass(ZUserCreateDto, loginA));
-      const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
-      const actual = actualBlobs[0];
+      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
       // Assert
       expect(actual.super).toBeTruthy();
     });
@@ -104,8 +103,7 @@ describe('ZUsersController', () => {
       const target = createTestTarget();
       // Act
       const created = await target.create(plainToClass(ZUserCreateDto, loginA));
-      const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
-      const actual = actualBlobs[0];
+      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
       // Assert
       expect(actual.super).toBeFalsy();
     });
@@ -124,8 +122,7 @@ describe('ZUsersController', () => {
       const target = createTestTarget();
       // Act
       const created = await target.create(plainToClass(ZUserCreateDto, loginA));
-      const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
-      const actual = actualBlobs[0];
+      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
       const same = await compare(loginA.password, actual.password);
       // Assert
       expect(same).toBeTruthy();
@@ -142,9 +139,7 @@ describe('ZUsersController', () => {
 
   describe('Read', () => {
     beforeEach(async () => {
-      const blobs = await dal.create(Collections.Users, [userA, userB]).run();
-      userA = blobs[0];
-      userB = blobs[1];
+      [userA, userB] = await dal.create(Collections.Users, [userA, userB]).run();
     });
 
     it('reads a redacted user.', async () => {
@@ -169,9 +164,7 @@ describe('ZUsersController', () => {
 
   describe('Update', () => {
     beforeEach(async () => {
-      const blobs = await dal.create<IZUser>(Collections.Users, [userA, userB]).run();
-      userA = blobs[0];
-      userB = blobs[1];
+      [userA, userB] = await dal.create<IZUser>(Collections.Users, [userA, userB]).run();
     });
 
     it('updates the user email.', async () => {
@@ -181,8 +174,7 @@ describe('ZUsersController', () => {
       const template: Partial<IZLogin> = { email: expected };
       // Act
       await target.update({ id: userA._id }, template);
-      const blobs = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
-      const actual = blobs[0];
+      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(actual.email).toEqual(expected);
     });
@@ -203,8 +195,7 @@ describe('ZUsersController', () => {
       const template: Partial<IZLogin> = { password: 'super-password', confirm: 'super-password' };
       // Act
       await target.update({ id: userA._id }, template);
-      const blobs = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
-      const actual = blobs[0];
+      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
       const same = await compare(template.password, actual.password);
       // Assert
       expect(same).toBeTruthy();
@@ -215,8 +206,7 @@ describe('ZUsersController', () => {
       const target = createTestTarget();
       // Act
       await target.update({ id: userA._id }, {});
-      const list = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
-      const actual = list[0];
+      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(actual.password).toEqual(userA.password);
     });

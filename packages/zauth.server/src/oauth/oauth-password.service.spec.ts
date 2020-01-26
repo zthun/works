@@ -130,10 +130,9 @@ describe('ZOauthPasswordService', () => {
       const target = createTestTarget();
       // Act
       await target.saveToken(oauthToken, client, user, jest.fn());
-      const actual = await dal.read<IZToken>(Collections.Tokens).filter({ userId: userid }).run();
+      const [actual] = await dal.read<IZToken>(Collections.Tokens).filter({ userId: userid }).run();
       // Assert
-      expect(actual.length).toEqual(1);
-      expect(actual[0]._id).toEqual(oauthToken.accessToken);
+      expect(actual._id).toEqual(oauthToken.accessToken);
     });
 
     it('invokes the callback.', async () => {
