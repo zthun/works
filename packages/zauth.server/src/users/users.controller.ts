@@ -1,13 +1,14 @@
 import { BadRequestException, Body, ConflictException, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put } from '@nestjs/common';
-import { IZLogin, IZUser, ZAuthSystemGroup, ZUserBuilder } from '@zthun/auth.core';
+import { IZUser, ZAuthSystemGroup, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { hash } from 'bcryptjs';
-import { pick } from 'lodash';
 import { Collections } from '../common/collections.enum';
 import { BcryptRounds } from '../common/crypt.constants';
 import { ZGroupUserBuilder } from '../common/group-user-builder.class';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
+import { ZUserCreateDto } from './user-create.dto';
+import { ZUserUpdateDto } from './user-update.dto';
 
 /**
  * Represents a service to retrieve users.
@@ -43,13 +44,9 @@ export class ZUsersController {
    * @throws NotFoundException If the user does not exist.
    */
   @Get(':id')
-  public async read(@Param() params: { id: string }): Promise<IZUser> {
-    const pid = params.id;
-    const filter = { _id: pid };
-    const userBlobs = await this._dal.read<IZUser>(Collections.Users).filter(filter).run();
-    ZHttpAssert.assert(userBlobs.length > 0, () => new NotFoundException());
-
-    const user = userBlobs[0];
+  public async read(@Param() { id }: { id: string }): Promise<IZUser> {
+    const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
+    ZHttpAssert.assert(!!user, () => new NotFoundException());
     return new ZUserBuilder().copy(user).redact().build();
   }
 
@@ -63,13 +60,8 @@ export class ZUsersController {
    * @throws ConflictException If a user already has the same name or already exists.
    */
   @Post()
-  public async create(@Body() login: IZLogin): Promise<IZUser> {
-    const filter = pick(login, 'email');
-    ZHttpAssert.assert(!!login.email, () => new BadRequestException('User email is required.'));
-    ZHttpAssert.assert(!!login.password, () => new BadRequestException('Password is required.'));
-    ZHttpAssert.assert(login.password === login.confirm, () => new BadRequestException('Passwords do not match'));
-
-    const count = await this._dal.count(Collections.Users).filter(filter).run();
+  public async create(@Body() login: ZUserCreateDto): Promise<IZUser> {
+    const count = await this._dal.count(Collections.Users).filter({ email: login.email }).run();
     ZHttpAssert.assert(count === 0, () => new ConflictException('User email is already taken.'));
 
     const total = await this._dal.count(Collections.Users).run();
@@ -98,37 +90,29 @@ export class ZUsersController {
    * @throws ConflictException If the name of the user changes and there is already another user with the same name.
    */
   @Put(':id')
-  public async update(@Param() params: { id: string }, @Body() login: Partial<IZLogin>): Promise<IZUser> {
-    const pid = params.id;
-
-    const idFilter = { _id: pid };
-    const currentBlobs = await this._dal.read<IZUser>(Collections.Users).filter(idFilter).run();
-    ZHttpAssert.assert(currentBlobs.length > 0, () => new NotFoundException());
+  public async update(@Param() { id }: { id: string }, @Body() login: ZUserUpdateDto): Promise<IZUser> {
+    const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
+    ZHttpAssert.assert(!!user, () => new NotFoundException(`User with id, ${id}, was not found.`));
 
     const template: Partial<IZUser> = {};
 
     if (login.email) {
-      const emailFilter = { email: login.email, _id: { $ne: pid } };
+      const emailFilter = { email: login.email, _id: { $ne: id } };
       const count = await this._dal.count(Collections.Users).filter(emailFilter).run();
-      ZHttpAssert.assert(count === 0, () => new ConflictException('User name is not available.'));
+      ZHttpAssert.assert(count === 0, () => new ConflictException('User email is not available.'));
       template.email = login.email;
     }
 
-    if (login.password || login.confirm) {
-      ZHttpAssert.assert(!!login.password, () => new BadRequestException('Password is required'));
-      ZHttpAssert.assert(!!login.confirm, () => new BadRequestException('Password confirmation is required'));
-      ZHttpAssert.assert(login.password === login.confirm, () => new BadRequestException('Passwords do not match.'));
+    if (login.password) {
       template.password = await hash(login.password, BcryptRounds);
     }
 
     if (!template.email && !template.password) {
-      const current = currentBlobs[0];
-      return new ZUserBuilder().copy(current).redact().build();
+      return new ZUserBuilder().copy(user).redact().build();
     }
 
-    await this._dal.update<IZUser>(Collections.Users, template).filter(idFilter).run();
-    const updatedBlobs = await this._dal.read<IZUser>(Collections.Users).filter(idFilter).run();
-    const updated = updatedBlobs[0];
+    await this._dal.update<IZUser>(Collections.Users, template).filter({ _id: id }).run();
+    const [updated] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     return new ZUserBuilder().copy(updated).redact().build();
   }
 

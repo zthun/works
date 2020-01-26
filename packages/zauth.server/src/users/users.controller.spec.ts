@@ -1,12 +1,14 @@
-import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { compare, hash } from 'bcryptjs';
+import { plainToClass } from 'class-transformer';
 import { v4 } from 'uuid';
 import { ZAuthService } from '../auth/auth.service';
 import { Collections } from '../common/collections.enum';
 import { BcryptRounds } from '../common/crypt.constants';
 import { ZGroupUserBuilder } from '../common/group-user-builder.class';
+import { ZUserCreateDto } from './user-create.dto';
 import { ZUsersController } from './users.controller';
 
 describe('ZUsersController', () => {
@@ -42,9 +44,7 @@ describe('ZUsersController', () => {
 
   describe('List', () => {
     beforeEach(async () => {
-      const blobs = await dal.create(Collections.Users, [userA, userB]).run();
-      userA = blobs[0];
-      userB = blobs[1];
+      [userA, userB] = await dal.create(Collections.Users, [userA, userB]).run();
     });
 
     it('returns all users.', async () => {
@@ -60,15 +60,14 @@ describe('ZUsersController', () => {
 
   describe('Create', () => {
     beforeEach(async () => {
-      const blobs = await dal.create(Collections.Users, [userB]).run();
-      userB = blobs[0];
+      [userB] = await dal.create(Collections.Users, [userB]).run();
     });
 
     it('creates a user.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const created = await target.create(loginA);
+      const created = await target.create(plainToClass(ZUserCreateDto, loginA));
       const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
       // Assert
       expect(actual._id).toBeTruthy();
@@ -80,7 +79,7 @@ describe('ZUsersController', () => {
       const target = createTestTarget();
       await dal.delete(Collections.Users).run();
       // Act
-      const created = await target.create(loginA);
+      const created = await target.create(plainToClass(ZUserCreateDto, loginA));
       const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
       const actual = actualBlobs[0];
       // Assert
@@ -93,7 +92,7 @@ describe('ZUsersController', () => {
       const admin = ZAuthService.constructSystemGroupAdministrators();
       await dal.delete(Collections.Users).run();
       // Act
-      const created = await target.create(loginA);
+      const created = await target.create(plainToClass(ZUserCreateDto, loginA));
       const expected = new ZGroupUserBuilder().group(admin).user(created).redact().build();
       const [actual] = await dal.read<IZUser>(Collections.GroupsUsers).filter({ _id: expected._id }).run();
       // Assert
@@ -104,7 +103,7 @@ describe('ZUsersController', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const created = await target.create(loginA);
+      const created = await target.create(plainToClass(ZUserCreateDto, loginA));
       const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
       const actual = actualBlobs[0];
       // Assert
@@ -115,7 +114,7 @@ describe('ZUsersController', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const created = await target.create(loginA);
+      const created = await target.create(plainToClass(ZUserCreateDto, loginA));
       // Assert
       expect(created.password).toBeFalsy();
     });
@@ -124,7 +123,7 @@ describe('ZUsersController', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const created = await target.create(loginA);
+      const created = await target.create(plainToClass(ZUserCreateDto, loginA));
       const actualBlobs = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
       const actual = actualBlobs[0];
       const same = await compare(loginA.password, actual.password);
@@ -137,34 +136,7 @@ describe('ZUsersController', () => {
       const target = createTestTarget();
       // Act
       // Assert
-      await expect(target.create(loginB)).rejects.toBeInstanceOf(ConflictException);
-    });
-
-    it('throws a BadRequestException if the user has no email.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      delete loginA.email;
-      // Act
-      // Assert
-      await expect(target.create(loginA)).rejects.toBeInstanceOf(BadRequestException);
-    });
-
-    it('throws a BadRequestException if the user has no password.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      delete loginA.password;
-      // Act
-      // Assert
-      await expect(target.create(loginA)).rejects.toBeInstanceOf(BadRequestException);
-    });
-
-    it('throws a BadRequestException if the user has a password that is not confirmed.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      loginA.confirm = '';
-      // Act
-      // Assert
-      await expect(target.create(loginA)).rejects.toBeInstanceOf(BadRequestException);
+      await expect(target.create(plainToClass(ZUserCreateDto, loginB))).rejects.toBeInstanceOf(ConflictException);
     });
   });
 
@@ -256,33 +228,6 @@ describe('ZUsersController', () => {
       // Act
       // Assert
       await expect(target.update({ id: userA._id }, template)).rejects.toBeInstanceOf(ConflictException);
-    });
-
-    it('throws a BadRequestException if the confirm is set but the password is not.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      const template = { confirm: 'super-password' };
-      // Act
-      // Assert
-      await expect(target.update({ id: userA._id }, template)).rejects.toBeInstanceOf(BadRequestException);
-    });
-
-    it('throws a BadRequestException if the password is set but the confirm is not.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      const template = { password: 'super-password' };
-      // Act
-      // Assert
-      await expect(target.update({ id: userA._id }, template)).rejects.toBeInstanceOf(BadRequestException);
-    });
-
-    it('throws a BadRequestException if the password does not match the confirm.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      const template = { password: 'super-password', confirm: 'super' };
-      // Act
-      // Assert
-      await expect(target.update({ id: userA._id }, template)).rejects.toBeInstanceOf(BadRequestException);
     });
 
     it('throws a NotFoundException if there is no id to update.', async () => {
