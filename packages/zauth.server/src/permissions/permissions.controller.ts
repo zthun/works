@@ -1,14 +1,16 @@
-import { Body, ConflictException, Controller, Delete, ForbiddenException, Get, Inject, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { Body, ConflictException, Controller, Delete, ForbiddenException, Get, Inject, NotFoundException, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { IZPermission, ZPermissionBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { Collections } from '../common/collections.enum';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
+import { ZTokensGuard } from '../tokens/tokens.guard';
 import { ZExceptionFactory } from '../validation/exception-factory.class';
 import { ZPermissionCreateDto } from './permission-create.dto';
 import { ZPermissionUpdateDto } from './permission-update.dto';
 
 @Controller('permissions')
+@UseGuards(ZTokensGuard)
 export class ZPermissionsController {
 
   public constructor(@Inject(DatabaseToken) private readonly _dal: IZDatabase) { }

@@ -11,6 +11,7 @@ import { ZPermissionsController } from '../permissions/permissions.controller';
 import { ZTokensController } from '../tokens/tokens.controller';
 import { ZUsersController } from '../users/users.controller';
 import { ZAuthService } from './auth.service';
+import { ZTokensGuard } from '../tokens/tokens.guard';
 
 @Module({
   controllers: [
@@ -29,7 +30,8 @@ import { ZAuthService } from './auth.service';
     },
     ZOauthPasswordService,
     ZOauthServerService,
-    ZAuthService
+    ZAuthService,
+    ZTokensGuard
   ]
 })
 export class ZAuthModule implements OnModuleInit {

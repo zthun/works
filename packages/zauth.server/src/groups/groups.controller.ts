@@ -1,13 +1,15 @@
-import { Body, ConflictException, Controller, Delete, ForbiddenException, Get, Inject, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { Body, ConflictException, Controller, Delete, ForbiddenException, Get, Inject, NotFoundException, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { IZGroup, ZGroupBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { Collections } from '../common/collections.enum';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
+import { ZTokensGuard } from '../tokens/tokens.guard';
 import { ZGroupCreateDto } from './group-create.dto';
 import { ZGroupUpdateDto } from './group-update.dto';
 
 @Controller('groups')
+@UseGuards(ZTokensGuard)
 export class ZGroupsController {
 
   public constructor(@Inject(DatabaseToken) private readonly _dal: IZDatabase) { }

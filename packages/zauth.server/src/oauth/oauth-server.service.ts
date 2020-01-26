@@ -44,4 +44,11 @@ export class ZOauthServerService {
     });
     return this._server.token(oreq, new Response());
   }
+
+  public validate(token: string) {
+    const oreq = new Request({
+      headers: { Authorization: token }
+    });
+    return this._server.authenticate(oreq, new Response());
+  }
 }

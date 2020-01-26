@@ -94,16 +94,6 @@ describe('ZTokensController', () => {
     });
   });
 
-  describe('Read/Verify', () => {
-    it('TBD', () => {
-      // Arrange
-      const target = createTestTarget();
-      // Act
-      // Assert
-      expect(() => target.read()).toThrow();
-    });
-  });
-
   describe('Update/Refresh', () => {
     it('TBD', () => {
       // Arrange

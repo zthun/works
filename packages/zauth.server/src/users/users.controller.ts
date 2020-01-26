@@ -1,4 +1,4 @@
-import { BadRequestException, Body, ConflictException, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { Body, ConflictException, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { IZUser, ZAuthSystemGroup, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { hash } from 'bcryptjs';
@@ -7,6 +7,7 @@ import { BcryptRounds } from '../common/crypt.constants';
 import { ZGroupUserBuilder } from '../common/group-user-builder.class';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DatabaseToken } from '../common/injection.constants';
+import { ZTokensGuard } from '../tokens/tokens.guard';
 import { ZUserCreateDto } from './user-create.dto';
 import { ZUserUpdateDto } from './user-update.dto';
 
@@ -29,6 +30,7 @@ export class ZUsersController {
    * @return A promise that, when resolved, has returned all users.
    */
   @Get()
+  @UseGuards(ZTokensGuard)
   public async list(): Promise<IZUser[]> {
     const users = await this._dal.read<IZUser>(Collections.Users).run();
     return users.map((user) => new ZUserBuilder().copy(user).redact().build());
@@ -44,6 +46,7 @@ export class ZUsersController {
    * @throws NotFoundException If the user does not exist.
    */
   @Get(':id')
+  @UseGuards(ZTokensGuard)
   public async read(@Param() { id }: { id: string }): Promise<IZUser> {
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     ZHttpAssert.assert(!!user, () => new NotFoundException());
@@ -90,6 +93,7 @@ export class ZUsersController {
    * @throws ConflictException If the name of the user changes and there is already another user with the same name.
    */
   @Put(':id')
+  @UseGuards(ZTokensGuard)
   public async update(@Param() { id }: { id: string }, @Body() login: ZUserUpdateDto): Promise<IZUser> {
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     ZHttpAssert.assert(!!user, () => new NotFoundException(`User with id, ${id}, was not found.`));
@@ -126,6 +130,7 @@ export class ZUsersController {
    * @throws NotFoundException If no user with the given id exists.
    */
   @Delete(':id')
+  @UseGuards(ZTokensGuard)
   public async remove(@Param() { id }: { id: string }): Promise<IZUser> {
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     ZHttpAssert.assert(!!user, () => new NotFoundException());

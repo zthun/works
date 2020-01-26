@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, NotImplementedException, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotImplementedException, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { IZToken, ZTokenBuilder } from '@zthun/auth.core';
 import { Response } from 'express';
 import { ZOauthServerService } from '../oauth/oauth-server.service';
 import { ZTokenCreateDto } from './token-create.dto.class';
+import { ZTokensGuard } from './tokens.guard';
 
 @Controller('tokens')
 export class ZTokensController {
@@ -12,17 +13,6 @@ export class ZTokensController {
    * @param _oauth: The oauth service.
    */
   public constructor(private readonly _oauth: ZOauthServerService) { }
-
-  /**
-   * Validates a token from the Authorization cookie.
-   *
-   * @returns A promise that, when resolved has found a NON EXPIRED token.  An expired token,
-   *          a non existant token, or a token that doesn't belong to the user will result in a 401.
-   */
-  @Get()
-  public read(): Promise<IZToken> {
-    throw new NotImplementedException();
-  }
 
   /**
    * Creates a new token.
@@ -51,6 +41,7 @@ export class ZTokensController {
    *          with a 401 error.
    */
   @Put()
+  @UseGuards(ZTokensGuard)
   public update(): Promise<IZToken> {
     throw new NotImplementedException();
   }
@@ -61,6 +52,7 @@ export class ZTokensController {
    * This is the same as logout.
    */
   @Delete()
+  @UseGuards(ZTokensGuard)
   public remove(): Promise<IZToken> {
     throw new NotImplementedException();
   }
