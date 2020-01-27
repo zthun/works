@@ -9,9 +9,9 @@ import { ZOauthPasswordService } from '../oauth/oauth-password.service';
 import { ZOauthServerService } from '../oauth/oauth-server.service';
 import { ZPermissionsController } from '../permissions/permissions.controller';
 import { ZTokensController } from '../tokens/tokens.controller';
+import { ZTokensGuard } from '../tokens/tokens.guard';
 import { ZUsersController } from '../users/users.controller';
 import { ZAuthService } from './auth.service';
-import { ZTokensGuard } from '../tokens/tokens.guard';
 
 @Module({
   controllers: [
