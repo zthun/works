@@ -55,18 +55,18 @@ describe('ZExceptionFactory', () => {
       // Arrange
       // Act
       const error = ZExceptionFactory.messageOnly([badA, badB]);
-      const actual = error.message.message as string[];
+      const actual = error.getResponse() as any;
       // Assert
-      expect(actual.sort()).toEqual(['Bad A', 'Bad B', 'Bad C']);
+      expect(actual.message.sort()).toEqual(['Bad A', 'Bad B', 'Bad C']);
     });
 
     it('returns just a string if there is only one message.', () => {
       // Arrange
       // Act
       const error = ZExceptionFactory.messageOnly([badA]);
-      const actual = error.message.message;
+      const actual = error.getResponse() as any;
       // Assert
-      expect(actual).toEqual('Bad A');
+      expect(actual.message).toEqual('Bad A');
     });
   });
 });

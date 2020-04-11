@@ -44,7 +44,7 @@ function config(env) {
       port: 4200,
       disableHostCheck: true
     }
-  }
+  };
 
   if (env.production) {
     cfg.mode = 'production';

@@ -3,17 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist",
+    "sourceMap": true,
     "paths": {
-      "@zthun/auth.core": [
-        "../zauth.core/src/index"
-      ]
+      "@zthun/auth.core": ["../zauth.core/src/index"]
     }
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/**/*.spec.ts"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "src/**/*.spec.ts"]
 }

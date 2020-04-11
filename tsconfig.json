@@ -6,16 +6,9 @@
     "inlineSourceMap": true,
     "target": "esnext",
     "paths": {
-      "@zthun/auth.core": [
-        "zauth.core/src/index"
-      ]
+      "@zthun/auth.core": ["zauth.core/src/index"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "**/node_modules/**"
-  ]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["**/node_modules/**"]
 }
