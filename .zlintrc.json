@@ -1,26 +1,9 @@
 {
   "tsConfig": "./tslint.json",
-  "esFiles": [
-    "*.js"
-  ],
-  "tsFiles": [
-    "packages/zauth.client/src/**/*.ts",
-    "packages/zauth.core/src/**/*.ts",
-    "packages/zauth.server/src/**/*.ts"
-  ],
-  "lessFiles": [
-    "packages/zauth.theme/**/*.less"
-  ],
-  "htmlFiles": [
-    "packages/zauth.client/src/**/*.html"
-  ],
-  "jsonFiles": [
-    "*.json",
-    "packages/zauth.client/*.json",
-    "packages/zauth.core/*.json",
-    "packages/zauth.server/*.json"
-  ],
-  "yamlFiles": [
-    "./*.yml"
-  ]
+  "esFiles": ["packages/**/*.js"],
+  "tsFiles": ["packages/zauth.client/src/**/*.ts", "packages/zauth.core/src/**/*.ts", "packages/zauth.server/src/**/*.ts"],
+  "lessFiles": ["packages/zauth.theme/**/*.less"],
+  "htmlFiles": ["packages/zauth.client/src/**/*.html"],
+  "jsonFiles": ["*.json", "packages/zauth.client/*.json", "packages/zauth.core/*.json", "packages/zauth.server/*.json"],
+  "yamlFiles": ["./*.yml"]
 }

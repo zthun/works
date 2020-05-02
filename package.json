@@ -16,9 +16,9 @@
   ],
   "scripts": {
     "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz",
-    "test": "jest --coverage --runInBand --forceExit",
+    "test": "lerna run test",
     "lint": "zlint",
-    "build": "lerna run build --stream",
+    "build": "lerna run build",
     "make": "yarn clean && yarn lint && yarn test && yarn build",
     "debug:client": "yarn --cwd packages/zauth.client run debug",
     "debug:server": "yarn --cwd packages/zauth.server run debug"

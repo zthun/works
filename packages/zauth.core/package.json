@@ -12,7 +12,8 @@
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
   "scripts": {
-    "build": "tsc -p ./tsconfig.cjs.json && tsc -p ./tsconfig.esm.json"
+    "build": "tsc -p ./tsconfig.cjs.json && tsc -p ./tsconfig.esm.json",
+    "test": "jest --coverage"
   },
   "publishConfig": {
     "access": "public"

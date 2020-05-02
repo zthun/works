@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "webpack --env.production && npm pack",
+    "test": "jest --coverage",
     "debug": "webpack-dev-server --env.development --host 0.0.0.0"
   },
   "author": "Anthony Bonta",

@@ -14,6 +14,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.prod.json && npm pack",
+    "test": "jest --coverage --runInBand --forceExit",
     "debug": "nodemon",
     "start": "node ./dist/main.js"
   },

@@ -2,10 +2,10 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist/esm5",
+    "outDir": "dist",
     "declaration": false,
-    "module": "es2015",
     "sourceMap": true,
+    "jsx": "react",
     "paths": {
       "@zthun/auth.core": ["../zauth.core/src/index"]
     }
