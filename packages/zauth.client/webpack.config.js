@@ -1,6 +1,7 @@
 const path = require('path');
 const pkg = require('./package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 function config(env) {
   const dir = path.resolve(__dirname, path.dirname(pkg.browser));
@@ -13,7 +14,8 @@ function config(env) {
       filename: file
     },
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx']
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      plugins: [new TsconfigPathsPlugin()]
     },
     module: {
       rules: [
@@ -49,6 +51,7 @@ function config(env) {
   if (env.production) {
     cfg.mode = 'production';
     delete cfg.devtool;
+    delete cfg.resolve.plugins;
     delete cfg.optimization;
     delete cfg.devServer;
   }

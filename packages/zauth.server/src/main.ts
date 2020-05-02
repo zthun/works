@@ -11,6 +11,7 @@ import { ZExceptionFactory } from './validation/exception-factory.class';
 export class ZMainModule {
   public static async run() {
     const app = await NestFactory.create(ZMainModule);
+    app.setGlobalPrefix('api');
     app.useGlobalPipes(new ValidationPipe({ exceptionFactory: ZExceptionFactory.messageOnly }));
     await app.listen(3000);
   }

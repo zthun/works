@@ -8,7 +8,7 @@ export function ZNewUserPage() {
   const history = useHistory();
 
   async function handleCreate(login: IZLogin): Promise<void> {
-    const newUserUrl = new ZUrlBuilder().location().subdomain('api').append('users').build();
+    const newUserUrl = new ZUrlBuilder().location().append('api').append('users').hash('').build();
     const user = await Axios.post<IZUser>(newUserUrl, login);
 
     if (user.status !== 200) {

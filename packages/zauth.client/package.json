@@ -20,5 +20,8 @@
   "files": [
     "dist/**"
   ],
+  "devDependencies": {
+    "@zthun/auth.core": "link:../zauth.core"
+  },
   "sideEffects": false
 }
