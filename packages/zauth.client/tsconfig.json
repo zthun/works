@@ -5,7 +5,6 @@
     "outDir": "dist",
     "declaration": false,
     "sourceMap": true,
-    "jsx": "react",
     "paths": {
       "@zthun/auth.core": ["../zauth.core/src/index"]
     }

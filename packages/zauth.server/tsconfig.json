@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "outDir": "dist",
     "sourceMap": true,
+    "module": "commonjs",
     "paths": {
       "@zthun/auth.core": ["../zauth.core/src/index"]
     }

@@ -13,7 +13,7 @@
     "zauth-server": "./dist/main.js"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.prod.json && npm pack",
+    "build": "tsc -p tsconfig.prod.json",
     "debug": "nodemon",
     "start": "node ./dist/main.js"
   },
