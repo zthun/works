@@ -17,7 +17,8 @@
     "dist/**"
   ],
   "devDependencies": {
-    "@zthun/auth.core": "link:../auth.core"
+    "@zthun/auth.core": "link:../auth.core",
+    "@zthun/auth.theme": "link:../auth.theme"
   },
   "sideEffects": false
 }
