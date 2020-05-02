@@ -1,9 +1,9 @@
 {
   "tsConfig": "./tslint.json",
-  "esFiles": ["packages/**/*.js"],
+  "esFiles": ["packages/auth.client/*.js"],
   "tsFiles": ["packages/auth.client/src/**/*.ts", "packages/auth.core/src/**/*.ts", "packages/auth.server/src/**/*.ts"],
   "lessFiles": ["packages/auth.theme/**/*.less"],
   "htmlFiles": ["packages/auth.client/src/**/*.html"],
-  "jsonFiles": ["*.json", "packages/auth.client/*.json", "packages/auth.core/*.json", "packages/auth.server/*.json"],
+  "jsonFiles": ["*.json", "packages/auth.theme/*.json", "packages/auth.client/*.json", "packages/auth.core/*.json", "packages/auth.server/*.json"],
   "yamlFiles": ["./*.yml"]
 }
