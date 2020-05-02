@@ -6,7 +6,8 @@
     "declaration": false,
     "sourceMap": true,
     "paths": {
-      "@zthun/auth.core": ["../auth.core/src/index"]
+      "@zthun/auth.core": ["../auth.core/src/index"],
+      "@zthun/auth.theme": ["../auth.theme"]
     }
   },
   "include": ["src/**/*.tsx"],

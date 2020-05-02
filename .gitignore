@@ -1,3 +1,4 @@
+# General conventions
 node_modules
 dist
 coverage
@@ -7,3 +8,6 @@ reports
 *.log
 *.tgz
 .rpt2_cache
+
+# Specific packages
+packages/auth.theme/css

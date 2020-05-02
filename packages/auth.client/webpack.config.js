@@ -21,7 +21,10 @@ function config(env) {
       rules: [
         {
           test: /\.tsx?$/,
-          use: ['awesome-typescript-loader']
+          loader: 'awesome-typescript-loader',
+          options: {
+            configFileName: env.production ? 'tsconfig.prod.json' : 'tsconfig.json'
+          }
         },
         {
           test: /\.less$/,
@@ -51,7 +54,6 @@ function config(env) {
   if (env.production) {
     cfg.mode = 'production';
     delete cfg.devtool;
-    delete cfg.resolve.plugins;
     delete cfg.optimization;
     delete cfg.devServer;
   }

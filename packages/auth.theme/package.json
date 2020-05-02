@@ -1,0 +1,27 @@
+{
+  "name": "@zthun/auth.theme",
+  "version": "1.0.0-5",
+  "description": "The core package for styles and themes for the @zthun/auth platform.",
+  "author": "Anthony Bonta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zthun/zauth"
+  },
+  "css": "less/index.min.css",
+  "less": "less/index.less",
+  "scripts": {
+    "build:mincss": "cleancss -o css/index.min.css css/index.css",
+    "build:postcss": "postcss -o css/index.css css/index.css",
+    "build:css": "lessc less/index.less css/index.css",
+    "build": "yarn build:css && yarn build:mincss"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "less",
+    "css"
+  ],
+  "sideEffects": true
+}
