@@ -5,10 +5,9 @@
     "module": "esnext",
     "inlineSourceMap": true,
     "target": "esnext",
+    "jsx": "react",
     "paths": {
-      "@zthun/auth.core": ["zauth.core/src/index"],
-      "@zthun/auth.server": ["zauth.server/src/index"],
-      "@zthun/auth.client": ["zauth.client/src/index"]
+      "@zthun/auth.core": ["zauth.core/src/index"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
