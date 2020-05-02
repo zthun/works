@@ -15,7 +15,7 @@ export class ZUrlBuilder {
     sftp: 22,
     ssh: 22,
     smtp: 25,
-    smb: 445,
+    smb: 445
   };
 
   /**
@@ -46,14 +46,14 @@ export class ZUrlBuilder {
    * The representation of the url object.
    */
   private readonly _url: {
-    protocol: string,
-    username: string,
-    password: string,
-    hostname: string,
-    port: number,
-    path: string[],
-    hash: string,
-    params: Array<{ key: string, val: string }>
+    protocol: string;
+    username: string;
+    password: string;
+    hostname: string;
+    port: number;
+    path: string[];
+    hash: string;
+    params: Array<{ key: string; val: string }>;
   };
 
   /**
@@ -98,6 +98,22 @@ export class ZUrlBuilder {
     }
 
     return this;
+  }
+
+  /**
+   * Fills the information for an api path call.
+   *
+   * This is a combination of location, hash with an empty string, and an
+   * append of the basePath.
+   *
+   * @param loc The optional location object to populate with.
+   * @param basePath The basePath for the api.  Generally, it's best to just keep this as api and
+   * have your server accept this path.
+   *
+   * @returns This object.
+   */
+  public api(loc: Location = location, basePath = 'api'): this {
+    return this.location(location).hash('').path(basePath);
   }
 
   /**

@@ -1,12 +1,29 @@
 import { ZUrlBuilder } from './url-builder.class';
 
 describe('ZUrlBuilder', () => {
+  let loc: Location;
   let protocol: string;
-  let host: string;
+  let hostname: string;
 
   beforeEach(() => {
     protocol = 'https';
-    host = 'facebook.com';
+    hostname = 'facebook.com';
+
+    loc = {
+      ancestorOrigins: null,
+      hash: '',
+      host: '',
+      hostname,
+      href: '',
+      origin: '',
+      pathname: '',
+      port: '',
+      protocol,
+      search: '',
+      assign: jest.fn(),
+      reload: jest.fn(),
+      replace: jest.fn()
+    };
   });
 
   function createTestTarget() {
@@ -15,7 +32,7 @@ describe('ZUrlBuilder', () => {
 
   function assertBuildsUrl(expected: string, buildFn: (target: ZUrlBuilder) => ZUrlBuilder) {
     // Arrange
-    const target = new ZUrlBuilder(protocol, host);
+    const target = new ZUrlBuilder(protocol, hostname);
     // Act
     const actual = buildFn(target).build();
     // Assert
@@ -24,12 +41,12 @@ describe('ZUrlBuilder', () => {
 
   describe('Parts', () => {
     it('sets the correct protocol.', () => {
-      const expected = `${protocol}://${host}`;
+      const expected = `${protocol}://${hostname}`;
       assertBuildsUrl(expected, (t) => t.protocol(protocol));
     });
 
     it('cleans the protocol.', () => {
-      const expected = `${protocol}://${host}`;
+      const expected = `${protocol}://${hostname}`;
       assertBuildsUrl(expected, (t) => t.protocol(`${protocol}://`));
     });
 
@@ -39,47 +56,47 @@ describe('ZUrlBuilder', () => {
     });
 
     it('cleans the host.', () => {
-      const expected = `${protocol}://${host}`;
-      assertBuildsUrl(expected, (t) => t.hostname(`////////${host}////`));
+      const expected = `${protocol}://${hostname}`;
+      assertBuildsUrl(expected, (t) => t.hostname(`////////${hostname}////`));
     });
 
     it('sets the correct path.', () => {
-      const expected = `${protocol}://${host}/a/b/c/d`;
+      const expected = `${protocol}://${hostname}/a/b/c/d`;
       assertBuildsUrl(expected, (t) => t.append('a/b').append('/c/d/'));
     });
 
     it('cleans the path.', () => {
-      const expected = `${protocol}://${host}/a/b/c/d`;
+      const expected = `${protocol}://${hostname}/a/b/c/d`;
       assertBuildsUrl(expected, (t) => t.append('////a/b/////').append('c').append('/d///'));
     });
 
     it('sets the hash.', () => {
-      const expected = `${protocol}://${host}/a/b#abcd`;
+      const expected = `${protocol}://${hostname}/a/b#abcd`;
       assertBuildsUrl(expected, (t) => t.append('/a/b').hash('abcd'));
     });
 
     it('sets the port.', () => {
-      const expected = `${protocol}://${host}:8080`;
+      const expected = `${protocol}://${hostname}:8080`;
       assertBuildsUrl(expected, (t) => t.port(8080));
     });
 
     it('ignores port 0.', () => {
-      const expected = `http://${host}`;
+      const expected = `http://${hostname}`;
       assertBuildsUrl(expected, (t) => t.protocol('http').port(0));
     });
 
     it('ignores default ports.', () => {
-      const expected = `http://${host}`;
+      const expected = `http://${hostname}`;
       assertBuildsUrl(expected, (t) => t.protocol('http').port(80));
     });
 
     it('adds the search.', () => {
-      const expected = `${protocol}://${host}/?paramA=a&paramB=b`;
+      const expected = `${protocol}://${hostname}/?paramA=a&paramB=b`;
       assertBuildsUrl(expected, (t) => t.param('paramA', 'a').param('paramB', 'b'));
     });
 
     it('adds a subdomain.', () => {
-      const expected = `${protocol}://mail.${host}`;
+      const expected = `${protocol}://mail.${hostname}`;
       assertBuildsUrl(expected, (t) => t.subdomain('mail'));
     });
 
@@ -90,22 +107,22 @@ describe('ZUrlBuilder', () => {
 
     it('encodes the parameter values.', () => {
       const valA = 'ab&cd&e//fg';
-      const expected = `${protocol}://${host}/?paramA=${encodeURIComponent(valA)}`;
+      const expected = `${protocol}://${hostname}/?paramA=${encodeURIComponent(valA)}`;
       assertBuildsUrl(expected, (t) => t.param('paramA', valA));
     });
 
     it('sets the user.', () => {
-      const expected = `${protocol}://user@${host}`;
+      const expected = `${protocol}://user@${hostname}`;
       assertBuildsUrl(expected, (t) => t.username('user'));
     });
 
     it('sets the password.', () => {
-      const expected = `${protocol}://user:password@${host}`;
+      const expected = `${protocol}://user:password@${hostname}`;
       assertBuildsUrl(expected, (t) => t.username('user').password('password'));
     });
 
     it('ignores the password if the user is not set.', () => {
-      const expected = `${protocol}://${host}`;
+      const expected = `${protocol}://${hostname}`;
       assertBuildsUrl(expected, (t) => t.password('password'));
     });
   });
@@ -137,18 +154,7 @@ describe('ZUrlBuilder', () => {
       const expected = 'http://user:password@mail.google.com:9099/a/b/c/?valA=c&valB=d#h32';
       const target = createTestTarget();
       // Act
-      const actual = target.parse(url)
-        .protocol('http')
-        .port(9099)
-        .path('a')
-        .append('b/c')
-        .param('valA', 'c')
-        .param('valB', 'd')
-        .hash('h32')
-        .username('user')
-        .password('password')
-        .subdomain('mail')
-        .build();
+      const actual = target.parse(url).protocol('http').port(9099).path('a').append('b/c').param('valA', 'c').param('valB', 'd').hash('h32').username('user').password('password').subdomain('mail').build();
       // Assert
       expect(actual).toEqual(expected);
     });
@@ -166,26 +172,6 @@ describe('ZUrlBuilder', () => {
   });
 
   describe('Location', () => {
-    let loc: Location;
-
-    beforeEach(() => {
-      loc = {
-        ancestorOrigins: null,
-        hash: '',
-        host: '',
-        hostname: 'localhost',
-        href: '',
-        origin: '',
-        pathname: '',
-        port: '',
-        protocol: 'https',
-        search: '',
-        assign: jest.fn(),
-        reload: jest.fn(),
-        replace: jest.fn()
-      };
-    });
-
     it('initializes with the default location.', () => {
       // Arrange
       const target = createTestTarget();
@@ -203,6 +189,26 @@ describe('ZUrlBuilder', () => {
       const actual = target.location(loc).build();
       // Assert
       expect(actual.endsWith('a=b')).toBeTruthy();
+    });
+  });
+
+  describe('API', () => {
+    it('initializes with the default parameters.', () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = target.api().build();
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('replaces the path with the basePath', () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = target.api(loc, 'api').build();
+      // Assert
+      expect(actual.endsWith('api')).toBeTruthy();
     });
   });
 });
