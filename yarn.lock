@@ -2101,7 +2101,7 @@
     mkdirp-promise "^5.0.1"
     mz "^2.5.0"
 
-"@zthun/auth.core@link:packages/zauth.core":
+"@zthun/auth.core@link:packages/auth.core":
   version "1.0.0-5"
 
 "@zthun/dal@^2.0.0":

@@ -2,11 +2,7 @@
   "name": "@zthun/auth.client",
   "version": "1.0.0-5",
   "description": "A client application that can be used to login to auth.server application.",
-  "keywords": [
-    "oauth2",
-    "zauth"
-  ],
-  "browser": "./dist/zauth.client.min.js",
+  "browser": "./dist/auth.client.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/zauth"
@@ -21,7 +17,7 @@
     "dist/**"
   ],
   "devDependencies": {
-    "@zthun/auth.core": "link:../zauth.core"
+    "@zthun/auth.core": "link:../auth.core"
   },
   "sideEffects": false
 }

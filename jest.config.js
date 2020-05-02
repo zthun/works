@@ -12,7 +12,7 @@ module.exports = {
   },
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {
-    '@zthun/auth.core': '<rootDir>/zauth.core/src/index'
+    '@zthun/auth.core': '<rootDir>/auth.core/src/index'
   },
   globalSetup: '../jest.setup.js',
   globalTeardown: '../jest.teardown.js',

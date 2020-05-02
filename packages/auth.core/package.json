@@ -1,7 +1,7 @@
 {
   "name": "@zthun/auth.core",
   "version": "1.0.0-5",
-  "description": "The core share package in the zauth platform that shares source between the server and client.",
+  "description": "The core share package in the @zthun/auth platform that shares source between the server and client.",
   "author": "Anthony Bonta",
   "license": "MIT",
   "repository": {

@@ -1,9 +1,9 @@
 {
   "tsConfig": "./tslint.json",
   "esFiles": ["packages/**/*.js"],
-  "tsFiles": ["packages/zauth.client/src/**/*.ts", "packages/zauth.core/src/**/*.ts", "packages/zauth.server/src/**/*.ts"],
-  "lessFiles": ["packages/zauth.theme/**/*.less"],
-  "htmlFiles": ["packages/zauth.client/src/**/*.html"],
-  "jsonFiles": ["*.json", "packages/zauth.client/*.json", "packages/zauth.core/*.json", "packages/zauth.server/*.json"],
+  "tsFiles": ["packages/auth.client/src/**/*.ts", "packages/auth.core/src/**/*.ts", "packages/auth.server/src/**/*.ts"],
+  "lessFiles": ["packages/auth.theme/**/*.less"],
+  "htmlFiles": ["packages/auth.client/src/**/*.html"],
+  "jsonFiles": ["*.json", "packages/auth.client/*.json", "packages/auth.core/*.json", "packages/auth.server/*.json"],
   "yamlFiles": ["./*.yml"]
 }

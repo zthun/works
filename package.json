@@ -10,9 +10,9 @@
     "url": "https://github.com/zthun/zauth"
   },
   "workspaces": [
-    "packages/zauth.core",
-    "packages/zauth.client",
-    "packages/zauth.server"
+    "packages/auth.core",
+    "packages/auth.client",
+    "packages/auth.server"
   ],
   "scripts": {
     "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz",

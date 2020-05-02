@@ -10,15 +10,17 @@ import { ZOauthPasswordService } from './oauth-password.service';
 describe('ZOauthPasswordService', () => {
   const token = v4();
   const userid = v4();
-  const email = 'test-user@zauth.com';
+  const email = 'test-user@zthunworks.com';
   const password = 'not-very-secure-password';
   let dal: IZDatabase;
 
   beforeAll(async () => {
     dal = ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('outh-password-service-test').build());
     const crypted = await hash(password, BcryptRounds);
-    const user = new ZUserBuilder().email('test-user@zauth.com').password(crypted).id(userid).build();
-    await dal.create<IZUser>(Collections.Users, [user]).run();
+    const user = new ZUserBuilder().email('test-user@zthunworks.com').password(crypted).id(userid).build();
+    await dal
+      .create<IZUser>(Collections.Users, [user])
+      .run();
   });
 
   function createTestTarget() {
@@ -228,7 +230,10 @@ describe('ZOauthPasswordService', () => {
     it('throws a 401 exception if the user no longer exists.', async () => {
       // Arrange
       const target = createTestTarget();
-      await dal.update<IZToken>(Collections.Tokens, { userId: v4() }).filter({ _id: ztoken._id }).run();
+      await dal
+        .update<IZToken>(Collections.Tokens, { userId: v4() })
+        .filter({ _id: ztoken._id })
+        .run();
       // Act
       // Assert
       await expect(target.getAccessToken(ztoken._id, jest.fn())).rejects.toHaveProperty('status', 401);
