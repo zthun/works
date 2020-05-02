@@ -6,7 +6,9 @@
     "inlineSourceMap": true,
     "target": "esnext",
     "paths": {
-      "@zthun/auth.core": ["zauth.core/src/index"]
+      "@zthun/auth.core": ["zauth.core/src/index"],
+      "@zthun/auth.server": ["zauth.server/src/index"],
+      "@zthun/auth.client": ["zauth.client/src/index"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
