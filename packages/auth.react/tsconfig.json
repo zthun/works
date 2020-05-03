@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "sourceMap": false,
+    "declarationDir": "dist/types",
+    "paths": {
+      "@zthun/auth.core": ["../auth.core/src/index"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts"]
+}

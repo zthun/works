@@ -4,7 +4,8 @@
     "baseUrl": "packages",
     "target": "esnext",
     "paths": {
-      "@zthun/auth.core": ["auth.core/src/index"]
+      "@zthun/auth.core": ["auth.core/src/index"],
+      "@zthun/auth.react": ["auth.react/src/index"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

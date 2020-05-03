@@ -1,0 +1,33 @@
+{
+  "name": "@zthun/auth.react",
+  "version": "1.0.0-5",
+  "description": "A react component package that contains components for authentication management.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "browser": "./dist/auth.client.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zthun/zauth"
+  },
+  "scripts": {
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "build": "yarn build:cjs && yarn build:esm"
+  },
+  "author": "Anthony Bonta",
+  "license": "MIT",
+  "files": [
+    "dist/**"
+  ],
+  "peerDependencies": {
+    "@material-ui/core": "^4.3.3",
+    "@zthun/auth.core": "^1.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@zthun/auth.core": "link:../auth.core"
+  },
+  "sideEffects": false
+}

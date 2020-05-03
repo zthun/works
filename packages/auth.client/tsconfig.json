@@ -7,6 +7,7 @@
     "sourceMap": true,
     "paths": {
       "@zthun/auth.core": ["../auth.core/src/index"],
+      "@zthun/auth.react": ["../auth.react/src/index"],
       "@zthun/auth.theme": ["../auth.theme"]
     }
   },
