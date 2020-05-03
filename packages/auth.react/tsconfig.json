@@ -8,6 +8,6 @@
       "@zthun/auth.core": ["../auth.core/src/index"]
     }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/index.tsx"],
   "exclude": ["src/**/*.spec.ts"]
 }

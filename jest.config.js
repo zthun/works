@@ -1,19 +1,13 @@
+const { pathsToModuleNameMapper } = require('ts-jest/utils');
+const { compilerOptions } = require('./tsconfig.json');
+
 module.exports = {
-  globals: {
-    'ts-jest': {
-      tsConfig: './tsconfig.json'
-    }
-  },
-  rootDir: 'packages',
+  rootDir: compilerOptions.baseUrl,
   testTimeout: 60000,
   testRegex: '.spec.(ts|tsx)$',
-  transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest'
-  },
+  transform: { '^.+\\.(ts|tsx)$': 'ts-jest' },
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  moduleNameMapper: {
-    '@zthun/auth.core': '<rootDir>/auth.core/src/index'
-  },
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
   globalSetup: '../jest.setup.js',
   globalTeardown: '../jest.teardown.js',
   coverageDirectory: '../reports/coverage'
