@@ -5,14 +5,23 @@ import { ZLoginTabs } from './login-tabs';
 
 describe('ZLoginTabs', () => {
   let _target: ShallowWrapper;
+  let login: jasmine.Spy;
+  let create: jasmine.Spy;
+  let recover: jasmine.Spy;
 
   function createTestTarget() {
-    _target = shallow(<ZLoginTabs />);
+    _target = shallow(<ZLoginTabs login={login} create={create} recover={recover} />);
     return _target;
   }
 
   beforeAll(() => {
     configure({ adapter: new Adapter() });
+  });
+
+  beforeEach(() => {
+    login = jasmine.createSpy();
+    create = jasmine.createSpy();
+    recover = jasmine.createSpy();
   });
 
   afterEach(() => {
