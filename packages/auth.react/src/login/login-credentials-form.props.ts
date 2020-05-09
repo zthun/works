@@ -2,11 +2,15 @@ import { IZLogin } from '@zthun/auth.core';
 
 export interface IZLoginCredentialsFormProps {
   headerText: string;
-  actionText: string;
   subHeaderText: string;
+  actionText: string;
+  disabled: boolean;
+  loading: boolean;
 
-  hidePassword?: boolean;
-  hideConfirm?: boolean;
+  hideEmail: boolean;
+  hidePassword: boolean;
+  hideConfirm: boolean;
 
-  run(credentials: IZLogin): Promise<void>;
+  credentials: IZLogin;
+  onCredentialsChange(val: IZLogin): void;
 }
