@@ -1,25 +1,31 @@
 import { findIndex } from 'lodash';
+import { Subject } from 'rxjs';
+import { IZAlertStack } from './alert-stack.interface';
 import { IZAlert } from './alert.interface';
 
 /**
  * Represents an alert stack with support to auto remove the alerts.
  */
-export class ZAlertStack {
-  private _list: IZAlert[] = [];
+export class ZAlertStack implements IZAlertStack {
+  public _list: IZAlert[] = [];
+  public change = new Subject<IZAlert[]>();
+
+  /**
+   * Returns a copy of the current list.
+   *
+   * @returns A copy of the current list.
+   */
+  public get list() {
+    return this._list.slice();
+  }
 
   /**
    * Initializes a new instance of this object.
    *
-   * @param _max The maximum stack size.
+   *
+   * @param max The maximum stack size.
    */
-  public constructor(private _max: number = Infinity) {}
-
-  /**
-   * Returns the list.
-   */
-  public toArray(): IZAlert[] {
-    return this._list;
-  }
+  public constructor(public max: number = Infinity) {}
 
   /**
    * Adds an alert to the front of the list.
@@ -42,9 +48,11 @@ export class ZAlertStack {
       setTimeout(() => this.remove(_id), alert.timeToLive);
     }
 
-    while (this._list.length > this._max) {
+    while (this._list.length > this.max) {
       this._list.pop();
     }
+
+    this.change.next(this._list.slice());
 
     return true;
   }
@@ -65,6 +73,7 @@ export class ZAlertStack {
     }
 
     this._list.splice(index, 1);
+    this.change.next(this._list.slice());
     return true;
   }
 }

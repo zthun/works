@@ -56,9 +56,8 @@ describe('AlertStack', () => {
       target.add(warn);
       target.add(info);
       target.add(success);
-      const actual = target.toArray();
       // Assert
-      expect(actual).toEqual(expected);
+      expect(target.list).toEqual(expected);
     });
 
     it('removes all alerts beyond the max.', () => {
@@ -70,9 +69,8 @@ describe('AlertStack', () => {
       target.add(warn);
       target.add(info);
       target.add(success);
-      const actual = target.toArray();
       // Assert
-      expect(actual).toEqual(expected);
+      expect(target.list).toEqual(expected);
     });
 
     it('removes the added alert after the time to live.', () => {
@@ -81,9 +79,8 @@ describe('AlertStack', () => {
       // Act
       target.add(success);
       jest.advanceTimersByTime(success.timeToLive);
-      const actual = target.toArray();
       // Assert
-      expect(actual).toEqual([]);
+      expect(target.list).toEqual([]);
     });
 
     it('never removes the alert if the time to live is 0.', () => {
@@ -92,9 +89,8 @@ describe('AlertStack', () => {
       // Act
       target.add(warn);
       jest.advanceTimersByTime(60000);
-      const actual = target.toArray();
       // Assert
-      expect(actual).toEqual([warn]);
+      expect(target.list).toEqual([warn]);
     });
 
     it('never removes the alert if the time to live is Infinity.', () => {
@@ -105,9 +101,8 @@ describe('AlertStack', () => {
       target.add(error);
       target.add(info);
       jest.advanceTimersByTime(60000);
-      const actual = target.toArray();
       // Assert
-      expect(actual).toEqual([error]);
+      expect(target.list).toEqual([error]);
     });
   });
 
@@ -142,9 +137,8 @@ describe('AlertStack', () => {
       // Act
       target.remove(info);
       target.remove(warn);
-      const actual = target.toArray();
       // Assert
-      expect(actual).toEqual([error, success]);
+      expect(target.list).toEqual([error, success]);
     });
 
     it('does not remove an alert that does not exist.', () => {

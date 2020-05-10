@@ -17,7 +17,7 @@ export class ZAlertBuilder {
       severity: ZAlertSeverity.Success,
       message: '',
       header: null,
-      timeToLive: 3500
+      timeToLive: 6000
     };
   }
 
@@ -30,7 +30,6 @@ export class ZAlertBuilder {
    */
   public success(): this {
     this._alert.severity = ZAlertSeverity.Success;
-    this._alert.header = this._alert.header || ZAlertSeverity.Success.toUpperCase();
     return this;
   }
 
@@ -43,7 +42,6 @@ export class ZAlertBuilder {
    */
   public info(): this {
     this._alert.severity = ZAlertSeverity.Info;
-    this._alert.header = this._alert.header || ZAlertSeverity.Info.toUpperCase();
     return this;
   }
 
@@ -56,7 +54,6 @@ export class ZAlertBuilder {
    */
   public warning(): this {
     this._alert.severity = ZAlertSeverity.Warning;
-    this._alert.header = this._alert.header || ZAlertSeverity.Warning.toUpperCase();
     return this;
   }
 
@@ -69,7 +66,6 @@ export class ZAlertBuilder {
    */
   public error(): this {
     this._alert.severity = ZAlertSeverity.Error;
-    this._alert.header = this._alert.header || ZAlertSeverity.Error.toUpperCase();
     return this;
   }
 

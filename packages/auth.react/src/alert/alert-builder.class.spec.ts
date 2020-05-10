@@ -41,28 +41,20 @@ describe('ZAlertBuilder', () => {
       );
     });
 
+    it('sets the header.', () => {
+      assertPropertySet(
+        'Heaer',
+        (t, v) => t.header(v),
+        (a) => a.header
+      );
+    });
+
     describe('SUCCESS', () => {
       it('sets the severity.', () => {
         assertPropertySet(
           ZAlertSeverity.Success,
           (t) => t.success(),
           (a) => a.severity
-        );
-      });
-
-      it('defaults the header.', () => {
-        assertPropertySet(
-          ZAlertSeverity.Success.toUpperCase(),
-          (t) => t.success(),
-          (a) => a.header
-        );
-      });
-
-      it('keeps an already set header.', () => {
-        assertPropertySet(
-          'Header',
-          (t, v) => t.header(v).success(),
-          (a) => a.header
         );
       });
     });
@@ -75,22 +67,6 @@ describe('ZAlertBuilder', () => {
           (a) => a.severity
         );
       });
-
-      it('defaults the header.', () => {
-        assertPropertySet(
-          ZAlertSeverity.Warning.toUpperCase(),
-          (t) => t.warning(),
-          (a) => a.header
-        );
-      });
-
-      it('keeps an already set header.', () => {
-        assertPropertySet(
-          'Header',
-          (t, v) => t.header(v).warning(),
-          (a) => a.header
-        );
-      });
     });
 
     describe('INFO', () => {
@@ -101,22 +77,6 @@ describe('ZAlertBuilder', () => {
           (a) => a.severity
         );
       });
-
-      it('defaults the header.', () => {
-        assertPropertySet(
-          ZAlertSeverity.Info.toUpperCase(),
-          (t) => t.info(),
-          (a) => a.header
-        );
-      });
-
-      it('keeps an already set header.', () => {
-        assertPropertySet(
-          'Header',
-          (t, v) => t.header(v).info(),
-          (a) => a.header
-        );
-      });
     });
 
     describe('ERROR', () => {
@@ -125,22 +85,6 @@ describe('ZAlertBuilder', () => {
           ZAlertSeverity.Error,
           (t) => t.error(),
           (a) => a.severity
-        );
-      });
-
-      it('defaults the header.', () => {
-        assertPropertySet(
-          ZAlertSeverity.Error.toUpperCase(),
-          (t) => t.error(),
-          (a) => a.header
-        );
-      });
-
-      it('keeps an already set header.', () => {
-        assertPropertySet(
-          'Header',
-          (t, v) => t.header(v).error(),
-          (a) => a.header
         );
       });
     });
