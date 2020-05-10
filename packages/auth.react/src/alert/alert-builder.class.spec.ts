@@ -25,6 +25,22 @@ describe('ZAlertBuilder', () => {
       );
     });
 
+    it('sets the time to live.', () => {
+      assertPropertySet(
+        1000,
+        (t, v) => t.time(v).success(),
+        (a) => a.timeToLive
+      );
+    });
+
+    it('sets the time to live forever.', () => {
+      assertPropertySet(
+        Infinity,
+        (t) => t.immortal().success(),
+        (a) => a.timeToLive
+      );
+    });
+
     describe('SUCCESS', () => {
       it('sets the severity.', () => {
         assertPropertySet(
@@ -131,26 +147,28 @@ describe('ZAlertBuilder', () => {
   });
 
   describe('Copy', () => {
-    it('copies the other alert.', () => {
+    it('copies the other alert with the exception of the id.', () => {
       // Arrange
       const expected = createTestTarget().info().message('message').header('header').build();
       const target = createTestTarget();
       // Act
       const actual = target.copy(expected).build();
       // Assert
-      expect(actual).toEqual(expected);
+      expect(actual).not.toEqual(expected);
+      expect(actual).toEqual(Object.assign({}, expected, { _id: actual._id }));
     });
   });
 
   describe('Assign', () => {
-    it('assigns the properties given.', () => {
+    it('assigns the properties given with the exception of the id.', () => {
       // Arrange
       const target = createTestTarget().warning().message('warning-message');
       const expected = createTestTarget().copy(target.build()).message('updated-warning').build();
       // Act
       const actual = target.assign({ message: 'updated-warning' }).build();
       // Assert
-      expect(actual).toEqual(expected);
+      expect(actual).not.toEqual(expected);
+      expect(actual).toEqual(Object.assign({}, expected, { _id: actual._id }));
     });
   });
 });

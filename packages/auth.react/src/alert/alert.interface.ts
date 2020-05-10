@@ -5,6 +5,12 @@ import { ZAlertSeverity } from './alert-severity.enum';
  */
 export interface IZAlert {
   /**
+   * A generated id of the alert.
+   *
+   * This must be unique across all alerts.
+   */
+  readonly _id: string;
+  /**
    * The severity of the alert.
    */
   severity: ZAlertSeverity;
@@ -16,4 +22,8 @@ export interface IZAlert {
    * The alert header (title).
    */
   header: string;
+  /**
+   * The time that the alert can live before being automatically dismissed.
+   */
+  timeToLive: number;
 }
