@@ -7,7 +7,7 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "Docker: Attach to Node",
+      "name": "Docker: Attach to Server",
       "port": 9229,
       "address": "0.0.0.0",
       "remoteRoot": "/usr/dev",

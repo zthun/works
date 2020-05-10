@@ -14,7 +14,7 @@
     "packages/auth.theme",
     "packages/auth.react",
     "packages/auth.client",
-    "packages/auth.user-service",
+    "packages/auth.service.user",
     "packages/auth.server"
   ],
   "scripts": {

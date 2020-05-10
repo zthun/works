@@ -26,7 +26,7 @@ services:
     volumes:
       - .:/usr/dev
     working_dir: /usr/dev
-    command: yarn workspace @zthun/auth.user-service debug
+    command: yarn workspace @zthun/auth.service.user debug
   api.auth.zthunworks.com:
     image: node:10.17.0
     ports:

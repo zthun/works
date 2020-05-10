@@ -1,5 +1,5 @@
 {
-  "name": "@zthun/auth.user-service",
+  "name": "@zthun/auth.service.user",
   "version": "1.0.0-5",
   "description": "The auth user microservice for managing users.",
   "author": "Anthony Bonta",
@@ -30,8 +30,6 @@
     "@zthun/auth.core": "link:../auth.core",
     "@zthun/dal": "^2.0.0",
     "bcryptjs": "^2.4.3",
-    "class-transformer": "^0.2.3",
-    "class-validator": "^0.12.2",
     "lodash": "^4.17.15",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",
