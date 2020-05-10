@@ -4,6 +4,12 @@ import { get, noop } from 'lodash';
 import React, { useState } from 'react';
 import { IZLoginCredentialsFormProps } from './login-credentials-form.props';
 
+/**
+ * Represents a credentials form that allows you to modify an IZLogin object.
+ *
+ * @param props The propertis for this form.
+ * @see IZLoginCredentialsFormProps for more information.
+ */
 export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
   const [email, setEmail] = useState(get(props, 'credentials.email', ''));
   const [password, setPassword] = useState(get(props, 'credentials.password', ''));
@@ -106,6 +112,11 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
   );
 }
 
+/**
+ * The default properties.
+ *
+ * @see IZLoginCredentialsFormProps for the default values.
+ */
 ZLoginCredentialsForm.defaultProps = {
   headerText: 'Create Account',
   subHeaderText: 'Enter account credentials',
