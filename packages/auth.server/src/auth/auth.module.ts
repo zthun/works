@@ -1,6 +1,7 @@
 import { Module, OnModuleInit } from '@nestjs/common';
+import { ClientsModule } from '@nestjs/microservices';
 import { ZDatabaseMongo, ZDatabaseOptionsBuilder } from '@zthun/dal';
-import { DatabaseToken } from '../common/injection.constants';
+import { DatabaseToken, UserServiceToken } from '../common/injection.constants';
 import { ZGroupsPermissionsController } from '../groups/groups-permissions.controller';
 import { ZGroupsUsersController } from '../groups/groups-users.controller';
 import { ZGroupsController } from '../groups/groups.controller';
@@ -12,17 +13,9 @@ import { ZTokensController } from '../tokens/tokens.controller';
 import { ZTokensGuard } from '../tokens/tokens.guard';
 import { ZUsersController } from '../users/users.controller';
 import { ZAuthService } from './auth.service';
-
 @Module({
-  controllers: [
-    ZUsersController,
-    ZTokensController,
-    ZPermissionsController,
-    ZGroupsController,
-    ZGroupsPermissionsController,
-    ZGroupsUsersController,
-    ZHealthController
-  ],
+  imports: [ClientsModule.register([{ name: UserServiceToken }])],
+  controllers: [ZUsersController, ZTokensController, ZPermissionsController, ZGroupsController, ZGroupsPermissionsController, ZGroupsUsersController, ZHealthController],
   providers: [
     {
       provide: DatabaseToken,
@@ -35,7 +28,7 @@ import { ZAuthService } from './auth.service';
   ]
 })
 export class ZAuthModule implements OnModuleInit {
-  public constructor(private readonly _auth: ZAuthService) { }
+  public constructor(private readonly _auth: ZAuthService) {}
 
   public async onModuleInit() {
     await this._auth.setupSystemPermissions();

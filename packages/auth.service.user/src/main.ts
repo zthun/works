@@ -2,7 +2,6 @@
 
 import { Module } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { Transport } from '@nestjs/microservices';
 import { ZDatabaseMongo, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { noop } from 'lodash';
 import { DatabaseToken } from './common/injection.constants';
@@ -17,13 +16,7 @@ import { DatabaseToken } from './common/injection.constants';
 })
 export class ZMainModule {
   public static async run() {
-    const app = await NestFactory.createMicroservice(ZMainModule, {
-      transport: Transport.TCP,
-      options: {
-        hostname: 'localhost',
-        port: 3000
-      }
-    });
+    const app = await NestFactory.createMicroservice(ZMainModule);
     await app.listen(noop);
   }
 }

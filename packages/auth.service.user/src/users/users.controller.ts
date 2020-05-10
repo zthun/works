@@ -1,5 +1,5 @@
 import { Controller, Inject } from '@nestjs/common';
-import { EventPattern } from '@nestjs/microservices';
+import { MessagePattern } from '@nestjs/microservices';
 import { IZLogin, IZUser, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { hash } from 'bcryptjs';
@@ -25,7 +25,7 @@ export class ZUsersController {
    *
    * @return A promise that, when resolved, has returned all users.
    */
-  @EventPattern('list')
+  @MessagePattern('list')
   public async list(): Promise<IZUser[]> {
     const users = await this._dal.read<IZUser>(Collections.Users).run();
     return users.map((user) => new ZUserBuilder().copy(user).redact().build());
@@ -40,7 +40,7 @@ export class ZUsersController {
    *
    * @throws NotFoundException If the user does not exist.
    */
-  @EventPattern('read')
+  @MessagePattern('read')
   public async read({ id }: { id: string }): Promise<IZUser> {
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     return new ZUserBuilder().copy(user).redact().build();
@@ -53,7 +53,7 @@ export class ZUsersController {
    *
    * @return A promise that, when resolved, has returned the new user.
    */
-  @EventPattern('create')
+  @MessagePattern('create')
   public async create(login: IZLogin): Promise<IZUser> {
     const total = await this._dal.count(Collections.Users).run();
     const password = await hash(login.password, BcryptRounds);
@@ -74,7 +74,7 @@ export class ZUsersController {
    * @throws NotFoundException If not user exists with the given id.
    * @throws ConflictException If the name of the user changes and there is already another user with the same name.
    */
-  @EventPattern('update')
+  @MessagePattern('update')
   public async update({ id, login }: { id: string; login: Partial<IZLogin> }): Promise<IZUser> {
     const template: Partial<IZUser> = {};
 
@@ -105,7 +105,7 @@ export class ZUsersController {
    *
    * @throws NotFoundException If no user with the given id exists.
    */
-  @EventPattern('remove')
+  @MessagePattern('remove')
   public async remove({ id }: { id: string }): Promise<IZUser> {
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     await this._dal.delete(Collections.Users).filter({ _id: id }).run();
