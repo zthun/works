@@ -4,7 +4,7 @@ import { ZLoginPage } from '../login/login-page';
 
 export function ZAuthApp() {
   return (
-    <div className='ZAuthApp-root'>
+    <div className='ZAuthApp-root' data-testid='ZAuthApp-root'>
       <HashRouter>
         <Redirect to='/login' />
         <Route path='/login' component={ZLoginPage} />

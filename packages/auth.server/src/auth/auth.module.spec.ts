@@ -12,7 +12,7 @@ describe('ZAuthModule', () => {
   }
 
   beforeEach(() => {
-    auth = createSpyObj(ZAuthModule, ['setupSystemPermissions', 'setupSystemGroups', 'setupDefaultGroupPermissions', 'setupDefaultGroupUsers']) as unknown as jest.Mocked<ZAuthService>;
+    auth = createSpyObj(ZAuthService, ['setupSystemPermissions', 'setupSystemGroups', 'setupDefaultGroupPermissions', 'setupDefaultGroupUsers']);
     auth.setupSystemGroups.mockResolvedValue(null);
     auth.setupSystemPermissions.mockResolvedValue(null);
   });

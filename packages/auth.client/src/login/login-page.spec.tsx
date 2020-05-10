@@ -1,24 +1,14 @@
-
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { ZLoginPage } from './login-page';
 
 describe('ZLoginPage', () => {
-  function createTestTarget() {
-    return shallow(<ZLoginPage />);
-  }
-
-  beforeAll(() => {
-    configure({ adapter: new Adapter() });
-  });
-
   it('renders the page', () => {
     // Arrange
-    const target = createTestTarget();
+    const target = render(<ZLoginPage />);
     // Act
-    const actual = target.find('.ZLoginPage-root');
+    const actual = target.queryByTestId('ZLoginPage-root');
     // Assert
-    expect(actual.length).toBeGreaterThan(0);
+    expect(actual).toBeTruthy();
   });
 });
