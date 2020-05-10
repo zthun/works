@@ -5,7 +5,7 @@ export function ZLoginPage() {
   const alerts = useAlertStack();
 
   function notImplemented() {
-    alerts.add(new ZAlertBuilder().warning().message('Method not implemented').build());
+    alerts.add(new ZAlertBuilder().warning().message('Method not implemented.').build());
   }
 
   return (

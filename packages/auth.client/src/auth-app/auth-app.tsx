@@ -12,7 +12,7 @@ export function ZAuthApp() {
           <Redirect to='/login' />
           <Route path='/login' component={ZLoginPage} />
         </HashRouter>
-        <Snackbar open={true} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Snackbar open={true} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
           <ZAlertStackList />
         </Snackbar>
       </ZAlertStackContext.Provider>

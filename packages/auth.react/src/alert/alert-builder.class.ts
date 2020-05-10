@@ -15,7 +15,7 @@ export class ZAlertBuilder {
     this._alert = {
       _id: null,
       severity: ZAlertSeverity.Success,
-      message: '',
+      message: null,
       header: null,
       timeToLive: 6000
     };

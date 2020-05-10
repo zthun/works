@@ -1,5 +1,4 @@
-import Alert from '@material-ui/lab/Alert';
-import AlertTitle from '@material-ui/lab/AlertTitle';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import React, { useEffect, useState } from 'react';
 import { useAlertStack } from './alert-stack.context';
 
@@ -18,7 +17,7 @@ export function ZAlertStackList() {
     }
 
     return (
-      <Alert className='ZAlertStackList-alert mb-sm' variant='outlined' key={alert._id} severity={alert.severity} onClose={handleClose}>
+      <Alert className='ZAlertStackList-alert mb-sm' data-testid='ZAlertStackList-alert' variant='outlined' key={alert._id} severity={alert.severity} onClose={handleClose}>
         <AlertTitle>{alert.header}</AlertTitle>
         {alert.message}
       </Alert>
