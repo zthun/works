@@ -86,7 +86,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       />
     );
 
-  const loadingProgress = !props.loading ? null : <CircularProgress className='ZLoginCredentialsForm-icon-progress ml-sm' data-testid='ZLoginCredentialsForm-icon-progress' color='inherit' size='1em'></CircularProgress>;
+  const loadingProgress = !props.loading ? null : <CircularProgress className='ZLoginCredentialsForm-icon-progress ml-sm' data-testid='ZLoginCredentialsForm-icon-progress' color='inherit' size='1em' />;
 
   const actionButton = (
     <Button className='ZLoginCredentialsForm-btn-action' data-testid='ZLoginCredentialsForm-btn-action' fullWidth={true} variant='contained' color='primary' disabled={props.disabled} onClick={handleAction}>
