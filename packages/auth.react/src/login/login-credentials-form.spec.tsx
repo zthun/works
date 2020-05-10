@@ -111,11 +111,11 @@ describe('ZLoginCredentialsForm', () => {
       const passwordField = getPasswordField(target);
       const confirmField = getConfirmField(target);
       emailField.value = credentials.email;
-      fireEvent.blur(emailField, { target: emailField });
+      fireEvent.input(emailField, { target: emailField });
       passwordField.value = credentials.password;
-      fireEvent.blur(passwordField, { target: passwordField });
+      fireEvent.input(passwordField, { target: passwordField });
       confirmField.value = credentials.confirm;
-      fireEvent.blur(confirmField, { target: confirmField });
+      fireEvent.input(confirmField, { target: confirmField });
       // Act
       fireEvent.click(actionButton);
       // Assert
@@ -131,9 +131,9 @@ describe('ZLoginCredentialsForm', () => {
       const emailField = getEmailField(target);
       const passwordField = getPasswordField(target);
       emailField.value = credentials.email;
-      fireEvent.blur(emailField, { target: emailField });
+      fireEvent.input(emailField, { target: emailField });
       passwordField.value = credentials.password;
-      fireEvent.blur(passwordField, { target: passwordField });
+      fireEvent.input(passwordField, { target: passwordField });
       // Act
       fireEvent.click(actionButton);
       // Assert

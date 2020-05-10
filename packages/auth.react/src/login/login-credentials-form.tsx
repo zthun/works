@@ -48,7 +48,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       variant='outlined'
       value={email}
       disabled={props.disabled}
-      onBlur={handleEmailChange}
+      onInput={handleEmailChange}
     />
   );
 
@@ -64,7 +64,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       variant='outlined'
       value={password}
       disabled={props.disabled}
-      onBlur={handlePasswordChange}
+      onInput={handlePasswordChange}
     />
   );
 
@@ -81,7 +81,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
         variant='outlined'
         value={confirm}
         disabled={props.disabled}
-        onBlur={handleConfirmChange}
+        onInput={handleConfirmChange}
       />
     );
 

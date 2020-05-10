@@ -1,3 +1,4 @@
+import { isArray } from 'lodash';
 import { v4 } from 'uuid';
 import { ZAlertSeverity } from './alert-severity.enum';
 import { IZAlert } from './alert.interface';
@@ -72,12 +73,16 @@ export class ZAlertBuilder {
   /**
    * Sets the message.
    *
-   * @param message The message to set.
+   * @param message The message to set.  This will be converted to a proper string.
    *
    * @returns This object.
    */
-  public message(message: string): this {
-    this._alert.message = message;
+  public message(message: any): this {
+    if (isArray(message)) {
+      this._alert.message = message.join('<br />');
+    } else {
+      this._alert.message = String(message);
+    }
     return this;
   }
 
