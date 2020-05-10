@@ -7,8 +7,7 @@ import { IZLoginCredentialsFormProps } from './login-credentials-form.props';
 /**
  * Represents a credentials form that allows you to modify an IZLogin object.
  *
- * @param props The propertis for this form.
- * @see IZLoginCredentialsFormProps for more information.
+ * @param props The propertis for the component.
  */
 export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
   const [email, setEmail] = useState(get(props, 'credentials.email', ''));

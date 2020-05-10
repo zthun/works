@@ -5,23 +5,34 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import { noop } from 'lodash';
 import React, { useState } from 'react';
 import { ZLoginCredentialsForm } from './login-credentials-form';
+import { ZLoginTab } from './login-tab.enum';
 import { IZLoginTabsProps } from './login-tabs.props';
 
+/**
+ * Represents a tab based ui that shows different variations of a {@link ZLoginCredentialsForm} component.
+ *
+ * 1.  The login tab is for creating a login token.
+ * 2.  The create tab is for creating a new account.
+ * 3.  The recover tab is for recovering a user password.
+ *
+ * @param props The properties for the component.
+ */
 export function ZLoginTabs(props: IZLoginTabsProps) {
-  const [tab, setTab] = useState('login');
+  const [tab, setTab] = useState(props.tab);
 
-  function handleTabChange(event: any, name: string) {
+  function handleTabChange(event: any, name: ZLoginTab) {
     setTab(name);
+    props.onTabChange(name);
   }
 
-  const loginTab = props.hideLoginTab ? null : <Tab icon={<LockOpenIcon />} label='LOGIN' value='login' disabled={props.loading}></Tab>;
+  const loginTab = props.hideLoginTab ? null : <Tab className='ZLoginTabs-tab-login' data-testid='ZLoginTabs-tab-login' icon={<LockOpenIcon />} label='LOGIN' value={ZLoginTab.Login} disabled={props.loading} />;
 
-  const signupTab = props.hideCreateTab ? null : <Tab icon={<PersonAddIcon />} label='SIGNUP' value='signup' disabled={props.loading}></Tab>;
+  const signupTab = props.hideCreateTab ? null : <Tab className='ZLoginTabs-tab-create' data-testid='ZLoginTabs-tab-create' icon={<PersonAddIcon />} label='CREATE' value={ZLoginTab.Create} disabled={props.loading} />;
 
-  const recoverTab = props.hideRecoverTab ? null : <Tab icon={<HelpOutlineIcon />} label='RECOVER' value='recover' disabled={props.loading}></Tab>;
+  const recoverTab = props.hideRecoverTab ? null : <Tab className='ZLoginTabs-tab-recover' data-testid='ZLoginTabs-tab-recover' icon={<HelpOutlineIcon />} label='RECOVER' value={ZLoginTab.Recover} disabled={props.loading} />;
 
   return (
-    <div className='ZLoginTabs-root d-flex-nowrap' data-test-id='ZLoginTabs-root'>
+    <div className='ZLoginTabs-root d-flex-nowrap' data-testid='ZLoginTabs-root'>
       <div className='ZLoginTabs-tab-container pr-sm'>
         <Tabs orientation='vertical' value={tab} onChange={handleTabChange}>
           {loginTab}
@@ -30,7 +41,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
         </Tabs>
       </div>
 
-      <div className='ZLoginTabs-login-form flex-grow-1' data-test-id='ZLoginTabs-login-form' hidden={tab !== 'login'}>
+      <div className='ZLoginTabs-form-login flex-grow-1' data-testid='ZLoginTabs-form-login' hidden={tab !== ZLoginTab.Login}>
         <ZLoginCredentialsForm
           headerText='Login'
           subHeaderText='Enter your credentials'
@@ -40,24 +51,24 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
           hideConfirm={true}
           credentials={props.loginCredentials}
           onCredentialsChange={props.onLoginCredentialsChange}
-        ></ZLoginCredentialsForm>
+        />
       </div>
 
-      <div className='ZLoginTabs-signup-form flex-grow-1' data-test-id='ZLoginTabs-signup-form' hidden={tab !== 'signup'}>
+      <div className='ZLoginTabs-form-create flex-grow-1' data-testid='ZLoginTabs-form-create' hidden={tab !== ZLoginTab.Create}>
         <ZLoginCredentialsForm
-          headerText='Create account'
+          headerText='Create Account'
           subHeaderText='Enter new account information'
           actionText='Create account'
           loading={props.loading}
           disabled={props.disabled}
           credentials={props.createCredentials}
           onCredentialsChange={props.onCreateCredentialsChange}
-        ></ZLoginCredentialsForm>
+        />
       </div>
 
-      <div className='ZLoginTabs-recover-form flex-grow-1' data-test-id='ZLoginTabs-login-recover' hidden={tab !== 'recover'}>
+      <div className='ZLoginTabs-form-recover flex-grow-1' data-testid='ZLoginTabs-form-recover' hidden={tab !== ZLoginTab.Recover}>
         <ZLoginCredentialsForm
-          headerText='Account recovery'
+          headerText='Recover Account'
           subHeaderText='Get back into your account'
           actionText='Request password reset'
           loading={props.loading}
@@ -65,16 +76,20 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
           hidePassword={true}
           credentials={props.recoverCredentials}
           onCredentialsChange={props.onRecoverCredentialsChange}
-        ></ZLoginCredentialsForm>
+        />
       </div>
     </div>
   );
 }
 
+/**
+ * The default properties.  See {@link IZLoginTabsProps} for values.
+ */
 ZLoginTabs.defaultProps = {
   loading: false,
   disabled: false,
 
+  tab: ZLoginTab.Login,
   loginCredentials: null,
   createCredentials: null,
   recoverCredentials: null,
@@ -83,6 +98,7 @@ ZLoginTabs.defaultProps = {
   hideCreateTab: false,
   hideRecoverTab: false,
 
+  onTabChange: noop,
   onLoginCredentialsChange: noop,
   onCreateCredentialsChange: noop,
   onRecoverCredentialsChange: noop
