@@ -14,10 +14,11 @@
     "packages/auth.theme",
     "packages/auth.react",
     "packages/auth.client",
+    "packages/auth.user-service",
     "packages/auth.server"
   ],
   "scripts": {
-    "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz",
+    "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz packages/**/yarn-error.log",
     "test": "jest --coverage --runInBand --forceExit",
     "lint": "zlint",
     "build": "lerna run build",

@@ -18,6 +18,15 @@ services:
       - .:/usr/dev
     working_dir: /usr/dev
     command: yarn workspace @zthun/auth.client debug
+  user.service.auth.zthunworks.com:
+    image: node:10.17.0
+    ports:
+      - 9230:9229
+      - 3001:3000
+    volumes:
+      - .:/usr/dev
+    working_dir: /usr/dev
+    command: yarn workspace @zthun/auth.user-service debug
   api.auth.zthunworks.com:
     image: node:10.17.0
     ports:

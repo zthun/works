@@ -1351,6 +1351,15 @@
     tslib "1.11.1"
     uuid "7.0.3"
 
+"@nestjs/microservices@^7.0.9":
+  version "7.0.9"
+  resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-7.0.9.tgz#290faaa46d0d61cbbd0a5b957c615af238e5e486"
+  integrity sha512-pSCWj/3wMHtqcJO5CayNRsTlsUzS480Yqd9UjMFJuSCSWyUGzYDSkkNkBfZupovKvJOUglV+jdlNDcWKZutosg==
+  dependencies:
+    iterare "1.2.0"
+    json-socket "0.3.0"
+    tslib "1.11.1"
+
 "@nestjs/platform-express@^7.0.7":
   version "7.0.9"
   resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-7.0.9.tgz#abfa9ae8855ddc889f644d4c4664682a4b11ff29"
@@ -7529,6 +7538,11 @@ json-schema@0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.2.3.tgz#b480c892e59a2f05954ce727bd3f2a4e882f9e13"
   integrity sha1-tIDIkuWaLwWVTOcnvT8qTogvnhM=
+
+json-socket@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/json-socket/-/json-socket-0.3.0.tgz#f4b953c685bb8e8bd0b72438f5208d9a0799ae07"
+  integrity sha512-jc8ZbUnYIWdxERFWQKVgwSLkGSe+kyzvmYxwNaRgx/c8NNyuHes4UHnPM3LUrAFXUx1BhNJ94n1h/KCRlbvV0g==
 
 json-stable-stringify-without-jsonify@^1.0.1:
   version "1.0.1"
