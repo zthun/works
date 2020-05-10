@@ -11,7 +11,7 @@ export function ZLoginPage() {
 
   return (
     <div className='ZLoginPage-root mx-auto w-50 mt-em-5'>
-      <ZLoginTabs loading={true}></ZLoginTabs>
+      <ZLoginTabs />
     </div>
   );
 }

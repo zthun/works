@@ -3,7 +3,6 @@ import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import { ZAuthApp } from './auth-app';
 
-
 describe('ZAuthApp', () => {
   function createTestTarget() {
     return shallow(<ZAuthApp />);
