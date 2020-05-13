@@ -2,8 +2,7 @@
 
 import { Module, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { ZAuthModule } from './auth/auth.module';
-import { ZExceptionFactory } from './validation/exception-factory.class';
+import { ZAuthModule, ZExceptionFactory } from '@zthun/auth.nest';
 
 @Module({
   imports: [ZAuthModule]

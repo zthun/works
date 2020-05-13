@@ -3,8 +3,8 @@ import { IZUser } from './user.interface';
 /**
  * Represents a builder object for a user.
  */
-export class ZUserBuilder<TMeta = any> {
-  private _user: IZUser<TMeta>;
+export class ZUserBuilder {
+  private _user: IZUser;
 
   /**
    * Initializes a new instance of this object.
@@ -59,18 +59,6 @@ export class ZUserBuilder<TMeta = any> {
    */
   public super(): this {
     this._user.super = true;
-    return this;
-  }
-
-  /**
-   * Sets the metadata for the user.
-   *
-   * @param meta The user metadata.
-   *
-   * @return This object.
-   */
-  public metadata(meta: TMeta): this {
-    this._user.metadata = meta;
     return this;
   }
 

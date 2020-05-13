@@ -20,33 +20,44 @@ describe('ZUserBuilder', () => {
 
     it('sets the id.', () => {
       const id = v4();
-      assertPropertySet(id, (t) => t.id(id), (u) => u._id);
+      assertPropertySet(
+        id,
+        (t) => t.id(id),
+        (u) => u._id
+      );
     });
 
     it('sets the name.', () => {
       const name = v4();
-      assertPropertySet(name, (t) => t.email(name), (u) => u.email);
+      assertPropertySet(
+        name,
+        (t) => t.email(name),
+        (u) => u.email
+      );
     });
 
     it('sets the password.', () => {
       const pwd = v4();
-      assertPropertySet(pwd, (t) => t.password(pwd), (u) => u.password);
+      assertPropertySet(
+        pwd,
+        (t) => t.password(pwd),
+        (u) => u.password
+      );
     });
 
     it('sets the super flag.', () => {
-      assertPropertySet(true, (t) => t.super(), (u) => u.super);
-    });
-
-    it('sets the user metadata.', () => {
-      const metadata = v4();
-      assertPropertySet(metadata, (t) => t.metadata(metadata), (u) => u.metadata);
+      assertPropertySet(
+        true,
+        (t) => t.super(),
+        (u) => u.super
+      );
     });
   });
 
   describe('Redaction', () => {
     function assertRedactsProperty<T>(propFn: (u: IZUser) => T) {
       // Arrange
-      const target = createTestTarget().id(v4()).email(v4()).password(v4()).super().metadata(v4());
+      const target = createTestTarget().id(v4()).email(v4()).password(v4()).super();
       // Act
       const user = target.redact().build();
       const actual = propFn(user);

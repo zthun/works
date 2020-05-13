@@ -40,7 +40,7 @@ export class ZUsersController {
    *
    * @throws NotFoundException If the user does not exist.
    */
-  @MessagePattern('read')
+  @MessagePattern('find')
   public async read({ id }: { id: string }): Promise<IZUser> {
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     return new ZUserBuilder().copy(user).redact().build();
