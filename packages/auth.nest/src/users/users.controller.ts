@@ -27,6 +27,7 @@ export class ZUsersController {
   @Get()
   // @UseGuards(ZRequiresSuperUser)
   public async list(): Promise<IZUser[]> {
+    await this._users.connect();
     const users = await this._users.send<IZUser[]>('list', {}).toPromise();
     return users.map((user) => new ZUserBuilder().copy(user).redact().build());
   }

@@ -7,8 +7,20 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "Docker: Attach to Server",
+      "name": "Debug server",
       "port": 9229,
+      "address": "0.0.0.0",
+      "remoteRoot": "/usr/dev",
+      "localRoot": "${workspaceFolder}",
+      "sourceMapPathOverrides": {
+        "/usr/dev/*": "${workspaceRoot}/*"
+      }
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Debug user microservice",
+      "port": 9230,
       "address": "0.0.0.0",
       "remoteRoot": "/usr/dev",
       "localRoot": "${workspaceFolder}",

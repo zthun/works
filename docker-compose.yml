@@ -20,6 +20,8 @@ services:
     command: yarn workspace @zthun/auth.client debug
   user.service.auth.zthunworks.com:
     image: node:10.17.0
+    expose:
+      - 3000
     ports:
       - 9230:9229
       - 3001:3000
