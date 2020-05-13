@@ -28,7 +28,6 @@ describe('ZUsersController', () => {
   });
 
   afterEach(async () => {
-    await dal.delete(Collections.GroupsUsers).run();
     await dal.delete(Collections.Users).run();
   });
 
@@ -44,7 +43,7 @@ describe('ZUsersController', () => {
     it('returns all users.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = [userA, userB].map((usr) => new ZUserBuilder().copy(usr).redact().build());
+      const expected = [userA, userB];
       // Act
       const actual = await target.list();
       // Assert
@@ -89,15 +88,6 @@ describe('ZUsersController', () => {
       expect(actual.super).toBeFalsy();
     });
 
-    it('returns a redacted user.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      // Act
-      const created = await target.create(loginA);
-      // Assert
-      expect(created.password).toBeFalsy();
-    });
-
     it('secures the password.', async () => {
       // Arrange
       const target = createTestTarget();
@@ -110,20 +100,27 @@ describe('ZUsersController', () => {
     });
   });
 
-  describe('Read', () => {
+  describe('Find', () => {
     beforeEach(async () => {
       [userA, userB] = await dal.create(Collections.Users, [userA, userB]).run();
     });
 
-    it('reads a redacted user.', async () => {
+    it('finds a user by id.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = await target.read({ id: userA._id });
+      const actual = await target.findById(userA._id);
       // Assert
-      expect(actual._id).toEqual(userA._id);
-      expect(actual.email).toEqual(userA.email);
-      expect(actual.password).toBeFalsy();
+      expect(actual).toEqual(userA);
+    });
+
+    it('reads a user by email.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.findByEmail(userA.email);
+      // Assert
+      expect(actual).toEqual(userA);
     });
   });
 
@@ -188,7 +185,7 @@ describe('ZUsersController', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      await target.remove({ id: userA._id });
+      await target.remove(userA._id);
       const blobs = await dal.read(Collections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(blobs.length).toEqual(0);

@@ -28,22 +28,35 @@ export class ZUsersController {
   @MessagePattern('list')
   public async list(): Promise<IZUser[]> {
     const users = await this._dal.read<IZUser>(Collections.Users).run();
-    return users.map((user) => new ZUserBuilder().copy(user).redact().build());
+    return users;
   }
 
   /**
-   * Gets a specific user.
+   * Gets a specific user by their id.
    *
-   * @param params The url params.
+   * @param _id The id of the user to find.
    *
-   * @return A promise that, when resolved, has the found user.
-   *
-   * @throws NotFoundException If the user does not exist.
+   * @return A promise that, when resolved, has the found user.  Returns undefined if no such user exists.
    */
-  @MessagePattern('find')
-  public async read({ id }: { id: string }): Promise<IZUser> {
-    const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
-    return new ZUserBuilder().copy(user).redact().build();
+  @MessagePattern('findById')
+  public async findById(_id: string): Promise<IZUser> {
+    const filter = { _id };
+    const [user] = await this._dal.read<IZUser>(Collections.Users).filter(filter).run();
+    return user;
+  }
+
+  /**
+   * Gets a specific user by their email.
+   *
+   * @param email The email of the user to find.
+   *
+   * @return A promise that, when resolved, has the found user by their email.  Returns null if no such user exists.
+   */
+  @MessagePattern('findByEmail')
+  public async findByEmail(email: string): Promise<IZUser> {
+    const filter = { email };
+    const [user] = await this._dal.read<IZUser>(Collections.Users).filter(filter).run();
+    return user;
   }
 
   /**
@@ -60,14 +73,11 @@ export class ZUsersController {
     const builder = new ZUserBuilder().email(login.email).password(password);
     const create = total === 0 ? builder.super().build() : builder.build();
     const [created] = await this._dal.create(Collections.Users, [create]).run();
-    return new ZUserBuilder().copy(created).redact().build();
+    return created;
   }
 
   /**
    * Updates an existing user.
-   *
-   * @param params The param that contains the id to update.
-   * @param login The user template to update.
    *
    * @return A promise that, when resolved, has returned the updated user.
    *
@@ -87,28 +97,25 @@ export class ZUsersController {
     }
 
     if (!template.email && !template.password) {
-      const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
-      return new ZUserBuilder().copy(user).redact().build();
+      return await this.findById(id);
     }
 
     await this._dal.update<IZUser>(Collections.Users, template).filter({ _id: id }).run();
     const [updated] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
-    return new ZUserBuilder().copy(updated).redact().build();
+    return updated;
   }
 
   /**
    * Deletes an existing user.
    *
-   * @param params The param that contains the id to delete.
+   * @param id The id of the user to  delete.
    *
    * @return A promise that, when resolve, has returned the deleted user.
-   *
-   * @throws NotFoundException If no user with the given id exists.
    */
   @MessagePattern('remove')
-  public async remove({ id }: { id: string }): Promise<IZUser> {
+  public async remove(id: string): Promise<IZUser> {
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     await this._dal.delete(Collections.Users).filter({ _id: id }).run();
-    return new ZUserBuilder().copy(user).redact().build();
+    return user;
   }
 }

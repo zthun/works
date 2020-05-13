@@ -44,8 +44,8 @@ export class ZUsersController {
   @Get(':id')
   // @UseGuards(ZRequiresMatchingUser)
   public async read(@Param() { id }: { id: string }): Promise<IZUser> {
-    const user = await this._users.send<IZUser, string>('find', id).toPromise();
-    ZHttpAssert.assert(!!user, () => new NotFoundException());
+    const user = await this._users.send<IZUser, string>('findById', id).toPromise();
+    ZHttpAssert.assert(!!user, () => new NotFoundException(`User with id, ${id}, was not found.`));
     return new ZUserBuilder().copy(user).redact().build();
   }
 
@@ -60,7 +60,7 @@ export class ZUsersController {
    */
   @Post()
   public async create(@Body() login: ZUserCreateDto): Promise<IZUser> {
-    let user = await this._users.send<IZUser, string>('find', login.email).toPromise();
+    let user = await this._users.send<IZUser, string>('findByEmail', login.email).toPromise();
     ZHttpAssert.assert(!user, () => new ConflictException('User email is already taken.'));
     user = await this._users.send<IZUser, IZLogin>('create', login).toPromise();
     return new ZUserBuilder().copy(user).redact().build();
@@ -80,11 +80,16 @@ export class ZUsersController {
   @Put(':id')
   // @UseGuards(ZRequiresMatchingUser)
   public async update(@Param() { id }: { id: string }, @Body() login: ZUserUpdateDto): Promise<IZUser> {
-    let user = await this._users.send<IZUser, string>('find', id).toPromise();
+    let user = await this._users.send<IZUser, string>('findById', id).toPromise();
     ZHttpAssert.assert(!!user, () => new NotFoundException(`User with id, ${id}, was not found.`));
-    user = await this._users
-      .send<IZUser>('update', { id, login })
-      .toPromise();
+
+    if (login.email) {
+      const existing = await this._users.send<IZUser, string>('findByEmail', login.email).toPromise();
+      ZHttpAssert.assert(!existing || existing._id === id, () => new ConflictException('User email is already taken.'));
+    }
+
+    const payload = { id, login };
+    user = await this._users.send<IZUser>('update', payload).toPromise();
     return new ZUserBuilder().copy(user).redact().build();
   }
 
@@ -100,7 +105,7 @@ export class ZUsersController {
   @Delete(':id')
   // @UseGuards(ZRequiresSuperUser)
   public async remove(@Param() { id }: { id: string }): Promise<IZUser> {
-    const user = await this._users.send<IZUser, string>('find', id).toPromise();
+    const user = await this._users.send<IZUser, string>('findById', id).toPromise();
     ZHttpAssert.assert(!!user, () => new NotFoundException());
     await this._users.send('remove', id).toPromise();
     return new ZUserBuilder().copy(user).redact().build();
