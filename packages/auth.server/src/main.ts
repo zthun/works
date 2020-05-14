@@ -3,9 +3,11 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ZAuthModule, ZExceptionFactory } from '@zthun/auth.nest';
+import { ZHealthController } from './health/health.controller';
 
 @Module({
-  imports: [ZAuthModule]
+  imports: [ZAuthModule],
+  controllers: [ZHealthController]
 })
 export class ZMainModule {
   public static async run() {

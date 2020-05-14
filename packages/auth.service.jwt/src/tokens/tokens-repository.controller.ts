@@ -9,6 +9,8 @@ export class ZTokensRepositoryController {
   /**
    * Signs a token and returns the token string.
    *
+   * @param payload The payload object to convert to a jwt token.
+   *
    * @return A promise that, when resolved, has returned the signed token.
    */
   @MessagePattern('sign')
