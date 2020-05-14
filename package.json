@@ -15,6 +15,7 @@
     "packages/auth.react",
     "packages/auth.client",
     "packages/auth.service.user",
+    "packages/auth.service.jwt",
     "packages/auth.nest",
     "packages/auth.server"
   ],

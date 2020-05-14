@@ -3,9 +3,9 @@ import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal
 import { compare, hash } from 'bcryptjs';
 import { Collections } from '../common/collections.enum';
 import { BcryptRounds } from '../common/crypt.constants';
-import { ZUsersController } from './users.controller';
+import { ZUsersRepositoryController } from './users-repository.controller';
 
-describe('ZUsersController', () => {
+describe('ZUsersRepositoryController', () => {
   let dal: IZDatabase;
   let userA: IZUser;
   let userB: IZUser;
@@ -32,7 +32,7 @@ describe('ZUsersController', () => {
   });
 
   function createTestTarget() {
-    return new ZUsersController(dal);
+    return new ZUsersRepositoryController(dal);
   }
 
   describe('List', () => {

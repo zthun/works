@@ -5,10 +5,10 @@ import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
 import { ZDatabaseMongo, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { DatabaseToken } from './common/injection.constants';
-import { ZUsersController } from './users/users.controller';
+import { ZUsersRepositoryController } from './users/users-repository.controller';
 
 @Module({
-  controllers: [ZUsersController],
+  controllers: [ZUsersRepositoryController],
   providers: [
     {
       provide: DatabaseToken,

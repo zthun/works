@@ -11,7 +11,7 @@ import { DatabaseToken } from '../common/injection.constants';
  * Represents a service to retrieve users.
  */
 @Controller()
-export class ZUsersController {
+export class ZUsersRepositoryController {
   /**
    * Initializes a new instance of this object.
    *

@@ -1,7 +1,7 @@
 {
-  "name": "@zthun/auth.service.user",
+  "name": "@zthun/auth.service.jwt",
   "version": "1.0.0-5",
-  "description": "The auth microservice for creating and managing users.",
+  "description": "The auth jwt microservice for creating json web tokens.",
   "author": "Anthony Bonta",
   "license": "MIT",
   "repository": {
@@ -10,7 +10,7 @@
   },
   "main": "./dist/cjs/index.js",
   "bin": {
-    "zauth-service-user": "./dist/main.js"
+    "zauth-service-jwt": "./dist/main.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.prod.json",
@@ -28,14 +28,8 @@
     "@nestjs/core": "^7.0.7",
     "@nestjs/microservices": "^7.0.7",
     "@nestjs/platform-express": "^7.0.7",
-    "@zthun/auth.core": "link:../auth.core",
-    "@zthun/dal": "^2.0.0",
-    "bcryptjs": "^2.4.3",
-    "lodash": "^4.17.15",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^6.5.3",
-    "url-parse": "^1.4.7",
-    "uuid": "^8.0.0"
+    "rxjs": "^6.5.3"
   },
   "sideEffects": false
 }
