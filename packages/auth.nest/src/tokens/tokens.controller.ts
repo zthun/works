@@ -29,8 +29,9 @@ export class ZTokensController {
    */
   @Get()
   // @UseGuards(ZRequiresUser)
-  public async verify() {
-    return undefined;
+  public async verify(@Res() res: Response) {
+    res.sendStatus(204);
+    return null;
   }
 
   /**
@@ -43,7 +44,7 @@ export class ZTokensController {
   @Post()
   public async login(@Res() res: Response, @Body() credentials: ZTokensLoginDto) {
     const valid = await this._users.send('compare', new ZLoginBuilder().copy(credentials).build()).toPromise();
-    ZHttpAssert.assert(valid, () => new UnauthorizedException());
+    ZHttpAssert.assert(valid, () => new UnauthorizedException('Your credentials are incorrect.  Please try again.'));
     // const jwt = this._jwt.sign();
     const jwt = v4();
     const tomorrow = new Date(Date.now() + 3600000);
@@ -57,7 +58,9 @@ export class ZTokensController {
    */
   @Delete()
   // @UseGuards(ZRequiresUser)
-  public async logout() {
-    return undefined;
+  public async logout(@Res() res: Response) {
+    res.clearCookie('Authentication');
+    res.sendStatus(204);
+    return null;
   }
 }
