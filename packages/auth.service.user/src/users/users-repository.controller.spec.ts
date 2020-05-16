@@ -191,4 +191,38 @@ describe('ZUsersRepositoryController', () => {
       expect(blobs.length).toEqual(0);
     });
   });
+
+  describe('Authenticate', () => {
+    beforeEach(async () => {
+      [userA] = await dal.create(Collections.Users, [userA]).run();
+    });
+
+    it('returns false if no such user exists.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.compare(loginB);
+      // Assert
+      expect(actual).toBeFalsy();
+    });
+
+    it('returns false if the passwords do not match.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      loginA.password = 'wrong-password';
+      // Act
+      const actual = await target.compare(loginA);
+      // Assert
+      expect(actual).toBeFalsy();
+    });
+
+    it('returns true if the email and password match.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.compare(loginA);
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+  });
 });

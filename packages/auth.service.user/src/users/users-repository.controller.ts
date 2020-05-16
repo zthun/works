@@ -2,7 +2,7 @@ import { Controller, Inject } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { IZLogin, IZUser, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
-import { hash } from 'bcryptjs';
+import { compare, hash } from 'bcryptjs';
 import { Collections } from '../common/collections.enum';
 import { BcryptRounds } from '../common/crypt.constants';
 import { DatabaseToken } from '../common/injection.constants';
@@ -117,5 +117,27 @@ export class ZUsersRepositoryController {
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     await this._dal.delete(Collections.Users).filter({ _id: id }).run();
     return user;
+  }
+
+  /**
+   * Compares the user and password to make sure it matches.
+   *
+   * @returns A promise that resolves to true if the credentials match.  False if they do not.
+   */
+  @MessagePattern('compare')
+  public async compare(credentials: IZLogin) {
+    const user = await this.findByEmail(credentials.email);
+
+    if (user == null) {
+      return false;
+    }
+
+    const passwordsMatch = await compare(credentials.password, user.password);
+
+    if (passwordsMatch) {
+      return true;
+    }
+
+    return false;
   }
 }

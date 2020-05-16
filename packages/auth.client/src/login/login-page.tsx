@@ -10,6 +10,16 @@ export function ZLoginPage() {
     alerts.add(new ZAlertBuilder().warning().message('Method not implemented.').build());
   }
 
+  async function handleLogin(login: IZLogin) {
+    try {
+      const url = new ZUrlBuilder().api().append('tokens').build();
+      await Axios.post(url, login);
+      alerts.add(new ZAlertBuilder().success().message('Login successful.').build());
+    } catch (err) {
+      alerts.add(new ZAlertBuilder().error().message(err.response.data.message).build());
+    }
+  }
+
   async function handleCreate(login: IZLogin) {
     try {
       const url = new ZUrlBuilder().api().append('users').build();
@@ -22,7 +32,7 @@ export function ZLoginPage() {
 
   return (
     <div className='ZLoginPage-root mx-auto w-50 mt-em-5' data-testid='ZLoginPage-root'>
-      <ZLoginTabs onLoginCredentialsChange={notImplemented} onCreateCredentialsChange={handleCreate} onRecoverCredentialsChange={notImplemented} />
+      <ZLoginTabs onLoginCredentialsChange={handleLogin} onCreateCredentialsChange={handleCreate} onRecoverCredentialsChange={notImplemented} />
     </div>
   );
 }

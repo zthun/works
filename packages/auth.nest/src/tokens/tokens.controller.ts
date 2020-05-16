@@ -1,6 +1,10 @@
-import { Body, Controller, Delete, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Post, Res, UnauthorizedException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { JwtServiceToken, UserServiceToken } from '../common/injection.constants';
+import { ZLoginBuilder } from '@zthun/auth.core';
+import { Response } from 'express';
+import { v4 } from 'uuid';
+import { ZHttpAssert } from '../common/http-assert.class';
+import { DomainToken, JwtServiceToken, UserServiceToken } from '../common/injection.constants';
 import { ZTokensLoginDto } from './tokens-login.dto';
 
 /**
@@ -14,7 +18,7 @@ export class ZTokensController {
    * @param _users The users client proxy.
    * @param _tokens The jwt tokens client proxy.
    */
-  public constructor(@Inject(UserServiceToken) private readonly _users: ClientProxy, @Inject(JwtServiceToken) private readonly _tokens: ClientProxy) {}
+  public constructor(@Inject(DomainToken) private readonly _domain: string, @Inject(UserServiceToken) private readonly _users: ClientProxy, @Inject(JwtServiceToken) private readonly _tokens: ClientProxy) {}
 
   /**
    * Convinence method for UIs that want route guards for token auth.
@@ -37,8 +41,15 @@ export class ZTokensController {
    * @returns A promise that resolves to a status of 204 if the cookie token is valid, and 401 if the user cannot login.  The return will
    */
   @Post()
-  public async login(@Body() credentials: ZTokensLoginDto) {
-    return undefined;
+  public async login(@Res() res: Response, @Body() credentials: ZTokensLoginDto) {
+    const valid = await this._users.send('compare', new ZLoginBuilder().copy(credentials).build()).toPromise();
+    ZHttpAssert.assert(valid, () => new UnauthorizedException());
+    // const jwt = this._jwt.sign();
+    const jwt = v4();
+    const tomorrow = new Date(Date.now() + 3600000);
+    res.cookie('Authentication', jwt, { secure: true, httpOnly: true, expires: tomorrow, domain: this._domain });
+    res.sendStatus(204);
+    return null;
   }
 
   /**
