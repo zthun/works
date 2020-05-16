@@ -21,7 +21,10 @@ export class ZUrlBuilder {
   /**
    * Gets whether the given protocols default port is port.
    *
-   * There are some special behaviors.
+   * The main purpose of this method is to determine if a url requires
+   * a port section.  Therefore, there are some special behaviors which may
+   * not be obvious:
+   *
    * 1.  If the port is falsy then this method returns true.
    * 2.  If the port is NaN, then this method returns true.
    * 3.  If the port is a string that evaluates to 0, then this method returns true.
@@ -62,7 +65,7 @@ export class ZUrlBuilder {
    * @param protocol The protocol to use.
    * @param hostname The hostname to connect with.
    */
-  public constructor(protocol: string = 'http', hostname = 'localhost') {
+  public constructor(protocol = 'http', hostname = 'localhost') {
     this._url = {
       protocol,
       hostname,

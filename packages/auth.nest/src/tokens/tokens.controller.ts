@@ -2,7 +2,6 @@ import { Body, Controller, Delete, Get, Inject, Post, Res, UnauthorizedException
 import { ClientProxy } from '@nestjs/microservices';
 import { ZLoginBuilder } from '@zthun/auth.core';
 import { Response } from 'express';
-import { v4 } from 'uuid';
 import { ZHttpAssert } from '../common/http-assert.class';
 import { DomainToken, JwtServiceToken, UserServiceToken } from '../common/injection.constants';
 import { ZTokensLoginDto } from './tokens-login.dto';
@@ -18,7 +17,7 @@ export class ZTokensController {
    * @param _users The users client proxy.
    * @param _tokens The jwt tokens client proxy.
    */
-  public constructor(@Inject(DomainToken) private readonly _domain: string, @Inject(UserServiceToken) private readonly _users: ClientProxy, @Inject(JwtServiceToken) private readonly _tokens: ClientProxy) {}
+  public constructor(@Inject(DomainToken) private readonly _domain: string, @Inject(UserServiceToken) private readonly _users: ClientProxy, @Inject(JwtServiceToken) private readonly _jwt: ClientProxy) {}
 
   /**
    * Convinence method for UIs that want route guards for token auth.
@@ -45,10 +44,9 @@ export class ZTokensController {
   public async login(@Res() res: Response, @Body() credentials: ZTokensLoginDto) {
     const valid = await this._users.send('compare', new ZLoginBuilder().copy(credentials).build()).toPromise();
     ZHttpAssert.assert(valid, () => new UnauthorizedException('Your credentials are incorrect.  Please try again.'));
-    // const jwt = this._jwt.sign();
-    const jwt = v4();
+    const jwt = await this._jwt.send('sign', { payload: { user: credentials.email }, secret: 'quick-test-must-change-later' }).toPromise();
     const tomorrow = new Date(Date.now() + 3600000);
-    res.cookie('Authentication', jwt, { secure: true, httpOnly: true, expires: tomorrow, domain: this._domain });
+    res.cookie('Authentication', jwt, { secure: false, httpOnly: true, expires: tomorrow, domain: this._domain });
     res.sendStatus(204);
     return null;
   }
