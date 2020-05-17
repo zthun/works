@@ -2,7 +2,6 @@
 export { ZAuthModule } from './auth/auth.module';
 // Common
 // This next one needs to go into a separate package.  Possibily revive zcore.
-export { ZHttpAssert } from './common/http-assert.class';
 export { UserServiceToken } from './common/injection.constants';
 // Users
 export { ZUserCreateDto } from './users/user-create.dto';
