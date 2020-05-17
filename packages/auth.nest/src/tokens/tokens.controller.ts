@@ -1,9 +1,9 @@
-import { Body, Controller, Delete, Get, Inject, Post, Res, UnauthorizedException } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Post, Res, UseGuards } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { ZLoginBuilder } from '@zthun/auth.core';
 import { Response } from 'express';
-import { ZHttpAssert } from '../common/http-assert.class';
 import { DomainToken, JwtServiceToken, UserServiceToken } from '../common/injection.constants';
+import { ZRequiresAuth } from './requires-auth.guard';
 import { ZTokensLoginDto } from './tokens-login.dto';
 
 /**
@@ -27,10 +27,9 @@ export class ZTokensController {
    * @returns A Promise that resolves to a status of 20 if the cookie token is valid, and 401 if it is not authenticated.
    */
   @Get()
-  // @UseGuards(ZRequiresUser)
+  @UseGuards(ZRequiresAuth)
   public async verify(@Res() res: Response) {
     res.sendStatus(204);
-    return null;
   }
 
   /**
@@ -43,22 +42,20 @@ export class ZTokensController {
   @Post()
   public async login(@Res() res: Response, @Body() credentials: ZTokensLoginDto) {
     const valid = await this._users.send('compare', new ZLoginBuilder().copy(credentials).build()).toPromise();
-    ZHttpAssert.assert(valid, () => new UnauthorizedException('Your credentials are incorrect.  Please try again.'));
+    // ZAssert.assert(valid, () => new UnauthorizedException('Your credentials are incorrect.  Please try again.'));
     const jwt = await this._jwt.send('sign', { payload: { user: credentials.email }, secret: 'quick-test-must-change-later' }).toPromise();
     const tomorrow = new Date(Date.now() + 3600000);
     res.cookie('Authentication', jwt, { secure: false, httpOnly: true, expires: tomorrow, domain: this._domain });
     res.sendStatus(204);
-    return null;
   }
 
   /**
    * Removes the cookie data.
    */
   @Delete()
-  // @UseGuards(ZRequiresUser)
+  @UseGuards(ZRequiresAuth)
   public async logout(@Res() res: Response) {
     res.clearCookie('Authentication');
     res.sendStatus(204);
-    return null;
   }
 }

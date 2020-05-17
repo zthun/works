@@ -68,10 +68,6 @@ describe('ZUserBuilder', () => {
     it('removes the password.', () => {
       assertRedactsProperty((u) => u.password);
     });
-
-    it('removes the super flag.', () => {
-      assertRedactsProperty((u) => u.super);
-    });
   });
 
   describe('Clone', () => {

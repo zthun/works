@@ -1,10 +1,10 @@
-// Needs to move down to the dal layer
+// Needs to move down to core layers.
+export { ZAssert } from './common/assert.class';
 export { IZIdentifiable } from './common/identifiable.interface';
+export { ZUrlBuilder } from './common/url-builder.class';
 // Login
 export { ZLoginBuilder } from './logins/login-builder.class';
 export { IZLogin } from './logins/login.interface';
-// URL - needs to move to a separate package somewhere outside of here.
-export { ZUrlBuilder } from './url/url-builder.class';
 // Users
 export { ZUserBuilder } from './users/user-builder.class';
 export { IZUser } from './users/user.interface';

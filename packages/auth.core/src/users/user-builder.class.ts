@@ -69,7 +69,6 @@ export class ZUserBuilder {
    */
   public redact(): this {
     delete this._user.password;
-    delete this._user.super;
     return this;
   }
 
