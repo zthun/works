@@ -4,11 +4,11 @@ import { ZJwtService } from './jwt.service';
 
 @Injectable()
 export class ZRequiresAuth implements CanActivate {
-  public constructor(private readonly _extract: ZJwtService) {}
+  public constructor(private readonly _jwt: ZJwtService) {}
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest() as Request;
-    const user = await this._extract.extract(request);
+    const user = await this._jwt.extract(request);
 
     if (!user) {
       throw new UnauthorizedException('You are not authenticated.  Please log in.');
