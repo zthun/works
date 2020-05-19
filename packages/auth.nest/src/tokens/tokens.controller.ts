@@ -1,8 +1,7 @@
-import { Body, Controller, Delete, Get, Inject, Post, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
+import { Body, Controller, Delete, Get, Post, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { ZAssert, ZLoginBuilder } from '@zthun/auth.core';
 import { Response } from 'express';
-import { UserServiceToken } from '../common/injection.constants';
+import { ZUsersService } from '../users/users.service';
 import { ZJwtService } from './jwt.service';
 import { ZRequiresAuth } from './requires-auth.guard';
 import { ZTokensLoginDto } from './tokens-login.dto';
@@ -18,7 +17,7 @@ export class ZTokensController {
    * @param _users The users client proxy.
    * @param _tokens The jwt tokens client proxy.
    */
-  public constructor(@Inject(UserServiceToken) private readonly _users: ClientProxy, private readonly _jwt: ZJwtService) {}
+  public constructor(private readonly _users: ZUsersService, private readonly _jwt: ZJwtService) {}
 
   /**
    * Convinence method for UIs that want route guards for token auth.
@@ -42,7 +41,7 @@ export class ZTokensController {
    */
   @Post()
   public async login(@Res() res: Response, @Body() credentials: ZTokensLoginDto) {
-    const valid = await this._users.send('compare', new ZLoginBuilder().copy(credentials).build()).toPromise();
+    const valid = await this._users.compare(new ZLoginBuilder().copy(credentials).build());
     ZAssert.claim(valid, 'Your credentials are incorrect.  Please try again.').assert((msg) => new UnauthorizedException(msg));
     await this._jwt.inject(res, credentials);
     res.sendStatus(204);

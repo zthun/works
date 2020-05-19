@@ -1,19 +1,20 @@
-import { ClientProxy } from '@nestjs/microservices';
 import { createSpyObj } from 'jest-createspyobj';
+import { ZUsersService } from '../users/users.service';
+import { ZJwtService } from './jwt.service';
 import { ZTokensController } from './tokens.controller';
 
 describe('TokensController', () => {
   let domain: string;
-  let users: jest.Mocked<ClientProxy>;
-  let jwt: jest.Mocked<ClientProxy>;
+  let jwt: jest.Mocked<ZJwtService>;
+  let users: jest.Mocked<ZUsersService>;
 
   function createTestTarget() {
-    return new ZTokensController(domain, jwt, users);
+    return new ZTokensController(users, jwt);
   }
 
   beforeEach(() => {
-    jwt = createSpyObj(ClientProxy, ['send']);
-    users = createSpyObj(ClientProxy, ['send']);
+    jwt = createSpyObj(ZJwtService, ['inject', 'extract', 'sign', 'verify', 'clear']);
+    users = createSpyObj(ZUsersService, ['findByEmail', 'findById']);
     domain = 'zthunworks.com';
   });
 

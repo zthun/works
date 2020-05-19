@@ -1,5 +1,4 @@
 import { Controller, Inject } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
 import { IZLogin, IZUser, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { compare, hash } from 'bcryptjs';
@@ -11,7 +10,7 @@ import { DatabaseToken } from '../common/injection.constants';
  * Represents a service to manage the user database.
  */
 @Controller()
-export class ZUsersRepositoryController {
+export class ZUsersService {
   /**
    * Initializes a new instance of this object.
    *
@@ -25,7 +24,6 @@ export class ZUsersRepositoryController {
    *
    * @return A promise that, when resolved, has returned all users.
    */
-  @MessagePattern('list')
   public async list(): Promise<IZUser[]> {
     const users = await this._dal.read<IZUser>(Collections.Users).run();
     return users;
@@ -38,7 +36,6 @@ export class ZUsersRepositoryController {
    *
    * @return A promise that, when resolved, has the found user.  Returns undefined if no such user exists.
    */
-  @MessagePattern('findById')
   public async findById(_id: string): Promise<IZUser> {
     const filter = { _id };
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter(filter).run();
@@ -52,7 +49,6 @@ export class ZUsersRepositoryController {
    *
    * @return A promise that, when resolved, has the found user by their email.  Returns null if no such user exists.
    */
-  @MessagePattern('findByEmail')
   public async findByEmail(email: string): Promise<IZUser> {
     const filter = { email };
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter(filter).run();
@@ -66,7 +62,6 @@ export class ZUsersRepositoryController {
    *
    * @return A promise that, when resolved, has returned the new user.
    */
-  @MessagePattern('create')
   public async create(login: IZLogin): Promise<IZUser> {
     const total = await this._dal.count(Collections.Users).run();
     const password = await hash(login.password, BcryptRounds);
@@ -84,8 +79,7 @@ export class ZUsersRepositoryController {
    * @throws NotFoundException If not user exists with the given id.
    * @throws ConflictException If the name of the user changes and there is already another user with the same name.
    */
-  @MessagePattern('update')
-  public async update({ id, login }: { id: string; login: Partial<IZLogin> }): Promise<IZUser> {
+  public async update(id: string, login: Partial<IZLogin>): Promise<IZUser> {
     const template: Partial<IZUser> = {};
 
     if (login.email) {
@@ -112,7 +106,6 @@ export class ZUsersRepositoryController {
    *
    * @return A promise that, when resolve, has returned the deleted user.
    */
-  @MessagePattern('remove')
   public async remove(id: string): Promise<IZUser> {
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
     await this._dal.delete(Collections.Users).filter({ _id: id }).run();
@@ -124,7 +117,6 @@ export class ZUsersRepositoryController {
    *
    * @returns A promise that resolves to true if the credentials match.  False if they do not.
    */
-  @MessagePattern('compare')
   public async compare(credentials: IZLogin) {
     const user = await this.findByEmail(credentials.email);
 

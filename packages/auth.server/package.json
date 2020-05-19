@@ -20,7 +20,6 @@
   "dependencies": {
     "@nestjs/common": "^7.0.7",
     "@nestjs/core": "^7.0.7",
-    "@nestjs/microservices": "^7.0.7",
     "@nestjs/platform-express": "^7.0.7",
     "@zthun/auth.core": "link:../auth.core",
     "@zthun/auth.nest": "link:../auth.nest",

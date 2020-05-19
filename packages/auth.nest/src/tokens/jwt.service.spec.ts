@@ -1,13 +1,13 @@
-import { ClientProxy } from '@nestjs/microservices';
 import { IZLogin, ZLoginBuilder } from '@zthun/auth.core';
 import { Response } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
+import { ZUsersService } from '../users/users.service';
 import { ZJwtService } from './jwt.service';
 
 describe('ZTokensRepositoryController', () => {
   let secret: string;
   let domain: string;
-  let users: jest.Mocked<ClientProxy>;
+  let users: jest.Mocked<ZUsersService>;
 
   function createTestTarget() {
     return new ZJwtService(domain, users);
@@ -17,7 +17,8 @@ describe('ZTokensRepositoryController', () => {
     secret = 'my-secret';
     domain = 'zthunworks.com';
 
-    users = createSpyObj(ClientProxy, ['send']);
+    users = createSpyObj(ZUsersService, ['findByEmail']);
+    users.findByEmail.mockReturnValue(Promise.resolve(null));
   });
 
   describe('Inject', () => {

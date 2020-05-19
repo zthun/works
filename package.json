@@ -14,7 +14,6 @@
     "packages/auth.theme",
     "packages/auth.react",
     "packages/auth.client",
-    "packages/auth.service.user",
     "packages/auth.nest",
     "packages/auth.server"
   ],
@@ -31,7 +30,6 @@
     "@material-ui/lab": "^4.0.0-alpha.52",
     "@nestjs/common": "^7.0.7",
     "@nestjs/core": "^7.0.7",
-    "@nestjs/microservices": "^7.0.7",
     "@nestjs/platform-express": "^7.0.7",
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^10.0.4",

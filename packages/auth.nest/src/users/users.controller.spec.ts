@@ -1,16 +1,16 @@
-import { ClientProxy } from '@nestjs/microservices';
 import { createSpyObj } from 'jest-createspyobj';
 import { ZUsersController } from './users.controller';
+import { ZUsersService } from './users.service';
 
 describe('ZUsersController', () => {
-  let users: jest.Mocked<ClientProxy>;
+  let users: jest.Mocked<ZUsersService>;
 
   function createTestTarget() {
     return new ZUsersController(users);
   }
 
   beforeEach(() => {
-    users = createSpyObj(ClientProxy, ['send']);
+    users = createSpyObj(ZUsersService, ['findById', 'list', 'update', 'create', 'remove', 'findByEmail']);
   });
 
   it('can create.', () => {

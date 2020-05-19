@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
 import { IZLogin, IZUser } from '@zthun/auth.core';
 import { Request, Response } from 'express';
 import { sign, SignOptions, verify } from 'jsonwebtoken';
 import { get } from 'lodash';
-import { DomainToken, UserServiceToken } from '../common/injection.constants';
+import { DomainToken } from '../common/injection.constants';
+import { ZUsersService } from '../users/users.service';
 
 const _SECRET: string = 'quick-test-must-change-later';
 
@@ -21,7 +21,7 @@ export class ZJwtService {
    * @param _domain The domain that the jwt is valid for.
    * @param _users The user repository for retrieving and updating users.
    */
-  public constructor(@Inject(DomainToken) private readonly _domain: string, @Inject(UserServiceToken) private readonly _users: ClientProxy) {}
+  public constructor(@Inject(DomainToken) private readonly _domain: string, private readonly _users: ZUsersService) {}
 
   /**
    * Injects the jwt with the appropriate credentials into the response object.
@@ -43,7 +43,7 @@ export class ZJwtService {
     try {
       const token = get(req, 'cookies.Authentication');
       const payload: { user: string } = await this.verify(token, _SECRET);
-      const user = await this._users.send('findByEmail', payload.user).toPromise();
+      const user = await this._users.findByEmail(payload.user);
       return user;
     } catch {
       return null;

@@ -3,7 +3,7 @@ import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal
 import { compare, hash } from 'bcryptjs';
 import { Collections } from '../common/collections.enum';
 import { BcryptRounds } from '../common/crypt.constants';
-import { ZUsersRepositoryController } from './users-repository.controller';
+import { ZUsersService } from './users.service';
 
 describe('ZUsersRepositoryController', () => {
   let dal: IZDatabase;
@@ -32,7 +32,7 @@ describe('ZUsersRepositoryController', () => {
   });
 
   function createTestTarget() {
-    return new ZUsersRepositoryController(dal);
+    return new ZUsersService(dal);
   }
 
   describe('List', () => {
@@ -137,7 +137,7 @@ describe('ZUsersRepositoryController', () => {
       const expected = 'super-user';
       const login: Partial<IZLogin> = { email: expected };
       // Act
-      await target.update({ id: userA._id, login });
+      await target.update(userA._id, login);
       const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(actual.email).toEqual(expected);
@@ -148,7 +148,7 @@ describe('ZUsersRepositoryController', () => {
       const target = createTestTarget();
       const login: Partial<IZLogin> = { password: 'super-password', confirm: 'super-password' };
       // Act
-      const updated = await target.update({ id: userA._id, login });
+      const updated = await target.update(userA._id, login);
       // Assert
       expect(updated.email).toEqual(userA.email);
     });
@@ -158,7 +158,7 @@ describe('ZUsersRepositoryController', () => {
       const target = createTestTarget();
       const login: Partial<IZLogin> = { password: 'super-password', confirm: 'super-password' };
       // Act
-      await target.update({ id: userA._id, login });
+      await target.update(userA._id, login);
       const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
       const same = await compare(login.password, actual.password);
       // Assert
@@ -169,7 +169,7 @@ describe('ZUsersRepositoryController', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      await target.update({ id: userA._id, login: {} });
+      await target.update(userA._id, {});
       const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(actual.password).toEqual(userA.password);

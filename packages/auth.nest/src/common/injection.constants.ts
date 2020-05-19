@@ -4,6 +4,6 @@
 export const DomainToken = 'SERVICE.DOMAIN';
 
 /**
- * Injection token for the user microservice.
+ * Injection token for the auth database (IZDatabase)
  */
-export const UserServiceToken = 'SERVICE.USER';
+export const DatabaseToken = 'DATABASE.AUTH';
