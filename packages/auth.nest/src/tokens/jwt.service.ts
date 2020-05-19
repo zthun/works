@@ -13,6 +13,9 @@ const _SECRET: string = 'quick-test-must-change-later';
  */
 @Injectable()
 export class ZJwtService {
+  /**
+   * The name of the cookie that this service will inject.
+   */
   public static readonly COOKIE_NAME = 'Authentication';
 
   /**
@@ -25,6 +28,11 @@ export class ZJwtService {
 
   /**
    * Injects the jwt with the appropriate credentials into the response object.
+   *
+   * @param res The response object to inject the cookie into.
+   * @param credentials The login credentials that contain the email to inject.
+   *
+   * @returns A promise that, when resolved, has injected the cookie.
    */
   public async inject(res: Response, credentials: IZLogin) {
     const jwt = await this.sign({ user: credentials.email }, _SECRET);
@@ -54,6 +62,8 @@ export class ZJwtService {
    * Clears the authentication cookie from the response.
    *
    * @param res The response to clear the cookie from.
+   *
+   * @returns A promise that, when resolved, has cleared the auth cookie.
    */
   public async clear(res: Response) {
     res.clearCookie(ZJwtService.COOKIE_NAME);

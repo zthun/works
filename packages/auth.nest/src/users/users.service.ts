@@ -7,7 +7,7 @@ import { BcryptRounds } from '../common/crypt.constants';
 import { DatabaseToken } from '../common/injection.constants';
 
 /**
- * Represents a service to manage the user database.
+ * Represents a service to manage the user database with business rules.
  */
 @Controller()
 export class ZUsersService {
