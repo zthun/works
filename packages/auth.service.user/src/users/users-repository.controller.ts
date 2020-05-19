@@ -8,7 +8,7 @@ import { BcryptRounds } from '../common/crypt.constants';
 import { DatabaseToken } from '../common/injection.constants';
 
 /**
- * Represents a service to retrieve users.
+ * Represents a service to manage the user database.
  */
 @Controller()
 export class ZUsersRepositoryController {
@@ -21,7 +21,7 @@ export class ZUsersRepositoryController {
   public constructor(@Inject(DatabaseToken) private readonly _dal: IZDatabase) {}
 
   /**
-   * Gets a list of all users.
+   * Gets a list of all users in the database.
    *
    * @return A promise that, when resolved, has returned all users.
    */

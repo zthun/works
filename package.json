@@ -15,7 +15,6 @@
     "packages/auth.react",
     "packages/auth.client",
     "packages/auth.service.user",
-    "packages/auth.service.jwt",
     "packages/auth.nest",
     "packages/auth.server"
   ],
@@ -42,6 +41,7 @@
     "@types/helmet": "^0.0.47",
     "@types/jest": "^25.2.1",
     "@types/jsdom": "^16.2.1",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/lodash": "^4.0.0",
     "@types/node": "^13.1.1",
     "@types/oauth2-server": "^3.0.12",

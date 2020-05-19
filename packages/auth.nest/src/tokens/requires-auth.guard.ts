@@ -1,10 +1,10 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
-import { ZJwtUserExtractService } from './jwt-user-extract.service';
+import { ZJwtService } from './jwt.service';
 
 @Injectable()
 export class ZRequiresAuth implements CanActivate {
-  public constructor(private readonly _extract: ZJwtUserExtractService) {}
+  public constructor(private readonly _extract: ZJwtService) {}
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest() as Request;

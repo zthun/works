@@ -2,7 +2,22 @@
  * Represents an object that can be used to build a list of assertions.
  */
 export class ZAssert {
+  /**
+   * Initializes a new instance of a ZAssert with one claim.
+   *
+   * @param claim The claim to make.
+   * @param msg The message to throw if the claim is false.
+   */
+  public static claim(claim: boolean, msg: any): ZAssert {
+    return new ZAssert().claim(claim, msg);
+  }
+
   private _messages: any[] = [];
+
+  /**
+   * Initializes a new instance of this object.
+   */
+  private constructor() {}
 
   /**
    * Adds a claim.

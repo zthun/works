@@ -2,7 +2,7 @@ import { ZAssert } from './assert.class';
 
 describe('ZAssert', () => {
   function createTestTarget() {
-    return new ZAssert();
+    return ZAssert.claim(true, 'ignored');
   }
 
   describe('Claims', () => {

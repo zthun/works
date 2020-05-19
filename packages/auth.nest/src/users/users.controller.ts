@@ -44,7 +44,7 @@ export class ZUsersController {
   @UseGuards(ZRequiresAuthSuper)
   public async read(@Param() { id }: { id: string }): Promise<IZUser> {
     const user = await this._users.send<IZUser, string>('findById', id).toPromise();
-    new ZAssert().claim(!!user, `User with id, ${id}, was not found.`).assert((msg) => new NotFoundException(`User with id, ${id}, was not found.`));
+    ZAssert.claim(!!user, `User with id, ${id}, was not found.`).assert((msg) => new NotFoundException(`User with id, ${id}, was not found.`));
     return new ZUserBuilder().copy(user).redact().build();
   }
 
@@ -60,7 +60,7 @@ export class ZUsersController {
   @Post()
   public async create(@Body() login: ZUserCreateDto): Promise<IZUser> {
     let user = await this._users.send<IZUser, string>('findByEmail', login.email).toPromise();
-    new ZAssert().claim(!user, 'User email is already taken.').assert((msg) => new ConflictException(msg));
+    ZAssert.claim(!user, 'User email is already taken.').assert((msg) => new ConflictException(msg));
     user = await this._users.send<IZUser, IZLogin>('create', login).toPromise();
     return new ZUserBuilder().copy(user).redact().build();
   }
@@ -80,11 +80,11 @@ export class ZUsersController {
   @UseGuards(ZRequiresAuthSuper)
   public async update(@Param() { id }: { id: string }, @Body() login: ZUserUpdateDto): Promise<IZUser> {
     let user = await this._users.send<IZUser, string>('findById', id).toPromise();
-    new ZAssert().claim(!!user, `User with id, ${id}, was not found.`).assert((msg) => new NotFoundException(msg));
+    ZAssert.claim(!!user, `User with id, ${id}, was not found.`).assert((msg) => new NotFoundException(msg));
 
     if (login.email) {
       const existing = await this._users.send<IZUser, string>('findByEmail', login.email).toPromise();
-      new ZAssert().claim(!existing || existing._id === id, 'User email is already taken.').assert((msg) => new ConflictException(msg));
+      ZAssert.claim(!existing || existing._id === id, 'User email is already taken.').assert((msg) => new ConflictException(msg));
     }
 
     const payload = { id, login };
@@ -105,8 +105,8 @@ export class ZUsersController {
   @UseGuards(ZRequiresAuthSuper)
   public async remove(@Param() { id }: { id: string }): Promise<IZUser> {
     const user = await this._users.send<IZUser, string>('findById', id).toPromise();
-    new ZAssert().claim(!!user, `User with id, ${id}, was not found.`).assert((msg) => new NotFoundException(msg));
-    new ZAssert().claim(!user.super, 'You cannot delete the super user.').assert((msg) => new ForbiddenException(msg));
+    ZAssert.claim(!!user, `User with id, ${id}, was not found.`).assert((msg) => new NotFoundException(msg));
+    ZAssert.claim(!user.super, 'You cannot delete the super user.').assert((msg) => new ForbiddenException(msg));
     await this._users.send('remove', id).toPromise();
     return new ZUserBuilder().copy(user).redact().build();
   }

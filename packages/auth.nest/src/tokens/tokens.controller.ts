@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Inject, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Post, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { ZLoginBuilder } from '@zthun/auth.core';
+import { ZAssert, ZLoginBuilder } from '@zthun/auth.core';
 import { Response } from 'express';
-import { DomainToken, JwtServiceToken, UserServiceToken } from '../common/injection.constants';
+import { UserServiceToken } from '../common/injection.constants';
+import { ZJwtService } from './jwt.service';
 import { ZRequiresAuth } from './requires-auth.guard';
 import { ZTokensLoginDto } from './tokens-login.dto';
 
@@ -17,14 +18,14 @@ export class ZTokensController {
    * @param _users The users client proxy.
    * @param _tokens The jwt tokens client proxy.
    */
-  public constructor(@Inject(DomainToken) private readonly _domain: string, @Inject(UserServiceToken) private readonly _users: ClientProxy, @Inject(JwtServiceToken) private readonly _jwt: ClientProxy) {}
+  public constructor(@Inject(UserServiceToken) private readonly _users: ClientProxy, private readonly _jwt: ZJwtService) {}
 
   /**
    * Convinence method for UIs that want route guards for token auth.
    *
    * Returns a status of 204 if your cookie token is valid, and 401 if not authenticated.
    *
-   * @returns A Promise that resolves to a status of 20 if the cookie token is valid, and 401 if it is not authenticated.
+   * @returns A Promise that resolves to a status of 204 if the cookie token is valid, and 401 if it is not authenticated.
    */
   @Get()
   @UseGuards(ZRequiresAuth)
@@ -42,10 +43,8 @@ export class ZTokensController {
   @Post()
   public async login(@Res() res: Response, @Body() credentials: ZTokensLoginDto) {
     const valid = await this._users.send('compare', new ZLoginBuilder().copy(credentials).build()).toPromise();
-    // ZAssert.assert(valid, () => new UnauthorizedException('Your credentials are incorrect.  Please try again.'));
-    const jwt = await this._jwt.send('sign', { payload: { user: credentials.email }, secret: 'quick-test-must-change-later' }).toPromise();
-    const tomorrow = new Date(Date.now() + 3600000);
-    res.cookie('Authentication', jwt, { secure: false, httpOnly: true, expires: tomorrow, domain: this._domain });
+    ZAssert.claim(valid, 'Your credentials are incorrect.  Please try again.').assert((msg) => new UnauthorizedException(msg));
+    await this._jwt.inject(res, credentials);
     res.sendStatus(204);
   }
 
@@ -55,7 +54,7 @@ export class ZTokensController {
   @Delete()
   @UseGuards(ZRequiresAuth)
   public async logout(@Res() res: Response) {
-    res.clearCookie('Authentication');
+    await this._jwt.clear(res);
     res.sendStatus(204);
   }
 }
