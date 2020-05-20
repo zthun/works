@@ -4,7 +4,7 @@ import { Request } from 'express';
 import { ZJwtService } from '../tokens/jwt.service';
 
 @Injectable()
-export class ZRuleRequiresAuthSuper implements CanActivate {
+export class ZRuleCookieRequiresAuthSuper implements CanActivate {
   public constructor(private readonly _jwt: ZJwtService) {}
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {

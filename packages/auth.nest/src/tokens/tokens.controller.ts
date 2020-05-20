@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Post, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { ZAssert, ZLoginBuilder } from '@zthun/auth.core';
 import { Response } from 'express';
-import { ZRuleRequiresAuth } from '../rules/rule-requires-auth.guard';
+import { ZRuleRequiresAuth } from '../rules/rule-cookie-requires-auth.guard';
 import { ZUsersService } from '../users/users.service';
 import { ZJwtService } from './jwt.service';
 import { ZTokensLoginDto } from './tokens-login.dto';

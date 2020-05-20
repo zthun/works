@@ -38,7 +38,7 @@ describe('ZTokensRepositoryController', () => {
       // Act
       await target.inject(res, credentials);
       // Assert
-      expect(res.cookie).toHaveBeenCalledWith(ZJwtService.COOKIE_NAME, expect.anything(), expect.objectContaining({ secure: true, httpOnly: true, domain }));
+      expect(res.cookie).toHaveBeenCalledWith(ZJwtService.COOKIE_NAME, expect.anything(), expect.objectContaining({ sameSite: true, httpOnly: true, domain }));
     });
 
     it('should clear the auth token.', async () => {
