@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { IZUser, ZUserBuilder } from '@zthun/auth.core';
 import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-user.guard';
 import { ZRuleCookieRequiresAuthSuper } from '../rules/rule-cookie-requires-auth-super.guard';
-import { ZRuleParamRequiresExistingUserId } from '../rules/rule-param-requires-existing-user-id.guard';
-import { ZRuleParamRequiresRegularUser } from '../rules/rule-param-requires-regular-user-id.guard';
+import { ZRuleParamRequiresExistingUser } from '../rules/rule-param-requires-existing-user.guard';
+import { ZRuleParamRequiresRegularUser } from '../rules/rule-param-requires-regular-user.guard';
 import { ZUserCreateDto } from './user-create.dto';
 import { ZUserUpdateDto } from './user-update.dto';
 import { ZUsersService } from './users.service';
@@ -42,7 +42,7 @@ export class ZUsersController {
    * @throws NotFoundException If the user does not exist.
    */
   @Get(':id')
-  @UseGuards(ZRuleParamRequiresExistingUserId)
+  @UseGuards(ZRuleParamRequiresExistingUser)
   @UseGuards(ZRuleCookieRequiresAuthSuper)
   public async read(@Param() { id }: { id: string }): Promise<IZUser> {
     const user = await this._users.findById(id);
@@ -78,7 +78,7 @@ export class ZUsersController {
    */
   @Put(':id')
   @UseGuards(ZRuleBodyRequiresUniqueUser)
-  @UseGuards(ZRuleParamRequiresExistingUserId)
+  @UseGuards(ZRuleParamRequiresExistingUser)
   @UseGuards(ZRuleCookieRequiresAuthSuper)
   public async update(@Param() { id }: { id: string }, @Body() login: ZUserUpdateDto): Promise<IZUser> {
     const user = await this._users.update(id, login);

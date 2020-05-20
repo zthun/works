@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 export { ZAlertBuilder } from './alert/alert-builder.class';
 export { ZAlertSeverity } from './alert/alert-severity.enum';
 export { ZAlertStackList } from './alert/alert-stack-list';

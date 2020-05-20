@@ -1,8 +1,14 @@
+/* istanbul ignore file */
+
 // Auth
 export { ZAuthModule } from './auth/auth.module';
 // Rules
+export { ZRuleBodyRequiresCredentials } from './rules/rule-body-requires-credentials.guard';
+export { ZRuleBodyRequiresUniqueUser } from './rules/rule-body-requires-unique-user.guard';
 export { ZRuleCookieRequiresAuthSuper } from './rules/rule-cookie-requires-auth-super.guard';
-export { ZRuleRequiresAuth } from './rules/rule-cookie-requires-auth.guard';
+export { ZRuleCookieRequiresAuth } from './rules/rule-cookie-requires-auth.guard';
+export { ZRuleParamRequiresExistingUser } from './rules/rule-param-requires-existing-user.guard';
+export { ZRuleParamRequiresRegularUser } from './rules/rule-param-requires-regular-user.guard';
 // Tokens
 export { ZJwtService } from './tokens/jwt.service';
 export { ZTokensLoginDto } from './tokens/tokens-login.dto';

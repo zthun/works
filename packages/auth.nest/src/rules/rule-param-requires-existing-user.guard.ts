@@ -3,7 +3,7 @@ import { ZAssert } from '@zthun/auth.core';
 import { ZUsersService } from '../users/users.service';
 
 @Injectable()
-export class ZRuleParamRequiresExistingUserId implements CanActivate {
+export class ZRuleParamRequiresExistingUser implements CanActivate {
   public constructor(private readonly _users: ZUsersService) {}
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {

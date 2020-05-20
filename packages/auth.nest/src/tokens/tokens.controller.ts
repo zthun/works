@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Post, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { ZRuleBodyRequiresCredentials } from '../rules/rule-body-requires-credentials.guard';
-import { ZRuleRequiresAuth } from '../rules/rule-cookie-requires-auth.guard';
+import { ZRuleCookieRequiresAuth } from '../rules/rule-cookie-requires-auth.guard';
 import { ZJwtService } from './jwt.service';
 import { ZTokensLoginDto } from './tokens-login.dto';
 
@@ -25,7 +25,7 @@ export class ZTokensController {
    * @returns A Promise that resolves to a status of 204 if the cookie token is valid, and 401 if it is not authenticated.
    */
   @Get()
-  @UseGuards(ZRuleRequiresAuth)
+  @UseGuards(ZRuleCookieRequiresAuth)
   public async verify(@Res() res: Response) {
     res.sendStatus(204);
   }
@@ -48,7 +48,7 @@ export class ZTokensController {
    * Removes the cookie data.
    */
   @Delete()
-  @UseGuards(ZRuleRequiresAuth)
+  @UseGuards(ZRuleCookieRequiresAuth)
   public async logout(@Res() res: Response) {
     await this._jwt.clear(res);
     res.sendStatus(204);

@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 // Needs to move down to core layers.
 export { ZAssert } from './common/assert.class';
 export { IZIdentifiable } from './common/identifiable.interface';
