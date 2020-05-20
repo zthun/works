@@ -1,5 +1,5 @@
-import { IZLogin, ZLoginBuilder } from '@zthun/auth.core';
-import { Response } from 'express';
+import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
+import { Request, Response } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
 import { ZUsersService } from '../users/users.service';
 import { ZJwtService } from './jwt.service';
@@ -15,7 +15,7 @@ describe('ZTokensRepositoryController', () => {
 
   beforeEach(() => {
     secret = 'my-secret';
-    domain = 'zthunworks.com';
+    domain = 'marvel.com';
 
     users = createSpyObj(ZUsersService, ['findByEmail']);
     users.findByEmail.mockReturnValue(Promise.resolve(null));
@@ -26,7 +26,7 @@ describe('ZTokensRepositoryController', () => {
     let credentials: IZLogin;
 
     beforeEach(() => {
-      credentials = new ZLoginBuilder().email('zthun@zthunworks.com').password('not-very-secure').autoConfirm().build();
+      credentials = new ZLoginBuilder().email('gambit@marvel.com').password('not-very-secure').autoConfirm().build();
 
       res = (createSpyObj('res', ['cookie', 'clearCookie']) as unknown) as jest.Mocked<Response>;
       res.cookie.mockReturnValue(res);
@@ -52,12 +52,34 @@ describe('ZTokensRepositoryController', () => {
   });
 
   describe('Extract', () => {
-    it('should extract the user from the auth cookie in the request.', () => {
-      expect(true).toBe(true);
+    let user: IZUser;
+    let req: jest.Mocked<Request>;
+
+    beforeEach(() => {
+      user = new ZUserBuilder().email('wolverine@marvel.com').password('foo').id('0').super().build();
+      users.findByEmail.mockReturnValue(Promise.resolve(user));
+      req = (createSpyObj('res', ['cookies']) as unknown) as jest.Mocked<Request>;
     });
 
-    it('should return null if the token cannot be extracted.', () => {
-      expect(true).toBe(true);
+    it('should extract the user from the auth cookie in the request.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const jwt = await target.sign({ user: user.email }, 'quick-test-must-change-later');
+      req.cookies[ZJwtService.COOKIE_NAME] = jwt;
+      // Act
+      const actual = await target.extract(req);
+      // Assert
+      expect(actual).toEqual(user);
+    });
+
+    it('should return falsy if the token cannot be extracted.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      users.findByEmail.mockRejectedValue('failed');
+      // Act
+      const actual = await target.extract(req);
+      // Assert
+      expect(actual).toBeFalsy();
     });
   });
 

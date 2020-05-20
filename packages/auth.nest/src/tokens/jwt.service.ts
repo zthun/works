@@ -49,7 +49,7 @@ export class ZJwtService {
    */
   public async extract(req: Request): Promise<IZUser> {
     try {
-      const token = get(req, 'cookies.Authentication');
+      const token = get(req, `cookies[${ZJwtService.COOKIE_NAME}]`);
       const payload: { user: string } = await this.verify(token, _SECRET);
       const user = await this._users.findByEmail(payload.user);
       return user;
