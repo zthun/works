@@ -1,8 +1,7 @@
-import { Body, Controller, Delete, Get, Post, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
-import { ZAssert, ZLoginBuilder } from '@zthun/auth.core';
+import { Body, Controller, Delete, Get, Post, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
+import { ZRuleBodyRequiresCredentials } from '../rules/rule-body-requires-credentials.guard';
 import { ZRuleRequiresAuth } from '../rules/rule-cookie-requires-auth.guard';
-import { ZUsersService } from '../users/users.service';
 import { ZJwtService } from './jwt.service';
 import { ZTokensLoginDto } from './tokens-login.dto';
 
@@ -14,10 +13,9 @@ export class ZTokensController {
   /**
    * Initializes a new instance of this object.
    *
-   * @param _users The users client proxy.
    * @param _tokens The jwt tokens client proxy.
    */
-  public constructor(private readonly _users: ZUsersService, private readonly _jwt: ZJwtService) {}
+  public constructor(private readonly _jwt: ZJwtService) {}
 
   /**
    * Convinence method for UIs that want route guards for token auth.
@@ -40,9 +38,8 @@ export class ZTokensController {
    * @returns A promise that resolves to a status of 204 if the cookie token is valid, and 401 if the user cannot login.
    */
   @Post()
+  @UseGuards(ZRuleBodyRequiresCredentials)
   public async login(@Res() res: Response, @Body() credentials: ZTokensLoginDto) {
-    const valid = await this._users.compare(new ZLoginBuilder().copy(credentials).build());
-    ZAssert.claim(valid, 'Your credentials are incorrect.  Please try again.').assert((msg) => new UnauthorizedException(msg));
     await this._jwt.inject(res, credentials);
     res.sendStatus(204);
   }
