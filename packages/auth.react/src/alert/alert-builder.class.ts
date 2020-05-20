@@ -79,7 +79,7 @@ export class ZAlertBuilder {
    */
   public message(message: any): this {
     if (isArray(message)) {
-      this._alert.message = message.join('<br />');
+      this._alert.message = message.join('\n');
     } else {
       this._alert.message = String(message);
     }

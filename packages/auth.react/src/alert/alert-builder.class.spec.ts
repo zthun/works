@@ -25,6 +25,14 @@ describe('ZAlertBuilder', () => {
       );
     });
 
+    it('sets the messages to a newline delimied string if an array is passed.', () => {
+      assertPropertySet(
+        'Line1\nLine2\nLine3',
+        (t) => t.success().message(['Line1', 'Line2', 'Line3']),
+        (a) => a.message
+      );
+    });
+
     it('sets the time to live.', () => {
       assertPropertySet(
         1000,
