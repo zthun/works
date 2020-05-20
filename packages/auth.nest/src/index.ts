@@ -1,9 +1,10 @@
 // Auth
 export { ZAuthModule } from './auth/auth.module';
+// Rules
+export { ZRuleRequiresAuthSuper } from './rules/rule-requires-auth-super.guard';
+export { ZRuleRequiresAuth } from './rules/rule-requires-auth.guard';
 // Tokens
 export { ZJwtService } from './tokens/jwt.service';
-export { ZRequiresAuthSuper } from './tokens/requires-auth-super.guard';
-export { ZRequiresAuth } from './tokens/requires-auth.guard';
 export { ZTokensLoginDto } from './tokens/tokens-login.dto';
 export { ZTokensController } from './tokens/tokens.controller';
 // Users

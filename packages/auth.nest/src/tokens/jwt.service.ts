@@ -37,7 +37,7 @@ export class ZJwtService {
   public async inject(res: Response, credentials: IZLogin) {
     const jwt = await this.sign({ user: credentials.email }, _SECRET);
     const tomorrow = new Date(Date.now() + 3600000);
-    res.cookie(ZJwtService.COOKIE_NAME, jwt, { secure: true, httpOnly: true, expires: tomorrow, domain: this._domain });
+    res.cookie(ZJwtService.COOKIE_NAME, jwt, { secure: false, httpOnly: true, expires: tomorrow, domain: this._domain });
   }
 
   /**

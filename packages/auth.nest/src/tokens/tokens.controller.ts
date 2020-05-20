@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Post, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { ZAssert, ZLoginBuilder } from '@zthun/auth.core';
 import { Response } from 'express';
+import { ZRuleRequiresAuth } from '../rules/rule-requires-auth.guard';
 import { ZUsersService } from '../users/users.service';
 import { ZJwtService } from './jwt.service';
-import { ZRequiresAuth } from './requires-auth.guard';
 import { ZTokensLoginDto } from './tokens-login.dto';
 
 /**
@@ -27,7 +27,7 @@ export class ZTokensController {
    * @returns A Promise that resolves to a status of 204 if the cookie token is valid, and 401 if it is not authenticated.
    */
   @Get()
-  @UseGuards(ZRequiresAuth)
+  @UseGuards(ZRuleRequiresAuth)
   public async verify(@Res() res: Response) {
     res.sendStatus(204);
   }
@@ -37,7 +37,7 @@ export class ZTokensController {
    *
    * @param credentials The user credentials.
    *
-   * @returns A promise that resolves to a status of 204 if the cookie token is valid, and 401 if the user cannot login.  The return will
+   * @returns A promise that resolves to a status of 204 if the cookie token is valid, and 401 if the user cannot login.
    */
   @Post()
   public async login(@Res() res: Response, @Body() credentials: ZTokensLoginDto) {
@@ -51,7 +51,7 @@ export class ZTokensController {
    * Removes the cookie data.
    */
   @Delete()
-  @UseGuards(ZRequiresAuth)
+  @UseGuards(ZRuleRequiresAuth)
   public async logout(@Res() res: Response) {
     await this._jwt.clear(res);
     res.sendStatus(204);
