@@ -1,24 +1,39 @@
 import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { Request, Response } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
+import { ZConfigsService } from '../config/configs.service';
 import { ZUsersService } from '../users/users.service';
 import { ZJwtService } from './jwt.service';
 
 describe('ZTokensRepositoryController', () => {
   let secret: string;
   let domain: string;
+  let cfg: any;
+  let config: jest.Mocked<ZConfigsService>;
   let users: jest.Mocked<ZUsersService>;
 
   function createTestTarget() {
-    return new ZJwtService(domain, users);
+    return new ZJwtService(config, users);
   }
 
   beforeEach(() => {
     secret = 'my-secret';
     domain = 'marvel.com';
 
+    cfg = {
+      'common': {
+        domain
+      },
+      'authentication.secrets': {
+        jwt: secret
+      }
+    };
+
     users = createSpyObj(ZUsersService, ['findByEmail']);
     users.findByEmail.mockReturnValue(Promise.resolve(null));
+
+    config = createSpyObj(ZConfigsService, ['getByKey']);
+    config.getByKey.mockImplementation((scope, key) => Promise.resolve(cfg[scope][key]));
   });
 
   describe('Inject', () => {
@@ -64,7 +79,7 @@ describe('ZTokensRepositoryController', () => {
     it('should extract the user from the auth cookie in the request.', async () => {
       // Arrange
       const target = createTestTarget();
-      const jwt = await target.sign({ user: user.email }, 'quick-test-must-change-later');
+      const jwt = await target.sign({ user: user.email }, secret);
       req.cookies[ZJwtService.COOKIE_NAME] = jwt;
       // Act
       const actual = await target.extract(req);

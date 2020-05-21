@@ -10,5 +10,9 @@ export enum Collections {
   /**
    * The users collection.
    */
-  Users = 'users'
+  Users = 'users',
+  /**
+   * The configs collection.
+   */
+  Configs = 'configs'
 }
