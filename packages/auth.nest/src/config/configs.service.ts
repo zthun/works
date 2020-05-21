@@ -8,26 +8,57 @@ import { DatabaseToken } from '../common/injection.constants';
 export class ZConfigsService {
   public constructor(@Inject(DatabaseToken) private readonly _dal: IZDatabase) {}
 
-  public async getByKey<T>(scope: string, key: string, def: T): Promise<T> {
-    let [config] = await this._dal.read<IZConfigEntry>(Collections.Configs).filter({ scope, key }).run();
-
-    if (!config) {
-      config = await this.putByKey(scope, key, def);
-    }
-
-    return config.value;
+  /**
+   * Reads a configuration item by scope and key.
+   *
+   * @param scope The configuration scope.
+   * @param key The configuration key.
+   *
+   * @returns A promise that, when resolved, has the configuration for the specified scope and key.  Resolves
+   *          to null if non such scope and key exists.
+   */
+  public async read<T>(scope: string, key: string): Promise<IZConfigEntry<T>> {
+    const [existing] = await this._dal.read<IZConfigEntry<T>>(Collections.Configs).filter({ scope, key }).run();
+    return existing;
   }
 
-  public async putByKey<T>(scope: string, key: string, val: T): Promise<IZConfigEntry> {
-    const config = new ZConfigEntryBuilder<T>().scope(scope).key(key).value(val).build();
-    const filter = { _id: config._id };
-    const count = await this._dal.count(Collections.Configs).filter(filter).run();
+  /**
+   * Gets the existing configuration value.
+   *
+   * If no config with the given scope and key exists, then the
+   * configuration is added with the value.  Otherwise, the value
+   * is overritten with the stored value.
+   *
+   * @param config The current configuration to read.  If the scope and key of the config exists,
+   * then the existing config entity is returned, otherwise, the config value is added and
+   * @returns A promise that, when resolved, gives the existing config.
+   */
+  public async get<T>(entry: IZConfigEntry<T>): Promise<IZConfigEntry<T>> {
+    let config = await this.read<T>(entry.scope, entry.key);
 
-    if (count > 0) {
-      await this._dal.update<IZConfigEntry>(Collections.Configs, config).filter(filter).run();
+    if (!config) {
+      config = new ZConfigEntryBuilder().copy(entry).build();
+      [config] = await this._dal.create(Collections.Configs, [config]).run();
+    }
+
+    return config;
+  }
+
+  /**
+   * Adds a configuration entry or updates an existing entry.
+   *
+   * @param entry The configuration entry to add or update.
+   *
+   * @returns A promise that, when resolve, returns the updated value.
+   */
+  public async put<T>(entry: IZConfigEntry<T>): Promise<IZConfigEntry<T>> {
+    let config = await this.read<T>(entry.scope, entry.key);
+
+    if (!config) {
+      const items = [entry];
+      [config] = await this._dal.create<IZConfigEntry<T>>(Collections.Configs, items).run();
     } else {
-      const items = [config];
-      await this._dal.create<IZConfigEntry>(Collections.Configs, items).run();
+      await this._dal.update<IZConfigEntry>(Collections.Configs, config).filter({ _id: config._id }).run();
     }
 
     return config;

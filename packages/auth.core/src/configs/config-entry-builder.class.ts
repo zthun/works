@@ -1,3 +1,4 @@
+import { randomBytes } from 'crypto';
 import { IZConfigEntry } from './config-entry.interface';
 
 /**
@@ -55,6 +56,19 @@ export class ZConfigEntryBuilder<T = any> {
   }
 
   /**
+   * Generates a value of a specified length and returns the new builder.
+   *
+   * @param length The length of the random byte array.  For secrets, the longer the better.
+   * @param encoding The way to encode the byte array to a string.
+   *
+   * @returns A new entry builder that has a string value.
+   */
+  public generate(length = 128, encoding = 'base64'): ZConfigEntryBuilder<string> {
+    const val = randomBytes(length).toString(encoding);
+    return new ZConfigEntryBuilder<string>().scope(this._entry.scope).key(this._entry.key).value(val);
+  }
+
+  /**
    * Assigns values from another config entry to this object.
    *
    * @param other The config entry to partially copy.
@@ -83,7 +97,7 @@ export class ZConfigEntryBuilder<T = any> {
    *
    * @returns The built entry object.
    */
-  public build(): IZConfigEntry {
+  public build(): IZConfigEntry<T> {
     this._entry._id = `${this._entry.scope}.${this._entry.key}`;
     return { ...this._entry };
   }

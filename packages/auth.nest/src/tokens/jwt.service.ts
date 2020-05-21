@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IZLogin, IZUser } from '@zthun/auth.core';
-import { randomBytes } from 'crypto';
+import { IZLogin, IZUser, ZConfigEntryBuilder } from '@zthun/auth.core';
 import { Request, Response } from 'express';
 import { sign, SignOptions, verify } from 'jsonwebtoken';
 import { get } from 'lodash';
@@ -35,7 +34,7 @@ export class ZJwtService {
    */
   public async inject(res: Response, credentials: IZLogin) {
     const secret = await this._secret();
-    const domain = await this._config.getByKey('common', 'domain', 'zthunworks.com');
+    const domain = await this._domain();
     const jwt = await this.sign({ user: credentials.email }, secret);
     const tomorrow = new Date(Date.now() + 3600000);
     res.cookie(ZJwtService.COOKIE_NAME, jwt, { secure: false, httpOnly: true, expires: tomorrow, domain, sameSite: true });
@@ -118,9 +117,19 @@ export class ZJwtService {
    * @returns A promise that, when resolved, returns the jwt secret.
    */
   private async _secret() {
-    const length = 128;
-    const encoding = 'base64';
-    const def = randomBytes(length).toString(encoding);
-    return await this._config.getByKey('authentication.secrets', 'jwt', def);
+    let cfg = new ZConfigEntryBuilder().scope('authentication.secrets').key('jwt').generate().build();
+    cfg = await this._config.get(cfg);
+    return cfg.value;
+  }
+
+  /**
+   * Gets the domain.
+   *
+   * @returns A promise that, when resolved, returns the domain.
+   */
+  private async _domain() {
+    let cfg = new ZConfigEntryBuilder().scope('common').key('domain').value('zthunworks.com').build();
+    cfg = await this._config.get(cfg);
+    return cfg.value;
   }
 }

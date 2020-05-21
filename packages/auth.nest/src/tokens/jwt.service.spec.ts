@@ -1,4 +1,4 @@
-import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
+import { IZLogin, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { Request, Response } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
 import { ZConfigsService } from '../config/configs.service';
@@ -22,18 +22,18 @@ describe('ZTokensRepositoryController', () => {
 
     cfg = {
       'common': {
-        domain
+        domain: new ZConfigEntryBuilder().scope('common').key('domain').value(domain).build()
       },
       'authentication.secrets': {
-        jwt: secret
+        jwt: new ZConfigEntryBuilder().scope('authentication.secrets').key('jwt').value(secret).build()
       }
     };
 
     users = createSpyObj(ZUsersService, ['findByEmail']);
     users.findByEmail.mockReturnValue(Promise.resolve(null));
 
-    config = createSpyObj(ZConfigsService, ['getByKey']);
-    config.getByKey.mockImplementation((scope, key) => Promise.resolve(cfg[scope][key]));
+    config = createSpyObj(ZConfigsService, ['get']);
+    config.get.mockImplementation((c) => Promise.resolve(cfg[c.scope][c.key]));
   });
 
   describe('Inject', () => {

@@ -98,4 +98,24 @@ describe('ZConfigEntryBuilder', () => {
       );
     });
   });
+
+  describe('Generated values', () => {
+    it('sets the value to a randomly generated string.', () => {
+      // Arrange
+      const target = createTestTarget().scope('application').key('secret').generate();
+      // Act
+      const actual = target.build().value;
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('sets the value to a string and respects the encoding and length.', () => {
+      // Arrange
+      const target = createTestTarget().scope('application').key('secret').generate(256, 'hex');
+      // Act
+      const actual = target.build().value;
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+  });
 });

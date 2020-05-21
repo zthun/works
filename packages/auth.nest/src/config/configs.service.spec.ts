@@ -18,7 +18,7 @@ describe('ZConfigsService', () => {
 
   beforeEach(async () => {
     configA = new ZConfigEntryBuilder().scope('common').key('domain').value('zthunworks.com').build();
-    configB = new ZConfigEntryBuilder().scope('authentication.secrets').key('jwt').value('not-very-secure').build();
+    configB = new ZConfigEntryBuilder().scope('authentication.secrets').key('jwt').generate().build();
 
     [configA, configB] = await dal.create(Collections.Configs, [configA, configB]).run();
   });
@@ -32,21 +32,25 @@ describe('ZConfigsService', () => {
       it('will retrieve the existingn value.', async () => {
         // Arrange
         const target = createTestTarget();
+        const expected = new ZConfigEntryBuilder().copy(configA).build();
+        configA.value = 'not-correct';
         // Act
-        const actual = await target.getByKey(configA.scope, configA.key, 'not-correct');
+        const actual = await target.get(configA);
         // Assert
-        expect(actual).toEqual(configA.value);
+        expect(actual).toEqual(expected);
       });
 
       it('will add the default value if the key does not exist.', async () => {
         // Arrange
         const target = createTestTarget();
         const expected = true;
+        const cfg = new ZConfigEntryBuilder().scope('common').key('secure').value(expected).build();
         // Act
-        await target.getByKey('common', 'secure', expected);
-        const actual = await target.getByKey('common', 'secure', !expected);
+        await target.get(cfg);
+        cfg.value = !expected;
+        const actual = await target.get(cfg);
         // Assert
-        expect(actual).toEqual(expected);
+        expect(actual.value).toEqual(expected);
       });
     });
   });
@@ -56,9 +60,9 @@ describe('ZConfigsService', () => {
       it('will add a key that does not exist.', async () => {
         // Arrange
         const target = createTestTarget();
-        const expected = new ZConfigEntryBuilder().scope('common').key('secure').value(true).build();
+        const expected = new ZConfigEntryBuilder<boolean>().scope('common').key('secure').value(true).build();
         // Act
-        const actual = await target.putByKey('common', 'secure', true);
+        const actual = await target.put(expected);
         // Assert
         expect(actual).toEqual(expected);
       });
@@ -68,8 +72,9 @@ describe('ZConfigsService', () => {
         const target = createTestTarget();
         const expected = new ZConfigEntryBuilder().scope('common').key('secure').value(true).build();
         // Act
-        await target.putByKey('common', 'secure', false);
-        const actual = await target.putByKey('common', 'secure', true);
+        await target.put(expected);
+        expected.value = true;
+        const actual = await target.put(expected);
         // Assert
         expect(actual).toEqual(expected);
       });
