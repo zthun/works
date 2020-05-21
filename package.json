@@ -18,7 +18,7 @@
     "packages/auth.server"
   ],
   "scripts": {
-    "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz packages/**/yarn-error.log",
+    "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz packages/**/yarn-error.log *.log",
     "test": "jest --coverage --runInBand --forceExit",
     "lint": "zlint",
     "build": "lerna run build",

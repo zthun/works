@@ -4,8 +4,10 @@ services:
     image: nginx:1.17.6
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./proxy/localhost/conf.d:/etc/nginx/conf.d
+      - ./proxy/certs:/etc/nginx/certs
     depends_on:
       - auth.zthunworks.com
       - api.auth.zthunworks.com
