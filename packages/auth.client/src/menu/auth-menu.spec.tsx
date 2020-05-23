@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { ZAuthMenu } from './auth-menu';
 
-describe('ZAuthApp', () => {
+describe('ZAuthMenu', () => {
   it('renders the menu', () => {
     // Arrange
     const target = render(<ZAuthMenu />);
