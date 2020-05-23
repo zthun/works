@@ -3,7 +3,7 @@ import { ZUrlBuilder } from '@zthun/auth.core';
 import { ZAlertStack, ZAlertStackContext, ZAlertStackList, ZLoginState, ZLoginStateContext } from '@zthun/auth.react';
 import Axios from 'axios';
 import React from 'react';
-import { HashRouter, Redirect, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import { ZHomePage } from '../home/home-page';
 import { ZLoginPage } from '../login/login-page';
 import { ZAuthMenu } from '../menu/auth-menu';
@@ -27,7 +27,6 @@ export function ZAuthApp() {
           <HashRouter>
             <ZAuthMenu />
             <article className='ZAuthApp-article pt-em-4' data-testid='ZAuthApp-article'>
-              <Redirect to='/home' />
               <Route path='/home' component={ZHomePage} />
               <Route path='/login' component={ZLoginPage} />
               <Route path='/profile' component={ZProfilePage} />

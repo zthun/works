@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IZLogin, IZUser, ZConfigEntryBuilder } from '@zthun/auth.core';
-import { Request, Response } from 'express';
+import { CookieOptions, Request, Response } from 'express';
 import { sign, SignOptions, verify } from 'jsonwebtoken';
 import { get } from 'lodash';
 import { ZConfigsService } from '../config/configs.service';
@@ -34,10 +34,10 @@ export class ZJwtService {
    */
   public async inject(res: Response, credentials: IZLogin) {
     const secret = await this._secret();
-    const domain = await this._domain();
-    const jwt = await this.sign({ user: credentials.email }, secret);
     const tomorrow = new Date(Date.now() + 3600000);
-    res.cookie(ZJwtService.COOKIE_NAME, jwt, { secure: true, httpOnly: true, expires: tomorrow, domain, sameSite: true });
+    const options = await this._cookieOptions(tomorrow);
+    const jwt = await this.sign({ user: credentials.email }, secret);
+    res.cookie(ZJwtService.COOKIE_NAME, jwt, options);
   }
 
   /**
@@ -67,7 +67,8 @@ export class ZJwtService {
    * @returns A promise that, when resolved, has cleared the auth cookie.
    */
   public async clear(res: Response) {
-    res.clearCookie(ZJwtService.COOKIE_NAME);
+    const options = await this._cookieOptions();
+    res.clearCookie(ZJwtService.COOKIE_NAME, options);
   }
 
   /**
@@ -109,6 +110,17 @@ export class ZJwtService {
         resolve(decoded);
       });
     });
+  }
+
+  /**
+   * Gets the options for a cookie.
+   *
+   * @returns The options for a cookie.
+   */
+  private async _cookieOptions(expires?: Date): Promise<CookieOptions> {
+    const domain = await this._domain();
+    const base = { secure: true, httpOnly: true, domain, sameSite: true };
+    return expires ? Object.assign(base, { expires }) : base;
   }
 
   /**
