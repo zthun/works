@@ -9,7 +9,7 @@ export class ZRuleBodyRequiresUniqueUser implements CanActivate {
   public async canActivate(context: ExecutionContext): Promise<boolean> {
     const { email } = context.switchToHttp().getRequest().body as IZLogin;
     const user = await this._users.findByEmail(email);
-    ZAssert.claim(!user, `User with email, ${email}, already exists.`).assert((msg) => new ConflictException(msg));
+    ZAssert.claim(!user, `Email, ${email}, is not available.`).assert((msg) => new ConflictException(msg));
     return true;
   }
 }

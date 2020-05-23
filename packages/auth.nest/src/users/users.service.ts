@@ -1,4 +1,4 @@
-import { Controller, Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { IZLogin, IZUser, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
 import { compare, hash } from 'bcryptjs';
@@ -9,7 +9,7 @@ import { DatabaseToken } from '../common/injection.constants';
 /**
  * Represents a service to manage the user database with business rules.
  */
-@Controller()
+@Injectable()
 export class ZUsersService {
   /**
    * Initializes a new instance of this object.

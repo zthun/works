@@ -1,6 +1,7 @@
 import { IZLogin, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
 import { Request, Response } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
+import { v4 } from 'uuid';
 import { ZConfigsService } from '../config/configs.service';
 import { ZUsersService } from '../users/users.service';
 import { ZJwtService } from './jwt.service';
@@ -29,8 +30,9 @@ describe('ZTokensRepositoryController', () => {
       }
     };
 
-    users = createSpyObj(ZUsersService, ['findByEmail']);
+    users = createSpyObj(ZUsersService, ['findByEmail', 'findById']);
     users.findByEmail.mockReturnValue(Promise.resolve(null));
+    users.findById.mockReturnValue(Promise.resolve(null));
 
     config = createSpyObj(ZConfigsService, ['get']);
     config.get.mockImplementation((c) => Promise.resolve(cfg[c.scope][c.key]));
@@ -39,9 +41,13 @@ describe('ZTokensRepositoryController', () => {
   describe('Inject', () => {
     let res: jest.Mocked<Response>;
     let credentials: IZLogin;
+    let user: IZUser;
 
     beforeEach(() => {
       credentials = new ZLoginBuilder().email('gambit@marvel.com').password('not-very-secure').autoConfirm().build();
+      user = new ZUserBuilder().email(credentials.email).id(v4()).build();
+
+      users.findByEmail.mockReturnValue(Promise.resolve(user));
 
       res = (createSpyObj('res', ['cookie', 'clearCookie']) as unknown) as jest.Mocked<Response>;
       res.cookie.mockReturnValue(res);
@@ -72,7 +78,7 @@ describe('ZTokensRepositoryController', () => {
 
     beforeEach(() => {
       user = new ZUserBuilder().email('wolverine@marvel.com').password('foo').id('0').super().build();
-      users.findByEmail.mockReturnValue(Promise.resolve(user));
+      users.findById.mockReturnValue(Promise.resolve(user));
       req = (createSpyObj('res', ['cookies']) as unknown) as jest.Mocked<Request>;
     });
 

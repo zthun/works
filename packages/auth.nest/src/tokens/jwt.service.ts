@@ -36,7 +36,8 @@ export class ZJwtService {
     const secret = await this._secret();
     const tomorrow = new Date(Date.now() + 3600000);
     const options = await this._cookieOptions(tomorrow);
-    const jwt = await this.sign({ user: credentials.email }, secret);
+    const { _id } = await this._users.findByEmail(credentials.email);
+    const jwt = await this.sign({ user: _id }, secret);
     res.cookie(ZJwtService.COOKIE_NAME, jwt, options);
   }
 
@@ -52,7 +53,7 @@ export class ZJwtService {
       const token = get(req, `cookies[${ZJwtService.COOKIE_NAME}]`);
       const secret = await this._secret();
       const payload: { user: string } = await this.verify(token, secret);
-      const user = await this._users.findByEmail(payload.user);
+      const user = await this._users.findById(payload.user);
       return user;
     } catch {
       return null;

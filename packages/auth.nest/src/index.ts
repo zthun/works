@@ -13,7 +13,8 @@ export { ZRuleParamRequiresRegularUser } from './rules/rule-param-requires-regul
 export { ZJwtService } from './tokens/jwt.service';
 export { ZTokensLoginDto } from './tokens/tokens-login.dto';
 export { ZTokensController } from './tokens/tokens.controller';
-// Users
+// Users/Profiles
+export { ZProfilesController } from './users/profiles.controller';
 export { ZUserCreateDto } from './users/user-create.dto';
 export { ZUserUpdateDto } from './users/user-update.dto';
 export { ZUsersController } from './users/users.controller';

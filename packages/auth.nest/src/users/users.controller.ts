@@ -38,12 +38,9 @@ export class ZUsersController {
    * @param params The url params.
    *
    * @return A promise that, when resolved, has the found user.
-   *
-   * @throws NotFoundException If the user does not exist.
    */
   @Get(':id')
-  @UseGuards(ZRuleParamRequiresExistingUser)
-  @UseGuards(ZRuleCookieRequiresAuthSuper)
+  @UseGuards(ZRuleCookieRequiresAuthSuper, ZRuleParamRequiresExistingUser)
   public async read(@Param() { id }: { id: string }): Promise<IZUser> {
     const user = await this._users.findById(id);
     return new ZUserBuilder().copy(user).redact().build();
@@ -55,8 +52,6 @@ export class ZUsersController {
    * @param login The user to create.
    *
    * @return A promise that, when resolved, has returned the new user.
-   *
-   * @throws ConflictException If a user already has the same name or already exists.
    */
   @Post()
   @UseGuards(ZRuleBodyRequiresUniqueUser)
@@ -72,14 +67,9 @@ export class ZUsersController {
    * @param login The user template to update.
    *
    * @return A promise that, when resolved, has returned the updated user.
-   *
-   * @throws NotFoundException If not user exists with the given id.
-   * @throws ConflictException If the name of the user changes and there is already another user with the same name.
    */
   @Put(':id')
-  @UseGuards(ZRuleBodyRequiresUniqueUser)
-  @UseGuards(ZRuleParamRequiresExistingUser)
-  @UseGuards(ZRuleCookieRequiresAuthSuper)
+  @UseGuards(ZRuleCookieRequiresAuthSuper, ZRuleParamRequiresExistingUser, ZRuleBodyRequiresUniqueUser)
   public async update(@Param() { id }: { id: string }, @Body() login: ZUserUpdateDto): Promise<IZUser> {
     const user = await this._users.update(id, login);
     return new ZUserBuilder().copy(user).redact().build();
@@ -91,12 +81,9 @@ export class ZUsersController {
    * @param params The param that contains the id to delete.
    *
    * @return A promise that, when resolve, has returned the deleted user.
-   *
-   * @throws NotFoundException If no user with the given id exists.
    */
   @Delete(':id')
-  @UseGuards(ZRuleParamRequiresRegularUser)
-  @UseGuards(ZRuleCookieRequiresAuthSuper)
+  @UseGuards(ZRuleCookieRequiresAuthSuper, ZRuleParamRequiresRegularUser)
   public async remove(@Param() { id }: { id: string }): Promise<IZUser> {
     const user = await this._users.remove(id);
     return new ZUserBuilder().copy(user).redact().build();
