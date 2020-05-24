@@ -8,7 +8,7 @@ import { IZAlert } from './alert.interface';
  */
 export class ZAlertStack implements IZAlertStack {
   public _list: IZAlert[] = [];
-  public change = new Subject<IZAlert[]>();
+  public listChange = new Subject<IZAlert[]>();
 
   /**
    * Returns a copy of the current list.
@@ -52,7 +52,7 @@ export class ZAlertStack implements IZAlertStack {
       this._list.pop();
     }
 
-    this.change.next(this._list.slice());
+    this.listChange.next(this._list.slice());
 
     return true;
   }
@@ -73,7 +73,7 @@ export class ZAlertStack implements IZAlertStack {
     }
 
     this._list.splice(index, 1);
-    this.change.next(this._list.slice());
+    this.listChange.next(this._list.slice());
     return true;
   }
 }

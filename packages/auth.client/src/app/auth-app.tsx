@@ -1,5 +1,5 @@
 import { Snackbar } from '@material-ui/core';
-import { ZUrlBuilder } from '@zthun/auth.core';
+import { IZProfile, ZUrlBuilder } from '@zthun/auth.core';
 import { ZAlertStack, ZAlertStackContext, ZAlertStackList, ZLoginState, ZLoginStateContext } from '@zthun/auth.react';
 import Axios from 'axios';
 import React from 'react';
@@ -10,19 +10,15 @@ import { ZAuthMenu } from '../menu/auth-menu';
 import { ZProfilePage } from '../profile/profile-page';
 
 export function ZAuthApp() {
-  async function verifyLogin() {
-    try {
-      const url = new ZUrlBuilder().api().append('tokens').build();
-      await Axios.get(url);
-      return true;
-    } catch {
-      return false;
-    }
+  async function getProfile() {
+    const url = new ZUrlBuilder().api().append('profiles').build();
+    const profile = await Axios.get<IZProfile>(url);
+    return profile.data;
   }
 
   return (
     <div className='ZAuthApp-root' data-testid='ZAuthApp-root'>
-      <ZLoginStateContext.Provider value={new ZLoginState(verifyLogin)}>
+      <ZLoginStateContext.Provider value={new ZLoginState(getProfile)}>
         <ZAlertStackContext.Provider value={new ZAlertStack(5)}>
           <HashRouter>
             <ZAuthMenu />

@@ -6,7 +6,7 @@ import { IZLoginState } from './login-state.interface';
 /**
  * Represents the context for the globally provided login state.
  */
-export const ZLoginStateContext = createContext(new ZLoginState(() => Promise.resolve(false)));
+export const ZLoginStateContext = createContext<IZLoginState>(new ZLoginState(() => Promise.resolve(null)));
 
 /**
  * Retrieves the current globally provided login state.
@@ -30,5 +30,5 @@ export function useLogin(): IZLoginState {
  */
 export function useLoginState(): IZLoginState {
   const loginState = useLogin();
-  return useWatchableState(loginState.logged, loginState);
+  return useWatchableState(loginState.profile, loginState.profileChange, loginState);
 }

@@ -1,8 +1,9 @@
+import { IZProfile } from '@zthun/auth.core';
 import { Observable } from 'rxjs';
 
 export interface IZLoginState {
-  readonly logged: boolean;
-  readonly change: Observable<boolean>;
+  readonly profile: IZProfile;
+  readonly profileChange: Observable<IZProfile>;
 
-  verify(): Promise<boolean>;
+  refresh(): Promise<IZProfile>;
 }

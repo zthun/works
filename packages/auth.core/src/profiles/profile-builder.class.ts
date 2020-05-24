@@ -77,6 +77,16 @@ export class ZProfileBuilder {
   }
 
   /**
+   * Marks the profile as belonging to a super user.
+   *
+   * @returns This object.
+   */
+  public super(): this {
+    this._profile.super = true;
+    return this;
+  }
+
+  /**
    * Assigns other properties from a profile to the current profile.
    *
    * @param other The partial object to copy.

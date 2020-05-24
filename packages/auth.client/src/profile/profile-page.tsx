@@ -9,7 +9,7 @@ export function ZProfilePage() {
   const loading = <CircularProgress className='ZProfilePage-logged-progress' data-testid='ZProfilePage-logged-progress' color='inherit' size='1em' />;
   const valid = <Typography>You have reached the profile page. You are logged in!</Typography>;
   const invalid = <Redirect to='/login' />;
-  const content = loginState.logged == null ? loading : loginState.logged ? valid : invalid;
+  const content = loginState.profile === undefined ? loading : loginState.profile ? valid : invalid;
 
   return (
     <div className='ZProfilePage-root' data-testid='ZProfilePage-root'>

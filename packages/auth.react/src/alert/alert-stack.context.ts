@@ -31,5 +31,5 @@ export function useAlertStack(): IZAlertStack {
  */
 export function useAlertState(): IZAlertStack {
   const stack = useAlertStack();
-  return useWatchableState(stack.list, stack);
+  return useWatchableState(stack.list, stack.listChange, stack);
 }

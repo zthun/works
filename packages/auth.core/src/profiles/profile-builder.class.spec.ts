@@ -65,6 +65,14 @@ describe('ZProfileBuilder', () => {
         (u) => u.confirm
       );
     });
+
+    it('marks the profile as a super user.', () => {
+      assertPropertySet(
+        true,
+        (t) => t.super(),
+        (u) => u.super
+      );
+    });
   });
 
   describe('Copy and Assignment', () => {

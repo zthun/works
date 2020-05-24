@@ -3,8 +3,8 @@ import { IZAlert } from './alert.interface';
 
 export interface IZAlertStack {
   readonly list: IZAlert[];
+  readonly listChange: Observable<IZAlert[]>;
   readonly max: number;
-  readonly change: Observable<IZAlert[]>;
 
   add(alert: IZAlert): boolean;
   remove(alert: IZAlert): boolean;

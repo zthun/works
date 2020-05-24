@@ -12,7 +12,7 @@ describe('ZProfilePage', () => {
     await act(async () => {
       // Arrange
       target = render(
-        <ZLoginStateContext.Provider value={new ZLoginState(() => Promise.resolve(true))}>
+        <ZLoginStateContext.Provider value={new ZLoginState(() => Promise.resolve(undefined))}>
           <MemoryRouter>
             <ZProfilePage />
           </MemoryRouter>

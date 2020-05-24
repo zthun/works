@@ -28,4 +28,9 @@ export interface IZProfile {
    * This should match the newPassword property.
    */
   confirm?: string;
+
+  /**
+   * True if the profile belongs to a super user.  False otherwise.
+   */
+  super?: boolean;
 }
