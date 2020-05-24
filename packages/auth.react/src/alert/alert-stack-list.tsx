@@ -1,17 +1,11 @@
 import { Alert, AlertTitle } from '@material-ui/lab';
-import React, { useEffect, useState } from 'react';
-import { useAlertStack } from './alert-stack.context';
+import React from 'react';
+import { useAlertState } from './alert-stack.context';
 
 export function ZAlertStackList() {
-  const stack = useAlertStack();
-  const [alerts, setAlerts] = useState(stack.list);
+  const stack = useAlertState();
 
-  useEffect(() => {
-    const subscription = stack.change.subscribe((updated) => setAlerts(updated));
-    return () => subscription.unsubscribe();
-  });
-
-  const components = alerts.map((alert) => {
+  const components = stack.list.map((alert) => {
     function handleClose() {
       stack.remove(alert);
     }

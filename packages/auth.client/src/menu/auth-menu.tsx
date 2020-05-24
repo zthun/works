@@ -2,19 +2,13 @@ import { AppBar, Button, CircularProgress, Link, Menu, MenuItem, Toolbar, Typogr
 import { ZUrlBuilder } from '@zthun/auth.core';
 import { useLoginState } from '@zthun/auth.react';
 import Axios from 'axios';
-import React, { MouseEvent, useEffect, useState } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export function ZAuthMenu() {
   const hist = useHistory();
   const login = useLoginState();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [logged, setLogged] = useState(login.logged);
-
-  useEffect(() => {
-    const subscription = login.change.subscribe((updated) => setLogged(updated));
-    return () => subscription.unsubscribe();
-  });
 
   function handleOpen(event: MouseEvent<HTMLButtonElement>) {
     setAnchorEl(event.currentTarget);
