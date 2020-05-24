@@ -78,7 +78,7 @@ export class ZJwtService {
    * @param payload The payload object to convert to a jwt token.
    * @param secret The secret to use when signing the token.
    *
-   * @return A promise that, when resolved, has returned the signed token.
+   * @returns A promise that, when resolved, has returned the signed token.
    */
   public async sign(payload: object, secret: string): Promise<string> {
     return new Promise((resolve, reject) => {

@@ -22,7 +22,7 @@ export class ZUsersService {
   /**
    * Gets a list of all users in the database.
    *
-   * @return A promise that, when resolved, has returned all users.
+   * @returns A promise that, when resolved, has returned all users.
    */
   public async list(): Promise<IZUser[]> {
     const users = await this._dal.read<IZUser>(Collections.Users).run();
@@ -34,7 +34,7 @@ export class ZUsersService {
    *
    * @param _id The id of the user to find.
    *
-   * @return A promise that, when resolved, has the found user.  Returns undefined if no such user exists.
+   * @returns A promise that, when resolved, has the found user.  Returns undefined if no such user exists.
    */
   public async findById(_id: string): Promise<IZUser> {
     const filter = { _id };
@@ -47,7 +47,7 @@ export class ZUsersService {
    *
    * @param email The email of the user to find.
    *
-   * @return A promise that, when resolved, has the found user by their email.  Returns null if no such user exists.
+   * @returns A promise that, when resolved, has the found user by their email.  Returns null if no such user exists.
    */
   public async findByEmail(email: string): Promise<IZUser> {
     const filter = { email };
@@ -60,7 +60,7 @@ export class ZUsersService {
    *
    * @param login The user to create.
    *
-   * @return A promise that, when resolved, has returned the new user.
+   * @returns A promise that, when resolved, has returned the new user.
    */
   public async create(login: IZLogin): Promise<IZUser> {
     const total = await this._dal.count(Collections.Users).run();
@@ -74,10 +74,7 @@ export class ZUsersService {
   /**
    * Updates an existing user.
    *
-   * @return A promise that, when resolved, has returned the updated user.
-   *
-   * @throws NotFoundException If not user exists with the given id.
-   * @throws ConflictException If the name of the user changes and there is already another user with the same name.
+   * @returns A promise that, when resolved, has returned the updated user.
    */
   public async update(id: string, login: Partial<IZLogin>): Promise<IZUser> {
     const template: Partial<IZUser> = {};
@@ -104,7 +101,7 @@ export class ZUsersService {
    *
    * @param id The id of the user to  delete.
    *
-   * @return A promise that, when resolve, has returned the deleted user.
+   * @returns A promise that, when resolve, has returned the deleted user.
    */
   public async remove(id: string): Promise<IZUser> {
     const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();

@@ -23,7 +23,7 @@ export class ZUsersController {
   /**
    * Gets a list of all users.
    *
-   * @return A promise that, when resolved, has returned all users.
+   * @returns A promise that, when resolved, has returned all users.
    */
   @Get()
   @UseGuards(ZRuleCookieRequiresAuthSuper)
@@ -37,7 +37,7 @@ export class ZUsersController {
    *
    * @param params The url params.
    *
-   * @return A promise that, when resolved, has the found user.
+   * @returns A promise that, when resolved, has the found user.
    */
   @Get(':id')
   @UseGuards(ZRuleCookieRequiresAuthSuper, ZRuleParamRequiresExistingUser)
@@ -51,7 +51,7 @@ export class ZUsersController {
    *
    * @param login The user to create.
    *
-   * @return A promise that, when resolved, has returned the new user.
+   * @returns A promise that, when resolved, has returned the new user.
    */
   @Post()
   @UseGuards(ZRuleBodyRequiresUniqueUser)
@@ -66,7 +66,7 @@ export class ZUsersController {
    * @param params The param that contains the id to update.
    * @param login The user template to update.
    *
-   * @return A promise that, when resolved, has returned the updated user.
+   * @returns A promise that, when resolved, has returned the updated user.
    */
   @Put(':id')
   @UseGuards(ZRuleCookieRequiresAuthSuper, ZRuleParamRequiresExistingUser, ZRuleBodyRequiresUniqueUser)
@@ -80,7 +80,7 @@ export class ZUsersController {
    *
    * @param params The param that contains the id to delete.
    *
-   * @return A promise that, when resolve, has returned the deleted user.
+   * @returns A promise that, when resolve, has returned the deleted user.
    */
   @Delete(':id')
   @UseGuards(ZRuleCookieRequiresAuthSuper, ZRuleParamRequiresRegularUser)

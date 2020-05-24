@@ -21,7 +21,7 @@ export class ZUserBuilder {
    *
    * @param val The value to set.
    *
-   * @return This object.
+   * @returns This object.
    */
   public id(val: string): this {
     this._user._id = val;
@@ -33,10 +33,22 @@ export class ZUserBuilder {
    *
    * @param val The value to set.
    *
-   * @return This object.
+   * @returns This object.
    */
   public email(val: string): this {
     this._user.email = val;
+    return this;
+  }
+
+  /**
+   * Sets the display name of the user.
+   *
+   * @param val The value to set.
+   *
+   * @returns This object.
+   */
+  public display(val: string): this {
+    this._user.display = val;
     return this;
   }
 
@@ -47,7 +59,7 @@ export class ZUserBuilder {
    *
    * @param val The value to set.
    *
-   * @return This object.
+   * @returns This object.
    */
   public password(val: string): this {
     this._user.password = val;
@@ -56,6 +68,8 @@ export class ZUserBuilder {
 
   /**
    * Sets the user as the super user.
+   *
+   * @returns This object.
    */
   public super(): this {
     this._user.super = true;
@@ -65,7 +79,7 @@ export class ZUserBuilder {
   /**
    * Removes unsafe properties to show users.
    *
-   * @return This object.
+   * @returns This object.
    */
   public redact(): this {
     delete this._user.password;
@@ -77,7 +91,7 @@ export class ZUserBuilder {
    *
    * @param other The other user to copy.
    *
-   * @return This object.
+   * @returns This object.
    */
   public copy(other: IZUser): this {
     this._user = { ...other };
@@ -87,7 +101,7 @@ export class ZUserBuilder {
   /**
    * Returns the user.
    *
-   * @return The constructed user.
+   * @returns The constructed user.
    */
   public build(): IZUser {
     return { ...this._user };

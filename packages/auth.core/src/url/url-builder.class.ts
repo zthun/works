@@ -154,7 +154,7 @@ export class ZUrlBuilder {
    *
    * @param protocol The protocol.
    *
-   * @return This object.
+   * @returns This object.
    */
   public protocol(protocol: string): this {
     this._url.protocol = protocol;
@@ -198,7 +198,7 @@ export class ZUrlBuilder {
    *
    * @param host The hostname.
    *
-   * @return This object.
+   * @returns This object.
    */
   public hostname(host: string): this {
     this._url.hostname = host;
@@ -224,7 +224,7 @@ export class ZUrlBuilder {
    *
    * @param port The port.
    *
-   * @return This object.
+   * @returns This object.
    */
   public port(port: number): this {
     this._url.port = port;
@@ -236,7 +236,7 @@ export class ZUrlBuilder {
    *
    * @param path The starting path.
    *
-   * @return This object.
+   * @returns This object.
    */
   public path(path: string): this {
     this._url.path = [path];
@@ -260,7 +260,7 @@ export class ZUrlBuilder {
    *
    * @param hash The hash section.
    *
-   * @return This object.
+   * @returns This object.
    */
   public hash(hash: string): this {
     this._url.hash = hash;
@@ -275,7 +275,7 @@ export class ZUrlBuilder {
    * @param key The parameter key.
    * @param val The parameter value.
    *
-   * @return This object.
+   * @returns This object.
    */
   public param(key: string, val: string): this {
     this._url.params.push({ key, val });
@@ -285,7 +285,7 @@ export class ZUrlBuilder {
   /**
    * Builds the url string and returns it.
    *
-   * @return The url string.
+   * @returns The url string.
    */
   public build(): string {
     const search = this._url.params.map((param) => `${param.key}=${encodeURIComponent(param.val)}`).join('&');

@@ -1,5 +1,7 @@
 /**
- * Represents a non storable login.
+ * Represents a login to the system.
+ *
+ * This is used for creating and posting tokens.  This object is non storable.
  */
 export interface IZLogin {
   /**

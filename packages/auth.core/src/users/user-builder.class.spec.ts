@@ -8,39 +8,44 @@ describe('ZUserBuilder', () => {
   }
 
   describe('Properties', () => {
-    function assertPropertySet<T>(expected: T, buildFn: (target: ZUserBuilder) => ZUserBuilder, actualFn: (user: IZUser) => T) {
+    function assertPropertySet<T>(expected: T, buildFn: (target: ZUserBuilder, value: T) => ZUserBuilder, actualFn: (user: IZUser) => T) {
       // Arrange
       const target = createTestTarget();
       // Act
-      const user = buildFn(target).build();
+      const user = buildFn(target, expected).build();
       const actual = actualFn(user);
       // Assert
       expect(actual).toEqual(expected);
     }
 
     it('sets the id.', () => {
-      const id = v4();
       assertPropertySet(
-        id,
-        (t) => t.id(id),
+        v4(),
+        (t, v) => t.id(v),
         (u) => u._id
       );
     });
 
-    it('sets the name.', () => {
-      const name = v4();
+    it('sets the email.', () => {
       assertPropertySet(
-        name,
-        (t) => t.email(name),
+        v4(),
+        (t, v) => t.email(v),
         (u) => u.email
       );
     });
 
-    it('sets the password.', () => {
-      const pwd = v4();
+    it('sets the display.', () => {
       assertPropertySet(
-        pwd,
-        (t) => t.password(pwd),
+        v4(),
+        (t, v) => t.display(v),
+        (u) => u.display
+      );
+    });
+
+    it('sets the password.', () => {
+      assertPropertySet(
+        v4(),
+        (t, v) => t.password(v),
         (u) => u.password
       );
     });
