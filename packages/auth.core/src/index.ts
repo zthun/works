@@ -10,6 +10,9 @@ export { IZConfigEntry } from './configs/config-entry.interface';
 // Login
 export { ZLoginBuilder } from './logins/login-builder.class';
 export { IZLogin } from './logins/login.interface';
+// Profile
+export { ZProfileBuilder } from './profiles/profile-builder.class';
+export { IZProfile } from './profiles/profile.interface';
 // URL
 export { ZUrlBuilder } from './url/url-builder.class';
 // Users
