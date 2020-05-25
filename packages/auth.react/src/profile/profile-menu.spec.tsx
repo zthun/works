@@ -1,14 +1,11 @@
 import { MenuItem } from '@material-ui/core';
-import { act, fireEvent, render, RenderResult } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/auth.core';
 import React from 'react';
-import { ZLoginState } from '../login/login-state.class';
-import { ZLoginStateContext } from '../login/login-state.context';
 import { ZProfileMenu } from './profile-menu';
 
 describe('ZProfileMenu', () => {
   let profile: IZProfile;
-  let state: ZLoginState;
   let onLogin: jest.Mock;
   let onLogout: jest.Mock;
   let hideLogout: boolean;
@@ -18,28 +15,21 @@ describe('ZProfileMenu', () => {
     onLogout = jest.fn();
     hideLogout = false;
     profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').build();
-    state = new ZLoginState(() => Promise.resolve(profile));
   });
 
   async function createTestTarget() {
     const target = render(
-      <ZLoginStateContext.Provider value={state}>
-        <ZProfileMenu hideLogout={hideLogout} onLogin={onLogin} onLogout={onLogout}>
-          <MenuItem>Child</MenuItem>
-        </ZProfileMenu>
-      </ZLoginStateContext.Provider>
+      <ZProfileMenu profile={profile} hideLogout={hideLogout} onLogin={onLogin} onLogout={onLogout}>
+        <MenuItem>Child</MenuItem>
+      </ZProfileMenu>
     );
-    await state.refresh();
     return target;
   }
 
   it('renders the component.', async () => {
     // Arrange
-    let target: RenderResult;
+    const target = await createTestTarget();
     // Act
-    await act(async () => {
-      target = await createTestTarget();
-    });
     const actual = target.getByTestId('ZProfileMenu-root');
     // Assert
     expect(actual).toBeTruthy();
@@ -47,16 +37,13 @@ describe('ZProfileMenu', () => {
 
   describe('Loading', () => {
     beforeEach(() => {
-      state = new ZLoginState(() => Promise.resolve(undefined));
+      profile = undefined;
     });
 
     it('shows a circular progress when the profile is loading.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-      });
       const actual = target.getByTestId('ZProfileMenu-loading');
       // Assert
       expect(actual).toBeTruthy();
@@ -65,16 +52,13 @@ describe('ZProfileMenu', () => {
 
   describe('Unauthenticated', () => {
     beforeEach(() => {
-      state = new ZLoginState(() => Promise.resolve(null));
+      profile = null;
     });
 
     it('shows the login button.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-      });
       const actual = target.getByTestId('ZProfileMenu-btn-login');
       // Assert
       expect(actual).toBeTruthy();
@@ -82,11 +66,8 @@ describe('ZProfileMenu', () => {
 
     it('invokes the onLogin event when the login button is clicked.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-      });
       const actual = target.getByTestId('ZProfileMenu-btn-login');
       fireEvent.click(actual);
       // Assert
@@ -95,18 +76,10 @@ describe('ZProfileMenu', () => {
   });
 
   describe('Authenticted', () => {
-    function openMenu(target: RenderResult) {
-      const btn = target.getByTestId('ZProfileMenu-btn-profile');
-      fireEvent.click(btn);
-    }
-
     it('renders the profile button.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-      });
       const actual = target.getByTestId('ZProfileMenu-btn-profile');
       // Assert
       expect(actual).toBeTruthy();
@@ -114,12 +87,10 @@ describe('ZProfileMenu', () => {
 
     it('invokes the onLogout when the logout menu item is clicked.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-        openMenu(target);
-      });
+      const btn = target.getByTestId('ZProfileMenu-btn-profile');
+      fireEvent.click(btn);
       const logout = target.getByTestId('ZProfileMenu-menuitem-logout');
       fireEvent.click(logout);
       // Assert
@@ -128,13 +99,11 @@ describe('ZProfileMenu', () => {
 
     it('does not show the logout button if hideLogout is true.', async () => {
       // Arrange
-      let target: RenderResult;
       hideLogout = true;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-        openMenu(target);
-      });
+      const btn = target.getByTestId('ZProfileMenu-btn-profile');
+      fireEvent.click(btn);
       const logout = target.queryByTestId('ZProfileMenu-menuitem-logout');
       // Assert
       expect(logout).toBeFalsy();
@@ -142,12 +111,9 @@ describe('ZProfileMenu', () => {
 
     it('shows the display name of the user if the display name is set.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       const expected = profile.display.toUpperCase();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-      });
       const btn = target.getByTestId('ZProfileMenu-btn-profile');
       const actual = btn.textContent.toUpperCase();
       // Assert
@@ -156,13 +122,10 @@ describe('ZProfileMenu', () => {
 
     it('shows the user email if the display name is not set.', async () => {
       // Arrange
-      let target: RenderResult;
-      const expected = profile.email.toUpperCase();
       delete profile.display;
+      const target = await createTestTarget();
+      const expected = profile.email.toUpperCase();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-      });
       const btn = target.getByTestId('ZProfileMenu-btn-profile');
       const actual = btn.textContent.toUpperCase();
       // Assert

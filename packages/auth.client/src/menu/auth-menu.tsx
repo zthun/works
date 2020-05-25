@@ -1,6 +1,6 @@
 import { AppBar, Button, Link, MenuItem, Toolbar, Typography } from '@material-ui/core';
 import { ZUrlBuilder } from '@zthun/auth.core';
-import { useAlertStack, useLogin, ZAlertBuilder, ZProfileMenu } from '@zthun/auth.react';
+import { useAlertStack, useLoginState, ZAlertBuilder, ZProfileMenu } from '@zthun/auth.react';
 import Axios from 'axios';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 export function ZAuthMenu() {
   const alerts = useAlertStack();
   const hist = useHistory();
-  const login = useLogin();
+  const login = useLoginState();
 
   function handleProfile() {
     hist.push('/profile');
@@ -40,7 +40,7 @@ export function ZAuthMenu() {
           </Link>
         </Button>
         <Typography className='flex-grow-1'>&nbsp;</Typography>
-        <ZProfileMenu onLogout={handleLogout} onLogin={handleLogin}>
+        <ZProfileMenu profile={login.profile} onLogout={handleLogout} onLogin={handleLogin}>
           <MenuItem onClick={handleProfile}>PROFILE</MenuItem>
         </ZProfileMenu>
       </Toolbar>

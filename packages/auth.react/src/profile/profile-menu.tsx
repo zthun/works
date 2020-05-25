@@ -2,7 +2,6 @@ import { Button, CircularProgress, Menu, MenuItem } from '@material-ui/core';
 import { noop } from 'lodash';
 import React from 'react';
 import { useMenuState } from '../common/use-menu-state.hook';
-import { useLoginState } from '../login/login-state.context';
 import { IZProfileMenuProps } from './profile-menu.props';
 
 /**
@@ -11,7 +10,6 @@ import { IZProfileMenuProps } from './profile-menu.props';
  * @param props The properties for the menu.
  */
 export function ZProfileMenu(props: IZProfileMenuProps) {
-  const loginState = useLoginState();
   const [anchorEl, openMenu, closeMenu] = useMenuState();
 
   function createLoadingProgress() {
@@ -40,7 +38,7 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
     return (
       <React.Fragment>
         <Button className='ZProfileMenu-btn-profile' data-testid='ZProfileMenu-btn-profile' color='inherit' onClick={openMenu}>
-          {loginState.profile.display || loginState.profile.email}
+          {props.profile.display || props.profile.email}
         </Button>
         <Menu className='ZProfileManu-menu-profile' data-testid='ZProfileMenu-menu-profile' open={!!anchorEl} onClose={closeMenu} anchorEl={anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
           <div onClick={closeMenu}>
@@ -53,7 +51,7 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
   }
 
   function createElementForProfile() {
-    switch (loginState.profile) {
+    switch (props.profile) {
       case undefined:
         return createLoadingProgress();
       case null:
