@@ -1,4 +1,4 @@
-import { AppBar, Button, Link, MenuItem, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, CircularProgress, Link, MenuItem, Toolbar, Typography } from '@material-ui/core';
 import { ZUrlBuilder } from '@zthun/auth.core';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZProfileMenu } from '@zthun/auth.react';
 import Axios from 'axios';
@@ -28,21 +28,42 @@ export function ZAuthMenu() {
     }
   }
 
+  function createSpacer() {
+    return <Typography className='flex-grow-1'>&nbsp;</Typography>;
+  }
+
+  function createHomeButton() {
+    return (
+      <Button color='inherit'>
+        <Link color='inherit' href='#/home' variant='h5'>
+          ZTHUNWORKS
+        </Link>
+      </Button>
+    );
+  }
+
+  function createProfileMenu() {
+    if (login.profile === undefined) {
+      return <CircularProgress className='ZAuthMenu-progress-loading' data-testid='ZAuthMenu-progress-loading' color='inherit' size='1em' />;
+    }
+
+    return (
+      <ZProfileMenu data-testid='ZAuthMenu-menu-profile' profile={login.profile} onLogout={handleLogout} onLogin={handleLogin}>
+        <MenuItem onClick={handleProfile}>PROFILE</MenuItem>
+      </ZProfileMenu>
+    );
+  }
+
+  const home = createHomeButton();
+  const spacer = createSpacer();
+  const profile = createProfileMenu();
+
   return (
     <AppBar className='ZAuthMenu-root' position='sticky' data-testid='ZAuthMenu-root'>
       <Toolbar>
-        <Typography className='mr-md' variant='h5'>
-          ZTHUNWORKS
-        </Typography>
-        <Button color='inherit'>
-          <Link color='inherit' href='#/home'>
-            HOME
-          </Link>
-        </Button>
-        <Typography className='flex-grow-1'>&nbsp;</Typography>
-        <ZProfileMenu profile={login.profile} onLogout={handleLogout} onLogin={handleLogin}>
-          <MenuItem onClick={handleProfile}>PROFILE</MenuItem>
-        </ZProfileMenu>
+        {home}
+        {spacer}
+        {profile}
       </Toolbar>
     </AppBar>
   );

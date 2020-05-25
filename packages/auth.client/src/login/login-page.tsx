@@ -1,17 +1,14 @@
 import { CircularProgress } from '@material-ui/core';
-import { IZLogin, IZProfile, ZUrlBuilder } from '@zthun/auth.core';
+import { IZLogin, ZUrlBuilder } from '@zthun/auth.core';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZLoginTabs } from '@zthun/auth.react';
 import Axios from 'axios';
+import { get, noop } from 'lodash';
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 export function ZLoginPage() {
   const logged = useLoginState();
   const alerts = useAlertStack();
-
-  async function handleRecoverCredentials() {
-    alerts.add(new ZAlertBuilder().warning().message('Method not implemented.').build());
-  }
 
   async function handleLogin(login: IZLogin) {
     try {
@@ -20,7 +17,7 @@ export function ZLoginPage() {
       alerts.add(new ZAlertBuilder().success().message('Login successful.').build());
       await logged.refresh();
     } catch (err) {
-      alerts.add(new ZAlertBuilder().error().message(err.response.data.message).build());
+      alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
     }
   }
 
@@ -33,24 +30,38 @@ export function ZLoginPage() {
       await Axios.post(url, login);
       await logged.refresh();
     } catch (err) {
-      alerts.add(new ZAlertBuilder().error().message(err.response.data.message).build());
+      alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
     }
   }
 
-  function getElementForProfile(profile: IZProfile) {
-    switch (profile) {
+  function createProgressLoading() {
+    return <CircularProgress className='ZLoginPage-progress-loading' data-testid='ZLoginPage-progress-loading' color='inherit' />;
+  }
+
+  function createTabs() {
+    return <ZLoginTabs onLoginCredentialsChange={handleLogin} onCreateCredentialsChange={handleCreate} onRecoverCredentialsChange={noop} />;
+  }
+
+  function createRedirect() {
+    return <Redirect data-testid='ZLoginPage-redirect-profile' to='/profile' />;
+  }
+
+  function createContent() {
+    switch (logged.profile) {
       case undefined:
-        return <CircularProgress className='ZLoginPage-loading' data-testid='ZLoginPage-loading' color='inherit' size='1em' />;
+        return createProgressLoading();
       case null:
-        return <ZLoginTabs onLoginCredentialsChange={handleLogin} onCreateCredentialsChange={handleCreate} onRecoverCredentialsChange={handleRecoverCredentials} />;
+        return createTabs();
       default:
-        return <Redirect to='/profile' />;
+        return createRedirect();
     }
   }
+
+  const content = createContent();
 
   return (
     <div className='ZLoginPage-root mx-auto w-50' data-testid='ZLoginPage-root'>
-      {getElementForProfile(logged.profile)}
+      {content}
     </div>
   );
 }

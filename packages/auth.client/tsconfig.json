@@ -11,6 +11,6 @@
       "@zthun/auth.theme": ["../auth.theme"]
     }
   },
-  "include": ["src/**/*.tsx"],
+  "include": ["src/**/*.tsx", "src/**/*.ts"],
   "exclude": ["node_modules", "src/**/*.spec.tsx", "src/**/*.spec.ts"]
 }

@@ -1,12 +1,12 @@
 import { createContext, useContext } from 'react';
 import { useWatchableState } from '../common/use-watchable-state.hook';
-import { ZLoginState } from './login-state.class';
+import { ZLoginStateStatic } from './login-state-static.class';
 import { IZLoginState } from './login-state.interface';
 
 /**
  * Represents the context for the globally provided login state.
  */
-export const ZLoginStateContext = createContext<IZLoginState>(new ZLoginState(() => Promise.resolve(null)));
+export const ZLoginStateContext = createContext<IZLoginState>(new ZLoginStateStatic(null));
 
 /**
  * Retrieves the current globally provided login state.

@@ -35,21 +35,6 @@ describe('ZProfileMenu', () => {
     expect(actual).toBeTruthy();
   });
 
-  describe('Loading', () => {
-    beforeEach(() => {
-      profile = undefined;
-    });
-
-    it('shows a circular progress when the profile is loading.', async () => {
-      // Arrange
-      const target = await createTestTarget();
-      // Act
-      const actual = target.getByTestId('ZProfileMenu-loading');
-      // Assert
-      expect(actual).toBeTruthy();
-    });
-  });
-
   describe('Unauthenticated', () => {
     beforeEach(() => {
       profile = null;

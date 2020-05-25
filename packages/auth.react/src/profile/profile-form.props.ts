@@ -1,15 +1,14 @@
 import { IZProfile } from '@zthun/auth.core';
 
 export interface IZProfileFormProps {
-  hideDisplay: boolean;
-  hideEmail: boolean;
+  hideAccountInformation: boolean;
   hidePassword: boolean;
-  hideNewPassword: boolean;
-  hideConfirm: boolean;
 
   headerText: string;
   subHeaderText: string;
   actionText: string;
+  accountInformationHeaderText: string;
+  passwordHeaderText: string;
 
   loading: boolean;
   disabled: boolean;

@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Menu, MenuItem } from '@material-ui/core';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 import { noop } from 'lodash';
 import React from 'react';
 import { useMenuState } from '../common/use-menu-state.hook';
@@ -11,10 +11,6 @@ import { IZProfileMenuProps } from './profile-menu.props';
  */
 export function ZProfileMenu(props: IZProfileMenuProps) {
   const [anchorEl, openMenu, closeMenu] = useMenuState();
-
-  function createLoadingProgress() {
-    return <CircularProgress className='ZProfileManu-loading' data-testid='ZProfileMenu-loading' color='inherit' size='1em' />;
-  }
 
   function createLoginButton() {
     return (
@@ -50,18 +46,8 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
     );
   }
 
-  function createElementForProfile() {
-    switch (props.profile) {
-      case undefined:
-        return createLoadingProgress();
-      case null:
-        return createLoginButton();
-      default:
-        return createProfileMenu();
-    }
-  }
+  const ui = props.profile ? createProfileMenu() : createLoginButton();
 
-  const ui = createElementForProfile();
   return (
     <div className='ZProfileMenu-root' data-testid='ZProfileMenu-root'>
       {ui}
@@ -71,6 +57,8 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
 
 ZProfileMenu.defaultProps = {
   hideLogout: false,
+
+  profile: null,
 
   onLogin: noop,
   onLogout: noop
