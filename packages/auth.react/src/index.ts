@@ -20,5 +20,7 @@ export { ZLoginTab } from './login/login-tab.enum';
 export { ZLoginTabs } from './login/login-tabs';
 export { IZLoginTabsProps } from './login/login-tabs.props';
 // Profile
+export { ZProfileForm } from './profile/profile-form';
+export { IZProfileFormProps } from './profile/profile-form.props';
 export { ZProfileMenu } from './profile/profile-menu';
 export { IZProfileMenuProps } from './profile/profile-menu.props';
