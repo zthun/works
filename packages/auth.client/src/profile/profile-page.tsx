@@ -32,7 +32,7 @@ export function ZProfilePage() {
   const content = createContentFromProfile();
 
   return (
-    <div className='ZProfilePage-root mx-auto w-50 mt-em-5' data-testid='ZProfilePage-root'>
+    <div className='ZProfilePage-root mx-auto w-50' data-testid='ZProfilePage-root'>
       {content}
     </div>
   );
