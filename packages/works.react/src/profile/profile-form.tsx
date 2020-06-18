@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, CardHeader, CircularProgress, TextField } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import { ZProfileBuilder } from '@zthun/auth.core';
+import { ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
 import { IZProfileFormProps } from './profile-form.props';

@@ -1,6 +1,6 @@
 import { UnauthorizedException } from '@nestjs/common';
 import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
-import { IZUser, ZUserBuilder } from '@zthun/auth.core';
+import { IZUser, ZUserBuilder } from '@zthun/works.core';
 import { Request } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
 import { ZJwtService } from '../tokens/jwt.service';

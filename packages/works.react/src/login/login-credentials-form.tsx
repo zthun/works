@@ -1,5 +1,5 @@
 import { Button, Card, CardContent, CardHeader, CircularProgress, TextField } from '@material-ui/core';
-import { ZLoginBuilder } from '@zthun/auth.core';
+import { ZLoginBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
 import { IZLoginCredentialsFormProps } from './login-credentials-form.props';

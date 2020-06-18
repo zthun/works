@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { IZUser, ZUserBuilder } from '@zthun/auth.core';
+import { IZUser, ZUserBuilder } from '@zthun/works.core';
 import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-user.guard';
 import { ZRuleCookieRequiresAuthSuper } from '../rules/rule-cookie-requires-auth-super.guard';
 import { ZRuleParamRequiresExistingUser } from '../rules/rule-param-requires-existing-user.guard';

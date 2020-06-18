@@ -6,7 +6,7 @@
     "declaration": false,
     "sourceMap": true,
     "paths": {
-      "@zthun/auth.core": ["../auth.core/src/index"],
+      "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.react": ["../works.react/src/index"],
       "@zthun/works.themes": ["../works.themes"]
     }

@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { IZProfile, ZProfileBuilder } from '@zthun/auth.core';
+import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import Axios from 'axios';
 import React from 'react';
 import { ZAuthApp } from './auth-app';

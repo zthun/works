@@ -1,4 +1,4 @@
-import { IZProfile, ZProfileBuilder } from '@zthun/auth.core';
+import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { ZLoginState } from './login-state.class';
 
 describe('ZLoginState', () => {

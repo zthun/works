@@ -1,4 +1,4 @@
-import { IZLogin } from '@zthun/auth.core';
+import { IZLogin } from '@zthun/works.core';
 import { ZLoginTab } from './login-tab.enum';
 
 /**

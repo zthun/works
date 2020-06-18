@@ -1,4 +1,4 @@
-import { IZLogin } from '@zthun/auth.core';
+import { IZLogin } from '@zthun/works.core';
 import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
 import { EqualsOtherProperty } from '../validation/equals-other-property.function';
 import { IsNotWhiteSpace } from '../validation/is-not-white-space.function';

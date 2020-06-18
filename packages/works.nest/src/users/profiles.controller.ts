@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Put, Req, UseGuards } from '@nestjs/common';
-import { ZUserBuilder } from '@zthun/auth.core';
+import { ZUserBuilder } from '@zthun/works.core';
 import { Request } from 'express';
 import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-user.guard';
 import { ZRuleCookieRequiresAuthRegular } from '../rules/rule-cookie-requires-auth-regular.guard';

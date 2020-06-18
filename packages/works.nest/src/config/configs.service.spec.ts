@@ -1,5 +1,5 @@
-import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/auth.core';
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
+import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
 import { Collections } from '../common/collections.enum';
 import { ZConfigsService } from './configs.service';
 

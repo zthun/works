@@ -2179,9 +2179,6 @@
     mkdirp-promise "^5.0.1"
     mz "^2.5.0"
 
-"@zthun/auth.core@link:packages/auth.core":
-  version "1.0.0-5"
-
 "@zthun/dal@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@zthun/dal/-/dal-2.0.0.tgz#01715118b4ea2f023b684955312b9892a2b38367"
@@ -2208,6 +2205,9 @@
     tslint "^5.19.0"
     typescript "^3.5.3"
     yargs "^14.0.0"
+
+"@zthun/works.core@link:packages/works.core":
+  version "1.0.0-5"
 
 "@zthun/works.nest@link:packages/works.nest":
   version "1.0.0-5"

@@ -1,4 +1,4 @@
-import { IZProfile } from '@zthun/auth.core';
+import { IZProfile } from '@zthun/works.core';
 import { Subject } from 'rxjs';
 import { IZLoginState } from './login-state.interface';
 

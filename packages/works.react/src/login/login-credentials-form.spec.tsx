@@ -1,5 +1,5 @@
 import { fireEvent, render, RenderResult } from '@testing-library/react';
-import { IZLogin, ZLoginBuilder } from '@zthun/auth.core';
+import { IZLogin, ZLoginBuilder } from '@zthun/works.core';
 import React from 'react';
 import { ZLoginCredentialsForm } from './login-credentials-form';
 

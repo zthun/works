@@ -1,4 +1,4 @@
-import { IZLogin, ZLoginBuilder } from '@zthun/auth.core';
+import { IZLogin, ZLoginBuilder } from '@zthun/works.core';
 import { registerDecorator, ValidationArguments } from 'class-validator';
 import { RequiresOtherProperty, RequiresOtherPropertyValidator } from './requires-other-property.function';
 

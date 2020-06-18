@@ -10,7 +10,7 @@
     "url": "https://github.com/zthun/works"
   },
   "workspaces": [
-    "packages/auth.core",
+    "packages/works.core",
     "packages/works.themes",
     "packages/works.react",
     "packages/works.client",

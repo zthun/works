@@ -5,7 +5,7 @@
     "sourceMap": false,
     "declarationDir": "dist/types",
     "paths": {
-      "@zthun/auth.core": ["../auth.core/src/index"]
+      "@zthun/works.core": ["../works.core/src/index"]
     }
   },
   "include": ["src/**/*.ts", "src/index.ts", "src/login/login-menu.class.tsx"],

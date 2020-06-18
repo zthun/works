@@ -1,6 +1,6 @@
 import { ConflictException } from '@nestjs/common';
 import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
-import { IZLogin, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
+import { IZLogin, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { Request } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
 import { ZUsersService } from '../users/users.service';

@@ -6,7 +6,7 @@
     "sourceMap": true,
     "module": "commonjs",
     "paths": {
-      "@zthun/auth.core": ["../auth.core/src/index"],
+      "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.nest": ["../works.nest/src/index"]
     }
   },

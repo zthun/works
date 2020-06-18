@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
-import { IZLogin, ZAssert, ZLoginBuilder } from '@zthun/auth.core';
+import { IZLogin, ZAssert, ZLoginBuilder } from '@zthun/works.core';
 import { ZUsersService } from '../users/users.service';
 
 @Injectable()

@@ -1,5 +1,5 @@
 import { CircularProgress } from '@material-ui/core';
-import { IZLogin, ZUrlBuilder } from '@zthun/auth.core';
+import { IZLogin, ZUrlBuilder } from '@zthun/works.core';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZLoginTabs } from '@zthun/works.react';
 import Axios from 'axios';
 import { get, noop } from 'lodash';

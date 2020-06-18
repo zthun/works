@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
+import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
 import { Collections } from '../common/collections.enum';
 import { DatabaseToken } from '../common/injection.constants';
 

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IZLogin, IZUser, ZUserBuilder } from '@zthun/auth.core';
 import { IZDatabase } from '@zthun/dal';
+import { IZLogin, IZUser, ZUserBuilder } from '@zthun/works.core';
 import { compare, hash } from 'bcryptjs';
 import { Collections } from '../common/collections.enum';
 import { BcryptRounds } from '../common/crypt.constants';

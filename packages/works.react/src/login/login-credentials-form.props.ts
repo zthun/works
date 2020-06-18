@@ -1,4 +1,4 @@
-import { IZLogin } from '@zthun/auth.core';
+import { IZLogin } from '@zthun/works.core';
 
 /**
  * Represents properties for the ZLoginCredentialsForm.

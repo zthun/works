@@ -1,5 +1,5 @@
 import { fireEvent, render, RenderResult } from '@testing-library/react';
-import { IZProfile, ZProfileBuilder } from '@zthun/auth.core';
+import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { ZProfileForm } from './profile-form';

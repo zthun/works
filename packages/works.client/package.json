@@ -17,7 +17,7 @@
     "dist/**"
   ],
   "devDependencies": {
-    "@zthun/auth.core": "link:../auth.core",
+    "@zthun/works.core": "link:../works.core",
     "@zthun/works.react": "link:../works.react",
     "@zthun/works.themes": "link:../works.themes"
   },

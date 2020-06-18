@@ -1,4 +1,4 @@
-import { IZLogin, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZUserBuilder } from '@zthun/auth.core';
+import { IZLogin, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { Request, Response } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
 import { v4 } from 'uuid';

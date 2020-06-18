@@ -1,5 +1,5 @@
 import { fireEvent, render, RenderResult } from '@testing-library/react';
-import { ZProfileBuilder } from '@zthun/auth.core';
+import { ZProfileBuilder } from '@zthun/works.core';
 import { IZAlertStack, IZLoginState, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZLoginStateContext, ZLoginStateStatic } from '@zthun/works.react';
 import Axios from 'axios';
 import React from 'react';

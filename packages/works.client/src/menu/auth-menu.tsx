@@ -1,5 +1,5 @@
 import { AppBar, Button, CircularProgress, Link, MenuItem, Toolbar, Typography } from '@material-ui/core';
-import { ZUrlBuilder } from '@zthun/auth.core';
+import { ZUrlBuilder } from '@zthun/works.core';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZProfileMenu } from '@zthun/works.react';
 import Axios from 'axios';
 import React from 'react';

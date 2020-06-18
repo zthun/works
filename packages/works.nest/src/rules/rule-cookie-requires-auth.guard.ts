@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
-import { ZAssert } from '@zthun/auth.core';
+import { ZAssert } from '@zthun/works.core';
 import { Request } from 'express';
 import { ZJwtService } from '../tokens/jwt.service';
 
