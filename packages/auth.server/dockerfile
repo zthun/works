@@ -1,9 +1,0 @@
-FROM node:10.16.3-alpine
-
-COPY zthun-auth.server*.tgz /usr/src/packages/zthun-auth.server.tgz
-
-RUN npm install -g /usr/src/packages/zthun-auth.server.tgz
-
-EXPOSE 3000
-
-CMD ["zauth-server"]

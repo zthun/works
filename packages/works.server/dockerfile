@@ -1,0 +1,5 @@
+FROM node:10.16.3-alpine
+COPY zthun-works.server*.tgz /usr/src/packages/zthun-works.server.tgz
+RUN npm install -g /usr/src/packages/zthun-works.server.tgz
+EXPOSE 3000
+CMD ["zworks-server"]

@@ -5,7 +5,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
-  "browser": "./dist/auth.client.min.js",
+  "browser": "./dist/works.client.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/zauth"

@@ -15,7 +15,7 @@
     "packages/auth.react",
     "packages/works.client",
     "packages/auth.nest",
-    "packages/auth.server"
+    "packages/works.server"
   ],
   "scripts": {
     "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz packages/**/yarn-error.log *.log",

@@ -1,8 +1,8 @@
 {
-  "name": "@zthun/auth.client",
+  "name": "@zthun/works.client",
   "version": "1.0.0-5",
-  "description": "A client application that can be used to login to auth.server application.",
-  "browser": "./dist/auth.client.min.js",
+  "description": "A client application that can be used to login to works.server application.",
+  "browser": "./dist/works.client.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/works"
