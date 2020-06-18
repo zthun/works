@@ -10,4 +10,4 @@ reports
 .rpt2_cache
 
 # Specific packages
-packages/auth.theme/css
+packages/themes/css

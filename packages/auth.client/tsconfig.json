@@ -8,7 +8,7 @@
     "paths": {
       "@zthun/auth.core": ["../auth.core/src/index"],
       "@zthun/auth.react": ["../auth.react/src/index"],
-      "@zthun/auth.theme": ["../auth.theme"]
+      "@zthun/themes": ["../theme"]
     }
   },
   "include": ["src/**/*.tsx", "src/**/*.ts"],

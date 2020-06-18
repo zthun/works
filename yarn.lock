@@ -2188,9 +2188,6 @@
 "@zthun/auth.react@link:packages/auth.react":
   version "1.0.0-5"
 
-"@zthun/auth.theme@link:packages/auth.theme":
-  version "1.0.0-5"
-
 "@zthun/dal@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@zthun/dal/-/dal-2.0.0.tgz#01715118b4ea2f023b684955312b9892a2b38367"
@@ -2200,6 +2197,10 @@
     mongodb "^3.4.1"
     mongodb-memory-server "^6.2.0"
     uuid "^3.3.2"
+
+"@zthun/themes@link:packages/themes":
+  version "0.0.0"
+  uid ""
 
 "@zthun/web-styles@^7.1.1":
   version "7.1.1"

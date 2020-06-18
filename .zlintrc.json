@@ -1,8 +1,8 @@
 {
   "tsConfig": "./tslint.json",
-  "esFiles": ["packages/auth.client/*.js"],
+  "esFiles": ["packages/client/*.js"],
   "tsFiles": ["packages/**/src/**/*.ts", "packages/**/src/**/*.tsx"],
-  "lessFiles": ["packages/auth.theme/**/*.less"],
+  "lessFiles": ["packages/themes/**/*.less"],
   "htmlFiles": ["packages/**/src/**/*.html"],
   "jsonFiles": ["*.json", "packages/**/*.json"],
   "yamlFiles": ["./*.yml"]
