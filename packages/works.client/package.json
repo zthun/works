@@ -19,7 +19,7 @@
   "devDependencies": {
     "@zthun/auth.core": "link:../auth.core",
     "@zthun/auth.react": "link:../auth.react",
-    "@zthun/themes": "link:../themes"
+    "@zthun/works.themes": "link:../works.themes"
   },
   "sideEffects": false
 }
