@@ -14,7 +14,7 @@
     "packages/works.themes",
     "packages/works.react",
     "packages/works.client",
-    "packages/auth.nest",
+    "packages/works.nest",
     "packages/works.server"
   ],
   "scripts": {

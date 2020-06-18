@@ -2,7 +2,7 @@
 
 import { Module, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { ZAuthModule, ZExceptionFactory } from '@zthun/auth.nest';
+import { ZAuthModule, ZExceptionFactory } from '@zthun/works.nest';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { ZHealthController } from './health/health.controller';

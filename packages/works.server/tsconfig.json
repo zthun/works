@@ -7,7 +7,7 @@
     "module": "commonjs",
     "paths": {
       "@zthun/auth.core": ["../auth.core/src/index"],
-      "@zthun/auth.nest": ["../auth.nest/src/index"]
+      "@zthun/works.nest": ["../works.nest/src/index"]
     }
   },
   "include": ["src/**/*.ts"],

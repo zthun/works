@@ -1,7 +1,7 @@
 {
-  "name": "@zthun/auth.nest",
+  "name": "@zthun/works.nest",
   "version": "1.0.0-5",
-  "description": "The main module for nestjs based routes and modules for authentication.",
+  "description": "The main module for nestjs based routes and modules for @zthun scoped projects.",
   "author": "Anthony Bonta",
   "license": "MIT",
   "repository": {
