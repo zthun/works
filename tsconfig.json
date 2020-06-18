@@ -5,7 +5,7 @@
     "target": "esnext",
     "paths": {
       "@zthun/auth.core": ["auth.core/src/index"],
-      "@zthun/auth.react": ["auth.react/src/index"]
+      "@zthun/works.react": ["works.react/src/index"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

@@ -1,5 +1,5 @@
 import { CircularProgress } from '@material-ui/core';
-import { useLoginState, ZProfileForm } from '@zthun/auth.react';
+import { useLoginState, ZProfileForm } from '@zthun/works.react';
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 

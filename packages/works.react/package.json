@@ -1,7 +1,7 @@
 {
-  "name": "@zthun/auth.react",
+  "name": "@zthun/works.react",
   "version": "1.0.0-5",
-  "description": "A react component package that contains components for authentication management.",
+  "description": "A react component package that contains react based components for @zthun scoped packages.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",

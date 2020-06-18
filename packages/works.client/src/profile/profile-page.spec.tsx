@@ -1,5 +1,5 @@
 import { act, render, RenderResult } from '@testing-library/react';
-import { ZLoginState, ZLoginStateContext } from '@zthun/auth.react';
+import { ZLoginState, ZLoginStateContext } from '@zthun/works.react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { ZProfilePage } from './profile-page';

@@ -12,7 +12,7 @@
   "workspaces": [
     "packages/auth.core",
     "packages/works.themes",
-    "packages/auth.react",
+    "packages/works.react",
     "packages/works.client",
     "packages/auth.nest",
     "packages/works.server"
