@@ -1,7 +1,7 @@
 /**
  * The name of the database.
  */
-export const DatabaseName = 'auth';
+export const DatabaseName = 'zthunworks';
 
 /**
  * The collections inside the database.

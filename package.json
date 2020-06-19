@@ -42,7 +42,6 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/lodash": "^4.0.0",
     "@types/node": "^13.1.1",
-    "@types/oauth2-server": "^3.0.12",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^5.1.3",

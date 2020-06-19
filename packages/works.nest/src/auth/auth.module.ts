@@ -10,7 +10,7 @@ import { ZUsersController } from '../users/users.controller';
 import { ZUsersService } from '../users/users.service';
 
 @Module({
-  providers: [ZJwtService, ZUsersService, ZConfigsService, { provide: DatabaseToken, useValue: ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().database(DatabaseName).host('database.auth.zthunworks.com').port(27017).build()) }],
+  providers: [ZJwtService, ZUsersService, ZConfigsService, { provide: DatabaseToken, useValue: ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().database(DatabaseName).host('database.zthunworks.com').port(27017).build()) }],
   controllers: [ZUsersController, ZTokensController, ZProfilesController]
 })
 export class ZAuthModule {}
