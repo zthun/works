@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { ZAuthApp } from './app/auth-app';
+import { ZthunworksApp } from './app/works-app';
 import './index.less';
 
-render(<ZAuthApp />, document.getElementById('zthunworks'));
+render(<ZthunworksApp />, document.getElementById('zthunworks'));
