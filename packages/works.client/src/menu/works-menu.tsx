@@ -5,7 +5,7 @@ import Axios from 'axios';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-export function ZAuthMenu() {
+export function ZthunworksMenu() {
   const alerts = useAlertStack();
   const hist = useHistory();
   const login = useLoginState();
@@ -44,11 +44,11 @@ export function ZAuthMenu() {
 
   function createProfileMenu() {
     if (login.profile === undefined) {
-      return <CircularProgress className='ZAuthMenu-progress-loading' data-testid='ZAuthMenu-progress-loading' color='inherit' size='1em' />;
+      return <CircularProgress className='ZthunworksMenu-progress-loading' data-testid='ZthunworksMenu-progress-loading' color='inherit' size='1em' />;
     }
 
     return (
-      <ZProfileMenu data-testid='ZAuthMenu-menu-profile' profile={login.profile} onLogout={handleLogout} onLogin={handleLogin}>
+      <ZProfileMenu data-testid='ZthunworksMenu-menu-profile' profile={login.profile} onLogout={handleLogout} onLogin={handleLogin}>
         <MenuItem onClick={handleProfile}>PROFILE</MenuItem>
       </ZProfileMenu>
     );
@@ -59,7 +59,7 @@ export function ZAuthMenu() {
   const profile = createProfileMenu();
 
   return (
-    <AppBar className='ZAuthMenu-root' position='sticky' data-testid='ZAuthMenu-root'>
+    <AppBar className='ZthunworksMenu-root' position='sticky' data-testid='ZthunworksMenu-root'>
       <Toolbar>
         {home}
         {spacer}

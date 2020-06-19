@@ -1,13 +1,13 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { ZAuthMenu } from './auth-menu';
+import { ZthunworksMenu } from './works-menu';
 
-describe('ZAuthMenu', () => {
+describe('ZthunworksMenu', () => {
   it('renders the menu', () => {
     // Arrange
-    const target = render(<ZAuthMenu />);
+    const target = render(<ZthunworksMenu />);
     // Act
-    const actual = target.queryByTestId('ZAuthMenu-root');
+    const actual = target.queryByTestId('ZthunworksMenu-root');
     // Assert
     expect(actual).toBeTruthy();
   });

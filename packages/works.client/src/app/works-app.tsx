@@ -6,7 +6,7 @@ import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import { ZHomePage } from '../home/home-page';
 import { ZLoginPage } from '../login/login-page';
-import { ZAuthMenu } from '../menu/auth-menu';
+import { ZthunworksMenu } from '../menu/works-menu';
 import { ZProfilePage } from '../profile/profile-page';
 
 export function ZthunworksApp() {
@@ -21,7 +21,7 @@ export function ZthunworksApp() {
       <ZLoginStateContext.Provider value={new ZLoginState(getProfile)}>
         <ZAlertStackContext.Provider value={new ZAlertStack(5)}>
           <HashRouter>
-            <ZAuthMenu />
+            <ZthunworksMenu />
             <article className='Zthunworks-article pt-em-4' data-testid='Zthunworks-article'>
               <Route path='/home' component={ZHomePage} />
               <Route path='/login' component={ZLoginPage} />
