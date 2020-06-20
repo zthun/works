@@ -20,6 +20,22 @@ function config(env) {
     module: {
       rules: [
         {
+          test: /\.png$/,
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images/png'
+          }
+        },
+        {
+          test: /\.svg$/,
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images/svg'
+          }
+        },
+        {
           test: /\.tsx?$/,
           loader: 'awesome-typescript-loader',
           options: {

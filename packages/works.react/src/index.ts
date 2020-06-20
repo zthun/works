@@ -21,6 +21,8 @@ export { IZLoginState } from './login/login-state.interface';
 export { ZLoginTab } from './login/login-tab.enum';
 export { ZLoginTabs } from './login/login-tabs';
 export { IZLoginTabsProps } from './login/login-tabs.props';
+// Media
+export { ZElevatedMediaCard } from './media/elevated-media-card';
 // Profile
 export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
