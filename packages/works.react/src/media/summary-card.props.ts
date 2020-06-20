@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface IZElevatedMediaCardProps {
+export interface IZSummaryCardProps {
   title: string;
   imageUrl?: string;
   children?: ReactNode;

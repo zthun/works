@@ -22,7 +22,7 @@ export { ZLoginTab } from './login/login-tab.enum';
 export { ZLoginTabs } from './login/login-tabs';
 export { IZLoginTabsProps } from './login/login-tabs.props';
 // Media
-export { ZElevatedMediaCard } from './media/elevated-media-card';
+export { ZSummaryCard } from './media/summary-card';
 // Profile
 export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
