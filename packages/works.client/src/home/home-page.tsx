@@ -4,7 +4,7 @@ import React from 'react';
 
 export function ZHomePage() {
   return (
-    <Grid container={true} spacing={3} className='ZHomePage-root' justify='center'>
+    <Grid container={true} spacing={3} className='ZHomePage-root' data-testid='ZHomePage-root' justify='center'>
       <Grid item={true}>
         <ZSummaryCard title='React Components' imageUrl='/images/svg/react.svg'>
           The Zthunworks client is built in React and offers a library of components for those who want to use some of the functionality found here.
