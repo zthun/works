@@ -5,7 +5,7 @@ import { Collections } from '../common/collections.enum';
 import { DatabaseToken } from '../common/injection.constants';
 
 @Injectable()
-export class ZConfigsService {
+export class ZVaultService {
   public constructor(@Inject(DatabaseToken) private readonly _dal: IZDatabase) {}
 
   /**
@@ -27,7 +27,7 @@ export class ZConfigsService {
    *
    * If no config with the given scope and key exists, then the
    * configuration is added with the value.  Otherwise, the value
-   * is overritten with the stored value.
+   * is overwritten with the stored value.
    *
    * @param config The current configuration to read.  If the scope and key of the config exists,
    * then the existing config entity is returned, otherwise, the config value is added and

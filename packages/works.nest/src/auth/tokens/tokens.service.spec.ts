@@ -2,19 +2,19 @@ import { IZLogin, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZUserBuilder } fro
 import { Request, Response } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
 import { v4 } from 'uuid';
-import { ZConfigsService } from '../config/configs.service';
-import { ZUsersService } from '../users/users.service';
-import { ZJwtService } from './jwt.service';
+import { ZUsersService } from '../../users/users.service';
+import { ZVaultService } from '../../vault/vault.service';
+import { ZTokensService } from './tokens.service';
 
-describe('ZTokensRepositoryController', () => {
+describe('ZTokensService', () => {
   let secret: string;
   let domain: string;
   let cfg: any;
-  let config: jest.Mocked<ZConfigsService>;
+  let config: jest.Mocked<ZVaultService>;
   let users: jest.Mocked<ZUsersService>;
 
   function createTestTarget() {
-    return new ZJwtService(config, users);
+    return new ZTokensService(config, users);
   }
 
   beforeEach(() => {
@@ -34,7 +34,7 @@ describe('ZTokensRepositoryController', () => {
     users.findByEmail.mockReturnValue(Promise.resolve(null));
     users.findById.mockReturnValue(Promise.resolve(null));
 
-    config = createSpyObj(ZConfigsService, ['get']);
+    config = createSpyObj(ZVaultService, ['get']);
     config.get.mockImplementation((c) => Promise.resolve(cfg[c.scope][c.key]));
   });
 
@@ -59,7 +59,7 @@ describe('ZTokensRepositoryController', () => {
       // Act
       await target.inject(res, credentials);
       // Assert
-      expect(res.cookie).toHaveBeenCalledWith(ZJwtService.COOKIE_NAME, expect.anything(), expect.objectContaining({ secure: true, sameSite: true, httpOnly: true, domain }));
+      expect(res.cookie).toHaveBeenCalledWith(ZTokensService.COOKIE_NAME, expect.anything(), expect.objectContaining({ secure: true, sameSite: true, httpOnly: true, domain }));
     });
 
     it('should clear the auth token.', async () => {
@@ -68,7 +68,7 @@ describe('ZTokensRepositoryController', () => {
       // Act
       await target.clear(res);
       // Assert
-      expect(res.clearCookie).toHaveBeenCalledWith(ZJwtService.COOKIE_NAME, expect.objectContaining({ secure: true, sameSite: true, httpOnly: true, domain }));
+      expect(res.clearCookie).toHaveBeenCalledWith(ZTokensService.COOKIE_NAME, expect.objectContaining({ secure: true, sameSite: true, httpOnly: true, domain }));
     });
   });
 
@@ -86,7 +86,7 @@ describe('ZTokensRepositoryController', () => {
       // Arrange
       const target = createTestTarget();
       const jwt = await target.sign({ user: user.email }, secret);
-      req.cookies[ZJwtService.COOKIE_NAME] = jwt;
+      req.cookies[ZTokensService.COOKIE_NAME] = jwt;
       // Act
       const actual = await target.extract(req);
       // Assert

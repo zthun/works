@@ -2,19 +2,19 @@
 
 // Auth
 export { ZAuthModule } from './auth/auth.module';
-// Rules
-export { ZRuleBodyRequiresCredentials } from './rules/rule-body-requires-credentials.guard';
-export { ZRuleBodyRequiresUniqueUser } from './rules/rule-body-requires-unique-user.guard';
-export { ZRuleCookieRequiresAuthSuper } from './rules/rule-cookie-requires-auth-super.guard';
-export { ZRuleCookieRequiresAuth } from './rules/rule-cookie-requires-auth.guard';
-export { ZRuleParamRequiresExistingUser } from './rules/rule-param-requires-existing-user.guard';
-export { ZRuleParamRequiresRegularUser } from './rules/rule-param-requires-regular-user.guard';
-// Tokens
-export { ZJwtService } from './tokens/jwt.service';
-export { ZTokensLoginDto } from './tokens/tokens-login.dto';
-export { ZTokensController } from './tokens/tokens.controller';
 // Users/Profiles
-export { ZProfilesController } from './users/profiles.controller';
+export { ZProfilesController } from './auth/profile/profiles.controller';
+// Rules
+export { ZRuleBodyRequiresCredentials } from './auth/rules/rule-body-requires-credentials.guard';
+export { ZRuleBodyRequiresUniqueUser } from './auth/rules/rule-body-requires-unique-user.guard';
+export { ZRuleCookieRequiresAuthSuper } from './auth/rules/rule-cookie-requires-auth-super.guard';
+export { ZRuleCookieRequiresAuth } from './auth/rules/rule-cookie-requires-auth.guard';
+export { ZRuleParamRequiresExistingUser } from './auth/rules/rule-param-requires-existing-user.guard';
+export { ZRuleParamRequiresRegularUser } from './auth/rules/rule-param-requires-regular-user.guard';
+export { ZTokensLoginDto } from './auth/tokens/tokens-login.dto';
+export { ZTokensController } from './auth/tokens/tokens.controller';
+// Tokens
+export { ZTokensService as ZJwtService } from './auth/tokens/tokens.service';
 export { ZUserCreateDto } from './users/user-create.dto';
 export { ZUserUpdateDto } from './users/user-update.dto';
 export { ZUsersController } from './users/users.controller';

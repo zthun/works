@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { IZUser, ZUserBuilder } from '@zthun/works.core';
-import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-user.guard';
-import { ZRuleCookieRequiresAuthSuper } from '../rules/rule-cookie-requires-auth-super.guard';
-import { ZRuleParamRequiresExistingUser } from '../rules/rule-param-requires-existing-user.guard';
-import { ZRuleParamRequiresRegularUser } from '../rules/rule-param-requires-regular-user.guard';
+import { ZRuleBodyRequiresUniqueUser } from '../auth/rules/rule-body-requires-unique-user.guard';
+import { ZRuleCookieRequiresAuthSuper } from '../auth/rules/rule-cookie-requires-auth-super.guard';
+import { ZRuleParamRequiresExistingUser } from '../auth/rules/rule-param-requires-existing-user.guard';
+import { ZRuleParamRequiresRegularUser } from '../auth/rules/rule-param-requires-regular-user.guard';
 import { ZUserCreateDto } from './user-create.dto';
 import { ZUserUpdateDto } from './user-update.dto';
 import { ZUsersService } from './users.service';

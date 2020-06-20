@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, Put, Req, UseGuards } from '@nestjs/common';
 import { ZUserBuilder } from '@zthun/works.core';
 import { Request } from 'express';
+import { ZUserUpdateDto } from '../../users/user-update.dto';
+import { ZUsersService } from '../../users/users.service';
 import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-user.guard';
 import { ZRuleCookieRequiresAuthRegular } from '../rules/rule-cookie-requires-auth-regular.guard';
 import { ZRuleCookieRequiresAuth } from '../rules/rule-cookie-requires-auth.guard';
-import { ZJwtService } from '../tokens/jwt.service';
-import { ZUserUpdateDto } from './user-update.dto';
-import { ZUsersService } from './users.service';
+import { ZTokensService } from '../tokens/tokens.service';
 
 /**
  * Same as the users controller, but uses the cookie to get the id and has different permissions.
@@ -21,7 +21,7 @@ export class ZProfilesController {
    * @param _jwt The jwt service.
    * @param _users The users service.
    */
-  public constructor(private readonly _jwt: ZJwtService, private readonly _users: ZUsersService) {}
+  public constructor(private readonly _jwt: ZTokensService, private readonly _users: ZUsersService) {}
 
   /**
    * Reads the user profile.
@@ -55,9 +55,6 @@ export class ZProfilesController {
 
   /**
    * Deletes/Deactivates the given user.
-   *
-   * TODO:  A user is only deactivated if this method is called.  If the user
-   * is already deactivated, then they are deleted.
    *
    * @param req The request object.
    *

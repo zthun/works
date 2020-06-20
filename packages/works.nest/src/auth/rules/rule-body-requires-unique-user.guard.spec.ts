@@ -3,7 +3,7 @@ import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
 import { IZLogin, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { Request } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
-import { ZUsersService } from '../users/users.service';
+import { ZUsersService } from '../../users/users.service';
 import { ZRuleBodyRequiresUniqueUser } from './rule-body-requires-unique-user.guard';
 
 describe('ZRuleBodyRequiresUniqueUser', () => {

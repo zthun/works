@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, Post, Res, UseGuards } from '@nestjs/com
 import { Response } from 'express';
 import { ZRuleBodyRequiresCredentials } from '../rules/rule-body-requires-credentials.guard';
 import { ZRuleCookieRequiresAuth } from '../rules/rule-cookie-requires-auth.guard';
-import { ZJwtService } from './jwt.service';
 import { ZTokensLoginDto } from './tokens-login.dto';
+import { ZTokensService } from './tokens.service';
 
 /**
  * The controller for logging the user in and out.
@@ -15,7 +15,7 @@ export class ZTokensController {
    *
    * @param _tokens The jwt tokens client proxy.
    */
-  public constructor(private readonly _jwt: ZJwtService) {}
+  public constructor(private readonly _jwt: ZTokensService) {}
 
   /**
    * Convinence method for UIs that want route guards for token auth.

@@ -1,11 +1,11 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ZAssert } from '@zthun/works.core';
 import { Request } from 'express';
-import { ZJwtService } from '../tokens/jwt.service';
+import { ZTokensService } from '../tokens/tokens.service';
 
 @Injectable()
 export class ZRuleCookieRequiresAuth implements CanActivate {
-  public constructor(private readonly _jwt: ZJwtService) {}
+  public constructor(private readonly _jwt: ZTokensService) {}
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest() as Request;

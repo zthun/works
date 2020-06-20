@@ -1,6 +1,6 @@
 import { IZLogin } from '@zthun/works.core';
 import { IsEmail, IsString, MinLength } from 'class-validator';
-import { IsNotWhiteSpace } from '../validation/is-not-white-space.function';
+import { IsNotWhiteSpace } from '../../validation/is-not-white-space.function';
 
 export class ZTokensLoginDto implements IZLogin {
   @IsString({ message: 'Email must be a string.' })

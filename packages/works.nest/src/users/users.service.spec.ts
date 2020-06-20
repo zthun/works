@@ -2,7 +2,6 @@ import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal
 import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { compare, hash } from 'bcryptjs';
 import { Collections } from '../common/collections.enum';
-import { BcryptRounds } from '../common/crypt.constants';
 import { ZUsersService } from './users.service';
 
 describe('ZUsersRepositoryController', () => {
@@ -20,8 +19,8 @@ describe('ZUsersRepositoryController', () => {
     loginA = new ZLoginBuilder().email('a@gmail.com').password('super-secret-a').autoConfirm().build();
     loginB = new ZLoginBuilder().email('b@yahoo.com').password('super-secret-b').autoConfirm().build();
 
-    const pwdA = await hash(loginA.password, BcryptRounds);
-    const pwdB = await hash(loginB.password, BcryptRounds);
+    const pwdA = await hash(loginA.password, ZUsersService.BcryptRounds);
+    const pwdB = await hash(loginB.password, ZUsersService.BcryptRounds);
 
     userA = new ZUserBuilder().email(loginA.email).password(pwdA).build();
     userB = new ZUserBuilder().email(loginB.email).password(pwdB).build();

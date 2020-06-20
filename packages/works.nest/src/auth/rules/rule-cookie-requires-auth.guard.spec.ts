@@ -3,11 +3,11 @@ import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
 import { IZUser, ZUserBuilder } from '@zthun/works.core';
 import { Request } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
-import { ZJwtService } from '../tokens/jwt.service';
+import { ZTokensService } from '../tokens/tokens.service';
 import { ZRuleCookieRequiresAuth } from './rule-cookie-requires-auth.guard';
 
 describe('ZRuleCookieRequestAuth', () => {
-  let jwt: jest.Mocked<ZJwtService>;
+  let jwt: jest.Mocked<ZTokensService>;
   let user: IZUser;
   let req: jest.Mocked<Request>;
   let host: jest.Mocked<HttpArgumentsHost>;
@@ -28,7 +28,7 @@ describe('ZRuleCookieRequestAuth', () => {
     context = (createSpyObj('context', ['switchToHttp']) as unknown) as jest.Mocked<ExecutionContext>;
     context.switchToHttp.mockReturnValue(host);
 
-    jwt = createSpyObj(ZJwtService, ['extract']);
+    jwt = createSpyObj(ZTokensService, ['extract']);
     jwt.extract.mockResolvedValue(user);
   });
 

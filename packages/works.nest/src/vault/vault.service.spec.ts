@@ -1,15 +1,15 @@
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
 import { Collections } from '../common/collections.enum';
-import { ZConfigsService } from './configs.service';
+import { ZVaultService } from './vault.service';
 
-describe('ZConfigsService', () => {
+describe('ZVaultService', () => {
   let dal: IZDatabase;
   let configA: IZConfigEntry;
   let configB: IZConfigEntry;
 
   function createTestTarget() {
-    return new ZConfigsService(dal);
+    return new ZVaultService(dal);
   }
 
   beforeAll(() => {
@@ -29,7 +29,7 @@ describe('ZConfigsService', () => {
 
   describe('Get', () => {
     describe('by key', () => {
-      it('will retrieve the existingn value.', async () => {
+      it('will retrieve the existing value.', async () => {
         // Arrange
         const target = createTestTarget();
         const expected = new ZConfigEntryBuilder().copy(configA).build();

@@ -1,26 +1,27 @@
-import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, NotFoundException } from '@nestjs/common';
 import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
 import { IZUser, ZUserBuilder } from '@zthun/works.core';
 import { Request } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
-import { ZJwtService } from '../tokens/jwt.service';
-import { ZRuleCookieRequiresAuthRegular } from './rule-cookie-requires-auth-regular.guard';
+import { ZUsersService } from '../../users/users.service';
+import { ZRuleParamRequiresRegularUser } from './rule-param-requires-regular-user.guard';
 
-describe('ZRuleCookieRequiresAuthRegular', () => {
-  let jwt: jest.Mocked<ZJwtService>;
+describe('ZRuleParamRequiresRegularUser', () => {
+  let users: jest.Mocked<ZUsersService>;
   let user: IZUser;
   let req: jest.Mocked<Request>;
   let host: jest.Mocked<HttpArgumentsHost>;
   let context: jest.Mocked<ExecutionContext>;
 
   function createTestTarget() {
-    return new ZRuleCookieRequiresAuthRegular(jwt);
+    return new ZRuleParamRequiresRegularUser(users);
   }
 
   beforeEach(() => {
-    user = new ZUserBuilder().email('gambit@marvel.com').password('weak').build();
+    user = new ZUserBuilder().email('cable@marvel.com').password('pa$$word1').id('0').build();
 
     req = (createSpyObj('req', ['text']) as unknown) as jest.Mocked<Request>;
+    req.params = { id: user._id };
 
     host = (createSpyObj('host', ['getRequest']) as unknown) as jest.Mocked<HttpArgumentsHost>;
     host.getRequest.mockReturnValue(req);
@@ -28,8 +29,8 @@ describe('ZRuleCookieRequiresAuthRegular', () => {
     context = (createSpyObj('context', ['switchToHttp']) as unknown) as jest.Mocked<ExecutionContext>;
     context.switchToHttp.mockReturnValue(host);
 
-    jwt = createSpyObj(ZJwtService, ['extract']);
-    jwt.extract.mockResolvedValue(user);
+    users = createSpyObj(ZUsersService, ['findById']);
+    users.findById.mockResolvedValue(user);
   });
 
   it('return true if all rules pass.', async () => {
@@ -41,20 +42,20 @@ describe('ZRuleCookieRequiresAuthRegular', () => {
     expect(actual).toBeTruthy();
   });
 
-  it('throws an UnauthorizedException if the user is not found.', async () => {
+  it('throws an NotFoundException if the user is not found.', async () => {
     // Arrange
     const target = createTestTarget();
-    jwt.extract.mockResolvedValue(null);
+    users.findById.mockResolvedValue(null);
     // Act
     const actual = target.canActivate(context);
     // Assert
-    await expect(actual).rejects.toBeInstanceOf(UnauthorizedException);
+    await expect(actual).rejects.toBeInstanceOf(NotFoundException);
   });
 
-  it('throws a ForbiddenException if the user is the super user.', async () => {
+  it('throws a ForbiddenException if the user is a super user.', async () => {
     // Arrange
     const target = createTestTarget();
-    jwt.extract.mockResolvedValue(new ZUserBuilder().super().build());
+    users.findById.mockResolvedValue(new ZUserBuilder().super().build());
     // Act
     const actual = target.canActivate(context);
     // Assert

@@ -1,21 +1,21 @@
 import { IZLogin, ZLoginBuilder } from '@zthun/works.core';
 import { Response } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
-import { ZJwtService } from './jwt.service';
 import { ZTokensController } from './tokens.controller';
+import { ZTokensService } from './tokens.service';
 
 describe('TokensController', () => {
   let domain: string;
   let credentials: IZLogin;
   let res: jest.Mocked<Response>;
-  let jwt: jest.Mocked<ZJwtService>;
+  let jwt: jest.Mocked<ZTokensService>;
 
   function createTestTarget() {
     return new ZTokensController(jwt);
   }
 
   beforeEach(() => {
-    jwt = createSpyObj(ZJwtService, ['inject', 'clear']);
+    jwt = createSpyObj(ZTokensService, ['inject', 'clear']);
     jwt.inject.mockReturnValue(Promise.resolve());
     jwt.clear.mockReturnValue(Promise.resolve());
 

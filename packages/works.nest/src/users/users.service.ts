@@ -3,7 +3,6 @@ import { IZDatabase } from '@zthun/dal';
 import { IZLogin, IZUser, ZUserBuilder } from '@zthun/works.core';
 import { compare, hash } from 'bcryptjs';
 import { Collections } from '../common/collections.enum';
-import { BcryptRounds } from '../common/crypt.constants';
 import { DatabaseToken } from '../common/injection.constants';
 
 /**
@@ -11,6 +10,11 @@ import { DatabaseToken } from '../common/injection.constants';
  */
 @Injectable()
 export class ZUsersService {
+  /**
+   * The password encryption rounds.
+   */
+  public static readonly BcryptRounds = 10;
+
   /**
    * Initializes a new instance of this object.
    *
@@ -64,7 +68,7 @@ export class ZUsersService {
    */
   public async create(login: IZLogin): Promise<IZUser> {
     const total = await this._dal.count(Collections.Users).run();
-    const password = await hash(login.password, BcryptRounds);
+    const password = await hash(login.password, ZUsersService.BcryptRounds);
     const builder = new ZUserBuilder().email(login.email).password(password);
     const create = total === 0 ? builder.super().build() : builder.build();
     const [created] = await this._dal.create(Collections.Users, [create]).run();
@@ -84,7 +88,7 @@ export class ZUsersService {
     }
 
     if (login.password) {
-      template.password = await hash(login.password, BcryptRounds);
+      template.password = await hash(login.password, ZUsersService.BcryptRounds);
     }
 
     if (!template.email && !template.password) {

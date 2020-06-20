@@ -2,14 +2,14 @@ import { IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { plainToClass } from 'class-transformer';
 import { Request } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
-import { ZJwtService } from '../tokens/jwt.service';
+import { ZUserUpdateDto } from '../../users/user-update.dto';
+import { ZUsersService } from '../../users/users.service';
+import { ZTokensService } from '../tokens/tokens.service';
 import { ZProfilesController } from './profiles.controller';
-import { ZUserUpdateDto } from './user-update.dto';
-import { ZUsersService } from './users.service';
 
 describe('ZProfilesController', () => {
   let gambit: IZUser;
-  let jwt: jest.Mocked<ZJwtService>;
+  let jwt: jest.Mocked<ZTokensService>;
   let users: jest.Mocked<ZUsersService>;
   let req: jest.Mocked<Request>;
 
@@ -26,7 +26,7 @@ describe('ZProfilesController', () => {
     users.update.mockResolvedValue(gambit);
     users.remove.mockResolvedValue(gambit);
 
-    jwt = createSpyObj(ZJwtService, ['extract']);
+    jwt = createSpyObj(ZTokensService, ['extract']);
     jwt.extract.mockReturnValue(Promise.resolve(gambit));
   });
 

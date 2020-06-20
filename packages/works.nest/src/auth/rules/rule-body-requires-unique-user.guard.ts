@@ -1,6 +1,6 @@
 import { CanActivate, ConflictException, ExecutionContext, Injectable } from '@nestjs/common';
 import { IZLogin, ZAssert } from '@zthun/works.core';
-import { ZUsersService } from '../users/users.service';
+import { ZUsersService } from '../../users/users.service';
 
 @Injectable()
 export class ZRuleBodyRequiresUniqueUser implements CanActivate {
