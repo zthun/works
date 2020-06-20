@@ -34,7 +34,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
   return (
     <div className='ZLoginTabs-root' data-testid='ZLoginTabs-root'>
       <div className='ZLoginTabs-tab-container'>
-        <Tabs value={tab} onChange={handleTabChange}>
+        <Tabs centered={true} value={tab} onChange={handleTabChange}>
           {loginTab}
           {signupTab}
           {recoverTab}
