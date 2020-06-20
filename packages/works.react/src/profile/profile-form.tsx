@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, CardHeader, CircularProgress, TextField } from '@material-ui/core';
+import { Button, Card, CardContent, CardHeader, CircularProgress, Paper, TextField } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { ZProfileBuilder } from '@zthun/works.core';
@@ -41,7 +41,7 @@ export function ZProfileForm(props: IZProfileFormProps) {
 
   function createTextField(name: string, label: string, type: string, val: string, handleInput: (e: any) => void) {
     const id = `ZProfileForm-input-${name}`;
-    const clasz = `${id} mb-md`;
+    const clasz = `ZProfileForm-input ${id}`;
     return <TextField className={clasz} data-testid={id} fullWidth={true} label={label} type={type} margin='none' variant='outlined' value={val} disabled={props.disabled} onInput={handleInput} />;
   }
 
@@ -55,7 +55,7 @@ export function ZProfileForm(props: IZProfileFormProps) {
 
     return (
       <React.Fragment>
-        <h2>{props.accountInformationHeaderText}</h2>
+        <h4>{props.accountInformationHeaderText}</h4>
         {displayTextField}
         {emailTextField}
       </React.Fragment>
@@ -73,7 +73,7 @@ export function ZProfileForm(props: IZProfileFormProps) {
 
     return (
       <React.Fragment>
-        <h2>{props.passwordHeaderText}</h2>
+        <h4>{props.passwordHeaderText}</h4>
         {passwordTextField}
         {newPasswordTextField}
         {confirmTextField}
@@ -102,16 +102,18 @@ export function ZProfileForm(props: IZProfileFormProps) {
   const actionButton = createActionButton();
 
   return (
-    <Card className='ZProfileForm-root'>
-      <CardHeader classes={{ root: 'pb-sm' }} avatar={avatar} title={<h1 className='m-no p-no'>{props.headerText}</h1>} subheader={props.subHeaderText} />
-      <CardContent>
-        <form noValidate={true} autoComplete='off'>
-          {accountInformation}
-          {updatePassword}
-          {actionButton}
-        </form>
-      </CardContent>
-    </Card>
+    <Paper className='ZProfileForm-root' data-testid='ZProfileForm-root' elevation={5}>
+      <Card>
+        <CardHeader className='ZProfileForm-header' avatar={avatar} title={<h3>{props.headerText}</h3>} subheader={props.subHeaderText} />
+        <CardContent>
+          <form noValidate={true} autoComplete='off'>
+            {accountInformation}
+            {updatePassword}
+            {actionButton}
+          </form>
+        </CardContent>
+      </Card>
+    </Paper>
   );
 }
 

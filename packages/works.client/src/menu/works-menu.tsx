@@ -30,14 +30,14 @@ export function ZthunworksMenu() {
   }
 
   function createSpacer() {
-    return <Typography className='flex-grow-1'>&nbsp;</Typography>;
+    return <Typography className='ZthunworksMenu-options'>&nbsp;</Typography>;
   }
 
   function createHomeButton() {
     return (
       <Button color='inherit'>
-        <CloudIcon className='mr-sm' />
-        <Link color='inherit' href='#/home' variant='h5'>
+        <CloudIcon className='ZthunworksMenu-icon' />
+        <Link className='ZthunworksMenu-home' color='inherit' href='#/home' variant='h5'>
           ZTHUNWORKS
         </Link>
       </Button>

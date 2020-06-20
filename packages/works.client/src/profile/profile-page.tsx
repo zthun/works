@@ -1,4 +1,4 @@
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Grid } from '@material-ui/core';
 import { useLoginState, ZProfileForm } from '@zthun/works.react';
 import React from 'react';
 import { Redirect } from 'react-router-dom';
@@ -32,8 +32,8 @@ export function ZProfilePage() {
   const content = createContentFromProfile();
 
   return (
-    <div className='ZProfilePage-root mx-auto w-50' data-testid='ZProfilePage-root'>
-      {content}
-    </div>
+    <Grid className='ZProfilePage-root' data-testid='ZProfilePage-root' container={true} spacing={3} justify='center'>
+      <Grid item={true}>{content}</Grid>
+    </Grid>
   );
 }
