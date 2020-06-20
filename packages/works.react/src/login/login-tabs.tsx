@@ -32,16 +32,16 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
   const recoverTab = props.hideRecoverTab ? null : <Tab className='ZLoginTabs-tab-recover' data-testid='ZLoginTabs-tab-recover' icon={<HelpOutlineIcon />} label='RECOVER' value={ZLoginTab.Recover} disabled={props.loading} />;
 
   return (
-    <div className='ZLoginTabs-root d-flex-nowrap' data-testid='ZLoginTabs-root'>
-      <div className='ZLoginTabs-tab-container pr-sm'>
-        <Tabs orientation='vertical' value={tab} onChange={handleTabChange}>
+    <div className='ZLoginTabs-root' data-testid='ZLoginTabs-root'>
+      <div className='ZLoginTabs-tab-container'>
+        <Tabs value={tab} onChange={handleTabChange}>
           {loginTab}
           {signupTab}
           {recoverTab}
         </Tabs>
       </div>
 
-      <div className='ZLoginTabs-form-login flex-grow-1' data-testid='ZLoginTabs-form-login' hidden={tab !== ZLoginTab.Login}>
+      <div className='ZLoginTabs-form-login' data-testid='ZLoginTabs-form-login' hidden={tab !== ZLoginTab.Login}>
         <ZLoginCredentialsForm
           headerText='Login'
           subHeaderText='Enter your credentials'
@@ -54,7 +54,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
         />
       </div>
 
-      <div className='ZLoginTabs-form-create flex-grow-1' data-testid='ZLoginTabs-form-create' hidden={tab !== ZLoginTab.Create}>
+      <div className='ZLoginTabs-form-create' data-testid='ZLoginTabs-form-create' hidden={tab !== ZLoginTab.Create}>
         <ZLoginCredentialsForm
           headerText='Create Account'
           subHeaderText='Enter new account information'
@@ -66,7 +66,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
         />
       </div>
 
-      <div className='ZLoginTabs-form-recover flex-grow-1' data-testid='ZLoginTabs-form-recover' hidden={tab !== ZLoginTab.Recover}>
+      <div className='ZLoginTabs-form-recover' data-testid='ZLoginTabs-form-recover' hidden={tab !== ZLoginTab.Recover}>
         <ZLoginCredentialsForm
           headerText='Recover Account'
           subHeaderText='Get back into your account'

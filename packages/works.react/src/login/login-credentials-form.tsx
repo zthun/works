@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, CardHeader, CircularProgress, TextField } from '@material-ui/core';
+import { Button, Card, CardContent, CardHeader, CircularProgress, Paper, TextField } from '@material-ui/core';
 import { ZLoginBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
@@ -38,7 +38,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
 
   const emailTextField = props.hideEmail ? null : (
     <TextField
-      className='ZLoginCredentialsForm-input-email mb-md'
+      className='ZLoginCredentialsForm-input ZLoginCredentialsForm-input-email'
       data-testid='ZLoginCredentialsForm-input-email'
       fullWidth={true}
       required={true}
@@ -54,7 +54,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
 
   const passwordTextField = props.hidePassword ? null : (
     <TextField
-      className='ZLoginCredentialsForm-input-password mb-md'
+      className='ZLoginCredentialsForm-input ZLoginCredentialsForm-input-password'
       data-testid='ZLoginCredentialsForm-input-password'
       fullWidth={true}
       required={true}
@@ -71,7 +71,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
   const confirmTextField =
     props.hidePassword || props.hideConfirm ? null : (
       <TextField
-        className='ZLoginCredentialsForm-input-confirm mb-md'
+        className='ZLoginCredentialsForm-input ZLoginCredentialsForm-input-confirm'
         data-testid='ZLoginCredentialsForm-input-confirm'
         fullWidth={true}
         required={true}
@@ -85,7 +85,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       />
     );
 
-  const loadingProgress = !props.loading ? null : <CircularProgress className='ZLoginCredentialsForm-icon-progress ml-sm' data-testid='ZLoginCredentialsForm-icon-progress' color='inherit' size='1em' />;
+  const loadingProgress = !props.loading ? null : <CircularProgress className='ZLoginCredentialsForm-icon-progress' data-testid='ZLoginCredentialsForm-icon-progress' color='inherit' size='1em' />;
 
   const actionButton = (
     <Button className='ZLoginCredentialsForm-btn-action' data-testid='ZLoginCredentialsForm-btn-action' fullWidth={true} variant='contained' color='primary' disabled={props.disabled} onClick={handleAction}>
@@ -95,9 +95,9 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
   );
 
   return (
-    <div className='ZLoginCredentialsForm-root' data-testid='ZLoginCredentialsForm-root'>
-      <Card className='mb-md'>
-        <CardHeader classes={{ root: 'pb-sm' }} title={<h3 className='m-no p-no'>{props.headerText}</h3>} subheader={props.subHeaderText} />
+    <Paper className='ZLoginCredentialsForm-root' data-testid='ZLoginCredentialsForm-root' elevation={5}>
+      <Card>
+        <CardHeader className='ZLoginCredentialsForm-header' data-testid='ZLoginCredentialsForm-header' title={<h3>{props.headerText}</h3>} subheader={props.subHeaderText} />
         <CardContent>
           <form noValidate={true} autoComplete='off'>
             {emailTextField}
@@ -107,7 +107,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
           </form>
         </CardContent>
       </Card>
-    </div>
+    </Paper>
   );
 }
 

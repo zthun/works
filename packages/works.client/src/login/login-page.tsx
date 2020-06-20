@@ -1,4 +1,4 @@
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Grid } from '@material-ui/core';
 import { IZLogin, ZUrlBuilder } from '@zthun/works.core';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZLoginTabs } from '@zthun/works.react';
 import Axios from 'axios';
@@ -60,8 +60,8 @@ export function ZLoginPage() {
   const content = createContent();
 
   return (
-    <div className='ZLoginPage-root mx-auto w-50' data-testid='ZLoginPage-root'>
-      {content}
-    </div>
+    <Grid container={true} spacing={3} justify='center' className='ZLoginPage-root' data-testid='ZLoginPage-root'>
+      <Grid item={true}>{content}</Grid>
+    </Grid>
   );
 }

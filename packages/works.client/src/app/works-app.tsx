@@ -22,7 +22,7 @@ export function ZthunworksApp() {
         <ZAlertStackContext.Provider value={new ZAlertStack(5)}>
           <HashRouter>
             <ZthunworksMenu />
-            <article className='Zthunworks-article pt-em-4' data-testid='Zthunworks-article'>
+            <article className='Zthunworks-article pt-em-4 px-em-1' data-testid='Zthunworks-article'>
               <Route path='/home' component={ZHomePage} />
               <Route path='/login' component={ZLoginPage} />
               <Route path='/profile' component={ZProfilePage} />

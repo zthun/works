@@ -11,7 +11,7 @@ export function ZAlertStackList() {
     }
 
     return (
-      <Alert className='ZAlertStackList-alert mb-sm' data-testid='ZAlertStackList-alert' variant='outlined' key={alert._id} severity={alert.severity} onClose={handleClose}>
+      <Alert className='ZAlertStackList-alert' data-testid='ZAlertStackList-alert' key={alert._id} severity={alert.severity} onClose={handleClose}>
         <AlertTitle>{alert.header}</AlertTitle>
         {alert.message}
       </Alert>
