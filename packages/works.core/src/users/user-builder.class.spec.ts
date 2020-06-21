@@ -50,6 +50,22 @@ describe('ZUserBuilder', () => {
       );
     });
 
+    it('sets the user inactive.', () => {
+      assertPropertySet(
+        v4(),
+        (t, v) => t.inactive(v),
+        (u) => u.activator
+      );
+    });
+
+    it('sets the user active', () => {
+      assertPropertySet(
+        undefined,
+        (t) => t.inactive(v4()).active(),
+        (u) => u.activator
+      );
+    });
+
     it('sets the super flag.', () => {
       assertPropertySet(
         true,
@@ -62,7 +78,7 @@ describe('ZUserBuilder', () => {
   describe('Clone', () => {
     it('copies another user.', () => {
       // Arrange
-      const userA = createTestTarget().email(v4()).password(v4()).id(v4()).build();
+      const userA = createTestTarget().email(v4()).password(v4()).id(v4()).inactive('some-activator-password').build();
       const target = createTestTarget();
       // Act
       const actual = target.copy(userA).build();

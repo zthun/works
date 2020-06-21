@@ -60,6 +60,14 @@ describe('ZProfileBuilder', () => {
       );
     });
 
+    it('marks the profile as active.', () => {
+      assertPropertySet(
+        true,
+        (t) => t.active(),
+        (u) => u.active
+      );
+    });
+
     it('marks the profile as a super user.', () => {
       assertPropertySet(
         true,
@@ -73,7 +81,7 @@ describe('ZProfileBuilder', () => {
     let gambit: IZUser;
 
     beforeEach(() => {
-      gambit = new ZUserBuilder().email('gambit@marvel.com').password('not-a-great-password').display('Gambit').super().build();
+      gambit = new ZUserBuilder().email('gambit@marvel.com').password('not-a-great-password').display('Gambit').active().super().build();
     });
 
     it('copies the email.', () => {
@@ -105,6 +113,22 @@ describe('ZProfileBuilder', () => {
         undefined,
         (t) => t.user(gambit),
         (u) => u.password || u.confirm
+      );
+    });
+
+    it('marks the profile as active if there is no activator code.', () => {
+      assertPropertySet(
+        true,
+        (t) => t.user(gambit),
+        (u) => u.active
+      );
+    });
+
+    it('marks the profile as inactive if there is an activator code.', () => {
+      assertPropertySet(
+        false,
+        (t) => t.user(new ZUserBuilder().copy(gambit).inactive(v4()).build()),
+        (u) => u.active
       );
     });
   });

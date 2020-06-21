@@ -68,6 +68,28 @@ export class ZUserBuilder {
   }
 
   /**
+   * Removes the activator if it is set.
+   *
+   * @returns This object.
+   */
+  public active(): this {
+    delete this._user.activator;
+    return this;
+  }
+
+  /**
+   * Sets the user as inactive and sets the one time password to activate or reactivate the account.
+   *
+   * @param activator The one time password to activate the account.
+   *
+   * @returns This object.
+   */
+  public inactive(activator: string): this {
+    this._user.activator = activator;
+    return this;
+  }
+
+  /**
    * Sets the user as the super user.
    *
    * @returns This object.

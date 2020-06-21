@@ -4,6 +4,11 @@
 export interface IZProfile {
   /**
    * The user email.
+   *
+   * This should always be sent back when the user
+   * requests their profile information, but can
+   * be empty when updating meaning that the user
+   * does not want to change their email.
    */
   email?: string;
 
@@ -27,6 +32,15 @@ export interface IZProfile {
    * must never be sent back to any client.
    */
   confirm?: string;
+
+  /**
+   * A value that indicates if the profile has been activated.
+   *
+   * This should always be sent back when the user requests their
+   * profile (for better UI experience), but, like the super flag,
+   * cannot be set.
+   */
+  active?: boolean;
 
   /**
    * True if the profile belongs to a super user.  False otherwise.

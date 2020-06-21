@@ -15,10 +15,10 @@ export class ZTokensController {
    *
    * @param _tokens The jwt tokens client proxy.
    */
-  public constructor(private readonly _jwt: ZTokensService) {}
+  public constructor(private readonly _tokens: ZTokensService) {}
 
   /**
-   * Convinence method for UIs that want route guards for token auth.
+   * Convenience method for UIs that want route guards for token auth.
    *
    * Returns a status of 204 if your cookie token is valid, and 401 if not authenticated.
    *
@@ -40,7 +40,7 @@ export class ZTokensController {
   @Post()
   @UseGuards(ZRuleBodyRequiresCredentials)
   public async login(@Res() res: Response, @Body() credentials: ZTokensLoginDto) {
-    await this._jwt.inject(res, credentials);
+    await this._tokens.inject(res, credentials);
     res.sendStatus(204);
   }
 
@@ -50,7 +50,7 @@ export class ZTokensController {
   @Delete()
   @UseGuards(ZRuleCookieRequiresAuth)
   public async logout(@Res() res: Response) {
-    await this._jwt.clear(res);
+    await this._tokens.clear(res);
     res.sendStatus(204);
   }
 }

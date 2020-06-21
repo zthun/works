@@ -5,7 +5,6 @@ import { ZTokensController } from './tokens.controller';
 import { ZTokensService } from './tokens.service';
 
 describe('TokensController', () => {
-  let domain: string;
   let credentials: IZLogin;
   let res: jest.Mocked<Response>;
   let jwt: jest.Mocked<ZTokensService>;
@@ -18,8 +17,6 @@ describe('TokensController', () => {
     jwt = createSpyObj(ZTokensService, ['inject', 'clear']);
     jwt.inject.mockReturnValue(Promise.resolve());
     jwt.clear.mockReturnValue(Promise.resolve());
-
-    domain = 'zthunworks.com';
 
     credentials = new ZLoginBuilder().email('gambit@marvel.com').password('sure').autoConfirm().build();
 

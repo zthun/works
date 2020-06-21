@@ -66,6 +66,16 @@ export class ZProfileBuilder {
   }
 
   /**
+   * Marks the profile as active.
+   *
+   * @returns This object.
+   */
+  public active(): this {
+    this._profile.active = true;
+    return this;
+  }
+
+  /**
    * Marks the profile as belonging to a super user.
    *
    * @returns This object.
@@ -110,6 +120,7 @@ export class ZProfileBuilder {
     this._profile.email = user.email;
     this._profile.display = user.display;
     this._profile.super = user.super;
+    this._profile.active = !user.activator;
     return this;
   }
 
