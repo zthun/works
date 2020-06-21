@@ -6,8 +6,8 @@ import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-
 import { ZRuleCookieRequiresAuthRegular } from '../rules/rule-cookie-requires-auth-regular.guard';
 import { ZRuleCookieRequiresAuth } from '../rules/rule-cookie-requires-auth.guard';
 import { ZTokensService } from '../tokens/tokens.service';
-import { ZUserCreateDto } from './profile-create.dto';
-import { ZUserUpdateDto } from './profile-update.dto';
+import { ZProfileCreateDto } from './profile-create.dto';
+import { ZProfileUpdateDto } from './profile-update.dto';
 
 /**
  * Same as the users controller, but uses the cookie to get the id and has different permissions.
@@ -48,7 +48,7 @@ export class ZProfilesController {
    */
   @Put()
   @UseGuards(ZRuleCookieRequiresAuth, ZRuleBodyRequiresUniqueUser)
-  public async update(@Req() req: Request, @Body() profile: ZUserUpdateDto): Promise<IZProfile> {
+  public async update(@Req() req: Request, @Body() profile: ZProfileUpdateDto): Promise<IZProfile> {
     let user = await this._jwt.extract(req);
     user = await this._users.update(user._id, profile);
     return new ZUserBuilder().copy(user).redact().build();
@@ -63,7 +63,7 @@ export class ZProfilesController {
    */
   @Post()
   @UseGuards(ZRuleBodyRequiresUniqueUser)
-  public async create(@Body() login: ZUserCreateDto): Promise<IZProfile> {
+  public async create(@Body() login: ZProfileCreateDto): Promise<IZProfile> {
     const user = await this._users.create(login);
     return new ZUserBuilder().copy(user).redact().build();
   }

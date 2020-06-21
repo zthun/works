@@ -2,8 +2,8 @@
 
 // Auth
 export { ZAuthModule } from './auth/auth.module';
-export { ZUserCreateDto } from './auth/profile/profile-create.dto';
-export { ZUserUpdateDto } from './auth/profile/profile-update.dto';
+export { ZProfileCreateDto } from './auth/profile/profile-create.dto';
+export { ZProfileUpdateDto as ZUserUpdateDto } from './auth/profile/profile-update.dto';
 export { ZProfilesController } from './auth/profile/profiles.controller';
 export { ZRuleBodyRequiresCredentials } from './auth/rules/rule-body-requires-credentials.guard';
 export { ZRuleBodyRequiresUniqueUser } from './auth/rules/rule-body-requires-unique-user.guard';
@@ -13,7 +13,7 @@ export { ZRuleParamRequiresExistingUser } from './auth/rules/rule-param-requires
 export { ZRuleParamRequiresRegularUser } from './auth/rules/rule-param-requires-regular-user.guard';
 export { ZTokensLoginDto } from './auth/tokens/tokens-login.dto';
 export { ZTokensController } from './auth/tokens/tokens.controller';
-export { ZTokensService as ZJwtService } from './auth/tokens/tokens.service';
+export { ZTokensService } from './auth/tokens/tokens.service';
 // Users
 export { ZUsersService } from './users/users.service';
 // Validation

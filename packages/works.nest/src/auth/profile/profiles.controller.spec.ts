@@ -4,8 +4,8 @@ import { Request } from 'express';
 import { createSpyObj } from 'jest-createspyobj';
 import { ZUsersService } from '../../users/users.service';
 import { ZTokensService } from '../tokens/tokens.service';
-import { ZUserCreateDto } from './profile-create.dto';
-import { ZUserUpdateDto } from './profile-update.dto';
+import { ZProfileCreateDto } from './profile-create.dto';
+import { ZProfileUpdateDto } from './profile-update.dto';
 import { ZProfilesController } from './profiles.controller';
 
 describe('ZProfilesController', () => {
@@ -47,7 +47,7 @@ describe('ZProfilesController', () => {
       // Arrange
       const target = createTestTarget();
       const login = new ZLoginBuilder().email(gambit.email).password(gambit.password).autoConfirm().build();
-      const dto = plainToClass(ZUserUpdateDto, login);
+      const dto = plainToClass(ZProfileUpdateDto, login);
       const expected = new ZUserBuilder().copy(gambit).redact().build();
       // Act
       const actual = await target.update(req, login);
@@ -59,7 +59,7 @@ describe('ZProfilesController', () => {
       // Arrange
       const target = createTestTarget();
       const login = new ZLoginBuilder().email(gambit.email).password(gambit.password).autoConfirm().build();
-      const dto = plainToClass(ZUserCreateDto, login);
+      const dto = plainToClass(ZProfileCreateDto, login);
       const expected = new ZUserBuilder().copy(gambit).redact().build();
       // Act
       const actual = await target.create(dto);

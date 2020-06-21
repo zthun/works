@@ -4,7 +4,7 @@ import { EqualsOtherProperty } from '../../validation/equals-other-property.func
 import { IsNotWhiteSpace } from '../../validation/is-not-white-space.function';
 import { RequiresOtherProperty } from '../../validation/requires-other-property.function';
 
-export class ZUserUpdateDto implements Partial<IZLogin> {
+export class ZProfileUpdateDto implements Partial<IZLogin> {
   @IsOptional()
   @IsString({ message: 'Email must be a string.' })
   @IsEmail({}, { message: 'The email must be a valid user@domain email.' })

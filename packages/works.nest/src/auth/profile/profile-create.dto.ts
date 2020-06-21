@@ -3,7 +3,7 @@ import { IsEmail, IsString, MinLength } from 'class-validator';
 import { EqualsOtherProperty } from '../../validation/equals-other-property.function';
 import { IsNotWhiteSpace } from '../../validation/is-not-white-space.function';
 
-export class ZUserCreateDto implements IZLogin {
+export class ZProfileCreateDto implements IZLogin {
   @IsString({ message: 'Email must be a string.' })
   @IsEmail({}, { message: 'The email must be a valid user@domain email.' })
   public email: string;
