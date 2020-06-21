@@ -11,7 +11,6 @@ export function ZProfileForm(props: IZProfileFormProps) {
   const [email, setEmail] = useState(get(props, 'profile.email', ''));
   const [display, setDisplay] = useState(get(props, 'profile.display', ''));
   const [password, setPassword] = useState(get(props, 'profile.password', ''));
-  const [newPassword, setNewPassword] = useState(get(props, 'profile.newPassword', ''));
   const [confirm, setConfirm] = useState(get(props, 'profile.confirm', ''));
 
   function handleEmailChange(event: any) {
@@ -26,16 +25,12 @@ export function ZProfileForm(props: IZProfileFormProps) {
     setPassword(event.target.value);
   }
 
-  function handleNewPasswordChange(event: any) {
-    setNewPassword(event.target.value);
-  }
-
   function handleConfirmChange(event: any) {
     setConfirm(event.target.value);
   }
 
   function handleAction() {
-    const profile = new ZProfileBuilder().email(email).display(display).password(password).newPassword(newPassword).confirm(confirm);
+    const profile = new ZProfileBuilder().email(email).display(display).password(password).confirm(confirm);
     props.onProfileChange(profile.build());
   }
 
@@ -67,15 +62,13 @@ export function ZProfileForm(props: IZProfileFormProps) {
       return null;
     }
 
-    const passwordTextField = createTextField('password', 'Current Password', 'password', password, handlePasswordChange);
-    const newPasswordTextField = createTextField('newPassword', 'New Password', 'password', newPassword, handleNewPasswordChange);
+    const passwordTextField = createTextField('password', 'New Password', 'password', password, handlePasswordChange);
     const confirmTextField = createTextField('confirm', 'Confirm Password', 'password', confirm, handleConfirmChange);
 
     return (
       <React.Fragment>
         <h4>{props.passwordHeaderText}</h4>
         {passwordTextField}
-        {newPasswordTextField}
         {confirmTextField}
       </React.Fragment>
     );

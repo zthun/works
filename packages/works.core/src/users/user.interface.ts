@@ -22,10 +22,9 @@ export interface IZUser extends IZIdentifiable {
   /**
    * The hashed password for the user.
    *
-   * This should always be stored encrypted, but will
-   * never be sent back.
+   * This should always be stored encrypted.
    */
-  password?: string;
+  password: string;
 
   /**
    * Gets a value that indicates whether or not the user is the super user.

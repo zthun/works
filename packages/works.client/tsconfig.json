@@ -11,6 +11,5 @@
       "@zthun/works.themes": ["../works.themes"]
     }
   },
-  "include": ["src/**/*.tsx", "src/**/*.ts"],
-  "exclude": ["node_modules", "src/**/*.spec.tsx", "src/**/*.spec.ts"]
+  "include": ["src/**/*.tsx", "src/**/*.ts"]
 }

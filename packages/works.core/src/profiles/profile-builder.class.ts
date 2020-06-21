@@ -1,3 +1,4 @@
+import { IZUser } from '../users/user.interface';
 import { IZProfile } from './profile.interface';
 
 /**
@@ -43,18 +44,6 @@ export class ZProfileBuilder {
   }
 
   /**
-   * Sets the password the user wants to change to.
-   *
-   * @param val The value to set.
-   *
-   * @returns This object.
-   */
-  public newPassword(val: string): this {
-    this._profile.newPassword = val;
-    return this;
-  }
-
-  /**
    * Sets the password confirmation.
    *
    * @param val The value to set.
@@ -72,7 +61,7 @@ export class ZProfileBuilder {
    * @returns This object.
    */
   public autoConfirm(): this {
-    this._profile.confirm = this._profile.newPassword;
+    this._profile.confirm = this._profile.password;
     return this;
   }
 
@@ -107,6 +96,20 @@ export class ZProfileBuilder {
    */
   public copy(other: IZProfile): this {
     this._profile = Object.assign(this._profile, other);
+    return this;
+  }
+
+  /**
+   * Constructs the profile object from the user.
+   *
+   * This basically sets the email, display, and super flag.
+   *
+   * @param user The user to construct the profile from.
+   */
+  public user(user: IZUser): this {
+    this._profile.email = user.email;
+    this._profile.display = user.display;
+    this._profile.super = user.super;
     return this;
   }
 

@@ -1,4 +1,6 @@
 import { v4 } from 'uuid';
+import { ZUserBuilder } from '../users/user-builder.class';
+import { IZUser } from '../users/user.interface';
 import { ZProfileBuilder } from './profile-builder.class';
 import { IZProfile } from './profile.interface';
 
@@ -7,17 +9,17 @@ describe('ZProfileBuilder', () => {
     return new ZProfileBuilder();
   }
 
-  describe('Properties', () => {
-    function assertPropertySet<T>(expected: T, buildFn: (target: ZProfileBuilder, value: T) => ZProfileBuilder, actualFn: (user: IZProfile) => T) {
-      // Arrange
-      const target = createTestTarget();
-      // Act
-      const user = buildFn(target, expected).build();
-      const actual = actualFn(user);
-      // Assert
-      expect(actual).toEqual(expected);
-    }
+  function assertPropertySet<T>(expected: T, buildFn: (target: ZProfileBuilder, value: T) => ZProfileBuilder, actualFn: (user: IZProfile) => T) {
+    // Arrange
+    const target = createTestTarget();
+    // Act
+    const user = buildFn(target, expected).build();
+    const actual = actualFn(user);
+    // Assert
+    expect(actual).toEqual(expected);
+  }
 
+  describe('Properties', () => {
     it('sets the email.', () => {
       assertPropertySet(
         v4(),
@@ -42,14 +44,6 @@ describe('ZProfileBuilder', () => {
       );
     });
 
-    it('sets the new password.', () => {
-      assertPropertySet(
-        v4(),
-        (t, v) => t.newPassword(v),
-        (u) => u.newPassword
-      );
-    });
-
     it('sets the confirmation.', () => {
       assertPropertySet(
         v4(),
@@ -61,7 +55,7 @@ describe('ZProfileBuilder', () => {
     it('auto confirms to the new password.', () => {
       assertPropertySet(
         v4(),
-        (t, v) => t.newPassword(v).autoConfirm(),
+        (t, v) => t.password(v).autoConfirm(),
         (u) => u.confirm
       );
     });
@@ -75,10 +69,50 @@ describe('ZProfileBuilder', () => {
     });
   });
 
+  describe('From user', () => {
+    let gambit: IZUser;
+
+    beforeEach(() => {
+      gambit = new ZUserBuilder().email('gambit@marvel.com').password('not-a-great-password').display('Gambit').super().build();
+    });
+
+    it('copies the email.', () => {
+      assertPropertySet(
+        gambit.email,
+        (t) => t.user(gambit),
+        (u) => u.email
+      );
+    });
+
+    it('copies the display.', () => {
+      assertPropertySet(
+        gambit.display,
+        (t) => t.user(gambit),
+        (u) => u.display
+      );
+    });
+
+    it('copies the super flag.', () => {
+      assertPropertySet(
+        gambit.super,
+        (t) => t.user(gambit),
+        (u) => u.super
+      );
+    });
+
+    it('does not copy the password.', () => {
+      assertPropertySet(
+        undefined,
+        (t) => t.user(gambit),
+        (u) => u.password || u.confirm
+      );
+    });
+  });
+
   describe('Copy and Assignment', () => {
     it('copies another profile.', () => {
       // Arrange
-      const profileA = createTestTarget().email(v4()).password(v4()).newPassword(v4()).autoConfirm().build();
+      const profileA = createTestTarget().email(v4()).password(v4()).autoConfirm().build();
       const target = createTestTarget();
       // Act
       const actual = target.copy(profileA).build();
@@ -89,7 +123,7 @@ describe('ZProfileBuilder', () => {
     it('assigns another profile.', () => {
       // Arrange
       const partial: Partial<IZProfile> = { display: v4() };
-      const target = createTestTarget().email(v4()).password(v4()).newPassword(v4()).autoConfirm();
+      const target = createTestTarget().email(v4()).password(v4()).autoConfirm();
       const expected = createTestTarget().copy(target.build()).display(partial.display).build();
       // Act
       const actual = target.assign(partial).build();

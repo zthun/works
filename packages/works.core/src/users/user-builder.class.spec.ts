@@ -59,22 +59,6 @@ describe('ZUserBuilder', () => {
     });
   });
 
-  describe('Redaction', () => {
-    function assertRedactsProperty<T>(propFn: (u: IZUser) => T) {
-      // Arrange
-      const target = createTestTarget().id(v4()).email(v4()).password(v4()).super();
-      // Act
-      const user = target.redact().build();
-      const actual = propFn(user);
-      // Assert
-      expect(actual).toBeUndefined();
-    }
-
-    it('removes the password.', () => {
-      assertRedactsProperty((u) => u.password);
-    });
-  });
-
   describe('Clone', () => {
     it('copies another user.', () => {
       // Arrange

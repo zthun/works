@@ -8,6 +8,6 @@
       "@zthun/works.react": ["works.react/src/index"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "packages/works.themes/svg/index.js"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["**/node_modules/**"]
 }

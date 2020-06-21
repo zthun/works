@@ -89,10 +89,6 @@ describe('ZProfileForm', () => {
       await assertDisablesField('ZProfileForm-input-password');
     });
 
-    it('should disable the newPassword field.', async () => {
-      await assertDisablesField('ZProfileForm-input-newPassword');
-    });
-
     it('should disable the confirm field.', async () => {
       await assertDisablesField('ZProfileForm-input-confirm');
     });
@@ -140,10 +136,6 @@ describe('ZProfileForm', () => {
         await assertFieldHidden('ZProfileForm-input-password');
       });
 
-      it('should hide the newPassword field if hidePassword is true.', async () => {
-        await assertFieldHidden('ZProfileForm-input-newPassword');
-      });
-
       it('should hide the confirm field if hidePassword is true.', async () => {
         await assertFieldHidden('ZProfileForm-input-confirm');
       });
@@ -175,13 +167,12 @@ describe('ZProfileForm', () => {
     it('should fire the profileChange method with the updated profile.', async () => {
       // Arrange
       const target = await createTestTarget();
-      const expected = new ZProfileBuilder().display('Wolverine').email('wolverine@marvel.com').password('suckie-password').newPassword('still-suckie-password').confirm('still-suckie-password').build();
+      const expected = new ZProfileBuilder().display('Wolverine').email('wolverine@marvel.com').password('sucks-password').confirm('sucks-password').build();
       // Act
       await act(async () => {
         setField(target, 'ZProfileForm-input-display', expected.display);
         setField(target, 'ZProfileForm-input-email', expected.email);
         setField(target, 'ZProfileForm-input-password', expected.password);
-        setField(target, 'ZProfileForm-input-newPassword', expected.newPassword);
         setField(target, 'ZProfileForm-input-confirm', expected.confirm);
       });
       clickAction(target);

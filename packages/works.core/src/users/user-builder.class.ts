@@ -12,7 +12,8 @@ export class ZUserBuilder {
   public constructor() {
     this._user = {
       _id: null,
-      email: null
+      email: null,
+      password: null
     };
   }
 
@@ -73,16 +74,6 @@ export class ZUserBuilder {
    */
   public super(): this {
     this._user.super = true;
-    return this;
-  }
-
-  /**
-   * Removes unsafe properties to show users.
-   *
-   * @returns This object.
-   */
-  public redact(): this {
-    delete this._user.password;
     return this;
   }
 

@@ -39,7 +39,7 @@ function config(env) {
           test: /\.tsx?$/,
           loader: 'awesome-typescript-loader',
           options: {
-            configFileName: env.production ? 'tsconfig.prod.json' : 'tsconfig.json'
+            configFileName: env.production ? 'tsconfig.prod.json' : 'tsconfig.dev.json'
           }
         },
         {

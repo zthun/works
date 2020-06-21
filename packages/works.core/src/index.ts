@@ -2,7 +2,7 @@
 
 // Assert
 export { ZAssert } from './assert/assert.class';
-// COMMON - NEEDS TO BE MOVE TO A DIFFERENT PACKAGE
+// Common - Needs to be moved to the database layer.
 export { IZIdentifiable } from './common/identifiable.interface';
 // Config
 export { ZConfigEntryBuilder } from './configs/config-entry-builder.class';

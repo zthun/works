@@ -2,7 +2,7 @@ import { trim, trimEnd, trimStart } from 'lodash';
 import URLParse from 'url-parse';
 
 /**
- * Represnets an object that is helpful in building a url.
+ * Represents an object that is helpful in building a url.
  */
 export class ZUrlBuilder {
   /**
@@ -36,9 +36,9 @@ export class ZUrlBuilder {
    * @returns True if the default port for protocol is port.
    */
   public static defaults(protocol: string, port: string | number): boolean {
-    const nport = +port;
+    const numericPort = +port;
 
-    if (isNaN(nport) || nport < 1) {
+    if (isNaN(numericPort) || numericPort < 1) {
       return true;
     }
 

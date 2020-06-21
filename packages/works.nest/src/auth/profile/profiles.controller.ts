@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Post, Put, Req, UseGuards } from '@nestjs/common';
-import { IZProfile, ZUserBuilder } from '@zthun/works.core';
+import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { Request } from 'express';
 import { ZUsersService } from '../../users/users.service';
 import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-user.guard';
@@ -19,10 +19,10 @@ export class ZProfilesController {
   /**
    * Initializes a new instance of this object.
    *
-   * @param _jwt The jwt service.
+   * @param _tokens The tokens service.
    * @param _users The users service.
    */
-  public constructor(private readonly _jwt: ZTokensService, private readonly _users: ZUsersService) {}
+  public constructor(private readonly _tokens: ZTokensService, private readonly _users: ZUsersService) {}
 
   /**
    * Reads the user profile.
@@ -34,8 +34,8 @@ export class ZProfilesController {
   @Get()
   @UseGuards(ZRuleCookieRequiresAuth)
   public async read(@Req() req: Request): Promise<IZProfile> {
-    const user = await this._jwt.extract(req);
-    return new ZUserBuilder().copy(user).redact().build();
+    const user = await this._tokens.extract(req);
+    return new ZProfileBuilder().user(user).build();
   }
 
   /**
@@ -49,9 +49,9 @@ export class ZProfilesController {
   @Put()
   @UseGuards(ZRuleCookieRequiresAuth, ZRuleBodyRequiresUniqueUser)
   public async update(@Req() req: Request, @Body() profile: ZProfileUpdateDto): Promise<IZProfile> {
-    let user = await this._jwt.extract(req);
+    let user = await this._tokens.extract(req);
     user = await this._users.update(user._id, profile);
-    return new ZUserBuilder().copy(user).redact().build();
+    return new ZProfileBuilder().user(user).build();
   }
 
   /**
@@ -65,7 +65,7 @@ export class ZProfilesController {
   @UseGuards(ZRuleBodyRequiresUniqueUser)
   public async create(@Body() login: ZProfileCreateDto): Promise<IZProfile> {
     const user = await this._users.create(login);
-    return new ZUserBuilder().copy(user).redact().build();
+    return new ZProfileBuilder().user(user).build();
   }
 
   /**
@@ -78,8 +78,8 @@ export class ZProfilesController {
   @Delete()
   @UseGuards(ZRuleCookieRequiresAuthRegular)
   public async remove(@Req() req: Request): Promise<IZProfile> {
-    let user = await this._jwt.extract(req);
+    let user = await this._tokens.extract(req);
     user = await this._users.remove(user._id);
-    return new ZUserBuilder().copy(user).redact().build();
+    return new ZProfileBuilder().user(user).build();
   }
 }

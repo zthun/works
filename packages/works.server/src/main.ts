@@ -17,7 +17,7 @@ export class ZMainModule {
     app.use(helmet());
     app.use(cookieParser());
     app.setGlobalPrefix('api');
-    app.useGlobalPipes(new ValidationPipe({ exceptionFactory: ZExceptionFactory.messageOnly }));
+    app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, exceptionFactory: ZExceptionFactory.messageOnly }));
     await app.listen(3000);
   }
 }
