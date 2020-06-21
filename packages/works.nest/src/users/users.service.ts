@@ -70,7 +70,7 @@ export class ZUsersService {
     const total = await this._dal.count(ZUsersCollections.Users).run();
     const password = await hash(login.password, ZUsersService.BcryptRounds);
     const builder = new ZUserBuilder().email(login.email).password(password);
-    const create = total === 0 ? builder.super().build() : builder.build();
+    const create = total === 0 ? builder.super().active().build() : builder.build();
     const [created] = await this._dal.create(ZUsersCollections.Users, [create]).run();
     return created;
   }
