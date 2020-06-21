@@ -77,6 +77,17 @@ describe('ZUsersRepositoryController', () => {
       expect(actual.super).toBeTruthy();
     });
 
+    it('always sets the super user to active without having to have them activate their account.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      await dal.delete(ZUsersCollections.Users).run();
+      // Act
+      const created = await target.create(loginA);
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
+      // Assert
+      expect(actual.activator).toBeFalsy();
+    });
+
     it('creates a normal user if there is already a super user.', async () => {
       // Arrange
       const target = createTestTarget();
@@ -85,6 +96,16 @@ describe('ZUsersRepositoryController', () => {
       const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
       // Assert
       expect(actual.super).toBeFalsy();
+    });
+
+    it('generates a one time password for the user.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const created = await target.create(loginA);
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
+      // Assert
+      expect(actual.activator).toBeTruthy();
     });
 
     it('secures the password.', async () => {
