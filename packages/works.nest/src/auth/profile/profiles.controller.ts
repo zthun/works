@@ -3,8 +3,9 @@ import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { Request } from 'express';
 import { ZUsersService } from '../../users/users.service';
 import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-user.guard';
+import { ZRuleCookieRequiresAuthActivated } from '../rules/rule-cookie-requires-auth-activated.guard';
+import { ZRuleCookieRequiresAuthAny } from '../rules/rule-cookie-requires-auth-any.guard';
 import { ZRuleCookieRequiresAuthRegular } from '../rules/rule-cookie-requires-auth-regular.guard';
-import { ZRuleCookieRequiresAuth } from '../rules/rule-cookie-requires-auth.guard';
 import { ZTokensService } from '../tokens/tokens.service';
 import { ZProfileCreateDto } from './profile-create.dto';
 import { ZProfileUpdateDto } from './profile-update.dto';
@@ -32,7 +33,7 @@ export class ZProfilesController {
    * @returns The profile object given the requested cookie.
    */
   @Get()
-  @UseGuards(ZRuleCookieRequiresAuth)
+  @UseGuards(ZRuleCookieRequiresAuthAny)
   public async read(@Req() req: Request): Promise<IZProfile> {
     const user = await this._tokens.extract(req);
     return new ZProfileBuilder().user(user).build();
@@ -47,7 +48,7 @@ export class ZProfilesController {
    * @returns The updated user.
    */
   @Put()
-  @UseGuards(ZRuleCookieRequiresAuth, ZRuleBodyRequiresUniqueUser)
+  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleCookieRequiresAuthActivated, ZRuleBodyRequiresUniqueUser)
   public async update(@Req() req: Request, @Body() profile: ZProfileUpdateDto): Promise<IZProfile> {
     let user = await this._tokens.extract(req);
     user = await this._users.update(user._id, profile);
@@ -76,7 +77,7 @@ export class ZProfilesController {
    * @returns The user that was deactivated/deleted.
    */
   @Delete()
-  @UseGuards(ZRuleCookieRequiresAuthRegular)
+  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleCookieRequiresAuthRegular, ZRuleCookieRequiresAuthActivated)
   public async remove(@Req() req: Request): Promise<IZProfile> {
     let user = await this._tokens.extract(req);
     user = await this._users.remove(user._id);

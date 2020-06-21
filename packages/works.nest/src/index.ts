@@ -7,6 +7,8 @@ export { ZProfileUpdateDto } from './auth/profile/profile-update.dto';
 export { ZProfilesController } from './auth/profile/profiles.controller';
 export { ZRuleBodyRequiresCredentials } from './auth/rules/rule-body-requires-credentials.guard';
 export { ZRuleBodyRequiresUniqueUser } from './auth/rules/rule-body-requires-unique-user.guard';
+export { ZRuleCookieRequiresAuthAny } from './auth/rules/rule-cookie-requires-auth-any.guard';
+export { ZRuleCookieRequiresAuthRegular } from './auth/rules/rule-cookie-requires-auth-regular.guard';
 export { ZRuleCookieRequiresAuth } from './auth/rules/rule-cookie-requires-auth.guard';
 export { ZTokensLoginDto } from './auth/tokens/tokens-login.dto';
 export { ZTokensController } from './auth/tokens/tokens.controller';

@@ -1,17 +1,10 @@
-import { CanActivate, ExecutionContext, ForbiddenException, Injectable, UnauthorizedException } from '@nestjs/common';
-import { ZAssert } from '@zthun/works.core';
-import { Request } from 'express';
-import { ZTokensService } from '../tokens/tokens.service';
+import { ForbiddenException, Injectable } from '@nestjs/common';
+import { IZUser, ZAssert } from '@zthun/works.core';
+import { ZRuleCookieRequiresAuth } from './rule-cookie-requires-auth.guard';
 
 @Injectable()
-export class ZRuleCookieRequiresAuthRegular implements CanActivate {
-  public constructor(private readonly _jwt: ZTokensService) {}
-
-  public async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request = context.switchToHttp().getRequest() as Request;
-    const user = await this._jwt.extract(request);
-    ZAssert.claim(!!user, 'You are not authenticated.  Please log in.').assert((msg) => new UnauthorizedException(msg));
+export class ZRuleCookieRequiresAuthRegular extends ZRuleCookieRequiresAuth {
+  public claim(user: IZUser) {
     ZAssert.claim(!user.super, 'You cannot perform this action on the super user.').assert((msg) => new ForbiddenException(msg));
-    return true;
   }
 }
