@@ -23,7 +23,7 @@ export function ZLoginPage() {
 
   async function handleCreate(login: IZLogin) {
     try {
-      let url = new ZUrlBuilder().api().append('users').build();
+      let url = new ZUrlBuilder().api().append('profiles').build();
       await Axios.post(url, login);
       alerts.add(new ZAlertBuilder().success().message('Account created successfully.').build());
       url = new ZUrlBuilder().api().append('tokens').build();

@@ -1,12 +1,13 @@
-import { Body, Controller, Delete, Get, Put, Req, UseGuards } from '@nestjs/common';
-import { ZUserBuilder } from '@zthun/works.core';
+import { Body, Controller, Delete, Get, Post, Put, Req, UseGuards } from '@nestjs/common';
+import { IZProfile, ZUserBuilder } from '@zthun/works.core';
 import { Request } from 'express';
-import { ZUserUpdateDto } from '../../users/user-update.dto';
 import { ZUsersService } from '../../users/users.service';
 import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-user.guard';
 import { ZRuleCookieRequiresAuthRegular } from '../rules/rule-cookie-requires-auth-regular.guard';
 import { ZRuleCookieRequiresAuth } from '../rules/rule-cookie-requires-auth.guard';
 import { ZTokensService } from '../tokens/tokens.service';
+import { ZUserCreateDto } from './profile-create.dto';
+import { ZUserUpdateDto } from './profile-update.dto';
 
 /**
  * Same as the users controller, but uses the cookie to get the id and has different permissions.
@@ -28,11 +29,11 @@ export class ZProfilesController {
    *
    * @param req The request object.
    *
-   * @returns The redacted user object.
+   * @returns The profile object given the requested cookie.
    */
   @Get()
   @UseGuards(ZRuleCookieRequiresAuth)
-  public async read(@Req() req: Request) {
+  public async read(@Req() req: Request): Promise<IZProfile> {
     const user = await this._jwt.extract(req);
     return new ZUserBuilder().copy(user).redact().build();
   }
@@ -47,9 +48,23 @@ export class ZProfilesController {
    */
   @Put()
   @UseGuards(ZRuleCookieRequiresAuth, ZRuleBodyRequiresUniqueUser)
-  public async update(@Req() req: Request, @Body() profile: ZUserUpdateDto) {
+  public async update(@Req() req: Request, @Body() profile: ZUserUpdateDto): Promise<IZProfile> {
     let user = await this._jwt.extract(req);
     user = await this._users.update(user._id, profile);
+    return new ZUserBuilder().copy(user).redact().build();
+  }
+
+  /**
+   * Creates a new user.
+   *
+   * @param login The user to create.
+   *
+   * @returns A promise that, when resolved, has returned the new user.
+   */
+  @Post()
+  @UseGuards(ZRuleBodyRequiresUniqueUser)
+  public async create(@Body() login: ZUserCreateDto): Promise<IZProfile> {
+    const user = await this._users.create(login);
     return new ZUserBuilder().copy(user).redact().build();
   }
 
@@ -62,7 +77,7 @@ export class ZProfilesController {
    */
   @Delete()
   @UseGuards(ZRuleCookieRequiresAuthRegular)
-  public async remove(@Req() req: Request) {
+  public async remove(@Req() req: Request): Promise<IZProfile> {
     let user = await this._jwt.extract(req);
     user = await this._users.remove(user._id);
     return new ZUserBuilder().copy(user).redact().build();

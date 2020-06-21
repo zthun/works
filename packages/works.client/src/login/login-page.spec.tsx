@@ -101,7 +101,7 @@ describe('ZLoginPage', () => {
         expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('tokens'), expect.anything());
       });
 
-      it('should notifiy the user of a successful login.', async () => {
+      it('should notify the user of a successful login.', async () => {
         // Arrange
         let target: RenderResult;
         await act(async () => {
@@ -139,10 +139,10 @@ describe('ZLoginPage', () => {
         // Act
         fireEvent.click(getCreateActionButton(target));
         // Assert
-        expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('users'), expect.anything());
+        expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles'), expect.anything());
       });
 
-      it('should notifiy the user of a successful creation.', async () => {
+      it('should notify the user of a successful creation.', async () => {
         // Arrange
         let target: RenderResult;
         await act(async () => {
