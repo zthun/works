@@ -11,7 +11,8 @@ services:
     depends_on:
       - local.zthunworks.com
       - api.zthunworks.com
-      - view.database.zthunworks.com
+      - view.vault.database.zthunworks.com
+      - view.users.database.zthunworks.com
   local.zthunworks.com:
     image: node:10.17.0
     ports:
@@ -29,11 +30,19 @@ services:
       - .:/usr/dev
     working_dir: /usr/dev
     command: yarn workspace @zthun/works.server debug
-  database.zthunworks.com:
+  vault.database.zthunworks.com:
     image: mongo:4.2.0
-  view.database.zthunworks.com:
+  view.vault.database.zthunworks.com:
     image: mongo-express:0.49
     depends_on:
-      - database.zthunworks.com
+      - vault.database.zthunworks.com
     environment:
-      - ME_CONFIG_MONGODB_SERVER=database.zthunworks.com
+      - ME_CONFIG_MONGODB_SERVER=vault.database.zthunworks.com
+  users.database.zthunworks.com:
+    image: mongo:4.2.0
+  view.users.database.zthunworks.com:
+    image: mongo-express:0.49
+    depends_on:
+      - users.database.zthunworks.com
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=users.database.zthunworks.com

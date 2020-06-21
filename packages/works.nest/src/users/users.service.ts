@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@nestjs/common';
 import { IZDatabase } from '@zthun/dal';
 import { IZLogin, IZUser, ZUserBuilder } from '@zthun/works.core';
 import { compare, hash } from 'bcryptjs';
-import { Collections } from '../common/collections.enum';
-import { DatabaseToken } from '../common/injection.constants';
+import { ZUsersCollections } from './users.collections';
+import { ZUsersDatabase } from './users.database';
 
 /**
  * Represents a service to manage the user database with business rules.
@@ -21,7 +21,7 @@ export class ZUsersService {
    * @param _dal The data access layer.
    * @param _auth The auth service for simple tasks.
    */
-  public constructor(@Inject(DatabaseToken) private readonly _dal: IZDatabase) {}
+  public constructor(@Inject(ZUsersDatabase.Token) private readonly _dal: IZDatabase) {}
 
   /**
    * Gets a list of all users in the database.
@@ -29,7 +29,7 @@ export class ZUsersService {
    * @returns A promise that, when resolved, has returned all users.
    */
   public async list(): Promise<IZUser[]> {
-    const users = await this._dal.read<IZUser>(Collections.Users).run();
+    const users = await this._dal.read<IZUser>(ZUsersCollections.Users).run();
     return users;
   }
 
@@ -42,7 +42,7 @@ export class ZUsersService {
    */
   public async findById(_id: string): Promise<IZUser> {
     const filter = { _id };
-    const [user] = await this._dal.read<IZUser>(Collections.Users).filter(filter).run();
+    const [user] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter(filter).run();
     return user;
   }
 
@@ -55,7 +55,7 @@ export class ZUsersService {
    */
   public async findByEmail(email: string): Promise<IZUser> {
     const filter = { email };
-    const [user] = await this._dal.read<IZUser>(Collections.Users).filter(filter).run();
+    const [user] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter(filter).run();
     return user;
   }
 
@@ -67,11 +67,11 @@ export class ZUsersService {
    * @returns A promise that, when resolved, has returned the new user.
    */
   public async create(login: IZLogin): Promise<IZUser> {
-    const total = await this._dal.count(Collections.Users).run();
+    const total = await this._dal.count(ZUsersCollections.Users).run();
     const password = await hash(login.password, ZUsersService.BcryptRounds);
     const builder = new ZUserBuilder().email(login.email).password(password);
     const create = total === 0 ? builder.super().build() : builder.build();
-    const [created] = await this._dal.create(Collections.Users, [create]).run();
+    const [created] = await this._dal.create(ZUsersCollections.Users, [create]).run();
     return created;
   }
 
@@ -95,8 +95,8 @@ export class ZUsersService {
       return await this.findById(id);
     }
 
-    await this._dal.update<IZUser>(Collections.Users, template).filter({ _id: id }).run();
-    const [updated] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
+    await this._dal.update<IZUser>(ZUsersCollections.Users, template).filter({ _id: id }).run();
+    const [updated] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: id }).run();
     return updated;
   }
 
@@ -108,8 +108,8 @@ export class ZUsersService {
    * @returns A promise that, when resolve, has returned the deleted user.
    */
   public async remove(id: string): Promise<IZUser> {
-    const [user] = await this._dal.read<IZUser>(Collections.Users).filter({ _id: id }).run();
-    await this._dal.delete(Collections.Users).filter({ _id: id }).run();
+    const [user] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: id }).run();
+    await this._dal.delete(ZUsersCollections.Users).filter({ _id: id }).run();
     return user;
   }
 

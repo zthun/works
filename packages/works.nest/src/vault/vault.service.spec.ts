@@ -1,6 +1,6 @@
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
-import { Collections } from '../common/collections.enum';
+import { ZVaultCollections } from './vault.collections';
 import { ZVaultService } from './vault.service';
 
 describe('ZVaultService', () => {
@@ -20,11 +20,11 @@ describe('ZVaultService', () => {
     configA = new ZConfigEntryBuilder().scope('common').key('domain').value('zthunworks.com').build();
     configB = new ZConfigEntryBuilder().scope('authentication.secrets').key('jwt').generate().build();
 
-    [configA, configB] = await dal.create(Collections.Configs, [configA, configB]).run();
+    [configA, configB] = await dal.create(ZVaultCollections.Configs, [configA, configB]).run();
   });
 
   afterEach(async () => {
-    await dal.delete(Collections.Configs).run();
+    await dal.delete(ZVaultCollections.Configs).run();
   });
 
   describe('Get', () => {

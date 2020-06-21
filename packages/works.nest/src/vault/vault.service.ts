@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IZDatabase } from '@zthun/dal';
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
-import { Collections } from '../common/collections.enum';
-import { DatabaseToken } from '../common/injection.constants';
+import { ZVaultCollections } from './vault.collections';
+import { ZVaultDatabase } from './vault.database';
 
 @Injectable()
 export class ZVaultService {
-  public constructor(@Inject(DatabaseToken) private readonly _dal: IZDatabase) {}
+  public constructor(@Inject(ZVaultDatabase.Token) private readonly _dal: IZDatabase) {}
 
   /**
    * Reads a configuration item by scope and key.
@@ -18,7 +18,7 @@ export class ZVaultService {
    *          to null if non such scope and key exists.
    */
   public async read<T>(scope: string, key: string): Promise<IZConfigEntry<T>> {
-    const [existing] = await this._dal.read<IZConfigEntry<T>>(Collections.Configs).filter({ scope, key }).run();
+    const [existing] = await this._dal.read<IZConfigEntry<T>>(ZVaultCollections.Configs).filter({ scope, key }).run();
     return existing;
   }
 
@@ -38,7 +38,7 @@ export class ZVaultService {
 
     if (!config) {
       config = new ZConfigEntryBuilder().copy(entry).build();
-      [config] = await this._dal.create(Collections.Configs, [config]).run();
+      [config] = await this._dal.create(ZVaultCollections.Configs, [config]).run();
     }
 
     return config;
@@ -56,9 +56,9 @@ export class ZVaultService {
 
     if (!config) {
       const items = [entry];
-      [config] = await this._dal.create<IZConfigEntry<T>>(Collections.Configs, items).run();
+      [config] = await this._dal.create<IZConfigEntry<T>>(ZVaultCollections.Configs, items).run();
     } else {
-      await this._dal.update<IZConfigEntry>(Collections.Configs, config).filter({ _id: config._id }).run();
+      await this._dal.update<IZConfigEntry>(ZVaultCollections.Configs, config).filter({ _id: config._id }).run();
     }
 
     return config;

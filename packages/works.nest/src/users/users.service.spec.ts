@@ -1,7 +1,7 @@
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { compare, hash } from 'bcryptjs';
-import { Collections } from '../common/collections.enum';
+import { ZUsersCollections } from './users.collections';
 import { ZUsersService } from './users.service';
 
 describe('ZUsersRepositoryController', () => {
@@ -27,7 +27,7 @@ describe('ZUsersRepositoryController', () => {
   });
 
   afterEach(async () => {
-    await dal.delete(Collections.Users).run();
+    await dal.delete(ZUsersCollections.Users).run();
   });
 
   function createTestTarget() {
@@ -36,7 +36,7 @@ describe('ZUsersRepositoryController', () => {
 
   describe('List', () => {
     beforeEach(async () => {
-      [userA, userB] = await dal.create(Collections.Users, [userA, userB]).run();
+      [userA, userB] = await dal.create(ZUsersCollections.Users, [userA, userB]).run();
     });
 
     it('returns all users.', async () => {
@@ -52,7 +52,7 @@ describe('ZUsersRepositoryController', () => {
 
   describe('Create', () => {
     beforeEach(async () => {
-      [userB] = await dal.create(Collections.Users, [userB]).run();
+      [userB] = await dal.create(ZUsersCollections.Users, [userB]).run();
     });
 
     it('creates a user.', async () => {
@@ -60,7 +60,7 @@ describe('ZUsersRepositoryController', () => {
       const target = createTestTarget();
       // Act
       const created = await target.create(loginA);
-      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
       // Assert
       expect(actual._id).toBeTruthy();
       expect(actual.email).toEqual(loginA.email);
@@ -69,10 +69,10 @@ describe('ZUsersRepositoryController', () => {
     it('creates the super user if the new user is the first in the system.', async () => {
       // Arrange
       const target = createTestTarget();
-      await dal.delete(Collections.Users).run();
+      await dal.delete(ZUsersCollections.Users).run();
       // Act
       const created = await target.create(loginA);
-      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
       // Assert
       expect(actual.super).toBeTruthy();
     });
@@ -82,7 +82,7 @@ describe('ZUsersRepositoryController', () => {
       const target = createTestTarget();
       // Act
       const created = await target.create(loginA);
-      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
       // Assert
       expect(actual.super).toBeFalsy();
     });
@@ -92,7 +92,7 @@ describe('ZUsersRepositoryController', () => {
       const target = createTestTarget();
       // Act
       const created = await target.create(loginA);
-      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: created._id }).run();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
       const same = await compare(loginA.password, actual.password);
       // Assert
       expect(same).toBeTruthy();
@@ -101,7 +101,7 @@ describe('ZUsersRepositoryController', () => {
 
   describe('Find', () => {
     beforeEach(async () => {
-      [userA, userB] = await dal.create(Collections.Users, [userA, userB]).run();
+      [userA, userB] = await dal.create(ZUsersCollections.Users, [userA, userB]).run();
     });
 
     it('finds a user by id.', async () => {
@@ -126,7 +126,7 @@ describe('ZUsersRepositoryController', () => {
   describe('Update', () => {
     beforeEach(async () => {
       [userA, userB] = await dal
-        .create<IZUser>(Collections.Users, [userA, userB])
+        .create<IZUser>(ZUsersCollections.Users, [userA, userB])
         .run();
     });
 
@@ -137,7 +137,7 @@ describe('ZUsersRepositoryController', () => {
       const login: Partial<IZLogin> = { email: expected };
       // Act
       await target.update(userA._id, login);
-      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(actual.email).toEqual(expected);
     });
@@ -158,7 +158,7 @@ describe('ZUsersRepositoryController', () => {
       const login: Partial<IZLogin> = { password: 'super-password', confirm: 'super-password' };
       // Act
       await target.update(userA._id, login);
-      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
       const same = await compare(login.password, actual.password);
       // Assert
       expect(same).toBeTruthy();
@@ -169,7 +169,7 @@ describe('ZUsersRepositoryController', () => {
       const target = createTestTarget();
       // Act
       await target.update(userA._id, {});
-      const [actual] = await dal.read<IZUser>(Collections.Users).filter({ _id: userA._id }).run();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(actual.password).toEqual(userA.password);
     });
@@ -177,7 +177,7 @@ describe('ZUsersRepositoryController', () => {
 
   describe('Delete', () => {
     beforeEach(async () => {
-      [userA, userB] = await dal.create(Collections.Users, [userA, userB]).run();
+      [userA, userB] = await dal.create(ZUsersCollections.Users, [userA, userB]).run();
     });
 
     it('deletes the user.', async () => {
@@ -185,7 +185,7 @@ describe('ZUsersRepositoryController', () => {
       const target = createTestTarget();
       // Act
       await target.remove(userA._id);
-      const blobs = await dal.read(Collections.Users).filter({ _id: userA._id }).run();
+      const blobs = await dal.read(ZUsersCollections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(blobs.length).toEqual(0);
     });
@@ -193,7 +193,7 @@ describe('ZUsersRepositoryController', () => {
 
   describe('Authenticate', () => {
     beforeEach(async () => {
-      [userA] = await dal.create(Collections.Users, [userA]).run();
+      [userA] = await dal.create(ZUsersCollections.Users, [userA]).run();
     });
 
     it('returns false if no such user exists.', async () => {
