@@ -43,7 +43,7 @@ describe('ZProfilesController', () => {
       expect(actual).toEqual(gambitProfile);
     });
 
-    it('returns the updated profile redacted.', async () => {
+    it('returns the updated profile.', async () => {
       // Arrange
       const target = createTestTarget();
       const login = new ZLoginBuilder().email(gambit.email).password(gambit.password).autoConfirm().build();
@@ -67,7 +67,7 @@ describe('ZProfilesController', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('returns the removed profile redacted.', async () => {
+    it('returns the removed profile.', async () => {
       // Arrange
       const target = createTestTarget();
       const expected = new ZProfileBuilder().user(gambit).build();
