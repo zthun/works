@@ -80,12 +80,14 @@ export class ZUserBuilder {
   /**
    * Sets the user as inactive and sets the one time password to activate or reactivate the account.
    *
-   * @param activator The one time password to activate the account.
+   * @param key The one time password to activate the account.  These last for 1 hour.
+   * @param time The total time that the activation code lasts before the user needs to request another one.
    *
    * @returns This object.
    */
-  public inactive(activator: string): this {
-    this._user.activator = activator;
+  public inactive(key: string, time: number = 3600000): this {
+    const exp = new Date().getTime() + time;
+    this._user.activator = { key, exp };
     return this;
   }
 

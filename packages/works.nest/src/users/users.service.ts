@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { IZDatabase } from '@zthun/dal';
 import { IZLogin, IZUser, ZUserBuilder } from '@zthun/works.core';
 import { compare, hash } from 'bcryptjs';
-import { range } from 'lodash';
+import { v4 } from 'uuid';
 import { ZUsersCollections } from './users.collections';
 import { ZUsersDatabase } from './users.database';
 
@@ -72,12 +72,8 @@ export class ZUsersService {
     const password = await hash(login.password, ZUsersService.BcryptRounds);
     const builder = new ZUserBuilder().email(login.email).password(password);
 
-    // This just generates a random password of some length up to 120ish
-    const onetime = range(0, 8)
-      .map(() => Math.random().toString(36).substring(2, 15))
-      .join('');
-
-    const activator = await hash(onetime, ZUsersService.BcryptRounds);
+    // This just generates a random key of some length up to 120ish
+    const activator = v4();
     const create = total === 0 ? builder.super().active().build() : builder.inactive(activator).build();
     const [created] = await this._dal.create(ZUsersCollections.Users, [create]).run();
     return created;

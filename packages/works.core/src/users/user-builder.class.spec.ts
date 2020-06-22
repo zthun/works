@@ -54,8 +54,19 @@ describe('ZUserBuilder', () => {
       assertPropertySet(
         v4(),
         (t, v) => t.inactive(v),
-        (u) => u.activator
+        (u) => u.activator.key
       );
+    });
+
+    it('sets the user inactive activator expiration.', () => {
+      // Arrange
+      const time = 2400;
+      const expected = new Date().getTime() + time;
+      const target = createTestTarget();
+      // Act
+      const actual = target.inactive(v4(), time).build();
+      // Assert
+      expect(actual.activator.exp).toBeGreaterThanOrEqual(expected);
     });
 
     it('sets the user active', () => {

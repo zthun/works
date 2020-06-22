@@ -32,7 +32,7 @@ export interface IZUser extends IZIdentifiable {
    * This will be in the url and they won't need to stored once the user has been activated.
    * This should never be sent back with the profile information.
    */
-  activator?: string;
+  activator?: { key: string; exp: number };
 
   /**
    * Gets a value that indicates whether or not the user is the super user.
