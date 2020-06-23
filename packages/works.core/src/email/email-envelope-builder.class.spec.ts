@@ -83,21 +83,18 @@ describe('ZEmailEnvelopeBuilder.', () => {
   });
 
   describe('Copy', () => {
-    it('should copy another contact.', () => {
+    it('should copy another envelope.', () => {
       assertBuilderCopiesObject(createTestTarget().from('gambit@marvel.com').to('rogue@marvel.com').cc('wolverine@marvel.com').cc('cyclops@marvel.com').bcc('x@marvel.com').build(), createTestTarget);
     });
   });
 
   describe('Assign', () => {
-    it('should assign another contact.', () => {
-      assertBuilderAssignsObject(
-        createTestTarget().from('gambit@marvel.com').to('rogue@marvel.com').cc('wolverine@marvel.com').cc('cyclops@marvel.com').bcc('x@marvel.com').build(),
-        () => createTestTarget().from('gambit@marvel.com').to('rogue@marvel.com'),
-        {
-          cc: ['wolverine@marvel.com', 'cyclops@marvel.com'],
-          bcc: ['x@marvel.com']
-        }
-      );
+    it('should assign another envelope.', () => {
+      const from = 'gambit@marvel.com';
+      const to = ['rogue@marvel.com'];
+      const cc = ['wolverine@marvel.com', 'cyclops@marvel.com'];
+      const bcc = ['x@marvel.com'];
+      assertBuilderAssignsObject(createTestTarget().from(from).tos(to).ccs(cc).bccs(bcc).build(), () => createTestTarget().from(from).tos(to), { cc, bcc });
     });
   });
 });

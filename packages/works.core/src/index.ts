@@ -7,6 +7,13 @@ export { IZIdentifiable } from './common/identifiable.interface';
 // Config
 export { ZConfigEntryBuilder } from './configs/config-entry-builder.class';
 export { IZConfigEntry } from './configs/config-entry.interface';
+// Email
+export { ZEmailBuilder } from './email/email-builder.class';
+export { ZEmailContactBuilder } from './email/email-contact-builder.class';
+export { IZEmailContact } from './email/email-contact.interface';
+export { ZEmailEnvelopeBuilder } from './email/email-envelope-builder.class';
+export { IZEmailEnvelope } from './email/email-envelope.interface';
+export { IZEmail } from './email/email.interface';
 // Login
 export { ZLoginBuilder } from './logins/login-builder.class';
 export { IZLogin } from './logins/login.interface';

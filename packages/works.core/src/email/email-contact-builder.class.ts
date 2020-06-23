@@ -60,6 +60,7 @@ export class ZEmailContactBuilder {
    */
   public assign(other: Partial<IZEmailContact>): this {
     this._contact = Object.assign({}, this._contact, other);
+    this._contact = JSON.parse(JSON.stringify(this._contact));
     return this;
   }
 
@@ -71,14 +72,16 @@ export class ZEmailContactBuilder {
    * @returns This object.
    */
   public copy(other: IZEmailContact): this {
-    this._contact = Object.assign(this._contact, other);
+    this._contact = JSON.parse(JSON.stringify(other));
     return this;
   }
 
   /**
    * Returns a copy of the built object.
+   *
+   * @returns A copy of the built email contact.
    */
   public build(): IZEmailContact {
-    return { ...this._contact };
+    return JSON.parse(JSON.stringify(this._contact));
   }
 }
