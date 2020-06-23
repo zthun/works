@@ -20,6 +20,9 @@ export { IZLogin } from './logins/login.interface';
 // Profile
 export { ZProfileBuilder } from './profiles/profile-builder.class';
 export { IZProfile } from './profiles/profile.interface';
+// Server
+export { ZServerBuilder } from './server/server-builder.class';
+export { IZServer } from './server/server.interface';
 // URL
 export { ZUrlBuilder } from './url/url-builder.class';
 // Users
