@@ -1,7 +1,7 @@
 {
-  "name": "@zthun/works.core",
+  "name": "@zthun/works.jest",
   "version": "1.0.0-5",
-  "description": "The core share package in the @zthun/auth platform that shares source between the server and client.",
+  "description": "A testing library that helps with common testing patterns in jest.",
   "author": "Anthony Bonta",
   "license": "MIT",
   "repository": {
@@ -23,7 +23,7 @@
     "dist/**"
   ],
   "peerDependencies": {
-    "url-parse": "^1.4.7"
+    "jest": "^26.0.0"
   },
   "sideEffects": false
 }

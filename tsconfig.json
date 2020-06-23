@@ -5,6 +5,7 @@
     "target": "esnext",
     "paths": {
       "@zthun/works.core": ["works.core/src/index"],
+      "@zthun/works.jest": ["works.jest/src/index"],
       "@zthun/works.react": ["works.react/src/index"]
     }
   },
