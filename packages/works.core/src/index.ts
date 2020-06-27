@@ -9,6 +9,7 @@ export { ZConfigEntryBuilder } from './configs/config-entry-builder.class';
 export { IZConfigEntry } from './configs/config-entry.interface';
 // Email
 export { ZEmailBuilder } from './email/email-builder.class';
+export { ZEmailContactAddressBuilder } from './email/email-contact-address-builder.class';
 export { ZEmailContactBuilder } from './email/email-contact-builder.class';
 export { IZEmailContact } from './email/email-contact.interface';
 export { ZEmailEnvelopeBuilder } from './email/email-envelope-builder.class';
