@@ -34,6 +34,6 @@ describe('ZEmailContactAddressBuilder', () => {
   });
 
   it('returns undefined for an empty list of addresses.', () => {
-    assertBuilderSetsProperty(undefined, createTestTarget, identity, identity);
+    assertBuilderSetsProperty(undefined, createTestTarget, (t) => t.addresses(null), identity);
   });
 });
