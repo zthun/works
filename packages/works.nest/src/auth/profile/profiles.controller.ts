@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { Request } from 'express';
-import { ZUsersService } from '../../users/users.service';
 import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-user.guard';
 import { ZRuleCookieRequiresAuthActivated } from '../rules/rule-cookie-requires-auth-activated.guard';
 import { ZRuleCookieRequiresAuthAny } from '../rules/rule-cookie-requires-auth-any.guard';
@@ -9,6 +8,7 @@ import { ZRuleCookieRequiresAuthRegular } from '../rules/rule-cookie-requires-au
 import { ZTokensService } from '../tokens/tokens.service';
 import { ZProfileCreateDto } from './profile-create.dto';
 import { ZProfileUpdateDto } from './profile-update.dto';
+import { ZProfilesService } from './profiles.service';
 
 /**
  * Same as the users controller, but uses the cookie to get the id and has different permissions.
@@ -21,9 +21,9 @@ export class ZProfilesController {
    * Initializes a new instance of this object.
    *
    * @param _tokens The tokens service.
-   * @param _users The users service.
+   * @param _profile The profile service.
    */
-  public constructor(private readonly _tokens: ZTokensService, private readonly _users: ZUsersService) {}
+  public constructor(private readonly _tokens: ZTokensService, private readonly _profile: ZProfilesService) {}
 
   /**
    * Reads the user profile.
@@ -50,9 +50,8 @@ export class ZProfilesController {
   @Put()
   @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleCookieRequiresAuthActivated, ZRuleBodyRequiresUniqueUser)
   public async update(@Req() req: Request, @Body() profile: ZProfileUpdateDto): Promise<IZProfile> {
-    let user = await this._tokens.extract(req);
-    user = await this._users.update(user._id, profile);
-    return new ZProfileBuilder().user(user).build();
+    const user = await this._tokens.extract(req);
+    return this._profile.update(user, profile);
   }
 
   /**
@@ -65,12 +64,11 @@ export class ZProfilesController {
   @Post()
   @UseGuards(ZRuleBodyRequiresUniqueUser)
   public async create(@Body() login: ZProfileCreateDto): Promise<IZProfile> {
-    const user = await this._users.create(login);
-    return new ZProfileBuilder().user(user).build();
+    return this._profile.create(login);
   }
 
   /**
-   * Deletes/Deactivates the given user.
+   * Deletes the given user.
    *
    * @param req The request object.
    *
@@ -79,8 +77,7 @@ export class ZProfilesController {
   @Delete()
   @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleCookieRequiresAuthRegular, ZRuleCookieRequiresAuthActivated)
   public async remove(@Req() req: Request): Promise<IZProfile> {
-    let user = await this._tokens.extract(req);
-    user = await this._users.remove(user._id);
-    return new ZProfileBuilder().user(user).build();
+    const user = await this._tokens.extract(req);
+    return this._profile.remove(user);
   }
 }
