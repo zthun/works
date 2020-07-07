@@ -34,7 +34,7 @@ export function ZProfileActivationForm(props: IZProfileActivationFormProps) {
           </Typography>
           <TextField className='ZProfileActivationForm-input-key' data-testid='ZProfileActivationForm-input-key' fullWidth={true} label='Key' type='text' margin='none' variant='outlined' value={key} onInput={handleKeyInput} />
 
-          <Button className='ZProfileActivationForm-btn-activate' data-testid='ZProfileActivationForm-btn-activate' fullWidth={true} variant='contained' color='primary' onClick={handleActivate}>
+          <Button className='ZProfileActivationForm-btn-activate' data-testid='ZProfileActivationForm-btn-activate' fullWidth={true} variant='contained' disabled={!key} color='primary' onClick={handleActivate}>
             <span>{props.activateText}</span>
           </Button>
         </CardContent>

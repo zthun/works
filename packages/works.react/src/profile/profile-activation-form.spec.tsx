@@ -59,4 +59,27 @@ describe('ZProfileActivationForm', () => {
     // Assert
     expect(onActivationChange).toHaveBeenCalledWith(expect.objectContaining(expected));
   });
+
+  it('should disable the activate button if the key is falsy.', async () => {
+    // Arrange
+    const target = await createTestTarget();
+    // Act
+    const button = target.getByTestId('ZProfileActivationForm-btn-activate') as HTMLButtonElement;
+    // Assert
+    expect(button.disabled).toBeTruthy();
+  });
+
+  it('should enable the activate button if the key is truthy.', async () => {
+    // Arrange
+    const target = await createTestTarget();
+    await act(async () => {
+      const field = target.getByTestId('ZProfileActivationForm-input-key').getElementsByTagName('input').item(0);
+      field.value = v4();
+      fireEvent.input(field);
+    });
+    // Act
+    const button = target.getByTestId('ZProfileActivationForm-btn-activate') as HTMLButtonElement;
+    // Assert
+    expect(button.disabled).toBeFalsy();
+  });
 });

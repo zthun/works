@@ -4,5 +4,6 @@
     "outDir": "dist/cjs",
     "module": "commonjs",
     "paths": {}
-  }
+  },
+  "exclude": ["src/**/*.spec.ts"]
 }

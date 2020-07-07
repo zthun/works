@@ -1,12 +1,12 @@
-import { CanActivate, ConflictException, ExecutionContext, ForbiddenException } from '@nestjs/common';
+import { CanActivate, ConflictException, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
 import { IZProfileActivation, ZAssert } from '@zthun/works.core';
 import { Request } from 'express';
 import { ZTokensService } from '../tokens/tokens.service';
 
 /**
  * Represents a rule that states that a request body must be an IZProfileActivation object and
- *
  */
+@Injectable()
 export class ZRuleBodyRequiresActivationKey implements CanActivate {
   public constructor(private readonly _tokens: ZTokensService) {}
 

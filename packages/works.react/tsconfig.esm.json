@@ -4,5 +4,6 @@
     "outDir": "dist/esm",
     "module": "es2015",
     "paths": {}
-  }
+  },
+  "exclude": ["src/**/*.spec.ts"]
 }
