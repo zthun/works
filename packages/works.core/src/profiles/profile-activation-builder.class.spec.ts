@@ -1,7 +1,7 @@
-import { assertBuilderSetsProperty, assertBuilderCopiesObject, assertBuilderAssignsObject } from '@zthun/works.jest';
+import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
+import { v4 } from 'uuid';
 import { ZProfileActivationBuilder } from './profile-activation-builder.class';
 import { IZProfileActivation } from './profile-activation.interface';
-import { v4 } from 'uuid';
 
 describe('ZProfileActivationBuilder', () => {
   function createTestTarget() {

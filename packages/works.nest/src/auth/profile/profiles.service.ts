@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IZEmail, IZLogin, IZProfile, IZUser, ZEmailBuilder, ZEmailEnvelopeBuilder, ZProfileBuilder, IZProfileActivation } from '@zthun/works.core';
+import { IZEmail, IZLogin, IZProfile, IZUser, ZEmailBuilder, ZEmailEnvelopeBuilder, ZProfileBuilder } from '@zthun/works.core';
 import { ZEmailService } from '../../notifications/email.service';
 import { ZNotificationsConfigService } from '../../notifications/notifications-config.service';
 import { ZUsersService } from '../../users/users.service';

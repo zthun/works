@@ -1,8 +1,7 @@
-import { CanActivate, ExecutionContext, ConflictException, ForbiddenException } from '@nestjs/common';
+import { CanActivate, ConflictException, ExecutionContext, ForbiddenException } from '@nestjs/common';
 import { IZProfileActivation, ZAssert } from '@zthun/works.core';
-import { ZUsersService } from '../../users/users.service';
-import { ZTokensService } from '../tokens/tokens.service';
 import { Request } from 'express';
+import { ZTokensService } from '../tokens/tokens.service';
 
 /**
  * Represents a rule that states that a request body must be an IZProfileActivation object and

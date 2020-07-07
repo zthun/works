@@ -1,9 +1,9 @@
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
 import { IZLogin, IZProfile, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { compare, hash } from 'bcryptjs';
+import { v4 } from 'uuid';
 import { ZUsersCollections } from './users.collections';
 import { ZUsersService } from './users.service';
-import { v4 } from 'uuid';
 
 describe('ZUsersRepositoryController', () => {
   let dal: IZDatabase;
