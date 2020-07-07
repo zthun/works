@@ -127,6 +127,23 @@ export class ZUsersService {
   }
 
   /**
+   * Deactivates a user.
+   *
+   * This simply copies the existing user and adds a new activation code.  If the user is already
+   * deactivated, then a new activation code is set with an updated expiration.
+   *
+   * @param user The user to deactivate.
+   *
+   * @return A promise that, when resolved, returns the updated user.
+   */
+  public async deactivate(user: IZUser): Promise<IZUser> {
+    const copy = new ZUserBuilder().copy(user).inactive(v4()).build();
+    await this._dal.update<IZUser>(ZUsersCollections.Users, copy).filter({ _id: copy._id }).run();
+    const [updated] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: copy._id }).run();
+    return updated;
+  }
+
+  /**
    * Deletes an existing user.
    *
    * @param id The id of the user to  delete.

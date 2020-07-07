@@ -27,7 +27,7 @@ describe('ZProfilesService', () => {
 
     domain = new ZConfigEntryBuilder().scope(ZCommonConfigService.SCOPE).key(ZCommonConfigService.KEY_DOMAIN).value(ZCommonConfigService.DEFAULT_DOMAIN).build();
 
-    users = createMocked<ZUsersService>(['create', 'update', 'remove', 'activate', 'findByEmail']);
+    users = createMocked<ZUsersService>(['create', 'update', 'remove', 'activate', 'deactivate', 'findByEmail']);
 
     email = createMocked<ZEmailService>(['send']);
     email.send.mockReturnValue(Promise.resolve());
@@ -125,6 +125,8 @@ describe('ZProfilesService', () => {
       user = new ZUserBuilder().email('gambit@marvel.com').password('not-really-secure').inactive(v4()).build();
 
       users.findByEmail.mockReturnValue(Promise.resolve(user));
+      users.activate.mockReturnValue(Promise.resolve(user));
+      users.deactivate.mockReturnValue(Promise.resolve(user));
     });
 
     it('sends the activation email with the activator key.', async () => {
@@ -143,6 +145,33 @@ describe('ZProfilesService', () => {
       await target.activate(user.email);
       // Assert
       expect(users.activate).toHaveBeenCalledWith(user);
+    });
+
+    it('deactivates the user with the given email.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.deactivate(user.email);
+      // Assert
+      expect(users.deactivate).toHaveBeenCalledWith(user);
+    });
+
+    it('deactivate the user before sending the activation mail.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.reactivate(user.email);
+      // Assert
+      expect(users.deactivate).toHaveBeenCalledWith(user);
+    });
+
+    it('sends the activation email after deactivating the user.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.reactivate(user.email);
+      // Assert
+      expect(email.send).toHaveBeenCalledWith(expect.objectContaining({ message: expect.stringContaining(user.activator.key) }), smtp.value);
     });
   });
 });

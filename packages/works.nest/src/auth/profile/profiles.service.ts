@@ -54,8 +54,49 @@ export class ZProfilesService {
    * @returns A promise that, when resolved, has activated the user with the given email.
    */
   public async activate(email: string): Promise<IZProfile> {
-    const user = await this._users.findByEmail(email);
-    user.activator = null;
-    return this._users.activate(user);
+    let user = await this._users.findByEmail(email);
+    user = await this._users.activate(user);
+    return new ZProfileBuilder().user(user).build();
+  }
+
+  /**
+   * Deactivates a user.
+   *
+   * This does not send an activation email.  If you need to send an activation email
+   * along with the activation key, the user reactivate instead.
+   *
+   * @param email The email of the user to deactivate.
+   *
+   * @returns A promise that, when resolved, has deactivated the user with the given email.
+   */
+  public async deactivate(email: string): Promise<IZProfile> {
+    const user = await this._deactivateEmail(email);
+    return new ZProfileBuilder().user(user).build();
+  }
+
+  /**
+   * Deactivates the user and sends the user activation email.
+   *
+   * @param email The email of the user to deactivate and send the email to.
+   *
+   * @returns A promise that, when resolved, has deactivated the user with the given email.
+   */
+  public async reactivate(email: string): Promise<IZProfile> {
+    const user = await this._deactivateEmail(email);
+    await this.sendActivationEmail(user);
+    return new ZProfileBuilder().user(user).build();
+  }
+
+  /**
+   * Deactivates a user.
+   *
+   * @param email The email address of the user to deactivate.
+   *
+   * @returns The user that was deactivated.
+   */
+  private async _deactivateEmail(email: string): Promise<IZUser> {
+    let user = await this._users.findByEmail(email);
+    user = await this._users.deactivate(user);
+    return user;
   }
 }

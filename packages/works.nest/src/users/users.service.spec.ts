@@ -210,6 +210,16 @@ describe('ZUsersRepositoryController', () => {
       // Assert
       expect(actual.activator).toBeFalsy();
     });
+
+    it('deactivates the user.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      await target.activate(userA);
+      // Act
+      const actual = await target.deactivate(userA);
+      // Assert
+      expect(actual.activator).toBeTruthy();
+    });
   });
 
   describe('Delete', () => {
