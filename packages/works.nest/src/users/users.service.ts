@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IZDatabase } from '@zthun/dal';
-import { IZLogin, IZUser, ZUserBuilder } from '@zthun/works.core';
+import { IZLogin, IZProfile, IZUser, ZUserBuilder } from '@zthun/works.core';
 import { compare, hash } from 'bcryptjs';
 import { v4 } from 'uuid';
 import { ZUsersCollections } from './users.collections';
@@ -63,7 +63,7 @@ export class ZUsersService {
   /**
    * Creates a new user.
    *
-   * @param login The user to create.
+   * @param login The user to create from a login configuration.
    *
    * @returns A promise that, when resolved, has returned the new user.
    */
@@ -82,20 +82,27 @@ export class ZUsersService {
   /**
    * Updates an existing user.
    *
+   * @param id The id of the user to update.
+   * @param profile The profile template to update the user with.
+   *
    * @returns A promise that, when resolved, has returned the updated user.
    */
-  public async update(id: string, login: Partial<IZLogin>): Promise<IZUser> {
+  public async update(id: string, profile: IZProfile): Promise<IZUser> {
     const template: Partial<IZUser> = {};
 
-    if (login.email) {
-      template.email = login.email;
+    if (profile.email) {
+      template.email = profile.email;
     }
 
-    if (login.password) {
-      template.password = await hash(login.password, ZUsersService.BcryptRounds);
+    if (profile.password) {
+      template.password = await hash(profile.password, ZUsersService.BcryptRounds);
     }
 
-    if (!template.email && !template.password) {
+    if (profile.display) {
+      template.display = profile.display;
+    }
+
+    if (JSON.stringify(template) === JSON.stringify({})) {
       return await this.findById(id);
     }
 

@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { IZEmail, IZLogin, IZProfile, IZServer, IZUser, ZConfigEntryBuilder, ZEmailBuilder, ZEmailEnvelopeBuilder, ZProfileBuilder, ZServerBuilder } from '@zthun/works.core';
+import { IZEmail, IZLogin, IZProfile, IZUser, ZEmailBuilder, ZEmailEnvelopeBuilder, ZProfileBuilder } from '@zthun/works.core';
 import { ZEmailService } from '../../notifications/email.service';
+import { ZNotificationsConfigService } from '../../notifications/notifications-config.service';
 import { ZUsersService } from '../../users/users.service';
-import { ZVaultService } from '../../vault/vault.service';
+import { ZCommonConfigService } from '../../vault/common-config.service';
 
 @Injectable()
 export class ZProfilesService {
-  public constructor(private _users: ZUsersService, private _email: ZEmailService, private _vault: ZVaultService) {}
+  public constructor(private _users: ZUsersService, private _email: ZEmailService, private _commonConfig: ZCommonConfigService, private _notificationsConfig: ZNotificationsConfigService) {}
 
   public async create(login: IZLogin): Promise<IZProfile> {
     const user = await this._users.create(login);
@@ -29,10 +30,10 @@ export class ZProfilesService {
   }
 
   public async sendActivationEmail(user: IZUser): Promise<IZEmail> {
-    const server = await this._emailServer();
-    const domain = await this._domain();
-    const notifier = await this._notifier();
-    const envelope = new ZEmailEnvelopeBuilder().to(user.email).from(notifier).build();
+    const server = await this._notificationsConfig.smtp();
+    const domain = await this._commonConfig.domain();
+    const notifier = await this._notificationsConfig.notifier();
+    const envelope = new ZEmailEnvelopeBuilder().to(user.email).from(notifier.value).build();
     const subject = `Welcome to ${domain}`;
     const msg = `<h1>Welcome to ${domain}</h1>
       <p>You must activate your account before you can do anything with your profile.  Your activation code is:</p>
@@ -41,26 +42,7 @@ export class ZProfilesService {
       <p>Thanks for joining ${domain}.  We hope you enjoy your stay.</p>
     `;
     const email = new ZEmailBuilder().message(msg).subject(subject).envelope(envelope).build();
-    await this._email.send(email, server);
+    await this._email.send(email, server.value);
     return email;
-  }
-
-  private async _notifier(): Promise<string> {
-    const config = new ZConfigEntryBuilder<string>().scope('common').key('notifier').value('notifications@zthunworks.com').build();
-    const entry = await this._vault.get<string>(config);
-    return entry.value;
-  }
-
-  private async _domain(): Promise<string> {
-    const config = new ZConfigEntryBuilder<string>().scope('common').key('domain').value('zthunworks.com').build();
-    const entry = await this._vault.get<string>(config);
-    return entry.value;
-  }
-
-  private async _emailServer(): Promise<IZServer> {
-    const basic = new ZServerBuilder().address('smtp.zthunworks.com').port(587).build();
-    const config = new ZConfigEntryBuilder<IZServer>().scope('common').key('smtp').value(basic).build();
-    const entry = await this._vault.get<IZServer>(config);
-    return entry.value;
   }
 }

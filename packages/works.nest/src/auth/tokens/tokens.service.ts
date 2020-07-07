@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { IZLogin, IZUser, ZConfigEntryBuilder } from '@zthun/works.core';
+import { IZLogin, IZUser } from '@zthun/works.core';
 import { CookieOptions, Request, Response } from 'express';
 import { sign, SignOptions, verify } from 'jsonwebtoken';
 import { get } from 'lodash';
 import { ZUsersService } from '../../users/users.service';
-import { ZVaultService } from '../../vault/vault.service';
+import { ZCommonConfigService } from '../../vault/common-config.service';
+import { ZAuthConfigService } from '../config/auth-config.service';
 
 /**
  * Represents a service that can be used to sign, verify, inject and extract a jwt token.
@@ -19,10 +20,11 @@ export class ZTokensService {
   /**
    * Initializes a new instance of this object.
    *
-   * @param _domain The domain that the jwt is valid for.
    * @param _users The user repository for retrieving and updating users.
+   * @param _commonConfig The common configuration service that contains core values.
+   * @param _authConfig The auth configuration service that contains auth options.
    */
-  public constructor(private readonly _config: ZVaultService, private readonly _users: ZUsersService) {}
+  public constructor(private readonly _users: ZUsersService, private readonly _commonConfig: ZCommonConfigService, private readonly _authConfig: ZAuthConfigService) {}
 
   /**
    * Injects the jwt with the appropriate credentials into the response object.
@@ -33,11 +35,11 @@ export class ZTokensService {
    * @returns A promise that, when resolved, has injected the cookie.
    */
   public async inject(res: Response, credentials: IZLogin) {
-    const secret = await this._secret();
+    const secret = await this._authConfig.jwt();
     const tomorrow = new Date(Date.now() + 3600000);
     const options = await this._cookieOptions(tomorrow);
     const { _id } = await this._users.findByEmail(credentials.email);
-    const jwt = await this.sign({ user: _id }, secret);
+    const jwt = await this.sign({ user: _id }, secret.value);
     res.cookie(ZTokensService.COOKIE_NAME, jwt, options);
   }
 
@@ -51,8 +53,8 @@ export class ZTokensService {
   public async extract(req: Request): Promise<IZUser> {
     try {
       const token = get(req, `cookies[${ZTokensService.COOKIE_NAME}]`);
-      const secret = await this._secret();
-      const payload: { user: string } = await this.verify(token, secret);
+      const secret = await this._authConfig.jwt();
+      const payload: { user: string } = await this.verify(token, secret.value);
       const user = await this._users.findById(payload.user);
       return user;
     } catch {
@@ -119,30 +121,8 @@ export class ZTokensService {
    * @returns The options for a cookie.
    */
   private async _cookieOptions(expires?: Date): Promise<CookieOptions> {
-    const domain = await this._domain();
-    const base = { secure: true, httpOnly: true, domain, sameSite: true };
+    const domain = await this._commonConfig.domain();
+    const base = { secure: true, httpOnly: true, domain: domain.value, sameSite: true };
     return expires ? Object.assign(base, { expires }) : base;
-  }
-
-  /**
-   * Gets the jwt secret.
-   *
-   * @returns A promise that, when resolved, returns the jwt secret.
-   */
-  private async _secret() {
-    let cfg = new ZConfigEntryBuilder().scope('authentication.secrets').key('jwt').generate().build();
-    cfg = await this._config.get(cfg);
-    return cfg.value;
-  }
-
-  /**
-   * Gets the domain.
-   *
-   * @returns A promise that, when resolved, returns the domain.
-   */
-  private async _domain() {
-    let cfg = new ZConfigEntryBuilder().scope('common').key('domain').value('zthunworks.com').build();
-    cfg = await this._config.get(cfg);
-    return cfg.value;
   }
 }

@@ -16,6 +16,7 @@ export { ZTokensController } from './auth/tokens/tokens.controller';
 export { ZTokensService } from './auth/tokens/tokens.service';
 // Notifications
 export { ZEmailService } from './notifications/email.service';
+export { ZNotificationsConfigService } from './notifications/notifications-config.service';
 export { ZNotificationsModule } from './notifications/notifications.module';
 // Users
 export { ZUsersCollections } from './users/users.collections';
@@ -28,6 +29,7 @@ export { ZExceptionFactory } from './validation/exception-factory.class';
 export { IsNotWhiteSpace, IsNotWhiteSpaceValidator } from './validation/is-not-white-space.function';
 export { RequiresOtherProperty, RequiresOtherPropertyValidator } from './validation/requires-other-property.function';
 // Vault
+export { ZCommonConfigService } from './vault/common-config.service';
 export { ZVaultCollections } from './vault/vault.collections';
 export { ZVaultDatabase } from './vault/vault.database';
 export { ZVaultModule } from './vault/vault.module';

@@ -1,41 +1,36 @@
-import { IZLogin, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
+import { IZConfigEntry, IZLogin, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
+import { createMocked } from '@zthun/works.jest';
 import { Request, Response } from 'express';
-import { createSpyObj } from 'jest-createspyobj';
 import { v4 } from 'uuid';
 import { ZUsersService } from '../../users/users.service';
-import { ZVaultService } from '../../vault/vault.service';
+import { ZCommonConfigService } from '../../vault/common-config.service';
+import { ZAuthConfigService } from '../config/auth-config.service';
 import { ZTokensService } from './tokens.service';
 
 describe('ZTokensService', () => {
-  let secret: string;
-  let domain: string;
-  let cfg: any;
-  let config: jest.Mocked<ZVaultService>;
+  let secret: IZConfigEntry<string>;
+  let domain: IZConfigEntry<string>;
   let users: jest.Mocked<ZUsersService>;
+  let commonConfig: jest.Mocked<ZCommonConfigService>;
+  let authConfig: jest.Mocked<ZAuthConfigService>;
 
   function createTestTarget() {
-    return new ZTokensService(config, users);
+    return new ZTokensService(users, commonConfig, authConfig);
   }
 
   beforeEach(() => {
-    secret = 'my-secret';
-    domain = 'marvel.com';
+    secret = new ZConfigEntryBuilder().scope(ZAuthConfigService.SCOPE).key(ZAuthConfigService.KEY_JWT).generate().build();
+    domain = new ZConfigEntryBuilder().scope(ZCommonConfigService.SCOPE).key(ZCommonConfigService.KEY_DOMAIN).value('marvel.com').build();
 
-    cfg = {
-      'common': {
-        domain: new ZConfigEntryBuilder().scope('common').key('domain').value(domain).build()
-      },
-      'authentication.secrets': {
-        jwt: new ZConfigEntryBuilder().scope('authentication.secrets').key('jwt').value(secret).build()
-      }
-    };
-
-    users = createSpyObj(ZUsersService, ['findByEmail', 'findById']);
+    users = createMocked(['findByEmail', 'findById']);
     users.findByEmail.mockReturnValue(Promise.resolve(null));
     users.findById.mockReturnValue(Promise.resolve(null));
 
-    config = createSpyObj(ZVaultService, ['get']);
-    config.get.mockImplementation((c) => Promise.resolve(cfg[c.scope][c.key]));
+    commonConfig = createMocked<ZCommonConfigService>(['domain']);
+    commonConfig.domain.mockReturnValue(Promise.resolve(domain));
+
+    authConfig = createMocked<ZAuthConfigService>(['jwt']);
+    authConfig.jwt.mockReturnValue(Promise.resolve(secret));
   });
 
   describe('Inject', () => {
@@ -49,7 +44,7 @@ describe('ZTokensService', () => {
 
       users.findByEmail.mockReturnValue(Promise.resolve(user));
 
-      res = (createSpyObj('res', ['cookie', 'clearCookie']) as unknown) as jest.Mocked<Response>;
+      res = createMocked(['cookie', 'clearCookie']);
       res.cookie.mockReturnValue(res);
     });
 
@@ -59,7 +54,7 @@ describe('ZTokensService', () => {
       // Act
       await target.inject(res, credentials);
       // Assert
-      expect(res.cookie).toHaveBeenCalledWith(ZTokensService.COOKIE_NAME, expect.anything(), expect.objectContaining({ secure: true, sameSite: true, httpOnly: true, domain }));
+      expect(res.cookie).toHaveBeenCalledWith(ZTokensService.COOKIE_NAME, expect.anything(), expect.objectContaining({ secure: true, sameSite: true, httpOnly: true, domain: domain.value }));
     });
 
     it('should clear the auth token.', async () => {
@@ -68,7 +63,7 @@ describe('ZTokensService', () => {
       // Act
       await target.clear(res);
       // Assert
-      expect(res.clearCookie).toHaveBeenCalledWith(ZTokensService.COOKIE_NAME, expect.objectContaining({ secure: true, sameSite: true, httpOnly: true, domain }));
+      expect(res.clearCookie).toHaveBeenCalledWith(ZTokensService.COOKIE_NAME, expect.objectContaining({ secure: true, sameSite: true, httpOnly: true, domain: domain.value }));
     });
   });
 
@@ -79,13 +74,13 @@ describe('ZTokensService', () => {
     beforeEach(() => {
       user = new ZUserBuilder().email('wolverine@marvel.com').password('foo').id('0').super().build();
       users.findById.mockReturnValue(Promise.resolve(user));
-      req = (createSpyObj('res', ['cookies']) as unknown) as jest.Mocked<Request>;
+      req = createMocked(['cookies']);
     });
 
     it('should extract the user from the auth cookie in the request.', async () => {
       // Arrange
       const target = createTestTarget();
-      const jwt = await target.sign({ user: user.email }, secret);
+      const jwt = await target.sign({ user: user.email }, secret.value);
       req.cookies[ZTokensService.COOKIE_NAME] = jwt;
       // Act
       const actual = await target.extract(req);
@@ -118,8 +113,8 @@ describe('ZTokensService', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const token = await target.sign(payload, secret);
-      const actual = await target.verify(token, secret);
+      const token = await target.sign(payload, secret.value);
+      const actual = await target.verify(token, secret.value);
       // Assert
       expect(actual).toEqual(jasmine.objectContaining(payload));
     });
@@ -128,7 +123,7 @@ describe('ZTokensService', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = target.sign(null, secret);
+      const actual = target.sign(null, secret.value);
       // Assert
       await expect(actual).rejects.toBeTruthy();
     });
@@ -147,7 +142,7 @@ describe('ZTokensService', () => {
       const target = createTestTarget();
       const wrong = 'not-the-right-secret';
       // Act
-      const token = await target.sign(payload, secret);
+      const token = await target.sign(payload, secret.value);
       const actual = target.verify(token, wrong);
       // Assert
       await expect(actual).rejects.toBeTruthy();

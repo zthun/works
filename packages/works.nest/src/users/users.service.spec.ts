@@ -1,5 +1,5 @@
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
-import { IZLogin, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
+import { IZLogin, IZProfile, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { compare, hash } from 'bcryptjs';
 import { ZUsersCollections } from './users.collections';
 import { ZUsersService } from './users.service';
@@ -155,37 +155,39 @@ describe('ZUsersRepositoryController', () => {
       // Arrange
       const target = createTestTarget();
       const expected = 'super-user';
-      const login: Partial<IZLogin> = { email: expected };
+      const profile: IZProfile = { email: expected };
       // Act
-      await target.update(userA._id, login);
+      await target.update(userA._id, profile);
       const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(actual.email).toEqual(expected);
     });
 
-    it('does not update the email if the email is not set.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      const login: Partial<IZLogin> = { password: 'super-password', confirm: 'super-password' };
-      // Act
-      const updated = await target.update(userA._id, login);
-      // Assert
-      expect(updated.email).toEqual(userA.email);
-    });
-
     it('updates the password.', async () => {
       // Arrange
       const target = createTestTarget();
-      const login: Partial<IZLogin> = { password: 'super-password', confirm: 'super-password' };
+      const profile: IZProfile = { password: 'super-password', confirm: 'super-password' };
       // Act
-      await target.update(userA._id, login);
+      await target.update(userA._id, profile);
       const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
-      const same = await compare(login.password, actual.password);
+      const same = await compare(profile.password, actual.password);
       // Assert
       expect(same).toBeTruthy();
     });
 
-    it('does not update the password if it is not set.', async () => {
+    it('updates the display.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const expected = 'Superman';
+      const profile: IZProfile = { display: expected };
+      // Act
+      await target.update(userA._id, profile);
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      // Assert
+      expect(actual.display).toEqual(expected);
+    });
+
+    it('does not update anything if nothing is set.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act

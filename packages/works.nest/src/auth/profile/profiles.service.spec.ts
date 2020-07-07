@@ -1,29 +1,137 @@
+import { IZConfigEntry, IZLogin, IZProfile, IZServer, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
+import { v4 } from 'uuid';
 import { ZEmailService } from '../../notifications/email.service';
+import { ZNotificationsConfigService } from '../../notifications/notifications-config.service';
 import { ZUsersService } from '../../users/users.service';
-import { ZVaultService } from '../../vault/vault.service';
+import { ZCommonConfigService } from '../../vault/common-config.service';
 import { ZProfilesService } from './profiles.service';
 
 describe('ZProfilesService', () => {
+  let smtp: IZConfigEntry<IZServer>;
+  let notifier: IZConfigEntry<string>;
+  let domain: IZConfigEntry<string>;
+
   let users: jest.Mocked<ZUsersService>;
   let email: jest.Mocked<ZEmailService>;
-  let vault: jest.Mocked<ZVaultService>;
+  let commonConfig: jest.Mocked<ZCommonConfigService>;
+  let notificationsConfig: jest.Mocked<ZNotificationsConfigService>;
 
   function createTestTarget() {
-    return new ZProfilesService(users, email, vault);
+    return new ZProfilesService(users, email, commonConfig, notificationsConfig);
   }
 
   beforeEach(() => {
-    users = createMocked<ZUsersService>();
-    email = createMocked<ZEmailService>();
-    vault = createMocked<ZVaultService>();
+    smtp = new ZConfigEntryBuilder().scope(ZNotificationsConfigService.SCOPE).key(ZNotificationsConfigService.KEY_SMTP).value(ZNotificationsConfigService.DEFAULT_SMTP).build();
+    notifier = new ZConfigEntryBuilder().scope(ZNotificationsConfigService.SCOPE).key(ZNotificationsConfigService.KEY_NOTIFIER).value(ZNotificationsConfigService.DEFAULT_NOTIFIER).build();
+
+    domain = new ZConfigEntryBuilder().scope(ZCommonConfigService.SCOPE).key(ZCommonConfigService.KEY_DOMAIN).value(ZCommonConfigService.DEFAULT_DOMAIN).build();
+
+    users = createMocked<ZUsersService>(['create', 'update', 'remove']);
+
+    email = createMocked<ZEmailService>(['send']);
+    email.send.mockReturnValue(Promise.resolve());
+
+    commonConfig = createMocked<ZCommonConfigService>(['domain']);
+    commonConfig.domain.mockReturnValue(Promise.resolve(domain));
+
+    notificationsConfig = createMocked<ZNotificationsConfigService>(['smtp', 'notifier']);
+    notificationsConfig.notifier.mockReturnValue(Promise.resolve(notifier));
+    notificationsConfig.smtp.mockReturnValue(Promise.resolve(smtp));
   });
 
-  it('can create.', () => {
-    // Arrange
-    // Act
-    const target = createTestTarget();
-    // Assert
-    expect(target).toBeTruthy();
+  describe('Create', () => {
+    let login: IZLogin;
+
+    beforeEach(() => {
+      login = new ZLoginBuilder().email('gambit@marvel.com').password('not-secure').build();
+      users.create.mockImplementation((log) => Promise.resolve(new ZUserBuilder().email(log.email).password(log.password).inactive(v4()).build()));
+    });
+
+    it('creates a new user.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.create(login);
+      // Assert
+      expect(actual.email).toEqual(login.email);
+    });
+
+    it('sends the activation email.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.create(login);
+      // Assert
+      expect(email.send).toHaveBeenCalledWith(expect.anything(), smtp.value);
+    });
+
+    it('does not send the activation email for the super user.', async () => {
+      // Arrange
+      users.create.mockClear();
+      users.create.mockImplementation((log) => Promise.resolve(new ZUserBuilder().email(log.email).password(log.password).active().super().build()));
+      const target = createTestTarget();
+      // Act
+      await target.create(login);
+      // Assert
+      expect(email.send).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Update', () => {
+    let profile: IZProfile;
+    let current: IZUser;
+
+    beforeEach(() => {
+      current = new ZUserBuilder().id(v4()).email('gambit@marvel.com').display('Gambit').active().password('not-very-secure').build();
+      profile = new ZProfileBuilder().user(current).build();
+
+      users.update.mockImplementation((id, prof) => Promise.resolve(new ZUserBuilder().id(id).email(prof.email).display(prof.display).build()));
+    });
+
+    it('updates the specified user with the given profile.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.update(current, profile);
+      // Assert
+      expect(users.update).toHaveBeenCalledWith(current._id, profile);
+    });
+  });
+
+  describe('Remove', () => {
+    let current: IZUser;
+
+    beforeEach(() => {
+      current = new ZUserBuilder().id(v4()).email('gambit@marvel.com').display('Gambit').active().password('not-very-secure').build();
+
+      users.remove.mockImplementation((usr) => Promise.resolve(current));
+    });
+
+    it('removes the specified user.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.remove(current);
+      // Assert
+      expect(users.remove).toHaveBeenCalledWith(current._id);
+    });
+  });
+
+  describe('Activate', () => {
+    let user: IZUser;
+
+    beforeEach(() => {
+      user = new ZUserBuilder().email('gambit@marvel.com').password('not-really-secure').inactive(v4()).build();
+    });
+
+    it('sends the activation email with the activator key.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.sendActivationEmail(user);
+      // Assert
+      expect(email.send).toHaveBeenCalledWith(expect.objectContaining({ message: expect.stringContaining(user.activator.key) }), smtp.value);
+    });
   });
 });
