@@ -63,7 +63,7 @@ export class ZConfigEntryBuilder<T = any> {
    *
    * @returns A new entry builder that has a string value.
    */
-  public generate(length = 128, encoding = 'base64'): ZConfigEntryBuilder<string> {
+  public generate(length = 128, encoding: BufferEncoding = 'base64'): ZConfigEntryBuilder<string> {
     const val = randomBytes(length).toString(encoding);
     return new ZConfigEntryBuilder<string>().scope(this._entry.scope).key(this._entry.key).value(val);
   }

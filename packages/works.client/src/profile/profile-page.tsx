@@ -1,5 +1,5 @@
 import { CircularProgress, Grid } from '@material-ui/core';
-import { useLoginState, ZProfileForm } from '@zthun/works.react';
+import { useLoginState, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ export function ZProfilePage() {
   }
 
   function createProfileForm() {
-    return <ZProfileForm profile={loginState.profile} />;
+    return loginState.profile.active ? <ZProfileForm profile={loginState.profile} /> : <ZProfileActivationForm />;
   }
 
   function createProfileRedirect() {

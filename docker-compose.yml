@@ -14,7 +14,7 @@ services:
       - view.vault.database.zthunworks.com
       - view.users.database.zthunworks.com
   local.zthunworks.com:
-    image: node:10.17.0
+    image: node:14.5.0
     ports:
       - 4200:4200
     volumes:
@@ -22,7 +22,7 @@ services:
     working_dir: /usr/dev
     command: yarn workspace @zthun/works.client debug
   api.zthunworks.com:
-    image: node:10.17.0
+    image: node:14.5.0
     ports:
       - 9229:9229
       - 3000:3000

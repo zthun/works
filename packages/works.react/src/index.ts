@@ -24,6 +24,7 @@ export { IZLoginTabsProps } from './login/login-tabs.props';
 // Media
 export { ZSummaryCard } from './media/summary-card';
 // Profile
+export { ZProfileActivationForm } from './profile/profile-activation-form';
 export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
 export { ZProfileMenu } from './profile/profile-menu';
