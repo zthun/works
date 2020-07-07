@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, CardHeader, Paper, TextField, Typography, Link, CircularProgress } from '@material-ui/core';
+import { Button, Card, CardContent, CardHeader, CircularProgress, Paper, TextField, Typography } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import { ZProfileActivationBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';

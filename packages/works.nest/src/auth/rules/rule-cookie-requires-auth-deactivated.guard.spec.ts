@@ -1,8 +1,8 @@
+import { ConflictException } from '@nestjs/common';
 import { ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { v4 } from 'uuid';
 import { ZRuleCookieRequiresAuthDeactivated } from './rule-cookie-requires-auth-deactivated.guard';
-import { ConflictException } from '@nestjs/common';
 
 describe('ZRuleCookieRequestAuthAny', () => {
   function createTestTarget() {

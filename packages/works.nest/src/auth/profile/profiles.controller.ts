@@ -1,19 +1,19 @@
 import { Body, Controller, Delete, Get, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { Request } from 'express';
+import { ZRuleBodyRequiresActivationEmail } from '../rules/rule-body-requires-activation-email.guard';
 import { ZRuleBodyRequiresActivationKey } from '../rules/rule-body-requires-activation-key.guard';
 import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-user.guard';
 import { ZRuleCookieRequiresAuthActivated } from '../rules/rule-cookie-requires-auth-activated.guard';
 import { ZRuleCookieRequiresAuthAny } from '../rules/rule-cookie-requires-auth-any.guard';
+import { ZRuleCookieRequiresAuthDeactivated } from '../rules/rule-cookie-requires-auth-deactivated.guard';
 import { ZRuleCookieRequiresAuthRegular } from '../rules/rule-cookie-requires-auth-regular.guard';
 import { ZTokensService } from '../tokens/tokens.service';
+import { ZProfileActivationCreateDto } from './profile-activation-create.dto';
 import { ZProfileActivationUpdateDto } from './profile-activation-update.dto';
 import { ZProfileCreateDto } from './profile-create.dto';
 import { ZProfileUpdateDto } from './profile-update.dto';
 import { ZProfilesService } from './profiles.service';
-import { ZProfileActivationCreateDto } from './profile-activation-create.dto';
-import { ZRuleCookieRequiresAuthDeactivated } from '../rules/rule-cookie-requires-auth-deactivated.guard';
-import { ZRuleBodyRequiresActivationEmail } from '../rules/rule-body-requires-activation-email.guard';
 
 /**
  * Same as the users controller, but uses the cookie to get the id and has different permissions.

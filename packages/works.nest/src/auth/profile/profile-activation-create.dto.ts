@@ -1,6 +1,5 @@
 import { IZProfileActivation } from '@zthun/works.core';
-import { IsEmail, IsString, IsOptional, Equals } from 'class-validator';
-import { IsNotWhiteSpace } from '../../validation/is-not-white-space.function';
+import { Equals, IsEmail, IsOptional, IsString } from 'class-validator';
 
 export class ZProfileActivationCreateDto implements IZProfileActivation {
   @IsString({ message: 'Activation email must be a string.' })

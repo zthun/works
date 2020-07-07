@@ -4,11 +4,11 @@ import { plainToClass } from 'class-transformer';
 import { Request } from 'express';
 import { v4 } from 'uuid';
 import { ZTokensService } from '../tokens/tokens.service';
+import { ZProfileActivationCreateDto } from './profile-activation-create.dto';
 import { ZProfileActivationUpdateDto } from './profile-activation-update.dto';
 import { ZProfileCreateDto } from './profile-create.dto';
 import { ZProfilesController } from './profiles.controller';
 import { ZProfilesService } from './profiles.service';
-import { ZProfileActivationCreateDto } from './profile-activation-create.dto';
 
 describe('ZProfilesController', () => {
   let gambit: IZProfile;
