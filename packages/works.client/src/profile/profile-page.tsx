@@ -9,18 +9,42 @@ import { Redirect } from 'react-router-dom';
 export function ZProfilePage() {
   const loginState = useLoginState();
   const alerts = useAlertStack();
+  const [loading, setLoading] = useState(false);
   const [activation, setActivation] = useState(new ZProfileActivationBuilder().email(get(loginState.profile, 'email', null)).build());
+
+  function createActivationsUrl() {
+    return new ZUrlBuilder().api().append('profiles').append('activations').build();
+  }
 
   async function handleActivationChange(value: IZProfileActivation) {
     setActivation(value);
+    setLoading(true);
 
     try {
-      const url = new ZUrlBuilder().api().append('profiles').append('activations').build();
+      const url = createActivationsUrl();
       await Axios.put(url, value);
       alerts.add(new ZAlertBuilder().success().message('Account activated').build());
       loginState.refresh();
     } catch (err) {
       alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleActivationCreate() {
+    setLoading(true);
+
+    try {
+      const url = new ZUrlBuilder().api().append('profiles').append('activations').build();
+      const body = new ZProfileActivationBuilder().email(loginState.profile.email).build();
+      await Axios.post(url, body);
+      alerts.add(new ZAlertBuilder().success().message('Activation code sent.  Please check your email.').build());
+      loginState.refresh();
+    } catch (err) {
+      alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -29,7 +53,11 @@ export function ZProfilePage() {
   }
 
   function createProfileForm() {
-    return loginState.profile.active ? <ZProfileForm profile={loginState.profile} /> : <ZProfileActivationForm activation={activation} onActivationChange={handleActivationChange} />;
+    return loginState.profile.active ? (
+      <ZProfileForm profile={loginState.profile} loading={loading} />
+    ) : (
+      <ZProfileActivationForm activation={activation} onActivationChange={handleActivationChange} onActivationCreate={handleActivationCreate} loading={loading} />
+    );
   }
 
   function createProfileRedirect() {

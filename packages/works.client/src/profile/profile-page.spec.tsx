@@ -103,6 +103,12 @@ describe('ZProfilePage', () => {
       await of(true).pipe(delay(0)).toPromise();
     }
 
+    async function clickReactivateButton(target: RenderResult) {
+      const reactivate = target.getByTestId('ZProfileActivationForm-link-reactivate') as HTMLButtonElement;
+      fireEvent.click(reactivate);
+      await of(true).pipe(delay(0)).toPromise();
+    }
+
     it('displays the profile activation form.', async () => {
       // Arrange
       let target: RenderResult;
@@ -154,6 +160,45 @@ describe('ZProfilePage', () => {
         target = await createTestTarget();
         await setKey(target, key);
         await clickActivateButton(target);
+      });
+      const actual = alerts.list[0];
+      // Assert
+      expect(actual.severity).toEqual(ZAlertSeverity.Error);
+    });
+
+    it('reactivates the profile.', async () => {
+      // Arrange
+      let target: RenderResult;
+      // Act
+      await act(async () => {
+        target = await createTestTarget();
+        await clickReactivateButton(target);
+      });
+      // Assert
+      expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles/activations'), expect.objectContaining({ email: state.profile.email }));
+    });
+
+    it('notifies the user that activation was successful.', async () => {
+      // Arrange
+      let target: RenderResult;
+      // Act
+      await act(async () => {
+        target = await createTestTarget();
+        await clickReactivateButton(target);
+      });
+      const actual = alerts.list[0];
+      // Assert
+      expect(actual.severity).toEqual(ZAlertSeverity.Success);
+    });
+
+    it('notifies the user when reactivation fails.', async () => {
+      // Arrange
+      let target: RenderResult;
+      Axios.post = jest.fn().mockRejectedValue('failed');
+      // Act
+      await act(async () => {
+        target = await createTestTarget();
+        await clickReactivateButton(target);
       });
       const actual = alerts.list[0];
       // Assert
