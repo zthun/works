@@ -19,6 +19,8 @@ export { IZEmail } from './email/email.interface';
 export { ZLoginBuilder } from './logins/login-builder.class';
 export { IZLogin } from './logins/login.interface';
 // Profile
+export { ZProfileActivationBuilder } from './profiles/profile-activation-builder.class';
+export { IZProfileActivation } from './profiles/profile-activation.interface';
 export { ZProfileBuilder } from './profiles/profile-builder.class';
 export { IZProfile } from './profiles/profile.interface';
 // Server
