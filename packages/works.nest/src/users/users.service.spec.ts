@@ -3,6 +3,7 @@ import { IZLogin, IZProfile, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/
 import { compare, hash } from 'bcryptjs';
 import { ZUsersCollections } from './users.collections';
 import { ZUsersService } from './users.service';
+import { v4 } from 'uuid';
 
 describe('ZUsersRepositoryController', () => {
   let dal: IZDatabase;
@@ -195,6 +196,19 @@ describe('ZUsersRepositoryController', () => {
       const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(actual.password).toEqual(userA.password);
+    });
+
+    it('activates the user.', async () => {
+      // Arrange
+      let userC = new ZUserBuilder().email('c@gmail.com').password('whatever').inactive(v4()).build();
+      [userC] = await dal
+        .create<IZUser>(ZUsersCollections.Users, [userC])
+        .run();
+      const target = createTestTarget();
+      // Act
+      const actual = await target.activate(userC);
+      // Assert
+      expect(actual.activator).toBeFalsy();
     });
   });
 

@@ -27,7 +27,7 @@ describe('ZProfilesService', () => {
 
     domain = new ZConfigEntryBuilder().scope(ZCommonConfigService.SCOPE).key(ZCommonConfigService.KEY_DOMAIN).value(ZCommonConfigService.DEFAULT_DOMAIN).build();
 
-    users = createMocked<ZUsersService>(['create', 'update', 'remove']);
+    users = createMocked<ZUsersService>(['create', 'update', 'remove', 'activate', 'findByEmail']);
 
     email = createMocked<ZEmailService>(['send']);
     email.send.mockReturnValue(Promise.resolve());
@@ -123,6 +123,8 @@ describe('ZProfilesService', () => {
 
     beforeEach(() => {
       user = new ZUserBuilder().email('gambit@marvel.com').password('not-really-secure').inactive(v4()).build();
+
+      users.findByEmail.mockReturnValue(Promise.resolve(user));
     });
 
     it('sends the activation email with the activator key.', async () => {
@@ -132,6 +134,15 @@ describe('ZProfilesService', () => {
       await target.sendActivationEmail(user);
       // Assert
       expect(email.send).toHaveBeenCalledWith(expect.objectContaining({ message: expect.stringContaining(user.activator.key) }), smtp.value);
+    });
+
+    it('activates the user with the given email.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.activate(user.email);
+      // Assert
+      expect(users.activate).toHaveBeenCalledWith(user);
     });
   });
 });

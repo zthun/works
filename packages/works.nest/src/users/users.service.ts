@@ -112,6 +112,21 @@ export class ZUsersService {
   }
 
   /**
+   * Activates a user.
+   *
+   * @param user The user to activate.
+   *
+   * @return A promise that, when resolved, returns the updated user.
+   */
+  public async activate(user: IZUser): Promise<IZUser> {
+    const copy = new ZUserBuilder().copy(user).build();
+    copy.activator = null;
+    await this._dal.update<IZUser>(ZUsersCollections.Users, copy).filter({ _id: copy._id }).run();
+    const [updated] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: copy._id }).run();
+    return updated;
+  }
+
+  /**
    * Deletes an existing user.
    *
    * @param id The id of the user to  delete.

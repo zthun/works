@@ -12,7 +12,7 @@ export class ZProfileActivationBuilder {
   public constructor() {
     this._activation = {
       email: null,
-      activationKey: null
+      key: null
     };
   }
 
@@ -36,7 +36,7 @@ export class ZProfileActivationBuilder {
    * @returns This object.
    */
   public key(val: string): this {
-    this._activation.activationKey = val;
+    this._activation.key = val;
     return this;
   }
 

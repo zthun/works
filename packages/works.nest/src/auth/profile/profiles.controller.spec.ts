@@ -1,8 +1,10 @@
-import { IZProfile, ZLoginBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
+import { IZProfile, ZLoginBuilder, ZProfileActivationBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { plainToClass } from 'class-transformer';
 import { Request } from 'express';
+import { v4 } from 'uuid';
 import { ZTokensService } from '../tokens/tokens.service';
+import { ZProfileActivationUpdateDto } from './profile-activation-update.dto';
 import { ZProfileCreateDto } from './profile-create.dto';
 import { ZProfilesController } from './profiles.controller';
 import { ZProfilesService } from './profiles.service';
@@ -22,16 +24,17 @@ describe('ZProfilesController', () => {
 
     req = createMocked<Request>();
 
-    profile = createMocked<ZProfilesService>(['update', 'create', 'remove']);
+    profile = createMocked<ZProfilesService>(['update', 'create', 'remove', 'activate']);
     profile.update.mockResolvedValue(gambit);
     profile.remove.mockResolvedValue(gambit);
     profile.create.mockResolvedValue(gambit);
+    profile.activate.mockResolvedValue(gambit);
 
     jwt = createMocked<ZTokensService>(['extract']);
     jwt.extract.mockReturnValue(Promise.resolve(new ZUserBuilder().email('gambit@marvel.com').super().active().build()));
   });
 
-  describe('Create, read, update, delete', () => {
+  describe('CRUD', () => {
     it('returns the individual profile from the token.', async () => {
       // Arrange
       const target = createTestTarget();
@@ -69,6 +72,19 @@ describe('ZProfilesController', () => {
       const actual = await target.remove(req);
       // Assert
       expect(actual).toEqual(gambit);
+    });
+  });
+
+  describe('Activation', () => {
+    it('activates user.', () => {
+      // Arrange
+      const target = createTestTarget();
+      const activate = new ZProfileActivationBuilder().email(gambit.email).key(v4()).build();
+      const dto = plainToClass(ZProfileActivationUpdateDto, activate);
+      // Act
+      target.updateActivation(dto);
+      // Assert
+      expect(profile.activate).toHaveBeenCalledWith(gambit.email);
     });
   });
 });

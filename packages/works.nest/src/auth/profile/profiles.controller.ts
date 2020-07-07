@@ -9,6 +9,8 @@ import { ZTokensService } from '../tokens/tokens.service';
 import { ZProfileCreateDto } from './profile-create.dto';
 import { ZProfileUpdateDto } from './profile-update.dto';
 import { ZProfilesService } from './profiles.service';
+import { ZRuleBodyRequiresActivationKey } from '../rules/rule-body-requires-activation-key.guard';
+import { ZProfileActivationUpdateDto } from './profile-activation-update.dto';
 
 /**
  * Same as the users controller, but uses the cookie to get the id and has different permissions.
@@ -79,5 +81,18 @@ export class ZProfilesController {
   public async remove(@Req() req: Request): Promise<IZProfile> {
     const user = await this._tokens.extract(req);
     return this._profile.remove(user);
+  }
+
+  /**
+   * Activates the user.
+   *
+   * @param dto The user to activate.
+   *
+   * @returns The updated profile.
+   */
+  @Put('activations')
+  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleBodyRequiresActivationKey)
+  public async updateActivation(@Body() dto: ZProfileActivationUpdateDto): Promise<IZProfile> {
+    return this._profile.activate(dto.email);
   }
 }

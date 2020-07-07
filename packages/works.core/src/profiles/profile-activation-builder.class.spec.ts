@@ -23,7 +23,7 @@ describe('ZProfileActivationBuilder', () => {
         v4(),
         createTestTarget,
         (t, v) => t.key(v),
-        (a: IZProfileActivation) => a.activationKey
+        (a: IZProfileActivation) => a.key
       );
     });
   });

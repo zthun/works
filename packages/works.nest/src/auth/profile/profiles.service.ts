@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IZEmail, IZLogin, IZProfile, IZUser, ZEmailBuilder, ZEmailEnvelopeBuilder, ZProfileBuilder } from '@zthun/works.core';
+import { IZEmail, IZLogin, IZProfile, IZUser, ZEmailBuilder, ZEmailEnvelopeBuilder, ZProfileBuilder, IZProfileActivation } from '@zthun/works.core';
 import { ZEmailService } from '../../notifications/email.service';
 import { ZNotificationsConfigService } from '../../notifications/notifications-config.service';
 import { ZUsersService } from '../../users/users.service';
@@ -44,5 +44,18 @@ export class ZProfilesService {
     const email = new ZEmailBuilder().message(msg).subject(subject).envelope(envelope).build();
     await this._email.send(email, server.value);
     return email;
+  }
+
+  /**
+   * Activates a user.
+   *
+   * @param email The email of the user to activate.
+   *
+   * @returns A promise that, when resolved, has activated the user with the given email.
+   */
+  public async activate(email: string): Promise<IZProfile> {
+    const user = await this._users.findByEmail(email);
+    user.activator = null;
+    return this._users.activate(user);
   }
 }

@@ -6,6 +6,7 @@ export { ZProfileCreateDto } from './auth/profile/profile-create.dto';
 export { ZProfileUpdateDto } from './auth/profile/profile-update.dto';
 export { ZProfilesController } from './auth/profile/profiles.controller';
 export { ZProfilesService } from './auth/profile/profiles.service';
+export { ZRuleBodyRequiresActivationKey } from './auth/rules/rule-body-requires-activation-key.guard';
 export { ZRuleBodyRequiresCredentials } from './auth/rules/rule-body-requires-credentials.guard';
 export { ZRuleBodyRequiresUniqueUser } from './auth/rules/rule-body-requires-unique-user.guard';
 export { ZRuleCookieRequiresAuthAny } from './auth/rules/rule-cookie-requires-auth-any.guard';
