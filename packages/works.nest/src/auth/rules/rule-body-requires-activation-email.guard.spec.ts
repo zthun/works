@@ -5,9 +5,9 @@ import { createMocked } from '@zthun/works.jest';
 import { Request } from 'express';
 import { v4 } from 'uuid';
 import { ZTokensService } from '../tokens/tokens.service';
-import { ZRuleBodyRequiresActivationKey } from './rule-body-requires-activation-key.guard';
+import { ZRuleBodyRequiresActivationEmail } from './rule-body-requires-activation-email.guard';
 
-describe('ZRuleBodyRequiresActivationKey', () => {
+describe('ZRuleBodyRequiresActivationEmail', () => {
   let tokens: jest.Mocked<ZTokensService>;
   let user: IZUser;
   let activation: IZProfileActivation;
@@ -16,7 +16,7 @@ describe('ZRuleBodyRequiresActivationKey', () => {
   let context: jest.Mocked<ExecutionContext>;
 
   function createTestTarget() {
-    return new ZRuleBodyRequiresActivationKey(tokens);
+    return new ZRuleBodyRequiresActivationEmail(tokens);
   }
 
   beforeEach(() => {
@@ -45,21 +45,10 @@ describe('ZRuleBodyRequiresActivationKey', () => {
     expect(actual).toBeTruthy();
   });
 
-  it('throws a Forbidden exception if the activator keys do not match.', async () => {
+  it('throws a Forbidden exception of the activation email does not match the logged in email.', async () => {
     // Arrange
     const target = createTestTarget();
-    user = new ZUserBuilder().copy(user).inactive(v4()).build();
-    tokens.extract.mockResolvedValue(Promise.resolve(user));
-    // Act
-    const actual = target.canActivate(context);
-    // Assert
-    await expect(actual).rejects.toBeInstanceOf(ForbiddenException);
-  });
-
-  it('throws a Forbidden exception if the activator key has expired.', async () => {
-    // Arrange
-    const target = createTestTarget();
-    user = new ZUserBuilder().copy(user).inactive(user.activator.key, 0).build();
+    user = new ZUserBuilder().copy(user).email('other-person@gmail.com').build();
     tokens.extract.mockResolvedValue(Promise.resolve(user));
     // Act
     const actual = target.canActivate(context);

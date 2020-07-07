@@ -8,6 +8,7 @@ import { ZProfileActivationUpdateDto } from './profile-activation-update.dto';
 import { ZProfileCreateDto } from './profile-create.dto';
 import { ZProfilesController } from './profiles.controller';
 import { ZProfilesService } from './profiles.service';
+import { ZProfileActivationCreateDto } from './profile-activation-create.dto';
 
 describe('ZProfilesController', () => {
   let gambit: IZProfile;
@@ -24,11 +25,13 @@ describe('ZProfilesController', () => {
 
     req = createMocked<Request>();
 
-    profile = createMocked<ZProfilesService>(['update', 'create', 'remove', 'activate']);
+    profile = createMocked<ZProfilesService>(['update', 'create', 'remove', 'activate', 'deactivate', 'reactivate']);
     profile.update.mockResolvedValue(gambit);
     profile.remove.mockResolvedValue(gambit);
     profile.create.mockResolvedValue(gambit);
     profile.activate.mockResolvedValue(gambit);
+    profile.deactivate.mockResolvedValue(gambit);
+    profile.reactivate.mockResolvedValue(gambit);
 
     jwt = createMocked<ZTokensService>(['extract']);
     jwt.extract.mockReturnValue(Promise.resolve(new ZUserBuilder().email('gambit@marvel.com').super().active().build()));
@@ -85,6 +88,17 @@ describe('ZProfilesController', () => {
       target.updateActivation(dto);
       // Assert
       expect(profile.activate).toHaveBeenCalledWith(gambit.email);
+    });
+
+    it('reactivates user.', () => {
+      // Arrange
+      const target = createTestTarget();
+      const activate = new ZProfileActivationBuilder().email(gambit.email).key(null).build();
+      const dto = plainToClass(ZProfileActivationCreateDto, activate);
+      // Act
+      target.createActivation(dto);
+      // Assert
+      expect(profile.reactivate).toHaveBeenCalledWith(gambit.email);
     });
   });
 });

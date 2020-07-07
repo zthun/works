@@ -11,6 +11,9 @@ import { ZProfileActivationUpdateDto } from './profile-activation-update.dto';
 import { ZProfileCreateDto } from './profile-create.dto';
 import { ZProfileUpdateDto } from './profile-update.dto';
 import { ZProfilesService } from './profiles.service';
+import { ZProfileActivationCreateDto } from './profile-activation-create.dto';
+import { ZRuleCookieRequiresAuthDeactivated } from '../rules/rule-cookie-requires-auth-deactivated.guard';
+import { ZRuleBodyRequiresActivationEmail } from '../rules/rule-body-requires-activation-email.guard';
 
 /**
  * Same as the users controller, but uses the cookie to get the id and has different permissions.
@@ -91,8 +94,21 @@ export class ZProfilesController {
    * @returns The updated profile.
    */
   @Put('activations')
-  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleBodyRequiresActivationKey)
+  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleCookieRequiresAuthDeactivated, ZRuleBodyRequiresActivationEmail, ZRuleBodyRequiresActivationKey)
   public async updateActivation(@Body() dto: ZProfileActivationUpdateDto): Promise<IZProfile> {
     return this._profile.activate(dto.email);
+  }
+
+  /**
+   * Reactivates the user.
+   *
+   * @param dto The user to reactivate.
+   *
+   * @returns The updated profile.
+   */
+  @Post('activations')
+  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleBodyRequiresActivationEmail)
+  public async createActivation(@Body() dto: ZProfileActivationCreateDto): Promise<IZProfile> {
+    return this._profile.reactivate(dto.email);
   }
 }
