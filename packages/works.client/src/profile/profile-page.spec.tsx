@@ -1,13 +1,13 @@
-import { act, render, RenderResult, fireEvent } from '@testing-library/react';
-import { ZLoginState, ZLoginStateContext, IZLoginState, IZAlertStack, ZAlertStackContext, ZAlertStack, ZAlertSeverity, ZLoginStateStatic } from '@zthun/works.react';
+import { act, fireEvent, render, RenderResult } from '@testing-library/react';
+import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
+import { IZAlertStack, IZLoginState, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZLoginStateContext, ZLoginStateStatic } from '@zthun/works.react';
+import Axios from 'axios';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { ZProfilePage } from './profile-page';
-import Axios from 'axios';
-import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
-import { v4 } from 'uuid';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { v4 } from 'uuid';
+import { ZProfilePage } from './profile-page';
 
 jest.mock('axios');
 
