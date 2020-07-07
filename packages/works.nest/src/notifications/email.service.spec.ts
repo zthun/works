@@ -1,5 +1,5 @@
 import { IZEmail, IZEmailEnvelope, IZServer, ZEmailBuilder, ZEmailEnvelopeBuilder, ZServerBuilder } from '@zthun/works.core';
-import { createSpyObj } from 'jest-createspyobj';
+import { createMocked } from '@zthun/works.jest';
 import { createTransport } from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 import { ZEmailService } from './email.service';
@@ -15,7 +15,7 @@ describe('ZEmailService', () => {
   }
 
   beforeEach(() => {
-    mail = createSpyObj(Mail, ['sendMail']);
+    mail = createMocked(['sendMail']);
     mail.sendMail.mockReturnValue(Promise.resolve({}));
 
     createTransportSpy = createTransport as jest.Mock;

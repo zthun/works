@@ -5,22 +5,20 @@ import { MemoryRouter } from 'react-router-dom';
 import { ZProfilePage } from './profile-page';
 
 describe('ZProfilePage', () => {
+  async function createTestTarget() {
+    return render(
+      <ZLoginStateContext.Provider value={new ZLoginState(() => Promise.resolve(undefined))}>
+        <MemoryRouter>
+          <ZProfilePage />
+        </MemoryRouter>
+      </ZLoginStateContext.Provider>
+    );
+  }
   it('renders the page', async () => {
     // Arrange
-    let target: RenderResult;
+    const target = await createTestTarget();
     // Act
-    await act(async () => {
-      // Arrange
-      target = render(
-        <ZLoginStateContext.Provider value={new ZLoginState(() => Promise.resolve(undefined))}>
-          <MemoryRouter>
-            <ZProfilePage />
-          </MemoryRouter>
-        </ZLoginStateContext.Provider>
-      );
-    });
-    // Act
-    const actual = target.queryByTestId('ZProfilePage-root');
+    const actual = target.getByTestId('ZProfilePage-root');
     // Assert
     expect(actual).toBeTruthy();
   });

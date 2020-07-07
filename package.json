@@ -64,7 +64,6 @@
     "helmet": "^3.22.0",
     "html-webpack-plugin": "^4.2.0",
     "jest": "^26.1.0",
-    "jest-createspyobj": "^1.2.2",
     "jsdom": "^16.2.2",
     "jsonwebtoken": "^8.5.1",
     "lerna": "^3.0.0",

@@ -1,11 +1,10 @@
 import { ZUserBuilder } from '@zthun/works.core';
-import { createSpyObj } from 'jest-createspyobj';
-import { ZTokensService } from '../tokens/tokens.service';
+import { createMocked } from '@zthun/works.jest';
 import { ZRuleCookieRequiresAuthAny } from './rule-cookie-requires-auth-any.guard';
 
 describe('ZRuleCookieRequestAuthAny', () => {
   function createTestTarget() {
-    return new ZRuleCookieRequiresAuthAny(createSpyObj(ZTokensService, ['extract']));
+    return new ZRuleCookieRequiresAuthAny(createMocked(['extract']));
   }
 
   it('does nothing if all rules pass', () => {

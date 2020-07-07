@@ -1,8 +1,8 @@
 import { ConflictException } from '@nestjs/common';
 import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
 import { IZLogin, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
+import { createMocked } from '@zthun/works.jest';
 import { Request } from 'express';
-import { createSpyObj } from 'jest-createspyobj';
 import { ZUsersService } from '../../users/users.service';
 import { ZRuleBodyRequiresUniqueUser } from './rule-body-requires-unique-user.guard';
 
@@ -20,16 +20,16 @@ describe('ZRuleBodyRequiresUniqueUser', () => {
   beforeEach(() => {
     login = new ZLoginBuilder().email('gambit@marvel.com').password('weak').autoConfirm().build();
 
-    req = (createSpyObj('req', ['text']) as unknown) as jest.Mocked<Request>;
+    req = createMocked(['get']);
     req.body = login;
 
-    host = (createSpyObj('host', ['getRequest']) as unknown) as jest.Mocked<HttpArgumentsHost>;
+    host = createMocked(['getRequest']);
     host.getRequest.mockReturnValue(req);
 
-    context = (createSpyObj('context', ['switchToHttp']) as unknown) as jest.Mocked<ExecutionContext>;
+    context = createMocked(['switchToHttp']);
     context.switchToHttp.mockReturnValue(host);
 
-    users = createSpyObj(ZUsersService, ['findByEmail']);
+    users = createMocked(['findByEmail']);
     users.findByEmail.mockResolvedValue(null);
   });
 

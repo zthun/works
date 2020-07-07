@@ -1,6 +1,6 @@
 import { IZLogin, ZLoginBuilder } from '@zthun/works.core';
+import { createMocked } from '@zthun/works.jest';
 import { Response } from 'express';
-import { createSpyObj } from 'jest-createspyobj';
 import { ZTokensController } from './tokens.controller';
 import { ZTokensService } from './tokens.service';
 
@@ -14,13 +14,13 @@ describe('TokensController', () => {
   }
 
   beforeEach(() => {
-    jwt = createSpyObj(ZTokensService, ['inject', 'clear']);
+    jwt = createMocked(['inject', 'clear']);
     jwt.inject.mockReturnValue(Promise.resolve());
     jwt.clear.mockReturnValue(Promise.resolve());
 
     credentials = new ZLoginBuilder().email('gambit@marvel.com').password('sure').autoConfirm().build();
 
-    res = (createSpyObj('res', ['sendStatus']) as unknown) as jest.Mocked<Response>;
+    res = createMocked(['sendStatus']);
   });
 
   describe('Login', () => {
