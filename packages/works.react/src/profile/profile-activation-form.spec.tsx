@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import { ZProfileActivationForm } from './profile-activation-form';
 import React from 'react';
+import { ZProfileActivationForm } from './profile-activation-form';
 
 describe('ZProfileActivationForm', () => {
   async function createTestTarget() {
