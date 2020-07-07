@@ -34,12 +34,12 @@ export class ZProfilesService {
     const domain = await this._commonConfig.domain();
     const notifier = await this._notificationsConfig.notifier();
     const envelope = new ZEmailEnvelopeBuilder().to(user.email).from(notifier.value).build();
-    const subject = `Welcome to ${domain}`;
-    const msg = `<h1>Welcome to ${domain}</h1>
+    const subject = `Welcome to ${domain.value}`;
+    const msg = `<h1>Welcome to ${domain.value}</h1>
       <p>You must activate your account before you can do anything with your profile.  Your activation code is:</p>
       <p><strong>${user.activator.key}</strong></p>
       <p>Your activation code is only good for a limited time.</p>
-      <p>Thanks for joining ${domain}.  We hope you enjoy your stay.</p>
+      <p>Thanks for joining ${domain.value}.  We hope you enjoy your stay.</p>
     `;
     const email = new ZEmailBuilder().message(msg).subject(subject).envelope(envelope).build();
     await this._email.send(email, server.value);

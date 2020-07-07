@@ -14,6 +14,6 @@ import { ZTokensService } from './tokens/tokens.service';
   imports: [ZVaultModule, ZUsersModule, ZNotificationsModule],
   providers: [ZTokensService, ZProfilesService, ZAuthConfigService],
   controllers: [ZTokensController, ZProfilesController],
-  exports: [ZVaultModule, ZUsersModule, ZTokensService, ZAuthConfigService]
+  exports: [ZTokensService, ZAuthConfigService]
 })
 export class ZAuthModule {}
