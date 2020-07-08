@@ -29,20 +29,24 @@ export function ZProfilePage() {
   async function handleActivation(value: IZProfileActivation) {
     setActivation(value);
     setActivating(true);
-    await handleActivationChange('Account activated', (url) => Axios.put(url, value));
+    value = new ZProfileActivationBuilder().copy(value).email(loginState.profile.email).build();
+    await handleActivationChange('Account activated.', (url) => Axios.put(url, value));
     setActivating(false);
   }
 
   async function handleReactivation() {
     setReactivating(true);
     const body = new ZProfileActivationBuilder().email(loginState.profile.email).build();
-    await handleActivationChange('Activation code sent.  Please check your email.', (url) => Axios.post(url, body));
+    setActivation(body);
+    await handleActivationChange('Activation code sent. Please check your email.', (url) => Axios.post(url, body));
     setReactivating(false);
   }
 
   async function handleDeactivation() {
     setDeactivating(true);
-    await handleActivationChange('Account deactivated.Send yourself another activation code to reactivate.', (url) => Axios.delete(url));
+    const body = new ZProfileActivationBuilder().email(loginState.profile.email).build();
+    setActivation(body);
+    await handleActivationChange('Account deactivated. Send yourself another activation code to reactivate.', (url) => Axios.delete(url));
     setDeactivating(false);
   }
 
