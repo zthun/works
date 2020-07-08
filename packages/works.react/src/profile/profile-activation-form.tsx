@@ -1,8 +1,9 @@
-import { Button, Card, CardContent, CardHeader, CircularProgress, Paper, TextField, Typography } from '@material-ui/core';
+import { Button, CircularProgress, TextField, Typography } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import { ZProfileActivationBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
+import { ZPaperCard } from '../common/paper-card';
 import { IZProfileActivationFormProps } from './profile-activation-form.props';
 
 export function ZProfileActivationForm(props: IZProfileActivationFormProps) {
@@ -28,41 +29,43 @@ export function ZProfileActivationForm(props: IZProfileActivationFormProps) {
   }
 
   return (
-    <Paper className='ZProfileActivationForm-root' data-testid='ZProfileActivationForm-root' elevation={5}>
-      <Card>
-        <CardHeader className='ZProfileActivationForm-header' avatar={<PersonIcon className='ZProfileActivationForm-icon-user' fontSize='large' />} action={createLoading()} title={<h3>{props.headerText}</h3>} subheader={props.subHeaderText} />
-        <CardContent>
-          <Typography variant='body1' component='p'>
-            You must activate your account before you are allowed to perform any account related actions.
-          </Typography>
+    <ZPaperCard
+      className='ZProfileActivationForm-root'
+      data-testid='ZProfileActivationForm-root'
+      avatar={<PersonIcon className='ZProfileActivationForm-icon-user' fontSize='large' />}
+      action={createLoading()}
+      headerText={props.headerText}
+      subHeaderText={props.subHeaderText}
+    >
+      <Typography variant='body1' component='p'>
+        You must activate your account before you are allowed to perform any account related actions.
+      </Typography>
 
-          <Typography variant='body1' component='p'>
-            Check your email for an activation key and copy it here.
-          </Typography>
+      <Typography variant='body1' component='p'>
+        Check your email for an activation key and copy it here.
+      </Typography>
 
-          <TextField
-            className='ZProfileActivationForm-input-key'
-            data-testid='ZProfileActivationForm-input-key'
-            fullWidth={true}
-            disabled={props.disabled || props.loading}
-            label='Key'
-            type='text'
-            margin='none'
-            variant='outlined'
-            value={key}
-            onInput={handleKeyInput}
-          />
+      <TextField
+        className='ZProfileActivationForm-input-key'
+        data-testid='ZProfileActivationForm-input-key'
+        fullWidth={true}
+        disabled={props.disabled || props.loading}
+        label='Key'
+        type='text'
+        margin='none'
+        variant='outlined'
+        value={key}
+        onInput={handleKeyInput}
+      />
 
-          <Button className='ZProfileActivationForm-btn-activate' data-testid='ZProfileActivationForm-btn-activate' fullWidth={true} variant='contained' disabled={props.disabled || props.loading || !key} color='primary' onClick={handleActivate}>
-            {props.activateText}
-          </Button>
+      <Button className='ZProfileActivationForm-btn-activate' data-testid='ZProfileActivationForm-btn-activate' fullWidth={true} variant='contained' disabled={props.disabled || props.loading || !key} color='primary' onClick={handleActivate}>
+        {props.activateText}
+      </Button>
 
-          <Button className='ZProfileActivationForm-link-reactivate' data-testid='ZProfileActivationForm-link-reactivate' fullWidth={true} variant='text' disabled={props.disabled || props.loading} color='primary' onClick={handleNewActivate}>
-            {props.reactivateText}
-          </Button>
-        </CardContent>
-      </Card>
-    </Paper>
+      <Button className='ZProfileActivationForm-link-reactivate' data-testid='ZProfileActivationForm-link-reactivate' fullWidth={true} variant='text' disabled={props.disabled || props.loading} color='primary' onClick={handleNewActivate}>
+        {props.reactivateText}
+      </Button>
+    </ZPaperCard>
   );
 }
 

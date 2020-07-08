@@ -1,9 +1,11 @@
-import { Button, Card, CardContent, CardHeader, CircularProgress, Paper, TextField } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
+import { ZCircularProgress } from '../common/circular-progress';
+import { ZPaperCard } from '../common/paper-card';
 import { IZProfileFormProps } from './profile-form.props';
 
 export function ZProfileForm(props: IZProfileFormProps) {
@@ -36,8 +38,8 @@ export function ZProfileForm(props: IZProfileFormProps) {
 
   function createTextField(name: string, label: string, type: string, val: string, handleInput: (e: any) => void) {
     const id = `ZProfileForm-input-${name}`;
-    const clasz = `ZProfileForm-input ${id}`;
-    return <TextField className={clasz} data-testid={id} fullWidth={true} label={label} type={type} margin='none' variant='outlined' value={val} disabled={props.disabled} onInput={handleInput} />;
+    const className = `ZProfileForm-input ${id}`;
+    return <TextField className={className} data-testid={id} fullWidth={true} label={label} type={type} margin='none' variant='outlined' value={val} disabled={props.disabled} onInput={handleInput} />;
   }
 
   function createAccountInformation() {
@@ -78,35 +80,22 @@ export function ZProfileForm(props: IZProfileFormProps) {
     return admin ? <SupervisorAccountIcon className='ZProfileForm-icon-superuser' data-testid='ZProfileForm-icon-superuser' fontSize='large' /> : <PersonIcon className='ZProfileForm-icon-user' data-testid='ZProfileForm-icon-user' fontSize='large' />;
   }
 
-  function createActionButton() {
-    const loadingProgress = !props.loading ? null : <CircularProgress className='ZProfileForm-progress-loading ml-sm' data-testid='ZProfileForm-progress-loading ' color='inherit' size='1em' />;
-
-    return (
-      <Button className='ZProfileForm-btn-action' data-testid='ZProfileForm-btn-action' fullWidth={true} variant='contained' color='primary' disabled={props.disabled} onClick={handleAction}>
-        <span>{props.actionText}</span>
-        {loadingProgress}
-      </Button>
-    );
-  }
-
   const accountInformation = createAccountInformation();
   const updatePassword = createUpdatePassword();
   const avatar = createAvatar();
-  const actionButton = createActionButton();
 
   return (
-    <Paper className='ZProfileForm-root' data-testid='ZProfileForm-root' elevation={5}>
-      <Card>
-        <CardHeader className='ZProfileForm-header' avatar={avatar} title={<h3>{props.headerText}</h3>} subheader={props.subHeaderText} />
-        <CardContent>
-          <form noValidate={true} autoComplete='off'>
-            {accountInformation}
-            {updatePassword}
-            {actionButton}
-          </form>
-        </CardContent>
-      </Card>
-    </Paper>
+    <ZPaperCard className='ZProfileForm-root' data-testid='ZProfileForm-root' avatar={avatar} headerText={props.headerText} subHeaderText={props.subHeaderText}>
+      <form noValidate={true} autoComplete='off'>
+        {accountInformation}
+        {updatePassword}
+
+        <Button className='ZProfileForm-btn-action' data-testid='ZProfileForm-btn-action' fullWidth={true} variant='contained' color='primary' disabled={props.disabled} onClick={handleAction}>
+          <span>{props.actionText}</span>
+          <ZCircularProgress className='ZProfileForm-progress-loading ml-sm' data-testid='ZProfileForm-progress-loading ' show={props.loading} />
+        </Button>
+      </form>
+    </ZPaperCard>
   );
 }
 

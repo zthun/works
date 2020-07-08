@@ -9,6 +9,10 @@ export { useAlertStack, useAlertState, ZAlertStackContext } from './alert/alert-
 export { IZAlertStack } from './alert/alert-stack.interface';
 export { IZAlert } from './alert/alert.interface';
 // Common
+export { ZCircularProgress } from './common/circular-progress';
+export { IZCircularProgressProps } from './common/circular-progress.props';
+export { ZPaperCard } from './common/paper-card';
+export { IZPaperCardProps } from './common/paper-card.props';
 export { useMenuState } from './common/use-menu-state.hook';
 export { useWatchableState } from './common/use-watchable-state.hook';
 // Login
@@ -25,6 +29,7 @@ export { IZLoginTabsProps } from './login/login-tabs.props';
 export { ZSummaryCard } from './media/summary-card';
 // Profile
 export { ZProfileActivationForm } from './profile/profile-activation-form';
+export { ZProfileDeactivationForm } from './profile/profile-deactivation-form';
 export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
 export { ZProfileMenu } from './profile/profile-menu';
