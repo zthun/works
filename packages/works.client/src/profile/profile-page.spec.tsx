@@ -104,7 +104,7 @@ describe('ZProfilePage', () => {
     }
 
     async function clickReactivateButton(target: RenderResult) {
-      const reactivate = target.getByTestId('ZProfileActivationForm-link-reactivate') as HTMLButtonElement;
+      const reactivate = target.getByTestId('ZProfileReactivationForm-btn-reactivate') as HTMLButtonElement;
       fireEvent.click(reactivate);
       await of(true).pipe(delay(0)).toPromise();
     }

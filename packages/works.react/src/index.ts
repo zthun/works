@@ -34,3 +34,5 @@ export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
 export { ZProfileMenu } from './profile/profile-menu';
 export { IZProfileMenuProps } from './profile/profile-menu.props';
+export { ZProfileReactivationForm } from './profile/profile-reactivation-form';
+export { IZProfileReactivationFormProps } from './profile/profile-reactivation-form.props';

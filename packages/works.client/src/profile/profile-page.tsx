@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import { IZProfileActivation, ZProfileActivationBuilder, ZUrlBuilder } from '@zthun/works.core';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileActivationForm, ZProfileDeactivationForm, ZProfileForm } from '@zthun/works.react';
+import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileActivationForm, ZProfileDeactivationForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
 import Axios from 'axios';
 import { get } from 'lodash';
 import React, { useState } from 'react';
@@ -60,7 +60,12 @@ export function ZProfilePage() {
   }
 
   function createProfileDeactivatedForm() {
-    return <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} onActivationCreate={handleReactivation} disabled={activating || reactivating} loading={activating || reactivating} />;
+    return (
+      <div className='ZPaperCard-group'>
+        <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={activating || reactivating} loading={activating} />;
+        <ZProfileReactivationForm onReactivate={handleReactivation} disabled={activating || reactivating} loading={reactivating} />
+      </div>
+    );
   }
 
   function createProfileForm() {
