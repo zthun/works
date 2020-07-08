@@ -111,4 +111,18 @@ export class ZProfilesController {
   public async createActivation(@Body() dto: ZProfileActivationCreateDto): Promise<IZProfile> {
     return this._profile.reactivate(dto.email);
   }
+
+  /**
+   * Deactivates the user.
+   *
+   * @param req The request object.
+   *
+   * @returns The updated profile.
+   */
+  @Delete('activations')
+  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleCookieRequiresAuthActivated)
+  public async deleteActivation(@Req() req: Request): Promise<IZProfile> {
+    const user = await this._tokens.extract(req);
+    return this._profile.deactivate(user.email);
+  }
 }

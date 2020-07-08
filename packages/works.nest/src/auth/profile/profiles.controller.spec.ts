@@ -79,26 +79,35 @@ describe('ZProfilesController', () => {
   });
 
   describe('Activation', () => {
-    it('activates user.', () => {
+    it('activates user.', async () => {
       // Arrange
       const target = createTestTarget();
       const activate = new ZProfileActivationBuilder().email(gambit.email).key(v4()).build();
       const dto = plainToClass(ZProfileActivationUpdateDto, activate);
       // Act
-      target.updateActivation(dto);
+      await target.updateActivation(dto);
       // Assert
       expect(profile.activate).toHaveBeenCalledWith(gambit.email);
     });
 
-    it('reactivates user.', () => {
+    it('reactivates user.', async () => {
       // Arrange
       const target = createTestTarget();
       const activate = new ZProfileActivationBuilder().email(gambit.email).key(null).build();
       const dto = plainToClass(ZProfileActivationCreateDto, activate);
       // Act
-      target.createActivation(dto);
+      await target.createActivation(dto);
       // Assert
       expect(profile.reactivate).toHaveBeenCalledWith(gambit.email);
+    });
+
+    it('deactivates user.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.deleteActivation(req);
+      // Assert
+      expect(profile.deactivate).toHaveBeenCalledWith(gambit.email);
     });
   });
 });
