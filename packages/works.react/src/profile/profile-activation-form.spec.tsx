@@ -10,13 +10,12 @@ describe('ZProfileActivationForm', () => {
   let loading: boolean;
   let activation: IZProfileActivation;
   let onActivationChange: jest.Mock;
-  let onActivationCreate: jest.Mock;
 
   async function createTestTarget() {
-    return render(<ZProfileActivationForm activation={activation} onActivationChange={onActivationChange} onActivationCreate={onActivationCreate} disabled={disabled} loading={loading} />);
+    return render(<ZProfileActivationForm activation={activation} onActivationChange={onActivationChange} disabled={disabled} loading={loading} />);
   }
 
-  async function assertDisabled<TElement extends HTMLElement>(testId: string, tag: keyof HTMLElementTagNameMap) {
+  async function assertDisabled(testId: string, tag: keyof HTMLElementTagNameMap) {
     // Arrange
     const target = await createTestTarget();
     // Act
@@ -32,7 +31,6 @@ describe('ZProfileActivationForm', () => {
     loading = false;
     activation = new ZProfileActivationBuilder().email('gambit@marvel.com').build();
     onActivationChange = jest.fn();
-    onActivationCreate = jest.fn();
   });
 
   it('renders the form.', async () => {
@@ -102,18 +100,6 @@ describe('ZProfileActivationForm', () => {
     });
   });
 
-  describe('Reactivate', () => {
-    it('should raise the create activate event when the send activation code link is clicked.', async () => {
-      // Arrange
-      const target = await createTestTarget();
-      // Act
-      const field = target.getByTestId('ZProfileActivationForm-link-reactivate');
-      fireEvent.click(field);
-      // Assert
-      expect(onActivationCreate).toHaveBeenCalled();
-    });
-  });
-
   describe('Disabled', () => {
     beforeEach(() => {
       disabled = true;
@@ -121,10 +107,6 @@ describe('ZProfileActivationForm', () => {
 
     it('should disable the activate button.', () => {
       assertDisabled('ZProfileActivationForm-btn-activate', null);
-    });
-
-    it('should disable the reactivate link.', () => {
-      assertDisabled('ZProfileActivationForm-link-reactivate', null);
     });
 
     it('should disable the key input.', () => {
@@ -135,18 +117,6 @@ describe('ZProfileActivationForm', () => {
   describe('Loading', () => {
     beforeEach(() => {
       loading = true;
-    });
-
-    it('should disable the activate button.', () => {
-      assertDisabled('ZProfileActivationForm-btn-activate', null);
-    });
-
-    it('should disable the reactivate link.', () => {
-      assertDisabled('ZProfileActivationForm-link-reactivate', null);
-    });
-
-    it('should disable the key input.', () => {
-      assertDisabled('ZProfileActivationForm-input-key', 'input');
     });
 
     it('shows the loading indicator.', async () => {

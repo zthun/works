@@ -29,20 +29,20 @@ export function ZProfilePage() {
   async function handleActivation(value: IZProfileActivation) {
     setActivation(value);
     setActivating(true);
-    handleActivationChange('Account activated', (url) => Axios.put(url, value));
+    await handleActivationChange('Account activated', (url) => Axios.put(url, value));
     setActivating(false);
   }
 
   async function handleReactivation() {
     setReactivating(true);
     const body = new ZProfileActivationBuilder().email(loginState.profile.email).build();
-    handleActivationChange('Activation code sent.  Please check your email.', (url) => Axios.post(url, body));
+    await handleActivationChange('Activation code sent.  Please check your email.', (url) => Axios.post(url, body));
     setReactivating(false);
   }
 
   async function handleDeactivation() {
     setDeactivating(true);
-    handleActivationChange('Account deactivated.Send yourself another activation code to reactivate.', (url) => Axios.delete(url));
+    await handleActivationChange('Account deactivated.Send yourself another activation code to reactivate.', (url) => Axios.delete(url));
     setDeactivating(false);
   }
 
@@ -62,7 +62,7 @@ export function ZProfilePage() {
   function createProfileDeactivatedForm() {
     return (
       <div className='ZPaperCard-group'>
-        <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={activating || reactivating} loading={activating} />;
+        <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={activating || reactivating} loading={activating} />
         <ZProfileReactivationForm onReactivate={handleReactivation} disabled={activating || reactivating} loading={reactivating} />
       </div>
     );
