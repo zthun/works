@@ -1,9 +1,9 @@
-import React from 'react';
-import { ZPaperCard } from './paper-card';
-import { Typography, Button } from '@material-ui/core';
-import { ZCircularProgress } from './circular-progress';
-import { IZActionFormProps } from './action-form.props';
+import { Button } from '@material-ui/core';
 import { noop } from 'lodash';
+import React from 'react';
+import { IZActionFormProps } from './action-form.props';
+import { ZCircularProgress } from './circular-progress';
+import { ZPaperCard } from './paper-card';
 
 /**
  * An action form is similar to a summary card, but contains some content and an action button.

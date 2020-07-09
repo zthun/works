@@ -1,11 +1,9 @@
-import { Button, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import { noop } from 'lodash';
 import React from 'react';
-import { ZCircularProgress } from '../common/circular-progress';
-import { ZPaperCard } from '../common/paper-card';
-import { IZProfileDeactivationFormProps } from './profile-deactivation-form.props';
 import { ZActionForm } from '../common/action-form';
+import { IZProfileDeactivationFormProps } from './profile-deactivation-form.props';
 
 export function ZProfileDeactivationForm(props: IZProfileDeactivationFormProps) {
   function handleDeactivate() {

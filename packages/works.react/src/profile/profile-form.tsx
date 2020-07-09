@@ -1,13 +1,11 @@
-import { Button, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
-import { ZCircularProgress } from '../common/circular-progress';
-import { ZPaperCard } from '../common/paper-card';
-import { IZProfileFormProps } from './profile-form.props';
 import { ZActionForm } from '../common/action-form';
+import { IZProfileFormProps } from './profile-form.props';
 
 export function ZProfileForm(props: IZProfileFormProps) {
   const [admin] = useState(get(props, 'profile.super', false));
