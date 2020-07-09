@@ -28,7 +28,11 @@ export { ZLoginTabs } from './login/login-tabs';
 export { IZLoginTabsProps } from './login/login-tabs.props';
 // Profile
 export { ZProfileActivationForm } from './profile/profile-activation-form';
+export { IZProfileActivationFormProps } from './profile/profile-activation-form.props';
 export { ZProfileDeactivationForm } from './profile/profile-deactivation-form';
+export { IZProfileDeactivationFormProps } from './profile/profile-deactivation-form.props';
+export { ZProfileDeleteForm } from './profile/profile-delete-form';
+export { IZProfileDeleteFormProps } from './profile/profile-delete-form.props';
 export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
 export { ZProfileMenu } from './profile/profile-menu';

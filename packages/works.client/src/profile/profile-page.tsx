@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import { IZProfileActivation, ZProfileActivationBuilder, ZUrlBuilder } from '@zthun/works.core';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileActivationForm, ZProfileDeactivationForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
+import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileActivationForm, ZProfileDeactivationForm, ZProfileDeleteForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
 import Axios from 'axios';
 import { get } from 'lodash';
 import React, { useState } from 'react';
@@ -13,17 +13,27 @@ export function ZProfilePage() {
   const [deactivating, setDeactivating] = useState(false);
   const [reactivating, setReactivating] = useState(false);
   const [updating, setUpdating] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [activation, setActivation] = useState(new ZProfileActivationBuilder().email(get(loginState.profile, 'email', null)).build());
 
-  async function handleActivationChange<T>(successMsg: string, changeFn: (url: string) => Promise<T>) {
+  async function handleProfileRest<T>(url: string, successMsg: string, changeFn: (url: string) => Promise<T>) {
     try {
-      const url = new ZUrlBuilder().api().append('profiles').append('activations').build();
       await changeFn(url);
       alerts.add(new ZAlertBuilder().success().message(successMsg).build());
       loginState.refresh();
     } catch (err) {
       alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
     }
+  }
+
+  async function handleProfileChange<T>(successMsg: string, changeFn: (url: string) => Promise<T>) {
+    const url = new ZUrlBuilder().api().append('profiles').build();
+    return handleProfileRest(url, successMsg, changeFn);
+  }
+
+  async function handleActivationChange<T>(successMsg: string, changeFn: (url: string) => Promise<T>) {
+    const url = new ZUrlBuilder().api().append('profiles').append('activations').build();
+    return handleProfileRest(url, successMsg, changeFn);
   }
 
   async function handleActivation(value: IZProfileActivation) {
@@ -50,15 +60,25 @@ export function ZProfilePage() {
     setDeactivating(false);
   }
 
+  async function handleDelete() {
+    setDeleting(true);
+    setActivation(null);
+    await handleProfileChange('Account deleted.  You will need to create a new account.', (url) => Axios.delete(url));
+    setDeleting(false);
+  }
+
   function createProfileLoading() {
     return <ZCircularProgress className='ZProfilePage-progress-profile-loading' data-testid='ZProfilePage-progress-profile-loading' size='5em' />;
   }
 
   function createProfileActivatedForm() {
     return (
-      <div className='ZPaperCard-group'>
-        <ZProfileForm profile={loginState.profile} disabled={deactivating || updating} loading={updating} />
-        <ZProfileDeactivationForm disabled={deactivating || updating} loading={deactivating} onDeactivate={handleDeactivation} />
+      <div className='ZPaperCard-row'>
+        <ZProfileForm profile={loginState.profile} disabled={deleting || deactivating || updating} loading={updating} />
+        <div className='ZPaperCard-group'>
+          <ZProfileDeactivationForm disabled={deleting || deactivating || updating} loading={deactivating} onDeactivate={handleDeactivation} />
+          <ZProfileDeleteForm disabled={deleting || deactivating || updating} loading={deleting} onDelete={handleDelete} />
+        </div>
       </div>
     );
   }

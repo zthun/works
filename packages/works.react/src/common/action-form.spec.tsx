@@ -1,19 +1,22 @@
-import { fireEvent, render } from '@testing-library/react';
+import { Typography } from '@material-ui/core';
+import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { ZActionForm } from './action-form';
 
 describe('ZActionForm', () => {
   let loading: boolean;
   let disabled: boolean;
+  let confirmation: React.ReactNode;
   let onAction: jest.Mock;
 
   async function createTestTarget() {
-    return render(<ZActionForm headerText='ZActionForm Test' actionText='Run' data-testid='ZActionForm-test' loading={loading} disabled={disabled} onAction={onAction} />);
+    return render(<ZActionForm headerText='ZActionForm Test' actionText='Run' data-testid='ZActionForm-test' loading={loading} disabled={disabled} confirmation={confirmation} onAction={onAction} />);
   }
 
   beforeEach(() => {
     loading = false;
     disabled = false;
+    confirmation = null;
 
     onAction = jest.fn();
   });
@@ -26,7 +29,41 @@ describe('ZActionForm', () => {
       const form = target.getByTestId('ZActionForm-form');
       fireEvent.submit(form);
       // Assert
+      expect(onAction).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('Confirm Action', () => {
+    beforeEach(() => {
+      confirmation = <Typography>Confirm?</Typography>;
+    });
+
+    it('should raise the onAction event after the user clicks the Accept button.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      act(() => {
+        const form = target.getByTestId('ZActionForm-form');
+        fireEvent.submit(form);
+      });
+      const yes = target.getByTestId('ZActionForm-btn-yes');
+      fireEvent.submit(yes);
+      // Assert
       expect(onAction).toHaveBeenCalled();
+    });
+
+    it('should not raise the onAction event after the user clicks the Decline button.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      act(() => {
+        const form = target.getByTestId('ZActionForm-form');
+        fireEvent.submit(form);
+      });
+      const no = target.getByTestId('ZActionForm-btn-no');
+      fireEvent.click(no);
+      // Assert
+      expect(onAction).not.toHaveBeenCalled();
     });
   });
 

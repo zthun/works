@@ -236,5 +236,20 @@ describe('ZProfilePage', () => {
       // Assert
       expect(Axios.delete).toHaveBeenCalledWith(expect.stringContaining('profiles/activations'));
     });
+
+    it('deletes the user account.', async () => {
+      // Arrange
+      let target: RenderResult;
+      // Act
+      await act(async () => {
+        target = await createTestTarget();
+        const deleteBtn = target.getByText('Delete');
+        fireEvent.submit(deleteBtn);
+        const yesBtn = target.getByText('Yes');
+        fireEvent.submit(yesBtn);
+      });
+      // Assert
+      expect(Axios.delete).toHaveBeenCalledWith(expect.stringContaining('profiles'));
+    });
   });
 });

@@ -10,6 +10,10 @@ export interface IZActionFormProps {
   avatar: React.ReactNode;
   children: React.ReactNode | React.ReactNode[];
 
+  confirmation: React.ReactNode;
+  yesText: string;
+  noText: string;
+
   loading: boolean;
   disabled: boolean;
 
