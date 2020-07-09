@@ -98,13 +98,13 @@ describe('ZProfilePage', () => {
     }
 
     async function clickActivateButton(target: RenderResult) {
-      const activation = target.getByTestId('ZProfileActivationForm-btn-activate') as HTMLButtonElement;
+      const activation = target.getByText('Activate') as HTMLButtonElement;
       fireEvent.click(activation);
       await of(true).pipe(delay(0)).toPromise();
     }
 
     async function clickReactivateButton(target: RenderResult) {
-      const reactivate = target.getByTestId('ZProfileReactivationForm-btn-reactivate') as HTMLButtonElement;
+      const reactivate = target.getByText('Send') as HTMLButtonElement;
       fireEvent.click(reactivate);
       await of(true).pipe(delay(0)).toPromise();
     }
@@ -230,7 +230,7 @@ describe('ZProfilePage', () => {
       // Act
       await act(async () => {
         target = await createTestTarget();
-        const deactivateBtn = target.getByTestId('ZProfileDeactivationForm-btn-deactivate');
+        const deactivateBtn = target.getByText('Deactivate');
         fireEvent.click(deactivateBtn);
       });
       // Assert

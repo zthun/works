@@ -1,10 +1,9 @@
-import { Button, TextField, Typography } from '@material-ui/core';
+import { TextField, Typography } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import { ZProfileActivationBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
-import { ZCircularProgress } from '../common/circular-progress';
-import { ZPaperCard } from '../common/paper-card';
+import { ZActionForm } from '../common/action-form';
 import { IZProfileActivationFormProps } from './profile-activation-form.props';
 
 export function ZProfileActivationForm(props: IZProfileActivationFormProps) {
@@ -22,20 +21,26 @@ export function ZProfileActivationForm(props: IZProfileActivationFormProps) {
   }
 
   return (
-    <ZPaperCard className='ZProfileActivationForm-root' data-testid='ZProfileActivationForm-root' avatar={<PersonIcon className='ZProfileActivationForm-icon-user' fontSize='large' />} headerText={props.headerText} subHeaderText={props.subHeaderText}>
+    <ZActionForm
+      className='ZProfileActivationForm-root'
+      data-testid='ZProfileActivationForm-root'
+      avatar={<PersonIcon className='ZProfileActivationForm-icon-user' fontSize='large' />}
+      headerText={props.headerText}
+      subHeaderText={props.subHeaderText}
+      actionText={props.activateText}
+      onAction={handleActivate}
+      loading={props.loading}
+      disabled={props.disabled || !key}
+    >
       <Typography variant='body1' component='p'>
-        You must activate your account before you are allowed to perform any account related actions.
-      </Typography>
-
-      <Typography variant='body1' component='p'>
-        Check your email for an activation key and copy it here.
+        You must activate your account before you are allowed to perform any account related actions. Check your email for an activation key and copy it here.
       </Typography>
 
       <TextField
         className='ZProfileActivationForm-input-key'
         data-testid='ZProfileActivationForm-input-key'
         fullWidth={true}
-        disabled={props.disabled || props.loading}
+        disabled={props.disabled}
         label={props.keyText}
         type='text'
         margin='none'
@@ -43,12 +48,7 @@ export function ZProfileActivationForm(props: IZProfileActivationFormProps) {
         value={key}
         onInput={handleKeyInput}
       />
-
-      <Button className='ZProfileActivationForm-btn-activate' data-testid='ZProfileActivationForm-btn-activate' fullWidth={true} variant='contained' disabled={props.disabled || !key} color='primary' onClick={handleActivate}>
-        {props.activateText}
-        <ZCircularProgress className='ZProfileActivationForm-progress-loading' data-testid='ZProfileActivationForm-progress-loading' show={props.loading} />
-      </Button>
-    </ZPaperCard>
+    </ZActionForm>
   );
 }
 

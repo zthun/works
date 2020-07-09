@@ -7,12 +7,11 @@ import { ZProfileActivationForm } from './profile-activation-form';
 
 describe('ZProfileActivationForm', () => {
   let disabled: boolean;
-  let loading: boolean;
   let activation: IZProfileActivation;
   let onActivationChange: jest.Mock;
 
   async function createTestTarget() {
-    return render(<ZProfileActivationForm activation={activation} onActivationChange={onActivationChange} disabled={disabled} loading={loading} />);
+    return render(<ZProfileActivationForm activation={activation} onActivationChange={onActivationChange} disabled={disabled} />);
   }
 
   async function assertDisabled(testId: string, tag: keyof HTMLElementTagNameMap) {
@@ -28,7 +27,6 @@ describe('ZProfileActivationForm', () => {
 
   beforeEach(() => {
     disabled = false;
-    loading = false;
     activation = new ZProfileActivationBuilder().email('gambit@marvel.com').build();
     onActivationChange = jest.fn();
   });
@@ -53,7 +51,7 @@ describe('ZProfileActivationForm', () => {
         field.value = expected.key;
         fireEvent.input(field);
       });
-      const button = target.getByTestId('ZProfileActivationForm-btn-activate') as HTMLButtonElement;
+      const button = target.getByTestId('ZActionForm-btn-action') as HTMLButtonElement;
       fireEvent.click(button);
       // Assert
       expect(onActivationChange).toHaveBeenCalledWith(expect.objectContaining(expected));
@@ -70,7 +68,7 @@ describe('ZProfileActivationForm', () => {
         field.value = expected.key;
         fireEvent.input(field);
       });
-      const button = target.getByTestId('ZProfileActivationForm-btn-activate') as HTMLButtonElement;
+      const button = target.getByTestId('ZActionForm-btn-action') as HTMLButtonElement;
       fireEvent.click(button);
       // Assert
       expect(onActivationChange).toHaveBeenCalledWith(expect.objectContaining(expected));
@@ -80,7 +78,7 @@ describe('ZProfileActivationForm', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const button = target.getByTestId('ZProfileActivationForm-btn-activate') as HTMLButtonElement;
+      const button = target.getByTestId('ZActionForm-btn-action') as HTMLButtonElement;
       // Assert
       expect(button.disabled).toBeTruthy();
     });
@@ -94,7 +92,7 @@ describe('ZProfileActivationForm', () => {
         fireEvent.input(field);
       });
       // Act
-      const button = target.getByTestId('ZProfileActivationForm-btn-activate') as HTMLButtonElement;
+      const button = target.getByTestId('ZActionForm-btn-action') as HTMLButtonElement;
       // Assert
       expect(button.disabled).toBeFalsy();
     });
@@ -105,37 +103,8 @@ describe('ZProfileActivationForm', () => {
       disabled = true;
     });
 
-    it('should disable the activate button.', () => {
-      assertDisabled('ZProfileActivationForm-btn-activate', null);
-    });
-
     it('should disable the key input.', () => {
       assertDisabled('ZProfileActivationForm-input-key', 'input');
-    });
-  });
-
-  describe('Loading', () => {
-    beforeEach(() => {
-      loading = true;
-    });
-
-    it('shows the loading indicator.', async () => {
-      // Arrange
-      const target = await createTestTarget();
-      // Act
-      const actual = target.getByTestId('ZProfileActivationForm-progress-loading');
-      // Assert
-      expect(actual).toBeTruthy();
-    });
-
-    it('does not show the indicator if loading is false.', async () => {
-      // Arrange
-      loading = false;
-      const target = await createTestTarget();
-      // Act
-      const actual = target.queryByTestId('ZProfileActivationForm-progress-loading');
-      // Assert
-      expect(actual).toBeFalsy();
     });
   });
 });

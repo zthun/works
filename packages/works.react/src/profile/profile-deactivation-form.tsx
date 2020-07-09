@@ -5,6 +5,7 @@ import React from 'react';
 import { ZCircularProgress } from '../common/circular-progress';
 import { ZPaperCard } from '../common/paper-card';
 import { IZProfileDeactivationFormProps } from './profile-deactivation-form.props';
+import { ZActionForm } from '../common/action-form';
 
 export function ZProfileDeactivationForm(props: IZProfileDeactivationFormProps) {
   function handleDeactivate() {
@@ -12,16 +13,22 @@ export function ZProfileDeactivationForm(props: IZProfileDeactivationFormProps) 
   }
 
   return (
-    <ZPaperCard className='ZProfileDeactivationForm-root' data-testid='ZProfileDeactivationForm-root' headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={<PauseCircleOutlineIcon fontSize='large' />}>
+    <ZActionForm
+      className='ZProfileDeactivationForm-root'
+      data-testid='ZProfileDeactivationForm-root'
+      headerText={props.headerText}
+      subHeaderText={props.subHeaderText}
+      avatar={<PauseCircleOutlineIcon fontSize='large' />}
+      loading={props.loading}
+      disabled={props.disabled}
+      actionColor='secondary'
+      onAction={handleDeactivate}
+      actionText={props.deactivateText}
+    >
       <Typography variant='body1' component='p'>
         {props.warningText}
       </Typography>
-
-      <Button className='ZProfileDeactivationForm-btn-deactivate' data-testid='ZProfileDeactivationForm-btn-deactivate' fullWidth={true} variant='outlined' disabled={props.disabled} color='secondary' onClick={handleDeactivate}>
-        {props.deactivateText}
-        <ZCircularProgress className='ZProfileDeactivationForm-progress-loading' data-testid='ZProfileDeactivationForm-progress-loading' show={props.loading} />
-      </Button>
-    </ZPaperCard>
+    </ZActionForm>
   );
 }
 
@@ -30,6 +37,9 @@ ZProfileDeactivationForm.defaultProps = {
   subHeaderText: 'Turn off access for awhile',
   warningText: 'This will deactivate your account.  If you wish to reactivate your account, you will need to send yourself another activation key.',
   deactivateText: 'Deactivate',
+
+  loading: false,
+  disabled: false,
 
   onDeactivate: noop
 };

@@ -13,6 +13,7 @@ export { ZCircularProgress } from './common/circular-progress';
 export { IZCircularProgressProps } from './common/circular-progress.props';
 export { ZPaperCard } from './common/paper-card';
 export { IZPaperCardProps } from './common/paper-card.props';
+export { ZSummaryCard } from './common/summary-card';
 export { useMenuState } from './common/use-menu-state.hook';
 export { useWatchableState } from './common/use-watchable-state.hook';
 // Login
@@ -25,8 +26,6 @@ export { IZLoginState } from './login/login-state.interface';
 export { ZLoginTab } from './login/login-tab.enum';
 export { ZLoginTabs } from './login/login-tabs';
 export { IZLoginTabsProps } from './login/login-tabs.props';
-// Media
-export { ZSummaryCard } from './media/summary-card';
 // Profile
 export { ZProfileActivationForm } from './profile/profile-activation-form';
 export { ZProfileDeactivationForm } from './profile/profile-deactivation-form';
