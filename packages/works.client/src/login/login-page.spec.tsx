@@ -82,7 +82,7 @@ describe('ZLoginPage', () => {
     });
 
     function getActionButton(index: number, target: RenderResult) {
-      return target.getAllByTestId('ZLoginCredentialsForm-btn-action')[index];
+      return target.getAllByTestId('ZActionForm-btn-action')[index];
     }
 
     const getLoginActionButton = getActionButton.bind(null, 0);
@@ -96,7 +96,7 @@ describe('ZLoginPage', () => {
           target = await createTestTarget();
         });
         // Act
-        fireEvent.click(getLoginActionButton(target));
+        fireEvent.submit(getLoginActionButton(target));
         // Assert
         expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('tokens'), expect.anything());
       });
@@ -108,7 +108,7 @@ describe('ZLoginPage', () => {
           target = await createTestTarget();
         });
         // Act
-        fireEvent.click(getLoginActionButton(target));
+        fireEvent.submit(getLoginActionButton(target));
         await of(true).pipe(delay(0)).toPromise();
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Success);
@@ -122,7 +122,7 @@ describe('ZLoginPage', () => {
           target = await createTestTarget();
         });
         // Act
-        fireEvent.click(getLoginActionButton(target));
+        fireEvent.submit(getLoginActionButton(target));
         await of(true).pipe(delay(0)).toPromise();
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
@@ -137,7 +137,7 @@ describe('ZLoginPage', () => {
           target = await createTestTarget();
         });
         // Act
-        fireEvent.click(getCreateActionButton(target));
+        fireEvent.submit(getCreateActionButton(target));
         // Assert
         expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles'), expect.anything());
       });
@@ -149,7 +149,7 @@ describe('ZLoginPage', () => {
           target = await createTestTarget();
         });
         // Act
-        fireEvent.click(getCreateActionButton(target));
+        fireEvent.submit(getCreateActionButton(target));
         await of(true).pipe(delay(0)).toPromise();
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Success);
@@ -163,7 +163,7 @@ describe('ZLoginPage', () => {
           target = await createTestTarget();
         });
         // Act
-        fireEvent.click(getCreateActionButton(target));
+        fireEvent.submit(getCreateActionButton(target));
         await of(true).pipe(delay(0)).toPromise();
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);

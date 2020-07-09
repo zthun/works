@@ -29,8 +29,7 @@ describe('ZLoginCredentialsForm', () => {
   const getEmailField: (target: RenderResult) => HTMLInputElement = getInputField.bind(null, 'ZLoginCredentialsForm-input-email');
   const getPasswordField: (target: RenderResult) => HTMLInputElement = getInputField.bind(null, 'ZLoginCredentialsForm-input-password');
   const getConfirmField: (target: RenderResult) => HTMLInputElement = getInputField.bind(null, 'ZLoginCredentialsForm-input-confirm');
-  const getActionButton: (target: RenderResult) => HTMLButtonElement = getButtonField.bind(null, 'ZLoginCredentialsForm-btn-action');
-  const getLoadingIcon: (target: RenderResult) => HTMLSpanElement = getElement.bind(null, 'ZLoginCredentialsForm-icon-progress');
+  const getActionButton: (target: RenderResult) => HTMLButtonElement = getButtonField.bind(null, 'ZActionForm-btn-action');
 
   it('renders the default form.', () => {
     // Arrange
@@ -117,7 +116,7 @@ describe('ZLoginCredentialsForm', () => {
       confirmField.value = credentials.confirm;
       fireEvent.input(confirmField, { target: confirmField });
       // Act
-      fireEvent.click(actionButton);
+      fireEvent.submit(actionButton);
       // Assert
       expect(expected).toHaveBeenCalledWith(expect.objectContaining(credentials));
     });
@@ -135,7 +134,7 @@ describe('ZLoginCredentialsForm', () => {
       passwordField.value = credentials.password;
       fireEvent.input(passwordField, { target: passwordField });
       // Act
-      fireEvent.click(actionButton);
+      fireEvent.submit(actionButton);
       // Assert
       expect(expected).toHaveBeenCalledWith(expect.objectContaining(confirmed));
     });
@@ -203,24 +202,6 @@ describe('ZLoginCredentialsForm', () => {
       const actual = getConfirmField(target);
       // Assert
       expect(actual.disabled).toBeTruthy();
-    });
-
-    it('hides the loading icon if the loading flag is false.', () => {
-      // Arrange
-      const target = render(<ZLoginCredentialsForm loading={false} />);
-      // Act
-      const actual = getLoadingIcon(target);
-      // Assert
-      expect(actual).toBeFalsy();
-    });
-
-    it('shows the loading icon if the loading flag is true.', () => {
-      // Arrange
-      const target = render(<ZLoginCredentialsForm loading={true} />);
-      // Act
-      const actual = getLoadingIcon(target);
-      // Assert
-      expect(actual).toBeTruthy();
     });
   });
 });

@@ -60,7 +60,7 @@ describe('ZProfileMenu', () => {
     });
   });
 
-  describe('Authenticted', () => {
+  describe('Authenticated', () => {
     it('renders the profile button.', async () => {
       // Arrange
       const target = await createTestTarget();

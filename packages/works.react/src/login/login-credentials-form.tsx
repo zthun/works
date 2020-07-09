@@ -1,13 +1,14 @@
-import { Button, Card, CardContent, CardHeader, CircularProgress, Paper, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { ZLoginBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
+import { ZActionForm } from '../common/action-form';
 import { IZLoginCredentialsFormProps } from './login-credentials-form.props';
 
 /**
  * Represents a credentials form that allows you to modify an IZLogin object.
  *
- * @param props The propertis for the component.
+ * @param props The properties for the component.
  */
 export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
   const [email, setEmail] = useState(get(props, 'credentials.email', ''));
@@ -85,29 +86,22 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       />
     );
 
-  const loadingProgress = !props.loading ? null : <CircularProgress className='ZLoginCredentialsForm-icon-progress' data-testid='ZLoginCredentialsForm-icon-progress' color='inherit' size='1em' />;
-
-  const actionButton = (
-    <Button className='ZLoginCredentialsForm-btn-action' data-testid='ZLoginCredentialsForm-btn-action' fullWidth={true} variant='contained' color='primary' disabled={props.disabled} onClick={handleAction}>
-      <span>{props.actionText}</span>
-      {loadingProgress}
-    </Button>
-  );
-
   return (
-    <Paper className='ZLoginCredentialsForm-root' data-testid='ZLoginCredentialsForm-root' elevation={5}>
-      <Card>
-        <CardHeader className='ZLoginCredentialsForm-header' data-testid='ZLoginCredentialsForm-header' title={<h3>{props.headerText}</h3>} subheader={props.subHeaderText} />
-        <CardContent>
-          <form noValidate={true} autoComplete='off'>
-            {emailTextField}
-            {passwordTextField}
-            {confirmTextField}
-            {actionButton}
-          </form>
-        </CardContent>
-      </Card>
-    </Paper>
+    <ZActionForm
+      className='ZLoginCredentialsForm-root'
+      data-testid='ZLoginCredentialsForm-root'
+      disabled={props.disabled}
+      loading={props.loading}
+      headerText={props.headerText}
+      subHeaderText={props.subHeaderText}
+      actionText={props.actionText}
+      avatar={props.avatar}
+      onAction={handleAction}
+    >
+      {emailTextField}
+      {passwordTextField}
+      {confirmTextField}
+    </ZActionForm>
   );
 }
 
@@ -122,6 +116,7 @@ ZLoginCredentialsForm.defaultProps = {
   actionText: 'Create',
   loading: false,
   disabled: false,
+  avatar: null,
 
   hideEmail: false,
   hidePassword: false,

@@ -46,6 +46,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
           headerText='Login'
           subHeaderText='Enter your credentials'
           actionText='Login'
+          avatar={<LockOpenIcon fontSize='large' />}
           loading={props.loading}
           disabled={props.disabled}
           hideConfirm={true}
@@ -59,6 +60,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
           headerText='Create Account'
           subHeaderText='Enter new account information'
           actionText='Create account'
+          avatar={<PersonAddIcon fontSize='large' />}
           loading={props.loading}
           disabled={props.disabled}
           credentials={props.createCredentials}
@@ -71,6 +73,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
           headerText='Recover Account'
           subHeaderText='Get back into your account'
           actionText='Request password reset'
+          avatar={<HelpOutlineIcon fontSize='large' />}
           loading={props.loading}
           disabled={props.disabled}
           hidePassword={true}

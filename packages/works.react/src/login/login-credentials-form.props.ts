@@ -95,6 +95,13 @@ export interface IZLoginCredentialsFormProps {
   credentials: IZLogin;
 
   /**
+   * The avatar for the form.
+   *
+   * @default null
+   */
+  avatar: React.ReactNode;
+
+  /**
    * Occurs when the user clicks the action button to confirm the credentials object.
    *
    * @default noop
