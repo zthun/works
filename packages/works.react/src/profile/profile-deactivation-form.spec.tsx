@@ -18,8 +18,8 @@ describe('ZProfileDeactivationForm', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const btn = target.getByTestId('ZActionForm-btn-action') as HTMLButtonElement;
-      fireEvent.click(btn);
+      const form = target.getByTestId('ZActionForm-form');
+      fireEvent.submit(form);
       // Assert
       expect(onDeactivate).toHaveBeenCalled();
     });

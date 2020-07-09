@@ -20,7 +20,7 @@ export function ZSummaryCard(props: IZSummaryCardProps) {
           <Typography variant='body1'>{props.children}</Typography>
         </CardContent>
         <CardActions className='ZSummaryCard-actions' data-testid='ZSummaryCard-actions'>
-          <Button className='ZSummaryCard-btn-learn' data-testid='ZSummaryCard-btn-learn' variant='contained' color='primary' onClick={handleLearnMore}>
+          <Button className='ZSummaryCard-btn-learn' data-testid='ZSummaryCard-btn-learn' variant='outlined' color='primary' onClick={handleLearnMore}>
             {props.learnMoreText}
           </Button>
         </CardActions>

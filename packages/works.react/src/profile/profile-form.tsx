@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { ZCircularProgress } from '../common/circular-progress';
 import { ZPaperCard } from '../common/paper-card';
 import { IZProfileFormProps } from './profile-form.props';
+import { ZActionForm } from '../common/action-form';
 
 export function ZProfileForm(props: IZProfileFormProps) {
   const [admin] = useState(get(props, 'profile.super', false));
@@ -31,7 +32,7 @@ export function ZProfileForm(props: IZProfileFormProps) {
     setConfirm(event.target.value);
   }
 
-  function handleAction() {
+  function handleSave() {
     const profile = new ZProfileBuilder().email(email).display(display).password(password).confirm(confirm);
     props.onProfileChange(profile.build());
   }
@@ -85,17 +86,20 @@ export function ZProfileForm(props: IZProfileFormProps) {
   const avatar = createAvatar();
 
   return (
-    <ZPaperCard className='ZProfileForm-root' data-testid='ZProfileForm-root' avatar={avatar} headerText={props.headerText} subHeaderText={props.subHeaderText}>
-      <form noValidate={true} autoComplete='off'>
-        {accountInformation}
-        {updatePassword}
-
-        <Button className='ZProfileForm-btn-action' data-testid='ZProfileForm-btn-action' fullWidth={true} variant='contained' color='primary' disabled={props.disabled} onClick={handleAction}>
-          <span>{props.actionText}</span>
-          <ZCircularProgress className='ZProfileForm-progress-loading ml-sm' data-testid='ZProfileForm-progress-loading ' show={props.loading} />
-        </Button>
-      </form>
-    </ZPaperCard>
+    <ZActionForm
+      className='ZProfileForm-root'
+      data-testid='ZProfileForm-root'
+      avatar={avatar}
+      headerText={props.headerText}
+      subHeaderText={props.subHeaderText}
+      loading={props.loading}
+      disabled={props.disabled}
+      actionText={props.saveText}
+      onAction={handleSave}
+    >
+      {accountInformation}
+      {updatePassword}
+    </ZActionForm>
   );
 }
 
@@ -105,7 +109,7 @@ ZProfileForm.defaultProps = {
 
   headerText: 'Profile',
   subHeaderText: 'Update your information',
-  actionText: 'Save',
+  saveText: 'Save',
   accountInformationHeaderText: 'Account Information',
   passwordHeaderText: 'Update Password',
 

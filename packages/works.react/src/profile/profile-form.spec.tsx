@@ -9,11 +9,10 @@ describe('ZProfileForm', () => {
   let hideAccountInformation: boolean;
   let hidePassword: boolean;
   let disabled: boolean;
-  let loading: boolean;
   let profile: IZProfile;
 
   async function createTestTarget() {
-    return render(<ZProfileForm profile={profile} onProfileChange={onProfileChange} loading={loading} disabled={disabled} hideAccountInformation={hideAccountInformation} hidePassword={hidePassword} />);
+    return render(<ZProfileForm profile={profile} onProfileChange={onProfileChange} disabled={disabled} hideAccountInformation={hideAccountInformation} hidePassword={hidePassword} />);
   }
 
   function getField(rend: RenderResult, id: string) {
@@ -28,39 +27,16 @@ describe('ZProfileForm', () => {
   }
 
   function clickAction(rend: RenderResult) {
-    const action = rend.getByTestId('ZProfileForm-btn-action') as HTMLButtonElement;
-    fireEvent.click(action);
+    const action = rend.getByTestId('ZActionForm-form');
+    fireEvent.submit(action);
   }
 
   beforeEach(() => {
     hideAccountInformation = false;
     hidePassword = false;
-    loading = false;
     disabled = false;
     profile = new ZProfileBuilder().email('gambit@marvel.com').build();
     onProfileChange = jest.fn();
-  });
-
-  describe('Loading', () => {
-    it('should not show the spinner if the loading flag is false.', async () => {
-      // Arrange
-      loading = false;
-      const target = await createTestTarget();
-      // Act
-      const actual = target.queryByTestId('ZProfileForm-progress-loading');
-      // Assert
-      expect(actual).toBeFalsy();
-    });
-
-    it('should show the spinner if the loading flag is true.', async () => {
-      // Arrange
-      loading = true;
-      const target = await createTestTarget();
-      // Act
-      const actual = target.getByTestId('ZProfileForm-progress-loading');
-      // Assert
-      expect(actual).toBeTruthy();
-    });
   });
 
   describe('Disabled', () => {
@@ -91,15 +67,6 @@ describe('ZProfileForm', () => {
 
     it('should disable the confirm field.', async () => {
       await assertDisablesField('ZProfileForm-input-confirm');
-    });
-
-    it('should disable the action button.', async () => {
-      // Arrange
-      const target = await createTestTarget();
-      // Act
-      const btn = target.getByTestId('ZProfileForm-btn-action') as HTMLButtonElement;
-      // Assert
-      expect(btn.disabled).toBeTruthy();
     });
   });
 
@@ -163,7 +130,7 @@ describe('ZProfileForm', () => {
     });
   });
 
-  describe('Action', () => {
+  describe('Save', () => {
     it('should fire the profileChange method with the updated profile.', async () => {
       // Arrange
       const target = await createTestTarget();

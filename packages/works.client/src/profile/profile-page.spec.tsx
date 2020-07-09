@@ -98,14 +98,14 @@ describe('ZProfilePage', () => {
     }
 
     async function clickActivateButton(target: RenderResult) {
-      const activation = target.getByText('Activate') as HTMLButtonElement;
-      fireEvent.click(activation);
+      const activation = target.getByText('Activate');
+      fireEvent.submit(activation);
       await of(true).pipe(delay(0)).toPromise();
     }
 
     async function clickReactivateButton(target: RenderResult) {
-      const reactivate = target.getByText('Send') as HTMLButtonElement;
-      fireEvent.click(reactivate);
+      const reactivate = target.getByText('Send');
+      fireEvent.submit(reactivate);
       await of(true).pipe(delay(0)).toPromise();
     }
 
@@ -231,7 +231,7 @@ describe('ZProfilePage', () => {
       await act(async () => {
         target = await createTestTarget();
         const deactivateBtn = target.getByText('Deactivate');
-        fireEvent.click(deactivateBtn);
+        fireEvent.submit(deactivateBtn);
       });
       // Assert
       expect(Axios.delete).toHaveBeenCalledWith(expect.stringContaining('profiles/activations'));

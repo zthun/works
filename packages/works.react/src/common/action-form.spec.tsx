@@ -23,8 +23,8 @@ describe('ZActionForm', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const btn = target.getByTestId('ZActionForm-btn-action');
-      fireEvent.click(btn);
+      const form = target.getByTestId('ZActionForm-form');
+      fireEvent.submit(form);
       // Assert
       expect(onAction).toHaveBeenCalled();
     });

@@ -18,8 +18,8 @@ describe('ZProfileActivationForm', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const field = target.getByTestId('ZActionForm-btn-action');
-      fireEvent.click(field);
+      const form = target.getByTestId('ZActionForm-form');
+      fireEvent.submit(form);
       // Assert
       expect(onReactivate).toHaveBeenCalled();
     });

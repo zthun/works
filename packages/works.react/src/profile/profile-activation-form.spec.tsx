@@ -51,8 +51,8 @@ describe('ZProfileActivationForm', () => {
         field.value = expected.key;
         fireEvent.input(field);
       });
-      const button = target.getByTestId('ZActionForm-btn-action') as HTMLButtonElement;
-      fireEvent.click(button);
+      const button = target.getByTestId('ZActionForm-form');
+      fireEvent.submit(button);
       // Assert
       expect(onActivationChange).toHaveBeenCalledWith(expect.objectContaining(expected));
     });
@@ -68,8 +68,8 @@ describe('ZProfileActivationForm', () => {
         field.value = expected.key;
         fireEvent.input(field);
       });
-      const button = target.getByTestId('ZActionForm-btn-action') as HTMLButtonElement;
-      fireEvent.click(button);
+      const button = target.getByTestId('ZActionForm-form');
+      fireEvent.submit(button);
       // Assert
       expect(onActivationChange).toHaveBeenCalledWith(expect.objectContaining(expected));
     });

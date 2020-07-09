@@ -15,12 +15,14 @@ export function ZActionForm(props: IZActionFormProps) {
 
   return (
     <ZPaperCard className={`${props.className} ZActionForm-root`} data-testid={props['data-testid']} headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={props.avatar}>
-      {props.children}
+      <form data-testid='ZActionForm-form' noValidate={true} autoComplete='off' onSubmit={handleAction}>
+        {props.children}
 
-      <Button className='ZActionForm-btn-action' data-testid='ZActionForm-btn-action' fullWidth={true} variant='outlined' disabled={props.disabled} color={props.actionColor} onClick={handleAction}>
-        {props.actionText}
-        <ZCircularProgress className='ZActionForm-progress-loading' data-testid='ZActionForm-progress-loading' show={props.loading} />
-      </Button>
+        <Button className='ZActionForm-btn-action' data-testid='ZActionForm-btn-action' fullWidth={true} variant='outlined' type='submit' disabled={props.disabled} color={props.actionColor}>
+          {props.actionText}
+          <ZCircularProgress className='ZActionForm-progress-loading' data-testid='ZActionForm-progress-loading' show={props.loading} />
+        </Button>
+      </form>
     </ZPaperCard>
   );
 }

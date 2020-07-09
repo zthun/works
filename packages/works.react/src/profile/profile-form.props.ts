@@ -6,7 +6,7 @@ export interface IZProfileFormProps {
 
   headerText: string;
   subHeaderText: string;
-  actionText: string;
+  saveText: string;
   accountInformationHeaderText: string;
   passwordHeaderText: string;
 
