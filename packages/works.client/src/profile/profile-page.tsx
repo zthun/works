@@ -1,5 +1,5 @@
 import { Grid } from '@material-ui/core';
-import { IZProfileActivation, ZProfileActivationBuilder, ZUrlBuilder } from '@zthun/works.core';
+import { IZProfileActivation, ZProfileActivationBuilder, ZUrlBuilder, IZProfile } from '@zthun/works.core';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileActivationForm, ZProfileDeactivationForm, ZProfileDeleteForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
 import Axios from 'axios';
 import { get } from 'lodash';
@@ -67,6 +67,12 @@ export function ZProfilePage() {
     setDeleting(false);
   }
 
+  async function handleSave(changes: IZProfile) {
+    setUpdating(true);
+    await handleProfileChange('Account updated.', (url) => Axios.put(url, changes));
+    setUpdating(false);
+  }
+
   function createProfileLoading() {
     return <ZCircularProgress className='ZProfilePage-progress-profile-loading' data-testid='ZProfilePage-progress-profile-loading' size='5em' />;
   }
@@ -74,7 +80,7 @@ export function ZProfilePage() {
   function createProfileActivatedForm() {
     return (
       <div className='ZPaperCard-row'>
-        <ZProfileForm profile={loginState.profile} disabled={deleting || deactivating || updating} loading={updating} />
+        <ZProfileForm disabled={deleting || deactivating || updating} loading={updating} profile={loginState.profile} onProfileChange={handleSave} />
         <div className='ZPaperCard-group'>
           <ZProfileDeactivationForm disabled={deleting || deactivating || updating} loading={deactivating} onDeactivate={handleDeactivation} />
           <ZProfileDeleteForm disabled={deleting || deactivating || updating} loading={deleting} onDelete={handleDelete} />

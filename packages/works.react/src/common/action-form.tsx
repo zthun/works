@@ -1,6 +1,6 @@
 import { Button, Grid } from '@material-ui/core';
 import { noop } from 'lodash';
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { IZActionFormProps } from './action-form.props';
 import { ZCircularProgress } from './circular-progress';
 import { ZPaperCard } from './paper-card';
@@ -15,7 +15,8 @@ export function ZActionForm(props: IZActionFormProps) {
     setConfirming(false);
   }
 
-  function handleAction() {
+  function handleAction(event: FormEvent) {
+    event.preventDefault();
     if (confirming || !props.confirmation) {
       handleCancel();
       props.onAction();

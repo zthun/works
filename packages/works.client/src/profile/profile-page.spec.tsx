@@ -34,6 +34,11 @@ describe('ZProfilePage', () => {
     profile = undefined;
     state = new ZLoginStateStatic(profile);
     alerts = new ZAlertStack(1);
+
+    (Axios.get as jest.Mock).mockClear();
+    (Axios.put as jest.Mock).mockClear();
+    (Axios.post as jest.Mock).mockClear();
+    (Axios.delete as jest.Mock).mockClear();
   });
 
   it('renders the page', async () => {
@@ -250,6 +255,19 @@ describe('ZProfilePage', () => {
       });
       // Assert
       expect(Axios.delete).toHaveBeenCalledWith(expect.stringContaining('profiles'));
+    });
+
+    it('saves the updated profile.', async () => {
+      // Arrange
+      let target: RenderResult;
+      // Act
+      await act(async () => {
+        target = await createTestTarget();
+        const saveBtn = target.getByText('Save');
+        fireEvent.submit(saveBtn);
+      });
+      // Assert
+      expect(Axios.put).toHaveBeenCalledWith(expect.stringContaining('profiles'), expect.anything());
     });
   });
 });
