@@ -83,10 +83,10 @@ describe('ZProfilesService', () => {
     let current: IZUser;
 
     beforeEach(() => {
-      current = new ZUserBuilder().id(v4()).email('gambit@marvel.com').display('Gambit').active().password('not-very-secure').build();
-      profile = new ZProfileBuilder().user(current).build();
+      current = new ZUserBuilder().id(v4()).email('gambit@marvel.com').active().password('not-very-secure').build();
+      profile = new ZProfileBuilder().display('Gambit').build();
 
-      users.update.mockImplementation((id, prof) => Promise.resolve(new ZUserBuilder().id(id).email(prof.email).display(prof.display).build()));
+      users.update.mockImplementation((id, prof) => Promise.resolve(new ZUserBuilder().id(id).email(current.email).display(prof.display).active().password(current.password).build()));
     });
 
     it('updates the specified user with the given profile.', async () => {
@@ -96,6 +96,16 @@ describe('ZProfilesService', () => {
       await target.update(current, profile);
       // Assert
       expect(users.update).toHaveBeenCalledWith(current._id, profile);
+    });
+
+    it('sends the activation email if the user is deactivated.', async () => {
+      // Arrange
+      users.update.mockImplementation((id, prof) => Promise.resolve(new ZUserBuilder().id(id).email(current.email).display(prof.display).inactive(v4()).password(current.password).build()));
+      const target = createTestTarget();
+      // Act
+      await target.update(current, profile);
+      // Assert
+      expect(email.send).toHaveBeenCalledWith(expect.anything(), smtp.value);
     });
   });
 

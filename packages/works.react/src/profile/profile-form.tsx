@@ -1,4 +1,4 @@
-import { TextField } from '@material-ui/core';
+import { TextField, Typography } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { ZProfileBuilder } from '@zthun/works.core';
@@ -31,8 +31,16 @@ export function ZProfileForm(props: IZProfileFormProps) {
   }
 
   function handleSave() {
-    const profile = new ZProfileBuilder().email(email).display(display).password(password).confirm(confirm);
+    const currentEmail = get(props, 'profile.email', '');
+
+    let profile = new ZProfileBuilder().display(display || null);
+    profile = email && email.toLowerCase() !== currentEmail.toLowerCase() ? profile.email(email) : profile;
+    profile = password || confirm ? profile.password(password).confirm(confirm) : profile;
+
     props.onProfileChange(profile.build());
+
+    setPassword('');
+    setConfirm('');
   }
 
   function createTextField(name: string, label: string, type: string, val: string, handleInput: (e: any) => void) {

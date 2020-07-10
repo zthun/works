@@ -69,6 +69,7 @@ export function ZProfilePage() {
 
   async function handleSave(changes: IZProfile) {
     setUpdating(true);
+    setActivation(new ZProfileActivationBuilder().email(loginState.profile.email).build());
     await handleProfileChange('Account updated.', (url) => Axios.put(url, changes));
     setUpdating(false);
   }

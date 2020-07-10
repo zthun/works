@@ -21,6 +21,11 @@ export class ZProfilesService {
 
   public async update(current: IZUser, profile: IZProfile): Promise<IZProfile> {
     const user = await this._users.update(current._id, profile);
+
+    if (user.activator) {
+      await this.sendActivationEmail(user);
+    }
+
     return new ZProfileBuilder().user(user).build();
   }
 

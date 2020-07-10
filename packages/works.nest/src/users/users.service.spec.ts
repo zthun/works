@@ -164,6 +164,17 @@ describe('ZUsersRepositoryController', () => {
       expect(actual.email).toEqual(expected);
     });
 
+    it('deactivates the account if the email changes.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const profile: IZProfile = { email: 'gambit@marvel.com' };
+      // Act
+      await target.update(userA._id, profile);
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      // Assert
+      expect(actual.activator).toBeTruthy();
+    });
+
     it('updates the password.', async () => {
       // Arrange
       const target = createTestTarget();
