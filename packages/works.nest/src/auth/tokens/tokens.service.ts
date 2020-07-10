@@ -35,8 +35,9 @@ export class ZTokensService {
    * @returns A promise that, when resolved, has injected the cookie.
    */
   public async inject(res: Response, credentials: IZLogin) {
+    const oneDay = 86400000;
     const secret = await this._authConfig.jwt();
-    const tomorrow = new Date(Date.now() + 3600000);
+    const tomorrow = new Date(Date.now() + oneDay);
     const options = await this._cookieOptions(tomorrow);
     const { _id } = await this._users.findByEmail(credentials.email);
     const jwt = await this.sign({ user: _id }, secret.value);
@@ -57,7 +58,7 @@ export class ZTokensService {
       const payload: { user: string } = await this.verify(token, secret.value);
       const user = await this._users.findById(payload.user);
       return user;
-    } catch {
+    } catch (err) {
       return null;
     }
   }
