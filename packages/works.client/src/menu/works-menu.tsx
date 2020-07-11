@@ -1,7 +1,7 @@
-import { AppBar, Button, CircularProgress, Link, MenuItem, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, Link, MenuItem, Toolbar, Typography } from '@material-ui/core';
 import CloudIcon from '@material-ui/icons/Cloud';
 import { ZUrlBuilder } from '@zthun/works.core';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZProfileMenu, ZCircularProgress } from '@zthun/works.react';
+import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileMenu } from '@zthun/works.react';
 import Axios from 'axios';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
