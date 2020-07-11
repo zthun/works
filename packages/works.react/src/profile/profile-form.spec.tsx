@@ -35,7 +35,7 @@ describe('ZProfileForm', () => {
     hideAccountInformation = false;
     hidePassword = false;
     disabled = false;
-    profile = new ZProfileBuilder().email('gambit@marvel.com').build();
+    profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').build();
     onProfileChange = jest.fn();
   });
 
@@ -141,6 +141,73 @@ describe('ZProfileForm', () => {
         setField(target, 'ZProfileForm-input-email', expected.email);
         setField(target, 'ZProfileForm-input-password', expected.password);
         setField(target, 'ZProfileForm-input-confirm', expected.confirm);
+      });
+      clickAction(target);
+      // Assert
+      expect(onProfileChange).toHaveBeenCalledWith(expected);
+    });
+
+    it('should fire the profileChange method with a null display name if the display is empty.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      await act(async () => {
+        setField(target, 'ZProfileForm-input-display', '');
+      });
+      clickAction(target);
+      // Assert
+      expect(onProfileChange).toHaveBeenCalledWith(expect.objectContaining({ display: null }));
+    });
+
+    it('should fire the profileChange method without the password or confirm password fields if the password and confirm password fields are empty.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      const expected = new ZProfileBuilder().password('not-very-secure').autoConfirm().build();
+      // Act
+      await act(async () => {
+        setField(target, 'ZProfileForm-input-password', expected.password);
+        setField(target, 'ZProfileForm-input-confirm', expected.confirm);
+      });
+      clickAction(target);
+      // Assert
+      expect(onProfileChange).toHaveBeenCalledWith(expect.objectContaining({ password: expected.password, confirm: expected.confirm }));
+    });
+
+    it('should fire the profileChange method with the password and confirm fields set if the password is not empty.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      const password = 'not-very-secure';
+      // Act
+      await act(async () => {
+        setField(target, 'ZProfileForm-input-password', password);
+        setField(target, 'ZProfileForm-input-confirm', '');
+      });
+      clickAction(target);
+      // Assert
+      expect(onProfileChange).toHaveBeenCalledWith(expect.objectContaining({ password, confirm: '' }));
+    });
+
+    it('should fire the profileChange method with the password and confirm fields set if the confirm is not empty.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      const password = 'not-very-secure';
+      // Act
+      await act(async () => {
+        setField(target, 'ZProfileForm-input-password', '');
+        setField(target, 'ZProfileForm-input-confirm', password);
+      });
+      clickAction(target);
+      // Assert
+      expect(onProfileChange).toHaveBeenCalledWith(expect.objectContaining({ password: '', confirm: password }));
+    });
+    it('should file the profileChange method with an empty email if the email has not changed.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      const expected = new ZProfileBuilder().display(profile.display).build();
+      // Act
+      await act(async () => {
+        setField(target, 'ZProfileForm-input-display', expected.display);
+        setField(target, 'ZProfileForm-input-email', profile.email);
       });
       clickAction(target);
       // Assert
