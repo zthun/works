@@ -1,7 +1,7 @@
 import { AppBar, Button, CircularProgress, Link, MenuItem, Toolbar, Typography } from '@material-ui/core';
 import CloudIcon from '@material-ui/icons/Cloud';
 import { ZUrlBuilder } from '@zthun/works.core';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZProfileMenu } from '@zthun/works.react';
+import { useAlertStack, useLoginState, ZAlertBuilder, ZProfileMenu, ZCircularProgress } from '@zthun/works.react';
 import Axios from 'axios';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -10,6 +10,10 @@ export function ZthunworksMenu() {
   const alerts = useAlertStack();
   const hist = useHistory();
   const login = useLoginState();
+
+  function handleHome() {
+    hist.push('/home');
+  }
 
   function handleProfile() {
     hist.push('/profile');
@@ -37,7 +41,7 @@ export function ZthunworksMenu() {
     return (
       <Button color='inherit'>
         <CloudIcon className='ZthunworksMenu-icon' />
-        <Link className='ZthunworksMenu-home' color='inherit' href='#/home' variant='h5'>
+        <Link className='ZthunworksMenu-link-home' color='inherit' onClick={handleHome} variant='h5'>
           ZTHUNWORKS
         </Link>
       </Button>
@@ -46,7 +50,7 @@ export function ZthunworksMenu() {
 
   function createProfileMenu() {
     if (login.profile === undefined) {
-      return <CircularProgress className='ZthunworksMenu-progress-loading' data-testid='ZthunworksMenu-progress-loading' color='inherit' size='1em' />;
+      return <ZCircularProgress className='ZthunworksMenu-progress-loading' data-testid='ZthunworksMenu-progress-loading' />;
     }
 
     return (
