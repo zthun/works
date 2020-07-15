@@ -114,8 +114,7 @@ describe('ZProfilesService', () => {
 
     beforeEach(() => {
       current = new ZUserBuilder().id(v4()).email('gambit@marvel.com').display('Gambit').active().password('not-very-secure').build();
-
-      users.remove.mockImplementation((usr) => Promise.resolve(current));
+      users.remove.mockImplementation(() => Promise.resolve(current));
     });
 
     it('removes the specified user.', async () => {

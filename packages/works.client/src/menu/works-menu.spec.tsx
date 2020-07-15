@@ -29,7 +29,7 @@ describe('ZthunworksMenu', () => {
 
   beforeEach(() => {
     history = createMemoryHistory();
-    loginState = new ZLoginStateStatic(undefined);
+    loginState = new ZLoginStateStatic();
     alerts = new ZAlertStack();
 
     (Axios.delete as jest.Mock).mockClear();

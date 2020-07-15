@@ -6,7 +6,7 @@ import { get, noop } from 'lodash';
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-export function ZLoginPage() {
+export function ZLoginPage(): JSX.Element {
   const logged = useLoginState();
   const alerts = useAlertStack();
 
@@ -47,14 +47,15 @@ export function ZLoginPage() {
   }
 
   function createContent() {
-    switch (logged.profile) {
-      case undefined:
-        return createProgressLoading();
-      case null:
-        return createTabs();
-      default:
-        return createRedirect();
+    if (logged.profile) {
+      return createRedirect();
     }
+
+    if (logged.profile === null) {
+      return createTabs();
+    }
+
+    return createProgressLoading();
   }
 
   const content = createContent();

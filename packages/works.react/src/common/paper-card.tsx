@@ -8,7 +8,7 @@ import { IZPaperCardProps } from './paper-card.props';
  *
  * @param props The properties for the paper card.
  */
-export function ZPaperCard(props: IZPaperCardProps) {
+export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
   function createAction() {
     return (
       <div className='ZPaperCard-header-action'>

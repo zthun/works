@@ -1,5 +1,4 @@
-import { FilterQuery } from 'mongodb';
-import { IZDatabaseQuery, JoinCriteria, SortCriteria, SortDirection } from './database-query.interface';
+import { IZDatabaseQuery, JoinCriteria, SortCriteria, SortDirection, FilterQuery } from './database-query.interface';
 
 /**
  * Represents an implementation of the IZDatabaseQuery interface.
@@ -7,8 +6,8 @@ import { IZDatabaseQuery, JoinCriteria, SortCriteria, SortDirection } from './da
 export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
   private _filter: FilterQuery<any> = {};
   private _sort: SortCriteria = [];
-  private _page: number = 0;
-  private _size: number = Infinity;
+  private _page = 0;
+  private _size = Infinity;
   private _join: JoinCriteria = [];
 
   /**
@@ -16,7 +15,7 @@ export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
    *
    * @returns The current filter.
    */
-  public get $filter() {
+  public get $filter(): FilterQuery<any> {
     return this._filter;
   }
 
@@ -25,7 +24,7 @@ export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
    *
    * @returns The current sort.
    */
-  public get $sort() {
+  public get $sort(): SortCriteria {
     return this._sort;
   }
 
@@ -34,7 +33,7 @@ export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
    *
    * @returns The current page.
    */
-  public get $page() {
+  public get $page(): number {
     return this._page;
   }
 
@@ -43,7 +42,7 @@ export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
    *
    * @returns The current page size.
    */
-  public get $size() {
+  public get $size(): number {
     return this._size;
   }
 
@@ -52,14 +51,14 @@ export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
    *
    * @returns The current join.
    */
-  public get $join() {
+  public get $join(): JoinCriteria {
     return this._join;
   }
 
   /**
    * Initializes a new instance of this object.
    *
-   * @param _do The invokation action for the query.
+   * @param _do The invoke action for the query.
    */
   public constructor(private _do: (query: ZDatabaseQuery<R>) => Promise<R>) {}
 

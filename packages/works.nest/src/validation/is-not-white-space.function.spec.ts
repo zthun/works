@@ -44,5 +44,4 @@ describe('IsNotWhiteSpace', () => {
       assertValid(true, 'This should be valid.');
     });
   });
-
 });

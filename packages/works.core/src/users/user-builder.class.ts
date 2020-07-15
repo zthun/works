@@ -85,7 +85,7 @@ export class ZUserBuilder {
    *
    * @returns This object.
    */
-  public inactive(key: string, time: number = 3600000): this {
+  public inactive(key: string, time = 3600000): this {
     const exp = new Date().getTime() + time;
     this._user.activator = { key, exp };
     return this;

@@ -54,34 +54,63 @@ describe('ZDatabaseMongo', () => {
     }
 
     it('sets the options.', () => {
-      assertConnection(options, () => createTestTarget(), (t) => t.$options);
+      assertConnection(
+        options,
+        () => createTestTarget(),
+        (t) => t.$options
+      );
     });
     it('sets the correct database.', () => {
-      assertConnection(database, () => createTestTarget(), (t) => t.$database);
+      assertConnection(
+        database,
+        () => createTestTarget(),
+        (t) => t.$database
+      );
     });
 
     it('sets the correct host.', () => {
-      assertConnection(host, () => createTestTarget(), (t) => t.$host);
+      assertConnection(
+        host,
+        () => createTestTarget(),
+        (t) => t.$host
+      );
     });
 
     it('sets the correct port.', () => {
-      assertConnection(port, () => createTestTarget(), (t) => t.$port);
+      assertConnection(
+        port,
+        () => createTestTarget(),
+        (t) => t.$port
+      );
     });
 
     it('sets the correct protocol.', () => {
-      assertConnection(protocol, () => createTestTarget(), (t) => t.$protocol);
+      assertConnection(
+        protocol,
+        () => createTestTarget(),
+        (t) => t.$protocol
+      );
     });
 
     it('defaults the host.', () => {
-      assertDefault(() => ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().build()), (t) => t.$host);
+      assertDefault(
+        () => ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().build()),
+        (t) => t.$host
+      );
     });
 
     it('defaults the port.', () => {
-      assertDefault(() => ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().build()), (t) => t.$port);
+      assertDefault(
+        () => ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().build()),
+        (t) => t.$port
+      );
     });
 
     it('defaults the protocol.', () => {
-      assertDefault(() => ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().build()), (t) => t.$protocol);
+      assertDefault(
+        () => ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().build()),
+        (t) => t.$protocol
+      );
     });
   });
 
@@ -201,7 +230,10 @@ describe('ZDatabaseMongo', () => {
         // Arrange
         const target = await createPopulatedTarget();
         // Act
-        const actual = await target.read(parentsSource).filter({ name: { $eq: fred.name } }).run();
+        const actual = await target
+          .read(parentsSource)
+          .filter({ name: { $eq: fred.name } })
+          .run();
         // Assert
         expect(actual).toEqual([fred]);
       });
@@ -209,7 +241,7 @@ describe('ZDatabaseMongo', () => {
       it('sorts the data.', async () => {
         // Arrange
         const target = await createPopulatedTarget();
-        const expected = parents.sort((a, b) => (a.name < b.name ? -1 : (a.name > b.name ? 1 : 0)));
+        const expected = parents.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
         // Act
         const actual = await target.read(parentsSource).sort('name', SortAscending).run();
         // Assert
@@ -255,10 +287,7 @@ describe('ZDatabaseMongo', () => {
       it('joins the data.', async () => {
         // Arrange
         const target = await createPopulatedTarget();
-        const expected = [
-          Object.assign({}, bambam, { father: [barney], mother: [betty] }),
-          Object.assign({}, pebbles, { father: [fred], mother: [wilma] })
-        ];
+        const expected = [Object.assign({}, bambam, { father: [barney], mother: [betty] }), Object.assign({}, pebbles, { father: [fred], mother: [wilma] })];
         // Act
         const actual = await target.read(kidsSource).join(parentsSource, 'fatherId', '_id', 'father').join(parentsSource, 'motherId', '_id', 'mother').run();
         // Assert
@@ -287,7 +316,10 @@ describe('ZDatabaseMongo', () => {
         const target = await createPopulatedTarget();
         const expected = [Object.assign({}, fred, template), Object.assign({}, barney, template), wilma, betty];
         // Act
-        await target.update(parentsSource, template).filter({ name: { $in: ['Fred', 'Barney'] } }).run();
+        await target
+          .update(parentsSource, template)
+          .filter({ name: { $in: ['Fred', 'Barney'] } })
+          .run();
         const actual = await target.read(parentsSource).run();
         // Assert
         expect(actual).toEqual(expected);
@@ -328,7 +360,10 @@ describe('ZDatabaseMongo', () => {
         // Arrange
         const target = await createPopulatedTarget();
         // Act
-        await target.delete(parentsSource).filter({ _id: { $eq: barney._id } }).run();
+        await target
+          .delete(parentsSource)
+          .filter({ _id: { $eq: barney._id } })
+          .run();
         const actual = await target.read(parentsSource).run();
         // Act
         expect(actual).toEqual([fred, wilma, betty]);
@@ -338,7 +373,10 @@ describe('ZDatabaseMongo', () => {
         // Arrange
         const target = await createPopulatedTarget();
         // Act
-        await target.delete(parentsSource).filter({ _id: { $in: [fred._id, barney._id] } }).run();
+        await target
+          .delete(parentsSource)
+          .filter({ _id: { $in: [fred._id, barney._id] } })
+          .run();
         const actual = await target.read(parentsSource).run();
         // Act
         expect(actual).toEqual([wilma, betty]);

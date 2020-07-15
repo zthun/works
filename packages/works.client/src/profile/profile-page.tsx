@@ -108,14 +108,15 @@ export function ZProfilePage() {
   }
 
   function createContentFromProfile() {
-    switch (loginState.profile) {
-      case undefined:
-        return createProfileLoading();
-      case null:
-        return createProfileRedirect();
-      default:
-        return createProfileForm();
+    if (loginState.profile) {
+      return createProfileForm();
     }
+
+    if (loginState.profile === null) {
+      return createProfileRedirect();
+    }
+
+    return createProfileLoading();
   }
 
   const content = createContentFromProfile();

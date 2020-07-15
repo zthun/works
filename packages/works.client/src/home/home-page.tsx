@@ -7,7 +7,7 @@ export function ZHomePage() {
     <Grid container={true} spacing={3} className='ZHomePage-root' data-testid='ZHomePage-root' justify='center'>
       <Grid item={true}>
         <ZSummaryCard title='React Components' imageUrl='/images/svg/react.svg'>
-          Zthunworks' client is built in React and offers a library of components for those who want to use some of the functionality found here.
+          Zthunworks&apos; client is built in React and offers a library of components for those who want to use some of the functionality found here.
         </ZSummaryCard>
       </Grid>
       <Grid item={true}>

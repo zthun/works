@@ -36,9 +36,9 @@ export class ZLoginState implements IZLoginState {
    *
    * @returns A promise that, when resolved, has updated the profile.
    */
-  public async refresh() {
+  public async refresh(): Promise<IZProfile> {
     delete this.profile;
-    this.profileChange.next(undefined);
+    this.profileChange.next();
 
     try {
       this.profile = await this.refreshFn();

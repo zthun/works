@@ -18,12 +18,14 @@ export class ZLoginStateStatic implements IZLoginState {
    *
    * @param profile The profile that never changes.
    */
-  public constructor(public profile: IZProfile) {}
+  public constructor(public profile?: IZProfile) {}
 
   /**
-   * Returns a resolved promise with the giben profile.
+   * Returns a resolved promise with the given profile.
+   *
+   * @returns A resolved promise with the given profile.
    */
-  public refresh() {
+  public refresh(): Promise<IZProfile> {
     return Promise.resolve(this.profile);
   }
 }

@@ -90,18 +90,18 @@ export class ZUsersService {
   public async update(id: string, profile: IZProfile): Promise<IZUser> {
     const template: Partial<IZUser> = {};
 
-    if (profile.hasOwnProperty('email')) {
+    if (Object.prototype.hasOwnProperty.call(profile, 'email')) {
       // Changing the email will cause the account to inactivate.
       const temp = new ZUserBuilder().email(profile.email).inactive(v4()).build();
       template.activator = temp.activator;
       template.email = temp.email;
     }
 
-    if (profile.hasOwnProperty('password')) {
+    if (Object.prototype.hasOwnProperty.call(profile, 'password')) {
       template.password = await hash(profile.password, ZUsersService.BcryptRounds);
     }
 
-    if (profile.hasOwnProperty('display')) {
+    if (Object.prototype.hasOwnProperty.call(profile, 'display')) {
       template.display = profile.display;
     }
 

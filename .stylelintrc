@@ -1,0 +1,3 @@
+{
+  "extends": "@zthun/lint-janitor/lint/.stylelintrc"
+}

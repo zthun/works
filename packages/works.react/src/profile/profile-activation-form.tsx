@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { ZActionForm } from '../common/action-form';
 import { IZProfileActivationFormProps } from './profile-activation-form.props';
 
-export function ZProfileActivationForm(props: IZProfileActivationFormProps) {
+export function ZProfileActivationForm(props: IZProfileActivationFormProps): JSX.Element {
   const [key, setKey] = useState(get(props, 'activation.key') || '');
 
   function handleKeyInput(t: any) {

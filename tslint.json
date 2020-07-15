@@ -1,3 +1,0 @@
-{
-  "extends": ["@zthun/web-styles/lint/tslint.json", "tslint-react"]
-}

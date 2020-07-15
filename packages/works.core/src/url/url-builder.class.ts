@@ -116,7 +116,7 @@ export class ZUrlBuilder {
    * @returns This object.
    */
   public api(loc: Location = location, basePath = 'api'): this {
-    return this.location(location).hash('').path(basePath);
+    return this.location(loc).hash('').path(basePath);
   }
 
   /**

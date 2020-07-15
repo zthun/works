@@ -1,4 +1,4 @@
-import { TextField, Typography } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { ZProfileBuilder } from '@zthun/works.core';
@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { ZActionForm } from '../common/action-form';
 import { IZProfileFormProps } from './profile-form.props';
 
-export function ZProfileForm(props: IZProfileFormProps) {
+export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   const [admin] = useState(get(props, 'profile.super', false));
   const [email, setEmail] = useState(get(props, 'profile.email', ''));
   const [display, setDisplay] = useState(get(props, 'profile.display', ''));

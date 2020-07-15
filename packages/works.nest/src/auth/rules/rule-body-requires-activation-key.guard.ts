@@ -1,4 +1,4 @@
-import { CanActivate, ConflictException, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
+import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
 import { IZProfileActivation, ZAssert } from '@zthun/works.core';
 import { Request } from 'express';
 import { ZTokensService } from '../tokens/tokens.service';

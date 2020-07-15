@@ -6,7 +6,7 @@ import Axios from 'axios';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-export function ZthunworksMenu() {
+export function ZthunworksMenu(): JSX.Element {
   const alerts = useAlertStack();
   const hist = useHistory();
   const login = useLoginState();

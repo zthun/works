@@ -1,9 +1,0 @@
-{
-  "tsConfig": "./tslint.json",
-  "esFiles": ["packages/works.client/*.js"],
-  "tsFiles": ["packages/**/src/**/*.ts", "packages/**/src/**/*.tsx"],
-  "lessFiles": ["packages/themes/**/*.less"],
-  "htmlFiles": ["packages/**/src/**/*.html"],
-  "jsonFiles": ["*.json", "packages/**/*.json"],
-  "yamlFiles": ["./*.yml"]
-}
