@@ -26,6 +26,7 @@
     "@nestjs/common": "^7.0.7",
     "@nestjs/core": "^7.0.7",
     "@zthun/works.core": ">=0.0.0 <2.0.0",
+    "@zthun/works.dal": ">=0.0.0 <2.0.0",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
     "lodash": "^4.17.15",
@@ -37,7 +38,8 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
-    "@zthun/works.core": "link:../works.core"
+    "@zthun/works.core": "link:../works.core",
+    "@zthun/works.dal": "link:../works.dal"
   },
   "sideEffects": false
 }

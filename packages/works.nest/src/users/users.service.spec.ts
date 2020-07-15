@@ -1,4 +1,4 @@
-import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
+import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
 import { IZLogin, IZProfile, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { compare, hash } from 'bcryptjs';
 import { v4 } from 'uuid';
@@ -12,8 +12,13 @@ describe('ZUsersRepositoryController', () => {
   let loginA: IZLogin;
   let loginB: IZLogin;
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    await ZDatabaseMemory.start();
     dal = ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('user-controller-test').build());
+  });
+
+  afterAll(async () => {
+    await ZDatabaseMemory.kill();
   });
 
   beforeEach(async () => {

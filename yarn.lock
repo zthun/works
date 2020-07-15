@@ -1834,7 +1834,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/mongodb@^3.3.14":
+"@types/mongodb@^3.5.25":
   version "3.5.25"
   resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.5.25.tgz#ab187db04d79f8e3f15af236327dc9139d9d4736"
   integrity sha512-2H/Owt+pHCl9YmBOYnXc3VdnxejJEjVdH+QCWL5ZAfPehEn3evygKBX3/vKRv7aTwfNbUd0E5vjJdQklH/9a6w==
@@ -2194,16 +2194,6 @@
     mkdirp-promise "^5.0.1"
     mz "^2.5.0"
 
-"@zthun/dal@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@zthun/dal/-/dal-2.0.0.tgz#01715118b4ea2f023b684955312b9892a2b38367"
-  integrity sha512-YHu5sihUToFpDkTpuO6y3Re0kJyPfLqziFmgrN6aJ79QbwqP8iYA7sgew2Opq9Tfj0SxsAtDCg3JViUkF1HSaA==
-  dependencies:
-    "@types/mongodb" "^3.3.14"
-    mongodb "^3.4.1"
-    mongodb-memory-server "^6.2.0"
-    uuid "^3.3.2"
-
 "@zthun/web-styles@^7.1.1":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@zthun/web-styles/-/web-styles-7.1.1.tgz#8ca8ca0e895f847c2f875c6848fb8a29faa6c321"
@@ -2222,6 +2212,9 @@
     yargs "^14.0.0"
 
 "@zthun/works.core@link:packages/works.core":
+  version "1.0.0-5"
+
+"@zthun/works.dal@link:packages/works.dal":
   version "1.0.0-5"
 
 "@zthun/works.jest@link:./packages/works.jest":
@@ -8593,14 +8586,14 @@ mongodb-memory-server-core@6.6.1:
   optionalDependencies:
     mongodb "^3.5.4"
 
-mongodb-memory-server@^6.2.0:
+mongodb-memory-server@^6.6.1:
   version "6.6.1"
   resolved "https://registry.yarnpkg.com/mongodb-memory-server/-/mongodb-memory-server-6.6.1.tgz#e7bc7fb0910d2398572c22dac1d96ecb3636f189"
   integrity sha512-qnGpGE50snhS3IgKwiPlxnL5wFWPxWutqcCqlsbb68FKohaEIsvi/gMBqJbBLF2l2sQu4a4aJofuKFudSI38vQ==
   dependencies:
     mongodb-memory-server-core "6.6.1"
 
-mongodb@^3.4.1, mongodb@^3.5.4:
+mongodb@^3.5.4, mongodb@^3.5.9:
   version "3.5.9"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.5.9.tgz#799b72be8110b7e71a882bb7ce0d84d05429f772"
   integrity sha512-vXHBY1CsGYcEPoVWhwgxIBeWqP3dSu9RuRDsoLRPTITrcrgm1f0Ubu1xqF9ozMwv53agmEiZm0YGo+7WL3Nbug==

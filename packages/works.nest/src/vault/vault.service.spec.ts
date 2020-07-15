@@ -1,4 +1,4 @@
-import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/dal';
+import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
 import { ZVaultCollections } from './vault.collections';
 import { ZVaultService } from './vault.service';
@@ -12,8 +12,13 @@ describe('ZVaultService', () => {
     return new ZVaultService(dal);
   }
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    await ZDatabaseMemory.start();
     dal = ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('user-controller-test').build());
+  });
+
+  afterAll(async () => {
+    await ZDatabaseMemory.kill();
   });
 
   beforeEach(async () => {

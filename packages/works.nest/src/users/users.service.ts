@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IZDatabase } from '@zthun/dal';
+import { IZDatabase } from '@zthun/works.dal';
 import { IZLogin, IZProfile, IZUser, ZUserBuilder } from '@zthun/works.core';
 import { compare, hash } from 'bcryptjs';
 import { v4 } from 'uuid';

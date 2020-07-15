@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 
 import { Module } from '@nestjs/common';
-import { ZDatabaseMongo, ZDatabaseOptionsBuilder } from '@zthun/dal';
+import { ZDatabaseMongo, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
 import { env } from 'process';
 import { ZVaultService } from '../vault/vault.service';
 import { ZCommonConfigService } from './common-config.service';

@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IZDatabase } from '@zthun/dal';
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
+import { IZDatabase } from '@zthun/works.dal';
 import { ZVaultCollections } from './vault.collections';
 import { ZVaultDatabase } from './vault.database';
 

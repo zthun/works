@@ -8,7 +8,5 @@ module.exports = {
   transform: { '^.+\\.(ts|tsx)$': 'ts-jest' },
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
-  globalSetup: '../jest.setup.js',
-  globalTeardown: '../jest.teardown.js',
   coverageDirectory: '../reports/coverage'
 };
