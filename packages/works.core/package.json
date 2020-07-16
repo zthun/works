@@ -25,5 +25,6 @@
   "peerDependencies": {
     "url-parse": "^1.4.7"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
 }

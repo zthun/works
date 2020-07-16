@@ -38,8 +38,9 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
-    "@zthun/works.core": "link:../works.core",
-    "@zthun/works.dal": "link:../works.dal"
+    "@zthun/works.core": "^1.0.0-6",
+    "@zthun/works.dal": "^1.0.0-6"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
 }
