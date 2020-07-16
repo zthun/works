@@ -13,6 +13,8 @@
     "zworks-server": "./dist/main.js"
   },
   "scripts": {
+    "docker:publish": "echo docker-publish",
+    "docker:build": "npm pack && docker build . -t zthun/works.server:latest -t zthun/works.server:$(node -p \"require('./package.json').version\")",
     "build": "tsc -p tsconfig.prod.json",
     "debug": "nodemon",
     "start": "node ./dist/main.js"
@@ -23,6 +25,7 @@
     "@nestjs/platform-express": "^7.0.7",
     "@zthun/works.core": "^1.0.0-7",
     "@zthun/works.nest": "^1.0.0-7",
+    "@zthun/works.dal": "^1.0.0-7",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
@@ -30,6 +33,8 @@
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "mongodb": "^3.5.9",
+    "mongodb-memory-server": "^6.6.1",
     "nodemailer": "^6.4.10",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",

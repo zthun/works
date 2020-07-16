@@ -25,7 +25,9 @@
     "lint": "lint-janitor",
     "build": "lerna run build",
     "make": "yarn clean && yarn lint && yarn test && yarn build",
-    "release:containers": "echo containers",
+    "docker:publish": "lerna run docker:publish",
+    "docker:build": "lerna run docker:build",
+    "release:containers": "yarn docker:build && yarn docker:publish",
     "release:packages": "lerna publish && git push --tags && git push",
     "release": "yarn make && yarn release:packages && yarn release containers"
   },

@@ -8,6 +8,8 @@
     "url": "https://github.com/zthun/works"
   },
   "scripts": {
+    "docker:publish": "echo docker-publish",
+    "docker:build": "docker build . -t zthun/works.client:latest -t zthun/works.client:$(node -p \"require('./package.json').version\")",
     "build": "webpack --env.production && npm pack",
     "debug": "webpack-dev-server --env.development --host 0.0.0.0"
   },
