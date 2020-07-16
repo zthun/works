@@ -24,7 +24,10 @@
     "test": "jest --coverage --runInBand",
     "lint": "lint-janitor",
     "build": "lerna run build",
-    "make": "yarn clean && yarn lint && yarn test && yarn build"
+    "make": "yarn clean && yarn lint && yarn test && yarn build",
+    "release:containers": "echo containers",
+    "release:packages": "yarn make && lerna publish && git push --tags && git push",
+    "release": "yarn release:packages && yarn release containers"
   },
   "devDependencies": {
     "@material-ui/core": "^4.3.3",
