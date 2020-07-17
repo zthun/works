@@ -29,8 +29,8 @@
     "docker:build": "lerna run docker:build",
     "release:containers": "yarn docker:build && yarn docker:publish",
     "release:packages": "lerna publish from-package",
-    "release:bump": "lerna version && git push --tags && git push",
-    "release": "yarn release:bump && yarn make && yarn release:packages && yarn release containers"
+    "release:bump": "lerna version",
+    "release": "yarn release:bump && yarn make && yarn release:packages && yarn release:containers"
   },
   "devDependencies": {
     "@material-ui/core": "^4.3.3",
