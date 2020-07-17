@@ -13,7 +13,7 @@
     "zworks-server": "./dist/main.js"
   },
   "scripts": {
-    "docker:publish": "echo docker-publish",
+    "docker:publish": "docker push zthun/works.server",
     "docker:build": "npm pack && docker build . -t zthun/works.server:latest -t zthun/works.server:$(node -p \"require('./package.json').version\")",
     "build": "tsc -p tsconfig.prod.json",
     "debug": "nodemon",
