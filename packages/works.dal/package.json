@@ -23,9 +23,14 @@
     "dist/**"
   ],
   "peerDependencies": {
-    "@zthun/works.url": ">=0.0.0 <2.0.0",
+    "@zthun/works.url": ">=0.0.0 <2.0.0"
+  },
+  "dependencies": {
     "mongodb": "^3.5.9",
     "mongodb-memory-server": "^6.6.0"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^3.5.25"
   },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
