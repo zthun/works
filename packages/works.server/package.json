@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.server",
-  "version": "1.0.0-7",
+  "version": "1.0.0-8",
   "description": "The server side package for the @zthun/auth platform.",
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -24,8 +24,8 @@
     "@nestjs/core": "^7.0.7",
     "@nestjs/platform-express": "^7.0.7",
     "@zthun/works.core": "^1.0.0-7",
-    "@zthun/works.nest": "^1.0.0-7",
     "@zthun/works.dal": "^1.0.0-7",
+    "@zthun/works.nest": "^1.0.0-7",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
