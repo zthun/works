@@ -1,12 +1,15 @@
-import { IZIdentifiable } from '../common/identifiable.interface';
-
 /**
  * Represents a user in the system.
  *
  * This is a storable version of the user and contains all information needed for
  * login and profile management.
  */
-export interface IZUser extends IZIdentifiable {
+export interface IZUser {
+  /**
+   * The user id.
+   */
+  _id: string;
+
   /**
    * The users email.  This must be unique.
    */

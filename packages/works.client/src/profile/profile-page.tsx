@@ -1,6 +1,7 @@
 import { Grid } from '@material-ui/core';
-import { IZProfile, IZProfileActivation, ZProfileActivationBuilder, ZUrlBuilder } from '@zthun/works.core';
+import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileActivationForm, ZProfileDeactivationForm, ZProfileDeleteForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
+import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import { get } from 'lodash';
 import React, { useState } from 'react';

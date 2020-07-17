@@ -64,6 +64,20 @@ export class ZDatabaseOptionsBuilder {
   }
 
   /**
+   * Sets the credentials for connecting to the database.
+   *
+   * @param user The user name.
+   * @param pass The password.
+   *
+   * @returns This object.
+   */
+  public credentials(user: string, pass: string): this {
+    this._options.user = user;
+    this._options.password = pass;
+    return this;
+  }
+
+  /**
    * Sets the timeout.
    *
    * @param val The value to set.

@@ -55,7 +55,7 @@ export class ZDatabaseMongo implements IZDatabase {
   /**
    * Gets the connection port.
    *
-   * @preturns The connection port.
+   * @returns The connection port.
    */
   public get $port(): number {
     return this._options.port || 32769;
@@ -78,10 +78,12 @@ export class ZDatabaseMongo implements IZDatabase {
    * @returns The count query.
    */
   public count(source: string): IZDatabaseQuery<number> {
-    return new ZDatabaseQuery((options) => this._do(source, async (docs: Collection<any>) => {
-      const result = await docs.countDocuments(options.$filter);
-      return result;
-    }));
+    return new ZDatabaseQuery((options) =>
+      this._do(source, async (docs: Collection<any>) => {
+        const result = await docs.countDocuments(options.$filter);
+        return result;
+      })
+    );
   }
 
   /**
@@ -96,11 +98,13 @@ export class ZDatabaseMongo implements IZDatabase {
     // This one is a bit goofy.  WithId and OptionalId cause a bunch of issues with the
     // Typescript compiler that I can't figure out how to work with.  After awhile, the
     // best solution is to just cast the damn thing.  We know what this returns.
-    return new ZDatabaseQuery(() => this._do(source, async (docs: Collection<T>) => {
-      template = template.map((t: any) => ({ ...t, _id: t._id || v4() }));
-      const result = await docs.insertMany(template as any[]);
-      return result.ops as unknown as T[];
-    }));
+    return new ZDatabaseQuery(() =>
+      this._do(source, async (docs: Collection<T>) => {
+        template = template.map((t: any) => ({ ...t, _id: t._id || v4() }));
+        const result = await docs.insertMany(template as any[]);
+        return (result.ops as unknown) as T[];
+      })
+    );
   }
 
   /**
@@ -112,10 +116,12 @@ export class ZDatabaseMongo implements IZDatabase {
    * @returns The update query.
    */
   public update<T>(source: string, template: Partial<T>): IZDatabaseQuery<number> {
-    return new ZDatabaseQuery((query) => this._do(source, async (docs: Collection<T>) => {
-      const result = await docs.updateMany(query.$filter, { $set: template });
-      return result.modifiedCount;
-    }));
+    return new ZDatabaseQuery((query) =>
+      this._do(source, async (docs: Collection<T>) => {
+        const result = await docs.updateMany(query.$filter, { $set: template });
+        return result.modifiedCount;
+      })
+    );
   }
 
   /**
@@ -126,28 +132,30 @@ export class ZDatabaseMongo implements IZDatabase {
    * @returns The read query.
    */
   public read<T>(source: string): IZDatabaseQuery<T[]> {
-    return new ZDatabaseQuery((query) => this._do(source, async (docs: Collection<T>) => {
-      const aggregate: any[] = [{ $match: query.$filter }];
+    return new ZDatabaseQuery((query) =>
+      this._do(source, async (docs: Collection<T>) => {
+        const aggregate: any[] = [{ $match: query.$filter }];
 
-      if (query.$join.length > 0) {
-        query.$join.forEach((j) => aggregate.push({ $lookup: { from: j.from, localField: j.local, foreignField: j.foreign, as: j.as } }));
-      }
+        if (query.$join.length > 0) {
+          query.$join.forEach((j) => aggregate.push({ $lookup: { from: j.from, localField: j.local, foreignField: j.foreign, as: j.as } }));
+        }
 
-      if (query.$sort.length > 0) {
-        const msort = {};
-        query.$sort.forEach((srt) => msort[srt.key] = srt.direction);
-        aggregate.push({ $sort: msort });
-      }
+        if (query.$sort.length > 0) {
+          const sorting = {};
+          query.$sort.forEach((srt) => (sorting[srt.key] = srt.direction));
+          aggregate.push({ $sort: sorting });
+        }
 
-      if (query.$size !== Infinity) {
-        const page = Math.max(0, query.$page);
-        const take = query.$size;
-        aggregate.push({ $skip: page * take });
-        aggregate.push({ $limit: take });
-      }
+        if (query.$size !== Infinity) {
+          const page = Math.max(0, query.$page);
+          const take = query.$size;
+          aggregate.push({ $skip: page * take });
+          aggregate.push({ $limit: take });
+        }
 
-      return docs.aggregate(aggregate).toArray();
-    }));
+        return docs.aggregate(aggregate).toArray();
+      })
+    );
   }
 
   /**
@@ -161,10 +169,12 @@ export class ZDatabaseMongo implements IZDatabase {
    * @returns The delete query.
    */
   public delete(source: string): IZDatabaseQuery<number> {
-    return new ZDatabaseQuery((query) => this._do(source, async (docs: Collection<any>) => {
-      const result = await docs.deleteMany(query.$filter);
-      return result.deletedCount;
-    }));
+    return new ZDatabaseQuery((query) =>
+      this._do(source, async (docs: Collection<any>) => {
+        const result = await docs.deleteMany(query.$filter);
+        return result.deletedCount;
+      })
+    );
   }
 
   /**
@@ -178,26 +188,21 @@ export class ZDatabaseMongo implements IZDatabase {
    * fn(col) throws an exception or if a connection cannot be established.
    */
   private async _do<C, T>(collection: string, fn: (col: Collection<C>) => Promise<T>) {
-    const options: MongoClientOptions & { serverSelectionTimeoutMS?: number } = {
+    const options: MongoClientOptions = {
       useNewUrlParser: true,
       useUnifiedTopology: true
     };
 
-    // The serverSelectionTimeoutMS is actually an option that is not currently in the
-    // MongoClientOptions type file (as of 3.3.14).  We're appending this here so that
-    // any tests can utilize this to set the timeout.  If we don't supply this option,
-    // then any tests utilizing a failed connection path will hang for 30 seconds.
-    // This option is also not specified in the mongodb documentation either (as of 2019-12-27).
     if (this._options.timeout) {
       options.serverSelectionTimeoutMS = this._options.timeout;
     }
 
-    const connection = `${this.$protocol}://${this.$host}:${this.$port}`;
-    const client = new MongoClient(connection, options);
+    const connectionString = `${this.$protocol}://${this.$host}:${this.$port}`;
+    const client = new MongoClient(connectionString, options);
 
     try {
-      const pconn = client.connect();
-      const conn = await pconn;
+      const connection = client.connect();
+      const conn = await connection;
       const db = conn.db(this.$database);
       const col = db.collection<C>(collection);
       const res: T = await fn(col);

@@ -2,8 +2,6 @@
 
 // Assert
 export { ZAssert } from './assert/assert.class';
-// Common - Needs to be moved to the database layer.
-export { IZIdentifiable } from './common/identifiable.interface';
 // Config
 export { ZConfigEntryBuilder } from './configs/config-entry-builder.class';
 export { IZConfigEntry } from './configs/config-entry.interface';
@@ -26,8 +24,6 @@ export { IZProfile } from './profiles/profile.interface';
 // Server
 export { ZServerBuilder } from './server/server-builder.class';
 export { IZServer } from './server/server.interface';
-// URL
-export { ZUrlBuilder } from './url/url-builder.class';
 // Users
 export { ZUserBuilder } from './users/user-builder.class';
 export { IZUser } from './users/user.interface';

@@ -22,6 +22,7 @@
     "dist/**"
   ],
   "devDependencies": {
+    "@zthun/works.url": "^1.0.0-7",
     "@zthun/works.core": "^1.0.0-7",
     "@zthun/works.react": "^1.0.0-7",
     "@zthun/works.themes": "^1.0.0-7"

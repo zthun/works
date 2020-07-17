@@ -19,6 +19,14 @@ export interface IZDatabaseOptions {
    */
   protocol?: string;
   /**
+   * The database login user.
+   */
+  user?: string;
+  /**
+   * The database login password.
+   */
+  password?: string;
+  /**
    * The timeout value for connections.
    */
   timeout?: number;

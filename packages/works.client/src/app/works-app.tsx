@@ -1,6 +1,7 @@
 import { Snackbar } from '@material-ui/core';
-import { IZProfile, ZUrlBuilder } from '@zthun/works.core';
+import { IZProfile } from '@zthun/works.core';
 import { ZAlertStack, ZAlertStackContext, ZAlertStackList, ZLoginState, ZLoginStateContext } from '@zthun/works.react';
+import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';

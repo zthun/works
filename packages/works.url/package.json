@@ -1,7 +1,7 @@
 {
-  "name": "@zthun/works.dal",
+  "name": "@zthun/works.url",
   "version": "1.0.0-7",
-  "description": "A database access layer for @zthun scoped projects.",
+  "description": "A simple class used to build or parse a URL.",
   "author": "Anthony Bonta",
   "license": "MIT",
   "repository": {
@@ -22,11 +22,8 @@
   "files": [
     "dist/**"
   ],
-  "peerDependencies": {
-    "@zthun/works.url": ">=0.0.0 <2.0.0",
-    "mongodb": "^3.5.9",
-    "mongodb-memory-server": "^6.6.0"
+  "dependencies": {
+    "url-parse": "^1.4.7"
   },
-  "sideEffects": false,
-  "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
+  "sideEffects": false
 }

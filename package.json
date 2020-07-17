@@ -11,6 +11,7 @@
   },
   "workspaces": [
     "packages/works.jest",
+    "packages/works.url",
     "packages/works.core",
     "packages/works.dal",
     "packages/works.themes",

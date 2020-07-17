@@ -1,64 +1,88 @@
 import { ZDatabaseOptionsBuilder } from './database-options-builder.class';
 import { IZDatabaseOptions } from './database-options.interface';
+import { assertBuilderSetsProperty, assertBuilderCopiesObject, assertBuilderAssignsObject } from '@zthun/works.jest';
 
 describe('ZDatabaseOptionsBuilder', () => {
   function createTestTarget() {
     return new ZDatabaseOptionsBuilder();
   }
 
-  function assertPropertySet<T>(expected: T, buildFn: (t: ZDatabaseOptionsBuilder, v: T) => ZDatabaseOptionsBuilder, actualFn: (o: IZDatabaseOptions) => T) {
-    // Arrange
-    const target = createTestTarget();
-    // Act
-    const options = buildFn(target, expected).build();
-    const actual = actualFn(options);
-    // Assert
-    expect(actual).toEqual(expected);
-  }
-
   describe('Properties', () => {
     it('sets the database.', () => {
-      assertPropertySet('database', (t, v) => t.database(v), (o) => o.database);
+      assertBuilderSetsProperty(
+        'database',
+        createTestTarget,
+        (t, v) => t.database(v),
+        (o: IZDatabaseOptions) => o.database
+      );
     });
 
     it('sets the host.', () => {
-      assertPropertySet('host', (t, v) => t.host(v), (o) => o.host);
+      assertBuilderSetsProperty(
+        'host',
+        createTestTarget,
+        (t, v) => t.host(v),
+        (o: IZDatabaseOptions) => o.host
+      );
     });
 
     it('sets the port.', () => {
-      assertPropertySet(3500, (t, v) => t.port(v), (o) => o.port);
+      assertBuilderSetsProperty(
+        3500,
+        createTestTarget,
+        (t, v) => t.port(v),
+        (o: IZDatabaseOptions) => o.port
+      );
     });
 
     it('sets the protocol.', () => {
-      assertPropertySet('protocol', (t, v) => t.protocol(v), (o) => o.protocol);
+      assertBuilderSetsProperty(
+        'protocol',
+        createTestTarget,
+        (t, v) => t.protocol(v),
+        (o: IZDatabaseOptions) => o.protocol
+      );
     });
 
     it('sets the timeout.', () => {
-      assertPropertySet(1258, (t, v) => t.timeout(v), (o) => o.timeout);
+      assertBuilderSetsProperty(
+        1258,
+        createTestTarget,
+        (t, v) => t.timeout(v),
+        (o: IZDatabaseOptions) => o.timeout
+      );
+    });
+
+    it('sets the user.', () => {
+      assertBuilderSetsProperty(
+        'user',
+        createTestTarget,
+        (t, v) => t.credentials(v, 'pass'),
+        (o: IZDatabaseOptions) => o.user
+      );
+    });
+
+    it('sets the password.', () => {
+      assertBuilderSetsProperty(
+        'pass',
+        createTestTarget,
+        (t, v) => t.credentials('user', v),
+        (o: IZDatabaseOptions) => o.password
+      );
     });
   });
 
   describe('Copy', () => {
     it('copies all properties.', () => {
-      // Arrange
-      const target = createTestTarget();
       const expected = createTestTarget().database('database').host('host').port(1234).protocol('protocol').timeout(500).build();
-      // Act
-      const actual = target.copy(expected).build();
-      // Assert
-      expect(actual).toEqual(expected);
+      assertBuilderCopiesObject(expected, createTestTarget);
     });
   });
 
   describe('Assign', () => {
     it('updates properties in the builder.', () => {
-      // Arrange
-      const target = createTestTarget().host('host');
       const expected = createTestTarget().database('database').host('host').build();
-      // Act
-      const actual = target.assign({ database: 'database' }).build();
-      // Assert
-      expect(actual).toEqual(expected);
+      assertBuilderAssignsObject(expected, () => createTestTarget().host('host'), { database: 'database' });
     });
   });
 });
