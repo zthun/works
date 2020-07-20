@@ -28,6 +28,10 @@ services:
       - 3000:3000
     volumes:
       - .:/usr/dev
+    environment:
+      - DATABASE_PORT=27017
+      - DATABASE_VAULT_HOST=vault.database.zthunworks.com
+      - DATABASE_USERS_HOST=users.database.zthunworks.com
     working_dir: /usr/dev
     command: yarn workspace @zthun/works.server debug
   vault.database.zthunworks.com:

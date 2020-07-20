@@ -4,7 +4,8 @@
     "baseUrl": ".",
     "declarationDir": "dist/types",
     "paths": {
-      "@zthun/works.jest": ["../works.jest/src/index"]
+      "@zthun/works.jest": ["../works.jest/src/index"],
+      "@zthun/works.url": ["../works.url/src/index"]
     }
   },
   "include": ["src/**/*.ts"]

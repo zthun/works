@@ -1,3 +1,4 @@
+import { ZUrlBuilder } from '@zthun/works.url';
 import { Collection, MongoClient, MongoClientOptions } from 'mongodb';
 import { v4 } from 'uuid';
 import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';
@@ -59,6 +60,24 @@ export class ZDatabaseMongo implements IZDatabase {
    */
   public get $port(): number {
     return this._options.port || 32769;
+  }
+
+  /**
+   * Gets the user that will be used to connect to the database.
+   *
+   * @returns The username.
+   */
+  public get $user(): string {
+    return this._options.user || null;
+  }
+
+  /**
+   * Gets the password that will be used to connect to the database.
+   *
+   * @returns The password.
+   */
+  public get $password(): string {
+    return this._options.password || null;
   }
 
   /**
@@ -197,7 +216,7 @@ export class ZDatabaseMongo implements IZDatabase {
       options.serverSelectionTimeoutMS = this._options.timeout;
     }
 
-    const connectionString = `${this.$protocol}://${this.$host}:${this.$port}`;
+    const connectionString = new ZUrlBuilder().protocol(this.$protocol).hostname(this.$host).port(this.$port).username(this.$user).password(this.$password).build();
     const client = new MongoClient(connectionString, options);
 
     try {
