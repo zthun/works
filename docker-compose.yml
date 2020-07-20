@@ -29,9 +29,8 @@ services:
     volumes:
       - .:/usr/dev
     environment:
-      - DATABASE_PORT=27017
-      - DATABASE_VAULT_HOST=vault.database.zthunworks.com
-      - DATABASE_USERS_HOST=users.database.zthunworks.com
+      - DATABASE_VAULT_URL=mongodb://vault.database.zthunworks.com:27017
+      - DATABASE_USERS_URL=mongodb://users.database.zthunworks.com:27017
     working_dir: /usr/dev
     command: yarn workspace @zthun/works.server debug
   vault.database.zthunworks.com:

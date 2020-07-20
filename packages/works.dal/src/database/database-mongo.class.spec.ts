@@ -6,17 +6,15 @@ import { ZDatabaseMongo } from './database-mongo.class';
 
 describe('ZDatabaseMongo', () => {
   let server: MongoMemoryServer;
+  const url = 'mongodb://127.0.0.1:37989';
   const database = 'test-db';
-  const host = '127.0.0.1';
-  const port = 37989;
-  const protocol = 'mongodb';
-  const options = new ZDatabaseOptionsBuilder().host(host).port(port).protocol(protocol).database(database).build();
+  const options = new ZDatabaseOptionsBuilder().url(url).database(database).build();
 
   beforeAll(async () => {
     server = new MongoMemoryServer({
       instance: {
-        port,
-        ip: host
+        port: 37989,
+        ip: '127.0.0.1'
       }
     });
     await server.start();
@@ -31,7 +29,7 @@ describe('ZDatabaseMongo', () => {
   }
 
   function createBadHostTestTarget(): ZDatabaseMongo {
-    return ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().copy(options).host('bad-host').timeout(100).build());
+    return ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().copy(options).url('mongodb://bad-host:1111').timeout(100).build());
   }
 
   describe('Connection', () => {
@@ -68,48 +66,18 @@ describe('ZDatabaseMongo', () => {
       );
     });
 
-    it('sets the correct host.', () => {
+    it('sets the correct url.', () => {
       assertConnection(
-        host,
+        url,
         () => createTestTarget(),
-        (t) => t.$host
+        (t) => t.$url
       );
     });
 
-    it('sets the correct port.', () => {
-      assertConnection(
-        port,
-        () => createTestTarget(),
-        (t) => t.$port
-      );
-    });
-
-    it('sets the correct protocol.', () => {
-      assertConnection(
-        protocol,
-        () => createTestTarget(),
-        (t) => t.$protocol
-      );
-    });
-
-    it('defaults the host.', () => {
+    it('defaults the url.', () => {
       assertDefault(
         () => ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().build()),
-        (t) => t.$host
-      );
-    });
-
-    it('defaults the port.', () => {
-      assertDefault(
-        () => ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().build()),
-        (t) => t.$port
-      );
-    });
-
-    it('defaults the protocol.', () => {
-      assertDefault(
-        () => ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().build()),
-        (t) => t.$protocol
+        (t) => t.$url
       );
     });
   });

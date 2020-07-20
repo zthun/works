@@ -22,9 +22,6 @@
   "files": [
     "dist/**"
   ],
-  "peerDependencies": {
-    "@zthun/works.url": ">=0.0.0 <2.0.0"
-  },
   "dependencies": {
     "mongodb": "^3.5.9",
     "mongodb-memory-server": "^6.6.0"

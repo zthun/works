@@ -7,9 +7,9 @@
     "module": "commonjs",
     "paths": {
       "@zthun/works.core": ["../works.core/src/index"],
-      "@zthun/works.nest": ["../works.nest/src/index"]
+      "@zthun/works.nest": ["../works.nest/src/index"],
+      "@zthun/works.dal": ["../works.dal/src/index"]
     }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "src/**/*.spec.ts"]
+  "include": ["src/**/*.ts"]
 }

@@ -7,25 +7,9 @@ export interface IZDatabaseOptions {
    */
   database: string;
   /**
-   * The host of the server.
+   * The database connection string.
    */
-  host?: string;
-  /**
-   * The port to connect on.
-   */
-  port?: number;
-  /**
-   * The database protocol.
-   */
-  protocol?: string;
-  /**
-   * The database login user.
-   */
-  user?: string;
-  /**
-   * The database login password.
-   */
-  password?: string;
+  url?: string;
   /**
    * The timeout value for connections.
    */

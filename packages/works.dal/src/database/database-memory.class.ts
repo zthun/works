@@ -32,19 +32,19 @@ export class ZDatabaseMemory implements IZDatabase {
   /**
    * Establishes a connection to a database in memory.
    *
-   * @param options The database options.  The host, port and protocol are ignored.
+   * @param options The database options.  The url is ignored.
    *
    * @returns An in memory database.
    */
   public static connect(options: IZDatabaseOptions): ZDatabaseMemory {
-    const inner = new ZDatabaseOptionsBuilder().copy(options).host(ZDatabaseMemory.Host).port(ZDatabaseMemory.Port).protocol(ZDatabaseMemory.Protocol).build();
+    const inner = new ZDatabaseOptionsBuilder().copy(options).url('mongodb://127.0.0.1:32769').build();
     return new ZDatabaseMemory(ZDatabaseMongo.connect(inner));
   }
 
   /**
    * Starts the in memory server.
    *
-   * You don't need to call this, but you can prewire the
+   * You don't need to call this, but you can pre-wire the
    * server to be ready before any queries are invoked.
    *
    * @returns A promise that when resolved, has started the server.
@@ -85,7 +85,7 @@ export class ZDatabaseMemory implements IZDatabase {
    *
    * @param _mongo The actual mongo database instance.
    */
-  private constructor(private readonly _mongo: IZDatabase) { }
+  private constructor(private readonly _mongo: IZDatabase) {}
 
   /**
    * Returns a query that gives the document count for a filter.

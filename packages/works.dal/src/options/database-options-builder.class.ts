@@ -28,52 +28,14 @@ export class ZDatabaseOptionsBuilder {
   }
 
   /**
-   * Sets the host to connect to.
+   * Sets the connection string.
    *
-   * @param val The value to set.
-   *
-   * @returns This object.
-   */
-  public host(val: string): this {
-    this._options.host = val;
-    return this;
-  }
-
-  /**
-   * Sets the protocol to connect to.
-   *
-   * @param val The value to set.
+   * @param val The connection string.
    *
    * @returns This object.
    */
-  public protocol(val: string): this {
-    this._options.protocol = val;
-    return this;
-  }
-
-  /**
-   * Sets the port to connect on.
-   *
-   * @param val The value to set.
-   *
-   * @returns This object.
-   */
-  public port(val: number): this {
-    this._options.port = val;
-    return this;
-  }
-
-  /**
-   * Sets the credentials for connecting to the database.
-   *
-   * @param user The user name.
-   * @param pass The password.
-   *
-   * @returns This object.
-   */
-  public credentials(user: string, pass: string): this {
-    this._options.user = user;
-    this._options.password = pass;
+  public url(val: string): this {
+    this._options.url = val;
     return this;
   }
 
