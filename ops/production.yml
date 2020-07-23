@@ -1,0 +1,58 @@
+# Copyright 2020 Anthony Bonta
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: zthunworks
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zthunworks-service
+  namespace: zthunworks
+spec:
+  selector:
+    app: zthunworks-app-client
+  ports:
+    - port: 80
+      targetPort: 80
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: zthunworks-secret-uri-db
+  namespace: zthunworks
+type: Opaque
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: zthunworks-secret-certs
+  namespace: zthunworks
+type: Opaque
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: zthunworks-deployment
+  namespace: zthunworks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zthunworks-app-client
+  template:
+    metadata:
+      name: zthunworks-app-client-rs
+      labels:
+        app: zthunworks-app-client
+        version: 1.0.0-9
+    spec:
+      containers:
+        - name: zthunworks-app-client
+          image: zthun/works.client:1.0.0-9
+          ports:
+            - containerPort: 80
