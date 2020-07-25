@@ -6,53 +6,116 @@ metadata:
 
 ---
 apiVersion: v1
+kind: Secret
+metadata:
+  name: zthunworks-secrets-db-urls
+  namespace: zthunworks
+type: Opaque
+stringData:
+  database-vault-url: "mongodb://vault.database.zthunworks.com:27017"
+  database-users-url: "mongodb://users.database.zthunworks.com:27017"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: zthunworks-secrets-certs
+  namespace: zthunworks
+type: Opaque
+
+---
+apiVersion: v1
 kind: Service
 metadata:
-  name: zthunworks-service
+  name: zthunworks-services-client
   namespace: zthunworks
 spec:
+  type: ClusterIP
   selector:
-    app: zthunworks-app-client
+    app: zthunworks-pods-client
   ports:
-    - port: 80
+    - protocol: TCP
+      port: 80
       targetPort: 80
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: zthunworks-secret-uri-db
-  namespace: zthunworks
-type: Opaque
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: zthunworks-secret-certs
-  namespace: zthunworks
-type: Opaque
+      name: "http"
+    - protocol: TCP
+      port: 443
+      targetPort: 443
+      name: "https"
 
 ---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: zthunworks-deployment
+  name: zthunworks-deployments-client
   namespace: zthunworks
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: zthunworks-app-client
+      app: zthunworks-pods-client
   template:
     metadata:
-      name: zthunworks-app-client-rs
+      name: zthunworks-pods-client
       labels:
-        app: zthunworks-app-client
+        app: zthunworks-pods-client
         version: 1.0.0-9
     spec:
       containers:
-        - name: zthunworks-app-client
+        - name: zthunworks-pods-client
           image: zthun/works.client:1.0.0-9
           ports:
+            - containerPort: 443
+              hostPort: 443
             - containerPort: 80
+              hostPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zthunworks-services-server
+  namespace: zthunworks
+spec:
+  type: ClusterIP
+  selector:
+    app: zthunworks-pods-server
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: zthunworks-deployments-server
+  namespace: zthunworks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zthunworks-pods-server
+  template:
+    metadata:
+      name: zthunworks-pods-server
+      labels:
+        app: zthunworks-pods-server
+        version: 1.0.0-9
+    spec:
+      containers:
+        - name: zthunworks-pods-server
+          image: zthun/works.server:1.0.0-9
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_VAULT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: zthunworks-secrets-db-urls
+                  key: database-vault-url
+            - name: DATABASE_USERS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: zthunworks-secrets-db-urls
+                  key: database-users-url
