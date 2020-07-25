@@ -1,0 +1,27 @@
+{
+  "name": "@zthun/works.install",
+  "version": "1.0.0-10",
+  "description": "The installer for the base zthunworks platform.",
+  "author": "Anthony Bonta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zthun/works"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "zthunworks-install": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.bin.json",
+    "start": "node --inspect-brk -r ts-node/register src/cli.ts"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "dependencies": {}
+}

@@ -19,7 +19,8 @@
     "packages/works.client",
     "packages/works.nest",
     "packages/works.server",
-    "packages/works.proxy"
+    "packages/works.proxy",
+    "packages/works.install"
   ],
   "scripts": {
     "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz packages/**/yarn-error.log *.log",
