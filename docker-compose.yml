@@ -6,8 +6,8 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./proxy/conf.d:/etc/nginx/conf.d
-      - ./proxy/certs:/etc/nginx/certs
+      - ./packages/works.proxy/dev:/etc/nginx/conf.d
+      - ./packages/works.proxy/certs:/etc/nginx/certs
     depends_on:
       - local.zthunworks.com
       - api.zthunworks.com

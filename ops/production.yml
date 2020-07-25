@@ -12,8 +12,8 @@ metadata:
   namespace: zthunworks
 type: Opaque
 stringData:
-  database-vault-url: "mongodb://vault.database.zthunworks.com:27017"
-  database-users-url: "mongodb://users.database.zthunworks.com:27017"
+  database-vault-url: 'mongodb://vault.database.zthunworks.com:27017'
+  database-users-url: 'mongodb://users.database.zthunworks.com:27017'
 
 ---
 apiVersion: v1
@@ -37,11 +37,6 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      name: "http"
-    - protocol: TCP
-      port: 443
-      targetPort: 443
-      name: "https"
 
 ---
 kind: Deployment
@@ -119,3 +114,47 @@ spec:
                 secretKeyRef:
                   name: zthunworks-secrets-db-urls
                   key: database-users-url
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zthunworks-services-proxy
+  namespace: zthunworks
+spec:
+  type: LoadBalancer
+  selector:
+    app: zthunworks-pods-proxy
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      name: 'http'
+    - protocol: TCP
+      port: 443
+      targetPort: 443
+      name: 'https'
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: zthunworks-deployments-proxy
+  namespace: zthunworks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zthunworks-pods-proxy
+  template:
+    metadata:
+      name: zthunworks-pods-proxy
+      labels:
+        app: zthunworks-pods-proxy
+        version: 1.0.0
+    spec:
+      containers:
+        - name: zthunworks-pods-proxy
+          image: zthun/works.proxy:1.0.0-9
+          ports:
+            - containerPort: 80
