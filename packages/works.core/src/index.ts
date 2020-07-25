@@ -16,6 +16,10 @@ export { IZEmail } from './email/email.interface';
 // Error
 export { ZErrorBuilder } from './error/error-builder.class';
 export { IZError } from './error/error.interface';
+// Filter
+export { ZUnaryFilterBuilder } from './filter/unary-filter-builder.class';
+export { IZUnaryFilter } from './filter/unary-filter.interface';
+export { ZUnaryOperator } from './filter/unary-operator.enum';
 // Http
 export { ZHttpCodeClient } from './http/http-code-client.enum';
 export { ZHttpCodeInformationalResponse } from './http/http-code-informational-response.enum';

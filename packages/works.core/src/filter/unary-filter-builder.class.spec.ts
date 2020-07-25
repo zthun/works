@@ -1,56 +1,36 @@
-import { UnaryFilterBuilder } from './unary-filter-builder.class';
-import { IUnaryFilter } from './unary-filter.interface';
+import { assertBuilderSetsProperty } from '@zthun/works.jest';
+import { ZUnaryFilterBuilder } from './unary-filter-builder.class';
 import { ZUnaryOperator } from './unary-operator.enum';
+import { IZUnaryFilter } from './unary-filter.interface';
 
 describe('UnaryFilterBuilder', () => {
-  let field: string;
-
-  function assertPropertySet<T>(expected: T, build: () => UnaryFilterBuilder, actual: (f: IUnaryFilter) => T) {
-    // Arrange
-    const target = build();
-    // Act
-    const val = actual(target.filter());
-    // Assert
-    expect(JSON.stringify(val)).toEqual(JSON.stringify(expected));
+  function createTestTarget() {
+    return new ZUnaryFilterBuilder();
   }
-
-  beforeEach(() => {
-    field = 'name';
+  it('sets the field.', () => {
+    assertBuilderSetsProperty(
+      'field',
+      createTestTarget,
+      (t, v) => t.field(v).isNull(),
+      (f: IZUnaryFilter) => f.field
+    );
   });
 
-  describe('IsNull', () => {
-    it('sets the field.', () => {
-      assertPropertySet(
-        field,
-        () => UnaryFilterBuilder.isNull(field),
-        (f) => f.field
-      );
-    });
-
-    it('sets the operator.', () => {
-      assertPropertySet(
-        ZUnaryOperator.IsNull,
-        () => UnaryFilterBuilder.isNull(field),
-        (f) => f.operator
-      );
-    });
+  it('sets the operator to is null.', () => {
+    assertBuilderSetsProperty(
+      ZUnaryOperator.IsNull,
+      createTestTarget,
+      (t) => t.field('a').isNull(),
+      (f: IZUnaryFilter) => f.operator
+    );
   });
 
-  describe('IsNotNull', () => {
-    it('sets the field.', () => {
-      assertPropertySet(
-        field,
-        () => UnaryFilterBuilder.isNotNull(field),
-        (f) => f.field
-      );
-    });
-
-    it('sets the operator.', () => {
-      assertPropertySet(
-        ZUnaryOperator.IsNotNull,
-        () => UnaryFilterBuilder.isNotNull(field),
-        (f) => f.operator
-      );
-    });
+  it('sets the operator to is not null.', () => {
+    assertBuilderSetsProperty(
+      ZUnaryOperator.IsNotNull,
+      createTestTarget,
+      (t) => t.field('a').isNotNull(),
+      (f: IZUnaryFilter) => f.operator
+    );
   });
 });

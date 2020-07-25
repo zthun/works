@@ -4,7 +4,7 @@ import { IFilter } from './filter.type';
 import { LogicFilterBuilder } from './logic-filter-builder.class';
 import { ILogicFilter } from './logic-filter.interface';
 import { LogicOperator } from './logic-operator.enum';
-import { UnaryFilterBuilder } from './unary-filter-builder.class';
+import { ZUnaryFilterBuilder } from './unary-filter-builder.class';
 
 describe('LogicFilterBuilder', () => {
   let clauseA: IFilter;
@@ -24,29 +24,45 @@ describe('LogicFilterBuilder', () => {
   beforeEach(() => {
     clauseA = BinaryFilterBuilder.greaterThan('age', 2).filter();
     clauseB = BinaryFilterBuilder.lessThan('age', 10).filter();
-    clauseC = UnaryFilterBuilder.isNull('collection').filter();
+    clauseC = ZUnaryFilterBuilder.isNull('collection').filter();
     clauseD = CollectionFilterBuilder.in('state').value('Texas').value('Arizona').filter();
   });
 
   describe('And', () => {
     it('sets the clauses.', () => {
       const expected = [clauseA, clauseB, clauseC, clauseD];
-      assertPropertySet(expected, () => LogicFilterBuilder.and(clauseA, clauseB, clauseC).another(clauseD), (f) => f.clauses);
+      assertPropertySet(
+        expected,
+        () => LogicFilterBuilder.and(clauseA, clauseB, clauseC).another(clauseD),
+        (f) => f.clauses
+      );
     });
 
     it('sets the operator.', () => {
-      assertPropertySet(LogicOperator.And, () => LogicFilterBuilder.and(clauseA, clauseB), (f) => f.operator);
+      assertPropertySet(
+        LogicOperator.And,
+        () => LogicFilterBuilder.and(clauseA, clauseB),
+        (f) => f.operator
+      );
     });
   });
 
   describe('Or', () => {
     it('sets the clauses.', () => {
       const expected = [clauseA, clauseB, clauseC, clauseD];
-      assertPropertySet(expected, () => LogicFilterBuilder.or(clauseA, clauseB, clauseC).another(clauseD), (f) => f.clauses);
+      assertPropertySet(
+        expected,
+        () => LogicFilterBuilder.or(clauseA, clauseB, clauseC).another(clauseD),
+        (f) => f.clauses
+      );
     });
 
     it('sets the operator.', () => {
-      assertPropertySet(LogicOperator.Or, () => LogicFilterBuilder.or(clauseA, clauseB), (f) => f.operator);
+      assertPropertySet(
+        LogicOperator.Or,
+        () => LogicFilterBuilder.or(clauseA, clauseB),
+        (f) => f.operator
+      );
     });
   });
 });
