@@ -13,6 +13,15 @@ export { IZEmailContact } from './email/email-contact.interface';
 export { ZEmailEnvelopeBuilder } from './email/email-envelope-builder.class';
 export { IZEmailEnvelope } from './email/email-envelope.interface';
 export { IZEmail } from './email/email.interface';
+// Error
+export { ZErrorBuilder } from './error/error-builder.class';
+export { IZError } from './error/error.interface';
+// Http
+export { ZHttpCodeClient } from './http/http-code-client.enum';
+export { ZHttpCodeInformationalResponse } from './http/http-code-informational-response.enum';
+export { ZHttpCodeRedirection } from './http/http-code-redirection.enum';
+export { ZHttpCodeServer } from './http/http-code-server.enum';
+export { ZHttpCodeSuccess } from './http/http-code-success.enum';
 // Login
 export { ZLoginBuilder } from './logins/login-builder.class';
 export { IZLogin } from './logins/login.interface';
@@ -24,6 +33,10 @@ export { IZProfile } from './profiles/profile.interface';
 // Server
 export { ZServerBuilder } from './server/server-builder.class';
 export { IZServer } from './server/server.interface';
+// Sort
+export { ZSortBuilder } from './sort/sort-builder.class';
+export { ZSortDirection } from './sort/sort-direction.enum';
+export { IZSort } from './sort/sort.interface';
 // Users
 export { ZUserBuilder } from './users/user-builder.class';
 export { IZUser } from './users/user.interface';
