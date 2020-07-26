@@ -1,68 +1,62 @@
-import { BinaryFilterBuilder } from './binary-filter-builder.class';
-import { CollectionFilterBuilder } from './collection-filter-builder.class';
-import { IFilter } from './filter.type';
-import { LogicFilterBuilder } from './logic-filter-builder.class';
-import { ILogicFilter } from './logic-filter.interface';
-import { LogicOperator } from './logic-operator.enum';
+import { assertBuilderSetsProperty } from '@zthun/works.jest';
+import { ZBinaryFilterBuilder } from './binary-filter-builder.class';
+import { ZCollectionFilterBuilder } from './collection-filter-builder.class';
+import { IZFilter } from './filter.type';
+import { ZLogicFilterBuilder } from './logic-filter-builder.class';
+import { ZLogicOperator } from './logic-operator.enum';
 import { ZUnaryFilterBuilder } from './unary-filter-builder.class';
+import { IZLogicFilter } from './logic-filter.interface';
 
 describe('LogicFilterBuilder', () => {
-  let clauseA: IFilter;
-  let clauseB: IFilter;
-  let clauseC: IFilter;
-  let clauseD: IFilter;
+  let clauseA: IZFilter;
+  let clauseB: IZFilter;
+  let clauseC: IZFilter;
+  let clauseD: IZFilter;
 
-  function assertPropertySet<T>(expected: T, build: () => LogicFilterBuilder, actual: (t: ILogicFilter) => T) {
-    // Arrange
-    const target = build();
-    // Act
-    const val = actual(target.filter());
-    // Assert
-    expect(JSON.stringify(val)).toEqual(JSON.stringify(expected));
+  function createTestTarget() {
+    return new ZLogicFilterBuilder();
   }
 
   beforeEach(() => {
-    clauseA = BinaryFilterBuilder.greaterThan('age', 2).filter();
-    clauseB = BinaryFilterBuilder.lessThan('age', 10).filter();
-    clauseC = ZUnaryFilterBuilder.isNull('collection').filter();
-    clauseD = CollectionFilterBuilder.in('state').value('Texas').value('Arizona').filter();
+    clauseA = new ZBinaryFilterBuilder().field('age').greaterThan().value(2).build();
+    clauseB = new ZBinaryFilterBuilder().field('age').lessThan().value(10).build();
+    clauseC = new ZUnaryFilterBuilder().field('collection').isNull().build();
+    clauseD = new ZCollectionFilterBuilder().field('state').in().value('Texas').value('Arizona').build();
   });
 
-  describe('And', () => {
-    it('sets the clauses.', () => {
-      const expected = [clauseA, clauseB, clauseC, clauseD];
-      assertPropertySet(
-        expected,
-        () => LogicFilterBuilder.and(clauseA, clauseB, clauseC).another(clauseD),
-        (f) => f.clauses
-      );
-    });
-
-    it('sets the operator.', () => {
-      assertPropertySet(
-        LogicOperator.And,
-        () => LogicFilterBuilder.and(clauseA, clauseB),
-        (f) => f.operator
-      );
-    });
+  it('sets the clauses.', () => {
+    assertBuilderSetsProperty(
+      [clauseA, clauseB, clauseC, clauseD],
+      createTestTarget,
+      (t, v) => t.and().clauses(v),
+      (f: IZLogicFilter) => f.clauses
+    );
   });
 
-  describe('Or', () => {
-    it('sets the clauses.', () => {
-      const expected = [clauseA, clauseB, clauseC, clauseD];
-      assertPropertySet(
-        expected,
-        () => LogicFilterBuilder.or(clauseA, clauseB, clauseC).another(clauseD),
-        (f) => f.clauses
-      );
-    });
+  it('adds clauses.', () => {
+    assertBuilderSetsProperty(
+      [clauseA, clauseB, clauseC, clauseD],
+      createTestTarget,
+      (t) => t.clause(clauseA).clause(clauseB).clause(clauseC).clause(clauseD),
+      (f: IZLogicFilter) => f.clauses
+    );
+  });
 
-    it('sets the operator.', () => {
-      assertPropertySet(
-        LogicOperator.Or,
-        () => LogicFilterBuilder.or(clauseA, clauseB),
-        (f) => f.operator
-      );
-    });
+  it('sets the operator to and.', () => {
+    assertBuilderSetsProperty(
+      ZLogicOperator.And,
+      createTestTarget,
+      (t) => t.and().clause(clauseA).clause(clauseB),
+      (f: IZLogicFilter) => f.operator
+    );
+  });
+
+  it('sets the operator to or.', () => {
+    assertBuilderSetsProperty(
+      ZLogicOperator.Or,
+      createTestTarget,
+      (t) => t.or().clause(clauseA).clause(clauseB),
+      (f: IZLogicFilter) => f.operator
+    );
   });
 });

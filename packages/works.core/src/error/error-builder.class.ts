@@ -20,7 +20,7 @@ export class ZErrorBuilder {
    *
    * @param code The sub code.
    *
-   * @return This object.
+   * @returns This object.
    */
   public sub(code: number): this {
     this._error.subCode = code;
@@ -32,7 +32,7 @@ export class ZErrorBuilder {
    *
    * @param type The type of error.
    *
-   * @return This object.
+   * @returns This object.
    */
   public type(type: string): this {
     this._error.type = type;
@@ -44,7 +44,7 @@ export class ZErrorBuilder {
    *
    * @param  msg The english error message.
    *
-   * @return This object.
+   * @returns This object.
    */
   public english(msg: string): this {
     this._error.english = msg;
@@ -54,7 +54,7 @@ export class ZErrorBuilder {
   /**
    * Returns the error object.
    *
-   * @return The error object.
+   * @returns The error object.
    */
   public build(): IZError {
     return { ...this._error };

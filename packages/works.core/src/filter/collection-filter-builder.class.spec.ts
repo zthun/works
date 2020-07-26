@@ -1,60 +1,55 @@
-import { CollectionFilterBuilder } from './collection-filter-builder.class';
-import { ICollectionFilter } from './collection-filter.interface';
-import { CollectionOperator } from './collection-operator.enum';
+import { ZCollectionFilterBuilder } from './collection-filter-builder.class';
+import { IZCollectionFilter } from './collection-filter.interface';
+import { ZCollectionOperator } from './collection-operator.enum';
+import { assertBuilderSetsProperty } from '@zthun/works.jest';
 
 describe('CollectionFilterBuilder', () => {
-  let field: string;
-
-  function assertPropertySet<T>(expected: T, build: () => CollectionFilterBuilder, actual: (t: ICollectionFilter) => T) {
-    // Arrange
-    const target = build();
-    // Act
-    const val = actual(target.filter());
-    // Assert
-    expect(JSON.stringify(val)).toEqual(JSON.stringify(expected));
+  function createTestTarget() {
+    return new ZCollectionFilterBuilder();
   }
 
-  beforeEach(() => {
-    field = 'name';
+  it('sets the field.', () => {
+    assertBuilderSetsProperty(
+      'field',
+      createTestTarget,
+      (t, v) => t.field(v),
+      (f: IZCollectionFilter) => f.field
+    );
   });
 
-  describe('In', () => {
-    it('sets the field.', () => {
-      assertPropertySet(field, () => CollectionFilterBuilder.in(field), (f) => f.field);
-    });
-
-    it('sets the values.', () => {
-      const expected = [1, 2, 3, 4];
-      assertPropertySet(expected, () => CollectionFilterBuilder.in(field, [8, 9]).values(expected), (f) => f.values);
-    });
-
-    it('incrementally adds values.', () => {
-      const expected = [1, 2, 3, 4];
-      assertPropertySet(expected, () => CollectionFilterBuilder.in(field, [1, 2]).value(3).value(4), (f) => f.values);
-    });
-
-    it('sets the operator.', () => {
-      assertPropertySet(CollectionOperator.In, () => CollectionFilterBuilder.in(field), (f) => f.operator);
-    });
+  it('sets the values.', () => {
+    assertBuilderSetsProperty(
+      [1, 2, 3, 4],
+      createTestTarget,
+      (t, v) => t.values(v),
+      (f: IZCollectionFilter) => f.values
+    );
   });
 
-  describe('Not In', () => {
-    it('sets the field.', () => {
-      assertPropertySet(field, () => CollectionFilterBuilder.notIn(field), (f) => f.field);
-    });
+  it('incrementally adds values.', () => {
+    assertBuilderSetsProperty(
+      [1, 2, 3, 4],
+      createTestTarget,
+      (t) => t.value(1).value(2).value(3).value(4),
+      (f: IZCollectionFilter) => f.values
+    );
+  });
 
-    it('sets the values.', () => {
-      const expected = [1, 2, 3, 4];
-      assertPropertySet(expected, () => CollectionFilterBuilder.notIn(field, [8, 9]).values(expected), (f) => f.values);
-    });
+  it('sets the operator to in.', () => {
+    assertBuilderSetsProperty(
+      ZCollectionOperator.In,
+      createTestTarget,
+      (t) => t.field('a').in().value(1).value(2),
+      (f: IZCollectionFilter) => f.operator
+    );
+  });
 
-    it('incrementally adds values.', () => {
-      const expected = [1, 2, 3, 4];
-      assertPropertySet(expected, () => CollectionFilterBuilder.notIn(field, [1, 2]).value(3).value(4), (f) => f.values);
-    });
-
-    it('sets the operator.', () => {
-      assertPropertySet(CollectionOperator.NotIn, () => CollectionFilterBuilder.notIn(field), (f) => f.operator);
-    });
+  it('sets the operator to not in.', () => {
+    assertBuilderSetsProperty(
+      ZCollectionOperator.NotIn,
+      createTestTarget,
+      (t) => t.field('a').notIn().value(1).value(2),
+      (f: IZCollectionFilter) => f.operator
+    );
   });
 });

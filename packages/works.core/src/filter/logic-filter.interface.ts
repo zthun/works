@@ -1,16 +1,16 @@
-import { IFilter } from './filter.type';
-import { LogicOperator } from './logic-operator.enum';
+import { IZFilter } from './filter.type';
+import { ZLogicOperator } from './logic-operator.enum';
 
 /**
- * Represnets a composite logical filter.
+ * Represents a composite logical filter.
  */
-export interface ILogicFilter {
+export interface IZLogicFilter {
   /**
    * The collection of child clauses.
    */
-  clauses: IFilter[];
+  clauses: IZFilter[];
   /**
    * The operator relationship between the clauses.
    */
-  operator: LogicOperator;
+  operator: ZLogicOperator;
 }

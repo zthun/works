@@ -1,61 +1,64 @@
-import { IFilter } from './filter.type';
-import { ILogicFilter } from './logic-filter.interface';
-import { LogicOperator } from './logic-operator.enum';
+import { IZFilter } from './filter.type';
+import { IZLogicFilter } from './logic-filter.interface';
+import { ZLogicOperator } from './logic-operator.enum';
 
 /**
  * Represents a builder for a logic filter.
  */
-export class LogicFilterBuilder {
-  /**
-   * Constructs a logic filter with an 'and' clause.
-   *
-   * @param clauseA The first required clause.
-   * @param clauseB The second required clause.
-   * @param more Optional remaining clauses.
-   *
-   * @return A new filter builder.
-   */
-  public static and(clauseA: IFilter, clauseB: IFilter, ...more: IFilter[]): LogicFilterBuilder {
-    return new LogicFilterBuilder([clauseA, clauseB, ...more], LogicOperator.And);
-  }
+export class ZLogicFilterBuilder {
+  private _filter: IZLogicFilter;
 
   /**
-   * Constructs a logic filter with an 'or' clause.
-   *
-   * @param clauseA The first required clause.
-   * @param clauseB The second required clause.
-   * @param more Optional remaining clauses.
-   *
-   * @return A new filter builder.
+   * Initializes a new instance of this object.
    */
-  public static or(clauseA: IFilter, clauseB: IFilter, ...more: IFilter[]): LogicFilterBuilder {
-    return new LogicFilterBuilder([clauseA, clauseB, ...more], LogicOperator.Or);
-  }
-
-  private _filter: ILogicFilter;
-
-  /**
-   * Initializes a new instance of this objecjt.
-   *
-   * @param clauses The list of logical clauses.
-   * @param operator The operator relationship.
-   */
-  private constructor(clauses: IFilter[], operator: LogicOperator) {
+  public constructor() {
     this._filter = {
-      clauses,
-      operator
+      clauses: [],
+      operator: ZLogicOperator.And
     };
+  }
+
+  /**
+   * Sets the operator to and.
+   *
+   * sThis object.
+   */
+  public and(): this {
+    this._filter.operator = ZLogicOperator.And;
+    return this;
+  }
+
+  /**
+   * Sets the operator to or.
+   *
+   * @returns This object.
+   */
+  public or(): this {
+    this._filter.operator = ZLogicOperator.Or;
+    return this;
   }
 
   /**
    * Adds another clause.
    *
-   * @param clause The clause to add.
+   * @param val The clause to add.
    *
-   * @return This object.
+   * @returns This object.
    */
-  public another(clause: IFilter): LogicFilterBuilder {
-    this._filter.clauses.push(clause);
+  public clause(val: IZFilter): this {
+    this._filter.clauses.push(val);
+    return this;
+  }
+
+  /**
+   * Sets the list of clauses.
+   *
+   * @param val the value to set.
+   *
+   * @returns This object
+   */
+  public clauses(val: IZFilter[]): this {
+    this._filter.clauses = val;
     return this;
   }
 
@@ -64,7 +67,7 @@ export class LogicFilterBuilder {
    *
    * @returns The logic filter
    */
-  public filter(): ILogicFilter {
-    return JSON.parse(JSON.stringify(this._filter));
+  public build(): IZLogicFilter {
+    return { ...this._filter };
   }
 }

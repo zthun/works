@@ -1,7 +1,7 @@
 /**
  * Represents the connector for a logic filter.
  */
-export enum LogicOperator {
+export enum ZLogicOperator {
   /**
    * And.
    */

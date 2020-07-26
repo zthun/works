@@ -1,7 +1,7 @@
 /**
  * Represents the available operators for a binary filter.
  */
-export enum BinaryOperator {
+export enum ZBinaryOperator {
   /**
    * Equals
    */

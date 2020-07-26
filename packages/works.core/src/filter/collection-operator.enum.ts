@@ -1,7 +1,7 @@
 /**
  * Represents an operator that compares collections.
  */
-export enum CollectionOperator {
+export enum ZCollectionOperator {
   /**
    * In
    */

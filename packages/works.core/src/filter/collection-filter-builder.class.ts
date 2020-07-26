@@ -1,47 +1,33 @@
-import { ICollectionFilter } from './collection-filter.interface';
-import { CollectionOperator } from './collection-operator.enum';
+import { IZCollectionFilter } from './collection-filter.interface';
+import { ZCollectionOperator } from './collection-operator.enum';
 
 /**
  * Represents a builder for a collection filter.
  */
-export class CollectionFilterBuilder {
-  /**
-   * Constructs an in filter.
-   *
-   * @param field The field to compare against.
-   * @param values [optional] The starting values.
-   *
-   * @return The builder object.
-   */
-  public static in(field: string, values: any[] = []): CollectionFilterBuilder {
-    return new CollectionFilterBuilder(field, CollectionOperator.In).values(values);
-  }
-
-  /**
-   * Constructs a not in filter.
-   *
-   * @param field The field to compare against.
-   * @param values [optional] The starting values.
-   *
-   * @return The builder object.
-   */
-  public static notIn(field: string, values: any[] = []): CollectionFilterBuilder {
-    return new CollectionFilterBuilder(field, CollectionOperator.NotIn).values(values);
-  }
-
-  private _filter: ICollectionFilter;
+export class ZCollectionFilterBuilder<T = any> {
+  private _filter: IZCollectionFilter<T>;
 
   /**
    * Initializes a new instance of this object.
-   *
-   * @param field The filed to which the filter applies.
    */
-  private constructor(field: string, operator: CollectionOperator) {
+  public constructor() {
     this._filter = {
-      field,
-      operator,
+      field: null,
+      operator: ZCollectionOperator.In,
       values: []
     };
+  }
+
+  /**
+   * Sets the field.
+   *
+   * @param val The value to set.
+   *
+   * @returns This object.
+   */
+  public field(val: string): this {
+    this._filter.field = val;
+    return this;
   }
 
   /**
@@ -51,7 +37,7 @@ export class CollectionFilterBuilder {
    *
    * @returns This object.
    */
-  public values(values: any[]): CollectionFilterBuilder {
+  public values(values: any[]): this {
     this._filter.values = values;
     return this;
   }
@@ -63,8 +49,28 @@ export class CollectionFilterBuilder {
    *
    * @returns This object.
    */
-  public value(value: any): CollectionFilterBuilder {
+  public value(value: any): this {
     this._filter.values.push(value);
+    return this;
+  }
+
+  /**
+   * Constructs an in filter.
+   *
+   * @returns This object.
+   */
+  public in(): this {
+    this._filter.operator = ZCollectionOperator.In;
+    return this;
+  }
+
+  /**
+   * Constructs a not in filter.
+   *
+   * @returns This object.
+   */
+  public notIn(): this {
+    this._filter.operator = ZCollectionOperator.NotIn;
     return this;
   }
 
@@ -73,7 +79,7 @@ export class CollectionFilterBuilder {
    *
    * @returns A copy of the currently built filter.
    */
-  public filter(): ICollectionFilter {
+  public build(): IZCollectionFilter<T> {
     return JSON.parse(JSON.stringify(this._filter));
   }
 }

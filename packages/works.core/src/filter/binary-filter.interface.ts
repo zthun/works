@@ -1,9 +1,9 @@
-import { BinaryOperator } from './binary-operator.enum';
+import { ZBinaryOperator } from './binary-operator.enum';
 
 /**
  * Represents a standard comparison filter between a field and a wanted value.
  */
-export interface IBinaryFilter {
+export interface IZBinaryFilter<T = any> {
   /**
    * The filed to sort by.
    */
@@ -11,9 +11,9 @@ export interface IBinaryFilter {
   /**
    * The comparison operator.
    */
-  operator: BinaryOperator;
+  operator: ZBinaryOperator;
   /**
    * The value to sort by.
    */
-  value: any;
+  value: T;
 }

@@ -54,7 +54,7 @@ export class ZUnaryFilterBuilder {
   /**
    * Returns a copy of the built filter.
    *
-   * @return A copy of the current filter.
+   * @returns A copy of the current filter.
    */
   public build(): IZUnaryFilter {
     return { ...this._filter };

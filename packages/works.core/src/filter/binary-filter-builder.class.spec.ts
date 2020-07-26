@@ -1,148 +1,91 @@
-import { BinaryFilterBuilder } from './binary-filter-builder.class';
-import { IBinaryFilter } from './binary-filter.interface';
-import { BinaryOperator } from './binary-operator.enum';
+import { ZBinaryFilterBuilder } from './binary-filter-builder.class';
+import { IZBinaryFilter } from './binary-filter.interface';
+import { ZBinaryOperator } from './binary-operator.enum';
+import { assertBuilderSetsProperty } from '@zthun/works.jest';
 
 describe('BinaryFilterBuilder', () => {
-  let field: string;
-  let value: string;
-
-  beforeEach(() => {
-    field = 'name';
-    value = 'value';
-  });
-
-  function assertProperty<T>(expected: T, build: () => BinaryFilterBuilder, actual: (f: IBinaryFilter) => T) {
-    // Arrange
-    const target = build();
-    // Act
-    const val = actual(target.filter());
-    // Assert
-    expect(JSON.stringify(val)).toEqual(JSON.stringify(expected));
+  function createTestTarget() {
+    return new ZBinaryFilterBuilder();
   }
 
-  describe('Equal', () => {
-    it('sets the field.', () => {
-      assertProperty(field, () => BinaryFilterBuilder.equal(field, value), (f) => f.field);
-    });
-
-    it('sets the value.', () => {
-      assertProperty(value, () => BinaryFilterBuilder.equal(field, value), (f) => f.value);
-    });
-
-    it('overrides the value.', () => {
-      assertProperty(value, () => BinaryFilterBuilder.equal(field).value(value), (f) => f.value);
-    });
-
-    it('sets the operator.', () => {
-      assertProperty(BinaryOperator.Equal, () => BinaryFilterBuilder.equal(field), (f) => f.operator);
-    });
+  it('sets the field.', () => {
+    assertBuilderSetsProperty(
+      'field',
+      createTestTarget,
+      (t, v) => t.field(v).equal().value('value'),
+      (f: IZBinaryFilter) => f.field
+    );
   });
 
-  describe('Not Equal', () => {
-    it('sets the field.', () => {
-      assertProperty(field, () => BinaryFilterBuilder.notEqual(field, value), (f) => f.field);
-    });
-
-    it('sets the value.', () => {
-      assertProperty(value, () => BinaryFilterBuilder.notEqual(field, value), (f) => f.value);
-    });
-
-    it('overrides the value.', () => {
-      assertProperty(value, () => BinaryFilterBuilder.notEqual(field).value(value), (f) => f.value);
-    });
-
-    it('sets the operator.', () => {
-      assertProperty(BinaryOperator.NotEqual, () => BinaryFilterBuilder.notEqual(field), (f) => f.operator);
-    });
+  it('sets the value.', () => {
+    assertBuilderSetsProperty(
+      'value',
+      createTestTarget,
+      (t, v) => t.field('field').equal().value(v),
+      (f: IZBinaryFilter) => f.value
+    );
   });
 
-  describe('Less Than', () => {
-    it('sets the field.', () => {
-      assertProperty(field, () => BinaryFilterBuilder.lessThan(field, value), (f) => f.field);
-    });
+  it('sets the operator to equal.', () => {
+    assertBuilderSetsProperty(
+      ZBinaryOperator.Equal,
+      createTestTarget,
+      (t) => t.field('field').equal().value('value'),
+      (f: IZBinaryFilter) => f.operator
+    );
+  });
 
-    it('sets the value.', () => {
-      assertProperty(value, () => BinaryFilterBuilder.lessThan(field, value), (f) => f.value);
-    });
+  it('sets the operator to not equal.', () => {
+    assertBuilderSetsProperty(
+      ZBinaryOperator.NotEqual,
+      createTestTarget,
+      (t) => t.field('field').notEqual().value('value'),
+      (f: IZBinaryFilter) => f.operator
+    );
+  });
 
-    it('overrides the value.', () => {
-      assertProperty(value, () => BinaryFilterBuilder.lessThan(field).value(value), (f) => f.value);
-    });
+  it('sets the operator to greater than.', () => {
+    assertBuilderSetsProperty(
+      ZBinaryOperator.GreaterThan,
+      createTestTarget,
+      (t) => t.field('field').greaterThan().value('value'),
+      (f: IZBinaryFilter) => f.operator
+    );
+  });
 
-    it('sets the operator.', () => {
-      assertProperty(BinaryOperator.LessThan, () => BinaryFilterBuilder.lessThan(field), (f) => f.operator);
-    });
+  it('sets the operator to greater than equal to.', () => {
+    assertBuilderSetsProperty(
+      ZBinaryOperator.GreaterThanEqualTo,
+      createTestTarget,
+      (t) => t.field('field').greaterThanEqualTo().value('value'),
+      (f: IZBinaryFilter) => f.operator
+    );
+  });
 
-    describe('Greater Than', () => {
-      it('sets the field.', () => {
-        assertProperty(field, () => BinaryFilterBuilder.greaterThan(field, value), (f) => f.field);
-      });
+  it('sets the operator to less than.', () => {
+    assertBuilderSetsProperty(
+      ZBinaryOperator.LessThan,
+      createTestTarget,
+      (t) => t.field('field').lessThan().value('value'),
+      (f: IZBinaryFilter) => f.operator
+    );
+  });
 
-      it('sets the value.', () => {
-        assertProperty(value, () => BinaryFilterBuilder.greaterThan(field, value), (f) => f.value);
-      });
+  it('sets the operator to less than equal to.', () => {
+    assertBuilderSetsProperty(
+      ZBinaryOperator.LessThanEqualTo,
+      createTestTarget,
+      (t) => t.field('field').lessThanEqualTo().value('value'),
+      (f: IZBinaryFilter) => f.operator
+    );
+  });
 
-      it('overrides the value.', () => {
-        assertProperty(value, () => BinaryFilterBuilder.greaterThan(field).value(value), (f) => f.value);
-      });
-
-      it('sets the operator.', () => {
-        assertProperty(BinaryOperator.GreaterThan, () => BinaryFilterBuilder.greaterThan(field), (f) => f.operator);
-      });
-    });
-
-    describe('Less Than Or Equal To', () => {
-      it('sets the field.', () => {
-        assertProperty(field, () => BinaryFilterBuilder.lessThanEqualTo(field, value), (f) => f.field);
-      });
-
-      it('sets the value.', () => {
-        assertProperty(value, () => BinaryFilterBuilder.lessThanEqualTo(field, value), (f) => f.value);
-      });
-
-      it('overrides the value.', () => {
-        assertProperty(value, () => BinaryFilterBuilder.lessThanEqualTo(field).value(value), (f) => f.value);
-      });
-
-      it('sets the operator.', () => {
-        assertProperty(BinaryOperator.LessThanEqualTo, () => BinaryFilterBuilder.lessThanEqualTo(field), (f) => f.operator);
-      });
-    });
-
-    describe('Greater Than Or Equal To', () => {
-      it('sets the field.', () => {
-        assertProperty(field, () => BinaryFilterBuilder.greaterThanEqualTo(field, value), (f) => f.field);
-      });
-
-      it('sets the value.', () => {
-        assertProperty(value, () => BinaryFilterBuilder.greaterThanEqualTo(field, value), (f) => f.value);
-      });
-
-      it('overrides the value.', () => {
-        assertProperty(value, () => BinaryFilterBuilder.greaterThanEqualTo(field).value(value), (f) => f.value);
-      });
-
-      it('sets the operator.', () => {
-        assertProperty(BinaryOperator.GreaterThanEqualTo, () => BinaryFilterBuilder.greaterThanEqualTo(field), (f) => f.operator);
-      });
-    });
-
-    describe('Like', () => {
-      it('sets the field.', () => {
-        assertProperty(field, () => BinaryFilterBuilder.like(field, value), (f) => f.field);
-      });
-
-      it('sets the value.', () => {
-        assertProperty(value, () => BinaryFilterBuilder.like(field, value), (f) => f.value);
-      });
-
-      it('overrides the value.', () => {
-        assertProperty(value, () => BinaryFilterBuilder.like(field).value(value), (f) => f.value);
-      });
-
-      it('sets the operator.', () => {
-        assertProperty(BinaryOperator.Like, () => BinaryFilterBuilder.like(field), (f) => f.operator);
-      });
-    });
+  it('sets the operator to like.', () => {
+    assertBuilderSetsProperty(
+      ZBinaryOperator.Like,
+      createTestTarget,
+      (t) => t.field('field').like().value('value'),
+      (f: IZBinaryFilter) => f.operator
+    );
   });
 });

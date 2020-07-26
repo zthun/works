@@ -1,9 +1,9 @@
-import { CollectionOperator } from './collection-operator.enum';
+import { ZCollectionOperator } from './collection-operator.enum';
 
 /**
  * A filter that operates on a collection of values.
  */
-export interface ICollectionFilter {
+export interface IZCollectionFilter<T = any> {
   /**
    * The collection field.
    */
@@ -11,9 +11,9 @@ export interface ICollectionFilter {
   /**
    * The collection operator against the field.
    */
-  operator: CollectionOperator;
+  operator: ZCollectionOperator;
   /**
    * The values to compare the field against.
    */
-  values: any[];
+  values: T[];
 }

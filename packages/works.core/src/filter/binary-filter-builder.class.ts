@@ -1,118 +1,114 @@
-import { IBinaryFilter } from './binary-filter.interface';
-import { BinaryOperator } from './binary-operator.enum';
+import { IZBinaryFilter } from './binary-filter.interface';
+import { ZBinaryOperator } from './binary-operator.enum';
 
 /**
  * Represents an object that can build up a binary filter.
  */
-export class BinaryFilterBuilder {
-  /**
-   * Constructs an equal filter.
-   *
-   * @param field The field to compare against.
-   * @param value [optional] The value to match.
-   *
-   * @return A new filter builder object.
-   */
-  public static equal(field: string, value: any = ''): BinaryFilterBuilder {
-    return new BinaryFilterBuilder(field, value, BinaryOperator.Equal);
-  }
-
-  /**
-   * Constructs a not equal filter.
-   *
-   * @param field The field to compare against.
-   * @param value [optional] The value to match.
-   *
-   * @return A new filter builder object.
-   */
-  public static notEqual(field: string, value: any = ''): BinaryFilterBuilder {
-    return new BinaryFilterBuilder(field, value, BinaryOperator.NotEqual);
-  }
-
-  /**
-   * Constructs a less than filter.
-   *
-   * @param field The field to compare against.
-   * @param value [optional] The value to match.
-   *
-   * @return A new filter builder object.
-   */
-  public static lessThan(field: string, value: any = ''): BinaryFilterBuilder {
-    return new BinaryFilterBuilder(field, value, BinaryOperator.LessThan);
-  }
-
-  /**
-   * Constructs a greater than filter.
-   *
-   * @param field The field to compare against.
-   * @param value [optional] The value to match.
-   *
-   * @return A new filter builder object.
-   */
-  public static greaterThan(field: string, value: any = ''): BinaryFilterBuilder {
-    return new BinaryFilterBuilder(field, value, BinaryOperator.GreaterThan);
-  }
-
-  /**
-   * Constructs a less than or equal to filter.
-   *
-   * @param field The field to compare against.
-   * @param value [optional] The value to match.
-   *
-   * @return A new filter builder object.
-   */
-  public static lessThanEqualTo(field: string, value: any = ''): BinaryFilterBuilder {
-    return new BinaryFilterBuilder(field, value, BinaryOperator.LessThanEqualTo);
-  }
-
-  /**
-   * Constructs a greater than or equal to filter.
-   *
-   * @param field The field to compare against.
-   * @param value [optional] The value to match.
-   *
-   * @return A new filter builder object.
-   */
-  public static greaterThanEqualTo(field: string, value: any = ''): BinaryFilterBuilder {
-    return new BinaryFilterBuilder(field, value, BinaryOperator.GreaterThanEqualTo);
-  }
-
-  /**
-   * Constructs a like filter.
-   *
-   * @param field The field to compare against.
-   * @param value [optional] The value to match.
-   *
-   * @return A new filter builder object.
-   */
-  public static like(field: string, value: any = '%'): BinaryFilterBuilder {
-    return new BinaryFilterBuilder(field, value, BinaryOperator.Like);
-  }
-
-  private _filter: IBinaryFilter;
+export class ZBinaryFilterBuilder<T = any> {
+  private _filter: IZBinaryFilter<T>;
 
   /**
    * Initializes a new instance of this object.
-   *
-   * @param field The field to use
    */
-  private constructor(field: string, value: any, operator: BinaryOperator) {
+  public constructor() {
     this._filter = {
-      field,
-      value,
-      operator
+      field: null,
+      value: null,
+      operator: ZBinaryOperator.Equal
     };
+  }
+
+  /**
+   * Sets the field.
+   *
+   * @param val The value to set.
+   *
+   * @returns This object.
+   */
+  public field(val: string): this {
+    this._filter.field = val;
+    return this;
   }
 
   /**
    * Overrides the value.
    *
-   * @param value The value to set.
+   * @param val The value to set.
    *
    * @returns This object.
    */
-  public value(value: any): BinaryFilterBuilder {
-    this._filter.value = value;
+  public value(val: T): this {
+    this._filter.value = val;
+    return this;
+  }
+
+  /**
+   * Constructs an equal relationship.
+   *
+   * @returns This object
+   */
+  public equal(): this {
+    this._filter.operator = ZBinaryOperator.Equal;
+    return this;
+  }
+
+  /**
+   * Constructs a not equal filter.
+   *
+   * @returns This object
+   */
+  public notEqual(): this {
+    this._filter.operator = ZBinaryOperator.NotEqual;
+    return this;
+  }
+
+  /**
+   * Constructs a less than filter.
+   *
+   * @returns This object
+   */
+  public lessThan(): this {
+    this._filter.operator = ZBinaryOperator.LessThan;
+    return this;
+  }
+
+  /**
+   * Constructs a greater than filter.
+   *
+   * @returns This object.
+   */
+  public greaterThan(): this {
+    this._filter.operator = ZBinaryOperator.GreaterThan;
+    return this;
+  }
+
+  /**
+   * Constructs a less than or equal to filter.
+   *
+   * @returns This object.
+   */
+  public lessThanEqualTo(): this {
+    this._filter.operator = ZBinaryOperator.LessThanEqualTo;
+    return this;
+  }
+
+  /**
+   * Constructs a greater than or equal to filter.
+   *
+   * @returns A new filter builder object.
+   */
+  public greaterThanEqualTo(): this {
+    this._filter.operator = ZBinaryOperator.GreaterThanEqualTo;
+    return this;
+  }
+
+  /**
+   * Constructs a like filter.
+   *
+   * @returns A new filter builder object.
+   */
+  public like(): this {
+    this._filter.operator = ZBinaryOperator.Like;
     return this;
   }
 
@@ -121,7 +117,7 @@ export class BinaryFilterBuilder {
    *
    * @returns A copy of the currently built filter.
    */
-  public filter() {
-    return JSON.parse(JSON.stringify(this._filter));
+  public build(): IZBinaryFilter {
+    return { ...this._filter };
   }
 }
