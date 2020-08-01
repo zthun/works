@@ -5,5 +5,5 @@ module.exports = {
   htmlFiles: ['packages/**/*.html'],
   markdownFiles: ['*.md'],
   jsonFiles: ['*.json', 'packages/**/*.json'],
-  yamlFiles: ['./*.yml']
+  yamlFiles: ['./docker-compose.yml', '.travis.yml']
 };
