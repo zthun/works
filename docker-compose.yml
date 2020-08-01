@@ -1,51 +1,57 @@
+# This compose file is intended to match the kubernetes composition as close as possible.
 version: '3.7'
 services:
-  proxy.zthunworks.com:
-    image: nginx:1.17.6
+  # Load Balancer (Entry Point)
+  zthunworks.com:
+    build: ./packages/works.proxy
     ports:
       - 80:80
       - 443:443
-    volumes:
-      - ./packages/works.proxy/dev:/etc/nginx/conf.d
-      - ./packages/works.proxy/certs:/etc/nginx/certs
     depends_on:
-      - local.zthunworks.com
-      - api.zthunworks.com
-      - view.vault.database.zthunworks.com
-      - view.users.database.zthunworks.com
-  local.zthunworks.com:
+      - zthunworks-services-client
+      - zthunworks-services-server
+    environment:
+      - ZTHUNWORKS_HTTPS_DRY=true
+  # Node Ports
+  zthunworks-services-client:
     image: node:14.5.0
-    ports:
-      - 4200:4200
     volumes:
       - .:/usr/dev
     working_dir: /usr/dev
     command: yarn workspace @zthun/works.client debug
-  api.zthunworks.com:
+  zthunworks-services-server:
     image: node:14.5.0
     ports:
       - 9229:9229
-      - 3000:3000
     volumes:
       - .:/usr/dev
     environment:
-      - DATABASE_VAULT_URL=mongodb://vault.database.zthunworks.com:27017
-      - DATABASE_USERS_URL=mongodb://users.database.zthunworks.com:27017
+      - DATABASE_VAULT_URL=mongodb://zthunworks-databases-vault:27017
+      - DATABASE_USERS_URL=mongodb://zthunworks-databases-users:27017
+    depends_on:
+      - zthunworks-databases-vault
+      - zthunworks-databases-users
     working_dir: /usr/dev
     command: yarn workspace @zthun/works.server debug
+  # Databases
+  zthunworks-databases-vault:
+    image: mongo:4.2.0
+  zthunworks-databases-users:
+    image: mongo:4.2.0
+  # Utilities
   vault.database.zthunworks.com:
-    image: mongo:4.2.0
-  view.vault.database.zthunworks.com:
     image: mongo-express:0.49
+    ports:
+      - 8081:8081
     depends_on:
-      - vault.database.zthunworks.com
+      - zthunworks-databases-vault
     environment:
-      - ME_CONFIG_MONGODB_SERVER=vault.database.zthunworks.com
+      - ME_CONFIG_MONGODB_SERVER=zthunworks-databases-vault
   users.database.zthunworks.com:
-    image: mongo:4.2.0
-  view.users.database.zthunworks.com:
     image: mongo-express:0.49
+    ports:
+      - 8082:8081
     depends_on:
-      - users.database.zthunworks.com
+      - zthunworks-databases-users
     environment:
-      - ME_CONFIG_MONGODB_SERVER=users.database.zthunworks.com
+      - ME_CONFIG_MONGODB_SERVER=zthunworks-databases-users

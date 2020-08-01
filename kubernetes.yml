@@ -17,17 +17,6 @@ stringData:
 
 ---
 apiVersion: v1
-kind: Secret
-metadata:
-  name: zthunworks-secrets-certs
-  namespace: zthunworks
-type: Opaque
-data:
-  zthunworks.com.crt: ${zthunworks.com.crt}
-  zthunworks.com.key: ${zthunworks.com.key}
-
----
-apiVersion: v1
 kind: Service
 metadata:
   name: zthunworks-services-client
@@ -161,11 +150,3 @@ spec:
           image: zthun/works.proxy:1.0.0-9
           ports:
             - containerPort: 80
-          volumeMounts:
-            - mountPath: /etc/nginx/certs
-              name: zthunworks-pods-proxy-volumes-certs
-              readOnly: true
-      volumes:
-        - name: zthunworks-pods-proxy-volumes-certs
-          secret:
-            secretName: zthunworks-secrets-certs

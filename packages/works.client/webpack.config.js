@@ -62,7 +62,7 @@ function config(env) {
     devServer: {
       contentBase: dir,
       compress: false,
-      port: 4200,
+      port: 80,
       disableHostCheck: true
     }
   };

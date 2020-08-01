@@ -2304,10 +2304,10 @@
     typescript "^3.9.6"
     yargs "^15.4.1"
 
-"@zthun/tokenizer@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@zthun/tokenizer/-/tokenizer-1.0.0.tgz#c59ce26517477ca88fecccbbc1fdfafa83ec3982"
-  integrity sha512-vRN5fg9l5Ms/jw76L2hqi/TBsYnknolgO+iUOIxSyCY84BW22IstPV2cwWIOCc/ClTuslRhHGf/FrgZ9w2gsVg==
+"@zthun/tokenizer@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@zthun/tokenizer/-/tokenizer-1.1.0.tgz#b4ffce29e8148645beb30492868c47f9e924a2e1"
+  integrity sha512-eFRfsNh53FeyRhbLIDjP5wrVEkTCqZf1a0L1DmW/Y4tufv8r05QpNSaqHUaP2ni+PEYw1yk0DGp5kpGmeQ7z/A==
   dependencies:
     chalk "^4.1.0"
     cosmiconfig "^6.0.0"
