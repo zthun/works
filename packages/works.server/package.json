@@ -10,7 +10,7 @@
   },
   "main": "dist/main.js",
   "bin": {
-    "zworks-server": "./dist/main.js"
+    "zthun-works-server": "./dist/main.js"
   },
   "scripts": {
     "docker:publish": "docker push zthun/works.server",

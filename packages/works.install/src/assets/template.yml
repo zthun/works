@@ -12,8 +12,8 @@ metadata:
   namespace: zthunworks
 type: Opaque
 stringData:
-  database-vault-url: 'mongodb://vault.database.zthunworks.com:27017'
-  database-users-url: 'mongodb://users.database.zthunworks.com:27017'
+  database-vault-url: ${database-vault-url}
+  database-users-url: ${database-users-url}
 
 ---
 apiVersion: v1
@@ -22,6 +22,9 @@ metadata:
   name: zthunworks-secrets-certs
   namespace: zthunworks
 type: Opaque
+data:
+  zthunworks.com.crt: ${zthunworks.com.crt}
+  zthunworks.com.key: ${zthunworks.com.key}
 
 ---
 apiVersion: v1
@@ -158,3 +161,11 @@ spec:
           image: zthun/works.proxy:1.0.0-9
           ports:
             - containerPort: 80
+          volumeMounts:
+            - mountPath: /etc/nginx/certs
+              name: zthunworks-pods-proxy-volumes-certs
+              readOnly: true
+      volumes:
+        - name: zthunworks-pods-proxy-volumes-certs
+          secret:
+            secretName: zthunworks-secrets-certs

@@ -3,6 +3,7 @@ node_modules
 dist
 coverage
 reports
+install
 .DS_Store
 *.lerna_backup
 *.log

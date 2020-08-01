@@ -11,11 +11,12 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "zthunworks-install": "./dist/cli.js"
+    "zthun-works-install": "./dist/cli.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.bin.json",
-    "start": "node --inspect-brk -r ts-node/register src/cli.ts"
+    "start": "tokenizer",
+    "debug": "node --inspect-brk -r ts-node/register src/cli.ts"
   },
   "publishConfig": {
     "access": "public"
@@ -23,5 +24,9 @@
   "files": [
     "dist/**"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "@zthun/tokenizer": "^1.0.0",
+    "chalk": "^4.1.0",
+    "yargs": "^15.4.1"
+  }
 }

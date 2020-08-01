@@ -3,4 +3,4 @@
 # be hosted somewhere else.  This is useful for debugging.
 FROM nginx:1.17.3-alpine
 COPY prod/default.conf /etc/nginx/conf.d/default.conf
-COPY certs/ etc/nginx/certs/
+COPY certs/ /etc/nginx/certs/
