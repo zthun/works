@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.nest",
-  "version": "1.0.0-9",
+  "version": "1.0.0-11",
   "description": "The main module for nestjs based routes and modules for @zthun scoped projects.",
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -37,7 +37,7 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
-    "@zthun/works.core": "^1.0.0-9",
+    "@zthun/works.core": "^1.0.0-11",
     "@zthun/works.dal": "^1.0.0-9"
   },
   "sideEffects": false,
