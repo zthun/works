@@ -46,11 +46,11 @@ spec:
       name: zthunworks-pods-client
       labels:
         app: zthunworks-pods-client
-        version: 1.0.0-9
+        version: ${zthunworks-version}
     spec:
       containers:
         - name: zthunworks-pods-client
-          image: zthun/works.client:1.0.0-9
+          image: zthun/works.client:${zthunworks-version}
           ports:
             - containerPort: 443
               hostPort: 443
@@ -88,11 +88,11 @@ spec:
       name: zthunworks-pods-server
       labels:
         app: zthunworks-pods-server
-        version: 1.0.0-9
+        version: ${zthunworks-version}
     spec:
       containers:
         - name: zthunworks-pods-server
-          image: zthun/works.server:1.0.0-9
+          image: zthun/works.server:${zthunworks-version}
           ports:
             - containerPort: 3000
           env:
