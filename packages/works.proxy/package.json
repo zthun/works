@@ -2,7 +2,7 @@
   "name": "@zthun/works.proxy",
   "version": "1.0.0-10",
   "private": true,
-  "description": "The reverse proxy layer which sits between the client and server for routing.",
+  "description": "A reverse proxy for the zthunworks website that is meant to run in docker-compose for development.",
   "author": "Anthony Bonta",
   "license": "MIT",
   "repository": {
