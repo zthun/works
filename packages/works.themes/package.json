@@ -22,7 +22,8 @@
   "files": [
     "less",
     "css",
-    "svg"
+    "svg",
+    "png"
   ],
   "sideEffects": true,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
