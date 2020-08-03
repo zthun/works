@@ -2,7 +2,7 @@
 version: '3.7'
 services:
   # Load Balancer (Entry Point)
-  zthunworks.com:
+  local.zthunworks.com:
     build: ./packages/works.proxy
     ports:
       - 80:80
@@ -10,8 +10,6 @@ services:
     depends_on:
       - zthunworks-services-client
       - zthunworks-services-server
-    environment:
-      - ZTHUNWORKS_HTTPS_DRY=true
   # Node Ports
   zthunworks-services-client:
     image: node:14.5.0
