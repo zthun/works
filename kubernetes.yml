@@ -109,6 +109,25 @@ spec:
 
 ---
 # Prerequisites
+# This requires cert-manager in order to issue the acme challenge
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: zthunworks-cert-issuer
+  namespace: zthunworks
+spec:
+  acme:
+    email: ${certificate-email-address}
+    privateKeySecretRef:
+      name: zthunworks-cert-issuer
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+
+---
+# Prerequisites
 # This is setup for the nginx-ingress controller.
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -118,7 +137,12 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    cert-manager.io/issuer: 'zthunworks-cert-issuer'
 spec:
+  tls:
+    - hosts:
+        - zthunworks.com
+      secretName: zthunworks-tls
   rules:
     - host: zthunworks.com
       http:
