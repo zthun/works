@@ -31,7 +31,7 @@ export { ZUnaryFilterBuilder } from './filter/unary-filter-builder.class';
 export { IZUnaryFilter } from './filter/unary-filter.interface';
 export { ZUnaryOperator } from './filter/unary-operator.enum';
 // Http
-export { ZHttpCodeClient } from './http/http-code-client.enum';
+export { ZHttpCodeClient, ZHttpCodeClientNames, ZHttpCodeClientDescriptions } from './http/http-code-client.enum';
 export { ZHttpCodeInformationalResponse } from './http/http-code-informational-response.enum';
 export { ZHttpCodeRedirection } from './http/http-code-redirection.enum';
 export { ZHttpCodeServer } from './http/http-code-server.enum';
