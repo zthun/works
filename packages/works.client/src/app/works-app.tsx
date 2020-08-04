@@ -4,7 +4,8 @@ import { ZAlertStack, ZAlertStackContext, ZAlertStackList, ZLoginState, ZLoginSt
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { ZNotFoundPage } from '../codes/not-found-page';
 import { ZHomePage } from '../home/home-page';
 import { ZLoginPage } from '../login/login-page';
 import { ZthunworksMenu } from '../menu/works-menu';
@@ -24,9 +25,14 @@ export function ZthunworksApp() {
           <HashRouter>
             <ZthunworksMenu />
             <article className='Zthunworks-article' data-testid='Zthunworks-article'>
-              <Route path='/home' component={ZHomePage} />
-              <Route path='/login' component={ZLoginPage} />
-              <Route path='/profile' component={ZProfilePage} />
+              <Switch>
+                <Route exact path='/home' component={ZHomePage} />
+                <Route exact path='/login' component={ZLoginPage} />
+                <Route exact path='/profile' component={ZProfilePage} />
+                <Route exact path='/404' component={ZNotFoundPage} />
+                <Redirect from='/' to='/home' />
+                <Redirect to='/404' />
+              </Switch>
             </article>
           </HashRouter>
           <Snackbar open={true} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
