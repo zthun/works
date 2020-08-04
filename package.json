@@ -22,7 +22,7 @@
     "packages/works.proxy"
   ],
   "scripts": {
-    "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz packages/**/yarn-error.log *.log install",
+    "clean": "rimraf dist reports *.tgz packages/**/dist packages/**/*.tgz packages/**/yarn-error.log *.log",
     "test": "jest --coverage --runInBand",
     "lint": "lint-janitor",
     "build": "lerna run build",
