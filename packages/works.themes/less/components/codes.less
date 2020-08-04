@@ -1,0 +1,35 @@
+.ZHttpStatusCodeCard-root {
+  .ZHttpStatusCodeCard-description {
+    font-size: 1.2rem;
+    max-width: 30rem;
+  }
+
+  .ZHttpStatusCodeCard-code {
+    font-size: 12rem;
+    color: @color-secondary;
+    opacity: 0.75;
+    text-align: center;
+  }
+
+  .ZHttpStatusCodeCard-icon {
+    font-size: 4rem;
+
+    &.ZHttpStatusCodeCard-client {
+      color: @color-warning;
+    }
+
+    &.ZHttpStatusCodeCard-server {
+      color: @color-danger;
+    }
+
+    &.ZHttpStatusCodeCard-informational-response,
+    &.ZHttpStatusCodeCard-redirection {
+      color: @color-info;
+    }
+
+    &.ZHttpStatusCodeCard-success,
+    &.ZHttpStatusCodeCard-teapot {
+      color: @color-success;
+    }
+  }
+}

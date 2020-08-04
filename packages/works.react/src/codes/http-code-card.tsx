@@ -1,19 +1,29 @@
 import { Typography } from '@material-ui/core';
 import WarningIcon from '@material-ui/icons/Warning';
+import EmojiFoodBeverageTwoToneIcon from '@material-ui/icons/EmojiFoodBeverageTwoTone';
 import { ZHttpCodeClientDescriptions, ZHttpCodeClientNames } from '@zthun/works.core';
 import React from 'react';
 import { ZPaperCard } from '../common/paper-card';
 import { IZHttpErrorCodeCardProps } from './http-code-card.props';
 
-export function ZHttpCodeCard(props: IZHttpErrorCodeCardProps) {
+export function ZHttpStatusCodeCard(props: IZHttpErrorCodeCardProps) {
   const name = ZHttpCodeClientNames[props.code];
-  const heading = `${props.code}`;
+  const heading = 'Client Error';
   const description = ZHttpCodeClientDescriptions[props.code];
-  const avatar = <WarningIcon />;
+  let avatar = <WarningIcon className='ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-client' data-testid='ZHttpStatusCodeCard-client' />;
+
+  if (props.code === 418) {
+    avatar = <EmojiFoodBeverageTwoToneIcon className='ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-teapot' data-testid='ZHttpStatusCodeCard-teapot' />;
+  }
 
   return (
-    <ZPaperCard className='ZHttpCodeCard-root' data-testid='ZHttpCodeCard-root' avatar={avatar} headerText={heading} subHeaderText={name}>
-      <Typography>{description}</Typography>
+    <ZPaperCard className='ZHttpStatusCodeCard-root' data-testid='ZHttpStatusCodeCard-root' avatar={avatar} headerText={heading} subHeaderText={name}>
+      <Typography variant='body1' component='p' className='ZHttpStatusCodeCard-description'>
+        {description}
+      </Typography>
+      <Typography variant='body2' component='div' className='ZHttpStatusCodeCard-code'>
+        {props.code}
+      </Typography>
     </ZPaperCard>
   );
 }

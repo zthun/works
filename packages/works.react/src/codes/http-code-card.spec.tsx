@@ -1,17 +1,33 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { ZHttpCodeCard } from './http-code-card';
+import { ZHttpStatusCodeCard } from './http-code-card';
 
-describe('ZNotFoundPage', () => {
+describe('ZHttpStatusCodeCard', () => {
+  let code: number;
+
   function createTestTarget() {
-    return render(<ZHttpCodeCard code={401} />);
+    return render(<ZHttpStatusCodeCard code={code} />);
   }
+
+  beforeEach(() => {
+    code = 404;
+  });
 
   it('should render the component.', () => {
     // Arrange
     const target = createTestTarget();
     // Act
-    const actual = target.getByTestId('ZHttpCodeCard-root');
+    const actual = target.getByTestId('ZHttpStatusCodeCard-root');
+    // Assert
+    expect(actual).toBeTruthy();
+  });
+
+  it('should be short and stout.', () => {
+    // Arrange
+    code = 418;
+    const target = createTestTarget();
+    // Act
+    const actual = target.getByTestId('ZHttpStatusCodeCard-teapot');
     // Assert
     expect(actual).toBeTruthy();
   });

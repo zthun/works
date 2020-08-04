@@ -9,7 +9,7 @@ export { useAlertStack, useAlertState, ZAlertStackContext } from './alert/alert-
 export { IZAlertStack } from './alert/alert-stack.interface';
 export { IZAlert } from './alert/alert.interface';
 // Codes
-export { ZHttpCodeCard } from './codes/http-code-card';
+export { ZHttpStatusCodeCard } from './codes/http-code-card';
 // Common
 export { ZCircularProgress } from './common/circular-progress';
 export { IZCircularProgressProps } from './common/circular-progress.props';

@@ -5,7 +5,7 @@ import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import React from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { ZNotFoundPage } from '../codes/not-found-page';
+import { ZStatusCodePage } from '../codes/status-code-page';
 import { ZHomePage } from '../home/home-page';
 import { ZLoginPage } from '../login/login-page';
 import { ZthunworksMenu } from '../menu/works-menu';
@@ -29,9 +29,9 @@ export function ZthunworksApp() {
                 <Route exact path='/home' component={ZHomePage} />
                 <Route exact path='/login' component={ZLoginPage} />
                 <Route exact path='/profile' component={ZProfilePage} />
-                <Route exact path='/404' component={ZNotFoundPage} />
-                <Redirect from='/' to='/home' />
-                <Redirect to='/404' />
+                <Route exact path='/status-code/:code' component={ZStatusCodePage} />
+                <Redirect exact from='/' to='/home' />
+                <Redirect to='/status-code/404' />
               </Switch>
             </article>
           </HashRouter>
