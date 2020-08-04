@@ -8,6 +8,8 @@ export { ZAlertStack } from './alert/alert-stack.class';
 export { useAlertStack, useAlertState, ZAlertStackContext } from './alert/alert-stack.context';
 export { IZAlertStack } from './alert/alert-stack.interface';
 export { IZAlert } from './alert/alert.interface';
+// Codes
+export { ZHttpCodeCard } from './codes/http-code-card';
 // Common
 export { ZCircularProgress } from './common/circular-progress';
 export { IZCircularProgressProps } from './common/circular-progress.props';
