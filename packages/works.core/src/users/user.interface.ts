@@ -23,6 +23,13 @@ export interface IZUser {
   password: string;
 
   /**
+   * The optional recovery password that is auto generated for the user.
+   *
+   * This is a temporary password that has an expiration date.
+   */
+  recovery?: { password: string; exp: number };
+
+  /**
    * The users display name.
    *
    * If this is falsy, then the email should be used as the display name.

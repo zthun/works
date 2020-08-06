@@ -92,6 +92,30 @@ export class ZUserBuilder {
   }
 
   /**
+   * Sets the recovery password.
+   *
+   * @param password The temporary hashed password.
+   * @param time The ttl that the password will live.  Default is 15 minutes.
+   *
+   * @returns This object.
+   */
+  public recover(password: string, time = 900000) {
+    const exp = new Date().getTime() + time;
+    this._user.recovery = { password, exp };
+    return this;
+  }
+
+  /**
+   * Removes the password recovery.
+   *
+   * @returns This object.
+   */
+  public remember() {
+    delete this._user.recovery;
+    return this;
+  }
+
+  /**
    * Sets the user as the super user.
    *
    * @returns This object.

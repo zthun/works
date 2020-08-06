@@ -1,6 +1,7 @@
 import { v4 } from 'uuid';
 import { ZUserBuilder } from './user-builder.class';
 import { IZUser } from './user.interface';
+import { assertBuilderSetsProperty, assertBuilderCopiesObject } from '@zthun/works.jest';
 
 describe('ZUserBuilder', () => {
   function createTestTarget() {
@@ -8,53 +9,48 @@ describe('ZUserBuilder', () => {
   }
 
   describe('Properties', () => {
-    function assertPropertySet<T>(expected: T, buildFn: (target: ZUserBuilder, value: T) => ZUserBuilder, actualFn: (user: IZUser) => T) {
-      // Arrange
-      const target = createTestTarget();
-      // Act
-      const user = buildFn(target, expected).build();
-      const actual = actualFn(user);
-      // Assert
-      expect(actual).toEqual(expected);
-    }
-
     it('sets the id.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         v4(),
+        createTestTarget,
         (t, v) => t.id(v),
-        (u) => u._id
+        (u: IZUser) => u._id
       );
     });
 
     it('sets the email.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         v4(),
+        createTestTarget,
         (t, v) => t.email(v),
-        (u) => u.email
+        (u: IZUser) => u.email
       );
     });
 
     it('sets the display.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         v4(),
+        createTestTarget,
         (t, v) => t.display(v),
-        (u) => u.display
+        (u: IZUser) => u.display
       );
     });
 
     it('sets the password.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         v4(),
+        createTestTarget,
         (t, v) => t.password(v),
-        (u) => u.password
+        (u: IZUser) => u.password
       );
     });
 
     it('sets the user inactive.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         v4(),
+        createTestTarget,
         (t, v) => t.inactive(v),
-        (u) => u.activator.key
+        (u: IZUser) => u.activator.key
       );
     });
 
@@ -70,31 +66,57 @@ describe('ZUserBuilder', () => {
     });
 
     it('sets the user active', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         undefined,
+        createTestTarget,
         (t) => t.inactive(v4()).active(),
-        (u) => u.activator
+        (u: IZUser) => u.activator
+      );
+    });
+
+    it('sets the user recovery.', () => {
+      assertBuilderSetsProperty(
+        v4(),
+        createTestTarget,
+        (t, v) => t.recover(v),
+        (u: IZUser) => u.recovery.password
+      );
+    });
+
+    it('sets the user recovery exp.', () => {
+      // Arrange
+      const time = 2400;
+      const expected = new Date().getTime() + time;
+      const target = createTestTarget();
+      // Act
+      const actual = target.recover(v4(), time).build();
+      // Assert
+      expect(actual.recovery.exp).toBeGreaterThanOrEqual(expected);
+    });
+
+    it('remembers the user password.', () => {
+      assertBuilderSetsProperty(
+        undefined,
+        createTestTarget,
+        (t) => t.recover(v4()).remember(),
+        (u: IZUser) => u.recovery
       );
     });
 
     it('sets the super flag.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         true,
+        createTestTarget,
         (t) => t.super(),
-        (u) => u.super
+        (u: IZUser) => u.super
       );
     });
   });
 
-  describe('Clone', () => {
+  describe('Copy', () => {
     it('copies another user.', () => {
-      // Arrange
-      const userA = createTestTarget().email(v4()).password(v4()).id(v4()).inactive('some-activator-password').build();
-      const target = createTestTarget();
-      // Act
-      const actual = target.copy(userA).build();
-      // Assert
-      expect(JSON.stringify(actual)).toEqual(JSON.stringify(userA));
+      const userA = createTestTarget().email(v4()).password(v4()).id(v4()).inactive('some-activator-password').recover('some-recovery-password', 1000).build();
+      assertBuilderCopiesObject(userA, createTestTarget);
     });
   });
 });
