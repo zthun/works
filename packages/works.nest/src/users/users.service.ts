@@ -99,6 +99,7 @@ export class ZUsersService {
 
     if (Object.prototype.hasOwnProperty.call(profile, 'password')) {
       template.password = await hash(profile.password, ZUsersService.BcryptRounds);
+      template.recovery = null;
     }
 
     if (Object.prototype.hasOwnProperty.call(profile, 'display')) {
@@ -145,6 +146,32 @@ export class ZUsersService {
     await this._dal.update<IZUser>(ZUsersCollections.Users, copy).filter({ _id: copy._id }).run();
     const [updated] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: copy._id }).run();
     return updated;
+  }
+
+  /**
+   * Recovers a user account.
+   *
+   * @param email The email of the account to recover.
+   *
+   * @returns A promise that resolves to the generated password for the user.  Resolves to null if no user with the given email exists.
+   */
+  public async recover(email: string): Promise<string> {
+    const current = await this.findByEmail(email);
+
+    if (current) {
+      const generated = this._password();
+      const crypt = await hash(generated, ZUsersService.BcryptRounds);
+      const updated = new ZUserBuilder().copy(current).recover(crypt).build();
+      await this._dal.update<IZUser>(ZUsersCollections.Users, updated).filter({ _id: updated._id }).run();
+      return generated;
+    }
+
+    return null;
+  }
+
+  private _password() {
+    // TODO:  Generate a decent password here.
+    return v4();
   }
 
   /**

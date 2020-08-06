@@ -192,6 +192,18 @@ describe('ZUsersRepositoryController', () => {
       expect(same).toBeTruthy();
     });
 
+    it('removes the recovery password if the password is properly updated.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const profile: IZProfile = { password: 'super-password', confirm: 'super-password' };
+      // Act
+      await target.recover(userA.email);
+      await target.update(userA._id, profile);
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      // Assert
+      expect(actual.recovery).toBeFalsy();
+    });
+
     it('updates the display.', async () => {
       // Arrange
       const target = createTestTarget();
@@ -283,6 +295,41 @@ describe('ZUsersRepositoryController', () => {
       const target = createTestTarget();
       // Act
       const actual = await target.compare(loginA);
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+  });
+
+  describe('Recover', () => {
+    beforeEach(async () => {
+      [userA] = await dal.create(ZUsersCollections.Users, [userA]).run();
+    });
+
+    it('returns null if the user email does not exist.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.recover(userB.email);
+      // Assert
+      expect(actual).toBeFalsy();
+    });
+
+    it('returns a generated password if the email does exist.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.recover(userA.email);
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('generates a recovery key for the user that matches the generated password.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const generated = await target.recover(userA.email);
+      const [user] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const actual = await compare(generated, user.recovery.password);
       // Assert
       expect(actual).toBeTruthy();
     });
