@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IZDatabase } from '@zthun/works.dal';
 import { IZLogin, IZProfile, IZUser, ZUserBuilder } from '@zthun/works.core';
+import { IZDatabase } from '@zthun/works.dal';
 import { compare, hash } from 'bcryptjs';
 import { v4 } from 'uuid';
 import { ZUsersCollections } from './users.collections';
@@ -169,9 +169,26 @@ export class ZUsersService {
     return null;
   }
 
+  /**
+   * Generates a random password between 17 and 24 characters.
+   *
+   * @returns A randomly generated password between 17 and 24 characters.
+   */
   private _password() {
-    // TODO:  Generate a decent password here.
-    return v4();
+    // Between 17 and 24 characters
+    const min = 17;
+    const bounded = Math.random() * 7;
+    const length = Math.floor(bounded + min);
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*~';
+
+    let pwd = '';
+
+    while (pwd.length < length) {
+      const chari = Math.floor(Math.random() * alphabet.length);
+      pwd += alphabet.charAt(chari);
+    }
+
+    return pwd;
   }
 
   /**
