@@ -28,10 +28,12 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
   }
 
   function handleAction() {
-    let login = new ZLoginBuilder().email(email).password(password).confirm(confirm);
+    let login = new ZLoginBuilder().email(email);
 
-    if (props.hideConfirm) {
-      login = login.autoConfirm();
+    if (!props.hidePassword && !props.hideConfirm) {
+      login = login.password(password).confirm(confirm);
+    } else if (!props.hidePassword) {
+      login = login.password(password).autoConfirm();
     }
 
     props.onCredentialsChange(login.build());

@@ -77,6 +77,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
           loading={props.loading}
           disabled={props.disabled}
           hidePassword={true}
+          hideConfirm={true}
           credentials={props.recoverCredentials}
           onCredentialsChange={props.onRecoverCredentialsChange}
         />

@@ -12,7 +12,7 @@ export interface IZLogin {
   /**
    * The login password.
    */
-  password: string;
+  password?: string;
 
   /**
    * The password confirmation.

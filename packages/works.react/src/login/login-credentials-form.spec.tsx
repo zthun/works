@@ -138,6 +138,21 @@ describe('ZLoginCredentialsForm', () => {
       // Assert
       expect(expected).toHaveBeenCalledWith(expect.objectContaining(confirmed));
     });
+
+    it('removes the password and confirm when the action button is clicked if the hidePassword flag is true.', () => {
+      // Arrange
+      const expected = jest.fn();
+      const target = render(<ZLoginCredentialsForm hidePassword={true} onCredentialsChange={expected} />);
+      const recover = new ZLoginBuilder().email(credentials.email).build();
+      const actionButton = getActionButton(target);
+      const emailField = getEmailField(target);
+      emailField.value = credentials.email;
+      fireEvent.input(emailField, { target: emailField });
+      // Act
+      fireEvent.submit(actionButton);
+      // Assert
+      expect(expected).toHaveBeenCalledWith(recover);
+    });
   });
 
   describe('Options', () => {

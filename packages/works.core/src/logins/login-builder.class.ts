@@ -5,8 +5,7 @@ export class ZLoginBuilder {
 
   public constructor() {
     this._login = {
-      email: null,
-      password: null
+      email: null
     };
   }
 
