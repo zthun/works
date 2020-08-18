@@ -3,7 +3,7 @@ import { IZLogin } from '@zthun/works.core';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZLoginTabs } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
-import { get, noop } from 'lodash';
+import { get } from 'lodash';
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
@@ -35,12 +35,22 @@ export function ZLoginPage(): JSX.Element {
     }
   }
 
+  async function handleRecover(login: IZLogin) {
+    try {
+      const url = new ZUrlBuilder().api().append('profiles').append('recoveries').build();
+      await Axios.post(url, login);
+      alerts.add(new ZAlertBuilder().success().message('Check your email, and if it is registered, you will get a one time password you can use to login.').build());
+    } catch (err) {
+      alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
+    }
+  }
+
   function createProgressLoading() {
     return <CircularProgress className='ZLoginPage-progress-loading' data-testid='ZLoginPage-progress-loading' color='inherit' />;
   }
 
   function createTabs() {
-    return <ZLoginTabs onLoginCredentialsChange={handleLogin} onCreateCredentialsChange={handleCreate} onRecoverCredentialsChange={noop} />;
+    return <ZLoginTabs onLoginCredentialsChange={handleLogin} onCreateCredentialsChange={handleCreate} onRecoverCredentialsChange={handleRecover} />;
   }
 
   function createRedirect() {

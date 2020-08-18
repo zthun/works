@@ -10,6 +10,14 @@ import { ZCommonConfigService } from '../../vault/common-config.service';
  */
 @Injectable()
 export class ZProfilesService {
+  /**
+   * Initializes a new instance of this object.
+   *
+   * @param _users The users service.
+   * @param _email The email service.
+   * @param _commonConfig The common configuration service.
+   * @param _notificationsConfig The notifications configuration service.
+   */
   public constructor(private _users: ZUsersService, private _email: ZEmailService, private _commonConfig: ZCommonConfigService, private _notificationsConfig: ZNotificationsConfigService) {}
 
   /**

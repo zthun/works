@@ -1,4 +1,4 @@
-import { IZConfigEntry, IZLogin, IZProfile, IZServer, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
+import { IZConfigEntry, IZLogin, IZProfile, IZServer, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZProfileBuilder, ZUserBuilder, IZEmail } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { v4 } from 'uuid';
 import { ZEmailService } from '../../notifications/email.service';
@@ -192,14 +192,14 @@ describe('ZProfilesService', () => {
       generated = v4();
       user = new ZUserBuilder().email('gambit@marvel.com').password('not-really-secure').recover(generated).inactive(v4()).build();
 
-      users.findByEmail.mockResolvedValue(user);
-      users.recover.mockResolvedValue(generated);
+      users.findByEmail.mockReturnValue(Promise.resolve(user));
+      users.recover.mockReturnValue(Promise.resolve(generated));
     });
 
     it('does not send an email if the user does not have a password generated.', async () => {
       // Arrange
       const target = createTestTarget();
-      users.findByEmail.mockResolvedValue(null);
+      users.recover.mockResolvedValue(null);
       // Act
       await target.recoverPassword(user.email);
       // Assert
@@ -209,20 +209,22 @@ describe('ZProfilesService', () => {
     it('sends the email with the generated password.', async () => {
       // Arrange
       const target = createTestTarget();
+      const expected = expect.objectContaining<Partial<IZEmail>>({ message: expect.stringContaining(generated) });
       // Act
       await target.recoverPassword(user.email);
       // Assert
-      expect(email.send).toHaveBeenCalledWith(expect.stringContaining(generated));
+      expect(email.send).toHaveBeenCalledWith(expected, smtp.value);
     });
 
     it('sends the email with the expiration date.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = new Date(user.recovery.exp).toLocaleString();
+      const date = new Date(user.recovery.exp).toLocaleString();
+      const expected = expect.objectContaining<Partial<IZEmail>>({ message: expect.stringContaining(date) });
       // Act
       await target.recoverPassword(user.email);
       // Assert
-      expect(email.send).toHaveBeenCalledWith(expect.stringContaining(expected));
+      expect(email.send).toHaveBeenCalledWith(expected, smtp.value);
     });
   });
 });

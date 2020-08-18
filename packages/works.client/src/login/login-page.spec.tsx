@@ -87,6 +87,7 @@ describe('ZLoginPage', () => {
 
     const getLoginActionButton = getActionButton.bind(null, 0);
     const getCreateActionButton = getActionButton.bind(null, 1);
+    const getRecoverActionButton = getActionButton.bind(null, 2);
 
     describe('Login', () => {
       it('should run the login.', async () => {
@@ -164,6 +165,46 @@ describe('ZLoginPage', () => {
         });
         // Act
         fireEvent.submit(getCreateActionButton(target));
+        await of(true).pipe(delay(0)).toPromise();
+        // Assert
+        expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
+      });
+    });
+
+    describe('Recover', () => {
+      it('should run the recover workflow.', async () => {
+        // Arrange
+        let target: RenderResult;
+        await act(async () => {
+          target = await createTestTarget();
+        });
+        // Act
+        fireEvent.submit(getRecoverActionButton(target));
+        // Assert
+        expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles/recoveries'), expect.anything());
+      });
+      it('should alert the user that the password recovery has been sent to their email.', async () => {
+        // Arrange
+        let target: RenderResult;
+        await act(async () => {
+          target = await createTestTarget();
+        });
+        // Act
+        fireEvent.submit(getRecoverActionButton(target));
+        await of(true).pipe(delay(0)).toPromise();
+        // Assert
+        expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Success);
+      });
+
+      it('should alert the user if an error occurs during the password recovery phase.', async () => {
+        // Arrange
+        Axios.post = jest.fn().mockRejectedValue('failed');
+        let target: RenderResult;
+        await act(async () => {
+          target = await createTestTarget();
+        });
+        // Act
+        fireEvent.submit(getRecoverActionButton(target));
         await of(true).pipe(delay(0)).toPromise();
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
