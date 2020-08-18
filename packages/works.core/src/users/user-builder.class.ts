@@ -106,12 +106,13 @@ export class ZUserBuilder {
   }
 
   /**
-   * Removes the password recovery.
+   * Removes the password recovery and marks a timestamp of the users last login.
    *
    * @returns This object.
    */
-  public remember() {
-    delete this._user.recovery;
+  public login() {
+    this._user.login = new Date().getTime();
+    this._user.recovery = null;
     return this;
   }
 

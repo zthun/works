@@ -298,6 +298,42 @@ describe('ZUsersRepositoryController', () => {
       // Assert
       expect(actual).toBeTruthy();
     });
+
+    it('returns true if the email and recovery password match.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const pwd = await target.recover(userA.email);
+      const login = new ZLoginBuilder().copy(loginA).password(pwd).build();
+      // Act
+      const actual = await target.compare(login);
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('returns false if the email and recovery password match, but the recovery password has expired.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const pwd = await target.recover(userA.email);
+      userA = await target.findById(userA._id);
+      userA.recovery.exp = new Date().getTime();
+      await dal.update(ZUsersCollections.Users, userA).filter({ _id: userA._id }).run();
+      const login = new ZLoginBuilder().copy(loginA).password(pwd).build();
+      // Act
+      const actual = await target.compare(login);
+      // Assert
+      expect(actual).toBeFalsy();
+    });
+
+    it('returns false if the email and password do not match and the recovery password does not match.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      await target.recover(userA.email);
+      loginA.password = 'wrong-password';
+      // Act
+      const actual = await target.compare(loginA);
+      // Assert
+      expect(actual).toBeFalsy();
+    });
   });
 
   describe('Recover', () => {
@@ -332,6 +368,18 @@ describe('ZUsersRepositoryController', () => {
       const actual = await compare(generated, user.recovery.password);
       // Assert
       expect(actual).toBeTruthy();
+    });
+
+    it('removes the recovery password when the user remembers it or logs in with the recovery password.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.recover(userA.email);
+      await target.login(userA._id);
+      const [user] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const actual = user.recovery;
+      // Assert
+      expect(actual).toBeFalsy();
     });
   });
 });

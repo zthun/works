@@ -5,10 +5,20 @@ import { ZNotificationsConfigService } from '../../notifications/notifications-c
 import { ZUsersService } from '../../users/users.service';
 import { ZCommonConfigService } from '../../vault/common-config.service';
 
+/**
+ * Represents a service that manages profiles and users.
+ */
 @Injectable()
 export class ZProfilesService {
   public constructor(private _users: ZUsersService, private _email: ZEmailService, private _commonConfig: ZCommonConfigService, private _notificationsConfig: ZNotificationsConfigService) {}
 
+  /**
+   * Creates a profile object from a login.
+   *
+   * @param login The login to construct the new user and profile.
+   *
+   * @returns A promise that resolves to the profile that represents the user created.
+   */
   public async create(login: IZLogin): Promise<IZProfile> {
     const user = await this._users.create(login);
 
@@ -19,6 +29,14 @@ export class ZProfilesService {
     return new ZProfileBuilder().user(user).build();
   }
 
+  /**
+   * Updates a user from a profile.
+   *
+   * @param current The current user before the update.
+   * @param profile The profile to update the user with.
+   *
+   * @returns A promise that resolves to the profile of the user updated.
+   */
   public async update(current: IZUser, profile: IZProfile): Promise<IZProfile> {
     const user = await this._users.update(current._id, profile);
 
@@ -29,11 +47,25 @@ export class ZProfilesService {
     return new ZProfileBuilder().user(user).build();
   }
 
+  /**
+   * Removes a user.
+   *
+   * @param current The user to remove.
+   *
+   * @returns A promise that resolves the profile that was removed.
+   */
   public async remove(current: IZUser): Promise<IZProfile> {
     const user = await this._users.remove(current._id);
     return new ZProfileBuilder().user(user).build();
   }
 
+  /**
+   * Sends the activation email for a user.
+   *
+   * @param user The user to send the activation email for.
+   *
+   * @returns A promise that resolves the email sent.
+   */
   public async sendActivationEmail(user: IZUser): Promise<IZEmail> {
     const server = await this._notificationsConfig.smtp();
     const domain = await this._commonConfig.domain();
@@ -90,6 +122,49 @@ export class ZProfilesService {
     const user = await this._deactivateEmail(email);
     await this.sendActivationEmail(user);
     return new ZProfileBuilder().user(user).build();
+  }
+
+  /**
+   * Sets up the recover password for an email.
+   *
+   * @param email The email to potentially send to if it exists in the system.
+   *
+   * @returns A promise that resolves when the operation is finished, whether an
+   *          recovery message was sent or not.
+   */
+  public async recoverPassword(email: string): Promise<void> {
+    const generated = await this._users.recover(email);
+
+    if (generated) {
+      const user = await this._users.findByEmail(email);
+      await this.sendRecoveryEmail(email, generated, user.recovery.exp);
+    }
+  }
+
+  /**
+   * Sends the recovery email.
+   *
+   * @param address The address to send to.
+   * @param generated The generated password.
+   * @param exp The expiration date.
+   */
+  public async sendRecoveryEmail(address: string, generated: string, exp: number): Promise<IZEmail> {
+    const server = await this._notificationsConfig.smtp();
+    const domain = await this._commonConfig.domain();
+    const notifier = await this._notificationsConfig.notifier();
+    const envelope = new ZEmailEnvelopeBuilder().to(address).from(notifier.value).build();
+    const date = new Date(exp).toLocaleString();
+    const time = new Date().toLocaleString();
+    const subject = `Password recovery for ${domain.value}`;
+    const msg = `<h1>Password Recovery</h1>
+      <p>A password recovery was requested for your account. You may use this generated password only one time.</p>
+      <p><strong>${generated}</strong></p>
+      <p>This password is good until <strong>${date}</strong> and the current server time is ${time}.</p>
+      <p>If you did not make this request, then it is recommended to log into the system and update your email/password as someone may be trying to access your account.</p>`;
+
+    const email = new ZEmailBuilder().message(msg).subject(subject).envelope(envelope).build();
+    await this._email.send(email, server.value);
+    return email;
   }
 
   /**

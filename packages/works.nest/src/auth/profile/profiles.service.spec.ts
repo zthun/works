@@ -27,7 +27,7 @@ describe('ZProfilesService', () => {
 
     domain = new ZConfigEntryBuilder().scope(ZCommonConfigService.SCOPE).key(ZCommonConfigService.KEY_DOMAIN).value(ZCommonConfigService.DEFAULT_DOMAIN).build();
 
-    users = createMocked<ZUsersService>(['create', 'update', 'remove', 'activate', 'deactivate', 'findByEmail']);
+    users = createMocked<ZUsersService>(['create', 'update', 'remove', 'activate', 'deactivate', 'recover', 'findByEmail']);
 
     email = createMocked<ZEmailService>(['send']);
     email.send.mockReturnValue(Promise.resolve());
@@ -181,6 +181,48 @@ describe('ZProfilesService', () => {
       await target.reactivate(user.email);
       // Assert
       expect(email.send).toHaveBeenCalledWith(expect.objectContaining({ message: expect.stringContaining(user.activator.key) }), smtp.value);
+    });
+  });
+
+  describe('Recovery', () => {
+    let user: IZUser;
+    let generated: string;
+
+    beforeEach(() => {
+      generated = v4();
+      user = new ZUserBuilder().email('gambit@marvel.com').password('not-really-secure').recover(generated).inactive(v4()).build();
+
+      users.findByEmail.mockResolvedValue(user);
+      users.recover.mockResolvedValue(generated);
+    });
+
+    it('does not send an email if the user does not have a password generated.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      users.findByEmail.mockResolvedValue(null);
+      // Act
+      await target.recoverPassword(user.email);
+      // Assert
+      expect(email.send).not.toHaveBeenCalled();
+    });
+
+    it('sends the email with the generated password.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.recoverPassword(user.email);
+      // Assert
+      expect(email.send).toHaveBeenCalledWith(expect.stringContaining(generated));
+    });
+
+    it('sends the email with the expiration date.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const expected = new Date(user.recovery.exp).toLocaleString();
+      // Act
+      await target.recoverPassword(user.email);
+      // Assert
+      expect(email.send).toHaveBeenCalledWith(expect.stringContaining(expected));
     });
   });
 });

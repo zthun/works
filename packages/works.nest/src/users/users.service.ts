@@ -149,11 +149,11 @@ export class ZUsersService {
   }
 
   /**
-   * Recovers a user account.
+   * Sets the user up for a password recovery.
    *
    * @param email The email of the account to recover.
    *
-   * @returns A promise that resolves to the generated password for the user.  Resolves to null if no user with the given email exists.
+   * @returns A promise that resolves to the generated password for the user with the expiration date.  Resolves to null if no user with the given email exists.
    */
   public async recover(email: string): Promise<string> {
     const current = await this.findByEmail(email);
@@ -167,6 +167,19 @@ export class ZUsersService {
     }
 
     return null;
+  }
+
+  /**
+   * Timestamps the user login.
+   *
+   * @param id The id of the account to login.
+   *
+   * @returns A promise that resolves when the login has been set.
+   */
+  public async login(id: string): Promise<void> {
+    const current = await this.findById(id);
+    const updated = new ZUserBuilder().copy(current).login().build();
+    await this._dal.update<IZUser>(ZUsersCollections.Users, updated).filter({ _id: updated._id }).run();
   }
 
   /**
@@ -210,6 +223,7 @@ export class ZUsersService {
    * @returns A promise that resolves to true if the credentials match.  False if they do not.
    */
   public async compare(credentials: IZLogin) {
+    // This can use the temporary password, or the actual password.
     const user = await this.findByEmail(credentials.email);
 
     if (user == null) {
@@ -222,6 +236,17 @@ export class ZUsersService {
       return true;
     }
 
-    return false;
+    if (!user.recovery) {
+      return false;
+    }
+
+    const tm = new Date().getTime();
+
+    if (user.recovery.exp <= tm) {
+      // Expired
+      return false;
+    }
+
+    return await compare(credentials.password, user.recovery.password);
   }
 }

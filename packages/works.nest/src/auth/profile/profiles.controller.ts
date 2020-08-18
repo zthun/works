@@ -1,6 +1,6 @@
-import { Body, Controller, Delete, Get, Post, Put, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { ZRuleBodyRequiresActivationEmail } from '../rules/rule-body-requires-activation-email.guard';
 import { ZRuleBodyRequiresActivationKey } from '../rules/rule-body-requires-activation-key.guard';
 import { ZRuleBodyRequiresUniqueUser } from '../rules/rule-body-requires-unique-user.guard';
@@ -12,6 +12,7 @@ import { ZTokensService } from '../tokens/tokens.service';
 import { ZProfileActivationCreateDto } from './profile-activation-create.dto';
 import { ZProfileActivationUpdateDto } from './profile-activation-update.dto';
 import { ZProfileCreateDto } from './profile-create.dto';
+import { ZProfileRecoveryCreateDto } from './profile-recovery-create.dto';
 import { ZProfileUpdateDto } from './profile-update.dto';
 import { ZProfilesService } from './profiles.service';
 
@@ -124,5 +125,19 @@ export class ZProfilesController {
   public async deleteActivation(@Req() req: Request): Promise<IZProfile> {
     const user = await this._tokens.extract(req);
     return this._profile.deactivate(user.email);
+  }
+
+  /**
+   * Creates a password recovery.
+   *
+   * @param dto The dto for the recovery.
+   * @param res The response object.
+   *
+   * @returns The status returned will be a 204 regardless of whether a recovery email was sent.
+   */
+  @Post('recoveries')
+  public async createPasswordRecovery(@Body() dto: ZProfileRecoveryCreateDto, @Res() res: Response): Promise<void> {
+    await this._profile.recoverPassword(dto.email);
+    res.sendStatus(204);
   }
 }

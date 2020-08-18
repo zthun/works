@@ -94,12 +94,21 @@ describe('ZUserBuilder', () => {
       expect(actual.recovery.exp).toBeGreaterThanOrEqual(expected);
     });
 
-    it('remembers the user password.', () => {
+    it('sets the the user recovery password to null on login.', () => {
       assertBuilderSetsProperty(
-        undefined,
+        null,
         createTestTarget,
-        (t) => t.recover(v4()).remember(),
+        (t) => t.recover(v4()).login(),
         (u: IZUser) => u.recovery
+      );
+    });
+
+    it('sets a timestamp of the last user login.', () => {
+      assertBuilderSetsProperty(
+        true,
+        createTestTarget,
+        (t) => t.recover(v4()).login(),
+        (u: IZUser) => !!u.login
       );
     });
 

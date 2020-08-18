@@ -22,9 +22,10 @@ describe('ZTokensService', () => {
     secret = new ZConfigEntryBuilder().scope(ZAuthConfigService.SCOPE).key(ZAuthConfigService.KEY_JWT).generate().build();
     domain = new ZConfigEntryBuilder().scope(ZCommonConfigService.SCOPE).key(ZCommonConfigService.KEY_DOMAIN).value('marvel.com').build();
 
-    users = createMocked(['findByEmail', 'findById']);
+    users = createMocked(['findByEmail', 'findById', 'login']);
     users.findByEmail.mockReturnValue(Promise.resolve(null));
     users.findById.mockReturnValue(Promise.resolve(null));
+    users.login.mockReturnValue(Promise.resolve());
 
     commonConfig = createMocked<ZCommonConfigService>(['domain']);
     commonConfig.domain.mockReturnValue(Promise.resolve(domain));
@@ -64,6 +65,15 @@ describe('ZTokensService', () => {
       await target.clear(res);
       // Assert
       expect(res.clearCookie).toHaveBeenCalledWith(ZTokensService.COOKIE_NAME, expect.objectContaining({ secure: true, sameSite: true, httpOnly: true, domain: domain.value }));
+    });
+
+    it('should timestamp the user login.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      await target.inject(res, credentials);
+      // Assert
+      expect(users.login).toHaveBeenCalledWith(user._id);
     });
   });
 

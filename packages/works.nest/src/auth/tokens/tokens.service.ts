@@ -41,6 +41,7 @@ export class ZTokensService {
     const options = await this._cookieOptions(tomorrow);
     const { _id } = await this._users.findByEmail(credentials.email);
     const jwt = await this.sign({ user: _id }, secret.value);
+    await this._users.login(_id);
     res.cookie(ZTokensService.COOKIE_NAME, jwt, options);
   }
 

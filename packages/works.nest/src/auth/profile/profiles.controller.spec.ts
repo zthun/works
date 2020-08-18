@@ -1,7 +1,7 @@
 import { IZProfile, ZLoginBuilder, ZProfileActivationBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { plainToClass } from 'class-transformer';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { v4 } from 'uuid';
 import { ZTokensService } from '../tokens/tokens.service';
 import { ZProfileActivationCreateDto } from './profile-activation-create.dto';
@@ -9,12 +9,14 @@ import { ZProfileActivationUpdateDto } from './profile-activation-update.dto';
 import { ZProfileCreateDto } from './profile-create.dto';
 import { ZProfilesController } from './profiles.controller';
 import { ZProfilesService } from './profiles.service';
+import { ZProfileRecoveryCreateDto } from './profile-recovery-create.dto';
 
 describe('ZProfilesController', () => {
   let gambit: IZProfile;
   let jwt: jest.Mocked<ZTokensService>;
   let profile: jest.Mocked<ZProfilesService>;
   let req: jest.Mocked<Request>;
+  let res: jest.Mocked<Response>;
 
   function createTestTarget() {
     return new ZProfilesController(jwt, profile);
@@ -24,8 +26,9 @@ describe('ZProfilesController', () => {
     gambit = new ZProfileBuilder().email('gambit@marvel.com').super().active().build();
 
     req = createMocked<Request>();
+    res = createMocked<Response>(['sendStatus']);
 
-    profile = createMocked<ZProfilesService>(['update', 'create', 'remove', 'activate', 'deactivate', 'reactivate']);
+    profile = createMocked<ZProfilesService>(['update', 'create', 'remove', 'activate', 'deactivate', 'reactivate', 'recoverPassword']);
     profile.update.mockResolvedValue(gambit);
     profile.remove.mockResolvedValue(gambit);
     profile.create.mockResolvedValue(gambit);
@@ -108,6 +111,28 @@ describe('ZProfilesController', () => {
       await target.deleteActivation(req);
       // Assert
       expect(profile.deactivate).toHaveBeenCalledWith(gambit.email);
+    });
+  });
+
+  describe('Recovery', () => {
+    it('returns a 204 (no content).', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const dto = plainToClass(ZProfileRecoveryCreateDto, gambit);
+      // Act
+      await target.createPasswordRecovery(dto, res);
+      // Assert
+      expect(res.sendStatus).toHaveBeenCalledWith(204);
+    });
+
+    it('creates the users recovery password.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const dto = plainToClass(ZProfileRecoveryCreateDto, gambit);
+      // Act
+      await target.createPasswordRecovery(dto, res);
+      // Assert
+      expect(profile.recoverPassword).toHaveBeenCalledWith(dto.email);
     });
   });
 });

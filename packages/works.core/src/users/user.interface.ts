@@ -50,4 +50,9 @@ export interface IZUser {
    * The super user cannot be deleted.
    */
   super?: boolean;
+
+  /**
+   * A timestamp of the last time the user logged in.
+   */
+  login?: number;
 }
