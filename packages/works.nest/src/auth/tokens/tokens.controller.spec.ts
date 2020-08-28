@@ -3,6 +3,8 @@ import { createMocked } from '@zthun/works.jest';
 import { Response } from 'express';
 import { ZTokensController } from './tokens.controller';
 import { ZTokensService } from './tokens.service';
+import { plainToClass } from 'class-transformer';
+import { ZTokensLoginDto } from './tokens-login.dto';
 
 describe('TokensController', () => {
   let credentials: IZLogin;
@@ -27,8 +29,9 @@ describe('TokensController', () => {
     it('can login', async () => {
       // Arrange
       const target = createTestTarget();
+      const login = plainToClass(ZTokensLoginDto, credentials);
       // Act
-      await target.login(res, credentials);
+      await target.login(res, login);
       // Assert
       expect(jwt.inject).toHaveBeenCalledWith(res, credentials);
     });
@@ -36,8 +39,9 @@ describe('TokensController', () => {
     it('returns no content.', async () => {
       // Arrange
       const target = createTestTarget();
+      const login = plainToClass(ZTokensLoginDto, credentials);
       // Act
-      await target.login(res, credentials);
+      await target.login(res, login);
       // Assert
       expect(res.sendStatus).toHaveBeenCalledWith(204);
     });
