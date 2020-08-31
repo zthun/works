@@ -9,17 +9,21 @@ describe('ZProfileMenu', () => {
   let onLogin: jest.Mock;
   let onLogout: jest.Mock;
   let hideLogout: boolean;
+  let loading: boolean;
+  let disabled: boolean;
 
   beforeEach(() => {
     onLogin = jest.fn();
     onLogout = jest.fn();
     hideLogout = false;
+    loading = false;
+    disabled = false;
     profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').build();
   });
 
   async function createTestTarget() {
     const target = render(
-      <ZProfileMenu profile={profile} hideLogout={hideLogout} onLogin={onLogin} onLogout={onLogout}>
+      <ZProfileMenu profile={profile} hideLogout={hideLogout} onLogin={onLogin} onLogout={onLogout} loading={loading} disabled={disabled}>
         <MenuItem>Child</MenuItem>
       </ZProfileMenu>
     );
@@ -115,6 +119,46 @@ describe('ZProfileMenu', () => {
       const actual = btn.textContent.toUpperCase();
       // Assert
       expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('Disabled', () => {
+    beforeEach(() => {
+      disabled = true;
+    });
+
+    it('should disable the button.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const btn = target.getByTestId('ZProfileMenu-btn-profile') as HTMLInputElement;
+      const actual = btn.disabled;
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+  });
+
+  describe('Loading', () => {
+    beforeEach(() => {
+      loading = true;
+    });
+    it('should show the spinner.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const spinner = target.getByTestId('ZProfileMenu-progress-loading');
+      // Assert
+      expect(spinner).toBeTruthy();
+    });
+
+    it('should not show the spinner if not loading.', async () => {
+      // Arrange
+      loading = false;
+      const target = await createTestTarget();
+      // Act
+      const spinner = target.queryByTestId('ZProfileMenu-progress-loading');
+      // Assert
+      expect(spinner).toBeFalsy();
     });
   });
 });

@@ -65,8 +65,10 @@ describe('ZthunworksMenu', () => {
         // Arrange
         const target = await createTestTarget();
         // Act
-        const actual = target.getByText('LOGIN');
-        fireEvent.click(actual);
+        await act(async () => {
+          const actual = target.getByText('LOGIN');
+          fireEvent.click(actual);
+        });
         // Assert
         expect(history.location.pathname).toEqual('/login');
       });

@@ -7,6 +7,9 @@ export interface IZProfileMenuProps {
 
   profile?: IZProfile;
 
+  disabled: boolean;
+  loading: boolean;
+
   onLogin: () => void;
   onLogout: () => void;
 }

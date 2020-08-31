@@ -3,10 +3,11 @@ import CloudIcon from '@material-ui/icons/Cloud';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileMenu } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export function ZthunworksMenu(): JSX.Element {
+  const [loggingOut, setLoggingOut] = useState(false);
   const alerts = useAlertStack();
   const hist = useHistory();
   const login = useLoginState();
@@ -26,10 +27,13 @@ export function ZthunworksMenu(): JSX.Element {
   async function handleLogout() {
     try {
       const url = new ZUrlBuilder().api().append('tokens').build();
+      setLoggingOut(true);
       await Axios.delete(url);
       await login.refresh();
     } catch (err) {
       alerts.add(new ZAlertBuilder().error().message(err).build());
+    } finally {
+      setLoggingOut(false);
     }
   }
 
@@ -54,7 +58,7 @@ export function ZthunworksMenu(): JSX.Element {
     }
 
     return (
-      <ZProfileMenu data-testid='ZthunworksMenu-menu-profile' profile={login.profile} onLogout={handleLogout} onLogin={handleLogin}>
+      <ZProfileMenu data-testid='ZthunworksMenu-menu-profile' profile={login.profile} onLogout={handleLogout} onLogin={handleLogin} loading={loggingOut}>
         <MenuItem onClick={handleProfile}>PROFILE</MenuItem>
       </ZProfileMenu>
     );

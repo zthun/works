@@ -1,6 +1,7 @@
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { noop } from 'lodash';
 import React from 'react';
+import { ZCircularProgress } from '../common/circular-progress';
 import { useMenuState } from '../common/use-menu-state.hook';
 import { IZProfileMenuProps } from './profile-menu.props';
 
@@ -33,8 +34,9 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
 
     return (
       <React.Fragment>
-        <Button className='ZProfileMenu-btn-profile' data-testid='ZProfileMenu-btn-profile' color='inherit' onClick={openMenu}>
+        <Button className='ZProfileMenu-btn-profile' data-testid='ZProfileMenu-btn-profile' color='inherit' onClick={openMenu} disabled={props.disabled}>
           {props.profile.display || props.profile.email}
+          <ZCircularProgress data-testid='ZProfileMenu-progress-loading' show={props.loading} />
         </Button>
         <Menu className='ZProfileManu-menu-profile' data-testid='ZProfileMenu-menu-profile' open={!!anchorEl} onClose={closeMenu} anchorEl={anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
           <div onClick={closeMenu}>
@@ -59,6 +61,9 @@ ZProfileMenu.defaultProps = {
   hideLogout: false,
 
   profile: null,
+
+  disabled: false,
+  loading: false,
 
   onLogin: noop,
   onLogout: noop

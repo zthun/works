@@ -4,27 +4,32 @@ import { useAlertStack, useLoginState, ZAlertBuilder, ZLoginTabs } from '@zthun/
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import { get } from 'lodash';
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 export function ZLoginPage(): JSX.Element {
+  const [working, setWorking] = useState(false);
   const logged = useLoginState();
   const alerts = useAlertStack();
 
   async function handleLogin(login: IZLogin) {
     try {
       const url = new ZUrlBuilder().api().append('tokens').build();
+      setWorking(true);
       await Axios.post(url, login);
       alerts.add(new ZAlertBuilder().success().message('Login successful.').build());
       await logged.refresh();
     } catch (err) {
       alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
+    } finally {
+      setWorking(false);
     }
   }
 
   async function handleCreate(login: IZLogin) {
     try {
       let url = new ZUrlBuilder().api().append('profiles').build();
+      setWorking(true);
       await Axios.post(url, login);
       alerts.add(new ZAlertBuilder().success().message('Account created successfully.').build());
       url = new ZUrlBuilder().api().append('tokens').build();
@@ -32,16 +37,21 @@ export function ZLoginPage(): JSX.Element {
       await logged.refresh();
     } catch (err) {
       alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
+    } finally {
+      setWorking(false);
     }
   }
 
   async function handleRecover(login: IZLogin) {
     try {
       const url = new ZUrlBuilder().api().append('profiles').append('recoveries').build();
+      setWorking(true);
       await Axios.post(url, login);
       alerts.add(new ZAlertBuilder().success().message('Check your email, and if it is registered, you will get a one time password you can use to login.').build());
     } catch (err) {
       alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
+    } finally {
+      setWorking(false);
     }
   }
 
@@ -50,7 +60,7 @@ export function ZLoginPage(): JSX.Element {
   }
 
   function createTabs() {
-    return <ZLoginTabs onLoginCredentialsChange={handleLogin} onCreateCredentialsChange={handleCreate} onRecoverCredentialsChange={handleRecover} />;
+    return <ZLoginTabs onLoginCredentialsChange={handleLogin} onCreateCredentialsChange={handleCreate} onRecoverCredentialsChange={handleRecover} disabled={working} loading={working} />;
   }
 
   function createRedirect() {

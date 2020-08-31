@@ -47,8 +47,10 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       required={true}
       label='Email'
       type='email'
+      name='username'
       margin='none'
       variant='outlined'
+      autoFocus={true}
       value={email}
       disabled={props.disabled}
       onInput={handleEmailChange}
@@ -62,6 +64,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       fullWidth={true}
       required={true}
       label='Password'
+      name='password'
       type='password'
       margin='none'
       variant='outlined'
@@ -80,6 +83,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
         required={true}
         label='Confirm password'
         type='password'
+        name='confirm'
         margin='none'
         variant='outlined'
         value={confirm}

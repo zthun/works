@@ -95,9 +95,9 @@ describe('ZLoginPage', () => {
         let target: RenderResult;
         await act(async () => {
           target = await createTestTarget();
+          // Act
+          fireEvent.submit(getLoginActionButton(target));
         });
-        // Act
-        fireEvent.submit(getLoginActionButton(target));
         // Assert
         expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('tokens'), expect.anything());
       });
@@ -107,10 +107,10 @@ describe('ZLoginPage', () => {
         let target: RenderResult;
         await act(async () => {
           target = await createTestTarget();
+          // Act
+          fireEvent.submit(getLoginActionButton(target));
+          await of(true).pipe(delay(0)).toPromise();
         });
-        // Act
-        fireEvent.submit(getLoginActionButton(target));
-        await of(true).pipe(delay(0)).toPromise();
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Success);
       });
@@ -121,10 +121,10 @@ describe('ZLoginPage', () => {
         let target: RenderResult;
         await act(async () => {
           target = await createTestTarget();
+          // Act
+          fireEvent.submit(getLoginActionButton(target));
+          await of(true).pipe(delay(0)).toPromise();
         });
-        // Act
-        fireEvent.submit(getLoginActionButton(target));
-        await of(true).pipe(delay(0)).toPromise();
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
       });
@@ -136,9 +136,9 @@ describe('ZLoginPage', () => {
         let target: RenderResult;
         await act(async () => {
           target = await createTestTarget();
+          // Act
+          fireEvent.submit(getCreateActionButton(target));
         });
-        // Act
-        fireEvent.submit(getCreateActionButton(target));
         // Assert
         expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles'), expect.anything());
       });
@@ -148,10 +148,10 @@ describe('ZLoginPage', () => {
         let target: RenderResult;
         await act(async () => {
           target = await createTestTarget();
+          // Act
+          fireEvent.submit(getCreateActionButton(target));
+          await of(true).pipe(delay(0)).toPromise();
         });
-        // Act
-        fireEvent.submit(getCreateActionButton(target));
-        await of(true).pipe(delay(0)).toPromise();
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Success);
       });
@@ -162,10 +162,10 @@ describe('ZLoginPage', () => {
         let target: RenderResult;
         await act(async () => {
           target = await createTestTarget();
+          // Act
+          fireEvent.submit(getCreateActionButton(target));
+          await of(true).pipe(delay(0)).toPromise();
         });
-        // Act
-        fireEvent.submit(getCreateActionButton(target));
-        await of(true).pipe(delay(0)).toPromise();
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
       });
@@ -177,9 +177,9 @@ describe('ZLoginPage', () => {
         let target: RenderResult;
         await act(async () => {
           target = await createTestTarget();
+          // Act
+          fireEvent.submit(getRecoverActionButton(target));
         });
-        // Act
-        fireEvent.submit(getRecoverActionButton(target));
         // Assert
         expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles/recoveries'), expect.anything());
       });
@@ -188,10 +188,10 @@ describe('ZLoginPage', () => {
         let target: RenderResult;
         await act(async () => {
           target = await createTestTarget();
+          // Act
+          fireEvent.submit(getRecoverActionButton(target));
+          await of(true).pipe(delay(0)).toPromise();
         });
-        // Act
-        fireEvent.submit(getRecoverActionButton(target));
-        await of(true).pipe(delay(0)).toPromise();
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Success);
       });
@@ -202,10 +202,10 @@ describe('ZLoginPage', () => {
         let target: RenderResult;
         await act(async () => {
           target = await createTestTarget();
+          // Act
+          fireEvent.submit(getRecoverActionButton(target));
+          await of(true).pipe(delay(0)).toPromise();
         });
-        // Act
-        fireEvent.submit(getRecoverActionButton(target));
-        await of(true).pipe(delay(0)).toPromise();
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
       });
