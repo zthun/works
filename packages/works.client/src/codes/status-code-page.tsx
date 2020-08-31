@@ -5,7 +5,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 export function ZStatusCodePage() {
-  const { code } = useParams();
+  const { code } = useParams<{ code: string }>();
 
   return (
     <Grid container={true} spacing={3} className='ZStatusCodePage-root' data-testid='ZStatusCodePage-root' justify='center'>

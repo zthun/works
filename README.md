@@ -24,6 +24,6 @@ helm install zthunworks-cert-manager jetstack/cert-manager --namespace zthunwork
 
 ### Install
 
-```
+```sh
 yarn kubernetes
 ```
