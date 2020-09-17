@@ -68,6 +68,23 @@ export class ZProfilesService {
   }
 
   /**
+   * Retrieves the avatar for a given user.
+   *
+   * @param current The user to retrieve the avatar for.
+   *
+   * @returns The avatar to use for the given user.  If the user has no
+   *          avatar, then the default avatar is returned.
+   */
+  public async findAvatar(current: IZUser): Promise<Buffer> {
+    if (current.avatar) {
+      return Buffer.from(current.avatar, 'base64');
+    }
+
+    // TODO: Use their gravatar if it exists
+    return Buffer.from('', 'ascii');
+  }
+
+  /**
    * Sends the activation email for a user.
    *
    * @param user The user to send the activation email for.

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Header, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { Request, Response } from 'express';
 import { ZRuleBodyRequiresActivationEmail } from '../rules/rule-body-requires-activation-email.guard';
@@ -139,5 +139,21 @@ export class ZProfilesController {
   public async createPasswordRecovery(@Body() dto: ZProfileRecoveryCreateDto, @Res() res: Response): Promise<void> {
     await this._profile.recoverPassword(dto.email);
     res.sendStatus(204);
+  }
+
+  /**
+   * Returns the avatar for the profile.
+   *
+   * This is retrieved separately as it can be large.
+   *
+   * @returns A promise that returns the avatar of the user.
+   */
+  @Get('avatars')
+  @Header('content-type', 'image/png')
+  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleCookieRequiresAuthActivated)
+  public async readAvatar(@Req() req: Request, @Res() res: Response): Promise<void> {
+    const user = await this._tokens.extract(req);
+    const binary = await this._profile.findAvatar(user);
+    res.send(binary);
   }
 }
