@@ -5,6 +5,10 @@ import { ZActionForm } from '../common/action-form';
 import { IZProfileAvatarFormProps } from './profile-avatar-form.props';
 
 export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
+  function handleSave() {
+    props.onAvatarChange(Buffer.from('', 'ascii'));
+  }
+
   return (
     <ZActionForm
       className='ZProfileAvatarForm-root'
@@ -15,6 +19,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
       headerText={props.headerText}
       subHeaderText={props.subHeaderText}
       actionText={props.saveText}
+      onAction={handleSave}
     ></ZActionForm>
   );
 }

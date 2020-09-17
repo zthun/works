@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileActivationForm, ZProfileDeactivationForm, ZProfileDeleteForm, ZProfileForm, ZProfileAvatarForm, ZProfileReactivationForm } from '@zthun/works.react';
+import { useAlertStack, useLoginState, useProfileAvatarState, ZAlertBuilder, ZCircularProgress, ZProfileActivationForm, ZProfileAvatarForm, ZProfileDeactivationForm, ZProfileDeleteForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import { get } from 'lodash';
@@ -9,13 +9,16 @@ import { Redirect } from 'react-router-dom';
 
 export function ZProfilePage() {
   const loginState = useLoginState();
+  const avatarState = useProfileAvatarState();
   const alerts = useAlertStack();
   const [activating, setActivating] = useState(false);
   const [deactivating, setDeactivating] = useState(false);
   const [reactivating, setReactivating] = useState(false);
-  const [updating, setUpdating] = useState(false);
+  const [updatingProfile, setUpdatingProfile] = useState(false);
+  const [updatingAvatar, setUpdatingAvatar] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [activation, setActivation] = useState(new ZProfileActivationBuilder().email(get(loginState.data, 'email', null)).build());
+  const waiting = deleting || deactivating || updatingProfile || updatingAvatar || activating || reactivating;
 
   async function handleProfileRest<T>(url: string, successMsg: string, changeFn: (url: string) => Promise<T>) {
     try {
@@ -68,11 +71,17 @@ export function ZProfilePage() {
     setDeleting(false);
   }
 
-  async function handleSave(changes: IZProfile) {
-    setUpdating(true);
+  async function handleUpdateProfile(changes: IZProfile) {
+    setUpdatingProfile(true);
     setActivation(new ZProfileActivationBuilder().email(loginState.data.email).build());
     await handleProfileChange('Account updated.', (url) => Axios.put(url, changes));
-    setUpdating(false);
+    setUpdatingProfile(false);
+  }
+
+  async function handleUpdateAvatar() {
+    setUpdatingAvatar(true);
+    alerts.add(new ZAlertBuilder().info().message('Method is not yet implemented').build());
+    setUpdatingAvatar(false);
   }
 
   function createProfileLoading() {
@@ -87,16 +96,16 @@ export function ZProfilePage() {
     return (
       <React.Fragment>
         <Grid item md={6}>
-          <ZProfileForm disabled={deleting || deactivating || updating} loading={updating} profile={loginState.data} onProfileChange={handleSave} />
+          <ZProfileForm disabled={waiting} loading={updatingProfile} profile={loginState.data} onProfileChange={handleUpdateProfile} />
         </Grid>
         <Grid item md={6}>
-          <ZProfileAvatarForm></ZProfileAvatarForm>
+          <ZProfileAvatarForm disabled={waiting} loading={updatingAvatar} avatar={avatarState.data} onAvatarChange={handleUpdateAvatar}></ZProfileAvatarForm>
         </Grid>
         <Grid item md={6}>
-          <ZProfileDeactivationForm disabled={deleting || deactivating || updating} loading={deactivating} onDeactivate={handleDeactivation} />
+          <ZProfileDeactivationForm disabled={waiting} loading={deactivating} onDeactivate={handleDeactivation} />
         </Grid>
         <Grid item md={6}>
-          <ZProfileDeleteForm disabled={deleting || deactivating || updating} loading={deleting} onDelete={handleDelete} />
+          <ZProfileDeleteForm disabled={waiting} loading={deleting} onDelete={handleDelete} />
         </Grid>
       </React.Fragment>
     );
@@ -106,10 +115,10 @@ export function ZProfilePage() {
     return (
       <React.Fragment>
         <Grid item md={12}>
-          <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={activating || reactivating} loading={activating} />
+          <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={waiting} loading={activating} />
         </Grid>
         <Grid item md={12}>
-          <ZProfileReactivationForm onReactivate={handleReactivation} disabled={activating || reactivating} loading={reactivating} />
+          <ZProfileReactivationForm onReactivate={handleReactivation} disabled={waiting} loading={reactivating} />
         </Grid>
       </React.Fragment>
     );
