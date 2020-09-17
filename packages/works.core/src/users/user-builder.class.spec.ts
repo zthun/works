@@ -120,6 +120,15 @@ describe('ZUserBuilder', () => {
         (u: IZUser) => u.super
       );
     });
+
+    it('sets the avatar.', () => {
+      assertBuilderSetsProperty(
+        'image-data',
+        createTestTarget,
+        (t, v) => t.avatar(v),
+        (u: IZUser) => u.avatar
+      );
+    });
   });
 
   describe('Copy', () => {

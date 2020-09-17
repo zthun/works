@@ -55,4 +55,9 @@ export interface IZUser {
    * A timestamp of the last time the user logged in.
    */
   login?: number;
+
+  /**
+   * An avatar image.
+   */
+  avatar?: string;
 }

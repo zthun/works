@@ -106,6 +106,18 @@ export class ZUserBuilder {
   }
 
   /**
+   * Sets the base64 avatar for this user.
+   *
+   * @param val The avatar image data.
+   *
+   * @returns This object.
+   */
+  public avatar(val: string) {
+    this._user.avatar = val;
+    return this;
+  }
+
+  /**
    * Removes the password recovery and marks a timestamp of the users last login.
    *
    * @returns This object.
