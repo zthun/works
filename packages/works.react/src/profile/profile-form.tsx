@@ -115,7 +115,7 @@ ZProfileForm.defaultProps = {
 
   headerText: 'Profile',
   subHeaderText: 'Update your information',
-  saveText: 'Save',
+  saveText: 'Update Profile',
   accountInformationHeaderText: 'Account Information',
   passwordHeaderText: 'Update Password',
 

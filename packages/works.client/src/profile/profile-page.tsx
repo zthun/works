@@ -77,7 +77,7 @@ export function ZProfilePage() {
 
   function createProfileLoading() {
     return (
-      <Grid item md={12}>
+      <Grid item>
         <ZCircularProgress className='ZProfilePage-progress-profile-loading' data-testid='ZProfilePage-progress-profile-loading' size='5em' />
       </Grid>
     );
@@ -87,10 +87,10 @@ export function ZProfilePage() {
     return (
       <React.Fragment>
         <Grid item md={6}>
-          <ZProfileForm disabled={deleting || deactivating || updating} saveText='Update Details' loading={updating} profile={loginState.data} onProfileChange={handleSave} />
+          <ZProfileForm disabled={deleting || deactivating || updating} loading={updating} profile={loginState.data} onProfileChange={handleSave} />
         </Grid>
         <Grid item md={6}>
-          <ZProfileAvatarForm saveText='Update Avatar'></ZProfileAvatarForm>
+          <ZProfileAvatarForm></ZProfileAvatarForm>
         </Grid>
         <Grid item md={6}>
           <ZProfileDeactivationForm disabled={deleting || deactivating || updating} loading={deactivating} onDeactivate={handleDeactivation} />

@@ -263,7 +263,7 @@ describe('ZProfilePage', () => {
       // Act
       await act(async () => {
         target = await createTestTarget();
-        const saveBtn = target.getByText('Update Details');
+        const saveBtn = target.getByText('Update Profile');
         fireEvent.submit(saveBtn);
       });
       // Assert
