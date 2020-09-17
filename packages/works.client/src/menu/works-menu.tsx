@@ -53,12 +53,12 @@ export function ZthunworksMenu(): JSX.Element {
   }
 
   function createProfileMenu() {
-    if (login.profile === undefined) {
+    if (login.data === undefined) {
       return <ZCircularProgress className='ZthunworksMenu-progress-loading' data-testid='ZthunworksMenu-progress-loading' />;
     }
 
     return (
-      <ZProfileMenu data-testid='ZthunworksMenu-menu-profile' profile={login.profile} onLogout={handleLogout} onLogin={handleLogin} loading={loggingOut}>
+      <ZProfileMenu data-testid='ZthunworksMenu-menu-profile' profile={login.data} onLogout={handleLogout} onLogin={handleLogin} loading={loggingOut}>
         <MenuItem onClick={handleProfile}>PROFILE</MenuItem>
       </ZProfileMenu>
     );

@@ -1,6 +1,6 @@
 import { fireEvent, render, RenderResult } from '@testing-library/react';
-import { ZProfileBuilder } from '@zthun/works.core';
-import { IZAlertStack, IZLoginState, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZLoginStateContext, ZLoginStateStatic } from '@zthun/works.react';
+import { ZProfileBuilder, IZProfile } from '@zthun/works.core';
+import { IZAlertStack, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZLoginStateContext, IZDataState, ZDataStateStatic } from '@zthun/works.react';
 import Axios from 'axios';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
@@ -12,7 +12,7 @@ import { ZLoginPage } from './login-page';
 jest.mock('axios');
 
 describe('ZLoginPage', () => {
-  let state: IZLoginState;
+  let state: IZDataState<IZProfile>;
   let alerts: IZAlertStack;
 
   async function createTestTarget() {
@@ -30,14 +30,14 @@ describe('ZLoginPage', () => {
   }
 
   beforeEach(() => {
-    state = new ZLoginStateStatic(null);
+    state = new ZDataStateStatic<IZProfile>(null);
     alerts = new ZAlertStack();
   });
 
   describe('Display', () => {
     it('shows a circular progress if the profile is loading.', async () => {
       // Arrange
-      state = new ZLoginStateStatic(undefined);
+      state = new ZDataStateStatic<IZProfile>(undefined);
       let target: RenderResult;
       // Act
       await act(async () => {
@@ -62,7 +62,7 @@ describe('ZLoginPage', () => {
 
     it('redirects to the profile page if the user is logged in.', async () => {
       // Arrange
-      state = new ZLoginStateStatic(new ZProfileBuilder().display('Gambit').email('gambit@marvel.com').build());
+      state = new ZDataStateStatic(new ZProfileBuilder().display('Gambit').email('gambit@marvel.com').build());
       let target: RenderResult;
       // Act
       await act(async () => {

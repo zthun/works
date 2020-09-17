@@ -1,19 +1,18 @@
-import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
-import { ZLoginState } from './login-state.class';
+import { ZDataState } from './data-state.class';
 
 describe('ZLoginState', () => {
-  let profile: IZProfile;
+  let data: string;
   let refreshFn: jest.Mock;
 
   function createTestTarget() {
-    return new ZLoginState(refreshFn);
+    return new ZDataState<string>(refreshFn);
   }
 
   beforeEach(() => {
-    profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').super().build();
+    data = 'state-0';
 
     refreshFn = jest.fn();
-    refreshFn.mockResolvedValue(profile);
+    refreshFn.mockResolvedValue(data);
   });
 
   it('sets the profile to the value of the refresh method.', async () => {
@@ -22,28 +21,28 @@ describe('ZLoginState', () => {
     // Act
     const actual = await target.refresh();
     // Assert
-    expect(actual).toEqual(profile);
+    expect(actual).toEqual(data);
   });
 
-  it('raises the profile change event.', async () => {
+  it('raises the data change event.', async () => {
     // Arrange
     const target = createTestTarget();
     await target.refresh();
     const expected = jest.fn();
-    target.profileChange.subscribe(expected);
+    target.dataChange.subscribe(expected);
     // Act
     const actual = await target.refresh();
     // Assert
     expect(expected).toHaveBeenCalledWith(actual);
   });
 
-  it('sets the profile to undefined when refreshing.', async () => {
+  it('sets the data to undefined when refreshing.', async () => {
     // Arrange
     const target = createTestTarget();
     await target.refresh();
     // Act
     const p = target.refresh();
-    const actual = target.profile;
+    const actual = target.data;
     await p;
     // Assert
     expect(actual).toBeUndefined();
@@ -54,7 +53,7 @@ describe('ZLoginState', () => {
     const target = createTestTarget();
     await target.refresh();
     const expected = jest.fn();
-    const sub = target.profileChange.subscribe(expected);
+    const sub = target.dataChange.subscribe(expected);
     // Act
     const p = target.refresh();
     sub.unsubscribe();
@@ -79,7 +78,7 @@ describe('ZLoginState', () => {
     const target = createTestTarget();
     await target.refresh();
     const expected = jest.fn();
-    target.profileChange.subscribe(expected);
+    target.dataChange.subscribe(expected);
     refreshFn.mockRejectedValue('Failed');
     // Act
     await target.refresh();

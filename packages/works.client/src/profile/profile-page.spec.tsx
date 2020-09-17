@@ -1,6 +1,6 @@
 import { act, fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
-import { IZAlertStack, IZLoginState, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZLoginStateContext, ZLoginStateStatic } from '@zthun/works.react';
+import { IZAlertStack, IZDataState, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZDataStateStatic, ZLoginStateContext } from '@zthun/works.react';
 import Axios from 'axios';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -13,7 +13,7 @@ jest.mock('axios');
 
 describe('ZProfilePage', () => {
   let profile: IZProfile;
-  let state: IZLoginState;
+  let state: IZDataState<IZProfile>;
   let alerts: IZAlertStack;
 
   async function createTestTarget() {
@@ -32,7 +32,7 @@ describe('ZProfilePage', () => {
 
   beforeEach(() => {
     profile = undefined;
-    state = new ZLoginStateStatic(profile);
+    state = new ZDataStateStatic(profile);
     alerts = new ZAlertStack(1);
 
     (Axios.get as jest.Mock).mockClear();
@@ -70,7 +70,7 @@ describe('ZProfilePage', () => {
   describe('Logged out', () => {
     beforeEach(() => {
       profile = null;
-      state = new ZLoginStateStatic(profile);
+      state = new ZDataStateStatic(profile);
     });
 
     it('redirects to the login page.', async () => {
@@ -92,7 +92,7 @@ describe('ZProfilePage', () => {
   describe('Not activated', () => {
     beforeEach(() => {
       profile = new ZProfileBuilder().email('gambit@marvel.com').build();
-      state = new ZLoginStateStatic(profile);
+      state = new ZDataStateStatic(profile);
     });
 
     async function setKey(target: RenderResult, key: string) {
@@ -180,7 +180,7 @@ describe('ZProfilePage', () => {
         await clickReactivateButton(target);
       });
       // Assert
-      expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles/activations'), expect.objectContaining({ email: state.profile.email }));
+      expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles/activations'), expect.objectContaining({ email: state.data.email }));
     });
 
     it('notifies the user that activation was successful.', async () => {
@@ -214,7 +214,7 @@ describe('ZProfilePage', () => {
   describe('Activated', () => {
     beforeEach(() => {
       profile = new ZProfileBuilder().active().email('gambit@marvel.com').display('Gambit').build();
-      state = new ZLoginStateStatic(profile);
+      state = new ZDataStateStatic(profile);
     });
 
     it('shows the profile editor.', async () => {
@@ -263,7 +263,7 @@ describe('ZProfilePage', () => {
       // Act
       await act(async () => {
         target = await createTestTarget();
-        const saveBtn = target.getByText('Save');
+        const saveBtn = target.getByText('Update Details');
         fireEvent.submit(saveBtn);
       });
       // Assert

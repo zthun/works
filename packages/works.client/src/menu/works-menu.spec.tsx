@@ -1,6 +1,6 @@
 import { fireEvent, render, RenderResult } from '@testing-library/react';
-import { ZProfileBuilder } from '@zthun/works.core';
-import { IZAlertStack, IZLoginState, ZAlertStack, ZAlertStackContext, ZLoginStateContext, ZLoginStateStatic } from '@zthun/works.react';
+import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
+import { IZAlertStack, IZDataState, ZAlertStack, ZAlertStackContext, ZLoginStateContext, ZDataStateStatic } from '@zthun/works.react';
 import Axios from 'axios';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
@@ -13,7 +13,7 @@ jest.mock('axios');
 describe('ZthunworksMenu', () => {
   let history: MemoryHistory;
   let alerts: IZAlertStack;
-  let loginState: IZLoginState;
+  let loginState: IZDataState<IZProfile>;
 
   async function createTestTarget() {
     return render(
@@ -29,7 +29,7 @@ describe('ZthunworksMenu', () => {
 
   beforeEach(() => {
     history = createMemoryHistory();
-    loginState = new ZLoginStateStatic();
+    loginState = new ZDataStateStatic<IZProfile>();
     alerts = new ZAlertStack();
 
     (Axios.delete as jest.Mock).mockClear();
@@ -58,7 +58,7 @@ describe('ZthunworksMenu', () => {
 
     describe('Logged out.', () => {
       beforeEach(() => {
-        loginState = new ZLoginStateStatic(null);
+        loginState = new ZDataStateStatic<IZProfile>(null);
       });
 
       it('should move to the login page when the profile menu is clicked.', async () => {
@@ -79,7 +79,7 @@ describe('ZthunworksMenu', () => {
 
       beforeEach(() => {
         menu = 'Gambit';
-        loginState = new ZLoginStateStatic(new ZProfileBuilder().email('gambit@marvel.com').display(menu).build());
+        loginState = new ZDataStateStatic(new ZProfileBuilder().email('gambit@marvel.com').display(menu).build());
       });
 
       function openMenu(target: RenderResult) {
@@ -103,8 +103,10 @@ describe('ZthunworksMenu', () => {
         const target = await createTestTarget();
         // Act
         await act(async () => openMenu(target));
-        const logoutMenuItem = target.getByText('LOGOUT');
-        fireEvent.click(logoutMenuItem);
+        await act(async () => {
+          const logoutMenuItem = target.getByText('LOGOUT');
+          fireEvent.click(logoutMenuItem);
+        });
         // Assert
         expect(Axios.delete).toHaveBeenCalledWith(expect.stringContaining('tokens'));
       });

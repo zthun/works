@@ -1,12 +1,12 @@
+import { IZProfile } from '@zthun/works.core';
 import { createContext, useContext } from 'react';
-import { useWatchableState } from '../common/use-watchable-state.hook';
-import { ZLoginStateStatic } from './login-state-static.class';
-import { IZLoginState } from './login-state.interface';
-
+import { useWatchableState } from '../store/use-watchable-state.hook';
+import { ZDataState } from '../store/data-state.class';
+import { IZDataState } from '../store/data-state.interface';
 /**
  * Represents the context for the globally provided login state.
  */
-export const ZLoginStateContext = createContext<IZLoginState>(new ZLoginStateStatic(null));
+export const ZLoginStateContext = createContext<IZDataState<IZProfile>>(new ZDataState<IZProfile>(null));
 
 /**
  * Retrieves the current globally provided login state.
@@ -16,7 +16,7 @@ export const ZLoginStateContext = createContext<IZLoginState>(new ZLoginStateSta
  *
  * @returns The global login state.
  */
-export function useLogin(): IZLoginState {
+export function useLogin(): IZDataState<IZProfile> {
   return useContext(ZLoginStateContext);
 }
 
@@ -28,7 +28,7 @@ export function useLogin(): IZLoginState {
  *
  * @returns The global login state.
  */
-export function useLoginState(): IZLoginState {
+export function useLoginState(): IZDataState<IZProfile> {
   const loginState = useLogin();
-  return useWatchableState(loginState.profile, loginState.profileChange, loginState);
+  return useWatchableState(loginState.data, loginState.dataChange, loginState);
 }

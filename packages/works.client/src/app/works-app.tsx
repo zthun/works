@@ -1,6 +1,6 @@
 import { Snackbar } from '@material-ui/core';
 import { IZProfile } from '@zthun/works.core';
-import { ZAlertStack, ZAlertStackContext, ZAlertStackList, ZLoginState, ZLoginStateContext } from '@zthun/works.react';
+import { ZAlertStack, ZAlertStackContext, ZAlertStackList, ZDataState, ZLoginStateContext } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import React from 'react';
@@ -20,7 +20,7 @@ export function ZthunworksApp() {
 
   return (
     <div className='Zthunworks-root' data-testid='Zthunworks-root'>
-      <ZLoginStateContext.Provider value={new ZLoginState(getProfile)}>
+      <ZLoginStateContext.Provider value={new ZDataState(getProfile)}>
         <ZAlertStackContext.Provider value={new ZAlertStack(5)}>
           <HashRouter>
             <ZthunworksMenu />

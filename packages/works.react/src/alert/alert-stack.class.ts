@@ -7,7 +7,7 @@ import { IZAlert } from './alert.interface';
  * Represents an alert stack with support to auto remove the alerts.
  */
 export class ZAlertStack implements IZAlertStack {
-  public _list: IZAlert[] = [];
+  private _list: IZAlert[] = [];
   public listChange = new Subject<IZAlert[]>();
 
   /**

@@ -68,11 +68,11 @@ export function ZLoginPage(): JSX.Element {
   }
 
   function createContent() {
-    if (logged.profile) {
+    if (logged.data) {
       return createRedirect();
     }
 
-    if (logged.profile === null) {
+    if (logged.data === null) {
       return createTabs();
     }
 

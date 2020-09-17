@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileActivationForm, ZProfileDeactivationForm, ZProfileDeleteForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
+import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileActivationForm, ZProfileDeactivationForm, ZProfileDeleteForm, ZProfileForm, ZProfileAvatarForm, ZProfileReactivationForm } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import { get } from 'lodash';
@@ -15,7 +15,7 @@ export function ZProfilePage() {
   const [reactivating, setReactivating] = useState(false);
   const [updating, setUpdating] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const [activation, setActivation] = useState(new ZProfileActivationBuilder().email(get(loginState.profile, 'email', null)).build());
+  const [activation, setActivation] = useState(new ZProfileActivationBuilder().email(get(loginState.data, 'email', null)).build());
 
   async function handleProfileRest<T>(url: string, successMsg: string, changeFn: (url: string) => Promise<T>) {
     try {
@@ -40,14 +40,14 @@ export function ZProfilePage() {
   async function handleActivation(value: IZProfileActivation) {
     setActivation(value);
     setActivating(true);
-    value = new ZProfileActivationBuilder().copy(value).email(loginState.profile.email).build();
+    value = new ZProfileActivationBuilder().copy(value).email(loginState.data.email).build();
     await handleActivationChange('Account activated.', (url) => Axios.put(url, value));
     setActivating(false);
   }
 
   async function handleReactivation() {
     setReactivating(true);
-    const body = new ZProfileActivationBuilder().email(loginState.profile.email).build();
+    const body = new ZProfileActivationBuilder().email(loginState.data.email).build();
     setActivation(body);
     await handleActivationChange('Activation code sent. Please check your email.', (url) => Axios.post(url, body));
     setReactivating(false);
@@ -55,7 +55,7 @@ export function ZProfilePage() {
 
   async function handleDeactivation() {
     setDeactivating(true);
-    const body = new ZProfileActivationBuilder().email(loginState.profile.email).build();
+    const body = new ZProfileActivationBuilder().email(loginState.data.email).build();
     setActivation(body);
     await handleActivationChange('Account deactivated. Send yourself another activation code to reactivate.', (url) => Axios.delete(url));
     setDeactivating(false);
@@ -70,38 +70,53 @@ export function ZProfilePage() {
 
   async function handleSave(changes: IZProfile) {
     setUpdating(true);
-    setActivation(new ZProfileActivationBuilder().email(loginState.profile.email).build());
+    setActivation(new ZProfileActivationBuilder().email(loginState.data.email).build());
     await handleProfileChange('Account updated.', (url) => Axios.put(url, changes));
     setUpdating(false);
   }
 
   function createProfileLoading() {
-    return <ZCircularProgress className='ZProfilePage-progress-profile-loading' data-testid='ZProfilePage-progress-profile-loading' size='5em' />;
+    return (
+      <Grid item md={12}>
+        <ZCircularProgress className='ZProfilePage-progress-profile-loading' data-testid='ZProfilePage-progress-profile-loading' size='5em' />
+      </Grid>
+    );
   }
 
   function createProfileActivatedForm() {
     return (
-      <div className='ZPaperCard-row'>
-        <ZProfileForm disabled={deleting || deactivating || updating} loading={updating} profile={loginState.profile} onProfileChange={handleSave} />
-        <div className='ZPaperCard-group'>
+      <React.Fragment>
+        <Grid item md={6}>
+          <ZProfileForm disabled={deleting || deactivating || updating} saveText='Update Details' loading={updating} profile={loginState.data} onProfileChange={handleSave} />
+        </Grid>
+        <Grid item md={6}>
+          <ZProfileAvatarForm saveText='Update Avatar'></ZProfileAvatarForm>
+        </Grid>
+        <Grid item md={6}>
           <ZProfileDeactivationForm disabled={deleting || deactivating || updating} loading={deactivating} onDeactivate={handleDeactivation} />
+        </Grid>
+        <Grid item md={6}>
           <ZProfileDeleteForm disabled={deleting || deactivating || updating} loading={deleting} onDelete={handleDelete} />
-        </div>
-      </div>
+        </Grid>
+      </React.Fragment>
     );
   }
 
   function createProfileDeactivatedForm() {
     return (
-      <div className='ZPaperCard-group'>
-        <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={activating || reactivating} loading={activating} />
-        <ZProfileReactivationForm onReactivate={handleReactivation} disabled={activating || reactivating} loading={reactivating} />
-      </div>
+      <React.Fragment>
+        <Grid item md={12}>
+          <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={activating || reactivating} loading={activating} />
+        </Grid>
+        <Grid item md={12}>
+          <ZProfileReactivationForm onReactivate={handleReactivation} disabled={activating || reactivating} loading={reactivating} />
+        </Grid>
+      </React.Fragment>
     );
   }
 
   function createProfileForm() {
-    return loginState.profile.active ? createProfileActivatedForm() : createProfileDeactivatedForm();
+    return loginState.data.active ? createProfileActivatedForm() : createProfileDeactivatedForm();
   }
 
   function createProfileRedirect() {
@@ -109,22 +124,20 @@ export function ZProfilePage() {
   }
 
   function createContentFromProfile() {
-    if (loginState.profile) {
+    if (loginState.data) {
       return createProfileForm();
     }
 
-    if (loginState.profile === null) {
+    if (loginState.data === null) {
       return createProfileRedirect();
     }
 
     return createProfileLoading();
   }
 
-  const content = createContentFromProfile();
-
   return (
-    <Grid className='ZProfilePage-root' data-testid='ZProfilePage-root' container={true} spacing={3} justify='center'>
-      <Grid item={true}>{content}</Grid>
+    <Grid container className='ZProfilePage-root' data-testid='ZProfilePage-root' spacing={3} justify='center'>
+      {createContentFromProfile()}
     </Grid>
   );
 }

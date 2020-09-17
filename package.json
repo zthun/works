@@ -13,6 +13,7 @@
     "packages/works.jest",
     "packages/works.url",
     "packages/works.core",
+    "packages/works.draw",
     "packages/works.dal",
     "packages/works.themes",
     "packages/works.react",
