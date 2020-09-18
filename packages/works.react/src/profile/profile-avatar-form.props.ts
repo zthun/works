@@ -6,6 +6,6 @@ export interface IZProfileAvatarFormProps {
   disabled: boolean;
   loading: boolean;
 
-  avatar: Buffer;
-  onAvatarChange: (avatar: Buffer) => void;
+  avatar: Blob;
+  onAvatarChange: (avatar: Blob) => void;
 }
