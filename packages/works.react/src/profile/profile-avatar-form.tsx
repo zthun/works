@@ -1,26 +1,24 @@
+import { Grid } from '@material-ui/core';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import { ZPrintableDrawing, ZPrintableImage, ZPrintableTransform } from '@zthun/works.draw';
 import { noop } from 'lodash';
 import React, { useEffect, useRef } from 'react';
 import { ZActionForm } from '../common/action-form';
-import { ZDrawing } from '../draw/drawing.class';
-import { ZPrintableImage } from '../draw/printable-image.class';
 import { IZProfileAvatarFormProps } from './profile-avatar-form.props';
-import { ZTransform } from '../draw/transform.class';
-import { ZPrintableLayer } from '../draw/printable-layer.class';
-import { Grid } from '@material-ui/core';
 
 export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   const cvs = useRef<HTMLCanvasElement>(null);
-  const draw = useRef<ZDrawing>(new ZDrawing());
+  const draw = useRef<ZPrintableDrawing>(new ZPrintableDrawing());
 
   useEffect(() => {
     async function render() {
       const image = new ZPrintableImage();
-      await image.load(props.avatar);
+      await image.import(props.avatar);
       const sx = 256 / image.width;
       const sy = 256 / image.height;
-      const background = new ZPrintableLayer([image], new ZTransform().scale(sx, sy));
-      draw.current.background = background;
+      const scale = new ZPrintableTransform().scale(sx, sy);
+      draw.current.background = image;
+      draw.current.backstage = scale;
       draw.current.print(cvs.current.getContext('2d'));
     }
 

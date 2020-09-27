@@ -6,15 +6,28 @@ import { IZPrintable } from './printable.interface';
 export class ZPrintableImage implements IZPrintable {
   private _canvas: HTMLCanvasElement = document.createElement('canvas');
 
+  /**
+   * Gets the width of the image.
+   */
   public get width() {
     return this._canvas.width;
   }
 
+  /**
+   * Gets the height of the image.
+   */
   public get height() {
     return this._canvas.height;
   }
 
-  public load(binary: Blob) {
+  /**
+   * Imports the image from binary data.
+   *
+   * @param binary The binary date to import from.
+   *
+   * @returns A promise that, when resolved, has loaded the image.
+   */
+  public import(binary: Blob): Promise<void> {
     const bmp = this._canvas.getContext('2d');
 
     if (!binary) {
@@ -37,8 +50,9 @@ export class ZPrintableImage implements IZPrintable {
       };
 
       img.onerror = () => {
-        this._canvas.width = img.width;
-        this._canvas.height = img.height;
+        this._canvas.width = 1;
+        this._canvas.height = 1;
+        bmp.clearRect(0, 0, 1, 1);
         URL.revokeObjectURL(url);
         reject();
       };

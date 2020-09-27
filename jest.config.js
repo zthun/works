@@ -8,5 +8,7 @@ module.exports = {
   transform: { '^.+\\.(ts|tsx)$': 'ts-jest' },
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
-  coverageDirectory: '../reports/coverage'
+  testEnvironmentOptions: { resources: 'usable' },
+  coverageDirectory: '../reports/coverage',
+  setupFiles: ['jest-canvas-mock']
 };

@@ -5,7 +5,8 @@
     "sourceMap": false,
     "declarationDir": "dist/types",
     "paths": {
-      "@zthun/works.core": ["../works.core/src/index"]
+      "@zthun/works.core": ["../works.core/src/index"],
+      "@zthun/works.draw": ["../works.draw/src/index"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"]

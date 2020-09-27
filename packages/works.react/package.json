@@ -28,11 +28,13 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.52",
     "@zthun/works.core": ">=0.0.0 <2.0.0",
+    "@zthun/works.draw": ">=0.0.0 <2.0.0",
     "react": "^16.12.0",
     "rxjs": "^6.5.5"
   },
   "devDependencies": {
-    "@zthun/works.core": "^1.0.0-13"
+    "@zthun/works.core": "^1.0.0-13",
+    "@zthun/works.draw": "^1.0.0-13"
   },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"

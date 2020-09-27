@@ -8,7 +8,8 @@
       "@zthun/works.jest": ["works.jest/src/index"],
       "@zthun/works.react": ["works.react/src/index"],
       "@zthun/works.dal": ["works.dal/src/index"],
-      "@zthun/works.url": ["works.url/src/index"]
+      "@zthun/works.url": ["works.url/src/index"],
+      "@zthun/works.draw": ["works.draw/src/index"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
