@@ -1,10 +1,11 @@
+import { IZImageReader } from '../image/image-reader.interface';
 import { IZPrintable } from './printable.interface';
 
 /**
  * Represents an object that can load an image to print to a canvas.
  */
 export class ZPrintableImage implements IZPrintable {
-  private _canvas: HTMLCanvasElement = document.createElement('canvas');
+  private _canvas: HTMLCanvasElement;
 
   /**
    * Gets the width of the image.
@@ -21,44 +22,33 @@ export class ZPrintableImage implements IZPrintable {
   }
 
   /**
+   * Initializes a new instance of this object.
+   *
+   * @param reader The reader to use to load images.
+   */
+  public constructor(public reader: IZImageReader) {
+    this._canvas = document.createElement('canvas');
+    this._canvas.width = 1;
+    this._canvas.height = 1;
+    this._canvas.getContext('2d').clearRect(0, 0, 1, 1);
+  }
+
+  /**
    * Imports the image from binary data.
    *
    * @param binary The binary date to import from.
    *
    * @returns A promise that, when resolved, has loaded the image.
    */
-  public import(binary: Blob): Promise<void> {
-    const bmp = this._canvas.getContext('2d');
-
+  public async import(binary: Blob): Promise<void> {
     if (!binary) {
+      this._canvas = document.createElement('canvas');
       this._canvas.width = 1;
       this._canvas.height = 1;
-      bmp.clearRect(0, 0, 1, 1);
       return Promise.resolve();
     }
 
-    return new Promise((resolve, reject) => {
-      const url = URL.createObjectURL(binary);
-      const img = new Image();
-
-      img.onload = () => {
-        this._canvas.width = img.width;
-        this._canvas.height = img.height;
-        bmp.drawImage(img, 0, 0);
-        URL.revokeObjectURL(url);
-        resolve();
-      };
-
-      img.onerror = () => {
-        this._canvas.width = 1;
-        this._canvas.height = 1;
-        bmp.clearRect(0, 0, 1, 1);
-        URL.revokeObjectURL(url);
-        reject();
-      };
-
-      img.src = url;
-    });
+    this._canvas = await this.reader.read(binary);
   }
 
   public print(context: CanvasRenderingContext2D) {

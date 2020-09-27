@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
-import { ZPrintableDrawing, ZPrintableImage, ZPrintableTransform } from '@zthun/works.draw';
+import { ZImageReader, ZPrintableDrawing, ZPrintableImage, ZPrintableTransform } from '@zthun/works.draw';
 import { noop } from 'lodash';
 import React, { useEffect, useRef } from 'react';
 import { ZActionForm } from '../common/action-form';
@@ -12,7 +12,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
 
   useEffect(() => {
     async function render() {
-      const image = new ZPrintableImage();
+      const image = new ZPrintableImage(new ZImageReader());
       await image.import(props.avatar);
       const sx = 256 / image.width;
       const sy = 256 / image.height;
