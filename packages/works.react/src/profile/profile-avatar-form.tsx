@@ -25,10 +25,6 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
     render();
   }, [props.avatar]);
 
-  useEffect(() => {
-    draw.current.print(cvs.current.getContext('2d'));
-  });
-
   function handleSave() {
     props.onAvatarChange(null);
   }
@@ -47,7 +43,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
     >
       <Grid container justify='center'>
         <Grid item>
-          <canvas ref={cvs} height={256} width={256} />
+          <canvas className='ZProfileAvatarForm-picture' ref={cvs} height={256} width={256} />
         </Grid>
       </Grid>
     </ZActionForm>
