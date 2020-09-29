@@ -1,6 +1,6 @@
 import { CircularProgress, Grid } from '@material-ui/core';
 import { IZLogin } from '@zthun/works.core';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZLoginTabs } from '@zthun/works.react';
+import { useAlertStack, useLoginState, useProfileAvatar, ZAlertBuilder, ZLoginTabs } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import { get } from 'lodash';
@@ -10,6 +10,7 @@ import { Redirect } from 'react-router-dom';
 export function ZLoginPage(): JSX.Element {
   const [working, setWorking] = useState(false);
   const logged = useLoginState();
+  const avatar = useProfileAvatar();
   const alerts = useAlertStack();
 
   async function handleLogin(login: IZLogin) {
@@ -18,10 +19,10 @@ export function ZLoginPage(): JSX.Element {
       setWorking(true);
       await Axios.post(url, login);
       alerts.add(new ZAlertBuilder().success().message('Login successful.').build());
+      avatar.refresh();
       await logged.refresh();
     } catch (err) {
       alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
-    } finally {
       setWorking(false);
     }
   }
@@ -37,7 +38,6 @@ export function ZLoginPage(): JSX.Element {
       await logged.refresh();
     } catch (err) {
       alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
-    } finally {
       setWorking(false);
     }
   }

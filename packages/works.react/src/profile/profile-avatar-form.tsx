@@ -1,6 +1,10 @@
-import { Grid } from '@material-ui/core';
+import { Grid, IconButton } from '@material-ui/core';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
-import { ZImageReader, ZPrintableDrawing, ZPrintableImage, ZPrintableTransform } from '@zthun/works.draw';
+import RestoreIcon from '@material-ui/icons/Restore';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import { ZImageReader, ZPrintableColor, ZPrintableDrawing, ZPrintableImage, ZPrintableTransform } from '@zthun/works.draw';
 import { noop } from 'lodash';
 import React, { useEffect, useRef } from 'react';
 import { ZActionForm } from '../common/action-form';
@@ -8,18 +12,17 @@ import { IZProfileAvatarFormProps } from './profile-avatar-form.props';
 
 export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   const cvs = useRef<HTMLCanvasElement>(null);
+  const transform = useRef<ZPrintableTransform>(new ZPrintableTransform());
   const draw = useRef<ZPrintableDrawing>(new ZPrintableDrawing());
 
   useEffect(() => {
     async function render() {
       const image = new ZPrintableImage(new ZImageReader());
       await image.import(props.avatar);
-      const sx = 256 / image.width;
-      const sy = 256 / image.height;
-      const scale = new ZPrintableTransform().scale(sx, sy);
-      draw.current.background = image;
-      draw.current.backstage = scale;
-      draw.current.print(cvs.current.getContext('2d'));
+      draw.current.layers = [image];
+      draw.current.background = new ZPrintableColor('#FFF');
+      draw.current.backstage = transform.current;
+      redraw();
     }
 
     render();
@@ -27,6 +30,30 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
 
   function handleSave() {
     props.onAvatarChange(null);
+  }
+
+  function redraw() {
+    draw.current.print(cvs.current.getContext('2d'));
+  }
+
+  function zoom(percent: number) {
+    const sx = transform.current.scaleX + percent;
+    const sy = transform.current.scaleY + percent;
+    transform.current.scale(sx, sy);
+    redraw();
+  }
+
+  function zoomOut() {
+    zoom(-0.2);
+  }
+
+  function zoomIn() {
+    zoom(0.2);
+  }
+
+  function reset() {
+    transform.current.reset();
+    redraw();
   }
 
   return (
@@ -41,7 +68,21 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
       actionText={props.saveText}
       onAction={handleSave}
     >
-      <Grid container justify='center'>
+      <Grid container justify='center' alignItems='center' direction='column' spacing={2}>
+        <Grid item>
+          <IconButton title='Open'>
+            <FolderOpenIcon fontSize='large' />
+          </IconButton>
+          <IconButton title='Zoom in' onClick={zoomIn}>
+            <ZoomInIcon fontSize='large' />
+          </IconButton>
+          <IconButton title='Zoom out' onClick={zoomOut}>
+            <ZoomOutIcon fontSize='large' />
+          </IconButton>
+          <IconButton title='Reset' onClick={reset}>
+            <RestoreIcon fontSize='large' />
+          </IconButton>
+        </Grid>
         <Grid item>
           <canvas className='ZProfileAvatarForm-picture' ref={cvs} height={256} width={256} />
         </Grid>

@@ -14,12 +14,12 @@ describe('ZPrintableTransform', () => {
     jest.spyOn(canvas.getContext('2d'), 'transform');
   });
 
-  it('should apply the identity transformation.', () => {
+  it('should apply the identity transformation on reset.', () => {
     // Arrange
     const target = createTestTarget();
     const context = canvas.getContext('2d');
     // Act
-    target.print(context);
+    target.scale(2, 2).skew(4, 5).translate(2, 3).reset().print(context);
     // Assert
     expect(context.transform).toHaveBeenCalledWith(1, 0, 0, 1, 0, 0);
   });

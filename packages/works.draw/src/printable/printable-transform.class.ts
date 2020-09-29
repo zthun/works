@@ -4,22 +4,39 @@ import { IZPrintable } from './printable.interface';
  * Represents a printable transformation that will apply a transformation matrix to the context.
  */
 export class ZPrintableTransform implements IZPrintable {
-  private _aScaleX = 1;
-  private _bSkewY = 0;
-  private _cSkewX = 0;
-  private _dScaleY = 1;
-  private _eTranslateX = 0;
-  private _fTranslateY = 0;
+  public scaleX = 1;
+  public skewY = 0;
+  public skewX = 0;
+  public scaleY = 1;
+  public translateX = 0;
+  public translateY = 0;
+
+  /**
+   * Resets the transform back to the identity.
+   *
+   * @returns This object.
+   */
+  public reset() {
+    this.scaleX = 1;
+    this.skewY = 0;
+    this.skewX = 0;
+    this.scaleY = 1;
+    this.translateX = 0;
+    this.translateY = 0;
+    return this;
+  }
 
   /**
    * Sets the scale on the transformation.
    *
    * @param sx The x scale.
    * @param sy The y scale.
+   *
+   * @returns This object.
    */
   public scale(sx: number, sy: number): this {
-    this._aScaleX = sx;
-    this._dScaleY = sy;
+    this.scaleX = sx;
+    this.scaleY = sy;
     return this;
   }
 
@@ -28,10 +45,12 @@ export class ZPrintableTransform implements IZPrintable {
    *
    * @param sx The x skew.
    * @param sy The y skew.
+   *
+   * @returns This object.
    */
   public skew(sx: number, sy: number): this {
-    this._cSkewX = sx;
-    this._bSkewY = sy;
+    this.skewX = sx;
+    this.skewY = sy;
     return this;
   }
 
@@ -40,10 +59,12 @@ export class ZPrintableTransform implements IZPrintable {
    *
    * @param mx The horizontal translation.
    * @param my The vertical translation.
+   *
+   * @returns This object.
    */
   public translate(mx: number, my: number): this {
-    this._eTranslateX = mx;
-    this._fTranslateY = my;
+    this.translateX = mx;
+    this.translateY = my;
     return this;
   }
 
@@ -53,6 +74,6 @@ export class ZPrintableTransform implements IZPrintable {
    * @param context The context to apply the transformation on.
    */
   public print(context: CanvasRenderingContext2D) {
-    context.transform(this._aScaleX, this._bSkewY, this._cSkewX, this._dScaleY, this._eTranslateX, this._fTranslateY);
+    context.transform(this.scaleX, this.skewY, this.skewX, this.scaleY, this.translateX, this.translateY);
   }
 }
