@@ -1,11 +1,11 @@
-import { ZImageReaderStatic } from '../image/image-reader-static.class';
+import { createMocked } from '@zthun/works.jest';
 import { IZImageReader } from '../image/image-reader.interface';
 import { ZPrintableImage } from './printable-image.class';
 
 describe('ZPrintableImage', () => {
   let image: HTMLCanvasElement;
   let canvas: HTMLCanvasElement;
-  let reader: IZImageReader;
+  let reader: jest.Mocked<IZImageReader>;
 
   function createTestTarget() {
     return new ZPrintableImage(reader);
@@ -22,7 +22,8 @@ describe('ZPrintableImage', () => {
     image.width = 15;
     image.height = 20;
 
-    reader = new ZImageReaderStatic(image);
+    reader = createMocked<IZImageReader>(['read']);
+    reader.read.mockResolvedValue(image);
   });
 
   describe('Import', () => {

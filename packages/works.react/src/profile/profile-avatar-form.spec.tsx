@@ -1,22 +1,65 @@
-import { render } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
+import { IZImageReader } from '@zthun/works.draw';
+import { createMocked } from '@zthun/works.jest';
 import React from 'react';
-import { ZFileSelectStatic } from '../file/file-select-static.class';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { ZFileSelectContext } from '../file/file-select.context';
+import { IZFileSelect } from '../file/file-select.interface';
+import { ZImageReaderContext } from '../image/image-reader.context';
 import { ZProfileAvatarForm } from './profile-avatar-form';
 
 describe('ZProfileAvatarForm', () => {
   let file: File;
+  let fileSelect: jest.Mocked<IZFileSelect>;
+  let avatar: Blob;
+  let avatarChange: jest.Mock;
+  let disabled: boolean;
+  let loading: boolean;
+  let avatarImage: HTMLCanvasElement;
+  let horizontalOpenImage: HTMLCanvasElement;
+  let verticalOpenImage: HTMLCanvasElement;
+  let imageReader: jest.Mocked<IZImageReader>;
 
   async function createTestTarget() {
     return render(
-      <ZFileSelectContext.Provider value={new ZFileSelectStatic(file)}>
-        <ZProfileAvatarForm />
-      </ZFileSelectContext.Provider>
+      <ZImageReaderContext.Provider value={imageReader}>
+        <ZFileSelectContext.Provider value={fileSelect}>
+          <ZProfileAvatarForm avatar={avatar} onAvatarChange={avatarChange} disabled={disabled} loading={loading} />
+        </ZFileSelectContext.Provider>
+      </ZImageReaderContext.Provider>
     );
   }
 
   beforeEach(() => {
     file = new File([], 'test.png');
+
+    fileSelect = createMocked<IZFileSelect>(['open']);
+    fileSelect.open.mockImplementation((ac: string, cb: (file: File) => void) => cb(file));
+
+    avatar = new Blob([]);
+    avatarChange = jest.fn();
+
+    avatarImage = document.createElement('canvas');
+    avatarImage.width = 100;
+    avatarImage.height = 200;
+    avatarImage.getContext('2d').fillStyle = 'blue';
+    avatarImage.getContext('2d').fillRect(0, 0, 256, 256);
+
+    horizontalOpenImage = document.createElement('canvas');
+    horizontalOpenImage.width = 500;
+    horizontalOpenImage.height = 300;
+    horizontalOpenImage.getContext('2d').fillStyle = 'green';
+    horizontalOpenImage.getContext('2d').fillRect(0, 0, 500, 300);
+
+    verticalOpenImage = document.createElement('canvas');
+    verticalOpenImage.width = 300;
+    verticalOpenImage.height = 500;
+    verticalOpenImage.getContext('2d').fillStyle = 'red';
+    verticalOpenImage.getContext('2d').fillRect(0, 0, 300, 500);
+
+    imageReader = createMocked<IZImageReader>(['read']);
+    imageReader.read.mockResolvedValue(avatarImage);
   });
 
   it('renders the form.', async () => {
@@ -26,5 +69,92 @@ describe('ZProfileAvatarForm', () => {
     const actual = target.getByTestId('ZProfileAvatarForm-root');
     // Assert
     expect(actual).toBeTruthy();
+  });
+
+  describe('Open', () => {
+    it('should update the selected image.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      imageReader.read.mockReset();
+      imageReader.read.mockResolvedValue(horizontalOpenImage);
+      // Act
+      const btn = target.getByTestId('ZProfileAvatarForm-btn-open');
+      const cvs = target.getByTestId('ZProfileAvatarForm-picture') as HTMLCanvasElement;
+      jest.spyOn(cvs.getContext('2d'), 'drawImage');
+      await act(async () => {
+        fireEvent.click(btn);
+        await of(true).pipe(delay(0)).toPromise();
+      });
+      // Assert
+      expect(cvs.getContext('2d').drawImage).toHaveBeenCalledWith(expect.anything(), 0, 0);
+    });
+  });
+
+  describe('Fit', () => {
+    it('should update the selected image.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const btn = target.getByTestId('ZProfileAvatarForm-btn-open');
+      const cvs = target.getByTestId('ZProfileAvatarForm-picture') as HTMLCanvasElement;
+      jest.spyOn(cvs.getContext('2d'), 'drawImage');
+      await act(async () => {
+        fireEvent.click(btn);
+        await of(true).pipe(delay(0)).toPromise();
+        fireEvent.click(btn);
+        await of(true).pipe(delay(0)).toPromise();
+      });
+      // Assert
+      expect(cvs.getContext('2d').drawImage).toHaveBeenCalledWith(expect.anything(), 0, 0);
+    });
+  });
+
+  describe('Reset', () => {
+    it('should update the selected image.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const btn = target.getByTestId('ZProfileAvatarForm-btn-reset');
+      const cvs = target.getByTestId('ZProfileAvatarForm-picture') as HTMLCanvasElement;
+      jest.spyOn(cvs.getContext('2d'), 'drawImage');
+      await act(async () => {
+        fireEvent.click(btn);
+        await of(true).pipe(delay(0)).toPromise();
+        fireEvent.click(btn);
+        await of(true).pipe(delay(0)).toPromise();
+      });
+      // Assert
+      expect(cvs.getContext('2d').drawImage).toHaveBeenCalledWith(expect.anything(), 0, 0);
+    });
+  });
+
+  describe('Zoom', () => {
+    it('should update the zoom percent.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const slider = target.getByTestId('ZProfileAvatarForm-zoom').querySelector('.MuiSlider-thumb');
+      await act(async () => {
+        fireEvent.mouseDown(slider);
+        fireEvent.mouseMove(slider, { screenX: 500, clientX: 500 });
+        fireEvent.mouseUp(slider);
+        await of(true).pipe(delay(0)).toPromise();
+      });
+      const actual = target.getByTestId('ZProfileAvatarForm-percent') as HTMLParagraphElement;
+      // Assert
+      expect(actual.textContent).toEqual('200%');
+    });
+  });
+
+  describe('Save', () => {
+    it('should invoke the onAvatarChange event.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const button = target.getByTestId('ZActionForm-btn-action') as HTMLButtonElement;
+      fireEvent.click(button);
+      // Assert
+      expect(avatarChange).toHaveBeenCalled();
+    });
   });
 });

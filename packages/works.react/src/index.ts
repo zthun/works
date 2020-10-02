@@ -19,9 +19,10 @@ export { ZSummaryCard } from './common/summary-card';
 export { useMenuState } from './common/use-menu-state.hook';
 // File
 export { ZFileSelectInput } from './file/file-select-input.class';
-export { ZFileSelectStatic } from './file/file-select-static.class';
-export { ZFileSelectContext, useFileSelect } from './file/file-select.context';
+export { useFileSelect, ZFileSelectContext } from './file/file-select.context';
 export { IZFileSelect } from './file/file-select.interface';
+// Image
+export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
 // Login
 export { ZLoginCredentialsForm } from './login/login-credentials-form';
 export { IZLoginCredentialsFormProps } from './login/login-credentials-form.props';

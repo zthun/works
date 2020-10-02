@@ -1,7 +1,7 @@
 {
   "name": "@zthun/works.draw",
   "version": "1.0.0-13",
-  "description": "A package that contains the modeling and algorithms to draw to a bitmap.",
+  "description": "A package that contains the modeling and algorithms to draw to a canvas.",
   "author": "Anthony Bonta",
   "license": "MIT",
   "repository": {
