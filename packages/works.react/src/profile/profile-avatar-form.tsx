@@ -4,23 +4,26 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import RestoreIcon from '@material-ui/icons/Restore';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
 import { ZImageReader, ZPrintableColor, ZPrintableDrawing, ZPrintableGroup, ZPrintableImage, ZPrintableTransform, ZToolingPan } from '@zthun/works.draw';
 import { noop } from 'lodash';
 import React, { useEffect, useRef } from 'react';
 import { ZActionForm } from '../common/action-form';
+import { useFileSelect } from '../file/file-select.context';
 import { IZProfileAvatarFormProps } from './profile-avatar-form.props';
 
 export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   const cvs = useRef<HTMLCanvasElement>(null);
   const transform = useRef<ZPrintableTransform>(new ZPrintableTransform());
+  const image = useRef<ZPrintableImage>(new ZPrintableImage(new ZImageReader()));
   const draw = useRef<ZPrintableDrawing>(new ZPrintableDrawing());
   const pan = useRef<ZToolingPan>(new ZToolingPan());
+  const fs = useFileSelect();
 
   useEffect(() => {
     async function render() {
-      const image = new ZPrintableImage(new ZImageReader());
-      await image.import(props.avatar);
-      draw.current.midground = new ZPrintableGroup([transform.current, image]);
+      await image.current.import(props.avatar);
+      draw.current.midground = new ZPrintableGroup([transform.current, image.current]);
       draw.current.background = new ZPrintableColor('#FFF');
       pan.current.destroy();
       pan.current.init(cvs.current, cvs.current.getContext('2d'), draw.current, transform.current);
@@ -53,9 +56,26 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
     zoom(0.2);
   }
 
+  function fit() {
+    const sx = 256 / image.current.width;
+    const sy = 256 / image.current.height;
+    transform.current.reset();
+    transform.current.scale(sx, sy);
+    redraw();
+  }
+
   function reset() {
     transform.current.reset();
     redraw();
+  }
+
+  function open() {
+    fs.open('image/*', (file) => {
+      image.current.import(file).then(() => {
+        transform.current.reset();
+        redraw();
+      });
+    });
   }
 
   return (
@@ -70,19 +90,22 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
       actionText={props.saveText}
       onAction={handleSave}
     >
-      <Grid container justify='center' alignItems='center' direction='column' spacing={2}>
+      <Grid container justify='center' alignItems='center' direction='column' spacing={1}>
         <Grid item>
-          <IconButton title='Open'>
-            <FolderOpenIcon fontSize='large' />
+          <IconButton title='Open' onClick={open}>
+            <FolderOpenIcon fontSize='small' />
           </IconButton>
           <IconButton title='Zoom in' onClick={zoomIn}>
-            <ZoomInIcon fontSize='large' />
+            <ZoomInIcon fontSize='small' />
           </IconButton>
           <IconButton title='Zoom out' onClick={zoomOut}>
-            <ZoomOutIcon fontSize='large' />
+            <ZoomOutIcon fontSize='small' />
+          </IconButton>
+          <IconButton title='Fit' onClick={fit}>
+            <ZoomOutMapIcon fontSize='small' />
           </IconButton>
           <IconButton title='Reset' onClick={reset}>
-            <RestoreIcon fontSize='large' />
+            <RestoreIcon fontSize='small' />
           </IconButton>
         </Grid>
         <Grid item>

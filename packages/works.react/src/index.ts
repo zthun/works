@@ -17,6 +17,11 @@ export { ZPaperCard } from './common/paper-card';
 export { IZPaperCardProps } from './common/paper-card.props';
 export { ZSummaryCard } from './common/summary-card';
 export { useMenuState } from './common/use-menu-state.hook';
+// File
+export { ZFileSelectInput } from './file/file-select-input.class';
+export { ZFileSelectStatic } from './file/file-select-static.class';
+export { ZFileSelectContext, useFileSelect } from './file/file-select.context';
+export { IZFileSelect } from './file/file-select.interface';
 // Login
 export { ZLoginCredentialsForm } from './login/login-credentials-form';
 export { IZLoginCredentialsFormProps } from './login/login-credentials-form.props';
