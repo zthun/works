@@ -1,13 +1,12 @@
-import { Grid, IconButton } from '@material-ui/core';
+import { Grid, IconButton, Slider, Typography } from '@material-ui/core';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import RestoreIcon from '@material-ui/icons/Restore';
-import ZoomInIcon from '@material-ui/icons/ZoomIn';
-import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import ZoomOutIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
 import { ZImageReader, ZPrintableColor, ZPrintableDrawing, ZPrintableGroup, ZPrintableImage, ZPrintableTransform, ZToolingPan } from '@zthun/works.draw';
 import { noop } from 'lodash';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ZActionForm } from '../common/action-form';
 import { useFileSelect } from '../file/file-select.context';
 import { IZProfileAvatarFormProps } from './profile-avatar-form.props';
@@ -19,6 +18,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   const draw = useRef<ZPrintableDrawing>(new ZPrintableDrawing());
   const pan = useRef<ZToolingPan>(new ZToolingPan());
   const fs = useFileSelect();
+  const [zoom, setZoom] = useState(100);
 
   useEffect(() => {
     async function render() {
@@ -33,6 +33,10 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
     render();
   }, [props.avatar]);
 
+  useEffect(() => {
+    redraw();
+  });
+
   function handleSave() {
     props.onAvatarChange(null);
   }
@@ -41,40 +45,32 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
     draw.current.print(cvs.current.getContext('2d'));
   }
 
-  function zoom(percent: number) {
-    const sx = transform.current.scaleX + percent;
-    const sy = transform.current.scaleY + percent;
-    transform.current.scale(sx, sy);
-    redraw();
-  }
+  function zoomChange(e: any, percent: number) {
+    const scale = percent / 100;
+    transform.current.scale(scale, scale);
 
-  function zoomOut() {
-    zoom(-0.2);
-  }
-
-  function zoomIn() {
-    zoom(0.2);
+    if (percent !== zoom) {
+      setZoom(percent);
+    } else {
+      redraw();
+    }
   }
 
   function fit() {
-    const sx = 256 / image.current.width;
-    const sy = 256 / image.current.height;
+    const d = Math.max(image.current.width, image.current.height);
+    const scale = 256 / d;
     transform.current.reset();
-    transform.current.scale(sx, sy);
-    redraw();
+    zoomChange(null, scale * 100);
   }
 
   function reset() {
     transform.current.reset();
-    redraw();
+    zoomChange(null, 100);
   }
 
   function open() {
     fs.open('image/*', (file) => {
-      image.current.import(file).then(() => {
-        transform.current.reset();
-        redraw();
-      });
+      image.current.import(file).then(() => fit());
     });
   }
 
@@ -95,12 +91,6 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
           <IconButton title='Open' onClick={open}>
             <FolderOpenIcon fontSize='small' />
           </IconButton>
-          <IconButton title='Zoom in' onClick={zoomIn}>
-            <ZoomInIcon fontSize='small' />
-          </IconButton>
-          <IconButton title='Zoom out' onClick={zoomOut}>
-            <ZoomOutIcon fontSize='small' />
-          </IconButton>
           <IconButton title='Fit' onClick={fit}>
             <ZoomOutMapIcon fontSize='small' />
           </IconButton>
@@ -110,6 +100,19 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
         </Grid>
         <Grid item>
           <canvas className='ZProfileAvatarForm-picture' ref={cvs} height={256} width={256} />
+        </Grid>
+        <Grid item>
+          <Grid container direction='row' spacing={2}>
+            <Grid item>
+              <ZoomOutIcon className='ZProfileAvatarForm-zoom-icon' fontSize='small' />
+            </Grid>
+            <Grid item>
+              <Slider className='ZProfileAvatarForm-zoom' title='Zoom' value={zoom} defaultValue={100} min={0} max={200} onChange={zoomChange} />
+            </Grid>
+            <Grid item>
+              <Typography className='ZProfileAvatarForm-percent'>{Math.round(zoom)}%</Typography>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </ZActionForm>
