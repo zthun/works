@@ -1,10 +1,10 @@
 import { ZPrintableDrawing } from './printable-drawing.class';
+import { ZPrintableGroup } from './printable-group.class';
 import { ZPrintableNothing } from './printable-nothing.class';
 import { IZPrintable } from './printable.interface';
 
 describe('ZPrintableDrawing', () => {
   let canvas: HTMLCanvasElement;
-  let backstage: IZPrintable;
   let background: IZPrintable;
   let top: IZPrintable;
   let middle: IZPrintable;
@@ -15,8 +15,7 @@ describe('ZPrintableDrawing', () => {
   function createTestTarget() {
     const target = new ZPrintableDrawing();
     target.background = background;
-    target.backstage = backstage;
-    target.layers = [top, middle, bottom];
+    target.midground = new ZPrintableGroup([bottom, middle, top]);
     target.foreground = foreground;
     return target;
   }
@@ -27,14 +26,12 @@ describe('ZPrintableDrawing', () => {
     canvas.height = 200;
 
     printed = [];
-    backstage = new ZPrintableNothing();
     background = new ZPrintableNothing();
     top = new ZPrintableNothing();
     middle = new ZPrintableNothing();
     bottom = new ZPrintableNothing();
     foreground = new ZPrintableNothing();
 
-    jest.spyOn(backstage, 'print').mockImplementation(() => printed.push(backstage));
     jest.spyOn(background, 'print').mockImplementation(() => printed.push(background));
     jest.spyOn(top, 'print').mockImplementation(() => printed.push(top));
     jest.spyOn(middle, 'print').mockImplementation(() => printed.push(middle));
@@ -48,6 +45,6 @@ describe('ZPrintableDrawing', () => {
     // Act
     target.print(canvas.getContext('2d'));
     // Assert
-    expect(printed).toEqual([backstage, background, bottom, middle, top, foreground]);
+    expect(printed).toEqual([background, bottom, middle, top, foreground]);
   });
 });

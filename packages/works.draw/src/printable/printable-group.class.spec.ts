@@ -37,9 +37,9 @@ describe('ZPrintableGroup', () => {
     expect(true).toBeTruthy();
   });
 
-  it('should print the layers in reverse order.', () => {
+  it('should print the layers.', () => {
     // Arrange
-    const target = createTestTarget([top, middle, bottom]);
+    const target = createTestTarget([bottom, middle, top]);
     // Act
     target.print(canvas.getContext('2d'));
     // Assert

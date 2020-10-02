@@ -1,6 +1,5 @@
 import { IZPrintable } from './printable.interface';
 import { ZPrintableColor } from './printable-color.class';
-import { ZPrintableTransform } from './printable-transform.class';
 import { ZPrintableNothing } from './printable-nothing.class';
 
 /**
@@ -9,10 +8,33 @@ import { ZPrintableNothing } from './printable-nothing.class';
 export class ZPrintableDrawing implements IZPrintable {
   private _canvas = document.createElement('canvas');
 
+  /**
+   * The foreground layer.
+   *
+   * This is the last layer that gets printed and is not affected by the midground
+   * transforms.
+   *
+   * You will normally use this layer for clippings such as highlights to certain
+   * areas of your drawings.
+   */
   public foreground: IZPrintable = new ZPrintableNothing();
-  public layers: IZPrintable[] = [];
+
+  /**
+   * The middle ground.
+   *
+   * This is printed second and is not affected by the background transforms.
+   */
+  public midground: IZPrintable = new ZPrintableNothing();
+
+  /**
+   * The background layer.
+   *
+   * This gets printed before anything else.
+   *
+   * Normally, you want this to be something that fills your canvas with
+   * no transformations.
+   */
   public background: IZPrintable = new ZPrintableColor();
-  public backstage: IZPrintable = new ZPrintableTransform();
 
   /**
    * Prints the drawing to a canvas context.
@@ -27,16 +49,12 @@ export class ZPrintableDrawing implements IZPrintable {
     const buffer = this._canvas.getContext('2d');
     buffer.clearRect(0, 0, this._canvas.width, this._canvas.height);
 
-    this.backstage.print(buffer);
     this.background.print(buffer);
-
-    for (let i = this.layers.length - 1; i >= 0; i--) {
-      const layer = this.layers[i];
-      layer.print(buffer);
-    }
-
+    buffer.resetTransform();
+    this.midground.print(buffer);
+    buffer.resetTransform();
     this.foreground.print(buffer);
-
+    buffer.resetTransform();
     context.drawImage(this._canvas, 0, 0);
   }
 }
