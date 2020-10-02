@@ -24,7 +24,11 @@ export class ZFileSelectInput implements IZFileSelect {
     this._input.style.left = '0';
     this._input.style.top = '0';
     this._input.style.zIndex = '-1';
-    this._input.onchange = () => this._cb(this._input.files[0]);
+    this._input.onchange = () => {
+      if (this._input.files[0]) {
+        this._cb(this._input.files[0]);
+      }
+    };
     container.appendChild(this._input);
   }
 
