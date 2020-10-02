@@ -1,7 +1,7 @@
 import { IZPrintable } from './printable.interface';
 
 /**
- * Represents a printable transformation that will apply a transformation matrix to the context.
+ * Represents a printable object that will apply a transformation matrix to the context.
  */
 export class ZPrintableTransform implements IZPrintable {
   public scaleX = 1;
@@ -74,6 +74,23 @@ export class ZPrintableTransform implements IZPrintable {
    * @param context The context to apply the transformation on.
    */
   public print(context: CanvasRenderingContext2D) {
+    // See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/transform for transformation information.
+
+    /*
+     * The transformation matrix is described by:
+     * [ a c e ]
+     * [ b d f ]
+     * [ 0 0 1 ]
+     *
+     * Where the following is true.
+     *
+     * a = scale (x)
+     * b = skew (y)
+     * c = skew (x)
+     * d = scale (y)
+     * e = translate (x)
+     * f = translate (y)
+     */
     context.transform(this.scaleX, this.skewY, this.skewX, this.scaleY, this.translateX, this.translateY);
   }
 }
