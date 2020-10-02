@@ -12,3 +12,6 @@ export { ZPrintableImage } from './printable/printable-image.class';
 export { ZPrintableNothing } from './printable/printable-nothing.class';
 export { ZPrintableTransform } from './printable/printable-transform.class';
 export { IZPrintable } from './printable/printable.interface';
+// Tooling
+export { ZToolingPan } from './tooling/tooling-pan.class';
+export { IZTooling } from './tooling/tooling.interface';

@@ -22,5 +22,8 @@
   "files": [
     "dist/**"
   ],
+  "peerDependencies": {
+    "rxjs": "^6.5.0"
+  },
   "sideEffects": false
 }

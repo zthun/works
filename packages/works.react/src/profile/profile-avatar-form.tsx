@@ -4,7 +4,7 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import RestoreIcon from '@material-ui/icons/Restore';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
-import { ZImageReader, ZPrintableColor, ZPrintableDrawing, ZPrintableGroup, ZPrintableImage, ZPrintableTransform } from '@zthun/works.draw';
+import { ZImageReader, ZPrintableColor, ZPrintableDrawing, ZPrintableGroup, ZPrintableImage, ZPrintableTransform, ZToolingPan } from '@zthun/works.draw';
 import { noop } from 'lodash';
 import React, { useEffect, useRef } from 'react';
 import { ZActionForm } from '../common/action-form';
@@ -14,6 +14,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   const cvs = useRef<HTMLCanvasElement>(null);
   const transform = useRef<ZPrintableTransform>(new ZPrintableTransform());
   const draw = useRef<ZPrintableDrawing>(new ZPrintableDrawing());
+  const pan = useRef<ZToolingPan>(new ZToolingPan());
 
   useEffect(() => {
     async function render() {
@@ -21,6 +22,8 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
       await image.import(props.avatar);
       draw.current.midground = new ZPrintableGroup([transform.current, image]);
       draw.current.background = new ZPrintableColor('#FFF');
+      pan.current.destroy();
+      pan.current.init(cvs.current, cvs.current.getContext('2d'), draw.current, transform.current);
       redraw();
     }
 

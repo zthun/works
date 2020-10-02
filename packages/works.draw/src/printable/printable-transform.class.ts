@@ -1,14 +1,40 @@
+import { IZTransformScale } from '../transform/transform-scale.interface';
+import { IZTransformSkew } from '../transform/transform-skew.interface';
+import { IZTransformTranslate } from '../transform/transform-translate.interface';
 import { IZPrintable } from './printable.interface';
 
 /**
  * Represents a printable object that will apply a transformation matrix to the context.
  */
-export class ZPrintableTransform implements IZPrintable {
+export class ZPrintableTransform implements IZPrintable, IZTransformScale, IZTransformSkew, IZTransformTranslate {
+  /**
+   * The x scale (a).
+   */
   public scaleX = 1;
-  public skewY = 0;
-  public skewX = 0;
+
+  /**
+   * The y scale (d).
+   */
   public scaleY = 1;
+
+  /**
+   * The x skew (c).
+   */
+  public skewX = 0;
+
+  /**
+   * The y skew (b)
+   */
+  public skewY = 0;
+
+  /**
+   * The x translation (e).
+   */
   public translateX = 0;
+
+  /**
+   * The y translation (f).
+   */
   public translateY = 0;
 
   /**
