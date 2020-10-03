@@ -3,76 +3,83 @@ import { ZUserBuilder } from '../users/user-builder.class';
 import { IZUser } from '../users/user.interface';
 import { ZProfileBuilder } from './profile-builder.class';
 import { IZProfile } from './profile.interface';
+import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 
 describe('ZProfileBuilder', () => {
   function createTestTarget() {
     return new ZProfileBuilder();
   }
 
-  function assertPropertySet<T>(expected: T, buildFn: (target: ZProfileBuilder, value: T) => ZProfileBuilder, actualFn: (user: IZProfile) => T) {
-    // Arrange
-    const target = createTestTarget();
-    // Act
-    const user = buildFn(target, expected).build();
-    const actual = actualFn(user);
-    // Assert
-    expect(actual).toEqual(expected);
-  }
-
   describe('Properties', () => {
     it('sets the email.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         v4(),
+        createTestTarget,
         (t, v) => t.email(v),
-        (u) => u.email
+        (u: IZProfile) => u.email
       );
     });
 
     it('sets the display.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         v4(),
+        createTestTarget,
         (t, v) => t.display(v),
-        (u) => u.display
+        (u: IZProfile) => u.display
       );
     });
 
     it('sets the password.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         v4(),
+        createTestTarget,
         (t, v) => t.password(v),
-        (u) => u.password
+        (u: IZProfile) => u.password
       );
     });
 
     it('sets the confirmation.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         v4(),
+        createTestTarget,
         (t, v) => t.confirm(v),
-        (u) => u.confirm
+        (u: IZProfile) => u.confirm
       );
     });
 
     it('auto confirms to the new password.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         v4(),
+        createTestTarget,
         (t, v) => t.password(v).autoConfirm(),
-        (u) => u.confirm
+        (u: IZProfile) => u.confirm
       );
     });
 
     it('marks the profile as active.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         true,
+        createTestTarget,
         (t) => t.active(),
-        (u) => u.active
+        (u: IZProfile) => u.active
       );
     });
 
     it('marks the profile as a super user.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         true,
+        createTestTarget,
         (t) => t.super(),
-        (u) => u.super
+        (u: IZProfile) => u.super
+      );
+    });
+
+    it('sets the avatar.', () => {
+      assertBuilderSetsProperty(
+        'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
+        createTestTarget,
+        (t, v) => t.avatar(v),
+        (u: IZProfile) => u.avatar
       );
     });
   });
@@ -81,78 +88,82 @@ describe('ZProfileBuilder', () => {
     let gambit: IZUser;
 
     beforeEach(() => {
-      gambit = new ZUserBuilder().email('gambit@marvel.com').password('not-a-great-password').display('Gambit').active().super().build();
+      gambit = new ZUserBuilder().email('gambit@marvel.com').password('not-a-great-password').display('Gambit').avatar('https://steamavatar.io/img/14777429602y3IT.jpg').active().super().build();
     });
 
     it('copies the email.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         gambit.email,
+        createTestTarget,
         (t) => t.user(gambit),
-        (u) => u.email
+        (u: IZProfile) => u.email
       );
     });
 
     it('copies the display.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         gambit.display,
+        createTestTarget,
         (t) => t.user(gambit),
-        (u) => u.display
+        (u: IZProfile) => u.display
       );
     });
 
     it('copies the super flag.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         gambit.super,
+        createTestTarget,
         (t) => t.user(gambit),
-        (u) => u.super
+        (u: IZProfile) => u.super
+      );
+    });
+
+    it('copies the avatar.', () => {
+      assertBuilderSetsProperty(
+        gambit.avatar,
+        createTestTarget,
+        (t) => t.user(gambit),
+        (u: IZProfile) => u.avatar
       );
     });
 
     it('does not copy the password.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         undefined,
+        createTestTarget,
         (t) => t.user(gambit),
-        (u) => u.password || u.confirm
+        (u: IZProfile) => u.password || u.confirm
       );
     });
 
     it('marks the profile as active if there is no activator code.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         true,
+        createTestTarget,
         (t) => t.user(gambit),
-        (u) => u.active
+        (u: IZProfile) => u.active
       );
     });
 
     it('marks the profile as inactive if there is an activator code.', () => {
-      assertPropertySet(
+      assertBuilderSetsProperty(
         false,
+        createTestTarget,
         (t) => t.user(new ZUserBuilder().copy(gambit).inactive(v4()).build()),
-        (u) => u.active
+        (u: IZProfile) => u.active
       );
     });
   });
 
   describe('Copy and Assignment', () => {
     it('copies another profile.', () => {
-      // Arrange
-      const profileA = createTestTarget().email(v4()).password(v4()).autoConfirm().build();
-      const target = createTestTarget();
-      // Act
-      const actual = target.copy(profileA).build();
-      // Assert
-      expect(JSON.stringify(actual)).toEqual(JSON.stringify(profileA));
+      const gambit = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').avatar('https://steamavatar.io/img/14777429602y3IT.jpg').super().build();
+      assertBuilderCopiesObject(gambit, createTestTarget);
     });
 
     it('assigns another profile.', () => {
-      // Arrange
-      const partial: Partial<IZProfile> = { display: v4() };
-      const target = createTestTarget().email(v4()).password(v4()).autoConfirm();
-      const expected = createTestTarget().copy(target.build()).display(partial.display).build();
-      // Act
-      const actual = target.assign(partial).build();
-      // Assert
-      expect(actual).toEqual(expected);
+      const gambit = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').build();
+      assertBuilderAssignsObject(gambit, createTestTarget, { email: 'gambit@marvel.com', display: 'Gambit' });
     });
   });
 });

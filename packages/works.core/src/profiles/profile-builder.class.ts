@@ -86,6 +86,16 @@ export class ZProfileBuilder {
   }
 
   /**
+   * Sets the users avatar url.
+   *
+   * @returns The avatar url.
+   */
+  public avatar(url: string): this {
+    this._profile.avatar = url;
+    return this;
+  }
+
+  /**
    * Assigns other properties from a profile to the current profile.
    *
    * @param other The partial object to copy.
@@ -121,6 +131,7 @@ export class ZProfileBuilder {
     this._profile.display = user.display;
     this._profile.super = user.super;
     this._profile.active = !user.activator;
+    this._profile.avatar = user.avatar;
     return this;
   }
 

@@ -57,7 +57,9 @@ export interface IZUser {
   login?: number;
 
   /**
-   * An avatar image.
+   * The url to the users avatar.
+   *
+   * This can be a data url or a url to a public image.
    */
   avatar?: string;
 }

@@ -48,4 +48,9 @@ export interface IZProfile {
    * This cannot be set.  It is only to confirm if the user is the super user.
    */
   super?: boolean;
+
+  /**
+   * A url to an avatar.
+   */
+  avatar?: string;
 }
