@@ -4,12 +4,13 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import RestoreIcon from '@material-ui/icons/Restore';
 import ZoomOutIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
+import { blobFromDataUrl } from '@zthun/works.core';
 import { ZPrintableColor, ZPrintableDrawing, ZPrintableGroup, ZPrintableImage, ZPrintableTransform, ZToolingPan } from '@zthun/works.draw';
 import { noop } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
-import { useImageReader } from '../image/image-reader.context';
 import { ZActionForm } from '../common/action-form';
 import { useFileSelect } from '../file/file-select.context';
+import { useImageReader } from '../image/image-reader.context';
 import { IZProfileAvatarFormProps } from './profile-avatar-form.props';
 
 export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
@@ -41,18 +42,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   });
 
   function save() {
-    const imgUrl = cvs.current.toDataURL();
-    const [header, base64] = imgUrl.split(',');
-    const bytes = atob(base64);
-    const type = header.replace('data:', '').replace(';base64', '');
-    const buffer = new ArrayBuffer(bytes.length);
-    const ab = new Uint8Array(buffer);
-
-    for (let i = 0; i < bytes.length; ++i) {
-      ab[i] = bytes.charCodeAt(i);
-    }
-
-    const blob = new Blob([ab], { type });
+    const blob = blobFromDataUrl(cvs.current.toDataURL());
     props.onAvatarChange(blob);
   }
 
