@@ -5,7 +5,7 @@ import { IZTransformTranslate } from '../transform/transform-translate.interface
 import { IZTooling } from './tooling.interface';
 
 /**
- * Represents a pan tool.
+ * Represents a tool to pan a transform across a canvas.
  */
 export class ZToolingPan implements IZTooling {
   private _destroy = new Subject();
@@ -15,6 +15,16 @@ export class ZToolingPan implements IZTooling {
   private _startTransformY = 0;
   private _dragging = false;
 
+  /**
+   * Initializes this tool.
+   *
+   * This will also destroy the current tool if a tool has already been initialized.
+   *
+   * @param target The target element that contains the bounding rect for dragging.
+   * @param context The drawing context to update while panning.
+   * @param drawing The drawing responsible for printing updates.
+   * @param transform The transform to update.
+   */
   public init(target: HTMLElement, context: CanvasRenderingContext2D, drawing: IZPrintable, transform: IZTransformTranslate) {
     this.destroy();
 
@@ -55,6 +65,12 @@ export class ZToolingPan implements IZTooling {
       });
   }
 
+  /**
+   * Destroys this tool.
+   *
+   * After this is called, this object will no longer do any drag and drop operations until
+   * init is called again.
+   */
   public destroy() {
     this._destroy.next();
     this._destroy.complete();
