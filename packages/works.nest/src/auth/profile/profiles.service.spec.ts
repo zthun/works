@@ -127,38 +127,6 @@ describe('ZProfilesService', () => {
     });
   });
 
-  describe('Avatar', () => {
-    let generic: IZUser;
-    let withAvatar: IZUser;
-    let avatar: string;
-
-    beforeEach(() => {
-      avatar = v4();
-      generic = new ZUserBuilder().id(v4()).email('gambit@marvel.com').password('not-very-secure').build();
-      withAvatar = new ZUserBuilder().id(v4()).email('wolverine@marvel.com').password('not-secure').avatar(Buffer.from(avatar, 'ascii').toString('base64')).build();
-    });
-
-    it('should return the user avatar in a buffer if the user set an avatar.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      // Act
-      const buffer = await target.findAvatar(withAvatar);
-      const actual = buffer.toString('ascii');
-      // Assert
-      expect(actual).toEqual(avatar);
-    });
-
-    it('should return an empty buffer if the user has no avatar.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      // Act
-      const buffer = await target.findAvatar(generic);
-      const actual = buffer.toString('ascii');
-      // Assert
-      expect(actual).toEqual('');
-    });
-  });
-
   describe('Activate', () => {
     let user: IZUser;
 

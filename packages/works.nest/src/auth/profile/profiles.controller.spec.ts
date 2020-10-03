@@ -7,12 +7,11 @@ import { ZTokensService } from '../tokens/tokens.service';
 import { ZProfileActivationCreateDto } from './profile-activation-create.dto';
 import { ZProfileActivationUpdateDto } from './profile-activation-update.dto';
 import { ZProfileCreateDto } from './profile-create.dto';
+import { ZProfileRecoveryCreateDto } from './profile-recovery-create.dto';
 import { ZProfilesController } from './profiles.controller';
 import { ZProfilesService } from './profiles.service';
-import { ZProfileRecoveryCreateDto } from './profile-recovery-create.dto';
 
 describe('ZProfilesController', () => {
-  let avatar: Buffer;
   let gambit: IZProfile;
   let jwt: jest.Mocked<ZTokensService>;
   let profile: jest.Mocked<ZProfilesService>;
@@ -24,20 +23,18 @@ describe('ZProfilesController', () => {
   }
 
   beforeEach(() => {
-    avatar = Buffer.from('abcd', 'ascii');
     gambit = new ZProfileBuilder().email('gambit@marvel.com').super().active().build();
 
     req = createMocked<Request>();
     res = createMocked<Response>(['sendStatus', 'send']);
 
-    profile = createMocked<ZProfilesService>(['update', 'create', 'remove', 'activate', 'deactivate', 'reactivate', 'recoverPassword', 'findAvatar']);
+    profile = createMocked<ZProfilesService>(['update', 'create', 'remove', 'activate', 'deactivate', 'reactivate', 'recoverPassword']);
     profile.update.mockResolvedValue(gambit);
     profile.remove.mockResolvedValue(gambit);
     profile.create.mockResolvedValue(gambit);
     profile.activate.mockResolvedValue(gambit);
     profile.deactivate.mockResolvedValue(gambit);
     profile.reactivate.mockResolvedValue(gambit);
-    profile.findAvatar.mockResolvedValue(avatar);
 
     jwt = createMocked<ZTokensService>(['extract']);
     jwt.extract.mockReturnValue(Promise.resolve(new ZUserBuilder().email('gambit@marvel.com').super().active().build()));
@@ -136,17 +133,6 @@ describe('ZProfilesController', () => {
       await target.createPasswordRecovery(dto, res);
       // Assert
       expect(profile.recoverPassword).toHaveBeenCalledWith(dto.email);
-    });
-  });
-
-  describe('Avatar', () => {
-    it('should return the avatar from the profile.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      // Act
-      await target.readAvatar(req, res);
-      // Assert
-      expect(res.send).toHaveBeenCalledWith(avatar);
     });
   });
 });
