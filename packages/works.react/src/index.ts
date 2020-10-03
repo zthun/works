@@ -35,7 +35,6 @@ export { ZProfileActivationForm } from './profile/profile-activation-form';
 export { IZProfileActivationFormProps } from './profile/profile-activation-form.props';
 export { ZProfileAvatarForm } from './profile/profile-avatar-form';
 export { IZProfileAvatarFormProps } from './profile/profile-avatar-form.props';
-export { useProfileAvatar, useProfileAvatarState, ZProfileAvatarStateContext } from './profile/profile-avatar-state.context';
 export { ZProfileDeactivationForm } from './profile/profile-deactivation-form';
 export { IZProfileDeactivationFormProps } from './profile/profile-deactivation-form.props';
 export { ZProfileDeleteForm } from './profile/profile-delete-form';
