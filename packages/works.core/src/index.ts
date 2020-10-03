@@ -16,6 +16,7 @@ export { IZEmail } from './email/email.interface';
 // Encoding
 export { atob, btoa } from './encoding/base64';
 export { blobFromString, blobFromBase64, blobFromDataUrl } from './encoding/blob';
+export { md5 } from './encoding/hash';
 // Error
 export { ZErrorBuilder } from './error/error-builder.class';
 export { IZError } from './error/error.interface';

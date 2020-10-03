@@ -22,6 +22,12 @@
   "files": [
     "dist/**"
   ],
+  "dependencies": {
+    "md5": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/md5": "^2.2.0"
+  },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
 }
