@@ -13,6 +13,9 @@ export { IZEmailContact } from './email/email-contact.interface';
 export { ZEmailEnvelopeBuilder } from './email/email-envelope-builder.class';
 export { IZEmailEnvelope } from './email/email-envelope.interface';
 export { IZEmail } from './email/email.interface';
+// Encoding
+export { atob, btoa } from './encoding/base64';
+export { blobFromString, blobFromBase64, blobFromDataUrl } from './encoding/blob';
 // Error
 export { ZErrorBuilder } from './error/error-builder.class';
 export { IZError } from './error/error.interface';
@@ -31,7 +34,7 @@ export { ZUnaryFilterBuilder } from './filter/unary-filter-builder.class';
 export { IZUnaryFilter } from './filter/unary-filter.interface';
 export { ZUnaryOperator } from './filter/unary-operator.enum';
 // Http
-export { ZHttpCodeClient, ZHttpCodeClientNames, ZHttpCodeClientDescriptions } from './http/http-code-client.enum';
+export { ZHttpCodeClient, ZHttpCodeClientDescriptions, ZHttpCodeClientNames } from './http/http-code-client.enum';
 export { ZHttpCodeInformationalResponse } from './http/http-code-informational-response.enum';
 export { ZHttpCodeRedirection } from './http/http-code-redirection.enum';
 export { ZHttpCodeServer } from './http/http-code-server.enum';
