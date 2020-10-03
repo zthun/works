@@ -13,12 +13,12 @@ export interface IZDataState<T> {
    * If it is undefined, then it is currently being loaded.
    * If it is an actual object, that means that it has been loaded.
    */
-  data?: T;
+  readonly data?: T;
 
   /**
    * The observable that
    */
-  dataChange: Observable<T>;
+  readonly dataChange: Observable<T>;
 
   /**
    * Refreshes the current state of the data.

@@ -11,7 +11,7 @@ export class ZDataState<T> implements IZDataState<T> {
    * This is normally in 3 different states.
    *
    * If the data is null, then that means that there is no value.
-   * If it is undefined, then it is currently being loaded.
+   * If it is undefined, then it is currently being loaded/refreshed.
    * If it is an actual object, that means that it has been loaded.
    */
   public data?: T = null;
