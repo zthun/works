@@ -108,10 +108,17 @@ export function ZProfilePage() {
     return (
       <React.Fragment>
         <Grid item>
-          <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={waiting} loading={activating} />
+          <ZProfileForm disabled={waiting} loading={updatingProfile} profile={loginState.data} onProfileChange={handleUpdateProfile} />
         </Grid>
         <Grid item>
-          <ZProfileReactivationForm onReactivate={handleReactivation} disabled={waiting} loading={reactivating} />
+          <Grid container spacing={3} direction='column'>
+            <Grid item>
+              <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={waiting} loading={activating} />
+            </Grid>
+            <Grid item>
+              <ZProfileReactivationForm onReactivate={handleReactivation} disabled={waiting} loading={reactivating} />
+            </Grid>
+          </Grid>
         </Grid>
       </React.Fragment>
     );

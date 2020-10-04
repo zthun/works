@@ -90,11 +90,11 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
 
     const emailWarning = (
       <Collapse in={emailDirty}>
-        <Alert severity='warning' className='ZProfileForm-alert-email-dirty' data-testid={`ZProfileForm-alert-email-dirty-${emailDirty}`} action={close}>
+        <Alert severity='warning' className='ZProfileForm-alert-email-dirty' data-testid={`ZProfileForm-alert-email-dirty-${emailDirty}`}>
           <AlertTitle>
             <Typography variant='subtitle1'>Email Changed</Typography>
           </AlertTitle>
-          <Typography variant='caption'>{`If you update your profile, it will be temporarily deactivated to confirm your updated email.  Your original email was ${emailOriginal}`}</Typography>
+          <Typography variant='caption'>{`If you update your profile, it will be deactivated to confirm your new email.  Your original email was ${emailOriginal}`}</Typography>
         </Alert>
       </Collapse>
     );

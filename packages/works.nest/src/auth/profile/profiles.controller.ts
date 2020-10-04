@@ -54,7 +54,7 @@ export class ZProfilesController {
    * @returns The updated user.
    */
   @Put()
-  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleCookieRequiresAuthActivated, ZRuleBodyRequiresUniqueUser)
+  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleBodyRequiresUniqueUser)
   public async update(@Req() req: Request, @Body() profile: ZProfileUpdateDto): Promise<IZProfile> {
     const user = await this._tokens.extract(req);
     return this._profile.update(user, profile);
