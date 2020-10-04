@@ -1,18 +1,32 @@
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
+import { IZImageReader } from '@zthun/works.draw';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { ZFileSelectContext } from '../file/file-select.context';
+import { IZFileSelect } from '../file/file-select.interface';
+import { ZImageReaderContext } from '../image/image-reader.context';
 import { ZProfileForm } from './profile-form';
 
 describe('ZProfileForm', () => {
   let onProfileChange: jest.Mock;
+  let fileSelect: jest.Mocked<IZFileSelect>;
+  let imageReader: jest.Mocked<IZImageReader>;
   let hideAccountInformation: boolean;
   let hidePassword: boolean;
   let disabled: boolean;
   let profile: IZProfile;
 
   async function createTestTarget() {
-    return render(<ZProfileForm profile={profile} onProfileChange={onProfileChange} disabled={disabled} hideAccountInformation={hideAccountInformation} hidePassword={hidePassword} />);
+    return render(
+      <ZImageReaderContext.Provider value={imageReader}>
+        <ZFileSelectContext.Provider value={fileSelect}>
+          <ZProfileForm profile={profile} onProfileChange={onProfileChange} disabled={disabled} hideAccountInformation={hideAccountInformation} hidePassword={hidePassword} />
+        </ZFileSelectContext.Provider>
+      </ZImageReaderContext.Provider>
+    );
   }
 
   function getField(rend: RenderResult, id: string) {
@@ -138,6 +152,37 @@ describe('ZProfileForm', () => {
       // Assert
       expect(actual).toBeTruthy();
     });
+
+    it('should open the avatar editor when the user clicks the avatar icon.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      const icon = target.getByTestId('ZProfileForm-avatar-profile');
+      // Act
+      await act(async () => {
+        fireEvent.click(icon);
+        await of(true).pipe(delay(0)).toPromise();
+      });
+      const actual = target.getByTestId('ZProfileForm-avatar-dialog');
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('should close the avatar editor when the user clicks the Update Avatar button.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      const icon = target.getByTestId('ZProfileForm-avatar-profile');
+      // Act
+      await act(async () => {
+        fireEvent.click(icon);
+        await of(true).pipe(delay(0)).toPromise();
+        const btn = target.getByText('Update Avatar');
+        fireEvent.click(btn);
+        await of(true).pipe(delay(1000)).toPromise();
+      });
+      const actual = target.queryByTestId('ZProfileForm-avatar-dialog');
+      // Assert
+      expect(actual).toBeFalsy();
+    });
   });
 
   describe('Save', () => {
@@ -210,6 +255,7 @@ describe('ZProfileForm', () => {
       // Assert
       expect(onProfileChange).toHaveBeenCalledWith(expect.objectContaining({ password: '', confirm: password }));
     });
+
     it('should file the profileChange method with an empty email if the email has not changed.', async () => {
       // Arrange
       const target = await createTestTarget();

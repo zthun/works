@@ -12,6 +12,7 @@ import { ZProfileAvatarForm } from './profile-avatar-form';
 describe('ZProfileAvatarForm', () => {
   let file: File;
   let fileSelect: jest.Mocked<IZFileSelect>;
+  let imageReader: jest.Mocked<IZImageReader>;
   let avatar: Blob;
   let avatarChange: jest.Mock;
   let disabled: boolean;
@@ -19,7 +20,6 @@ describe('ZProfileAvatarForm', () => {
   let avatarImage: HTMLCanvasElement;
   let horizontalOpenImage: HTMLCanvasElement;
   let verticalOpenImage: HTMLCanvasElement;
-  let imageReader: jest.Mocked<IZImageReader>;
 
   async function createTestTarget() {
     return render(

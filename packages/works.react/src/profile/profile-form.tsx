@@ -1,8 +1,9 @@
-import { TextField } from '@material-ui/core';
+import { Dialog, TextField } from '@material-ui/core';
 import { md5, ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
 import { ZActionForm } from '../common/action-form';
+import { ZProfileAvatarForm } from './profile-avatar-form';
 import { IZProfileFormProps } from './profile-form.props';
 
 export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
@@ -11,6 +12,19 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   const [password, setPassword] = useState(get(props, 'profile.password', ''));
   const [confirm, setConfirm] = useState(get(props, 'profile.confirm', ''));
   const [avatar] = useState(get(props, 'profile.avatar', ''));
+  const [editAvatar, setEditAvatar] = useState(false);
+
+  function handleEditAvatar() {
+    setEditAvatar(true);
+  }
+
+  function handleCloseEditAvatar() {
+    setEditAvatar(false);
+  }
+
+  function handleUpdateAvatar() {
+    handleCloseEditAvatar();
+  }
 
   function handleEmailChange(event: any) {
     setEmail(event.target.value);
@@ -39,6 +53,14 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
 
     setPassword('');
     setConfirm('');
+  }
+
+  function createAvatarDialog() {
+    return (
+      <Dialog className='ZProfileForm-avatar-dialog' data-testid='ZProfileForm-avatar-dialog' open={editAvatar} onClose={handleCloseEditAvatar}>
+        <ZProfileAvatarForm onAvatarChange={handleUpdateAvatar} />
+      </Dialog>
+    );
   }
 
   function createTextField(name: string, label: string, type: string, val: string, handleInput: (e: any) => void) {
@@ -91,28 +113,32 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
       from = profileHash ? 'ZProfileForm-avatar-gravatar' : 'ZProfileForm-avatar-default';
     }
 
-    return <img className='ZProfileForm-avatar' data-testid={from} src={url} />;
+    return <img className='ZProfileForm-avatar' data-testid={from} src={url} onClick={handleEditAvatar} />;
   }
 
+  const avatarDialog = createAvatarDialog();
   const accountInformation = createAccountInformation();
   const updatePassword = createUpdatePassword();
   const formIcon = createAvatarImage();
 
   return (
-    <ZActionForm
-      className='ZProfileForm-root'
-      data-testid='ZProfileForm-root'
-      avatar={formIcon}
-      headerText={props.headerText}
-      subHeaderText={props.subHeaderText}
-      loading={props.loading}
-      disabled={props.disabled}
-      actionText={props.saveText}
-      onAction={handleSave}
-    >
-      {accountInformation}
-      {updatePassword}
-    </ZActionForm>
+    <React.Fragment>
+      {avatarDialog}
+      <ZActionForm
+        className='ZProfileForm-root'
+        data-testid='ZProfileForm-root'
+        avatar={formIcon}
+        headerText={props.headerText}
+        subHeaderText={props.subHeaderText}
+        loading={props.loading}
+        disabled={props.disabled}
+        actionText={props.saveText}
+        onAction={handleSave}
+      >
+        {accountInformation}
+        {updatePassword}
+      </ZActionForm>
+    </React.Fragment>
   );
 }
 
