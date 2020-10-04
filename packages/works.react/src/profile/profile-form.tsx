@@ -14,6 +14,15 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   const [avatar, setAvatar] = useState(get(props, 'profile.avatar'));
   const [editAvatar, setEditAvatar] = useState(false);
 
+  function build() {
+    const currentEmail = get(props, 'profile.email', '');
+
+    let profile = new ZProfileBuilder().display(display || null).avatar(avatar);
+    profile = email && email.toLowerCase() !== currentEmail.toLowerCase() ? profile.email(email) : profile;
+    profile = password || confirm ? profile.password(password).confirm(confirm) : profile;
+    return profile;
+  }
+
   function handleEditAvatar() {
     setEditAvatar(true);
   }
@@ -23,8 +32,12 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   }
 
   function handleUpdateAvatar(url: string) {
+    const profile = build().avatar(url);
     setAvatar(url);
+    setPassword('');
+    setConfirm('');
     handleCloseEditAvatar();
+    props.onProfileChange(profile.build());
   }
 
   function handleEmailChange(event: any) {
@@ -44,16 +57,10 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   }
 
   function handleSave() {
-    const currentEmail = get(props, 'profile.email', '');
-
-    let profile = new ZProfileBuilder().display(display || null).avatar(avatar);
-    profile = email && email.toLowerCase() !== currentEmail.toLowerCase() ? profile.email(email) : profile;
-    profile = password || confirm ? profile.password(password).confirm(confirm) : profile;
-
-    props.onProfileChange(profile.build());
-
+    const profile = build();
     setPassword('');
     setConfirm('');
+    props.onProfileChange(profile.build());
   }
 
   function createAvatarDialog() {

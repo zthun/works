@@ -2,8 +2,6 @@ import { act, fireEvent, render } from '@testing-library/react';
 import { IZImageReader } from '@zthun/works.draw';
 import { createMocked } from '@zthun/works.jest';
 import React from 'react';
-import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { ZFileSelectContext } from '../file/file-select.context';
 import { IZFileSelect } from '../file/file-select.interface';
 import { ZImageReaderContext } from '../image/image-reader.context';
@@ -12,6 +10,7 @@ import { ZProfileAvatarForm } from './profile-avatar-form';
 describe('ZProfileAvatarForm', () => {
   let file: File;
   let fileSelect: jest.Mocked<IZFileSelect>;
+  let maxSize = Infinity;
   let imageReader: jest.Mocked<IZImageReader>;
   let avatar: string;
   let avatarChange: jest.Mock;
@@ -25,7 +24,7 @@ describe('ZProfileAvatarForm', () => {
     return render(
       <ZImageReaderContext.Provider value={imageReader}>
         <ZFileSelectContext.Provider value={fileSelect}>
-          <ZProfileAvatarForm avatar={avatar} onAvatarChange={avatarChange} disabled={disabled} loading={loading} />
+          <ZProfileAvatarForm avatar={avatar} maxSize={maxSize} onAvatarChange={avatarChange} disabled={disabled} loading={loading} />
         </ZFileSelectContext.Provider>
       </ZImageReaderContext.Provider>
     );
@@ -83,7 +82,6 @@ describe('ZProfileAvatarForm', () => {
       jest.spyOn(cvs.getContext('2d'), 'drawImage');
       await act(async () => {
         fireEvent.click(btn);
-        await of(true).pipe(delay(0)).toPromise();
       });
       // Assert
       expect(cvs.getContext('2d').drawImage).toHaveBeenCalledWith(expect.anything(), 0, 0);
@@ -100,9 +98,9 @@ describe('ZProfileAvatarForm', () => {
       jest.spyOn(cvs.getContext('2d'), 'drawImage');
       await act(async () => {
         fireEvent.click(btn);
-        await of(true).pipe(delay(0)).toPromise();
+      });
+      await act(async () => {
         fireEvent.click(btn);
-        await of(true).pipe(delay(0)).toPromise();
       });
       // Assert
       expect(cvs.getContext('2d').drawImage).toHaveBeenCalledWith(expect.anything(), 0, 0);
@@ -119,9 +117,9 @@ describe('ZProfileAvatarForm', () => {
       jest.spyOn(cvs.getContext('2d'), 'drawImage');
       await act(async () => {
         fireEvent.click(btn);
-        await of(true).pipe(delay(0)).toPromise();
+      });
+      await act(async () => {
         fireEvent.click(btn);
-        await of(true).pipe(delay(0)).toPromise();
       });
       // Assert
       expect(cvs.getContext('2d').drawImage).toHaveBeenCalledWith(expect.anything(), 0, 0);
@@ -138,7 +136,6 @@ describe('ZProfileAvatarForm', () => {
         fireEvent.mouseDown(slider);
         fireEvent.mouseMove(slider, { screenX: 500, clientX: 500 });
         fireEvent.mouseUp(slider);
-        await of(true).pipe(delay(0)).toPromise();
       });
       const actual = target.getByTestId('ZProfileAvatarForm-percent') as HTMLParagraphElement;
       // Assert
@@ -147,7 +144,7 @@ describe('ZProfileAvatarForm', () => {
   });
 
   describe('Save', () => {
-    it('should invoke the onAvatarChange event when saving.', async () => {
+    it('should invoke the onAvatarChange event when saving and valid.', async () => {
       // Arrange
       const target = await createTestTarget();
       // Act
@@ -155,6 +152,38 @@ describe('ZProfileAvatarForm', () => {
       fireEvent.click(button);
       // Assert
       expect(avatarChange).toHaveBeenCalledWith(expect.any(String));
+    });
+
+    it('should show the max size error when the image is oversized.', async () => {
+      // Arrange
+      maxSize = 1;
+      const target = await createTestTarget();
+      // Act
+      const button = target.getByText('Update Avatar');
+      await act(async () => {
+        fireEvent.click(button);
+      });
+      const actual = target.getByTestId('ZProfileAvatarForm-alert-oversized-true');
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('should close the oversize alert when the user clicks the x button.', async () => {
+      // Arrange
+      maxSize = 1;
+      const target = await createTestTarget();
+      // Act
+      const button = target.getByText('Update Avatar');
+      await act(async () => {
+        fireEvent.click(button);
+      });
+      await act(async () => {
+        const close = target.getByTestId('ZProfileAvatarForm-alert-oversized-close');
+        fireEvent.click(close);
+      });
+      const actual = target.getByTestId('ZProfileAvatarForm-alert-oversized-false');
+      // Assert
+      expect(actual).toBeTruthy();
     });
 
     it('should invoke the onAvatarChange event when clearing.', async () => {

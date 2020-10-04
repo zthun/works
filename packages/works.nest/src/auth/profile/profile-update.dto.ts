@@ -1,4 +1,4 @@
-import { IZProfile } from '@zthun/works.core';
+import { IZProfile, ZProfileAvatarMaxBytes } from '@zthun/works.core';
 import { IsDataURI, IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
 import { EqualsOtherProperty } from '../../validation/equals-other-property.function';
 import { IsDataURILimit } from '../../validation/is-data-uri-limit.function';
@@ -32,6 +32,6 @@ export class ZProfileUpdateDto implements Partial<IZProfile> {
   @IsString({ message: 'The avatar must be a string.' })
   @IsDataURI({ message: 'The avatar must be a data uri.  External cross origin urls are not supported.' })
   @IsDataURIType(['image/png'], { message: 'The avatar data uri must be a png image.' })
-  @IsDataURILimit(0, 131072, { message: 'The avatar storage size is too big.  Your avatar must encode to less than 128KB.  Use gravatar if you would like to use larger images.' })
+  @IsDataURILimit(0, ZProfileAvatarMaxBytes, { message: 'The avatar storage size is too big.  Your avatar must encode to less than 128KB.  Use gravatar if you would like to use larger images.' })
   public avatar?: string;
 }

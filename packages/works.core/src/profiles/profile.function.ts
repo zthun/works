@@ -2,9 +2,16 @@ import { md5 } from '../encoding/hash';
 import { IZProfile } from './profile.interface';
 
 /**
- * The standard size of the profile avatar.
+ * The standard height and width of the profile avatar.
  */
 export const ZProfileAvatarSize = 256;
+
+/**
+ * The maximum number of bytes for an avatar.
+ *
+ * The current default is 128KB.
+ */
+export const ZProfileAvatarMaxBytes = 131072;
 
 /**
  * The root path to the gravatar url.

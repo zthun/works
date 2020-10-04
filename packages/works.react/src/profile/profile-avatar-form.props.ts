@@ -3,6 +3,7 @@ export interface IZProfileAvatarFormProps {
   subHeaderText: string;
   saveText: string;
   clearText: string;
+  maxSize: number;
 
   disabled: boolean;
   loading: boolean;

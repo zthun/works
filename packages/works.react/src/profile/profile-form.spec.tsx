@@ -1,4 +1,4 @@
-import { fireEvent, render, RenderResult } from '@testing-library/react';
+import { fireEvent, render, RenderResult, waitForElementToBeRemoved } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { IZImageReader } from '@zthun/works.draw';
 import { createMocked } from '@zthun/works.jest';
@@ -162,10 +162,11 @@ describe('ZProfileForm', () => {
       // Act
       await act(async () => {
         fireEvent.click(icon);
-        await of(true).pipe(delay(0)).toPromise();
+      });
+      await act(async () => {
         const btn = target.getByText('Update Avatar');
         fireEvent.click(btn);
-        await of(true).pipe(delay(1000)).toPromise();
+        await waitForElementToBeRemoved(target.queryByTestId('ZProfileForm-avatar-dialog'));
       });
       const actual = target.queryByTestId('ZProfileForm-avatar-dialog');
       // Assert
