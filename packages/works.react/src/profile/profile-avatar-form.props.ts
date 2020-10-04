@@ -2,6 +2,7 @@ export interface IZProfileAvatarFormProps {
   headerText: string;
   subHeaderText: string;
   saveText: string;
+  clearText: string;
 
   disabled: boolean;
   loading: boolean;

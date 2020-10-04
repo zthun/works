@@ -1,4 +1,4 @@
-import { Grid, IconButton, Slider, Typography } from '@material-ui/core';
+import { Button, Grid, IconButton, Slider, Typography } from '@material-ui/core';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import RestoreIcon from '@material-ui/icons/Restore';
@@ -7,7 +7,7 @@ import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
 import { ZPrintableColor, ZPrintableDrawing, ZPrintableGroup, ZPrintableImage, ZPrintableTransform, ZToolingPan } from '@zthun/works.draw';
 import { noop } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
-import { ZActionForm } from '../common/action-form';
+import { ZPaperCard } from '../common/paper-card';
 import { useFileSelect } from '../file/file-select.context';
 import { useImageReader } from '../image/image-reader.context';
 import { IZProfileAvatarFormProps } from './profile-avatar-form.props';
@@ -44,6 +44,10 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
     props.onAvatarChange(cvs.current.toDataURL());
   }
 
+  function clear() {
+    props.onAvatarChange(null);
+  }
+
   function redraw() {
     draw.current.print(cvs.current.getContext('2d'));
   }
@@ -78,17 +82,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   }
 
   return (
-    <ZActionForm
-      className='ZProfileAvatarForm-root'
-      data-testid='ZProfileAvatarForm-root'
-      avatar={<PhotoCameraIcon fontSize='large' />}
-      disabled={props.disabled}
-      loading={props.loading}
-      headerText={props.headerText}
-      subHeaderText={props.subHeaderText}
-      actionText={props.saveText}
-      onAction={save}
-    >
+    <ZPaperCard className='ZProfileAvatarForm-root' data-testid='ZProfileAvatarForm-root' avatar={<PhotoCameraIcon fontSize='large' />} loading={props.loading} headerText={props.headerText} subHeaderText={props.subHeaderText}>
       <Grid container justify='center' alignItems='center' direction='column' spacing={1}>
         <Grid item>
           <IconButton data-testid='ZProfileAvatarForm-btn-open' disabled={props.disabled} title='Open' onClick={open}>
@@ -119,8 +113,22 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
             </Grid>
           </Grid>
         </Grid>
+        <Grid item className='ZProfileAvatarForm-toolbar'>
+          <Grid container spacing={2}>
+            <Grid item sm={6}>
+              <Button className='ZProfileAvatarForm-btn-save' data-testid='ZProfileAvatarForm-btn-save' fullWidth={true} variant='outlined' type='submit' disabled={props.disabled} color='primary' onClick={save}>
+                {props.saveText}
+              </Button>
+            </Grid>
+            <Grid item sm={6}>
+              <Button className='ZProfileAvatarForm-btn-clear' data-testid='ZProfileAvatarForm-btn-clear' fullWidth={true} variant='outlined' type='button' disabled={props.disabled} color='secondary' onClick={clear}>
+                {props.clearText}
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
-    </ZActionForm>
+    </ZPaperCard>
   );
 }
 
@@ -128,6 +136,7 @@ ZProfileAvatarForm.defaultProps = {
   headerText: 'Avatar',
   subHeaderText: 'Update your representation',
   saveText: 'Update Avatar',
+  clearText: 'Clear',
 
   disabled: false,
   loading: false,

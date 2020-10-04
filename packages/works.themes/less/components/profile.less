@@ -69,7 +69,7 @@
   width: 400px;
 
   .ZProfileAvatarForm-picture {
-    border: 0.1em solid #000;
+    border: @thickness-md solid @color-black;
     cursor: grab;
 
     &:active {
@@ -78,10 +78,14 @@
   }
 
   .ZProfileAvatarForm-zoom {
-    width: calc(256px - 4em);
+    width: calc(@sizing-avatar-xl - 4em);
   }
 
   .ZProfileAvatarForm-percent {
     width: 2.6em;
+  }
+
+  .ZProfileAvatarForm-toolbar {
+    align-self: stretch;
   }
 }

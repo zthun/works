@@ -83,7 +83,7 @@ describe('ZthunworksMenu', () => {
       });
 
       function openMenu(target: RenderResult) {
-        const profileMenu = target.getByText(menu);
+        const profileMenu = target.getByTestId('ZProfileMenu-avatar');
         fireEvent.click(profileMenu);
       }
 

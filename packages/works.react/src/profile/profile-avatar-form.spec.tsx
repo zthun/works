@@ -147,14 +147,24 @@ describe('ZProfileAvatarForm', () => {
   });
 
   describe('Save', () => {
-    it('should invoke the onAvatarChange event.', async () => {
+    it('should invoke the onAvatarChange event when saving.', async () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const button = target.getByTestId('ZActionForm-btn-action') as HTMLButtonElement;
+      const button = target.getByText('Update Avatar');
       fireEvent.click(button);
       // Assert
-      expect(avatarChange).toHaveBeenCalled();
+      expect(avatarChange).toHaveBeenCalledWith(expect.any(String));
+    });
+
+    it('should invoke the onAvatarChange event when clearing.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const button = target.getByText('Clear');
+      fireEvent.click(button);
+      // Assert
+      expect(avatarChange).toHaveBeenCalledWith(null);
     });
   });
 });

@@ -1,4 +1,4 @@
-import { Button, Grid, Menu, MenuItem } from '@material-ui/core';
+import { Button, Grid, Hidden, Menu, MenuItem } from '@material-ui/core';
 import { getProfileAvatarUrl } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React from 'react';
@@ -36,12 +36,16 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
     return (
       <React.Fragment>
         <Button className='ZProfileMenu-btn-profile' data-testid='ZProfileMenu-btn-profile' color='inherit' onClick={openMenu} disabled={props.disabled}>
-          <Grid container spacing={2} alignItems='center'>
+          <Grid container spacing={2} justify='center' alignItems='center' wrap='nowrap'>
             <Grid item>
               <img className='ZProfileMenu-avatar' data-testid='ZProfileMenu-avatar' src={getProfileAvatarUrl(props.profile)} />
             </Grid>
-            <Grid item>{get(props, 'profile.display') || get(props, 'profile.email')}</Grid>
-            <ZCircularProgress data-testid='ZProfileMenu-progress-loading' show={props.loading} />
+            <Hidden only='xs'>
+              <Grid item>{get(props, 'profile.display') || get(props, 'profile.email')}</Grid>
+            </Hidden>
+            <Grid item>
+              <ZCircularProgress data-testid='ZProfileMenu-progress-loading' show={props.loading} />
+            </Grid>
           </Grid>
         </Button>
 
