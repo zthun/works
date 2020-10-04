@@ -1,4 +1,5 @@
-import { Dialog, TextField } from '@material-ui/core';
+import { Collapse, Dialog, TextField, Typography } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import { getAvatarUrl, ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
@@ -7,11 +8,11 @@ import { ZProfileAvatarForm } from './profile-avatar-form';
 import { IZProfileFormProps } from './profile-form.props';
 
 export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
-  const [email, setEmail] = useState(get(props, 'profile.email', ''));
-  const [display, setDisplay] = useState(get(props, 'profile.display', ''));
-  const [password, setPassword] = useState(get(props, 'profile.password', ''));
-  const [confirm, setConfirm] = useState(get(props, 'profile.confirm', ''));
-  const [avatar, setAvatar] = useState(get(props, 'profile.avatar'));
+  const [email, setEmail] = useState<string>(get(props, 'profile.email', ''));
+  const [display, setDisplay] = useState<string>(get(props, 'profile.display', ''));
+  const [password, setPassword] = useState<string>(get(props, 'profile.password', ''));
+  const [confirm, setConfirm] = useState<string>(get(props, 'profile.confirm', ''));
+  const [avatar, setAvatar] = useState<string>(get(props, 'profile.avatar'));
   const [editAvatar, setEditAvatar] = useState(false);
 
   function build() {
@@ -84,12 +85,26 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
 
     const displayTextField = createTextField('display', 'Display', 'text', display, handleDisplayChange);
     const emailTextField = createTextField('email', 'Email', 'email', email, handleEmailChange);
+    const emailOriginal = get(props, 'profile.email', '');
+    const emailDirty = emailOriginal.toLowerCase() !== email.toLowerCase();
+
+    const emailWarning = (
+      <Collapse in={emailDirty}>
+        <Alert severity='warning' className='ZProfileForm-alert-email-dirty' data-testid={`ZProfileForm-alert-email-dirty-${emailDirty}`} action={close}>
+          <AlertTitle>
+            <Typography variant='subtitle1'>Email Changed</Typography>
+          </AlertTitle>
+          <Typography variant='caption'>{`If you update your profile, it will be temporarily deactivated to confirm your updated email.  Your original email was ${emailOriginal}`}</Typography>
+        </Alert>
+      </Collapse>
+    );
 
     return (
       <React.Fragment>
         <h4>{props.accountInformationHeaderText}</h4>
         {displayTextField}
         {emailTextField}
+        {emailWarning}
       </React.Fragment>
     );
   }

@@ -127,6 +127,30 @@ describe('ZProfileForm', () => {
     });
   });
 
+  describe('Email', () => {
+    it('should show the email warning if the email has changed.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      const updated = 'wolverine@marvel.com';
+      // Act
+      await act(async () => {
+        setField(target, 'ZProfileForm-input-email', updated);
+      });
+      const actual = target.getByTestId('ZProfileForm-alert-email-dirty-true');
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('should not show the email warning if the email is the original email.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const actual = target.getByTestId('ZProfileForm-alert-email-dirty-false');
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+  });
+
   describe('Avatar', () => {
     beforeEach(() => {
       profile = new ZProfileBuilder().copy(profile).avatar('https://steamavatar.io/img/14777429602y3IT.jpg').build();
