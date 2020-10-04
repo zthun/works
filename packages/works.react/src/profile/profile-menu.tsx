@@ -1,6 +1,6 @@
 import { Button, Grid, Hidden, Menu, MenuItem } from '@material-ui/core';
-import { getProfileAvatarUrl } from '@zthun/works.core';
-import { get, noop } from 'lodash';
+import { getProfileAvatarUrl, getProfileDisplay } from '@zthun/works.core';
+import { noop } from 'lodash';
 import React from 'react';
 import { ZCircularProgress } from '../common/circular-progress';
 import { useMenuState } from '../common/use-menu-state.hook';
@@ -41,7 +41,7 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
               <img className='ZProfileMenu-avatar' data-testid='ZProfileMenu-avatar' src={getProfileAvatarUrl(props.profile)} />
             </Grid>
             <Hidden only='xs'>
-              <Grid item>{get(props, 'profile.display') || get(props, 'profile.email')}</Grid>
+              <Grid item>{getProfileDisplay(props.profile)}</Grid>
             </Hidden>
             <Grid item>
               <ZCircularProgress data-testid='ZProfileMenu-progress-loading' show={props.loading} />

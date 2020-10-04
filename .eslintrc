@@ -12,6 +12,7 @@
     "eqeqeq": ["error", "smart"],
     "multiline-ternary": "off",
     "new-cap": "off",
+    "no-mixed-operators": "off",
     "@typescript-eslint/no-empty-function": ["error", { "allow": ["constructors"] }],
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-var-requires": "off",

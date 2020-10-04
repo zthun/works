@@ -1,5 +1,5 @@
 import { ZProfileBuilder } from './profile-builder.class';
-import { getGravatarUrl, getProfileAvatarUrl } from './profile.function';
+import { getGravatarUrl, getProfileAvatarUrl, getProfileDisplay } from './profile.function';
 
 describe('Avatar', () => {
   it('should resolve the url to the gravatar url on a falsy profile.', () => {
@@ -29,5 +29,43 @@ describe('Avatar', () => {
     const actual = getProfileAvatarUrl(profile);
     // Assert
     expect(actual).toEqual(avatar);
+  });
+});
+
+describe('Display', () => {
+  it('should resolve the display to the empty string on a falsy profile.', () => {
+    // Arrange
+    // Act
+    const actual = getProfileDisplay(null);
+    // Assert
+    expect(actual).toEqual('');
+  });
+
+  it('should resolve to the empty string on a profile with no email or display.', () => {
+    // Arrange
+    // Act
+    const actual = getProfileDisplay(new ZProfileBuilder().build());
+    // Assert
+    expect(actual).toEqual('');
+  });
+
+  it('should resolve the display to the email on profile with no display.', () => {
+    // Arrange
+    const email = 'gambit@marvel.com';
+    const profile = new ZProfileBuilder().email(email).build();
+    // Act
+    const actual = getProfileDisplay(profile);
+    // Assert
+    expect(actual).toEqual(email);
+  });
+
+  it('should resolve to the display on a profile with a display and an email.', () => {
+    // Arrange
+    const display = 'Gambit';
+    const profile = new ZProfileBuilder().email('gambit@marvel.com').display(display).build();
+    // Act
+    const actual = getProfileDisplay(profile);
+    // Assert
+    expect(actual).toEqual(display);
   });
 });

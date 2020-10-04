@@ -47,7 +47,7 @@ export { IZLogin } from './logins/login.interface';
 export { ZProfileActivationBuilder } from './profiles/profile-activation-builder.class';
 export { IZProfileActivation } from './profiles/profile-activation.interface';
 export { ZProfileBuilder } from './profiles/profile-builder.class';
-export { getAvatarUrl, getGravatarUrl, getProfileAvatarUrl } from './profiles/profile.function';
+export { getAvatarUrl, getGravatarUrl, getProfileAvatarUrl, getProfileDisplay } from './profiles/profile.function';
 export { IZProfile } from './profiles/profile.interface';
 // Server
 export { ZServerBuilder } from './server/server-builder.class';

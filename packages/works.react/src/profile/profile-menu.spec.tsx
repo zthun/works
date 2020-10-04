@@ -97,29 +97,6 @@ describe('ZProfileMenu', () => {
       // Assert
       expect(logout).toBeFalsy();
     });
-
-    it('shows the display name of the user if the display name is set.', async () => {
-      // Arrange
-      const target = await createTestTarget();
-      const expected = profile.display.toUpperCase();
-      // Act
-      const btn = target.getByTestId('ZProfileMenu-btn-profile');
-      const actual = btn.textContent.toUpperCase();
-      // Assert
-      expect(actual).toEqual(expected);
-    });
-
-    it('shows the user email if the display name is not set.', async () => {
-      // Arrange
-      delete profile.display;
-      const target = await createTestTarget();
-      const expected = profile.email.toUpperCase();
-      // Act
-      const btn = target.getByTestId('ZProfileMenu-btn-profile');
-      const actual = btn.textContent.toUpperCase();
-      // Assert
-      expect(actual).toEqual(expected);
-    });
   });
 
   describe('Disabled', () => {

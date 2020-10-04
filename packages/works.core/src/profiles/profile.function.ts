@@ -51,3 +51,16 @@ export function getProfileAvatarUrl(profile: IZProfile) {
 export function getAvatarUrl(avatar: string, email: string) {
   return avatar || getGravatarUrl(email);
 }
+
+/**
+ * Gets the display for the profile.
+ *
+ * @param profile The profile to convert to a display string.
+ *
+ * @returns The appropriate display for the profile.
+ */
+export function getProfileDisplay(profile: IZProfile) {
+  const display = profile ? profile.display : '';
+  const email = profile ? profile.email : '';
+  return display || email || '';
+}

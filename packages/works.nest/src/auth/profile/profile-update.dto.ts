@@ -1,6 +1,8 @@
 import { IZProfile } from '@zthun/works.core';
-import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
+import { IsDataURI, IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
 import { EqualsOtherProperty } from '../../validation/equals-other-property.function';
+import { IsDataURILimit } from '../../validation/is-data-uri-limit.function';
+import { IsDataURIType } from '../../validation/is-data-uri-type.function';
 import { IsNotWhiteSpace } from '../../validation/is-not-white-space.function';
 
 export class ZProfileUpdateDto implements Partial<IZProfile> {
@@ -28,6 +30,8 @@ export class ZProfileUpdateDto implements Partial<IZProfile> {
 
   @IsOptional()
   @IsString({ message: 'The avatar must be a string.' })
-  // @IsImageUrl({message: 'The avatar must be a url to an image of a supported type.'})
+  @IsDataURI({ message: 'The avatar must be a data uri.  External cross origin urls are not supported.' })
+  @IsDataURIType(['image/png'], { message: 'The avatar data uri must be a png image.' })
+  @IsDataURILimit(0, 131072, { message: 'The avatar storage size is too big.  Your avatar must encode to less than 128KB.  Use gravatar if you would like to use larger images.' })
   public avatar?: string;
 }
