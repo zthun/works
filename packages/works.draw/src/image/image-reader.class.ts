@@ -14,15 +14,25 @@ import { IZImageReader } from './image-reader.interface';
  * Represents the standard implementation of the image reader object.
  */
 export class ZImageReader implements IZImageReader {
-  public read(blob: Blob): Promise<HTMLCanvasElement> {
+  /**
+   * Reads the data blob.
+   *
+   * @param data The data to read.  This can be a url to an image or a Blob that can convert locally to an image.
+   *
+   * @returns A promise that returns the loaded canvas.  If the read fails,
+   *          then a canvas that is a 1x1 white pixel will be returned.
+   */
+  public read(urlOrBlob: Blob): Promise<HTMLCanvasElement> {
     const canvas = document.createElement('canvas');
     canvas.width = 1;
     canvas.height = 1;
     const bmp = canvas.getContext('2d');
 
     return new Promise<HTMLCanvasElement>((resolve) => {
-      const url = URL.createObjectURL(blob);
+      const url = typeof urlOrBlob === 'string' ? urlOrBlob : URL.createObjectURL(urlOrBlob);
       const img = new Image();
+
+      img.crossOrigin = 'Anonymous';
 
       img.onload = () => {
         canvas.width = img.width;

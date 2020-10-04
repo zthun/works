@@ -13,7 +13,7 @@ describe('ZProfileAvatarForm', () => {
   let file: File;
   let fileSelect: jest.Mocked<IZFileSelect>;
   let imageReader: jest.Mocked<IZImageReader>;
-  let avatar: Blob;
+  let avatar: string;
   let avatarChange: jest.Mock;
   let disabled: boolean;
   let loading: boolean;
@@ -37,7 +37,7 @@ describe('ZProfileAvatarForm', () => {
     fileSelect = createMocked<IZFileSelect>(['open']);
     fileSelect.open.mockImplementation((ac: string, cb: (file: File) => void) => cb(file));
 
-    avatar = new Blob([]);
+    avatar = 'https://steamavatar.io/img/14777429602y3IT.jpg';
     avatarChange = jest.fn();
 
     avatarImage = document.createElement('canvas');

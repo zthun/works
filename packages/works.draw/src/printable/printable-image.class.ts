@@ -34,21 +34,21 @@ export class ZPrintableImage implements IZPrintable {
   }
 
   /**
-   * Imports the image from binary data.
+   * Imports the image from or url or binary data.
    *
-   * @param binary The binary date to import from.
+   * @param urlOrBinary The url or binary date to import from.
    *
    * @returns A promise that, when resolved, has loaded the image.
    */
-  public async import(binary: Blob): Promise<void> {
-    if (!binary) {
+  public async import(urlOrBinary: string | Blob): Promise<void> {
+    if (!urlOrBinary) {
       this._canvas = document.createElement('canvas');
       this._canvas.width = 1;
       this._canvas.height = 1;
       return Promise.resolve();
     }
 
-    this._canvas = await this.reader.read(binary);
+    this._canvas = await this.reader.read(urlOrBinary);
   }
 
   public print(context: CanvasRenderingContext2D) {

@@ -1,18 +1,16 @@
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { IZImageReader } from '@zthun/works.draw';
+import { createMocked } from '@zthun/works.jest';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { ZFileSelectContext } from '../file/file-select.context';
-import { IZFileSelect } from '../file/file-select.interface';
 import { ZImageReaderContext } from '../image/image-reader.context';
 import { ZProfileForm } from './profile-form';
 
 describe('ZProfileForm', () => {
   let onProfileChange: jest.Mock;
-  let fileSelect: jest.Mocked<IZFileSelect>;
   let imageReader: jest.Mocked<IZImageReader>;
   let hideAccountInformation: boolean;
   let hidePassword: boolean;
@@ -22,9 +20,7 @@ describe('ZProfileForm', () => {
   async function createTestTarget() {
     return render(
       <ZImageReaderContext.Provider value={imageReader}>
-        <ZFileSelectContext.Provider value={fileSelect}>
-          <ZProfileForm profile={profile} onProfileChange={onProfileChange} disabled={disabled} hideAccountInformation={hideAccountInformation} hidePassword={hidePassword} />
-        </ZFileSelectContext.Provider>
+        <ZProfileForm profile={profile} onProfileChange={onProfileChange} disabled={disabled} hideAccountInformation={hideAccountInformation} hidePassword={hidePassword} />
       </ZImageReaderContext.Provider>
     );
   }
@@ -49,7 +45,15 @@ describe('ZProfileForm', () => {
     hideAccountInformation = false;
     hidePassword = false;
     disabled = false;
-    profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').avatar('https://steamavatar.io/img/14777429602y3IT.jpg').build();
+    profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').build();
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 1;
+    canvas.height = 1;
+
+    imageReader = createMocked<IZImageReader>(['read']);
+    imageReader.read.mockResolvedValue(canvas);
+
     onProfileChange = jest.fn();
   });
 
@@ -124,6 +128,10 @@ describe('ZProfileForm', () => {
   });
 
   describe('Avatar', () => {
+    beforeEach(() => {
+      profile = new ZProfileBuilder().copy(profile).avatar('https://steamavatar.io/img/14777429602y3IT.jpg').build();
+    });
+
     it('should show the user avatar if the avatar is set.', async () => {
       // Arrange
       const target = await createTestTarget();
@@ -189,7 +197,7 @@ describe('ZProfileForm', () => {
     it('should fire the profileChange method with the updated profile.', async () => {
       // Arrange
       const target = await createTestTarget();
-      const expected = new ZProfileBuilder().display('Wolverine').email('wolverine@marvel.com').password('sucks-password').confirm('sucks-password').build();
+      const expected = new ZProfileBuilder().display('Wolverine').email('wolverine@marvel.com').password('sucks-password').avatar(profile.avatar).confirm('sucks-password').build();
       // Act
       await act(async () => {
         setField(target, 'ZProfileForm-input-display', expected.display);

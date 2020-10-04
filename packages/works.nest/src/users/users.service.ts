@@ -106,6 +106,10 @@ export class ZUsersService {
       template.display = profile.display;
     }
 
+    if (Object.prototype.hasOwnProperty.call(profile, 'avatar')) {
+      template.avatar = profile.avatar;
+    }
+
     if (JSON.stringify(template) === JSON.stringify({})) {
       return await this.findById(id);
     }

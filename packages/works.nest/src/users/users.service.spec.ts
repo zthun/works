@@ -216,6 +216,18 @@ describe('ZUsersRepositoryController', () => {
       expect(actual.display).toEqual(expected);
     });
 
+    it('updates the avatar.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const expected = 'https://avatarfiles.alphacoders.com/116/thumb-116912.jpg';
+      const profile: IZProfile = { avatar: expected };
+      // Act
+      await target.update(userA._id, profile);
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      // Assert
+      expect(actual.avatar).toEqual(expected);
+    });
+
     it('does not update anything if nothing is set.', async () => {
       // Arrange
       const target = createTestTarget();

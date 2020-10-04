@@ -4,7 +4,6 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import RestoreIcon from '@material-ui/icons/Restore';
 import ZoomOutIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
-import { blobFromDataUrl } from '@zthun/works.core';
 import { ZPrintableColor, ZPrintableDrawing, ZPrintableGroup, ZPrintableImage, ZPrintableTransform, ZToolingPan } from '@zthun/works.draw';
 import { noop } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
@@ -42,8 +41,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   });
 
   function save() {
-    const blob = blobFromDataUrl(cvs.current.toDataURL());
-    props.onAvatarChange(blob);
+    props.onAvatarChange(cvs.current.toDataURL());
   }
 
   function redraw() {
