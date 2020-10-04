@@ -38,9 +38,6 @@ ZProfileDeleteForm.defaultProps = {
   headerText: 'Delete Account',
   subHeaderText: 'Remove your account completely.',
   deleteText: 'Delete',
-  confirmText: 'This action is not reversible.  Are you sure you wish to proceed?',
-  yesText: 'Yes',
-  noText: 'No',
 
   loading: false,
   disabled: false,
