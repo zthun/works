@@ -10,7 +10,7 @@ describe('ZthunworksApp', () => {
   let profile: IZProfile;
 
   beforeEach(() => {
-    profile = new ZProfileBuilder().display('Administrator').email('admin@zthunworks.com').super().build();
+    profile = new ZProfileBuilder().display('Administrator').email('admin@zthunworks.com').build();
 
     jest.spyOn(Axios, 'get').mockResolvedValue(profile);
   });

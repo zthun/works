@@ -35,7 +35,7 @@ describe('ZProfileForm', () => {
     hideAccountInformation = false;
     hidePassword = false;
     disabled = false;
-    profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').build();
+    profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').avatar('https://steamavatar.io/img/14777429602y3IT.jpg').build();
     onProfileChange = jest.fn();
   });
 
@@ -110,21 +110,31 @@ describe('ZProfileForm', () => {
   });
 
   describe('Avatar', () => {
-    it('should show the user avatar if the user is not the super user.', async () => {
+    it('should show the user avatar if the avatar is set.', async () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const actual = target.getByTestId('ZProfileForm-icon-user');
+      const actual = target.getByTestId('ZProfileForm-avatar-profile');
       // Assert
       expect(actual).toBeTruthy();
     });
 
-    it('should show the super user avatar if the user is the super user.', async () => {
+    it('should show the avatar from gravatar if the avatar is not set.', async () => {
       // Arrange
-      profile = new ZProfileBuilder().copy(profile).super().build();
+      delete profile.avatar;
       const target = await createTestTarget();
       // Act
-      const actual = target.getByTestId('ZProfileForm-icon-superuser');
+      const actual = target.getByTestId('ZProfileForm-avatar-gravatar');
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('should show the default gravatar avatar if the profile is not set.', async () => {
+      // Arrange
+      profile = null;
+      const target = await createTestTarget();
+      // Act
+      const actual = target.getByTestId('ZProfileForm-avatar-default');
       // Assert
       expect(actual).toBeTruthy();
     });

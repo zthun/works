@@ -23,7 +23,7 @@ describe('ZProfilesController', () => {
   }
 
   beforeEach(() => {
-    gambit = new ZProfileBuilder().email('gambit@marvel.com').super().active().build();
+    gambit = new ZProfileBuilder().email('gambit@marvel.com').active().build();
 
     req = createMocked<Request>();
     res = createMocked<Response>(['sendStatus', 'send']);

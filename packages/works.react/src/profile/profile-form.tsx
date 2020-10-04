@@ -1,18 +1,16 @@
 import { TextField } from '@material-ui/core';
-import PersonIcon from '@material-ui/icons/Person';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import { ZProfileBuilder } from '@zthun/works.core';
+import { md5, ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
 import { ZActionForm } from '../common/action-form';
 import { IZProfileFormProps } from './profile-form.props';
 
 export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
-  const [admin] = useState(get(props, 'profile.super', false));
   const [email, setEmail] = useState(get(props, 'profile.email', ''));
   const [display, setDisplay] = useState(get(props, 'profile.display', ''));
   const [password, setPassword] = useState(get(props, 'profile.password', ''));
   const [confirm, setConfirm] = useState(get(props, 'profile.confirm', ''));
+  const [avatar] = useState(get(props, 'profile.avatar', ''));
 
   function handleEmailChange(event: any) {
     setEmail(event.target.value);
@@ -83,19 +81,28 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     );
   }
 
-  function createAvatar() {
-    return admin ? <SupervisorAccountIcon className='ZProfileForm-icon-superuser' data-testid='ZProfileForm-icon-superuser' fontSize='large' /> : <PersonIcon className='ZProfileForm-icon-user' data-testid='ZProfileForm-icon-user' fontSize='large' />;
+  function createAvatarImage() {
+    let url = avatar;
+    let from = 'ZProfileForm-avatar-profile';
+
+    if (!url) {
+      const profileHash = email ? md5(email) : '';
+      url = `https://s.gravatar.com/avatar/${profileHash}?s=256`;
+      from = profileHash ? 'ZProfileForm-avatar-gravatar' : 'ZProfileForm-avatar-default';
+    }
+
+    return <img className='ZProfileForm-avatar' data-testid={from} src={url} />;
   }
 
   const accountInformation = createAccountInformation();
   const updatePassword = createUpdatePassword();
-  const avatar = createAvatar();
+  const formIcon = createAvatarImage();
 
   return (
     <ZActionForm
       className='ZProfileForm-root'
       data-testid='ZProfileForm-root'
-      avatar={avatar}
+      avatar={formIcon}
       headerText={props.headerText}
       subHeaderText={props.subHeaderText}
       loading={props.loading}

@@ -1,4 +1,6 @@
 .ZProfileForm-root {
+  max-width: @sizing-card-md;
+
   .ZProfileForm-header {
     padding-bottom: @spacing-no;
 
@@ -9,12 +11,20 @@
     }
   }
 
+  .ZProfileForm-avatar {
+    height: @sizing-avatar-md;
+    width: @sizing-avatar-md;
+  }
+
   .ZProfileForm-input {
     margin-bottom: @spacing-md;
   }
 }
 
 .ZProfileActivationForm-root {
+  min-width: @sizing-card-sm;
+  max-width: @sizing-card-md;
+
   .ZProfileActivationForm-input-key,
   .ZProfileActivationForm-btn-activate {
     margin-top: @spacing-md;
@@ -22,15 +32,24 @@
 }
 
 .ZProfileDeactivationForm-root {
+  width: @sizing-card-sm;
+
   .ZProfileDeactivationForm-btn-deactivate {
     margin-top: @spacing-md;
   }
 }
 
 .ZProfileReactivationForm-root {
+  min-width: @sizing-card-sm;
+  max-width: @sizing-card-md;
+
   .ZProfileReactivationForm-btn-reactivate {
     margin-top: @spacing-md;
   }
+}
+
+.ZProfileDeleteForm-root {
+  width: @sizing-card-sm;
 }
 
 .ZProfileAvatarForm-root {

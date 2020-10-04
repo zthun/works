@@ -43,13 +43,6 @@ export interface IZProfile {
   active?: boolean;
 
   /**
-   * True if the profile belongs to a super user.  False otherwise.
-   *
-   * This cannot be set.  It is only to confirm if the user is the super user.
-   */
-  super?: boolean;
-
-  /**
    * A url to an avatar.
    */
   avatar?: string;

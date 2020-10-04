@@ -31,7 +31,7 @@ export function ZProfileDeactivationForm(props: IZProfileDeactivationFormProps) 
 }
 
 ZProfileDeactivationForm.defaultProps = {
-  headerText: 'Deactivate My Account',
+  headerText: 'Deactivate Account',
   subHeaderText: 'Turn off access for awhile',
   warningText: 'This will deactivate your account.  If you wish to reactivate your account, you will need to send yourself another activation key.',
   deactivateText: 'Deactivate',

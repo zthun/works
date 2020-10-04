@@ -12,6 +12,7 @@ export function ZProfileDeleteForm(props: IZProfileDeleteFormProps) {
 
   return (
     <ZActionForm
+      className='ZProfileDeleteForm-root'
       headerText={props.headerText}
       subHeaderText={props.subHeaderText}
       actionText={props.deleteText}

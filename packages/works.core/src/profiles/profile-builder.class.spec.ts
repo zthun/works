@@ -65,15 +65,6 @@ describe('ZProfileBuilder', () => {
       );
     });
 
-    it('marks the profile as a super user.', () => {
-      assertBuilderSetsProperty(
-        true,
-        createTestTarget,
-        (t) => t.super(),
-        (u: IZProfile) => u.super
-      );
-    });
-
     it('sets the avatar.', () => {
       assertBuilderSetsProperty(
         'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
@@ -106,15 +97,6 @@ describe('ZProfileBuilder', () => {
         createTestTarget,
         (t) => t.user(gambit),
         (u: IZProfile) => u.display
-      );
-    });
-
-    it('copies the super flag.', () => {
-      assertBuilderSetsProperty(
-        gambit.super,
-        createTestTarget,
-        (t) => t.user(gambit),
-        (u: IZProfile) => u.super
       );
     });
 
@@ -157,7 +139,7 @@ describe('ZProfileBuilder', () => {
 
   describe('Copy and Assignment', () => {
     it('copies another profile.', () => {
-      const gambit = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').avatar('https://steamavatar.io/img/14777429602y3IT.jpg').super().build();
+      const gambit = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').avatar('https://steamavatar.io/img/14777429602y3IT.jpg').build();
       assertBuilderCopiesObject(gambit, createTestTarget);
     });
 

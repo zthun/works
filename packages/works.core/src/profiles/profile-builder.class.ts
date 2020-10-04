@@ -76,16 +76,6 @@ export class ZProfileBuilder {
   }
 
   /**
-   * Marks the profile as belonging to a super user.
-   *
-   * @returns This object.
-   */
-  public super(): this {
-    this._profile.super = true;
-    return this;
-  }
-
-  /**
    * Sets the users avatar url.
    *
    * @returns The avatar url.
@@ -129,7 +119,6 @@ export class ZProfileBuilder {
   public user(user: IZUser): this {
     this._profile.email = user.email;
     this._profile.display = user.display;
-    this._profile.super = user.super;
     this._profile.active = !user.activator;
     this._profile.avatar = user.avatar;
     return this;
