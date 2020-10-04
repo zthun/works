@@ -1,5 +1,6 @@
-import { Button, Menu, MenuItem } from '@material-ui/core';
-import { noop } from 'lodash';
+import { Button, Grid, Menu, MenuItem } from '@material-ui/core';
+import { getProfileAvatarUrl } from '@zthun/works.core';
+import { get, noop } from 'lodash';
 import React from 'react';
 import { ZCircularProgress } from '../common/circular-progress';
 import { useMenuState } from '../common/use-menu-state.hook';
@@ -35,10 +36,16 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
     return (
       <React.Fragment>
         <Button className='ZProfileMenu-btn-profile' data-testid='ZProfileMenu-btn-profile' color='inherit' onClick={openMenu} disabled={props.disabled}>
-          {props.profile.display || props.profile.email}
-          <ZCircularProgress data-testid='ZProfileMenu-progress-loading' show={props.loading} />
+          <Grid container spacing={2} alignItems='center'>
+            <Grid item>
+              <img className='ZProfileMenu-avatar' data-testid='ZProfileMenu-avatar' src={getProfileAvatarUrl(props.profile)} />
+            </Grid>
+            <Grid item>{get(props, 'profile.display') || get(props, 'profile.email')}</Grid>
+            <ZCircularProgress data-testid='ZProfileMenu-progress-loading' show={props.loading} />
+          </Grid>
         </Button>
-        <Menu className='ZProfileManu-menu-profile' data-testid='ZProfileMenu-menu-profile' open={!!anchorEl} onClose={closeMenu} anchorEl={anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
+
+        <Menu className='ZProfileMenu-menu-profile' data-testid='ZProfileMenu-menu-profile' open={!!anchorEl} onClose={closeMenu} anchorEl={anchorEl} getContentAnchorEl={null} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
           <div onClick={closeMenu}>
             {props.children}
             {logout}

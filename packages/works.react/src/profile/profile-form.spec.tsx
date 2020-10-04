@@ -132,31 +132,11 @@ describe('ZProfileForm', () => {
       profile = new ZProfileBuilder().copy(profile).avatar('https://steamavatar.io/img/14777429602y3IT.jpg').build();
     });
 
-    it('should show the user avatar if the avatar is set.', async () => {
+    it('should show the user avatar.', async () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const actual = target.getByTestId('ZProfileForm-avatar-profile');
-      // Assert
-      expect(actual).toBeTruthy();
-    });
-
-    it('should show the avatar from gravatar if the avatar is not set.', async () => {
-      // Arrange
-      delete profile.avatar;
-      const target = await createTestTarget();
-      // Act
-      const actual = target.getByTestId('ZProfileForm-avatar-gravatar');
-      // Assert
-      expect(actual).toBeTruthy();
-    });
-
-    it('should show the default gravatar avatar if the profile is not set.', async () => {
-      // Arrange
-      profile = null;
-      const target = await createTestTarget();
-      // Act
-      const actual = target.getByTestId('ZProfileForm-avatar-default');
+      const actual = target.getByTestId('ZProfileForm-avatar');
       // Assert
       expect(actual).toBeTruthy();
     });
@@ -164,7 +144,7 @@ describe('ZProfileForm', () => {
     it('should open the avatar editor when the user clicks the avatar icon.', async () => {
       // Arrange
       const target = await createTestTarget();
-      const icon = target.getByTestId('ZProfileForm-avatar-profile');
+      const icon = target.getByTestId('ZProfileForm-avatar');
       // Act
       await act(async () => {
         fireEvent.click(icon);
@@ -178,7 +158,7 @@ describe('ZProfileForm', () => {
     it('should close the avatar editor when the user clicks the Update Avatar button.', async () => {
       // Arrange
       const target = await createTestTarget();
-      const icon = target.getByTestId('ZProfileForm-avatar-profile');
+      const icon = target.getByTestId('ZProfileForm-avatar');
       // Act
       await act(async () => {
         fireEvent.click(icon);

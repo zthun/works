@@ -15,7 +15,7 @@ export { IZEmailEnvelope } from './email/email-envelope.interface';
 export { IZEmail } from './email/email.interface';
 // Encoding
 export { atob, btoa } from './encoding/base64';
-export { blobFromString, blobFromBase64, blobFromDataUrl } from './encoding/blob';
+export { blobFromBase64, blobFromDataUrl, blobFromString } from './encoding/blob';
 export { md5 } from './encoding/hash';
 // Error
 export { ZErrorBuilder } from './error/error-builder.class';
@@ -47,6 +47,7 @@ export { IZLogin } from './logins/login.interface';
 export { ZProfileActivationBuilder } from './profiles/profile-activation-builder.class';
 export { IZProfileActivation } from './profiles/profile-activation.interface';
 export { ZProfileBuilder } from './profiles/profile-builder.class';
+export { getAvatarUrl, getGravatarUrl, getProfileAvatarUrl } from './profiles/profile.function';
 export { IZProfile } from './profiles/profile.interface';
 // Server
 export { ZServerBuilder } from './server/server-builder.class';

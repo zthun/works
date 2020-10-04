@@ -1,5 +1,5 @@
 import { Dialog, TextField } from '@material-ui/core';
-import { md5, ZProfileBuilder } from '@zthun/works.core';
+import { getAvatarUrl, ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
 import { ZActionForm } from '../common/action-form';
@@ -56,27 +56,10 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     setConfirm('');
   }
 
-  function getAvatarUrl() {
-    let url = avatar;
-
-    if (!url) {
-      const profileHash = email ? md5(email) : '';
-      url = `https://s.gravatar.com/avatar/${profileHash}?s=256`;
-    }
-    return url;
-  }
-
-  function getAvatarFrom() {
-    if (!avatar) {
-      return email ? 'ZProfileForm-avatar-gravatar' : 'ZProfileForm-avatar-default';
-    }
-    return 'ZProfileForm-avatar-profile';
-  }
-
   function createAvatarDialog() {
     return (
       <Dialog className='ZProfileForm-avatar-dialog' data-testid='ZProfileForm-avatar-dialog' open={editAvatar} onClose={handleCloseEditAvatar}>
-        <ZProfileAvatarForm avatar={getAvatarUrl()} onAvatarChange={handleUpdateAvatar} />
+        <ZProfileAvatarForm avatar={getAvatarUrl(avatar, email)} onAvatarChange={handleUpdateAvatar} />
       </Dialog>
     );
   }
@@ -122,7 +105,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   }
 
   function createAvatarImage() {
-    return <img className='ZProfileForm-avatar' data-testid={getAvatarFrom()} src={getAvatarUrl()} onClick={handleEditAvatar} />;
+    return <img className='ZProfileForm-avatar' data-testid='ZProfileForm-avatar' src={getAvatarUrl(avatar, email)} onClick={handleEditAvatar} />;
   }
 
   const avatarDialog = createAvatarDialog();
