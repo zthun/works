@@ -1,7 +1,7 @@
 # General conventions
 node_modules
 dist
-doc
+docs
 coverage
 reports
 install

@@ -23,12 +23,12 @@
     "packages/works.proxy"
   ],
   "scripts": {
-    "clean": "rimraf dist doc reports *.tgz *.log packages/**/dist packages/**/doc packages/**/*.tgz packages/**/*.log  packages/**/css",
+    "clean": "rimraf dist docs reports *.tgz *.log packages/**/dist packages/**/docs packages/**/*.tgz packages/**/*.log  packages/**/css",
     "test": "jest --coverage --runInBand",
     "lint": "lint-janitor",
     "build": "lerna run build",
-    "doc": "lerna run doc",
-    "make": "yarn clean && yarn lint && yarn test && yarn build && yarn doc",
+    "docs": "lerna run docs",
+    "make": "yarn clean && yarn lint && yarn test && yarn build && yarn docs",
     "kubernetes": "tokenizer && kubectl apply -f install/kubernetes.yml",
     "docker:publish": "lerna run docker:publish",
     "docker:build": "lerna run docker:build",

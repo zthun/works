@@ -11,6 +11,7 @@
     "url": "https://github.com/zthun/works"
   },
   "scripts": {
+    "docs": "typedoc",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:esm": "tsc -p ./tsconfig.esm.json",
     "build": "yarn build:cjs && yarn build:esm"
@@ -21,7 +22,8 @@
     "access": "public"
   },
   "files": [
-    "dist/**"
+    "dist/**",
+    "docs/**"
   ],
   "peerDependencies": {
     "@material-ui/core": "^4.3.3",
