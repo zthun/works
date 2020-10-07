@@ -54,6 +54,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       value={email}
       disabled={props.disabled}
       onInput={handleEmailChange}
+      onChange={handleEmailChange}
     />
   );
 
@@ -71,6 +72,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       value={password}
       disabled={props.disabled}
       onInput={handlePasswordChange}
+      onChange={handlePasswordChange}
     />
   );
 
@@ -89,6 +91,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
         value={confirm}
         disabled={props.disabled}
         onInput={handleConfirmChange}
+        onChange={handleConfirmChange}
       />
     );
 
