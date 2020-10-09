@@ -3,7 +3,9 @@ import React from 'react';
 import { IZCircularProgressProps } from './circular-progress.props';
 
 /**
- * Represents a circular progress that can render nothing or the material ui circular progress.
+ * Renders a circular progress that can render nothing or the material ui circular progress.
+ *
+ * @returns The jsx for a circular loading progress.
  */
 export function ZCircularProgress(props: IZCircularProgressProps): JSX.Element {
   return props.show ? <CircularProgress className={`${props.className} ZCircularProgress-root`} data-testid={props['data-testid']} size={props.size} color={props.color} /> : null;

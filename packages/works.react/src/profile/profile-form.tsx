@@ -7,6 +7,13 @@ import { ZActionForm } from '../common/action-form';
 import { ZProfileAvatarForm } from './profile-avatar-form';
 import { IZProfileFormProps } from './profile-form.props';
 
+/**
+ * Creates a form for modifying the users profile.
+ *
+ * @param props The properties for the form.
+ *
+ * @returns The jsx rendering of the profile form.
+ */
 export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   const [email, setEmail] = useState<string>(get(props, 'profile.email', ''));
   const [display, setDisplay] = useState<string>(get(props, 'profile.display', ''));
@@ -15,6 +22,11 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   const [avatar, setAvatar] = useState<string>(get(props, 'profile.avatar'));
   const [editAvatar, setEditAvatar] = useState(false);
 
+  /**
+   * Builds a profile given the current state of the form.
+   *
+   * @returns A profile that can be used to update the existing profile with new information.
+   */
   function build() {
     const currentEmail = get(props, 'profile.email', '');
 
@@ -24,14 +36,28 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     return profile;
   }
 
+  /**
+   * Occurs when the user clicks on the avatar to edit it.
+   */
   function handleEditAvatar() {
     setEditAvatar(true);
   }
 
+  /**
+   * Occurs when the user decides to close the avatar editor.
+   */
   function handleCloseEditAvatar() {
     setEditAvatar(false);
   }
 
+  /**
+   * Occurs when the user edits a custom avatar and clicks the update button.
+   *
+   * This will actually have the same effect as if the user clicked the save button, as the
+   * onProfileChange will be invoked in the properties.
+   *
+   * @param url The url of the avatar.
+   */
   function handleUpdateAvatar(url: string) {
     const profile = build().avatar(url);
     setAvatar(url);
@@ -41,22 +67,47 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     props.onProfileChange(profile.build());
   }
 
+  /**
+   * Occurs when the user enters in changes to the email.
+   *
+   * @param event The event that targets the input that changed.
+   */
   function handleEmailChange(event: any) {
     setEmail(event.target.value);
   }
 
+  /**
+   * Occurs when the user enters in their display name.
+   *
+   * @param event The event that targets the input that changed.
+   */
   function handleDisplayChange(event: any) {
     setDisplay(event.target.value);
   }
 
+  /**
+   * Occurs when the user enters in a new password.
+   *
+   * @param event The event that targets the input that changed.
+   */
   function handlePasswordChange(event: any) {
     setPassword(event.target.value);
   }
 
+  /**
+   * Occurs when the user enters in the new password confirmation.
+   *
+   * @param event The event that targets the input that changed.
+   */
   function handleConfirmChange(event: any) {
     setConfirm(event.target.value);
   }
 
+  /**
+   * Occurs when the user clicks the Update Profile button.
+   *
+   * This raises the onProfileChange event in the properties.
+   */
   function handleSave() {
     const profile = build();
     setPassword('');
@@ -64,6 +115,11 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     props.onProfileChange(profile.build());
   }
 
+  /**
+   * Creates the avatar dialog for when the user wants to edit their avatar.
+   *
+   * @returns The jsx for the avatar dialog.
+   */
   function createAvatarDialog() {
     return (
       <Dialog className='ZProfileForm-avatar-dialog' data-testid='ZProfileForm-avatar-dialog' open={editAvatar} onClose={handleCloseEditAvatar}>
@@ -72,12 +128,28 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     );
   }
 
+  /**
+   * Creates a text field.
+   *
+   * @param name The name of the field.
+   * @param label The field label.
+   * @param type The type of field.
+   * @param val The initial value.
+   * @param handleInput The callback for when the field changes.
+   *
+   * @returns The jsx for the text field.
+   */
   function createTextField(name: string, label: string, type: string, val: string, handleInput: (e: any) => void) {
     const id = `ZProfileForm-input-${name}`;
     const className = `ZProfileForm-input ${id}`;
     return <TextField className={className} data-testid={id} fullWidth={true} label={label} type={type} margin='none' variant='outlined' value={val} disabled={props.disabled} onInput={handleInput} />;
   }
 
+  /**
+   * Creates the jsx for the account information section.
+   *
+   * @returns The jsx for the account information section.
+   */
   function createAccountInformation() {
     if (props.hideAccountInformation) {
       return null;
@@ -109,6 +181,11 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     );
   }
 
+  /**
+   * Creates the jsx for the update password section.
+   *
+   * @returns The jsx for the update password section.
+   */
   function createUpdatePassword() {
     if (props.hidePassword) {
       return null;
@@ -126,6 +203,11 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     );
   }
 
+  /**
+   * Creates the image jsx for the avatar.
+   *
+   * @returns The jsx for the avatar image.
+   */
   function createAvatarImage() {
     return <img className='ZProfileForm-avatar' data-testid='ZProfileForm-avatar' src={getAvatarUrl(avatar, email)} onClick={handleEditAvatar} />;
   }

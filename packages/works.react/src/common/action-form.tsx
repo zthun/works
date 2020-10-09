@@ -6,15 +6,28 @@ import { ZCircularProgress } from './circular-progress';
 import { ZPaperCard } from './paper-card';
 
 /**
- * An action form is similar to a summary card, but contains some content and an action button.
+ * Renders an action form that is similar to a summary card, but contains some content and an action button.
+ *
+ * @param props The properties for the form.
+ *
+ * @returns The jsx for the form.
  */
 export function ZActionForm(props: IZActionFormProps) {
   const [confirming, setConfirming] = useState(false);
 
+  /**
+   * Occurs when the user is presented with a confirmation and chooses to cancel the operation.
+   */
   function handleCancel() {
     setConfirming(false);
   }
 
+  /**
+   * Does one of two possible actions.  If this form requires a confirmation, then the action buttons switch to a confirmation
+   * yes/no flow.  Otherwise, the onAction event is raised.
+   *
+   * @param event The form event to handle.
+   */
   function handleAction(event: FormEvent) {
     event.preventDefault();
     if (confirming || !props.confirmation) {

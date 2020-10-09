@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { MenuItem } from '@material-ui/core';
 import { fireEvent, render } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';

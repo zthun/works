@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { ZSummaryCard } from './summary-card';

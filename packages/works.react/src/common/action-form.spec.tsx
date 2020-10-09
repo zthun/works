@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { Typography } from '@material-ui/core';
 import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';

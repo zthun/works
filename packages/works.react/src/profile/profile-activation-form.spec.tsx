@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { fireEvent, render } from '@testing-library/react';
 import { IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
 import React from 'react';

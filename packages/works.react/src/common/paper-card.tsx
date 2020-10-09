@@ -4,11 +4,18 @@ import { ZCircularProgress } from './circular-progress';
 import { IZPaperCardProps } from './paper-card.props';
 
 /**
- * Represents a material ui card wrapped in paper at a standard elevation.
+ * Renders a material ui card wrapped in paper at a standard elevation.
  *
  * @param props The properties for the paper card.
+ *
+ * @returns The jsx for the paper card.
  */
 export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
+  /**
+   * Creates the action button.
+   *
+   * @returns The jsx for the action button.
+   */
   function createAction() {
     return (
       <div className='ZPaperCard-header-action'>

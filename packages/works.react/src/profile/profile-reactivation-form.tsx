@@ -5,7 +5,15 @@ import React from 'react';
 import { ZActionForm } from '../common/action-form';
 import { IZProfileReactivationFormProps } from './profile-reactivation-form.props';
 
+/**
+ * Constructs a form for reactivating the users profile.
+ *
+ * @param props The properties for the form.
+ */
 export function ZProfileReactivationForm(props: IZProfileReactivationFormProps) {
+  /**
+   * Occurs when the user clicks the action button.
+   */
   function handleReactivate() {
     props.onReactivate();
   }

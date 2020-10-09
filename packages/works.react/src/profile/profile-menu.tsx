@@ -14,6 +14,13 @@ import { IZProfileMenuProps } from './profile-menu.props';
 export function ZProfileMenu(props: IZProfileMenuProps) {
   const [anchorEl, openMenu, closeMenu] = useMenuState();
 
+  /**
+   * Creates the root button as a login button jsx.
+   *
+   * This should be used when the user is not logged in.
+   *
+   * @returns The jsx for the menu with a single login button.
+   */
   function createLoginButton() {
     return (
       <Button className='ZProfileMenu-btn-login' data-testid='ZProfileMenu-btn-login' color='inherit' onClick={props.onLogin}>
@@ -22,6 +29,11 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
     );
   }
 
+  /**
+   * Creates the logout menu item.
+   *
+   * @returns The logout menu item jsx.
+   */
   function createLogoutMenuItem() {
     return (
       <MenuItem className='ZProfileMenu-menuitem-logout' data-testid='ZProfileMenu-menuitem-logout' onClick={props.onLogout}>
@@ -30,6 +42,13 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
     );
   }
 
+  /**
+   * Creates the profile menu jsx.
+   *
+   * This should be used if the user is logged in.
+   *
+   * @returns The profile menu jsx.
+   */
   function createProfileMenu() {
     const logout = props.hideLogout ? null : createLogoutMenuItem();
 

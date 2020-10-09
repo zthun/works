@@ -15,18 +15,36 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
   const [password, setPassword] = useState(get(props, 'credentials.password', ''));
   const [confirm, setConfirm] = useState(get(props, 'credentials.confirm', ''));
 
+  /**
+   * Occurs when the user makes a change to the email field.
+   *
+   * @param event An input event or change event.
+   */
   function handleEmailChange(event: any) {
     setEmail(event.target.value);
   }
 
+  /**
+   * Occurs when the user makes a change to the password field.
+   *
+   * @param event An input event or change event.
+   */
   function handlePasswordChange(event: any) {
     setPassword(event.target.value);
   }
 
+  /**
+   * Occurs when the user makes a change to the confirm field.
+   *
+   * @param event An input event or change event.
+   */
   function handleConfirmChange(event: any) {
     setConfirm(event.target.value);
   }
 
+  /**
+   * Occurs when the user clicks the action button.
+   */
   function handleAction() {
     let login = new ZLoginBuilder().email(email);
 
@@ -47,7 +65,8 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       required={true}
       label='Email'
       type='email'
-      name='username'
+      name={props.nameEmail}
+      autoComplete={props.nameEmail}
       margin='none'
       variant='outlined'
       autoFocus={true}
@@ -65,7 +84,8 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       fullWidth={true}
       required={true}
       label='Password'
-      name='password'
+      name={props.namePassword}
+      autoComplete={props.namePassword}
       type='password'
       margin='none'
       variant='outlined'
@@ -85,7 +105,8 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
         required={true}
         label='Confirm password'
         type='password'
-        name='confirm'
+        name={props.nameConfirm}
+        autoComplete={props.namePassword}
         margin='none'
         variant='outlined'
         value={confirm}
@@ -130,6 +151,10 @@ ZLoginCredentialsForm.defaultProps = {
   hideEmail: false,
   hidePassword: false,
   hideConfirm: false,
+
+  nameEmail: 'username',
+  namePassword: 'password',
+  nameConfirm: 'confirm',
 
   credentials: null,
   onCredentialsChange: noop

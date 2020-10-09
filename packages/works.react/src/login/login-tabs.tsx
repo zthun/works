@@ -20,7 +20,15 @@ import { IZLoginTabsProps } from './login-tabs.props';
 export function ZLoginTabs(props: IZLoginTabsProps) {
   const [tab, setTab] = useState(props.tab);
 
-  function handleTabChange(event: any, name: ZLoginTab) {
+  /**
+   * Occurs when the user changes a tab.
+   *
+   * This raises the onTabChange event.
+   *
+   * @param _ Ignored.
+   * @param name The name of the tab selected.
+   */
+  function handleTabChange(_: any, name: ZLoginTab) {
     setTab(name);
     props.onTabChange(name);
   }
@@ -63,6 +71,9 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
           avatar={<PersonAddIcon fontSize='large' />}
           loading={props.loading}
           disabled={props.disabled}
+          nameEmail='new-email'
+          namePassword='new-password'
+          nameConfirm='new-password-confirm'
           credentials={props.createCredentials}
           onCredentialsChange={props.onCreateCredentialsChange}
         />
@@ -78,6 +89,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
           disabled={props.disabled}
           hidePassword={true}
           hideConfirm={true}
+          nameEmail='recover-email'
           credentials={props.recoverCredentials}
           onCredentialsChange={props.onRecoverCredentialsChange}
         />

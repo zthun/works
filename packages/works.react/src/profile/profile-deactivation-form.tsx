@@ -5,7 +5,19 @@ import React from 'react';
 import { ZActionForm } from '../common/action-form';
 import { IZProfileDeactivationFormProps } from './profile-deactivation-form.props';
 
+/**
+ * Renders the jsx for deactivating a users profile.
+ *
+ * @param props The properties for the form.
+ *
+ * @returns The jsx for the deactivation form.
+ */
 export function ZProfileDeactivationForm(props: IZProfileDeactivationFormProps) {
+  /**
+   * Occurs when the user requests to deactivate their profile.
+   *
+   * This raises the props onDeactivate event.
+   */
   function handleDeactivate() {
     props.onDeactivate();
   }

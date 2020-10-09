@@ -4,9 +4,14 @@ import React from 'react';
 import { IZSummaryCardProps } from './summary-card.props';
 
 /**
- * Represents a pretty elevated card that is meant to lead users to another area of the site.
+ * Renders a pretty elevated card that is meant to lead users to another area of the site.
+ *
+ * @returns The jsx for the summary card.
  */
 export function ZSummaryCard(props: IZSummaryCardProps) {
+  /**
+   * Occurs when the user has requested the navigation button.
+   */
   function handleLearnMore() {
     props.onLearnMore();
   }

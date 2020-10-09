@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZLogin, ZLoginBuilder } from '@zthun/works.core';
 import React from 'react';

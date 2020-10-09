@@ -85,6 +85,33 @@ export interface IZLoginCredentialsFormProps {
   hideConfirm: boolean;
 
   /**
+   * Gets or sets the name of the email field.
+   *
+   * This is mostly to support password form fillers.
+   *
+   * @default 'username'
+   */
+  nameEmail: string;
+
+  /**
+   * Gets or sets the name of the password field.
+   *
+   * This is mostly to support password form fillers.
+   *
+   * @default 'password'
+   */
+  namePassword: string;
+
+  /**
+   * Gets or sets the confirm field.
+   *
+   * This is mostly to support password form fillers.
+   *
+   * @default 'confirm'
+   */
+  nameConfirm: string;
+
+  /**
    * Gets or sets the current credentials object.
    *
    * This will allow you to set the default field values.  If this is null,

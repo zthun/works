@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { act, fireEvent, render } from '@testing-library/react';
 import { IZImageReader } from '@zthun/works.draw';
 import { createMocked } from '@zthun/works.jest';

@@ -6,6 +6,13 @@ import React from 'react';
 import { ZPaperCard } from '../common/paper-card';
 import { IZHttpErrorCodeCardProps } from './http-code-card.props';
 
+/**
+ * Renders a paper card that describes an HttpStatusCode.
+ *
+ * @props The properties for the component.
+ *
+ * @returns The jsx for the rendered
+ */
 export function ZHttpStatusCodeCard(props: IZHttpErrorCodeCardProps) {
   const name = ZHttpCodeClientNames[props.code];
   const heading = 'Client Error';

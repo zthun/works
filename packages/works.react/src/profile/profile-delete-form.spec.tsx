@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { ZProfileDeleteForm } from './profile-delete-form';

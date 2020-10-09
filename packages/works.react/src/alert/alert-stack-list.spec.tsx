@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { ZAlertBuilder } from './alert-builder.class';

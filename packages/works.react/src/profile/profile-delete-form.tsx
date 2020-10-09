@@ -5,7 +5,19 @@ import React from 'react';
 import { ZActionForm } from '../common/action-form';
 import { IZProfileDeleteFormProps } from './profile-delete-form.props';
 
+/**
+ * Renders a form that allows the user to delete their profile after a full confirmation.
+ *
+ * @param props The form properties
+ *
+ * @returns The jsx for the delete profile form.
+ */
 export function ZProfileDeleteForm(props: IZProfileDeleteFormProps) {
+  /**
+   * Occurs when the user clicks the delete button and confirms that they want to delete their profile.
+   *
+   * This invokes the props.onDelete event.
+   */
   function handleDelete() {
     props.onDelete();
   }

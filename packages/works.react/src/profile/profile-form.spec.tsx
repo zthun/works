@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { fireEvent, render, RenderResult, waitForElementToBeRemoved } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { IZImageReader } from '@zthun/works.draw';
