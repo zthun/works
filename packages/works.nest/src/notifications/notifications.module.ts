@@ -10,4 +10,7 @@ import { ZNotificationsConfigService } from './notifications-config.service';
   providers: [ZEmailService, ZNotificationsConfigService],
   exports: [ZEmailService, ZNotificationsConfigService]
 })
+/**
+ * Represents a module for handling notifications.
+ */
 export class ZNotificationsModule {}

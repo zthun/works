@@ -14,4 +14,7 @@ const DATABASE_OPTIONS = new ZDatabaseOptionsBuilder().database(ZVaultDatabase.N
   providers: [ZVaultService, ZCommonConfigService, { provide: ZVaultDatabase.Token, useValue: ZDatabaseMongo.connect(DATABASE_OPTIONS) }],
   exports: [ZVaultService, ZCommonConfigService]
 })
+/**
+ * Represents the module that interacts with the vault database.
+ */
 export class ZVaultModule {}

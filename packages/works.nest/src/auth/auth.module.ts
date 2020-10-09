@@ -16,4 +16,7 @@ import { ZTokensService } from './tokens/tokens.service';
   controllers: [ZTokensController, ZProfilesController],
   exports: [ZTokensService, ZAuthConfigService]
 })
+/**
+ * Represents a module that includes all services regarding authentication.
+ */
 export class ZAuthModule {}

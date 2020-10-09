@@ -6,10 +6,10 @@ import { v4 } from 'uuid';
 import { ZUsersCollections } from './users.collections';
 import { ZUsersDatabase } from './users.database';
 
+@Injectable()
 /**
  * Represents a service to manage the user database with business rules.
  */
-@Injectable()
 export class ZUsersService {
   /**
    * The password encryption rounds.
@@ -20,7 +20,6 @@ export class ZUsersService {
    * Initializes a new instance of this object.
    *
    * @param _dal The data access layer.
-   * @param _auth The auth service for simple tasks.
    */
   public constructor(@Inject(ZUsersDatabase.Token) private readonly _dal: IZDatabase) {}
 

@@ -5,7 +5,15 @@ import { ZVaultCollections } from './vault.collections';
 import { ZVaultDatabase } from './vault.database';
 
 @Injectable()
+/**
+ * Represents the service that can be used to read configuration from the vault database.
+ */
 export class ZVaultService {
+  /**
+   * Initializes a new instance of this object.
+   *
+   * @param _dal The data access layer used to communicate with the vault database.
+   */
   public constructor(@Inject(ZVaultDatabase.Token) private readonly _dal: IZDatabase) {}
 
   /**

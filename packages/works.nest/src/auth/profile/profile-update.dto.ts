@@ -5,6 +5,9 @@ import { IsDataURILimit } from '../../validation/is-data-uri-limit.function';
 import { IsDataURIType } from '../../validation/is-data-uri-type.function';
 import { IsNotWhiteSpace } from '../../validation/is-not-white-space.function';
 
+/**
+ * Represents the DTO to update a profile.
+ */
 export class ZProfileUpdateDto implements Partial<IZProfile> {
   @IsOptional()
   @IsString({ message: 'Display must be a string.' })

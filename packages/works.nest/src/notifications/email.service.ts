@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { IZEmail, IZServer, ZEmailContactAddressBuilder } from '@zthun/works.core';
 import { createTransport, SendMailOptions } from 'nodemailer';
 
+@Injectable()
 /**
  * Represents a service to send emails.
  */
-@Injectable()
 export class ZEmailService {
   /**
    * Sends an email message.

@@ -5,10 +5,10 @@ import { ZRuleCookieRequiresAuthAny } from '../rules/rule-cookie-requires-auth-a
 import { ZTokensLoginDto } from './tokens-login.dto';
 import { ZTokensService } from './tokens.service';
 
+@Controller('tokens')
 /**
  * The controller for logging the user in and out.
  */
-@Controller('tokens')
 export class ZTokensController {
   /**
    * Initializes a new instance of this object.

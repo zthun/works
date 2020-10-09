@@ -1,9 +1,9 @@
 import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 
+@ValidatorConstraint({ name: 'data-uri-limit', async: false })
 /**
  * Represents a validator for forcing the limit of the data section of a data uri to be between a certain length.
  */
-@ValidatorConstraint({ name: 'data-uri-limit', async: false })
 export class IsDataURILimitValidator implements ValidatorConstraintInterface {
   /**
    * Validates that the value is a data uri and that the data section is between the minimum and maximum length.

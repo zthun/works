@@ -7,10 +7,10 @@ import { ZUsersService } from '../../users/users.service';
 import { ZCommonConfigService } from '../../vault/common-config.service';
 import { ZAuthConfigService } from '../config/auth-config.service';
 
+@Injectable()
 /**
  * Represents a service that can be used to sign, verify, inject and extract a jwt token.
  */
-@Injectable()
 export class ZTokensService {
   /**
    * The name of the cookie that this service will inject.

@@ -16,12 +16,12 @@ import { ZProfileRecoveryCreateDto } from './profile-recovery-create.dto';
 import { ZProfileUpdateDto } from './profile-update.dto';
 import { ZProfilesService } from './profiles.service';
 
+@Controller('profiles')
 /**
  * Same as the users controller, but uses the cookie to get the id and has different permissions.
  *
  * Used by regular users to retrieve their own information.
  */
-@Controller('profiles')
 export class ZProfilesController {
   /**
    * Initializes a new instance of this object.

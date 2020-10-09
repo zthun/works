@@ -13,4 +13,7 @@ const DATABASE_OPTIONS = new ZDatabaseOptionsBuilder().database(ZUsersDatabase.N
   providers: [ZUsersService, { provide: ZUsersDatabase.Token, useValue: ZDatabaseMongo.connect(DATABASE_OPTIONS) }],
   exports: [ZUsersService]
 })
+/**
+ * Represents the module that handles users.
+ */
 export class ZUsersModule {}

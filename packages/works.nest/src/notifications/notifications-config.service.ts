@@ -3,10 +3,10 @@ import { IZConfigEntry, IZServer, ZConfigEntryBuilder, ZServerBuilder } from '@z
 import { ZCommonConfigService } from '../vault/common-config.service';
 import { ZVaultService } from '../vault/vault.service';
 
-/**
- * Represents a service for common configuration throughout the system.
- */
 @Injectable()
+/**
+ * Represents a service for notification configuration throughout the system.
+ */
 export class ZNotificationsConfigService implements OnModuleInit {
   /**
    * The scope for the common config.

@@ -2,10 +2,10 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
 import { ZVaultService } from './vault.service';
 
+@Injectable()
 /**
  * Represents a service for common configuration throughout the system.
  */
-@Injectable()
 export class ZCommonConfigService implements OnModuleInit {
   /**
    * The scope for the common config.

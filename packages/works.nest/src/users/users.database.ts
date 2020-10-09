@@ -1,3 +1,6 @@
+/**
+ * Represents a static class for constants regarding the users database.
+ */
 export abstract class ZUsersDatabase {
   /**
    * The database injection token.

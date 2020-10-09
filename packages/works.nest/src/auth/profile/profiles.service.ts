@@ -5,10 +5,10 @@ import { ZNotificationsConfigService } from '../../notifications/notifications-c
 import { ZUsersService } from '../../users/users.service';
 import { ZCommonConfigService } from '../../vault/common-config.service';
 
+@Injectable()
 /**
  * Represents a service that manages profiles and users.
  */
-@Injectable()
 export class ZProfilesService {
   /**
    * Initializes a new instance of this object.
