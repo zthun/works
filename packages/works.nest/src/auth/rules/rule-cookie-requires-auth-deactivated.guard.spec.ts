@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ConflictException } from '@nestjs/common';
 import { ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';

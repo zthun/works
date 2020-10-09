@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { render } from '@testing-library/react';
 import React from 'react';
 import { Router, Route } from 'react-router-dom';

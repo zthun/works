@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ConflictException } from '@nestjs/common';
 import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
 import { IZLogin, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';

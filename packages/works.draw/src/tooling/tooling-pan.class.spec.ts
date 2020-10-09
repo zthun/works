@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZPrintableNothing } from '../printable/printable-nothing.class';
 import { ZPrintableTransform } from '../printable/printable-transform.class';
 import { IZPrintable } from '../printable/printable.interface';

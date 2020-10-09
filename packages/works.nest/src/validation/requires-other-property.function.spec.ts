@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { IZLogin, ZLoginBuilder } from '@zthun/works.core';
 import { registerDecorator, ValidationArguments } from 'class-validator';
 import { RequiresOtherProperty, RequiresOtherPropertyValidator } from './requires-other-property.function';

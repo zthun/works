@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZAlertBuilder } from './alert-builder.class';
 import { ZAlertSeverity } from './alert-severity.enum';
 import { IZAlert } from './alert.interface';

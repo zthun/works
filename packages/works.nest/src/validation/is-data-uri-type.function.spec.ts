@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { registerDecorator, ValidationArguments } from 'class-validator';
 import { IsDataURIType, IsDataURITypeValidator } from './is-data-uri-type.function';
 

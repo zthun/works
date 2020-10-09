@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ExecutionContext, ForbiddenException } from '@nestjs/common';
 import { HttpArgumentsHost } from '@nestjs/common/interfaces';
 import { IZProfileActivation, IZUser, ZProfileActivationBuilder, ZUserBuilder } from '@zthun/works.core';

@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { IZProfile, ZLoginBuilder, ZProfileActivationBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { plainToClass } from 'class-transformer';

@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZPrintableNothing } from './printable-nothing.class';
 
 describe('ZPrintableNothing', () => {

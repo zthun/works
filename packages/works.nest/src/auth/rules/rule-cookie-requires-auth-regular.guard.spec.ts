@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { ZRuleCookieRequiresAuthRegular } from './rule-cookie-requires-auth-regular.guard';

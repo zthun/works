@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZPrintableGroup } from './printable-group.class';
 import { ZPrintableNothing } from './printable-nothing.class';
 import { IZPrintable } from './printable.interface';

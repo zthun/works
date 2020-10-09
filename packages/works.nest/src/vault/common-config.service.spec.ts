@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZConfigEntryBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { ZCommonConfigService } from './common-config.service';

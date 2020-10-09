@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { v4 } from 'uuid';
 import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';

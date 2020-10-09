@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { v4 } from 'uuid';
 import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';
 import { IZDatabaseOptions } from '../options/database-options.interface';

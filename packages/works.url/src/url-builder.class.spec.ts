@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZUrlBuilder } from './url-builder.class';
 
 describe('ZUrlBuilder', () => {

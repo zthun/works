@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZDataState } from './data-state.class';
 
 describe('ZLoginState', () => {

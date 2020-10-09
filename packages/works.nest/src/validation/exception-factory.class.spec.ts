@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ValidationError } from 'class-validator';
 import { ZExceptionFactory } from './exception-factory.class';
 

@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZPrintableDrawing } from './printable-drawing.class';
 import { ZPrintableGroup } from './printable-group.class';
 import { ZPrintableNothing } from './printable-nothing.class';

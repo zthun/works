@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZConfigEntryBuilder, ZServerBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { ZVaultService } from '../vault/vault.service';

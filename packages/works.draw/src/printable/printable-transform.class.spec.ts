@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZPrintableTransform } from './printable-transform.class';
 describe('ZPrintableTransform', () => {
   let canvas: HTMLCanvasElement;

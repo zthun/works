@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZDatabaseOptionsBuilder } from './database-options-builder.class';
 import { IZDatabaseOptions } from './database-options.interface';
 import { assertBuilderSetsProperty, assertBuilderCopiesObject, assertBuilderAssignsObject } from '@zthun/works.jest';

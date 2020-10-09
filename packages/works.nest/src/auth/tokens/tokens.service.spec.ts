@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { IZConfigEntry, IZLogin, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { Request, Response } from 'express';

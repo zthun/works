@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { ZProfileBuilder, IZProfile } from '@zthun/works.core';
 import { IZAlertStack, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZLoginStateContext, IZDataState, ZDataStateStatic } from '@zthun/works.react';

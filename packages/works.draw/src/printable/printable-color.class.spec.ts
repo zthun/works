@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZPrintableColor } from './printable-color.class';
 
 describe('ZPrintableColor', () => {

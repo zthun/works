@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { registerDecorator, ValidationArguments } from 'class-validator';
 import { IsDataURILimit, IsDataURILimitValidator } from './is-data-uri-limit.function';
 

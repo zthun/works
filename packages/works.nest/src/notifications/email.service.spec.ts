@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { IZEmail, IZEmailEnvelope, IZServer, ZEmailBuilder, ZEmailEnvelopeBuilder, ZServerBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { createTransport } from 'nodemailer';
