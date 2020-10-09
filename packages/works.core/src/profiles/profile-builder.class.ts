@@ -78,7 +78,9 @@ export class ZProfileBuilder {
   /**
    * Sets the users avatar url.
    *
-   * @returns The avatar url.
+   * @param url The avatar url.
+   *
+   * @returns This object.
    */
   public avatar(url: string): this {
     this._profile.avatar = url;
@@ -115,6 +117,8 @@ export class ZProfileBuilder {
    * This basically sets the email, display, and super flag.
    *
    * @param user The user to construct the profile from.
+   *
+   * @returns This object.
    */
   public user(user: IZUser): this {
     this._profile.email = user.email;

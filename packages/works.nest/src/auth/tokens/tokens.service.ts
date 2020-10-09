@@ -102,6 +102,7 @@ export class ZTokensService {
    * Verifies a token.
    *
    * @param token The token to validate.
+   * @param secret The secret jwt key.
    *
    * @returns A promise that, when resolved, returns the payload.  Returns a rejected promise if the
    *          token is not valid or has expired.
@@ -119,6 +120,8 @@ export class ZTokensService {
 
   /**
    * Gets the options for a cookie.
+   *
+   * @param expires The expiration date for the cookie.
    *
    * @returns The options for a cookie.
    */

@@ -29,6 +29,7 @@ export class EqualsOtherPropertyValidator implements ValidatorConstraintInterfac
  * A constraint that forces a property on an object to equal another property on the same object.
  *
  * @param property The other property to map.
+ * @param options The validation options.
  *
  * @returns A reflection decorator function that applies the constraint to a property.
  */

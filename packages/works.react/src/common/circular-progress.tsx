@@ -5,6 +5,8 @@ import { IZCircularProgressProps } from './circular-progress.props';
 /**
  * Renders a circular progress that can render nothing or the material ui circular progress.
  *
+ * @param props The properties for the card.
+ *
  * @returns The jsx for a circular loading progress.
  */
 export function ZCircularProgress(props: IZCircularProgressProps): JSX.Element {

@@ -42,7 +42,7 @@ export function ZLoginPage(): JSX.Element {
    *
    * @param login The credentials to create the profile from.
    *
-   * @return A promise that resolves when the request completes.
+   * @returns A promise that resolves when the request completes.
    */
   async function handleCreate(login: IZLogin) {
     try {
@@ -100,7 +100,7 @@ export function ZLoginPage(): JSX.Element {
   /**
    * Creates the redirection jsx if the user is already logged in.
    *
-   * @return The jsx that renders a redirection.
+   * @returns The jsx that renders a redirection.
    */
   function createRedirect() {
     return <Redirect data-testid='ZLoginPage-redirect-profile' to='/profile' />;

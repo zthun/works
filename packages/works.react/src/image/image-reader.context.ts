@@ -8,6 +8,8 @@ export const ZImageReaderContext = createContext<IZImageReader>(new ZImageReader
 
 /**
  * Returns the image reader to be used.
+ *
+ * @returns The image reader service.
  */
 export function useImageReader() {
   return useContext(ZImageReaderContext);

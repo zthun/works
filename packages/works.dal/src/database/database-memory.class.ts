@@ -154,6 +154,8 @@ export class ZDatabaseMemory implements IZDatabase {
    * The query will only be ran after the server has been started.
    *
    * @param fn The callback that creates the database query.
+   *
+   * @returns The built query.
    */
   private _query<T>(fn: () => IZDatabaseQuery<T>): IZDatabaseQuery<T> {
     return new ZDatabaseQuery(async (query) => {

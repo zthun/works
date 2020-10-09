@@ -9,6 +9,8 @@ import { IZProfileReactivationFormProps } from './profile-reactivation-form.prop
  * Constructs a form for reactivating the users profile.
  *
  * @param props The properties for the form.
+ *
+ * @returns The jsx that renders the reactivation form.
  */
 export function ZProfileReactivationForm(props: IZProfileReactivationFormProps) {
   /**

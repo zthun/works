@@ -22,14 +22,14 @@ export class ZImageReader implements IZImageReader {
    * @returns A promise that returns the loaded canvas.  If the read fails,
    *          then a canvas that is a 1x1 white pixel will be returned.
    */
-  public read(urlOrBlob: Blob): Promise<HTMLCanvasElement> {
+  public read(data: Blob): Promise<HTMLCanvasElement> {
     const canvas = document.createElement('canvas');
     canvas.width = 1;
     canvas.height = 1;
     const bmp = canvas.getContext('2d');
 
     return new Promise<HTMLCanvasElement>((resolve) => {
-      const url = typeof urlOrBlob === 'string' ? urlOrBlob : URL.createObjectURL(urlOrBlob);
+      const url = typeof data === 'string' ? data : URL.createObjectURL(data);
       const img = new Image();
 
       img.crossOrigin = 'Anonymous';

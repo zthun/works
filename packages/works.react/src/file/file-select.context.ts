@@ -10,7 +10,7 @@ export const ZFileSelectContext = createContext<IZFileSelect>(new ZFileSelectInp
 /**
  * Retrieves the global file select object.
  *
- * @return The global file select object.
+ * @returns The global file select object.
  */
 export function useFileSelect(): IZFileSelect {
   return useContext(ZFileSelectContext);

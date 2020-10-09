@@ -9,9 +9,9 @@ import { IZHttpErrorCodeCardProps } from './http-code-card.props';
 /**
  * Renders a paper card that describes an HttpStatusCode.
  *
- * @props The properties for the component.
+ * @param props The properties for the component.
  *
- * @returns The jsx for the rendered
+ * @returns The jsx that renders the card.
  */
 export function ZHttpStatusCodeCard(props: IZHttpErrorCodeCardProps) {
   const name = ZHttpCodeClientNames[props.code];

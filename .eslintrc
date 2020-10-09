@@ -25,6 +25,21 @@
         }
       }
     ],
+    "valid-jsdoc": [
+      "error",
+      {
+        "prefer": {
+          "arg": "param",
+          "return": "returns"
+        },
+        "matchDescription": ".+",
+        "requireParamDescription": true,
+        "requireReturnDescription": true,
+        "requireParamType": false,
+        "requireReturnType": false,
+        "requireReturn": false
+      }
+    ],
     "@typescript-eslint/no-empty-function": ["error", { "allow": ["constructors"] }],
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-var-requires": "off",

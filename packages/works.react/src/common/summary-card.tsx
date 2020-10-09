@@ -6,6 +6,8 @@ import { IZSummaryCardProps } from './summary-card.props';
 /**
  * Renders a pretty elevated card that is meant to lead users to another area of the site.
  *
+ * @param props The properties for the card.
+ *
  * @returns The jsx for the summary card.
  */
 export function ZSummaryCard(props: IZSummaryCardProps) {

@@ -16,6 +16,8 @@ import { IZLoginTabsProps } from './login-tabs.props';
  * 3.  The recover tab is for recovering a user password.
  *
  * @param props The properties for the component.
+ *
+ * @returns The jsx that renders the login tabs.
  */
 export function ZLoginTabs(props: IZLoginTabsProps) {
   const [tab, setTab] = useState(props.tab);

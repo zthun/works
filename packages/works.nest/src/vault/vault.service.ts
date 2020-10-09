@@ -37,8 +37,8 @@ export class ZVaultService {
    * configuration is added with the value.  Otherwise, the value
    * is overwritten with the stored value.
    *
-   * @param config The current configuration to read.  If the scope and key of the config exists,
-   * then the existing config entity is returned, otherwise, the config value is added and
+   * @param entry The current configuration to read.  If the scope and key of the config exists,
+   *              then the existing config entity is returned, otherwise, the config value is added and
    * @returns A promise that, when resolved, gives the existing config.
    */
   public async get<T>(entry: IZConfigEntry<T>): Promise<IZConfigEntry<T>> {

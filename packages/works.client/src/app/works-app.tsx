@@ -13,6 +13,8 @@ import { ZProfilePage } from '../profile/profile-page';
 
 /**
  * Represents the entry point of the client application.
+ *
+ * @returns The jsx that renders the entire application.
  */
 export function ZthunworksApp() {
   /**

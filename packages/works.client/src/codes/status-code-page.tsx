@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 
 /**
  * Renders a page that displays a status code card.
+ *
+ * @returns The jsx that renders the status code page.
  */
 export function ZStatusCodePage() {
   const { code } = useParams<{ code: string }>();

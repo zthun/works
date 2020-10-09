@@ -7,6 +7,8 @@ import { Controller, Get } from '@nestjs/common';
 export class ZHealthController {
   /**
    * Returns a promise that resolves to true.
+   *
+   * @returns A promise that resolves to true.
    */
   @Get()
   public read(): Promise<boolean> {

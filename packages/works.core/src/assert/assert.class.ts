@@ -7,6 +7,8 @@ export class ZAssert {
    *
    * @param claim The claim to make.
    * @param msg The message to throw if the claim is false.
+   *
+   * @returns A new ZAssert object with an initial claim.
    */
   public static claim(claim: boolean, msg: any): ZAssert {
     return new ZAssert().claim(claim, msg);

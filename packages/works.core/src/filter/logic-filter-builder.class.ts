@@ -21,7 +21,7 @@ export class ZLogicFilterBuilder {
   /**
    * Sets the operator to and.
    *
-   * sThis object.
+   * @returns This object.
    */
   public and(): this {
     this._filter.operator = ZLogicOperator.And;

@@ -10,6 +10,8 @@ import { IZProfileMenuProps } from './profile-menu.props';
  * Represents the menu that either displays the login text or the user's display or email.
  *
  * @param props The properties for the menu.
+ *
+ * @returns The jsx that renders the profile menu.
  */
 export function ZProfileMenu(props: IZProfileMenuProps) {
   const [anchorEl, openMenu, closeMenu] = useMenuState();

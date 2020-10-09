@@ -67,7 +67,7 @@ export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
    *
    * @param other The query to copy.
    *
-   * @return This object.
+   * @returns This object.
    */
   public copy(other: IZDatabaseQuery<R>): ZDatabaseQuery<R> {
     this._filter = other.$filter;
@@ -83,7 +83,7 @@ export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
    *
    * @param filter The filter to use.
    *
-   * @return This object.
+   * @returns This object.
    */
   public filter(filter: FilterQuery<any>): this {
     this._filter = filter;
@@ -95,7 +95,7 @@ export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
    *
    * @param sort The sort criteria.
    *
-   * @return This object.
+   * @returns This object.
    */
   public sorts(sort: SortCriteria): this {
     this._sort = sort;

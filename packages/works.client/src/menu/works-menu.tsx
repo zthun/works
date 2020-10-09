@@ -8,6 +8,8 @@ import { useHistory } from 'react-router-dom';
 
 /**
  * Renders the top menu.
+ *
+ * @returns The jsx that renders the top menu.
  */
 export function ZthunworksMenu(): JSX.Element {
   const [loggingOut, setLoggingOut] = useState(false);

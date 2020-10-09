@@ -9,6 +9,8 @@ import { Redirect } from 'react-router-dom';
 
 /**
  * Renders the profile page.
+ *
+ * @returns The jsx that renders the profile page.
  */
 export function ZProfilePage() {
   const loginState = useLoginState();

@@ -124,7 +124,7 @@ export class ZUsersService {
    *
    * @param user The user to activate.
    *
-   * @return A promise that, when resolved, returns the updated user.
+   * @returns A promise that, when resolved, returns the updated user.
    */
   public async activate(user: IZUser): Promise<IZUser> {
     const copy = new ZUserBuilder().copy(user).build();
@@ -142,7 +142,7 @@ export class ZUsersService {
    *
    * @param user The user to deactivate.
    *
-   * @return A promise that, when resolved, returns the updated user.
+   * @returns A promise that, when resolved, returns the updated user.
    */
   public async deactivate(user: IZUser): Promise<IZUser> {
     const copy = new ZUserBuilder().copy(user).inactive(v4()).build();
@@ -222,6 +222,8 @@ export class ZUsersService {
 
   /**
    * Compares the user and password to make sure it matches.
+   *
+   * @param credentials The credentials to check and compare with what is stored in the database.
    *
    * @returns A promise that resolves to true if the credentials match.  False if they do not.
    */

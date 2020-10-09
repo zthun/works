@@ -6,6 +6,8 @@
  *
  * @param b64 The base64 string to decode.
  * @param ns The namespace that may or may not already contain the browser atob method.
+ *
+ * @returns The decoded b64 binary value.
  */
 export function atob(b64: string, ns: any = global): string {
   if (ns.atob) {
@@ -26,6 +28,8 @@ export function atob(b64: string, ns: any = global): string {
  *
  * @param raw The raw string to encode.
  * @param ns The namespace
+ *
+ * @returns The encoded base64 string.
  */
 export function btoa(raw: string, ns: any = global): string {
   if (ns.btoa) {
