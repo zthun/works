@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZSortDirection } from './sort-direction.enum';
 import { ZSortBuilder } from './sort-builder.class';

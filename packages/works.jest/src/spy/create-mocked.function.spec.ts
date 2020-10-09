@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { createMocked } from './create-mocked.function';
 
 describe('createMocked', () => {

@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { identity } from 'lodash';
 import { ZEmailContactAddressBuilder } from './email-contact-address-builder.class';

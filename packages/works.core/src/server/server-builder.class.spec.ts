@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZServerBuilder } from './server-builder.class';
 import { IZServer } from './server.interface';

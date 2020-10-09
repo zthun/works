@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZHttpCodeClient } from '../http/http-code-client.enum';
 import { ZErrorBuilder } from './error-builder.class';

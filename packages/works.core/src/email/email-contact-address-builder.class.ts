@@ -53,17 +53,17 @@ export class ZEmailContactAddressBuilder {
    * @returns The delimited separated list of addresses.
    */
   public build(): string {
-    function addr(ct: string | IZEmailContact) {
+    const addr = (ct: string | IZEmailContact) => {
       if (!ct) {
         return undefined;
       }
 
       return typeof ct === 'string' ? ct : ct.address;
-    }
+    };
 
-    function truthy(ct: string) {
+    const truthy = (ct: string) => {
       return !!ct;
-    }
+    };
 
     return this._addresses.map(addr).filter(truthy).join(this._delimiter) || undefined;
   }

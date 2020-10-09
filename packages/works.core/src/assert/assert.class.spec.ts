@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { ZAssert } from './assert.class';
 
 describe('ZAssert', () => {

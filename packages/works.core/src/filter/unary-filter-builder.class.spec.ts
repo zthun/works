@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZUnaryFilterBuilder } from './unary-filter-builder.class';
 import { ZUnaryOperator } from './unary-operator.enum';

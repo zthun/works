@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { v4 } from 'uuid';
 import { ZUserBuilder } from './user-builder.class';
 import { IZUser } from './user.interface';

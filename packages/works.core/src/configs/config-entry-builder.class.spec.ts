@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { ZConfigEntryBuilder } from './config-entry-builder.class';
 import { IZConfigEntry } from './config-entry.interface';
 

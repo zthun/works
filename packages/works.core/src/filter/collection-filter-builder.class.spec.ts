@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { ZCollectionFilterBuilder } from './collection-filter-builder.class';
 import { IZCollectionFilter } from './collection-filter.interface';
 import { ZCollectionOperator } from './collection-operator.enum';

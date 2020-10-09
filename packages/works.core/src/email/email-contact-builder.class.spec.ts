@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+
 import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZEmailContactBuilder } from './email-contact-builder.class';
 import { IZEmailContact } from './email-contact.interface';

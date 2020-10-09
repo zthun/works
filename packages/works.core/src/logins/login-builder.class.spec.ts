@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { v4 } from 'uuid';
 import { ZLoginBuilder } from './login-builder.class';
 import { IZLogin } from './login.interface';
@@ -33,17 +34,29 @@ describe('ZLoginBuilder', () => {
 
     it('sets the email.', () => {
       const email = v4();
-      assertPropertySet(email, (t) => t.email(email), (u) => u.email);
+      assertPropertySet(
+        email,
+        (t) => t.email(email),
+        (u) => u.email
+      );
     });
 
     it('sets the password.', () => {
       const pwd = v4();
-      assertPropertySet(pwd, (t) => t.password(pwd), (u) => u.password);
+      assertPropertySet(
+        pwd,
+        (t) => t.password(pwd),
+        (u) => u.password
+      );
     });
 
     it('sets the confirm.', () => {
       const confirm = v4();
-      assertPropertySet(confirm, (t) => t.confirm(confirm), (u) => u.confirm);
+      assertPropertySet(
+        confirm,
+        (t) => t.confirm(confirm),
+        (u) => u.confirm
+      );
     });
   });
 

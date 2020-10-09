@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from './assertBuilder.function';
 
 describe('Builder', () => {

@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZBinaryFilterBuilder } from './binary-filter-builder.class';
 import { ZCollectionFilterBuilder } from './collection-filter-builder.class';
