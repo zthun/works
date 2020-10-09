@@ -12,7 +12,13 @@ import { ZHealthController } from './health/health.controller';
   imports: [ZAuthModule],
   controllers: [ZHealthController]
 })
+/**
+ * The main module.
+ */
 export class ZMainModule {
+  /**
+   * Runs the application.
+   */
   public static async run() {
     const app = await NestFactory.create(ZMainModule);
     app.use(helmet());
