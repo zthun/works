@@ -2,6 +2,9 @@ import { Grid } from '@material-ui/core';
 import { ZSummaryCard } from '@zthun/works.react';
 import React from 'react';
 
+/**
+ * Renders the home page.
+ */
 export function ZHomePage() {
   return (
     <Grid container={true} spacing={3} className='ZHomePage-root' data-testid='ZHomePage-root' justify='center'>

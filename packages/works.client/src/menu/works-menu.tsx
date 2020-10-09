@@ -6,24 +6,39 @@ import Axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+/**
+ * Renders the top menu.
+ */
 export function ZthunworksMenu(): JSX.Element {
   const [loggingOut, setLoggingOut] = useState(false);
   const alerts = useAlertStack();
   const hist = useHistory();
   const login = useLoginState();
 
+  /**
+   * Occurs when the user click the home link.
+   */
   function handleHome() {
     hist.push('/home');
   }
 
+  /**
+   * Occurs when the user clicks the profile menu item.
+   */
   function handleProfile() {
     hist.push('/profile');
   }
 
+  /**
+   * Occurs when the user clicks the login button.
+   */
   async function handleLogin() {
     hist.push('/login');
   }
 
+  /**
+   * Occurs when the user clicks the logout button.
+   */
   async function handleLogout() {
     try {
       const url = new ZUrlBuilder().api().append('tokens').build();
@@ -37,10 +52,20 @@ export function ZthunworksMenu(): JSX.Element {
     }
   }
 
+  /**
+   * Creates a spacer between the home button and the login menu.
+   *
+   * @returns The jsx for the spacer.
+   */
   function createSpacer() {
     return <Typography className='ZthunworksMenu-options'>&nbsp;</Typography>;
   }
 
+  /**
+   * Creates the home button.
+   *
+   * @returns The jsx for the home button.
+   */
   function createHomeButton() {
     return (
       <Button color='inherit'>
@@ -52,6 +77,11 @@ export function ZthunworksMenu(): JSX.Element {
     );
   }
 
+  /**
+   * Creates the profile menu.
+   *
+   * @returns The jsx for the profile menu.
+   */
   function createProfileMenu() {
     if (login.data === undefined) {
       return <ZCircularProgress className='ZthunworksMenu-progress-loading' data-testid='ZthunworksMenu-progress-loading' />;

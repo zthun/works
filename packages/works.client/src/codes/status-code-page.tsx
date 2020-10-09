@@ -4,6 +4,9 @@ import { ZHttpStatusCodeCard } from '@zthun/works.react';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
+/**
+ * Renders a page that displays a status code card.
+ */
 export function ZStatusCodePage() {
   const { code } = useParams<{ code: string }>();
 

@@ -121,7 +121,7 @@ export class ZProfilesController {
    * @returns The updated profile.
    */
   @Delete('activations')
-  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleCookieRequiresAuthActivated)
+  @UseGuards(ZRuleCookieRequiresAuthAny, ZRuleCookieRequiresAuthActivated, ZRuleCookieRequiresAuthRegular)
   public async deleteActivation(@Req() req: Request): Promise<IZProfile> {
     const user = await this._tokens.extract(req);
     return this._profile.deactivate(user.email);

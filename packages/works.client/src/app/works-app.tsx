@@ -11,7 +11,15 @@ import { ZLoginPage } from '../login/login-page';
 import { ZthunworksMenu } from '../menu/works-menu';
 import { ZProfilePage } from '../profile/profile-page';
 
+/**
+ * Represents the entry point of the client application.
+ */
 export function ZthunworksApp() {
+  /**
+   * Gets the user profile.
+   *
+   * @returns A promise that resolves the profile.  Returns a rejected promise if the user is not logged in.
+   */
   async function getProfile(): Promise<IZProfile> {
     const url = new ZUrlBuilder().api().append('profiles').build();
     const profile = await Axios.get<IZProfile>(url);

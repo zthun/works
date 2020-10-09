@@ -13,6 +13,18 @@
     "multiline-ternary": "off",
     "new-cap": "off",
     "no-mixed-operators": "off",
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true,
+          "ArrowFunctionExpression": false,
+          "FunctionExpression": false
+        }
+      }
+    ],
     "@typescript-eslint/no-empty-function": ["error", { "allow": ["constructors"] }],
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-var-requires": "off",
