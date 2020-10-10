@@ -62,3 +62,19 @@ export class ZMainModule {
 
 ZMainModule.run();
 ```
+
+### Routes
+
+| Route                 | Verb   | Body                        | Description                                |
+| --------------------- | ------ | --------------------------- | ------------------------------------------ |
+| /profiles             | GET    |                             | Returns the current profile.               |
+| /profiles             | PUT    | ZProfileUpdateDto           | Updates a profile.                         |
+| /profiles             | POST   | ZProfileCreateDto           | Creates a new account.                     |
+| /profiles             | DELETE |                             | Deletes the profile defined by the cookie. |
+| /profiles/activations | PUT    | ZProfileActivationUpdateDto | Activates a profile                        |
+| /profiles/activations | POST   | ZProfileActivationCreateDto | Creates a new activation token.            |
+| /profiles/activations | DELETE |                             | Deactivates the user                       |
+| /profiles/recoveries  | POST   | ZProfileRecoveryCreateDto   | Creates an account recovery password.      |
+| /tokens               | GET    |                             | Verify a cookie token                      |
+| /tokens               | POST   | ZTokensLoginDto             | Login for an account.                      |
+| /tokens               | DELETE |                             | Logout for an account                      |
