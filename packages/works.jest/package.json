@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.jest",
-  "version": "1.0.0-7",
+  "version": "1.0.0-15",
   "description": "A testing library that helps with common testing patterns in jest.",
   "author": "Anthony Bonta",
   "license": "MIT",
