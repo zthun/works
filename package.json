@@ -32,7 +32,8 @@
     "kubernetes": "tokenizer && kubectl apply -f install/kubernetes.yml",
     "docker:publish": "lerna run docker:publish",
     "docker:build": "lerna run docker:build",
-    "release": "yarn make && lerna version && lerna publish from-package && yarn docker:build && yarn docker:publish"
+    "docker": "yarn docker:build && yarn docker:publish",
+    "release": "yarn make && lerna version && lerna publish from-package"
   },
   "devDependencies": {
     "@material-ui/core": "^4.3.3",
