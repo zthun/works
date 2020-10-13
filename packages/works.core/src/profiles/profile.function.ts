@@ -1,3 +1,4 @@
+import { getGravatarUrl } from '../gravatar/gravatar.function';
 import { md5 } from '../encoding/hash';
 import { IZProfile } from './profile.interface';
 
@@ -12,23 +13,6 @@ export const ZProfileAvatarSize = 256;
  * The current default is 128KB.
  */
 export const ZProfileAvatarMaxBytes = 131072;
-
-/**
- * The root path to the gravatar url.
- */
-export const ZProfileGravatarUrl = 'https://s.gravatar.com/avatar';
-
-/**
- * Gets the url for an email gravatar.
- *
- * @param email The email to retrieve the gravatar for.
- *
- * @returns The gravatar for the email.  If email is falsy, returns the default gravatar url.
- */
-export function getGravatarUrl(email?: string) {
-  const hash = email ? md5(email) : '';
-  return `${ZProfileGravatarUrl}/${hash}?s=${ZProfileAvatarSize}`;
-}
 
 /**
  * Helper method that retrieves the avatar url for a profile.
@@ -56,7 +40,8 @@ export function getProfileAvatarUrl(profile: IZProfile) {
  * @returns The url to load for the profile.
  */
 export function getAvatarUrl(avatar: string, email: string) {
-  return avatar || getGravatarUrl(email);
+  const hash = email ? md5(email) : '';
+  return avatar || getGravatarUrl(hash, ZProfileAvatarSize);
 }
 
 /**

@@ -1,5 +1,7 @@
+import { md5 } from '../encoding/hash';
+import { getGravatarUrl } from '../gravatar/gravatar.function';
 import { ZProfileBuilder } from './profile-builder.class';
-import { getGravatarUrl, getProfileAvatarUrl, getProfileDisplay } from './profile.function';
+import { getProfileAvatarUrl, getProfileDisplay, ZProfileAvatarSize } from './profile.function';
 
 describe('Avatar', () => {
   it('should resolve the url to the gravatar url on a falsy profile.', () => {
@@ -7,7 +9,7 @@ describe('Avatar', () => {
     // Act
     const actual = getProfileAvatarUrl(null);
     // Assert
-    expect(actual).toEqual(getGravatarUrl());
+    expect(actual).toEqual(getGravatarUrl('', ZProfileAvatarSize));
   });
 
   it('should resolve the url to the gravatar for the email for profiles without an avatar.', () => {
@@ -17,7 +19,7 @@ describe('Avatar', () => {
     // Act
     const actual = getProfileAvatarUrl(profile);
     // Assert
-    expect(actual).toEqual(getGravatarUrl(email));
+    expect(actual).toEqual(getGravatarUrl(md5(email), ZProfileAvatarSize));
   });
 
   it('should resolve the url to the avatar set in the profile first.', () => {
