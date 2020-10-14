@@ -12,6 +12,7 @@
   "workspaces": [
     "packages/works.jest",
     "packages/works.url",
+    "packages/works.class",
     "packages/works.core",
     "packages/works.dal",
     "packages/works.draw",
