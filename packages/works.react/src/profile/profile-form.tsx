@@ -1,11 +1,12 @@
 import { Collapse, Dialog, TextField, Typography } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import { getAvatarUrl, ZProfileBuilder } from '@zthun/works.core';
+import { ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
 import { ZActionForm } from '../common/action-form';
 import { ZProfileAvatarForm } from './profile-avatar-form';
 import { IZProfileFormProps } from './profile-form.props';
+import { getAvatarUrl } from './profile.util';
 
 /**
  * Creates a form for modifying the users profile.

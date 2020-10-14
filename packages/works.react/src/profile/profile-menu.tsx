@@ -1,10 +1,10 @@
 import { Button, Grid, Hidden, Menu, MenuItem } from '@material-ui/core';
-import { getProfileAvatarUrl, getProfileDisplay } from '@zthun/works.core';
 import { noop } from 'lodash';
 import React from 'react';
 import { ZCircularProgress } from '../common/circular-progress';
 import { useMenuState } from '../common/use-menu-state.hook';
 import { IZProfileMenuProps } from './profile-menu.props';
+import { getProfileAvatarUrl, getProfileDisplay } from './profile.util';
 
 /**
  * Represents the menu that either displays the login text or the user's display or email.
