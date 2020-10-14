@@ -6,6 +6,11 @@ import URLParse from 'url-parse';
  */
 export class ZUrlBuilder {
   /**
+   * The url to the gravatar api.
+   */
+  public static UrlGravatar = 'https://s.gravatar.com/avatar';
+
+  /**
    * A mapping between protocol and default port.
    */
   public static ProtocolPorts = {
@@ -147,6 +152,21 @@ export class ZUrlBuilder {
     Object.keys(current.query).forEach((key) => this.param(key, current.query[key]));
 
     return this;
+  }
+
+  /**
+   * Gets the url for a user gravatar.
+   *
+   * @param hash The md5 email hash.
+   * @param size The dimensional size of the gravatar image.
+   *
+   * @returns This object.
+   */
+  public gravatar(hash?: string, size?: number): this {
+    let current = this.parse(ZUrlBuilder.UrlGravatar);
+    current = hash ? current.append(hash) : current;
+    current = size ? current.param('s', String(size)) : current;
+    return current;
   }
 
   /**
