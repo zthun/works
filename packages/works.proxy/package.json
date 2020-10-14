@@ -10,7 +10,7 @@
     "url": "https://github.com/zthun/works"
   },
   "scripts": {
-    "docker:publish": "docker push zthun/works.server",
+    "docker:publish": "docker push zthun/works.proxy",
     "docker:build": "docker build . -t zthun/works.proxy:latest -t zthun/works.proxy:$(node -p \"require('./package.json').version\")"
   }
 }
