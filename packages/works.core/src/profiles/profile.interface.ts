@@ -1,4 +1,16 @@
 /**
+ * The standard height and width of the profile avatar.
+ */
+export const ZProfileAvatarSize = 256;
+
+/**
+ * The maximum number of bytes for an avatar.
+ *
+ * The current default is 128KB.
+ */
+export const ZProfileAvatarMaxBytes = 131072;
+
+/**
  * Represents an object that can be used to update various fields of a user.
  */
 export interface IZProfile {
