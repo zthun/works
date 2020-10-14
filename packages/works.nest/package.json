@@ -42,6 +42,7 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
+    "@zthun/works.class": "^1.0.0-15",
     "@zthun/works.core": "^1.0.0-15",
     "@zthun/works.dal": "^1.0.0-15"
   },

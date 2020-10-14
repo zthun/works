@@ -5,7 +5,7 @@ import { NestFactory } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
 import { json } from 'express';
 import helmet from 'helmet';
-import { ZExceptionFactory } from '../validation/exception-factory.class';
+import { ZExceptionFactory } from '../error/exception-factory.class';
 
 /**
  * Represents the root access point to all @zthun based nest applications.

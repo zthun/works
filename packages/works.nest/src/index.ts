@@ -17,6 +17,8 @@ export { ZRuleCookieRequiresAuth } from './auth/rules/rule-cookie-requires-auth.
 export { ZTokensLoginDto } from './auth/tokens/tokens-login.dto';
 export { ZTokensController } from './auth/tokens/tokens.controller';
 export { ZTokensService } from './auth/tokens/tokens.service';
+// Error
+export { ZExceptionFactory } from './error/exception-factory.class';
 // Health
 export { ZHealthController } from './health/health.controller';
 export { ZHealthModule } from './health/health.module';
@@ -29,11 +31,6 @@ export { ZUsersCollections } from './users/users.collections';
 export { ZUsersDatabase } from './users/users.database';
 export { ZUsersModule } from './users/users.module';
 export { ZUsersService } from './users/users.service';
-// Validation
-export { EqualsOtherProperty, EqualsOtherPropertyValidator } from './validation/equals-other-property.function';
-export { ZExceptionFactory } from './validation/exception-factory.class';
-export { IsNotWhiteSpace, IsNotWhiteSpaceValidator } from './validation/is-not-white-space.function';
-export { RequiresOtherProperty, RequiresOtherPropertyValidator } from './validation/requires-other-property.function';
 // Vault
 export { ZCommonConfigService } from './vault/common-config.service';
 export { ZVaultCollections } from './vault/vault.collections';

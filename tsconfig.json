@@ -4,6 +4,7 @@
     "baseUrl": "packages",
     "target": "esnext",
     "paths": {
+      "@zthun/works.class": ["works.class/src/index"],
       "@zthun/works.core": ["works.core/src/index"],
       "@zthun/works.jest": ["works.jest/src/index"],
       "@zthun/works.react": ["works.react/src/index"],

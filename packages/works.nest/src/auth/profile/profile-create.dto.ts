@@ -1,7 +1,6 @@
+import { EqualsOtherProperty, IsNotWhiteSpace } from '@zthun/works.class';
 import { IZLogin } from '@zthun/works.core';
 import { IsEmail, IsString, MinLength } from 'class-validator';
-import { EqualsOtherProperty } from '../../validation/equals-other-property.function';
-import { IsNotWhiteSpace } from '../../validation/is-not-white-space.function';
 
 /**
  * Represents the DTO for creating a new profile login.

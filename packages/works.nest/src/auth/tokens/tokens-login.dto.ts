@@ -1,6 +1,6 @@
+import { IsNotWhiteSpace } from '@zthun/works.class';
 import { IZLogin } from '@zthun/works.core';
 import { Allow, IsEmail, IsString, MinLength } from 'class-validator';
-import { IsNotWhiteSpace } from '../../validation/is-not-white-space.function';
 
 /**
  * Represents the DTO to login to the system.

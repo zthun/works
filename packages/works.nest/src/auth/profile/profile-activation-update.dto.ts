@@ -1,6 +1,6 @@
+import { IsNotWhiteSpace } from '@zthun/works.class';
 import { IZProfileActivation } from '@zthun/works.core';
 import { IsEmail, IsString } from 'class-validator';
-import { IsNotWhiteSpace } from '../../validation/is-not-white-space.function';
 
 /**
  * Represents the dto for updating an activation.

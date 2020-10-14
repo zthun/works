@@ -1,9 +1,6 @@
+import { EqualsOtherProperty, IsDataURILimit, IsDataURIType, IsNotWhiteSpace } from '@zthun/works.class';
 import { IZProfile, ZProfileAvatarMaxBytes } from '@zthun/works.core';
 import { IsDataURI, IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
-import { EqualsOtherProperty } from '../../validation/equals-other-property.function';
-import { IsDataURILimit } from '../../validation/is-data-uri-limit.function';
-import { IsDataURIType } from '../../validation/is-data-uri-type.function';
-import { IsNotWhiteSpace } from '../../validation/is-not-white-space.function';
 
 /**
  * Represents the DTO to update a profile.
