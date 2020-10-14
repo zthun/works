@@ -111,7 +111,7 @@ export function ZProfilePage() {
   }
 
   /**
-   * Attemps to delete a profile.
+   * Attempts to delete a profile.
    */
   async function handleDelete() {
     setDeleting(true);
@@ -121,7 +121,7 @@ export function ZProfilePage() {
   }
 
   /**
-   * Attemps to update a profile.
+   * Attempts to update a profile.
    *
    * @param changes The changes to make to the current profile.
    */

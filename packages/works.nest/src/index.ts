@@ -1,5 +1,7 @@
 /* istanbul ignore file */
 
+// App
+export { ZNestApplication } from './app/nest-application.class';
 // Auth
 export { ZAuthModule } from './auth/auth.module';
 export { ZProfileCreateDto } from './auth/profile/profile-create.dto';
@@ -15,6 +17,9 @@ export { ZRuleCookieRequiresAuth } from './auth/rules/rule-cookie-requires-auth.
 export { ZTokensLoginDto } from './auth/tokens/tokens-login.dto';
 export { ZTokensController } from './auth/tokens/tokens.controller';
 export { ZTokensService } from './auth/tokens/tokens.service';
+// Health
+export { ZHealthController } from './health/health.controller';
+export { ZHealthModule } from './health/health.module';
 // Notifications
 export { ZEmailService } from './notifications/email.service';
 export { ZNotificationsConfigService } from './notifications/notifications-config.service';
