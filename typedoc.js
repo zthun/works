@@ -5,5 +5,5 @@ module.exports = {
   exclude: ['src/index.ts'],
   excludePrivate: true,
   excludeNotExported: true,
-  tsconfig: 'tsconfig.cjs.json'
+  tsconfig: 'tsconfig.json'
 };

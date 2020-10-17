@@ -21,6 +21,15 @@ function config(env) {
     module: {
       rules: [
         {
+          test: /.*docs\/typedoc.json$/,
+          type: 'javascript/auto',
+          loader: 'file-loader',
+          options: {
+            name: (url) => path.basename(path.dirname(path.dirname(url))) + '.[ext]',
+            outputPath: 'docs'
+          }
+        },
+        {
           test: /\.png$/,
           loader: 'file-loader',
           options: {
