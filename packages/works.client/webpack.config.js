@@ -21,11 +21,19 @@ function config(env) {
     module: {
       rules: [
         {
-          test: /.*docs\/typedoc.json$/,
+          test: /.*docs\/typedoc.json$/i,
           type: 'javascript/auto',
           loader: 'file-loader',
           options: {
-            name: (url) => path.basename(path.dirname(path.dirname(url))) + '.[ext]',
+            name: (url) => path.basename(path.dirname(path.dirname(url))) + '.[name].[ext]',
+            outputPath: 'docs'
+          }
+        },
+        {
+          test: /readme.md/i,
+          loader: 'file-loader',
+          options: {
+            name: (url) => path.basename(path.dirname(url)) + '.[name].[ext]',
             outputPath: 'docs'
           }
         },
