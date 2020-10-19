@@ -2,6 +2,8 @@
 
 Zthunworks is the main application that contains all components, services, and contracts for @zthun scoped applications.
 
+[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
+
 ## Installation
 
 Zthunworks is meant to run in a kubernetes cluster. It has some dependencies. If you have not installed these into your cluster yet, you will need to before getting it to run. You will need helm.
