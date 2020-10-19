@@ -2,6 +2,8 @@
 
 Contains all of the shared objects that are used on the client and server of @zthun scoped projects.
 
+[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
+
 ## Installation
 
 Please note that any dependencies that get introduced into this library will eventually be split out into their own packages that have either the hard dependency or an equivalent peer dependency.

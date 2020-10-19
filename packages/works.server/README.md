@@ -2,6 +2,8 @@
 
 The Zthunworks server contains the main entry point of the server application.
 
+[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
+
 ## Usage
 
 The server is meant to be ran in a docker container.

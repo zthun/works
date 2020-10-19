@@ -2,6 +2,8 @@
 
 Zthunworks class package is an extension for class-validator that contains additional validation decorators.
 
+[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
+
 ## Installation
 
 ```sh

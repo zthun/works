@@ -2,6 +2,8 @@
 
 This package extends upon jest to add additional methods for mocking. It also adds some common assertions found throughout @zthun scoped projects.
 
+[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
+
 ## Installation
 
 ```sh

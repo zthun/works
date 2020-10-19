@@ -101,7 +101,7 @@ export function ZthunworksMenu(): JSX.Element {
   const profile = createProfileMenu();
 
   return (
-    <AppBar className='ZthunworksMenu-root' position='sticky' data-testid='ZthunworksMenu-root'>
+    <AppBar className='ZthunworksMenu-root' position='sticky' color='primary' data-testid='ZthunworksMenu-root'>
       <Toolbar>
         {home}
         {spacer}

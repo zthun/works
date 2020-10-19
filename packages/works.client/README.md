@@ -2,6 +2,8 @@
 
 This is the application for the zthunworks client.
 
+[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
+
 ## Usage
 
 The client is meant to be ran in a docker container.

@@ -2,6 +2,8 @@
 
 The draw package allows a developer to manipulate a canvas object similar to how applications such as The Gimp and Photoshop structure their drawings.
 
+[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
+
 ## Installation
 
 ```sh
