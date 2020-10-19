@@ -30,7 +30,7 @@ function config(env) {
           }
         },
         {
-          test: /readme.md/i,
+          test: /README.md/i,
           loader: 'file-loader',
           options: {
             name: (url) => path.basename(path.dirname(url)) + '.[name].[ext]',

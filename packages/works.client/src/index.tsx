@@ -14,14 +14,14 @@ import '@zthun/works.react/docs/typedoc.json';
 import '@zthun/works.url/docs/typedoc.json';
 
 // Readme
-import '@zthun/works.class/readme.md';
-import '@zthun/works.core/readme.md';
-import '@zthun/works.dal/readme.md';
-import '@zthun/works.draw/readme.md';
-import '@zthun/works.jest/readme.md';
-import '@zthun/works.nest/readme.md';
-import '@zthun/works.react/readme.md';
-import '@zthun/works.url/readme.md';
+import '@zthun/works.class/README.md';
+import '@zthun/works.core/README.md';
+import '@zthun/works.dal/README.md';
+import '@zthun/works.draw/README.md';
+import '@zthun/works.jest/README.md';
+import '@zthun/works.nest/README.md';
+import '@zthun/works.react/README.md';
+import '@zthun/works.url/README.md';
 
 import React from 'react';
 import { render } from 'react-dom';
