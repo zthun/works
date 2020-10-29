@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.core",
-  "version": "1.0.0-16",
+  "version": "1.0.0-17",
   "description": "The core share package in the @zthun/works platform that shares source between the server and client.",
   "author": "Anthony Bonta",
   "license": "MIT",
