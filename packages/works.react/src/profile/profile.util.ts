@@ -1,5 +1,6 @@
-import { IZProfile, md5, ZProfileAvatarSize } from '@zthun/works.core';
+import { IZProfile, ZProfileAvatarSize } from '@zthun/works.core';
 import { ZUrlBuilder } from '@zthun/works.url';
+import md5 from 'md5';
 
 /**
  * Helper method that retrieves the avatar url for a profile.

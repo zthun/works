@@ -23,6 +23,9 @@ import '@zthun/works.nest/README.md';
 import '@zthun/works.react/README.md';
 import '@zthun/works.url/README.md';
 
+// Legal
+import '@zthun/works.core/PRIVACY.md';
+
 import React from 'react';
 import { render } from 'react-dom';
 import { ZthunworksApp } from './app/works-app';

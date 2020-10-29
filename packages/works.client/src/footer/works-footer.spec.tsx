@@ -9,6 +9,14 @@ describe('ZthunworksMenu', () => {
     return render(<ZthunworksFooter />);
   }
 
+  beforeEach(() => {
+    jest.spyOn(window, 'open').mockImplementation(identity.bind(null, window));
+  });
+
+  afterEach(() => {
+    (window.open as jest.Mock).mockClear();
+  });
+
   it('renders the footer', async () => {
     // Arrange
     const target = await createTestTarget();
@@ -19,23 +27,26 @@ describe('ZthunworksMenu', () => {
   });
 
   describe('SourceCodeHome', () => {
-    beforeEach(() => {
-      jest.spyOn(window, 'open').mockImplementation(identity.bind(null, window));
-    });
-
-    afterEach(() => {
-      (window.open as jest.Mock).mockClear();
-    });
-
     it('navigates to a target _blank github.', async () => {
       // Arrange
       const target = await createTestTarget();
-      spyOn(window, 'open');
       // Act
       const btn = target.getByTestId('ZthunworksFooter-btn-github');
       fireEvent.click(btn);
       // Assert
       expect(window.open).toHaveBeenCalledWith(expect.stringContaining('github.com'), '_blank');
+    });
+  });
+
+  describe('Contact information', () => {
+    it('navigates to a contact application.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const btn = target.getByTestId('ZthunworksFooter-btn-contact');
+      fireEvent.click(btn);
+      // Assert
+      expect(window.open).toHaveBeenCalledWith(expect.stringContaining('mailto:'), '_blank');
     });
   });
 });

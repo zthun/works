@@ -1,5 +1,6 @@
-import { md5, ZProfileAvatarSize, ZProfileBuilder } from '@zthun/works.core';
+import { ZProfileAvatarSize, ZProfileBuilder } from '@zthun/works.core';
 import { ZUrlBuilder } from '@zthun/works.url';
+import md5 from 'md5';
 import { getProfileAvatarUrl, getProfileDisplay } from './profile.util';
 
 describe('Avatar', () => {

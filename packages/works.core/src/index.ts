@@ -13,8 +13,6 @@ export { IZEmailContact } from './email/email-contact.interface';
 export { ZEmailEnvelopeBuilder } from './email/email-envelope-builder.class';
 export { IZEmailEnvelope } from './email/email-envelope.interface';
 export { IZEmail } from './email/email.interface';
-// Encoding
-export { md5 } from './encoding/hash';
 // Error
 export { ZErrorBuilder } from './error/error-builder.class';
 export { IZError } from './error/error.interface';

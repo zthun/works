@@ -38,6 +38,14 @@ function config(env) {
           }
         },
         {
+          test: /(PRIVACY|TERMS).md$/i,
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'legal'
+          }
+        },
+        {
           test: /\.png$/,
           loader: 'file-loader',
           options: {
