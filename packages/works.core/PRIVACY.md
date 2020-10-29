@@ -10,33 +10,7 @@ This privacy notice applies to all information collected through our Services (w
 
 **Please read this privacy notice carefully as it will help you understand what we do with the information that we collect.**
 
-## TABLE OF CONTENTS
-
-[1\. WHAT INFORMATION DO WE COLLECT?](#infocollect)
-
-[2\. HOW DO WE USE YOUR INFORMATION?](#infouse)
-
-[3\. WILL YOUR INFORMATION BE SHARED WITH ANYONE?](#infoshare)
-
-[4\. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?](#cookies)
-
-[5\. HOW LONG DO WE KEEP YOUR INFORMATION?](#inforetain)
-
-[6\. HOW DO WE KEEP YOUR INFORMATION SAFE?](#infosafe)
-
-[7\. WHAT ARE YOUR PRIVACY RIGHTS?](#privacyrights)
-
-[8\. CONTROLS FOR DO-NOT-TRACK FEATURES](#DNT)
-
-[9\. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?](#caresidents)
-
-[10\. DO WE MAKE UPDATES TO THIS NOTICE?](#policyupdates)
-
-[11\. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?](#contact)
-
-[12\. HOW CAN YOU REVIEW, UPDATE OR DELETE THE DATA WE COLLECT FROM YOU?](#request)
-
-**1\. WHAT INFORMATION DO WE COLLECT?**
+## 1\. WHAT INFORMATION DO WE COLLECT
 
 **_Personal information you disclose to us_**
 
@@ -50,7 +24,7 @@ The personal information that we collect depends on the context of your interact
 
 All personal information that you provide to us must be true, complete and accurate, and you must notify us of any changes to such personal information.
 
-**2\. HOW DO WE USE YOUR INFORMATION?**
+## 2\. HOW DO WE USE YOUR INFORMATION
 
 **_In Short:_** _We process your information for purposes based on legitimate business interests, the fulfillment of our contract with you, compliance with our legal obligations, and/or your consent._
 
@@ -76,7 +50,7 @@ We use the information we collect or receive:
 
 - **To respond to legal requests and prevent harm.** If we receive a subpoena or other legal request, we may need to inspect the data we hold to determine how to respond.
 
-**3\. WILL YOUR INFORMATION BE SHARED WITH ANYONE?**
+## 3\. WILL YOUR INFORMATION BE SHARED WITH ANYONE
 
 **_In Short:_** _We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations._
 
@@ -96,13 +70,13 @@ More specifically, we may need to process your data or share your personal infor
 
 - **Business Transfers.** We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.
 
-**4\. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?**
+## 4\. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES
 
 **_In Short:_** _We may use cookies and other tracking technologies to collect and store your information._
 
 We may use cookies and similar tracking technologies (like web beacons and pixels) to access or store information. Specific information about how we use such technologies and how you can refuse certain cookies is set out in our Cookie Notice.
 
-**5\. HOW LONG DO WE KEEP YOUR INFORMATION?**
+## 5\. HOW LONG DO WE KEEP YOUR INFORMATION
 
 **_In Short:_** _We keep your information for as long as necessary to fulfill the purposes outlined in this privacy notice unless otherwise required by law._
 
@@ -110,13 +84,13 @@ We will only keep your personal information for as long as it is necessary for t
 
 When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymize such information, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.
 
-**6\. HOW DO WE KEEP YOUR INFORMATION SAFE?**
+## 6\. HOW DO WE KEEP YOUR INFORMATION SAFE
 
 **_In Short:_** _We aim to protect your personal information through a system of organizational and technical security measures._
 
 We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure, so we cannot promise or guarantee that hackers, cybercriminals, or other unauthorized third parties will not be able to defeat our security, and improperly collect, access, steal, or modify your information. Although we will do our best to protect your personal information, transmission of personal information to and from our Website is at your own risk. You should only access the Website within a secure environment.
 
-**7\. WHAT ARE YOUR PRIVACY RIGHTS?**
+## 7\. WHAT ARE YOUR PRIVACY RIGHTS
 
 **_In Short:_** _In some regions, such as the European Economic Area, you have rights that allow you greater access to and control over your personal information. You may review, change, or terminate your account at any time._
 
@@ -144,11 +118,11 @@ Upon your request to terminate your account, we will deactivate or delete your a
 
 - Access your account settings and update your preferences.
 
-**8\. CONTROLS FOR DO-NOT-TRACK FEATURES.**
+## 8\. CONTROLS FOR DO-NOT-TRACK FEATURES
 
 Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ("DNT") feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage no uniform technology standard for recognizing and implementing DNT signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this privacy notice.
 
-**9\. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?**
+## 9\. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS
 
 **_In Short:_** _Yes, if you are a resident of California, you are granted specific rights regarding access to your personal information._
 
@@ -156,7 +130,7 @@ California Civil Code Section 1798.83, also known as the "Shine The Light" law, 
 
 If you are under 18 years of age, reside in California, and have a registered account with the Website, you have the right to request removal of unwanted data that you publicly post on the Website. To request removal of such data, please contact us using the contact information provided below, and include the email address associated with your account and a statement that you reside in California. We will make sure the data is not publicly displayed on the Website, but please be aware that the data may not be completely or comprehensively removed from all our systems (e.g. backups, etc.).
 
-**CCPA Privacy Notice.**
+### CCPA Privacy Notice
 
 The California Code of Regulations defines a "resident" as:
 
@@ -168,7 +142,7 @@ All other individuals are defined as "non-residents."
 
 If this definition of "resident" applies to you, we must adhere to certain rights and obligations regarding your personal information.
 
-**What categories of personal information do we collect?**
+### What categories of personal information do we collect
 
 We have collected the following categories of personal information in the past twelve (12) months:
 
@@ -186,7 +160,7 @@ We have collected the following categories of personal information in the past t
 | Education Information                                                 | Student records and directory information               | NO        |
 | Inferences drawn from other personal information                      | Individual’s preferences and characteristics            | YES       |
 
-<br>**How do we use and share your personal information?**
+### How do we use and share your personal information
 
 More information about our data collection and sharing practices can be found in this privacy notice.
 
@@ -194,7 +168,7 @@ You may contact us by email at support@zthunworks.com, or by referring to the co
 
 If you are using an authorized agent to exercise your right to opt-out we may deny a request if the authorized agent does not submit proof that they have been validly authorized to act on your behalf.
 
-**Will your information be shared with anyone else?**
+### Will your information be shared with anyone else
 
 We may disclose your personal information with our service providers pursuant to a written contract between us and each service provider. Each service provider is a for-profit entity that processes the information on our behalf.
 
@@ -250,17 +224,17 @@ Other privacy rights
 
 To exercise these rights, you can contact us by email at support@zthunworks.com, or by referring to the contact details at the bottom of this document. If you have a complaint about how we handle your data, we would like to hear from you.
 
-**10\. DO WE MAKE UPDATES TO THIS NOTICE?**
+## 10\. DO WE MAKE UPDATES TO THIS NOTICE
 
 _**In Short: ** Yes, we will update this notice as necessary to stay compliant with relevant laws._
 
 We may update this privacy notice from time to time. The updated version will be indicated by an updated "Revised" date and the updated version will be effective as soon as it is accessible. If we make material changes to this privacy notice, we may notify you either by prominently posting a notice of such changes or by directly sending you a notification. We encourage you to review this privacy notice frequently to be informed of how we are protecting your information.
 
-**11\. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?**
+## 11\. HOW CAN YOU CONTACT US ABOUT THIS NOTICE
 
 If you have questions or comments about this notice, you may email us at support@zthunworks.com.
 
-**12\. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?**
+## 12\. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU
 
 Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it in some circumstances. To request to review, update, or delete your personal information, please visit: [https://zthunworks.com/#/profile](https://zthunworks.com/#/profile). We will respond to your request within 30 days.
 
