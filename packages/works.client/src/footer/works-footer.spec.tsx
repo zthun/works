@@ -1,15 +1,24 @@
 /* eslint-disable require-jsdoc */
 import { fireEvent, render } from '@testing-library/react';
+import { createMemoryHistory, MemoryHistory } from 'history';
 import { identity } from 'lodash';
 import React from 'react';
+import { Router } from 'react-router-dom';
 import { ZthunworksFooter } from './works-footer';
 
 describe('ZthunworksMenu', () => {
+  let history: MemoryHistory;
+
   async function createTestTarget() {
-    return render(<ZthunworksFooter />);
+    return render(
+      <Router history={history}>
+        <ZthunworksFooter />
+      </Router>
+    );
   }
 
   beforeEach(() => {
+    history = createMemoryHistory();
     jest.spyOn(window, 'open').mockImplementation(identity.bind(null, window));
   });
 
@@ -47,6 +56,18 @@ describe('ZthunworksMenu', () => {
       fireEvent.click(btn);
       // Assert
       expect(window.open).toHaveBeenCalledWith(expect.stringContaining('mailto:'), '_blank');
+    });
+  });
+
+  describe('Legal information', () => {
+    it('navigates to legal.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const btn = target.getByTestId('ZthunworksFooter-btn-legal');
+      fireEvent.click(btn);
+      // Assert
+      expect(history.location.pathname).toEqual('/legal');
     });
   });
 });

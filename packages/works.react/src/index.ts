@@ -17,6 +17,9 @@ export { ZPaperCard } from './common/paper-card';
 export { IZPaperCardProps } from './common/paper-card.props';
 export { ZSummaryCard } from './common/summary-card';
 export { useMenuState } from './common/use-menu-state.hook';
+// Doc
+export { ZMarkdownViewer } from './doc/markdown-viewer';
+export { IZMarkdownViewerProps } from './doc/markdown-viewer.props';
 // File
 export { ZFileSelectInput } from './file/file-select-input.class';
 export { useFileSelect, ZFileSelectContext } from './file/file-select.context';

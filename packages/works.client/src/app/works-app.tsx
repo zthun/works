@@ -11,6 +11,7 @@ import { ZHomePage } from '../home/home-page';
 import { ZLoginPage } from '../login/login-page';
 import { ZthunworksMenu } from '../menu/works-menu';
 import { ZProfilePage } from '../profile/profile-page';
+import { ZLegalPage } from '../legal/legal-page';
 
 /**
  * Represents the entry point of the client application.
@@ -40,6 +41,7 @@ export function ZthunworksApp() {
                 <Route exact path='/home' component={ZHomePage} />
                 <Route exact path='/login' component={ZLoginPage} />
                 <Route exact path='/profile' component={ZProfilePage} />
+                <Route exact path='/legal' component={ZLegalPage} />
                 <Route exact path='/status-code/:code' component={ZStatusCodePage} />
                 <Redirect exact from='/' to='/home' />
                 <Redirect to='/status-code/404' />

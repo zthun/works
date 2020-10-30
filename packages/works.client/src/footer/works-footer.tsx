@@ -3,6 +3,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import WorkIcon from '@material-ui/icons/Work';
 import MailIcon from '@material-ui/icons/Mail';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 /**
  * Renders the footer for the zthunworks site.
@@ -10,6 +11,8 @@ import React from 'react';
  * @returns The jsx for the footer.
  */
 export function ZthunworksFooter() {
+  const history = useHistory();
+
   /**
    * Opens the github for zthunworks.
    */
@@ -24,6 +27,13 @@ export function ZthunworksFooter() {
     window.open('mailto:support@zthunworks.com', '_blank');
   }
 
+  /**
+   * Opens the legal route.
+   */
+  function openLegal() {
+    history.push('/legal');
+  }
+
   return (
     <footer className='ZthunworksFooter-root' data-testid='ZthunworksFooter-root'>
       <Toolbar>
@@ -33,7 +43,7 @@ export function ZthunworksFooter() {
         <IconButton className='ZthunworksFooter-btn-contact' data-testid='ZthunworksFooter-btn-contact' title='Contact' color='inherit' onClick={openMail}>
           <MailIcon />
         </IconButton>
-        <IconButton className='ZthunworksFooter-btn-legal' data-testid='ZthunworksFooter-btn-legal' title='Legal' color='inherit'>
+        <IconButton className='ZthunworksFooter-btn-legal' data-testid='ZthunworksFooter-btn-legal' title='Legal' color='inherit' onClick={openLegal}>
           <WorkIcon />
         </IconButton>
       </Toolbar>
