@@ -14,7 +14,7 @@ export function ZLegalPage() {
 
   return (
     <Grid container className='ZLegalPage-root' data-testid='ZLegalPage-root' spacing={3} justify='center'>
-      <ZMarkdownViewer url={privacy} headerText='Privacy' subHeaderText='Information collection' avatar={<InfoIcon fontSize='large' />} size='lg'></ZMarkdownViewer>
+      <ZMarkdownViewer src={privacy} headerText='Privacy' subHeaderText='Information collection' avatar={<InfoIcon fontSize='large' />} size='lg'></ZMarkdownViewer>
     </Grid>
   );
 }

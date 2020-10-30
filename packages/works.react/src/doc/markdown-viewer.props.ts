@@ -6,7 +6,7 @@ import { IZComponentSizeable } from '../common/component-sizeable.interface';
  */
 export interface IZMarkdownViewerProps extends IZComponentHeader, IZComponentSizeable {
   /**
-   * The url to fetch.
+   * The source to fetch.
    */
-  url: string;
+  src: string;
 }
