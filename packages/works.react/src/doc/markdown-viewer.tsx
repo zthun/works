@@ -1,10 +1,9 @@
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { ZCircularProgress } from '../common/circular-progress';
+import gfm from 'remark-gfm';
 import { ZPaperCard } from '../common/paper-card';
 import { IZMarkdownViewerProps } from './markdown-viewer.props';
-import Axios from 'axios';
-import gfm from 'remark-gfm';
 
 /**
  * Renders markdown files from a url or content string.
@@ -30,8 +29,10 @@ export function ZMarkdownViewer(props: IZMarkdownViewerProps) {
   }
 
   return (
-    <ZPaperCard className='ZMarkdownViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={props.avatar} action={<ZCircularProgress show={!markdown} size='2em'></ZCircularProgress>}>
-      <ReactMarkdown plugins={[gfm]}>{markdown}</ReactMarkdown>
+    <ZPaperCard className='ZMarkdownViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={props.avatar} size={props.size} loading={!markdown}>
+      <ReactMarkdown plugins={[gfm]} linkTarget='_blank'>
+        {markdown}
+      </ReactMarkdown>
     </ZPaperCard>
   );
 }

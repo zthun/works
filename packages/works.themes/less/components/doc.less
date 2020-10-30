@@ -1,0 +1,50 @@
+@markdown-table-border-color: @color-gray;
+@markdown-table-border-thickness: @thickness-md;
+@markdown-table-border: @markdown-table-border-thickness solid @markdown-table-border-color;
+
+@markdown-table-padding: @spacing-sm;
+
+.ZMarkdownViewer-root {
+  &.ZMarkdownViewer-lg {
+    width: @sizing-font-lg;
+  }
+
+  &.ZMarkdownViewer-md {
+    width: @sizing-font-md;
+  }
+
+  a {
+    text-decoration: none;
+    color: @color-primary;
+  }
+
+  table {
+    border-spacing: 0;
+    border: @markdown-table-border;
+
+    th {
+      text-align: left;
+      text-transform: uppercase;
+      background-color: @color-gray-x11;
+    }
+
+    td,
+    th {
+      padding: @markdown-table-padding;
+      border-bottom: @markdown-table-border;
+      border-right: @markdown-table-border;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+
+    tr {
+      &:last-child {
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+}

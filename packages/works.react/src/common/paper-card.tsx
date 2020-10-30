@@ -20,13 +20,13 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
     return (
       <div className='ZPaperCard-header-action'>
         {props.action}
-        <ZCircularProgress className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={props.loading} />
+        <ZCircularProgress className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={props.loading} size='2.5em' />
       </div>
     );
   }
 
   return (
-    <Paper className={`${props.className} ZPaperCard-root`} data-testid={props['data-testid']} elevation={5}>
+    <Paper className={`${props.className} ZPaperCard-root ZPaperCard-size-${props.size}`} data-testid={props['data-testid']} elevation={5}>
       <Card>
         <CardHeader className='ZPaperCard-header' avatar={props.avatar} action={createAction()} title={<h3>{props.headerText}</h3>} subheader={props.subHeaderText} />
         <CardContent>{props.children}</CardContent>
@@ -42,6 +42,7 @@ ZPaperCard.defaultProps = {
   children: null,
 
   loading: false,
+  size: 'auto',
 
   avatar: null,
   action: null

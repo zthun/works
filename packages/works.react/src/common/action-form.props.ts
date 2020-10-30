@@ -1,21 +1,17 @@
 import { PropTypes } from '@material-ui/core';
+import { IZComponentDisabled } from './component-disabled.interface';
+import { IZComponentHeader } from './component-header.interface';
+import { IZComponentHierarchy } from './component-hierarchy.interface';
+import { IZComponentLoading } from './component-loading.interface';
+import { IZComponentStyle } from './component-style.interface';
 
-export interface IZActionFormProps {
-  className: string;
-  headerText: string;
-  subHeaderText: string;
+export interface IZActionFormProps extends IZComponentStyle, IZComponentHeader, IZComponentLoading, IZComponentDisabled, IZComponentHierarchy {
   actionText: string;
   actionColor: PropTypes.Color;
-
-  avatar: React.ReactNode;
-  children: React.ReactNode | React.ReactNode[];
 
   confirmation: React.ReactNode;
   yesText: string;
   noText: string;
-
-  loading: boolean;
-  disabled: boolean;
 
   onAction: () => void;
 }

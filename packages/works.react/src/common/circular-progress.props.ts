@@ -1,14 +1,9 @@
+import { IZComponentStyle } from './component-style.interface';
+
 /**
  * Represents properties for the circular progress component.
  */
-export interface IZCircularProgressProps {
-  /**
-   * Optional class name.
-   *
-   * @default ''
-   */
-  className: string;
-
+export interface IZCircularProgressProps extends IZComponentStyle {
   /**
    * An html size string that represents the size.
    *

@@ -13,6 +13,12 @@ export { ZHttpStatusCodeCard } from './codes/http-code-card';
 // Common
 export { ZCircularProgress } from './common/circular-progress';
 export { IZCircularProgressProps } from './common/circular-progress.props';
+export { IZComponentDisabled } from './common/component-disabled.interface';
+export { IZComponentHeader } from './common/component-header.interface';
+export { IZComponentHierarchy } from './common/component-hierarchy.interface';
+export { IZComponentLoading } from './common/component-loading.interface';
+export { IZComponentSizeable } from './common/component-sizeable.interface';
+export { IZComponentStyle } from './common/component-style.interface';
 export { ZPaperCard } from './common/paper-card';
 export { IZPaperCardProps } from './common/paper-card.props';
 export { ZSummaryCard } from './common/summary-card';
