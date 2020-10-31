@@ -1,6 +1,6 @@
 # TERMS OF USE
 
-**_Last updated 10/31/2020_**
+**_Last updated October 31, 2020_**
 
 ## AGREEMENT TO TERMS
 
