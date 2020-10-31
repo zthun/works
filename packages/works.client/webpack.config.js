@@ -89,6 +89,9 @@ function config(env) {
       contentBase: dir,
       compress: false,
       disableHostCheck: true
+    },
+    performance: {
+      hints: false
     }
   };
 

@@ -60,14 +60,24 @@ describe('ZthunworksMenu', () => {
   });
 
   describe('Legal information', () => {
-    it('navigates to legal.', async () => {
+    it('navigates to privacy.', async () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const btn = target.getByTestId('ZthunworksFooter-btn-legal');
+      const btn = target.getByTestId('ZthunworksFooter-btn-privacy');
       fireEvent.click(btn);
       // Assert
-      expect(history.location.pathname).toEqual('/legal');
+      expect(history.location.pathname).toEqual('/privacy');
+    });
+
+    it('navigates to the terms of use.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const btn = target.getByTestId('ZthunworksFooter-btn-terms');
+      fireEvent.click(btn);
+      // Assert
+      expect(history.location.pathname).toEqual('/terms');
     });
   });
 });

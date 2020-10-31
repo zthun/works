@@ -1,18 +1,18 @@
 /* eslint-disable require-jsdoc */
 import { render } from '@testing-library/react';
 import React from 'react';
-import { ZLegalPage } from './legal-page';
+import { ZTermsPage } from './terms-page';
 
-describe('ZLegalPage', () => {
+describe('ZTermsPage', () => {
   function createTestTarget() {
-    return render(<ZLegalPage />);
+    return render(<ZTermsPage />);
   }
 
   it('renders the page.', () => {
     // Arrange
     const target = createTestTarget();
     // Act
-    const actual = target.getByTestId('ZLegalPage-root');
+    const actual = target.getByTestId('ZTermsPage-root');
     // Assert
     expect(actual).toBeTruthy();
   });

@@ -25,6 +25,7 @@ import '@zthun/works.url/README.md';
 
 // Legal
 import '@zthun/works.core/PRIVACY.md';
+import '@zthun/works.core/TERMS.md';
 
 import React from 'react';
 import { render } from 'react-dom';

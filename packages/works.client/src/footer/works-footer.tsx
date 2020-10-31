@@ -1,7 +1,8 @@
 import { IconButton, Toolbar } from '@material-ui/core';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import WorkIcon from '@material-ui/icons/Work';
+import InfoIcon from '@material-ui/icons/Info';
 import MailIcon from '@material-ui/icons/Mail';
+import MouseIcon from '@material-ui/icons/Mouse';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -28,10 +29,17 @@ export function ZthunworksFooter() {
   }
 
   /**
-   * Opens the legal route.
+   * Opens the privacy route.
    */
-  function openLegal() {
-    history.push('/legal');
+  function openPrivacy() {
+    history.push('/privacy');
+  }
+
+  /**
+   * Opens the terms route.
+   */
+  function openTerms() {
+    history.push('/terms');
   }
 
   return (
@@ -43,8 +51,11 @@ export function ZthunworksFooter() {
         <IconButton className='ZthunworksFooter-btn-contact' data-testid='ZthunworksFooter-btn-contact' title='Contact' color='inherit' onClick={openMail}>
           <MailIcon />
         </IconButton>
-        <IconButton className='ZthunworksFooter-btn-legal' data-testid='ZthunworksFooter-btn-legal' title='Legal' color='inherit' onClick={openLegal}>
-          <WorkIcon />
+        <IconButton className='ZthunworksFooter-btn-privacy' data-testid='ZthunworksFooter-btn-privacy' title='Privacy' color='inherit' onClick={openPrivacy}>
+          <InfoIcon />
+        </IconButton>
+        <IconButton className='ZthunworksFooter-btn-terms' data-testid='ZthunworksFooter-btn-terms' title='Terms of Use' color='inherit' onClick={openTerms}>
+          <MouseIcon />
         </IconButton>
       </Toolbar>
     </footer>

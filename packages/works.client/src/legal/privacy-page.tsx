@@ -5,15 +5,15 @@ import InfoIcon from '@material-ui/icons/Info';
 import React, { useState } from 'react';
 
 /**
- * Renders the legal page.
+ * Renders the privacy page.
  *
- * @returns The jsx to render the legal page.
+ * @returns The jsx to render the privacy page.
  */
-export function ZLegalPage() {
+export function ZPrivacyPage() {
   const [privacy] = useState(new ZUrlBuilder().location().hash('').path('legal/PRIVACY.md').build());
 
   return (
-    <Grid container className='ZLegalPage-root' data-testid='ZLegalPage-root' spacing={3} justify='center'>
+    <Grid container className='ZPrivacyPage-root' data-testid='ZPrivacyPage-root' spacing={3} justify='center'>
       <ZMarkdownViewer src={privacy} headerText='Privacy' subHeaderText='Information collection' avatar={<InfoIcon fontSize='large' />} size='lg'></ZMarkdownViewer>
     </Grid>
   );
