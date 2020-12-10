@@ -42,7 +42,7 @@ describe('ZEmailService', () => {
       // Act
       await target.send(email, server);
       // Assert
-      expect(mail.sendMail).toHaveBeenCalledWith(jasmine.objectContaining(expected));
+      expect(mail.sendMail).toHaveBeenCalledWith(expect.objectContaining(expected));
     });
 
     it('should send with the correct smtp server.', async () => {
@@ -52,7 +52,7 @@ describe('ZEmailService', () => {
       // Act
       await target.send(email, server);
       // Assert
-      expect(createTransportSpy).toHaveBeenCalledWith(jasmine.objectContaining(expected));
+      expect(createTransportSpy).toHaveBeenCalledWith(expect.objectContaining(expected));
     });
 
     it('should send with the correct smtp server credentials.', async () => {
@@ -65,7 +65,7 @@ describe('ZEmailService', () => {
       // Act
       await target.send(email, server);
       // Assert
-      expect(createTransportSpy).toHaveBeenCalledWith(jasmine.objectContaining(expected));
+      expect(createTransportSpy).toHaveBeenCalledWith(expect.objectContaining(expected));
     });
 
     it('should default to port 587 if no port is supplied.', async () => {
@@ -76,7 +76,7 @@ describe('ZEmailService', () => {
       // Act
       await target.send(email, server);
       // Assert
-      expect(createTransportSpy).toHaveBeenCalledWith(jasmine.objectContaining(expected));
+      expect(createTransportSpy).toHaveBeenCalledWith(expect.objectContaining(expected));
     });
   });
 });
