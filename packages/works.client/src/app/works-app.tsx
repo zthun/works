@@ -13,6 +13,7 @@ import { ZthunworksMenu } from '../menu/works-menu';
 import { ZProfilePage } from '../profile/profile-page';
 import { ZPrivacyPage } from '../legal/privacy-page';
 import { ZTermsPage } from '../legal/terms-page';
+import { ZLearnPage } from '../learn/learn-page';
 
 /**
  * Represents the entry point of the client application.
@@ -45,6 +46,7 @@ export function ZthunworksApp() {
                 <Route exact path='/privacy' component={ZPrivacyPage} />
                 <Route exact path='/terms' component={ZTermsPage} />
                 <Route exact path='/status-code/:code' component={ZStatusCodePage} />
+                <Route exact path='/learn/:tool' component={ZLearnPage} />
                 <Redirect exact from='/' to='/home' />
                 <Redirect to='/status-code/404' />
               </Switch>
