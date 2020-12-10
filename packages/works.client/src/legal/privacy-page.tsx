@@ -14,7 +14,9 @@ export function ZPrivacyPage() {
 
   return (
     <Grid container className='ZPrivacyPage-root' data-testid='ZPrivacyPage-root' spacing={3} justify='center'>
-      <ZMarkdownViewer src={privacy} headerText='Privacy' subHeaderText='Information collection' avatar={<InfoIcon fontSize='large' />} size='lg'></ZMarkdownViewer>
+      <Grid item={true}>
+        <ZMarkdownViewer src={privacy} headerText='Privacy' subHeaderText='Information collection' avatar={<InfoIcon fontSize='large' />} size='lg'></ZMarkdownViewer>
+      </Grid>
     </Grid>
   );
 }

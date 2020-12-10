@@ -46,7 +46,7 @@ export function ZthunworksApp() {
                 <Route exact path='/privacy' component={ZPrivacyPage} />
                 <Route exact path='/terms' component={ZTermsPage} />
                 <Route exact path='/status-code/:code' component={ZStatusCodePage} />
-                <Route exact path='/learn/:tool' component={ZLearnPage} />
+                <Route exact path='/learn/:pkg' component={ZLearnPage} />
                 <Redirect exact from='/' to='/home' />
                 <Redirect to='/status-code/404' />
               </Switch>

@@ -14,7 +14,9 @@ export function ZTermsPage() {
 
   return (
     <Grid container className='ZTermsPage-root' data-testid='ZTermsPage-root' spacing={3} justify='center'>
-      <ZMarkdownViewer src={privacy} headerText='Terms' subHeaderText='Usage of this website' avatar={<MouseIcon fontSize='large' />} size='lg'></ZMarkdownViewer>
+      <Grid item={true}>
+        <ZMarkdownViewer src={privacy} headerText='Terms' subHeaderText='Usage of this website' avatar={<MouseIcon fontSize='large' />} size='lg'></ZMarkdownViewer>
+      </Grid>
     </Grid>
   );
 }
