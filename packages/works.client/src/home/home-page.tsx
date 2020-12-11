@@ -27,17 +27,17 @@ export function ZHomePage() {
   return (
     <Grid container={true} spacing={3} className='ZHomePage-root' data-testid='ZHomePage-root' justify='center'>
       <Grid item={true} data-testid='ZHomePage-learn-react-components'>
-        <ZSummaryCard title='React Components' imageUrl='/images/svg/works.react.svg' onLearnMore={learnReactComponents}>
+        <ZSummaryCard headerText='React Components' imageUrl='/images/svg/works.react.svg' onAction={learnReactComponents}>
           Zthunworks&apos; client is built in React and offers a library of components for those who want to use some of the functionality found here.
         </ZSummaryCard>
       </Grid>
       <Grid item={true} data-testid='ZHomePage-learn-nest-services'>
-        <ZSummaryCard title='Nest Services' imageUrl='/images/svg/works.nest.svg' onLearnMore={learnNestServices}>
+        <ZSummaryCard headerText='Nest Services' imageUrl='/images/svg/works.nest.svg' onAction={learnNestServices}>
           Zthunworks is made up of shared services built using nestjs. The services packages contains reusable modules that can be used to quickly set up distributed services for other websites.
         </ZSummaryCard>
       </Grid>
       <Grid item={true} data-testid='ZHomePage-learn-core-contracts'>
-        <ZSummaryCard title='Core Contracts' imageUrl='images/svg/works.core.svg' onLearnMore={learnCoreContracts}>
+        <ZSummaryCard headerText='Core Contracts' imageUrl='images/svg/works.core.svg' onAction={learnCoreContracts}>
           Zthunworks has a shared layer of common functionality across the client and the server that is separated into a framework-agnostic package for anyone to consume.
         </ZSummaryCard>
       </Grid>

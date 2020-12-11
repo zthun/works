@@ -1,10 +1,6 @@
-import { ReactNode } from 'react';
+import { IZComponentActionable } from './component-actionable.interface';
+import { IZComponentHeader } from './component-header.interface';
+import { IZComponentHierarchy } from './component-hierarchy.interface';
+import { IZComponentMedia } from './component-media.interface';
 
-export interface IZSummaryCardProps {
-  title: string;
-  imageUrl: string;
-  children: ReactNode;
-
-  learnMoreText: string;
-  onLearnMore: () => void;
-}
+export interface IZSummaryCardProps extends IZComponentActionable, IZComponentHeader, Required<IZComponentHierarchy>, IZComponentMedia {}

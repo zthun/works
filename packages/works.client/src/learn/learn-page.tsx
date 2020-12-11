@@ -1,8 +1,9 @@
 import { Grid } from '@material-ui/core';
-import { ZMarkdownViewer } from '@zthun/works.react';
+import DescriptionIcon from '@material-ui/icons/Description';
+import { ZMarkdownViewer, ZMediaCard } from '@zthun/works.react';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import DescriptionIcon from '@material-ui/icons/Description';
+import CodeIcon from '@material-ui/icons/Code';
 
 /**
  * Returns the jsx for the learn page.
@@ -12,10 +13,16 @@ import DescriptionIcon from '@material-ui/icons/Description';
 export function ZLearnPage() {
   const { pkg } = useParams<{ pkg: string }>();
   const src = `docs/${pkg}.README.md`;
+  const img = `images/svg/${pkg}.svg`;
 
   return (
     <Grid container={true} spacing={3} className='ZLearnPage-root' data-testid='ZLearnPage-root' justify='center'>
-      <ZMarkdownViewer src={src} headerText='README' subHeaderText='General information' avatar={<DescriptionIcon fontSize='large' />} size='lg' />
+      <Grid item={true}>
+        <ZMarkdownViewer src={src} headerText='README' subHeaderText='Package information' avatar={<DescriptionIcon fontSize='large' />} size='lg' />
+      </Grid>
+      <Grid item={true}>
+        <ZMediaCard headerText='Documentation' subHeaderText={pkg} imageUrl={img} actionText='View the API' avatar={<CodeIcon fontSize='large' />} />
+      </Grid>
     </Grid>
   );
 }

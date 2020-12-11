@@ -2,28 +2,24 @@
 
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import { ZSummaryCard } from './summary-card';
+import { ZMediaCard } from './media-card';
 
 describe('ZSummaryCard', () => {
-  let onLearnMore: jest.Mock;
+  let onAction: jest.Mock;
 
   beforeEach(() => {
-    onLearnMore = jest.fn();
+    onAction = jest.fn();
   });
 
   function createTestTarget() {
-    return render(
-      <ZSummaryCard headerText='Summary test' imageUrl='/not/a/real/image.svg' onAction={onLearnMore}>
-        Summary text
-      </ZSummaryCard>
-    );
+    return render(<ZMediaCard headerText='Summary test' imageUrl='/not/a/real/image.svg' onAction={onAction} />);
   }
 
   it('should render the card.', () => {
     // Arrange
     const target = createTestTarget();
     // Act
-    const actual = target.getByTestId('ZSummaryCard-root');
+    const actual = target.getByTestId('ZMediaCard-root');
     // Assert
     expect(actual).toBeTruthy();
   });
@@ -32,9 +28,9 @@ describe('ZSummaryCard', () => {
     // Arrange
     const target = createTestTarget();
     // Act
-    const actual = target.getByTestId('ZSummaryCard-btn-action');
+    const actual = target.getByTestId('ZMediaCard-btn-action');
     fireEvent.click(actual);
     // Assert
-    expect(onLearnMore).toHaveBeenCalledTimes(1);
+    expect(onAction).toHaveBeenCalledTimes(1);
   });
 });

@@ -11,24 +11,17 @@ import { IZSummaryCardProps } from './summary-card.props';
  * @returns The jsx for the summary card.
  */
 export function ZSummaryCard(props: IZSummaryCardProps) {
-  /**
-   * Occurs when the user has requested the navigation button.
-   */
-  function handleLearnMore() {
-    props.onLearnMore();
-  }
-
   return (
     <Paper className='ZSummaryCard-root' data-testid='ZSummaryCard-root' elevation={5}>
       <Card>
-        <CardHeader className='ZSummaryCard-header' data-testid='ZSummaryCard-header' title={<h3>{props.title}</h3>} />
-        <CardMedia className='ZSummaryCard-media' data-testid='ZSummaryCard-media' component='img' image={props.imageUrl} title={props.title} />
+        <CardHeader className='ZSummaryCard-header' data-testid='ZSummaryCard-header' avatar={props.avatar} action={props.action} title={<h3>{props.headerText}</h3>} subheader={props.subHeaderText} />
+        <CardMedia className='ZSummaryCard-media' data-testid='ZSummaryCard-media' component='img' image={props.imageUrl} title={props.headerText} />
         <CardContent className='ZSummaryCard-content' data-testid='ZSummaryCard-content'>
           <Typography variant='body1'>{props.children}</Typography>
         </CardContent>
         <CardActions className='ZSummaryCard-actions' data-testid='ZSummaryCard-actions'>
-          <Button className='ZSummaryCard-btn-learn' data-testid='ZSummaryCard-btn-learn' variant='outlined' color='primary' onClick={handleLearnMore}>
-            {props.learnMoreText}
+          <Button className='ZSummaryCard-btn-action' data-testid='ZSummaryCard-btn-action' variant='outlined' color='primary' onClick={props.onAction}>
+            {props.actionText}
           </Button>
         </CardActions>
       </Card>
@@ -40,6 +33,7 @@ ZSummaryCard.defaultProps = {
   width: 'full',
   units: 'em',
 
-  learnMoreText: 'Learn More...',
-  onLearnMore: noop
+  actionText: 'Learn More...',
+  actionColor: 'primary',
+  onAction: noop
 };
