@@ -6025,7 +6025,7 @@ helmet@^4.1.0:
   resolved "https://registry.yarnpkg.com/helmet/-/helmet-4.2.0.tgz#e81f5613cc1c90402af581794dc9878ad078b237"
   integrity sha512-aoiSxXMd0ks1ojYpSCFoCRzgv4rY/uB9jKStaw8PkXwsdLYa/Gq+Nc5l0soH0cwBIsLAlujPnx4HLQs+LaXCrQ==
 
-highlight.js@^10.2.0:
+highlight.js@^10.2.0, highlight.js@^10.4.1:
   version "10.4.1"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.4.1.tgz#d48fbcf4a9971c4361b3f95f302747afe19dbad0"
   integrity sha512-yR5lWvNz7c85OhVAEAeFhVCc/GV4C30Fjzc/rCP0aCWzc1UUOPUk55dK/qdwTZHBvMZo+eZ2jpk62ndX/xMFlg==

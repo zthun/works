@@ -1,5 +1,6 @@
 import Axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { highlightBlock } from 'highlight.js';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import { ZPaperCard } from '../common/paper-card';
@@ -14,6 +15,7 @@ import { IZMarkdownViewerProps } from './markdown-viewer.props';
  */
 export function ZMarkdownViewer(props: IZMarkdownViewerProps) {
   const [markdown, setMarkdown] = useState('');
+  const markdownEl = useRef<HTMLDivElement>();
 
   useEffect(loadMarkdown, [props.src]);
 
@@ -25,14 +27,17 @@ export function ZMarkdownViewer(props: IZMarkdownViewerProps) {
     Axios.get(props.src)
       .then((res) => res.data)
       .catch((err) => `Unable to retrieve ${props.src}.  ${err}.`)
-      .then((md) => setMarkdown(md));
+      .then((md) => setMarkdown(md))
+      .then(() => markdownEl.current.querySelectorAll('code').forEach((block) => highlightBlock(block)));
   }
 
   return (
     <ZPaperCard className='ZMarkdownViewer-root' data-testid='ZMarkdownViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={props.avatar} size={props.size} loading={!markdown}>
-      <ReactMarkdown className='ZMarkdownViewer-markdown' plugins={[gfm]} linkTarget='_blank'>
-        {markdown}
-      </ReactMarkdown>
+      <div ref={markdownEl}>
+        <ReactMarkdown className='ZMarkdownViewer-markdown' plugins={[gfm]} linkTarget='_blank'>
+          {markdown}
+        </ReactMarkdown>
+      </div>
     </ZPaperCard>
   );
 }

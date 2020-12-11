@@ -20,6 +20,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "peerDependencies": {
+    "highlight.js": "^10.4.1"
+  },
   "files": [
     "less",
     "css",
