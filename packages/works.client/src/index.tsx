@@ -1,7 +1,7 @@
 // Assets
-import '@zthun/works.themes/svg/javascript.svg';
-import '@zthun/works.themes/svg/nestjs.svg';
-import '@zthun/works.themes/svg/react.svg';
+import '@zthun/works.themes/svg/works.react.svg';
+import '@zthun/works.themes/svg/works.nest.svg';
+import '@zthun/works.themes/svg/works.core.svg';
 
 // Typedoc
 import '@zthun/works.class/docs/typedoc.json';
