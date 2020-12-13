@@ -23,6 +23,13 @@ import '@zthun/works.nest/README.md';
 import '@zthun/works.react/README.md';
 import '@zthun/works.url/README.md';
 
+// Media
+import '@zthun/works.core/images/png/works.core.builders.png';
+import '@zthun/works.core/images/png/works.core.config-entry.png';
+import '@zthun/works.core/images/png/works.core.email.png';
+import '@zthun/works.core/images/png/works.core.error.png';
+import '@zthun/works.core/images/png/works.core.users.png';
+
 // Legal
 import '@zthun/works.core/PRIVACY.md';
 import '@zthun/works.core/TERMS.md';
