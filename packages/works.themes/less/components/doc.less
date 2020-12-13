@@ -54,4 +54,10 @@
     margin: 0;
     padding: 1em;
   }
+
+  pre {
+    // I honestly don't know why 6em works.  It should work with 2, but
+    // I'm getting some extras from material-ui.
+    max-width: calc(100vw - 6em);
+  }
 }
