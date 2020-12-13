@@ -32,7 +32,7 @@ export function ZMarkdownViewer(props: IZMarkdownViewerProps) {
   }
 
   return (
-    <ZPaperCard className='ZMarkdownViewer-root' data-testid='ZMarkdownViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={props.avatar} size={props.size} loading={!markdown}>
+    <ZPaperCard className='ZMarkdownViewer-root' data-testid='ZMarkdownViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={props.avatar} action={props.action} size={props.size} loading={!markdown}>
       <div ref={markdownEl}>
         <ReactMarkdown className='ZMarkdownViewer-markdown' plugins={[gfm]} linkTarget='_blank'>
           {markdown}
