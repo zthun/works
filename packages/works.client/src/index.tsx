@@ -29,6 +29,8 @@ import '@zthun/works.core/images/png/works.core.config-entry.png';
 import '@zthun/works.core/images/png/works.core.email.png';
 import '@zthun/works.core/images/png/works.core.error.png';
 import '@zthun/works.core/images/png/works.core.users.png';
+import '@zthun/works.core/images/png/works.core.data.png';
+import '@zthun/works.core/images/png/works.core.server.png';
 
 // Legal
 import '@zthun/works.core/PRIVACY.md';
