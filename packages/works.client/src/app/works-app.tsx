@@ -5,15 +5,16 @@ import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import React from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { ZthunworksFooter } from '../footer/works-footer';
+import { ZApiPage } from '../api/api-page';
 import { ZStatusCodePage } from '../codes/status-code-page';
+import { ZthunworksFooter } from '../footer/works-footer';
 import { ZHomePage } from '../home/home-page';
+import { ZLearnPage } from '../learn/learn-page';
+import { ZPrivacyPage } from '../legal/privacy-page';
+import { ZTermsPage } from '../legal/terms-page';
 import { ZLoginPage } from '../login/login-page';
 import { ZthunworksMenu } from '../menu/works-menu';
 import { ZProfilePage } from '../profile/profile-page';
-import { ZPrivacyPage } from '../legal/privacy-page';
-import { ZTermsPage } from '../legal/terms-page';
-import { ZLearnPage } from '../learn/learn-page';
 
 /**
  * Represents the entry point of the client application.
@@ -47,6 +48,7 @@ export function ZthunworksApp() {
                 <Route exact path='/terms' component={ZTermsPage} />
                 <Route exact path='/status-code/:code' component={ZStatusCodePage} />
                 <Route exact path='/learn/:pkg' component={ZLearnPage} />
+                <Route exact path='/api/:pkg' component={ZApiPage} />
                 <Redirect exact from='/' to='/home' />
                 <Redirect to='/status-code/404' />
               </Switch>

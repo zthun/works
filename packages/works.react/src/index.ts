@@ -30,6 +30,8 @@ export { useMenuState } from './common/use-menu-state.hook';
 // Doc
 export { ZMarkdownViewer } from './doc/markdown-viewer';
 export { IZMarkdownViewerProps } from './doc/markdown-viewer.props';
+export { ZTypedocViewer } from './doc/typedoc-viewer';
+export { IZTypedocViewerProps } from './doc/typedoc-viewer.props';
 // File
 export { ZFileSelectInput } from './file/file-select-input.class';
 export { useFileSelect, ZFileSelectContext } from './file/file-select.context';

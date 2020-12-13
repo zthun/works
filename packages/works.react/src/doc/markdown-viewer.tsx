@@ -3,6 +3,8 @@ import { highlightBlock } from 'highlight.js';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
+import { from, of, Subject } from 'rxjs';
+import { catchError, map, takeUntil } from 'rxjs/operators';
 import { ZPaperCard } from '../common/paper-card';
 import { IZMarkdownViewerProps } from './markdown-viewer.props';
 
@@ -21,14 +23,28 @@ export function ZMarkdownViewer(props: IZMarkdownViewerProps) {
 
   /**
    * Loads the markdown into this viewer.
+   *
+   * @returns A callback that cleans up the current markdown load.
    */
   function loadMarkdown() {
+    const canceled = new Subject<any>();
     setMarkdown('');
-    Axios.get(props.src)
-      .then((res) => res.data)
-      .catch((err) => `Unable to retrieve ${props.src}.  ${err}.`)
-      .then((md) => setMarkdown(md))
-      .then(() => markdownEl.current.querySelectorAll('code').forEach((block) => highlightBlock(block)));
+
+    from(Axios.get(props.src))
+      .pipe(
+        takeUntil(canceled),
+        map((res) => res.data),
+        catchError((err) => of(`Unable to retrieve ${props.src}.  ${err}.`))
+      )
+      .subscribe((md) => {
+        setMarkdown(md);
+        markdownEl.current.querySelectorAll('code').forEach((block) => highlightBlock(block));
+      });
+
+    return () => {
+      canceled.next();
+      canceled.complete();
+    };
   }
 
   return (
