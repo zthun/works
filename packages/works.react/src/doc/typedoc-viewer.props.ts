@@ -1,8 +1,14 @@
+import { IZTypedoc } from '@zthun/works.core';
 import { IZComponentSizeable } from '../component/component-sizeable.interface';
+import { IZComponentHeader } from '../component/component-header.interface';
+import { IZComponentLoading } from '../component/component-loading.interface';
 
-export interface IZTypedocViewerProps extends IZComponentSizeable {
+/**
+ * Represents the properties for the ZTypedocViewer component.
+ */
+export interface IZTypedocViewerProps extends IZComponentLoading, IZComponentHeader, IZComponentSizeable {
   /**
-   * The source to fetch.
+   * The typedoc to display.
    */
-  src: string;
+  typedoc: IZTypedoc;
 }

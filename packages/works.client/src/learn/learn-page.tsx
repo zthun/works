@@ -13,7 +13,7 @@ export function ZLearnPage() {
   const { pkg } = useParams<{ pkg: string }>();
   const src = `docs/${pkg}.README.md`;
   const img = `images/svg/${pkg}.svg`;
-  const avatar = <img className='ZPaperCard-avatar-svg ZPaperCard-avatar-xl' src={img} />;
+  const avatar = <img className='ZPaperCard-avatar ZPaperCard-avatar-xl' src={img} />;
 
   /**
    * Occurs when the api button is clicked.
