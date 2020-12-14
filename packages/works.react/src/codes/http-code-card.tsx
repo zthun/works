@@ -3,7 +3,7 @@ import WarningIcon from '@material-ui/icons/Warning';
 import EmojiFoodBeverageTwoToneIcon from '@material-ui/icons/EmojiFoodBeverageTwoTone';
 import { ZHttpCodeClientDescriptions, ZHttpCodeClientNames } from '@zthun/works.core';
 import React from 'react';
-import { ZPaperCard } from '../common/paper-card';
+import { ZPaperCard } from '../card/paper-card';
 import { IZHttpErrorCodeCardProps } from './http-code-card.props';
 
 /**

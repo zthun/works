@@ -1,5 +1,5 @@
-import { IZComponentHeader } from '../common/component-header.interface';
-import { IZComponentSizeable } from '../common/component-sizeable.interface';
+import { IZComponentHeader } from '../component/component-header.interface';
+import { IZComponentSizeable } from '../component/component-sizeable.interface';
 
 /**
  * Represents properties for the markdown viewer.

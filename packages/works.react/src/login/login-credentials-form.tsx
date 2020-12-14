@@ -2,7 +2,7 @@ import { TextField } from '@material-ui/core';
 import { ZLoginBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
-import { ZActionForm } from '../common/action-form';
+import { ZActionForm } from '../card/action-form';
 import { IZLoginCredentialsFormProps } from './login-credentials-form.props';
 
 /**

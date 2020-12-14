@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import { from, of, Subject } from 'rxjs';
 import { catchError, map, takeUntil } from 'rxjs/operators';
-import { ZPaperCard } from '../common/paper-card';
+import { ZPaperCard } from '../card/paper-card';
 import { IZMarkdownViewerProps } from './markdown-viewer.props';
 
 /**

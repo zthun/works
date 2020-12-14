@@ -2,7 +2,7 @@ import { Button, Grid } from '@material-ui/core';
 import { noop } from 'lodash';
 import React, { FormEvent, useState } from 'react';
 import { IZActionFormProps } from './action-form.props';
-import { ZCircularProgress } from './circular-progress';
+import { ZCircularProgress } from '../loading/circular-progress';
 import { ZPaperCard } from './paper-card';
 
 /**

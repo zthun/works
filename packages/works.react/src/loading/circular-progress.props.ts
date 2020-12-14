@@ -1,4 +1,4 @@
-import { IZComponentStyle } from './component-style.interface';
+import { IZComponentStyle } from '../component/component-style.interface';
 
 /**
  * Represents properties for the circular progress component.

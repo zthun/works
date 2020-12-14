@@ -1,4 +1,4 @@
-import { IZComponentSizeable } from '../common/component-sizeable.interface';
+import { IZComponentSizeable } from '../component/component-sizeable.interface';
 
 export interface IZTypedocViewerProps extends IZComponentSizeable {
   /**

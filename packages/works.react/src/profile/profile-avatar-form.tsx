@@ -10,7 +10,7 @@ import { ZProfileAvatarMaxBytes } from '@zthun/works.core';
 import { ZPrintableColor, ZPrintableDrawing, ZPrintableGroup, ZPrintableImage, ZPrintableTransform, ZToolingPan } from '@zthun/works.draw';
 import { noop } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
-import { ZPaperCard } from '../common/paper-card';
+import { ZPaperCard } from '../card/paper-card';
 import { useFileSelect } from '../file/file-select.context';
 import { useImageReader } from '../image/image-reader.context';
 import { IZProfileAvatarFormProps } from './profile-avatar-form.props';

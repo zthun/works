@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { noop } from 'lodash';
 import React from 'react';
-import { ZActionForm } from '../common/action-form';
+import { ZActionForm } from '../card/action-form';
 import { IZProfileReactivationFormProps } from './profile-reactivation-form.props';
 
 /**

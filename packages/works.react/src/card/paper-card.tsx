@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, Paper } from '@material-ui/core';
 import React from 'react';
-import { ZCircularProgress } from './circular-progress';
+import { ZCircularProgress } from '../loading/circular-progress';
 import { IZPaperCardProps } from './paper-card.props';
 
 /**

@@ -1,8 +1,8 @@
 import { Button, Grid, Hidden, Menu, MenuItem } from '@material-ui/core';
 import { noop } from 'lodash';
 import React from 'react';
-import { ZCircularProgress } from '../common/circular-progress';
-import { useMenuState } from '../common/use-menu-state.hook';
+import { ZCircularProgress } from '../loading/circular-progress';
+import { useMenuState } from '../menu/use-menu-state.hook';
 import { IZProfileMenuProps } from './profile-menu.props';
 import { getProfileAvatarUrl, getProfileDisplay } from './profile.util';
 
