@@ -3,7 +3,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import { ZProfileActivationBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
-import { ZActionForm } from '../card/action-form';
+import { ZActionForm } from '../form/action-form';
 import { IZProfileActivationFormProps } from './profile-activation-form.props';
 
 /**

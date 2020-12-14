@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { noop } from 'lodash';
 import React from 'react';
-import { ZActionForm } from '../card/action-form';
+import { ZActionForm } from '../form/action-form';
 import { IZProfileDeleteFormProps } from './profile-delete-form.props';
 
 /**

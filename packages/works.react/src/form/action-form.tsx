@@ -3,7 +3,7 @@ import { noop } from 'lodash';
 import React, { FormEvent, useState } from 'react';
 import { IZActionFormProps } from './action-form.props';
 import { ZCircularProgress } from '../loading/circular-progress';
-import { ZPaperCard } from './paper-card';
+import { ZPaperCard } from '../card/paper-card';
 
 /**
  * Renders an action form that is similar to a summary card, but contains some content and an action button.
