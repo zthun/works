@@ -6,13 +6,17 @@ import { ZPaperCard } from './paper-card';
 
 describe('ZPaperCard', () => {
   let loading: boolean;
+  let media: string;
+  let actionText: string;
 
   async function createTestTarget() {
-    return render(<ZPaperCard headerText='Paper Card Test' loading={loading} />);
+    return render(<ZPaperCard headerText='Paper Card Test' loading={loading} imageUrl={media} actionText={actionText} />);
   }
 
   beforeEach(() => {
     loading = false;
+    media = null;
+    actionText = null;
   });
 
   it('renders the component.', async () => {
@@ -43,6 +47,48 @@ describe('ZPaperCard', () => {
       const actual = target.queryByTestId('ZPaperCard-progress-loading');
       // Assert
       expect(actual).toBeFalsy();
+    });
+  });
+
+  describe('Media', () => {
+    it('hides the media component if the imageUrl is not set.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const actual = target.queryByTestId('ZPaperCard-media');
+      // Assert
+      expect(actual).toBeFalsy();
+    });
+
+    it('displays the media component if the imageUrl is set.', async () => {
+      // Arrange
+      media = 'images/svg/works.svg';
+      const target = await createTestTarget();
+      // Act
+      const actual = target.queryByTestId('ZPaperCard-media');
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+  });
+
+  describe('Footer', () => {
+    it('hides the card actions component if action text is not set.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const actual = target.queryByTestId('ZPaperCard-btn-action');
+      // Assert
+      expect(actual).toBeFalsy();
+    });
+
+    it('shows the card actions component if action text is set.', async () => {
+      // Arrange
+      actionText = 'Run it!';
+      const target = await createTestTarget();
+      // Act
+      const actual = target.queryByTestId('ZPaperCard-btn-action');
+      // Assert
+      expect(actual).toBeTruthy();
     });
   });
 });

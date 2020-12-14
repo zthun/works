@@ -47,8 +47,8 @@ export function ZProfileDeleteForm(props: IZProfileDeleteFormProps) {
 }
 
 ZProfileDeleteForm.defaultProps = {
-  headerText: 'Delete Account',
-  subHeaderText: 'Remove your account completely.',
+  headerText: 'Delete',
+  subHeaderText: 'Remove your account.',
   deleteText: 'Delete',
 
   loading: false,

@@ -3,7 +3,7 @@
  */
 export interface IZComponentSizeable {
   /**
-   * The (maximum) size for the component.
+   * The (maximum) width for the component.
    *
    * @default auto
    */

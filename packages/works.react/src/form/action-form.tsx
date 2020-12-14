@@ -61,7 +61,7 @@ export function ZActionForm(props: IZActionFormProps) {
   );
 
   return (
-    <ZPaperCard className={`${props.className} ZActionForm-root`} data-testid={props['data-testid']} headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={props.avatar}>
+    <ZPaperCard className={`${props.className} ZActionForm-root`} data-testid={props['data-testid']} headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={props.avatar} action={props.action}>
       <form data-testid='ZActionForm-form' noValidate={true} onSubmit={handleAction}>
         {content}
         {submission}

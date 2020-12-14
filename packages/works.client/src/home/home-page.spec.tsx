@@ -27,7 +27,7 @@ describe('ZHomePage', () => {
     // Act
     await act(async () => {
       const box = await target.findByTestId(identifier);
-      const learn = box.querySelector('.ZSummaryCard-btn-action');
+      const learn = box.querySelector('.ZPaperCard-btn-action');
       fireEvent.click(learn);
     });
     // Assert

@@ -3,9 +3,9 @@
     padding-bottom: @spacing-no;
 
     h3 {
-      font-size: @sizing-font-xl;
-      padding: @spacing-no;
-      margin: @spacing-no;
+      font-size: @sizing-font-root-xl;
+      padding: 0;
+      margin: 0;
     }
   }
 
@@ -14,6 +14,57 @@
     flex-wrap: nowrap;
     align-items: center;
     align-content: center;
+  }
+
+  .ZPaperCard-media {
+    object-fit: fill;
+    margin: auto;
+    padding-top: @spacing-sm;
+    padding-bottom: @spacing-sm;
+
+    &.ZPaperCard-media-width-xs {
+      width: @sizing-image-xs;
+    }
+
+    &.ZPaperCard-media-width-sm {
+      width: @sizing-image-sm;
+    }
+
+    &.ZPaperCard-media-width-md {
+      width: @sizing-image-md;
+    }
+
+    &.ZPaperCard-media-width-lg {
+      width: @sizing-image-lg;
+    }
+
+    &.ZPaperCard-media-width-xl {
+      width: @sizing-image-xl;
+    }
+
+    &.ZPaperCard-media-height-xs {
+      height: @sizing-image-xs;
+    }
+
+    &.ZPaperCard-media-height-sm {
+      height: @sizing-image-sm;
+    }
+
+    &.ZPaperCard-media-height-md {
+      height: @sizing-image-md;
+    }
+
+    &.ZPaperCard-media-height-lg {
+      height: @sizing-image-lg;
+    }
+
+    &.ZPaperCard-media-height-xl {
+      height: @sizing-image-xl;
+    }
+  }
+
+  .ZPaperCard-actions {
+    padding: @spacing-md;
   }
 
   &.ZPaperCard-size-max {
