@@ -31,6 +31,7 @@ import '@zthun/works.core/images/png/works.core.error.png';
 import '@zthun/works.core/images/png/works.core.users.png';
 import '@zthun/works.core/images/png/works.core.data.png';
 import '@zthun/works.core/images/png/works.core.server.png';
+import '@zthun/works.core/images/png/works.core.typedoc.png';
 
 // Legal
 import '@zthun/works.core/PRIVACY.md';

@@ -5,6 +5,15 @@ export { ZAssert } from './assert/assert.class';
 // Config
 export { ZConfigEntryBuilder } from './configs/config-entry-builder.class';
 export { IZConfigEntry } from './configs/config-entry.interface';
+// Doc
+export { IZTypedocCommentTag } from './doc/typedoc-comment-tag.interface';
+export { IZTypedocComment } from './doc/typedoc-comment.interface';
+export { IZTypedocEntity } from './doc/typedoc-entity.interface';
+export { IZTypedocFlags } from './doc/typedoc-flags.interface';
+export { IZTypedocGroup } from './doc/typedoc-group.interface';
+export { ZTypedocKind } from './doc/typedoc-kind.enum';
+export { IZTypedocSource } from './doc/typedoc-source.interface';
+export { IZTypedoc } from './doc/typedoc.interface';
 // Email
 export { ZEmailBuilder } from './email/email-builder.class';
 export { ZEmailContactAddressBuilder } from './email/email-contact-address-builder.class';
@@ -43,7 +52,7 @@ export { IZLogin } from './logins/login.interface';
 export { ZProfileActivationBuilder } from './profiles/profile-activation-builder.class';
 export { IZProfileActivation } from './profiles/profile-activation.interface';
 export { ZProfileBuilder } from './profiles/profile-builder.class';
-export { ZProfileAvatarMaxBytes, ZProfileAvatarSize, IZProfile } from './profiles/profile.interface';
+export { IZProfile, ZProfileAvatarMaxBytes, ZProfileAvatarSize } from './profiles/profile.interface';
 // Server
 export { ZServerBuilder } from './server/server-builder.class';
 export { IZServer } from './server/server.interface';
