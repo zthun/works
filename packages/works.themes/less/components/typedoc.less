@@ -1,0 +1,70 @@
+.ZTypedocViewer-root {
+  .ZTypedocViewer-group {
+    margin-bottom: @spacing-md;
+
+    .ZTypedocViewer-group-entities {
+      display: grid;
+    }
+
+    .ZTypedocViewer-group-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .ZTypedocViewer-entity {
+      display: block;
+      text-transform: none;
+      text-align: left;
+      justify-content: flex-start;
+      padding: 0;
+      padding-right: @spacing-sm;
+      margin-top: @spacing-xs;
+      margin-bottom: @spacing-xs;
+      margin-right: @spacing-sm;
+      cursor: pointer;
+      color: @color-primary;
+
+      &.ZTypedocViewer-entity-enumeration {
+        color: @color-enumeration;
+      }
+
+      &.ZTypedocViewer-entity-class {
+        color: @color-class;
+      }
+
+      &.ZTypedocViewer-entity-interface {
+        color: @color-interface;
+      }
+
+      &:hover {
+        color: @color-info;
+        background-color: transparent;
+      }
+    }
+
+    @media (min-width: 0) {
+      .ZTypedocViewer-group-entities {
+        grid-template-columns: auto;
+      }
+    }
+
+    @media (min-width: 550px) {
+      .ZTypedocViewer-group-entities {
+        grid-template-columns: auto auto;
+      }
+    }
+
+    @media (min-width: 800px) {
+      .ZTypedocViewer-group-entities {
+        grid-template-columns: auto auto auto;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .ZTypedocViewer-group-entities {
+        grid-template-columns: auto auto auto auto;
+      }
+    }
+  }
+}

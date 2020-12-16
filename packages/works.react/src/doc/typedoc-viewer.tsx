@@ -1,5 +1,8 @@
-import { TextField, Typography } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Button, Typography } from '@material-ui/core';
+import { IZTypedocGroup } from '@zthun/works.core';
+import { kebabCase, keyBy } from 'lodash';
+import React, { ReactNode } from 'react';
+import { IZTypedocEntity } from '../../../works.core/dist/types';
 import { ZPaperCard } from '../card/paper-card';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { IZTypedocViewerProps } from './typedoc-viewer.props';
@@ -12,17 +15,6 @@ import { IZTypedocViewerProps } from './typedoc-viewer.props';
  * @returns The jsx for a typedoc viewer.
  */
 export function ZTypedocViewer(props: IZTypedocViewerProps) {
-  const [search, setSearch] = useState('');
-
-  /**
-   * Occurs when a search is invoked.
-   *
-   * @param event The text event for the search.
-   */
-  function handleSearch(event: any) {
-    setSearch(event.target.value);
-  }
-
   /**
    * Creates the loading icon.
    *
@@ -46,12 +38,40 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
   }
 
   /**
-   * Creates the component for handling search.
+   * Creates the component for an entity.
    *
-   * @returns The jsx for the search component.
+   * @param en The entity to create.
+   *
+   * @returns The jsx for the entity.
    */
-  function createSearch() {
-    return <TextField data-testid='ZTypedocViewer-text-search' fullWidth={true} label='Search' type='text' margin='none' variant='outlined' value={search} onInput={handleSearch} />;
+  function createEntity(en: IZTypedocEntity) {
+    return (
+      <Button className={`ZTypedocViewer-entity ZTypedocViewer-entity-${kebabCase(en.kindString)}`} data-testid={`ZTypedocViewer-entity-${en.id}`} key={kebabCase(`${en.kindString}-${en.name}`)} disableRipple={true}>
+        {en.name}
+      </Button>
+    );
+  }
+
+  /**
+   * Creates the component for a group.
+   *
+   * @param gr The group to generate the component for.
+   *
+   * @returns The jsx for the group component.
+   */
+  function createGroup(gr: IZTypedocGroup) {
+    const lookup = keyBy(props.typedoc.children, (ch) => ch.id);
+    const entities: IZTypedocEntity[] = gr.children.map((eid) => lookup[eid]);
+    const nodes: ReactNode[] = entities.map(createEntity);
+    return (
+      <div className='ZTypedocViewer-group' key={kebabCase(gr.title)}>
+        <Typography className='ZTypedocViewer-group-title' data-testid='ZTypedocViewer-group-title' variant='h4'>
+          {gr.title}
+        </Typography>
+        <hr />
+        <div className='ZTypedocViewer-group-entities'>{nodes}</div>
+      </div>
+    );
   }
 
   /**
@@ -60,7 +80,8 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
    * @returns The jsx for the global typedoc object.
    */
   function createGlobal() {
-    return null;
+    const nodes: ReactNode[] = props.typedoc.groups.map((gr) => createGroup(gr));
+    return <React.Fragment>{nodes}</React.Fragment>;
   }
 
   /**
@@ -74,23 +95,16 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
     }
 
     if (props.typedoc == null) {
-      createEmptyTypedoc();
+      return createEmptyTypedoc();
     }
 
-    return (
-      <React.Fragment>
-        {createSearch()}
-        {createGlobal()}
-      </React.Fragment>
-    );
+    return createGlobal();
   }
 
   return (
-    <div className='ZTypedocViewer-root'>
-      <ZPaperCard className='ZTypedocViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText || props.typedoc?.name} avatar={props.avatar} action={props.action} size={props.size}>
-        {createTypedocContent()}
-      </ZPaperCard>
-    </div>
+    <ZPaperCard className='ZTypedocViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText || props.typedoc?.name} avatar={props.avatar} action={props.action} size={props.size}>
+      {createTypedocContent()}
+    </ZPaperCard>
   );
 }
 
