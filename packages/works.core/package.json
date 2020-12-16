@@ -22,7 +22,7 @@
   "files": [
     "dist/**",
     "docs/**",
-    "assets/**",
+    "images/**",
     "PRIVACY.md",
     "TERMS.md"
   ],
