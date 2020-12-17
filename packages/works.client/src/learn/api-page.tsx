@@ -1,11 +1,11 @@
-import { Button, Grid } from '@material-ui/core';
-import { ZTypedocViewer } from '@zthun/works.react';
+import { Button, ButtonGroup, Grid } from '@material-ui/core';
+import { IZTypedoc, IZTypedocEntity } from '@zthun/works.core';
+import { ZTypedocEntityViewer, ZTypedocViewer } from '@zthun/works.react';
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { from, Subject } from 'rxjs';
-import Axios from 'axios';
 import { finalize, map, takeUntil } from 'rxjs/operators';
-import { IZTypedoc } from '@zthun/works.core';
 
 /**
  * Represents the api page for a package.
@@ -13,11 +13,12 @@ import { IZTypedoc } from '@zthun/works.core';
  * @returns The jsx that renders the api page for a package.
  */
 export function ZApiPage() {
-  const { pkg } = useParams<{ pkg: string }>();
+  const { pkg, enid } = useParams<{ pkg: string; enid?: string }>();
   const [typedoc, setTypedoc] = useState<IZTypedoc>(null);
   const [loading, setLoading] = useState(false);
   const hist = useHistory();
   const img = `images/svg/${pkg}.svg`;
+  const entity = +enid;
 
   useEffect(loadTypedoc, [pkg]);
 
@@ -52,6 +53,22 @@ export function ZApiPage() {
     hist.push(`/learn/${pkg}`);
   }
 
+  /**
+   * Navigates to the root api page of the package.
+   */
+  function handleApi() {
+    hist.push(`/learn/${pkg}/api`);
+  }
+
+  /**
+   * Occurs when the user clicks on an entity.
+   *
+   * @param entity The entity to navigate to.
+   */
+  function handleEntity(entity: IZTypedocEntity) {
+    hist.push(`/learn/${pkg}/api/${entity.id}`);
+  }
+
   const avatar = <img className='ZPaperCard-avatar ZPaperCard-avatar-xl' src={img} />;
 
   const learn = (
@@ -60,11 +77,40 @@ export function ZApiPage() {
     </Button>
   );
 
+  const api = (
+    <Button className='ZApiPage-btn-api' data-testid='ZApiPage-btn-api' color='secondary' variant='contained' onClick={handleApi}>
+      API
+    </Button>
+  );
+
+  /**
+   * Creates the viewer for the given params.
+   *
+   * @returns The jsx for the api page main component.
+   */
+  function createViewer() {
+    if (isNaN(entity)) {
+      return <ZTypedocViewer typedoc={typedoc} loading={loading} avatar={avatar} action={learn} onEntity={handleEntity} />;
+    }
+
+    return (
+      <ZTypedocEntityViewer
+        entity={null}
+        loading={loading}
+        onEntity={handleEntity}
+        action={
+          <ButtonGroup>
+            {learn}
+            {api}
+          </ButtonGroup>
+        }
+      />
+    );
+  }
+
   return (
     <Grid container={true} spacing={3} className='ZApiPage-root' data-testid='ZApiPage-root' justify='center'>
-      <Grid item={true}>
-        <ZTypedocViewer typedoc={typedoc} loading={loading} avatar={avatar} action={learn} />
-      </Grid>
+      <Grid item={true}>{createViewer()}</Grid>
     </Grid>
   );
 }

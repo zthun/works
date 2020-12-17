@@ -42,6 +42,6 @@ describe('ZLearnPage', () => {
     });
     const actual = history.location.pathname;
     // Assert
-    expect(actual).toEqual('/api/works.core');
+    expect(actual).toEqual('/learn/works.core/api');
   });
 });

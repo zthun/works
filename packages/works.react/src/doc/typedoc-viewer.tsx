@@ -1,8 +1,8 @@
 import { Button, Typography } from '@material-ui/core';
 import WarningIcon from '@material-ui/icons/Warning';
 import { IZTypedocEntity, IZTypedocGroup } from '@zthun/works.core';
-import { kebabCase, keyBy, noop } from 'lodash';
-import React, { ReactNode } from 'react';
+import { Dictionary, kebabCase, keyBy, noop } from 'lodash';
+import React, { ReactNode, useMemo } from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { ZTypedocIcon } from './typedoc-icon';
 import { IZTypedocViewerProps } from './typedoc-viewer.props';
@@ -15,6 +15,20 @@ import { IZTypedocViewerProps } from './typedoc-viewer.props';
  * @returns The jsx for a typedoc viewer.
  */
 export function ZTypedocViewer(props: IZTypedocViewerProps) {
+  const lookup = useMemo(() => createLookup(), [props.typedoc]);
+
+  /**
+   * Constructs a lookup table of the root typedoc children.
+   *
+   * @returns a lookup of the typedoc children by id.
+   */
+  function createLookup(): Dictionary<IZTypedocEntity> {
+    if (props.typedoc == null) {
+      return {};
+    }
+    return keyBy(props.typedoc.children, (ch) => ch.id);
+  }
+
   /**
    * Creates the message for empty typedoc.
    *
@@ -30,6 +44,15 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
   }
 
   /**
+   * Occurs when an entity is clicked.
+   *
+   * @param entity The entity that was clicked.
+   */
+  function handleEntity(entity: IZTypedocEntity) {
+    props.onEntity(entity);
+  }
+
+  /**
    * Creates the component for an entity.
    *
    * @param en The entity to create.
@@ -41,9 +64,11 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
       <Button
         className={`ZTypedocViewer-entity ZTypedocViewer-entity-${kebabCase(en.kindString)}`}
         data-testid={`ZTypedocViewer-entity-${en.id}`}
+        data-entity={en.id}
         key={kebabCase(`${en.kindString}-${en.name}`)}
         disableRipple={true}
         startIcon={<ZTypedocIcon kind={en.kind} />}
+        onClick={handleEntity.bind(null, en)}
       >
         {en.name}
       </Button>
@@ -58,7 +83,6 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
    * @returns The jsx for the group component.
    */
   function createGroup(gr: IZTypedocGroup) {
-    const lookup = keyBy(props.typedoc.children, (ch) => ch.id);
     const entities: IZTypedocEntity[] = gr.children.map((eid) => lookup[eid]);
     const nodes: ReactNode[] = entities.map(createEntity);
     return (

@@ -5,10 +5,10 @@ import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import React from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { ZApiPage } from '../api/api-page';
 import { ZStatusCodePage } from '../codes/status-code-page';
 import { ZthunworksFooter } from '../footer/works-footer';
 import { ZHomePage } from '../home/home-page';
+import { ZApiPage } from '../learn/api-page';
 import { ZLearnPage } from '../learn/learn-page';
 import { ZPrivacyPage } from '../legal/privacy-page';
 import { ZTermsPage } from '../legal/terms-page';
@@ -48,7 +48,8 @@ export function ZthunworksApp() {
                 <Route exact path='/terms' component={ZTermsPage} />
                 <Route exact path='/status-code/:code' component={ZStatusCodePage} />
                 <Route exact path='/learn/:pkg' component={ZLearnPage} />
-                <Route exact path='/api/:pkg' component={ZApiPage} />
+                <Route exact path='/learn/:pkg/api' component={ZApiPage} />
+                <Route exact path='/learn/:pkg/api/:enid' component={ZApiPage} />
                 <Redirect exact from='/' to='/home' />
                 <Redirect to='/status-code/404' />
               </Switch>

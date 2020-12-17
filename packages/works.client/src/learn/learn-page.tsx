@@ -19,7 +19,7 @@ export function ZLearnPage() {
    * Occurs when the api button is clicked.
    */
   function handleApi() {
-    hist.push(`/api/${pkg}`);
+    hist.push(`/learn/${pkg}/api`);
   }
 
   const api = (

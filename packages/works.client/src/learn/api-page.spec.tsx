@@ -18,14 +18,14 @@ describe('ZApiPage', () => {
   function createTestTarget() {
     return render(
       <Router history={history}>
-        <Route path='/api/:pkg' component={ZApiPage} />
+        <Route path='/learn/:pkg/api' component={ZApiPage} />
       </Router>
     );
   }
 
   beforeEach(() => {
     pkg = 'works.core';
-    history = createMemoryHistory({ initialEntries: [`/api/${pkg}`] });
+    history = createMemoryHistory({ initialEntries: [`/learn/${pkg}/api`] });
 
     typedoc = {
       name: '@zthun/works.core',
