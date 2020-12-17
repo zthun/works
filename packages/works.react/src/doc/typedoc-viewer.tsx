@@ -1,9 +1,8 @@
 import { Button, Typography } from '@material-ui/core';
-import { IZTypedocGroup } from '@zthun/works.core';
-import { kebabCase, keyBy, noop } from 'lodash';
 import WarningIcon from '@material-ui/icons/Warning';
+import { IZTypedocEntity, IZTypedocGroup } from '@zthun/works.core';
+import { kebabCase, keyBy, noop } from 'lodash';
 import React, { ReactNode } from 'react';
-import { IZTypedocEntity } from '../../../works.core/dist/types';
 import { ZPaperCard } from '../card/paper-card';
 import { ZTypedocIcon } from './typedoc-icon';
 import { IZTypedocViewerProps } from './typedoc-viewer.props';
