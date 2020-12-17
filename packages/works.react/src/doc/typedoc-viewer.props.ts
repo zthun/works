@@ -1,4 +1,4 @@
-import { IZTypedoc } from '@zthun/works.core';
+import { IZTypedoc, IZTypedocEntity } from '@zthun/works.core';
 import { IZComponentSizeable } from '../component/component-sizeable.interface';
 import { IZComponentHeader } from '../component/component-header.interface';
 import { IZComponentLoading } from '../component/component-loading.interface';
@@ -11,4 +11,13 @@ export interface IZTypedocViewerProps extends IZComponentLoading, IZComponentHea
    * The typedoc to display.
    */
   typedoc: IZTypedoc;
+
+  /**
+   * Occurs when an entity is selected.
+   *
+   * @param entity The entity that was clicked.
+   *
+   * @returns Anything you want.  Or nothing.
+   */
+  onEntity(entity: IZTypedocEntity): any;
 }

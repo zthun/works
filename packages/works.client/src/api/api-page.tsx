@@ -1,7 +1,7 @@
-import { Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { ZTypedocViewer } from '@zthun/works.react';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { from, Subject } from 'rxjs';
 import Axios from 'axios';
 import { finalize, map, takeUntil } from 'rxjs/operators';
@@ -16,8 +16,8 @@ export function ZApiPage() {
   const { pkg } = useParams<{ pkg: string }>();
   const [typedoc, setTypedoc] = useState<IZTypedoc>(null);
   const [loading, setLoading] = useState(false);
+  const hist = useHistory();
   const img = `images/svg/${pkg}.svg`;
-  const avatar = <img className='ZPaperCard-avatar ZPaperCard-avatar-xl' src={img} />;
 
   useEffect(loadTypedoc, [pkg]);
 
@@ -45,10 +45,25 @@ export function ZApiPage() {
     };
   }
 
+  /**
+   * Navigates back to the learn page.
+   */
+  function handleLearn() {
+    hist.push(`/learn/${pkg}`);
+  }
+
+  const avatar = <img className='ZPaperCard-avatar ZPaperCard-avatar-xl' src={img} />;
+
+  const learn = (
+    <Button className='ZApiPage-btn-learn' data-testid='ZApiPage-btn-learn' color='primary' variant='contained' onClick={handleLearn}>
+      Learn
+    </Button>
+  );
+
   return (
     <Grid container={true} spacing={3} className='ZApiPage-root' data-testid='ZApiPage-root' justify='center'>
       <Grid item={true}>
-        <ZTypedocViewer typedoc={typedoc} loading={loading} avatar={avatar} />
+        <ZTypedocViewer typedoc={typedoc} loading={loading} avatar={avatar} action={learn} />
       </Grid>
     </Grid>
   );

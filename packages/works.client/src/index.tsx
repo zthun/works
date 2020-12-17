@@ -19,7 +19,6 @@ import '@zthun/works.react/README.md';
 import '@zthun/works.url/README.md';
 
 // Media
-import '@zthun/works.core/images/svg/works.core.svg';
 import '@zthun/works.core/images/png/works.core.builders.png';
 import '@zthun/works.core/images/png/works.core.config-entry.png';
 import '@zthun/works.core/images/png/works.core.email.png';
@@ -28,6 +27,7 @@ import '@zthun/works.core/images/png/works.core.users.png';
 import '@zthun/works.core/images/png/works.core.data.png';
 import '@zthun/works.core/images/png/works.core.server.png';
 import '@zthun/works.core/images/png/works.core.typedoc.png';
+import '@zthun/works.core/images/svg/works.core.svg';
 import '@zthun/works.react/images/svg/works.react.svg';
 import '@zthun/works.nest/images/svg/works.nest.svg';
 

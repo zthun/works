@@ -1,10 +1,11 @@
 import { Button, Typography } from '@material-ui/core';
 import { IZTypedocGroup } from '@zthun/works.core';
-import { kebabCase, keyBy } from 'lodash';
+import { kebabCase, keyBy, noop } from 'lodash';
+import WarningIcon from '@material-ui/icons/Warning';
 import React, { ReactNode } from 'react';
 import { IZTypedocEntity } from '../../../works.core/dist/types';
 import { ZPaperCard } from '../card/paper-card';
-import { ZCircularProgress } from '../loading/circular-progress';
+import { ZTypedocIcon } from './typedoc-icon';
 import { IZTypedocViewerProps } from './typedoc-viewer.props';
 
 /**
@@ -16,24 +17,16 @@ import { IZTypedocViewerProps } from './typedoc-viewer.props';
  */
 export function ZTypedocViewer(props: IZTypedocViewerProps) {
   /**
-   * Creates the loading icon.
-   *
-   * @returns The jsx for the loading component.
-   */
-  function createLoading() {
-    return <ZCircularProgress show={true} size='4em' />;
-  }
-
-  /**
    * Creates the message for empty typedoc.
    *
    * @returns The jsx for a falsy typedoc object.
    */
   function createEmptyTypedoc() {
     return (
-      <Typography variant='h4' color='secondary'>
-        No typedoc has been loaded.
-      </Typography>
+      <div className='ZTypedocViewer-no-entity' data-testid='ZTypedocViewer-no-entity'>
+        <WarningIcon className='ZTypedocViewer-no-entity-icon' fontSize='large' />
+        <Typography variant='h4'>No typedoc has been loaded.</Typography>
+      </div>
     );
   }
 
@@ -46,7 +39,13 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
    */
   function createEntity(en: IZTypedocEntity) {
     return (
-      <Button className={`ZTypedocViewer-entity ZTypedocViewer-entity-${kebabCase(en.kindString)}`} data-testid={`ZTypedocViewer-entity-${en.id}`} key={kebabCase(`${en.kindString}-${en.name}`)} disableRipple={true}>
+      <Button
+        className={`ZTypedocViewer-entity ZTypedocViewer-entity-${kebabCase(en.kindString)}`}
+        data-testid={`ZTypedocViewer-entity-${en.id}`}
+        key={kebabCase(`${en.kindString}-${en.name}`)}
+        disableRipple={true}
+        startIcon={<ZTypedocIcon kind={en.kind} />}
+      >
         {en.name}
       </Button>
     );
@@ -64,7 +63,7 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
     const entities: IZTypedocEntity[] = gr.children.map((eid) => lookup[eid]);
     const nodes: ReactNode[] = entities.map(createEntity);
     return (
-      <div className='ZTypedocViewer-group' key={kebabCase(gr.title)}>
+      <div className='ZTypedocViewer-group' data-testid={`ZTypedocViewer-group-${kebabCase(gr.title)}`} key={kebabCase(gr.title)}>
         <Typography className='ZTypedocViewer-group-title' data-testid='ZTypedocViewer-group-title' variant='h4'>
           {gr.title}
         </Typography>
@@ -91,7 +90,7 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
    */
   function createTypedocContent() {
     if (props.loading) {
-      return createLoading();
+      return null;
     }
 
     if (props.typedoc == null) {
@@ -102,7 +101,7 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
   }
 
   return (
-    <ZPaperCard className='ZTypedocViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText || props.typedoc?.name} avatar={props.avatar} action={props.action} size={props.size}>
+    <ZPaperCard className='ZTypedocViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText || props.typedoc?.name} loading={props.loading} avatar={props.avatar} action={props.action} size={props.size}>
       {createTypedocContent()}
     </ZPaperCard>
   );
@@ -110,5 +109,6 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
 
 ZTypedocViewer.defaultProps = {
   headerText: 'API',
-  avatar: null
+  avatar: null,
+  onEntity: noop
 };

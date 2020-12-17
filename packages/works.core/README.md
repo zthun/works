@@ -271,7 +271,7 @@ function createFtpServerConnection() {
 
 ![Typedoc](images/png/works.core.typedoc.png)
 
-Zthunworks treats [Typedoc](https://typedoc.org) documentation as a first class citizen and is able to load typedoc json files into memory for analysis. Rather than using the classes found in the actual [typedoc github]('https://github.com/TypeStrong/typedoc') package, @zthun/works.core just defines the base interfaces and enums for a very small footprint. This lets you load a remote json object into memory and can quickly access the members with full intellisense support.
+Zthunworks treats [Typedoc](https://typedoc.org) documentation as a first class citizen and is able to load typedoc json files into memory for analysis. Rather than using the classes found in the actual [typedoc github](https://github.com/TypeStrong/typedoc) package, @zthun/works.core just defines the base interfaces and enums for a very small footprint. This lets you load a remote json object into memory and can quickly access the members with full intellisense support.
 
 ```ts
 import { IZTypedoc } from '@zthun/works.core';
@@ -281,5 +281,4 @@ async function readTypedoc(url: string): Promise<IZTypedoc> {
   const res = await Axios.get<IZTypedoc>(url);
   return res.data;
 }
-Typoe;
 ```

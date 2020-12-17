@@ -1,4 +1,20 @@
 .ZTypedocViewer-root {
+  .ZTypedocViewer-no-entity {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+
+    .ZTypedocViewer-no-entity-icon {
+      color: @color-warning;
+      margin-right: @spacing-sm;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+      color: @color-danger;
+    }
+  }
+
   .ZTypedocViewer-group {
     margin-bottom: @spacing-md;
 
@@ -13,7 +29,7 @@
     }
 
     .ZTypedocViewer-entity {
-      display: block;
+      display: flex;
       text-transform: none;
       text-align: left;
       justify-content: flex-start;
@@ -66,5 +82,19 @@
         grid-template-columns: auto auto auto auto;
       }
     }
+  }
+}
+
+.ZTypedocIcon-root {
+  &.ZTypedocIcon-sm {
+    font-size: 1rem;
+  }
+
+  &.ZTypedocIcon-md {
+    font-size: 3rem;
+  }
+
+  &.ZTypedocIcon-lg {
+    font-size: 5rem;
   }
 }
