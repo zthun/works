@@ -21,7 +21,8 @@
     "packages/works.client",
     "packages/works.nest",
     "packages/works.server",
-    "packages/works.proxy"
+    "packages/works.proxy",
+    "packages/works.k8s"
   ],
   "scripts": {
     "clean": "rimraf dist docs reports *.tgz *.log packages/**/dist packages/**/docs packages/**/*.tgz packages/**/*.log  packages/**/css",
@@ -30,7 +31,6 @@
     "build": "lerna run build",
     "make": "yarn clean && yarn lint && yarn test && yarn build",
     "start": "yarn docs && docker-compose up",
-    "kubernetes": "tokenizer && kubectl apply -f install/kubernetes.yml",
     "docker:publish": "lerna run docker:publish",
     "docker:build": "lerna run docker:build",
     "docker": "yarn docker:build && yarn docker:publish",
@@ -64,7 +64,6 @@
     "@types/url-parse": "^1.4.3",
     "@types/uuid": "^8.0.0",
     "@zthun/lint-janitor": "^8.0.0",
-    "@zthun/tokenizer": "^1.1.0",
     "axios": "^0.21.0",
     "canvas": "^2.6.1",
     "class-transformer": "^0.3.1",

@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ .Chart.Name }}-cert-issuer
+  namespace: {{ .Release.Namespace }}
+spec:
+  acme:
+    email: {{ .Values.cert.owner }}@{{ .Values.domain }}
+    privateKeySecretRef:
+      name: {{ .Chart.Name}}-cert-issuer
+    server: {{ .Values.cert.issuer }}
+    solvers:
+      - http01:
+          ingress:
+            class: nginx

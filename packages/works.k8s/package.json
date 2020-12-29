@@ -1,0 +1,17 @@
+{
+  "name": "@zthun/works.k8s",
+  "version": "1.0.0-21",
+  "private": true,
+  "description": "The helm chart source..",
+  "author": "Anthony Bonta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zthun/works"
+  },
+  "scripts": {
+    "lint": "helm lint .",
+    "deploy": "helm install zthunworks . -n zthunworks",
+    "test": "yarn deploy --dry-run"
+  }
+}

@@ -1,0 +1,16 @@
+domain: zthunworks.com
+
+replicas: 1
+
+cert:
+  issuer: https://acme-v02.api.letsencrypt.org/directory
+  owner: admin
+
+images:
+  scope: zthun
+  server: works.server
+  client: works.client
+
+database:
+  vault: vault.database.zthunworks.com
+  users: users.database.zthunworks.com

@@ -1,0 +1,33 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ .Chart.Name }}-deployments-server
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-pods-server
+  template:
+    metadata:
+      name: {{ .Chart.Name }}-pods-server
+      labels:
+        app: {{ .Chart.Name }}-pods-server
+        version: {{ .Chart.AppVersion }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-pods-server
+          image: {{ .Values.images.scope }}/{{ .Values.images.server }}:{{ .Chart.AppVersion }}
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_VAULT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}-secrets-db-urls
+                  key: database-vault-url
+            - name: DATABASE_USERS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}-secrets-db-urls
+                  key: database-users-url
