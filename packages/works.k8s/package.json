@@ -12,6 +12,7 @@
   "scripts": {
     "lint": "helm lint .",
     "deploy": "helm install zthunworks . -n zthunworks",
+    "redeploy": "helm upgrade zthunworks . -n zthunworks",
     "test": "yarn deploy --dry-run"
   }
 }
