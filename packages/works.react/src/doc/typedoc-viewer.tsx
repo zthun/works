@@ -23,9 +23,6 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
    * @returns a lookup of the typedoc children by id.
    */
   function createLookup(): Dictionary<IZTypedocEntity> {
-    if (props.typedoc == null) {
-      return {};
-    }
     return keyBy(props.typedoc.children, (ch) => ch.id);
   }
 
@@ -112,10 +109,6 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
    * @returns The jsx for the typedoc root.
    */
   function createTypedocContent() {
-    if (props.loading) {
-      return null;
-    }
-
     if (props.typedoc == null) {
       return createEmptyTypedoc();
     }
@@ -124,7 +117,7 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
   }
 
   return (
-    <ZPaperCard className='ZTypedocViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText || props.typedoc?.name} loading={props.loading} avatar={props.avatar} action={props.action} size={props.size}>
+    <ZPaperCard className='ZTypedocViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText || props.typedoc?.name} avatar={props.avatar} action={props.action} size={props.size}>
       {createTypedocContent()}
     </ZPaperCard>
   );

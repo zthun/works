@@ -1,7 +1,8 @@
 import { Button, ButtonGroup, Grid } from '@material-ui/core';
 import { IZTypedoc, IZTypedocEntity } from '@zthun/works.core';
-import { ZTypedocEntityViewer, ZTypedocViewer } from '@zthun/works.react';
+import { ZCircularProgress, ZTypedocEntityViewer, ZTypedocViewer } from '@zthun/works.react';
 import Axios from 'axios';
+import { first } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { from, Subject } from 'rxjs';
@@ -18,7 +19,7 @@ export function ZApiPage() {
   const [loading, setLoading] = useState(false);
   const hist = useHistory();
   const img = `images/svg/${pkg}.svg`;
-  const entity = +enid;
+  const entityId = +enid;
 
   useEffect(loadTypedoc, [pkg]);
 
@@ -89,14 +90,19 @@ export function ZApiPage() {
    * @returns The jsx for the api page main component.
    */
   function createViewer() {
-    if (isNaN(entity)) {
-      return <ZTypedocViewer typedoc={typedoc} loading={loading} avatar={avatar} action={learn} onEntity={handleEntity} />;
+    if (typedoc == null) {
+      return <ZCircularProgress show={loading} />;
     }
+
+    if (isNaN(entityId)) {
+      return <ZTypedocViewer typedoc={typedoc} avatar={avatar} action={learn} onEntity={handleEntity} />;
+    }
+
+    const entity = first(typedoc.children.filter((ch) => ch.id === entityId));
 
     return (
       <ZTypedocEntityViewer
-        entity={null}
-        loading={loading}
+        entity={entity}
         onEntity={handleEntity}
         action={
           <ButtonGroup>
