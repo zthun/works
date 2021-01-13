@@ -4,7 +4,7 @@ metadata:
   name: {{ .Chart.Name }}-services-client
   namespace: {{ .Release.Namespace }}
 spec:
-  type: {{ .Values.service.kind }}
+  type: NodePort
   selector:
     app: {{ .Chart.Name}}-pods-client
   ports:
