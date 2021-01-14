@@ -134,6 +134,10 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     ) : null;
   }
 
+  if (!props.type) {
+    return null;
+  }
+
   return (
     <div className='ZTypedocTypeViewer-root' data-testid='ZTypedocTypeViewer-root'>
       {createHeader()}
