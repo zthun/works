@@ -13,7 +13,7 @@ describe('ZTypedocTypeViewer', () => {
   let onReference: jest.Mock;
 
   function createTestTarget() {
-    return render(<ZTypedocTypeViewer type={type} onReference={onReference} header={header} separator={separator} />);
+    return render(<ZTypedocTypeViewer type={type} onReference={onReference} prefix={header} suffix={separator} />);
   }
 
   beforeEach(() => {
@@ -31,7 +31,7 @@ describe('ZTypedocTypeViewer', () => {
     const target = createTestTarget();
     // Act
     const actual = target.findByTestId('ZTypedocTypeViewer-root');
-    await of(true).pipe(delay(1)).toPromise();
+    await of(true).pipe(delay(100)).toPromise();
     // Assert
     expect(actual).toBeTruthy();
   });

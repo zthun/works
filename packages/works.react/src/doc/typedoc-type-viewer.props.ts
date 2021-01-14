@@ -11,14 +11,14 @@ export interface IZTypedocTypeViewerProps {
   type: IZTypedocType;
 
   /**
-   * The separator character.
+   * Suffix element.
    */
-  separator: ReactNode;
+  suffix: ReactNode;
 
   /**
-   * Whether or not to add the header colon to the front of the type.
+   * Prefix element.
    */
-  header: ReactNode;
+  prefix: ReactNode;
 
   /**
    * Occurs when the user clicks on a reference type with an id.

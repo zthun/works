@@ -9,6 +9,7 @@ export interface IZTypedocType {
    * The type of type.
    */
   type: ZTypedocTypeKind;
+
   /**
    * The name of the type.
    */
@@ -20,7 +21,7 @@ export interface IZTypedocType {
   typeArguments?: IZTypedocType[];
 
   /**
-   * Used for union types.
+   * Used for union and intersection types.
    */
   types?: IZTypedocType[];
 
@@ -33,6 +34,36 @@ export interface IZTypedocType {
    * Used for array and optional types.
    */
   elementType?: IZTypedocType;
+
+  /**
+   * Used for conditional types.
+   */
+  checkType?: IZTypedocType;
+
+  /**
+   * Used for conditional types.
+   */
+  extendsType?: IZTypedocType;
+
+  /**
+   * Used for conditional types.
+   */
+  trueType?: IZTypedocType;
+
+  /**
+   * Used for conditional types.
+   */
+  falseType?: IZTypedocType;
+
+  /**
+   * Used for predicate types.
+   */
+  targetType?: IZTypedocType;
+
+  /**
+   * Used for tuples.
+   */
+  elements?: IZTypedocType[];
 
   /**
    * The id for reference types.

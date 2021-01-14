@@ -63,7 +63,7 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
     return (
       <Fragment key={parameter.id}>
         {parameter.name}
-        <ZTypedocTypeViewer type={parameter.type} header=': ' onReference={props.onEntity} />
+        <ZTypedocTypeViewer type={parameter.type} prefix=': ' onReference={props.onEntity} />
         {last ? null : ', '}
       </Fragment>
     );
@@ -83,7 +83,7 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
         <div className='ZTypedocEntityViewer-sub-entity ZTypedocEntityViewer-signature'>
           <span className='ZTypedocEntityViewer-entity-title'>{signature.name}</span>
           <span>({params.map((param, i) => createSignatureParameter(param, i === params.length - 1))})</span>
-          <ZTypedocTypeViewer type={signature.type} header=': ' onReference={props.onEntity} />
+          <ZTypedocTypeViewer type={signature.type} prefix=': ' onReference={props.onEntity} />
         </div>
         {createComment(signature.comment)}
       </Fragment>
@@ -102,7 +102,7 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
       <Fragment key={entity.id}>
         <div className='ZTypedocEntityViewer-sub-entity'>
           <span className='ZTypedocEntityViewer-entity-title'>{entity.name}</span>
-          <ZTypedocTypeViewer type={entity.type} header=': ' onReference={props.onEntity} />
+          <ZTypedocTypeViewer type={entity.type} prefix=': ' onReference={props.onEntity} />
         </div>
         {createComment(entity.comment)}
       </Fragment>
