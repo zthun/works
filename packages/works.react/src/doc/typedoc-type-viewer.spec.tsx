@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { render } from '@testing-library/react';
-import { IZTypedocType } from '@zthun/works.core';
+import { IZTypedocType, ZTypedocTypeKind } from '@zthun/works.core';
 import React from 'react';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -18,7 +18,7 @@ describe('ZTypedocTypeViewer', () => {
 
   beforeEach(() => {
     type = {
-      type: 'intrinsic',
+      type: ZTypedocTypeKind.Intrinsic,
       name: 'string'
     };
     header = null;

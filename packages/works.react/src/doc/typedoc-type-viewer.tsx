@@ -1,4 +1,5 @@
 import { Typography } from '@material-ui/core';
+import { ZTypedocTypeKind } from '@zthun/works.core';
 import { noop } from 'lodash';
 import React, { Fragment } from 'react';
 import { IZTypedocTypeViewerProps } from './typedoc-type-viewer.props';
@@ -64,6 +65,15 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
+   * Creates a type element for an array.
+   *
+   * @returns The jsx for an array.
+   */
+  function createArrayElement() {
+    return <ZTypedocTypeViewer type={props.type.elementType} onReference={props.onReference} separator='[]' />;
+  }
+
+  /**
    * Creates the reference type jsx.
    *
    * @returns The jsx for a reference type element.
@@ -99,9 +109,11 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    */
   function createTypeElement() {
     switch (props.type.type) {
-      case 'reference':
+      case ZTypedocTypeKind.Array:
+        return createArrayElement();
+      case ZTypedocTypeKind.Reference:
         return createReferenceElement();
-      case 'union':
+      case ZTypedocTypeKind.Union:
         return createUnionElement();
       default:
         return createIntrinsicElement();

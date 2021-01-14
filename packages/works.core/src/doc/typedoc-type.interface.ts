@@ -1,4 +1,5 @@
 import { IZTypedocEntity } from './typedoc-entity.interface';
+import { ZTypedocTypeKind } from './typedoc-type-kind.enum';
 
 /**
  * Represents a type structure in a typedoc entity.
@@ -7,8 +8,7 @@ export interface IZTypedocType {
   /**
    * The type of type.
    */
-  type: 'reference' | 'intrinsic' | 'union' | 'reflection';
-
+  type: ZTypedocTypeKind;
   /**
    * The name of the type.
    */
@@ -28,6 +28,11 @@ export interface IZTypedocType {
    * Used for reflection types.
    */
   declaration?: IZTypedocEntity;
+
+  /**
+   * Used for array and optional types.
+   */
+  elementType?: IZTypedocType;
 
   /**
    * The id for reference types.
