@@ -4,7 +4,7 @@
 export enum ZTypedocTypeKind {
   Array = 'array',
   Conditional = 'conditional',
-  IndexedAccess = 'indexed-access',
+  IndexedAccess = 'indexedAccess',
   Inferred = 'inferred',
   Intersection = 'intersection',
   Intrinsic = 'intrinsic',

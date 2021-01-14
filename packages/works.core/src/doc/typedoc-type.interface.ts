@@ -16,6 +16,11 @@ export interface IZTypedocType {
   name: string;
 
   /**
+   * Used for string literals.
+   */
+  value?: string;
+
+  /**
    * The type arguments if this type represents a generic type.
    */
   typeArguments?: IZTypedocType[];
@@ -64,6 +69,16 @@ export interface IZTypedocType {
    * Used for tuples.
    */
   elements?: IZTypedocType[];
+
+  /**
+   * Used for index-access types.
+   */
+  indexType?: IZTypedocType;
+
+  /**
+   * Used for index-access types.
+   */
+  objectType?: IZTypedocType;
 
   /**
    * The id for reference types.

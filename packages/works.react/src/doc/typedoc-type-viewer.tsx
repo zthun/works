@@ -200,6 +200,35 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
+   * Creates an index access type element.
+   *
+   * @returns The jsx for an index access element.
+   */
+  function createIndexAccess() {
+    const parenOpen = '(';
+    const parenClose = ')';
+    const bracketOpen = '[';
+    const bracketClose = ']';
+
+    return (
+      <Fragment>
+        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
+          {parenOpen}
+        </Typography>
+        <ZTypedocTypeViewer type={props.type.objectType} onReference={props.onReference} />
+        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
+          {parenClose}
+          {bracketOpen}
+        </Typography>
+        <ZTypedocTypeViewer type={props.type.indexType} onReference={props.onReference} />
+        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
+          {bracketClose}
+        </Typography>
+      </Fragment>
+    );
+  }
+
+  /**
    * Creates the under element based on the type's type.
    *
    * @returns The jsx for the type.
@@ -222,6 +251,8 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
         return createJoinedElement(' & ');
       case ZTypedocTypeKind.Tuple:
         return createTupleElement();
+      case ZTypedocTypeKind.IndexedAccess:
+        return createIndexAccess();
       default:
         return createIntrinsicElement();
     }
