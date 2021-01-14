@@ -61,3 +61,169 @@
     max-width: calc(100vw - 6em);
   }
 }
+
+.ZTypedocViewer-root {
+  .ZTypedocViewer-no-entity {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+
+    .ZTypedocViewer-no-entity-icon {
+      color: @color-warning;
+      margin-right: @spacing-sm;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+      color: @color-danger;
+    }
+  }
+
+  .ZTypedocViewer-group {
+    margin-bottom: @spacing-md;
+
+    .ZTypedocViewer-group-entities {
+      display: grid;
+    }
+
+    .ZTypedocViewer-group-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .ZTypedocViewer-entity {
+      display: flex;
+      text-transform: none;
+      text-align: left;
+      justify-content: flex-start;
+      padding: 0;
+      padding-right: @spacing-sm;
+      margin-top: @spacing-xs;
+      margin-bottom: @spacing-xs;
+      margin-right: @spacing-sm;
+      cursor: pointer;
+      color: @color-primary;
+
+      &.ZTypedocViewer-entity-enumeration {
+        color: @color-enumeration;
+      }
+
+      &.ZTypedocViewer-entity-class {
+        color: @color-class;
+      }
+
+      &.ZTypedocViewer-entity-interface {
+        color: @color-interface;
+      }
+
+      &:hover {
+        color: @color-info;
+        background-color: transparent;
+      }
+    }
+
+    @media (min-width: 0) {
+      .ZTypedocViewer-group-entities {
+        grid-template-columns: auto;
+      }
+    }
+
+    @media (min-width: 550px) {
+      .ZTypedocViewer-group-entities {
+        grid-template-columns: auto auto;
+      }
+    }
+
+    @media (min-width: 800px) {
+      .ZTypedocViewer-group-entities {
+        grid-template-columns: auto auto auto;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .ZTypedocViewer-group-entities {
+        grid-template-columns: auto auto auto auto;
+      }
+    }
+  }
+}
+
+.ZTypedocIcon-root {
+  &.ZTypedocIcon-sm {
+    font-size: 1rem;
+  }
+
+  &.ZTypedocIcon-md {
+    font-size: 3rem;
+  }
+
+  &.ZTypedocIcon-lg {
+    font-size: 5rem;
+  }
+}
+
+.ZTypedocEntityViewer-root {
+  .ZPaperCard-root {
+    margin-bottom: @spacing-md;
+  }
+
+  .ZTypedocEntityViewer-comment-short,
+  .ZTypedocEntityViewer-comment-text {
+    margin-bottom: @spacing-md;
+  }
+
+  .ZTypedocEntityViewer-entity-title {
+    font-weight: bolder;
+  }
+
+  .ZTypedocEntityViewer-group {
+    .ZTypedocEntityViewer-sub-entity {
+      margin-top: @spacing-sm;
+      margin-bottom: @spacing-sm;
+      border-bottom: @thickness-md solid @color-gray;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  .ZTypedocIcon-root {
+    color: @color-primary;
+
+    &.ZTypedocIcon-class {
+      color: @color-class;
+    }
+
+    &.ZTypedocIcon-enumeration {
+      color: @color-enumeration;
+    }
+
+    &.ZTypedocIcon-interface {
+      color: @color-interface;
+    }
+
+    &.ZTypedocIcon-type-alias {
+      color: @color-type-alias;
+    }
+  }
+}
+
+.ZTypedocTypeViewer-root {
+  display: inline-block;
+
+  .ZTypedocTypeViewer-title {
+    font-style: italic;
+  }
+
+  .ZTypedocTypeViewer-header,
+  .ZTypedocTypeViewer-separator {
+    white-space: pre;
+  }
+
+  a {
+    cursor: pointer;
+    color: @color-primary;
+  }
+}

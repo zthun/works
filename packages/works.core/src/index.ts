@@ -13,6 +13,7 @@ export { IZTypedocFlags } from './doc/typedoc-flags.interface';
 export { IZTypedocGroup } from './doc/typedoc-group.interface';
 export { ZTypedocKind } from './doc/typedoc-kind.enum';
 export { IZTypedocSource } from './doc/typedoc-source.interface';
+export { IZTypedocType } from './doc/typedoc-type.interface';
 export { IZTypedoc } from './doc/typedoc.interface';
 // Email
 export { ZEmailBuilder } from './email/email-builder.class';

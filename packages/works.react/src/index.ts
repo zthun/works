@@ -26,6 +26,8 @@ export { IZComponentStyle } from './component/component-style.interface';
 export { ZMarkdownViewer } from './doc/markdown-viewer';
 export { IZMarkdownViewerProps } from './doc/markdown-viewer.props';
 export { ZTypedocEntityViewer } from './doc/typedoc-entity-viewer';
+export { ZTypedocTypeViewer } from './doc/typedoc-type-viewer';
+export { IZTypedocTypeViewerProps } from './doc/typedoc-type-viewer.props';
 export { ZTypedocViewer } from './doc/typedoc-viewer';
 export { IZTypedocViewerProps } from './doc/typedoc-viewer.props';
 // File

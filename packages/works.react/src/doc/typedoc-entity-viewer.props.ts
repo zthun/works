@@ -20,6 +20,8 @@ export interface IZTypedocEntityViewerProps extends IZComponentSizeable {
 
   /**
    * Occurs when the user clicks another entity object from within the entity.
+   *
+   * @param id The id of the entity that was clicked.
    */
-  onEntity(other: IZTypedocEntity): void;
+  onEntity(id: number): void;
 }

@@ -6,14 +6,12 @@ import { ZTypedocEntityViewer } from './typedoc-entity-viewer';
 
 describe('ZTypedocEntityViewer', () => {
   let entity: IZTypedocEntity;
-  let loading: boolean;
 
   function createTestTarget() {
-    return render(<ZTypedocEntityViewer entity={entity} loading={loading} />);
+    return render(<ZTypedocEntityViewer entity={entity} />);
   }
 
   beforeEach(() => {
-    loading = false;
     entity = {
       id: 11,
       name: 'ClassA',

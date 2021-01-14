@@ -70,6 +70,16 @@ export function ZApiPage() {
     hist.push(`/learn/${pkg}/api/${entity.id}`);
   }
 
+  /**
+   * Same as handleEntity except takes the entity id.
+   *
+   * @param id The id of the entity.
+   */
+  function handleEntityId(id: number) {
+    const entity = first(typedoc.children.filter((ch) => ch.id === id));
+    handleEntity(entity);
+  }
+
   const avatar = <img className='ZPaperCard-avatar ZPaperCard-avatar-xl' src={img} />;
 
   const learn = (
@@ -103,7 +113,7 @@ export function ZApiPage() {
     return (
       <ZTypedocEntityViewer
         entity={entity}
-        onEntity={handleEntity}
+        onEntity={handleEntityId}
         action={
           <ButtonGroup>
             {learn}
