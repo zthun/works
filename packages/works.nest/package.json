@@ -30,7 +30,6 @@
     "@zthun/works.core": ">=0.0.0 <2.0.0",
     "@zthun/works.dal": ">=0.0.0 <2.0.0",
     "class-transformer": "^0.3.0",
-    "class-validator": "^0.12.2",
     "cookie-parser": "^1.4.5",
     "helmet": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
