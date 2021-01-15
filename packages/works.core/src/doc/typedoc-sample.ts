@@ -21,6 +21,16 @@ export interface IZTypedocSampleDataType {
 }
 
 /**
+ * Prefix for sample matrix.
+ */
+export type ZSampleMatrixPrefix = 'foo' | 'bar';
+
+/**
+ * Suffix for sample matrix.
+ */
+export type ZSampleMatrixSuffix = 'boo' | 'far';
+
+/**
  * Represents a sample class that contains all aspects of typedoc.
  *
  * You should never inherit or create an instance of this object.  This object
@@ -70,7 +80,7 @@ export abstract class ZTypedocSample<T> {
   /**
    * Union type property.
    */
-  public union: string | number | boolean = null;
+  public union: number | boolean | 'auto' = null;
 
   /**
    * Intersection type property.
@@ -114,8 +124,10 @@ export abstract class ZTypedocSample<T> {
 
   /**
    * A template literal property.
+   *
+   * Requires typescript 4.1
    */
-  public template: { val: number; test: string };
+  // public template: `${ZSampleMatrixPrefix}-${ZSampleMatrixSuffix}`;
 
   /**
    * A method with parameters.
