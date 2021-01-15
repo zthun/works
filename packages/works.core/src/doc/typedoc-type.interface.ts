@@ -36,7 +36,7 @@ export interface IZTypedocType {
   declaration?: IZTypedocEntity;
 
   /**
-   * Used for array and optional types.
+   * Used for array, rest, and optional types.
    */
   elementType?: IZTypedocType;
 

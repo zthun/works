@@ -69,7 +69,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
-   * Creates the most basic type element jsx.
+   * Creates the intrinsic element.
    *
    * @returns The jsx for an intrinsic element.
    */
@@ -85,7 +85,36 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
-   * Creates a type element that has a separator keyword at the end.
+   * Creates a literal element.
+   *
+   * @returns The jsx for a literal element.
+   */
+  function createLiteralElement() {
+    const value = props.type.value;
+    const literalType = typeof value;
+
+    let wrap = null;
+
+    if (literalType === 'string') {
+      const quote = '"';
+      wrap = (
+        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
+          {quote}
+        </Typography>
+      );
+    }
+
+    return (
+      <Fragment>
+        {wrap}
+        {props.type.value}
+        {wrap}
+      </Fragment>
+    );
+  }
+
+  /**
+   * Creates a type element that has a suffix keyword at the end.
    *
    * @param ending The ending separator.
    *
@@ -204,7 +233,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    *
    * @returns The jsx for an index access element.
    */
-  function createIndexAccess() {
+  function createIndexAccessElement() {
     const parenOpen = '(';
     const parenClose = ')';
     const bracketOpen = '[';
@@ -229,6 +258,23 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
+   * Creates a rest type element.
+   *
+   * @returns The jsx for a rest element.
+   */
+  function createRestElement() {
+    const dots = '...';
+    return (
+      <Fragment>
+        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
+          {dots}
+        </Typography>
+        <ZTypedocTypeViewer type={props.type.elementType} onReference={props.onReference} />
+      </Fragment>
+    );
+  }
+
+  /**
    * Creates the under element based on the type's type.
    *
    * @returns The jsx for the type.
@@ -237,22 +283,42 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     switch (props.type.type) {
       case ZTypedocTypeKind.Array:
         return createEndTypeElement('[]');
-      case ZTypedocTypeKind.Optional:
-        return createEndTypeElement('?');
       case ZTypedocTypeKind.Conditional:
         return createConditionalElement();
-      case ZTypedocTypeKind.Predicate:
-        return createPredicateElement();
-      case ZTypedocTypeKind.Reference:
-        return createReferenceElement();
-      case ZTypedocTypeKind.Union:
-        return createJoinedElement(' | ');
+      case ZTypedocTypeKind.IndexedAccess:
+        return createIndexAccessElement();
+      // case ZTypedocTypeKind.Inferred:
+      //   return createInferredElement();
       case ZTypedocTypeKind.Intersection:
         return createJoinedElement(' & ');
+      case ZTypedocTypeKind.Literal:
+        return createLiteralElement();
+      // case ZTypedocTypeKind.Mapped:
+      //  return createMappedElement();
+      case ZTypedocTypeKind.Optional:
+        return createEndTypeElement('?');
+      case ZTypedocTypeKind.Predicate:
+        return createPredicateElement();
+      // case ZTypedocTypeKind.Query:
+      //   return createQueryElement();
+      case ZTypedocTypeKind.Reference:
+        return createReferenceElement();
+      // case ZTypedocTypeKind.Reflection:
+      //   return createReflectionElement();
+      case ZTypedocTypeKind.Rest:
+        return createRestElement();
+      // case ZTypedocTypeKind.TemplateLiteral:
+      //  return createTemplateLiteralElement();
       case ZTypedocTypeKind.Tuple:
         return createTupleElement();
-      case ZTypedocTypeKind.IndexedAccess:
-        return createIndexAccess();
+      // case ZTypedocTypeKind.TypeOperator:
+      //  return createTypeOperatorElement();
+      // case ZTypedocTypeKind.TypeParameter:
+      //  return createTypeParameterElement();
+      case ZTypedocTypeKind.Union:
+        return createJoinedElement(' | ');
+      // case ZTypedocTypeKind.Intrinsic:
+      // case ZTypedocTypeKind.Unknown:
       default:
         return createIntrinsicElement();
     }
@@ -265,7 +331,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    */
   function createHeader() {
     return props.prefix ? (
-      <Typography variant={variant} component={component} className='ZTypedocTypeViewer-header'>
+      <Typography variant={variant} component={component} className='ZTypedocTypeViewer-keyword'>
         {props.prefix}
       </Typography>
     ) : null;
@@ -278,7 +344,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    */
   function createSeparator() {
     return props.suffix ? (
-      <Typography variant={variant} component={component} className='ZTypedocTypeViewer-separator'>
+      <Typography variant={variant} component={component} className='ZTypedocTypeViewer-keyword'>
         {props.suffix}
       </Typography>
     ) : null;
