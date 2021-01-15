@@ -84,4 +84,34 @@ export interface IZTypedocType {
    * The id for reference types.
    */
   id?: number;
+
+  /**
+   * Used for mapped types.
+   */
+  parameter?: string;
+
+  /**
+   * Used for mapped types.
+   */
+  parameterType: IZTypedocType;
+
+  /**
+   * Used for mapped types.
+   */
+  templateType?: IZTypedocType;
+
+  /**
+   * Used for mapped types.
+   */
+  nameType?: IZTypedocType;
+
+  /**
+   * Used for mapped types.
+   */
+  readonlyModifier?: '+' | '-';
+
+  /**
+   * Used for mapped types.
+   */
+  optionalModifier?: '+' | '-';
 }

@@ -93,6 +93,11 @@ export abstract class ZTypedocSample<T> {
   public mapped: { readonly [P in keyof T]: T[P] };
 
   /**
+   * A mapped type property.
+   */
+  public partial: { [P in keyof T]?: T[P] };
+
+  /**
    * A tuple type property with optionals.
    */
   public tuple: [number, number, number?, string?];

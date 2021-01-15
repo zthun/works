@@ -209,9 +209,8 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function createIndexAccessElement() {
     return (
       <Fragment>
-        {createKeyword('(')}
         {createType(props.type.objectType)}
-        {createKeyword(')[')}
+        {createKeyword('[')}
         {createType(props.type.indexType)}
         {createKeyword(']')}
       </Fragment>
@@ -233,6 +232,51 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
+   * Constructs a mapped element.
+   *
+   * @returns The jsx for a mapped element.
+   */
+  function createMappedElement() {
+    const read = {
+      '+': 'readonly ',
+      '-': '-readonly ',
+      '': null
+    }[props.type.readonlyModifier || ''];
+
+    const opt = {
+      '+': '?',
+      '-': '-?',
+      '': null
+    }[props.type.optionalModifier || ''];
+
+    const as = props.type.nameType ? (
+      <Fragment>
+        {createKeyword(' as ')}
+        {createType(props.type.nameType)}
+      </Fragment>
+    ) : null;
+
+    return (
+      <Fragment>
+        {createKeyword('{')}
+        {createKeyword(read)}
+        {createKeyword('[')}
+        {createKeyword(props.type.parameter)}
+        {createKeyword(' in ')}
+        {createType(props.type.parameterType)}
+        {as}
+        {createKeyword(']')}
+        {createKeyword(opt)}
+        {createKeyword(': ')}
+        {createType(props.type.templateType)}
+        {createKeyword('}')}
+      </Fragment>
+    );
+
+    // return `{ ${read}[${this.parameter} in ${this.parameterType}${name}]${opt}: ${this.templateType}}`;
+  }
+
+  /**
    * Creates the under element based on the type's type.
    *
    * @returns The jsx for the type.
@@ -251,8 +295,8 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
         return createTypeList(props.type.types, ' & ');
       case ZTypedocTypeKind.Literal:
         return createLiteralElement();
-      // case ZTypedocTypeKind.Mapped:
-      //  return createMappedElement();
+      case ZTypedocTypeKind.Mapped:
+        return createMappedElement();
       case ZTypedocTypeKind.Optional:
         return createType(props.type.elementType, null, '?');
       case ZTypedocTypeKind.Predicate:
