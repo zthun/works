@@ -23,7 +23,7 @@ describe('RequiresOtherProperty', () => {
       passwordConfirm = new ZLoginBuilder().password('bad-password').autoConfirm().build();
     });
 
-    function assertValid<T>(expected: boolean, object: T, property: keyof T, propertyToCheck: keyof T) {
+    function assertValid<T extends object>(expected: boolean, object: T, property: keyof T, propertyToCheck: keyof T) {
       // Arrange
       const target = new RequiresOtherPropertyValidator();
       const args: ValidationArguments = {

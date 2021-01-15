@@ -25,7 +25,7 @@ describe('EqualsOtherProperty', () => {
       mismatchedPasswords = new ZLoginBuilder().password('password').confirm('password-c').build();
     });
 
-    function assertValid<T>(expected: boolean, object: T, value: T[keyof T], property: keyof T, propertyToMatch: keyof T) {
+    function assertValid<T extends object>(expected: boolean, object: T, value: T[keyof T], property: keyof T, propertyToMatch: keyof T) {
       // Arrange
       const target = new EqualsOtherPropertyValidator();
       const args: ValidationArguments = {
