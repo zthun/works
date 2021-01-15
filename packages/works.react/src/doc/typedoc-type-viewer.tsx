@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
-import { ZTypedocTypeKind } from '@zthun/works.core';
+import { IZTypedocType, ZTypedocTypeKind } from '@zthun/works.core';
 import { noop } from 'lodash';
-import React, { Fragment, ReactNode } from 'react';
+import React, { ElementType, Fragment, ReactNode } from 'react';
 import { IZTypedocTypeViewerProps } from './typedoc-type-viewer.props';
 
 /**
@@ -24,19 +24,6 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
-   * Sets to choose the separator as long as the index is not at the last item.
-   *
-   * @param i The index current enumerated.
-   * @param len The len of the array being enumerated.
-   * @param postfix The text to select if i is less than len - 1.
-   *
-   * @returns The separator if i is less than len - 1.  Null otherwise.
-   */
-  function chooseIfNotLast(i: number, len: number, postfix: ReactNode): ReactNode {
-    return i < len - 1 ? postfix : null;
-  }
-
-  /**
    * Creates a keyword string.
    *
    * @param keyword The key to create for.
@@ -52,6 +39,50 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
+   * Creates the title element.
+   *
+   * @param title The title to create the typography for.
+   * @param component The component to use.
+   * @param id The optional data id of the node.
+   * @param click The event handler for a click event.
+   *
+   * @returns The jsx for the title element.
+   */
+  function createTitle(title: string, component: ElementType<any>, id = null, click: (e: any) => void = noop) {
+    return (
+      <Typography className='ZTypedocTypeViewer-title' variant='body2' component={component} data-entity-id={id} onClick={click}>
+        {title}
+      </Typography>
+    );
+  }
+
+  /**
+   * Creates an inner type.
+   *
+   * @param ty The inner type.
+   * @param prefix The optional inner type prefix.
+   * @param suffix The optional inner type suffix.
+   * @param key The optional key.
+   *
+   * @returns The jsx for the inner type.
+   */
+  function createType(ty: IZTypedocType, prefix: ReactNode = null, suffix: ReactNode = null, key?: any) {
+    return <ZTypedocTypeViewer key={key} type={ty} onReference={props.onReference} prefix={prefix} suffix={suffix} />;
+  }
+
+  /**
+   * Creates the jsx for a list of types separated by a suffix.
+   *
+   * @param list The list to create jsx for.
+   * @param suffix The list item separator suffix.
+   *
+   * @returns The jsx for the list.
+   */
+  function createTypeList(list: IZTypedocType[], suffix: ReactNode) {
+    return list.map((ty, i) => createType(ty, null, i < list.length - 1 ? suffix : null, i));
+  }
+
+  /**
    * Creates the jsx for the generic arguments.
    *
    * @returns The jsx for generic arguments.
@@ -61,13 +92,10 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       return null;
     }
 
-    const args = props.type.typeArguments;
     return (
       <Fragment>
         {createKeyword('<')}
-        {args.map((ty, i) => (
-          <ZTypedocTypeViewer key={i} type={ty} onReference={props.onReference} suffix={chooseIfNotLast(i, args.length, ', ')} />
-        ))}
+        {createTypeList(props.type.typeArguments, ', ')}
         {createKeyword('>')}
       </Fragment>
     );
@@ -81,9 +109,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function createIntrinsicElement() {
     return (
       <Fragment>
-        <Typography className='ZTypedocTypeViewer-title' variant='body2' component='span'>
-          {props.type.name}
-        </Typography>
+        {createTitle(props.type.name, 'span')}
         {createGenericArguments()}
       </Fragment>
     );
@@ -109,17 +135,6 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
-   * Creates a type element that has a suffix keyword at the end.
-   *
-   * @param ending The ending separator.
-   *
-   * @returns The jsx for an array.
-   */
-  function createEndTypeElement(ending: string) {
-    return <ZTypedocTypeViewer type={props.type.elementType} onReference={props.onReference} suffix={ending} />;
-  }
-
-  /**
    * Creates the reference type jsx.
    *
    * @returns The jsx for a reference type element.
@@ -131,9 +146,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
 
     return (
       <Fragment>
-        <Typography className='ZTypedocTypeViewer-title' data-entity={props.type.id} variant='body2' component='a' onClick={handleReference}>
-          {props.type.name}
-        </Typography>
+        {createTitle(props.type.name, 'a', props.type.id, handleReference)}
         {createGenericArguments()}
       </Fragment>
     );
@@ -145,29 +158,13 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for a tuple type element.
    */
   function createTupleElement() {
-    const elements = props.type.elements;
-
     return (
       <Fragment>
         {createKeyword('[')}
-        {elements.map((ty, i) => (
-          <ZTypedocTypeViewer key={i} type={ty} onReference={props.onReference} suffix={chooseIfNotLast(i, elements.length, ', ')} />
-        ))}
+        {createTypeList(props.type.elements, ', ')}
         {createKeyword(']')}
       </Fragment>
     );
-  }
-
-  /**
-   * Creates the jsx for a union type.
-   *
-   * @param separator The separator character.
-   *
-   * @returns The jsx for a union type.
-   */
-  function createJoinedElement(separator: string) {
-    const types = props.type.types;
-    return types.map((ty, i) => <ZTypedocTypeViewer key={i} type={ty} onReference={props.onReference} suffix={chooseIfNotLast(i, types.length, separator)} />);
   }
 
   /**
@@ -178,13 +175,13 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function createConditionalElement() {
     return (
       <Fragment>
-        <ZTypedocTypeViewer type={props.type.checkType} onReference={props.onReference} />
+        {createType(props.type.checkType)}
         {createKeyword(' extends ')}
-        <ZTypedocTypeViewer type={props.type.extendsType} onReference={props.onReference} />
+        {createType(props.type.extendsType)}
         {createKeyword(' ? ')}
-        <ZTypedocTypeViewer type={props.type.trueType} onReference={props.onReference} />
+        {createType(props.type.trueType)}
         {createKeyword(' : ')}
-        <ZTypedocTypeViewer type={props.type.falseType} onReference={props.onReference} />
+        {createType(props.type.falseType)}
       </Fragment>
     );
   }
@@ -199,7 +196,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       <Fragment>
         {createIntrinsicElement()}
         {createKeyword(' is ')}
-        <ZTypedocTypeViewer type={props.type.targetType} onReference={props.onReference} />
+        {createType(props.type.targetType)}
       </Fragment>
     );
   }
@@ -213,9 +210,9 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     return (
       <Fragment>
         {createKeyword('(')}
-        <ZTypedocTypeViewer type={props.type.objectType} onReference={props.onReference} />
+        {createType(props.type.objectType)}
         {createKeyword(')[')}
-        <ZTypedocTypeViewer type={props.type.indexType} onReference={props.onReference} />
+        {createType(props.type.indexType)}
         {createKeyword(']')}
       </Fragment>
     );
@@ -230,7 +227,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     return (
       <Fragment>
         {createKeyword('...')}
-        <ZTypedocTypeViewer type={props.type.elementType} onReference={props.onReference} />
+        {createType(props.type.elementType)}
       </Fragment>
     );
   }
@@ -243,7 +240,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function createTypeElement() {
     switch (props.type.type) {
       case ZTypedocTypeKind.Array:
-        return createEndTypeElement('[]');
+        return createType(props.type.elementType, null, '[]');
       case ZTypedocTypeKind.Conditional:
         return createConditionalElement();
       case ZTypedocTypeKind.IndexedAccess:
@@ -251,13 +248,13 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       // case ZTypedocTypeKind.Inferred:
       //   return createInferredElement();
       case ZTypedocTypeKind.Intersection:
-        return createJoinedElement(' & ');
+        return createTypeList(props.type.types, ' & ');
       case ZTypedocTypeKind.Literal:
         return createLiteralElement();
       // case ZTypedocTypeKind.Mapped:
       //  return createMappedElement();
       case ZTypedocTypeKind.Optional:
-        return createEndTypeElement('?');
+        return createType(props.type.elementType, null, '?');
       case ZTypedocTypeKind.Predicate:
         return createPredicateElement();
       // case ZTypedocTypeKind.Query:
@@ -277,7 +274,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       // case ZTypedocTypeKind.TypeParameter:
       //  return createTypeParameterElement();
       case ZTypedocTypeKind.Union:
-        return createJoinedElement(' | ');
+        return createTypeList(props.type.types, ' | ');
       // case ZTypedocTypeKind.Intrinsic:
       // case ZTypedocTypeKind.Unknown:
       default:
