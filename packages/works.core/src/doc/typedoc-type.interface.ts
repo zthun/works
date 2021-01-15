@@ -93,7 +93,7 @@ export interface IZTypedocType {
   /**
    * Used for mapped types.
    */
-  parameterType: IZTypedocType;
+  parameterType?: IZTypedocType;
 
   /**
    * Used for mapped types.

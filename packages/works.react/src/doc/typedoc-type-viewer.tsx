@@ -318,7 +318,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     const isFunction = !props.type.declaration.children && props.type.declaration.signatures;
     const display = isFunction ? 'function' : 'object';
 
-    return <Fragment>{createKeyword(display)}</Fragment>;
+    return <Fragment>{createType({ type: ZTypedocTypeKind.Intrinsic, name: display })}</Fragment>;
   }
 
   /**
