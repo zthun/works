@@ -12,9 +12,6 @@ import { IZTypedocTypeViewerProps } from './typedoc-type-viewer.props';
  * @returns The jsx for the type viewer.
  */
 export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
-  const variant = 'body2';
-  const component = 'span';
-
   /**
    * Occurs when the user clicks on another entity.
    *
@@ -40,6 +37,21 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
+   * Creates a keyword string.
+   *
+   * @param keyword The key to create for.
+   *
+   * @returns The jsx for the keyword or null if keyword is falsy.
+   */
+  function createKeyword(keyword: ReactNode) {
+    return keyword ? (
+      <Typography className='ZTypedocTypeViewer-keyword' variant='body2' component='span'>
+        {keyword}
+      </Typography>
+    ) : null;
+  }
+
+  /**
    * Creates the jsx for the generic arguments.
    *
    * @returns The jsx for generic arguments.
@@ -50,20 +62,13 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     }
 
     const args = props.type.typeArguments;
-    const lt = '<';
-    const gt = '>';
-    const separator = ', ';
     return (
       <Fragment>
-        <Typography className='' variant={variant} component={component}>
-          {lt}
-        </Typography>
+        {createKeyword('<')}
         {args.map((ty, i) => (
-          <ZTypedocTypeViewer key={i} type={ty} onReference={props.onReference} suffix={chooseIfNotLast(i, args.length, separator)} />
+          <ZTypedocTypeViewer key={i} type={ty} onReference={props.onReference} suffix={chooseIfNotLast(i, args.length, ', ')} />
         ))}
-        <Typography variant={variant} component={component}>
-          {gt}
-        </Typography>
+        {createKeyword('>')}
       </Fragment>
     );
   }
@@ -76,7 +81,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function createIntrinsicElement() {
     return (
       <Fragment>
-        <Typography variant={variant} component={component} className='ZTypedocTypeViewer-title'>
+        <Typography className='ZTypedocTypeViewer-title' variant='body2' component='span'>
           {props.type.name}
         </Typography>
         {createGenericArguments()}
@@ -92,17 +97,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function createLiteralElement() {
     const value = props.type.value;
     const literalType = typeof value;
-
-    let wrap = null;
-
-    if (literalType === 'string') {
-      const quote = '"';
-      wrap = (
-        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
-          {quote}
-        </Typography>
-      );
-    }
+    const wrap = literalType === 'string' ? createKeyword('"') : null;
 
     return (
       <Fragment>
@@ -136,9 +131,9 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
 
     return (
       <Fragment>
-        <a className='ZTypedocTypeViewer-title' data-entity={props.type.id} onClick={handleReference}>
+        <Typography className='ZTypedocTypeViewer-title' data-entity={props.type.id} variant='body2' component='a' onClick={handleReference}>
           {props.type.name}
-        </a>
+        </Typography>
         {createGenericArguments()}
       </Fragment>
     );
@@ -150,21 +145,15 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for a tuple type element.
    */
   function createTupleElement() {
-    const openParen = '[';
-    const closeParen = ']';
-    const separator = ', ';
     const elements = props.type.elements;
+
     return (
       <Fragment>
-        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
-          {openParen}
-        </Typography>
+        {createKeyword('[')}
         {elements.map((ty, i) => (
-          <ZTypedocTypeViewer key={i} type={ty} onReference={props.onReference} suffix={chooseIfNotLast(i, elements.length, separator)} />
+          <ZTypedocTypeViewer key={i} type={ty} onReference={props.onReference} suffix={chooseIfNotLast(i, elements.length, ', ')} />
         ))}
-        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
-          {closeParen}
-        </Typography>
+        {createKeyword(']')}
       </Fragment>
     );
   }
@@ -187,24 +176,14 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for a conditional type.
    */
   function createConditionalElement() {
-    const ext = ' extends ';
-    const check = ' ? ';
-    const el = ' : ';
-
     return (
       <Fragment>
         <ZTypedocTypeViewer type={props.type.checkType} onReference={props.onReference} />
-        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
-          {ext}
-        </Typography>
+        {createKeyword(' extends ')}
         <ZTypedocTypeViewer type={props.type.extendsType} onReference={props.onReference} />
-        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
-          {check}
-        </Typography>
+        {createKeyword(' ? ')}
         <ZTypedocTypeViewer type={props.type.trueType} onReference={props.onReference} />
-        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
-          {el}
-        </Typography>
+        {createKeyword(' : ')}
         <ZTypedocTypeViewer type={props.type.falseType} onReference={props.onReference} />
       </Fragment>
     );
@@ -216,13 +195,10 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for a predicate element.
    */
   function createPredicateElement() {
-    const chk = ' is ';
     return (
       <Fragment>
         {createIntrinsicElement()}
-        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
-          {chk}
-        </Typography>
+        {createKeyword(' is ')}
         <ZTypedocTypeViewer type={props.type.targetType} onReference={props.onReference} />
       </Fragment>
     );
@@ -234,25 +210,13 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for an index access element.
    */
   function createIndexAccessElement() {
-    const parenOpen = '(';
-    const parenClose = ')';
-    const bracketOpen = '[';
-    const bracketClose = ']';
-
     return (
       <Fragment>
-        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
-          {parenOpen}
-        </Typography>
+        {createKeyword('(')}
         <ZTypedocTypeViewer type={props.type.objectType} onReference={props.onReference} />
-        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
-          {parenClose}
-          {bracketOpen}
-        </Typography>
+        {createKeyword(')[')}
         <ZTypedocTypeViewer type={props.type.indexType} onReference={props.onReference} />
-        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
-          {bracketClose}
-        </Typography>
+        {createKeyword(']')}
       </Fragment>
     );
   }
@@ -263,12 +227,9 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for a rest element.
    */
   function createRestElement() {
-    const dots = '...';
     return (
       <Fragment>
-        <Typography className='ZTypedocTypeViewer-keyword' variant={variant} component={component}>
-          {dots}
-        </Typography>
+        {createKeyword('...')}
         <ZTypedocTypeViewer type={props.type.elementType} onReference={props.onReference} />
       </Fragment>
     );
@@ -324,41 +285,15 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     }
   }
 
-  /**
-   * Creates the type header.
-   *
-   * @returns The jsx for the type header.
-   */
-  function createHeader() {
-    return props.prefix ? (
-      <Typography variant={variant} component={component} className='ZTypedocTypeViewer-keyword'>
-        {props.prefix}
-      </Typography>
-    ) : null;
-  }
-
-  /**
-   * Creates the type separator.
-   *
-   * @returns The jsx for the type separator.
-   */
-  function createSeparator() {
-    return props.suffix ? (
-      <Typography variant={variant} component={component} className='ZTypedocTypeViewer-keyword'>
-        {props.suffix}
-      </Typography>
-    ) : null;
-  }
-
   if (!props.type) {
     return null;
   }
 
   return (
     <div className='ZTypedocTypeViewer-root' data-testid='ZTypedocTypeViewer-root'>
-      {createHeader()}
+      {createKeyword(props.prefix)}
       {createTypeElement()}
-      {createSeparator()}
+      {createKeyword(props.suffix)}
     </div>
   );
 }
