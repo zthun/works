@@ -114,4 +114,19 @@ export interface IZTypedocType {
    * Used for mapped types.
    */
   optionalModifier?: '+' | '-';
+
+  /**
+   * Used for query types.
+   */
+  queryType?: IZTypedocType;
+
+  /**
+   * Used for type operators.
+   */
+  operator?: 'keyof' | 'unique' | 'readonly';
+
+  /**
+   * Used for type operators.
+   */
+  target?: IZTypedocType;
 }

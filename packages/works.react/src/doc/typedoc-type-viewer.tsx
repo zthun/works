@@ -24,37 +24,27 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
-   * Creates a keyword string.
+   * Creates the typography for text based elements.
    *
-   * @param keyword The key to create for.
+   * @param clasz The class to attach to the typography.
+   * @param component The component type for the typography.
+   * @param children The nodes to put in the typography.
+   * @param id The optional id for the typography data entity attribute.
+   * @param click The optional click handler for what to do when the typography is clicked.
    *
-   * @returns The jsx for the keyword or null if keyword is falsy.
+   * @returns The typography jsx.
    */
-  function createKeyword(keyword: ReactNode) {
-    return keyword ? (
-      <Typography className='ZTypedocTypeViewer-keyword' variant='body2' component='span'>
-        {keyword}
+  function createTypography(clasz: string, component: ElementType<any>, children: ReactNode | ReactNode[], id?: any, click?: (e: any) => void) {
+    return children ? (
+      <Typography className={clasz} variant='body2' component={component} data-entity-id={id} onClick={click}>
+        {children}
       </Typography>
     ) : null;
   }
 
-  /**
-   * Creates the title element.
-   *
-   * @param title The title to create the typography for.
-   * @param component The component to use.
-   * @param id The optional data id of the node.
-   * @param click The event handler for a click event.
-   *
-   * @returns The jsx for the title element.
-   */
-  function createTitle(title: string, component: ElementType<any>, id = null, click: (e: any) => void = noop) {
-    return (
-      <Typography className='ZTypedocTypeViewer-title' variant='body2' component={component} data-entity-id={id} onClick={click}>
-        {title}
-      </Typography>
-    );
-  }
+  const createKeyword = createTypography.bind(null, 'ZTypedocTypeViewer-keyword', 'span');
+  const createText = createTypography.bind(null, 'ZTypedocTypeViewer-text', 'span');
+  const createTitle = createTypography.bind(null, 'ZTypedocTypeViewer-title');
 
   /**
    * Creates an inner type.
@@ -109,7 +99,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function createIntrinsicElement() {
     return (
       <Fragment>
-        {createTitle(props.type.name, 'span')}
+        {createTitle('span', props.type.name)}
         {createGenericArguments()}
       </Fragment>
     );
@@ -146,7 +136,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
 
     return (
       <Fragment>
-        {createTitle(props.type.name, 'a', props.type.id, handleReference)}
+        {createTitle('a', props.type.name, props.type.id, handleReference)}
         {createGenericArguments()}
       </Fragment>
     );
@@ -261,7 +251,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
         {createKeyword('{')}
         {createKeyword(read)}
         {createKeyword('[')}
-        {createKeyword(props.type.parameter)}
+        {createText(props.type.parameter)}
         {createKeyword(' in ')}
         {createType(props.type.parameterType)}
         {as}
@@ -277,6 +267,61 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
+   * Constructs a query element.
+   *
+   * @returns The jsx for a query element.
+   */
+  function createQueryElement() {
+    return (
+      <Fragment>
+        {createKeyword('typeof ')}
+        {createType(props.type.queryType)}
+      </Fragment>
+    );
+  }
+
+  /**
+   * Constructs an inferred element.
+   *
+   * @returns The jsx for an inferred element.
+   */
+  function createInferredElement() {
+    return (
+      <Fragment>
+        {createKeyword('infer ')}
+        {createText(props.type.name)}
+      </Fragment>
+    );
+  }
+
+  /**
+   * Constructs a type operator element.
+   *
+   * @returns The jsx for a type operator.
+   */
+  function createTypeOperatorElement() {
+    return (
+      <Fragment>
+        {createKeyword(`${props.type.operator} `)}
+        {createType(props.type.target)}
+      </Fragment>
+    );
+  }
+
+  /**
+   * Constructs a reflection element.
+   *
+   * @returns The jsx for a reflection element.
+   */
+  function createReflectionElement() {
+    // This will be done later.  For now, we will stub this one out.
+    const isFunction = !props.type.declaration.children && props.type.declaration.signatures;
+    const display = isFunction ? 'function' : 'object';
+
+    return <Fragment>{createKeyword(display)}</Fragment>;
+  }
+
+  /**
    * Creates the under element based on the type's type.
    *
    * @returns The jsx for the type.
@@ -289,8 +334,8 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
         return createConditionalElement();
       case ZTypedocTypeKind.IndexedAccess:
         return createIndexAccessElement();
-      // case ZTypedocTypeKind.Inferred:
-      //   return createInferredElement();
+      case ZTypedocTypeKind.Inferred:
+        return createInferredElement();
       case ZTypedocTypeKind.Intersection:
         return createTypeList(props.type.types, ' & ');
       case ZTypedocTypeKind.Literal:
@@ -301,25 +346,24 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
         return createType(props.type.elementType, null, '?');
       case ZTypedocTypeKind.Predicate:
         return createPredicateElement();
-      // case ZTypedocTypeKind.Query:
-      //   return createQueryElement();
+      case ZTypedocTypeKind.Query:
+        return createQueryElement();
       case ZTypedocTypeKind.Reference:
         return createReferenceElement();
-      // case ZTypedocTypeKind.Reflection:
-      //   return createReflectionElement();
+      case ZTypedocTypeKind.Reflection:
+        return createReflectionElement();
       case ZTypedocTypeKind.Rest:
         return createRestElement();
       // case ZTypedocTypeKind.TemplateLiteral:
       //  return createTemplateLiteralElement();
       case ZTypedocTypeKind.Tuple:
         return createTupleElement();
-      // case ZTypedocTypeKind.TypeOperator:
-      //  return createTypeOperatorElement();
-      // case ZTypedocTypeKind.TypeParameter:
-      //  return createTypeParameterElement();
+      case ZTypedocTypeKind.TypeOperator:
+        return createTypeOperatorElement();
       case ZTypedocTypeKind.Union:
         return createTypeList(props.type.types, ' | ');
       // case ZTypedocTypeKind.Intrinsic:
+      // case ZTypedocTypeKind.TypeParameter:
       // case ZTypedocTypeKind.Unknown:
       default:
         return createIntrinsicElement();
