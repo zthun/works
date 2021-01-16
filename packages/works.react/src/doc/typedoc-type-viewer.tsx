@@ -42,9 +42,9 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     ) : null;
   }
 
-  const createKeyword: (children: ReactNode) => void = createTypography.bind(null, 'ZTypedocTypeViewer-keyword', 'span');
-  const createText: (children: ReactNode) => void = createTypography.bind(null, 'ZTypedocTypeViewer-text', 'span');
-  const createTitle: (component: ElementType<any>, children: ReactNode, id?: any, click?: (e: any) => void) => void = createTypography.bind(null, 'ZTypedocTypeViewer-title');
+  const createKeyword: (children: ReactNode) => ReactNode = createTypography.bind(null, 'ZTypedocTypeViewer-keyword', 'span');
+  const createText: (children: ReactNode) => ReactNode = createTypography.bind(null, 'ZTypedocTypeViewer-text', 'span');
+  const createTitle: (component: ElementType<any>, children: ReactNode, id?: any, click?: (e: any) => void) => ReactNode = createTypography.bind(null, 'ZTypedocTypeViewer-title');
 
   /**
    * Creates an inner type.
@@ -182,11 +182,19 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for a predicate element.
    */
   function createPredicateElement() {
-    return (
+    const asserts: ReactNode = props.type.asserts ? createKeyword('asserts ') : null;
+    const target: ReactNode = props.type.targetType ? (
       <Fragment>
-        {createIntrinsicElement()}
         {createKeyword(' is ')}
         {createType(props.type.targetType)}
+      </Fragment>
+    ) : null;
+
+    return (
+      <Fragment>
+        {asserts}
+        {createIntrinsicElement()}
+        {target}
       </Fragment>
     );
   }
@@ -338,6 +346,9 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
         return createInferredElement();
       case ZTypedocTypeKind.Intersection:
         return createTypeList(props.type.types, ' & ');
+      case ZTypedocTypeKind.Intrinsic:
+      case ZTypedocTypeKind.TypeParameter:
+        return createIntrinsicElement();
       case ZTypedocTypeKind.Literal:
         return createLiteralElement();
       case ZTypedocTypeKind.Mapped:
@@ -360,11 +371,9 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
         return createTypeOperatorElement();
       case ZTypedocTypeKind.Union:
         return createTypeList(props.type.types, ' | ');
-      // case ZTypedocTypeKind.Intrinsic:
-      // case ZTypedocTypeKind.TypeParameter:
       // case ZTypedocTypeKind.Unknown:
       default:
-        return createIntrinsicElement();
+        return null;
     }
   }
 
@@ -373,7 +382,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   return (
-    <div className='ZTypedocTypeViewer-root' data-testid='ZTypedocTypeViewer-root'>
+    <div className='ZTypedocTypeViewer-root'>
       {createKeyword(props.prefix)}
       {createTypeElement()}
       {createKeyword(props.suffix)}

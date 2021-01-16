@@ -11,14 +11,14 @@ export interface IZTypedocType {
   type: ZTypedocTypeKind;
 
   /**
-   * The name of the type.
+   * Used for intrinsic and basic types.
    */
-  name: string;
+  name?: string;
 
   /**
-   * Used for string literals.
+   * Used for literals.
    */
-  value?: string;
+  value?: any;
 
   /**
    * The type arguments if this type represents a generic type.
@@ -59,6 +59,11 @@ export interface IZTypedocType {
    * Used for conditional types.
    */
   falseType?: IZTypedocType;
+
+  /**
+   * Used for predicate types.
+   */
+  asserts?: boolean;
 
   /**
    * Used for predicate types.
