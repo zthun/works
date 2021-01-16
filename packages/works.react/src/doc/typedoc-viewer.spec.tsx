@@ -1,14 +1,15 @@
 /* eslint-disable require-jsdoc */
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { IZTypedoc, ZTypedocKind } from '@zthun/works.core';
 import React from 'react';
 import { ZTypedocViewer } from './typedoc-viewer';
 
 describe('ZTypedocViewer', () => {
   let typedoc: IZTypedoc;
+  let onEntity: jest.Mock;
 
   function createTestTarget() {
-    return render(<ZTypedocViewer typedoc={typedoc} />);
+    return render(<ZTypedocViewer typedoc={typedoc} onEntity={onEntity} />);
   }
 
   beforeEach(() => {
@@ -36,6 +37,8 @@ describe('ZTypedocViewer', () => {
         }
       ]
     };
+
+    onEntity = jest.fn();
   });
 
   it('should render the groups.', () => {
@@ -55,5 +58,15 @@ describe('ZTypedocViewer', () => {
     const actualB = target.getByTestId(`ZTypedocViewer-entity-${typedoc.children[1].id}`);
     // Assert
     expect(actualA && actualB).toBeTruthy();
+  });
+
+  it('should invoke the onEntity method when an entity is clicked.', () => {
+    // Arrange
+    const target = createTestTarget();
+    // Act
+    const entity = target.getByTestId(`ZTypedocViewer-entity-${typedoc.children[0].id}`);
+    fireEvent.click(entity);
+    // Assert
+    expect(onEntity).toHaveBeenCalledWith(typedoc.children[0]);
   });
 });

@@ -1,5 +1,4 @@
 import { Button, Typography } from '@material-ui/core';
-import WarningIcon from '@material-ui/icons/Warning';
 import { IZTypedocEntity, IZTypedocGroup } from '@zthun/works.core';
 import { Dictionary, kebabCase, keyBy, noop } from 'lodash';
 import React, { ReactNode, useMemo } from 'react';
@@ -24,20 +23,6 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
    */
   function createLookup(): Dictionary<IZTypedocEntity> {
     return keyBy(props.typedoc.children, (ch) => ch.id);
-  }
-
-  /**
-   * Creates the message for empty typedoc.
-   *
-   * @returns The jsx for a falsy typedoc object.
-   */
-  function createEmptyTypedoc() {
-    return (
-      <div className='ZTypedocViewer-no-entity' data-testid='ZTypedocViewer-no-entity'>
-        <WarningIcon className='ZTypedocViewer-no-entity-icon' fontSize='large' />
-        <Typography variant='h4'>No typedoc has been loaded.</Typography>
-      </div>
-    );
   }
 
   /**
@@ -103,22 +88,9 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
     return <React.Fragment>{nodes}</React.Fragment>;
   }
 
-  /**
-   * Creates the root typedoc element.
-   *
-   * @returns The jsx for the typedoc root.
-   */
-  function createTypedocContent() {
-    if (props.typedoc == null) {
-      return createEmptyTypedoc();
-    }
-
-    return createGlobal();
-  }
-
   return (
     <ZPaperCard className='ZTypedocViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText || props.typedoc?.name} avatar={props.avatar} action={props.action} size={props.size}>
-      {createTypedocContent()}
+      {createGlobal()}
     </ZPaperCard>
   );
 }

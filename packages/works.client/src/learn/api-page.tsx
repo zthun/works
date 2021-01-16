@@ -82,18 +82,6 @@ export function ZApiPage() {
 
   const avatar = <img className='ZPaperCard-avatar ZPaperCard-avatar-xl' src={img} />;
 
-  const learn = (
-    <Button className='ZApiPage-btn-learn' data-testid='ZApiPage-btn-learn' color='primary' variant='contained' onClick={handleLearn}>
-      Learn
-    </Button>
-  );
-
-  const api = (
-    <Button className='ZApiPage-btn-api' data-testid='ZApiPage-btn-api' color='secondary' variant='contained' onClick={handleApi}>
-      API
-    </Button>
-  );
-
   /**
    * Creates the viewer for the given params.
    *
@@ -103,12 +91,23 @@ export function ZApiPage() {
     if (typedoc == null) {
       return <ZCircularProgress show={loading} />;
     }
+    const learn = (
+      <Button className='ZApiPage-btn-learn' data-testid='ZApiPage-btn-learn' color='primary' variant='contained' onClick={handleLearn}>
+        Learn
+      </Button>
+    );
 
     if (isNaN(entityId)) {
       return <ZTypedocViewer typedoc={typedoc} avatar={avatar} action={learn} onEntity={handleEntity} />;
     }
 
     const entity = first(typedoc.children.filter((ch) => ch.id === entityId));
+
+    const api = (
+      <Button className='ZApiPage-btn-api' data-testid='ZApiPage-btn-api' color='secondary' variant='contained' onClick={handleApi}>
+        API
+      </Button>
+    );
 
     return (
       <ZTypedocEntityViewer
