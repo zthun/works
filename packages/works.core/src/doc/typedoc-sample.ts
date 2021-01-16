@@ -132,7 +132,7 @@ export abstract class ZTypedocSample<T> {
    *
    * Requires typescript 4.1
    */
-  // public template: `${ZSampleMatrixPrefix}-${ZSampleMatrixSuffix}`;
+  public template: `${ZSampleMatrixPrefix}-${ZSampleMatrixSuffix}`;
 
   /**
    * A method with parameters.

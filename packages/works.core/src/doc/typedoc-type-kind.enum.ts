@@ -16,7 +16,6 @@ export enum ZTypedocTypeKind {
   Reference = 'reference',
   Reflection = 'reflection',
   Rest = 'rest',
-  TemplateLiteral = 'template-literal',
   Tuple = 'tuple',
   TypeOperator = 'type-operator',
   TypeParameter = 'type-parameter',

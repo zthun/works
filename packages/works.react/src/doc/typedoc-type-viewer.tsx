@@ -36,15 +36,15 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    */
   function createTypography(clasz: string, component: ElementType<any>, children: ReactNode | ReactNode[], id?: any, click?: (e: any) => void) {
     return children ? (
-      <Typography className={clasz} variant='body2' component={component} data-entity-id={id} onClick={click}>
+      <Typography className={clasz} variant='body2' component={component} data-entity={id} onClick={click}>
         {children}
       </Typography>
     ) : null;
   }
 
-  const createKeyword = createTypography.bind(null, 'ZTypedocTypeViewer-keyword', 'span');
-  const createText = createTypography.bind(null, 'ZTypedocTypeViewer-text', 'span');
-  const createTitle = createTypography.bind(null, 'ZTypedocTypeViewer-title');
+  const createKeyword: (children: ReactNode) => void = createTypography.bind(null, 'ZTypedocTypeViewer-keyword', 'span');
+  const createText: (children: ReactNode) => void = createTypography.bind(null, 'ZTypedocTypeViewer-text', 'span');
+  const createTitle: (component: ElementType<any>, children: ReactNode, id?: any, click?: (e: any) => void) => void = createTypography.bind(null, 'ZTypedocTypeViewer-title');
 
   /**
    * Creates an inner type.
@@ -118,7 +118,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     return (
       <Fragment>
         {wrap}
-        {props.type.value}
+        {createText(props.type.value)}
         {wrap}
       </Fragment>
     );
@@ -354,8 +354,6 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
         return createReflectionElement();
       case ZTypedocTypeKind.Rest:
         return createRestElement();
-      // case ZTypedocTypeKind.TemplateLiteral:
-      //  return createTemplateLiteralElement();
       case ZTypedocTypeKind.Tuple:
         return createTupleElement();
       case ZTypedocTypeKind.TypeOperator:
