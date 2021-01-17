@@ -117,6 +117,18 @@
         color: @color-interface;
       }
 
+      &.ZTypedocViewer-entity-function {
+        color: @color-function;
+      }
+
+      &.ZTypedocViewer-entity-variable {
+        color: @color-variable;
+      }
+
+      &.ZTypedocViewer-entity-namespace {
+        color: @color-namespace;
+      }
+
       &:hover {
         color: @color-info;
         background-color: transparent;
@@ -174,7 +186,7 @@
 
   .ZTypedocEntityViewer-group {
     .ZTypedocEntityViewer-sub-entity {
-      margin-top: @spacing-sm;
+      padding-top: @spacing-sm;
       padding-bottom: @spacing-sm;
       border-bottom: @thickness-md solid @color-gray;
 
@@ -195,12 +207,36 @@
       color: @color-enumeration;
     }
 
+    &.ZTypedocIcon-constructor {
+      color: @color-constructor;
+    }
+
+    &.ZTypedocIcon-property {
+      color: @color-property;
+    }
+
+    &.ZTypedocIcon-function {
+      color: @color-function;
+    }
+
     &.ZTypedocIcon-interface {
       color: @color-interface;
     }
 
     &.ZTypedocIcon-type-alias {
       color: @color-type-alias;
+    }
+
+    &.ZTypedocIcon-accessor {
+      color: @color-accessor;
+    }
+
+    &.ZTypedocIcon-variable {
+      color: @color-variable;
+    }
+
+    &.ZTypedocIcon-namespace {
+      color: @color-namespace;
     }
   }
 }

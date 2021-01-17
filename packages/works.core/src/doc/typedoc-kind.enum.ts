@@ -11,9 +11,9 @@ export enum ZTypedocKind {
    */
   ExternalModule = 1,
   /**
-   * Inner module (not normally used).
+   * Namespace.
    */
-  Module = 2,
+  Namespace = 2,
   /**
    * Enum type.
    */

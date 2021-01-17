@@ -45,4 +45,24 @@ describe('ZTypedocIcon', () => {
   it('should return a function icon for an method.', () => {
     assertIconForType('ZTypedocIcon-function', ZTypedocKind.Method);
   });
+
+  it('should return a constructor icon for a constructor', () => {
+    assertIconForType('ZTypedocIcon-constructor', ZTypedocKind.Constructor);
+  });
+
+  it('should return a property icon for a property', () => {
+    assertIconForType('ZTypedocIcon-property', ZTypedocKind.Property);
+  });
+
+  it('should return a accessor icon for an accessor', () => {
+    assertIconForType('ZTypedocIcon-accessor', ZTypedocKind.Accessor);
+  });
+
+  it('should return a variable icon for an variable', () => {
+    assertIconForType('ZTypedocIcon-variable', ZTypedocKind.Variable);
+  });
+
+  it('should return a namespace icon for a namespace', () => {
+    assertIconForType('ZTypedocIcon-namespace', ZTypedocKind.Namespace);
+  });
 });
