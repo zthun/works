@@ -7,7 +7,7 @@ export interface IZTypedocComment {
   /**
    * The first line of a comment literal.
    */
-  shortText: string;
+  shortText?: string;
   /**
    * The remarks section or everything after the first line.
    */

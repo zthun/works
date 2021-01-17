@@ -168,11 +168,6 @@
     margin-bottom: @spacing-md;
   }
 
-  .ZTypedocEntityViewer-comment-short,
-  .ZTypedocEntityViewer-comment-text {
-    margin-bottom: @spacing-md;
-  }
-
   .ZTypedocEntityViewer-entity-title {
     font-weight: bolder;
   }
@@ -271,5 +266,12 @@
       background-color: @color-flag-private;
       border-color: darken(@color-flag-private, @color-flag-border-darken);
     }
+  }
+}
+
+.ZTypedocCommentViewer-root {
+  .ZTypedocCommentViewer-short,
+  .ZTypedocCommentViewer-text {
+    margin-bottom: @spacing-md;
   }
 }

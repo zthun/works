@@ -8,10 +8,12 @@ export interface IZTypedocCommentTag {
    * The tag name.
    */
   tagName: string;
+
   /**
    * The param name for parameters.
    */
   paramName?: string;
+
   /**
    * The parameter comment.
    */

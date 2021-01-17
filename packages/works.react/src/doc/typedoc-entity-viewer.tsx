@@ -1,8 +1,8 @@
-import { Typography } from '@material-ui/core';
-import { IZTypedocComment, IZTypedocEntity, IZTypedocGroup } from '@zthun/works.core';
+import { IZTypedocEntity, IZTypedocGroup } from '@zthun/works.core';
 import { keyBy, noop } from 'lodash';
 import React, { Fragment } from 'react';
 import { ZPaperCard } from '../card/paper-card';
+import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
 import { IZTypedocEntityViewerProps } from './typedoc-entity-viewer.props';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { ZTypedocIcon } from './typedoc-icon';
@@ -17,40 +17,6 @@ import { ZTypedocTypeViewer } from './typedoc-type-viewer';
  */
 export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
   const lookup = keyBy(props.entity.children, (ch) => ch.id);
-
-  /**
-   * Creates the jsx for comment paragraphs.
-   *
-   * @param comment The comment to create the jsx for.
-   * @param shortText A flag on whether to show the short text.
-   * @param text A flag on whether to show the full text.
-   *
-   * @returns The jsx for the comment fragment.
-   */
-  function createComment(comment: IZTypedocComment) {
-    if (!comment) {
-      return null;
-    }
-
-    const short = comment.shortText ? (
-      <Typography className='ZTypedocEntityViewer-comment-short' variant='body2'>
-        {comment.shortText}
-      </Typography>
-    ) : null;
-
-    const long = comment.text ? (
-      <Typography className='ZTypedocEntityViewer-comment-text' variant='body2'>
-        {comment.text}
-      </Typography>
-    ) : null;
-
-    return (
-      <Fragment>
-        {short}
-        {long}
-      </Fragment>
-    );
-  }
 
   /**
    * Creates the jsx for the parameter list.
@@ -85,8 +51,8 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
           <span className='ZTypedocEntityViewer-entity-title'>{signature.name}</span>
           <span>({params.map((param, i) => createSignatureParameter(param, i === params.length - 1))})</span>
           <ZTypedocTypeViewer type={signature.type} prefix=': ' onReference={props.onEntity} />
+          <ZTypedocCommentViewer comment={signature.comment} />
         </div>
-        {createComment(signature.comment)}
       </Fragment>
     );
   }
@@ -105,8 +71,8 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
           <ZTypedocFlagsViewer flags={entity.flags} />
           <span className='ZTypedocEntityViewer-entity-title'>{entity.name}</span>
           <ZTypedocTypeViewer type={entity.type} prefix=': ' onReference={props.onEntity} />
+          <ZTypedocCommentViewer comment={entity.comment} />
         </div>
-        {createComment(entity.comment)}
       </Fragment>
     );
   }
@@ -128,16 +94,14 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
   }
 
   return (
-    <Fragment>
-      <div className='ZTypedocEntityViewer-root' data-testid='ZTypedocEntityViewer-root'>
-        <ZPaperCard headerText={props.entity.name} action={props.action} avatar={<ZTypedocIcon kind={props.entity.kind} size='md' />} subHeaderText={props.entity.kindString} size='lg'>
-          <ZTypedocFlagsViewer flags={props.entity.flags} />
-          {createComment(props.entity.comment)}
-        </ZPaperCard>
+    <div className='ZTypedocEntityViewer-root' data-testid='ZTypedocEntityViewer-root'>
+      <ZPaperCard headerText={props.entity.name} action={props.action} avatar={<ZTypedocIcon kind={props.entity.kind} size='md' />} subHeaderText={props.entity.kindString} size='lg'>
+        <ZTypedocFlagsViewer flags={props.entity.flags} />
+        <ZTypedocCommentViewer comment={props.entity.comment} />
+      </ZPaperCard>
 
-        {(props.entity.groups || []).map((gr) => createGroup(gr))}
-      </div>
-    </Fragment>
+      {(props.entity.groups || []).map((gr) => createGroup(gr))}
+    </div>
   );
 }
 
