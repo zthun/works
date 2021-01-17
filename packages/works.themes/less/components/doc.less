@@ -180,7 +180,7 @@
   .ZTypedocEntityViewer-group {
     .ZTypedocEntityViewer-sub-entity {
       margin-top: @spacing-sm;
-      margin-bottom: @spacing-sm;
+      padding-bottom: @spacing-sm;
       border-bottom: @thickness-md solid @color-gray;
 
       &:last-child {
@@ -227,6 +227,49 @@
 
     &:hover {
       color: darken(@color-primary, 10%);
+    }
+  }
+}
+
+.ZTypedocFlagsViewer-root {
+  display: inline-flex;
+
+  .ZTypedocFlagsViewer-flag {
+    margin-right: @spacing-sm;
+    padding-left: @spacing-sm;
+    padding-right: @spacing-sm;
+    color: @color-white;
+    background-color: @color-flag;
+    border: @thickness-xs solid darken(@color-flag, @color-flag-border-darken);
+
+    &.ZTypedocFlagsViewer-flag-abstract {
+      background-color: @color-flag-abstract;
+      border-color: darken(@color-flag-abstract, @color-flag-border-darken);
+    }
+
+    &.ZTypedocFlagsViewer-flag-static {
+      background-color: @color-flag-static;
+      border-color: darken(@color-flag-static, @color-flag-border-darken);
+    }
+
+    &.ZTypedocFlagsViewer-flag-readonly {
+      background-color: @color-flag-readonly;
+      border-color: darken(@color-flag-readonly, @color-flag-border-darken);
+    }
+
+    &.ZTypedocFlagsViewer-flag-const {
+      background-color: @color-flag-const;
+      border-color: darken(@color-flag-const, @color-flag-border-darken);
+    }
+
+    &.ZTypedocFlagsViewer-flag-protected {
+      background-color: @color-flag-protected;
+      border-color: darken(@color-flag-protected, @color-flag-border-darken);
+    }
+
+    &.ZTypedocFlagsViewer-flag-private {
+      background-color: @color-flag-private;
+      border-color: darken(@color-flag-private, @color-flag-border-darken);
     }
   }
 }

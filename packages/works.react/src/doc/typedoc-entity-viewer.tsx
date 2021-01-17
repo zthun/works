@@ -4,6 +4,7 @@ import { keyBy, noop } from 'lodash';
 import React, { Fragment } from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { IZTypedocEntityViewerProps } from './typedoc-entity-viewer.props';
+import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { ZTypedocIcon } from './typedoc-icon';
 import { ZTypedocTypeViewer } from './typedoc-type-viewer';
 
@@ -101,6 +102,7 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
     return (
       <Fragment key={entity.id}>
         <div className='ZTypedocEntityViewer-sub-entity'>
+          <ZTypedocFlagsViewer flags={entity.flags} />
           <span className='ZTypedocEntityViewer-entity-title'>{entity.name}</span>
           <ZTypedocTypeViewer type={entity.type} prefix=': ' onReference={props.onEntity} />
         </div>
@@ -129,6 +131,7 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
     <Fragment>
       <div className='ZTypedocEntityViewer-root' data-testid='ZTypedocEntityViewer-root'>
         <ZPaperCard headerText={props.entity.name} action={props.action} avatar={<ZTypedocIcon kind={props.entity.kind} size='md' />} subHeaderText={props.entity.kindString} size='lg'>
+          <ZTypedocFlagsViewer flags={props.entity.flags} />
           {createComment(props.entity.comment)}
         </ZPaperCard>
 

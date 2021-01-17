@@ -91,6 +91,7 @@ export function ZApiPage() {
     if (typedoc == null) {
       return <ZCircularProgress show={loading} />;
     }
+
     const learn = (
       <Button className='ZApiPage-btn-learn' data-testid='ZApiPage-btn-learn' color='primary' variant='contained' onClick={handleLearn}>
         Learn

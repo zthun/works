@@ -39,6 +39,10 @@ export interface IZTypedocFlags {
    */
   isRest?: boolean;
   /**
+   * True if entity is marked readonly.
+   */
+  isReadonly?: boolean;
+  /**
    * True if assignment is exported.
    */
   hasExportedAssignment?: boolean;

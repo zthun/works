@@ -57,7 +57,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for the inner type.
    */
   function createType(ty: IZTypedocType, prefix: ReactNode = null, suffix: ReactNode = null, key?: any) {
-    return <ZTypedocTypeViewer key={key} type={ty} onReference={props.onReference} prefix={prefix} suffix={suffix} />;
+    return <ZTypedocTypeViewer key={key} type={ty} container={false} onReference={props.onReference} prefix={prefix} suffix={suffix} />;
   }
 
   /**
@@ -377,21 +377,31 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     }
   }
 
+  /**
+   * Creates the type kind jsx main flow.
+   *
+   * @returns The jsx for the main flow.
+   */
+  function createFlow() {
+    return (
+      <Fragment>
+        {createKeyword(props.prefix)}
+        {createTypeElement()}
+        {createKeyword(props.suffix)}
+      </Fragment>
+    );
+  }
+
   if (!props.type) {
     return null;
   }
 
-  return (
-    <div className='ZTypedocTypeViewer-root'>
-      {createKeyword(props.prefix)}
-      {createTypeElement()}
-      {createKeyword(props.suffix)}
-    </div>
-  );
+  return props.container ? <div className='ZTypedocTypeViewer-root'>{createFlow()}</div> : <Fragment>{createFlow()}</Fragment>;
 }
 
 ZTypedocTypeViewer.defaultProps = {
   suffix: null,
   prefix: null,
+  container: true,
   onReference: noop
 };
