@@ -185,10 +185,25 @@
   }
 
   .ZTypedocEntityViewer-group {
+    padding-bottom: @spacing-md;
+    padding-top: @spacing-md;
+
+    .ZTypedocEntityViewer-group-header {
+      display: flex;
+      flex-wrap: nowrap;
+
+      h4 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        flex-grow: 1;
+        padding-left: @spacing-xs;
+      }
+    }
+
     .ZTypedocEntityViewer-sub-entity {
       padding-top: @spacing-sm;
       padding-bottom: @spacing-sm;
-      border-bottom: @thickness-md solid @color-gray;
 
       &:last-child {
         border-bottom: 0;

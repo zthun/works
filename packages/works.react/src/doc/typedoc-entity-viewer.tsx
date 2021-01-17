@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import { IZTypedocEntity, IZTypedocGroup } from '@zthun/works.core';
 import { keyBy, noop } from 'lodash';
 import React, { Fragment } from 'react';
@@ -87,21 +88,32 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
   function createGroup(group: IZTypedocGroup) {
     const entities = group.children.map((id) => lookup[id]);
     return (
-      <ZPaperCard key={group.title} className='ZTypedocEntityViewer-group' headerText={group.title} avatar={<ZTypedocIcon kind={group.kind} size='md' />} size='lg'>
-        {entities.map((en) => (en.signatures ? en.signatures.map((sig) => createSignature(sig)) : createSubEntity(en)))}
-      </ZPaperCard>
+      <div className='ZTypedocEntityViewer-group' key={group.kind}>
+        <div className='ZTypedocEntityViewer-group-header'>
+          <ZTypedocIcon kind={group.kind} />
+          <Typography variant='h4'>{group.title}</Typography>
+        </div>
+        <hr />
+        <div className='ZTypedocEntityViewer-group-children'>{entities.map((en) => (en.signatures ? en.signatures.map((sig) => createSignature(sig)) : createSubEntity(en)))}</div>
+      </div>
     );
   }
 
   return (
-    <div className='ZTypedocEntityViewer-root' data-testid='ZTypedocEntityViewer-root'>
-      <ZPaperCard headerText={props.entity.name} action={props.action} avatar={<ZTypedocIcon kind={props.entity.kind} size='md' />} subHeaderText={props.entity.kindString} size='lg'>
-        <ZTypedocFlagsViewer flags={props.entity.flags} />
-        <ZTypedocCommentViewer comment={props.entity.comment} />
-      </ZPaperCard>
+    <ZPaperCard
+      className='ZTypedocEntityViewer-root'
+      data-testid='ZTypedocEntityViewer-root'
+      headerText={props.entity.name}
+      action={props.action}
+      avatar={<ZTypedocIcon kind={props.entity.kind} size='md' />}
+      subHeaderText={props.entity.kindString}
+      size='lg'
+    >
+      <ZTypedocFlagsViewer flags={props.entity.flags} />
+      <ZTypedocCommentViewer comment={props.entity.comment} />
 
       {(props.entity.groups || []).map((gr) => createGroup(gr))}
-    </div>
+    </ZPaperCard>
   );
 }
 
