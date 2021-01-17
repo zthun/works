@@ -107,7 +107,7 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
       action={props.action}
       avatar={<ZTypedocIcon kind={props.entity.kind} size='md' />}
       subHeaderText={props.entity.kindString}
-      size='lg'
+      size='xl'
     >
       <ZTypedocFlagsViewer flags={props.entity.flags} />
       <ZTypedocCommentViewer comment={props.entity.comment} />

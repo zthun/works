@@ -7,5 +7,5 @@ export interface IZComponentSizeable {
    *
    * @default auto
    */
-  size?: 'auto' | 'max' | 'lg' | 'md' | 'sm';
+  size?: 'auto' | 'max' | 'xl' | 'lg' | 'md' | 'sm';
 }
