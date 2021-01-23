@@ -203,10 +203,9 @@
 
     .ZTypedocEntityViewer-sub-entity {
       padding: @spacing-sm;
-
-      &:last-child {
-        border-bottom: 0;
-      }
+      margin-bottom: @spacing-sm;
+      background: @color-entity;
+      border: @thickness-xs solid darken(@color-entity, 25%);
     }
   }
 
@@ -268,10 +267,10 @@
 
   a {
     cursor: pointer;
-    color: @color-primary;
+    color: @color-secondary;
 
     &:hover {
-      color: darken(@color-primary, 10%);
+      color: darken(@color-secondary, 25%);
     }
   }
 }
