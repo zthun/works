@@ -110,4 +110,24 @@ describe('ZTypedocFlagsViewer', () => {
       assertRendersFlag('private');
     });
   });
+
+  describe('Rest', () => {
+    beforeEach(() => {
+      flags.isRest = true;
+    });
+
+    it('should render the flag.', () => {
+      assertRendersFlag('rest');
+    });
+  });
+
+  describe('Optional', () => {
+    beforeEach(() => {
+      flags.isOptional = true;
+    });
+
+    it('should render the flag.', () => {
+      assertRendersFlag('optional');
+    });
+  });
 });

@@ -57,5 +57,13 @@ export function ZTypedocFlagsViewer(props: IZTypedocFlagsViewerProps) {
     buttons.push(createFlag('Private'));
   }
 
-  return <div className='ZTypedocFlagsViewer-root'>{buttons}</div>;
+  if (flags.isRest) {
+    buttons.push(createFlag('Rest'));
+  }
+
+  if (flags.isOptional) {
+    buttons.push(createFlag('Optional'));
+  }
+
+  return buttons.length ? <div className='ZTypedocFlagsViewer-root'>{buttons}</div> : null;
 }

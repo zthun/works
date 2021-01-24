@@ -149,6 +149,37 @@ export abstract class ZTypedocSample<T> {
   }
 
   /**
+   * Returns val.
+   *
+   * @param val The value to return.
+   *
+   * @returns val
+   */
+  public multi(val: string): string;
+
+  /**
+   * Returns the sum of val and second as a string.
+   *
+   * @param val The first number.
+   * @param second The second number
+   *
+   * @returns val + second as a string.
+   */
+  public multi(val: number, second: number): string;
+
+  /**
+   * Returns val as a string.
+   *
+   * @param val The value to return.
+   * @param second The second value.
+   *
+   * @returns The string value or the sum of val and number if val and second are passed.
+   */
+  public multi(val: string | number, second?: number): string {
+    return typeof val === 'string' ? val : String(val + second);
+  }
+
+  /**
    * A static method with one typed parameter.
    *
    * @param arg Some type argument.

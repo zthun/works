@@ -170,41 +170,36 @@
 }
 
 .ZTypedocEntityViewer-root {
-  .ZTypedocEntityViewer-entity-category {
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: underline;
-    font-size: @sizing-font-sm;
-  }
-
-  .ZTypedocEntityViewer-entity-signature {
-    .ZTypedocEntityViewer-entity-parameter-header,
-    .ZTypedocEntityViewer-entity-category,
-    .ZTypedocCommentViewer-root {
-      margin-left: @spacing-md;
-    }
-  }
-
   .ZTypedocEntityViewer-entity-default {
     &::before {
       content: '= ';
     }
   }
 
-  .ZTypedocEntityViewer-entity-signature-header {
+  .ZTypedocEntityViewer-entity {
+    padding: @spacing-sm;
     margin-bottom: @spacing-sm;
+    background: @color-sub-entity;
+    border: @thickness-xs solid darken(@color-sub-entity, 25%);
 
-    &::before {
-      content: '• ';
+    .ZTypedocEntityViewer-entity-header {
+      margin-bottom: @spacing-md;
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+
+      > * {
+        margin-right: @spacing-xs;
+      }
+
+      > .ZTypedocEntityViewer-entity-title {
+        flex-grow: 1;
+      }
     }
-  }
 
-  .ZTypedocEntityViewer-entity-header {
-    margin-bottom: @spacing-md;
-  }
-
-  .ZTypedocEntityViewer-entity-title {
-    font-weight: bolder;
+    .ZTypedocEntityViewer-entity-title {
+      font-weight: bolder;
+    }
   }
 
   .ZTypedocEntityViewer-group {
@@ -222,13 +217,6 @@
         flex-grow: 1;
         padding-left: @spacing-xs;
       }
-    }
-
-    .ZTypedocEntityViewer-sub-entity {
-      padding: @spacing-sm;
-      margin-bottom: @spacing-sm;
-      background: @color-sub-entity;
-      border: @thickness-xs solid darken(@color-sub-entity, 25%);
     }
   }
 
@@ -278,6 +266,7 @@
 }
 
 .ZTypedocTypeViewer-root {
+  font-family: @font-family-fixed-width;
   display: inline-block;
 
   .ZTypedocTypeViewer-title {
@@ -296,6 +285,10 @@
       color: darken(@color-secondary, 25%);
     }
   }
+
+  .MuiTypography-body2 {
+    font-family: @font-family-fixed-width;
+  }
 }
 
 .ZTypedocFlagsViewer-root {
@@ -308,6 +301,10 @@
     color: @color-white;
     background-color: @color-flag;
     border: @thickness-xs solid darken(@color-flag, @color-flag-border-darken);
+
+    &:last-child {
+      margin-right: @spacing-no;
+    }
 
     &.ZTypedocFlagsViewer-flag-abstract {
       background-color: @color-flag-abstract;
@@ -338,6 +335,11 @@
       background-color: @color-flag-private;
       border-color: darken(@color-flag-private, @color-flag-border-darken);
     }
+
+    &.ZTypedocFlagsViewer-flag-rest {
+      background-color: @color-flag-rest;
+      border-color: darken(@color-flag-rest, @color-flag-border-darken);
+    }
   }
 }
 
@@ -345,5 +347,62 @@
   .ZTypedocCommentViewer-short,
   .ZTypedocCommentViewer-text {
     margin-bottom: @spacing-md;
+  }
+}
+
+.ZTypedocSignatureListViewer-root {
+  strong {
+    font-weight: bold;
+  }
+
+  .ZTypedocSignatureListViewer-category {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-size: @sizing-font-sm;
+  }
+
+  .ZTypedocSignatureListViewer-signature-list {
+    margin-bottom: @spacing-md;
+
+    .ZTypedocSignatureListViewer-signature {
+      font-family: @font-family-fixed-width;
+      padding: @spacing-sm;
+      border-style: solid;
+      border-width: @thickness-xs;
+      border-color: @color-gray-x11;
+      border-bottom-width: @thickness-no;
+      background: @color-white;
+      color: @color-black;
+
+      &:last-child {
+        border-bottom-width: @thickness-xs;
+      }
+
+      &.ZTypedocSignatureListViewer-signature-active {
+        background: @color-whitesmoke;
+      }
+
+      &.ZTypedocSignatureListViewer-signature-inactive {
+        cursor: pointer;
+      }
+
+      .MuiTypography-body2 {
+        font-family: @font-family-fixed-width;
+      }
+    }
+  }
+
+  .ZTypedocSignatureListViewer-signature-parameter-list {
+    h4 {
+      font-size: @sizing-font-md;
+      font-weight: bolder;
+      text-transform: uppercase;
+      margin-bottom: @spacing-sm;
+    }
+
+    .ZTypedocFlagsViewer-root {
+      margin-right: @spacing-xs;
+    }
   }
 }
