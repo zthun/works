@@ -1,6 +1,6 @@
 import { Typography } from '@material-ui/core';
 import { IZTypedocEntity } from '@zthun/works.core';
-import { first, get, noop } from 'lodash';
+import { first, get, noop, pick } from 'lodash';
 import React, { ElementType, Fragment, useState } from 'react';
 import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
@@ -45,6 +45,25 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
       <Typography variant='body2' component={component}>
         {text}
       </Typography>
+    );
+  }
+
+  /**
+   * Creates the documentation for the return value.
+   *
+   * @returns The jsx for the return value of the active signature.
+   */
+  function createReturnsDocumentation() {
+    if (!active.type) {
+      return null;
+    }
+
+    return (
+      <div className='ZTypedocSignatureListViewer-signature-returns'>
+        <Typography variant='h4'>Returns</Typography>
+        <ZTypedocTypeViewer type={active.type} onReference={props.onEntity} />;
+        <ZTypedocCommentViewer comment={pick(active.comment, 'returns')} />
+      </div>
     );
   }
 
@@ -117,8 +136,9 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
   return (
     <div className='ZTypedocSignatureListViewer-root'>
       <div className='ZTypedocSignatureListViewer-signature-list'>{props.signatures.map((sig, i) => createSignature(sig, i))}</div>
-      <ZTypedocCommentViewer comment={active.comment} />
+      <ZTypedocCommentViewer comment={pick(active.comment, 'text', 'shortText')} />
       {createParametersDocumentation()}
+      {createReturnsDocumentation()}
     </div>
   );
 }

@@ -26,10 +26,17 @@ export function ZTypedocCommentViewer(props: IZTypedocCommentViewerProps) {
     </Typography>
   ) : null;
 
+  const returns = props.comment.returns ? (
+    <Typography className='ZTypedocCommentViewer-returns' variant='body2'>
+      {props.comment.returns}
+    </Typography>
+  ) : null;
+
   return (
     <div className='ZTypedocCommentViewer-root' data-testid='ZTypedocCommentViewer-root'>
       {short}
       {long}
+      {returns}
     </div>
   );
 }

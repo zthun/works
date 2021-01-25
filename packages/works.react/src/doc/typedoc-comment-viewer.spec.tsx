@@ -43,6 +43,12 @@ describe('ZTypedocCommentViewer', () => {
     });
   });
 
+  describe('Returns', () => {
+    it('should render', () => {
+      assertRendersSection('returns');
+    });
+  });
+
   describe('Falsy', () => {
     beforeEach(() => {
       comment = null;
