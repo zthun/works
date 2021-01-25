@@ -58,6 +58,14 @@ export interface IZTypedocEntity {
    */
   signatures?: IZTypedocEntity[];
   /**
+   * The signatures for when the entity is a accessor.
+   */
+  getSignature?: IZTypedocEntity[];
+  /**
+   * The signatures for when the entity is a mutator.
+   */
+  setSignature?: IZTypedocEntity[];
+  /**
    * The parameters for this entity.
    *
    * This is for methods, functions, and constructors.

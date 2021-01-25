@@ -7,6 +7,7 @@ import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
 import { IZTypedocEntityViewerProps } from './typedoc-entity-viewer.props';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { ZTypedocIcon } from './typedoc-icon';
+import { ZTypedocPropertyViewer } from './typedoc-property-viewer';
 import { ZTypedocSignatureListViewer } from './typedoc-signature-list-viewer';
 
 /**
@@ -32,6 +33,10 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
       case ZTypedocKind.Method:
       case ZTypedocKind.Function:
         return <ZTypedocSignatureListViewer signatures={entity.signatures} onEntity={props.onEntity} />;
+      case ZTypedocKind.Accessor:
+        return <ZTypedocSignatureListViewer signatures={[].concat(entity.getSignature || []).concat(entity.setSignature || [])} onEntity={props.onEntity} />;
+      case ZTypedocKind.Property:
+        return <ZTypedocPropertyViewer property={entity} onEntity={props.onEntity} />;
       default:
         return <ZTypedocCommentViewer comment={entity.comment} />;
     }

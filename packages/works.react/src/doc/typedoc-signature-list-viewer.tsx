@@ -1,5 +1,5 @@
 import { Typography } from '@material-ui/core';
-import { IZTypedocEntity } from '@zthun/works.core';
+import { IZTypedocEntity, ZTypedocKind } from '@zthun/works.core';
 import { first, get, noop, pick } from 'lodash';
 import React, { ElementType, Fragment, useState } from 'react';
 import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
@@ -103,9 +103,14 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
    * @returns The jsx for the signature.
    */
   function createSignature(signature: IZTypedocEntity, index: number) {
+    if (!signature) {
+      return null;
+    }
+
     const params = signature.parameters || [];
     let clasz = 'ZTypedocSignatureListViewer-signature';
     let activate = noop;
+    let accessor: string;
 
     if (props.signatures.length > 1 && active === signature) {
       clasz = `${clasz} ZTypedocSignatureListViewer-signature-active`;
@@ -114,8 +119,21 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
       activate = handleActivateSignature;
     }
 
+    switch (signature.kind) {
+      case ZTypedocKind.GetSignature:
+        accessor = 'get ';
+        break;
+      case ZTypedocKind.SetSignature:
+        accessor = 'set ';
+        break;
+      default:
+        accessor = null;
+        break;
+    }
+
     return (
       <div className={clasz} key={index} data-signature-index={index} onClick={activate}>
+        {createTypography(accessor, 'strong')}
         {createTypography(signature.name)}
         {createTypography('(')}
         {params.map((parameter, i) => (
