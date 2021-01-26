@@ -13,13 +13,20 @@ import { ZTypedocTypeViewer } from './typedoc-type-viewer';
  * @returns The jsx for a property entity.
  */
 export function ZTypedocPropertyViewer(props: IZTypedocPropertyViewerProps) {
+  const def = props.property.defaultValue ? (
+    <Typography variant='body2' component='span'>
+      {` = ${props.property.defaultValue}`}
+    </Typography>
+  ) : null;
+
   return (
-    <div className='ZTypedocPropertyViewer-root'>
+    <div className='ZTypedocPropertyViewer-root' data-testid='ZTypedocPropertyViewer-root'>
       <div className='ZTypedocPropertyViewer-signature'>
         <Typography variant='body2' component='span'>
           {props.property.name}
         </Typography>
-        <ZTypedocTypeViewer type={props.property.type} prefix=': ' suffix={props.property.defaultValue ? ` = ${props.property.defaultValue}` : null} onReference={props.onEntity} />
+        <ZTypedocTypeViewer type={props.property.type} prefix=': ' onReference={props.onEntity} />
+        {def}
       </div>
       <ZTypedocCommentViewer comment={props.property.comment} />
     </div>

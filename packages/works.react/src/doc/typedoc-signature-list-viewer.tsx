@@ -61,7 +61,7 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
     return (
       <div className='ZTypedocSignatureListViewer-signature-returns'>
         <Typography variant='h4'>Returns</Typography>
-        <ZTypedocTypeViewer type={active.type} onReference={props.onEntity} />;
+        <ZTypedocTypeViewer type={active.type} onReference={props.onEntity} />
         <ZTypedocCommentViewer comment={pick(active.comment, 'returns')} />
       </div>
     );
