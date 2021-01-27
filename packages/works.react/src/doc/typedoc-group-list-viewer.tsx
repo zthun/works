@@ -47,7 +47,8 @@ export function ZTypedocGroupListViewer(props: IZTypedocGroupListViewerProps) {
    * @returns The jsx that represents the group.
    */
   function createGroup(group: IZTypedocGroup) {
-    const entities = group.children.map((id) => props.dictionary[id]);
+    const dict = props.dictionary || {};
+    const entities = group.children.map((id) => dict[id]).filter((en) => !!en);
 
     return (
       <div className='ZTypedocGroupListViewer-group' key={group.kind}>
@@ -69,7 +70,15 @@ export function ZTypedocGroupListViewer(props: IZTypedocGroupListViewerProps) {
     );
   }
 
-  return <div className='ZTypedocGroupListViewer-root'>{(props.groups || []).map((gr) => createGroup(gr))}</div>;
+  if (!props.groups) {
+    return null;
+  }
+
+  return (
+    <div className='ZTypedocGroupListViewer-root' data-testid='ZTypedocGroupListViewer-root'>
+      {props.groups.map((gr) => createGroup(gr))}
+    </div>
+  );
 }
 
 ZTypedocGroupListViewer.defaultProps = {
