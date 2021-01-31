@@ -28,7 +28,7 @@ export function ZTypedocGroupListViewer(props: IZTypedocGroupListViewerProps) {
     switch (entity.kind) {
       case ZTypedocKind.Constructor:
       case ZTypedocKind.Method:
-        return <ZTypedocSignatureListViewer signatures={entity.signatures} onEntity={props.onEntity} />;
+        return <ZTypedocSignatureListViewer signatures={entity.signatures} treatCallSignatureAsFunction={false} onEntity={props.onEntity} />;
       case ZTypedocKind.Accessor:
         return <ZTypedocSignatureListViewer signatures={[].concat(entity.getSignature || []).concat(entity.setSignature || [])} onEntity={props.onEntity} />;
       case ZTypedocKind.Property:

@@ -185,12 +185,12 @@ export abstract class ZTypedocSample<T> {
    * @param arg Some type argument.
    * @param other Optional argument.
    *
-   * @returns arg
+   * @returns Whatever it feels like.
    *
    * @example const shouldBeThree = ZTypedocSample.static(3);
    */
-  public static static<T extends IZTypedocSampleData>(arg: T, other?: any) {
-    return other || arg;
+  public static static<T extends IZTypedocSampleData, T2>(arg: T, other?: T2[]) {
+    return arg ? [arg] : other;
   }
 
   /**

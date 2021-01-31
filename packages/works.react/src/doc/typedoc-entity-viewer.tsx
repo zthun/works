@@ -6,6 +6,7 @@ import { IZTypedocEntityViewerProps } from './typedoc-entity-viewer.props';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { ZTypedocGroupListViewer } from './typedoc-group-list-viewer';
 import { ZTypedocIcon } from './typedoc-icon';
+import { ZTypedocSignatureListViewer } from './typedoc-signature-list-viewer';
 
 /**
  * Represents a viewer for a typedoc entity.
@@ -27,6 +28,7 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
     >
       <ZTypedocFlagsViewer flags={props.entity.flags} />
       <ZTypedocCommentViewer comment={props.entity.comment} />
+      <ZTypedocSignatureListViewer signatures={props.entity.signatures} onEntity={props.onEntity} />
       <ZTypedocGroupListViewer groups={props.entity.groups} dictionary={keyBy(props.entity.children, (ch) => ch.id)} onEntity={props.onEntity} />
     </ZPaperCard>
   );

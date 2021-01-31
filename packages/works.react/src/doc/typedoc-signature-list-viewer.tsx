@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { IZTypedocEntity, ZTypedocKind } from '@zthun/works.core';
 import { first, get, noop, pick } from 'lodash';
-import React, { ElementType, Fragment, useState } from 'react';
+import React, { ElementType, Fragment, ReactNode, useState } from 'react';
 import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { IZTypedocSignatureListViewerProps } from './typedoc-signature-list-viewer.props';
@@ -108,9 +108,12 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
     }
 
     const params = signature.parameters || [];
+    const generics = signature.typeParameter || [];
+
     let clasz = 'ZTypedocSignatureListViewer-signature';
     let activate = noop;
     let accessor: string;
+    let generic: ReactNode = null;
 
     if (props.signatures.length > 1 && active === signature) {
       clasz = `${clasz} ZTypedocSignatureListViewer-signature-active`;
@@ -126,22 +129,42 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
       case ZTypedocKind.SetSignature:
         accessor = 'set ';
         break;
+      case ZTypedocKind.CallSignature:
+        accessor = props.treatCallSignatureAsFunction ? 'function ' : null;
+        break;
       default:
         accessor = null;
         break;
+    }
+
+    if (generics.length) {
+      generic = (
+        <Fragment>
+          {createTypography('<')}
+          {signature.typeParameter.map((ty, i) => (
+            <Fragment key={ty.id}>
+              {createTypography(ty.name)}
+              <ZTypedocTypeViewer type={ty.type} prefix=' extends ' />
+              {createTypography(i === generics.length - 1 ? null : ', ')}
+            </Fragment>
+          ))}
+          {createTypography('>')}
+        </Fragment>
+      );
     }
 
     return (
       <div className={clasz} key={index} data-signature-index={index} onClick={activate}>
         {createTypography(accessor, 'strong')}
         {createTypography(signature.name)}
+        {generic}
         {createTypography('(')}
         {params.map((parameter, i) => (
           <Fragment key={parameter.id}>
             {createTypography(get(parameter, 'flags.isRest') ? '...' : null)}
             {createTypography(parameter.name, 'strong')}
             {createTypography(get(parameter, 'flags.isOptional') ? '?' : null)}
-            <ZTypedocTypeViewer type={parameter.type} prefix=': ' suffix={parameter.defaultValue ? `= ${parameter.defaultValue}` : null} onReference={props.onEntity} />
+            <ZTypedocTypeViewer type={parameter.type} prefix=': ' suffix={parameter.defaultValue ? ` = ${parameter.defaultValue}` : null} onReference={props.onEntity} />
             {createTypography(i === params.length - 1 ? null : ', ')}
           </Fragment>
         ))}
@@ -151,8 +174,12 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
     );
   }
 
+  if (!get(props, 'signatures.length')) {
+    return null;
+  }
+
   return (
-    <div className='ZTypedocSignatureListViewer-root'>
+    <div className='ZTypedocSignatureListViewer-root' data-testid='ZTypedocSignatureListViewer-root'>
       <div className='ZTypedocSignatureListViewer-signature-list'>{props.signatures.map((sig, i) => createSignature(sig, i))}</div>
       <ZTypedocCommentViewer comment={pick(active.comment, 'text', 'shortText')} />
       {createParametersDocumentation()}
@@ -162,5 +189,6 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
 }
 
 ZTypedocSignatureListViewer.defaultProps = {
-  onEntity: noop
+  onEntity: noop,
+  treatCallSignatureAsFunction: true
 };

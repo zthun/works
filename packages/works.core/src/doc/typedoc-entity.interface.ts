@@ -77,4 +77,10 @@ export interface IZTypedocEntity {
    * Only really used for methods and functions.
    */
   type?: IZTypedocType;
+  /**
+   * The type parameters for this entity.
+   *
+   * Used for classes, interfaces, functions, and methods.
+   */
+  typeParameter?: IZTypedocEntity[];
 }

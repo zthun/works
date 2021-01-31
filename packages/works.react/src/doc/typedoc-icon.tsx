@@ -49,3 +49,7 @@ export function ZTypedocIcon(props: IZTypedocIconProps) {
       return <Brightness1Icon className={`${className} ZTypedocIcon-bullet`} data-testid='ZTypedocIcon-bullet' />;
   }
 }
+
+ZTypedocIcon.defaultProps = {
+  size: 'auto'
+};
