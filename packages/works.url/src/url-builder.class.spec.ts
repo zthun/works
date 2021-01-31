@@ -205,4 +205,41 @@ describe('ZUrlBuilder', () => {
       assertBuilderSetsProperty(expected, createTestTarget, (t) => t.gravatar(hash, size), identity);
     });
   });
+
+  describe('Github', () => {
+    it('returns the base github url.', () => {
+      const expected = ZUrlBuilder.UrlGithub;
+      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.github(), identity);
+    });
+
+    it('returns the users root page.', () => {
+      const expected = 'https://github.com/zthun';
+      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.github('zthun'), identity);
+    });
+
+    it('returns the users project page.', () => {
+      const expected = 'https://github.com/zthun/works';
+      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.github('zthun', 'works'), identity);
+    });
+
+    it('returns the path to the github file on the main branch.', () => {
+      const expected = 'https://github.com/zthun/works/blob/main/packages/works.core/src/users/user-builder.class.ts';
+      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.github('zthun', 'works', null, 'packages/works.core/src/users/user-builder.class.ts'), identity);
+    });
+
+    it('returns the latest commit on the specified branch.', () => {
+      const expected = 'https://github.com/zthun/works/commit/7662bc434d3bd5c5d066c321b2b94ae2ec509d8f';
+      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.github('zthun', 'works', '7662bc434d3bd5c5d066c321b2b94ae2ec509d8f'), identity);
+    });
+
+    it('returns the path to the github file on the specified commit blob.', () => {
+      const expected = 'https://github.com/zthun/works/blob/7662bc434d3bd5c5d066c321b2b94ae2ec509d8f/packages/works.core/src/users/user-builder.class.ts';
+      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.github('zthun', 'works', '7662bc434d3bd5c5d066c321b2b94ae2ec509d8f', 'packages/works.core/src/users/user-builder.class.ts'), identity);
+    });
+
+    it('appends the line number.', () => {
+      const expected = 'https://github.com/zthun/works/blob/develop/packages/works.core/src/users/user-builder.class.ts#L10';
+      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.github('zthun', 'works', 'develop', 'packages/works.core/src/users/user-builder.class.ts', 10), identity);
+    });
+  });
 });
