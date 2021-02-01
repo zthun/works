@@ -24,7 +24,7 @@ export function ZApiPage() {
   useEffect(loadTypedoc, [pkg]);
 
   /**
-   * Loads the markdown into this viewer.
+   * Loads the typedoc and package information into this viewer.
    *
    * @returns A callback that cleans up the current markdown load.
    */
