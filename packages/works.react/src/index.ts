@@ -35,6 +35,8 @@ export { ZTypedocIcon } from './doc/typedoc-icon';
 export { IZTypedocIconProps } from './doc/typedoc-icon.props';
 export { ZTypedocSignatureListViewer } from './doc/typedoc-signature-list-viewer';
 export { IZTypedocSignatureListViewerProps } from './doc/typedoc-signature-list-viewer.props';
+export { ZTypedocSourceLinks } from './doc/typedoc-source-links';
+export { IZTypedocSourceLinksProps } from './doc/typedoc-source-links.props';
 export { ZTypedocTypeViewer } from './doc/typedoc-type-viewer';
 export { IZTypedocTypeViewerProps } from './doc/typedoc-type-viewer.props';
 export { ZTypedocViewer } from './doc/typedoc-viewer';

@@ -3,11 +3,16 @@ import { IZTypedocSource } from '@zthun/works.core';
 /**
  * Represents properties for the ZTypedocSourceLink component.
  */
-export interface IZTypedocSourceLinkProps {
+export interface IZTypedocSourceLinksProps {
   /**
-   * The source data to link to.
+   * The source list to render.
+   *
+   * This can be falsy or empty and nothing will render.  If there is only one
+   * item, then it should just render a direct link button that immediately takes the
+   * user to the source file.  If this is multiple sources, then a menu should be displayed
+   * that allows the user to select which source they want to see.
    */
-  src?: IZTypedocSource;
+  sources?: IZTypedocSource[];
 
   /**
    * The repository source.
@@ -19,13 +24,6 @@ export interface IZTypedocSourceLinkProps {
    * Defaults to github.
    */
   repo: 'github' | string;
-
-  /**
-   * The link target.
-   *
-   * Defaults to _blank.
-   */
-  target: string;
 
   /**
    * The user that owns the project.
