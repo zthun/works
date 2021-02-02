@@ -30,12 +30,31 @@ function config(env) {
           }
         },
         {
-          test: /README.md/i,
+          test: /README.md$/i,
           loader: 'file-loader',
           options: {
             name: (url) => path.basename(path.dirname(url)) + '.[name].[ext]',
             outputPath: 'docs'
           }
+        },
+        {
+          test: /package.json$/i,
+          type: 'javascript/auto',
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: (url) => path.basename(path.dirname(url)) + '.metadata.json',
+                outputPath: 'docs'
+              }
+            },
+            {
+              loader: 'package-json-cleanup-loader',
+              options: {
+                only: ['name', 'version', 'description', 'author', 'license', 'repository']
+              }
+            }
+          ]
         },
         {
           test: /(PRIVACY|TERMS).md$/i,

@@ -90,6 +90,7 @@
     "mongodb-memory-server": "^6.9.2",
     "nodemailer": "^6.4.10",
     "nodemon": "^2.0.1",
+    "package-json-cleanup-loader": "^1.0.3",
     "postcss": "^8.1.0",
     "postcss-cli": "^8.0.0",
     "react": "^17.0.1",

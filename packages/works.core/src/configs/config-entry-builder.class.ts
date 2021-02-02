@@ -1,4 +1,3 @@
-import { randomBytes } from 'crypto';
 import { IZConfigEntry } from './config-entry.interface';
 
 /**
@@ -64,7 +63,10 @@ export class ZConfigEntryBuilder<T = any> {
    * @returns A new entry builder that has a string value.
    */
   public generate(length = 128, encoding: BufferEncoding = 'base64'): ZConfigEntryBuilder<string> {
-    const val = randomBytes(length).toString(encoding);
+    // We could include randomBytes from crypto to handle this, but then it imports a huge library and
+    // a bunch of crypto currency nonsense when bundled to a web app.  So we'll just randomize it here.
+    // The original call would look like randomBytes(length).toString(encoding);
+    const val = Buffer.from(Uint8Array.from({ length }, () => Math.random() * 256)).toString(encoding);
     return new ZConfigEntryBuilder<string>().scope(this._entry.scope).key(this._entry.key).value(val);
   }
 

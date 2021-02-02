@@ -18,6 +18,16 @@ import '@zthun/works.nest/README.md';
 import '@zthun/works.react/README.md';
 import '@zthun/works.url/README.md';
 
+// Metadata
+import '@zthun/works.class/package.json';
+import '@zthun/works.core/package.json';
+import '@zthun/works.dal/package.json';
+import '@zthun/works.draw/package.json';
+import '@zthun/works.jest/package.json';
+import '@zthun/works.nest/package.json';
+import '@zthun/works.react/package.json';
+import '@zthun/works.url/package.json';
+
 // Media
 import '@zthun/works.core/images/png/works.core.builders.png';
 import '@zthun/works.core/images/png/works.core.config-entry.png';

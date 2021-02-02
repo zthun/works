@@ -117,7 +117,7 @@ describe('ZConfigEntryBuilder', () => {
       // Act
       const actual = target.build().value;
       // Assert
-      expect(actual).toBeTruthy();
+      expect(actual.length).toBeGreaterThanOrEqual(256);
     });
   });
 });
