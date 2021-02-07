@@ -100,14 +100,15 @@ function config(env) {
       })
     ],
     mode: 'development',
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'cheap-module-source-map',
     optimization: {
       usedExports: true
     },
     devServer: {
       contentBase: dir,
       compress: false,
-      disableHostCheck: true
+      disableHostCheck: true,
+      port: 8080
     },
     performance: {
       hints: false
