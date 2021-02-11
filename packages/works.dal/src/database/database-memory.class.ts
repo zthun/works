@@ -94,7 +94,7 @@ export class ZDatabaseMemory implements IZDatabase {
    *
    * @returns The count query.
    */
-  public count<T>(source: string): IZDatabaseQuery<number> {
+  public count(source: string): IZDatabaseQuery<number> {
     return this._query(() => this._mongo.count(source));
   }
 
