@@ -11,11 +11,6 @@ export class ZUrlBuilder {
   public static UrlGravatar = 'https://s.gravatar.com/avatar';
 
   /**
-   * The url to a github page.
-   */
-  public static UrlGithub = 'https://github.com';
-
-  /**
    * A mapping between protocol and default port.
    */
   public static ProtocolPorts = {
@@ -171,46 +166,6 @@ export class ZUrlBuilder {
     let current = this.parse(ZUrlBuilder.UrlGravatar);
     current = hash ? current.append(hash) : current;
     current = size ? current.param('s', String(size)) : current;
-    return current;
-  }
-
-  /**
-   * Sets the url for a github source file.
-   *
-   * The actual destination you will arrive at depends on how specific you want to get.
-   *
-   * @param user The user that owns the project.  If this is falsy, then the root of github is set.
-   * @param project The project to link to.  If this is falsy, the the github api user's root page is returned.  This and everything below it is ignored
-   *                if the user is not set.
-   * @param commit The commit hash or branch.  If this is falsy, then it defaults to main (Github current standard as of 1-31-2021).  If the path is not set and this value is, then the
-   *               url is set to the entire commit page.  If you intend to link a path or link to an entire commit branch, then it is always best to explicitly set this value instead
-   *               of just leaving it at the default.  Github decided to change this due to the BLM movement, but there are still a lot of legacy source repositories that use master as
-   *               the default branch.
-   * @param path The file path to open. If this is falsy, then the project page is returned.  Note that you may set a directory here as Github will properly redirect the url from blob
-   *             to tree.
-   * @param line The optional line number to highlight.  If this is falsy, then nothing in the path is highlighted.  This is only used if the path is set.
-   *
-   * @returns This object.
-   */
-  public github(user?: string, project?: string, commit?: string, path?: string, line?: number): this {
-    let current = this.parse(ZUrlBuilder.UrlGithub);
-
-    if (user) {
-      current = current.append(user);
-      if (project) {
-        current = current.append(project);
-        if (path) {
-          current = current
-            .append('blob')
-            .append(commit || 'main')
-            .append(path);
-          current = line != null ? current.hash(`L${line}`) : current;
-        } else if (commit) {
-          current = current.append('commit').append(commit);
-        }
-      }
-    }
-
     return current;
   }
 
