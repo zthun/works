@@ -445,3 +445,21 @@
     }
   }
 }
+
+.ZTypedocDeclarationViewer-root {
+  .ZTypedocDeclarationViewer-entity {
+    padding: @spacing-sm;
+    margin-bottom: @spacing-lg;
+    background: @color-sub-entity;
+    border: @thickness-xs solid darken(@color-sub-entity, 25%);
+
+    > strong {
+      font-weight: bold;
+      white-space: pre-wrap;
+    }
+
+    > .ZTypedocFlagsViewer-root {
+      margin-right: @spacing-sm;
+    }
+  }
+}

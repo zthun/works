@@ -1,12 +1,10 @@
 import { keyBy, noop } from 'lodash';
 import React from 'react';
 import { ZPaperCard } from '../card/paper-card';
-import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
+import { ZTypedocDeclarationViewer } from './typedoc-declaration-viewer';
 import { IZTypedocEntityViewerProps } from './typedoc-entity-viewer.props';
-import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { ZTypedocGroupListViewer } from './typedoc-group-list-viewer';
 import { ZTypedocIcon } from './typedoc-icon';
-import { ZTypedocSignatureListViewer } from './typedoc-signature-list-viewer';
 
 /**
  * Represents a viewer for a typedoc entity.
@@ -26,9 +24,7 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
       avatar={<ZTypedocIcon kind={props.entity.kind} size='md' />}
       size='xl'
     >
-      <ZTypedocFlagsViewer flags={props.entity.flags} />
-      <ZTypedocCommentViewer comment={props.entity.comment} />
-      <ZTypedocSignatureListViewer signatures={props.entity.signatures} onEntity={props.onEntity} />
+      <ZTypedocDeclarationViewer declaration={props.entity} onEntity={props.onEntity} />
       <ZTypedocGroupListViewer groups={props.entity.groups} dictionary={keyBy(props.entity.children, (ch) => ch.id)} onEntity={props.onEntity} />
     </ZPaperCard>
   );
