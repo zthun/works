@@ -1,10 +1,11 @@
 import { Typography } from '@material-ui/core';
 import { IZTypedocEntity, ZTypedocKind } from '@zthun/works.core';
 import { first, get, noop, pick } from 'lodash';
-import React, { ElementType, Fragment, ReactNode, useState } from 'react';
+import React, { ElementType, Fragment, useState } from 'react';
 import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { IZTypedocSignatureListViewerProps } from './typedoc-signature-list-viewer.props';
+import { ZTypedocTypeParametersViewer } from './typedoc-type-parameters-viewer';
 import { ZTypedocTypeViewer } from './typedoc-type-viewer';
 
 /**
@@ -108,12 +109,10 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
     }
 
     const params = signature.parameters || [];
-    const generics = signature.typeParameter || [];
 
     let clasz = 'ZTypedocSignatureListViewer-signature';
     let activate = noop;
     let accessor: string;
-    let generic: ReactNode = null;
 
     if (props.signatures.length > 1 && active === signature) {
       clasz = `${clasz} ZTypedocSignatureListViewer-signature-active`;
@@ -137,27 +136,11 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
         break;
     }
 
-    if (generics.length) {
-      generic = (
-        <Fragment>
-          {createTypography('<')}
-          {signature.typeParameter.map((ty, i) => (
-            <Fragment key={ty.id}>
-              {createTypography(ty.name)}
-              <ZTypedocTypeViewer type={ty.type} prefix=' extends ' />
-              {createTypography(i === generics.length - 1 ? null : ', ')}
-            </Fragment>
-          ))}
-          {createTypography('>')}
-        </Fragment>
-      );
-    }
-
     return (
       <div className={clasz} key={index} data-signature-index={index} onClick={activate}>
         {createTypography(accessor, 'strong')}
         {createTypography(signature.name)}
-        {generic}
+        <ZTypedocTypeParametersViewer types={signature.typeParameter} />
         {createTypography('(')}
         {params.map((parameter, i) => (
           <Fragment key={parameter.id}>
