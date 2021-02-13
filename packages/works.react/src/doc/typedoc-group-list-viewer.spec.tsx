@@ -12,11 +12,13 @@ describe('ZTypedocGroupListViewer', () => {
   let property: IZTypedocEntity;
   let enumMember: IZTypedocEntity;
   let namespace: IZTypedocEntity;
+  let variable: IZTypedocEntity;
   let constructors: IZTypedocGroup;
   let methods: IZTypedocGroup;
   let accessors: IZTypedocGroup;
   let properties: IZTypedocGroup;
   let enumMembers: IZTypedocGroup;
+  let variables: IZTypedocGroup;
   let namespaces: IZTypedocGroup;
   let comment: IZTypedocComment;
 
@@ -178,7 +180,15 @@ describe('ZTypedocGroupListViewer', () => {
       comment
     };
 
-    dictionary = keyBy([constructor, method, accessor, property, enumMember, namespace], (en) => en.id);
+    variable = {
+      id: 2000,
+      name: 'variable',
+      kind: ZTypedocKind.Variable,
+      comment,
+      defaultValue: '256'
+    };
+
+    dictionary = keyBy([constructor, method, accessor, property, enumMember, namespace, variable], (en) => en.id);
 
     constructors = {
       kind: constructor.kind,
@@ -214,6 +224,12 @@ describe('ZTypedocGroupListViewer', () => {
       kind: namespace.kind,
       title: 'Namespaces',
       children: [namespace.id]
+    };
+
+    variables = {
+      kind: variable.kind,
+      title: 'Variables',
+      children: [variable.id]
     };
   });
 
@@ -272,8 +288,9 @@ describe('ZTypedocGroupListViewer', () => {
 
   describe('Multiple', () => {
     beforeEach(() => {
-      groups = [constructors, methods, properties, accessors, enumMembers, namespaces];
+      groups = [constructors, methods, properties, accessors, enumMembers, namespaces, variables];
     });
+
     it('renders the group titles.', () => {
       // Arrange
       const target = createRootTarget();
@@ -371,6 +388,21 @@ describe('ZTypedocGroupListViewer', () => {
   describe('Enum Members', () => {
     beforeEach(() => {
       groups = [enumMembers];
+    });
+
+    it('renders the group as a list of properties.', () => {
+      // Arrange
+      const target = createRootTarget();
+      // Act
+      const actual = target.querySelector('.ZTypedocPropertyViewer-signature');
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+  });
+
+  describe('Variables', () => {
+    beforeEach(() => {
+      groups = [variables];
     });
 
     it('renders the group as a list of properties.', () => {

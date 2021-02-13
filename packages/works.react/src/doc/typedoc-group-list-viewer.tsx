@@ -33,6 +33,7 @@ export function ZTypedocGroupListViewer(props: IZTypedocGroupListViewerProps) {
         return <ZTypedocSignatureListViewer signatures={[].concat(entity.getSignature || []).concat(entity.setSignature || [])} onEntity={props.onEntity} />;
       case ZTypedocKind.Property:
       case ZTypedocKind.EnumMember:
+      case ZTypedocKind.Variable:
         return <ZTypedocPropertyViewer property={entity} onEntity={props.onEntity} />;
       default:
         return <ZTypedocCommentViewer comment={entity.comment} />;
