@@ -6,6 +6,7 @@ import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
 import { IZTypedocDeclarationViewerProps } from './typedoc-declaration-viewer.props';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { ZTypedocSignatureListViewer } from './typedoc-signature-list-viewer';
+import { ZTypedocTypeParametersViewer } from './typedoc-type-parameters-viewer';
 import { ZTypedocTypeViewer } from './typedoc-type-viewer';
 
 /**
@@ -36,40 +37,19 @@ export function ZTypedocDeclarationViewer(props: IZTypedocDeclarationViewerProps
   }
 
   /**
-   * Creates a declaration for a root element.
+   * Creates the declaration node.
    *
-   * @param keyword The optional keyword.
+   * @param child The child node for the declaration.
    *
-   * @returns The jsx for the declaration as a single line root element.
+   * @returns The jsx for the declaration.
    */
-  function createRootLevelDeclaration(keyword?: string) {
-    const generics = props.declaration.typeParameter || [];
+  function createDeclaration(child: ReactNode) {
     const clasz = `ZTypedocDeclarationViewer-entity ZTypedocDeclarationViewer-${kebabCase(props.declaration.kindString)}`;
-    let generic: ReactNode = null;
-
-    if (generics.length) {
-      generic = (
-        <Fragment>
-          {createTypography('span', '<')}
-          {generics.map((ty, i) => (
-            <Fragment key={ty.id}>
-              {createTypography('span', ty.name)}
-              <ZTypedocTypeViewer type={ty.type} prefix=' extends ' />
-              {createTypography('span', i === generics.length - 1 ? null : ', ')}
-            </Fragment>
-          ))}
-          {createTypography('span', '>')}
-        </Fragment>
-      );
-    }
-
     return (
       <div className='ZTypedocDeclarationViewer-root' data-testid='ZTypedocDeclarationViewer-root'>
         <div className={clasz}>
           <ZTypedocFlagsViewer flags={props.declaration.flags} />
-          {createTypography('strong', keyword)}
-          {createTypography('span', props.declaration.name)}
-          {generic}
+          {child}
         </div>
         <ZTypedocCommentViewer comment={props.declaration.comment} />
       </div>
@@ -77,27 +57,90 @@ export function ZTypedocDeclarationViewer(props: IZTypedocDeclarationViewerProps
   }
 
   /**
-   * Creates the declaration of a function.
+   * Creates a declaration for a group style element.
+   *
+   * @param keyword The optional keyword.
+   *
+   * @returns The jsx for the declaration as a single line root element.
+   */
+  function createGroupDeclaration(keyword?: string) {
+    return createDeclaration(
+      <Fragment>
+        {createTypography('strong', keyword)}
+        {createTypography('span', props.declaration.name)}
+        <ZTypedocTypeParametersViewer types={props.declaration.typeParameter} onEntity={props.onEntity} />
+      </Fragment>
+    );
+  }
+
+  const createClassDeclaration = createGroupDeclaration.bind(null, 'class ');
+  const createEnumDeclaration = createGroupDeclaration.bind(null, 'enum ');
+  const createInterfaceDeclaration = createGroupDeclaration.bind(null, 'interface ');
+  const createNamespaceDeclaration = createGroupDeclaration.bind(null, 'namespace ');
+
+  /**
+   * Creates the jsx declaration for a variable.
+   *
+   * @returns The jsx for a variable declaration.
+   */
+  function createVariableDeclaration() {
+    return createDeclaration(
+      <Fragment>
+        {createTypography('strong', 'var ')}
+        {createTypography('span', props.declaration.name)}
+        <ZTypedocTypeViewer type={props.declaration.type} prefix=': ' onReference={props.onEntity} />
+        {createTypography('strong', ' = ')}
+        {createTypography('span', props.declaration.defaultValue)}
+      </Fragment>
+    );
+  }
+
+  /**
+   * Creates the declaration jsx for a function.
    *
    * @returns The jsx for a function declaration.
    */
   function createFunctionDeclaration() {
-    return <ZTypedocSignatureListViewer signatures={props.declaration.signatures} treatCallSignatureAsFunction={true} onEntity={props.onEntity} />;
+    return createDeclaration(<ZTypedocSignatureListViewer signatures={props.declaration.signatures} treatCallSignatureAsFunction={true} onEntity={props.onEntity} />);
+  }
+
+  /**
+   * Creates the declaration for a type alias.
+   *
+   * @returns The jsx for a type alias.
+   */
+  function createTypeAliasDeclaration() {
+    return (
+      <div className='ZTypedocDeclarationViewer-root' data-testid='ZTypedocDeclarationViewer-root'>
+        <div className='ZTypedocDeclarationViewer-entity ZTypedocDeclarationViewer-type-alias'>
+          <ZTypedocFlagsViewer flags={props.declaration.flags} />
+          {createTypography('strong', 'type ')}
+          {createTypography('span', props.declaration.name)}
+          {createTypography('strong', ' = ')}
+          <ZTypedocTypeViewer type={props.declaration.type} onReference={props.onEntity} />
+        </div>
+        <ZTypedocCommentViewer comment={props.declaration.comment} />
+      </div>
+    );
   }
 
   switch (props.declaration.kind) {
     case ZTypedocKind.Class:
-      return createRootLevelDeclaration('class ');
+      return createClassDeclaration();
     case ZTypedocKind.Enum:
-      return createRootLevelDeclaration('enum ');
+      return createEnumDeclaration();
     case ZTypedocKind.Interface:
-      return createRootLevelDeclaration('interface ');
+      return createInterfaceDeclaration();
     case ZTypedocKind.Namespace:
-      return createRootLevelDeclaration('namespace ');
+      return createNamespaceDeclaration();
+    case ZTypedocKind.Variable:
+      return createVariableDeclaration();
+    case ZTypedocKind.TypeAlias:
+      return createTypeAliasDeclaration();
     case ZTypedocKind.Function:
       return createFunctionDeclaration();
     default:
-      return createRootLevelDeclaration();
+      return createDeclaration(props.declaration.name);
   }
 }
 
