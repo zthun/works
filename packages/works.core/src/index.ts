@@ -14,7 +14,6 @@ export { IZTypedocGroup } from './doc/typedoc-group.interface';
 export { ZTypedocKind } from './doc/typedoc-kind.enum';
 export { IZTypedocSource } from './doc/typedoc-source.interface';
 export { ZTypedocTypeKind } from './doc/typedoc-type-kind.enum';
-export { IZTypedocSampleData, IZTypedocSampleDataType, ZTypedocSample, ZTypedocSampleB, ZSampleMatrixPrefix, ZSampleMatrixSuffix } from './doc/typedoc-sample';
 export { IZTypedocType } from './doc/typedoc-type.interface';
 export { IZTypedoc } from './doc/typedoc.interface';
 // Email
