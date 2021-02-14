@@ -375,23 +375,9 @@
 
 .ZTypedocCommentViewer-root {
   .ZTypedocCommentViewer-short,
-  .ZTypedocCommentViewer-text {
+  .ZTypedocCommentViewer-text,
+  .ZTypedocCommentViewer-returns {
     margin-bottom: @spacing-md;
-  }
-}
-
-.ZTypedocPropertyViewer-root {
-  .ZTypedocPropertyViewer-signature {
-    margin-bottom: @spacing-md;
-    font-family: @font-family-fixed-width;
-    padding: @spacing-sm;
-    border: @thickness-xs solid @color-gray-x11;
-    color: @color-black;
-    background: @color-white;
-
-    .MuiTypography-body2 {
-      font-family: @font-family-fixed-width;
-    }
   }
 }
 
@@ -439,8 +425,10 @@
   }
 
   .ZTypedocSignatureListViewer-signature-parameter-list,
-  .ZTypedocSignatureListViewer-signature-returns {
+  .ZTypedocSignatureListViewer-signature-returns,
+  .ZTypedocSignatureListViewer-signature-inherits {
     padding-left: @spacing-md;
+    padding-top: @spacing-sm;
 
     h4 {
       margin-left: -@spacing-md;

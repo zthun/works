@@ -6,7 +6,6 @@ import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { IZTypedocGroupListViewerProps } from './typedoc-group-list-viewer.props';
 import { ZTypedocIcon } from './typedoc-icon';
-import { ZTypedocPropertyViewer } from './typedoc-property-viewer';
 import { ZTypedocSignatureListViewer } from './typedoc-signature-list-viewer';
 
 /**
@@ -34,7 +33,7 @@ export function ZTypedocGroupListViewer(props: IZTypedocGroupListViewerProps) {
       case ZTypedocKind.Property:
       case ZTypedocKind.EnumMember:
       case ZTypedocKind.Variable:
-        return <ZTypedocPropertyViewer property={entity} onEntity={props.onEntity} />;
+        return <ZTypedocSignatureListViewer signatures={[entity]} onEntity={props.onEntity} />;
       default:
         return <ZTypedocCommentViewer comment={entity.comment} />;
     }

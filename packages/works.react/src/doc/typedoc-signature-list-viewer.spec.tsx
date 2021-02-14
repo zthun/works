@@ -120,6 +120,14 @@ describe('ZTypedocSignatureListViewer', () => {
         type: ZTypedocTypeKind.Reference,
         id: 5000,
         name: 'MyReference'
+      },
+      implementationOf: {
+        type: ZTypedocTypeKind.Reference,
+        name: 'IZCalling.calling'
+      },
+      inheritedFrom: {
+        type: ZTypedocTypeKind.Reference,
+        name: 'ZCalling.calling'
       }
     };
 
@@ -242,6 +250,16 @@ describe('ZTypedocSignatureListViewer', () => {
       const expected = active.comment.returns;
       // Act
       const actual = last(target.queryAllByTestId('ZTypedocCommentViewer-root')).textContent;
+      // Assert
+      expect(actual).toEqual(expected);
+    });
+
+    it('should render the active signature inheritance information.', () => {
+      // Arrange
+      const target = createTestTarget();
+      const expected = 2;
+      // Act
+      const actual = target.container.querySelectorAll('.ZTypedocSignatureListViewer-signature-inherits').length;
       // Assert
       expect(actual).toEqual(expected);
     });

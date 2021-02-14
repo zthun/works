@@ -68,7 +68,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for the inner type list.
    *
    */
-  function createTypeList(types: IZTypedocType[], prefix: ReactNode = null, suffix: ReactNode = null, separator?: string) {
+  function createTypeList(types: IZTypedocType[], prefix?: ReactNode, suffix?: ReactNode, separator?: string) {
     return <ZTypedocTypeListViewer types={types} prefix={prefix} suffix={suffix} separator={separator} container={false} onEntity={props.onReference} />;
   }
 
@@ -111,7 +111,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for a reference type element.
    */
   function createReferenceElement() {
-    if (props.type.id == null) {
+    if (props.ignoreReferenceIds || props.type.id == null) {
       return createIntrinsicElement();
     }
 
@@ -327,5 +327,6 @@ ZTypedocTypeViewer.defaultProps = {
   suffix: null,
   prefix: null,
   container: true,
+  ignoreReferenceIds: false,
   onReference: noop
 };

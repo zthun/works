@@ -156,8 +156,8 @@ describe('ZApiPage', () => {
       // Act
       await act(async () => {
         const target = createTestTarget();
-        const link = await target.findByText('ZBinaryOperator');
-        fireEvent.click(link);
+        const link = await target.findAllByText('ZBinaryOperator');
+        fireEvent.click(link[0]);
       });
       // Assert
       expect(history.location.pathname).toEqual(`/learn/${pkg}/api/${expected}`);

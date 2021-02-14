@@ -8,10 +8,11 @@ describe('ZTypedocTypeViewer', () => {
   let type: IZTypedocType;
   let prefix: string;
   let suffix: string;
+  let ignoreReferenceIds: boolean;
   let onReference: jest.Mock;
 
   function createTestTarget() {
-    return render(<ZTypedocTypeViewer type={type} onReference={onReference} prefix={prefix} suffix={suffix} />);
+    return render(<ZTypedocTypeViewer type={type} onReference={onReference} prefix={prefix} suffix={suffix} ignoreReferenceIds={ignoreReferenceIds} />);
   }
 
   beforeEach(() => {
@@ -20,6 +21,7 @@ describe('ZTypedocTypeViewer', () => {
     };
     prefix = null;
     suffix = null;
+    ignoreReferenceIds = false;
     onReference = jest.fn();
   });
 
@@ -343,6 +345,17 @@ describe('ZTypedocTypeViewer', () => {
       fireEvent.click(target.container.getElementsByTagName('a').item(0));
       // Assert
       expect(onReference).toHaveBeenCalledWith(type.id);
+    });
+
+    it('should not link the reference if the ignoreReferenceIds property is set.', () => {
+      // Arrange
+      type.id = 256;
+      ignoreReferenceIds = true;
+      const target = createTestTarget();
+      // Act
+      const actual = target.container.getElementsByTagName('a').length;
+      // Assert
+      expect(actual).toEqual(0);
     });
   });
 

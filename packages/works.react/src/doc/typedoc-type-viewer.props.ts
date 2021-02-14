@@ -12,21 +12,34 @@ export interface IZTypedocTypeViewerProps {
 
   /**
    * Suffix element.
+   *
+   * @default null
    */
   suffix: ReactNode;
 
   /**
    * Prefix element.
+   *
+   * @default null
    */
   prefix: ReactNode;
 
   /**
    * An option that forces the type to be situated at a div root instead of a fragment.
+   *
+   * @default true
    */
   container: boolean;
 
   /**
-   * Occurs when the user clicks on a reference type with an id.
+   * An option to ignore reference ids even if they are present.
+   *
+   * @default false
+   */
+  ignoreReferenceIds: boolean;
+
+  /**
+   * Occurs when the user clicks on a entity type with an id.
    */
   onReference(id: number): void;
 }

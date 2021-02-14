@@ -379,7 +379,7 @@ describe('ZTypedocGroupListViewer', () => {
       // Arrange
       const target = createRootTarget();
       // Act
-      const actual = target.querySelector('.ZTypedocPropertyViewer-signature');
+      const actual = target.querySelector('.ZTypedocSignatureListViewer-signature');
       // Assert
       expect(actual).toBeTruthy();
     });
@@ -394,7 +394,7 @@ describe('ZTypedocGroupListViewer', () => {
       // Arrange
       const target = createRootTarget();
       // Act
-      const actual = target.querySelector('.ZTypedocPropertyViewer-signature');
+      const actual = target.querySelector('.ZTypedocSignatureListViewer-signature');
       // Assert
       expect(actual).toBeTruthy();
     });
@@ -409,7 +409,7 @@ describe('ZTypedocGroupListViewer', () => {
       // Arrange
       const target = createRootTarget();
       // Act
-      const actual = target.querySelector('.ZTypedocPropertyViewer-signature');
+      const actual = target.querySelector('.ZTypedocSignatureListViewer-signature');
       // Assert
       expect(actual).toBeTruthy();
     });

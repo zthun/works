@@ -91,4 +91,16 @@ export interface IZTypedocEntity {
    * The types that this entity implements.
    */
   implementedTypes?: IZTypedocType[];
+  /**
+   * What the entity implements.
+   *
+   * Used in classes.
+   */
+  implementationOf?: IZTypedocType;
+  /**
+   * Where the entity was inherited from, if any.
+   *
+   * Used in classes.
+   */
+  inheritedFrom?: IZTypedocType;
 }

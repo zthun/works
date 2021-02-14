@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
-import { IZTypedocEntity, ZTypedocKind } from '@zthun/works.core';
+import { IZTypedocEntity, IZTypedocType, ZTypedocKind } from '@zthun/works.core';
 import { first, get, noop, pick } from 'lodash';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, ReactNode, useState } from 'react';
 import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
 import { createTypedocTypography } from './typedoc-create-typography.function';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
@@ -42,9 +42,30 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
 
     return (
       <div className='ZTypedocSignatureListViewer-signature-returns'>
-        <Typography variant='h4'>Returns</Typography>
+        {createTypedocTypography('Returns', 'h4', 'h4')}
         <ZTypedocTypeViewer type={active.type} onReference={props.onEntity} />
         <ZTypedocCommentViewer comment={pick(active.comment, 'returns')} />
+      </div>
+    );
+  }
+
+  /**
+   * Creates a type documentation for inheritance.
+   *
+   * @param type The type to document.
+   * @param title The title of where this came from.
+   *
+   * @returns The jsx for the inheritance documentation.
+   */
+  function createTypeInheritanceDocumentation(type: IZTypedocType, title: string) {
+    if (!type) {
+      return null;
+    }
+
+    return (
+      <div className='ZTypedocSignatureListViewer-signature-inherits'>
+        {createTypedocTypography(title, 'h4', 'h4')}
+        <ZTypedocTypeViewer type={type} onReference={props.onEntity} ignoreReferenceIds={true} />
       </div>
     );
   }
@@ -77,48 +98,37 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
   }
 
   /**
-   * Creates the jsx for a signature button.
+   * Creates the signature for a property.
    *
-   * @param signature The signature to create the jsx for.
-   * @param index The signature index.
+   * @param signature The signature to construct.
    *
-   * @returns The jsx for the signature.
+   * @returns The jsx for a property signature.
    */
-  function createSignature(signature: IZTypedocEntity, index: number) {
-    if (!signature) {
-      return null;
-    }
-
-    const params = signature.parameters || [];
-
-    let clasz = 'ZTypedocSignatureListViewer-signature';
-    let activate = noop;
-    let accessor: string;
-
-    if (props.signatures.length > 1 && active === signature) {
-      clasz = `${clasz} ZTypedocSignatureListViewer-signature-active`;
-    } else if (props.signatures.length > 1) {
-      clasz = `${clasz} ZTypedocSignatureListViewer-signature-inactive`;
-      activate = handleActivateSignature;
-    }
-
-    switch (signature.kind) {
-      case ZTypedocKind.GetSignature:
-        accessor = 'get ';
-        break;
-      case ZTypedocKind.SetSignature:
-        accessor = 'set ';
-        break;
-      case ZTypedocKind.CallSignature:
-        accessor = props.treatCallSignatureAsFunction ? 'function ' : null;
-        break;
-      default:
-        accessor = null;
-        break;
-    }
+  function createPropertySignature(signature: IZTypedocEntity) {
+    const def = signature.defaultValue ? createTypedocTypography(` = ${signature.defaultValue}`) : null;
 
     return (
-      <div className={clasz} key={index} data-signature-index={index} onClick={activate}>
+      <Fragment>
+        {createTypedocTypography(signature.name)}
+        <ZTypedocTypeViewer type={signature.type} prefix=': ' onReference={props.onEntity} />
+        {def}
+      </Fragment>
+    );
+  }
+
+  /**
+   * Creates the signature for a function.
+   *
+   * @param signature The signature to construct.
+   * @param accessor The accessor for the signature.
+   *
+   * @returns The jsx for the signature as a functional signature.
+   */
+  function createFunctionalSignature(signature: IZTypedocEntity, accessor?: string) {
+    const params = signature.parameters || [];
+
+    return (
+      <Fragment>
         {createTypedocTypography(accessor, 'strong')}
         {createTypedocTypography(signature.name)}
         <ZTypedocTypeParametersViewer types={signature.typeParameter} />
@@ -134,6 +144,57 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
         ))}
         {createTypedocTypography(')')}
         <ZTypedocTypeViewer type={signature.type} prefix=': ' onReference={props.onEntity} />
+      </Fragment>
+    );
+  }
+
+  /**
+   * Creates the jsx for a signature button.
+   *
+   * @param signature The signature to create the jsx for.
+   * @param index The signature index.
+   *
+   * @returns The jsx for the signature.
+   */
+  function createSignature(signature: IZTypedocEntity, index: number) {
+    if (!signature) {
+      return null;
+    }
+
+    let clasz = 'ZTypedocSignatureListViewer-signature';
+    let activate = noop;
+    let body: ReactNode;
+
+    if (props.signatures.length > 1 && active === signature) {
+      clasz = `${clasz} ZTypedocSignatureListViewer-signature-active`;
+    } else if (props.signatures.length > 1) {
+      clasz = `${clasz} ZTypedocSignatureListViewer-signature-inactive`;
+      activate = handleActivateSignature;
+    }
+
+    switch (signature.kind) {
+      case ZTypedocKind.GetSignature:
+        body = createFunctionalSignature(signature, 'get ');
+        break;
+      case ZTypedocKind.SetSignature:
+        body = createFunctionalSignature(signature, 'set ');
+        break;
+      case ZTypedocKind.CallSignature:
+        body = createFunctionalSignature(signature, props.treatCallSignatureAsFunction ? 'function ' : null);
+        break;
+      case ZTypedocKind.Property:
+      case ZTypedocKind.EnumMember:
+      case ZTypedocKind.Variable:
+        body = createPropertySignature(signature);
+        break;
+      default:
+        body = createFunctionalSignature(signature);
+        break;
+    }
+
+    return (
+      <div className={clasz} key={index} data-signature-index={index} onClick={activate}>
+        {body}
       </div>
     );
   }
@@ -148,6 +209,8 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
       <ZTypedocCommentViewer comment={pick(active.comment, 'text', 'shortText')} />
       {createParametersDocumentation()}
       {createReturnsDocumentation()}
+      {createTypeInheritanceDocumentation(active.inheritedFrom, 'Inherited From')}
+      {createTypeInheritanceDocumentation(active.implementationOf, 'Implementation Of')}
     </div>
   );
 }
