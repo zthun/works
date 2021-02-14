@@ -1,7 +1,8 @@
-import { Typography } from '@material-ui/core';
 import { IZTypedocType, ZTypedocTypeKind } from '@zthun/works.core';
 import { noop } from 'lodash';
 import React, { ElementType, Fragment, ReactNode } from 'react';
+import { createTypedocTypography } from './typedoc-create-typography.function';
+import { ZTypedocTypeListViewer } from './typedoc-type-list-viewer';
 import { IZTypedocTypeViewerProps } from './typedoc-type-viewer.props';
 
 /**
@@ -34,12 +35,8 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    *
    * @returns The typography jsx.
    */
-  function createTypography(clasz: string, component: ElementType<any>, children: ReactNode | ReactNode[], id?: any, click?: (e: any) => void) {
-    return children ? (
-      <Typography className={clasz} variant='body2' component={component} data-entity={id} onClick={click}>
-        {children}
-      </Typography>
-    ) : null;
+  function createTypography(clasz: string, component: ElementType<any>, children: ReactNode, id?: any, click?: (e: any) => void) {
+    return createTypedocTypography(children, component, undefined, clasz, id, click);
   }
 
   const createKeyword: (children: ReactNode) => ReactNode = createTypography.bind(null, 'ZTypedocTypeViewer-keyword', 'span');
@@ -56,39 +53,23 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    *
    * @returns The jsx for the inner type.
    */
-  function createType(ty: IZTypedocType, prefix: ReactNode = null, suffix: ReactNode = null, key?: any) {
-    return <ZTypedocTypeViewer key={key} type={ty} container={false} onReference={props.onReference} prefix={prefix} suffix={suffix} />;
+  function createType(ty: IZTypedocType, prefix: ReactNode = null, suffix: ReactNode = null) {
+    return <ZTypedocTypeViewer type={ty} container={false} onReference={props.onReference} prefix={prefix} suffix={suffix} />;
   }
 
   /**
-   * Creates the jsx for a list of types separated by a suffix.
+   * Creates an inner type list.
    *
-   * @param list The list to create jsx for.
-   * @param suffix The list item separator suffix.
+   * @param types The types to render.
+   * @param prefix The prefix node.
+   * @param suffix The optional suffix.
+   * @param separator The separator between types.
    *
-   * @returns The jsx for the list.
+   * @returns The jsx for the inner type list.
+   *
    */
-  function createTypeList(list: IZTypedocType[], suffix: ReactNode) {
-    return list.map((ty, i) => createType(ty, null, i < list.length - 1 ? suffix : null, i));
-  }
-
-  /**
-   * Creates the jsx for the generic arguments.
-   *
-   * @returns The jsx for generic arguments.
-   */
-  function createGenericArguments() {
-    if (!props.type.typeArguments) {
-      return null;
-    }
-
-    return (
-      <Fragment>
-        {createKeyword('<')}
-        {createTypeList(props.type.typeArguments, ', ')}
-        {createKeyword('>')}
-      </Fragment>
-    );
+  function createTypeList(types: IZTypedocType[], prefix: ReactNode = null, suffix: ReactNode = null, separator?: string) {
+    return <ZTypedocTypeListViewer types={types} prefix={prefix} suffix={suffix} separator={separator} container={false} onEntity={props.onReference} />;
   }
 
   /**
@@ -100,7 +81,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     return (
       <Fragment>
         {createTitle('span', props.type.name)}
-        {createGenericArguments()}
+        {createTypeList(props.type.typeArguments, '<', '>')}
       </Fragment>
     );
   }
@@ -137,22 +118,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     return (
       <Fragment>
         {createTitle('a', props.type.name, props.type.id, handleReference)}
-        {createGenericArguments()}
-      </Fragment>
-    );
-  }
-
-  /**
-   * Creates a tuple type jsx.
-   *
-   * @returns The jsx for a tuple type element.
-   */
-  function createTupleElement() {
-    return (
-      <Fragment>
-        {createKeyword('[')}
-        {createTypeList(props.type.elements, ', ')}
-        {createKeyword(']')}
+        {createTypeList(props.type.typeArguments, '<', '>')}
       </Fragment>
     );
   }
@@ -211,20 +177,6 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
         {createKeyword('[')}
         {createType(props.type.indexType)}
         {createKeyword(']')}
-      </Fragment>
-    );
-  }
-
-  /**
-   * Creates a rest type element.
-   *
-   * @returns The jsx for a rest element.
-   */
-  function createRestElement() {
-    return (
-      <Fragment>
-        {createKeyword('...')}
-        {createType(props.type.elementType)}
       </Fragment>
     );
   }
@@ -345,7 +297,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       case ZTypedocTypeKind.Inferred:
         return createInferredElement();
       case ZTypedocTypeKind.Intersection:
-        return createTypeList(props.type.types, ' & ');
+        return createTypeList(props.type.types, null, null, ' & ');
       case ZTypedocTypeKind.Intrinsic:
       case ZTypedocTypeKind.TypeParameter:
         return createIntrinsicElement();
@@ -364,13 +316,13 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       case ZTypedocTypeKind.Reflection:
         return createReflectionElement();
       case ZTypedocTypeKind.Rest:
-        return createRestElement();
+        return createType(props.type.elementType, '...');
       case ZTypedocTypeKind.Tuple:
-        return createTupleElement();
+        return createTypeList(props.type.elements, '[', ']');
       case ZTypedocTypeKind.TypeOperator:
         return createTypeOperatorElement();
       case ZTypedocTypeKind.Union:
-        return createTypeList(props.type.types, ' | ');
+        return createTypeList(props.type.types, null, null, ' | ');
       // case ZTypedocTypeKind.Unknown:
       default:
         return null;

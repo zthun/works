@@ -1,8 +1,8 @@
-import { Typography } from '@material-ui/core';
 import { ZTypedocKind } from '@zthun/works.core';
 import { kebabCase, noop } from 'lodash';
-import React, { ElementType, Fragment, ReactNode } from 'react';
+import React, { Fragment, ReactNode } from 'react';
 import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
+import { createTypedocTypography } from './typedoc-create-typography.function';
 import { IZTypedocDeclarationViewerProps } from './typedoc-declaration-viewer.props';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { ZTypedocSignatureListViewer } from './typedoc-signature-list-viewer';
@@ -20,22 +20,6 @@ import { ZTypedocTypeViewer } from './typedoc-type-viewer';
  * @returns The jsx to render the declaration.
  */
 export function ZTypedocDeclarationViewer(props: IZTypedocDeclarationViewerProps) {
-  /**
-   * Creates the typography for text based elements.
-   *
-   * @param component The component type for the typography.
-   * @param child The text data to put in the typography.
-   *
-   * @returns The typography jsx.
-   */
-  function createTypography(component: ElementType<any>, child: ReactNode) {
-    return child ? (
-      <Typography variant='body2' component={component}>
-        {child}
-      </Typography>
-    ) : null;
-  }
-
   /**
    * Creates the declaration node.
    *
@@ -66,8 +50,8 @@ export function ZTypedocDeclarationViewer(props: IZTypedocDeclarationViewerProps
   function createGroupDeclaration(keyword?: string) {
     return createDeclaration(
       <Fragment>
-        {createTypography('strong', keyword)}
-        {createTypography('span', props.declaration.name)}
+        {createTypedocTypography(keyword, 'strong')}
+        {createTypedocTypography(props.declaration.name)}
         <ZTypedocTypeParametersViewer types={props.declaration.typeParameter} onEntity={props.onEntity} />
       </Fragment>
     );
@@ -86,11 +70,11 @@ export function ZTypedocDeclarationViewer(props: IZTypedocDeclarationViewerProps
   function createVariableDeclaration() {
     return createDeclaration(
       <Fragment>
-        {createTypography('strong', 'var ')}
-        {createTypography('span', props.declaration.name)}
+        {createTypedocTypography('var ', 'strong')}
+        {createTypedocTypography(props.declaration.name)}
         <ZTypedocTypeViewer type={props.declaration.type} prefix=': ' onReference={props.onEntity} />
-        {createTypography('strong', ' = ')}
-        {createTypography('span', props.declaration.defaultValue)}
+        {createTypedocTypography(' = ', 'strong')}
+        {createTypedocTypography(props.declaration.defaultValue)}
       </Fragment>
     );
   }
@@ -114,9 +98,9 @@ export function ZTypedocDeclarationViewer(props: IZTypedocDeclarationViewerProps
       <div className='ZTypedocDeclarationViewer-root' data-testid='ZTypedocDeclarationViewer-root'>
         <div className='ZTypedocDeclarationViewer-entity ZTypedocDeclarationViewer-type-alias'>
           <ZTypedocFlagsViewer flags={props.declaration.flags} />
-          {createTypography('strong', 'type ')}
-          {createTypography('span', props.declaration.name)}
-          {createTypography('strong', ' = ')}
+          {createTypedocTypography('type ', 'strong')}
+          {createTypedocTypography(props.declaration.name)}
+          {createTypedocTypography(' = ', 'strong')}
           <ZTypedocTypeViewer type={props.declaration.type} onReference={props.onEntity} />
         </div>
         <ZTypedocCommentViewer comment={props.declaration.comment} />

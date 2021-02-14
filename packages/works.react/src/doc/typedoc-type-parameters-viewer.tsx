@@ -1,7 +1,7 @@
-import { Typography } from '@material-ui/core';
 import { noop } from 'lodash';
-import React, { Fragment, ReactNode } from 'react';
-import { IZTypedocTypeParametersProps } from './typedoc-type-parameters.props';
+import React, { Fragment } from 'react';
+import { createTypedocTypography } from './typedoc-create-typography.function';
+import { IZTypedocTypeParametersViewerProps } from './typedoc-type-parameters-viewer.props';
 import { ZTypedocTypeViewer } from './typedoc-type-viewer';
 
 /**
@@ -11,37 +11,22 @@ import { ZTypedocTypeViewer } from './typedoc-type-viewer';
  *
  * @returns The jsx for type parameters.
  */
-export function ZTypedocTypeParametersViewer(props: IZTypedocTypeParametersProps) {
+export function ZTypedocTypeParametersViewer(props: IZTypedocTypeParametersViewerProps) {
   if (!props.types || !props.types.length) {
     return null;
   }
 
-  /**
-   * Create the typography for this parameters viewer.
-   *
-   * @param node The child node under the typography.
-   *
-   * @returns The typography jsx for the type parameters viewer.
-   */
-  function createTypography(node: ReactNode) {
-    return (
-      <Typography variant='body2' component='span'>
-        {node}
-      </Typography>
-    );
-  }
-
   return (
     <div className='ZTypedocTypeParametersViewer-root' data-testid='ZTypedocTypeParametersViewer-root'>
-      {createTypography(props.prefix)}
+      {createTypedocTypography(props.prefix)}
       {props.types.map((ty, i) => (
         <Fragment key={ty.id}>
-          {createTypography(ty.name)}
+          {createTypedocTypography(ty.name)}
           <ZTypedocTypeViewer type={ty.type} prefix=' extends ' onReference={props.onEntity} />
-          {createTypography(i === props.types.length - 1 ? null : props.separator)}
+          {createTypedocTypography(i === props.types.length - 1 ? null : props.separator)}
         </Fragment>
       ))}
-      {createTypography(props.suffix)}
+      {createTypedocTypography(props.suffix)}
     </div>
   );
 }

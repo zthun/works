@@ -1,8 +1,9 @@
 import { Typography } from '@material-ui/core';
 import { IZTypedocEntity, ZTypedocKind } from '@zthun/works.core';
 import { first, get, noop, pick } from 'lodash';
-import React, { ElementType, Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { ZTypedocCommentViewer } from './typedoc-comment-viewer';
+import { createTypedocTypography } from './typedoc-create-typography.function';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { IZTypedocSignatureListViewerProps } from './typedoc-signature-list-viewer.props';
 import { ZTypedocTypeParametersViewer } from './typedoc-type-parameters-viewer';
@@ -27,26 +28,6 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
     const target = e.target as HTMLElement;
     const index = +target.getAttribute('data-signature-index');
     setActive(props.signatures[index]);
-  }
-
-  /**
-   * Creates a typography section.
-   *
-   * @param text The typography text.
-   * @param component The component to use.
-   *
-   * @returns The jsx for the typography.
-   */
-  function createTypography(text: string, component: ElementType<any> = 'span') {
-    if (!text) {
-      return null;
-    }
-
-    return (
-      <Typography variant='body2' component={component}>
-        {text}
-      </Typography>
-    );
   }
 
   /**
@@ -86,7 +67,7 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
         {params.map((param) => (
           <div className='ZTypedocSignatureListViewer-signature-parameter' key={param.id}>
             <ZTypedocFlagsViewer flags={param.flags} />
-            {createTypography(param.name, 'strong')}
+            {createTypedocTypography(param.name, 'strong')}
             <ZTypedocTypeViewer type={param.type} prefix=': ' onReference={props.onEntity} />
             <ZTypedocCommentViewer comment={param.comment} />
           </div>
@@ -138,20 +119,20 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
 
     return (
       <div className={clasz} key={index} data-signature-index={index} onClick={activate}>
-        {createTypography(accessor, 'strong')}
-        {createTypography(signature.name)}
+        {createTypedocTypography(accessor, 'strong')}
+        {createTypedocTypography(signature.name)}
         <ZTypedocTypeParametersViewer types={signature.typeParameter} />
-        {createTypography('(')}
+        {createTypedocTypography('(')}
         {params.map((parameter, i) => (
           <Fragment key={parameter.id}>
-            {createTypography(get(parameter, 'flags.isRest') ? '...' : null)}
-            {createTypography(parameter.name, 'strong')}
-            {createTypography(get(parameter, 'flags.isOptional') ? '?' : null)}
+            {createTypedocTypography(get(parameter, 'flags.isRest') ? '...' : null)}
+            {createTypedocTypography(parameter.name, 'strong')}
+            {createTypedocTypography(get(parameter, 'flags.isOptional') ? '?' : null)}
             <ZTypedocTypeViewer type={parameter.type} prefix=': ' suffix={parameter.defaultValue ? ` = ${parameter.defaultValue}` : null} onReference={props.onEntity} />
-            {createTypography(i === params.length - 1 ? null : ', ')}
+            {createTypedocTypography(i === params.length - 1 ? null : ', ')}
           </Fragment>
         ))}
-        {createTypography(')')}
+        {createTypedocTypography(')')}
         <ZTypedocTypeViewer type={signature.type} prefix=': ' onReference={props.onEntity} />
       </div>
     );

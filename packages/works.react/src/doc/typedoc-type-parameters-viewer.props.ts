@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 /**
  * Represents properties for the ZTypedocTypeParameters component.
  */
-export interface IZTypedocTypeParametersProps {
+export interface IZTypedocTypeParametersViewerProps {
   /**
    * The collection of entities that represent the types.
    *
