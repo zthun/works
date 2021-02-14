@@ -227,20 +227,6 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   }
 
   /**
-   * Constructs a query element.
-   *
-   * @returns The jsx for a query element.
-   */
-  function createQueryElement() {
-    return (
-      <Fragment>
-        {createKeyword('typeof ')}
-        {createType(props.type.queryType)}
-      </Fragment>
-    );
-  }
-
-  /**
    * Constructs an inferred element.
    *
    * @returns The jsx for an inferred element.
@@ -250,20 +236,6 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       <Fragment>
         {createKeyword('infer ')}
         {createText(props.type.name)}
-      </Fragment>
-    );
-  }
-
-  /**
-   * Constructs a type operator element.
-   *
-   * @returns The jsx for a type operator.
-   */
-  function createTypeOperatorElement() {
-    return (
-      <Fragment>
-        {createKeyword(`${props.type.operator} `)}
-        {createType(props.type.target)}
       </Fragment>
     );
   }
@@ -310,7 +282,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       case ZTypedocTypeKind.Predicate:
         return createPredicateElement();
       case ZTypedocTypeKind.Query:
-        return createQueryElement();
+        return createType(props.type.queryType, 'typeof ');
       case ZTypedocTypeKind.Reference:
         return createReferenceElement();
       case ZTypedocTypeKind.Reflection:
@@ -320,7 +292,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       case ZTypedocTypeKind.Tuple:
         return createTypeList(props.type.elements, '[', ']');
       case ZTypedocTypeKind.TypeOperator:
-        return createTypeOperatorElement();
+        return createType(props.type.target, `${props.type.operator} `);
       case ZTypedocTypeKind.Union:
         return createTypeList(props.type.types, null, null, ' | ');
       // case ZTypedocTypeKind.Unknown:
