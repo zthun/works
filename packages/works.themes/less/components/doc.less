@@ -289,6 +289,7 @@
   }
 }
 
+.ZTypedocTypeListViewer-root,
 .ZTypedocTypeViewer-root {
   font-family: @font-family-fixed-width;
   display: inline-block;
@@ -297,6 +298,7 @@
     font-style: italic;
   }
 
+  .ZTypedocTypeListViewer-keyword,
   .ZTypedocTypeViewer-keyword {
     white-space: pre-wrap;
   }
@@ -308,6 +310,10 @@
     &:hover {
       color: darken(@color-secondary, 25%);
     }
+  }
+
+  strong {
+    font-weight: bold;
   }
 
   .MuiTypography-body2 {
@@ -464,7 +470,6 @@
   }
 }
 
-.ZTypedocTypeListViewer-root,
 .ZTypedocTypeParametersViewer-root {
-  display: inline-flex;
+  display: inline-block;
 }

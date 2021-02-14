@@ -1,5 +1,5 @@
 import { IZTypedocType } from '@zthun/works.core';
-import { ReactNode } from 'react';
+import { ElementType, ReactNode } from 'react';
 
 /**
  * Represents properties for the ZTypedocTypeListViewer component.
@@ -23,6 +23,20 @@ export interface IZTypedocTypeListViewerProps {
    * @default null
    */
   suffix: ReactNode;
+
+  /**
+   * How to render the prefix node.
+   *
+   * @default 'span'
+   */
+  prefixContainer: ElementType<any>;
+
+  /**
+   * How to render the suffix.
+   *
+   * @default 'span'
+   */
+  suffixContainer: ElementType<any>;
 
   /**
    * The optional separator.

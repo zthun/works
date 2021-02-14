@@ -6,6 +6,7 @@ import { createTypedocTypography } from './typedoc-create-typography.function';
 import { IZTypedocDeclarationViewerProps } from './typedoc-declaration-viewer.props';
 import { ZTypedocFlagsViewer } from './typedoc-flags-viewer';
 import { ZTypedocSignatureListViewer } from './typedoc-signature-list-viewer';
+import { ZTypedocTypeListViewer } from './typedoc-type-list-viewer';
 import { ZTypedocTypeParametersViewer } from './typedoc-type-parameters-viewer';
 import { ZTypedocTypeViewer } from './typedoc-type-viewer';
 
@@ -53,6 +54,8 @@ export function ZTypedocDeclarationViewer(props: IZTypedocDeclarationViewerProps
         {createTypedocTypography(keyword, 'strong')}
         {createTypedocTypography(props.declaration.name)}
         <ZTypedocTypeParametersViewer types={props.declaration.typeParameter} onEntity={props.onEntity} />
+        <ZTypedocTypeListViewer types={props.declaration.extendedTypes} prefix=' extends ' prefixContainer='strong' onEntity={props.onEntity} />
+        <ZTypedocTypeListViewer types={props.declaration.implementedTypes} prefix=' implements ' prefixContainer='strong' onEntity={props.onEntity} />
       </Fragment>
     );
   }

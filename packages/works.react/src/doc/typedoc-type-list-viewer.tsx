@@ -24,11 +24,11 @@ export function ZTypedocTypeListViewer(props: IZTypedocTypeListViewerProps) {
   function createFlow() {
     return (
       <Fragment>
-        {createTypedocTypography(props.prefix)}
+        {createTypedocTypography(props.prefix, props.prefixContainer, undefined, 'ZTypedocTypeListViewer-keyword')}
         {props.types.map((ty, i) => (
-          <ZTypedocTypeViewer key={i} type={ty} container={false} onReference={props.onEntity} suffix={i === props.types.length - 1 ? null : props.separator} />
+          <ZTypedocTypeViewer key={i} type={ty} container={props.container} onReference={props.onEntity} suffix={i === props.types.length - 1 ? null : props.separator} />
         ))}
-        {createTypedocTypography(props.suffix)}
+        {createTypedocTypography(props.suffix, props.suffixContainer, undefined, 'ZTypedocTypeListViewer-keyword')}
       </Fragment>
     );
   }
@@ -51,7 +51,9 @@ export function ZTypedocTypeListViewer(props: IZTypedocTypeListViewerProps) {
 
 ZTypedocTypeListViewer.defaultProps = {
   prefix: null,
+  prefixContainer: 'span',
   suffix: null,
+  suffixContainer: 'span',
   separator: ', ',
   container: true,
   onEntity: noop

@@ -218,3 +218,17 @@ export abstract class ZTypedocSample<T> {
     return Object.prototype.hasOwnProperty.call(other, 'value');
   }
 }
+
+/**
+ * A hardened class that extends ZTypedocSample
+ */
+export class ZTypedocSampleB extends ZTypedocSample<string> implements IZTypedocSampleData, IZTypedocSampleDataType {
+  /**
+   * The value of twelve.
+   */
+  value = 'twelve';
+  /**
+   * The value of type.
+   */
+  type = 'foo';
+}
