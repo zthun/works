@@ -212,69 +212,19 @@
 }
 
 .ZTypedocEntityViewer-root {
-  .ZTypedocEntityViewer-entity {
-    padding: @spacing-sm;
-    margin-bottom: @spacing-sm;
-    background: @color-sub-entity;
-    border: @thickness-xs solid darken(@color-sub-entity, 25%);
-
-    .ZTypedocEntityViewer-entity-header {
-      margin-bottom: @spacing-md;
-      display: flex;
-      align-items: center;
-      flex-wrap: nowrap;
-
-      > * {
-        margin-right: @spacing-xs;
-      }
-
-      > .ZTypedocEntityViewer-entity-title {
-        flex-grow: 1;
-      }
-    }
-
-    .ZTypedocEntityViewer-entity-title {
-      font-weight: bolder;
-    }
-  }
-}
-
-.ZTypedocGroupListViewer-root {
-  .ZTypedocGroupListViewer-group {
+  .ZTypedocEntityViewer-group {
     padding-bottom: @spacing-md;
     padding-top: @spacing-md;
 
-    .ZTypedocGroupListViewer-group-entity {
-      padding: @spacing-sm;
+    .ZTypedocSignatureListViewer-root {
       margin-bottom: @spacing-lg;
-      background: @color-sub-entity;
-      border: @thickness-xs solid darken(@color-sub-entity, 25%);
 
       &:last-child {
         margin-bottom: @spacing-no;
       }
-
-      .ZTypedocGroupListViewer-group-entity-header {
-        margin-bottom: @spacing-md;
-        display: flex;
-        align-items: center;
-        flex-wrap: nowrap;
-
-        > * {
-          margin-right: @spacing-xs;
-        }
-
-        > .ZTypedocGroupListViewer-group-entity-title {
-          flex-grow: 1;
-        }
-      }
-
-      .ZTypedocGroupListViewer-group-entity-title {
-        font-weight: bolder;
-      }
     }
 
-    .ZTypedocGroupListViewer-group-header {
+    .ZTypedocEntityViewer-group-header {
       display: flex;
       flex-wrap: nowrap;
 
@@ -382,6 +332,10 @@
 }
 
 .ZTypedocSignatureListViewer-root {
+  padding: @spacing-sm;
+  background: @color-sub-entity;
+  border: @thickness-xs solid darken(@color-sub-entity, 25%);
+
   h4 {
     font-size: @sizing-font-md;
     font-weight: bolder;
@@ -438,22 +392,15 @@
       margin-right: @spacing-xs;
     }
   }
-}
 
-.ZTypedocDeclarationViewer-root {
-  .ZTypedocDeclarationViewer-entity {
-    padding: @spacing-sm;
-    margin-bottom: @spacing-lg;
-    background: @color-sub-entity;
-    border: @thickness-xs solid darken(@color-sub-entity, 25%);
+  .ZTypedocSignatureListViewer-header {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: @spacing-md;
+    align-items: center;
 
-    > strong {
-      font-weight: bold;
-      white-space: pre-wrap;
-    }
-
-    > .ZTypedocFlagsViewer-root {
-      margin-right: @spacing-sm;
+    > * {
+      margin-right: @spacing-xs;
     }
   }
 }

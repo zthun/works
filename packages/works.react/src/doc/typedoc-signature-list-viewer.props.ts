@@ -10,14 +10,12 @@ export interface IZTypedocSignatureListViewerProps {
   signatures: IZTypedocEntity[];
 
   /**
-   * A flag that determines whether or not to put the keyword 'function' in front of call signatures.
+   * The signature list owner.
    *
-   * You should set this to false if you are displaying a method in a grouped interface or class.  This will not
-   * affect constructor signatures.
-   *
-   * @default true
+   * This is optional.  The signatures may include this object as well, but what appears in the header is the
+   * information for this entity.
    */
-  treatCallSignatureAsFunction: boolean;
+  owner?: IZTypedocEntity;
 
   /**
    * Occurs when a child entity is clicked in this component.

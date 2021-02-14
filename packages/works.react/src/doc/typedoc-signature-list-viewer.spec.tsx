@@ -10,11 +10,9 @@ describe('ZTypedocSignatureListViewer', () => {
   let setSignature: IZTypedocEntity;
   let callSignature: IZTypedocEntity;
   let constructorSignature: IZTypedocEntity;
-  let treatCallSignatureAsFunction: boolean;
   let signatures: IZTypedocEntity[];
 
   beforeEach(() => {
-    treatCallSignatureAsFunction = false;
     signatures = null;
 
     getSignature = {
@@ -171,7 +169,7 @@ describe('ZTypedocSignatureListViewer', () => {
   });
 
   function createTestTarget() {
-    return render(<ZTypedocSignatureListViewer signatures={signatures} treatCallSignatureAsFunction={treatCallSignatureAsFunction} />);
+    return render(<ZTypedocSignatureListViewer signatures={signatures} />);
   }
 
   function assertRendersSignature(expected: string) {
@@ -318,11 +316,6 @@ describe('ZTypedocSignatureListViewer', () => {
 
     it('should render the signature.', () => {
       assertRendersSignature('calling<T extends ExtensionType, T2>(a: T, ...b: T2[]): MyReference');
-    });
-
-    it('should render the signature with the keyword function if the signature is being treated as such.', () => {
-      treatCallSignatureAsFunction = true;
-      assertRendersSignature('function calling<T extends ExtensionType, T2>(a: T, ...b: T2[]): MyReference');
     });
   });
 
