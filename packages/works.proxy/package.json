@@ -7,7 +7,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zthun/works"
+    "url": "https://github.com/zthun/works",
+    "directory": "packages/works.proxy"
   },
   "scripts": {
     "docker:publish": "docker push zthun/works.proxy:latest && docker push zthun/works.proxy:$(node -p \"require('./package.json').version\")",

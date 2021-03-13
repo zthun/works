@@ -5,7 +5,8 @@
   "browser": "./dist/works.client.min.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zthun/works"
+    "url": "https://github.com/zthun/works",
+    "directory": "packages/works.client"
   },
   "scripts": {
     "docker:publish": "docker push zthun/works.client && docker push zthun/works.client:$(node -p \"require('./package.json').version\")",
