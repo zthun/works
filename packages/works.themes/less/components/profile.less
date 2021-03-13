@@ -14,6 +14,9 @@
   .ZProfileForm-avatar {
     height: @sizing-avatar-md;
     width: @sizing-avatar-md;
+    border-radius: @rounding-circle;
+    background: @color-white;
+    border: @thickness-xs solid @color-gainsboro;
 
     &:hover {
       cursor: pointer;
@@ -28,9 +31,11 @@
 
 .ZProfileMenu-root {
   .ZProfileMenu-avatar {
-    height: @sizing-avatar-xs;
-    width: @sizing-avatar-xs;
+    height: @sizing-avatar-sm;
+    width: @sizing-avatar-sm;
     border-radius: 50%;
+    border: @thickness-xs solid @color-gainsboro;
+    background: @color-white;
   }
 }
 

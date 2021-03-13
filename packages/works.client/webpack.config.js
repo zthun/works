@@ -3,6 +3,7 @@ const path = require('path');
 const pkg = require('./package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 function config(env) {
   const dir = path.resolve(__dirname, path.dirname(pkg.browser));
@@ -97,6 +98,16 @@ function config(env) {
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/index.html'
+      }),
+      new FaviconsWebpackPlugin({
+        logo: path.resolve(__dirname, '../../node_modules/@zthun/works.themes/images/svg/zthunworks-z.svg'),
+        outputPath: path.resolve(dir, 'images/favicon'),
+        prefix: 'images/favicon/',
+        favicons: {
+          appName: pkg.name,
+          appDescription: pkg.description,
+          developerName: pkg.author
+        }
       })
     ],
     mode: 'development',
