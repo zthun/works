@@ -1,5 +1,4 @@
 import { AppBar, Button, Link, MenuItem, Toolbar, Typography } from '@material-ui/core';
-import CloudIcon from '@material-ui/icons/Cloud';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileMenu } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
@@ -70,8 +69,8 @@ export function ZthunworksMenu(): JSX.Element {
    */
   function createHomeButton() {
     return (
-      <Button color='inherit'>
-        <CloudIcon className='ZthunworksMenu-icon' />
+      <Button className='ZthunworksMenu-btn-home' color='inherit'>
+        <img className='ZthunworksMenu-icon' src='images/svg/zthunworks-owl.svg' onClick={handleHome} />
         <Link className='ZthunworksMenu-link-home' color='inherit' onClick={handleHome} variant='h5'>
           ZTHUNWORKS
         </Link>

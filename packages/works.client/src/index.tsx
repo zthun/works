@@ -40,6 +40,7 @@ import '@zthun/works.core/images/png/works.core.typedoc.png';
 import '@zthun/works.core/images/svg/works.core.svg';
 import '@zthun/works.react/images/svg/works.react.svg';
 import '@zthun/works.nest/images/svg/works.nest.svg';
+import '@zthun/works.themes/images/svg/zthunworks-owl.svg';
 
 // Legal
 import '@zthun/works.core/PRIVACY.md';
