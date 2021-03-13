@@ -8,7 +8,7 @@
 import { IZFileSelect } from './file-select.interface';
 
 /**
- * Represents a file select that is opened from an this._input.
+ * Represents a file select that is opened from an input.
  */
 export class ZFileSelectInput implements IZFileSelect {
   private _input: HTMLInputElement;
