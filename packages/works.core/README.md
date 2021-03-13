@@ -64,13 +64,27 @@ A configuration entry is divided into 3 parts. The configuration scope, the key,
 
 > Best practice: The scope is the system configuration for the application that is currently running and the key is the name of the configuration. There should always be a root scope called default or common which all applications will access for shared configuration.
 
-The following table is an example of a vault database that may exist with configuration entries:
+The following document list is an example of a vault database that may exist with configuration entries:
 
-| Scope   | Key       | Value      |
-| ------- | --------- | ---------- |
-| common  | domain    | zthunworks |
-| common  | log-level | ERROR      |
-| foo-app | retries   | 5          |
+```json
+[
+  {
+    "scope": "common",
+    "key": "domain",
+    "value": "zthunworks"
+  },
+  {
+    "scope": "common",
+    "key": "log-level",
+    "value": "ERROR"
+  },
+  {
+    "scope": "foo-app",
+    "key": "retries",
+    "value": 5
+  }
+]
+```
 
 Here, the vault has three configurations, with two common scopes and one for foo-app. While any app could access any configuration, it would be best for foo-app to only access configurations under common and foo-app. This forces a good separation between application configuration, but still provides a central repository for configuration.
 
@@ -139,13 +153,34 @@ At minimum, errors should have a code, and this can be the standard HTTP error c
 
 HTTP error codes are conveniently located for you using the **ZHttpCode\*** enums.
 
-| Enum                           | Range   |
-| ------------------------------ | ------- |
-| ZHttpCodeInformationalResponse | 100-199 |
-| ZHttpCodeSuccess               | 200-299 |
-| ZHttpCodeRedirection           | 300-399 |
-| ZHttpCodeClient                | 400-499 |
-| ZHttpCodeServer                | 500-599 |
+```ts
+/**
+ * Details codes 100-199
+ */
+export enum ZHttpCodeInformationalResponse {}
+
+/**
+ * Details codes 200-299
+ */
+export enum ZHttpCodeSuccess {}
+
+/**
+ * Details codes 300-399
+ */
+export enum ZHttpCodeRedirection {}
+
+/**
+ * Details codes 400-499
+ */
+export enum ZHttpCodeClient {}
+
+/**
+ * Details codes 500-599
+ */
+export enum ZHttpCodeServer {}
+```
+
+The following example details usage for the ZErrorBuilder.
 
 ```ts
 import { IZError, ZErrorBuilder } from '@zthun/works.core';
@@ -201,12 +236,45 @@ Filters are a bit more complicated. Filters don't have a single root interface; 
 
 The IZFilter can be any of the following filter types with a respective builder for each type.
 
-| Interface          | Builder                  | Description                              | Example         |
-| ------------------ | ------------------------ | ---------------------------------------- | --------------- |
-| IZBinaryFilter     | ZBuilderFilterBuilder    | Used for x, y comparisons.               | x == y          |
-| IZCollectionFilter | ZCollectionFilterBuilder | Use to check x against a list y          | x _in_ y        |
-| IZLoginFilter      | ZLogicFilterBuilder      | A composite filter x, y, joined by logic | x _and_ y       |
-| IZUnaryFilter      | ZUnaryFilterBuilder      | A filter involving a single clause, x    | x _is not null_ |
+```ts
+/**
+ * Used for x, y comparisons.
+ *
+ * @see ZBinaryFilterBuilder for creation.
+ *
+ * @example x EQUALS y
+ */
+export interface IZBinaryFilter {}
+
+/**
+ * Used to check x against a list of y.
+ *
+ * @see ZCollectionFilterBuilder for creation.
+ *
+ * @example x IN y.
+ */
+export interface IZCollectionFilter {}
+
+/**
+ * A composite list of filters x, y, z, etc, joined by a logic clause.
+ *
+ * @see ZLogicFilterBuilder for creation.
+ *
+ * @example x AND y
+ */
+export interface IZLogicFilter {}
+
+/**
+ * A filter involving a single clause, x.
+ *
+ * @see ZUnaryFilterBuilder for creation.
+ *
+ * @example x IS NOT NULL
+ */
+export interface IZUnaryFilter {}
+```
+
+The following example shows the general use of creating a logical filter clause by using builders.
 
 ```ts
 import {
