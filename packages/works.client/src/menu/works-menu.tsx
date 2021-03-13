@@ -1,4 +1,5 @@
 import { AppBar, Button, MenuItem, Toolbar, Typography } from '@material-ui/core';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileMenu } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
@@ -90,7 +91,10 @@ export function ZthunworksMenu(): JSX.Element {
 
     return (
       <ZProfileMenu data-testid='ZthunworksMenu-menu-profile' profile={login.data} onLogout={handleLogout} onLogin={handleLogin} loading={loggingOut}>
-        <MenuItem onClick={handleProfile}>PROFILE</MenuItem>
+        <MenuItem onClick={handleProfile}>
+          <AccountCircleIcon />
+          PROFILE
+        </MenuItem>
       </ZProfileMenu>
     );
   }

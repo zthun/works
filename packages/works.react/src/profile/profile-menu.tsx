@@ -1,4 +1,5 @@
 import { Button, Grid, Hidden, Menu, MenuItem } from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { noop } from 'lodash';
 import React from 'react';
 import { ZCircularProgress } from '../loading/circular-progress';
@@ -39,6 +40,7 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
   function createLogoutMenuItem() {
     return (
       <MenuItem className='ZProfileMenu-menuitem-logout' data-testid='ZProfileMenu-menuitem-logout' onClick={props.onLogout}>
+        <ExitToAppIcon />
         LOGOUT
       </MenuItem>
     );
