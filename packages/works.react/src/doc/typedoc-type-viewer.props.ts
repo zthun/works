@@ -1,10 +1,11 @@
 import { IZTypedocType } from '@zthun/works.core';
 import { ReactNode } from 'react';
+import { IZComponentEntityRedirect } from 'src/component/component-entity-redirect.interface';
 
 /**
  * Represents properties for the type viewer.
  */
-export interface IZTypedocTypeViewerProps {
+export interface IZTypedocTypeViewerProps extends IZComponentEntityRedirect<number> {
   /**
    * The type to view.
    */
@@ -37,9 +38,4 @@ export interface IZTypedocTypeViewerProps {
    * @default false
    */
   ignoreReferenceIds: boolean;
-
-  /**
-   * Occurs when the user clicks on a entity type with an id.
-   */
-  onReference(id: number): void;
 }

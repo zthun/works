@@ -22,7 +22,7 @@ export function ZTypedocTypeParametersViewer(props: IZTypedocTypeParametersViewe
       {props.types.map((ty, i) => (
         <Fragment key={ty.id}>
           {createTypedocTypography(ty.name)}
-          <ZTypedocTypeViewer type={ty.type} prefix=' extends ' onReference={props.onEntity} />
+          <ZTypedocTypeViewer type={ty.type} prefix=' extends ' onEntity={props.onEntity} />
           {createTypedocTypography(i === props.types.length - 1 ? null : props.separator)}
         </Fragment>
       ))}

@@ -87,7 +87,7 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
     return (
       <div className='ZTypedocSignatureListViewer-signature-returns'>
         {createTypedocTypography('Returns', 'h4', 'h4')}
-        <ZTypedocTypeViewer type={active.type} onReference={props.onEntity} />
+        <ZTypedocTypeViewer type={active.type} onEntity={props.onEntity} />
         <ZTypedocCommentViewer comment={pick(active.comment, 'returns')} />
       </div>
     );
@@ -109,7 +109,7 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
     return (
       <div className='ZTypedocSignatureListViewer-signature-inherits'>
         {createTypedocTypography(title, 'h4', 'h4')}
-        <ZTypedocTypeViewer type={type} onReference={props.onEntity} ignoreReferenceIds={true} />
+        <ZTypedocTypeViewer type={type} onEntity={props.onEntity} ignoreReferenceIds={true} />
       </div>
     );
   }
@@ -162,7 +162,7 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
           <div className='ZTypedocSignatureListViewer-signature-parameter' key={param.id}>
             <ZTypedocFlagsViewer flags={param.flags} />
             {createTypedocTypography(param.name, 'strong')}
-            <ZTypedocTypeViewer type={param.type} prefix=': ' onReference={props.onEntity} />
+            <ZTypedocTypeViewer type={param.type} prefix=': ' onEntity={props.onEntity} />
             <ZTypedocCommentViewer comment={param.comment} />
           </div>
         ))}
@@ -190,7 +190,7 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
       <Fragment>
         {createTypedocTypography(keyword, 'strong')}
         {createTypedocTypography(signature.name)}
-        <ZTypedocTypeViewer type={signature.type} prefix={prefix} onReference={props.onEntity} />
+        <ZTypedocTypeViewer type={signature.type} prefix={prefix} onEntity={props.onEntity} />
         {def}
       </Fragment>
     );
@@ -218,12 +218,12 @@ export function ZTypedocSignatureListViewer(props: IZTypedocSignatureListViewerP
             {createTypedocTypography(get(parameter, 'flags.isRest') ? '...' : null)}
             {createTypedocTypography(parameter.name, 'strong')}
             {createTypedocTypography(get(parameter, 'flags.isOptional') ? '?' : null)}
-            <ZTypedocTypeViewer type={parameter.type} prefix=': ' suffix={parameter.defaultValue ? ` = ${parameter.defaultValue}` : null} onReference={props.onEntity} />
+            <ZTypedocTypeViewer type={parameter.type} prefix=': ' suffix={parameter.defaultValue ? ` = ${parameter.defaultValue}` : null} onEntity={props.onEntity} />
             {createTypedocTypography(i === params.length - 1 ? null : ', ')}
           </Fragment>
         ))}
         {createTypedocTypography(')')}
-        <ZTypedocTypeViewer type={signature.type} prefix=': ' onReference={props.onEntity} />
+        <ZTypedocTypeViewer type={signature.type} prefix=': ' onEntity={props.onEntity} />
       </Fragment>
     );
   }

@@ -12,7 +12,7 @@ describe('ZTypedocTypeViewer', () => {
   let onReference: jest.Mock;
 
   function createTestTarget() {
-    return render(<ZTypedocTypeViewer type={type} onReference={onReference} prefix={prefix} suffix={suffix} ignoreReferenceIds={ignoreReferenceIds} />);
+    return render(<ZTypedocTypeViewer type={type} onEntity={onReference} prefix={prefix} suffix={suffix} ignoreReferenceIds={ignoreReferenceIds} />);
   }
 
   beforeEach(() => {

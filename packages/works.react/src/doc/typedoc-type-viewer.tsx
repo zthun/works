@@ -21,7 +21,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function handleReference(e: any) {
     const element = e.target as HTMLElement;
     const id = +element.getAttribute('data-entity');
-    props.onReference(id);
+    props.onEntity(id);
   }
 
   /**
@@ -54,7 +54,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for the inner type.
    */
   function createType(ty: IZTypedocType, prefix: ReactNode = null, suffix: ReactNode = null) {
-    return <ZTypedocTypeViewer type={ty} container={false} onReference={props.onReference} prefix={prefix} suffix={suffix} />;
+    return <ZTypedocTypeViewer type={ty} container={false} onEntity={props.onEntity} prefix={prefix} suffix={suffix} />;
   }
 
   /**
@@ -69,7 +69,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    *
    */
   function createTypeList(types: IZTypedocType[], prefix?: ReactNode, suffix?: ReactNode, separator?: string) {
-    return <ZTypedocTypeListViewer types={types} prefix={prefix} suffix={suffix} separator={separator} container={false} onEntity={props.onReference} />;
+    return <ZTypedocTypeListViewer types={types} prefix={prefix} suffix={suffix} separator={separator} container={false} onEntity={props.onEntity} />;
   }
 
   /**

@@ -26,7 +26,7 @@ export function ZTypedocTypeListViewer(props: IZTypedocTypeListViewerProps) {
       <Fragment>
         {createTypedocTypography(props.prefix, props.prefixContainer, undefined, 'ZTypedocTypeListViewer-keyword')}
         {props.types.map((ty, i) => (
-          <ZTypedocTypeViewer key={i} type={ty} container={props.container} onReference={props.onEntity} suffix={i === props.types.length - 1 ? null : props.separator} />
+          <ZTypedocTypeViewer key={i} type={ty} container={props.container} onEntity={props.onEntity} suffix={i === props.types.length - 1 ? null : props.separator} />
         ))}
         {createTypedocTypography(props.suffix, props.suffixContainer, undefined, 'ZTypedocTypeListViewer-keyword')}
       </Fragment>
