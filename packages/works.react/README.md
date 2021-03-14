@@ -26,9 +26,8 @@ The paper card is generally built using the following methodologies.
 
 - The paper card should have a clear title with an icon.
 - There should be a subtitle describing the card.
-- There should be, at most, one or two actions that the user can perform relating to the card.
-- Do not overload the card with buttons and actions.
-- A user should really be focused on one thing at a time.
+- There should be, at most, one primary action that the user can perform on the card.
+- Dangerous actions, such as deletes, should require that the user confirm that they know the consequences of the action.
 
 Given these rules, the remaining components are built on top of the paper card.
 
@@ -46,7 +45,6 @@ export function MyComponent(props: IZMyComponentProps) {
       subHeaderText='My Component Description'
       avatar={<AddIcon />}
       size='md'
-      loading={false}
     >
       Content for the PaperCard is here.
     </ZPaperCard>
@@ -103,9 +101,38 @@ export function MyComponent() {
 Documentation is treated as a first class citizen in the zthunworks system and thus, there are components that can be used to render [markdown](https://www.markdownguide.org/) and [typedoc](https://typedoc.org/) files straight to react. There are three main components for rendering these files.
 
 - Use the **ZMarkdownViewer** component to render markdown text.
-- Use the **ZTypedocViewer** component to render the TOC section of a typedoc.json file.
-- Use the **ZTypedocEntityViewer** component to render an individual entity of a typedoc.json file.
+- Use the **ZTypedocViewerSource** component to render your typedoc.
 
 Note that the ZMarkdownViewer component supports syntax highlighting of any language supported by [highlight.js](https://highlightjs.org/);
 
 With these components, they already exist within a paper card component so you will want to have them separate of any paper card components you have.
+
+```ts
+import { Grid } from '@material-ui/core';
+import { ZTypedocViewerSource } from '@zthun/works.react';
+import React from 'react';
+
+export function MyPage() {
+  const pkg = 'works.core';
+  const img = `images/svg/${pkg}.svg`;
+  const src = `docs/${pkg}.typedoc.json`;
+
+  const avatar = (
+    <img className='ZPaperCard-avatar ZPaperCard-avatar-lg' src={img} />
+  );
+
+  return (
+    <Grid
+      container={true}
+      spacing={3}
+      className='ZApiPage-root'
+      data-testid='ZApiPage-root'
+      justify='center'
+    >
+      <Grid item={true}>
+        <ZTypedocViewerSource src={src} avatar={avatar} />
+      </Grid>
+    </Grid>
+  );
+}
+```
