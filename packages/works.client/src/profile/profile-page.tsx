@@ -1,6 +1,7 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
+import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZProfileActivationForm, ZProfileDeactivationForm, ZProfileDeleteForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
+import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileDeleteForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import { get } from 'lodash';
@@ -159,7 +160,21 @@ export function ZProfilePage() {
         <Grid item>
           <Grid container spacing={3} direction='column'>
             <Grid item>
-              <ZProfileDeactivationForm disabled={waiting} loading={deactivating} onDeactivate={handleDeactivation} />
+              <ZPaperCard
+                headerText='Deactivate Account'
+                subHeaderText='Turn off account access'
+                avatar={<PauseCircleOutlineIcon fontSize='large' />}
+                loading={deactivating}
+                disabled={waiting}
+                actionColor='secondary'
+                size='md'
+                onAction={handleDeactivation}
+                actionText='Deactivate'
+              >
+                <Typography variant='body1' component='p'>
+                  This will deactivate your account. If you wish to reactivate your account, you will need to send yourself another activation key.{' '}
+                </Typography>
+              </ZPaperCard>
             </Grid>
             <Grid item>
               <ZProfileDeleteForm disabled={waiting} loading={deleting} onDelete={handleDelete} />

@@ -75,8 +75,6 @@ export { ZProfileActivationForm } from './profile/profile-activation-form';
 export { IZProfileActivationFormProps } from './profile/profile-activation-form.props';
 export { ZProfileAvatarForm } from './profile/profile-avatar-form';
 export { IZProfileAvatarFormProps } from './profile/profile-avatar-form.props';
-export { ZProfileDeactivationForm } from './profile/profile-deactivation-form';
-export { IZProfileDeactivationFormProps } from './profile/profile-deactivation-form.props';
 export { ZProfileDeleteForm } from './profile/profile-delete-form';
 export { IZProfileDeleteFormProps } from './profile/profile-delete-form.props';
 export { ZProfileForm } from './profile/profile-form';

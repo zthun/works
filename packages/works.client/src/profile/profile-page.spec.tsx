@@ -237,7 +237,7 @@ describe('ZProfilePage', () => {
       await act(async () => {
         target = await createTestTarget();
         const deactivateBtn = target.getByText('Deactivate');
-        fireEvent.submit(deactivateBtn);
+        fireEvent.click(deactivateBtn);
       });
       // Assert
       expect(Axios.delete).toHaveBeenCalledWith(expect.stringContaining('profiles/activations'));
