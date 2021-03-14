@@ -119,18 +119,8 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
     );
 
   return (
-    <form className='ZLoginCredentialsForm-root' noValidate={true} onSubmit={handleAction}>
-      <ZPaperCard
-        className='ZLoginCredentialsForm-root'
-        data-testid='ZLoginCredentialsForm-root'
-        disabled={props.disabled}
-        loading={props.loading}
-        headerText={props.headerText}
-        subHeaderText={props.subHeaderText}
-        actionText={props.actionText}
-        actionType='submit'
-        avatar={props.avatar}
-      >
+    <form className='ZLoginCredentialsForm-root' data-testid='ZLoginCredentialsForm-root' noValidate={true} onSubmit={handleAction}>
+      <ZPaperCard disabled={props.disabled} loading={props.loading} headerText={props.headerText} subHeaderText={props.subHeaderText} actionText={props.actionText} actionType='submit' avatar={props.avatar}>
         {emailTextField}
         {passwordTextField}
         {confirmTextField}

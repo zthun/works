@@ -53,7 +53,7 @@ describe('ZProfileActivationForm', () => {
         field.value = expected.key;
         fireEvent.input(field);
       });
-      const button = target.getByTestId('ZActionForm-form');
+      const button = target.getByTestId('ZProfileActivationForm-root');
       fireEvent.submit(button);
       // Assert
       expect(onActivationChange).toHaveBeenCalledWith(expect.objectContaining(expected));
@@ -70,7 +70,7 @@ describe('ZProfileActivationForm', () => {
         field.value = expected.key;
         fireEvent.input(field);
       });
-      const button = target.getByTestId('ZActionForm-form');
+      const button = target.getByTestId('ZProfileActivationForm-root');
       fireEvent.submit(button);
       // Assert
       expect(onActivationChange).toHaveBeenCalledWith(expect.objectContaining(expected));
@@ -80,7 +80,7 @@ describe('ZProfileActivationForm', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const button = target.getByTestId('ZActionForm-btn-action') as HTMLButtonElement;
+      const button = target.getByTestId('ZPaperCard-btn-action') as HTMLButtonElement;
       // Assert
       expect(button.disabled).toBeTruthy();
     });
@@ -94,7 +94,7 @@ describe('ZProfileActivationForm', () => {
         fireEvent.input(field);
       });
       // Act
-      const button = target.getByTestId('ZActionForm-btn-action') as HTMLButtonElement;
+      const button = target.getByTestId('ZPaperCard-btn-action') as HTMLButtonElement;
       // Assert
       expect(button.disabled).toBeFalsy();
     });

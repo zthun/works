@@ -1,27 +1,12 @@
 import { IZLogin } from '@zthun/works.core';
+import { IZComponentDisabled } from '../component/component-disabled.interface';
+import { IZComponentHeader } from '../component/component-header.interface';
+import { IZComponentLoading } from '../component/component-loading.interface';
 
 /**
  * Represents properties for the ZLoginCredentialsForm.
  */
-export interface IZLoginCredentialsFormProps {
-  /**
-   * The header text.
-   *
-   * This is the text that appears in the card header.
-   *
-   * @default "Create Account"
-   */
-  headerText: string;
-
-  /**
-   * The subheader text.
-   *
-   * This is the text that appears underneath the card header.
-   *
-   * @default "Enter account credentials"
-   */
-  subHeaderText: string;
-
+export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZComponentDisabled, IZComponentHeader {
   /**
    * The text for the action button.
    *
@@ -31,23 +16,6 @@ export interface IZLoginCredentialsFormProps {
    * @default "Create"
    */
   actionText: string;
-
-  /**
-   * Gets or sets whether to disable the form.
-   *
-   * @default false
-   */
-  disabled: boolean;
-
-  /**
-   * Gets or sets whether to show the loading (working) indicator.
-   *
-   * Generally, when you set this, you should probably also
-   * set your disabled flag to true as well.
-   *
-   * @default false
-   */
-  loading: boolean;
 
   /**
    * Gets or sets whether to hide the email field.
@@ -120,13 +88,6 @@ export interface IZLoginCredentialsFormProps {
    * @default null
    */
   credentials: IZLogin;
-
-  /**
-   * The avatar for the form.
-   *
-   * @default null
-   */
-  avatar: React.ReactNode;
 
   /**
    * Occurs when the user clicks the action button to confirm the credentials object.

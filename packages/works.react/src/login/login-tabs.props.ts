@@ -1,22 +1,12 @@
 import { IZLogin } from '@zthun/works.core';
+import { IZComponentDisabled } from '../component/component-disabled.interface';
+import { IZComponentLoading } from '../component/component-loading.interface';
 import { ZLoginTab } from './login-tab.enum';
 
 /**
  * Represents the properties for the IZLoginTabs component.
  */
-export interface IZLoginTabsProps {
-  /**
-   * Gets or sets whether to show any loading indicators.
-   *
-   * @default false
-   */
-  loading: boolean;
-
-  /**
-   * Gets or sets if the tabs are disabled.
-   */
-  disabled: boolean;
-
+export interface IZLoginTabsProps extends IZComponentLoading, IZComponentDisabled {
   /**
    * Gets or sets the selected tab.
    *

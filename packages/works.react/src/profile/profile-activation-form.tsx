@@ -3,7 +3,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import { ZProfileActivationBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
-import { ZActionForm } from '../form/action-form';
+import { ZPaperCard } from '../card/paper-card';
 import { IZProfileActivationFormProps } from './profile-activation-form.props';
 
 /**
@@ -38,34 +38,35 @@ export function ZProfileActivationForm(props: IZProfileActivationFormProps): JSX
   }
 
   return (
-    <ZActionForm
-      className='ZProfileActivationForm-root'
-      data-testid='ZProfileActivationForm-root'
-      avatar={<PersonIcon className='ZProfileActivationForm-icon-user' fontSize='large' />}
-      headerText={props.headerText}
-      subHeaderText={props.subHeaderText}
-      actionText={props.activateText}
-      onAction={handleActivate}
-      loading={props.loading}
-      disabled={props.disabled || !key}
-    >
-      <Typography variant='body1' component='p'>
-        You must activate your account before you are allowed to perform any account related actions. Check your email for an activation key and copy it here.
-      </Typography>
+    <form className='ZProfileActivationForm-root' data-testid='ZProfileActivationForm-root' noValidate={true} onSubmit={handleActivate}>
+      <ZPaperCard
+        avatar={<PersonIcon className='ZProfileActivationForm-icon-user' fontSize='large' />}
+        headerText={props.headerText}
+        subHeaderText={props.subHeaderText}
+        actionText={props.activateText}
+        actionType='submit'
+        loading={props.loading}
+        disabled={props.disabled || !key}
+      >
+        <Typography variant='body1' component='p'>
+          You must activate your account before you are allowed to perform any account related actions. Check your email for an activation key and copy it here.
+        </Typography>
 
-      <TextField
-        className='ZProfileActivationForm-input-key'
-        data-testid='ZProfileActivationForm-input-key'
-        fullWidth={true}
-        disabled={props.disabled}
-        label={props.keyText}
-        type='text'
-        margin='none'
-        variant='outlined'
-        value={key}
-        onInput={handleKeyInput}
-      />
-    </ZActionForm>
+        <TextField
+          className='ZProfileActivationForm-input-key'
+          data-testid='ZProfileActivationForm-input-key'
+          fullWidth={true}
+          disabled={props.disabled}
+          label={props.keyText}
+          type='text'
+          margin='none'
+          variant='outlined'
+          required
+          value={key}
+          onInput={handleKeyInput}
+        />
+      </ZPaperCard>
+    </form>
   );
 }
 
