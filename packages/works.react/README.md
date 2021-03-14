@@ -98,7 +98,7 @@ export function MyComponent() {
 
 ![Typedoc](images/png/works.react.typedoc.png)
 
-Documentation is treated as a first class citizen in the zthunworks system and thus, there are components that can be used to render [markdown](https://www.markdownguide.org/) and [typedoc](https://typedoc.org/) files straight to react. There are three main components for rendering these files.
+Documentation is treated as a first class citizen in the zthunworks system and thus, there are components that can be used to render [markdown](https://www.markdownguide.org/) and [typedoc](https://typedoc.org/) files straight to react. There are two main components for rendering these files.
 
 - Use the **ZMarkdownViewer** component to render markdown text.
 - Use the **ZTypedocViewerSource** component to render your typedoc.
