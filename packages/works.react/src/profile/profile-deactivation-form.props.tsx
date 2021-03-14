@@ -1,9 +1,9 @@
-export interface IZProfileDeactivationFormProps {
+import { IZComponentDisabled } from '../component/component-disabled.interface';
+import { IZComponentLoading } from '../component/component-loading.interface';
+
+export interface IZProfileDeactivationFormProps extends IZComponentDisabled, IZComponentLoading {
   headerText: string;
   subHeaderText: string;
-
-  disabled: boolean;
-  loading: boolean;
 
   warningText: string;
   deactivateText: string;

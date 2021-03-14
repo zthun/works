@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import { noop } from 'lodash';
 import React from 'react';
-import { ZActionForm } from '../form/action-form';
+import { ZPaperCard } from '../card/paper-card';
 import { IZProfileDeactivationFormProps } from './profile-deactivation-form.props';
 
 /**
@@ -23,7 +23,7 @@ export function ZProfileDeactivationForm(props: IZProfileDeactivationFormProps) 
   }
 
   return (
-    <ZActionForm
+    <ZPaperCard
       className='ZProfileDeactivationForm-root'
       data-testid='ZProfileDeactivationForm-root'
       headerText={props.headerText}
@@ -38,7 +38,7 @@ export function ZProfileDeactivationForm(props: IZProfileDeactivationFormProps) 
       <Typography variant='body1' component='p'>
         {props.warningText}
       </Typography>
-    </ZActionForm>
+    </ZPaperCard>
   );
 }
 
