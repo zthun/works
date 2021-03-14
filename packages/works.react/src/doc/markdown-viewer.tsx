@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import { highlightBlock } from 'highlight.js';
+import { noop } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
@@ -48,7 +49,18 @@ export function ZMarkdownViewer(props: IZMarkdownViewerProps) {
   }
 
   return (
-    <ZPaperCard className='ZMarkdownViewer-root' data-testid='ZMarkdownViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={props.avatar} action={props.action} size={props.size} loading={!markdown}>
+    <ZPaperCard
+      className='ZMarkdownViewer-root'
+      data-testid='ZMarkdownViewer-root'
+      headerText={props.headerText}
+      subHeaderText={props.subHeaderText}
+      avatar={props.avatar}
+      actionText={props.actionText}
+      actionColor={props.actionColor}
+      size={props.size}
+      loading={!markdown}
+      onAction={props.onAction}
+    >
       <div ref={markdownEl}>
         <ReactMarkdown className='ZMarkdownViewer-markdown' plugins={[gfm]} linkTarget='_blank'>
           {markdown}
@@ -57,3 +69,9 @@ export function ZMarkdownViewer(props: IZMarkdownViewerProps) {
     </ZPaperCard>
   );
 }
+
+ZMarkdownViewer.defaultProps = {
+  actionText: null,
+  actionColor: 'primary',
+  onAction: noop
+};

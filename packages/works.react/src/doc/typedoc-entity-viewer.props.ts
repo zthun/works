@@ -1,18 +1,11 @@
 import { IZTypedocEntity } from '@zthun/works.core';
-import { ReactNode } from 'react';
+import { IZComponentActionable } from '../component/component-actionable.interface';
 import { IZComponentSizeable } from '../component/component-sizeable.interface';
 
 /**
  * Represents the properties for the ZTypedocEntityViewer.
  */
-export interface IZTypedocEntityViewerProps extends IZComponentSizeable {
-  /**
-   * The avatar icon for the heading component.
-   *
-   * @default null
-   */
-  action: ReactNode;
-
+export interface IZTypedocEntityViewerProps extends IZComponentSizeable, IZComponentActionable {
   /**
    * The entity to display information about.
    */

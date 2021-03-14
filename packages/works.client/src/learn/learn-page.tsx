@@ -1,4 +1,4 @@
-import { Button, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { ZMarkdownViewer } from '@zthun/works.react';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
@@ -22,16 +22,10 @@ export function ZLearnPage() {
     hist.push(`/learn/${pkg}/api`);
   }
 
-  const api = (
-    <Button className='ZLearnPage-btn-api' data-testid='ZLearnPage-btn-api' color='primary' variant='contained' onClick={handleApi}>
-      API
-    </Button>
-  );
-
   return (
     <Grid container={true} spacing={3} className='ZLearnPage-root' data-testid='ZLearnPage-root' justify='center'>
       <Grid item={true}>
-        <ZMarkdownViewer src={src} avatar={avatar} action={api} headerText='README' subHeaderText={pkg} size='lg' />
+        <ZMarkdownViewer src={src} avatar={avatar} actionText='View the API' onAction={handleApi} headerText='README' subHeaderText={pkg} size='lg' />
       </Grid>
     </Grid>
   );

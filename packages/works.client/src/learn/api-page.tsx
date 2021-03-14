@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { IZTypedoc, IZTypedocEntity } from '@zthun/works.core';
 import { ZCircularProgress, ZTypedocEntityViewer, ZTypedocViewer } from '@zthun/works.react';
 import Axios from 'axios';
@@ -92,36 +92,13 @@ export function ZApiPage() {
       return <ZCircularProgress show={loading} />;
     }
 
-    const learn = (
-      <Button className='ZApiPage-btn-learn' data-testid='ZApiPage-btn-learn' color='primary' variant='contained' onClick={handleLearn}>
-        Learn
-      </Button>
-    );
-
     if (isNaN(entityId)) {
-      return <ZTypedocViewer typedoc={typedoc} avatar={avatar} action={learn} onEntity={handleEntity} />;
+      return <ZTypedocViewer typedoc={typedoc} avatar={avatar} actionText='Back to README' onAction={handleLearn} onEntity={handleEntity} />;
     }
 
     const entity = first(typedoc.children.filter((ch) => ch.id === entityId));
 
-    const api = (
-      <Button className='ZApiPage-btn-api' data-testid='ZApiPage-btn-api' color='secondary' variant='contained' onClick={handleApi}>
-        API
-      </Button>
-    );
-
-    return (
-      <ZTypedocEntityViewer
-        entity={entity}
-        onEntity={handleEntityId}
-        action={
-          <ButtonGroup>
-            {learn}
-            {api}
-          </ButtonGroup>
-        }
-      />
-    );
+    return <ZTypedocEntityViewer entity={entity} onEntity={handleEntityId} actionText='Back to API' onAction={handleApi} />;
   }
 
   return (

@@ -111,7 +111,7 @@ describe('ZApiPage', () => {
       // Act
       await act(async () => {
         const target = createTestTarget();
-        const btn = await target.findByTestId('ZApiPage-btn-learn');
+        const btn = await target.findByTestId('ZPaperCard-btn-action');
         fireEvent.click(btn);
       });
       // Assert
@@ -163,24 +163,12 @@ describe('ZApiPage', () => {
       expect(history.location.pathname).toEqual(`/learn/${pkg}/api/${expected}`);
     });
 
-    it('navigates back to the learn page when the learn button is clicked.', async () => {
+    it('navigates back to the api page when the action button is clicked.', async () => {
       // Arrange
       // Act
       await act(async () => {
         const target = createTestTarget();
-        const btn = await target.findByTestId('ZApiPage-btn-learn');
-        fireEvent.click(btn);
-      });
-      // Assert
-      expect(history.location.pathname).toEqual(`/learn/${pkg}`);
-    });
-
-    it('navigates back to the api page when the api button is clicked.', async () => {
-      // Arrange
-      // Act
-      await act(async () => {
-        const target = createTestTarget();
-        const btn = await target.findByTestId('ZApiPage-btn-api');
+        const btn = await target.findByTestId('ZPaperCard-btn-action');
         fireEvent.click(btn);
       });
       // Assert

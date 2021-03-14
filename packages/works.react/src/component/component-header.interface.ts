@@ -18,11 +18,4 @@ export interface IZComponentHeader {
    * @default null
    */
   avatar?: React.ReactNode;
-
-  /**
-   * The action element for the heading component.
-   *
-   * @default null
-   */
-  action?: React.ReactNode;
 }

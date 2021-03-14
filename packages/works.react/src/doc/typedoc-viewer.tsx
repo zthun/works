@@ -89,7 +89,16 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
   }
 
   return (
-    <ZPaperCard className='ZTypedocViewer-root' headerText={props.headerText} subHeaderText={props.subHeaderText || props.typedoc?.name} avatar={props.avatar} action={props.action} size={props.size}>
+    <ZPaperCard
+      className='ZTypedocViewer-root'
+      headerText={props.headerText}
+      subHeaderText={props.subHeaderText || props.typedoc?.name}
+      avatar={props.avatar}
+      size={props.size}
+      actionText={props.actionText}
+      actionColor={props.actionColor}
+      onAction={props.onAction}
+    >
       {createGlobal()}
     </ZPaperCard>
   );
@@ -98,5 +107,9 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
 ZTypedocViewer.defaultProps = {
   headerText: 'API',
   avatar: null,
+
+  actionText: null,
+  actionColor: 'primary',
+  onAction: noop,
   onEntity: noop
 };

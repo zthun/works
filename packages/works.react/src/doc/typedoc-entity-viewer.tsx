@@ -42,9 +42,11 @@ export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
       data-testid='ZTypedocEntityViewer-root'
       headerText={props.entity.name}
       subHeaderText={props.entity.kindString}
-      action={props.action}
       avatar={<ZTypedocIcon kind={props.entity.kind} size='md' />}
-      size='xl'
+      size={props.size}
+      actionText={props.actionText}
+      actionColor={props.actionColor}
+      onAction={props.onAction}
     >
       <ZTypedocSignatureListViewer owner={props.entity} signatures={[props.entity]} onEntity={props.onEntity} />
       {(props.entity.groups || []).map((gr) => createGroup(gr))}
@@ -56,8 +58,12 @@ ZTypedocEntityViewer.defaultProps = {
   headerText: null,
   subHeaderText: null,
 
-  action: null,
   avatar: null,
 
+  actionText: null,
+  actionColor: 'primary',
+  size: 'xl',
+
+  onAction: noop,
   onEntity: noop
 };

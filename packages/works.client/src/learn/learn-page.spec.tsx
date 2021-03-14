@@ -37,7 +37,7 @@ describe('ZLearnPage', () => {
     // Act
     await act(async () => {
       const target = createTestTarget();
-      const api = await target.findByTestId('ZLearnPage-btn-api');
+      const api = await target.findByTestId('ZPaperCard-btn-action');
       fireEvent.click(api);
     });
     const actual = history.location.pathname;

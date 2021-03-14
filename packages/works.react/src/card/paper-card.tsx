@@ -20,7 +20,6 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
   function createAction() {
     return (
       <div className='ZPaperCard-header-action'>
-        {props.action}
         <ZCircularProgress className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={props.loading} size='2.5em' />
       </div>
     );
