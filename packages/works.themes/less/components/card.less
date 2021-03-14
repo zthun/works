@@ -1,4 +1,6 @@
 .ZPaperCard-root {
+  position: relative;
+
   .ZPaperCard-header {
     padding-bottom: @spacing-no;
 
@@ -6,18 +8,6 @@
       font-size: @sizing-font-root-xl;
       padding: 0;
       margin: 0;
-    }
-  }
-
-  .ZPaperCard-header-action {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    align-content: center;
-    margin-left: @spacing-xl;
-
-    .ZPaperCard-progress-loading {
-      margin-left: @spacing-sm;
     }
   }
 
@@ -68,12 +58,12 @@
     }
   }
 
-  .ZPaperCard-content {
-    position: relative;
-  }
-
   .ZPaperCard-actions {
     padding: @spacing-md;
+  }
+
+  .ZPaperCard-actions-confirm {
+    margin-top: @spacing-md;
   }
 
   &.ZPaperCard-size-max {

@@ -57,7 +57,16 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
    * @returns The jsx for the CardContent component.
    */
   function createContent() {
-    return <CardContent>{props.children}</CardContent>;
+    const confirm =
+      props.confirmation && props.actionText ? (
+        <FormControlLabel className='ZPaperCard-actions-confirm' control={<Checkbox checked={confirmed} onChange={updateConfirmed} color={props.confirmationColor} name={props.confirmationName} />} label={props.confirmation} disabled={props.disabled} />
+      ) : null;
+    return (
+      <CardContent>
+        {props.children}
+        {confirm}
+      </CardContent>
+    );
   }
 
   /**
@@ -71,11 +80,9 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
     }
 
     const disabled = props.disabled || (props.confirmation && !confirmed);
-    const confirm = props.confirmation ? <FormControlLabel control={<Checkbox checked={confirmed} onChange={updateConfirmed} color={props.confirmationColor} name={props.confirmationName} />} label={props.confirmation} disabled={props.disabled} /> : null;
 
     return (
       <CardActions className='ZPaperCard-actions' data-testid='ZPaperCard-actions'>
-        {confirm}
         <Button className='ZPaperCard-btn-action' data-testid='ZPaperCard-btn-action' fullWidth={true} variant='outlined' type={props.actionType} disabled={disabled} color={props.actionColor} onClick={handleAction}>
           {props.actionText}
         </Button>
@@ -85,13 +92,12 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
 
   return (
     <Paper className={`${props.className} ZPaperCard-root ZPaperCard-size-${props.size}`} data-testid={props['data-testid']} elevation={5}>
+      <ZCircularBackdrop className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={props.loading} size='2.5em' />
+
       <Card>
         {createHeader()}
-        <div className='ZPaperCard-content'>
-          <ZCircularBackdrop className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={props.loading} size='2.5em' />
-          {createMedia()}
-          {createContent()}
-        </div>
+        {createMedia()}
+        {createContent()}
         {createActions()}
       </Card>
     </Paper>
