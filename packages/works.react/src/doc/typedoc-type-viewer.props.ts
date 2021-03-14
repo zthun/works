@@ -1,6 +1,6 @@
 import { IZTypedocType } from '@zthun/works.core';
 import { ReactNode } from 'react';
-import { IZComponentEntityRedirect } from 'src/component/component-entity-redirect.interface';
+import { IZComponentEntityRedirect } from '../component/component-entity-redirect.interface';
 
 /**
  * Represents properties for the type viewer.
