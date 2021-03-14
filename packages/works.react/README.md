@@ -136,3 +136,82 @@ export function MyPage() {
   );
 }
 ```
+
+## Login and Profile
+
+![Login and Profile](images/png/works.react.users.png)
+
+There are several components for user management.
+
+The first starts with login components. The root component is the **ZLoginTabs** component. This tab component contains all three of the main activities that users do when dealing with credentials.
+
+1. Logging into their account.
+1. Creating a new account.
+1. Recovering their account.
+
+```ts
+import { Grid } from '@material-ui/core';
+import { IZLogin } from '@zthun/works.core';
+import { ZLoginTabs } from '@zthun/works.react';
+import React, { useState } from 'react';
+
+export function MyLoginPage() {
+  function handleLogin(login: IZLogin) {
+    // Login with user credentials
+  }
+
+  function handleCreate(login: IZLogin) {
+    // Create a new account
+  }
+
+  function handleRecover(login: IZLogin) {
+    // Recover password
+  }
+
+  return (
+    <Grid container={true} spacing={3} justify='center'>
+      <Grid item={true}>
+        <ZLoginTabs
+          onLoginCredentialsChange={handleLogin}
+          onCreateCredentialsChange={handleCreate}
+          onRecoverCredentialsChange={handleRecover}
+        />
+      </Grid>
+    </Grid>
+  );
+}
+```
+
+If your user is already authenticated, then you can allow them to modify their profile using the **ZProfileForm** component. The profile form constructs a partial object that allows you to just send the necessary information that changes without having to deal with it on the server.
+
+```ts
+import { Grid } from '@material-ui/core';
+import { IZProfile } from '@zthun/works.core';
+import { ZProfileForm, useLoginState } from '@zthun/works.react';
+import React from 'react';
+
+export function ZProfilePage() {
+  const loginState = useLoginState();
+
+  function handleUpdateProfile(changes: IZProfile) {
+    // Handle updates to profile here.
+  }
+
+  return (
+    <Grid container spacing={3} justify='center'>
+      <Grid item>
+        <ZProfileForm
+          profile={loginState.data}
+          onProfileChange={handleUpdateProfile}
+        />
+      </Grid>
+    </Grid>
+  );
+}
+```
+
+## Store
+
+![Store](images/png/works.react.store.png)
+
+The last major feature of this package is how zthunworks deals with global store. A lot of react developers are familiar with redux. The redux pattern is complicated and will add a lot of unnecessary code bloat to manage global state when the function side of react comes with a great global state management tool called a context.

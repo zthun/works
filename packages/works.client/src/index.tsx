@@ -40,6 +40,7 @@ import '@zthun/works.core/images/png/works.core.typedoc.png';
 import '@zthun/works.core/images/svg/works.core.svg';
 import '@zthun/works.react/images/png/works.react.card.png';
 import '@zthun/works.react/images/png/works.react.alert.png';
+import '@zthun/works.react/images/png/works.react.users.png';
 import '@zthun/works.react/images/png/works.react.typedoc.png';
 import '@zthun/works.react/images/svg/works.react.svg';
 import '@zthun/works.nest/images/svg/works.nest.svg';
