@@ -16,11 +16,13 @@ export { ZHttpStatusCodeCard } from './codes/http-code-card';
 // Component
 export { IZComponentActionable } from './component/component-actionable.interface';
 export { IZComponentDisabled } from './component/component-disabled.interface';
+export { IZComponentEntityRedirect } from './component/component-entity-redirect.interface';
 export { IZComponentHeader } from './component/component-header.interface';
 export { IZComponentHierarchy } from './component/component-hierarchy.interface';
 export { IZComponentLoading } from './component/component-loading.interface';
 export { IZComponentMedia } from './component/component-media.interface';
 export { IZComponentSizeable } from './component/component-sizeable.interface';
+export { IZComponentSource } from './component/component-source.interface';
 export { IZComponentStyle } from './component/component-style.interface';
 // Doc
 export { ZMarkdownViewer } from './doc/markdown-viewer';
@@ -43,6 +45,8 @@ export { IZTypedocTypeParametersViewerProps } from './doc/typedoc-type-parameter
 export { ZTypedocTypeViewer } from './doc/typedoc-type-viewer';
 export { IZTypedocTypeViewerProps } from './doc/typedoc-type-viewer.props';
 export { ZTypedocViewer } from './doc/typedoc-viewer';
+export { ZTypedocViewerSource } from './doc/typedoc-viewer-source';
+export { IZTypedocViewerSourceProps } from './doc/typedoc-viewer-source.props';
 export { IZTypedocViewerProps } from './doc/typedoc-viewer.props';
 // File
 export { ZFileSelectInput } from './file/file-select-input.class';

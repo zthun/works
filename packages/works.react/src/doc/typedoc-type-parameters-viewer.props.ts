@@ -1,10 +1,11 @@
 import { IZTypedocEntity } from '@zthun/works.core';
 import { ReactNode } from 'react';
+import { IZComponentEntityRedirect } from '../component/component-entity-redirect.interface';
 
 /**
  * Represents properties for the ZTypedocTypeParameters component.
  */
-export interface IZTypedocTypeParametersViewerProps {
+export interface IZTypedocTypeParametersViewerProps extends IZComponentEntityRedirect<number> {
   /**
    * The collection of entities that represent the types.
    *
@@ -32,9 +33,4 @@ export interface IZTypedocTypeParametersViewerProps {
    * @default ,
    */
   separator: string;
-
-  /**
-   * Occurs when a child entity is clicked.
-   */
-  onEntity(id: number): void;
 }

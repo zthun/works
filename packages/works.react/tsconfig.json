@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "sourceMap": false,
+    "sourceMap": true,
     "declarationDir": "dist/types",
     "paths": {
       "@zthun/works.core": ["../works.core/src/index"],

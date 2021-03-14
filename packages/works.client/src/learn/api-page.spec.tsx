@@ -88,22 +88,9 @@ describe('ZApiPage', () => {
     (Axios.get as jest.Mock).mockClear();
   });
 
-  describe('Typedoc', () => {
+  describe('Without entity', () => {
     beforeEach(() => {
       history = createMemoryHistory({ initialEntries: [`/learn/${pkg}/api`] });
-    });
-
-    it('renders the globals.', async () => {
-      // Arrange
-      const expected = `ZTypedocViewer-entity-${typedoc.children[0].id}`;
-      let actual: HTMLElement = null;
-      // Act
-      await act(async () => {
-        const target = createTestTarget();
-        actual = await target.findByTestId(expected);
-      });
-      // Assert
-      expect(actual).toBeTruthy();
     });
 
     it('navigates back to the learn page when the learn button is clicked.', async () => {
@@ -132,22 +119,9 @@ describe('ZApiPage', () => {
     });
   });
 
-  describe('Entity', () => {
+  describe('With entity', () => {
     beforeEach(() => {
       history = createMemoryHistory({ initialEntries: [`/learn/${pkg}/api/${enid}`] });
-    });
-
-    it('renders the entity.', async () => {
-      // Arrange
-      const expected = 'ZTypedocEntityViewer-root';
-      let actual: HTMLElement = null;
-      // Act
-      await act(async () => {
-        const target = createTestTarget();
-        actual = await target.findByTestId(expected);
-      });
-      // Assert
-      expect(actual).toBeTruthy();
     });
 
     it('navigates to the id that was clicked in the entity viewer.', async () => {
