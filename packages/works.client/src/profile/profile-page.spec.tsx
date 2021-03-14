@@ -97,7 +97,7 @@ describe('ZProfilePage', () => {
     });
 
     async function setKey(target: RenderResult, key: string) {
-      const keyField = target.getByTestId('ZProfileActivationForm-input-key').getElementsByTagName('input').item(0);
+      const keyField = target.getByText('Key') as HTMLInputElement;
       keyField.value = key;
       fireEvent.input(keyField);
       await of(true).pipe(delay(0)).toPromise();
@@ -114,18 +114,6 @@ describe('ZProfilePage', () => {
       fireEvent.click(reactivate);
       await of(true).pipe(delay(0)).toPromise();
     }
-
-    it('displays the profile activation form.', async () => {
-      // Arrange
-      let target: RenderResult;
-      // Act
-      await act(async () => {
-        target = await createTestTarget();
-      });
-      const activationEditor = target.getByTestId('ZProfileActivationForm-root');
-      // Assert
-      expect(activationEditor).toBeTruthy();
-    });
 
     it('activates the profile.', async () => {
       // Arrange

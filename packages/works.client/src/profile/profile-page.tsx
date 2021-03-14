@@ -1,8 +1,9 @@
 import { Grid, Typography } from '@material-ui/core';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
+import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import { get } from 'lodash';
@@ -218,7 +219,21 @@ export function ZProfilePage() {
               <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={waiting} loading={activating} />
             </Grid>
             <Grid item>
-              <ZProfileReactivationForm onReactivate={handleReactivation} disabled={waiting} loading={reactivating} />
+              <ZPaperCard
+                avatar={<MailOutlineIcon fontSize='large' />}
+                headerText='Resend Activation Code'
+                subHeaderText='Get another code'
+                actionText='Send'
+                onAction={handleReactivation}
+                actionColor='secondary'
+                size='md'
+                disabled={waiting}
+                loading={reactivating}
+              >
+                <Typography variant='body1' component='p'>
+                  If you disabled your account, lost your activation key, or your activation key has expired, you can request a new one here.{' '}
+                </Typography>
+              </ZPaperCard>
             </Grid>
           </Grid>
         </Grid>
