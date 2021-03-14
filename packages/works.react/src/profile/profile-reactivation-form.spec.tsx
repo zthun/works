@@ -20,8 +20,8 @@ describe('ZProfileActivationForm', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const form = target.getByTestId('ZActionForm-form');
-      fireEvent.submit(form);
+      const btn = target.getByTestId('ZPaperCard-btn-action');
+      fireEvent.click(btn);
       // Assert
       expect(onReactivate).toHaveBeenCalled();
     });

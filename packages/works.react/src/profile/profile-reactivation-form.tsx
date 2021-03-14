@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { noop } from 'lodash';
 import React from 'react';
-import { ZActionForm } from '../form/action-form';
+import { ZPaperCard } from '../card/paper-card';
 import { IZProfileReactivationFormProps } from './profile-reactivation-form.props';
 
 /**
@@ -21,7 +21,7 @@ export function ZProfileReactivationForm(props: IZProfileReactivationFormProps) 
   }
 
   return (
-    <ZActionForm
+    <ZPaperCard
       className='ZProfileReactivationForm-root'
       data-testid='ZProfileReactivationForm-root'
       avatar={<MailOutlineIcon fontSize='large' />}
@@ -36,7 +36,7 @@ export function ZProfileReactivationForm(props: IZProfileReactivationFormProps) 
       <Typography variant='body1' component='p'>
         {props.description}
       </Typography>
-    </ZActionForm>
+    </ZPaperCard>
   );
 }
 
