@@ -44,12 +44,12 @@ export function ZActionForm(props: IZActionFormProps) {
     <Grid container={true} className='ZActionForm-confirmation' spacing={2}>
       <Grid item={true} md={6}>
         <Button className='ZActionForm-btn-yes' data-testid='ZActionForm-btn-yes' fullWidth={true} variant='outlined' type='submit' disabled={props.disabled} color='secondary'>
-          {props.yesText}
+          {props.yes}
         </Button>
       </Grid>
       <Grid item={true} md={6}>
         <Button className='ZActionForm-btn-no' data-testid='ZActionForm-btn-no' fullWidth={true} variant='outlined' type='button' onClick={handleCancel} disabled={props.disabled} color='primary'>
-          {props.noText}
+          {props.no}
         </Button>
       </Grid>
     </Grid>
@@ -61,26 +61,29 @@ export function ZActionForm(props: IZActionFormProps) {
   );
 
   return (
-    <ZPaperCard className={`${props.className} ZActionForm-root`} data-testid={props['data-testid']} headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={props.avatar}>
-      <form data-testid='ZActionForm-form' noValidate={true} onSubmit={handleAction}>
+    <form data-testid='ZActionForm-form' noValidate={true} onSubmit={handleAction}>
+      <ZPaperCard className={`${props.className} ZActionForm-root`} data-testid={props['data-testid']} headerText={props.headerText} subHeaderText={props.subHeaderText} avatar={props.avatar}>
         {content}
         {submission}
-      </form>
-    </ZPaperCard>
+      </ZPaperCard>
+    </form>
   );
 }
 
 ZActionForm.defaultProps = {
   className: '',
   subHeaderText: '',
+
+  actionText: 'Save',
+  actionType: 'submit',
   actionColor: 'primary',
 
   avatar: null,
   children: null,
 
   confirmation: null,
-  yesText: 'Yes',
-  noText: 'No',
+  yes: 'Yes',
+  no: 'No',
 
   loading: false,
   disabled: false,

@@ -13,25 +13,12 @@ import { IZPaperCardProps } from './paper-card.props';
  */
 export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
   /**
-   * Creates the action button.
-   *
-   * @returns The jsx for the action button.
-   */
-  function createAction() {
-    return (
-      <div className='ZPaperCard-header-action'>
-        <ZCircularProgress className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={props.loading} size='2.5em' />
-      </div>
-    );
-  }
-
-  /**
    * Creates the card header.
    *
    * @returns The jsx for the CardHeader component.
    */
   function createHeader() {
-    return <CardHeader className='ZPaperCard-header' avatar={props.avatar} action={createAction()} title={<h3>{props.headerText}</h3>} subheader={props.subHeaderText} />;
+    return <CardHeader className='ZPaperCard-header' avatar={props.avatar} title={<h3>{props.headerText}</h3>} subheader={props.subHeaderText} />;
   }
 
   /**
@@ -51,7 +38,12 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
    * @returns The jsx for the CardContent component.
    */
   function createContent() {
-    return <CardContent>{props.children}</CardContent>;
+    return (
+      <CardContent>
+        {props.children}
+        <ZCircularProgress className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={props.loading} size='2.5em' />
+      </CardContent>
+    );
   }
 
   /**
@@ -62,7 +54,7 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
   function createActions() {
     return props.actionText ? (
       <CardActions className='ZPaperCard-actions' data-testid='ZPaperCard-actions'>
-        <Button className='ZPaperCard-btn-action' data-testid='ZPaperCard-btn-action' fullWidth={true} variant='outlined' color={props.actionColor} onClick={props.onAction}>
+        <Button className='ZPaperCard-btn-action' data-testid='ZPaperCard-btn-action' fullWidth={true} variant='outlined' type={props.actionType} disabled={props.disabled} color={props.actionColor} onClick={props.onAction}>
           {props.actionText}
         </Button>
       </CardActions>
@@ -88,6 +80,7 @@ ZPaperCard.defaultProps = {
   children: null,
 
   loading: false,
+  disabled: false,
   size: 'auto',
 
   imageUrl: null,
@@ -95,6 +88,7 @@ ZPaperCard.defaultProps = {
   imageHeight: 'auto',
 
   actionText: null,
+  actionType: 'button',
   actionColor: 'primary',
   onAction: noop,
 

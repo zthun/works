@@ -73,5 +73,6 @@ export function ZMarkdownViewer(props: IZMarkdownViewerProps) {
 ZMarkdownViewer.defaultProps = {
   actionText: null,
   actionColor: 'primary',
+  actionType: 'button',
   onAction: noop
 };

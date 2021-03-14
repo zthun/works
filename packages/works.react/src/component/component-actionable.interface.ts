@@ -15,6 +15,11 @@ export interface IZComponentActionable {
   actionColor: PropTypes.Color;
 
   /**
+   * The type of action.
+   */
+  actionType: 'button' | 'submit' | 'reset';
+
+  /**
    * Occurs when the action is invoked.
    */
   onAction: () => void;

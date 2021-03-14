@@ -6,11 +6,12 @@ import { ZPaperCard } from './paper-card';
 
 describe('ZPaperCard', () => {
   let loading: boolean;
+  let disabled: boolean;
   let media: string;
   let actionText: string;
 
   async function createTestTarget() {
-    return render(<ZPaperCard headerText='Paper Card Test' loading={loading} imageUrl={media} actionText={actionText} />);
+    return render(<ZPaperCard headerText='Paper Card Test' disabled={disabled} loading={loading} imageUrl={media} actionText={actionText} />);
   }
 
   beforeEach(() => {
@@ -26,6 +27,20 @@ describe('ZPaperCard', () => {
     const actual = target.getByText('Paper Card Test');
     // Assert
     expect(actual).toBeTruthy();
+  });
+
+  describe('Disabled', () => {
+    it('disables the action button if displayed.', async () => {
+      // Arrange
+      actionText = 'Action';
+      disabled = true;
+      const target = await createTestTarget();
+      // Act
+      const btn = target.getByTestId('ZPaperCard-btn-action') as HTMLInputElement;
+      const actual = btn.disabled;
+      // Assert
+      expect(actual).toBeTruthy();
+    });
   });
 
   describe('Loading', () => {

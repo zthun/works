@@ -109,7 +109,9 @@ ZTypedocViewer.defaultProps = {
   avatar: null,
 
   actionText: null,
+  actionType: 'button',
   actionColor: 'primary',
   onAction: noop,
+
   onEntity: noop
 };

@@ -15,6 +15,7 @@ export { IZPaperCardProps } from './card/paper-card.props';
 export { ZHttpStatusCodeCard } from './codes/http-code-card';
 // Component
 export { IZComponentActionable } from './component/component-actionable.interface';
+export { IZComponentConfirmable } from './component/component-confirmable.interface';
 export { IZComponentDisabled } from './component/component-disabled.interface';
 export { IZComponentEntityRedirect } from './component/component-entity-redirect.interface';
 export { IZComponentHeader } from './component/component-header.interface';

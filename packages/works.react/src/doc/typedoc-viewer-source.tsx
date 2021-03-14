@@ -90,8 +90,11 @@ ZTypedocViewerSource.defaultProps = {
   headerText: 'Typedoc',
   avatar: null,
   entityId: null,
+
   actionText: null,
+  actionType: 'button',
   actionColor: 'primary',
+
   onAction: noop,
   onEntity: noop
 };

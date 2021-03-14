@@ -328,5 +328,5 @@ ZTypedocTypeViewer.defaultProps = {
   prefix: null,
   container: true,
   ignoreReferenceIds: false,
-  onReference: noop
+  onEntity: noop
 };
