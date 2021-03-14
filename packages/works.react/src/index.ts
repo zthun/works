@@ -58,6 +58,8 @@ export { ZActionForm } from './form/action-form';
 export { IZActionFormProps } from './form/action-form.props';
 // Image
 export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
+// Loading
+export { ZCircularBackdrop } from './loading/circular-backdrop';
 export { ZCircularProgress } from './loading/circular-progress';
 export { IZCircularProgressProps } from './loading/circular-progress.props';
 // Login

@@ -83,22 +83,6 @@ describe('ZTypedocViewerSource', () => {
     (Axios.get as jest.Mock).mockClear();
   });
 
-  describe('Loading', () => {
-    it('shows a progress bar while loading.', async () => {
-      // Arrange
-      let actual: HTMLElement = null;
-      const later = new Promise<IZTypedoc>((r) => setTimeout(() => r(null), 500));
-      (Axios.get as jest.Mock).mockReturnValue(later);
-      // Act
-      await act(async () => {
-        const target = createTestTarget();
-        actual = await target.findByTestId('ZTypedocViewer-loading');
-      });
-      // Assert
-      expect(actual).toBeTruthy();
-    });
-  });
-
   describe('Typedoc', () => {
     it('renders the typedoc not loaded if the request fails.', async () => {
       // Arrange

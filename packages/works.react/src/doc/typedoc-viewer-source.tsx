@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { from, of, Subject } from 'rxjs';
 import { catchError, finalize, map, takeUntil } from 'rxjs/operators';
 import { ZPaperCard } from '../card/paper-card';
-import { ZCircularProgress } from '../loading/circular-progress';
 import { ZTypedocEntityViewer } from './typedoc-entity-viewer';
 import { ZTypedocViewer } from './typedoc-viewer';
 import { IZTypedocViewerSourceProps } from './typedoc-viewer-source.props';
@@ -49,17 +48,9 @@ export function ZTypedocViewerSource(props: IZTypedocViewerSourceProps) {
     };
   }
 
-  if (loading) {
-    return (
-      <ZPaperCard {...props}>
-        <ZCircularProgress data-testid='ZTypedocViewer-loading' show={loading} />;
-      </ZPaperCard>
-    );
-  }
-
   if (typedoc == null) {
     return (
-      <ZPaperCard {...props}>
+      <ZPaperCard loading={loading} {...props}>
         <Typography data-testid='ZTypedocViewer-no-typedoc-loaded' variant='body2'>
           No typedoc has been loaded or the typedoc could not be loaded.
         </Typography>

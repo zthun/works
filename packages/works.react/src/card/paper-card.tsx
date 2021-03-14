@@ -1,7 +1,7 @@
-import { Card, CardMedia, CardContent, CardHeader, Paper, CardActions, Button } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Paper } from '@material-ui/core';
 import { noop } from 'lodash';
 import React from 'react';
-import { ZCircularProgress } from '../loading/circular-progress';
+import { ZCircularBackdrop } from '../loading/circular-backdrop';
 import { IZPaperCardProps } from './paper-card.props';
 
 /**
@@ -38,12 +38,7 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
    * @returns The jsx for the CardContent component.
    */
   function createContent() {
-    return (
-      <CardContent>
-        {props.children}
-        <ZCircularProgress className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={props.loading} size='2.5em' />
-      </CardContent>
-    );
+    return <CardContent>{props.children}</CardContent>;
   }
 
   /**
@@ -65,8 +60,11 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
     <Paper className={`${props.className} ZPaperCard-root ZPaperCard-size-${props.size}`} data-testid={props['data-testid']} elevation={5}>
       <Card>
         {createHeader()}
-        {createMedia()}
-        {createContent()}
+        <div className='ZPaperCard-content'>
+          <ZCircularBackdrop className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={props.loading} size='2.5em' />
+          {createMedia()}
+          {createContent()}
+        </div>
         {createActions()}
       </Card>
     </Paper>
