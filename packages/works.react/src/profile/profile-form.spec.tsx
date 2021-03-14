@@ -39,7 +39,7 @@ describe('ZProfileForm', () => {
   }
 
   function clickAction(rend: RenderResult) {
-    const action = rend.getByTestId('ZActionForm-form');
+    const action = rend.getByTestId('ZProfileForm-root');
     fireEvent.submit(action);
   }
 

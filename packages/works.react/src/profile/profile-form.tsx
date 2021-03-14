@@ -3,7 +3,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
-import { ZActionForm } from '../form/action-form';
+import { ZPaperCard } from '../card/paper-card';
 import { ZProfileAvatarForm } from './profile-avatar-form';
 import { IZProfileFormProps } from './profile-form.props';
 import { getAvatarUrl } from './profile.util';
@@ -221,20 +221,12 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   return (
     <React.Fragment>
       {avatarDialog}
-      <ZActionForm
-        className='ZProfileForm-root'
-        data-testid='ZProfileForm-root'
-        avatar={formIcon}
-        headerText={props.headerText}
-        subHeaderText={props.subHeaderText}
-        loading={props.loading}
-        disabled={props.disabled}
-        actionText={props.saveText}
-        onAction={handleSave}
-      >
-        {accountInformation}
-        {updatePassword}
-      </ZActionForm>
+      <form className='ZProfileForm-root' data-testid='ZProfileForm-root' noValidate={true} onSubmit={handleSave}>
+        <ZPaperCard avatar={formIcon} headerText={props.headerText} subHeaderText={props.subHeaderText} loading={props.loading} disabled={props.disabled} actionText={props.saveText} actionType='submit' onAction={handleSave}>
+          {accountInformation}
+          {updatePassword}
+        </ZPaperCard>
+      </form>
     </React.Fragment>
   );
 }

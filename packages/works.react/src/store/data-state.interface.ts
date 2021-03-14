@@ -16,7 +16,7 @@ export interface IZDataState<T> {
   readonly data?: T;
 
   /**
-   * The observable that
+   * The observable that streams in changes to the data.
    */
   readonly dataChange: Observable<T>;
 
