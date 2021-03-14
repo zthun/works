@@ -93,7 +93,6 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
   return (
     <Paper className={`${props.className} ZPaperCard-root ZPaperCard-size-${props.size}`} data-testid={props['data-testid']} elevation={5}>
       <ZCircularBackdrop className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={props.loading} size='2.5em' />
-
       <Card>
         {createHeader()}
         {createMedia()}
