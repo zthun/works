@@ -31,7 +31,7 @@ describe('ZLoginCredentialsForm', () => {
   const getEmailField: (target: RenderResult) => HTMLInputElement = getInputField.bind(null, 'ZLoginCredentialsForm-input-email');
   const getPasswordField: (target: RenderResult) => HTMLInputElement = getInputField.bind(null, 'ZLoginCredentialsForm-input-password');
   const getConfirmField: (target: RenderResult) => HTMLInputElement = getInputField.bind(null, 'ZLoginCredentialsForm-input-confirm');
-  const getActionButton: (target: RenderResult) => HTMLButtonElement = getButtonField.bind(null, 'ZActionForm-btn-action');
+  const getActionButton: (target: RenderResult) => HTMLButtonElement = getButtonField.bind(null, 'ZPaperCard-btn-action');
 
   it('renders the default form.', () => {
     // Arrange

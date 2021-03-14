@@ -2,7 +2,7 @@ import { TextField } from '@material-ui/core';
 import { ZLoginBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { useState } from 'react';
-import { ZActionForm } from '../form/action-form';
+import { ZPaperCard } from '../card/paper-card';
 import { IZLoginCredentialsFormProps } from './login-credentials-form.props';
 
 /**
@@ -119,21 +119,23 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
     );
 
   return (
-    <ZActionForm
-      className='ZLoginCredentialsForm-root'
-      data-testid='ZLoginCredentialsForm-root'
-      disabled={props.disabled}
-      loading={props.loading}
-      headerText={props.headerText}
-      subHeaderText={props.subHeaderText}
-      actionText={props.actionText}
-      avatar={props.avatar}
-      onAction={handleAction}
-    >
-      {emailTextField}
-      {passwordTextField}
-      {confirmTextField}
-    </ZActionForm>
+    <form className='ZLoginCredentialsForm-root' noValidate={true} onSubmit={handleAction}>
+      <ZPaperCard
+        className='ZLoginCredentialsForm-root'
+        data-testid='ZLoginCredentialsForm-root'
+        disabled={props.disabled}
+        loading={props.loading}
+        headerText={props.headerText}
+        subHeaderText={props.subHeaderText}
+        actionText={props.actionText}
+        actionType='submit'
+        avatar={props.avatar}
+      >
+        {emailTextField}
+        {passwordTextField}
+        {confirmTextField}
+      </ZPaperCard>
+    </form>
   );
 }
 
