@@ -111,7 +111,7 @@ describe('ZProfilePage', () => {
 
     async function clickReactivateButton(target: RenderResult) {
       const reactivate = target.getByText('Send');
-      fireEvent.submit(reactivate);
+      fireEvent.click(reactivate);
       await of(true).pipe(delay(0)).toPromise();
     }
 
@@ -249,10 +249,10 @@ describe('ZProfilePage', () => {
       // Act
       await act(async () => {
         target = await createTestTarget();
+        const confirm = target.getByText('I understand that this action is not reversible.');
+        fireEvent.click(confirm);
         const deleteBtn = target.getByText('Delete');
-        fireEvent.submit(deleteBtn);
-        const yesBtn = target.getByText('Yes');
-        fireEvent.submit(yesBtn);
+        fireEvent.click(deleteBtn);
       });
       // Assert
       expect(Axios.delete).toHaveBeenCalledWith(expect.stringContaining('profiles'));

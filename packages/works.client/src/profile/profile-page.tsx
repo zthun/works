@@ -1,7 +1,8 @@
 import { Grid, Typography } from '@material-ui/core';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileDeleteForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
+import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm, ZProfileReactivationForm } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import { get } from 'lodash';
@@ -166,10 +167,10 @@ export function ZProfilePage() {
                 avatar={<PauseCircleOutlineIcon fontSize='large' />}
                 loading={deactivating}
                 disabled={waiting}
-                actionColor='secondary'
                 size='md'
-                onAction={handleDeactivation}
                 actionText='Deactivate'
+                actionColor='secondary'
+                onAction={handleDeactivation}
               >
                 <Typography variant='body1' component='p'>
                   This will deactivate your account. If you wish to reactivate your account, you will need to send yourself another activation key.{' '}
@@ -177,7 +178,22 @@ export function ZProfilePage() {
               </ZPaperCard>
             </Grid>
             <Grid item>
-              <ZProfileDeleteForm disabled={waiting} loading={deleting} onDelete={handleDelete} />
+              <ZPaperCard
+                headerText='Delete Account'
+                subHeaderText='remove your account'
+                avatar={<DeleteOutlineIcon fontSize='large' />}
+                loading={deleting}
+                disabled={waiting}
+                size='md'
+                confirmation='I understand that this action is not reversible.'
+                actionText='Delete'
+                actionColor='secondary'
+                onAction={handleDelete}
+              >
+                <Typography variant='body1' component='p'>
+                  This will completely delete your account and all preferences associated with it.
+                </Typography>
+              </ZPaperCard>
             </Grid>
           </Grid>
         </Grid>

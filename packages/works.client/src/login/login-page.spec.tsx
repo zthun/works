@@ -83,7 +83,7 @@ describe('ZLoginPage', () => {
     });
 
     function getActionButton(index: number, target: RenderResult) {
-      return target.getAllByTestId('ZActionForm-btn-action')[index];
+      return target.getAllByTestId('ZPaperCard-btn-action')[index];
     }
 
     const getLoginActionButton = getActionButton.bind(null, 0);

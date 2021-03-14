@@ -10,12 +10,17 @@ export interface IZComponentConfirmable {
   confirmation: ReactNode;
 
   /**
-   * The yes ui.
+   * The confirmation color.
    */
-  yes: ReactNode;
+  confirmationColor: 'primary' | 'default' | 'secondary';
 
   /**
-   * The no/cancel ui.
+   * The form name of the confirmation.  Mostly only used with forms.
    */
-  no: string;
+  confirmationName: string;
+
+  /**
+   * Sets whether or not the confirmation is checked by default.
+   */
+  autoConfirm: boolean;
 }

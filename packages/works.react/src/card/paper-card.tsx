@@ -1,6 +1,6 @@
-import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Paper } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Checkbox, FormControlLabel, Paper } from '@material-ui/core';
 import { noop } from 'lodash';
-import React from 'react';
+import React, { useState } from 'react';
 import { ZCircularBackdrop } from '../loading/circular-backdrop';
 import { IZPaperCardProps } from './paper-card.props';
 
@@ -12,6 +12,25 @@ import { IZPaperCardProps } from './paper-card.props';
  * @returns The jsx for the paper card.
  */
 export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
+  const [confirmed, setConfirmed] = useState(props.autoConfirm);
+
+  /**
+   * Sets the confirmed flag.
+   *
+   * @param event The event that changed the confirmation.
+   */
+  function updateConfirmed(event: any) {
+    setConfirmed(event.target.checked);
+  }
+
+  /**
+   * Occurs when the action button is clicked.
+   */
+  function handleAction() {
+    setConfirmed(props.autoConfirm);
+    props.onAction();
+  }
+
   /**
    * Creates the card header.
    *
@@ -47,13 +66,21 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
    * @returns The jsx for the card actions.
    */
   function createActions() {
-    return props.actionText ? (
+    if (!props.actionText) {
+      return null;
+    }
+
+    const disabled = props.disabled || (props.confirmation && !confirmed);
+    const confirm = props.confirmation ? <FormControlLabel control={<Checkbox checked={confirmed} onChange={updateConfirmed} color={props.confirmationColor} name={props.confirmationName} />} label={props.confirmation} disabled={props.disabled} /> : null;
+
+    return (
       <CardActions className='ZPaperCard-actions' data-testid='ZPaperCard-actions'>
-        <Button className='ZPaperCard-btn-action' data-testid='ZPaperCard-btn-action' fullWidth={true} variant='outlined' type={props.actionType} disabled={props.disabled} color={props.actionColor} onClick={props.onAction}>
+        {confirm}
+        <Button className='ZPaperCard-btn-action' data-testid='ZPaperCard-btn-action' fullWidth={true} variant='outlined' type={props.actionType} disabled={disabled} color={props.actionColor} onClick={handleAction}>
           {props.actionText}
         </Button>
       </CardActions>
-    ) : null;
+    );
   }
 
   return (
@@ -89,6 +116,11 @@ ZPaperCard.defaultProps = {
   actionType: 'button',
   actionColor: 'primary',
   onAction: noop,
+
+  confirmation: null,
+  confirmationName: null,
+  confirmationColor: 'default',
+  autoConfirm: false,
 
   avatar: null,
   action: null

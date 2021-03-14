@@ -53,9 +53,6 @@ export { IZTypedocViewerProps } from './doc/typedoc-viewer.props';
 export { ZFileSelectInput } from './file/file-select-input.class';
 export { useFileSelect, ZFileSelectContext } from './file/file-select.context';
 export { IZFileSelect } from './file/file-select.interface';
-// Form
-export { ZActionForm } from './form/action-form';
-export { IZActionFormProps } from './form/action-form.props';
 // Image
 export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
 // Loading
@@ -75,8 +72,6 @@ export { ZProfileActivationForm } from './profile/profile-activation-form';
 export { IZProfileActivationFormProps } from './profile/profile-activation-form.props';
 export { ZProfileAvatarForm } from './profile/profile-avatar-form';
 export { IZProfileAvatarFormProps } from './profile/profile-avatar-form.props';
-export { ZProfileDeleteForm } from './profile/profile-delete-form';
-export { IZProfileDeleteFormProps } from './profile/profile-delete-form.props';
 export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
 export { ZProfileMenu } from './profile/profile-menu';
