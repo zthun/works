@@ -20,7 +20,8 @@
     "access": "public"
   },
   "files": [
-    "dist/**"
+    "dist/**",
+    "images/**"
   ],
   "devDependencies": {
     "@zthun/works.core": "^1.0.0-22",

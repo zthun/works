@@ -21,6 +21,7 @@
     "access": "public"
   },
   "files": [
+    "images/**",
     "dist/**",
     "docs/**"
   ],
