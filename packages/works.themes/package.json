@@ -25,9 +25,9 @@
     "highlight.js": "^10.4.1"
   },
   "files": [
-    "less",
-    "css",
-    "images"
+    "less/**",
+    "css/**",
+    "images/**"
   ],
   "sideEffects": true,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"

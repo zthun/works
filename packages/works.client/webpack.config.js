@@ -100,7 +100,7 @@ function config(env) {
         template: './src/index.html'
       }),
       new FaviconsWebpackPlugin({
-        logo: path.resolve(__dirname, '../../node_modules/@zthun/works.themes/images/svg/zthunworks-z.svg'),
+        logo: path.resolve(__dirname, 'images/svg/favicon.svg'),
         outputPath: path.resolve(dir, 'images/favicon'),
         prefix: 'images/favicon/',
         favicons: {

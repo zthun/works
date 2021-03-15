@@ -1,6 +1,6 @@
 # Description
 
-The main component library for common react components across @zthun scoped projects.
+This is the main component library for common react based components across @zthun scoped projects.
 
 [![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
 
@@ -20,16 +20,14 @@ yarn add @zthun/works.react
 
 ![Paper Card](images/png/works.react.card.png)
 
-The vast majority of the components in @zthun/works.react are built from a paper card. A paper card is a styled [Material UI Card](https://material-ui.com/components/cards/) component that sits on top of a [Material UI Paper](https://material-ui.com/components/paper/) component for a 3d effect.
+The vast majority of the components in @zthun/works.react are built from a **ZPaperCard**. A paper card is a styled [Material UI Card](https://material-ui.com/components/cards/) component that sits on top of a [Material UI Paper](https://material-ui.com/components/paper/) component for a 3d effect.
 
 The paper card is generally built using the following methodologies.
 
-- The paper card should have a clear title with an icon.
+- The paper card should have a clear title with an avatar icon.
 - There should be a subtitle describing the card.
 - There should be, at most, one primary action that the user can perform on the card.
 - Dangerous actions, such as deletes, should require that the user confirm that they know the consequences of the action.
-
-Given these rules, the remaining components are built on top of the paper card.
 
 ```ts
 import React from 'react';
@@ -214,4 +212,76 @@ export function ZProfilePage() {
 
 ![Store](images/png/works.react.store.png)
 
-The last major feature of this package is how zthunworks deals with global store. A lot of react developers are familiar with redux. The redux pattern is complicated and will add a lot of unnecessary code bloat to manage global state when the function side of react comes with a great global state management tool called a context.
+The last major feature of this package is how zthunworks deals with global store. A lot of react developers are familiar with redux. The redux pattern is complicated and will add a lot of unnecessary code bloat to manage global state when the functional side of react comes with a great global state management tool called a context. Zthunworks combines this context object with rxjs to make a minimal code global state management system by defining objects that can be "watched."
+
+Instead of having to create reducers and actions, you simply define an object interface that you want to watch for changes. You then combine it with the ZDataStateClass and the useWatchableState hook. The easiest global state object that changes is the users current profile state.
+
+In general, a state has three possible values.
+
+1. Undefined means that the state is currently loading.
+1. Null means what it means in JavaScript; there is no value.
+1. A defined object means the value has been loaded and is ready to be used.
+
+The following example shows how to define a global state object that is compatible with the React system.
+
+```ts
+import React, { useState, useContext, createContext } from 'react';
+import { IZProfile } from '@zthun/works.core';
+import { IZDataState, ZDataState, useWatchableState } from '@zthun/works.react';
+
+/**
+ * Defines the context state for teh object.
+ *
+ * Note that the default will just be null here.
+ * You must provide the refresh implementation at the
+ * root of you application.
+ */
+export const ZLoginStateContext = createContext<IZDataState<IZProfile>>(
+  new ZDataState<IZProfile>(null)
+);
+
+/**
+ * Specifies a hook that returns the current value of the state.
+ *
+ * Use this when you don't need to watch for
+ * changes to the object.
+ */
+export function useLogin(): IZDataState<IZProfile> {
+  return useContext(ZLoginStateContext);
+}
+
+/**
+ * Same as useLogin() but will cause
+ * any component using it to redraw.
+ */
+export function useLoginState(): IZDataState<IZProfile> {
+  const loginState = useLogin();
+  return useWatchableState(loginState.data, loginState.dataChange, loginState);
+}
+
+/**
+ * A component that doesn't re-render
+ * when the object changes.
+ */
+export function MyComponentThatRefreshesTheState() {
+  const login = useLogin();
+
+  async function refreshLogin() {
+    await login.refresh();
+  }
+
+  return <button onClick={refreshLogin} />;
+}
+
+/**
+ * This component will re-render any
+ * time the actual state is refreshed.
+ */
+export function MyComponent() {
+  const login = useLoginState();
+
+  const current = login.data;
+
+  return <div>Current Login: {current.display} </div>;
+}
+```
