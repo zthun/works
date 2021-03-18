@@ -28,6 +28,7 @@ export function ZHomePage() {
   const learnReactComponents = learn.bind(null, 'works.react');
   const learnNestServices = learn.bind(null, 'works.nest');
   const learnCoreContracts = learn.bind(null, 'works.core');
+  const learnDal = learn.bind(null, 'works.dal');
 
   return (
     <Grid container={true} spacing={3} className='ZHomePage-root' data-testid='ZHomePage-root' justify='center'>
@@ -44,6 +45,11 @@ export function ZHomePage() {
       <Grid item={true} data-testid='ZHomePage-learn-core-contracts'>
         <ZPaperCard headerText='Core' subHeaderText='@zthun/works.core' imageUrl='images/svg/works.core.svg' imageHeight={imgDimension} size={size} avatar={library} actionText={learnMore} onAction={learnCoreContracts}>
           <Typography className='ZHomePage-summary-text'>Zthunworks has a shared layer of common functionality across the client and the server that is separated into a framework-agnostic package for anyone to consume.</Typography>
+        </ZPaperCard>
+      </Grid>
+      <Grid item={true} data-testid='ZHomePage-learn-data-access'>
+        <ZPaperCard headerText='Data Access' subHeaderText='@zthun/works.dal' imageUrl='images/svg/works.dal.svg' imageHeight={imgDimension} size={size} avatar={library} actionText={learnMore} onAction={learnDal}>
+          <Typography className='ZHomePage-summary-text'>Zthunworks uses mongodb for data data access for quick adaptability, fast schema changes, and standardized apis which is not susceptible to injection attacks.</Typography>
         </ZPaperCard>
       </Grid>
     </Grid>
