@@ -24,6 +24,7 @@ import '@zthun/works.dal/images';
 import '@zthun/works.react/images';
 import '@zthun/works.nest/images';
 import '@zthun/works.themes/images';
+import '@zthun/works.url/images';
 
 // Legal
 import '@zthun/works.core/PRIVACY.md';

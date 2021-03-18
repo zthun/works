@@ -54,4 +54,12 @@ describe('ZHomePage', () => {
   it('navigates to the works.core learn page.', async () => {
     await assertNavigatesToPage('ZHomePage-learn-core-contracts', 'works.core');
   });
+
+  it('navigates to the works.dal learn page.', async () => {
+    await assertNavigatesToPage('ZHomePage-learn-data-access', 'works.dal');
+  });
+
+  it('navigates to the works.url learn page.', async () => {
+    await assertNavigatesToPage('ZHomePage-learn-url', 'works.url');
+  });
 });
