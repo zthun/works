@@ -6,7 +6,7 @@ Zthunworks Nest services implement standard distributable services that can be r
 
 ## Installation
 
-There are quite a few dependencies that this package requires.
+There are quite a few dependencies that this package requires. Double check after installation and follow instructions to install of the needed dependency packages.
 
 ```sh
 # NPM
@@ -16,12 +16,6 @@ yarn add @zthun/works.nest
 ```
 
 This package is divided into modules that automatically add specific http routes and services to your application without you having to add additional implementation. This package is built around the [nestjs](https://nestjs.com/) framework.
-
-## Modules
-
-| Module               | Description                                                  | Adds routes | Requires Database |
-| -------------------- | ------------------------------------------------------------ | ----------- | ----------------- |
-| ZNotificationsModule | Contains services for sending emails and messages to people. | No          | No                |
 
 ## Users Module
 
@@ -71,17 +65,7 @@ export class ProfilesController {
   imports: [ZUsersModule]
   controllers: [MyController]
 })
-export class MyApp {
-  public static async run() {
-    const app = await NestFactory.create(Myapp);
-    // This is optional, but is highly recommend for easy use with
-    // the ZUrlBuilder class found in the @zthun/works.url package.
-    app.setGlobalPrefix('api');
-    await app.listen(3000);
-  }
-}
-
-MyApp.run();
+export class MyApp {}
 ```
 
 ## Vault Module
@@ -132,17 +116,49 @@ export class MyService implements OnModuleInit {
   imports: [ZVaultModule]
   controllers: [MyController]
 })
-export class MyApp {
-  public static async run() {
-    const app = await NestFactory.create(Myapp);
-    // This is optional, but is highly recommend for easy use with
-    // the ZUrlBuilder class found in the @zthun/works.url package.
-    app.setGlobalPrefix('api');
-    await app.listen(3000);
+export class MyApp {}
+```
+
+## Notifications Module
+
+![Notifications](images/png/works.nest.notifications.png)
+
+The notifications module is a small module that is responsible for sending message notifications to users. The primary service in this module is the **ZEmailModule** which requires an smtp server and an email to send.
+
+```ts
+import {
+  ZServerBuilder,
+  ZEmailEnvelopeBuilder,
+  ZEmailBuilder
+} from '@zthun/works.core';
+import { ZEmailService, ZNotificationsModule } from '@zthun/works.nest';
+
+@Injectable()
+export class MyService {
+  public constructor(private _email: ZEmailService) {}
+
+  public sendActivationEmail(from: string, to: string): Promise<IZEmail> {
+    const server = new ZServerBuilder()
+      .address('smtp.email-server.com')
+      .build();
+    const envelope = new ZEmailEnvelopeBuilder().to(to).from(from).build();
+    const subject = 'Activation successful';
+    const message = 'You have successfully activated your account.';
+    const email = new ZEmailBuilder()
+      .message(message)
+      .subject(subject)
+      .envelope(envelope)
+      .build();
+    await this._email.send(email, server);
+    return email;
   }
 }
 
-MyApp.run();
+@Module({
+  imports: [ZNotificationsModule],
+  providers: [MyService]
+})
+export class MyModule {}
 ```
 
 ## Auth Module
@@ -162,18 +178,7 @@ import cookieParser from 'cookie-parser';
 @Module({
   imports: [ZAuthModule]
 })
-export class ZMainModule {
-  public static async run() {
-    const app = await NestFactory.create(ZMainModule);
-    app.use(cookieParser());
-    // This is optional, but is highly recommend for easy use with
-    // the ZUrlBuilder class found in the @zthun/works.url package.
-    app.setGlobalPrefix('api');
-    await app.listen(3000);
-  }
-}
-
-ZMainModule.run();
+export class MyApp {}
 ```
 
 ### Routes
@@ -246,4 +251,26 @@ The auth module adds the following routes.
  * Destroys the current cookie and invalids the current login session.
  */
 @Delete('tokens')
+```
+
+## Health Module
+
+![Health](images/png/works.nest.health.png)
+
+The final module that this package provides is the health module that adds a single route to your application. This route has no restrictions behind it, requires no user authentication, and always returns a 200 return code.
+
+```ts
+import { ZHealthModule } from '@zthun/works.nest';
+
+@Module({})
+export class MyApp {}
+```
+
+The following is the route that gets added.
+
+```ts
+/**
+ * Returns a 200 return code.
+ */
+@Get('health')
 ```
