@@ -9,8 +9,8 @@
     "url": "https://github.com/zthun/works",
     "directory": "packages/works.themes"
   },
-  "styles": "less/index.min.css",
-  "css": "less/index.min.css",
+  "styles": "css/index.min.css",
+  "css": "css/index.min.css",
   "less": "less/index.less",
   "scripts": {
     "build:mincss": "cleancss -o css/index.min.css css/index.css",
