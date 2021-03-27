@@ -1,3 +1,10 @@
 {
-  "extends": "./node_modules/@zthun/lint-janitor/lint/.markdownlintrc"
+  "heading-increment": false,
+  "no-multiple-blanks": false,
+  "single-title": false,
+  "line-length": false,
+  "no-inline-html": false,
+  "no-duplicate-heading": {
+    "allow_different_nesting": true
+  }
 }

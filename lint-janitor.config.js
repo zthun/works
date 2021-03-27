@@ -4,6 +4,7 @@ module.exports = {
   styleConfig: '.stylelintrc',
   styleFiles: ['packages/**/src/**/*.less', 'packages/**/less/**/*.less'],
   htmlFiles: ['packages/**/src/**/*.html'],
+  markdownConfig: '.markdownlintrc',
   markdownFiles: ['*.md', 'packages/**/*.md'],
   jsonFiles: ['*.json', 'packages/**/*.json'],
   yamlFiles: ['./docker-compose.yml', '.travis.yml']
