@@ -30,7 +30,6 @@
     "lint": "lint-janitor",
     "build": "lerna run build",
     "make": "yarn clean && yarn lint && yarn test && yarn build",
-    "start": "yarn docs && docker-compose up",
     "docker:publish": "lerna run docker:publish",
     "docker:build": "lerna run docker:build",
     "docker": "yarn docker:build && yarn docker:publish",
