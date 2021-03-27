@@ -21,8 +21,10 @@ import '@zthun/works.url/README.md';
 // Media
 import '@zthun/works.core/images';
 import '@zthun/works.dal/images';
-import '@zthun/works.react/images';
+import '@zthun/works.draw/images';
+import '@zthun/works.jest/images';
 import '@zthun/works.nest/images';
+import '@zthun/works.react/images';
 import '@zthun/works.themes/images';
 import '@zthun/works.url/images';
 
