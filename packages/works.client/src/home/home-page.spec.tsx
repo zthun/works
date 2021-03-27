@@ -44,22 +44,30 @@ describe('ZHomePage', () => {
   });
 
   it('navigates to the works.react learn page.', async () => {
-    await assertNavigatesToPage('ZHomePage-learn-react-components', 'works.react');
+    await assertNavigatesToPage('ZHomePage-learn-react', 'works.react');
   });
 
   it('navigates to the works.nest learn page.', async () => {
-    await assertNavigatesToPage('ZHomePage-learn-nest-services', 'works.nest');
+    await assertNavigatesToPage('ZHomePage-learn-nest', 'works.nest');
   });
 
   it('navigates to the works.core learn page.', async () => {
-    await assertNavigatesToPage('ZHomePage-learn-core-contracts', 'works.core');
+    await assertNavigatesToPage('ZHomePage-learn-core', 'works.core');
   });
 
   it('navigates to the works.dal learn page.', async () => {
-    await assertNavigatesToPage('ZHomePage-learn-data-access', 'works.dal');
+    await assertNavigatesToPage('ZHomePage-learn-dal', 'works.dal');
   });
 
   it('navigates to the works.url learn page.', async () => {
     await assertNavigatesToPage('ZHomePage-learn-url', 'works.url');
+  });
+
+  it('navigates to the works.draw learn page.', async () => {
+    await assertNavigatesToPage('ZHomePage-learn-draw', 'works.draw');
+  });
+
+  it('navigates to the works.jest learn page.', async () => {
+    await assertNavigatesToPage('ZHomePage-learn-jest', 'works.jest');
   });
 });
