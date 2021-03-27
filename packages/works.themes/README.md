@@ -1,6 +1,6 @@
 # Description
 
-This is the themes package that goes hand in hand with teh @zthun/works.react package. It contains all of the resources images and styles for the main website.
+This is the themes package that goes hand in hand with the @zthun/works.react package. It contains all of the resources images and styles for the main website.
 
 [![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
 
@@ -22,4 +22,4 @@ The best way to use this is to simply use webpack in your client application and
 @import '~@zthun/works.themes';
 ```
 
-After that, ever component in the @zthun/works.react package will look like it does on [zthunworks.com](https://zthunworks.com).
+After that, every component in the @zthun/works.react package will look like it does on [zthunworks.com](https://zthunworks.com).
