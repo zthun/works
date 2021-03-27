@@ -33,7 +33,7 @@
     "docker:publish": "lerna run docker:publish",
     "docker:build": "lerna run docker:build",
     "docker": "yarn docker:build && yarn docker:publish",
-    "release": "yarn make && lerna version && lerna publish from-package"
+    "release": "yarn make && lerna publish --conventional-commits -m \"chore: publish [skip ci]\""
   },
   "devDependencies": {
     "@material-ui/core": "^4.3.3",
