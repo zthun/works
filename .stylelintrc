@@ -1,7 +1,0 @@
-{
-  "extends": "@zthun/lint-janitor/lint/.stylelintrc",
-  "rules": {
-    "no-descending-specificity": null,
-    "declaration-empty-line-before": "never"
-  }
-}
