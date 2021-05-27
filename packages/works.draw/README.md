@@ -15,9 +15,9 @@ yarn add rxjs @zthun/works.draw
 
 ## Introduction
 
-Draw is structured with the root item being of type ZPrintableDrawing. A printable drawing is a model representation of how to render to an HTML Canvas drawing context and is structured in three stacked layers, the background, the midground, and the foreground.
+Draw is structured with the root item being of type ZPrintableDrawing. A printable drawing is a model representation of how to render to an HTML Canvas drawing context and is structured in three stacked layers, the background, the middleground, and the foreground.
 
-All of the layers have the same structure; the only difference between the layers is that any transformations that occur in each of the layers do not affect the other layers. For example, lets say the entire midground has a scaling transformation of 200%. When the midground is drawn, it will draw at 200% of its size, but when the foreground is drawn after it, it will reset the transformation.
+All of the layers have the same structure; the only difference between the layers is that any transformations that occur in each of the layers do not affect the other layers. For example, lets say the entire middleground has a scaling transformation of 200%. When the middleground is drawn, it will draw at 200% of its size, but when the foreground is drawn after it, it will reset the transformation.
 
 ## Printable
 
@@ -58,13 +58,7 @@ export class ZPrintableTransform {}
 ```
 
 ```ts
-import {
-  ZPrintableDrawing,
-  ZPrintableImage,
-  ZPrintableGroup,
-  ZPrintableTransform,
-  ZPrintableColor
-} from '@zthun/works.draw';
+import { ZPrintableDrawing, ZPrintableImage, ZPrintableGroup, ZPrintableTransform, ZPrintableColor } from '@zthun/works.draw';
 
 async function draw(canvas: HTMLCanvasElement) {
   const url = 'https://images.to.draw/my-image.jpg';
@@ -74,10 +68,7 @@ async function draw(canvas: HTMLCanvasElement) {
 
   drawing.background = new ZPrintableColor('white');
   drawing.foreground = new ZPrintableNothing();
-  drawing.midground = new ZPrintableGroup([
-    new ZPrintableTransform().scale(2.0, 2.0).translate(10, 10),
-    image
-  ]);
+  drawing.midground = new ZPrintableGroup([new ZPrintableTransform().scale(2.0, 2.0).translate(10, 10), image]);
 
   drawing.print(canvas.getContext('2d'));
 }
@@ -95,17 +86,9 @@ export class ZToolingPan {}
 ```
 
 ```ts
-import {
-  ZToolingPan,
-  IZPrintable,
-  IZTransformTranslate
-} from '@zthun/works.draw';
+import { ZToolingPan, IZPrintable, IZTransformTranslate } from '@zthun/works.draw';
 
-function start(
-  canvas: HTMLCanvasElement,
-  drawing: IZPrintable,
-  transform: IZTransformTranslate
-) {
+function start(canvas: HTMLCanvasElement, drawing: IZPrintable, transform: IZTransformTranslate) {
   const tool = new ZToolingPan();
   tool.init(canvas, canvas.getContext('2d'), drawing, transform);
 }

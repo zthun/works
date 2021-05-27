@@ -10,7 +10,7 @@ export function createMocked<T>(methods?: Array<keyof T>): jest.Mocked<T> {
 
   methods = methods || [];
   methods.forEach((method) => {
-    mockup[method] = (jest.fn() as unknown) as jest.Mocked<T>[keyof T];
+    mockup[method] = jest.fn() as unknown as jest.Mocked<T>[keyof T];
   });
 
   return mockup;

@@ -126,11 +126,7 @@ export class MyApp {}
 The notifications module is a small module that is responsible for sending message notifications to users. The primary service in this module is the **ZEmailModule** which requires an smtp server and an email to send.
 
 ```ts
-import {
-  ZServerBuilder,
-  ZEmailEnvelopeBuilder,
-  ZEmailBuilder
-} from '@zthun/works.core';
+import { ZServerBuilder, ZEmailEnvelopeBuilder, ZEmailBuilder } from '@zthun/works.core';
 import { ZEmailService, ZNotificationsModule } from '@zthun/works.nest';
 
 @Injectable()
@@ -138,17 +134,11 @@ export class MyService {
   public constructor(private _email: ZEmailService) {}
 
   public sendActivationEmail(from: string, to: string): Promise<IZEmail> {
-    const server = new ZServerBuilder()
-      .address('smtp.email-server.com')
-      .build();
+    const server = new ZServerBuilder().address('smtp.email-server.com').build();
     const envelope = new ZEmailEnvelopeBuilder().to(to).from(from).build();
     const subject = 'Activation successful';
     const message = 'You have successfully activated your account.';
-    const email = new ZEmailBuilder()
-      .message(message)
-      .subject(subject)
-      .envelope(envelope)
-      .build();
+    const email = new ZEmailBuilder().message(message).subject(subject).envelope(envelope).build();
     await this._email.send(email, server);
     return email;
   }

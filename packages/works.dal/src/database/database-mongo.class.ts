@@ -84,7 +84,7 @@ export class ZDatabaseMongo implements IZDatabase {
       this._do(source, async (docs: Collection<T>) => {
         template = template.map((t: any) => ({ ...t, _id: t._id || v4() }));
         const result = await docs.insertMany(template as any[]);
-        return (result.ops as unknown) as T[];
+        return result.ops as unknown as T[];
       })
     );
   }

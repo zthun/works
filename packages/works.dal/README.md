@@ -18,18 +18,10 @@ yarn install @zthun/works.dal
 The basic usage of the dal layer is to build up a query that you want results from and fire it off against the actual database that it is connected to. You always start by setting up a connection, either globally or as part of the query process.
 
 ```ts
-import {
-  IZDatabase,
-  IZDatabaseOptions,
-  ZDatabaseOptionsBuilder,
-  ZDatabaseZDatabaseMongo
-} from '@zthun/works.dal';
+import { IZDatabase, IZDatabaseOptions, ZDatabaseOptionsBuilder, ZDatabaseZDatabaseMongo } from '@zthun/works.dal';
 
 async function getFoo(connection: string, id: string) {
-  const options = new ZDatabaseOptionsBuilder()
-    .url(connection)
-    .database('foo')
-    .build();
+  const options = new ZDatabaseOptionsBuilder().url(connection).database('foo').build();
 
   const db: IZDatabase = ZDatabaseMongo.connect(options);
   const [bar] = await db.read<any>('bars').filter({ _id: id }).run();
@@ -48,10 +40,7 @@ const FOO_DATABASE_NAME = 'foo';
 const FOO_DATABASE_TOKEN = 'foo-database';
 const FOO_DATABASE_URL = env.FOO_DATABASE_URL;
 
-const DATABASE_OPTIONS = new ZDatabaseOptionsBuilder()
-  .database(DATABASE_NAME)
-  .url(FOO_DATABASE_URL)
-  .build();
+const DATABASE_OPTIONS = new ZDatabaseOptionsBuilder().database(DATABASE_NAME).url(FOO_DATABASE_URL).build();
 
 @Module({
   providers: [
@@ -73,9 +62,7 @@ const DATABASE_COLLECTION = 'bars';
 
 @Injectable()
 export class FooService {
-  public constructor(
-    @Inject(DATABASE_TOKEN) private readonly _dal: IZDatabase
-  ) {}
+  public constructor(@Inject(DATABASE_TOKEN) private readonly _dal: IZDatabase) {}
 
   public list(): Promise<any[]> {
     return this._dal.read<any>(DATABASE_COLLECTION).run();

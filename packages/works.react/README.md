@@ -28,8 +28,7 @@ yarn add @zthun/works.themes
 The best way to apply the themes package is to simply use webpack in your client application and import the package directly.
 
 ```less
-// index.less
-@import '~@zthun/works.themes';
+@import '@zthun/works.themes';
 ```
 
 After that, every component in the @zthun/works.react package will look like it does on [zthunworks.com](https://zthunworks.com).
@@ -37,7 +36,7 @@ After that, every component in the @zthun/works.react package will look like it 
 Note that currently, the themes package is written in less. If you are using sass or css, you will want to import the css file instead of the less file.
 
 ```scss
-@import '@zthun/works.themes/css/index';
+@use '@zthun/works.themes/css/index';
 ```
 
 ## Paper Card
@@ -61,13 +60,7 @@ import { IZMyComponentProps } from './my-component.props.ts';
 
 export function MyComponent(props: IZMyComponentProps) {
   return (
-    <ZPaperCard
-      className='MyComponent-root'
-      headerText='My Component'
-      subHeaderText='My Component Description'
-      avatar={<AddIcon />}
-      size='md'
-    >
+    <ZPaperCard className='MyComponent-root' headerText='My Component' subHeaderText='My Component Description' avatar={<AddIcon />} size='md'>
       Content for the PaperCard is here.
     </ZPaperCard>
   );
@@ -91,26 +84,13 @@ export function MyComponent() {
   const alerts = useAlertStack();
 
   function handleAlert() {
-    const alert = new ZAlertBuilder()
-      .success()
-      .message('Yay!  Success alert')
-      .header('Successful Alert')
-      .build();
+    const alert = new ZAlertBuilder().success().message('Yay!  Success alert').header('Successful Alert').build();
     alerts.add(alert);
   }
 
   return (
-    <ZPaperCard
-      className='MyComponent-root'
-      headerText='Alert Sample'
-      subHeaderText='Show a success alert'
-      avatar={<AnnouncementIcon />}
-      actionText='Show Alert'
-      onAction={handleAlert}
-    >
-      Alerts can have varying severity, messages, and titles. Use them to notify
-      your users that things are happening in your application as a result of
-      their actions.
+    <ZPaperCard className='MyComponent-root' headerText='Alert Sample' subHeaderText='Show a success alert' avatar={<AnnouncementIcon />} actionText='Show Alert' onAction={handleAlert}>
+      Alerts can have varying severity, messages, and titles. Use them to notify your users that things are happening in your application as a result of their actions.
     </ZPaperCard>
   );
 }
@@ -139,18 +119,10 @@ export function MyPage() {
   const img = `images/svg/${pkg}.svg`;
   const src = `docs/${pkg}.typedoc.json`;
 
-  const avatar = (
-    <img className='ZPaperCard-avatar ZPaperCard-avatar-lg' src={img} />
-  );
+  const avatar = <img className='ZPaperCard-avatar ZPaperCard-avatar-lg' src={img} />;
 
   return (
-    <Grid
-      container={true}
-      spacing={3}
-      className='ZApiPage-root'
-      data-testid='ZApiPage-root'
-      justify='center'
-    >
+    <Grid container={true} spacing={3} className='ZApiPage-root' data-testid='ZApiPage-root' justify='center'>
       <Grid item={true}>
         <ZTypedocViewerSource src={src} avatar={avatar} />
       </Grid>
@@ -193,11 +165,7 @@ export function MyLoginPage() {
   return (
     <Grid container={true} spacing={3} justify='center'>
       <Grid item={true}>
-        <ZLoginTabs
-          onLoginCredentialsChange={handleLogin}
-          onCreateCredentialsChange={handleCreate}
-          onRecoverCredentialsChange={handleRecover}
-        />
+        <ZLoginTabs onLoginCredentialsChange={handleLogin} onCreateCredentialsChange={handleCreate} onRecoverCredentialsChange={handleRecover} />
       </Grid>
     </Grid>
   );
@@ -222,10 +190,7 @@ export function ZProfilePage() {
   return (
     <Grid container spacing={3} justify='center'>
       <Grid item>
-        <ZProfileForm
-          profile={loginState.data}
-          onProfileChange={handleUpdateProfile}
-        />
+        <ZProfileForm profile={loginState.data} onProfileChange={handleUpdateProfile} />
       </Grid>
     </Grid>
   );
@@ -260,9 +225,7 @@ import { IZDataState, ZDataState, useWatchableState } from '@zthun/works.react';
  * You must provide the refresh implementation at the
  * root of you application.
  */
-export const ZLoginStateContext = createContext<IZDataState<IZProfile>>(
-  new ZDataState<IZProfile>(null)
-);
+export const ZLoginStateContext = createContext<IZDataState<IZProfile>>(new ZDataState<IZProfile>(null));
 
 /**
  * Specifies a hook that returns the current value of the state.

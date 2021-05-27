@@ -92,11 +92,7 @@ Here, the vault has three configurations, with two common scopes and one for foo
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
 
 function createDefaultDomainConfig(): IZConfigEntry {
-  const config: IZConfigEntry = new ZConfigEntryBuilder()
-    .scope('common')
-    .key('domain')
-    .value('zthunworks')
-    .build();
+  const config: IZConfigEntry = new ZConfigEntryBuilder().scope('common').key('domain').value('zthunworks').build();
   return config;
 }
 ```
@@ -114,31 +110,13 @@ Email objects are split into three categories: the email itself, the email envel
 - The email contact is represented **IZEmailContact** and uses the _ZEmailContactBuilder_ to construct it.
 
 ```ts
-import {
-  IZEmail,
-  IZEmailEnvelope,
-  IZEmailContact,
-  ZEmailBuilder,
-  ZEmailEnvelopeBuilder,
-  ZEmailContactBuilder
-} from '@zthun/works.core';
+import { IZEmail, IZEmailEnvelope, IZEmailContact, ZEmailBuilder, ZEmailEnvelopeBuilder, ZEmailContactBuilder } from '@zthun/works.core';
 
 function createEmailMessageToAdmin(msg: string, subject: string) {
   const current: IZEmailContact = getCurrentUserEmailAddress();
-  const admin = new ZEmailContactBuilder()
-    .address('admin@zthunworks.com')
-    .display('Admin')
-    .type('email-message')
-    .build();
-  const envelope: IZEmailEnvelope = new ZEmailEnvelopeBuilder()
-    .from(current)
-    .to(admin)
-    .build();
-  const email: IZEmail = new ZEmailBuilder()
-    .envelope(envelope)
-    .message(msg)
-    .subject(subject)
-    .build();
+  const admin = new ZEmailContactBuilder().address('admin@zthunworks.com').display('Admin').type('email-message').build();
+  const envelope: IZEmailEnvelope = new ZEmailEnvelopeBuilder().from(current).to(admin).build();
+  const email: IZEmail = new ZEmailBuilder().envelope(envelope).message(msg).subject(subject).build();
   return email;
 }
 ```
@@ -186,10 +164,7 @@ The following example details usage for the ZErrorBuilder.
 import { IZError, ZErrorBuilder } from '@zthun/works.core';
 
 function createErrorForUnhandledException(msg: string, type: string) {
-  const error = new ZErrorBuilder(ZHttpCodeServer.InternalServerError)
-    .type(type)
-    .english(msg)
-    .build();
+  const error = new ZErrorBuilder(ZHttpCodeServer.InternalServerError).type(type).english(msg).build();
   return error;
 }
 ```
@@ -224,10 +199,7 @@ For sorting, we have the **IZSort** and the _ZSortBuilder_ for construction. A s
 import { IZSort, ZSortBuilder } from '@zthun/works.core';
 
 function sortByNameThenByAge() {
-  const sort: IZSort[] = new ZSortBuilder()
-    .ascending('name')
-    .descending('age')
-    .build();
+  const sort: IZSort[] = new ZSortBuilder().ascending('name').descending('age').build();
   return sort;
 }
 ```
@@ -277,38 +249,13 @@ export interface IZUnaryFilter {}
 The following example shows the general use of creating a logical filter clause by using builders.
 
 ```ts
-import {
-  IZBinaryFilter,
-  IZLogicFilter,
-  IZCollectionFilter,
-  IZUnaryFilter,
-  ZCollectionFilterBuilder,
-  ZBinaryFilter,
-  ZLogicFilter,
-  ZUnaryFilter
-} from '@zthun/works.core';
+import { IZBinaryFilter, IZLogicFilter, IZCollectionFilter, IZUnaryFilter, ZCollectionFilterBuilder, ZBinaryFilter, ZLogicFilter, ZUnaryFilter } from '@zthun/works.core';
 
 function createComplexFilter(): IZFilter {
-  const ageIsSet: IZUnaryFilter = new ZUnaryFilterBuilder()
-    .field('age')
-    .isNotNull()
-    .build();
-  const ageIsAdult: IZBinaryFilter = new ZBinaryFilterBuilder()
-    .field('age')
-    .greaterThanEqualTo()
-    .value(0)
-    .build();
-  const ageIsNotTwentyOneOrTwentyFive: IZCollectionFilter = new ZCollectionFilterBuilder()
-    .field('age')
-    .notIn()
-    .values([21, 25])
-    .build();
-  const filter: IZLogicFilter = new ZLogicFilterBuilder()
-    .and()
-    .clause(ageIsSet)
-    .clause(ageIsAdult)
-    .clause(ageIsNotTwentyOneOrTwentyFive)
-    .build();
+  const ageIsSet: IZUnaryFilter = new ZUnaryFilterBuilder().field('age').isNotNull().build();
+  const ageIsAdult: IZBinaryFilter = new ZBinaryFilterBuilder().field('age').greaterThanEqualTo().value(0).build();
+  const ageIsNotTwentyOneOrTwentyFive: IZCollectionFilter = new ZCollectionFilterBuilder().field('age').notIn().values([21, 25]).build();
+  const filter: IZLogicFilter = new ZLogicFilterBuilder().and().clause(ageIsSet).clause(ageIsAdult).clause(ageIsNotTwentyOneOrTwentyFive).build();
   return filter;
 }
 ```
@@ -325,12 +272,7 @@ At minimum, you will need the address to connect to. Additionally, unless the ta
 import { IZServer, ZServerBuilder } from '@zthun/works.core';
 
 function createFtpServerConnection() {
-  const server: IZServer = new ZServerBuilder()
-    .address('ftp://my-host.info')
-    .port(8922)
-    .username('foo')
-    .password('pa$$w0rD')
-    .build();
+  const server: IZServer = new ZServerBuilder().address('ftp://my-host.info').port(8922).username('foo').password('pa$$w0rD').build();
   return server;
 }
 ```

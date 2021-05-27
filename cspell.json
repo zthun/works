@@ -1,0 +1,30 @@
+{
+  "version": "0.1",
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/master/cspell.schema.json",
+  "language": "en",
+  "words": [
+    "Bonta",
+    "CCPA",
+    "choco",
+    "cleancss",
+    "favicons",
+    "htmlhint",
+    "jetstack",
+    "kubectl",
+    "kubernetes",
+    "lessc",
+    "markdownlint",
+    "middleground",
+    "midground",
+    "mincss",
+    "nestjs",
+    "Photoshop",
+    "stylelint",
+    "Termly’s",
+    "testid",
+    "typedoc",
+    "zthun",
+    "Zthunworks"
+  ],
+  "dictionaries": ["typescript", "node", "npm", "en_US"]
+}
