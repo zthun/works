@@ -4,6 +4,7 @@ import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { IZAlertStack, IZDataState, ZAlertStack, ZAlertStackContext, ZLoginStateContext, ZDataStateStatic } from '@zthun/works.react';
 import Axios from 'axios';
 import { createMemoryHistory, MemoryHistory } from 'history';
+import { identity, kebabCase } from 'lodash';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { Router } from 'react-router-dom';
@@ -138,6 +139,71 @@ describe('ZthunworksMenu', () => {
       fireEvent.click(home);
       // Assert
       expect(history.location.pathname).toEqual('/home');
+    });
+  });
+
+  describe('More', () => {
+    function openNavDrawer(target: RenderResult) {
+      const more = target.getByTestId('ZthunworksMenu-btn-more');
+      fireEvent.click(more);
+      return target.getByTestId('ZthunworksMenu-drawer-more');
+    }
+
+    function clickMenuItem(drawer: HTMLElement, name: string) {
+      const kebab = kebabCase(name);
+      const clasz = `.ZthunworksMenu-drawer-more-item-${kebab}`;
+      const item = drawer.querySelector(clasz);
+      fireEvent.click(item);
+    }
+
+    async function assertPushesHistory(expected: string, item: string) {
+      // Arrange
+      const target = await createTestTarget();
+      const drawer = openNavDrawer(target);
+      // Act
+      clickMenuItem(drawer, item);
+      // Assert
+      expect(history.location.pathname).toEqual(expected);
+    }
+
+    async function assertOpensWindow(expected: string, item: string) {
+      // Arrange
+      jest.spyOn(window, 'open').mockImplementation(identity.bind(null, window));
+      const target = await createTestTarget();
+      const drawer = openNavDrawer(target);
+      // Act
+      clickMenuItem(drawer, item);
+      // Assert
+      expect(window.open).toHaveBeenCalledWith(expect.stringContaining(expected), '_blank');
+    }
+
+    it('should open the nav drawer.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const actual = openNavDrawer(target);
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('should move to the home page.', async () => {
+      await assertPushesHistory('/home', 'Home');
+    });
+
+    it('should move to the terms page.', async () => {
+      await assertPushesHistory('/terms', 'Terms');
+    });
+
+    it('should move to the privacy page.', async () => {
+      await assertPushesHistory('/privacy', 'Privacy');
+    });
+
+    it('should open github for zthunworks.', async () => {
+      await assertOpensWindow('github.com', 'GitHub');
+    });
+
+    it('should open the mailto contact for zthunworks.', async () => {
+      await assertOpensWindow('mailto:', 'Contact');
     });
   });
 });
