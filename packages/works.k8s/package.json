@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.k8s",
-  "version": "1.0.0-24",
+  "version": "1.0.0-26",
   "private": true,
   "description": "The helm chart source..",
   "author": "Anthony Bonta",

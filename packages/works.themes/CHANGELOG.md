@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-26](https://github.com/zthun/works/compare/v1.0.0-25...v1.0.0-26) (2021-05-27)
+
+
+### Features
+
+* removed the footer in favor of a drawer ([a6f4b3b](https://github.com/zthun/works/commit/a6f4b3bf2748add82b5de942125c1f39779bdd50))
+
+
+
+
+
 # [1.0.0-25](https://github.com/zthun/works/compare/v1.0.0-24...v1.0.0-25) (2021-03-27)
 
 
