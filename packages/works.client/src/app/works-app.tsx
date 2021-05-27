@@ -6,7 +6,6 @@ import Axios from 'axios';
 import React from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { ZStatusCodePage } from '../codes/status-code-page';
-import { ZthunworksFooter } from '../footer/works-footer';
 import { ZHomePage } from '../home/home-page';
 import { ZApiPage } from '../learn/api-page';
 import { ZLearnPage } from '../learn/learn-page';
@@ -54,7 +53,6 @@ export function ZthunworksApp() {
                 <Redirect to='/status-code/404' />
               </Switch>
             </article>
-            <ZthunworksFooter />
           </HashRouter>
           <Snackbar className='Zthunworks-snackbar' open={true} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
             <ZAlertStackList />
