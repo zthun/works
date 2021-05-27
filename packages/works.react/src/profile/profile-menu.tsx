@@ -1,7 +1,8 @@
-import { Button, Grid, Hidden, Menu, MenuItem } from '@material-ui/core';
+import { Button, Grid, Hidden, Menu, MenuItem, Typography } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { noop } from 'lodash';
 import React from 'react';
+import PersonIcon from '@material-ui/icons/Person';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { useMenuState } from '../menu/use-menu-state.hook';
 import { IZProfileMenuProps } from './profile-menu.props';
@@ -27,7 +28,10 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
   function createLoginButton() {
     return (
       <Button className='ZProfileMenu-btn-login' data-testid='ZProfileMenu-btn-login' color='inherit' onClick={props.onLogin}>
-        LOGIN
+        <PersonIcon />
+        <Hidden only='xs'>
+          <Typography>LOGIN</Typography>
+        </Hidden>
       </Button>
     );
   }

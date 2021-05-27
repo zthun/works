@@ -10,7 +10,12 @@
   }
 
   .ZthunworksMenu-title {
-    font-size: 1.5rem;
+    display: block;
+    font-size: @sizing-font-lg;
+
+    @media (max-width: 400px) {
+      display: none;
+    }
   }
 
   .ZthunworksMenu-icon {

@@ -89,7 +89,7 @@ export function ZthunworksMenu(): JSX.Element {
    */
   function createHomeButton() {
     return (
-      <Button className='ZthunworksMenu-btn-home' color='inherit' onClick={handleHome}>
+      <Button className='ZthunworksMenu-btn-home' data-testid='ZthunworksMenu-btn-home' color='inherit' onClick={handleHome}>
         <img className='ZthunworksMenu-icon' src='images/svg/zthunworks-owl.svg' />
         <Typography className='ZthunworksMenu-title' color='inherit' variant='h1'>
           ZTHUNWORKS
