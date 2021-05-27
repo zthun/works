@@ -68,7 +68,7 @@ describe('ZthunworksMenu', () => {
         const target = await createTestTarget();
         // Act
         await act(async () => {
-          const actual = target.getByText('LOGIN');
+          const actual = target.getByTestId('ZProfileMenu-btn-login');
           fireEvent.click(actual);
         });
         // Assert
