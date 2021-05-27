@@ -90,7 +90,7 @@ describe('ZDatabaseMongo', () => {
     let betty: any;
     let parents: any[];
     let parentsSource: string;
-    let bambam: any;
+    let bamBam: any;
     let pebbles: any;
     let kids: any;
     let kidsSource: string;
@@ -122,11 +122,11 @@ describe('ZDatabaseMongo', () => {
         name: 'Betty'
       };
 
-      bambam = {
+      bamBam = {
         _id: v4(),
         fatherId: barney._id,
         motherId: betty._id,
-        name: 'Bambam'
+        name: 'BamBam'
       };
 
       pebbles = {
@@ -136,10 +136,10 @@ describe('ZDatabaseMongo', () => {
         name: 'Pebbles'
       };
 
-      parentsSource = 'flinstones-parents';
+      parentsSource = 'flintstones-parents';
       parents = [fred, barney, wilma, betty];
-      kidsSource = 'flinstones-kids';
-      kids = [bambam, pebbles];
+      kidsSource = 'flintstones-kids';
+      kids = [bamBam, pebbles];
     });
 
     describe('Create', () => {
@@ -235,7 +235,7 @@ describe('ZDatabaseMongo', () => {
         expect(actual).toEqual([wilma, betty]);
       });
 
-      it('returns the empty array if retriving any pages beyond the last.', async () => {
+      it('returns the empty array if retrieving any pages beyond the last.', async () => {
         // Arrange
         const target = await createPopulatedTarget();
         // Act
@@ -244,7 +244,7 @@ describe('ZDatabaseMongo', () => {
         expect(actual).toEqual([]);
       });
 
-      it('returns the remining items on the last page.', async () => {
+      it('returns the remaining items on the last page.', async () => {
         // Arrange
         const target = await createPopulatedTarget();
         // Act
@@ -256,7 +256,7 @@ describe('ZDatabaseMongo', () => {
       it('joins the data.', async () => {
         // Arrange
         const target = await createPopulatedTarget();
-        const expected = [Object.assign({}, bambam, { father: [barney], mother: [betty] }), Object.assign({}, pebbles, { father: [fred], mother: [wilma] })];
+        const expected = [Object.assign({}, bamBam, { father: [barney], mother: [betty] }), Object.assign({}, pebbles, { father: [fred], mother: [wilma] })];
         // Act
         const actual = await target.read(kidsSource).join(parentsSource, 'fatherId', '_id', 'father').join(parentsSource, 'motherId', '_id', 'mother').run();
         // Assert

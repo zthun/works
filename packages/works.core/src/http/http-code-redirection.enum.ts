@@ -24,7 +24,7 @@ export enum ZHttpCodeRedirection {
    * This is an example of industry practice contradicting the standard. The HTTP/1.0 specification (RFC 1945)
    * required the client to perform a temporary redirect (the original describing phrase was "Moved Temporarily"),
    * [22] but popular browsers implemented 302 with the functionality of a 303 See Other. Therefore, HTTP/1.1
-   * added status codes 303 and 307 to distinguish between the two behaviours.[23] However, some Web applications
+   * added status codes 303 and 307 to distinguish between the two behaviors.[23] However, some Web applications
    * and frameworks use the 302 status code as if it were the 303.
    */
   Found = 302,
@@ -54,8 +54,8 @@ export enum ZHttpCodeRedirection {
    */
   SwitchProxy = 306,
   /**
-   * In this case, the request should be repeated with another URI; however, future requests s
-   * hould still use the original URI.
+   * In this case, the request should be repeated with another URI; however, future requests
+   * should still use the original URI.
    *
    * In contrast to how 302 was historically implemented, the request method is not allowed to be
    * changed when reissuing the original request. For example, a POST request should be repeated using

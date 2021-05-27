@@ -123,7 +123,7 @@ export class ZAlertBuilder {
   /**
    * Assigns all the properties in other to the current alert.
    *
-   * The id will still remain uninque.
+   * The id will still remain unique.
    *
    * @param other The other partial object to copy.
    *

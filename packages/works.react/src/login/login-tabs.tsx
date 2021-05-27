@@ -37,7 +37,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
 
   const loginTab = props.hideLoginTab ? null : <Tab className='ZLoginTabs-tab-login' data-testid='ZLoginTabs-tab-login' icon={<LockOpenIcon />} label='LOGIN' value={ZLoginTab.Login} disabled={props.loading} />;
 
-  const signupTab = props.hideCreateTab ? null : <Tab className='ZLoginTabs-tab-create' data-testid='ZLoginTabs-tab-create' icon={<PersonAddIcon />} label='CREATE' value={ZLoginTab.Create} disabled={props.loading} />;
+  const signUpTab = props.hideCreateTab ? null : <Tab className='ZLoginTabs-tab-create' data-testid='ZLoginTabs-tab-create' icon={<PersonAddIcon />} label='CREATE' value={ZLoginTab.Create} disabled={props.loading} />;
 
   const recoverTab = props.hideRecoverTab ? null : <Tab className='ZLoginTabs-tab-recover' data-testid='ZLoginTabs-tab-recover' icon={<HelpOutlineIcon />} label='RECOVER' value={ZLoginTab.Recover} disabled={props.loading} />;
 
@@ -46,7 +46,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
       <div className='ZLoginTabs-tab-container'>
         <Tabs centered={true} value={tab} onChange={handleTabChange}>
           {loginTab}
-          {signupTab}
+          {signUpTab}
           {recoverTab}
         </Tabs>
       </div>

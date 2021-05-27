@@ -7,8 +7,8 @@ export enum ZHttpCodeSuccess {
    * Standard response for successful HTTP requests.
    *
    * The actual response will depend on the request method used. In a GET
-   * request, the response will contain an entity corresponding to the r
-   * equested resource. In a POST request, the response will contain an
+   * request, the response will contain an entity corresponding to the
+   * requested resource. In a POST request, the response will contain an
    * entity describing or containing the result of the action.
    */
   OK = 200,
@@ -51,7 +51,7 @@ export enum ZHttpCodeSuccess {
    */
   MultiStatus = 207,
   /**
-   * The members of a DAV binding have already been enumerated in a preceding part of the (multistatus)
+   * The members of a DAV binding have already been enumerated in a preceding part of the
    * response, and are not being included again.
    */
   AlreadyReported = 208,
