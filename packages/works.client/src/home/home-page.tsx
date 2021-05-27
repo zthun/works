@@ -3,6 +3,7 @@ import { ZPaperCard } from '@zthun/works.react';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import { kebabCase } from 'lodash';
 
 /**
  * Renders the home page.
@@ -28,6 +29,7 @@ export function ZHomePage() {
   const learnUrl = learn.bind(null, 'works.url');
   const learnDraw = learn.bind(null, 'works.draw');
   const learnJest = learn.bind(null, 'works.jest');
+  const learnLintJanitor = learn.bind(null, 'lint-janitor');
 
   /**
    * Creates an individual learn item.
@@ -40,9 +42,10 @@ export function ZHomePage() {
    * @returns The jsx for the individual grid item.
    */
   function createLearn(pkg: string, name: string, description: string, onAction: () => void) {
+    const identifier = kebabCase(name);
     return (
-      <Grid item={true} className={`ZHomePage-learn ZHomePage-learn-${pkg}`} data-testid={`ZHomePage-learn-${pkg}`} xs={12} sm={6} md={4} lg={3} xl={2}>
-        <ZPaperCard headerText={name} subHeaderText={`@zthun/works.${pkg}`} imageUrl={`/images/svg/works.${pkg}.svg`} imageHeight='lg' size='auto' avatar={<LocalLibraryIcon fontSize='large' />} actionText='Learn More...' onAction={onAction}>
+      <Grid item={true} className={`ZHomePage-learn ZHomePage-learn-${identifier}`} data-testid={`ZHomePage-learn-${identifier}`} xs={12} sm={6} md={4} lg={3} xl={2}>
+        <ZPaperCard headerText={name} subHeaderText={`@zthun/${pkg}`} imageUrl={`/images/svg/${pkg}.svg`} imageHeight='lg' size='auto' avatar={<LocalLibraryIcon fontSize='large' />} actionText='Learn More...' onAction={onAction}>
           <Typography className='ZHomePage-summary-text'>{description}</Typography>
         </ZPaperCard>
       </Grid>
@@ -51,13 +54,14 @@ export function ZHomePage() {
 
   return (
     <Grid container={true} spacing={3} className='ZHomePage-root' data-testid='ZHomePage-root'>
-      {createLearn('react', 'React', 'The Zthunworks client is built in React and offers a library of components for those who want to use some of the functionality found here.', learnReact)}
-      {createLearn('nest', 'Nest', 'Zthunworks is made up of shared services built using nestjs. The services packages contains reusable modules that can be used to quickly set up distributed services for other websites.', learnNest)}
-      {createLearn('core', 'Core', 'Zthunworks has a shared layer of common functionality across the client and the server that is separated into a framework-agnostic package for anyone to consume.', learnCore)}
-      {createLearn('dal', 'Data Access', 'Zthunworks uses mongodb for data data access for quick adaptability, fast schema changes, and standardized apis which is not susceptible to injection attacks.', learnDal)}
-      {createLearn('url', 'URL', 'When making asynchronous calls, you will often need to build out URL paths out of parts. Zthunworks has just the package to do this using the builder pattern.', learnUrl)}
-      {createLearn('draw', 'Draw', 'Need to draw to an HTML5 canvas? Using a printable layering model with transformation support makes that much easier.', learnDraw)}
-      {createLearn('jest', 'Jest', 'Zthunworks unit testing framework of choice is Jest for its amazing tooling and speed. The jest packages adds some minor functionality to enhance the experience.', learnJest)}
+      {createLearn('works.react', 'React', 'The Zthunworks client is built in React and offers a library of components for those who want to use some of the functionality found here.', learnReact)}
+      {createLearn('works.nest', 'Nest', 'Zthunworks is made up of shared services built using nestjs. The services packages contains reusable modules that can be used to quickly set up distributed services for other websites.', learnNest)}
+      {createLearn('works.core', 'Core', 'Zthunworks has a shared layer of common functionality across the client and the server that is separated into a framework-agnostic package for anyone to consume.', learnCore)}
+      {createLearn('works.dal', 'Data Access', 'Zthunworks uses mongodb for data data access for quick adaptability, fast schema changes, and standardized apis which is not susceptible to injection attacks.', learnDal)}
+      {createLearn('works.url', 'URL', 'When making asynchronous calls, you will often need to build out URL paths out of parts. Zthunworks has just the package to do this using the builder pattern.', learnUrl)}
+      {createLearn('works.draw', 'Draw', 'Need to draw to an HTML5 canvas? Using a printable layering model with transformation support makes that much easier.', learnDraw)}
+      {createLearn('works.jest', 'Jest', 'Zthunworks unit testing framework of choice is Jest for its amazing tooling and speed. The jest packages adds some minor functionality to enhance the experience.', learnJest)}
+      {createLearn('lint-janitor', 'Lint Janitor', 'Zthunworks offers tooling for consistent code styling and maintenance.  By using lint-janitor, you can consolidate linters into a single, centralized solution.', learnLintJanitor)}
     </Grid>
   );
 }

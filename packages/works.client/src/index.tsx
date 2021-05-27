@@ -7,6 +7,7 @@ import '@zthun/works.jest/docs/typedoc.json';
 import '@zthun/works.nest/docs/typedoc.json';
 import '@zthun/works.react/docs/typedoc.json';
 import '@zthun/works.url/docs/typedoc.json';
+import '@zthun/lint-janitor/docs/typedoc.json';
 
 // Readme
 import '@zthun/works.class/README.md';
@@ -17,6 +18,7 @@ import '@zthun/works.jest/README.md';
 import '@zthun/works.nest/README.md';
 import '@zthun/works.react/README.md';
 import '@zthun/works.url/README.md';
+import '@zthun/lint-janitor/README.md';
 
 // Media
 import '@zthun/works.core/images';
@@ -27,6 +29,7 @@ import '@zthun/works.nest/images';
 import '@zthun/works.react/images';
 import '@zthun/works.themes/images';
 import '@zthun/works.url/images';
+import '@zthun/lint-janitor/images';
 
 // Legal
 import '@zthun/works.core/PRIVACY.md';

@@ -56,7 +56,7 @@ describe('ZHomePage', () => {
   });
 
   it('navigates to the works.dal learn page.', async () => {
-    await assertNavigatesToPage('ZHomePage-learn-dal', 'works.dal');
+    await assertNavigatesToPage('ZHomePage-learn-data-access', 'works.dal');
   });
 
   it('navigates to the works.url learn page.', async () => {
@@ -69,5 +69,9 @@ describe('ZHomePage', () => {
 
   it('navigates to the works.jest learn page.', async () => {
     await assertNavigatesToPage('ZHomePage-learn-jest', 'works.jest');
+  });
+
+  it('navigates to the lint-janitor page.', async () => {
+    await assertNavigatesToPage('ZHomePage-learn-lint-janitor', 'lint-janitor');
   });
 });
