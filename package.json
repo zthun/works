@@ -33,9 +33,12 @@
     "docker:publish": "lerna run docker:publish",
     "docker:build": "lerna run docker:build",
     "docker": "yarn docker:build && yarn docker:publish",
+    "prepare": "husky install",
     "release": "yarn make && lerna publish --conventional-commits -m \"chore: publish [skip ci]\""
   },
   "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@material-ui/core": "^4.3.3",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.52",
@@ -87,6 +90,7 @@
     "highlight.js": "^10.4.1",
     "html-webpack-plugin": "^5.0.0",
     "htmlhint": "^0.14.2",
+    "husky": "^6.0.0",
     "jest": "^27.0.1",
     "jsdom": "^16.2.2",
     "jsonwebtoken": "^8.5.1",
