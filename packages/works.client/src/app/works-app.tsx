@@ -1,11 +1,10 @@
 import { Snackbar } from '@material-ui/core';
 import { IZProfile } from '@zthun/works.core';
-import { ZAlertStack, ZAlertStackContext, ZAlertStackList, ZDataState, ZLoginStateContext } from '@zthun/works.react';
+import { ZAlertStack, ZAlertStackContext, ZAlertStackList, ZDataState, ZStatusCodePage, ZLoginStateContext } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import React from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { ZStatusCodePage } from '../codes/status-code-page';
 import { ZHomePage } from '../home/home-page';
 import { ZApiPage } from '../learn/api-page';
 import { ZLearnPage } from '../learn/learn-page';
@@ -45,7 +44,7 @@ export function ZthunworksApp() {
                 <Route exact path='/profile' component={ZProfilePage} />
                 <Route exact path='/privacy' component={ZPrivacyPage} />
                 <Route exact path='/terms' component={ZTermsPage} />
-                <Route exact path='/status-code/:code' component={ZStatusCodePage} />
+                <Route exact path={ZStatusCodePage.route} component={ZStatusCodePage} />
                 <Route exact path='/learn/:pkg' component={ZLearnPage} />
                 <Route exact path='/learn/:pkg/api' component={ZApiPage} />
                 <Route exact path='/learn/:pkg/api/:enid' component={ZApiPage} />

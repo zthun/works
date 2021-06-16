@@ -13,6 +13,7 @@ export { ZPaperCard } from './card/paper-card';
 export { IZPaperCardProps } from './card/paper-card.props';
 // Codes
 export { ZHttpStatusCodeCard } from './codes/http-code-card';
+export { ZStatusCodePage } from './codes/status-code-page';
 // Component
 export { IZComponentActionable } from './component/component-actionable.interface';
 export { IZComponentConfirmable } from './component/component-confirmable.interface';
@@ -81,3 +82,8 @@ export { ZDataStateStatic } from './store/data-state-static.class';
 export { ZDataState } from './store/data-state.class';
 export { IZDataState } from './store/data-state.interface';
 export { useWatchableState } from './store/use-watchable-state.hook';
+// Top Bar
+export { ZTopBar } from './top-bar/top-bar';
+export { ZTopBarItemBuilder } from './top-bar/top-bar-item-builder.class';
+export { IZTopBarItem } from './top-bar/top-bar-item.interface';
+export { IZTopBarProps } from './top-bar/top-bar.props';

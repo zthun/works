@@ -47,6 +47,7 @@ export { ZHttpCodeInformationalResponse } from './http/http-code-informational-r
 export { ZHttpCodeRedirection } from './http/http-code-redirection.enum';
 export { ZHttpCodeServer } from './http/http-code-server.enum';
 export { ZHttpCodeSuccess } from './http/http-code-success.enum';
+export { ZHttpCode } from './http/http-code.type';
 // Login
 export { ZLoginBuilder } from './logins/login-builder.class';
 export { IZLogin } from './logins/login.interface';
