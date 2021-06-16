@@ -4,9 +4,13 @@ import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
 import { Route, Router } from 'react-router-dom';
 import { ZLearnPage } from './learn-page';
+import Axios from 'axios';
+
+jest.mock('axios');
 
 describe('ZLearnPage', () => {
   let history: MemoryHistory;
+  let markdown: string;
 
   function createTestTarget() {
     return render(
@@ -17,7 +21,13 @@ describe('ZLearnPage', () => {
   }
 
   beforeEach(() => {
+    markdown = '# README';
     history = createMemoryHistory({ initialEntries: ['/learn/works.core'] });
+    (Axios.get as jest.Mock).mockResolvedValue(markdown);
+  });
+
+  afterEach(() => {
+    (Axios.get as jest.Mock).mockClear();
   });
 
   it('renders the page', async () => {
