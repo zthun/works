@@ -1,0 +1,36 @@
+.ZTopBar-root {
+  height: @sizing-toolbar;
+
+  .ZTopBar-btn-home {
+    height: @sizing-toolbar;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .ZTopBar-title {
+    display: block;
+    font-size: @sizing-font-lg;
+
+    @media (max-width: 400px) {
+      display: none;
+    }
+  }
+
+  .ZTopBar-icon {
+    height: 5rem;
+    margin-right: @spacing-sm;
+    border-radius: @rounding-circle;
+    border: @thickness-xs solid @color-gainsboro;
+    background: @color-white;
+  }
+
+  .ZTopBar-options {
+    flex-grow: 1;
+  }
+}
+
+.ZTopBar-drawer-more {
+  min-width: @sizing-drawer;
+}
