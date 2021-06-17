@@ -1,10 +1,9 @@
 /* eslint-disable require-jsdoc */
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
-import { IZAlertStack, IZDataState, ZAlertStack, ZAlertStackContext, ZLoginStateContext, ZDataStateStatic } from '@zthun/works.react';
+import { IZAlertStack, IZDataState, ZAlertStack, ZAlertStackContext, ZDataStateStatic, ZLoginStateContext } from '@zthun/works.react';
 import Axios from 'axios';
 import { createMemoryHistory, MemoryHistory } from 'history';
-import { identity, kebabCase } from 'lodash';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { Router } from 'react-router-dom';
@@ -37,27 +36,7 @@ describe('ZthunworksMenu', () => {
     (Axios.delete as jest.Mock).mockClear();
   });
 
-  it('renders the menu', async () => {
-    // Arrange
-    const target = await createTestTarget();
-    // Act
-    const actual = target.getByTestId('ZthunworksMenu-root');
-    // Assert
-    expect(actual).toBeTruthy();
-  });
-
   describe('Profile state', () => {
-    describe('Loading', () => {
-      it('shows the loader while the profile state is loading.', async () => {
-        // Arrange
-        const target = await createTestTarget();
-        // Act
-        const actual = target.getByTestId('ZthunworksMenu-progress-loading');
-        // Assert
-        expect(actual).toBeTruthy();
-      });
-    });
-
     describe('Logged out.', () => {
       beforeEach(() => {
         loginState = new ZDataStateStatic<IZProfile>(null);
@@ -127,83 +106,6 @@ describe('ZthunworksMenu', () => {
         // Assert
         expect(alerts.list[0].message).toEqual(error);
       });
-    });
-  });
-
-  describe('Home', () => {
-    it('should move to the home page (visible to everyone).', async () => {
-      // Arrange
-      const target = await createTestTarget();
-      // Act
-      const home = target.getByText('ZTHUNWORKS');
-      fireEvent.click(home);
-      // Assert
-      expect(history.location.pathname).toEqual('/home');
-    });
-  });
-
-  describe('More', () => {
-    function openNavDrawer(target: RenderResult) {
-      const more = target.getByTestId('ZthunworksMenu-btn-more');
-      fireEvent.click(more);
-      return target.getByTestId('ZthunworksMenu-drawer-more');
-    }
-
-    function clickMenuItem(drawer: HTMLElement, name: string) {
-      const kebab = kebabCase(name);
-      const clasz = `.ZthunworksMenu-drawer-more-item-${kebab}`;
-      const item = drawer.querySelector(clasz);
-      fireEvent.click(item);
-    }
-
-    async function assertPushesHistory(expected: string, item: string) {
-      // Arrange
-      const target = await createTestTarget();
-      const drawer = openNavDrawer(target);
-      // Act
-      clickMenuItem(drawer, item);
-      // Assert
-      expect(history.location.pathname).toEqual(expected);
-    }
-
-    async function assertOpensWindow(expected: string, item: string) {
-      // Arrange
-      jest.spyOn(window, 'open').mockImplementation(identity.bind(null, window));
-      const target = await createTestTarget();
-      const drawer = openNavDrawer(target);
-      // Act
-      clickMenuItem(drawer, item);
-      // Assert
-      expect(window.open).toHaveBeenCalledWith(expect.stringContaining(expected), '_blank');
-    }
-
-    it('should open the nav drawer.', async () => {
-      // Arrange
-      const target = await createTestTarget();
-      // Act
-      const actual = openNavDrawer(target);
-      // Assert
-      expect(actual).toBeTruthy();
-    });
-
-    it('should move to the home page.', async () => {
-      await assertPushesHistory('/home', 'Home');
-    });
-
-    it('should move to the terms page.', async () => {
-      await assertPushesHistory('/terms', 'Terms');
-    });
-
-    it('should move to the privacy page.', async () => {
-      await assertPushesHistory('/privacy', 'Privacy');
-    });
-
-    it('should open github for zthunworks.', async () => {
-      await assertOpensWindow('github.com', 'GitHub');
-    });
-
-    it('should open the mailto contact for zthunworks.', async () => {
-      await assertOpensWindow('mailto:', 'Contact');
     });
   });
 });

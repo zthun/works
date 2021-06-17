@@ -51,6 +51,15 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
   }
 
   /**
+   * Creates the profile loading spinner.
+   *
+   * @returns The profile loading item jsx.
+   */
+  function createProfileLoading() {
+    return <ZCircularProgress className='ZProfileMenu-profile-loading' data-testid='ZProfileMenu-profile-loading' />;
+  }
+
+  /**
    * Creates the profile menu jsx.
    *
    * This should be used if the user is logged in.
@@ -86,7 +95,7 @@ export function ZProfileMenu(props: IZProfileMenuProps) {
     );
   }
 
-  const ui = props.profile ? createProfileMenu() : createLoginButton();
+  const ui = props.profile ? createProfileMenu() : props.profile === undefined ? createProfileLoading() : createLoginButton();
 
   return (
     <div className='ZProfileMenu-root' data-testid='ZProfileMenu-root'>
