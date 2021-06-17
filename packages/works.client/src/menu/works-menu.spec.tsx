@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { fireEvent, render, RenderResult } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { IZAlertStack, IZDataState, ZAlertStack, ZAlertStackContext, ZDataStateStatic, ZLoginStateContext } from '@zthun/works.react';
 import Axios from 'axios';
@@ -47,7 +47,7 @@ describe('ZthunworksMenu', () => {
         const target = await createTestTarget();
         // Act
         await act(async () => {
-          const actual = target.getByTestId('ZProfileMenu-btn-login');
+          const actual = target.getByTestId('ZProfileButton-login');
           fireEvent.click(actual);
         });
         // Assert
@@ -63,22 +63,20 @@ describe('ZthunworksMenu', () => {
         loginState = new ZDataStateStatic(new ZProfileBuilder().email('gambit@marvel.com').display(menu).build());
       });
 
-      function openMenu(target: RenderResult) {
-        const profileMenu = target.getByTestId('ZProfileMenu-avatar');
-        fireEvent.click(profileMenu);
-      }
-
       it('should move to the profile page when the profile menu item is clicked.', async () => {
         // Arrange
         const target = await createTestTarget();
         // Act
-        await act(async () => openMenu(target));
-        const profileMenuItem = target.getByText('PROFILE');
-        fireEvent.click(profileMenuItem);
+        await act(async () => {
+          const btn = target.getByTestId('ZProfileButton-avatar');
+          fireEvent.click(btn);
+        });
         // Assert
         expect(history.location.pathname).toEqual('/profile');
       });
 
+      /**
+       * TODO:  This needs to be moved to the profile page.
       it('should log out the user when the logout menu item is clicked.', async () => {
         // Arrange
         const target = await createTestTarget();
@@ -106,6 +104,7 @@ describe('ZthunworksMenu', () => {
         // Assert
         expect(alerts.list[0].message).toEqual(error);
       });
+      */
     });
   });
 });

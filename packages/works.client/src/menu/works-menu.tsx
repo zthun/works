@@ -1,14 +1,10 @@
-import { MenuItem } from '@material-ui/core';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
 import MailIcon from '@material-ui/icons/Mail';
 import MouseIcon from '@material-ui/icons/Mouse';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZProfileMenu, ZTopBar, ZTopBarItemBuilder } from '@zthun/works.react';
-import { ZUrlBuilder } from '@zthun/works.url';
-import Axios from 'axios';
-import React, { useState } from 'react';
+import { useLoginState, ZProfileButton, ZTopBar, ZTopBarItemBuilder } from '@zthun/works.react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 export const ZApplicationName = 'ZTHUNWORKS';
@@ -43,8 +39,8 @@ export const ZDrawer = [
  * @returns The jsx that renders the top menu.
  */
 export function ZthunworksMenu(): JSX.Element {
-  const [loggingOut, setLoggingOut] = useState(false);
-  const alerts = useAlertStack();
+  // const [loggingOut, setLoggingOut] = useState(false);
+  // const alerts = useAlertStack();
   const hist = useHistory();
   const login = useLoginState();
 
@@ -62,7 +58,7 @@ export function ZthunworksMenu(): JSX.Element {
 
   /**
    * Occurs when the user clicks the logout button.
-   */
+   *
   async function handleLogout() {
     try {
       const url = new ZUrlBuilder().api().append('tokens').build();
@@ -75,15 +71,11 @@ export function ZthunworksMenu(): JSX.Element {
       setLoggingOut(false);
     }
   }
+  */
 
   return (
     <ZTopBar route='/home' headerText={ZApplicationName} avatar={ZAvatarOwl} moreItems={ZDrawer}>
-      <ZProfileMenu data-testid='ZthunworksMenu-profile' profile={login.data} onLogout={handleLogout} onLogin={handleLogin} loading={loggingOut}>
-        <MenuItem onClick={handleProfile}>
-          <AccountCircleIcon />
-          PROFILE
-        </MenuItem>
-      </ZProfileMenu>
+      <ZProfileButton data-testid='ZthunworksMenu-profile' profile={login.data} onProfile={handleProfile} onLogin={handleLogin} />
     </ZTopBar>
   );
 }

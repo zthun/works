@@ -7,11 +7,11 @@ import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import React from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { ZthunworksMenu } from 'src/menu/works-menu';
 import { ZHomePage } from '../home/home-page';
 import { ZApiPage } from '../learn/api-page';
 import { ZLearnPage } from '../learn/learn-page';
 import { ZLoginPage } from '../login/login-page';
+import { ZthunworksMenu } from '../menu/works-menu';
 import { ZProfilePage } from '../profile/profile-page';
 
 export const ZUrlMarkdownTerms = new ZUrlBuilder().location().hash('').path('legal/TERMS.md').build();

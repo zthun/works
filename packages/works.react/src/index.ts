@@ -68,16 +68,15 @@ export { useLogin, useLoginState, ZLoginStateContext } from './login/login-state
 export { ZLoginTab } from './login/login-tab.enum';
 export { ZLoginTabs } from './login/login-tabs';
 export { IZLoginTabsProps } from './login/login-tabs.props';
-export { useMenuState } from './menu/use-menu-state.hook';
 // Profile
 export { ZProfileActivationForm } from './profile/profile-activation-form';
 export { IZProfileActivationFormProps } from './profile/profile-activation-form.props';
 export { ZProfileAvatarForm } from './profile/profile-avatar-form';
 export { IZProfileAvatarFormProps } from './profile/profile-avatar-form.props';
+export { ZProfileButton } from './profile/profile-button';
+export { IZProfileButtonProps } from './profile/profile-button.props';
 export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
-export { ZProfileMenu } from './profile/profile-menu';
-export { IZProfileMenuProps } from './profile/profile-menu.props';
 // Store
 export { ZDataStateStatic } from './store/data-state-static.class';
 export { ZDataState } from './store/data-state.class';
