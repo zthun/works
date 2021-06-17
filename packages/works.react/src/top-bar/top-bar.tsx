@@ -50,6 +50,8 @@ export function ZTopBar(props: IZTopBarProps): JSX.Element {
    * @param item The item that was clicked.
    */
   function handleMoreItem(item: IZTopBarItem) {
+    setMoreShown(false);
+
     if (item.route) {
       hist.push(item.route);
     }
@@ -106,7 +108,7 @@ export function ZTopBar(props: IZTopBarProps): JSX.Element {
     <AppBar className='ZTopBar-root' position='sticky' color='primary' data-testid='ZTopBar-root'>
       <Toolbar>
         {createHomeButton()}
-        <Typography className='ZthunworksMenu-options'>&nbsp;</Typography>
+        <Typography className='ZTopBar-options'>&nbsp;</Typography>
         {props.children}
         {createMoreButton()}
       </Toolbar>
