@@ -27,8 +27,9 @@ export { IZComponentSizeable } from './component/component-sizeable.interface';
 export { IZComponentSource } from './component/component-source.interface';
 export { IZComponentStyle } from './component/component-style.interface';
 // Doc
+export { ZMarkdownPage } from './doc/markdown-page';
 export { ZMarkdownViewer } from './doc/markdown-viewer';
-export { IZMarkdownViewerProps } from './doc/markdown-viewer.props';
+export { IZMarkdownProps } from './doc/markdown.props';
 export { ZTypedocCommentViewer } from './doc/typedoc-comment-viewer';
 export { IZTypedocCommentViewerProps } from './doc/typedoc-comment-viewer.props';
 export { createTypedocTypography } from './doc/typedoc-create-typography.function';

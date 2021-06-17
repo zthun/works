@@ -7,7 +7,7 @@ import gfm from 'remark-gfm';
 import { from, of, Subject } from 'rxjs';
 import { catchError, map, takeUntil } from 'rxjs/operators';
 import { ZPaperCard } from '../card/paper-card';
-import { IZMarkdownViewerProps } from './markdown-viewer.props';
+import { IZMarkdownProps } from './markdown.props';
 
 /**
  * Renders markdown files from a url or content string.
@@ -16,7 +16,7 @@ import { IZMarkdownViewerProps } from './markdown-viewer.props';
  *
  * @returns The jsx to render a markdown file.
  */
-export function ZMarkdownViewer(props: IZMarkdownViewerProps) {
+export function ZMarkdownViewer(props: IZMarkdownProps) {
   const [markdown, setMarkdown] = useState('');
   const markdownEl = useRef<HTMLDivElement>();
 
