@@ -1,20 +1,18 @@
 /* eslint-disable require-jsdoc */
 import { render } from '@testing-library/react';
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
 import { ZStatusCodePage } from './status-code-page';
-import { createMemoryHistory } from 'history';
 
 describe('ZStatusCodePage', () => {
-  function createTestTarget() {
-    const history = createMemoryHistory({ initialEntries: ['/error/404'] });
+  let code: number;
 
-    return render(
-      <Router history={history}>
-        <Route path='/error/:code' component={ZStatusCodePage} />
-      </Router>
-    );
+  function createTestTarget() {
+    return render(<ZStatusCodePage code={code} />);
   }
+
+  beforeEach(() => {
+    code = 404;
+  });
 
   it('should render the page.', () => {
     // Arrange
