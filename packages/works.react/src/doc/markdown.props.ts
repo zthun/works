@@ -6,4 +6,4 @@ import { IZComponentSource } from '../component/component-source.interface';
 /**
  * Represents properties for the markdown viewer.
  */
-export interface IZMarkdownViewerProps extends IZComponentHeader, IZComponentSizeable, IZComponentActionable, IZComponentSource {}
+export interface IZMarkdownProps extends IZComponentHeader, IZComponentSizeable, IZComponentActionable, IZComponentSource {}
