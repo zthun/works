@@ -261,7 +261,7 @@ export function ZProfilePage() {
    */
   function createProfileLogoutForm() {
     return (
-      <ZPaperCard avatar={<ExitToAppIcon fontSize='large' />} headerText='End Session' subHeaderText='End current session' actionText='Logout' onAction={handleLogout} actionColor='secondary' size='md' disabled={waiting} loading={loggingOut}>
+      <ZPaperCard avatar={<ExitToAppIcon fontSize='large' />} headerText='End Session' subHeaderText='End current session on this device' actionText='Logout' onAction={handleLogout} actionColor='secondary' size='md' disabled={waiting} loading={loggingOut}>
         <Typography variant='body1' component='p'>
           This will end your current session and log you out. If you are logged in on other devices, then you will need to click this button on those devices there too.
         </Typography>
