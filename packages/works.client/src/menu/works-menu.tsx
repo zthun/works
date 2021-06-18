@@ -39,8 +39,6 @@ export const ZDrawer = [
  * @returns The jsx that renders the top menu.
  */
 export function ZthunworksMenu(): JSX.Element {
-  // const [loggingOut, setLoggingOut] = useState(false);
-  // const alerts = useAlertStack();
   const hist = useHistory();
   const login = useLoginState();
 
@@ -55,23 +53,6 @@ export function ZthunworksMenu(): JSX.Element {
 
   const handleProfile = pushHistory.bind(null, '/profile');
   const handleLogin = pushHistory.bind(null, '/login');
-
-  /**
-   * Occurs when the user clicks the logout button.
-   *
-  async function handleLogout() {
-    try {
-      const url = new ZUrlBuilder().api().append('tokens').build();
-      setLoggingOut(true);
-      await Axios.delete(url);
-      await login.refresh();
-    } catch (err) {
-      alerts.add(new ZAlertBuilder().error().message(err).build());
-    } finally {
-      setLoggingOut(false);
-    }
-  }
-  */
 
   return (
     <ZTopBar route='/home' headerText={ZApplicationName} avatar={ZAvatarOwl} moreItems={ZDrawer}>
