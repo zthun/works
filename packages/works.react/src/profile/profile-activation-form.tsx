@@ -2,7 +2,7 @@ import { TextField, Typography } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import { ZProfileActivationBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { IZProfileActivationFormProps } from './profile-activation-form.props';
 
@@ -29,8 +29,11 @@ export function ZProfileActivationForm(props: IZProfileActivationFormProps): JSX
    * Occurs when the user clicks the activate button.
    *
    * This generates a new profile activation and raises the onActivationChange event.
+   *
+   * @param e The form event.
    */
-  function handleActivate() {
+  function handleActivate(e: FormEvent) {
+    e.preventDefault();
     const empty = new ZProfileActivationBuilder().build();
     let activation = new ZProfileActivationBuilder().copy(props.activation || empty);
     activation = activation.key(key);
