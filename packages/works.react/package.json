@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.react",
-  "version": "1.0.0-26",
+  "version": "1.0.0-27",
   "description": "A react component package that contains react based components for @zthun scoped packages.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -43,7 +43,7 @@
     "rxjs": "^6.5.5"
   },
   "devDependencies": {
-    "@zthun/works.core": "^1.0.0-26",
+    "@zthun/works.core": "^1.0.0-27",
     "@zthun/works.draw": "^1.0.0-26",
     "@zthun/works.url": "^1.0.0-26"
   },
