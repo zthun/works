@@ -1,7 +1,7 @@
 import { TextField } from '@material-ui/core';
 import { ZLoginBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { IZLoginCredentialsFormProps } from './login-credentials-form.props';
 
@@ -46,8 +46,11 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
 
   /**
    * Occurs when the user clicks the action button.
+   *
+   * @param e The submission event.
    */
-  function handleAction() {
+  function handleAction(e: FormEvent) {
+    e.preventDefault();
     let login = new ZLoginBuilder().email(email);
 
     if (!props.hidePassword && !props.hideConfirm) {
