@@ -2,7 +2,7 @@ import { Collapse, Dialog, TextField, Typography } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { ZProfileAvatarForm } from './profile-avatar-form';
 import { IZProfileFormProps } from './profile-form.props';
@@ -108,8 +108,11 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
    * Occurs when the user clicks the Update Profile button.
    *
    * This raises the onProfileChange event in the properties.
+   *
+   * @param e The form event.
    */
-  function handleSave() {
+  function handleSave(e: FormEvent) {
+    e.preventDefault();
     const profile = build();
     setPassword('');
     setConfirm('');
@@ -222,7 +225,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     <React.Fragment>
       {avatarDialog}
       <form className='ZProfileForm-root' data-testid='ZProfileForm-root' noValidate={true} onSubmit={handleSave}>
-        <ZPaperCard avatar={formIcon} headerText={props.headerText} subHeaderText={props.subHeaderText} loading={props.loading} disabled={props.disabled} actionText={props.saveText} actionType='submit' onAction={handleSave}>
+        <ZPaperCard avatar={formIcon} headerText={props.headerText} subHeaderText={props.subHeaderText} loading={props.loading} disabled={props.disabled} actionText={props.saveText} actionType='submit'>
           {accountInformation}
           {updatePassword}
         </ZPaperCard>
