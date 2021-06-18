@@ -42,17 +42,9 @@ export function ZProfileActivationForm(props: IZProfileActivationFormProps): JSX
 
   return (
     <form className='ZProfileActivationForm-root' data-testid='ZProfileActivationForm-root' noValidate={true} onSubmit={handleActivate}>
-      <ZPaperCard
-        avatar={<PersonIcon className='ZProfileActivationForm-icon-user' fontSize='large' />}
-        headerText={props.headerText}
-        subHeaderText={props.subHeaderText}
-        actionText={props.activateText}
-        actionType='submit'
-        loading={props.loading}
-        disabled={props.disabled || !key}
-      >
+      <ZPaperCard avatar={props.avatar} headerText={props.headerText} subHeaderText={props.subHeaderText} actionText={props.activateText} actionType='submit' loading={props.loading} disabled={props.disabled || !key}>
         <Typography variant='body1' component='p'>
-          You must activate your account before you are allowed to perform any account related actions. Check your email for an activation key and copy it here.
+          {props.description}
         </Typography>
 
         <TextField
@@ -76,8 +68,11 @@ export function ZProfileActivationForm(props: IZProfileActivationFormProps): JSX
 ZProfileActivationForm.defaultProps = {
   headerText: 'Activate Account',
   subHeaderText: 'Activate your account',
+  avatar: <PersonIcon fontSize='large' />,
   keyText: 'Key',
   activateText: 'Activate',
+
+  description: 'You must activate your account before you are allowed to perform any account related actions. Check your email for an activation key and copy it here.',
 
   disabled: false,
   loading: false,
