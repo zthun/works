@@ -17,6 +17,7 @@ export { ZStatusCodePage } from './codes/status-code-page';
 // Component
 export { IZComponentActionable } from './component/component-actionable.interface';
 export { IZComponentConfirmable } from './component/component-confirmable.interface';
+export { IZComponentDescription } from './component/component-description.interface';
 export { IZComponentDisabled } from './component/component-disabled.interface';
 export { IZComponentEntityRedirect } from './component/component-entity-redirect.interface';
 export { IZComponentHeader } from './component/component-header.interface';
@@ -77,6 +78,7 @@ export { ZProfileButton } from './profile/profile-button';
 export { IZProfileButtonProps } from './profile/profile-button.props';
 export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
+export { getAvatarUrl, getProfileAvatarUrl, getProfileDisplay } from './profile/profile.util';
 // Store
 export { ZDataStateStatic } from './store/data-state-static.class';
 export { ZDataState } from './store/data-state.class';
