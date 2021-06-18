@@ -198,6 +198,19 @@ describe('ZProfilePage', () => {
       // Assert
       expect(actual.severity).toEqual(ZAlertSeverity.Error);
     });
+
+    it('logs the user out of the session.', async () => {
+      // Arrange
+      let target: RenderResult;
+      // Act
+      await act(async () => {
+        target = await createTestTarget();
+        const logoutBtn = target.getByText('Logout');
+        fireEvent.click(logoutBtn);
+      });
+      // Assert
+      expect(Axios.delete).toHaveBeenCalledWith(expect.stringContaining('tokens'));
+    });
   });
 
   describe('Activated', () => {
@@ -257,6 +270,19 @@ describe('ZProfilePage', () => {
       });
       // Assert
       expect(Axios.put).toHaveBeenCalledWith(expect.stringContaining('profiles'), expect.anything());
+    });
+
+    it('logs the user out of the session.', async () => {
+      // Arrange
+      let target: RenderResult;
+      // Act
+      await act(async () => {
+        target = await createTestTarget();
+        const logoutBtn = target.getByText('Logout');
+        fireEvent.click(logoutBtn);
+      });
+      // Assert
+      expect(Axios.delete).toHaveBeenCalledWith(expect.stringContaining('tokens'));
     });
   });
 });

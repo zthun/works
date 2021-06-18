@@ -2,6 +2,7 @@ import { Grid, Typography } from '@material-ui/core';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
 import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
@@ -18,13 +19,14 @@ import { Redirect } from 'react-router-dom';
 export function ZProfilePage() {
   const loginState = useLoginState();
   const alerts = useAlertStack();
+  const [loggingOut, setLoggingOut] = useState(false);
   const [activating, setActivating] = useState(false);
   const [deactivating, setDeactivating] = useState(false);
   const [reactivating, setReactivating] = useState(false);
   const [updatingProfile, setUpdatingProfile] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [activation, setActivation] = useState(new ZProfileActivationBuilder().email(get(loginState.data, 'email', null)).build());
-  const waiting = deleting || deactivating || updatingProfile || activating || reactivating;
+  const waiting = deleting || deactivating || updatingProfile || activating || reactivating || loggingOut;
 
   /**
    * Helper function that invokes the profile service to refresh it.
@@ -44,6 +46,16 @@ export function ZProfilePage() {
     } catch (err) {
       alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
     }
+  }
+
+  /**
+   * Occurs when the user clicks the logout button.
+   */
+  async function handleLogout() {
+    setLoggingOut(true);
+    const url = new ZUrlBuilder().api().append('tokens').build();
+    await handleProfileRest(url, 'Logout successful', (u) => Axios.delete(u));
+    setLoggingOut(false);
   }
 
   /**
@@ -149,53 +161,128 @@ export function ZProfilePage() {
   }
 
   /**
+   * Creates the form card that can be used to update the core profile information.
+   *
+   * @returns The jsx that renders the core profile form.
+   */
+  function createProfileForm() {
+    return <ZProfileForm disabled={waiting} loading={updatingProfile} profile={loginState.data} onProfileChange={handleUpdateProfile} />;
+  }
+
+  /**
+   * Creates the form card that allows the user to deactivate their account.
+   *
+   * @returns The jsx that lets the user deactivate their account.
+   */
+  function createProfileDeactivateForm() {
+    return (
+      <ZPaperCard
+        headerText='Deactivate Account'
+        subHeaderText='Turn off account access'
+        avatar={<PauseCircleOutlineIcon fontSize='large' />}
+        loading={deactivating}
+        disabled={waiting}
+        size='md'
+        actionText='Deactivate'
+        actionColor='secondary'
+        onAction={handleDeactivation}
+      >
+        <Typography variant='body1' component='p'>
+          This will deactivate your account. If you wish to reactivate your account, you will need to send yourself another activation key.{' '}
+        </Typography>
+      </ZPaperCard>
+    );
+  }
+
+  /**
+   * Creates the form card that allows the user to delete their account.
+   *
+   * @returns The jsx that lets the user delete their account.
+   */
+  function createProfileDeleteForm() {
+    return (
+      <ZPaperCard
+        headerText='Delete Account'
+        subHeaderText='Remove your account'
+        avatar={<DeleteOutlineIcon fontSize='large' />}
+        loading={deleting}
+        disabled={waiting}
+        size='md'
+        confirmation='I understand that this action is not reversible.'
+        actionText='Delete'
+        actionColor='secondary'
+        onAction={handleDelete}
+      >
+        <Typography variant='body1' component='p'>
+          This will completely delete your account and all preferences associated with it.
+        </Typography>
+      </ZPaperCard>
+    );
+  }
+
+  /**
+   * Creates the form card that the user can use to activate their account.
+   *
+   * @returns The jsx that renders the activation form card.
+   */
+  function createProfileActivationForm() {
+    return <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={waiting} loading={activating} />;
+  }
+
+  /**
+   * Creates the form card that the user can use to get another activation code.
+   *
+   * @returns The jsx that renders the reactivation form.
+   */
+  function createProfileReactivationForm() {
+    return (
+      <ZPaperCard
+        avatar={<MailOutlineIcon fontSize='large' />}
+        headerText='Resend Activation Code'
+        subHeaderText='Get another code'
+        actionText='Send'
+        onAction={handleReactivation}
+        actionColor='secondary'
+        size='md'
+        disabled={waiting}
+        loading={reactivating}
+      >
+        <Typography variant='body1' component='p'>
+          If you disabled your account, lost your activation key, or your activation key has expired, you can request a new one here.
+        </Typography>
+      </ZPaperCard>
+    );
+  }
+
+  /**
+   * Creates the form that allows the user to log out of their session.
+   *
+   * @returns The jsx that allows the user to log out of their session.
+   */
+  function createProfileLogoutForm() {
+    return (
+      <ZPaperCard avatar={<ExitToAppIcon fontSize='large' />} headerText='End Session' subHeaderText='End current session' actionText='Logout' onAction={handleLogout} actionColor='secondary' size='md' disabled={waiting} loading={loggingOut}>
+        <Typography variant='body1' component='p'>
+          This will end your current session and log you out. If you are logged in on other devices, then you will need to click this button on those devices there too.
+        </Typography>
+      </ZPaperCard>
+    );
+  }
+
+  /**
    * Creates the jsx for the activation form.
    *
    * @returns The jsx that renders the activation form.
    */
-  function createProfileActivatedForm() {
+  function createProfileActivatedSession() {
     return (
       <React.Fragment>
-        <Grid item>
-          <ZProfileForm disabled={waiting} loading={updatingProfile} profile={loginState.data} onProfileChange={handleUpdateProfile} />
-        </Grid>
+        <Grid item>{createProfileForm()}</Grid>
         <Grid item>
           <Grid container spacing={3} direction='column'>
-            <Grid item>
-              <ZPaperCard
-                headerText='Deactivate Account'
-                subHeaderText='Turn off account access'
-                avatar={<PauseCircleOutlineIcon fontSize='large' />}
-                loading={deactivating}
-                disabled={waiting}
-                size='md'
-                actionText='Deactivate'
-                actionColor='secondary'
-                onAction={handleDeactivation}
-              >
-                <Typography variant='body1' component='p'>
-                  This will deactivate your account. If you wish to reactivate your account, you will need to send yourself another activation key.{' '}
-                </Typography>
-              </ZPaperCard>
-            </Grid>
-            <Grid item>
-              <ZPaperCard
-                headerText='Delete Account'
-                subHeaderText='remove your account'
-                avatar={<DeleteOutlineIcon fontSize='large' />}
-                loading={deleting}
-                disabled={waiting}
-                size='md'
-                confirmation='I understand that this action is not reversible.'
-                actionText='Delete'
-                actionColor='secondary'
-                onAction={handleDelete}
-              >
-                <Typography variant='body1' component='p'>
-                  This will completely delete your account and all preferences associated with it.
-                </Typography>
-              </ZPaperCard>
-            </Grid>
+            <Grid item>{createProfileLogoutForm()}</Grid>
+            <Grid item>{createProfileDeactivateForm()}</Grid>
+            <Grid item>{createProfileDeleteForm()}</Grid>
           </Grid>
         </Grid>
       </React.Fragment>
@@ -207,34 +294,15 @@ export function ZProfilePage() {
    *
    * @returns The jsx that renders the deactivation form.
    */
-  function createProfileDeactivatedForm() {
+  function createProfileDeactivatedSession() {
     return (
       <React.Fragment>
-        <Grid item>
-          <ZProfileForm disabled={waiting} loading={updatingProfile} profile={loginState.data} onProfileChange={handleUpdateProfile} />
-        </Grid>
+        <Grid item>{createProfileForm()}</Grid>
         <Grid item>
           <Grid container spacing={3} direction='column'>
-            <Grid item>
-              <ZProfileActivationForm activation={activation} onActivationChange={handleActivation} disabled={waiting} loading={activating} />
-            </Grid>
-            <Grid item>
-              <ZPaperCard
-                avatar={<MailOutlineIcon fontSize='large' />}
-                headerText='Resend Activation Code'
-                subHeaderText='Get another code'
-                actionText='Send'
-                onAction={handleReactivation}
-                actionColor='secondary'
-                size='md'
-                disabled={waiting}
-                loading={reactivating}
-              >
-                <Typography variant='body1' component='p'>
-                  If you disabled your account, lost your activation key, or your activation key has expired, you can request a new one here.{' '}
-                </Typography>
-              </ZPaperCard>
-            </Grid>
+            <Grid item>{createProfileLogoutForm()}</Grid>
+            <Grid item>{createProfileActivationForm()}</Grid>
+            <Grid item>{createProfileReactivationForm()}</Grid>
           </Grid>
         </Grid>
       </React.Fragment>
@@ -242,12 +310,12 @@ export function ZProfilePage() {
   }
 
   /**
-   * Creates the profile form.
+   * Creates the profile session form.
    *
    * @returns The jsx that represents the current profile state.
    */
-  function createProfileForm() {
-    return loginState.data.active ? createProfileActivatedForm() : createProfileDeactivatedForm();
+  function createProfileFromSession() {
+    return loginState.data.active ? createProfileActivatedSession() : createProfileDeactivatedSession();
   }
 
   /**
@@ -266,7 +334,7 @@ export function ZProfilePage() {
    */
   function createContentFromProfile() {
     if (loginState.data) {
-      return createProfileForm();
+      return createProfileFromSession();
     }
 
     if (loginState.data === null) {
