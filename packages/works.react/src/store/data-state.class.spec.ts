@@ -6,7 +6,7 @@ describe('ZLoginState', () => {
   let refreshFn: jest.Mock;
 
   function createTestTarget() {
-    return new ZDataState<string>(refreshFn);
+    return new ZDataState<string>(data);
   }
 
   beforeEach(() => {
@@ -16,74 +16,74 @@ describe('ZLoginState', () => {
     refreshFn.mockResolvedValue(data);
   });
 
-  it('sets the profile to the value of the refresh method.', async () => {
+  it('should set the initial data.', () => {
     // Arrange
     const target = createTestTarget();
     // Act
-    const actual = await target.refresh();
+    const actual = target.data;
     // Assert
     expect(actual).toEqual(data);
   });
 
-  it('raises the data change event.', async () => {
+  it('should set the initial data to undefined.', () => {
     // Arrange
-    const target = createTestTarget();
-    await target.refresh();
-    const expected = jest.fn();
-    target.dataChange.subscribe(expected);
-    // Act
-    const actual = await target.refresh();
+    const target = new ZDataState();
     // Assert
-    expect(expected).toHaveBeenCalledWith(actual);
-  });
-
-  it('sets the data to undefined when refreshing.', async () => {
-    // Arrange
-    const target = createTestTarget();
-    await target.refresh();
-    // Act
-    const p = target.refresh();
     const actual = target.data;
-    await p;
     // Assert
     expect(actual).toBeUndefined();
   });
 
-  it('raises the change event when verifying.', async () => {
+  it('should delete the data.', () => {
     // Arrange
     const target = createTestTarget();
-    await target.refresh();
-    const expected = jest.fn();
-    const sub = target.dataChange.subscribe(expected);
     // Act
-    const p = target.refresh();
-    sub.unsubscribe();
-    await p;
+    target.set();
+    const actual = target.data;
     // Assert
-    expect(expected).toHaveBeenCalledTimes(1);
-    expect(expected).toHaveBeenCalledWith(undefined);
+    expect(actual).toBeUndefined();
   });
 
-  it('sets the profile to null if an error occurs retrieving the profile.', async () => {
+  it('should set the data to no value.', () => {
     // Arrange
     const target = createTestTarget();
-    refreshFn.mockRejectedValue('Failed');
     // Act
-    const actual = await target.refresh();
+    target.set(null);
+    const actual = target.data;
     // Assert
     expect(actual).toBeNull();
   });
 
-  it('raises the profileChange if an error occurs retrieving the profile.', async () => {
+  it('should set the data to a valid value.', () => {
     // Arrange
     const target = createTestTarget();
-    await target.refresh();
+    const expected = 'new-value';
+    // Act
+    target.set(expected);
+    const actual = target.data;
+    // Assert
+    expect(actual).toEqual(expected);
+  });
+
+  it('should raise the data change event.', () => {
+    // Arrange
+    const target = createTestTarget();
     const expected = jest.fn();
     target.dataChange.subscribe(expected);
-    refreshFn.mockRejectedValue('Failed');
     // Act
-    await target.refresh();
+    target.set('some-new-value');
     // Assert
-    expect(expected).toHaveBeenCalledWith(null);
+    expect(expected).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not raise the data change event if the data  and the value being set are the same.', () => {
+    // Arrange
+    const target = createTestTarget();
+    const unexpected = jest.fn();
+    target.dataChange.subscribe(unexpected);
+    // Act
+    target.set(target.data);
+    // Assert
+    expect(unexpected).not.toHaveBeenCalled();
   });
 });

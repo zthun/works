@@ -21,7 +21,11 @@ export interface IZDataState<T> {
   readonly dataChange: Observable<T>;
 
   /**
-   * Refreshes the current state of the data.
+   * Sets the data state.
+   *
+   * This can be undefined, null, or an actual value.
+   *
+   * @param val The value to set.  Use the convention that undefined is loading, null is no value, and truthy is loaded and has a value.
    */
-  refresh(): Promise<T>;
+  set(val?: T): void;
 }

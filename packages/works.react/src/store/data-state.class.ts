@@ -14,40 +14,50 @@ export class ZDataState<T> implements IZDataState<T> {
    * If it is undefined, then it is currently being loaded/refreshed.
    * If it is an actual object, that means that it has been loaded.
    */
-  public data?: T = null;
+  public data?: T;
+
+  /**
+   * The underlying data change object.
+   */
+  private _dataChange = new Subject<T>();
+
   /**
    * Occurs when the data object changes.
    *
    * @see data For information about the states.
    */
-  public dataChange = new Subject<T>();
+  public dataChange = this._dataChange.asObservable();
 
   /**
    * Initializes a new instance of this object.
    *
-   * @param refreshFn The method to refresh the data.  This can handle errors and recover if desired, but if
-   *                  it does not, then this object will null out the data on failure.
+   * @param initial The initial value of the data.
    */
-  public constructor(private refreshFn: () => Promise<T>) {
-    this.refresh();
+  public constructor(initial?: T) {
+    this.data = initial;
   }
 
   /**
-   * Refreshes the data.
+   * Sets the current data object.
    *
-   * @returns A promise that, when resolved, has updated the data.
+   * @param val The value to set.
+   *
+   * @returns The data that was updated.
    */
-  public async refresh(): Promise<T> {
-    delete this.data;
-    this.dataChange.next();
-
-    try {
-      this.data = await this.refreshFn();
-    } catch {
-      this.data = null;
+  public set(val?: T) {
+    if (this.data === val) {
+      // There are no changes to be made.
+      return this.data;
     }
 
-    this.dataChange.next(this.data);
+    if (val === undefined) {
+      delete this.data;
+    } else {
+      this.data = val;
+    }
+
+    this._dataChange.next(this.data);
+
     return this.data;
   }
 }
