@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { act, fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
-import { IZAlertStack, IZDataState, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZDataStateStatic, ZLoginStateContext } from '@zthun/works.react';
+import { IZAlertStack, IZDataState, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZDataState, ZLoginStateContext } from '@zthun/works.react';
 import Axios from 'axios';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -27,31 +27,18 @@ describe('ZProfilePage', () => {
         </ZLoginStateContext.Provider>
       </ZAlertStackContext.Provider>
     );
-    await state.refresh();
     return target;
   }
 
   beforeEach(() => {
     profile = undefined;
-    state = new ZDataStateStatic(profile);
+    state = new ZDataState(profile);
     alerts = new ZAlertStack(1);
 
     (Axios.get as jest.Mock).mockClear();
     (Axios.put as jest.Mock).mockClear();
     (Axios.post as jest.Mock).mockClear();
     (Axios.delete as jest.Mock).mockClear();
-  });
-
-  it('renders the page', async () => {
-    // Arrange
-    let target: RenderResult;
-    // Act
-    await act(async () => {
-      target = await createTestTarget();
-    });
-    const actual = target.getByTestId('ZProfilePage-root');
-    // Assert
-    expect(actual).toBeTruthy();
   });
 
   describe('Loading', () => {
@@ -71,7 +58,7 @@ describe('ZProfilePage', () => {
   describe('Logged out', () => {
     beforeEach(() => {
       profile = null;
-      state = new ZDataStateStatic(profile);
+      state = new ZDataState(profile);
     });
 
     it('redirects to the login page.', async () => {
@@ -93,7 +80,7 @@ describe('ZProfilePage', () => {
   describe('Not activated', () => {
     beforeEach(() => {
       profile = new ZProfileBuilder().email('gambit@marvel.com').build();
-      state = new ZDataStateStatic(profile);
+      state = new ZDataState(profile);
     });
 
     async function setKey(target: RenderResult, key: string) {
@@ -163,13 +150,14 @@ describe('ZProfilePage', () => {
     it('reactivates the profile.', async () => {
       // Arrange
       let target: RenderResult;
+      const expected = state.data.email;
       // Act
       await act(async () => {
         target = await createTestTarget();
         await clickReactivateButton(target);
       });
       // Assert
-      expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles/activations'), expect.objectContaining({ email: state.data.email }));
+      expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles/activations'), expect.objectContaining({ email: expected }));
     });
 
     it('notifies the user that activation was successful.', async () => {
@@ -216,7 +204,7 @@ describe('ZProfilePage', () => {
   describe('Activated', () => {
     beforeEach(() => {
       profile = new ZProfileBuilder().active().email('gambit@marvel.com').display('Gambit').build();
-      state = new ZDataStateStatic(profile);
+      state = new ZDataState(profile);
     });
 
     it('shows the profile editor.', async () => {

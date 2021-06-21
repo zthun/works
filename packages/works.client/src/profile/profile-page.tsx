@@ -1,10 +1,10 @@
 import { Grid, Typography } from '@material-ui/core';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
-import { useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
+import { tryGetProfile, useAlertStack, useLoginState, ZAlertBuilder, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import Axios from 'axios';
 import { get } from 'lodash';
@@ -42,7 +42,9 @@ export function ZProfilePage() {
     try {
       await changeFn(url);
       alerts.add(new ZAlertBuilder().success().message(successMsg).build());
-      loginState.refresh();
+      loginState.set();
+      const profile = await tryGetProfile();
+      loginState.set(profile);
     } catch (err) {
       alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
     }
