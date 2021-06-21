@@ -36,12 +36,12 @@ describe('ZthunworksApp', () => {
     }
 
     it('should return the terms page.', () => {
-      (Axios.get as unknown as jest.Mock<AxiosResponse<string>>).mockReturnValue({ data: '', status: 200, statusText: 'Success', headers: [], config: null });
+      (Axios.get as unknown as jest.Mock<Promise<AxiosResponse<string>>>).mockResolvedValue({ data: '', status: 200, statusText: 'Success', headers: [], config: null });
       assertRendersPage(renderTermsPage);
     });
 
     it('should render the privacy page.', () => {
-      (Axios.get as unknown as jest.Mock<AxiosResponse<string>>).mockReturnValue({ data: '', status: 200, statusText: 'Success', headers: [], config: null });
+      (Axios.get as unknown as jest.Mock<Promise<AxiosResponse<string>>>).mockResolvedValue({ data: '', status: 200, statusText: 'Success', headers: [], config: null });
       assertRendersPage(renderPrivacyPage);
     });
 

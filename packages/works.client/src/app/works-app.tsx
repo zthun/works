@@ -1,11 +1,9 @@
 import { Snackbar } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import MouseIcon from '@material-ui/icons/Mouse';
-import { IZProfile } from '@zthun/works.core';
-import { ZAlertStack, ZAlertStackContext, ZAlertStackList, ZDataState, ZLoginStateContext, ZMarkdownPage, ZStatusCodePage } from '@zthun/works.react';
+import { tryGetProfile, useLogin, ZAlertStackList, ZMarkdownPage, ZStatusCodePage } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
-import Axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter, Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { ZHomePage } from '../home/home-page';
 import { ZApiPage } from '../learn/api-page';
@@ -59,44 +57,36 @@ export function renderStatusCodePage(props: RouteComponentProps<{ code: string }
  * @returns The jsx that renders the entire application.
  */
 export function ZthunworksApp() {
-  /**
-   * Gets the user profile.
-   *
-   * @returns A promise that resolves the profile.  Returns a rejected promise if the user is not logged in.
-   */
-  async function getProfile(): Promise<IZProfile> {
-    const url = new ZUrlBuilder().api().append('profiles').build();
-    const profile = await Axios.get<IZProfile>(url);
-    return profile.data;
-  }
+  const login = useLogin();
+
+  useEffect(() => {
+    login.set();
+    tryGetProfile().then((profile) => login.set(profile));
+  });
 
   return (
     <div className='Zthunworks-root' data-testid='Zthunworks-root'>
-      <ZLoginStateContext.Provider value={new ZDataState(getProfile)}>
-        <ZAlertStackContext.Provider value={new ZAlertStack(5)}>
-          <HashRouter>
-            <ZthunworksMenu />
-            <article className='Zthunworks-article' data-testid='Zthunworks-article'>
-              <Switch>
-                <Route exact path='/home' component={ZHomePage} />
-                <Route exact path='/login' component={ZLoginPage} />
-                <Route exact path='/profile' component={ZProfilePage} />
-                <Route exact path='/privacy' render={renderPrivacyPage} />
-                <Route exact path='/terms' render={renderTermsPage} />
-                <Route exact path='/status-code/:code' render={renderStatusCodePage} />
-                <Route exact path='/learn/:pkg' component={ZLearnPage} />
-                <Route exact path='/learn/:pkg/api' component={ZApiPage} />
-                <Route exact path='/learn/:pkg/api/:enid' component={ZApiPage} />
-                <Redirect exact from='/' to='/home' />
-                <Redirect to='/status-code/404' />
-              </Switch>
-            </article>
-          </HashRouter>
-          <Snackbar className='Zthunworks-snackbar' open={true} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-            <ZAlertStackList />
-          </Snackbar>
-        </ZAlertStackContext.Provider>
-      </ZLoginStateContext.Provider>
+      <HashRouter>
+        <ZthunworksMenu />
+        <article className='Zthunworks-article' data-testid='Zthunworks-article'>
+          <Switch>
+            <Route exact path='/home' component={ZHomePage} />
+            <Route exact path='/login' component={ZLoginPage} />
+            <Route exact path='/profile' component={ZProfilePage} />
+            <Route exact path='/privacy' render={renderPrivacyPage} />
+            <Route exact path='/terms' render={renderTermsPage} />
+            <Route exact path='/status-code/:code' render={renderStatusCodePage} />
+            <Route exact path='/learn/:pkg' component={ZLearnPage} />
+            <Route exact path='/learn/:pkg/api' component={ZApiPage} />
+            <Route exact path='/learn/:pkg/api/:enid' component={ZApiPage} />
+            <Redirect exact from='/' to='/home' />
+            <Redirect to='/status-code/404' />
+          </Switch>
+        </article>
+      </HashRouter>
+      <Snackbar className='Zthunworks-snackbar' open={true} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+        <ZAlertStackList />
+      </Snackbar>
     </div>
   );
 }
