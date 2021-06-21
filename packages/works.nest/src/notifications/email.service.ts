@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ServiceUnavailableException } from '@nestjs/common';
 import { IZEmail, IZServer, ZEmailContactAddressBuilder } from '@zthun/works.core';
 import { createTransport, SendMailOptions } from 'nodemailer';
 
@@ -41,6 +41,10 @@ export class ZEmailService {
 
     const mail: SendMailOptions = { from, to, cc, bcc, subject, html };
 
-    await transport.sendMail(mail);
+    try {
+      await transport.sendMail(mail);
+    } catch {
+      return Promise.reject(new ServiceUnavailableException('The email server is currently not available.  You will need to try this again later.'));
+    }
   }
 }

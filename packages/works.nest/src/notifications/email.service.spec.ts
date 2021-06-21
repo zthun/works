@@ -78,5 +78,15 @@ describe('ZEmailService', () => {
       // Assert
       expect(createTransportSpy).toHaveBeenCalledWith(expect.objectContaining(expected));
     });
+
+    it('should reject with an error 503 if the email server is not available.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      mail.sendMail.mockRejectedValue('server not found');
+      // Act
+      const actual = target.send(email, server);
+      // Assert
+      await expect(actual).rejects.toEqual(expect.objectContaining({ status: 503 }));
+    });
   });
 });
