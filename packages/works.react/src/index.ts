@@ -78,9 +78,8 @@ export { ZProfileButton } from './profile/profile-button';
 export { IZProfileButtonProps } from './profile/profile-button.props';
 export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
-export { getAvatarUrl, getProfileAvatarUrl, getProfileDisplay } from './profile/profile.util';
+export { getProfile, tryGetProfile, getAvatarUrl, getProfileAvatarUrl, getProfileDisplay } from './profile/profile-service';
 // Store
-export { ZDataStateStatic } from './store/data-state-static.class';
 export { ZDataState } from './store/data-state.class';
 export { IZDataState } from './store/data-state.interface';
 export { useWatchableState } from './store/use-watchable-state.hook';

@@ -6,7 +6,7 @@ import React, { FormEvent, useState } from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { ZProfileAvatarForm } from './profile-avatar-form';
 import { IZProfileFormProps } from './profile-form.props';
-import { getAvatarUrl } from './profile.util';
+import { getAvatarUrl } from './profile-service';
 
 /**
  * Creates a form for modifying the users profile.

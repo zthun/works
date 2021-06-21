@@ -4,7 +4,7 @@ import { noop } from 'lodash';
 import React from 'react';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { IZProfileButtonProps } from './profile-button.props';
-import { getProfileAvatarUrl, getProfileDisplay } from './profile.util';
+import { getProfileAvatarUrl, getProfileDisplay } from './profile-service';
 
 /**
  * Represents a tri-state button that displays the profile information based on 3 possible states.
