@@ -22,10 +22,9 @@ export class ZAlertStack implements IZAlertStack {
   /**
    * Initializes a new instance of this object.
    *
-   *
-   * @param max The maximum stack size.
+   * @param max The maximum stack size.  The default is 5.
    */
-  public constructor(public max: number = Infinity) {}
+  public constructor(public max = 5) {}
 
   /**
    * Adds an alert to the front of the list.
