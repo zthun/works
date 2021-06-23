@@ -5,7 +5,7 @@ export enum ZTypedocKind {
   /**
    * The root entity.
    */
-  Global = 0,
+  Project = 0,
   /**
    * External module.
    */
