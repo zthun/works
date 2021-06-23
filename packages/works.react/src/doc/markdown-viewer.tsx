@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { highlightBlock } from 'highlight.js';
+import highlight from 'highlight.js';
 import { noop } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -39,7 +39,7 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
       )
       .subscribe((md) => {
         setMarkdown(md);
-        markdownEl.current.querySelectorAll('code').forEach((block) => highlightBlock(block));
+        markdownEl.current.querySelectorAll('code').forEach((block) => highlight.highlightElement(block));
       });
 
     return () => {

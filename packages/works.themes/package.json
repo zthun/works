@@ -22,7 +22,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "highlight.js": "^10.4.1"
+    "highlight.js": "^11.0.1"
   },
   "files": [
     "less/**",
