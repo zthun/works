@@ -50,6 +50,17 @@ describe('ZTypedocViewer', () => {
     expect(actual).toBeTruthy();
   });
 
+  it('should render an empty list if the groups are falsy.', () => {
+    // Arrange
+    delete typedoc.children;
+    delete typedoc.groups;
+    const target = createTestTarget();
+    // Act
+    const actual = target.container.querySelector('.ZTypedocViewer-group-empty');
+    // Assert
+    expect(actual).toBeTruthy();
+  });
+
   it('should render the entities.', () => {
     // Arrange
     const target = createTestTarget();

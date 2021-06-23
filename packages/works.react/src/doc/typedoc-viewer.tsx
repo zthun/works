@@ -3,6 +3,7 @@ import { IZTypedocEntity, IZTypedocGroup } from '@zthun/works.core';
 import { Dictionary, kebabCase, keyBy, noop } from 'lodash';
 import React, { ReactNode, useMemo } from 'react';
 import { ZPaperCard } from '../card/paper-card';
+import { createTypedocTypography } from './typedoc-create-typography.function';
 import { ZTypedocIcon } from './typedoc-icon';
 import { IZTypedocViewerProps } from './typedoc-viewer.props';
 
@@ -84,6 +85,10 @@ export function ZTypedocViewer(props: IZTypedocViewerProps) {
    * @returns The jsx for the global typedoc object.
    */
   function createGlobal() {
+    if (!props.typedoc.groups) {
+      return createTypedocTypography('The documentation document is currently empty.  Check back later to see if this is corrected or contact support to notify them of this issue.', undefined, undefined, 'ZTypedocViewer-group-empty');
+    }
+
     const nodes: ReactNode[] = props.typedoc.groups.map((gr) => createGroup(gr));
     return <React.Fragment>{nodes}</React.Fragment>;
   }
