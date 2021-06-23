@@ -624,7 +624,7 @@ describe('ZTypedocSignatureListViewer', () => {
     beforeEach(() => {
       unsupported = {
         id: 0,
-        kind: ZTypedocKind.Global,
+        kind: ZTypedocKind.Project,
         kindString: 'Project',
         name: '@zthun/works.core'
       };
