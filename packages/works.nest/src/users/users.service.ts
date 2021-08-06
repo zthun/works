@@ -24,16 +24,6 @@ export class ZUsersService {
   public constructor(@Inject(ZUsersDatabase.Token) private readonly _dal: IZDatabase) {}
 
   /**
-   * Gets a list of all users in the database.
-   *
-   * @returns A promise that, when resolved, has returned all users.
-   */
-  public async list(): Promise<IZUser[]> {
-    const users = await this._dal.read<IZUser>(ZUsersCollections.Users).run();
-    return users;
-  }
-
-  /**
    * Gets a specific user by their id.
    *
    * @param _id The id of the user to find.
