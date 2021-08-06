@@ -24,9 +24,11 @@
     "dist/**",
     "docs/**"
   ],
-  "peerDependencies": {
+  "dependencies": {
     "mongodb": "^4.1.0",
-    "mongodb-memory-server": "^7.3.4",
+    "mongodb-memory-server": "^7.3.4"
+  },
+  "peerDependencies": {
     "uuid": "^8.0.0"
   },
   "sideEffects": false,

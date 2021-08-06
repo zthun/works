@@ -35,8 +35,6 @@
     "helmet": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "mongodb": "^3.6.2",
-    "mongodb-memory-server": "^6.9.2",
     "nodemailer": "^6.4.10",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",
