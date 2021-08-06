@@ -72,7 +72,7 @@ export class ZToolingPan implements IZTooling {
    * init is called again.
    */
   public destroy() {
-    this._destroy.next();
+    this._destroy.next(undefined);
     this._destroy.complete();
   }
 }

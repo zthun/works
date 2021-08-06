@@ -43,7 +43,7 @@ export function ZTypedocViewerSource(props: IZTypedocViewerSourceProps) {
       .subscribe((td) => setTypedoc(td));
 
     return () => {
-      canceled.next();
+      canceled.next(undefined);
       canceled.complete();
     };
   }

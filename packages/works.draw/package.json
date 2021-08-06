@@ -25,7 +25,7 @@
     "docs/**"
   ],
   "peerDependencies": {
-    "rxjs": "^6.5.0"
+    "rxjs": "^7.3.0"
   },
   "sideEffects": false
 }

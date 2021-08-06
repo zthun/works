@@ -43,7 +43,7 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
       });
 
     return () => {
-      canceled.next();
+      canceled.next(undefined);
       canceled.complete();
     };
   }
