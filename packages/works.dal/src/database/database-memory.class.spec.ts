@@ -15,18 +15,22 @@ describe('ZDatabaseMemory', () => {
   let testData: any[];
   let _target: ZDatabaseMemory;
 
-  function createTestTarget() {
-    _target = ZDatabaseMemory.connect(options);
+  async function createTestTarget() {
+    // The start isn't actually needed here, but it helps
+    // to make sure that calling an already started server
+    // doesn't just crash or hang the application.
+    await _target.start();
     return _target;
   }
 
   beforeAll(async () => {
-    await ZDatabaseMemory.start();
+    _target = await ZDatabaseMemory.connect(options);
+    await _target.start();
   });
 
   afterAll(async () => {
-    await ZDatabaseMemory.kill();
-    await ZDatabaseMemory.kill();
+    await _target.kill();
+    await _target.kill();
   });
 
   beforeEach(async () => {
@@ -48,7 +52,7 @@ describe('ZDatabaseMemory', () => {
 
   it('retrieves the document count.', async () => {
     // Arrange
-    const target = createTestTarget();
+    const target = await createTestTarget();
     await target.create(source, testData).run();
     // Act
     const actual = await target.count(source).run();
@@ -58,7 +62,7 @@ describe('ZDatabaseMemory', () => {
 
   it('creates and reads in memory data.', async () => {
     // Arrange
-    const target = createTestTarget();
+    const target = await createTestTarget();
     await target.create(source, testData).run();
     // Act
     const actual = await target.read(source).run();
@@ -68,7 +72,7 @@ describe('ZDatabaseMemory', () => {
 
   it('updates in memory data.', async () => {
     // Arrange
-    const target = createTestTarget();
+    const target = await createTestTarget();
     await target.create(source, testData).run();
     const named = { name: 'Everyone is Jill' };
     // Act
@@ -79,7 +83,7 @@ describe('ZDatabaseMemory', () => {
 
   it('deletes in memory data.', async () => {
     // Arrange
-    const target = createTestTarget();
+    const target = await createTestTarget();
     await target.create(source, testData).run();
     // Act
     const actual = await target.delete(source).run();

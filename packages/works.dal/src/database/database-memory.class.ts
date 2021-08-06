@@ -1,4 +1,5 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
+import { getPortPromise } from 'portfinder';
 import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';
 import { IZDatabaseOptions } from '../options/database-options.interface';
 import { ZDatabaseQuery } from '../query/database-query.class';
@@ -9,25 +10,23 @@ import { IZDatabase } from './database.interface';
 /**
  * Represents an in memory database.
  *
- * This will always run on localhost:32769 so you need to make sure that your
- * local port is open.
- *
  * It is not recommended to use this for a production system.  This is mostly
  * here for testing and mocking.
  */
 export class ZDatabaseMemory implements IZDatabase {
+  private _server: MongoMemoryServer;
+  private _running: Promise<void>;
+  private _port: number;
+
   /**
-   * The server host.
+   * The host the in memory database runs on.
    */
   public static readonly Host = '127.0.0.1';
+
   /**
-   * The server port.
+   * The starting port the database runs on.
    */
   public static readonly Port = 32769;
-  /**
-   * The server protocol.
-   */
-  public static readonly Protocol = 'mongodb';
 
   /**
    * Establishes a connection to a database in memory.
@@ -36,9 +35,15 @@ export class ZDatabaseMemory implements IZDatabase {
    *
    * @returns An in memory database.
    */
-  public static connect(options: IZDatabaseOptions): ZDatabaseMemory {
-    const inner = new ZDatabaseOptionsBuilder().copy(options).url('mongodb://127.0.0.1:32769').build();
-    return new ZDatabaseMemory(ZDatabaseMongo.connect(inner));
+  public static async connect(options: IZDatabaseOptions): Promise<ZDatabaseMemory> {
+    const startPort = ZDatabaseMemory.Port;
+    const host = ZDatabaseMemory.Host;
+    const port = await getPortPromise({ startPort, host });
+    const url = `mongodb://${host}:${port}`;
+    const inner = new ZDatabaseOptionsBuilder().copy(options).url(url).build();
+    const database = new ZDatabaseMemory(ZDatabaseMongo.connect(inner));
+    database._port = port;
+    return database;
   }
 
   /**
@@ -49,18 +54,16 @@ export class ZDatabaseMemory implements IZDatabase {
    *
    * @returns A promise that when resolved, has started the server.
    */
-  public static start(): Promise<boolean> {
-    if (!ZDatabaseMemory._server) {
-      const ip = ZDatabaseMemory.Host;
-      const port = ZDatabaseMemory.Port;
-      const instance = { port, ip };
-      const autoStart = false;
-      const server = new MongoMemoryServer({ instance, autoStart });
-      ZDatabaseMemory._running = server.start();
-      ZDatabaseMemory._server = server;
+  public async start(): Promise<void> {
+    if (this._server) {
+      return;
     }
 
-    return ZDatabaseMemory._running;
+    const ip = ZDatabaseMemory.Host;
+    const port = this._port;
+    const instance = { port, ip };
+    this._server = new MongoMemoryServer({ instance });
+    this._running = this._server.start();
   }
 
   /**
@@ -68,17 +71,16 @@ export class ZDatabaseMemory implements IZDatabase {
    *
    * @returns A promise that when resolved, has stopped the server.
    */
-  public static async kill(): Promise<boolean> {
-    if (ZDatabaseMemory._server) {
-      await ZDatabaseMemory._server.stop();
-      ZDatabaseMemory._running = null;
-      ZDatabaseMemory._server = null;
+  public async kill(): Promise<boolean> {
+    if (!this._server) {
+      return true;
     }
-    return true;
-  }
 
-  private static _running: Promise<boolean>;
-  private static _server: MongoMemoryServer;
+    const killed = await this._server.stop();
+    this._running = null;
+    this._server = null;
+    return killed;
+  }
 
   /**
    * Initializes a new instance of this object.
@@ -159,7 +161,7 @@ export class ZDatabaseMemory implements IZDatabase {
    */
   private _query<T>(fn: () => IZDatabaseQuery<T>): IZDatabaseQuery<T> {
     return new ZDatabaseQuery(async (query) => {
-      await ZDatabaseMemory.start();
+      await this.start();
       return fn().copy(query).run();
     });
   }

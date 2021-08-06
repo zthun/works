@@ -4,20 +4,23 @@ import { v4 } from 'uuid';
 import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';
 import { SortAscending } from '../query/database-query.interface';
 import { ZDatabaseMongo } from './database-mongo.class';
+import { getPortPromise } from 'portfinder';
+import { IZDatabaseOptions } from '../options/database-options.interface';
 
 describe('ZDatabaseMongo', () => {
   let server: MongoMemoryServer;
-  const url = 'mongodb://127.0.0.1:37989';
+  let options: IZDatabaseOptions;
+  let url: string;
   const database = 'test-db';
-  const options = new ZDatabaseOptionsBuilder().url(url).database(database).build();
 
   beforeAll(async () => {
-    server = new MongoMemoryServer({
-      instance: {
-        port: 37989,
-        ip: '127.0.0.1'
-      }
-    });
+    const ip = '127.0.0.1';
+    const port = await getPortPromise({ host: ip, port: 37989 });
+    const instance = { ip, port };
+
+    url = `mongodb://${ip}:${port}`;
+    options = new ZDatabaseOptionsBuilder().url(url).database(database).build();
+    server = new MongoMemoryServer({ instance });
     await server.start();
   });
 
@@ -156,15 +159,19 @@ describe('ZDatabaseMongo', () => {
 
       it('adds all items to the database.', async () => {
         // Arrange
+        const cmp = (x, y) => (x < y ? -1 : x > y ? 1 : 0);
         const target = createTestTarget();
+        const expected = parents.map((p) => p.name);
+        expected.sort(cmp);
         // Act
         const actual = await target.create(parentsSource, parents).run();
+        const names = actual.map((p) => p.name);
+        names.sort(cmp);
         // Assert
-        expect(actual.length).toEqual(parents.length);
-        parents.forEach((doc, i) => expect(actual[i].name).toEqual(doc.name));
+        expect(names).toEqual(expected);
       });
 
-      it('constructs serializable ids for all documents that do not have the _id field set.', async () => {
+      it('constructs ids for all documents that do not have the _id field set.', async () => {
         // Arrange
         const target = createTestTarget();
         delete fred._id;

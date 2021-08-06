@@ -1,10 +1,10 @@
-import { IZDatabaseQuery, JoinCriteria, SortCriteria, SortDirection, FilterQuery } from './database-query.interface';
+import { IZDatabaseQuery, JoinCriteria, SortCriteria, SortDirection, Filter } from './database-query.interface';
 
 /**
  * Represents an implementation of the IZDatabaseQuery interface.
  */
 export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
-  private _filter: FilterQuery<any> = {};
+  private _filter: Filter<any> = {};
   private _sort: SortCriteria = [];
   private _page = 0;
   private _size = Infinity;
@@ -15,7 +15,7 @@ export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
    *
    * @returns The current filter.
    */
-  public get $filter(): FilterQuery<any> {
+  public get $filter(): Filter<any> {
     return this._filter;
   }
 
@@ -85,7 +85,7 @@ export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
    *
    * @returns This object.
    */
-  public filter(filter: FilterQuery<any>): this {
+  public filter(filter: Filter<any>): this {
     this._filter = filter;
     return this;
   }

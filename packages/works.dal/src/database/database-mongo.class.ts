@@ -1,4 +1,4 @@
-import { Collection, MongoClient, MongoClientOptions } from 'mongodb';
+import { Collection, MongoClient, MongoClientOptions, OptionalId } from 'mongodb';
 import { v4 } from 'uuid';
 import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';
 import { IZDatabaseOptions } from '../options/database-options.interface';
@@ -77,14 +77,12 @@ export class ZDatabaseMongo implements IZDatabase {
    * @returns The create query.
    */
   public create<T>(source: string, template: T[]): IZDatabaseQuery<T[]> {
-    // This one is a bit goofy.  WithId and OptionalId cause a bunch of issues with the
-    // Typescript compiler that I can't figure out how to work with.  After awhile, the
-    // best solution is to just cast the damn thing.  We know what this returns.
     return new ZDatabaseQuery(() =>
       this._do(source, async (docs: Collection<T>) => {
         template = template.map((t: any) => ({ ...t, _id: t._id || v4() }));
-        const result = await docs.insertMany(template as any[]);
-        return result.ops as unknown as T[];
+        const result = await docs.insertMany(template as OptionalId<T>[]);
+        const ids = Object.keys(result.insertedIds).map((index) => result.insertedIds[index]);
+        return docs.find({ _id: { $in: ids } }).toArray();
       })
     );
   }
@@ -170,10 +168,7 @@ export class ZDatabaseMongo implements IZDatabase {
    * fn(col) throws an exception or if a connection cannot be established.
    */
   private async _do<C, T>(collection: string, fn: (col: Collection<C>) => Promise<T>) {
-    const options: MongoClientOptions = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    };
+    const options: MongoClientOptions = {};
 
     if (this._options.timeout) {
       options.serverSelectionTimeoutMS = this._options.timeout;

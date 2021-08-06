@@ -1,9 +1,9 @@
-import { FilterQuery } from 'mongodb';
+import { Filter } from 'mongodb';
 
 /**
  * The filter query type;
  */
-export { FilterQuery } from 'mongodb';
+export { Filter } from 'mongodb';
 
 /**
  * Ascending sort.
@@ -40,7 +40,7 @@ export interface IZDatabaseQuery<R> {
   /**
    * The current filter.
    */
-  readonly $filter: FilterQuery<any>;
+  readonly $filter: Filter<any>;
 
   /**
    * The current join.
@@ -78,7 +78,7 @@ export interface IZDatabaseQuery<R> {
    *
    * @returns This object.
    */
-  filter(filter: FilterQuery<any>): IZDatabaseQuery<R>;
+  filter(filter: Filter<any>): IZDatabaseQuery<R>;
 
   /**
    * Sets criteria to join on.
