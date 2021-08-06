@@ -53,7 +53,7 @@ export function ZProfileButton(props: IZProfileButtonProps) {
   function createProfileButton() {
     return (
       <Button className='ZProfileButton-root ZProfileButton-profile' data-testid='ZProfileButton-profile' color='inherit' onClick={props.onProfile} disabled={props.disabled}>
-        <Grid container spacing={2} justify='center' alignItems='center' wrap='nowrap'>
+        <Grid container spacing={2} justifyContent='center' alignItems='center' wrap='nowrap'>
           <Grid item>
             <img className='ZProfileButton-avatar' data-testid='ZProfileButton-avatar' src={getProfileAvatarUrl(props.profile)} />
           </Grid>

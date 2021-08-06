@@ -266,7 +266,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
 
   return (
     <ZPaperCard className='ZProfileAvatarForm-root' data-testid='ZProfileAvatarForm-root' avatar={<PhotoCameraIcon fontSize='large' />} loading={props.loading} headerText={props.headerText} subHeaderText={props.subHeaderText}>
-      <Grid container justify='center' alignItems='center' direction='column' spacing={1}>
+      <Grid container justifyContent='center' alignItems='center' direction='column' spacing={1}>
         {createOversizedAlert()}
         {createToolbar()}
         {createDrawingArea()}

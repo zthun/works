@@ -23,7 +23,7 @@ export function ZLearnPage() {
   }
 
   return (
-    <Grid container={true} spacing={3} className='ZLearnPage-root' data-testid='ZLearnPage-root' justify='center'>
+    <Grid container={true} spacing={3} className='ZLearnPage-root' data-testid='ZLearnPage-root' justifyContent='center'>
       <Grid item={true}>
         <ZMarkdownViewer src={src} avatar={avatar} actionText='View the API' onAction={handleApi} headerText='README' subHeaderText={pkg} size='lg' />
       </Grid>

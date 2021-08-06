@@ -12,7 +12,7 @@ import { IZMarkdownProps } from './markdown.props';
  */
 export function ZMarkdownPage(props: IZMarkdownProps) {
   return (
-    <Grid container className='ZMarkdownPage-root' data-testid='ZMarkdownPage-root' spacing={3} justify='center'>
+    <Grid container className='ZMarkdownPage-root' data-testid='ZMarkdownPage-root' spacing={3} justifyContent='center'>
       <Grid item={true}>
         <ZMarkdownViewer {...props}></ZMarkdownViewer>
       </Grid>

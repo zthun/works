@@ -347,7 +347,7 @@ export function ZProfilePage() {
   }
 
   return (
-    <Grid container className='ZProfilePage-root' data-testid='ZProfilePage-root' spacing={3} justify='center'>
+    <Grid container className='ZProfilePage-root' data-testid='ZProfilePage-root' spacing={3} justifyContent='center'>
       {createContentFromProfile()}
     </Grid>
   );

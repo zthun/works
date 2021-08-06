@@ -141,7 +141,7 @@ export function ZLoginPage(): JSX.Element {
   const content = createContent();
 
   return (
-    <Grid container={true} spacing={3} justify='center' className='ZLoginPage-root' data-testid='ZLoginPage-root'>
+    <Grid container={true} spacing={3} justifyContent='center' className='ZLoginPage-root' data-testid='ZLoginPage-root'>
       <Grid item={true}>{content}</Grid>
     </Grid>
   );

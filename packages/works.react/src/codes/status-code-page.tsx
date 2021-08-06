@@ -13,7 +13,7 @@ import { IZStatusCodePageProps } from './status-code-page.props';
  */
 export function ZStatusCodePage(props: IZStatusCodePageProps) {
   return (
-    <Grid container={true} spacing={3} className='ZStatusCodePage-root' data-testid='ZStatusCodePage-root' justify='center'>
+    <Grid container={true} spacing={3} className='ZStatusCodePage-root' data-testid='ZStatusCodePage-root' justifyContent='center'>
       <Grid item={true}>
         <ZHttpStatusCodeCard code={+props.code as ZHttpCode} />
       </Grid>

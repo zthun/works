@@ -122,7 +122,7 @@ export function MyPage() {
   const avatar = <img className='ZPaperCard-avatar ZPaperCard-avatar-lg' src={img} />;
 
   return (
-    <Grid container={true} spacing={3} className='ZApiPage-root' data-testid='ZApiPage-root' justify='center'>
+    <Grid container={true} spacing={3} className='ZApiPage-root' data-testid='ZApiPage-root' justifyContent='center'>
       <Grid item={true}>
         <ZTypedocViewerSource src={src} avatar={avatar} />
       </Grid>
@@ -163,7 +163,7 @@ export function MyLoginPage() {
   }
 
   return (
-    <Grid container={true} spacing={3} justify='center'>
+    <Grid container={true} spacing={3} justifyContent='center'>
       <Grid item={true}>
         <ZLoginTabs onLoginCredentialsChange={handleLogin} onCreateCredentialsChange={handleCreate} onRecoverCredentialsChange={handleRecover} />
       </Grid>
@@ -188,7 +188,7 @@ export function ZProfilePage() {
   }
 
   return (
-    <Grid container spacing={3} justify='center'>
+    <Grid container spacing={3} justifyContent='center'>
       <Grid item>
         <ZProfileForm profile={loginState.data} onProfileChange={handleUpdateProfile} />
       </Grid>
