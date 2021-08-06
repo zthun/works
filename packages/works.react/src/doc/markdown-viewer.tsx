@@ -62,7 +62,7 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
       onAction={props.onAction}
     >
       <div ref={markdownEl}>
-        <ReactMarkdown className='ZMarkdownViewer-markdown' plugins={[gfm]} linkTarget='_blank'>
+        <ReactMarkdown className='ZMarkdownViewer-markdown' remarkPlugins={[gfm]} linkTarget='_blank'>
           {markdown}
         </ReactMarkdown>
       </div>
