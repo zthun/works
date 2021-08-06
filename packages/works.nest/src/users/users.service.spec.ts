@@ -6,7 +6,8 @@ import { v4 } from 'uuid';
 import { ZUsersCollections } from './users.collections';
 import { ZUsersService } from './users.service';
 
-describe('ZUsersRepositoryController', () => {
+describe('ZUsersService', () => {
+  let mongo: ZDatabaseMemory;
   let dal: IZDatabase;
   let userA: IZUser;
   let userB: IZUser;
@@ -14,12 +15,13 @@ describe('ZUsersRepositoryController', () => {
   let loginB: IZLogin;
 
   beforeAll(async () => {
-    await ZDatabaseMemory.start();
-    dal = ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('user-controller-test').build());
+    mongo = await ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('user-controller-test').build());
+    await mongo.start();
+    dal = mongo;
   });
 
   afterAll(async () => {
-    await ZDatabaseMemory.kill();
+    await mongo.kill();
   });
 
   beforeEach(async () => {
@@ -40,22 +42,6 @@ describe('ZUsersRepositoryController', () => {
   function createTestTarget() {
     return new ZUsersService(dal);
   }
-
-  describe('List', () => {
-    beforeEach(async () => {
-      [userA, userB] = await dal.create(ZUsersCollections.Users, [userA, userB]).run();
-    });
-
-    it('returns all users.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      const expected = [userA, userB];
-      // Act
-      const actual = await target.list();
-      // Assert
-      expect(actual).toEqual(expected);
-    });
-  });
 
   describe('Create', () => {
     beforeEach(async () => {

@@ -5,6 +5,7 @@ import { ZVaultCollections } from './vault.collections';
 import { ZVaultService } from './vault.service';
 
 describe('ZVaultService', () => {
+  let mongo: ZDatabaseMemory;
   let dal: IZDatabase;
   let configA: IZConfigEntry;
   let configB: IZConfigEntry;
@@ -14,12 +15,13 @@ describe('ZVaultService', () => {
   }
 
   beforeAll(async () => {
-    await ZDatabaseMemory.start();
-    dal = ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('user-controller-test').build());
+    mongo = await ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('user-controller-test').build());
+    await mongo.start();
+    dal = mongo;
   });
 
   afterAll(async () => {
-    await ZDatabaseMemory.kill();
+    await mongo.kill();
   });
 
   beforeEach(async () => {
