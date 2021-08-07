@@ -1,4 +1,5 @@
 FROM nginx:1.21.1-alpine
 EXPOSE 8080
-COPY conf.d/default.conf /etc/nginx/conf.d/default.conf
-COPY certs/ /etc/nginx/certs/
+COPY shared /etc/nginx/shared
+COPY certs /etc/nginx/certs
+COPY conf.d /etc/nginx/conf.d
