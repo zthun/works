@@ -24,9 +24,11 @@
     "dist/**",
     "docs/**"
   ],
-  "peerDependencies": {
-    "lodash": "^4.17.15",
+  "dependencies": {
     "url-parse": "^1.4.7"
+  },
+  "peerDependencies": {
+    "lodash": "^4.17.15"
   },
   "sideEffects": false
 }
