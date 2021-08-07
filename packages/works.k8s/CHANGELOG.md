@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0-28](https://github.com/zthun/works/compare/v1.0.0-27...v1.0.0-28) (2021-08-07)
+
+
+### Features
+
+* updated the ingress balancer to v1 ([b452d3e](https://github.com/zthun/works/commit/b452d3e8e6f960b1bd76d26eceb5bbe2bcc0c174))
+
+
+
 ## [1.0.0-27](https://github.com/zthun/works/compare/v1.0.0-26...v1.0.0-27) (2021-06-18)
 
 **Note:** Version bump only for package @zthun/works.k8s

@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0-28](https://github.com/zthun/works/compare/v1.0.0-27...v1.0.0-28) (2021-08-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* updated server rxjs
+* updated nestjs
+* updated to latest material
+* you can no longer list users from the users service
+* updatd mongo to 4
+* the root kind for typedoc has been changed from Global to Project
+* updated highlight.js to version 11
+* data state can now simply set the data instead of a forced refresh
+* removed data state static in favor of a simpler data state
+
+### Features
+
+* added a profile service ([1a4665c](https://github.com/zthun/works/commit/1a4665cee01134fa365b9350552358f26eb66a93))
+* data state can now simply set the data instead of a forced refresh ([7a7a7ba](https://github.com/zthun/works/commit/7a7a7ba20b870d5d15530e393f235fa06cfe7eb5))
+* mongo is now a transitive dependency of works.dal ([7b9b3ec](https://github.com/zthun/works/commit/7b9b3ec9e1f4b1b4210c37985b87dd5605d776fc))
+* removed data state static in favor of a simpler data state ([fd41901](https://github.com/zthun/works/commit/fd4190148aaf7418a13bf1812daddfb4fa2ae8d5))
+* the initializer for get profile is now in the main app root ([4445121](https://github.com/zthun/works/commit/4445121328413d981cb669a709fabe427031a548))
+* the profile page uses the new profile service ([e903eba](https://github.com/zthun/works/commit/e903eba5a3a2863798433d39f818fd677204e3dd))
+* the proxy now has composable shared configuration ([e0f75fd](https://github.com/zthun/works/commit/e0f75fd5192eb8dfe65f0e7e42d60aac6665aade))
+* updatd mongo to 4 ([f8917c1](https://github.com/zthun/works/commit/f8917c13fa844b0a621c2204b3eb0adbe9583e9e))
+* updated highlight.js to version 11 ([cea3c8b](https://github.com/zthun/works/commit/cea3c8bffe16cd0b0dec778b5a87d70b6e9efef4))
+* updated nestjs ([98d2248](https://github.com/zthun/works/commit/98d224887a87c2f89fdb2f84cfda3dedc64a69b8))
+* updated server rxjs ([15280ef](https://github.com/zthun/works/commit/15280efba02e805057f60f50508726f7abb5ec9a))
+* updated the ingress balancer to v1 ([b452d3e](https://github.com/zthun/works/commit/b452d3e8e6f960b1bd76d26eceb5bbe2bcc0c174))
+* updated to latest material ([9aabf3e](https://github.com/zthun/works/commit/9aabf3ee21ff14c89100f46afc6caba811108c08))
+* upgraded nginx in the proxy ([8432b94](https://github.com/zthun/works/commit/8432b9411417554604c4809fe90def309420b80a))
+* you can no longer list users from the users service ([0daa679](https://github.com/zthun/works/commit/0daa67935bc34f167d813486670fb2b572b100c9))
+
+
+### Bug Fixes
+
+* an unavailable email server will now throw a proper error ([fe34073](https://github.com/zthun/works/commit/fe34073972b89fccc6362305e563a3a0c9f2c3ef))
+* removed old styles ([7d25780](https://github.com/zthun/works/commit/7d25780c59bc762c6dc9554c717e33bc8072eedb))
+* the body should no longer have a bottom padding ([3723658](https://github.com/zthun/works/commit/3723658f81130559e1927998dfe4a861e3372336))
+* the default alert stack size is now 5 ([f5170d1](https://github.com/zthun/works/commit/f5170d15ea2fff8ff4de61a43a99f990f7203404))
+* the login page now logs in on create even if the email server is down ([26597c6](https://github.com/zthun/works/commit/26597c6671038ec627b152e5fc111d8748a0e0c6))
+* the typedoc viewer will now display an documentation message if there are no groups ([4314f95](https://github.com/zthun/works/commit/4314f957ebcdcea7d11f35fa70ff63c329d2d740))
+* typedoc should now be properly generated ([001290f](https://github.com/zthun/works/commit/001290fbd1ea12fede5832292e86450862367e78))
+
+
+### Code Refactoring
+
+* the root kind for typedoc has been changed from Global to Project ([01f8bcf](https://github.com/zthun/works/commit/01f8bcf05aa488ae7164ddd4f5547ea4d4117cd0))
+
+
+
 ## [1.0.0-27](https://github.com/zthun/works/compare/v1.0.0-26...v1.0.0-27) (2021-06-18)
 
 

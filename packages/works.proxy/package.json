@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.proxy",
-  "version": "1.0.0-24",
+  "version": "1.0.0-28",
   "private": true,
   "description": "A reverse proxy for the zthunworks website that is meant to run in docker-compose for development.",
   "author": "Anthony Bonta",
