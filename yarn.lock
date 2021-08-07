@@ -4156,6 +4156,7 @@ __metadata:
     helmet: ^4.1.0
     highlight.js: ^11.0.1
     html-webpack-plugin: ^5.0.0
+    htmlhint: ^0.15.1
     husky: ^7.0.1
     jest: ^27.0.1
     jsdom: ^16.2.2
@@ -9005,7 +9006,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"htmlhint@npm:~0.15.1":
+"htmlhint@npm:^0.15.1, htmlhint@npm:~0.15.1":
   version: 0.15.1
   resolution: "htmlhint@npm:0.15.1"
   dependencies:
