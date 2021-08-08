@@ -17,7 +17,7 @@ services:
     volumes:
       - .:/usr/dev
     working_dir: /usr/dev
-    command: yarn workspace @zthun/works.client debug
+    command: npm --workspace @zthun/works.client run debug
   zthunworks-services-server:
     image: node:16.2.0
     ports:
@@ -31,7 +31,7 @@ services:
       - zthunworks-databases-vault
       - zthunworks-databases-users
     working_dir: /usr/dev
-    command: yarn workspace @zthun/works.server debug
+    command: npm --workspace @zthun/works.server run debug
   # Databases
   zthunworks-databases-vault:
     image: mongo:4.2.0

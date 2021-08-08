@@ -11,10 +11,6 @@ install
 *.tgz
 .rpt2_cache
 
-# Yarn
-.yarn/cache
-.yarn/*.gz
-
 # Specific packages
 packages/works.themes/css
 packages/works.install/charts
