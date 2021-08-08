@@ -11,7 +11,7 @@
   },
   "main": "dist/main.js",
   "bin": {
-    "zthun-works-server": "./dist/main.js"
+    "zthun-works-server": "./bin/main.js"
   },
   "scripts": {
     "docker:publish": "docker push zthun/works.server:latest && docker push zthun/works.server:$(node -p \"require('./package.json').version\")",
@@ -44,7 +44,8 @@
     "access": "public"
   },
   "files": [
-    "dist/**"
+    "dist",
+    "bin"
   ],
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
 }

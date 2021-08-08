@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { Module } from '@nestjs/common';
 import { ZAuthModule, ZHealthModule, ZNestApplication } from '@zthun/works.nest';
 
