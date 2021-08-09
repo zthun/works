@@ -13,13 +13,13 @@ services:
       - zthunworks-services-server
   # Node Ports
   zthunworks-services-client:
-    image: node:16.2.0
+    image: node:16.6.0
     volumes:
       - .:/usr/dev
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.client run debug
   zthunworks-services-server:
-    image: node:16.2.0
+    image: node:16.6.0
     ports:
       - 9229:9229
     volumes:

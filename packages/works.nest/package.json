@@ -28,9 +28,11 @@
   "peerDependencies": {
     "@nestjs/common": "^8.0.6",
     "@nestjs/core": "^8.0.6",
+    "@nestjs/platform-express": "^8.0.6",
     "@zthun/works.class": ">=0.0.0 <2.0.0",
     "@zthun/works.core": ">=0.0.0 <2.0.0",
     "@zthun/works.dal": ">=0.0.0 <2.0.0",
+    "bcryptjs": "^2.4.3",
     "class-transformer": "~0.4.0",
     "cookie-parser": "^1.4.5",
     "helmet": "^4.1.0",
