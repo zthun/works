@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0-29](https://github.com/zthun/works/compare/v1.0.0-28...v1.0.0-29) (2021-08-09)
+
+
+### Features
+
+* themes no longer requires highlight.js ([07a9d11](https://github.com/zthun/works/commit/07a9d11e7d7c3bc37fd58a57ed3d7d4865058016))
+* updated to snapshot 28 ([0f08ac7](https://github.com/zthun/works/commit/0f08ac7f031ec02c6136a0dfe3041ac212f0b4ff))
+* updated to yarn 3+ ([ef6696c](https://github.com/zthun/works/commit/ef6696ce7259f7c9dc78d8ce070dc236f99a1c04))
+* works.url now provides url-parse ([82bc14d](https://github.com/zthun/works/commit/82bc14def07d6e7919b73f246940d5d71cdde8c7))
+
+
+
 ## [1.0.0-28](https://github.com/zthun/works/compare/v1.0.0-27...v1.0.0-28) (2021-08-07)
 
 

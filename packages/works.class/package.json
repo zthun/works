@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.class",
-  "version": "1.0.0-24",
+  "version": "1.0.0-29",
   "description": "Extensions to class-validator for @zthun scoped projects.",
   "author": "Anthony Bonta",
   "license": "MIT",

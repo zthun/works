@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.dal",
-  "version": "1.0.0-28",
+  "version": "1.0.0-29",
   "description": "A database access layer for @zthun scoped projects.",
   "author": "Anthony Bonta",
   "license": "MIT",
