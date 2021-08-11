@@ -6,6 +6,8 @@
  * optional header fields, and is terminated by an empty line. As the HTTP/1.0 standard
  * did not define any 1xx status codes, servers must not[note 1] send a 1xx response to
  * an HTTP/1.0 compliant client except under experimental conditions.[4]
+ *
+ * @deprecated Use the version in @zthun/works.http instead.
  */
 export enum ZHttpCodeInformationalResponse {
   /**

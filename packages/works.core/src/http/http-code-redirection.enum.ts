@@ -5,6 +5,8 @@
  * action with no user interaction only if the method used in the second request is GET or HEAD.
  * A user agent may automatically redirect a request. A user agent should detect and intervene
  * to prevent cyclical redirects.
+ *
+ * @deprecated Use the version in @zthun/works.http instead.
  */
 export enum ZHttpCodeRedirection {
   /**

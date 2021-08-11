@@ -9,6 +9,8 @@
  * is a temporary or permanent condition. Likewise, user agents should
  * display any included entity to the user. These response codes are applicable
  * to any request method.
+ *
+ * @deprecated Use the version in @zthun/works.http instead.
  */
 export enum ZHttpCodeServer {
   /**

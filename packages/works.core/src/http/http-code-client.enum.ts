@@ -4,6 +4,8 @@
  * Except when responding to a HEAD request, the server should include an entity containing an explanation
  * of the error situation, and whether it is a temporary or permanent condition. These status codes are applicable
  * to any request method. User agents should display any included entity to the user.
+ *
+ * @deprecated Use the version in @zthun/works.http instead.
  */
 export enum ZHttpCodeClient {
   /**
@@ -178,6 +180,8 @@ export enum ZHttpCodeClient {
 
 /**
  * English friendly names of the codes.
+ *
+ * @deprecate Use the version in @zthun/works.http instead.
  */
 export const ZHttpCodeClientNames = {
   400: 'Bad Request',
@@ -212,6 +216,8 @@ export const ZHttpCodeClientNames = {
 
 /**
  * English friendly descriptions of HttpClientCodes
+ *
+ * @deprecated Use the version in @zthun/works.http instead.
  */
 export const ZHttpCodeClientDescriptions = {
   400: 'A bad request was sent.',

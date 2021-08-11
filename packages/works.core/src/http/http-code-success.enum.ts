@@ -1,6 +1,8 @@
 /**
  * This class of status codes indicates the action requested by
  * the client was received, understood and accepted.
+ *
+ * @deprecated Use the version in @zthun/works.http instead.
  */
 export enum ZHttpCodeSuccess {
   /**
