@@ -1,7 +1,6 @@
-import { Snackbar } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import MouseIcon from '@material-ui/icons/Mouse';
-import { tryGetProfile, useLogin, ZAlertStackList, ZMarkdownPage, ZStatusCodePage } from '@zthun/works.react';
+import { tryGetProfile, useLogin, ZAlertSnackbar, ZContent, ZMarkdownPage, ZStatusCodePage } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import React, { useEffect } from 'react';
 import { HashRouter, Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
@@ -68,7 +67,7 @@ export function ZthunworksApp() {
     <div className='Zthunworks-root' data-testid='Zthunworks-root'>
       <HashRouter>
         <ZthunworksMenu />
-        <article className='Zthunworks-article' data-testid='Zthunworks-article'>
+        <ZContent>
           <Switch>
             <Route exact path='/home' component={ZHomePage} />
             <Route exact path='/login' component={ZLoginPage} />
@@ -82,11 +81,9 @@ export function ZthunworksApp() {
             <Redirect exact from='/' to='/home' />
             <Redirect to='/status-code/404' />
           </Switch>
-        </article>
+        </ZContent>
       </HashRouter>
-      <Snackbar className='Zthunworks-snackbar' open={true} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-        <ZAlertStackList />
-      </Snackbar>
+      <ZAlertSnackbar />
     </div>
   );
 }

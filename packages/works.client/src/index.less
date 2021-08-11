@@ -1,9 +1,24 @@
 @import 'highlight.js/styles/vs2015.css';
 @import '@zthun/works.themes';
-@import './theme/app';
-@import './theme/home';
 
-body {
-  background-color: @color-whitesmoke;
-  margin: 0;
+.Zthunworks-root {
+  .Zthunworks-owl {
+    height: 5rem;
+    margin-right: @spacing-sm;
+    border-radius: @rounding-circle;
+    border: @thickness-xs solid @color-gainsboro;
+    background: @color-white;
+  }
+}
+
+.ZHomePage-root {
+  .ZHomePage-learn {
+    display: flex;
+    justify-content: center;
+  }
+
+  .ZHomePage-summary-text {
+    height: 10em;
+    overflow: auto;
+  }
 }
