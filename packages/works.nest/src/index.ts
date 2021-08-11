@@ -26,6 +26,9 @@ export { ZHealthModule } from './health/health.module';
 export { ZEmailService } from './notifications/email.service';
 export { ZNotificationsConfigService } from './notifications/notifications-config.service';
 export { ZNotificationsModule } from './notifications/notifications.module';
+// Options
+export { ZOptionsController } from './options/options.controller';
+export { ZOptionsModule } from './options/options.module';
 // Users
 export { ZUsersCollections } from './users/users.collections';
 export { ZUsersDatabase } from './users/users.database';
