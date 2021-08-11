@@ -3,6 +3,7 @@
 // Alert
 export { ZAlertBuilder } from './alert/alert-builder.class';
 export { ZAlertSeverity } from './alert/alert-severity.enum';
+export { IZAlertSnackbarProps, ZAlertSnackbar } from './alert/alert-snackbar';
 export { ZAlertStackList } from './alert/alert-stack-list';
 export { ZAlertStack } from './alert/alert-stack.class';
 export { useAlertStack, useAlertState, ZAlertStackContext } from './alert/alert-stack.context';
@@ -27,6 +28,8 @@ export { IZComponentMedia } from './component/component-media.interface';
 export { IZComponentSizeable } from './component/component-sizeable.interface';
 export { IZComponentSource } from './component/component-source.interface';
 export { IZComponentStyle } from './component/component-style.interface';
+// Content
+export { ZContent } from './content/content';
 // Doc
 export { ZMarkdownPage } from './doc/markdown-page';
 export { ZMarkdownViewer } from './doc/markdown-viewer';
