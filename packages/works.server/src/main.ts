@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ZAuthModule, ZHealthModule, ZNestApplication } from '@zthun/works.nest';
+import { ZAuthModule, ZHealthModule, ZNestApplication, ZOptionsModule } from '@zthun/works.nest';
 
 @Module({
-  imports: [ZAuthModule, ZHealthModule]
+  imports: [ZAuthModule, ZHealthModule, ZOptionsModule]
 })
 /**
  * The main module.
