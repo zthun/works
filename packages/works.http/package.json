@@ -1,0 +1,31 @@
+{
+  "name": "@zthun/works.http",
+  "version": "1.0.0",
+  "description": "A simple service to make http calls or mock http calls.",
+  "author": "Anthony Bonta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zthun/works",
+    "directory": "packages/works.http"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "build": "npm run build:cjs && npm run build:esm && typedoc"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/**",
+    "docs/**"
+  ],
+  "dependencies": {
+    "axios": "^0.21.0"
+  },
+  "sideEffects": false
+}
