@@ -22,7 +22,8 @@
   },
   "files": [
     "dist/**",
-    "docs/**"
+    "docs/**",
+    "images/**"
   ],
   "dependencies": {
     "url-parse": "^1.4.7"
