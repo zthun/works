@@ -240,6 +240,18 @@ export class ZUrlBuilder {
   }
 
   /**
+   * Removes a subdomain from the current domain.
+   *
+   * @returns This object.
+   */
+  public popSubdomain(): this {
+    const parts = this._url.hostname.split('.');
+    parts.splice(0, 1);
+    this._url.hostname = parts.join('.');
+    return this;
+  }
+
+  /**
    * Sets the port.
    *
    * @param port The port.

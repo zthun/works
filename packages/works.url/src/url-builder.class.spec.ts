@@ -94,6 +94,11 @@ describe('ZUrlBuilder', () => {
       assertBuilderSetsProperty(expected, createTestTarget, (t) => t.subdomain('mail'), identity);
     });
 
+    it('replaces a subdomain.', () => {
+      const expected = `${protocol}://mail.${hostname}`;
+      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.subdomain('email').popSubdomain().subdomain('mail'), identity);
+    });
+
     it('sets the domain as the host if the host is not set.', () => {
       const expected = `${protocol}://mail`;
       assertBuilderSetsProperty(expected, createTestTarget, (t) => t.hostname('').subdomain('mail'), identity);
