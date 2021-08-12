@@ -21,8 +21,9 @@
     "access": "public"
   },
   "files": [
-    "dist/**",
-    "docs/**"
+    "dist",
+    "docs",
+    "images"
   ],
   "dependencies": {
     "axios": "^0.21.0"
