@@ -1,5 +1,5 @@
 /**
- * IAn informational response indicates that the request was received and understood.
+ * An informational response indicates that the request was received and understood.
  *
  * It is issued on a provisional basis while request processing continues. It alerts the
  * client to wait for a final response. The message consists only of the status line and
@@ -37,3 +37,23 @@ export enum ZHttpCodeInformationalResponse {
    */
   EarlyHints = 103
 }
+
+/**
+ * English friendly names of the codes.
+ */
+export const ZHttpCodeInformationalResponseNames = {
+  [ZHttpCodeInformationalResponse.Continue]: 'Continue',
+  [ZHttpCodeInformationalResponse.SwitchingProtocols]: 'Switching Protocols',
+  [ZHttpCodeInformationalResponse.Processing]: 'Processing',
+  [ZHttpCodeInformationalResponse.EarlyHints]: 'Early Hints'
+};
+
+/**
+ * English friendly descriptions of the codes.
+ */
+export const ZHttpCodeInformationalResponseDescriptions = {
+  [ZHttpCodeInformationalResponse.Continue]: 'The client should continue to send the request body.',
+  [ZHttpCodeInformationalResponse.SwitchingProtocols]: 'The requestor has asked the server to switch protocols and the server has agreed to do so.',
+  [ZHttpCodeInformationalResponse.Processing]: 'The server has received and is processing the request, but a response is not available yet.',
+  [ZHttpCodeInformationalResponse.EarlyHints]: 'There are some early response headers available for you before the final message.'
+};
