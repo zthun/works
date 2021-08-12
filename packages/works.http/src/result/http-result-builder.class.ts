@@ -56,18 +56,6 @@ export class ZHttpResultBuilder<TData = any> {
   }
 
   /**
-   * Sets the redirection url.
-   *
-   * @param url The url to set.
-   *
-   * @returns This object.
-   */
-  public redirect(url: string): this {
-    this._result.url = url;
-    return this;
-  }
-
-  /**
    * Returns the built up result.
    *
    * @returns A shallow copy of the built up result.

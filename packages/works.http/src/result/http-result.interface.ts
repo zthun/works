@@ -18,12 +18,4 @@ export interface IZHttpResult<TResult = any> {
    * The actual body result of the invocation.
    */
   data: TResult;
-
-  /**
-   * The redirection url in the case that status is 300.
-   *
-   * This is normally handled for you internally and you don't
-   * really ever have to worry about it.
-   */
-  url?: string;
 }

@@ -36,14 +36,5 @@ describe('ZHttpResultBuilder', () => {
         (r: IZHttpResult) => r.headers
       );
     });
-
-    it('should set redirect url.', () => {
-      assertBuilderSetsProperty(
-        'google.com',
-        createTestTarget,
-        (t, v) => t.redirect(v),
-        (r: IZHttpResult) => r.url
-      );
-    });
   });
 });
