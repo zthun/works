@@ -4,7 +4,6 @@ import { ZHttpRequestBuilder } from '../request/http-request-builder.class';
 import { IZHttpRequest } from '../request/http-request.interface';
 import { ZHttpCodeClient } from '../result/http-code-client.enum';
 import { ZHttpCodeInformationalResponse } from '../result/http-code-informational-response.enum';
-import { ZHttpCodeRedirection } from '../result/http-code-redirection.enum';
 import { ZHttpCodeServer } from '../result/http-code-server.enum';
 import { ZHttpCodeSuccess } from '../result/http-code-success.enum';
 import { ZHttpCode } from '../result/http-code.type';
@@ -55,96 +54,6 @@ describe('ZHttpServiceMock', () => {
 
     it('should return a rejected promise for code 500.', async () => {
       await assertRejectsRequest(ZHttpCodeServer.InsufficientStorage);
-    });
-  });
-
-  describe('Redirecting', () => {
-    let data: any;
-    let endpointRedirect: string;
-    let endpointPermanent: string;
-
-    function createRedirectedTarget() {
-      const target = createTestTarget();
-      target.set(endpointRedirect, ZHttpMethod.Get, () => new ZHttpResultBuilder().status(ZHttpCodeRedirection.Found).redirect(endpointPermanent).build());
-      target.set(endpointPermanent, ZHttpMethod.Get, () => new ZHttpResultBuilder().status(ZHttpCodeSuccess.OK).data(data).build());
-      return target;
-    }
-
-    beforeEach(() => {
-      data = { value: 10 };
-      endpointRedirect = 'https://zthunworks.com/api/from';
-      endpointPermanent = 'https://zthunworks.com/api/to';
-    });
-
-    it('should redirect the correct data.', async () => {
-      // Arrange
-      const target = createRedirectedTarget();
-      const req = new ZHttpRequestBuilder().url(endpointRedirect).get().build();
-      // Act
-      const actual = await target.request(req);
-      // Assert
-      expect(actual.data).toEqual(data);
-    });
-
-    it('should return a 404 rejection if the redirect url is not returned.', async () => {
-      // Arrange
-      const target = createRedirectedTarget();
-      target.set(endpointRedirect, ZHttpMethod.Get, () => new ZHttpResultBuilder().status(ZHttpCodeRedirection.UseProxy).build());
-      const req = new ZHttpRequestBuilder().url(endpointRedirect).get().build();
-      // Act
-      const actual = await target
-        .request(req)
-        .then(() => Promise.resolve(null))
-        .catch((e) => Promise.resolve(e));
-      // Assert
-      expect(actual.status).toEqual(ZHttpCodeClient.NotFound);
-    });
-
-    it('continues to redirect until a non redirection code is discovered.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      const endpointRedirect2 = 'https://zthunworks.com/api/from-2';
-      const endpointRedirect3 = 'https://zthunworks.com/api/from-3';
-      target.set(endpointRedirect, ZHttpMethod.Get, () => new ZHttpResultBuilder().status(ZHttpCodeRedirection.Found).redirect(endpointRedirect2).build());
-      target.set(endpointRedirect2, ZHttpMethod.Get, () => new ZHttpResultBuilder().status(ZHttpCodeRedirection.Found).redirect(endpointRedirect3).build());
-      target.set(endpointRedirect3, ZHttpMethod.Get, () => new ZHttpResultBuilder().status(ZHttpCodeRedirection.Found).redirect(endpointPermanent).build());
-      target.set(endpointPermanent, ZHttpMethod.Get, () => new ZHttpResultBuilder().status(ZHttpCodeSuccess.OK).data(data).build());
-      const req = new ZHttpRequestBuilder().url(endpointRedirect).get().build();
-      // Act
-      const actual = await target.request(req);
-      // Assert
-      expect(actual.data).toEqual(data);
-    });
-
-    async function assertCompletes(requestFn: (t: ZHttpServiceMock, r: IZHttpRequest) => Promise<IZHttpResult>, code: ZHttpCode) {
-      // Arrange
-      const target = createRedirectedTarget();
-      const expected = new ZHttpResultBuilder().data(data).status(code).build();
-      target.set(endpointPermanent, ZHttpMethod.Get, () => new ZHttpResultBuilder().status(code).data(data).build());
-      const req = new ZHttpRequestBuilder().get().url(endpointRedirect).build();
-      // Act
-      const actual = await requestFn(target, req).catch(() => Promise.resolve(null));
-      // Assert
-      expect(actual).toEqual(expected);
-    }
-
-    const assertResolvesRequest: (code: ZHttpCode) => Promise<void> = assertCompletes.bind(null, (t: ZHttpServiceMock, r: IZHttpRequest) => t.request(r));
-    const assertRejectsRequest: (code: ZHttpCode) => Promise<void> = assertCompletes.bind(null, (t: ZHttpServiceMock, r: IZHttpRequest) => t.request(r).catch((e) => Promise.resolve(e)));
-
-    it('should return a resolved promise for a redirect to a 100.', async () => {
-      await assertResolvesRequest(ZHttpCodeInformationalResponse.EarlyHints);
-    });
-
-    it('should return a resolved promise for a redirect to a 200.', async () => {
-      await assertResolvesRequest(ZHttpCodeSuccess.Accepted);
-    });
-
-    it('should return a rejected promise for a redirect to a 400.', async () => {
-      await assertRejectsRequest(ZHttpCodeClient.Conflict);
-    });
-
-    it('should return a rejected promise for a redirect to a 500.', async () => {
-      await assertRejectsRequest(ZHttpCodeServer.BadGateway);
     });
   });
 

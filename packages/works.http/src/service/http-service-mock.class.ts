@@ -1,5 +1,4 @@
 import { ZHttpMethod } from '../request/http-method.enum';
-import { ZHttpRequestBuilder } from '../request/http-request-builder.class';
 import { IZHttpRequest } from '../request/http-request.interface';
 import { ZHttpCodeClient } from '../result/http-code-client.enum';
 import { ZHttpResultBuilder } from '../result/http-result-builder.class';
@@ -41,7 +40,6 @@ export class ZHttpServiceMock implements IZHttpService {
     const endpointConfig = this._mapping[req.url];
     const result = endpointConfig?.[req.method];
     const errorThreshold = 400;
-    const redirectThreshold = 300;
     const notFound = new ZHttpResultBuilder().data(null).status(ZHttpCodeClient.NotFound).build();
 
     if (result == null) {
@@ -49,11 +47,6 @@ export class ZHttpServiceMock implements IZHttpService {
     }
 
     const intermediate = await result(req);
-
-    if (intermediate.status >= redirectThreshold && intermediate.status < errorThreshold) {
-      return this.request(new ZHttpRequestBuilder().copy(req).url(intermediate.url).build());
-    }
-
     return +intermediate.status < errorThreshold ? Promise.resolve(intermediate) : Promise.reject(intermediate);
   }
 }
