@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { IZHttpRequest } from '../request/http-request.interface';
 import { ZHttpResultBuilder } from '../result/http-result-builder.class';
 import { IZHttpResult } from '../result/http-result.interface';
@@ -23,8 +23,23 @@ export class ZHttpService implements IZHttpService {
         headers: req.headers
       });
       return new ZHttpResultBuilder().data(res.data).headers(res.headers).status(res.status).build();
-    } catch (err) {
-      return Promise.reject(new ZHttpResultBuilder().data(err.data).headers(err.headers).status(err.status).build());
+    } catch (e) {
+      const error = e as AxiosError;
+
+      let builder = new ZHttpResultBuilder().status(null).headers({});
+
+      if (error.response) {
+        // A call was made to the server and the status falls outside the accepted success range.
+        builder = builder.headers(error.response.headers).status(error.response.status).data(error.response.data);
+      } else if (error.request) {
+        // The request was made but the server was never hit.
+        builder = builder.data('The target endpoint could not be reached.  You may need to try again later.');
+      } else {
+        // Some other error occurred.
+        builder = builder.data(error.message || 'An unexpected error occurred.');
+      }
+
+      return Promise.reject(builder.build());
     }
   }
 }
