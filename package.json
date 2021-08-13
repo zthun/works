@@ -12,6 +12,7 @@
   "workspaces": [
     "packages/works.jest",
     "packages/works.url",
+    "packages/works.http",
     "packages/works.class",
     "packages/works.core",
     "packages/works.dal",
