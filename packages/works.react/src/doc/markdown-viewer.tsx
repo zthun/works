@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import { IZHttpResult, ZHttpRequestBuilder } from '@zthun/works.http';
 import highlight from 'highlight.js';
 import { noop } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
@@ -7,6 +7,7 @@ import gfm from 'remark-gfm';
 import { from, of, Subject } from 'rxjs';
 import { catchError, map, takeUntil } from 'rxjs/operators';
 import { ZPaperCard } from '../card/paper-card';
+import { useHttpService } from '../http/http-service.context';
 import { IZMarkdownProps } from './markdown.props';
 
 /**
@@ -18,6 +19,7 @@ import { IZMarkdownProps } from './markdown.props';
  */
 export function ZMarkdownViewer(props: IZMarkdownProps) {
   const [markdown, setMarkdown] = useState('');
+  const http = useHttpService();
   const markdownEl = useRef<HTMLDivElement>();
 
   useEffect(loadMarkdown, [props.src]);
@@ -31,11 +33,13 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
     const canceled = new Subject<any>();
     setMarkdown('');
 
-    from(Axios.get(props.src))
+    const request = new ZHttpRequestBuilder().get().url(props.src).build();
+
+    from(http.request<string>(request))
       .pipe(
         takeUntil(canceled),
         map((res) => res.data),
-        catchError((err) => of(`Unable to retrieve ${props.src}.  ${err}.`))
+        catchError((err: IZHttpResult) => of(`Unable to retrieve ${props.src}.  ${err.data}.`))
       )
       .subscribe((md) => {
         setMarkdown(md);

@@ -1,32 +1,40 @@
 /* eslint-disable require-jsdoc */
 
 import { render } from '@testing-library/react';
-import Axios from 'axios';
+import { ZHttpCodeClient, ZHttpCodeSuccess, ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { of } from 'rxjs';
+import { lastValueFrom, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { ZHttpServiceContext } from '../http/http-service.context';
 import { ZMarkdownViewer } from './markdown-viewer';
-
-jest.mock('axios');
 
 describe('ZMarkdownViewer', () => {
   let url: string;
   let markdown: string;
+  let http: ZHttpServiceMock;
 
   async function createTestTarget() {
-    const target = render(<ZMarkdownViewer src={url} headerText='Test Markdown' />);
-    await act(async (): Promise<undefined> => await of(undefined).pipe(delay(5)).toPromise());
+    const target = render(
+      <ZHttpServiceContext.Provider value={http}>
+        <ZMarkdownViewer src={url} headerText='Test Markdown' />
+      </ZHttpServiceContext.Provider>
+    );
+    await act(async (): Promise<undefined> => await lastValueFrom(of(undefined).pipe(delay(5))));
     return target;
   }
 
   beforeEach(() => {
+    http = new ZHttpServiceMock();
+
+    url = 'https://zthunworks.com/docs/README.md';
+
     markdown = `# Test
     _This is test markdown_
     `;
 
-    (Axios.get as jest.Mock).mockClear();
-    (Axios.get as jest.Mock).mockResolvedValue({ data: markdown });
+    const result = new ZHttpResultBuilder().status(ZHttpCodeSuccess.OK).data(markdown).build();
+    http.set(url, ZHttpMethod.Get, () => result);
   });
 
   it('should render the markdown from the source.', async () => {
@@ -41,8 +49,8 @@ describe('ZMarkdownViewer', () => {
   it('should render an error markdown if an error occurs while retrieving the source.', async () => {
     // Arrange
     const error = 'An error occurred retrieving the markdown.';
-    (Axios.get as jest.Mock).mockClear();
-    (Axios.get as jest.Mock).mockRejectedValue(error);
+    const result = new ZHttpResultBuilder().status(ZHttpCodeClient.Forbidden).data(error).build();
+    http.set(url, ZHttpMethod.Get, result);
     const target = await createTestTarget();
     // Act
     const actual = target.getByTestId('ZMarkdownViewer-root').innerHTML;
