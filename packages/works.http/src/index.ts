@@ -16,3 +16,4 @@ export { IZHttpResult } from './result/http-result.interface';
 // Service
 export { ZHttpService } from './service/http-service.class';
 export { ZHttpServiceMock } from './service/http-service-mock.class';
+export { IZHttpService } from './service/http-service.interface';
