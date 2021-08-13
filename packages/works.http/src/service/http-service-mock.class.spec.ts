@@ -29,7 +29,7 @@ describe('ZHttpServiceMock', () => {
       // Arrange
       const target = createTestTarget();
       const expected = new ZHttpResultBuilder().data(data).status(code).build();
-      target.set(endpoint, ZHttpMethod.Get, () => expected);
+      target.set(endpoint, ZHttpMethod.Get, expected);
       const req = new ZHttpRequestBuilder().get().url(endpoint).build();
       // Act
       const actual = await requestFn(target, req);

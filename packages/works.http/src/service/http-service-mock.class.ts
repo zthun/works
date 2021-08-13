@@ -23,9 +23,9 @@ export class ZHttpServiceMock implements IZHttpService {
    * @param verb The endpoint verb to respond to.
    * @param invoke The result method.  If this is falsy, then the endpoint is removed.
    */
-  public set<TResult = any>(endpoint: string, verb: ZHttpMethod, invoke: (req: IZHttpRequest) => IZHttpResult<TResult> | Promise<IZHttpResult<TResult>>) {
+  public set<TResult = any>(endpoint: string, verb: ZHttpMethod, invoke: IZHttpResult<TResult> | ((req: IZHttpRequest) => IZHttpResult<TResult> | Promise<IZHttpResult<TResult>>)) {
     this._mapping[endpoint] = this._mapping[endpoint] || {};
-    this._mapping[endpoint][verb] = invoke;
+    this._mapping[endpoint][verb] = typeof invoke === 'function' ? invoke : () => invoke;
   }
 
   /**
@@ -39,13 +39,13 @@ export class ZHttpServiceMock implements IZHttpService {
   public async request<TResult = any, TBody = any>(req: IZHttpRequest<TBody>): Promise<IZHttpResult<TResult>> {
     const endpointConfig = this._mapping[req.url];
     const result = endpointConfig?.[req.method];
-    const errorThreshold = 400;
-    const notFound = new ZHttpResultBuilder().data(null).status(ZHttpCodeClient.NotFound).build();
 
     if (result == null) {
+      const notFound = new ZHttpResultBuilder().data(null).status(ZHttpCodeClient.NotFound).build();
       return Promise.reject(notFound);
     }
 
+    const errorThreshold = 400;
     const intermediate = await result(req);
     return +intermediate.status < errorThreshold ? Promise.resolve(intermediate) : Promise.reject(intermediate);
   }
