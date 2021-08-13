@@ -33,7 +33,7 @@
     "@zthun/works.core": ">=0.0.0 <2.0.0",
     "@zthun/works.draw": ">=0.0.0 <2.0.0",
     "@zthun/works.url": ">=0.0.0 <2.0.0",
-    "axios": "^0.21.0",
+    "@zthun/works.http": ">=0.0.0 <2.0.0",
     "highlight.js": "^11.0.1",
     "md5": "^2.3.0",
     "react": "^17.0.0",
