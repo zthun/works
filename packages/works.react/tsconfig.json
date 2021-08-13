@@ -8,6 +8,7 @@
       "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.url": ["../works.url/src/index"],
       "@zthun/works.draw": ["../works.draw/src/index"],
+      "@zthun/works.http": ["../works.http/src/index"],
       "@zthun/works.jest": ["../works.jest/src/index"]
     }
   },
