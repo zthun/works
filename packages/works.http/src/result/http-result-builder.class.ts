@@ -60,7 +60,7 @@ export class ZHttpResultBuilder<TData = any> {
    *
    * @returns A shallow copy of the built up result.
    */
-  public build() {
+  public build(): IZHttpResult {
     return JSON.parse(JSON.stringify(this._result));
   }
 }

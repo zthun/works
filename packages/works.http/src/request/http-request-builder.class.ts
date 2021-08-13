@@ -158,7 +158,7 @@ export class ZHttpRequestBuilder<TBody = any> {
    *
    * @returns The constructed request.
    */
-  public build() {
+  public build(): IZHttpRequest {
     return JSON.parse(JSON.stringify(this._request));
   }
 }
