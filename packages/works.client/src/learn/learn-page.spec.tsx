@@ -1,33 +1,33 @@
 /* eslint-disable require-jsdoc */
-import { fireEvent, render, act } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
+import { ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
+import { ZHttpServiceContext } from '@zthun/works.react';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
 import { Route, Router } from 'react-router-dom';
 import { ZLearnPage } from './learn-page';
-import Axios from 'axios';
-
-jest.mock('axios');
 
 describe('ZLearnPage', () => {
   let history: MemoryHistory;
   let markdown: string;
+  let http: ZHttpServiceMock;
 
   function createTestTarget() {
     return render(
-      <Router history={history}>
-        <Route path='/learn/:pkg' component={ZLearnPage} />
-      </Router>
+      <ZHttpServiceContext.Provider value={http}>
+        <Router history={history}>
+          <Route path='/learn/:pkg' component={ZLearnPage} />
+        </Router>
+      </ZHttpServiceContext.Provider>
     );
   }
 
   beforeEach(() => {
     markdown = '# README';
     history = createMemoryHistory({ initialEntries: ['/learn/works.core'] });
-    (Axios.get as jest.Mock).mockResolvedValue(markdown);
-  });
 
-  afterEach(() => {
-    (Axios.get as jest.Mock).mockClear();
+    http = new ZHttpServiceMock();
+    http.set('docs/works.core.README.md', ZHttpMethod.Get, new ZHttpResultBuilder().data(markdown).build());
   });
 
   it('renders the page', async () => {
