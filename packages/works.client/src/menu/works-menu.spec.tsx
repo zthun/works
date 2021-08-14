@@ -2,14 +2,11 @@
 import { fireEvent, render } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { IZAlertStack, IZDataState, ZAlertStack, ZAlertStackContext, ZDataState, ZLoginStateContext } from '@zthun/works.react';
-import Axios from 'axios';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { Router } from 'react-router-dom';
 import { ZthunworksMenu } from './works-menu';
-
-jest.mock('axios');
 
 describe('ZthunworksMenu', () => {
   let history: MemoryHistory;
@@ -32,8 +29,6 @@ describe('ZthunworksMenu', () => {
     history = createMemoryHistory();
     loginState = new ZDataState<IZProfile>();
     alerts = new ZAlertStack();
-
-    (Axios.delete as jest.Mock).mockClear();
   });
 
   describe('Profile state', () => {
