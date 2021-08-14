@@ -1,4 +1,4 @@
-import { IZLogin, IZProfile, ZProfileAvatarSize } from '@zthun/works.core';
+import { IZLogin, IZProfile, IZProfileActivation, ZProfileAvatarSize } from '@zthun/works.core';
 import { IZHttpService, ZHttpRequestBuilder } from '@zthun/works.http';
 import { ZUrlBuilder } from '@zthun/works.url';
 import md5 from 'md5';
@@ -24,6 +24,15 @@ export class ZProfileService implements IZProfileService {
    */
   public static createTokensUrl(): string {
     return new ZUrlBuilder().api().append('tokens').build();
+  }
+
+  /**
+   * Gets the url for profile activation.
+   *
+   * @returns The url for the activation rest api.
+   */
+  public static createActivationsUrl(): string {
+    return new ZUrlBuilder().api().append('profiles').append('activations').build();
   }
 
   /**
@@ -123,5 +132,45 @@ export class ZProfileService implements IZProfileService {
   public async logout(): Promise<void> {
     const req = new ZHttpRequestBuilder().delete().url(ZProfileService.createTokensUrl()).build();
     await this._http.request(req);
+  }
+
+  /**
+   * Activates the users profile.
+   *
+   * @param activation The activation key used to activate the profile.
+   *
+   * @returns A promise that returns the updated profile.
+   */
+  public async activate(activation: IZProfileActivation): Promise<IZProfile> {
+    const req = new ZHttpRequestBuilder().put(activation).url(ZProfileService.createActivationsUrl()).build();
+    const actual = await this._http.request(req);
+    return actual.data;
+  }
+
+  /**
+   * Deactivates the users profile.
+   *
+   * @returns A promise that returns the updated profile.
+   */
+  public async deactivate(): Promise<IZProfile> {
+    const req = new ZHttpRequestBuilder().delete().url(ZProfileService.createActivationsUrl()).build();
+    const actual = await this._http.request(req);
+    return actual.data;
+  }
+
+  /**
+   * Reactivates the users profile.
+   *
+   * This should send the user a new activation email with an updated
+   * key.
+   *
+   * @param activation The activation that targets the specified email to activate.
+   *
+   * @returns A promise that returns the updated profile.
+   */
+  public async reactivate(activation: IZProfileActivation): Promise<IZProfile> {
+    const req = new ZHttpRequestBuilder().post(activation).url(ZProfileService.createActivationsUrl()).build();
+    const actual = await this._http.request(req);
+    return actual.data;
   }
 }

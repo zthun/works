@@ -1,8 +1,9 @@
 /* eslint-disable require-jsdoc */
-import { IZProfile, ZLoginBuilder, ZProfileAvatarSize, ZProfileBuilder } from '@zthun/works.core';
+import { IZProfile, ZLoginBuilder, ZProfileActivationBuilder, ZProfileAvatarSize, ZProfileBuilder } from '@zthun/works.core';
 import { IZHttpRequest, ZHttpCodeClient, ZHttpCodeSuccess, ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
 import { ZUrlBuilder } from '@zthun/works.url';
 import md5 from 'md5';
+import { v4 } from 'uuid';
 import { ZProfileService } from './profile-service.class';
 
 describe('ZProfileService', () => {
@@ -17,25 +18,14 @@ describe('ZProfileService', () => {
   beforeEach(() => {
     avatar = 'data:text/plain;Avatar';
     profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').avatar(avatar).build();
-
-    const profiles = ZProfileService.createProfilesUrl();
-    const tokens = ZProfileService.createTokensUrl();
-
     http = new ZHttpServiceMock();
-
-    http.set(profiles, ZHttpMethod.Get, new ZHttpResultBuilder().data(profile).status(ZHttpCodeSuccess.OK).build());
-    http.set(profiles, ZHttpMethod.Delete, new ZHttpResultBuilder().data(null).status(ZHttpCodeSuccess.OK).build());
-    http.set(profiles, ZHttpMethod.Put, (req: IZHttpRequest<Partial<IZProfile>>) => {
-      const updated = new ZProfileBuilder().copy(profile).assign(req.body).build();
-      const res = new ZHttpResultBuilder().data(updated).status(ZHttpCodeSuccess.OK).build();
-      return Promise.resolve(res);
-    });
-
-    http.set(tokens, ZHttpMethod.Post, new ZHttpResultBuilder().data(null).status(ZHttpCodeSuccess.OK).build());
-    http.set(tokens, ZHttpMethod.Delete, new ZHttpResultBuilder().status(ZHttpCodeSuccess.OK).build());
   });
 
   describe('Read', () => {
+    beforeEach(() => {
+      http.set(ZProfileService.createProfilesUrl(), ZHttpMethod.Get, new ZHttpResultBuilder().data(profile).status(ZHttpCodeSuccess.OK).build());
+    });
+
     it('should return the profile on successful read.', async () => {
       // Arrange
       const target = createTestTarget();
@@ -57,6 +47,14 @@ describe('ZProfileService', () => {
   });
 
   describe('Update', () => {
+    beforeEach(() => {
+      http.set(ZProfileService.createProfilesUrl(), ZHttpMethod.Put, (req: IZHttpRequest<Partial<IZProfile>>) => {
+        const updated = new ZProfileBuilder().copy(profile).assign(req.body).build();
+        const res = new ZHttpResultBuilder().data(updated).status(ZHttpCodeSuccess.OK).build();
+        return Promise.resolve(res);
+      });
+    });
+
     it('should return the updated profile.', async () => {
       // Arrange
       const target = createTestTarget();
@@ -70,6 +68,10 @@ describe('ZProfileService', () => {
   });
 
   describe('Delete', () => {
+    beforeEach(() => {
+      http.set(ZProfileService.createProfilesUrl(), ZHttpMethod.Delete, new ZHttpResultBuilder().data(null).status(ZHttpCodeSuccess.OK).build());
+    });
+
     it('should delete the profile.', async () => {
       // Arrange
       const target = createTestTarget();
@@ -154,6 +156,11 @@ describe('ZProfileService', () => {
   });
 
   describe('Login', () => {
+    beforeEach(() => {
+      http.set(ZProfileService.createProfilesUrl(), ZHttpMethod.Get, new ZHttpResultBuilder().data(profile).status(ZHttpCodeSuccess.OK).build());
+      http.set(ZProfileService.createTokensUrl(), ZHttpMethod.Post, new ZHttpResultBuilder().data(null).status(ZHttpCodeSuccess.OK).build());
+    });
+
     it('should return the profile that was successfully logged in.', async () => {
       // Arrange
       const target = createTestTarget();
@@ -166,6 +173,10 @@ describe('ZProfileService', () => {
   });
 
   describe('Logout', () => {
+    beforeEach(() => {
+      http.set(ZProfileService.createTokensUrl(), ZHttpMethod.Delete, new ZHttpResultBuilder().status(ZHttpCodeSuccess.OK).build());
+    });
+
     it('should log the user out from the system.', async () => {
       // Arrange
       const target = createTestTarget();
@@ -174,6 +185,53 @@ describe('ZProfileService', () => {
       const actual = await target.logout();
       // Assert
       expect(actual).toBeUndefined();
+    });
+  });
+
+  describe('Activation', () => {
+    beforeEach(() => {
+      http.set(ZProfileService.createActivationsUrl(), ZHttpMethod.Put, new ZHttpResultBuilder().data(profile).status(ZHttpCodeSuccess.OK).build());
+    });
+
+    it('should activate the users account.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const activator = new ZProfileActivationBuilder().email('gambit@marvel.com').key(v4()).build();
+      // Act
+      const actual = await target.activate(activator);
+      // Assert
+      expect(actual).toEqual(profile);
+    });
+  });
+
+  describe('Deactivation', () => {
+    beforeEach(() => {
+      http.set(ZProfileService.createActivationsUrl(), ZHttpMethod.Delete, new ZHttpResultBuilder().data(profile).status(ZHttpCodeSuccess.OK).build());
+    });
+
+    it('should deactivate the users account.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.deactivate();
+      // Assert
+      expect(actual).toEqual(profile);
+    });
+  });
+
+  describe('Reactivation', () => {
+    beforeEach(() => {
+      http.set(ZProfileService.createActivationsUrl(), ZHttpMethod.Post, new ZHttpResultBuilder().data(profile).status(ZHttpCodeSuccess.OK).build());
+    });
+
+    it('should reactivate the users account.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const activator = new ZProfileActivationBuilder().email('gambit@marvel.com').key(v4()).build();
+      // Act
+      const actual = await target.reactivate(activator);
+      // Assert
+      expect(actual).toEqual(profile);
     });
   });
 });

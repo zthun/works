@@ -1,4 +1,4 @@
-import { IZLogin, IZProfile } from '@zthun/works.core';
+import { IZLogin, IZProfile, IZProfileActivation } from '@zthun/works.core';
 
 /**
  * Represents a service to retrieve information about profiles in the zthunworks system.
@@ -55,4 +55,32 @@ export interface IZProfileService {
    *          if the endpoint cannot be reached.
    */
   logout(): Promise<void>;
+
+  /**
+   * Activates the users profile.
+   *
+   * @param activation The activation key used to activate the profile.
+   *
+   * @returns A promise that returns the updated profile.
+   */
+  activate(activation: IZProfileActivation): Promise<IZProfile>;
+
+  /**
+   * Deactivates the users profile.
+   *
+   * @returns A promise that returns the updated profile.
+   */
+  deactivate(): Promise<IZProfile>;
+
+  /**
+   * Reactivates the users profile.
+   *
+   * This should send the user a new activation email with an updated
+   * key.
+   *
+   * @param activation The activation that targets the specified email to activate.
+   *
+   * @returns A promise that returns the updated profile.
+   */
+  reactivate(activation: IZProfileActivation): Promise<IZProfile>;
 }
