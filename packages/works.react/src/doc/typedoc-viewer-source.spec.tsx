@@ -2,25 +2,32 @@
 
 import { act, fireEvent, render } from '@testing-library/react';
 import { IZTypedoc, ZTypedocKind, ZTypedocTypeKind } from '@zthun/works.core';
-import Axios from 'axios';
+import { ZHttpCodeClient, ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
 import React from 'react';
+import { ZHttpServiceContext } from '../http/http-service.context';
 import { ZTypedocViewerSource } from './typedoc-viewer-source';
-
-jest.mock('axios');
 
 describe('ZTypedocViewerSource', () => {
   let entityId: number;
   let onAction: jest.Mock;
   let onEntity: jest.Mock;
   let typedoc: IZTypedoc;
+  let src: string;
+  let http: ZHttpServiceMock;
 
   function createTestTarget() {
-    return render(<ZTypedocViewerSource src='/path/to/typedoc.json' entityId={entityId} onAction={onAction} onEntity={onEntity} />);
+    return render(
+      <ZHttpServiceContext.Provider value={http}>
+        <ZTypedocViewerSource src='/path/to/typedoc.json' entityId={entityId} onAction={onAction} onEntity={onEntity} />
+      </ZHttpServiceContext.Provider>
+    );
   }
 
   beforeEach(() => {
     onAction = jest.fn();
     onEntity = jest.fn();
+
+    src = '/path/to/typedoc.json';
 
     entityId = null;
 
@@ -76,18 +83,15 @@ describe('ZTypedocViewerSource', () => {
       ]
     };
 
-    (Axios.get as jest.Mock).mockResolvedValue({ data: typedoc });
-  });
-
-  afterEach(() => {
-    (Axios.get as jest.Mock).mockClear();
+    http = new ZHttpServiceMock();
+    http.set(src, ZHttpMethod.Get, new ZHttpResultBuilder().data(typedoc).build());
   });
 
   describe('Typedoc', () => {
     it('renders the typedoc not loaded if the request fails.', async () => {
       // Arrange
       let actual: HTMLElement = null;
-      (Axios.get as jest.Mock).mockRejectedValue('file not found');
+      http.set(src, ZHttpMethod.Get, new ZHttpResultBuilder().status(ZHttpCodeClient.NotFound).build());
       // Act
       await act(async () => {
         const target = createTestTarget();

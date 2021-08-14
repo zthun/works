@@ -1,11 +1,12 @@
 import { Typography } from '@material-ui/core';
 import { IZTypedoc } from '@zthun/works.core';
-import Axios from 'axios';
+import { ZHttpRequestBuilder } from '@zthun/works.http';
 import { first, noop } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { from, of, Subject } from 'rxjs';
 import { catchError, finalize, map, takeUntil } from 'rxjs/operators';
 import { ZPaperCard } from '../card/paper-card';
+import { useHttpService } from '../http/http-service.context';
 import { ZTypedocEntityViewer } from './typedoc-entity-viewer';
 import { ZTypedocViewer } from './typedoc-viewer';
 import { IZTypedocViewerSourceProps } from './typedoc-viewer-source.props';
@@ -20,6 +21,7 @@ import { IZTypedocViewerSourceProps } from './typedoc-viewer-source.props';
  * @returns The jsx that renders the component.
  */
 export function ZTypedocViewerSource(props: IZTypedocViewerSourceProps) {
+  const http = useHttpService();
   const [typedoc, setTypedoc] = useState<IZTypedoc>(null);
   const [loading, setLoading] = useState(false);
 
@@ -32,8 +34,9 @@ export function ZTypedocViewerSource(props: IZTypedocViewerSourceProps) {
    */
   function loadTypedoc() {
     const canceled = new Subject<any>();
+    const req = new ZHttpRequestBuilder().get().url(props.src).build();
     setLoading(true);
-    from(Axios.get<IZTypedoc>(props.src))
+    from(http.request(req))
       .pipe(
         takeUntil(canceled),
         map((res) => res.data),
