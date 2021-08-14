@@ -1,29 +1,31 @@
 /* eslint-disable require-jsdoc */
 import { act, render } from '@testing-library/react';
+import { ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
 import React from 'react';
-import { ZMarkdownPage } from './markdown-page';
-import Axios from 'axios';
-import { of } from 'rxjs';
+import { lastValueFrom, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-
-jest.mock('axios');
+import { ZHttpServiceContext } from '../http/http-service.context';
+import { ZMarkdownPage } from './markdown-page';
 
 describe('ZMarkdownPage', () => {
   let markdown: string;
+  let http: ZHttpServiceMock;
 
   async function createTestTarget() {
-    const target = render(<ZMarkdownPage src='markdown.md' headerText='Markdown' />);
-    await act(async () => of(undefined).pipe(delay(2)).toPromise());
+    const target = render(
+      <ZHttpServiceContext.Provider value={http}>
+        <ZMarkdownPage src='markdown.md' headerText='Markdown' />
+      </ZHttpServiceContext.Provider>
+    );
+    await act(async () => lastValueFrom(of(undefined).pipe(delay(2))));
     return target;
   }
 
   beforeEach(() => {
     markdown = '# Markdown';
-    (Axios.get as jest.Mock).mockResolvedValue({ data: markdown });
-  });
 
-  afterEach(() => {
-    (Axios.get as jest.Mock).mockClear();
+    http = new ZHttpServiceMock();
+    http.set('markdown.md', ZHttpMethod.Get, new ZHttpResultBuilder().data(markdown).build());
   });
 
   it('renders the page.', async () => {
