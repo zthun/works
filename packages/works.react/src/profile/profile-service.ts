@@ -6,6 +6,8 @@ import md5 from 'md5';
 /**
  * Gets the current profile from the standard api.
  *
+ * @deprecated Use the profile service context instead.
+ *
  * @returns A promise that returns the current profile information.
  */
 export async function getProfile(): Promise<IZProfile> {
@@ -16,6 +18,8 @@ export async function getProfile(): Promise<IZProfile> {
 
 /**
  * Same as getProfile but returns null in the case of an error.
+ *
+ * @deprecated Use the profile service context instead.
  *
  * @returns The result from getProfile or null if an error occurred.
  */
@@ -29,6 +33,8 @@ export async function tryGetProfile(): Promise<IZProfile> {
 
 /**
  * Helper method that retrieves the avatar url for a profile.
+ *
+ * @deprecated Use the profile service context instead.
  *
  * @param profile The profile to retrieve the avatar url for.
  *
@@ -58,6 +64,8 @@ export function getAvatarUrl(avatar: string, email: string) {
 
 /**
  * Gets the display for the profile.
+ *
+ * @deprecated Use the profile service context instead.
  *
  * @param profile The profile to convert to a display string.
  *
