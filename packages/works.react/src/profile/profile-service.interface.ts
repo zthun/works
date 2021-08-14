@@ -12,6 +12,16 @@ export interface IZProfileService {
   read(): Promise<IZProfile>;
 
   /**
+   * Updates the user profile.
+   */
+  update(profile: Partial<IZProfile>): Promise<IZProfile>;
+
+  /**
+   * Deletes the users profile.
+   */
+  delete(): Promise<void>;
+
+  /**
    * Helper method that retrieves the avatar url for a profile.
    *
    * @param profile The profile to retrieve the avatar url for.
