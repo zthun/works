@@ -1,8 +1,6 @@
 import { CircularProgress, Grid } from '@material-ui/core';
-import { IZLogin, IZProfile } from '@zthun/works.core';
-import { tryGetProfile, useAlertStack, useLoginState, ZAlertBuilder, ZLoginTabs } from '@zthun/works.react';
-import { ZUrlBuilder } from '@zthun/works.url';
-import Axios from 'axios';
+import { IZLogin } from '@zthun/works.core';
+import { useAlertStack, useLoginState, useProfileService, ZAlertBuilder, ZLoginTabs } from '@zthun/works.react';
 import { get } from 'lodash';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
@@ -15,6 +13,7 @@ import { Redirect } from 'react-router-dom';
 export function ZLoginPage(): JSX.Element {
   const [working, setWorking] = useState(false);
   const logged = useLoginState();
+  const profileSvc = useProfileService();
   const alerts = useAlertStack();
 
   /**
@@ -26,17 +25,13 @@ export function ZLoginPage(): JSX.Element {
    */
   async function handleLogin(login: IZLogin) {
     try {
-      const url = new ZUrlBuilder().api().append('tokens').build();
       setWorking(true);
-      // await createToken(login);
-      await Axios.post<IZProfile>(url, login);
-      logged.set();
-      const profile = await tryGetProfile();
-      logged.set(profile);
+      const profile = await profileSvc.login(login);
       alerts.add(new ZAlertBuilder().success().message('Login successful.').build());
+      setWorking(false);
+      logged.set(profile);
     } catch (err) {
-      alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
-    } finally {
+      alerts.add(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
       setWorking(false);
     }
   }
@@ -49,28 +44,16 @@ export function ZLoginPage(): JSX.Element {
    * @returns A promise that resolves when the request completes.
    */
   async function handleCreate(login: IZLogin) {
-    setWorking(true);
-
     try {
-      const url = new ZUrlBuilder().api().append('profiles').build();
-      // await createProfile(login);
-      await Axios.post(url, login);
+      setWorking(true);
+      const profile = await profileSvc.create(login);
       alerts.add(new ZAlertBuilder().success().message('Account created successfully.').build());
+      setWorking(false);
+      logged.set(profile);
     } catch (err) {
-      alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
+      alerts.add(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
+      setWorking(false);
     }
-
-    try {
-      // await createLoginToken(login);
-      const url = new ZUrlBuilder().api().append('tokens').build();
-      await Axios.post(url, login);
-    } catch (err) {
-      alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
-    }
-
-    const created = await tryGetProfile();
-    logged.set(created);
-    setWorking(false);
   }
 
   /**
@@ -82,13 +65,11 @@ export function ZLoginPage(): JSX.Element {
    */
   async function handleRecover(login: IZLogin) {
     try {
-      const url = new ZUrlBuilder().api().append('profiles').append('recoveries').build();
       setWorking(true);
-      // await createProfileRecovery(login);
-      await Axios.post(url, login);
+      await profileSvc.recover(login);
       alerts.add(new ZAlertBuilder().success().message('Check your email, and if it is registered, you will get a one time password you can use to login.').build());
     } catch (err) {
-      alerts.add(new ZAlertBuilder().error().message(get(err, 'response.data.message', err)).build());
+      alerts.add(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
     } finally {
       setWorking(false);
     }

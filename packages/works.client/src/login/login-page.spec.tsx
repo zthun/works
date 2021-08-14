@@ -1,28 +1,30 @@
 /* eslint-disable require-jsdoc */
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
-import { IZAlertStack, IZDataState, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZDataState, ZLoginStateContext } from '@zthun/works.react';
-import Axios from 'axios';
+import { createMocked } from '@zthun/works.jest';
+import { IZAlertStack, IZDataState, IZProfileService, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZDataState, ZLoginStateContext, ZProfileServiceContext } from '@zthun/works.react';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
-import { of } from 'rxjs';
+import { lastValueFrom, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ZLoginPage } from './login-page';
-
-jest.mock('axios');
 
 describe('ZLoginPage', () => {
   let state: IZDataState<IZProfile>;
   let alerts: IZAlertStack;
+  let profile: IZProfile;
+  let profiles: jest.Mocked<IZProfileService>;
 
   async function createTestTarget() {
     const target = render(
       <ZAlertStackContext.Provider value={alerts}>
         <ZLoginStateContext.Provider value={state}>
-          <MemoryRouter>
-            <ZLoginPage />
-          </MemoryRouter>
+          <ZProfileServiceContext.Provider value={profiles}>
+            <MemoryRouter>
+              <ZLoginPage />
+            </MemoryRouter>
+          </ZProfileServiceContext.Provider>
         </ZLoginStateContext.Provider>
       </ZAlertStackContext.Provider>
     );
@@ -32,6 +34,9 @@ describe('ZLoginPage', () => {
   beforeEach(() => {
     state = new ZDataState<IZProfile>(null);
     alerts = new ZAlertStack();
+
+    profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').build();
+    profiles = createMocked<IZProfileService>(['login', 'create', 'recover']);
   });
 
   describe('Display', () => {
@@ -77,10 +82,6 @@ describe('ZLoginPage', () => {
   });
 
   describe('Tabs', () => {
-    beforeEach(() => {
-      Axios.post = jest.fn().mockResolvedValue(Promise.resolve());
-    });
-
     function getActionButton(index: number, target: RenderResult) {
       return target.getAllByTestId('ZPaperCard-btn-action')[index];
     }
@@ -90,21 +91,10 @@ describe('ZLoginPage', () => {
     const getRecoverActionButton = getActionButton.bind(null, 2);
 
     describe('Login', () => {
-      it('should run the login.', async () => {
-        // Arrange
-        let target: RenderResult;
-        await act(async () => {
-          target = await createTestTarget();
-          // Act
-          fireEvent.submit(getLoginActionButton(target));
-        });
-        // Assert
-        expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('tokens'), expect.anything());
-      });
-
       it('should notify the user of a successful login.', async () => {
         // Arrange
         let target: RenderResult;
+        profiles.login.mockResolvedValue(profile);
         await act(async () => {
           target = await createTestTarget();
           // Act
@@ -117,13 +107,13 @@ describe('ZLoginPage', () => {
 
       it('should alert the user if the login fails.', async () => {
         // Arrange
-        Axios.post = jest.fn().mockRejectedValue('failed');
         let target: RenderResult;
+        profiles.login.mockRejectedValue('Credentials invalid');
         await act(async () => {
           target = await createTestTarget();
           // Act
           fireEvent.submit(getLoginActionButton(target));
-          await of(true).pipe(delay(0)).toPromise();
+          await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
@@ -131,26 +121,15 @@ describe('ZLoginPage', () => {
     });
 
     describe('Create', () => {
-      it('should run the create user workflow.', async () => {
-        // Arrange
-        let target: RenderResult;
-        await act(async () => {
-          target = await createTestTarget();
-          // Act
-          fireEvent.submit(getCreateActionButton(target));
-        });
-        // Assert
-        expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles'), expect.anything());
-      });
-
       it('should notify the user of a successful creation.', async () => {
         // Arrange
         let target: RenderResult;
+        profiles.create.mockResolvedValue(profile);
         await act(async () => {
           target = await createTestTarget();
           // Act
           fireEvent.submit(getCreateActionButton(target));
-          await of(true).pipe(delay(0)).toPromise();
+          await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Success);
@@ -158,13 +137,13 @@ describe('ZLoginPage', () => {
 
       it('should alert the user if the login fails.', async () => {
         // Arrange
-        Axios.post = jest.fn().mockRejectedValue('failed');
         let target: RenderResult;
+        profiles.create.mockRejectedValue('User already exists');
         await act(async () => {
           target = await createTestTarget();
           // Act
           fireEvent.submit(getCreateActionButton(target));
-          await of(true).pipe(delay(0)).toPromise();
+          await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
@@ -172,25 +151,15 @@ describe('ZLoginPage', () => {
     });
 
     describe('Recover', () => {
-      it('should run the recover workflow.', async () => {
-        // Arrange
-        let target: RenderResult;
-        await act(async () => {
-          target = await createTestTarget();
-          // Act
-          fireEvent.submit(getRecoverActionButton(target));
-        });
-        // Assert
-        expect(Axios.post).toHaveBeenCalledWith(expect.stringContaining('profiles/recoveries'), expect.anything());
-      });
       it('should alert the user that the password recovery has been sent to their email.', async () => {
         // Arrange
         let target: RenderResult;
+        profiles.recover.mockResolvedValue(undefined);
         await act(async () => {
           target = await createTestTarget();
           // Act
           fireEvent.submit(getRecoverActionButton(target));
-          await of(true).pipe(delay(0)).toPromise();
+          await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Success);
@@ -198,13 +167,13 @@ describe('ZLoginPage', () => {
 
       it('should alert the user if an error occurs during the password recovery phase.', async () => {
         // Arrange
-        Axios.post = jest.fn().mockRejectedValue('failed');
         let target: RenderResult;
+        profiles.recover.mockRejectedValue('Could not setup recovery.');
         await act(async () => {
           target = await createTestTarget();
           // Act
           fireEvent.submit(getRecoverActionButton(target));
-          await of(true).pipe(delay(0)).toPromise();
+          await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
         expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
