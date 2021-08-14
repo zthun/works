@@ -1,4 +1,4 @@
-import { IZProfile, ZProfileAvatarSize } from '@zthun/works.core';
+import { IZLogin, IZProfile, ZProfileAvatarSize } from '@zthun/works.core';
 import { IZHttpService, ZHttpRequestBuilder } from '@zthun/works.http';
 import { ZUrlBuilder } from '@zthun/works.url';
 import md5 from 'md5';
@@ -15,6 +15,15 @@ export class ZProfileService implements IZProfileService {
    */
   public static createProfilesUrl() {
     return new ZUrlBuilder().api().append('profiles').build();
+  }
+
+  /**
+   * Gets the url for the tokens service.
+   *
+   * @returns The url for the tokens rest api.
+   */
+  public static createTokensUrl(): string {
+    return new ZUrlBuilder().api().append('tokens').build();
   }
 
   /**
@@ -89,5 +98,30 @@ export class ZProfileService implements IZProfileService {
     const display = profile?.display;
     const email = profile?.email;
     return Promise.resolve(display || email || '');
+  }
+
+  /**
+   * Logs the user into the system.
+   *
+   * @param credentials The credentials to use when logging in.
+   *
+   * @returns A promise that resolves with a successful login and rejects
+   *          if the credentials are invalid.
+   */
+  public async login(credentials: IZLogin): Promise<IZProfile> {
+    const req = new ZHttpRequestBuilder().post(credentials).url(ZProfileService.createTokensUrl()).build();
+    await this._http.request(req);
+    return this.read();
+  }
+
+  /**
+   * Logs the user out of the system.
+   *
+   * @returns A promise that resolves with a successful logout and rejects
+   *          if the endpoint cannot be reached.
+   */
+  public async logout(): Promise<void> {
+    const req = new ZHttpRequestBuilder().delete().url(ZProfileService.createTokensUrl()).build();
+    await this._http.request(req);
   }
 }

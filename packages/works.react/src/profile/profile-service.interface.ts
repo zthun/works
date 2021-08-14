@@ -1,4 +1,4 @@
-import { IZProfile } from '@zthun/works.core';
+import { IZLogin, IZProfile } from '@zthun/works.core';
 
 /**
  * Represents a service to retrieve information about profiles in the zthunworks system.
@@ -38,4 +38,21 @@ export interface IZProfileService {
    * @returns The appropriate display for the profile.
    */
   getDisplay(profile: IZProfile): Promise<string>;
+
+  /**
+   * Logs the user into the system.
+   *
+   * @param credentials The credentials to use when logging in.
+   *
+   * @returns A promise that resolves with a profile that was logged in.
+   */
+  login(credentials: IZLogin): Promise<IZProfile>;
+
+  /**
+   * Logs the user out of the system.
+   *
+   * @returns A promise that resolves with a successful logout and rejects
+   *          if the endpoint cannot be reached.
+   */
+  logout(): Promise<void>;
 }
