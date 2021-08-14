@@ -41,6 +41,27 @@ export class ZProfileService implements IZProfileService {
   }
 
   /**
+   * Updates the current users profile.
+   *
+   * @param profile The profile information to update.
+   *
+   * @returns The updated profile.
+   */
+  public async update(profile: Partial<IZProfile>): Promise<IZProfile> {
+    const req = new ZHttpRequestBuilder().put(profile).url(ZProfileService.createProfilesUrl()).build();
+    const result = await this._http.request<IZProfile>(req);
+    return result.data;
+  }
+
+  /**
+   * Deletes the current users profile.
+   */
+  public async delete(): Promise<void> {
+    const req = new ZHttpRequestBuilder().delete().url(ZProfileService.createProfilesUrl()).build();
+    await this._http.request(req);
+  }
+
+  /**
    * Gets the avatar for a profile.
    *
    * This will use the avatar set by the user or this will

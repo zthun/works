@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { IZProfile, ZProfileAvatarSize, ZProfileBuilder } from '@zthun/works.core';
-import { ZHttpCodeClient, ZHttpCodeSuccess, ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
+import { IZHttpRequest, ZHttpCodeClient, ZHttpCodeSuccess, ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
 import { ZUrlBuilder } from '@zthun/works.url';
 import md5 from 'md5';
 import { ZProfileService } from './profile-service.class';
@@ -18,8 +18,15 @@ describe('ZProfileService', () => {
     avatar = 'data:text/plain;Avatar';
     profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').avatar(avatar).build();
 
+    const profiles = ZProfileService.createProfilesUrl();
     http = new ZHttpServiceMock();
-    http.set(ZProfileService.createProfilesUrl(), ZHttpMethod.Get, new ZHttpResultBuilder().data(profile).status(ZHttpCodeSuccess.OK).build());
+    http.set(profiles, ZHttpMethod.Get, new ZHttpResultBuilder().data(profile).status(ZHttpCodeSuccess.OK).build());
+    http.set(profiles, ZHttpMethod.Delete, new ZHttpResultBuilder().data(null).status(ZHttpCodeSuccess.OK).build());
+    http.set(profiles, ZHttpMethod.Put, (req: IZHttpRequest<Partial<IZProfile>>) => {
+      const updated = new ZProfileBuilder().copy(profile).assign(req.body).build();
+      const res = new ZHttpResultBuilder().data(updated).status(ZHttpCodeSuccess.OK).build();
+      return Promise.resolve(res);
+    });
   });
 
   describe('Read', () => {
@@ -40,6 +47,30 @@ describe('ZProfileService', () => {
       const actual = await target.read();
       // Assert
       expect(actual).toBeNull();
+    });
+  });
+
+  describe('Update', () => {
+    it('should return the updated profile.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const update: Partial<IZProfile> = { display: 'Logan' };
+      const expected = new ZProfileBuilder().copy(profile).assign(update).build();
+      // Act
+      const actual = await target.update(update);
+      // Assert
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('Delete', () => {
+    it('should delete the profile.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.delete().catch((err) => Promise.resolve(err));
+      // Assert
+      expect(actual).toBeUndefined();
     });
   });
 
