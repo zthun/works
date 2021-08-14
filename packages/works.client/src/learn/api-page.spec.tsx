@@ -2,26 +2,28 @@
 
 import { act, fireEvent, render } from '@testing-library/react';
 import { IZTypedoc, ZTypedocKind, ZTypedocTypeKind } from '@zthun/works.core';
-import Axios from 'axios';
+import { ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
+import { ZHttpServiceContext } from '@zthun/works.react';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
 import { Route, Router } from 'react-router-dom';
 import { ZApiPage } from './api-page';
-
-jest.mock('axios');
 
 describe('ZApiPage', () => {
   let pkg: string;
   let enid: string;
   let history: MemoryHistory;
   let typedoc: IZTypedoc;
+  let http: ZHttpServiceMock;
 
   function createTestTarget() {
     return render(
-      <Router history={history}>
-        <Route path='/learn/:pkg/api' exact={true} component={ZApiPage} />
-        <Route path='/learn/:pkg/api/:enid' exact={true} component={ZApiPage} />
-      </Router>
+      <ZHttpServiceContext.Provider value={http}>
+        <Router history={history}>
+          <Route path='/learn/:pkg/api' exact={true} component={ZApiPage} />
+          <Route path='/learn/:pkg/api/:enid' exact={true} component={ZApiPage} />
+        </Router>
+      </ZHttpServiceContext.Provider>
     );
   }
 
@@ -81,11 +83,9 @@ describe('ZApiPage', () => {
       ]
     };
 
-    (Axios.get as jest.Mock).mockResolvedValue({ data: typedoc });
-  });
-
-  afterEach(() => {
-    (Axios.get as jest.Mock).mockClear();
+    const src = `docs/${pkg}.typedoc.json`;
+    http = new ZHttpServiceMock();
+    http.set(src, ZHttpMethod.Get, new ZHttpResultBuilder().data(typedoc).build());
   });
 
   describe('Without entity', () => {
