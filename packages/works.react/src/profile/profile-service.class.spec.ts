@@ -21,9 +21,25 @@ describe('ZProfileService', () => {
     http = new ZHttpServiceMock();
   });
 
+  describe('Create', () => {
+    beforeEach(() => {
+      http.set(ZProfileService.createProfilesUrl(), ZHttpMethod.Post, new ZHttpResultBuilder().data(profile).build());
+    });
+
+    it('should create a new account.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const credentials = new ZLoginBuilder().email(profile.email).password('crappy-password').autoConfirm().build();
+      // Act
+      const actual = await target.create(credentials);
+      // Assert
+      expect(actual).toEqual(profile);
+    });
+  });
+
   describe('Read', () => {
     beforeEach(() => {
-      http.set(ZProfileService.createProfilesUrl(), ZHttpMethod.Get, new ZHttpResultBuilder().data(profile).status(ZHttpCodeSuccess.OK).build());
+      http.set(ZProfileService.createProfilesUrl(), ZHttpMethod.Get, new ZHttpResultBuilder().data(profile).build());
     });
 
     it('should return the profile on successful read.', async () => {
@@ -183,6 +199,22 @@ describe('ZProfileService', () => {
       http.set(ZProfileService.createTokensUrl(), ZHttpMethod.Delete, new ZHttpResultBuilder().data(true).status(ZHttpCodeSuccess.OK).build());
       // Act
       const actual = await target.logout();
+      // Assert
+      expect(actual).toBeUndefined();
+    });
+  });
+
+  describe('Recovery', () => {
+    beforeEach(() => {
+      http.set(ZProfileService.createRecoveryUrl(), ZHttpMethod.Post, new ZHttpResultBuilder().status(ZHttpCodeSuccess.Created).build());
+    });
+
+    it('should send the recovery email.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      const credentials = new ZLoginBuilder().email(profile.email).build();
+      // Act
+      const actual = await target.recover(credentials).catch((err) => Promise.resolve(err));
       // Assert
       expect(actual).toBeUndefined();
     });

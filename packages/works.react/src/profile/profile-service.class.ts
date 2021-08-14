@@ -27,6 +27,15 @@ export class ZProfileService implements IZProfileService {
   }
 
   /**
+   * Gets the url for the profile recovery service.
+   *
+   * @returns The url for the profile recovery api.
+   */
+  public static createRecoveryUrl(): string {
+    return new ZUrlBuilder().api().append('profiles').append('recoveries').build();
+  }
+
+  /**
    * Gets the url for profile activation.
    *
    * @returns The url for the activation rest api.
@@ -41,6 +50,20 @@ export class ZProfileService implements IZProfileService {
    * @param _http The http service to invoke rest api calls.
    */
   public constructor(private _http: IZHttpService) {}
+
+  /**
+   * Creates a new profile.
+   *
+   * @param credentials The login credentials.
+   *
+   * @returns A promise that resolves with the new login profile,
+   *          or a promise that rejects with an error.
+   */
+  public async create(credentials: IZLogin): Promise<IZProfile> {
+    const req = new ZHttpRequestBuilder().post(credentials).url(ZProfileService.createProfilesUrl()).build();
+    const res = await this._http.request(req);
+    return res.data;
+  }
 
   /**
    * Gets the current profile from the standard api.
@@ -131,6 +154,19 @@ export class ZProfileService implements IZProfileService {
    */
   public async logout(): Promise<void> {
     const req = new ZHttpRequestBuilder().delete().url(ZProfileService.createTokensUrl()).build();
+    await this._http.request(req);
+  }
+
+  /**
+   * Sends a recovery email to the given login.
+   *
+   * @param credentials The login to recover.
+   *
+   * @returns A promise that resolves with a recovery login or a rejected
+   *          promise if the operation failed.
+   */
+  public async recover(credentials: IZLogin): Promise<void> {
+    const req = new ZHttpRequestBuilder().post(credentials).url(ZProfileService.createRecoveryUrl()).build();
     await this._http.request(req);
   }
 

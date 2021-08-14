@@ -5,6 +5,16 @@ import { IZLogin, IZProfile, IZProfileActivation } from '@zthun/works.core';
  */
 export interface IZProfileService {
   /**
+   * Creates a new profile.
+   *
+   * @param credentials The login credentials.
+   *
+   * @returns A promise that resolves with the new login profile,
+   *          or a promise that rejects with an error.
+   */
+  create(credentials: IZLogin): Promise<IZProfile>;
+
+  /**
    * Reads the current profile from the standard api.
    *
    * @returns A promise that returns the current profile information.
@@ -55,6 +65,14 @@ export interface IZProfileService {
    *          if the endpoint cannot be reached.
    */
   logout(): Promise<void>;
+
+  /**
+   * Sends a recovery email to the given login.
+   *
+   * @returns A promise that resolves with a recovery login or a rejected
+   *          promise if the operation failed.
+   */
+  recover(credentials: IZLogin): Promise<void>;
 
   /**
    * Activates the users profile.
