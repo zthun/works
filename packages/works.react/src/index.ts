@@ -59,6 +59,8 @@ export { IZTypedocViewerProps } from './doc/typedoc-viewer.props';
 export { ZFileSelectInput } from './file/file-select-input.class';
 export { useFileSelect, ZFileSelectContext } from './file/file-select.context';
 export { IZFileSelect } from './file/file-select.interface';
+// Http
+export { ZHttpServiceContext, useHttpService } from './http/http-service.context';
 // Image
 export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
 // Loading
@@ -81,7 +83,10 @@ export { ZProfileButton } from './profile/profile-button';
 export { IZProfileButtonProps } from './profile/profile-button.props';
 export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
-export { getProfile, tryGetProfile, getAvatarUrl, getProfileAvatarUrl, getProfileDisplay } from './profile/profile-service';
+export { ZProfileService } from './profile/profile-service.class';
+export { ZProfileServiceContext, useProfileService } from './profile/profile-service.context';
+export { IZProfileService } from './profile/profile-service.interface';
+export { getAvatarUrl, getProfile, getProfileAvatarUrl, getProfileDisplay, tryGetProfile } from './profile/profile-service';
 // Store
 export { ZDataState } from './store/data-state.class';
 export { IZDataState } from './store/data-state.interface';
