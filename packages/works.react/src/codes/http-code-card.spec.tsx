@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 
 import { render } from '@testing-library/react';
+import { ZHttpCodeClient } from '@zthun/works.http';
 import React from 'react';
 import { ZHttpStatusCodeCard } from './http-code-card';
 
@@ -12,7 +13,7 @@ describe('ZHttpStatusCodeCard', () => {
   }
 
   beforeEach(() => {
-    code = 404;
+    code = ZHttpCodeClient.NotFound;
   });
 
   it('should render the component.', () => {
@@ -26,7 +27,7 @@ describe('ZHttpStatusCodeCard', () => {
 
   it('should be short and stout.', () => {
     // Arrange
-    code = 418;
+    code = ZHttpCodeClient.ImATeapot;
     const target = createTestTarget();
     // Act
     const actual = target.getByTestId('ZHttpStatusCodeCard-teapot');

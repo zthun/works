@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
-import WarningIcon from '@material-ui/icons/Warning';
 import EmojiFoodBeverageTwoToneIcon from '@material-ui/icons/EmojiFoodBeverageTwoTone';
-import { ZHttpCodeClientDescriptions, ZHttpCodeClientNames } from '@zthun/works.core';
+import WarningIcon from '@material-ui/icons/Warning';
+import { getHttpCodeDescription, getHttpCodeName, ZHttpCodeClient } from '@zthun/works.http';
 import React from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { IZHttpErrorCodeCardProps } from './http-code-card.props';
@@ -14,12 +14,12 @@ import { IZHttpErrorCodeCardProps } from './http-code-card.props';
  * @returns The jsx that renders the card.
  */
 export function ZHttpStatusCodeCard(props: IZHttpErrorCodeCardProps) {
-  const name = ZHttpCodeClientNames[props.code];
-  const heading = 'Client Error';
-  const description = ZHttpCodeClientDescriptions[props.code];
+  const name = getHttpCodeName(props.code);
+  const heading = 'Error';
+  const description = getHttpCodeDescription(props.code);
   let avatar = <WarningIcon className='ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-client' data-testid='ZHttpStatusCodeCard-client' />;
 
-  if (props.code === 418) {
+  if (props.code === ZHttpCodeClient.ImATeapot) {
     avatar = <EmojiFoodBeverageTwoToneIcon className='ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-teapot' data-testid='ZHttpStatusCodeCard-teapot' />;
   }
 

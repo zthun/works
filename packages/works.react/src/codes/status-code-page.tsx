@@ -1,5 +1,5 @@
 import { Grid } from '@material-ui/core';
-import { ZHttpCode } from '@zthun/works.core';
+import { ZHttpCode } from '@zthun/works.http';
 import React from 'react';
 import { ZHttpStatusCodeCard } from './http-code-card';
 import { IZStatusCodePageProps } from './status-code-page.props';
