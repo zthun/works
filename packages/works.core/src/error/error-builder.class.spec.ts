@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { ZHttpCodeClient } from '../http/http-code-client.enum';
 import { ZErrorBuilder } from './error-builder.class';
 import { IZError } from './error.interface';
 
@@ -12,7 +11,7 @@ describe('ZErrorBuilder', () => {
   }
 
   beforeEach(() => {
-    code = ZHttpCodeClient.BadRequest;
+    code = 400;
   });
 
   it('sets the error code.', () => {
