@@ -21,7 +21,7 @@ export interface IZFileSelect {
 /**
  * Represents a file select that is opened from an input.
  */
-export class ZFileSelectInput implements IZFileSelect {
+export class ZFileSelect implements IZFileSelect {
   private _input: HTMLInputElement;
   private _cb: (file: File) => void;
 
@@ -71,7 +71,7 @@ export class ZFileSelectInput implements IZFileSelect {
 /**
  * Represents the context for using a file select object.
  */
-export const ZFileSelectContext = createContext<IZFileSelect>(new ZFileSelectInput());
+export const ZFileSelectContext = createContext<IZFileSelect>(new ZFileSelect());
 
 /**
  * Retrieves the global file select object.
