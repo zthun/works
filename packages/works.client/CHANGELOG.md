@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/zthun/works/compare/v1.0.0...v1.1.0) (2021-08-15)
+
+
+### Features
+
+* the profile page should now refresh immediately upon completing an action ([01a314a](https://github.com/zthun/works/commit/01a314abb217b6bb98441c2c7f06871ae8b4f8b1))
+
+
+
 ## [1.0.0-29](https://github.com/zthun/works/compare/v1.0.0-28...v1.0.0-29) (2021-08-09)
 
 **Note:** Version bump only for package @zthun/works.client

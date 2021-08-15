@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.react",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A react component package that contains react based components for @zthun scoped packages.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -32,8 +32,8 @@
     "@material-ui/lab": "^4.0.0-alpha.52",
     "@zthun/works.core": ">=0.0.0 <2.0.0",
     "@zthun/works.draw": ">=0.0.0 <2.0.0",
-    "@zthun/works.url": ">=0.0.0 <2.0.0",
     "@zthun/works.http": ">=0.0.0 <2.0.0",
+    "@zthun/works.url": ">=0.0.0 <2.0.0",
     "highlight.js": "^11.0.1",
     "md5": "^2.3.0",
     "react": "^17.0.0",
@@ -43,10 +43,10 @@
     "rxjs": "^7.3.0"
   },
   "devDependencies": {
-    "@zthun/works.core": "^1.0.0",
+    "@zthun/works.core": "^1.1.0",
     "@zthun/works.draw": "^1.0.0",
-    "@zthun/works.url": "^1.0.0",
-    "@zthun/works.http": "^1.0.0"
+    "@zthun/works.http": "^1.1.0",
+    "@zthun/works.url": "^1.1.0"
   },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/zthun/works/compare/v1.0.0...v1.1.0) (2021-08-15)
+
+
+### Features
+
+* added the alert snackbar and content components ([6e38235](https://github.com/zthun/works/commit/6e382355a4f2012046e142b852bce4e5b5be6a46))
+* zthunworks themed apps now have standard body styles ([4294ecc](https://github.com/zthun/works/commit/4294ecc74034c4fc02b773a947b0f1ee135509c7))
+
+
+
 ## [1.0.0-29](https://github.com/zthun/works/compare/v1.0.0-28...v1.0.0-29) (2021-08-09)
 
 

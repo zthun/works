@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/zthun/works/compare/v1.0.0...v1.1.0) (2021-08-15)
+
+
+### Features
+
+* added the options module and controller ([06e78d1](https://github.com/zthun/works/commit/06e78d16c44590f7a3b453721bfe288b807d2405))
+
+
+
 ## [1.0.0-29](https://github.com/zthun/works/compare/v1.0.0-28...v1.0.0-29) (2021-08-09)
 
 **Note:** Version bump only for package @zthun/works.nest

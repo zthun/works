@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/zthun/works/compare/v1.0.0...v1.1.0) (2021-08-15)
+
+
+### Features
+
+* you can now pop a subdomain ([f4f41e3](https://github.com/zthun/works/commit/f4f41e3aa1a4813db2ba7c5e0fd11e04bfceb0af))
+
+
+### Bug Fixes
+
+* the package images should now be exported ([d5b9de1](https://github.com/zthun/works/commit/d5b9de1e5ef385c7e73731fcce26f6e59c03dc76))
+
+
+
 ## [1.0.0-29](https://github.com/zthun/works/compare/v1.0.0-28...v1.0.0-29) (2021-08-09)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.client",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A client application that can be used to login to works.server application.",
   "browser": "./dist/works.client.min.js",
   "repository": {
@@ -24,11 +24,11 @@
     "images/**"
   ],
   "devDependencies": {
-    "@zthun/works.core": "^1.0.0",
+    "@zthun/works.core": "^1.1.0",
     "@zthun/works.draw": "^1.0.0",
-    "@zthun/works.react": "^1.0.0",
-    "@zthun/works.themes": "^1.0.0",
-    "@zthun/works.url": "^1.0.0"
+    "@zthun/works.react": "^1.1.0",
+    "@zthun/works.themes": "^1.1.0",
+    "@zthun/works.url": "^1.1.0"
   },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"

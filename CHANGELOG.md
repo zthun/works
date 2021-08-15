@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/zthun/works/compare/v1.0.0...v1.1.0) (2021-08-15)
+
+
+### Features
+
+* added a peer dependency on the works.http package ([f651f97](https://github.com/zthun/works/commit/f651f977bb2fc70aed0c810693aa4509435a7c9f))
+* added the alert snackbar and content components ([6e38235](https://github.com/zthun/works/commit/6e382355a4f2012046e142b852bce4e5b5be6a46))
+* added the http package ([3ea26e4](https://github.com/zthun/works/commit/3ea26e4d32a24841e80cd3ac9deb313b00cfccf4))
+* added the options module and controller ([06e78d1](https://github.com/zthun/works/commit/06e78d16c44590f7a3b453721bfe288b807d2405))
+* added the profile service ([f54e272](https://github.com/zthun/works/commit/f54e27222ecb90f636401ff822581eb97b8a5afe))
+* deprecated profile service functions in favor of the profile service ([7b38062](https://github.com/zthun/works/commit/7b38062649cd7ace9e1f78de7b4487d1e72465f2))
+* exported the IZHttpService interface ([8522248](https://github.com/zthun/works/commit/8522248a1e775dab6946395f1b11163888bb1037))
+* the http codes have been deprecated in favor of the ones in works.http ([872faa3](https://github.com/zthun/works/commit/872faa3e42f2414526ccad720edb83854173488f))
+* the http codes now all have names and descriptions ([71272f3](https://github.com/zthun/works/commit/71272f3a2471865d88134a7a574f35c68857c1c1))
+* the markdown viewer now uses the http service ([e15c7e1](https://github.com/zthun/works/commit/e15c7e19a3dee1979af1a408fe8b4a7eff0b2dea))
+* the profile page should now refresh immediately upon completing an action ([01a314a](https://github.com/zthun/works/commit/01a314abb217b6bb98441c2c7f06871ae8b4f8b1))
+* the profile service can activate, deactive, and reactivate a profile ([5af7648](https://github.com/zthun/works/commit/5af76485f5f3a889d7999fe40caf7bcbe5e6f311))
+* the profile service can create and recover accounts ([97f05a2](https://github.com/zthun/works/commit/97f05a2c5e7599d37ff7ea86517fd2dda11fb775))
+* the profile service can handle login and logout ([0e867a1](https://github.com/zthun/works/commit/0e867a1e80898c841c948aa0c755e9682c30dd7b))
+* the profile service can update and delete a profile ([58c6161](https://github.com/zthun/works/commit/58c61615d74bf895a3f53e4472c770326cdaa37b))
+* the server now responds to the options call ([b516445](https://github.com/zthun/works/commit/b516445e43eec93c423b649565eda54279023c0b))
+* you can now pop a subdomain ([f4f41e3](https://github.com/zthun/works/commit/f4f41e3aa1a4813db2ba7c5e0fd11e04bfceb0af))
+* zthunworks themed apps now have standard body styles ([4294ecc](https://github.com/zthun/works/commit/4294ecc74034c4fc02b773a947b0f1ee135509c7))
+
+
+### Bug Fixes
+
+* the package images should now be exported ([d5b9de1](https://github.com/zthun/works/commit/d5b9de1e5ef385c7e73731fcce26f6e59c03dc76))
+
+
+
 ## [1.0.0-29](https://github.com/zthun/works/compare/v1.0.0-28...v1.0.0-29) (2021-08-09)
 
 
