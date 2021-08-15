@@ -56,9 +56,7 @@ export { ZTypedocViewerSource } from './doc/typedoc-viewer-source';
 export { IZTypedocViewerSourceProps } from './doc/typedoc-viewer-source.props';
 export { IZTypedocViewerProps } from './doc/typedoc-viewer.props';
 // File
-export { ZFileSelectInput } from './file/file-select-input.class';
-export { useFileSelect, ZFileSelectContext } from './file/file-select.context';
-export { IZFileSelect } from './file/file-select.interface';
+export { useFileSelect, ZFileSelectContext, IZFileSelect, ZFileSelect, ZFileSelect as ZFileSelectInput } from './file/file-select.context';
 // Http
 export { ZHttpServiceContext, useHttpService } from './http/http-service.context';
 // Image
@@ -96,3 +94,5 @@ export { ZTopBar } from './top-bar/top-bar';
 export { ZTopBarItemBuilder } from './top-bar/top-bar-item-builder.class';
 export { IZTopBarItem } from './top-bar/top-bar-item.interface';
 export { IZTopBarProps } from './top-bar/top-bar.props';
+// Window
+export { useWindow, ZWindowContext } from './window/window.context';
