@@ -6,11 +6,11 @@ export { ZHttpRequestBuilder } from './request/http-request-builder.class';
 export { IZHttpRequest } from './request/http-request.interface';
 // Result
 export { ZHttpCodeClient, ZHttpCodeClientDescriptions, ZHttpCodeClientNames } from './result/http-code-client.enum';
-export { ZHttpCodeInformationalResponse } from './result/http-code-informational-response.enum';
-export { ZHttpCodeRedirection } from './result/http-code-redirection.enum';
-export { ZHttpCodeServer } from './result/http-code-server.enum';
-export { ZHttpCodeSuccess, ZHttpCodeSuccessNames } from './result/http-code-success.enum';
-export { ZHttpCode } from './result/http-code.type';
+export { ZHttpCodeInformationalResponse, ZHttpCodeInformationalResponseNames, ZHttpCodeInformationalResponseDescriptions } from './result/http-code-informational-response.enum';
+export { ZHttpCodeRedirection, ZHttpCodeRedirectionNames, ZHttpCodeRedirectionDescriptions } from './result/http-code-redirection.enum';
+export { ZHttpCodeServer, ZHttpCodeServerNames, ZHttpCodeServerDescriptions } from './result/http-code-server.enum';
+export { ZHttpCodeSuccess, ZHttpCodeSuccessNames, ZHttpCodeSuccessDescriptions } from './result/http-code-success.enum';
+export { ZHttpCode, getHttpCodeName, getHttpCodeDescription } from './result/http-code.type';
 export { ZHttpResultBuilder } from './result/http-result-builder.class';
 export { IZHttpResult } from './result/http-result.interface';
 // Service
