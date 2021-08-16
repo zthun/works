@@ -1,5 +1,7 @@
 /* istanbul ignore file */
 
+// App
+export { IZWebApp, ZWebAppBuilder } from './app/web-app';
 // Assert
 export { ZAssert } from './assert/assert.class';
 // Config
