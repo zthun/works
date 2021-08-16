@@ -11,6 +11,8 @@ import { IZTopBarProps } from './top-bar.props';
  *
  * @param props The properties for the card.
  *
+ * @deprecated Use the top nav instead.  This will be overtaken in the future.
+ *
  * @returns The jsx for a circular loading progress.
  */
 export function ZTopBar(props: IZTopBarProps): JSX.Element {
