@@ -4,7 +4,7 @@ import { IZHttpRequest, ZHttpCodeClient, ZHttpCodeSuccess, ZHttpMethod, ZHttpRes
 import { ZUrlBuilder } from '@zthun/works.url';
 import md5 from 'md5';
 import { v4 } from 'uuid';
-import { ZProfileService } from './profile-service.class';
+import { ZProfileService } from './profile-service.context';
 
 describe('ZProfileService', () => {
   let http: ZHttpServiceMock;
