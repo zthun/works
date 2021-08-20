@@ -2,6 +2,10 @@
 
 // App
 export { ZNestApplication } from './app/nest-application.class';
+// Apps
+export { ZAppsModule } from './apps/apps.module';
+export { ZAppsService } from './apps/apps.service';
+export { ZWebAppsController } from './apps/web-apps/web-apps.controller';
 // Auth
 export { ZAuthModule } from './auth/auth.module';
 export { ZProfileCreateDto } from './auth/profile/profile-create.dto';
