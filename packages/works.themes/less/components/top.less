@@ -1,7 +1,9 @@
-.ZTopBar-root {
+.ZTopBar-root,
+.ZTopNav-root {
   height: @sizing-toolbar;
 
-  .ZTopBar-btn-home {
+  .ZTopBar-btn-home,
+  .ZTopNav-btn-home {
     height: @sizing-toolbar;
 
     &:hover {
@@ -9,7 +11,8 @@
     }
   }
 
-  .ZTopBar-title {
+  .ZTopBar-title,
+  .ZTopNav-title {
     display: block;
     font-size: @sizing-font-lg;
 
@@ -18,11 +21,13 @@
     }
   }
 
-  .ZTopBar-options {
+  .ZTopBar-options,
+  .ZTopNav-options {
     flex-grow: 1;
   }
 }
 
-.ZTopBar-drawer-more {
+.ZTopBar-drawer-more,
+.ZTopNav-drawer-more {
   min-width: @sizing-drawer;
 }
