@@ -34,5 +34,24 @@ describe('ZWebAppBuilder', () => {
         (a: IZWebApp) => a.domain
       );
     });
+
+    it('should set the icon.', () => {
+      assertBuilderSetsProperty(
+        // cspell:disable-next-line
+        'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+        createTestTarget,
+        (t, v) => t.icon(v),
+        (a: IZWebApp) => a.icon
+      );
+    });
+
+    it('should set the source.', () => {
+      assertBuilderSetsProperty(
+        'https://github.com/zthun/works',
+        createTestTarget,
+        (t, v) => t.source(v),
+        (a: IZWebApp) => a.source
+      );
+    });
   });
 });

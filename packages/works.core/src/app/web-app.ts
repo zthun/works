@@ -16,6 +16,16 @@ export interface IZWebApp {
    * The domain uri of the application.
    */
   domain: string;
+
+  /**
+   * The data url of the app icon.
+   */
+  icon: string;
+
+  /**
+   * The url for the source code if open sourced.
+   */
+  source?: string;
 }
 
 /**
@@ -31,7 +41,8 @@ export class ZWebAppBuilder {
     this._app = {
       _id: null,
       name: null,
-      domain: null
+      domain: null,
+      icon: null
     };
   }
 
@@ -68,6 +79,32 @@ export class ZWebAppBuilder {
    */
   public domain(domain: string): this {
     this._app.domain = domain;
+    return this;
+  }
+
+  /**
+   * Sets the icon.
+   *
+   * @param icon The app icon.
+   *
+   * @returns This object.
+   */
+  public icon(icon: string): this {
+    this._app.icon = icon;
+    return this;
+  }
+
+  /**
+   * Sets the source code url.
+   *
+   * This will normally be for github or bitbucket.
+   *
+   * @param source The value to set.
+   *
+   * @returns This object.
+   */
+  public source(source: string): this {
+    this._app.source = source;
     return this;
   }
 
