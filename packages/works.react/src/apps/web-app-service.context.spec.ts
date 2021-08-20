@@ -3,7 +3,7 @@ import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
 import { ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
 import { ZWebAppService } from './web-app-service.context';
 
-describe('ZAppService', () => {
+describe('ZWebAppsService', () => {
   let http: ZHttpServiceMock;
 
   function createTestTarget() {

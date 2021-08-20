@@ -85,6 +85,7 @@ export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
 export { getAvatarUrl, getProfile, getProfileAvatarUrl, getProfileDisplay, tryGetProfile } from './profile/profile-service';
 export { IZProfileService, useProfileService, ZProfileService, ZProfileServiceContext } from './profile/profile-service.context';
+export { ZProfileContext, useProfile, useProfileRoot, useProfileAndWatch } from './profile/profile.context';
 // Store
 export { ZDataState } from './store/data-state.class';
 export { IZDataState } from './store/data-state.interface';
@@ -95,4 +96,4 @@ export { ZTopBarItemBuilder } from './top/top-bar-item-builder.class';
 export { IZTopBarItem } from './top/top-bar-item.interface';
 export { IZTopBarProps } from './top/top-bar.props';
 // Window
-export { useWindowService, ZWindowServiceContext } from './window/window.context';
+export { useWindowService, ZWindowServiceContext } from './window/window-service.context';
