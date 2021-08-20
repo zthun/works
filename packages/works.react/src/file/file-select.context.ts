@@ -1,3 +1,12 @@
+/* istanbul ignore file */
+
+/**
+ * Note that how this works makes it very difficult to test since the method to do
+ * this requires a hidden element on the dom that runs raw browser code.  It's
+ * just not worth the effort to mock all of this stuff out so this is one
+ * service that will not have any unit tests.
+ */
+
 import { createContext, useContext } from 'react';
 
 /**
