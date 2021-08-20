@@ -2,6 +2,8 @@ import { IZComponentHeader } from '../component/component-header.interface';
 
 /**
  * Represents a drawer item in the top bar.
+ *
+ * @deprecated Just use the top nav.
  */
 export interface IZTopBarItem extends IZComponentHeader {
   /**

@@ -5,6 +5,7 @@ import { IZTopBarItem } from './top-bar-item.interface';
 /**
  * Represents the properties for the top bar.
  *
+ * @deprecated Use the @see IZTopNavProps instead.
  */
 export interface IZTopBarProps extends IZComponentHeader, IZComponentHierarchy {
   /**

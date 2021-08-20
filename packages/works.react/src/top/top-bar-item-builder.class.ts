@@ -3,6 +3,8 @@ import { IZTopBarItem } from './top-bar-item.interface';
 
 /**
  * Represents a builder for a top bar item.
+ *
+ * @deprecated Just use the top nav
  */
 export class ZTopBarItemBuilder {
   private _item: IZTopBarItem;
