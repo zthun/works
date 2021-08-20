@@ -5,7 +5,7 @@ import { IZImageReader } from '@zthun/works.draw';
 import { createMocked } from '@zthun/works.jest';
 import React from 'react';
 import { ZFileSelectContext } from '../file/file-select.context';
-import { IZFileSelect } from '../file/file-select.interface';
+import { IZFileSelect } from '../file/file-select.context';
 import { ZImageReaderContext } from '../image/image-reader.context';
 import { ZProfileAvatarForm } from './profile-avatar-form';
 
