@@ -1,14 +1,15 @@
 import InfoIcon from '@material-ui/icons/Info';
 import MouseIcon from '@material-ui/icons/Mouse';
-import { tryGetProfile, useLogin, ZAlertSnackbar, ZContent, ZMarkdownPage, ZStatusCodePage } from '@zthun/works.react';
+import { useProfileRoot, ZAlertSnackbar, ZContent, ZMarkdownPage, ZStatusCodePage } from '@zthun/works.react';
+import { useWebAppsRoot } from '@zthun/works.react/src/apps/web-apps.context';
+import { ZTopNav } from '@zthun/works.react/src/top/top-nav';
 import { ZUrlBuilder } from '@zthun/works.url';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { HashRouter, Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { ZHomePage } from '../home/home-page';
 import { ZApiPage } from '../learn/api-page';
 import { ZLearnPage } from '../learn/learn-page';
 import { ZLoginPage } from '../login/login-page';
-import { ZthunworksMenu } from '../menu/works-menu';
 import { ZProfilePage } from '../profile/profile-page';
 
 /**
@@ -20,6 +21,8 @@ export const ZUrlMarkdownTerms = new ZUrlBuilder().location().hash('').path('leg
  * The url to the privacy markdown.
  */
 export const ZUrlMarkdownPrivacy = new ZUrlBuilder().location().hash('').path('legal/PRIVACY.md').build();
+
+export const ZAvatarOwl = <img className='Zthunworks-owl' src='images/svg/zthunworks-owl.svg' />;
 
 /**
  * Returns the jsx for the privacy page render.
@@ -56,17 +59,13 @@ export function renderStatusCodePage(props: RouteComponentProps<{ code: string }
  * @returns The jsx that renders the entire application.
  */
 export function ZthunworksApp() {
-  const login = useLogin();
-
-  useEffect(() => {
-    login.set();
-    tryGetProfile().then((profile) => login.set(profile));
-  });
+  useProfileRoot();
+  useWebAppsRoot();
 
   return (
     <div className='Zthunworks-root' data-testid='Zthunworks-root'>
       <HashRouter>
-        <ZthunworksMenu />
+        <ZTopNav headerText='Zthunworks' whoami='portal' profileApp='roadblock' avatar={ZAvatarOwl} />
         <ZContent>
           <Switch>
             <Route exact path='/home' component={ZHomePage} />
