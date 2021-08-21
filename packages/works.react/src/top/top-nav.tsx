@@ -1,5 +1,5 @@
 import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core';
-import GithubIcon from '@material-ui/icons/Github';
+import GithubIcon from '@material-ui/icons/GitHub';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import { IZWebApp } from '@zthun/works.core';
