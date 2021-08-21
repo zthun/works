@@ -2,6 +2,7 @@
 import { act, fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, IZWebApp, ZProfileBuilder, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
+import { ZDataUrlBuilder, ZMimeTypeImage, ZUrlBuilder } from '@zthun/works.url';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router-dom';
@@ -237,6 +238,32 @@ describe('ZTopNav', () => {
         const actual = drawer.querySelector(`.ZTopNav-drawer-more-item-${profileApp}`);
         // Arrange
         expect(actual).toBeFalsy();
+      });
+
+      it('should render the app icon as a raw svg if it exists.', async () => {
+        // Arrange
+        portal.icon = new ZDataUrlBuilder()
+          .encode('base64')
+          .buffer('<svg focusable="false" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>')
+          .mimeType(ZMimeTypeImage.SVG)
+          .build();
+        const target = createTestTarget();
+        // Act
+        const drawer = await openNavDrawer(target);
+        const actual = drawer.querySelector(`.ZTopNav-drawer-more-item-${portal._id} div.ZTopNav-app-icon`);
+        // Assert
+        expect(actual).toBeTruthy();
+      });
+
+      it('should render the app icon as a raster image if the url is not a svg data url.', async () => {
+        // Arrange
+        portal.icon = new ZUrlBuilder().gravatar().build();
+        const target = createTestTarget();
+        // Act
+        const drawer = await openNavDrawer(target);
+        const actual = drawer.querySelector(`.ZTopNav-drawer-more-item-${portal._id} img.ZTopNav-app-icon`);
+        // Assert
+        expect(actual).toBeTruthy();
       });
     });
 

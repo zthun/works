@@ -3,6 +3,7 @@ import GithubIcon from '@material-ui/icons/Github';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import { IZWebApp } from '@zthun/works.core';
+import { ZDataUrlBuilder } from '@zthun/works.url';
 import { first } from 'lodash';
 import React, { useState } from 'react';
 import { ReactNode } from 'react-markdown';
@@ -137,6 +138,29 @@ export function ZTopNav(props: IZTopNavProps) {
   }
 
   /**
+   * Creates an icon tag.
+   *
+   * @param icon The icon to display.
+   *
+   * @returns The icon image
+   */
+  function createAppIcon(icon: string) {
+    if (!icon) {
+      return null;
+    }
+
+    if (icon.startsWith('data:image/svg+xml')) {
+      // SVG images can go into html directly.
+      const info = new ZDataUrlBuilder().parse(icon).info();
+      const __html = info.buffer.toString();
+      return <div className='ZTopNav-app-icon' dangerouslySetInnerHTML={{ __html }} />;
+    }
+
+    // This is some other url.  Use the img tag for this one.
+    return <img src={icon} className='ZTopNav-app-icon'></img>;
+  }
+
+  /**
    * Returns the nav app list.
    *
    * @returns The nav app list.
@@ -148,7 +172,7 @@ export function ZTopNav(props: IZTopNavProps) {
 
     const ignore = [undefined, null, props.whoami, props.profileApp];
     const list: IZWebApp[] = apps.data || [];
-    return <>{list.filter((app) => ignore.indexOf(app._id) < 0).map((app) => createNavItem(app._id, app.name, app.icon, handleLink.bind(null, app.domain, '_self')))}</>;
+    return <>{list.filter((app) => ignore.indexOf(app._id) < 0).map((app) => createNavItem(app._id, app.name, createAppIcon(app.icon), handleLink.bind(null, app.domain, '_self')))}</>;
   }
 
   /**
