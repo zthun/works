@@ -5,7 +5,7 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
 import { IZHttpResult } from '@zthun/works.http';
-import { useAlertStack, useLoginState, useProfileService, ZAlertBuilder, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
+import { useAlertStack, useProfileAndWatch, useProfileService, ZAlertBuilder, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
 import { get } from 'lodash';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
@@ -16,7 +16,7 @@ import { Redirect } from 'react-router-dom';
  * @returns The jsx that renders the profile page.
  */
 export function ZProfilePage() {
-  const loginState = useLoginState();
+  const profile = useProfileAndWatch();
   const alerts = useAlertStack();
   const profileSvc = useProfileService();
   const [loggingOut, setLoggingOut] = useState(false);
@@ -25,7 +25,7 @@ export function ZProfilePage() {
   const [reactivating, setReactivating] = useState(false);
   const [updatingProfile, setUpdatingProfile] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const [activation, setActivation] = useState(new ZProfileActivationBuilder().email(get(loginState.data, 'email', null)).build());
+  const [activation, setActivation] = useState(new ZProfileActivationBuilder().email(get(profile.data, 'email', null)).build());
   const waiting = deleting || deactivating || updatingProfile || activating || reactivating || loggingOut;
 
   /**
@@ -48,7 +48,7 @@ export function ZProfilePage() {
       await profileSvc.logout();
       alerts.add(new ZAlertBuilder().success().message('Logout successful.').build());
       setLoggingOut(false);
-      loginState.set(null);
+      profile.set(null);
     } catch (err) {
       showError(err);
       setLoggingOut(false);
@@ -69,7 +69,7 @@ export function ZProfilePage() {
       const update = await profileSvc.activate(value);
       alerts.add(new ZAlertBuilder().success().message('Account activated.').build());
       setActivating(false);
-      loginState.set(update);
+      profile.set(update);
     } catch (err) {
       showError(err);
       setActivating(false);
@@ -86,11 +86,11 @@ export function ZProfilePage() {
   async function handleReactivation() {
     try {
       setReactivating(true);
-      const body = new ZProfileActivationBuilder().email(loginState.data.email).build();
+      const body = new ZProfileActivationBuilder().email(profile.data.email).build();
       setActivation(body);
       const update = await profileSvc.reactivate(body);
       alerts.add(new ZAlertBuilder().success().message('Activation code sent. Please check your email.').build());
-      loginState.set(update);
+      profile.set(update);
     } catch (err) {
       showError(err);
       setReactivating(false);
@@ -103,11 +103,11 @@ export function ZProfilePage() {
   async function handleDeactivation() {
     try {
       setDeactivating(true);
-      const body = new ZProfileActivationBuilder().email(loginState.data.email).build();
+      const body = new ZProfileActivationBuilder().email(profile.data.email).build();
       setActivation(body);
       const update = await profileSvc.deactivate();
       alerts.add(new ZAlertBuilder().success().message('Account deactivated. Send yourself another activation code to reactivate.').build());
-      loginState.set(update);
+      profile.set(update);
     } catch (err) {
       showError(err);
       setDeactivating(false);
@@ -126,7 +126,7 @@ export function ZProfilePage() {
       await profileSvc.delete();
       alerts.add(new ZAlertBuilder().success().message('Account deleted').build());
       setDeleting(false);
-      loginState.set(null);
+      profile.set(null);
     } catch (err) {
       showError(err);
       setDeleting(false);
@@ -141,11 +141,11 @@ export function ZProfilePage() {
   async function handleUpdateProfile(changes: IZProfile) {
     try {
       setUpdatingProfile(true);
-      setActivation(new ZProfileActivationBuilder().email(loginState.data.email).build());
+      setActivation(new ZProfileActivationBuilder().email(profile.data.email).build());
       const updated = await profileSvc.update(changes);
       alerts.add(new ZAlertBuilder().success().message('Account updated').build());
       setUpdatingProfile(false);
-      loginState.set(updated);
+      profile.set(updated);
     } catch (err) {
       showError(err);
       setUpdatingProfile(false);
@@ -171,7 +171,7 @@ export function ZProfilePage() {
    * @returns The jsx that renders the core profile form.
    */
   function createProfileForm() {
-    return <ZProfileForm disabled={waiting} loading={updatingProfile} profile={loginState.data} onProfileChange={handleUpdateProfile} />;
+    return <ZProfileForm disabled={waiting} loading={updatingProfile} profile={profile.data} onProfileChange={handleUpdateProfile} />;
   }
 
   /**
@@ -320,7 +320,7 @@ export function ZProfilePage() {
    * @returns The jsx that represents the current profile state.
    */
   function createProfileFromSession() {
-    return loginState.data.active ? createProfileActivatedSession() : createProfileDeactivatedSession();
+    return profile.data.active ? createProfileActivatedSession() : createProfileDeactivatedSession();
   }
 
   /**
@@ -338,11 +338,11 @@ export function ZProfilePage() {
    * @returns The jsx associated with the login state.
    */
   function createContentFromProfile() {
-    if (loginState.data) {
+    if (profile.data) {
       return createProfileFromSession();
     }
 
-    if (loginState.data === null) {
+    if (profile.data === null) {
       return createProfileRedirect();
     }
 

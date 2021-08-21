@@ -2,7 +2,7 @@
 import { act, fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
-import { IZAlertStack, IZDataState, IZProfileService, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZDataState, ZLoginStateContext, ZProfileServiceContext } from '@zthun/works.react';
+import { IZAlertStack, IZDataState, IZProfileService, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZDataState, ZProfileContext, ZProfileServiceContext } from '@zthun/works.react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { lastValueFrom, of } from 'rxjs';
@@ -17,17 +17,22 @@ describe('ZProfilePage', () => {
   let alerts: IZAlertStack;
 
   async function createTestTarget() {
-    const target = render(
-      <ZAlertStackContext.Provider value={alerts}>
-        <ZLoginStateContext.Provider value={state}>
-          <MemoryRouter>
-            <ZProfileServiceContext.Provider value={profileSvc}>
-              <ZProfilePage />
-            </ZProfileServiceContext.Provider>
-          </MemoryRouter>
-        </ZLoginStateContext.Provider>
-      </ZAlertStackContext.Provider>
-    );
+    let target: RenderResult;
+
+    await act(async () => {
+      target = render(
+        <ZAlertStackContext.Provider value={alerts}>
+          <ZProfileContext.Provider value={state}>
+            <MemoryRouter>
+              <ZProfileServiceContext.Provider value={profileSvc}>
+                <ZProfilePage />
+              </ZProfileServiceContext.Provider>
+            </MemoryRouter>
+          </ZProfileContext.Provider>
+        </ZAlertStackContext.Provider>
+      );
+    });
+
     return target;
   }
 
@@ -50,9 +55,11 @@ describe('ZProfilePage', () => {
   });
 
   async function clickAndWait(text: string, ms: number, target: RenderResult) {
-    const btn = target.getByText(text);
-    fireEvent.click(btn);
-    await lastValueFrom(of(true).pipe(delay(ms)));
+    await act(async () => {
+      const btn = target.getByText(text);
+      fireEvent.click(btn);
+      await lastValueFrom(of(true).pipe(delay(ms)));
+    });
   }
 
   const clickLogoutButton = clickAndWait.bind(null, 'Logout', 10);
@@ -66,11 +73,8 @@ describe('ZProfilePage', () => {
   describe('Loading', () => {
     it('renders the loading icon if the login state profile is undefined.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-      });
       const actual = target.getByTestId('ZProfilePage-progress-profile-loading');
       // Assert
       expect(actual).toBeTruthy();
@@ -85,17 +89,42 @@ describe('ZProfilePage', () => {
 
     it('redirects to the login page.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-      });
       const loading = target.queryByTestId('ZProfilePage-progress-profile-loading');
       const profileEditor = target.queryByTestId('ZProfileForm-root');
       const activationEditor = target.queryByTestId('ZProfileActivationForm-root');
       const stay = loading || profileEditor || activationEditor;
       // Assert
       expect(stay).toBeFalsy();
+    });
+  });
+
+  describe('Logged in', () => {
+    beforeEach(() => {
+      profile = new ZProfileBuilder().email('gambit@marvel.com').active().build();
+      state = new ZDataState(profile);
+    });
+
+    it('logs the user out of the session.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      await clickLogoutButton(target);
+      const actual = alerts.list[0];
+      // Assert
+      expect(actual.severity).toEqual(ZAlertSeverity.Success);
+    });
+
+    it('notifies the user when the logout fails.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      profileSvc.logout.mockRejectedValue('failed');
+      // Act
+      await clickLogoutButton(target);
+      const actual = alerts.list[0];
+      // Assert
+      expect(actual.severity).toEqual(ZAlertSeverity.Error);
     });
   });
 
@@ -106,22 +135,21 @@ describe('ZProfilePage', () => {
     });
 
     async function setKey(target: RenderResult, key: string) {
-      const keyField = target.getByText('Key') as HTMLInputElement;
-      keyField.value = key;
-      fireEvent.input(keyField);
-      await lastValueFrom(of(true).pipe(delay(10)));
+      await act(async () => {
+        const keyField = target.getByText('Key') as HTMLInputElement;
+        keyField.value = key;
+        fireEvent.input(keyField);
+        await lastValueFrom(of(true).pipe(delay(10)));
+      });
     }
 
     it('activates the profile.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       const key = v4();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-        await setKey(target, key);
-        await clickActivateButton(target);
-      });
+      await setKey(target, key);
+      await clickActivateButton(target);
       const actual = alerts.list[0];
       // Assert
       expect(actual.severity).toEqual(ZAlertSeverity.Success);
@@ -129,15 +157,12 @@ describe('ZProfilePage', () => {
 
     it('notifies the user when activation fails.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       const key = v4();
       profileSvc.activate.mockRejectedValue('failed');
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-        await setKey(target, key);
-        await clickActivateButton(target);
-      });
+      await setKey(target, key);
+      await clickActivateButton(target);
       const actual = alerts.list[0];
       // Assert
       expect(actual.severity).toEqual(ZAlertSeverity.Error);
@@ -145,12 +170,9 @@ describe('ZProfilePage', () => {
 
     it('reactivates the profile.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-        await clickReactivateButton(target);
-      });
+      await clickReactivateButton(target);
       const actual = alerts.list[0];
       // Assert
       expect(actual.severity).toEqual(ZAlertSeverity.Success);
@@ -158,29 +180,13 @@ describe('ZProfilePage', () => {
 
     it('notifies the user when reactivation fails.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       profileSvc.reactivate.mockRejectedValue('failed');
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-        await clickReactivateButton(target);
-      });
+      await clickReactivateButton(target);
       const actual = alerts.list[0];
       // Assert
       expect(actual.severity).toEqual(ZAlertSeverity.Error);
-    });
-
-    it('logs the user out of the session.', async () => {
-      // Arrange
-      let target: RenderResult;
-      // Act
-      await act(async () => {
-        target = await createTestTarget();
-        await clickLogoutButton(target);
-      });
-      const actual = alerts.list[0];
-      // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Success);
     });
   });
 
@@ -193,11 +199,8 @@ describe('ZProfilePage', () => {
 
     it('shows the profile editor.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-      });
       const actual = target.getByTestId('ZProfileForm-root');
       // Assert
       expect(actual).toBeTruthy();
@@ -205,26 +208,31 @@ describe('ZProfilePage', () => {
 
     it('deactivates the user account.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-        await clickDeactivateButton(target);
-      });
+      await clickDeactivateButton(target);
       const actual = alerts.list[0];
       // Assert
       expect(actual.severity).toEqual(ZAlertSeverity.Success);
     });
 
+    it('notifies the user if the deactivation fails.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      profileSvc.deactivate.mockRejectedValue('failed');
+      // Act
+      await clickDeactivateButton(target);
+      const actual = alerts.list[0];
+      // Assert
+      expect(actual.severity).toEqual(ZAlertSeverity.Error);
+    });
+
     it('deletes the user account.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-        await checkDeleteConfirm(target);
-        await clickDeleteButton(target);
-      });
+      await checkDeleteConfirm(target);
+      await clickDeleteButton(target);
       const actual = alerts.list[0];
       // Assert
       expect(actual.severity).toEqual(ZAlertSeverity.Success);
@@ -232,14 +240,11 @@ describe('ZProfilePage', () => {
 
     it('notifies the user if the delete fails.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       profileSvc.delete.mockRejectedValue('failed');
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-        await checkDeleteConfirm(target);
-        await clickDeleteButton(target);
-      });
+      await checkDeleteConfirm(target);
+      await clickDeleteButton(target);
       const actual = alerts.list[0];
       // Assert
       expect(actual.severity).toEqual(ZAlertSeverity.Error);
@@ -247,12 +252,9 @@ describe('ZProfilePage', () => {
 
     it('saves the updated profile.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-        await clickUpdateProfile(target);
-      });
+      await clickUpdateProfile(target);
       const actual = alerts.list[0];
       // Assert
       expect(actual.severity).toEqual(ZAlertSeverity.Success);
@@ -260,29 +262,13 @@ describe('ZProfilePage', () => {
 
     it('notifies the user if the update fails.', async () => {
       // Arrange
-      let target: RenderResult;
+      const target = await createTestTarget();
       profileSvc.update.mockRejectedValue('failed');
       // Act
-      await act(async () => {
-        target = await createTestTarget();
-        await clickUpdateProfile(target);
-      });
+      await clickUpdateProfile(target);
       const actual = alerts.list[0];
       // Assert
       expect(actual.severity).toEqual(ZAlertSeverity.Error);
-    });
-
-    it('logs the user out of the session.', async () => {
-      // Arrange
-      let target: RenderResult;
-      // Act
-      await act(async () => {
-        target = await createTestTarget();
-        await clickLogoutButton(target);
-      });
-      const actual = alerts.list[0];
-      // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Success);
     });
   });
 });
