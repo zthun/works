@@ -1,3 +1,5 @@
+import { Buffer } from 'buffer';
+
 /**
  * Represents information about a data url.
  */

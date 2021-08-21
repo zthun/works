@@ -29,7 +29,8 @@
     "url-parse": "^1.4.7"
   },
   "peerDependencies": {
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "buffer": "^6.0.3"
   },
   "sideEffects": false
 }

@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer';
 import { last } from 'lodash';
 import { ZMimeTypeApplication } from '../mime/mime-type-application.enum';
 import { ZSupportedMimeTypes } from '../mime/mime-type.type';
