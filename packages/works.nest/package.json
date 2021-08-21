@@ -47,7 +47,8 @@
   "devDependencies": {
     "@zthun/works.class": "^1.0.0",
     "@zthun/works.core": "^1.1.0",
-    "@zthun/works.dal": "^1.0.0"
+    "@zthun/works.dal": "^1.0.0",
+    "@zthun/works.url": "^1.1.0"
   },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
