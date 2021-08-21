@@ -1,5 +1,6 @@
 import { trim, trimEnd, trimStart } from 'lodash';
 import URLParse from 'url-parse';
+import { IZUrlInfo } from './url-info.interface';
 
 /**
  * Represents an object that is helpful in building a url.
@@ -53,16 +54,7 @@ export class ZUrlBuilder {
   /**
    * The representation of the url object.
    */
-  private readonly _url: {
-    protocol: string;
-    username: string;
-    password: string;
-    hostname: string;
-    port: number;
-    path: string[];
-    hash: string;
-    params: Array<{ key: string; val: string }>;
-  };
+  private readonly _url: IZUrlInfo;
 
   /**
    * Initializes a new instance of this object.
@@ -360,5 +352,14 @@ export class ZUrlBuilder {
     }
 
     return url;
+  }
+
+  /**
+   * Gets the current information about the uri being built.
+   *
+   * @returns The current uri information.
+   */
+  public info(): IZUrlInfo {
+    return JSON.parse(JSON.stringify(this._url));
   }
 }

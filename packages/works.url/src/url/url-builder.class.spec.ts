@@ -2,6 +2,7 @@
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { identity } from 'lodash';
 import { ZUrlBuilder } from './url-builder.class';
+import { IZUrlInfo } from './url-info.interface';
 
 describe('ZUrlBuilder', () => {
   let loc: Location;
@@ -208,6 +209,40 @@ describe('ZUrlBuilder', () => {
       const size = 256;
       const expected = createTestTarget().parse(ZUrlBuilder.UrlGravatar).append(hash).param('s', `${size}`).build();
       assertBuilderSetsProperty(expected, createTestTarget, (t) => t.gravatar(hash, size), identity);
+    });
+  });
+
+  describe('Info', () => {
+    it('returns the current url information.', () => {
+      // Arrange
+      const expected: IZUrlInfo = {
+        protocol: 'ftp',
+        username: 'user',
+        password: 'pass',
+        hostname: 'host.com',
+        hash: 'hash',
+        port: 5001,
+        path: ['/', 'foo', 'bar'],
+        params: [
+          { key: 'filter', val: 'a' },
+          { key: 'filter', val: 'b' }
+        ]
+      };
+      const target = createTestTarget()
+        .protocol(expected.protocol)
+        .username(expected.username)
+        .password(expected.password)
+        .hostname(expected.hostname)
+        .hash(expected.hash)
+        .port(expected.port)
+        .append('foo')
+        .append('bar')
+        .param('filter', 'a')
+        .param('filter', 'b');
+      // Act
+      const actual = target.info();
+      // Assert
+      expect(actual).toEqual(expected);
     });
   });
 });
