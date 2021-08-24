@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { ZErrorBuilder } from './error-builder.class';
-import { IZError } from './error.interface';
+import { IZError, ZErrorBuilder } from './error';
 
 describe('ZErrorBuilder', () => {
   let code: number;
