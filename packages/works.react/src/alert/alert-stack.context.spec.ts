@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
-import { ZAlertBuilder } from './alert-builder.class';
-import { ZAlertStack } from './alert-stack.class';
-import { IZAlert } from './alert.interface';
+import { IZAlert, ZAlertBuilder } from './alert';
+import { ZAlertStack } from './alert-stack.context';
 
 describe('AlertStack', () => {
   let success: IZAlert;

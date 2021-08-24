@@ -1,7 +1,7 @@
 import { Alert, AlertTitle } from '@material-ui/lab';
 import React from 'react';
+import { IZAlert } from './alert';
 import { useAlertState } from './alert-stack.context';
-import { IZAlert } from './alert.interface';
 
 /**
  * Renders a stack of alert messages from the global alert state list.

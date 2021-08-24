@@ -2,11 +2,9 @@
 
 import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import { ZAlertBuilder } from './alert-builder.class';
 import { ZAlertStackList } from './alert-stack-list';
-import { ZAlertStack } from './alert-stack.class';
-import { ZAlertStackContext } from './alert-stack.context';
-import { IZAlertStack } from './alert-stack.interface';
+import { IZAlertStack, ZAlertStack, ZAlertStackContext } from './alert-stack.context';
+import { ZAlertBuilder } from './alert';
 
 describe('ZAlertStackList', () => {
   let stack: IZAlertStack;

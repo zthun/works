@@ -1,11 +1,9 @@
 /* eslint-disable require-jsdoc */
 import { act, render } from '@testing-library/react';
 import React from 'react';
-import { ZAlertBuilder } from './alert-builder.class';
+import { ZAlertBuilder } from './alert';
 import { ZAlertSnackbar } from './alert-snackbar';
-import { ZAlertStack } from './alert-stack.class';
-import { ZAlertStackContext } from './alert-stack.context';
-import { IZAlertStack } from './alert-stack.interface';
+import { IZAlertStack, ZAlertStack, ZAlertStackContext } from './alert-stack.context';
 
 describe('ZAlertSnackbar', () => {
   let alerts: IZAlertStack;
