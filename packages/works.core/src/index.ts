@@ -27,8 +27,7 @@ export { ZEmailEnvelopeBuilder } from './email/email-envelope-builder.class';
 export { IZEmailEnvelope } from './email/email-envelope.interface';
 export { IZEmail } from './email/email.interface';
 // Error
-export { ZErrorBuilder } from './error/error-builder.class';
-export { IZError } from './error/error.interface';
+export { IZError, ZErrorBuilder } from './error/error';
 // Filter
 export { ZBinaryFilterBuilder } from './filter/binary-filter-builder.class';
 export { IZBinaryFilter } from './filter/binary-filter.interface';

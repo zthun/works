@@ -1,5 +1,7 @@
 /**
  * Represents an error return object from a web rest service.
+ *
+ * @deprecated Use the version in works.error instead.
  */
 export interface IZError {
   /**
@@ -34,6 +36,8 @@ export interface IZError {
 
 /**
  * Represents an object used to build up an IZError object.
+ *
+ * @deprecated Use the version in works.error instead.
  */
 export class ZErrorBuilder {
   private _error: IZError;
