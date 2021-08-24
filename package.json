@@ -12,6 +12,8 @@
   "workspaces": [
     "packages/works.jest",
     "packages/works.url",
+    "packages/works.error",
+    "packages/works.logger",
     "packages/works.http",
     "packages/works.class",
     "packages/works.core",
