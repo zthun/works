@@ -11,8 +11,8 @@
   "scripts": {
     "docker:publish": "docker push zthun/works.client && docker push zthun/works.client:$(node -p \"require('./package.json').version\")",
     "docker:build": "docker build . -t zthun/works.client:latest -t zthun/works.client:$(node -p \"require('./package.json').version\")",
-    "build": "webpack --env production && npm pack",
-    "debug": "webpack serve --env development --host 0.0.0.0"
+    "build": "webpack --env production",
+    "debug": "webpack serve --env development"
   },
   "author": "Anthony Bonta",
   "license": "MIT",

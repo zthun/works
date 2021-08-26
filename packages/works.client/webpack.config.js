@@ -116,9 +116,9 @@ function config(env) {
       usedExports: true
     },
     devServer: {
-      contentBase: dir,
+      host: '0.0.0.0',
       compress: false,
-      disableHostCheck: true,
+      allowedHosts: 'all',
       port: 8080
     },
     performance: {
