@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 /* eslint-disable require-jsdoc */
 import { v4 } from 'uuid';
 import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';

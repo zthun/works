@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 /* eslint-disable require-jsdoc */
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
 import { IZLogin, IZProfile, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';

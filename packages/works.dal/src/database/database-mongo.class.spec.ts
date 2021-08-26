@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 /* eslint-disable require-jsdoc */
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { v4 } from 'uuid';
