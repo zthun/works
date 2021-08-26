@@ -1,4 +1,4 @@
-import { ReactNode } from 'react-markdown';
+import { ReactNode } from 'react';
 import { IZTopBarItem } from './top-bar-item.interface';
 
 /**
