@@ -15,6 +15,7 @@
     "packages/works.error",
     "packages/works.logger",
     "packages/works.http",
+    "packages/works.message",
     "packages/works.class",
     "packages/works.core",
     "packages/works.dal",
