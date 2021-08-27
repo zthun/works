@@ -5,7 +5,8 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
 import { IZHttpResult } from '@zthun/works.http';
-import { useAlertStack, useProfileAndWatch, useProfileService, ZAlertBuilder, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
+import { ZAlertBuilder } from '@zthun/works.message';
+import { useAlertService, useProfileAndWatch, useProfileService, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
 import { get } from 'lodash';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
@@ -17,7 +18,7 @@ import { Redirect } from 'react-router-dom';
  */
 export function ZProfilePage() {
   const profile = useProfileAndWatch();
-  const alerts = useAlertStack();
+  const alerts = useAlertService();
   const profileSvc = useProfileService();
   const [loggingOut, setLoggingOut] = useState(false);
   const [activating, setActivating] = useState(false);
@@ -36,7 +37,7 @@ export function ZProfilePage() {
   function showError(err: any) {
     const error = err as IZHttpResult;
     const msg = get(error, 'data.message', error.data);
-    alerts.add(new ZAlertBuilder().error().message(msg).build());
+    alerts.create(new ZAlertBuilder().error().message(msg).build());
   }
 
   /**
@@ -46,7 +47,7 @@ export function ZProfilePage() {
     try {
       setLoggingOut(true);
       await profileSvc.logout();
-      alerts.add(new ZAlertBuilder().success().message('Logout successful.').build());
+      alerts.create(new ZAlertBuilder().success().message('Logout successful.').build());
       setLoggingOut(false);
       profile.set(null);
     } catch (err) {
@@ -67,7 +68,7 @@ export function ZProfilePage() {
       setActivation(value);
       setActivating(true);
       const update = await profileSvc.activate(value);
-      alerts.add(new ZAlertBuilder().success().message('Account activated.').build());
+      alerts.create(new ZAlertBuilder().success().message('Account activated.').build());
       setActivating(false);
       profile.set(update);
     } catch (err) {
@@ -89,7 +90,7 @@ export function ZProfilePage() {
       const body = new ZProfileActivationBuilder().email(profile.data.email).build();
       setActivation(body);
       const update = await profileSvc.reactivate(body);
-      alerts.add(new ZAlertBuilder().success().message('Activation code sent. Please check your email.').build());
+      alerts.create(new ZAlertBuilder().success().message('Activation code sent. Please check your email.').build());
       profile.set(update);
     } catch (err) {
       showError(err);
@@ -106,7 +107,7 @@ export function ZProfilePage() {
       const body = new ZProfileActivationBuilder().email(profile.data.email).build();
       setActivation(body);
       const update = await profileSvc.deactivate();
-      alerts.add(new ZAlertBuilder().success().message('Account deactivated. Send yourself another activation code to reactivate.').build());
+      alerts.create(new ZAlertBuilder().success().message('Account deactivated. Send yourself another activation code to reactivate.').build());
       profile.set(update);
     } catch (err) {
       showError(err);
@@ -124,7 +125,7 @@ export function ZProfilePage() {
       setDeleting(true);
       setActivation(null);
       await profileSvc.delete();
-      alerts.add(new ZAlertBuilder().success().message('Account deleted').build());
+      alerts.create(new ZAlertBuilder().success().message('Account deleted').build());
       setDeleting(false);
       profile.set(null);
     } catch (err) {
@@ -143,7 +144,7 @@ export function ZProfilePage() {
       setUpdatingProfile(true);
       setActivation(new ZProfileActivationBuilder().email(profile.data.email).build());
       const updated = await profileSvc.update(changes);
-      alerts.add(new ZAlertBuilder().success().message('Account updated').build());
+      alerts.create(new ZAlertBuilder().success().message('Account updated').build());
       setUpdatingProfile(false);
       profile.set(updated);
     } catch (err) {

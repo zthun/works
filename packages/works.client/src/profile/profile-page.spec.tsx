@@ -2,7 +2,8 @@
 import { act, fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
-import { IZAlertStack, IZDataState, IZProfileService, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZDataState, ZProfileContext, ZProfileServiceContext } from '@zthun/works.react';
+import { IZAlertService, ZAlertSeverity } from '@zthun/works.message';
+import { IZDataState, IZProfileService, ZAlertServiceContext, ZDataState, ZProfileContext, ZProfileServiceContext } from '@zthun/works.react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { lastValueFrom, of } from 'rxjs';
@@ -14,14 +15,14 @@ describe('ZProfilePage', () => {
   let profile: IZProfile;
   let profileSvc: jest.Mocked<IZProfileService>;
   let state: IZDataState<IZProfile>;
-  let alerts: IZAlertStack;
+  let alerts: jest.Mocked<IZAlertService>;
 
   async function createTestTarget() {
     let target: RenderResult;
 
     await act(async () => {
       target = render(
-        <ZAlertStackContext.Provider value={alerts}>
+        <ZAlertServiceContext.Provider value={alerts}>
           <ZProfileContext.Provider value={state}>
             <MemoryRouter>
               <ZProfileServiceContext.Provider value={profileSvc}>
@@ -29,7 +30,7 @@ describe('ZProfilePage', () => {
               </ZProfileServiceContext.Provider>
             </MemoryRouter>
           </ZProfileContext.Provider>
-        </ZAlertStackContext.Provider>
+        </ZAlertServiceContext.Provider>
       );
     });
 
@@ -39,7 +40,7 @@ describe('ZProfilePage', () => {
   beforeEach(() => {
     profile = undefined;
     state = new ZDataState(profile);
-    alerts = new ZAlertStack(1);
+    alerts = createMocked<IZAlertService>(['create']);
 
     profileSvc = createMocked<IZProfileService>(['read', 'update', 'delete', 'getAvatar', 'getDisplay', 'login', 'logout', 'activate', 'deactivate', 'reactivate']);
     profileSvc.read.mockResolvedValue(null);
@@ -111,9 +112,8 @@ describe('ZProfilePage', () => {
       const target = await createTestTarget();
       // Act
       await clickLogoutButton(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Success);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
     });
 
     it('notifies the user when the logout fails.', async () => {
@@ -122,9 +122,8 @@ describe('ZProfilePage', () => {
       profileSvc.logout.mockRejectedValue('failed');
       // Act
       await clickLogoutButton(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Error);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
     });
   });
 
@@ -150,9 +149,8 @@ describe('ZProfilePage', () => {
       // Act
       await setKey(target, key);
       await clickActivateButton(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Success);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
     });
 
     it('notifies the user when activation fails.', async () => {
@@ -163,9 +161,8 @@ describe('ZProfilePage', () => {
       // Act
       await setKey(target, key);
       await clickActivateButton(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Error);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
     });
 
     it('reactivates the profile.', async () => {
@@ -173,9 +170,8 @@ describe('ZProfilePage', () => {
       const target = await createTestTarget();
       // Act
       await clickReactivateButton(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Success);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
     });
 
     it('notifies the user when reactivation fails.', async () => {
@@ -184,9 +180,8 @@ describe('ZProfilePage', () => {
       profileSvc.reactivate.mockRejectedValue('failed');
       // Act
       await clickReactivateButton(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Error);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
     });
   });
 
@@ -211,9 +206,8 @@ describe('ZProfilePage', () => {
       const target = await createTestTarget();
       // Act
       await clickDeactivateButton(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Success);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
     });
 
     it('notifies the user if the deactivation fails.', async () => {
@@ -222,9 +216,8 @@ describe('ZProfilePage', () => {
       profileSvc.deactivate.mockRejectedValue('failed');
       // Act
       await clickDeactivateButton(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Error);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
     });
 
     it('deletes the user account.', async () => {
@@ -233,9 +226,8 @@ describe('ZProfilePage', () => {
       // Act
       await checkDeleteConfirm(target);
       await clickDeleteButton(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Success);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
     });
 
     it('notifies the user if the delete fails.', async () => {
@@ -245,9 +237,8 @@ describe('ZProfilePage', () => {
       // Act
       await checkDeleteConfirm(target);
       await clickDeleteButton(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Error);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
     });
 
     it('saves the updated profile.', async () => {
@@ -255,9 +246,8 @@ describe('ZProfilePage', () => {
       const target = await createTestTarget();
       // Act
       await clickUpdateProfile(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Success);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
     });
 
     it('notifies the user if the update fails.', async () => {
@@ -266,9 +256,8 @@ describe('ZProfilePage', () => {
       profileSvc.update.mockRejectedValue('failed');
       // Act
       await clickUpdateProfile(target);
-      const actual = alerts.list[0];
       // Assert
-      expect(actual.severity).toEqual(ZAlertSeverity.Error);
+      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
     });
   });
 });
