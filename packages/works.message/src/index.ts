@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 
 // Alert
-
-// Console
-// Log
+export { IZAlert, ZAlertBuilder } from './alert/alert';
+export { IZAlertService, ZAlertService } from './alert/alert-service';
+export { ZAlertSeverity } from './alert/alert-severity.enum';

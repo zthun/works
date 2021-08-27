@@ -2,6 +2,8 @@
 
 // Alerts
 export { IZAlert, ZAlertBuilder } from './alert/alert';
+export { ZAlertList } from './alert/alert-list';
+export { ZAlertServiceContext, useAlertService } from './alert/alert-service.context';
 export { ZAlertSeverity } from './alert/alert-severity.enum';
 export { IZAlertSnackbarProps, ZAlertSnackbar } from './alert/alert-snackbar';
 export { ZAlertStackList } from './alert/alert-stack-list';
