@@ -2,7 +2,8 @@
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
-import { IZAlertStack, IZDataState, IZProfileService, ZAlertSeverity, ZAlertStack, ZAlertStackContext, ZDataState, ZLoginStateContext, ZProfileServiceContext } from '@zthun/works.react';
+import { IZAlertService, ZAlertSeverity } from '@zthun/works.message';
+import { IZDataState, IZProfileService, ZAlertServiceContext, ZDataState, ZProfileContext, ZProfileServiceContext } from '@zthun/works.react';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
@@ -12,31 +13,31 @@ import { ZLoginPage } from './login-page';
 
 describe('ZLoginPage', () => {
   let state: IZDataState<IZProfile>;
-  let alerts: IZAlertStack;
+  let alerts: jest.Mocked<IZAlertService>;
   let profile: IZProfile;
   let profiles: jest.Mocked<IZProfileService>;
 
   async function createTestTarget() {
     const target = render(
-      <ZAlertStackContext.Provider value={alerts}>
-        <ZLoginStateContext.Provider value={state}>
+      <ZAlertServiceContext.Provider value={alerts}>
+        <ZProfileContext.Provider value={state}>
           <ZProfileServiceContext.Provider value={profiles}>
             <MemoryRouter>
               <ZLoginPage />
             </MemoryRouter>
           </ZProfileServiceContext.Provider>
-        </ZLoginStateContext.Provider>
-      </ZAlertStackContext.Provider>
+        </ZProfileContext.Provider>
+      </ZAlertServiceContext.Provider>
     );
     return target;
   }
 
   beforeEach(() => {
     state = new ZDataState<IZProfile>(null);
-    alerts = new ZAlertStack();
-
     profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').build();
+
     profiles = createMocked<IZProfileService>(['login', 'create', 'recover']);
+    alerts = createMocked<IZAlertService>(['create']);
   });
 
   describe('Display', () => {
@@ -102,7 +103,7 @@ describe('ZLoginPage', () => {
           await of(true).pipe(delay(0)).toPromise();
         });
         // Assert
-        expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Success);
+        expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
       });
 
       it('should alert the user if the login fails.', async () => {
@@ -116,7 +117,7 @@ describe('ZLoginPage', () => {
           await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
-        expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
+        expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
       });
     });
 
@@ -132,7 +133,7 @@ describe('ZLoginPage', () => {
           await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
-        expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Success);
+        expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
       });
 
       it('should alert the user if the login fails.', async () => {
@@ -146,7 +147,7 @@ describe('ZLoginPage', () => {
           await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
-        expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
+        expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
       });
     });
 
@@ -162,7 +163,7 @@ describe('ZLoginPage', () => {
           await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
-        expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Success);
+        expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
       });
 
       it('should alert the user if an error occurs during the password recovery phase.', async () => {
@@ -176,7 +177,7 @@ describe('ZLoginPage', () => {
           await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
-        expect(alerts.list[0].severity).toEqual(ZAlertSeverity.Error);
+        expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
       });
     });
   });

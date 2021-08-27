@@ -1,6 +1,7 @@
 import { CircularProgress, Grid } from '@material-ui/core';
 import { IZLogin } from '@zthun/works.core';
-import { useAlertStack, useProfileAndWatch, useProfileService, ZAlertBuilder, ZLoginTabs } from '@zthun/works.react';
+import { ZAlertBuilder } from '@zthun/works.message';
+import { useAlertService, useProfileAndWatch, useProfileService, ZLoginTabs } from '@zthun/works.react';
 import { get } from 'lodash';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
@@ -14,7 +15,7 @@ export function ZLoginPage(): JSX.Element {
   const [working, setWorking] = useState(false);
   const logged = useProfileAndWatch();
   const profileSvc = useProfileService();
-  const alerts = useAlertStack();
+  const alerts = useAlertService();
 
   /**
    * Handles the login request.
@@ -27,11 +28,11 @@ export function ZLoginPage(): JSX.Element {
     try {
       setWorking(true);
       const profile = await profileSvc.login(login);
-      alerts.add(new ZAlertBuilder().success().message('Login successful.').build());
+      alerts.create(new ZAlertBuilder().success().message('Login successful.').build());
       setWorking(false);
       logged.set(profile);
     } catch (err) {
-      alerts.add(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
+      alerts.create(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
       setWorking(false);
     }
   }
@@ -47,11 +48,11 @@ export function ZLoginPage(): JSX.Element {
     try {
       setWorking(true);
       const profile = await profileSvc.create(login);
-      alerts.add(new ZAlertBuilder().success().message('Account created successfully.').build());
+      alerts.create(new ZAlertBuilder().success().message('Account created successfully.').build());
       setWorking(false);
       logged.set(profile);
     } catch (err) {
-      alerts.add(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
+      alerts.create(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
       setWorking(false);
     }
   }
@@ -67,9 +68,9 @@ export function ZLoginPage(): JSX.Element {
     try {
       setWorking(true);
       await profileSvc.recover(login);
-      alerts.add(new ZAlertBuilder().success().message('Check your email, and if it is registered, you will get a one time password you can use to login.').build());
+      alerts.create(new ZAlertBuilder().success().message('Check your email, and if it is registered, you will get a one time password you can use to login.').build());
     } catch (err) {
-      alerts.add(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
+      alerts.create(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
     } finally {
       setWorking(false);
     }
