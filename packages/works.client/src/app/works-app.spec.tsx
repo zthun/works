@@ -1,13 +1,24 @@
 /* eslint-disable require-jsdoc */
-import { render } from '@testing-library/react';
+import { act, render, RenderResult } from '@testing-library/react';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { delay, lastValueFrom, of } from 'rxjs';
 import { renderPrivacyPage, renderStatusCodePage, renderTermsPage, ZthunworksApp } from './works-app';
 
 describe('ZthunworksApp', () => {
-  it('renders the application', () => {
+  async function createTestTarget() {
+    let target: RenderResult;
+
+    await act(async () => {
+      target = render(<ZthunworksApp />);
+      await lastValueFrom(of(true).pipe(delay(0)));
+    });
+
+    return target;
+  }
+  it('renders the application', async () => {
     // Arrange
-    const target = render(<ZthunworksApp />);
+    const target = await createTestTarget();
     // Act
     const actual = target.queryByTestId('Zthunworks-root');
     // Assert
