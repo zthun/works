@@ -1,5 +1,6 @@
 import { Snackbar } from '@material-ui/core';
 import React from 'react';
+import { ZAlertList } from './alert-list';
 import { ZAlertStackList } from './alert-stack-list';
 
 /**
@@ -31,7 +32,10 @@ export interface IZAlertSnackbarProps {
 export function ZAlertSnackbar(props: IZAlertSnackbarProps) {
   return (
     <Snackbar className='ZAlertSnackbar-root' open={true} anchorOrigin={{ vertical: props.vertical, horizontal: props.horizontal }}>
-      <ZAlertStackList />
+      <>
+        <ZAlertStackList />
+        <ZAlertList />
+      </>
     </Snackbar>
   );
 }

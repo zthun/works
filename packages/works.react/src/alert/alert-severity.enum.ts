@@ -1,5 +1,7 @@
 /**
  * Represents alert severity.
+ *
+ * @deprecated Use the version in @zthun/works.messages instead.
  */
 export enum ZAlertSeverity {
   /**

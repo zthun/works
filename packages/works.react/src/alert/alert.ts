@@ -4,6 +4,8 @@ import { ZAlertSeverity } from './alert-severity.enum';
 
 /**
  * Represents an alert in  @zthun based projects.
+ *
+ * @deprecated Use the version in @zthun/works.messages.
  */
 export interface IZAlert {
   /**
@@ -36,6 +38,8 @@ export interface IZAlert {
 
 /**
  * Represents a builder for an alert.
+ *
+ * @deprecated Use the version in @zthun/works.messages.
  */
 export class ZAlertBuilder {
   private _alert: IZAlert;

@@ -7,6 +7,8 @@ import { useAlertState } from './alert-stack.context';
  * Renders a stack of alert messages from the global alert state list.
  *
  * @returns The jsx for the alert stack.
+ *
+ * @deprecated Use the alert list instead.
  */
 export function ZAlertStackList() {
   const stack = useAlertState();

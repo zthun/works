@@ -6,6 +6,8 @@ import { IZAlert } from './alert';
 
 /**
  * Represents a mutable stack of alerts.
+ *
+ * @deprecated Use the alert service instead.
  */
 export interface IZAlertStack {
   /**
@@ -44,6 +46,8 @@ export interface IZAlertStack {
 
 /**
  * Represents an alert stack with support to auto remove the alerts.
+ *
+ * @deprecated Use the alert service instead.
  */
 export class ZAlertStack implements IZAlertStack {
   private _list: IZAlert[] = [];
@@ -118,6 +122,8 @@ export class ZAlertStack implements IZAlertStack {
 
 /**
  * Represents the context for the globally provided alert stack.
+ *
+ * @deprecated Use the alert service instead.
  */
 export const ZAlertStackContext = createContext<IZAlertStack>(new ZAlertStack());
 
@@ -128,6 +134,8 @@ export const ZAlertStackContext = createContext<IZAlertStack>(new ZAlertStack())
  * your component to render when the stack changes, use @see useAlertState instead.
  *
  * @returns The current alert stack.
+ *
+ * @deprecated Use @see useAlertService instead.
  */
 export function useAlertStack(): IZAlertStack {
   return useContext(ZAlertStackContext);
@@ -141,6 +149,8 @@ export function useAlertStack(): IZAlertStack {
  * stack changes, use @see useAlertStack instead.
  *
  * @returns The current alert stack.
+ *
+ * @deprecated Use @see useAlertService instead.
  */
 export function useAlertState(): IZAlertStack {
   const stack = useAlertStack();
