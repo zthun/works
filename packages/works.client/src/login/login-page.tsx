@@ -48,6 +48,7 @@ export function ZLoginPage(): JSX.Element {
     try {
       setWorking(true);
       const profile = await profileSvc.create(login);
+      await profileSvc.login(login);
       alerts.create(new ZAlertBuilder().success().message('Account created successfully.').build());
       setWorking(false);
       logged.set(profile);

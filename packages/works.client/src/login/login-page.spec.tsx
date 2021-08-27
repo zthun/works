@@ -136,6 +136,20 @@ describe('ZLoginPage', () => {
         expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
       });
 
+      it('should immediately log the user in.', async () => {
+        // Arrange
+        let target: RenderResult;
+        profiles.create.mockResolvedValue(profile);
+        await act(async () => {
+          target = await createTestTarget();
+          // Act
+          fireEvent.submit(getCreateActionButton(target));
+          await lastValueFrom(of(true).pipe(delay(0)));
+        });
+        // Assert
+        expect(profiles.login).toHaveBeenCalled();
+      });
+
       it('should alert the user if the login fails.', async () => {
         // Arrange
         let target: RenderResult;
