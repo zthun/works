@@ -11,6 +11,7 @@
       "@zthun/works.react": ["../works.react/src/index"],
       "@zthun/works.draw": ["../works.draw/src/index"],
       "@zthun/works.http": ["../works.http/src/index"],
+      "@zthun/works.message": ["../works.message/src/index"],
       "@zthun/works.themes": ["../works.themes"]
     }
   },

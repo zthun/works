@@ -12,7 +12,8 @@
       "@zthun/works.url": ["works.url/src/index"],
       "@zthun/works.http": ["works.http/src/index"],
       "@zthun/works.draw": ["works.draw/src/index"],
-      "@zthun/works.logger": ["works.logger/src/index"]
+      "@zthun/works.logger": ["works.logger/src/index"],
+      "@zthun/works.message": ["works.message/src/index"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
