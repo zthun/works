@@ -44,22 +44,22 @@ export class ZErrorHandler implements IZErrorHandler {
    *
    * @returns The unwrapped message or null if the message could not be detected.
    */
-  private _unwrapMessage(err: any): string[] {
+  private _unwrapMessages(err: any): string[] {
     let msg = null;
 
     if (Object.hasOwnProperty.call(err, 'code')) {
-      // This may be a proper ZError.  Try to extract a message.
-      msg = this._findMessage(err.english || err.code);
+      // This is probably a ZError.  Try to extract a message.
+      msg = this._findMessages(err.english || err.code);
     }
 
-    if (msg == null && Object.hasOwnProperty.call(err, 'data')) {
+    if (!msg?.length && Object.hasOwnProperty.call(err, 'data')) {
       // This is probably an http object - either from axios or the works.http package result.
-      msg = this._findMessage(err.data);
+      msg = this._findMessages(err.data);
     }
 
-    if (msg == null && Object.hasOwnProperty.call(err, 'message')) {
+    if (!msg?.length && Object.hasOwnProperty.call(err, 'message')) {
       // An object with a literal message.
-      msg = this._findMessage(err.message);
+      msg = this._findMessages(err.message);
     }
 
     return msg;
@@ -72,8 +72,8 @@ export class ZErrorHandler implements IZErrorHandler {
    *
    * @returns The message parsed from err.
    */
-  private _findMessageFromShape(err: object): string[] {
-    const messages = this._unwrapMessage(err);
+  private _findMessagesFromShape(err: object): string[] {
+    const messages = this._unwrapMessages(err);
     return messages == null ? [JSON.stringify(err, undefined, ZErrorHandler.Spacing)] : messages;
   }
 
@@ -86,7 +86,7 @@ export class ZErrorHandler implements IZErrorHandler {
    */
   private _flattenMessages(err: any[]): string[] {
     let flattened: string[] = [];
-    err.forEach((e) => (flattened = flattened.concat(this._findMessage(e))));
+    err.forEach((e) => (flattened = flattened.concat(this._findMessages(e))));
     return flattened;
   }
 
@@ -97,7 +97,7 @@ export class ZErrorHandler implements IZErrorHandler {
    *
    * @returns A parsed error message from err.
    */
-  private _findMessage(err: any): string[] {
+  private _findMessages(err: any): string[] {
     if (err == null) {
       return [];
     }
@@ -107,11 +107,11 @@ export class ZErrorHandler implements IZErrorHandler {
     }
 
     if (typeof err === 'function') {
-      return this._findMessage(err());
+      return this._findMessages(err());
     }
 
     if (typeof err === 'object') {
-      return this._findMessageFromShape(err);
+      return this._findMessagesFromShape(err);
     }
 
     if (typeof err === 'symbol') {
@@ -127,7 +127,7 @@ export class ZErrorHandler implements IZErrorHandler {
    * @param err The error to handle.
    */
   public handle(err: any): void {
-    const msg = this._findMessage(err);
+    const msg = this._findMessages(err);
 
     if (msg.length) {
       this._msg.handle(msg, err);
