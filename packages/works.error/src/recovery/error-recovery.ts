@@ -34,8 +34,8 @@ export class ZErrorRecovery implements IZErrorRecovery {
    *
    * @returns A resolved promise with the recovery value.
    */
-  recover<T>(err: any, value: T): Promise<T> {
-    this._handler.handle(err);
+  public async recover<T>(err: any, value: T): Promise<T> {
+    await this._handler.handle(err);
     return Promise.resolve(value);
   }
 }

@@ -4,7 +4,7 @@ import { IZErrorHandler } from '../handler/error-handler';
 import { ZErrorPassThrough } from './error-pass-through';
 
 describe('ZErrorPassThrough', () => {
-  let handler: IZErrorHandler;
+  let handler: jest.Mocked<IZErrorHandler>;
 
   function createTestTarget() {
     return new ZErrorPassThrough(handler);
@@ -12,6 +12,7 @@ describe('ZErrorPassThrough', () => {
 
   beforeEach(() => {
     handler = createMocked<IZErrorHandler>(['handle']);
+    handler.handle.mockResolvedValue();
   });
 
   it('should handle the error.', async () => {

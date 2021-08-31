@@ -13,8 +13,11 @@ export interface IZErrorHandler {
    * Handles and error.
    *
    * @param err The error to handle.
+   *
+   * @returns A promise that resolves when the handle
+   *          operation completes.
    */
-  handle(err: any): void;
+  handle(err: any): Promise<void>;
 }
 
 /**
@@ -126,11 +129,11 @@ export class ZErrorHandler implements IZErrorHandler {
    *
    * @param err The error to handle.
    */
-  public handle(err: any): void {
+  public async handle(err: any): Promise<void> {
     const msg = this._findMessages(err);
 
     if (msg.length) {
-      this._msg.handle(msg, err);
+      await this._msg.handle(msg, err);
     }
   }
 }

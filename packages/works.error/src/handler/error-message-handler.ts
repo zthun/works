@@ -9,7 +9,7 @@ export interface IZErrorMessageHandler {
    * @param err The original error that occurred.  If you don't need this
    *            the your handler can simply take the message by itself.
    */
-  handle(msg: string[], err: any): void;
+  handle(msg: string[], err: any): Promise<void>;
 }
 
 /**
@@ -29,8 +29,10 @@ export class ZErrorMessageHandlerComposite implements IZErrorMessageHandler {
    * @param msg The messages that were stripped out from the error.
    * @param err The original error that occurred.  If you don't need this
    *            the your handler can simply take the message by itself.
+   *
+   * @returns A promise that resolves when all of the child handles have handled their errors.
    */
-  public handle(msg: string[], err: any) {
-    this._children.forEach((ch) => ch.handle(msg, err));
+  public async handle(msg: string[], err: any): Promise<void> {
+    await Promise.all(this._children.map((ch) => ch.handle(msg, err)));
   }
 }

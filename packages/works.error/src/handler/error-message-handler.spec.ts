@@ -15,13 +15,13 @@ describe('ZMessageHandler', () => {
     logger = createMocked(['handle']);
   });
 
-  it('should forward the messages to the child handlers.', () => {
+  it('should forward the messages to the child handlers.', async () => {
     // Arrange
     const target = createTestTarget();
     const error = { message: ['Error One', 'Error Two'] };
     const messages = ['Error One', 'Error Two'];
     // Act
-    target.handle(messages, error);
+    await target.handle(messages, error);
     // Assert
     expect(alerter.handle).toHaveBeenCalledWith(messages, error);
     expect(logger.handle).toHaveBeenCalledWith(messages, error);

@@ -35,8 +35,8 @@ export class ZErrorPassThrough implements IZErrorPassThrough {
    *
    * @returns A rejected promise with err as the payload.
    */
-  public pass(err: any): Promise<never> {
-    this._handler.handle(err);
+  public async pass(err: any): Promise<never> {
+    await this._handler.handle(err);
     return Promise.reject(err);
   }
 }
