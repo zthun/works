@@ -1,14 +1,14 @@
 /* eslint-disable require-jsdoc */
 import { createMocked } from '@zthun/works.jest';
 import { ZLogEntryBuilder } from '../log/log-entry';
-import { ZConsoleLogger } from './console-logger';
+import { ZLoggerConsole } from './logger-console';
 
-describe('ZConsoleLogger', () => {
+describe('ZLoggerConsole', () => {
   let msg: string;
   let cons: jest.Mocked<Console>;
 
   function createTestTarget() {
-    return new ZConsoleLogger(cons);
+    return new ZLoggerConsole(cons);
   }
 
   beforeEach(() => {
@@ -54,7 +54,7 @@ describe('ZConsoleLogger', () => {
       // Act
       target.log(entry);
       // Assert
-      expect(cons.error).toHaveBeenCalledWith(`[${entry.created.toLocaleString()}]: ${ZConsoleLogger.FATAL} - ${entry.message}`);
+      expect(cons.error).toHaveBeenCalledWith(`[${entry.created.toLocaleString()}]: ${ZLoggerConsole.FATAL} - ${entry.message}`);
     });
   });
 });

@@ -3,7 +3,7 @@
 // Composite
 export { ZCompositeLogger } from './composite/composite-logger';
 // Console
-export { ZConsoleLogger } from './console/console-logger';
+export { ZLoggerConsole } from './console/logger-console';
 // Log
 export { IZLogEntry, ZLogEntryBuilder } from './log/log-entry';
 export { ZLogLevel } from './log/log-level.enum';

@@ -5,7 +5,7 @@ import { IZLogger } from '../log/logger';
 /**
  * Represents a logger that logs to the console.
  */
-export class ZConsoleLogger implements IZLogger {
+export class ZLoggerConsole implements IZLogger {
   public static readonly FATAL = '!!FATAL!!';
   private _logFnMap: any;
 
@@ -31,7 +31,7 @@ export class ZConsoleLogger implements IZLogger {
     const fn = this._logFnMap[entry.level] || ((msg: string) => this._console.log(msg));
 
     const timestamp = `[${entry.created.toLocaleString()}]`;
-    const payload = entry.level === ZLogLevel.CATASTROPHE ? `: ${ZConsoleLogger.FATAL} - ${entry.message}` : `: ${entry.message}`;
+    const payload = entry.level === ZLogLevel.CATASTROPHE ? `: ${ZLoggerConsole.FATAL} - ${entry.message}` : `: ${entry.message}`;
     fn(`${timestamp}${payload}`);
   }
 }
