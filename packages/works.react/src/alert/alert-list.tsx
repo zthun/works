@@ -10,7 +10,7 @@ import { useAlertService } from './alert-service.context';
  * @returns The jsx for the alert stack.
  */
 export function ZAlertList() {
-  const [alerts, setAlerts] = useState([]);
+  const [alerts, setAlerts] = useState<IZAlert[]>([]);
   const service = useAlertService();
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export function ZAlertList() {
     return (
       <Alert className={`ZAlertList-alert ZAlertList-alert-${alert._id}`} key={alert._id} severity={alert.severity} onClose={handleCloseAlert}>
         <AlertTitle>{alert.header}</AlertTitle>
-        {alert.message}
+        <div className='ZAlertList-alert-message'>{alert.message}</div>
       </Alert>
     );
   });
