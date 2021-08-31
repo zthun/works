@@ -4,7 +4,7 @@ import { IZLogger } from '../log/logger';
 /**
  * Represents a logger that logs to multiple sources.
  */
-export class ZCompositeLogger implements IZLogger {
+export class ZLoggerComposite implements IZLogger {
   /**
    * Initializes a new instance of this object.
    *

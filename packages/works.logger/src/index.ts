@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 
 // Composite
-export { ZCompositeLogger } from './composite/composite-logger';
+export { ZLoggerComposite } from './composite/logger-composite';
 // Console
 export { ZLoggerConsole } from './console/logger-console';
 // Log

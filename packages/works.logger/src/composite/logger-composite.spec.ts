@@ -2,15 +2,15 @@
 import { createMocked } from '@zthun/works.jest';
 import { ZLogEntryBuilder } from '../log/log-entry';
 import { IZLogger } from '../log/logger';
-import { ZCompositeLogger } from './composite-logger';
+import { ZLoggerComposite } from './logger-composite';
 
-describe('ZCompositeLogger', () => {
+describe('ZLoggerComposite', () => {
   let loggerA: jest.Mocked<IZLogger>;
   let loggerB: jest.Mocked<IZLogger>;
   let loggerC: jest.Mocked<IZLogger>;
 
   function createTestTarget() {
-    return new ZCompositeLogger([loggerA, loggerB, loggerC]);
+    return new ZLoggerComposite([loggerA, loggerB, loggerC]);
   }
 
   beforeEach(() => {
