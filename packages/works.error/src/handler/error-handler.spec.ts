@@ -14,13 +14,14 @@ describe('ErrorHandler', () => {
     msg = createMocked<IZMessageHandler>(['handle']);
   });
 
-  function assertMessageHandlerReceivesMessage(expected: string, err: any) {
+  function assertMessageHandlerReceivesMessage(expected: string | string[], err: any) {
     // Arrange
+    const messages = Array.isArray(expected) ? expected : [expected];
     const target = createTestTarget();
     // Act
     target.handle(err);
     // Assert
-    expect(msg.handle).toHaveBeenCalledWith(expected, err);
+    expect(msg.handle).toHaveBeenCalledWith(messages, err);
   }
 
   describe('Primitives', () => {
@@ -154,6 +155,27 @@ describe('ErrorHandler', () => {
       const expected = 'Message';
       const fn = () => expected;
       assertMessageHandlerReceivesMessage(expected, fn);
+    });
+  });
+
+  describe('Array', () => {
+    it('should unwrap all entries and return each entry as a message.', () => {
+      const errors = [
+        'Something happened',
+        42,
+        {
+          message: 'Message object'
+        },
+        {
+          data: {
+            code: 404,
+            english: 'Not found'
+          }
+        },
+        ['Inner Array', 'Of Messages']
+      ];
+      const expected = ['Something happened', '42', 'Message object', 'Not found', 'Inner Array', 'Of Messages'];
+      assertMessageHandlerReceivesMessage(expected, errors);
     });
   });
 });

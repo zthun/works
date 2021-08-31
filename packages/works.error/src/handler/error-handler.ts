@@ -44,7 +44,7 @@ export class ZErrorHandler implements IZErrorHandler {
    *
    * @returns The unwrapped message or null if the message could not be detected.
    */
-  private _unwrapMessage(err: any) {
+  private _unwrapMessage(err: any): string[] {
     let msg = null;
 
     if (Object.hasOwnProperty.call(err, 'code')) {
@@ -72,9 +72,22 @@ export class ZErrorHandler implements IZErrorHandler {
    *
    * @returns The message parsed from err.
    */
-  private _findMessageFromShape(err: object) {
-    const message = this._unwrapMessage(err);
-    return message == null ? JSON.stringify(err, undefined, ZErrorHandler.Spacing) : message;
+  private _findMessageFromShape(err: object): string[] {
+    const messages = this._unwrapMessage(err);
+    return messages == null ? [JSON.stringify(err, undefined, ZErrorHandler.Spacing)] : messages;
+  }
+
+  /**
+   * Unwraps every message in err and flattens every message into a top level array.
+   *
+   * @param err The array of errors.
+   *
+   * @returns The flattened list of error messages.
+   */
+  private _flattenMessages(err: any[]): string[] {
+    let flattened: string[] = [];
+    err.forEach((e) => (flattened = flattened.concat(this._findMessage(e))));
+    return flattened;
   }
 
   /**
@@ -84,9 +97,13 @@ export class ZErrorHandler implements IZErrorHandler {
    *
    * @returns A parsed error message from err.
    */
-  private _findMessage(err: any) {
+  private _findMessage(err: any): string[] {
     if (err == null) {
-      return err;
+      return [];
+    }
+
+    if (Array.isArray(err)) {
+      return this._flattenMessages(err);
     }
 
     if (typeof err === 'function') {
@@ -98,10 +115,10 @@ export class ZErrorHandler implements IZErrorHandler {
     }
 
     if (typeof err === 'symbol') {
-      return err.description;
+      return [err.description];
     }
 
-    return `${err}`;
+    return [`${err}`];
   }
 
   /**
@@ -112,7 +129,7 @@ export class ZErrorHandler implements IZErrorHandler {
   public handle(err: any): void {
     const msg = this._findMessage(err);
 
-    if (msg) {
+    if (msg.length) {
       this._msg.handle(msg, err);
     }
   }

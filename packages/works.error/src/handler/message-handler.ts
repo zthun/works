@@ -9,5 +9,5 @@ export interface IZMessageHandler {
    * @param err The original error that occurred.  If you don't need this
    *            the your handler can simply take the message by itself.
    */
-  handle(msg: string, err: any): void;
+  handle(msg: string[], err: any): void;
 }
