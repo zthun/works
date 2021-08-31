@@ -10,13 +10,6 @@ export interface IZLogEntry {
   level: ZLogLevel;
 
   /**
-   * The log scope.
-   *
-   * This is just a description of the module that the log occurred in.
-   */
-  scope: string;
-
-  /**
    * The creation of this entry.
    */
   created: Date | string;
@@ -40,8 +33,7 @@ export class ZLogEntryBuilder {
     this._entry = {
       level: ZLogLevel.ERROR,
       message: null,
-      created: new Date().toJSON(),
-      scope: null
+      created: new Date().toJSON()
     };
   }
 
@@ -94,18 +86,6 @@ export class ZLogEntryBuilder {
    */
   public message(msg: string): this {
     this._entry.message = msg;
-    return this;
-  }
-
-  /**
-   * Sets the scope.
-   *
-   * @param scope The scope to set.
-   *
-   * @returns This object.
-   */
-  public scope(scope: string): this {
-    this._entry.scope = scope;
     return this;
   }
 

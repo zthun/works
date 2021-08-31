@@ -53,14 +53,5 @@ describe('ZLogEntryBuilder', () => {
         (l: IZLogEntry) => l.message
       );
     });
-
-    it('should set the scope.', () => {
-      assertBuilderSetsProperty(
-        'Roadblock.Login',
-        createTestTarget,
-        (t, v) => t.scope(v),
-        (l: IZLogEntry) => l.scope
-      );
-    });
   });
 });

@@ -22,7 +22,7 @@ describe('ZCompositeLogger', () => {
   it('should log to every child logger.', () => {
     // Arrange
     const target = createTestTarget();
-    const expected = new ZLogEntryBuilder().message('log-it').warning().scope('Test.CompositeLogger').build();
+    const expected = new ZLogEntryBuilder().message('log-it').warning().build();
     // Act
     target.log(expected);
     // Asset
