@@ -1,4 +1,4 @@
-import { IZMessageHandler } from './message-handler';
+import { IZErrorMessageHandler } from './error-message-handler';
 
 /**
  * Represents an object that can be used to handle an error.
@@ -35,7 +35,7 @@ export class ZErrorHandler implements IZErrorHandler {
    * @param _msg The handler that will receive the message
    *            stripped out from the error.
    */
-  public constructor(private _msg: IZMessageHandler) {}
+  public constructor(private _msg: IZErrorMessageHandler) {}
 
   /**
    * Attempts to unwrap the message from the error object.

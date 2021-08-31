@@ -1,17 +1,17 @@
 /* eslint-disable require-jsdoc */
 import { createMocked } from '@zthun/works.jest';
 import { ZErrorHandler } from './error-handler';
-import { IZMessageHandler } from './message-handler';
+import { IZErrorMessageHandler } from './error-message-handler';
 
 describe('ErrorHandler', () => {
-  let msg: IZMessageHandler;
+  let msg: IZErrorMessageHandler;
 
   function createTestTarget() {
     return new ZErrorHandler(msg);
   }
 
   beforeEach(() => {
-    msg = createMocked<IZMessageHandler>(['handle']);
+    msg = createMocked<IZErrorMessageHandler>(['handle']);
   });
 
   function assertMessageHandlerReceivesMessage(expected: string | string[], err: any) {

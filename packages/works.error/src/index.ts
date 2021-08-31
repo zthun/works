@@ -4,7 +4,7 @@
 export { IZError, ZErrorBuilder } from './error/error';
 // Handler
 export { IZErrorHandler, ZErrorHandler } from './handler/error-handler';
-export { IZMessageHandler } from './handler/message-handler';
+export { IZErrorMessageHandler, ZErrorMessageHandlerComposite } from './handler/error-message-handler';
 // Pass Through
 export { IZErrorPassThrough, ZErrorPassThrough } from './pass-through/error-pass-through';
 // Recovery
