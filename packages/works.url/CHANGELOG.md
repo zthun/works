@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
+
+
+### Features
+
+* added common mime types ([20f4059](https://github.com/zthun/works/commit/20f4059c25e03db95dd706e43298c925092d3888))
+* you can now parse and get info about data urls ([a3b2b6b](https://github.com/zthun/works/commit/a3b2b6bf0c3abfbd2bc1c34efb8ee59a27c256f5))
+* you can now retrieve the information about the url being built ([d78d194](https://github.com/zthun/works/commit/d78d194bc264a7a110ae4a87cf82d55c3086c233))
+
+
+
 ## [1.1.0](https://github.com/zthun/works/compare/v1.0.0...v1.1.0) (2021-08-15)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
+
+
+### Features
+
+* added the apps module and controller ([b3a3a2b](https://github.com/zthun/works/commit/b3a3a2b9142802530b28dc4ce5a32ed29a0e4298))
+* nest now has a peer dependency on works.url ([3697ee5](https://github.com/zthun/works/commit/3697ee5034924e3f2fdb7ab70c3c49b8b3bdb3c1))
+* the app service now returns the icons for the necessary apps ([6f04a90](https://github.com/zthun/works/commit/6f04a907a9d2da4d68896888b970a514894353c6))
+
+
+
 ## [1.1.0](https://github.com/zthun/works/compare/v1.0.0...v1.1.0) (2021-08-15)
 
 

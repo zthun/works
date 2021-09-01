@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
+
+
+### Features
+
+* updated default config for sock to path ws ([130a1ed](https://github.com/zthun/works/commit/130a1ed17258de4708f58472de0270a35233ab99))
+
+
+
 ## [1.0.0-28](https://github.com/zthun/works/compare/v1.0.0-27...v1.0.0-28) (2021-08-07)
 
 

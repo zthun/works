@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
+
+
+### Features
+
+* a web app can set an icon and source code ([8588076](https://github.com/zthun/works/commit/85880766f16e1fae2c7d45ecb87c54ff121a961c))
+* added a logger message handler ([becf55f](https://github.com/zthun/works/commit/becf55fc368eb7a2c38d3dc822e520634a7eab80))
+* added an alert error message handler ([8bbcc40](https://github.com/zthun/works/commit/8bbcc40848c8fa19aef4078b4667831b0de2e616))
+* added common mime types ([20f4059](https://github.com/zthun/works/commit/20f4059c25e03db95dd706e43298c925092d3888))
+* added composite logger ([dc2c267](https://github.com/zthun/works/commit/dc2c2672fd6302ec9121248788a760ce8a148a3c))
+* added the alert list component and alert service context ([c9c6545](https://github.com/zthun/works/commit/c9c6545e0d77d42de9a8f571b1edcbc903f7e616))
+* added the apps module and controller ([b3a3a2b](https://github.com/zthun/works/commit/b3a3a2b9142802530b28dc4ce5a32ed29a0e4298))
+* added the contract for a web app ([1ecc030](https://github.com/zthun/works/commit/1ecc030208d0daf007cea89454df8112ef26bd1c))
+* added the logger package ([77a9cc7](https://github.com/zthun/works/commit/77a9cc72822ab3ec93eaeab777b241de78e56cb7))
+* added the message handler interface ([378cf66](https://github.com/zthun/works/commit/378cf664cc40dbb1f890fff65adb9157910fa136))
+* added the profile context in favor of the login state context ([d70e180](https://github.com/zthun/works/commit/d70e180b2e5cf4881add7737c6f40ad5dcdca9fc))
+* added the standard error handler that unwraps messages ([d086b66](https://github.com/zthun/works/commit/d086b661bc6c0a5d27971de82dd33912790a2db3))
+* added the web app service ([3a8421f](https://github.com/zthun/works/commit/3a8421ff75dc6baa1295158ebf9a43c8d412b1dd))
+* added the web apps service context ([94c5a0d](https://github.com/zthun/works/commit/94c5a0db087dbd7be4508087cd1b34f76dee3ea1))
+* added the window context ([c575903](https://github.com/zthun/works/commit/c57590367774ba248a714c5adb966b139aac2329))
+* added the works.message package ([05498e4](https://github.com/zthun/works/commit/05498e4934315642ef7363a75af6e7b425bd079f))
+* added works.error ([13b79a5](https://github.com/zthun/works/commit/13b79a595f5c632a231258bb2761e52337c0cf71))
+* adding the error handler context ([a8663fd](https://github.com/zthun/works/commit/a8663fd1655c09f77fe8677ef4a9c7fedf69bcdc))
+* alertlist style for message will properly preserve white space ([c08cfd2](https://github.com/zthun/works/commit/c08cfd28780986c15141af1af5f2a299e02da090))
+* converted to use the alert service ([00eed9b](https://github.com/zthun/works/commit/00eed9b04a2a2af2866d1bff6c294e12d576feaa))
+* nest now has a peer dependency on works.url ([3697ee5](https://github.com/zthun/works/commit/3697ee5034924e3f2fdb7ab70c3c49b8b3bdb3c1))
+* removed the works menu ([ca91c25](https://github.com/zthun/works/commit/ca91c250ece4e133c71a23d4d1ef39f6d82d3817))
+* status code page and http code card now use the http package ([b6b009e](https://github.com/zthun/works/commit/b6b009e965c8848ecfebc65c569bdbf1314dfe73))
+* the app controller is now provided ([731c30a](https://github.com/zthun/works/commit/731c30a041b06de76e4cc5693a8d564d8290bc5f))
+* the app service now returns the icons for the necessary apps ([6f04a90](https://github.com/zthun/works/commit/6f04a907a9d2da4d68896888b970a514894353c6))
+* the client now uses the ZTopNav component ([8c5454b](https://github.com/zthun/works/commit/8c5454bd717628b96dba0101410cd3faf943aec2))
+* the error objects have been deprecated from core ([02e6c2c](https://github.com/zthun/works/commit/02e6c2c16d060bde2f9b2238fda4f01f3047a231))
+* the login page errors have been cleaned up ([f29442f](https://github.com/zthun/works/commit/f29442fe7ee0c357b833215569d99e014d8de9df))
+* the top bar has been fully merged to the top  nav ([6471ee6](https://github.com/zthun/works/commit/6471ee63c832fdde71ccf63974dcfa827b3e96f3))
+* the top nav should now properly display app icons ([1faaffe](https://github.com/zthun/works/commit/1faaffe965b648a996c18f109fcc99acda328868))
+* updated default config for sock to path ws ([130a1ed](https://github.com/zthun/works/commit/130a1ed17258de4708f58472de0270a35233ab99))
+* updated styles for the top nav ([32a9b53](https://github.com/zthun/works/commit/32a9b5306460ef09602648ec11ad9eec1145bd82))
+* works.react now has peer dependencies on logger, message, and error ([f2c39d6](https://github.com/zthun/works/commit/f2c39d6f16f45da03d71b33abe1566f80dfb7eab))
+* you can now parse and get info about data urls ([a3b2b6b](https://github.com/zthun/works/commit/a3b2b6bf0c3abfbd2bc1c34efb8ee59a27c256f5))
+* you can now retrieve names and descriptions of codes ([3ceceb3](https://github.com/zthun/works/commit/3ceceb3e0367a3f2d122ec539b9eaa802b47f4ae))
+* you can now retrieve the information about the url being built ([d78d194](https://github.com/zthun/works/commit/d78d194bc264a7a110ae4a87cf82d55c3086c233))
+
+
+### Bug Fixes
+
+* creating an account should now immediately log you in ([1525db0](https://github.com/zthun/works/commit/1525db023d969f8479070fadd452ee1fcd1788de))
+* the profile page now properly handles errors ([69e47f0](https://github.com/zthun/works/commit/69e47f0a546e5eddc54d7c81c780cdf96c03551b))
+
+
+
 ## [1.1.0](https://github.com/zthun/works/compare/v1.0.0...v1.1.0) (2021-08-15)
 
 

@@ -5,12 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
 
-**Note:** Version bump only for package @zthun/works.class
 
+### Features
 
-
-
-
-## [1.0.0-29](https://github.com/zthun/works/compare/v1.0.0-28...v1.0.0-29) (2021-08-09)
-
-**Note:** Version bump only for package @zthun/works.class
+* added the works.message package ([05498e4](https://github.com/zthun/works/commit/05498e4934315642ef7363a75af6e7b425bd079f))

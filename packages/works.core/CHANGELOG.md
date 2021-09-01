@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
+
+
+### Features
+
+* a web app can set an icon and source code ([8588076](https://github.com/zthun/works/commit/85880766f16e1fae2c7d45ecb87c54ff121a961c))
+* added the contract for a web app ([1ecc030](https://github.com/zthun/works/commit/1ecc030208d0daf007cea89454df8112ef26bd1c))
+* the error objects have been deprecated from core ([02e6c2c](https://github.com/zthun/works/commit/02e6c2c16d060bde2f9b2238fda4f01f3047a231))
+
+
+
 ## [1.1.0](https://github.com/zthun/works/compare/v1.0.0...v1.1.0) (2021-08-15)
 
 

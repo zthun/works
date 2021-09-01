@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.message",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A system for handling messages and questions for the user.",
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -26,8 +26,8 @@
     "images"
   ],
   "peerDependencies": {
-    "rxjs": "^7.3.0",
     "lodash": "^4.17.15",
+    "rxjs": "^7.3.0",
     "uuid": "^8.3.2"
   },
   "sideEffects": false

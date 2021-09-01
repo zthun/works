@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
+
+
+### Features
+
+* converted to use the alert service ([00eed9b](https://github.com/zthun/works/commit/00eed9b04a2a2af2866d1bff6c294e12d576feaa))
+* removed the works menu ([ca91c25](https://github.com/zthun/works/commit/ca91c250ece4e133c71a23d4d1ef39f6d82d3817))
+* the client now uses the ZTopNav component ([8c5454b](https://github.com/zthun/works/commit/8c5454bd717628b96dba0101410cd3faf943aec2))
+* the login page errors have been cleaned up ([f29442f](https://github.com/zthun/works/commit/f29442fe7ee0c357b833215569d99e014d8de9df))
+
+
+### Bug Fixes
+
+* creating an account should now immediately log you in ([1525db0](https://github.com/zthun/works/commit/1525db023d969f8479070fadd452ee1fcd1788de))
+* the profile page now properly handles errors ([69e47f0](https://github.com/zthun/works/commit/69e47f0a546e5eddc54d7c81c780cdf96c03551b))
+
+
+
 ## [1.1.0](https://github.com/zthun/works/compare/v1.0.0...v1.1.0) (2021-08-15)
 
 
