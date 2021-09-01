@@ -6,14 +6,14 @@
     "declaration": false,
     "sourceMap": true,
     "paths": {
-      "@zthun/works.url": ["../works.url/src/index"],
       "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.draw": ["../works.draw/src/index"],
       "@zthun/works.error": ["../works.error/src/index"],
       "@zthun/works.http": ["../works.http/src/index"],
       "@zthun/works.message": ["../works.message/src/index"],
       "@zthun/works.react": ["../works.react/src/index"],
-      "@zthun/works.themes": ["../works.themes"]
+      "@zthun/works.themes": ["../works.themes"],
+      "@zthun/works.url": ["../works.url/src/index"]
     }
   },
   "include": ["src/**/*.tsx", "src/**/*.ts"]
