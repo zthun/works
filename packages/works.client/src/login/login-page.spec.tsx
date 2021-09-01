@@ -1,9 +1,10 @@
 /* eslint-disable require-jsdoc */
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
+import { IZErrorHandler } from '@zthun/works.error';
 import { createMocked } from '@zthun/works.jest';
 import { IZAlertService, ZAlertSeverity } from '@zthun/works.message';
-import { IZDataState, IZProfileService, ZAlertServiceContext, ZDataState, ZProfileContext, ZProfileServiceContext } from '@zthun/works.react';
+import { IZDataState, IZProfileService, ZAlertServiceContext, ZDataState, ZErrorHandlerContext, ZProfileContext, ZProfileServiceContext } from '@zthun/works.react';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
@@ -14,20 +15,23 @@ import { ZLoginPage } from './login-page';
 describe('ZLoginPage', () => {
   let state: IZDataState<IZProfile>;
   let alerts: jest.Mocked<IZAlertService>;
+  let errors: jest.Mocked<IZErrorHandler>;
   let profile: IZProfile;
   let profiles: jest.Mocked<IZProfileService>;
 
   async function createTestTarget() {
     const target = render(
-      <ZAlertServiceContext.Provider value={alerts}>
-        <ZProfileContext.Provider value={state}>
-          <ZProfileServiceContext.Provider value={profiles}>
-            <MemoryRouter>
-              <ZLoginPage />
-            </MemoryRouter>
-          </ZProfileServiceContext.Provider>
-        </ZProfileContext.Provider>
-      </ZAlertServiceContext.Provider>
+      <ZErrorHandlerContext.Provider value={errors}>
+        <ZAlertServiceContext.Provider value={alerts}>
+          <ZProfileContext.Provider value={state}>
+            <ZProfileServiceContext.Provider value={profiles}>
+              <MemoryRouter>
+                <ZLoginPage />
+              </MemoryRouter>
+            </ZProfileServiceContext.Provider>
+          </ZProfileContext.Provider>
+        </ZAlertServiceContext.Provider>
+      </ZErrorHandlerContext.Provider>
     );
     return target;
   }
@@ -38,6 +42,7 @@ describe('ZLoginPage', () => {
 
     profiles = createMocked<IZProfileService>(['login', 'create', 'recover']);
     alerts = createMocked<IZAlertService>(['create']);
+    errors = createMocked<IZErrorHandler>(['handle']);
   });
 
   describe('Display', () => {
@@ -106,10 +111,11 @@ describe('ZLoginPage', () => {
         expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
       });
 
-      it('should alert the user if the login fails.', async () => {
+      it('should notify the user if the login fails.', async () => {
         // Arrange
         let target: RenderResult;
-        profiles.login.mockRejectedValue('Credentials invalid');
+        const error = new Error('Credentials invalid');
+        profiles.login.mockRejectedValue(error);
         await act(async () => {
           target = await createTestTarget();
           // Act
@@ -117,7 +123,7 @@ describe('ZLoginPage', () => {
           await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
-        expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
+        expect(errors.handle).toHaveBeenCalledWith(error);
       });
     });
 
@@ -150,10 +156,11 @@ describe('ZLoginPage', () => {
         expect(profiles.login).toHaveBeenCalled();
       });
 
-      it('should alert the user if the login fails.', async () => {
+      it('should notify the user if the login fails.', async () => {
         // Arrange
         let target: RenderResult;
-        profiles.create.mockRejectedValue('User already exists');
+        const error = new Error('User already exists');
+        profiles.create.mockRejectedValue(error);
         await act(async () => {
           target = await createTestTarget();
           // Act
@@ -161,7 +168,7 @@ describe('ZLoginPage', () => {
           await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
-        expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
+        expect(errors.handle).toHaveBeenCalledWith(error);
       });
     });
 
@@ -180,10 +187,11 @@ describe('ZLoginPage', () => {
         expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Success }));
       });
 
-      it('should alert the user if an error occurs during the password recovery phase.', async () => {
+      it('should notify the user if an error occurs during the password recovery phase.', async () => {
         // Arrange
         let target: RenderResult;
-        profiles.recover.mockRejectedValue('Could not setup recovery.');
+        const error = new Error('Could not setup recovery.');
+        profiles.recover.mockRejectedValue(error);
         await act(async () => {
           target = await createTestTarget();
           // Act
@@ -191,7 +199,7 @@ describe('ZLoginPage', () => {
           await lastValueFrom(of(true).pipe(delay(0)));
         });
         // Assert
-        expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
+        expect(errors.handle).toHaveBeenCalledWith(error);
       });
     });
   });

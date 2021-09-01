@@ -1,8 +1,7 @@
 import { CircularProgress, Grid } from '@material-ui/core';
 import { IZLogin } from '@zthun/works.core';
 import { ZAlertBuilder } from '@zthun/works.message';
-import { useAlertService, useProfileAndWatch, useProfileService, ZLoginTabs } from '@zthun/works.react';
-import { get } from 'lodash';
+import { useAlertService, useErrorHandler, useProfileAndWatch, useProfileService, ZLoginTabs } from '@zthun/works.react';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
@@ -16,6 +15,7 @@ export function ZLoginPage(): JSX.Element {
   const logged = useProfileAndWatch();
   const profileSvc = useProfileService();
   const alerts = useAlertService();
+  const errors = useErrorHandler();
 
   /**
    * Handles the login request.
@@ -32,7 +32,7 @@ export function ZLoginPage(): JSX.Element {
       setWorking(false);
       logged.set(profile);
     } catch (err) {
-      alerts.create(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
+      errors.handle(err);
       setWorking(false);
     }
   }
@@ -53,7 +53,7 @@ export function ZLoginPage(): JSX.Element {
       setWorking(false);
       logged.set(profile);
     } catch (err) {
-      alerts.create(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
+      errors.handle(err);
       setWorking(false);
     }
   }
@@ -71,7 +71,7 @@ export function ZLoginPage(): JSX.Element {
       await profileSvc.recover(login);
       alerts.create(new ZAlertBuilder().success().message('Check your email, and if it is registered, you will get a one time password you can use to login.').build());
     } catch (err) {
-      alerts.create(new ZAlertBuilder().error().message(get(err, 'data.message', err)).build());
+      errors.handle(err);
     } finally {
       setWorking(false);
     }
