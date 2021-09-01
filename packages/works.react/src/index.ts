@@ -3,7 +3,7 @@
 // Alerts
 export { IZAlert, ZAlertBuilder } from './alert/alert';
 export { ZAlertList } from './alert/alert-list';
-export { ZAlertServiceContext, useAlertService } from './alert/alert-service.context';
+export { useAlertService, ZAlertServiceContext } from './alert/alert-service.context';
 export { ZAlertSeverity } from './alert/alert-severity.enum';
 export { IZAlertSnackbarProps, ZAlertSnackbar } from './alert/alert-snackbar';
 export { ZAlertStackList } from './alert/alert-stack-list';
@@ -56,6 +56,10 @@ export { ZTypedocViewer } from './doc/typedoc-viewer';
 export { ZTypedocViewerSource } from './doc/typedoc-viewer-source';
 export { IZTypedocViewerSourceProps } from './doc/typedoc-viewer-source.props';
 export { IZTypedocViewerProps } from './doc/typedoc-viewer.props';
+// Error
+export { useErrorHandler, ZErrorHandlerContext } from './error/error-handler.context';
+export { ZErrorMessageHandlerAlert } from './error/error-message-handler-alert';
+export { ZErrorMessageHandlerLogger } from './error/error-message-handler-logger';
 // File
 export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelect as ZFileSelectInput, ZFileSelectContext } from './file/file-select.context';
 // Http
