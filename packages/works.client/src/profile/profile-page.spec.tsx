@@ -1,9 +1,10 @@
 /* eslint-disable require-jsdoc */
 import { act, fireEvent, render, RenderResult } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
+import { IZErrorHandler } from '@zthun/works.error';
 import { createMocked } from '@zthun/works.jest';
 import { IZAlertService, ZAlertSeverity } from '@zthun/works.message';
-import { IZDataState, IZProfileService, ZAlertServiceContext, ZDataState, ZProfileContext, ZProfileServiceContext } from '@zthun/works.react';
+import { IZDataState, IZProfileService, ZAlertServiceContext, ZDataState, ZErrorHandlerContext, ZProfileContext, ZProfileServiceContext } from '@zthun/works.react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { lastValueFrom, of } from 'rxjs';
@@ -16,21 +17,24 @@ describe('ZProfilePage', () => {
   let profileSvc: jest.Mocked<IZProfileService>;
   let state: IZDataState<IZProfile>;
   let alerts: jest.Mocked<IZAlertService>;
+  let errors: jest.Mocked<IZErrorHandler>;
 
   async function createTestTarget() {
     let target: RenderResult;
 
     await act(async () => {
       target = render(
-        <ZAlertServiceContext.Provider value={alerts}>
-          <ZProfileContext.Provider value={state}>
-            <MemoryRouter>
-              <ZProfileServiceContext.Provider value={profileSvc}>
-                <ZProfilePage />
-              </ZProfileServiceContext.Provider>
-            </MemoryRouter>
-          </ZProfileContext.Provider>
-        </ZAlertServiceContext.Provider>
+        <ZErrorHandlerContext.Provider value={errors}>
+          <ZAlertServiceContext.Provider value={alerts}>
+            <ZProfileContext.Provider value={state}>
+              <MemoryRouter>
+                <ZProfileServiceContext.Provider value={profileSvc}>
+                  <ZProfilePage />
+                </ZProfileServiceContext.Provider>
+              </MemoryRouter>
+            </ZProfileContext.Provider>
+          </ZAlertServiceContext.Provider>
+        </ZErrorHandlerContext.Provider>
       );
     });
 
@@ -41,6 +45,7 @@ describe('ZProfilePage', () => {
     profile = undefined;
     state = new ZDataState(profile);
     alerts = createMocked<IZAlertService>(['create']);
+    errors = createMocked<IZErrorHandler>(['handle']);
 
     profileSvc = createMocked<IZProfileService>(['read', 'update', 'delete', 'getAvatar', 'getDisplay', 'login', 'logout', 'activate', 'deactivate', 'reactivate']);
     profileSvc.read.mockResolvedValue(null);
@@ -119,11 +124,12 @@ describe('ZProfilePage', () => {
     it('notifies the user when the logout fails.', async () => {
       // Arrange
       const target = await createTestTarget();
-      profileSvc.logout.mockRejectedValue('failed');
+      const error = new Error('failed');
+      profileSvc.logout.mockRejectedValue(error);
       // Act
       await clickLogoutButton(target);
       // Assert
-      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
+      expect(errors.handle).toHaveBeenCalledWith(error);
     });
   });
 
@@ -157,12 +163,13 @@ describe('ZProfilePage', () => {
       // Arrange
       const target = await createTestTarget();
       const key = v4();
-      profileSvc.activate.mockRejectedValue('failed');
+      const error = new Error('failed');
+      profileSvc.activate.mockRejectedValue(error);
       // Act
       await setKey(target, key);
       await clickActivateButton(target);
       // Assert
-      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
+      expect(errors.handle).toHaveBeenCalledWith(error);
     });
 
     it('reactivates the profile.', async () => {
@@ -177,11 +184,12 @@ describe('ZProfilePage', () => {
     it('notifies the user when reactivation fails.', async () => {
       // Arrange
       const target = await createTestTarget();
-      profileSvc.reactivate.mockRejectedValue('failed');
+      const error = new Error('failed');
+      profileSvc.reactivate.mockRejectedValue(error);
       // Act
       await clickReactivateButton(target);
       // Assert
-      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
+      expect(errors.handle).toHaveBeenCalledWith(error);
     });
   });
 
@@ -213,11 +221,12 @@ describe('ZProfilePage', () => {
     it('notifies the user if the deactivation fails.', async () => {
       // Arrange
       const target = await createTestTarget();
-      profileSvc.deactivate.mockRejectedValue('failed');
+      const error = new Error('failed');
+      profileSvc.deactivate.mockRejectedValue(error);
       // Act
       await clickDeactivateButton(target);
       // Assert
-      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
+      expect(errors.handle).toHaveBeenCalledWith(error);
     });
 
     it('deletes the user account.', async () => {
@@ -233,12 +242,13 @@ describe('ZProfilePage', () => {
     it('notifies the user if the delete fails.', async () => {
       // Arrange
       const target = await createTestTarget();
-      profileSvc.delete.mockRejectedValue('failed');
+      const error = new Error('failed');
+      profileSvc.delete.mockRejectedValue(error);
       // Act
       await checkDeleteConfirm(target);
       await clickDeleteButton(target);
       // Assert
-      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
+      expect(errors.handle).toHaveBeenCalledWith(error);
     });
 
     it('saves the updated profile.', async () => {
@@ -253,11 +263,12 @@ describe('ZProfilePage', () => {
     it('notifies the user if the update fails.', async () => {
       // Arrange
       const target = await createTestTarget();
-      profileSvc.update.mockRejectedValue('failed');
+      const error = new Error('failed');
+      profileSvc.update.mockRejectedValue(error);
       // Act
       await clickUpdateProfile(target);
       // Assert
-      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining({ severity: ZAlertSeverity.Error }));
+      expect(errors.handle).toHaveBeenCalledWith(error);
     });
   });
 });

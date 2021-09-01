@@ -4,9 +4,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
-import { IZHttpResult } from '@zthun/works.http';
 import { ZAlertBuilder } from '@zthun/works.message';
-import { useAlertService, useProfileAndWatch, useProfileService, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
+import { useAlertService, useErrorHandler, useProfileAndWatch, useProfileService, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
 import { get } from 'lodash';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
@@ -19,6 +18,7 @@ import { Redirect } from 'react-router-dom';
 export function ZProfilePage() {
   const profile = useProfileAndWatch();
   const alerts = useAlertService();
+  const errors = useErrorHandler();
   const profileSvc = useProfileService();
   const [loggingOut, setLoggingOut] = useState(false);
   const [activating, setActivating] = useState(false);
@@ -28,17 +28,6 @@ export function ZProfilePage() {
   const [deleting, setDeleting] = useState(false);
   const [activation, setActivation] = useState(new ZProfileActivationBuilder().email(get(profile.data, 'email', null)).build());
   const waiting = deleting || deactivating || updatingProfile || activating || reactivating || loggingOut;
-
-  /**
-   * Shows an error alert from a rest service call.
-   *
-   * @param err The error to show.
-   */
-  function showError(err: any) {
-    const error = err as IZHttpResult;
-    const msg = get(error, 'data.message', error.data);
-    alerts.create(new ZAlertBuilder().error().message(msg).build());
-  }
 
   /**
    * Occurs when the user clicks the logout button.
@@ -51,7 +40,7 @@ export function ZProfilePage() {
       setLoggingOut(false);
       profile.set(null);
     } catch (err) {
-      showError(err);
+      errors.handle(err);
       setLoggingOut(false);
     }
   }
@@ -72,7 +61,7 @@ export function ZProfilePage() {
       setActivating(false);
       profile.set(update);
     } catch (err) {
-      showError(err);
+      errors.handle(err);
       setActivating(false);
     }
   }
@@ -93,7 +82,7 @@ export function ZProfilePage() {
       alerts.create(new ZAlertBuilder().success().message('Activation code sent. Please check your email.').build());
       profile.set(update);
     } catch (err) {
-      showError(err);
+      errors.handle(err);
       setReactivating(false);
     }
   }
@@ -110,7 +99,7 @@ export function ZProfilePage() {
       alerts.create(new ZAlertBuilder().success().message('Account deactivated. Send yourself another activation code to reactivate.').build());
       profile.set(update);
     } catch (err) {
-      showError(err);
+      errors.handle(err);
       setDeactivating(false);
     }
 
@@ -129,7 +118,7 @@ export function ZProfilePage() {
       setDeleting(false);
       profile.set(null);
     } catch (err) {
-      showError(err);
+      errors.handle(err);
       setDeleting(false);
     }
   }
@@ -148,7 +137,7 @@ export function ZProfilePage() {
       setUpdatingProfile(false);
       profile.set(updated);
     } catch (err) {
-      showError(err);
+      errors.handle(err);
       setUpdatingProfile(false);
     }
   }
