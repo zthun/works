@@ -71,7 +71,15 @@ export class ZAlertService implements IZAlertService {
    */
   public static readonly Namespace = 'zthunworks.alerts';
 
-  private _watch = new Subject<IZAlert[]>();
+  /**
+   * The property of where the alerts will be stored.
+   */
+  public static readonly PropertyAlerts = `${ZAlertService.Namespace}.list`;
+
+  /**
+   * The property of where the watcher will be stored.
+   */
+  public static readonly PropertyWatcher = `${ZAlertService.Namespace}.watcher`;
 
   /**
    * Initializes a new instance of this object.
@@ -81,16 +89,32 @@ export class ZAlertService implements IZAlertService {
   public constructor(private _max: number = 5) {}
 
   /**
+   * Gets the watcher for the alert changes.
+   *
+   * @returns The watcher for alert changes.
+   */
+  private static _getWatcher(): Subject<IZAlert[]> {
+    let watcher: Subject<IZAlert[]> = get(global, ZAlertService.PropertyWatcher);
+
+    if (!watcher) {
+      set(global, ZAlertService.PropertyWatcher, new Subject<IZAlert[]>());
+      watcher = get(global, ZAlertService.PropertyWatcher);
+    }
+
+    return watcher;
+  }
+
+  /**
    * Gets the current alert list.
    *
    * @returns The current alert list.
    */
   private static _getAlerts(): IZAlert[] {
-    let alerts = get(global, ZAlertService.Namespace);
+    let alerts = get(global, ZAlertService.PropertyAlerts);
 
     if (!alerts) {
       ZAlertService._setAlerts([]);
-      alerts = get(global, ZAlertService.Namespace);
+      alerts = get(global, ZAlertService.PropertyAlerts);
     }
 
     return alerts.slice();
@@ -102,7 +126,7 @@ export class ZAlertService implements IZAlertService {
    * @param alerts The alert list to set.
    */
   private static _setAlerts(alerts: IZAlert[]): void {
-    set(global, ZAlertService.Namespace, alerts);
+    set(global, ZAlertService.PropertyAlerts, alerts);
   }
 
   /**
@@ -124,7 +148,7 @@ export class ZAlertService implements IZAlertService {
     const alert = alerts[index];
     alerts.splice(index, 1);
     ZAlertService._setAlerts(alerts);
-    this._watch.next(alerts.slice());
+    ZAlertService._getWatcher().next(alerts.slice());
     return alert;
   }
 
@@ -147,7 +171,7 @@ export class ZAlertService implements IZAlertService {
    * @returns An observable that streams in changes to the alert stack.
    */
   public watch(): Observable<IZAlert[]> {
-    return this._watch.asObservable();
+    return ZAlertService._getWatcher().asObservable();
   }
 
   /**
@@ -188,7 +212,7 @@ export class ZAlertService implements IZAlertService {
     alert = new ZAlertBuilder().copy(alert).id(v4()).build();
     alerts.splice(0, 0, alert);
     ZAlertService._setAlerts(alerts);
-    this._watch.next(alerts.slice());
+    ZAlertService._getWatcher().next(alerts.slice());
 
     if (alert.timeToLive > 0 && alert.timeToLive < Infinity) {
       setTimeout(() => this._tryRemove(alert._id), alert.timeToLive);
@@ -225,7 +249,7 @@ export class ZAlertService implements IZAlertService {
 
     if (alerts.length) {
       ZAlertService._setAlerts([]);
-      this._watch.next([]);
+      ZAlertService._getWatcher().next([]);
     }
 
     return Promise.resolve();
