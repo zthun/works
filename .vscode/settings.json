@@ -1,3 +1,3 @@
 {
-  "jest.autoRun": { "watch": true }
+  "jest.autoRun": { "watch": false, "onSave": "test-src-file" }
 }
