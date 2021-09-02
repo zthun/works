@@ -1,8 +1,6 @@
 import InfoIcon from '@material-ui/icons/Info';
 import MouseIcon from '@material-ui/icons/Mouse';
-import { useProfileRoot, ZAlertSnackbar, ZContent, ZMarkdownPage, ZStatusCodePage } from '@zthun/works.react';
-import { useWebAppsRoot } from '@zthun/works.react/src/apps/web-apps.context';
-import { ZTopNav } from '@zthun/works.react/src/top/top-nav';
+import { useProfileRoot, useWebAppsRoot, ZAlertSnackbar, ZContent, ZMarkdownPage, ZStatusCodePage, ZTopNav } from '@zthun/works.react';
 import { ZUrlBuilder } from '@zthun/works.url';
 import React from 'react';
 import { HashRouter, Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
