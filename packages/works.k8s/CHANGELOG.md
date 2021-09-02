@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0](https://github.com/zthun/works/compare/v1.2.0...v1.3.0) (2021-09-02)
+
+
+### Features
+
+* updated the app version ([ac2a383](https://github.com/zthun/works/commit/ac2a383b7ea083cb62da35e9a04c1ea96b50c775))
+
+
+
 ## [1.1.0](https://github.com/zthun/works/compare/v1.0.0...v1.1.0) (2021-08-15)
 
 **Note:** Version bump only for package @zthun/works.k8s

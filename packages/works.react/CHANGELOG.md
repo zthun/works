@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0](https://github.com/zthun/works/compare/v1.2.0...v1.3.0) (2021-09-02)
+
+
+### Bug Fixes
+
+* index now properly exports the top nav and web apps context ([a284ce5](https://github.com/zthun/works/commit/a284ce59449f41083a0e55233a30a3dd338246b2))
+
+
+
 ## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
 
 

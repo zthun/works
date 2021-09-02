@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.react",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A react component package that contains react based components for @zthun scoped packages.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
