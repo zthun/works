@@ -12,14 +12,14 @@ export interface IZAlertSnackbarProps {
    *
    * @default 'bottom'
    */
-  vertical: 'top' | 'bottom';
+  vertical?: 'top' | 'bottom';
 
   /**
    * Horizontal alignment.
    *
    * @default 'right'
    */
-  horizontal: 'left' | 'center' | 'right';
+  horizontal?: 'left' | 'center' | 'right';
 }
 
 /**
@@ -30,8 +30,10 @@ export interface IZAlertSnackbarProps {
  * @returns The jsx for this component.
  */
 export function ZAlertSnackbar(props: IZAlertSnackbarProps) {
+  const { vertical = 'bottom', horizontal = 'right' } = props;
+
   return (
-    <Snackbar className='ZAlertSnackbar-root' open={true} anchorOrigin={{ vertical: props.vertical, horizontal: props.horizontal }}>
+    <Snackbar className='ZAlertSnackbar-root' open={true} anchorOrigin={{ vertical, horizontal }}>
       <>
         <ZAlertStackList />
         <ZAlertList />
@@ -39,8 +41,3 @@ export function ZAlertSnackbar(props: IZAlertSnackbarProps) {
     </Snackbar>
   );
 }
-
-ZAlertSnackbar.defaultProps = {
-  vertical: 'bottom',
-  horizontal: 'right'
-};
