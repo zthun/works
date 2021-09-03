@@ -9,9 +9,18 @@ services:
       - 443:443
       - 8080:8080
     depends_on:
+      - zthunworks-services-api
       - zthunworks-services-client
       - zthunworks-services-server
   # Node Ports
+  zthunworks-services-api:
+    image: node:16.6.0
+    ports:
+      - 9230:9229
+    volumes:
+      - .:/usr/dev
+    working_dir: /usr/dev
+    command: npm --workspace @zthun/works.api run debug
   zthunworks-services-client:
     image: node:16.6.0
     volumes:
