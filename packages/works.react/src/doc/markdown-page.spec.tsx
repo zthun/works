@@ -5,18 +5,14 @@ import React from 'react';
 import { lastValueFrom, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ZHttpServiceContext } from '../http/http-service.context';
-import { ZMarkdownPage } from './markdown-page';
+import { renderMarkdownPage } from './markdown-page';
 
 describe('ZMarkdownPage', () => {
   let markdown: string;
   let http: ZHttpServiceMock;
 
   async function createTestTarget() {
-    const target = render(
-      <ZHttpServiceContext.Provider value={http}>
-        <ZMarkdownPage src='markdown.md' headerText='Markdown' />
-      </ZHttpServiceContext.Provider>
-    );
+    const target = render(<ZHttpServiceContext.Provider value={http}>{renderMarkdownPage({ src: 'markdown.md', headerText: 'Test Markdown' })}</ZHttpServiceContext.Provider>);
     await act(async () => lastValueFrom(of(undefined).pipe(delay(2))));
     return target;
   }

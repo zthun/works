@@ -1,7 +1,6 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import { ZMarkdownViewer } from './markdown-viewer';
-import { IZMarkdownProps } from './markdown.props';
+import { IZMarkdownProps, ZMarkdownViewer } from './markdown-viewer';
 
 /**
  * Represents a page that displays a single markdown document.
@@ -20,4 +19,13 @@ export function ZMarkdownPage(props: IZMarkdownProps) {
   );
 }
 
-ZMarkdownPage.defaultProps = ZMarkdownViewer.defaultProps;
+/**
+ * Returns the jsx for rendering a full markdown page.
+ *
+ * @param props The properties to pass through to the markdown page.
+ *
+ * @returns The jsx that renders the entire markdown page.
+ */
+export function renderMarkdownPage(props: IZMarkdownProps) {
+  return <ZMarkdownPage {...props} />;
+}

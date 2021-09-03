@@ -7,8 +7,16 @@ import gfm from 'remark-gfm';
 import { from, of, Subject } from 'rxjs';
 import { catchError, map, takeUntil } from 'rxjs/operators';
 import { ZPaperCard } from '../card/paper-card';
+import { IZComponentActionable } from '../component/component-actionable.interface';
+import { IZComponentHeader } from '../component/component-header.interface';
+import { IZComponentSizeable } from '../component/component-sizeable.interface';
+import { IZComponentSource } from '../component/component-source.interface';
 import { useHttpService } from '../http/http-service.context';
-import { IZMarkdownProps } from './markdown.props';
+
+/**
+ * Represents properties for the markdown viewer.
+ */
+export interface IZMarkdownProps extends IZComponentHeader, IZComponentSizeable, IZComponentActionable, IZComponentSource {}
 
 /**
  * Renders markdown files from a url or content string.
@@ -18,11 +26,13 @@ import { IZMarkdownProps } from './markdown.props';
  * @returns The jsx to render a markdown file.
  */
 export function ZMarkdownViewer(props: IZMarkdownProps) {
+  const { src, headerText, subHeaderText = '', avatar = null, actionText = null, actionColor = 'primary', actionType = 'button', size = 'auto', onAction = noop } = props;
+
   const [markdown, setMarkdown] = useState('');
   const http = useHttpService();
   const markdownEl = useRef<HTMLDivElement>();
 
-  useEffect(loadMarkdown, [props.src]);
+  useEffect(loadMarkdown, [src]);
 
   /**
    * Loads the markdown into this viewer.
@@ -33,13 +43,13 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
     const canceled = new Subject<any>();
     setMarkdown('');
 
-    const request = new ZHttpRequestBuilder().get().url(props.src).build();
+    const request = new ZHttpRequestBuilder().get().url(src).build();
 
     from(http.request<string>(request))
       .pipe(
         takeUntil(canceled),
         map((res) => res.data),
-        catchError((err: IZHttpResult) => of(`Unable to retrieve ${props.src}.  ${err.data}.`))
+        catchError((err: IZHttpResult) => of(`Unable to retrieve ${src}.  ${err.data}.`))
       )
       .subscribe((md) => {
         setMarkdown(md);
@@ -56,14 +66,15 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
     <ZPaperCard
       className='ZMarkdownViewer-root'
       data-testid='ZMarkdownViewer-root'
-      headerText={props.headerText}
-      subHeaderText={props.subHeaderText}
-      avatar={props.avatar}
-      actionText={props.actionText}
-      actionColor={props.actionColor}
-      size={props.size}
+      headerText={headerText}
+      subHeaderText={subHeaderText}
+      avatar={avatar}
+      actionText={actionText}
+      actionType={actionType}
+      actionColor={actionColor}
+      size={size}
       loading={!markdown}
-      onAction={props.onAction}
+      onAction={onAction}
     >
       <div ref={markdownEl}>
         <ReactMarkdown className='ZMarkdownViewer-markdown' remarkPlugins={[gfm]} linkTarget='_blank'>
@@ -73,10 +84,3 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
     </ZPaperCard>
   );
 }
-
-ZMarkdownViewer.defaultProps = {
-  actionText: null,
-  actionColor: 'primary',
-  actionType: 'button',
-  onAction: noop
-};
