@@ -1,10 +1,11 @@
 import { Button, Grid, Hidden, Typography } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
+import { ZUrlBuilder } from '@zthun/works.url';
 import { noop } from 'lodash';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { IZProfileButtonProps } from './profile-button.props';
-import { getProfileAvatarUrl, getProfileDisplay } from './profile-service';
+import { useProfileService } from './profile-service.context';
 
 /**
  * Represents a tri-state button that displays the profile information based on 3 possible states.
@@ -14,6 +15,31 @@ import { getProfileAvatarUrl, getProfileDisplay } from './profile-service';
  * @returns The jsx that renders the profile menu.
  */
 export function ZProfileButton(props: IZProfileButtonProps) {
+  const {
+    profile,
+    disabled = false,
+
+    onLogin = noop,
+    onProfile = noop
+  } = props;
+
+  const profiles = useProfileService();
+  const [avatar, setAvatar] = useState(new ZUrlBuilder().gravatar().build());
+  const [display, setDisplay] = useState('');
+
+  useEffect(() => {
+    let _setAvatar = setAvatar;
+    let _setDisplay = setDisplay;
+
+    profiles.getAvatar(profile).then((a) => _setAvatar(a));
+    profiles.getDisplay(profile).then((d) => _setDisplay(d));
+
+    return () => {
+      _setAvatar = noop;
+      _setDisplay = noop;
+    };
+  }, [profile]);
+
   /**
    * Creates the root button as a login button jsx.
    *
@@ -23,7 +49,7 @@ export function ZProfileButton(props: IZProfileButtonProps) {
    */
   function createLoginButton() {
     return (
-      <Button className='ZProfileButton-root ZProfileButton-login' data-testid='ZProfileButton-login' color='inherit' disabled={props.disabled} onClick={props.onLogin}>
+      <Button className='ZProfileButton-root ZProfileButton-login' data-testid='ZProfileButton-login' color='inherit' disabled={disabled} onClick={onLogin}>
         <PersonIcon />
         <Hidden only='xs'>
           <Typography>LOGIN</Typography>
@@ -52,24 +78,18 @@ export function ZProfileButton(props: IZProfileButtonProps) {
    */
   function createProfileButton() {
     return (
-      <Button className='ZProfileButton-root ZProfileButton-profile' data-testid='ZProfileButton-profile' color='inherit' onClick={props.onProfile} disabled={props.disabled}>
+      <Button className='ZProfileButton-root ZProfileButton-profile' data-testid='ZProfileButton-profile' color='inherit' onClick={onProfile} disabled={disabled}>
         <Grid container spacing={2} justifyContent='center' alignItems='center' wrap='nowrap'>
           <Grid item>
-            <img className='ZProfileButton-avatar' data-testid='ZProfileButton-avatar' src={getProfileAvatarUrl(props.profile)} />
+            <img className='ZProfileButton-avatar' data-testid='ZProfileButton-avatar' src={avatar} />
           </Grid>
           <Hidden only='xs'>
-            <Grid item>{getProfileDisplay(props.profile)}</Grid>
+            <Grid item>{display}</Grid>
           </Hidden>
         </Grid>
       </Button>
     );
   }
 
-  return props.profile ? createProfileButton() : props.profile === undefined ? createProfileLoading() : createLoginButton();
+  return profile ? createProfileButton() : profile === undefined ? createProfileLoading() : createLoginButton();
 }
-
-ZProfileButton.defaultProps = {
-  disabled: false,
-  onLogin: noop,
-  onProfile: noop
-};

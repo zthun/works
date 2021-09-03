@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { act, fireEvent, render, RenderResult } from '@testing-library/react';
+import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
 import { IZProfile, IZWebApp, ZProfileBuilder, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { ZDataUrlBuilder, ZMimeTypeImage, ZUrlBuilder } from '@zthun/works.url';
@@ -22,18 +22,25 @@ describe('ZTopNav', () => {
   let webApps: ZDataState<IZWebApp[]>;
   let $window: jest.Mocked<Window>;
 
-  function createTestTarget() {
-    return render(
-      <ZWindowServiceContext.Provider value={$window}>
-        <ZWebAppsContext.Provider value={webApps}>
-          <ZProfileContext.Provider value={profile}>
-            <Router history={history}>
-              <ZTopNav headerText={appName} whoami={whoami} profileApp={profileApp} />
-            </Router>
-          </ZProfileContext.Provider>
-        </ZWebAppsContext.Provider>
-      </ZWindowServiceContext.Provider>
-    );
+  async function createTestTarget() {
+    let target: RenderResult;
+
+    await act(async () => {
+      target = render(
+        <ZWindowServiceContext.Provider value={$window}>
+          <ZWebAppsContext.Provider value={webApps}>
+            <ZProfileContext.Provider value={profile}>
+              <Router history={history}>
+                <ZTopNav headerText={appName} whoami={whoami} profileApp={profileApp} />
+              </Router>
+            </ZProfileContext.Provider>
+          </ZWebAppsContext.Provider>
+        </ZWindowServiceContext.Provider>
+      );
+      await waitFor(() => true);
+    });
+
+    return target;
   }
 
   beforeEach(() => {
@@ -47,7 +54,7 @@ describe('ZTopNav', () => {
 
   it('renders the component', async () => {
     // Arrange
-    const target = createTestTarget();
+    const target = await createTestTarget();
     // Act
     const actual = target.getByTestId('ZTopNav-root');
     // Assert
@@ -55,9 +62,9 @@ describe('ZTopNav', () => {
   });
 
   describe('Home', () => {
-    it('should move to the home page (visible to everyone).', () => {
+    it('should move to the home page (visible to everyone).', async () => {
       // Arrange
-      const target = createTestTarget();
+      const target = await createTestTarget();
       // Act
       const home = target.getByText(appName);
       fireEvent.click(home);
@@ -88,7 +95,7 @@ describe('ZTopNav', () => {
 
     it('should render the profile button.', async () => {
       // Arrange
-      const target = createTestTarget();
+      const target = await createTestTarget();
       // Act
       const btn = await findProfileButton(target);
       // Assert
@@ -98,7 +105,7 @@ describe('ZTopNav', () => {
     it('should not navigate anywhere if the app list does not exist yet.', async () => {
       // Arrange
       webApps = new ZDataState(null);
-      const target = createTestTarget();
+      const target = await createTestTarget();
       // Act
       const btn = await findProfileButton(target);
       fireEvent.click(btn);
@@ -108,7 +115,7 @@ describe('ZTopNav', () => {
 
     it('should not navigate anywhere if the profileApp is not returned in the list of apps.', async () => {
       // Arrange
-      const target = createTestTarget();
+      const target = await createTestTarget();
       // Act
       const btn = await findProfileButton(target);
       fireEvent.click(btn);
@@ -119,7 +126,7 @@ describe('ZTopNav', () => {
     it('should navigate the user to the profileApp.', async () => {
       // Arrange
       profileApp = 'profiler';
-      const target = createTestTarget();
+      const target = await createTestTarget();
       // Act
       const btn = await findProfileButton(target);
       fireEvent.click(btn);
@@ -151,7 +158,7 @@ describe('ZTopNav', () => {
 
     it('should open the nav drawer.', async () => {
       // Arrange
-      const target = createTestTarget();
+      const target = await createTestTarget();
       // Act
       const actual = await openNavDrawer(target);
       // Assert
@@ -161,7 +168,7 @@ describe('ZTopNav', () => {
     describe('Home', () => {
       it('should navigate to home (visible to everyone).', async () => {
         // Arrange
-        const target = createTestTarget();
+        const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
         await clickMenuItem(drawer, 'home');
@@ -187,7 +194,7 @@ describe('ZTopNav', () => {
       it('should render a loading indicator while apps are loading.', async () => {
         // Arrange
         webApps = new ZDataState(undefined);
-        const target = createTestTarget();
+        const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
         const actual = drawer.querySelector('.ZCircularProgress-root');
@@ -198,7 +205,7 @@ describe('ZTopNav', () => {
       it('should not render any applications if the app list fails to load (only Home shows up).', async () => {
         // Arrange
         webApps = new ZDataState(null);
-        const target = createTestTarget();
+        const target = await createTestTarget();
         const expected = 1;
         // Act
         const drawer = await openNavDrawer(target);
@@ -209,7 +216,7 @@ describe('ZTopNav', () => {
 
       it('should list all the apps (plus home).', async () => {
         // Arrange
-        const target = createTestTarget();
+        const target = await createTestTarget();
         const expected = apps.length + 1;
         // Act
         const drawer = await openNavDrawer(target);
@@ -221,7 +228,7 @@ describe('ZTopNav', () => {
       it('should not include self in the app list (only source).', async () => {
         // Arrange
         whoami = portal._id;
-        const target = createTestTarget();
+        const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
         const actual = drawer.querySelector(`.ZTopNav-drawer-more-item-${whoami}`);
@@ -232,7 +239,7 @@ describe('ZTopNav', () => {
       it('should not include the profileApp.', async () => {
         // Arrange
         profileApp = roadblock._id;
-        const target = createTestTarget();
+        const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
         const actual = drawer.querySelector(`.ZTopNav-drawer-more-item-${profileApp}`);
@@ -247,7 +254,7 @@ describe('ZTopNav', () => {
           .buffer('<svg focusable="false" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>')
           .mimeType(ZMimeTypeImage.SVG)
           .build();
-        const target = createTestTarget();
+        const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
         const actual = drawer.querySelector(`.ZTopNav-drawer-more-item-${portal._id} div.ZTopNav-app-icon`);
@@ -258,7 +265,7 @@ describe('ZTopNav', () => {
       it('should render the app icon as a raster image if the url is not a svg data url.', async () => {
         // Arrange
         portal.icon = new ZUrlBuilder().gravatar().build();
-        const target = createTestTarget();
+        const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
         const actual = drawer.querySelector(`.ZTopNav-drawer-more-item-${portal._id} img.ZTopNav-app-icon`);
@@ -278,7 +285,7 @@ describe('ZTopNav', () => {
 
       it('should have the source link if it exists.', async () => {
         // Arrange
-        const target = createTestTarget();
+        const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
         const actual = await findMenuItem(drawer, 'github');
@@ -289,7 +296,7 @@ describe('ZTopNav', () => {
       it('should hide the source link if it does not exist.', async () => {
         // Arrange
         delete me.source;
-        const target = createTestTarget();
+        const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
         const actual = await findMenuItem(drawer, 'github');
@@ -300,7 +307,7 @@ describe('ZTopNav', () => {
       it('should hide the source link if the self app is not returned in the list of apps.', async () => {
         // Arrange
         whoami = 'ghost';
-        const target = createTestTarget();
+        const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
         const actual = await findMenuItem(drawer, 'github');
@@ -310,7 +317,7 @@ describe('ZTopNav', () => {
 
       it('should navigate to the source link if the self app is registered and the source is available.', async () => {
         // Arrange
-        const target = createTestTarget();
+        const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
         await clickMenuItem(drawer, 'github');
