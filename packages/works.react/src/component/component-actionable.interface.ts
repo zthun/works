@@ -7,20 +7,20 @@ export interface IZComponentActionable {
   /**
    * The text of the action.
    */
-  actionText: string;
+  actionText?: string;
 
   /**
    * The action color.
    */
-  actionColor: PropTypes.Color;
+  actionColor?: PropTypes.Color;
 
   /**
    * The type of action.
    */
-  actionType: 'button' | 'submit' | 'reset';
+  actionType?: 'button' | 'submit' | 'reset';
 
   /**
    * Occurs when the action is invoked.
    */
-  onAction: () => void;
+  onAction?: () => void;
 }
