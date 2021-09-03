@@ -12,11 +12,21 @@ describe('ZCircularBackdrop', () => {
   }
 
   beforeEach(() => {
-    show = true;
+    show = undefined;
+  });
+
+  it('should render by default.', async () => {
+    // Arrange
+    const target = await createTestTarget();
+    // Act
+    const actual = target.getByTestId('ZCircularBackdrop-test');
+    // Assert
+    expect(actual).toBeTruthy();
   });
 
   it('should render if show is true.', async () => {
     // Arrange
+    show = true;
     const target = await createTestTarget();
     // Act
     const actual = target.getByTestId('ZCircularBackdrop-test');

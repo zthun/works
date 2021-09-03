@@ -1,6 +1,5 @@
 import React from 'react';
-import { ZCircularProgress } from './circular-progress';
-import { IZCircularProgressProps } from './circular-progress.props';
+import { IZCircularProgressProps, ZCircularProgress } from './circular-progress';
 
 /**
  * Creates a circular progress spinner that is positioned absolutely and contains a backdrop to disable everything behind it.
@@ -10,17 +9,12 @@ import { IZCircularProgressProps } from './circular-progress.props';
  * @returns The jsx to render the component.
  */
 export function ZCircularBackdrop(props: IZCircularProgressProps) {
-  return props.show ? (
+  const { show = true } = props;
+
+  return show ? (
     <div className='ZCircularBackdrop-root'>
       <div className='ZCircularBackdrop-backdrop' />
       <ZCircularProgress {...props} />
     </div>
   ) : null;
 }
-
-ZCircularBackdrop.defaultProps = {
-  className: '',
-  show: true,
-  size: '1em',
-  color: 'inherit'
-};
