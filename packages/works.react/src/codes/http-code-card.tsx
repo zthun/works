@@ -14,9 +14,10 @@ import { IZHttpErrorCodeCardProps } from './http-code-card.props';
  * @returns The jsx that renders the card.
  */
 export function ZHttpStatusCodeCard(props: IZHttpErrorCodeCardProps) {
-  const name = getHttpCodeName(props.code);
+  const { code } = props;
+  const name = getHttpCodeName(code);
   const heading = 'Error';
-  const description = getHttpCodeDescription(props.code);
+  const description = getHttpCodeDescription(code);
   let avatar = <WarningIcon className='ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-client' data-testid='ZHttpStatusCodeCard-client' />;
 
   if (props.code === ZHttpCodeClient.ImATeapot) {
@@ -28,7 +29,7 @@ export function ZHttpStatusCodeCard(props: IZHttpErrorCodeCardProps) {
       <Typography variant='body1' component='p' className='ZHttpStatusCodeCard-description'>
         {description}
       </Typography>
-      <Typography variant='body2' component='div' className='ZHttpStatusCodeCard-code'>
+      <Typography variant='body2' component='div' className={`ZHttpStatusCodeCard-code ZHttpStatusCodeCard-code-${code}`}>
         {props.code}
       </Typography>
     </ZPaperCard>
