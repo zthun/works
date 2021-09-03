@@ -6,8 +6,7 @@ import { kebabCase } from 'lodash';
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { ZTopBar } from './top-bar';
-import { ZTopBarItemBuilder } from './top-bar-item-builder.class';
-import { IZTopBarItem } from './top-bar-item.interface';
+import { IZTopBarItem, ZTopBarItemBuilder } from './top-bar-item';
 
 describe('ZTopBar', () => {
   const appName = 'ZTHUNWORKS';

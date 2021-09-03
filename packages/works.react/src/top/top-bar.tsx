@@ -1,21 +1,41 @@
+/* istanbul ignore file */
 import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import { kebabCase } from 'lodash';
 import React, { Fragment, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { IZTopBarItem } from './top-bar-item.interface';
-import { IZTopBarProps } from './top-bar.props';
+import { IZComponentHeader } from '../component/component-header.interface';
+import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
+import { IZTopBarItem } from './top-bar-item';
 
 /**
- * Renders a circular progress that can render nothing or the material ui circular progress.
+ * Represents the properties for the top bar.
  *
- * @param props The properties for the card.
+ * @deprecated Use the @see IZTopNavProps instead.
+ */
+export interface IZTopBarProps extends IZComponentHeader, IZComponentHierarchy {
+  /**
+   * The route to migrate to when the avatar or headerText is clicked.
+   */
+  route: string;
+
+  /**
+   * The item list that appears in the drawer.
+   */
+  moreItems?: IZTopBarItem[];
+}
+
+/**
+ * Renders a top bar.
+ *
+ * @param props The properties for the top bar.
  *
  * @deprecated Use the top nav instead.  This will be overtaken in the future.
  *
- * @returns The jsx for a circular loading progress.
+ * @returns The jsx for the top bar.
  */
 export function ZTopBar(props: IZTopBarProps): JSX.Element {
+  const { moreItems = [], children = null, headerText, route, avatar = null } = props;
   const [moreShown, setMoreShown] = useState(false);
   const hist = useHistory();
 
@@ -27,7 +47,7 @@ export function ZTopBar(props: IZTopBarProps): JSX.Element {
    */
   function handleHome() {
     setMoreShown(false);
-    hist.push(props.route);
+    hist.push(route);
   }
 
   /**
@@ -38,9 +58,9 @@ export function ZTopBar(props: IZTopBarProps): JSX.Element {
   function createHomeButton() {
     return (
       <Button className='ZTopBar-btn-home' data-testid='ZTopBar-btn-home' color='inherit' onClick={handleHome}>
-        {props.avatar}
+        {avatar}
         <Typography className='ZTopBar-title' color='inherit' variant='h1'>
-          {props.headerText}
+          {headerText}
         </Typography>
       </Button>
     );
@@ -100,7 +120,7 @@ export function ZTopBar(props: IZTopBarProps): JSX.Element {
         </Button>
         <Drawer anchor='right' open={moreShown} onClose={handleCloseMore}>
           <List className='ZTopBar-drawer-more' data-testid='ZTopBar-drawer-more'>
-            {props.moreItems.map((item, index) => createMoreNavItem(item, index))}
+            {moreItems.map((item, index) => createMoreNavItem(item, index))}
           </List>
         </Drawer>
       </Fragment>
@@ -111,13 +131,9 @@ export function ZTopBar(props: IZTopBarProps): JSX.Element {
       <Toolbar>
         {createHomeButton()}
         <Typography className='ZTopBar-options'>&nbsp;</Typography>
-        {props.children}
+        {children}
         {createMoreButton()}
       </Toolbar>
     </AppBar>
   );
 }
-
-ZTopBar.defaultProps = {
-  moreItems: []
-};

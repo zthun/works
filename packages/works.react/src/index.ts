@@ -93,10 +93,8 @@ export { ZDataState } from './store/data-state.class';
 export { IZDataState } from './store/data-state.interface';
 export { useWatchableState } from './store/use-watchable-state.hook';
 // Top
-export { ZTopBar } from './top/top-bar';
-export { ZTopBarItemBuilder } from './top/top-bar-item-builder.class';
-export { IZTopBarItem } from './top/top-bar-item.interface';
-export { IZTopBarProps } from './top/top-bar.props';
+export { IZTopBarProps, ZTopBar } from './top/top-bar';
+export { IZTopBarItem, ZTopBarItemBuilder } from './top/top-bar-item';
 export { IZTopNavProps, ZTopNav } from './top/top-nav';
 // Window
 export { useWindowService, ZWindowServiceContext } from './window/window-service.context';

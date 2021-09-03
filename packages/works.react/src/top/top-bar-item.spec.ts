@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { ZTopBarItemBuilder } from './top-bar-item-builder.class';
-import { IZTopBarItem } from './top-bar-item.interface';
+import { IZTopBarItem, ZTopBarItemBuilder } from './top-bar-item';
 
 describe('ZTopBarItemBuilder', () => {
   function createTestTarget() {
