@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0](https://github.com/zthun/works/compare/v1.3.0...v1.4.0) (2021-09-03)
+
+
+### Features
+
+* added the renderMarkdownPage method ([753d40d](https://github.com/zthun/works/commit/753d40db0e311b56a80ea9161f96cb92bfebc8eb))
+* added the web app layout component ([bf181c3](https://github.com/zthun/works/commit/bf181c3028ff55c7fd6c9b679aa72b4c7d95e24a))
+* adding the api to the compose file ([d16a0af](https://github.com/zthun/works/commit/d16a0af3092699299e31825ce785759353eec1bb))
+* adding works.api ([1901992](https://github.com/zthun/works/commit/190199283f7ca0d64af5908c1d36ca92abe1226c))
+* the default conf no longer turns off the proxy pass ([712ae8e](https://github.com/zthun/works/commit/712ae8ef9631a56932e666ba6168957973530df1))
+* the properties of the IZComponentStyle are now optional ([6e9d1bd](https://github.com/zthun/works/commit/6e9d1bd05bc20048a21b00b62fba23b9ffab15eb))
+* the properties on the IZComponentActionable are now optional ([5108d78](https://github.com/zthun/works/commit/5108d787d7e9b5255f334201702a738687dd46db))
+* the properties on the IZComponentConfirmable are now optional ([a78cdaf](https://github.com/zthun/works/commit/a78cdaf9c5a0b868d1efb8fa12abb9b0459053fe))
+* the proxy now enables the api ([a7141c5](https://github.com/zthun/works/commit/a7141c59f4be1934d830627e8e1c0e2e41c5c826))
+* the status code page now supplies a means to render the page as a routed page ([91cc460](https://github.com/zthun/works/commit/91cc460e10451d6d2a54677c9b20a885615c4de5))
+* you can now specify the avatar element on the top nav for styles ([20b94a9](https://github.com/zthun/works/commit/20b94a9bc228f08c035a8fea9d27c0f8a4b96ac2))
+
+
+
 ## [1.3.0](https://github.com/zthun/works/compare/v1.2.0...v1.3.0) (2021-09-02)
 
 

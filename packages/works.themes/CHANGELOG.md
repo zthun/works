@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0](https://github.com/zthun/works/compare/v1.3.0...v1.4.0) (2021-09-03)
+
+
+### Features
+
+* you can now specify the avatar element on the top nav for styles ([20b94a9](https://github.com/zthun/works/commit/20b94a9bc228f08c035a8fea9d27c0f8a4b96ac2))
+
+
+
 ## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
 
 

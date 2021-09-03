@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0](https://github.com/zthun/works/compare/v1.3.0...v1.4.0) (2021-09-03)
+
+
+### Features
+
+* the default conf no longer turns off the proxy pass ([712ae8e](https://github.com/zthun/works/commit/712ae8ef9631a56932e666ba6168957973530df1))
+* the proxy now enables the api ([a7141c5](https://github.com/zthun/works/commit/a7141c59f4be1934d830627e8e1c0e2e41c5c826))
+
+
+
 ## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
 
 
