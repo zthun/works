@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist docs reports *.tgz *.log packages/**/dist packages/**/docs packages/**/*.tgz packages/**/*.log  packages/**/css",
-    "test": "jest --coverage",
+    "test": "jest --coverage --detectOpenHandles",
     "lint": "lint-janitor",
     "build": "lerna run build",
     "make": "npm run clean && npm run lint && npm run test && npm run build",
