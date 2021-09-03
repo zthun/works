@@ -13,8 +13,7 @@ export { ZWebAppLayout } from './apps/web-app-layout';
 export { IZWebAppService, useWebAppService, ZWebAppService, ZWebAppServiceContext } from './apps/web-app-service.context';
 export { useWebApps, useWebAppsAndWatch, useWebAppsRoot, ZWebAppsContext } from './apps/web-apps.context';
 // Cards
-export { ZPaperCard } from './card/paper-card';
-export { IZPaperCardProps } from './card/paper-card.props';
+export { IZPaperCardProps, ZPaperCard } from './card/paper-card';
 // Codes
 export { ZHttpStatusCodeCard } from './codes/http-code-card';
 export { renderStatusCodePage, ZStatusCodePage } from './codes/status-code-page';
@@ -34,9 +33,8 @@ export { IZComponentStyle } from './component/component-style.interface';
 // Content
 export { ZContent } from './content/content';
 // Doc
-export { ZMarkdownPage } from './doc/markdown-page';
-export { ZMarkdownViewer } from './doc/markdown-viewer';
-export { IZMarkdownProps } from './doc/markdown.props';
+export { renderMarkdownPage, ZMarkdownPage } from './doc/markdown-page';
+export { IZMarkdownProps, ZMarkdownViewer } from './doc/markdown-viewer';
 export { ZTypedocCommentViewer } from './doc/typedoc-comment-viewer';
 export { IZTypedocCommentViewerProps } from './doc/typedoc-comment-viewer.props';
 export { createTypedocTypography } from './doc/typedoc-create-typography.function';
@@ -70,8 +68,7 @@ export { useHttpService, ZHttpServiceContext } from './http/http-service.context
 export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
 // Loading
 export { ZCircularBackdrop } from './loading/circular-backdrop';
-export { ZCircularProgress } from './loading/circular-progress';
-export { IZCircularProgressProps } from './loading/circular-progress.props';
+export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';
 // Login
 export { ZLoginCredentialsForm } from './login/login-credentials-form';
 export { IZLoginCredentialsFormProps } from './login/login-credentials-form.props';
