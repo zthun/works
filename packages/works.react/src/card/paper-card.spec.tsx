@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 
 import { act, fireEvent, render } from '@testing-library/react';
+import { ZDataUrlBuilder, ZMimeTypeImage } from '@zthun/works.url';
 import React, { ReactNode } from 'react';
 import { ZPaperCard } from './paper-card';
 
@@ -141,6 +142,17 @@ describe('ZPaperCard', () => {
       const target = await createTestTarget();
       // Act
       const actual = target.queryByTestId('ZPaperCard-media');
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('displays the media component as a direct svg if the imageUrl is a data uri to an svg.', async () => {
+      // Arrange
+      const svg = '<svg focusable="false" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>';
+      media = new ZDataUrlBuilder().encode('base64').buffer(svg).mimeType(ZMimeTypeImage.SVG).build();
+      const target = await createTestTarget();
+      // Act
+      const actual = target.container.querySelector('.ZPaperCard-svg');
       // Assert
       expect(actual).toBeTruthy();
     });

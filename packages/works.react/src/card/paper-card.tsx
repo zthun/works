@@ -1,4 +1,5 @@
 import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Checkbox, FormControlLabel, Paper } from '@material-ui/core';
+import { ZDataUrlBuilder, ZMimeTypeImage } from '@zthun/works.url';
 import { noop } from 'lodash';
 import React, { useState } from 'react';
 import { IZComponentActionable } from '../component/component-actionable.interface';
@@ -82,7 +83,19 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
    * @returns The jsx for the CardMedia component or null if the imageUrl is not set.
    */
   function createMedia() {
-    return imageUrl ? <CardMedia className={`ZPaperCard-media ZPaperCard-media-width-${imageWidth} ZPaperCard-media-height-${imageHeight}`} data-testid='ZPaperCard-media' component='img' image={imageUrl} title={headerText} /> : null;
+    if (!imageUrl) {
+      return null;
+    }
+
+    const dataUri = new ZDataUrlBuilder().parse(imageUrl).info();
+
+    if (dataUri.mimeType === ZMimeTypeImage.SVG) {
+      // The buffer itself is just the <svg> tag. So we'll just use that.
+      const image = dataUri.buffer.toString();
+      return <div className={`ZPaperCard-media ZPaperCard-svg ZPaperCard-media-width-${imageWidth} ZPaperCard-media-height-${imageHeight}`} dangerouslySetInnerHTML={{ __html: image }} />;
+    }
+
+    return <CardMedia className={`ZPaperCard-media ZPaperCard-media-width-${imageWidth} ZPaperCard-media-height-${imageHeight}`} data-testid='ZPaperCard-media' component='img' image={imageUrl} title={headerText} />;
   }
 
   /**
