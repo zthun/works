@@ -26,6 +26,24 @@ describe('ZWebAppBuilder', () => {
       );
     });
 
+    it('should set the short.', () => {
+      assertBuilderSetsProperty(
+        'Short',
+        createTestTarget,
+        (t, v) => t.short(v),
+        (a: IZWebApp) => a.short
+      );
+    });
+
+    it('should set the description.', () => {
+      assertBuilderSetsProperty(
+        'Description',
+        createTestTarget,
+        (t, v) => t.description(v),
+        (a: IZWebApp) => a.description
+      );
+    });
+
     it('should set the domain.', () => {
       assertBuilderSetsProperty(
         'https://app.zthunworks.com',

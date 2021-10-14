@@ -13,6 +13,16 @@ export interface IZWebApp {
   name: string;
 
   /**
+   * A short subtitle for the application.
+   */
+  short: string;
+
+  /**
+   * The application description.
+   */
+  description: string;
+
+  /**
    * The domain uri of the application.
    */
   domain: string;
@@ -41,6 +51,8 @@ export class ZWebAppBuilder {
     this._app = {
       _id: null,
       name: null,
+      short: null,
+      description: null,
       domain: null,
       icon: null
     };
@@ -67,6 +79,30 @@ export class ZWebAppBuilder {
    */
   public name(name: string): this {
     this._app.name = name;
+    return this;
+  }
+
+  /**
+   * Sets the short subtitle for the app.
+   *
+   * @param short The app subtitle.
+   *
+   * @returns This object.
+   */
+  public short(short: string): this {
+    this._app.short = short;
+    return this;
+  }
+
+  /**
+   * Sets the full description for the app.
+   *
+   * @param description The app description.
+   *
+   * @returns This object.
+   */
+  public description(description: string): this {
+    this._app.description = description;
     return this;
   }
 
