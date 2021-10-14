@@ -57,6 +57,8 @@ export { ZProfileActivationBuilder } from './profiles/profile-activation-builder
 export { IZProfileActivation } from './profiles/profile-activation.interface';
 export { ZProfileBuilder } from './profiles/profile-builder.class';
 export { IZProfile, ZProfileAvatarMaxBytes, ZProfileAvatarSize } from './profiles/profile.interface';
+// Route
+export { IZRouteOption, ZRouteOptionBuilder } from './route/route-option';
 // Server
 export { ZServerBuilder } from './server/server-builder.class';
 export { IZServer } from './server/server.interface';
