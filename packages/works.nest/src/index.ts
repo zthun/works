@@ -26,6 +26,8 @@ export { ZExceptionFactory } from './error/exception-factory.class';
 // Health
 export { ZHealthController } from './health/health.controller';
 export { ZHealthModule } from './health/health.module';
+// Http
+export { ZHttpServiceToken, ZHttpServiceProvider, ZHttpModule } from './http/http.module';
 // Notifications
 export { ZEmailService } from './notifications/email.service';
 export { ZNotificationsConfigService } from './notifications/notifications-config.service';
