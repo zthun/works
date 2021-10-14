@@ -1,5 +1,4 @@
 /* eslint-disable require-jsdoc */
-import { ZHttpMethod } from '@zthun/works.http';
 import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
 import { IZRouteOption, ZRouteOptionBuilder } from './route-option';
@@ -28,11 +27,65 @@ describe('ZRouteOptionBuilder', () => {
       );
     });
 
-    it('should set the method.', () => {
+    it('should set the method to get.', () => {
       assertBuilderSetsProperty(
-        ZHttpMethod.Post,
+        'get',
         createTestTarget,
-        (t, v) => t.method(v),
+        (t, v) => t.get(v),
+        (r: IZRouteOption) => r.method
+      );
+    });
+
+    it('should set the method to put.', () => {
+      assertBuilderSetsProperty(
+        'put',
+        createTestTarget,
+        (t, v) => t.put(v),
+        (r: IZRouteOption) => r.method
+      );
+    });
+
+    it('should set the method to post.', () => {
+      assertBuilderSetsProperty(
+        'post',
+        createTestTarget,
+        (t, v) => t.post(v),
+        (r: IZRouteOption) => r.method
+      );
+    });
+
+    it('should set the method to delete.', () => {
+      assertBuilderSetsProperty(
+        'delete',
+        createTestTarget,
+        (t, v) => t.delete(v),
+        (r: IZRouteOption) => r.method
+      );
+    });
+
+    it('should set the method to patch.', () => {
+      assertBuilderSetsProperty(
+        'patch',
+        createTestTarget,
+        (t, v) => t.patch(v),
+        (r: IZRouteOption) => r.method
+      );
+    });
+
+    it('should set the method to head.', () => {
+      assertBuilderSetsProperty(
+        'head',
+        createTestTarget,
+        (t, v) => t.head(v),
+        (r: IZRouteOption) => r.method
+      );
+    });
+
+    it('should set the method to options.', () => {
+      assertBuilderSetsProperty(
+        'options',
+        createTestTarget,
+        (t, v) => t.options(v),
         (r: IZRouteOption) => r.method
       );
     });
@@ -40,7 +93,7 @@ describe('ZRouteOptionBuilder', () => {
 
   describe('Copy', () => {
     it('should copy another route option.', () => {
-      const expected = new ZRouteOptionBuilder().method(ZHttpMethod.Put).owner(v4()).path('/api/options').build();
+      const expected = new ZRouteOptionBuilder().head().owner(v4()).path('/api/options').build();
       assertBuilderCopiesObject(expected, createTestTarget);
     });
   });
