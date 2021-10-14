@@ -3,6 +3,7 @@
 import { ZOptionsController } from './options.controller';
 import { Request } from 'express';
 import { createMocked } from '@zthun/works.jest';
+import { ZRouteOptionBuilder } from '@zthun/works.core';
 
 describe('ZOptionsController', () => {
   let request: Request;
@@ -53,11 +54,11 @@ describe('ZOptionsController', () => {
     // Arrange
     const target = createTestTarget();
     const expected = [
-      { path: '/api/users', method: 'get' },
-      { path: '/api/users', method: 'put' },
-      { path: '/api/users', method: 'post' },
-      { path: '/api/animals', method: 'delete' },
-      { path: '/api/animals', method: 'patch' }
+      new ZRouteOptionBuilder().path('/api/users').get().build(),
+      new ZRouteOptionBuilder().path('/api/users').put().build(),
+      new ZRouteOptionBuilder().path('/api/users').post().build(),
+      new ZRouteOptionBuilder().path('/api/animals').delete().build(),
+      new ZRouteOptionBuilder().path('/api/animals').patch().build()
     ];
     // Act
     const actual = await target.read(request);
