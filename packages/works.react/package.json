@@ -27,8 +27,8 @@
     "docs/**"
   ],
   "peerDependencies": {
-    "@mui/material": "^5.0.0",
     "@mui/icons-material": "^5.0.0",
+    "@mui/material": "^5.0.0",
     "@zthun/works.core": ">=0.0.0 <2.0.0",
     "@zthun/works.draw": ">=0.0.0 <2.0.0",
     "@zthun/works.error": ">0.0.0 <2.0.0",
