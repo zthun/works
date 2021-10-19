@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { IZTypedocFlags } from '@zthun/works.core';
 import React, { ReactNode } from 'react';
 import { IZTypedocFlagsViewerProps } from './typedoc-flags-viewer.props';

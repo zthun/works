@@ -1,17 +1,17 @@
-import Brightness1Icon from '@material-ui/icons/Brightness1';
-import BuildIcon from '@material-ui/icons/Build';
-import ClassIcon from '@material-ui/icons/Class';
-import CloseIcon from '@material-ui/icons/Close';
-import FunctionsIcon from '@material-ui/icons/Functions';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import MergeTypeIcon from '@material-ui/icons/MergeType';
-import NoteIcon from '@material-ui/icons/Note';
-import TocIcon from '@material-ui/icons/Toc';
-import WidgetsIcon from '@material-ui/icons/Widgets';
+import Brightness1Icon from '@mui/icons-material/Brightness1';
+import BuildIcon from '@mui/icons-material/Build';
+import ClassIcon from '@mui/icons-material/Class';
+import CloseIcon from '@mui/icons-material/Close';
+import FunctionsIcon from '@mui/icons-material/Functions';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import MergeTypeIcon from '@mui/icons-material/MergeType';
+import NoteIcon from '@mui/icons-material/Note';
+import TocIcon from '@mui/icons-material/Toc';
+import WidgetsIcon from '@mui/icons-material/Widgets';
 import { ZTypedocKind } from '@zthun/works.core';
 import React from 'react';
 import { IZTypedocIconProps } from './typedoc-icon.props';
-import CodeIcon from '@material-ui/icons/Code';
+import CodeIcon from '@mui/icons-material/Code';
 
 /**
  * Represents a view that maps an icon for a typedoc entity type.

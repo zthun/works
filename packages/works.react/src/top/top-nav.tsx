@@ -1,7 +1,7 @@
-import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core';
-import GithubIcon from '@material-ui/icons/GitHub';
-import HomeIcon from '@material-ui/icons/Home';
-import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
+import GithubIcon from '@mui/icons-material/GitHub';
+import HomeIcon from '@mui/icons-material/Home';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { IZWebApp } from '@zthun/works.core';
 import { ZDataUrlBuilder } from '@zthun/works.url';
 import { first } from 'lodash';

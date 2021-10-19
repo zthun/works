@@ -1,4 +1,4 @@
-import { Typography, TypographyVariant } from '@material-ui/core';
+import { Typography, TypographyVariant } from '@mui/material';
 import React, { ElementType, ReactNode } from 'react';
 
 /**

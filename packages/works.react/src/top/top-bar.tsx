@@ -1,6 +1,6 @@
 /* istanbul ignore file */
-import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core';
-import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { kebabCase } from 'lodash';
 import React, { Fragment, useState } from 'react';
 import { useHistory } from 'react-router-dom';

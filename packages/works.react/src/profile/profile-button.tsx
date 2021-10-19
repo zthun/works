@@ -1,5 +1,5 @@
-import { Button, Grid, Hidden, Typography } from '@material-ui/core';
-import PersonIcon from '@material-ui/icons/Person';
+import { Button, Grid, Hidden, Typography } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
 import { ZUrlBuilder } from '@zthun/works.url';
 import { noop } from 'lodash';
 import React, { useEffect, useState } from 'react';

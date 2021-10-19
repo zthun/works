@@ -54,7 +54,7 @@ The paper card is generally built using the following methodologies.
 
 ```ts
 import React from 'react';
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from '@mui/icons-material/Add';
 import { ZPaperCard } from '@zthun/works.react';
 import { IZMyComponentProps } from './my-component.props.ts';
 
@@ -78,7 +78,7 @@ The alerts component is usually stored in one place and you will use the AlertSt
 ```ts
 import React from 'react';
 import { useAlertStack, ZAlertBuilder, ZPaperCard } from '@zthun/works.react';
-import AnnouncementIcon from '@material-ui/icons/Announcement';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
 
 export function MyComponent() {
   const alerts = useAlertStack();
@@ -110,7 +110,7 @@ Note that the ZMarkdownViewer component supports syntax highlighting of any lang
 With these components, they already exist within a paper card component so you will want to have them separate of any paper card components you have.
 
 ```ts
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import { ZTypedocViewerSource } from '@zthun/works.react';
 import React from 'react';
 
@@ -144,7 +144,7 @@ The first starts with login components. The root component is the **ZLoginTabs**
 1. Recovering their account.
 
 ```ts
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import { IZLogin } from '@zthun/works.core';
 import { ZLoginTabs } from '@zthun/works.react';
 import React, { useState } from 'react';
@@ -175,7 +175,7 @@ export function MyLoginPage() {
 If your user is already authenticated, then you can allow them to modify their profile using the **ZProfileForm** component. The profile form constructs a partial object that allows you to just send the necessary information that changes without having to deal with it on the server.
 
 ```ts
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import { IZProfile } from '@zthun/works.core';
 import { ZProfileForm, useLoginState } from '@zthun/works.react';
 import React from 'react';

@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import { ZMarkdownViewer } from '@zthun/works.react';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';

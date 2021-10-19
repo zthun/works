@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { IZTypedocEntity, IZTypedocType, ZTypedocKind } from '@zthun/works.core';
 import { first, get, noop, pick } from 'lodash';
 import React, { Fragment, ReactNode, useMemo, useState } from 'react';

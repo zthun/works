@@ -1,4 +1,4 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button, Typography } from '@mui/material';
 import { IZTypedocEntity, IZTypedocGroup } from '@zthun/works.core';
 import { Dictionary, kebabCase, keyBy, noop } from 'lodash';
 import React, { ReactNode, useMemo } from 'react';

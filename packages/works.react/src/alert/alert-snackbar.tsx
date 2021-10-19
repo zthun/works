@@ -1,4 +1,4 @@
-import { Snackbar } from '@material-ui/core';
+import { Snackbar } from '@mui/material';
 import React from 'react';
 import { ZAlertList } from './alert-list';
 import { ZAlertStackList } from './alert-stack-list';

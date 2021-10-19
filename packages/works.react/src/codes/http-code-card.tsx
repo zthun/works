@@ -1,6 +1,6 @@
-import { Typography } from '@material-ui/core';
-import EmojiFoodBeverageTwoToneIcon from '@material-ui/icons/EmojiFoodBeverageTwoTone';
-import WarningIcon from '@material-ui/icons/Warning';
+import { Typography } from '@mui/material';
+import EmojiFoodBeverageTwoToneIcon from '@mui/icons-material/EmojiFoodBeverageTwoTone';
+import WarningIcon from '@mui/icons-material/Warning';
 import { getHttpCodeDescription, getHttpCodeName, ZHttpCodeClient } from '@zthun/works.http';
 import React from 'react';
 import { ZPaperCard } from '../card/paper-card';

@@ -1,8 +1,8 @@
-import { Grid, Typography } from '@material-ui/core';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
+import { Grid, Typography } from '@mui/material';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
 import { ZAlertBuilder } from '@zthun/works.message';
 import { useAlertService, useErrorHandler, useProfileAndWatch, useProfileService, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';

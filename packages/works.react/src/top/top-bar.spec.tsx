@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { kebabCase } from 'lodash';

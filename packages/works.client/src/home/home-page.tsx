@@ -1,9 +1,9 @@
-import { Grid, Typography } from '@material-ui/core';
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
+import { Grid, Typography } from '@mui/material';
 import { ZPaperCard } from '@zthun/works.react';
+import { kebabCase } from 'lodash';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
-import { kebabCase } from 'lodash';
 
 /**
  * Renders the home page.

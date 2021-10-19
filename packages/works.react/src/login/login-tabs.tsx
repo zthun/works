@@ -1,7 +1,7 @@
-import { Tab, Tabs } from '@material-ui/core';
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import { Tab, Tabs } from '@mui/material';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { noop } from 'lodash';
 import React, { useState } from 'react';
 import { ZLoginCredentialsForm } from './login-credentials-form';

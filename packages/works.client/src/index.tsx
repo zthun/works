@@ -1,6 +1,6 @@
 /* istanbul ignore file */
-import InfoIcon from '@material-ui/icons/Info';
-import MouseIcon from '@material-ui/icons/Mouse';
+import InfoIcon from '@mui/icons-material/Info';
+import MouseIcon from '@mui/icons-material/Mouse';
 import '@zthun/lint-janitor/docs/typedoc.json';
 import '@zthun/lint-janitor/images';
 import '@zthun/lint-janitor/README.md';

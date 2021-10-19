@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { IZTypedoc } from '@zthun/works.core';
 import { ZHttpRequestBuilder } from '@zthun/works.http';
 import { first, noop } from 'lodash';

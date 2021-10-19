@@ -1,4 +1,4 @@
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Alert, AlertTitle } from '@mui/material';
 import { IZAlert } from '@zthun/works.message';
 import { noop } from 'lodash';
 import React, { useEffect, useState } from 'react';

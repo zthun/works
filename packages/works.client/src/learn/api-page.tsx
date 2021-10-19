@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import { IZTypedocEntity } from '@zthun/works.core';
 import { ZTypedocViewerSource } from '@zthun/works.react';
 import { get } from 'lodash';

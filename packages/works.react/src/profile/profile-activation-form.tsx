@@ -1,5 +1,5 @@
-import { TextField, Typography } from '@material-ui/core';
-import PersonIcon from '@material-ui/icons/Person';
+import { TextField, Typography } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
 import { ZProfileActivationBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { FormEvent, useState } from 'react';

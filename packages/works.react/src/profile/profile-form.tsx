@@ -1,5 +1,4 @@
-import { Collapse, Dialog, TextField, Typography } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Alert, AlertTitle, Collapse, Dialog, TextField, Typography } from '@mui/material';
 import { ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { FormEvent, useState } from 'react';

@@ -1,11 +1,10 @@
-import { Button, Collapse, Grid, IconButton, Slider, Typography } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import FolderOpenIcon from '@material-ui/icons/FolderOpen';
-import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
-import RestoreIcon from '@material-ui/icons/Restore';
-import ZoomOutIcon from '@material-ui/icons/ZoomIn';
-import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import CloseIcon from '@mui/icons-material/Close';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import RestoreIcon from '@mui/icons-material/Restore';
+import ZoomOutIcon from '@mui/icons-material/ZoomIn';
+import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
+import { Alert, AlertTitle, Button, Collapse, Grid, IconButton, Slider, Typography } from '@mui/material';
 import { ZProfileAvatarMaxBytes } from '@zthun/works.core';
 import { ZPrintableColor, ZPrintableDrawing, ZPrintableGroup, ZPrintableImage, ZPrintableTransform, ZToolingPan } from '@zthun/works.draw';
 import { noop } from 'lodash';

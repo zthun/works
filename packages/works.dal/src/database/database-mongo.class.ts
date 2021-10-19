@@ -133,7 +133,7 @@ export class ZDatabaseMongo implements IZDatabase {
           aggregate.push({ $limit: take });
         }
 
-        return docs.aggregate(aggregate).toArray();
+        return docs.aggregate<T>(aggregate).toArray();
       })
     );
   }

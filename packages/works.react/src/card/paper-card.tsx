@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Checkbox, FormControlLabel, Paper } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Checkbox, FormControlLabel, Paper } from '@mui/material';
 import { ZDataUrlBuilder, ZMimeTypeImage } from '@zthun/works.url';
 import { noop } from 'lodash';
 import React, { useState } from 'react';

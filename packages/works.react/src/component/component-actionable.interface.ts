@@ -1,4 +1,4 @@
-import { PropTypes } from '@material-ui/core';
+import { PropTypes } from '@mui/material';
 
 /**
  * Represents a component that is responsible for invoking an action from the user.
