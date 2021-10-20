@@ -1,11 +1,12 @@
 import { Alert, AlertTitle, Collapse, Dialog, TextField, Typography } from '@mui/material';
-import { ZProfileBuilder } from '@zthun/works.core';
+import { ZProfileAvatarSize, ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { FormEvent, useState } from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { ZProfileAvatarForm } from './profile-avatar-form';
 import { IZProfileFormProps } from './profile-form.props';
-import { getAvatarUrl } from './profile-service';
+import { ZUrlBuilder } from '@zthun/works.url';
+import md5 from 'md5';
 
 /**
  * Creates a form for modifying the users profile.
@@ -21,6 +22,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   const [confirm, setConfirm] = useState<string>(get(props, 'profile.confirm', ''));
   const [avatar, setAvatar] = useState<string>(get(props, 'profile.avatar'));
   const [editAvatar, setEditAvatar] = useState(false);
+  const avatarToShow = avatar || new ZUrlBuilder().gravatar(email ? md5(email) : '', ZProfileAvatarSize).build();
 
   /**
    * Builds a profile given the current state of the form.
@@ -126,7 +128,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   function createAvatarDialog() {
     return (
       <Dialog className='ZProfileForm-avatar-dialog' data-testid='ZProfileForm-avatar-dialog' open={editAvatar} onClose={handleCloseEditAvatar}>
-        <ZProfileAvatarForm avatar={getAvatarUrl(avatar, email)} onAvatarChange={handleUpdateAvatar} />
+        <ZProfileAvatarForm avatar={avatarToShow} onAvatarChange={handleUpdateAvatar} />
       </Dialog>
     );
   }
@@ -212,7 +214,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
    * @returns The jsx for the avatar image.
    */
   function createAvatarImage() {
-    return <img className='ZProfileForm-avatar' data-testid='ZProfileForm-avatar' src={getAvatarUrl(avatar, email)} onClick={handleEditAvatar} />;
+    return <img className='ZProfileForm-avatar' data-testid='ZProfileForm-avatar' src={avatarToShow} onClick={handleEditAvatar} />;
   }
 
   const avatarDialog = createAvatarDialog();

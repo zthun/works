@@ -3,7 +3,16 @@ import { ZHttpCode } from '@zthun/works.http';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { ZHttpStatusCodeCard } from './http-code-card';
-import { IZStatusCodePageProps } from './status-code-page.props';
+
+/**
+ * Represents properties for the status code page.
+ */
+export interface IZStatusCodePageProps {
+  /**
+   * The code to display information about.
+   */
+  code: number | string;
+}
 
 /**
  * Renders a page that displays a status code card.

@@ -1,7 +1,6 @@
 import { Snackbar } from '@mui/material';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { ZAlertList } from './alert-list';
-import { ZAlertStackList } from './alert-stack-list';
 
 /**
  * Represents the alert snackbar properties.
@@ -32,12 +31,11 @@ export interface IZAlertSnackbarProps {
 export function ZAlertSnackbar(props: IZAlertSnackbarProps) {
   const { vertical = 'bottom', horizontal = 'right' } = props;
 
+  const Alerts = forwardRef(() => <ZAlertList />);
+
   return (
-    <Snackbar className='ZAlertSnackbar-root' open={true} anchorOrigin={{ vertical, horizontal }}>
-      <>
-        <ZAlertStackList />
-        <ZAlertList />
-      </>
+    <Snackbar className='ZAlertSnackbar-root' open anchorOrigin={{ vertical, horizontal }}>
+      <Alerts />
     </Snackbar>
   );
 }

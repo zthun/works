@@ -1,6 +1,6 @@
 import React from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { ZAlertSnackbar } from '../alert/alert-snackbar';
+import { ZAlertList } from '../alert/alert-list';
 import { renderStatusCodePage } from '../codes/status-code-page';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
 import { ZContent } from '../content/content';
@@ -49,7 +49,7 @@ export function ZWebAppLayout(props: IZWebAppLayout) {
           </Switch>
         </ZContent>
       </HashRouter>
-      <ZAlertSnackbar />
+      <ZAlertList />
     </div>
   );
 }

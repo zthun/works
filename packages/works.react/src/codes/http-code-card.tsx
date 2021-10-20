@@ -1,10 +1,19 @@
 import { Typography } from '@mui/material';
 import EmojiFoodBeverageTwoToneIcon from '@mui/icons-material/EmojiFoodBeverageTwoTone';
 import WarningIcon from '@mui/icons-material/Warning';
-import { getHttpCodeDescription, getHttpCodeName, ZHttpCodeClient } from '@zthun/works.http';
+import { getHttpCodeDescription, getHttpCodeName, ZHttpCode, ZHttpCodeClient } from '@zthun/works.http';
 import React from 'react';
 import { ZPaperCard } from '../card/paper-card';
-import { IZHttpErrorCodeCardProps } from './http-code-card.props';
+
+/**
+ * Represents a status summary card for an http error code.
+ */
+export interface IZHttpStatusCodeCardProps {
+  /**
+   * One of the available http codes.
+   */
+  code: ZHttpCode;
+}
 
 /**
  * Renders a paper card that describes an HttpStatusCode.
@@ -13,7 +22,7 @@ import { IZHttpErrorCodeCardProps } from './http-code-card.props';
  *
  * @returns The jsx that renders the card.
  */
-export function ZHttpStatusCodeCard(props: IZHttpErrorCodeCardProps) {
+export function ZHttpStatusCodeCard(props: IZHttpStatusCodeCardProps) {
   const { code } = props;
   const name = getHttpCodeName(code);
   const heading = 'Error';

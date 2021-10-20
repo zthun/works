@@ -1,5 +1,3 @@
-import { PropTypes } from '@mui/material';
-
 /**
  * Represents a component that is responsible for invoking an action from the user.
  */
@@ -12,7 +10,7 @@ export interface IZComponentActionable {
   /**
    * The action color.
    */
-  actionColor?: PropTypes.Color;
+  actionColor?: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
 
   /**
    * The type of action.
