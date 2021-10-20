@@ -26,8 +26,6 @@ export { IZEmailContact } from './email/email-contact.interface';
 export { ZEmailEnvelopeBuilder } from './email/email-envelope-builder.class';
 export { IZEmailEnvelope } from './email/email-envelope.interface';
 export { IZEmail } from './email/email.interface';
-// Error
-export { IZError, ZErrorBuilder } from './error/error';
 // Filter
 export { ZBinaryFilterBuilder } from './filter/binary-filter-builder.class';
 export { IZBinaryFilter } from './filter/binary-filter.interface';
@@ -42,13 +40,6 @@ export { ZLogicOperator } from './filter/logic-operator.enum';
 export { ZUnaryFilterBuilder } from './filter/unary-filter-builder.class';
 export { IZUnaryFilter } from './filter/unary-filter.interface';
 export { ZUnaryOperator } from './filter/unary-operator.enum';
-// Http
-export { ZHttpCodeClient, ZHttpCodeClientDescriptions, ZHttpCodeClientNames } from './http/http-code-client.enum';
-export { ZHttpCodeInformationalResponse } from './http/http-code-informational-response.enum';
-export { ZHttpCodeRedirection } from './http/http-code-redirection.enum';
-export { ZHttpCodeServer } from './http/http-code-server.enum';
-export { ZHttpCodeSuccess } from './http/http-code-success.enum';
-export { ZHttpCode } from './http/http-code.type';
 // Login
 export { ZLoginBuilder } from './logins/login-builder.class';
 export { IZLogin } from './logins/login.interface';
