@@ -14,7 +14,7 @@
   "scripts": {
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:esm": "tsc -p ./tsconfig.esm.json",
-    "build": "npm run build:cjs && npm run build:esm && typedoc"
+    "build": "yarn build:cjs && yarn build:esm && typedoc"
   },
   "author": "Anthony Bonta",
   "license": "MIT",

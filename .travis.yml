@@ -4,6 +4,6 @@ sudo: required
 install:
   - npm ci
 script:
-  - npm run lint
-  - npm test
-  - npm run build
+  - yarn lint
+  - yarn test
+  - yarn build

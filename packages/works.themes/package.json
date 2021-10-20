@@ -16,7 +16,7 @@
     "build:mincss": "cleancss -o css/index.min.css css/index.css",
     "build:postcss": "postcss -o css/index.css css/index.css",
     "build:css": "lessc less/index.less css/index.css",
-    "build": "npm run build:css && npm run build:mincss"
+    "build": "yarn build:css && yarn build:mincss"
   },
   "publishConfig": {
     "access": "public"
