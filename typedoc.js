@@ -3,5 +3,8 @@ module.exports = {
   json: 'docs/typedoc.json',
   excludePrivate: true,
   tsconfig: 'tsconfig.esm.json',
-  entryPoints: ['src/index.ts']
+  entryPoints: ['src/index.ts'],
+  validation: {
+    notExported: false
+  }
 };
