@@ -1,16 +1,23 @@
-# General conventions
-node_modules
+# Generated Outputs
 dist
 docs
 coverage
 reports
-install
-.DS_Store
 *.lerna_backup
 *.log
 *.tgz
 .rpt2_cache
 
+# Node Modules
+node_modules
+
 # Specific packages
 packages/works.themes/css
 packages/works.install/charts
+
+# OS Turds
+.DS_Store
+
+# Yarn
+.yarn/cache
+.yarn/*.gz

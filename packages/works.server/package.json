@@ -25,10 +25,14 @@
     "start": "node ./dist/main.js"
   },
   "dependencies": {
+    "@nestjs/common": "^8.1.1",
+    "@nestjs/core": "^8.1.1",
+    "@nestjs/platform-express": "^8.1.1",
     "@zthun/works.class": "^1.2.0",
     "@zthun/works.core": "^1.2.0",
     "@zthun/works.dal": "^1.2.0",
     "@zthun/works.nest": "^1.2.0",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "^7.3.0",
     "uuid": "^8.3.2"
   },
