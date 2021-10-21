@@ -26,11 +26,9 @@
     "images/**"
   ],
   "dependencies": {
-    "url-parse": "^1.4.7"
-  },
-  "peerDependencies": {
     "buffer": "^6.0.3",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "url-parse": "^1.4.7"
   },
   "sideEffects": false
 }

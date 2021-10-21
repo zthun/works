@@ -27,9 +27,7 @@
   "dependencies": {
     "mongodb": "^4.1.0",
     "mongodb-memory-server": "^7.3.4",
-    "portfinder": "^1.0.28"
-  },
-  "peerDependencies": {
+    "portfinder": "^1.0.28",
     "uuid": "^8.0.0"
   },
   "sideEffects": false,

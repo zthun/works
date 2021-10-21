@@ -26,32 +26,27 @@
     "dist/**",
     "docs/**"
   ],
-  "peerDependencies": {
+  "dependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.0",
     "@mui/material": "^5.0.0",
-    "@zthun/works.core": ">=0.0.0 <2.0.0",
-    "@zthun/works.draw": ">=0.0.0 <2.0.0",
-    "@zthun/works.error": ">0.0.0 <2.0.0",
-    "@zthun/works.http": ">=0.0.0 <2.0.0",
-    "@zthun/works.logger": ">0.0.0 <2.0.0",
-    "@zthun/works.message": ">0.0.0 <2.0.0",
-    "@zthun/works.url": ">=0.0.0 <2.0.0",
-    "highlight.js": "^11.0.1",
-    "md5": "^2.3.0",
-    "react": "^17.0.0",
-    "react-markdown": "^6.0.0",
-    "react-router-dom": "^5.0.1",
-    "remark-gfm": "^1.0.0",
-    "rxjs": "^7.3.0"
-  },
-  "devDependencies": {
     "@zthun/works.core": "^1.2.0",
     "@zthun/works.draw": "^1.0.0",
     "@zthun/works.error": "^1.2.0",
     "@zthun/works.http": "^1.2.0",
     "@zthun/works.logger": "^1.2.0",
     "@zthun/works.message": "^1.2.0",
-    "@zthun/works.url": "^1.2.0"
+    "@zthun/works.url": "^1.2.0",
+    "highlight.js": "^11.0.1",
+    "md5": "^2.3.0",
+    "react-markdown": "^6.0.0",
+    "remark-gfm": "^1.0.0",
+    "rxjs": "^7.3.0"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0",
+    "react-router-dom": "^5.0.1"
   },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
