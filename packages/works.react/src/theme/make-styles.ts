@@ -1,35 +1,44 @@
 import { createMakeStyles } from 'tss-react';
+import { Theme, useTheme as useMuiTheme } from '@mui/material';
 
+export interface ZthunworksSizeOptions {
+  xs?: number | string;
+  sm?: number | string;
+  md?: number | string;
+  lg?: number | string;
+  xl?: number | string;
+  none?: number | string;
+}
+
+export interface ZthunworksGeometryOptions {
+  square?: number | string;
+  circle?: number | string;
+}
+
+export interface ZthunworksTheme extends Theme {
+  rounding: ZthunworksGeometryOptions;
+  sizing: {
+    alerts: ZthunworksSizeOptions;
+    avatar: ZthunworksSizeOptions;
+    card: ZthunworksSizeOptions;
+    drawer: ZthunworksSizeOptions;
+    gaps: ZthunworksSizeOptions;
+    image: ZthunworksSizeOptions;
+    thickness: ZthunworksSizeOptions;
+    toolbar: ZthunworksSizeOptions;
+  };
+}
 /**
  * Constructs the theme variables for zthunworks components.
  *
  * @returns The zthunworks theme.
  */
-function useTheme() {
-  return {
-    colors: {
-      monochrome: {
-        black: '#000',
-        blackVsCode: '#1e1e1e',
-        darkGray: '#404040',
-        gray: '#808080',
-        grayX11: '#bebebe',
-        silver: 'c0c0c0',
-        lightGray: '#d3d3d3',
-        gainsboro: '#dcdcdc',
-        whiteSmoke: '#f5f5f5',
-        white: '#fff'
-      },
-      status: {
-        primary: '#3f51b5',
-        secondary: '#dc004d',
-        success: '#4caf50',
-        danger: '#f44336',
-        warning: '#ff9800',
-        info: '#2196f3'
-      }
-    },
+export function useZthunworksTheme(): ZthunworksTheme {
+  const mui = useMuiTheme();
+
+  const base = {
     rounding: {
+      square: 0,
       circle: '50%'
     },
     sizing: {
@@ -52,6 +61,14 @@ function useTheme() {
       drawer: {
         md: '15rem'
       },
+      gaps: {
+        xs: '0.25rem',
+        sm: '0.5rem',
+        md: '1rem',
+        lg: '1.25rem',
+        xl: '1.5rem',
+        none: 0
+      },
       image: {
         xs: '3em',
         sm: '5em',
@@ -59,27 +76,21 @@ function useTheme() {
         lg: '10em',
         xl: '15em'
       },
+      thickness: {
+        xs: '0.0625rem',
+        sm: '0.08rem',
+        md: '0.1rem',
+        lg: '0.12rem',
+        xl: '0.15rem',
+        none: 0
+      },
       toolbar: {
         md: '64px'
       }
-    },
-    spacing: {
-      xs: '0.25rem',
-      sm: '0.5rem',
-      md: '1rem',
-      lg: '1.25rem',
-      xl: '1.5rem',
-      none: 0
-    },
-    thickness: {
-      xs: '0.0625rem',
-      sm: '0.08rem',
-      md: '0.1rem',
-      lg: '0.12rem',
-      xl: '0.15rem',
-      none: 0
     }
   };
+
+  return Object.assign({}, mui, base);
 }
 
-export const { makeStyles } = createMakeStyles({ useTheme });
+export const { makeStyles } = createMakeStyles({ useTheme: useZthunworksTheme });
