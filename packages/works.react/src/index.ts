@@ -79,7 +79,7 @@ export { ZProfileButton } from './profile/profile-button';
 export { IZProfileButtonProps } from './profile/profile-button.props';
 export { ZProfileForm } from './profile/profile-form';
 export { IZProfileFormProps } from './profile/profile-form.props';
-export { IZProfileService, useProfileService, ZProfileService, ZProfileServiceContext } from './profile/profile-service.context';
+export { IZProfileService, useProfileService, selectAvatar, ZProfileService, ZProfileServiceContext } from './profile/profile-service.context';
 export { useProfile, useProfileAndWatch, useProfileRoot, ZProfileContext } from './profile/profile.context';
 // Store
 export { ZDataState } from './store/data-state.class';

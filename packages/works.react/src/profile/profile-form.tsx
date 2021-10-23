@@ -1,12 +1,11 @@
 import { Alert, AlertTitle, Collapse, Dialog, TextField, Typography } from '@mui/material';
-import { ZProfileAvatarSize, ZProfileBuilder } from '@zthun/works.core';
+import { ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { FormEvent, useState } from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { ZProfileAvatarForm } from './profile-avatar-form';
 import { IZProfileFormProps } from './profile-form.props';
-import { ZUrlBuilder } from '@zthun/works.url';
-import md5 from 'md5';
+import { selectAvatar } from './profile-service.context';
 
 /**
  * Creates a form for modifying the users profile.
@@ -22,7 +21,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   const [confirm, setConfirm] = useState<string>(get(props, 'profile.confirm', ''));
   const [avatar, setAvatar] = useState<string>(get(props, 'profile.avatar'));
   const [editAvatar, setEditAvatar] = useState(false);
-  const avatarToShow = avatar || new ZUrlBuilder().gravatar(email ? md5(email) : '', ZProfileAvatarSize).build();
+  const avatarToShow = selectAvatar(avatar, email);
 
   /**
    * Builds a profile given the current state of the form.

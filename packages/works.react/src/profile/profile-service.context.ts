@@ -218,7 +218,7 @@ export class ZProfileService implements IZProfileService {
   public getAvatar(profile: IZProfile): Promise<string> {
     const avatar = profile?.avatar;
     const email = profile?.email;
-    const data = avatar || new ZUrlBuilder().gravatar(email ? md5(email) : '', ZProfileAvatarSize).build();
+    const data = selectAvatar(avatar, email);
     return Promise.resolve(data);
   }
 
@@ -326,4 +326,18 @@ export const ZProfileServiceContext = createContext<IZProfileService>(new ZProfi
  */
 export function useProfileService(): IZProfileService {
   return useContext(ZProfileServiceContext);
+}
+
+/**
+ * Select's a profiles avatar based on the given settings.
+ *
+ * @param avatar The current avatar data url.
+ * @param email The email for the profile that owns the avatar.
+ *
+ * @returns Avatar if the avatar is truthy, or the gravatar for the email if it is
+ *          falsy.  If the user does not have a gravatar, then the default gravatar
+ *          image is shown.
+ */
+export function selectAvatar(avatar: string, email: string): string {
+  return avatar || new ZUrlBuilder().gravatar(email ? md5(email) : '', ZProfileAvatarSize).build();
 }
