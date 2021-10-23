@@ -2,17 +2,29 @@ import CloseIcon from '@mui/icons-material/Close';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import RestoreIcon from '@mui/icons-material/Restore';
-import ZoomOutIcon from '@mui/icons-material/ZoomIn';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
+import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import { Alert, AlertTitle, Button, Collapse, Grid, IconButton, Slider, Typography } from '@mui/material';
 import { ZProfileAvatarMaxBytes } from '@zthun/works.core';
 import { ZPrintableColor, ZPrintableDrawing, ZPrintableGroup, ZPrintableImage, ZPrintableTransform, ZToolingPan } from '@zthun/works.draw';
-import { noop } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
+import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { ZPaperCard } from '../card/paper-card';
 import { useFileSelect } from '../file/file-select.context';
 import { useImageReader } from '../image/image-reader.context';
-import { IZProfileAvatarFormProps } from './profile-avatar-form.props';
+import { IZComponentLoading } from '../component/component-loading.interface';
+
+export interface IZProfileAvatarFormProps extends IZComponentLoading, IZComponentDisabled {
+  headerText?: string;
+  subHeaderText?: string;
+  saveText?: string;
+  clearText?: string;
+  maxSize?: number;
+
+  avatar: string;
+  onAvatarChange: (avatar: string) => void;
+}
 
 /**
  * Renders a form that allows the user to edit his/her avatar.
@@ -25,6 +37,19 @@ import { IZProfileAvatarFormProps } from './profile-avatar-form.props';
  * @returns The jsx to render the form.
  */
 export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
+  const {
+    headerText,
+    subHeaderText = 'Update your representation',
+    saveText = 'Update Avatar',
+    clearText = 'Clear',
+    maxSize = ZProfileAvatarMaxBytes,
+
+    disabled = false,
+    loading = false,
+    avatar,
+    onAvatarChange
+  } = props;
+
   const fs = useFileSelect();
   const ir = useImageReader();
   const cvs = useRef<HTMLCanvasElement>(null);
@@ -35,7 +60,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   const [scalePercent, setScalePercent] = useState(100);
   const [oversized, setOversized] = useState(0);
 
-  useEffect(render, [props.avatar]);
+  useEffect(render, [avatar]);
   useEffect(redraw);
 
   /**
@@ -45,7 +70,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
    * image is loaded to actually draw it.
    */
   function render() {
-    image.current.import(props.avatar).then(() => {
+    image.current.import(avatar).then(() => {
       transform.current.reset();
       draw.current.midground = new ZPrintableGroup([transform.current, image.current]);
       draw.current.background = new ZPrintableColor('#FFF');
@@ -73,12 +98,12 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   function handleSave() {
     const url = cvs.current.toDataURL();
     const [, data] = url.split(',');
-    const os = Math.max(0, data.length - props.maxSize);
+    const os = Math.max(0, data.length - maxSize);
 
     setOversized(os);
 
     if (os === 0) {
-      props.onAvatarChange(url);
+      onAvatarChange(url);
     }
   }
 
@@ -89,7 +114,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
    */
   function handleClear() {
     setOversized(0);
-    props.onAvatarChange(null);
+    onAvatarChange(null);
   }
 
   /**
@@ -111,6 +136,9 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
       redraw();
     }
   }
+
+  const handleZoomIn = handleZoom.bind(null, null, Math.min(200, scalePercent + 10));
+  const handleZoomOut = handleZoom.bind(null, null, Math.max(0, scalePercent - 10));
 
   /**
    * Occurs when the fit button is clicked.
@@ -171,7 +199,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
             <AlertTitle>
               <Typography variant='subtitle1'>Max Size Reached</Typography>
             </AlertTitle>
-            <Typography variant='caption'>{`The maximum size a custom avatar can have after encoding is ${props.maxSize} bytes.  The current image is over capacity by ${oversized} bytes.`}</Typography>
+            <Typography variant='caption'>{`The maximum size a custom avatar can have after encoding is ${maxSize} bytes.  The current image is over capacity by ${oversized} bytes.`}</Typography>
           </Alert>
         </Collapse>
       </Grid>
@@ -186,14 +214,20 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   function createToolbar() {
     return (
       <Grid item>
-        <IconButton data-testid='ZProfileAvatarForm-btn-open' disabled={props.disabled} title='Open' onClick={handleOpen}>
+        <IconButton data-testid='ZProfileAvatarForm-btn-open' disabled={disabled} title='Open' onClick={handleOpen}>
           <FolderOpenIcon fontSize='small' />
         </IconButton>
-        <IconButton data-testid='ZProfileAvatarForm-btn-fit' disabled={props.disabled} title='Fit' onClick={handleFit}>
+        <IconButton data-testid='ZProfileAvatarForm-btn-fit' disabled={disabled} title='Fit' onClick={handleFit}>
           <ZoomOutMapIcon fontSize='small' />
         </IconButton>
-        <IconButton data-testid='ZProfileAvatarForm-btn-reset' disabled={props.disabled} title='Reset' onClick={handleReset}>
+        <IconButton data-testid='ZProfileAvatarForm-btn-reset' disabled={disabled} title='Reset' onClick={handleReset}>
           <RestoreIcon fontSize='small' />
+        </IconButton>
+        <IconButton data-testid='ZProfileAvatarForm-btn-zoom-in' disabled={disabled} title='Zoom In' onClick={handleZoomIn}>
+          <ZoomInIcon fontSize='small' />
+        </IconButton>
+        <IconButton data-testid='ZProfileAvatarForm-btn-zoom-out' disabled={disabled} title='Zoom Out' onClick={handleZoomOut}>
+          <ZoomOutIcon fontSize='small' />
         </IconButton>
       </Grid>
     );
@@ -222,10 +256,10 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
       <Grid item>
         <Grid container direction='row' spacing={2}>
           <Grid item>
-            <ZoomOutIcon className='ZProfileAvatarForm-zoom-icon' fontSize='small' />
+            <ZoomInIcon className='ZProfileAvatarForm-zoom-icon' fontSize='small' />
           </Grid>
           <Grid item>
-            <Slider className='ZProfileAvatarForm-zoom' disabled={props.disabled} data-testid='ZProfileAvatarForm-zoom' title='Zoom' value={scalePercent} defaultValue={100} min={0} max={200} onChange={handleZoom} />
+            <Slider className='ZProfileAvatarForm-zoom' disabled={disabled} data-testid='ZProfileAvatarForm-zoom' title='Zoom' value={scalePercent} defaultValue={100} min={0} max={200} onChange={handleZoom} />
           </Grid>
           <Grid item>
             <Typography className='ZProfileAvatarForm-percent' data-testid='ZProfileAvatarForm-percent'>
@@ -249,13 +283,13 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
       <Grid item className='ZProfileAvatarForm-toolbar'>
         <Grid container spacing={2}>
           <Grid item sm={6}>
-            <Button className='ZProfileAvatarForm-btn-save' data-testid='ZProfileAvatarForm-btn-save' fullWidth={true} variant='outlined' type='submit' disabled={props.disabled} color='primary' onClick={handleSave}>
-              {props.saveText}
+            <Button className='ZProfileAvatarForm-btn-save' data-testid='ZProfileAvatarForm-btn-save' fullWidth={true} variant='outlined' type='submit' disabled={disabled} color='primary' onClick={handleSave}>
+              {saveText}
             </Button>
           </Grid>
           <Grid item sm={6}>
-            <Button className='ZProfileAvatarForm-btn-clear' data-testid='ZProfileAvatarForm-btn-clear' fullWidth={true} variant='outlined' type='button' disabled={props.disabled} color='secondary' onClick={handleClear}>
-              {props.clearText}
+            <Button className='ZProfileAvatarForm-btn-clear' data-testid='ZProfileAvatarForm-btn-clear' fullWidth={true} variant='outlined' type='button' disabled={disabled} color='secondary' onClick={handleClear}>
+              {clearText}
             </Button>
           </Grid>
         </Grid>
@@ -264,7 +298,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   }
 
   return (
-    <ZPaperCard className='ZProfileAvatarForm-root' data-testid='ZProfileAvatarForm-root' avatar={<PhotoCameraIcon fontSize='large' />} loading={props.loading} headerText={props.headerText} subHeaderText={props.subHeaderText}>
+    <ZPaperCard className='ZProfileAvatarForm-root' data-testid='ZProfileAvatarForm-root' avatar={<PhotoCameraIcon fontSize='large' />} loading={loading} headerText={headerText} subHeaderText={subHeaderText}>
       <Grid container justifyContent='center' alignItems='center' direction='column' spacing={1}>
         {createOversizedAlert()}
         {createToolbar()}
@@ -275,17 +309,3 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
     </ZPaperCard>
   );
 }
-
-ZProfileAvatarForm.defaultProps = {
-  headerText: 'Avatar',
-  subHeaderText: 'Update your representation',
-  saveText: 'Update Avatar',
-  clearText: 'Clear',
-  maxSize: ZProfileAvatarMaxBytes,
-
-  disabled: false,
-  loading: false,
-
-  avatar: null,
-  onAvatarChange: noop
-};

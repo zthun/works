@@ -129,19 +129,26 @@ describe('ZProfileAvatarForm', () => {
   });
 
   describe('Zoom', () => {
-    it('should update the zoom percent.', async () => {
+    async function assertSetsZoom(direction: number, id: string) {
       // Arrange
       const target = await createTestTarget();
+      const expected = 100 + direction;
       // Act
-      const slider = target.getByTestId('ZProfileAvatarForm-zoom').querySelector('.MuiSlider-thumb');
+      const zoom = target.getByTestId(`ZProfileAvatarForm-btn-${id}`);
       await act(async () => {
-        fireEvent.mouseDown(slider);
-        fireEvent.mouseMove(slider, { screenX: 500, clientX: 500 });
-        fireEvent.mouseUp(slider);
+        fireEvent.click(zoom);
       });
       const actual = target.getByTestId('ZProfileAvatarForm-percent') as HTMLParagraphElement;
       // Assert
-      expect(actual.textContent).toEqual('200%');
+      expect(actual.textContent).toEqual(`${expected}%`);
+    }
+
+    it('should update the zoom percent by positive 10% on zoom in.', async () => {
+      await assertSetsZoom(10, 'zoom-in');
+    });
+
+    it('should update the zoom percent by negative 10% on zoom out.', async () => {
+      await assertSetsZoom(-10, 'zoom-out');
     });
   });
 
