@@ -2,7 +2,33 @@ import { Alert, AlertTitle } from '@mui/material';
 import { IZAlert } from '@zthun/works.message';
 import { noop } from 'lodash';
 import React, { useEffect, useState } from 'react';
+import { makeStyles } from '../theme/make-styles';
 import { useAlertService } from './alert-service.context';
+
+/*
+const ZAlertListStyled = styled('div', {
+  position: 'fixed',
+  bottom: '1rem',
+  right: '1rem',
+  maxWidth: '65rem'
+});
+
+const AlertStyled = styled(Alert, {
+  marginBottom: '1rem'
+});
+*/
+
+const useAlertStyles = makeStyles()((theme) => ({
+  root: {
+    position: 'fixed',
+    top: `calc(${theme.sizing.toolbar.md} + ${theme.spacing.md})`,
+    right: theme.spacing.md,
+    maxWidth: theme.sizing.alerts.md
+  },
+  alert: {
+    marginBottom: theme.spacing.md
+  }
+}));
 
 /**
  * Renders a stack of alert messages from the global alert service.
@@ -12,6 +38,7 @@ import { useAlertService } from './alert-service.context';
 export function ZAlertList() {
   const [alerts, setAlerts] = useState<IZAlert[]>([]);
   const service = useAlertService();
+  const styles = useAlertStyles();
 
   useEffect(() => {
     let _setAlerts = setAlerts;
@@ -37,12 +64,12 @@ export function ZAlertList() {
   const components = alerts.map((alert) => {
     const handleCloseAlert = handleClose.bind(this, alert);
     return (
-      <Alert className={`ZAlertList-alert ZAlertList-alert-${alert._id}`} key={alert._id} severity={alert.severity} onClose={handleCloseAlert}>
+      <Alert className={`ZAlertList-alert ZAlertList-alert-${alert._id} ${styles.classes.alert}`} key={alert._id} severity={alert.severity} onClose={handleCloseAlert}>
         <AlertTitle>{alert.header}</AlertTitle>
         <div className='ZAlertList-alert-message'>{alert.message}</div>
       </Alert>
     );
   });
 
-  return <div className='ZAlertList-root'>{components}</div>;
+  return <div className={`ZAlertList-root ${styles.classes.root}`}>{components}</div>;
 }
