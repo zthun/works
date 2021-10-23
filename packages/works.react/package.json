@@ -43,7 +43,8 @@
     "react-markdown": "^6.0.0",
     "react-router-dom": "^5.0.1",
     "remark-gfm": "^1.0.0",
-    "rxjs": "^7.3.0"
+    "rxjs": "^7.3.0",
+    "tss-react": "^1.1.0"
   },
   "peerDependencies": {
     "react": "^17.0.0",
