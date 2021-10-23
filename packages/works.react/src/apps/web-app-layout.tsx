@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@mui/system';
 import React from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { ZAlertList } from '../alert/alert-list';
@@ -5,6 +6,7 @@ import { renderStatusCodePage } from '../codes/status-code-page';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
 import { ZContent } from '../content/content';
 import { useProfileRoot } from '../profile/profile.context';
+import { useZthunworksTheme } from '../theme/make-styles';
 import { IZTopNavProps, ZTopNav } from '../top/top-nav';
 import { useWebAppsRoot } from './web-apps.context';
 
@@ -35,21 +37,24 @@ export function ZWebAppLayout(props: IZWebAppLayout) {
   useProfileRoot();
 
   const { children, home = '/home' } = props;
+  const theme = useZthunworksTheme();
 
   return (
     <div className='ZWebAppLayout-root'>
-      <HashRouter>
-        <ZTopNav {...props} />
-        <ZContent>
-          <Switch>
-            {children}
-            <Route exact path='/status-code/:code' render={renderStatusCodePage.bind(null, 'code')} />
-            <Redirect exact from='/' to={home} />
-            <Redirect to='/status-code/404' />
-          </Switch>
-        </ZContent>
-      </HashRouter>
-      <ZAlertList />
+      <ThemeProvider theme={theme}>
+        <HashRouter>
+          <ZTopNav {...props} />
+          <ZContent>
+            <Switch>
+              {children}
+              <Route exact path='/status-code/:code' render={renderStatusCodePage.bind(null, 'code')} />
+              <Redirect exact from='/' to={home} />
+              <Redirect to='/status-code/404' />
+            </Switch>
+          </ZContent>
+        </HashRouter>
+        <ZAlertList />
+      </ThemeProvider>
     </div>
   );
 }
