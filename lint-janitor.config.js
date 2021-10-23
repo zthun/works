@@ -1,4 +1,4 @@
-const generated = ['**/CHANGELOG.md', 'packages/**/dist/**', 'packages/**/docs/**', 'node_modules/**', 'packages/**/node_modules/**', 'package-lock.json'];
+const generated = ['**/CHANGELOG.md', 'packages/**/dist/**', 'packages/**/docs/**', 'node_modules/**', 'packages/**/node_modules/**', 'package-lock.json', '.yarnrc.yml'];
 const k8sTemplates = ['packages/works.k8s/templates/**'];
 const partialGenerated = ['cspell.json', 'lerna.json'];
 

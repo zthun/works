@@ -3,7 +3,6 @@
 // Alerts
 export { ZAlertList } from './alert/alert-list';
 export { useAlertService, ZAlertServiceContext } from './alert/alert-service.context';
-export { IZAlertSnackbarProps, ZAlertSnackbar } from './alert/alert-snackbar';
 // Apps
 export { ZWebAppLayout } from './apps/web-app-layout';
 export { IZWebAppService, useWebAppService, ZWebAppService, ZWebAppServiceContext } from './apps/web-app-service.context';
@@ -87,6 +86,8 @@ export { useProfile, useProfileAndWatch, useProfileRoot, ZProfileContext } from 
 export { ZDataState } from './store/data-state.class';
 export { IZDataState } from './store/data-state.interface';
 export { useWatchableState } from './store/use-watchable-state.hook';
+// Theme
+export { makeStyles } from './theme/make-styles';
 // Top
 export { IZTopBarProps, ZTopBar } from './top/top-bar';
 export { IZTopBarItem, ZTopBarItemBuilder } from './top/top-bar-item';
