@@ -74,8 +74,7 @@ export { IZLoginTabsProps } from './login/login-tabs.props';
 // Profile
 export { ZProfileActivationForm } from './profile/profile-activation-form';
 export { IZProfileActivationFormProps } from './profile/profile-activation-form.props';
-export { ZProfileAvatarForm } from './profile/profile-avatar-form';
-export { IZProfileAvatarFormProps } from './profile/profile-avatar-form.props';
+export { IZProfileAvatarFormProps, ZProfileAvatarForm } from './profile/profile-avatar-form';
 export { ZProfileButton } from './profile/profile-button';
 export { IZProfileButtonProps } from './profile/profile-button.props';
 export { ZProfileForm } from './profile/profile-form';
