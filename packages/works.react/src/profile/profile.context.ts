@@ -32,7 +32,10 @@ export function useProfileRoot() {
 
   useEffect(() => {
     profile.set();
-    service.read().then((p) => profile.set(p));
+    service
+      .read()
+      .then((p) => profile.set(p))
+      .catch(() => profile.set(null));
   });
 
   return profile;
