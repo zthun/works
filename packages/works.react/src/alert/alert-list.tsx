@@ -5,28 +5,15 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '../theme/make-styles';
 import { useAlertService } from './alert-service.context';
 
-/*
-const ZAlertListStyled = styled('div', {
-  position: 'fixed',
-  bottom: '1rem',
-  right: '1rem',
-  maxWidth: '65rem'
-});
-
-const AlertStyled = styled(Alert, {
-  marginBottom: '1rem'
-});
-*/
-
 const useAlertStyles = makeStyles()((theme) => ({
   root: {
     position: 'fixed',
-    top: `calc(${theme.sizing.toolbar.md} + ${theme.spacing.md})`,
-    right: theme.spacing.md,
+    top: `calc(${theme.sizing.toolbar.md} + ${theme.sizing.gaps.md})`,
+    right: theme.sizing.gaps.md,
     maxWidth: theme.sizing.alerts.md
   },
   alert: {
-    marginBottom: theme.spacing.md
+    marginBottom: theme.sizing.gaps.md
   }
 }));
 
