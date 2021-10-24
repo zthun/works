@@ -7,6 +7,7 @@ export interface ZthunworksSizeOptions {
   md?: number | string;
   lg?: number | string;
   xl?: number | string;
+  max?: number | string;
   none?: number | string;
 }
 
@@ -22,12 +23,14 @@ export interface ZthunworksTheme extends Theme {
     avatar: ZthunworksSizeOptions;
     card: ZthunworksSizeOptions;
     drawer: ZthunworksSizeOptions;
+    font: ZthunworksSizeOptions;
     gaps: ZthunworksSizeOptions;
     image: ZthunworksSizeOptions;
     thickness: ZthunworksSizeOptions;
     toolbar: ZthunworksSizeOptions;
   };
 }
+
 /**
  * Constructs the theme variables for zthunworks components.
  *
@@ -56,10 +59,18 @@ export function useZthunworksTheme(): ZthunworksTheme {
         sm: '18rem',
         md: '30rem',
         lg: '50rem',
-        xl: '64rem'
+        xl: '64rem',
+        max: '100%'
       },
       drawer: {
         md: '15rem'
+      },
+      font: {
+        xs: '0.625em',
+        sm: '0.8em',
+        md: '1em',
+        lg: '1.2em',
+        xl: '1.5em'
       },
       gaps: {
         xs: '0.25rem',
