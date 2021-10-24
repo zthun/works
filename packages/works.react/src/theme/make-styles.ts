@@ -82,6 +82,7 @@ export interface ZthunworksTheme extends Theme {
     font: ZthunworksSizeOptions;
     gaps: ZthunworksSizeOptions;
     image: ZthunworksSizeOptions;
+    icon: ZthunworksSizeOptions;
     thickness: ZthunworksSizeOptions;
     toolbar: ZthunworksSizeOptions;
   };
@@ -144,6 +145,13 @@ export function useZthunworksTheme(): ZthunworksTheme {
         md: '8em',
         lg: '10em',
         xl: '15em'
+      },
+      icon: {
+        xs: '0.50em',
+        sm: '0.75em',
+        md: '1em',
+        lg: '1.25em',
+        xl: '1.5em'
       },
       thickness: {
         xs: '0.0625rem',

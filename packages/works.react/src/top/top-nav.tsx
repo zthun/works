@@ -13,6 +13,7 @@ import { ZCircularProgress } from '../loading/circular-progress';
 import { ZProfileButton } from '../profile/profile-button';
 import { useProfileAndWatch } from '../profile/profile.context';
 import { useWindowService } from '../window/window-service.context';
+import { makeStyles } from '../theme/make-styles';
 
 /**
  * Represents properties for the top nav menu.
@@ -40,6 +41,48 @@ export interface IZTopNavProps extends IZComponentHeader {
   whoami?: string;
 }
 
+const useTopNavStyles = makeStyles()((theme) => ({
+  home: {
+    height: theme.sizing.toolbar.md
+  },
+
+  title: {
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
+    }
+  },
+
+  options: {
+    flexGrow: 1
+  },
+
+  drawer: {
+    minWidth: theme.sizing.drawer.md
+  },
+
+  icon: {
+    fill: 'currentColor',
+    width: theme.sizing.icon.md,
+    height: theme.sizing.icon.md,
+    display: 'inline-block',
+    fontSize: theme.sizing.font.xl,
+    transition: 'fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+    flexShrink: 0,
+    userSelect: 'none',
+    color: `rgb(${theme.palette.common.black}, 0.54)`
+  }
+
+  /*
+  avatar: {
+    height: '5rem',
+    marginRight: theme.sizing.gaps.sm,
+    borderRadius: theme.rounding.circle,
+    border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[200]}`,
+    background: theme.palette.common.white
+  }
+  */
+}));
+
 /**
  * Represents the top nav bar with all services implemented.
  *
@@ -60,6 +103,7 @@ export function ZTopNav(props: IZTopNavProps) {
   const apps = useWebAppsAndWatch();
   const history = useHistory();
   const win = useWindowService();
+  const styles = useTopNavStyles();
 
   const handleOpenMore = setMoreShown.bind(null, true);
   const handleCloseMore = setMoreShown.bind(null, false);
@@ -79,9 +123,9 @@ export function ZTopNav(props: IZTopNavProps) {
    */
   function createHomeButton() {
     return (
-      <Button className='ZTopNav-btn-home' data-testid='ZTopNav-btn-home' color='inherit' onClick={handleHome}>
+      <Button className={`ZTopNav-btn-home ${styles.classes.home}`} data-testid='ZTopNav-btn-home' color='inherit' onClick={handleHome}>
         {props.avatar}
-        <Typography className='ZTopNav-title' color='inherit' variant='h1'>
+        <Typography className={`ZTopNav-title ${styles.classes.title}`} color='inherit' variant='h1'>
           {props.headerText}
         </Typography>
       </Button>
@@ -152,7 +196,7 @@ export function ZTopNav(props: IZTopNavProps) {
       // SVG images can go into html directly.
       const info = new ZDataUrlBuilder().parse(icon).info();
       const __html = info.buffer.toString();
-      return <div className='ZTopNav-app-icon' dangerouslySetInnerHTML={{ __html }} />;
+      return <div className={`ZTopNav-app-icon ${styles.classes.icon}`} dangerouslySetInnerHTML={{ __html }} />;
     }
 
     // This is some other url.  Use the img tag for this one.
@@ -207,7 +251,7 @@ export function ZTopNav(props: IZTopNavProps) {
           <MenuOpenIcon />
         </Button>
         <Drawer anchor='right' open={moreShown} onClose={handleCloseMore}>
-          <List className='ZTopNav-drawer-more' data-testid='ZTopNav-drawer-more'>
+          <List className={`ZTopNav-drawer-more ${styles.classes.drawer}`} data-testid='ZTopNav-drawer-more'>
             {createNavItem('home', 'Home', <HomeIcon />, handleHome)}
             <Divider />
             {createNavApps()}
@@ -222,7 +266,7 @@ export function ZTopNav(props: IZTopNavProps) {
     <AppBar className='ZTopNav-root' position='sticky' color='primary' data-testid='ZTopNav-root'>
       <Toolbar>
         {createHomeButton()}
-        <Typography className='ZTopNav-options'>&nbsp;</Typography>
+        <Typography className={`ZTopNav-options ${styles.classes.options}`}>&nbsp;</Typography>
         <ZProfileButton profile={profile.data} onLogin={handleProfile} onProfile={handleProfile} />
         {createMoreButton()}
       </Toolbar>
