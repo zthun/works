@@ -2,6 +2,7 @@ import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Checkbox
 import { ZDataUrlBuilder, ZMimeTypeImage } from '@zthun/works.url';
 import { noop } from 'lodash';
 import React, { useState } from 'react';
+import { makeStyles } from '../theme/make-styles';
 import { IZComponentActionable } from '../component/component-actionable.interface';
 import { IZComponentConfirmable } from '../component/component-confirmable.interface';
 import { IZComponentDisabled } from '../component/component-disabled.interface';
@@ -17,6 +18,37 @@ import { ZCircularBackdrop } from '../loading/circular-backdrop';
  * Represents the properties for the paper card component.
  */
 export interface IZPaperCardProps extends IZComponentHeader, IZComponentHierarchy, IZComponentStyle, IZComponentMedia, IZComponentSizeable, IZComponentLoading, IZComponentDisabled, IZComponentActionable, IZComponentConfirmable {}
+
+const usePaperCardStyles = makeStyles<IZPaperCardProps>()((theme, props) => ({
+  root: {
+    position: 'relative',
+    width: theme.sizing.card[props.size]
+  },
+  header: {
+    paddingBottom: theme.sizing.gaps.none,
+
+    h3: {
+      fontSize: theme.sizing.font.xl,
+      padding: theme.sizing.gaps.none,
+      margin: theme.sizing.gaps.none
+    }
+  },
+  media: {
+    objectFit: 'fill',
+    margin: 'auto',
+    textAlign: 'center',
+    paddingTop: theme.sizing.gaps.sm,
+    paddingBottom: theme.sizing.gaps.sm,
+    width: theme.sizing.image[props.imageWidth],
+    height: theme.sizing.image[props.imageHeight]
+  },
+  actions: {
+    padding: theme.sizing.gaps.md
+  },
+  confirm: {
+    marginTop: theme.sizing.gaps.md
+  }
+}));
 
 /**
  * Renders a material ui card wrapped in paper at a standard elevation.
@@ -50,6 +82,7 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
   } = props;
 
   const [confirmed, setConfirmed] = useState(autoConfirm);
+  const styles = usePaperCardStyles(props);
 
   /**
    * Sets the confirmed flag.
@@ -74,7 +107,7 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
    * @returns The jsx for the CardHeader component.
    */
   function createHeader() {
-    return <CardHeader className='ZPaperCard-header' avatar={avatar} title={<h3>{headerText}</h3>} subheader={subHeaderText} />;
+    return <CardHeader className={`ZPaperCard-header ${styles.classes.header}`} avatar={avatar} title={<h3>{headerText}</h3>} subheader={subHeaderText} />;
   }
 
   /**
@@ -92,10 +125,10 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
     if (dataUri.mimeType === ZMimeTypeImage.SVG) {
       // The buffer itself is just the <svg> tag. So we'll just use that.
       const image = dataUri.buffer.toString();
-      return <div className={`ZPaperCard-media ZPaperCard-svg ZPaperCard-media-width-${imageWidth} ZPaperCard-media-height-${imageHeight}`} dangerouslySetInnerHTML={{ __html: image }} />;
+      return <div className={`ZPaperCard-media ZPaperCard-svg ZPaperCard-media-width-${imageWidth} ZPaperCard-media-height-${imageHeight} ${styles.classes.media}`} dangerouslySetInnerHTML={{ __html: image }} />;
     }
 
-    return <CardMedia className={`ZPaperCard-media ZPaperCard-media-width-${imageWidth} ZPaperCard-media-height-${imageHeight}`} data-testid='ZPaperCard-media' component='img' image={imageUrl} title={headerText} />;
+    return <CardMedia className={`ZPaperCard-media ZPaperCard-media-width-${imageWidth} ZPaperCard-media-height-${imageHeight} ${styles.classes.media}`} data-testid='ZPaperCard-media' component='img' image={imageUrl} title={headerText} />;
   }
 
   /**
@@ -106,7 +139,7 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
   function createContent() {
     const confirm =
       confirmation && actionText ? (
-        <FormControlLabel className='ZPaperCard-actions-confirm' control={<Checkbox checked={confirmed} onChange={updateConfirmed} color={confirmationColor} name={confirmationName} />} label={confirmation} disabled={disabled} />
+        <FormControlLabel className={`ZPaperCard-actions-confirm ${styles.classes.confirm}`} control={<Checkbox checked={confirmed} onChange={updateConfirmed} color={confirmationColor} name={confirmationName} />} label={confirmation} disabled={disabled} />
       ) : null;
     return (
       <CardContent>
@@ -129,7 +162,7 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
     const isDisabled = disabled || (confirmation && !confirmed);
 
     return (
-      <CardActions className='ZPaperCard-actions' data-testid='ZPaperCard-actions'>
+      <CardActions className={`ZPaperCard-actions ${styles.classes.actions}`} data-testid='ZPaperCard-actions'>
         <Button className='ZPaperCard-btn-action' data-testid='ZPaperCard-btn-action' fullWidth={true} variant='outlined' type={actionType} disabled={isDisabled} color={actionColor} onClick={handleAction}>
           {actionText}
         </Button>
@@ -138,7 +171,7 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
   }
 
   return (
-    <Paper className={`${className} ZPaperCard-root ZPaperCard-size-${size}`} data-testid={props['data-testid']} elevation={5}>
+    <Paper className={`${className} ZPaperCard-root ZPaperCard-size-${size} ${styles.classes.root}`} data-testid={props['data-testid']} elevation={5}>
       <ZCircularBackdrop className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={loading} size='2.5em' />
       <Card>
         {createHeader()}
