@@ -2,10 +2,34 @@ import { Alert, AlertTitle, Collapse, Dialog, TextField, Typography } from '@mui
 import { ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { FormEvent, useState } from 'react';
+import { makeStyles } from '../theme/make-styles';
 import { ZPaperCard } from '../card/paper-card';
 import { ZProfileAvatarForm } from './profile-avatar-form';
 import { IZProfileFormProps } from './profile-form.props';
 import { selectAvatar } from './profile-service.context';
+
+const useProfileFormStyles = makeStyles()((theme) => ({
+  root: {
+    maxWidth: theme.sizing.card.md
+  },
+
+  avatar: {
+    'height': theme.sizing.avatar.md,
+    'width': theme.sizing.avatar.md,
+    'borderRadius': theme.rounding.circle,
+    'background': theme.palette.common.white,
+    'border': `${theme.sizing.thickness.xs} solid ${theme.palette.grey[400]}`,
+
+    '&:hover': {
+      cursor: 'pointer',
+      boxShadow: `0 0 ${theme.sizing.font.xl} ${theme.sizing.thickness.sm} ${theme.palette.primary.main}`
+    }
+  },
+
+  field: {
+    marginBottom: theme.sizing.gaps.md
+  }
+}));
 
 /**
  * Creates a form for modifying the users profile.
@@ -21,6 +45,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   const [confirm, setConfirm] = useState<string>(get(props, 'profile.confirm', ''));
   const [avatar, setAvatar] = useState<string>(get(props, 'profile.avatar'));
   const [editAvatar, setEditAvatar] = useState(false);
+  const styles = useProfileFormStyles();
   const avatarToShow = selectAvatar(avatar, email);
 
   /**
@@ -146,7 +171,11 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   function createTextField(name: string, label: string, type: string, val: string, handleInput: (e: any) => void) {
     const id = `ZProfileForm-input-${name}`;
     const className = `ZProfileForm-input ${id}`;
-    return <TextField className={className} data-testid={id} fullWidth={true} label={label} type={type} margin='none' variant='outlined' value={val} disabled={props.disabled} onInput={handleInput} />;
+    return (
+      <div className={styles.classes.field}>
+        <TextField className={className} data-testid={id} fullWidth={true} label={label} type={type} margin='none' variant='outlined' value={val} disabled={props.disabled} onInput={handleInput} />
+      </div>
+    );
   }
 
   /**
@@ -213,7 +242,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
    * @returns The jsx for the avatar image.
    */
   function createAvatarImage() {
-    return <img className='ZProfileForm-avatar' data-testid='ZProfileForm-avatar' src={avatarToShow} onClick={handleEditAvatar} />;
+    return <img className={`ZProfileForm-avatar ${styles.classes.avatar}`} data-testid='ZProfileForm-avatar' src={avatarToShow} onClick={handleEditAvatar} />;
   }
 
   const avatarDialog = createAvatarDialog();
@@ -224,7 +253,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
   return (
     <React.Fragment>
       {avatarDialog}
-      <form className='ZProfileForm-root' data-testid='ZProfileForm-root' noValidate={true} onSubmit={handleSave}>
+      <form className={`ZProfileForm-root ${styles.classes.root}`} data-testid='ZProfileForm-root' noValidate={true} onSubmit={handleSave}>
         <ZPaperCard avatar={formIcon} headerText={props.headerText} subHeaderText={props.subHeaderText} loading={props.loading} disabled={props.disabled} actionText={props.saveText} actionType='submit'>
           {accountInformation}
           {updatePassword}
