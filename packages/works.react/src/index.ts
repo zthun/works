@@ -89,6 +89,7 @@ export { useWatchableState } from './store/use-watchable-state.hook';
 // Theme
 export { makeStyles } from './theme/make-styles';
 // Top
+export { ZTopNavAvatar } from './top/top-nav-avatar';
 export { IZTopNavProps, ZTopNav } from './top/top-nav';
 // Window
 export { useWindowService, ZWindowServiceContext } from './window/window-service.context';
