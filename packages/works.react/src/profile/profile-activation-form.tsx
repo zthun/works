@@ -8,6 +8,7 @@ import { IZComponentDescription } from '../component/component-description.inter
 import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { IZComponentHeader } from '../component/component-header.interface';
 import { IZComponentLoading } from '../component/component-loading.interface';
+import { makeStyles } from '../theme/make-styles';
 
 /**
  * Represents properties for the profile activation form.
@@ -36,6 +37,17 @@ export interface IZProfileActivationFormProps extends IZComponentLoading, IZComp
   onActivationChange?: (activation: IZProfileActivation) => void;
 }
 
+const useProfileActivationStyles = makeStyles()((theme) => ({
+  root: {
+    minWidth: theme.sizing.card.sm,
+    maxWidth: theme.sizing.card.md
+  },
+
+  key: {
+    marginTop: theme.sizing.gaps.md
+  }
+}));
+
 /**
  * Renders the form for activating a users profile.
  *
@@ -45,6 +57,7 @@ export interface IZProfileActivationFormProps extends IZComponentLoading, IZComp
  */
 export function ZProfileActivationForm(props: IZProfileActivationFormProps): JSX.Element {
   const [key, setKey] = useState(get(props, 'activation.key') || '');
+  const styles = useProfileActivationStyles();
 
   /**
    * Occurs when the user enters input into the key field.
@@ -71,25 +84,27 @@ export function ZProfileActivationForm(props: IZProfileActivationFormProps): JSX
   }
 
   return (
-    <form className='ZProfileActivationForm-root' data-testid='ZProfileActivationForm-root' noValidate={true} onSubmit={handleActivate}>
+    <form className={`ZProfileActivationForm-root ${styles.classes.root}`} data-testid='ZProfileActivationForm-root' noValidate={true} onSubmit={handleActivate}>
       <ZPaperCard avatar={props.avatar} headerText={props.headerText} subHeaderText={props.subHeaderText} actionText={props.activateText} actionType='submit' loading={props.loading} disabled={props.disabled || !key}>
         <Typography variant='body1' component='p'>
           {props.description}
         </Typography>
 
-        <TextField
-          className='ZProfileActivationForm-input-key'
-          data-testid='ZProfileActivationForm-input-key'
-          fullWidth={true}
-          disabled={props.disabled}
-          label={props.keyText}
-          type='text'
-          margin='none'
-          variant='outlined'
-          required
-          value={key}
-          onInput={handleKeyInput}
-        />
+        <div className={styles.classes.key}>
+          <TextField
+            className='ZProfileActivationForm-input-key'
+            data-testid='ZProfileActivationForm-input-key'
+            fullWidth={true}
+            disabled={props.disabled}
+            label={props.keyText}
+            type='text'
+            margin='none'
+            variant='outlined'
+            required
+            value={key}
+            onInput={handleKeyInput}
+          />
+        </div>
       </ZPaperCard>
     </form>
   );
