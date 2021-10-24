@@ -1,12 +1,26 @@
 import { Alert, AlertTitle, Collapse, Dialog, TextField, Typography } from '@mui/material';
-import { ZProfileBuilder } from '@zthun/works.core';
+import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { FormEvent, useState } from 'react';
-import { makeStyles } from '../theme/make-styles';
 import { ZPaperCard } from '../card/paper-card';
+import { IZComponentDisabled } from '../component/component-disabled.interface';
+import { IZComponentHeader } from '../component/component-header.interface';
+import { IZComponentLoading } from '../component/component-loading.interface';
+import { makeStyles } from '../theme/make-styles';
 import { ZProfileAvatarForm } from './profile-avatar-form';
-import { IZProfileFormProps } from './profile-form.props';
 import { selectAvatar } from './profile-service.context';
+
+export interface IZProfileFormProps extends Partial<IZComponentHeader>, IZComponentLoading, IZComponentDisabled {
+  hideAccountInformation?: boolean;
+  hidePassword?: boolean;
+
+  saveText?: string;
+  accountInformationHeaderText?: string;
+  passwordHeaderText?: string;
+
+  profile: IZProfile;
+  onProfileChange?: (profile: IZProfile) => void;
+}
 
 const useProfileFormStyles = makeStyles()((theme) => ({
   root: {
@@ -34,19 +48,36 @@ const useProfileFormStyles = makeStyles()((theme) => ({
 /**
  * Creates a form for modifying the users profile.
  *
- * @param props The properties for the form.
+ * @param p The properties for the form.
  *
  * @returns The jsx rendering of the profile form.
  */
-export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
-  const [email, setEmail] = useState<string>(get(props, 'profile.email', ''));
-  const [display, setDisplay] = useState<string>(get(props, 'profile.display', ''));
-  const [password, setPassword] = useState<string>(get(props, 'profile.password', ''));
-  const [confirm, setConfirm] = useState<string>(get(props, 'profile.confirm', ''));
-  const [avatar, setAvatar] = useState<string>(get(props, 'profile.avatar'));
+export function ZProfileForm(p: IZProfileFormProps): JSX.Element {
+  const [email, setEmail] = useState<string>(get(p, 'profile.email', ''));
+  const [display, setDisplay] = useState<string>(get(p, 'profile.display', ''));
+  const [password, setPassword] = useState<string>(get(p, 'profile.password', ''));
+  const [confirm, setConfirm] = useState<string>(get(p, 'profile.confirm', ''));
+  const [avatar, setAvatar] = useState<string>(get(p, 'profile.avatar'));
   const [editAvatar, setEditAvatar] = useState(false);
   const styles = useProfileFormStyles();
   const avatarToShow = selectAvatar(avatar, email);
+
+  const {
+    hideAccountInformation = false,
+    hidePassword = false,
+
+    headerText = 'Profile',
+    subHeaderText = 'Update your information',
+    saveText = 'Update Profile',
+    accountInformationHeaderText = 'Account Information',
+    passwordHeaderText = 'Update Password',
+
+    loading = false,
+    disabled = false,
+
+    profile,
+    onProfileChange = noop
+  } = p;
 
   /**
    * Builds a profile given the current state of the form.
@@ -54,12 +85,12 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
    * @returns A profile that can be used to update the existing profile with new information.
    */
   function build() {
-    const currentEmail = get(props, 'profile.email', '');
+    const currentEmail = get(profile, 'email', '');
 
-    let profile = new ZProfileBuilder().display(display || null).avatar(avatar);
-    profile = email && email.toLowerCase() !== currentEmail.toLowerCase() ? profile.email(email) : profile;
-    profile = password || confirm ? profile.password(password).confirm(confirm) : profile;
-    return profile;
+    let updated = new ZProfileBuilder().display(display || null).avatar(avatar);
+    updated = email && email.toLowerCase() !== currentEmail.toLowerCase() ? updated.email(email) : updated;
+    updated = password || confirm ? updated.password(password).confirm(confirm) : updated;
+    return updated;
   }
 
   /**
@@ -90,7 +121,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     setPassword('');
     setConfirm('');
     handleCloseEditAvatar();
-    props.onProfileChange(profile.build());
+    onProfileChange(profile.build());
   }
 
   /**
@@ -141,7 +172,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     const profile = build();
     setPassword('');
     setConfirm('');
-    props.onProfileChange(profile.build());
+    onProfileChange(profile.build());
   }
 
   /**
@@ -173,7 +204,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     const className = `ZProfileForm-input ${id}`;
     return (
       <div className={styles.classes.field}>
-        <TextField className={className} data-testid={id} fullWidth={true} label={label} type={type} margin='none' variant='outlined' value={val} disabled={props.disabled} onInput={handleInput} />
+        <TextField className={className} data-testid={id} fullWidth={true} label={label} type={type} margin='none' variant='outlined' value={val} disabled={disabled} onInput={handleInput} />
       </div>
     );
   }
@@ -184,13 +215,13 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
    * @returns The jsx for the account information section.
    */
   function createAccountInformation() {
-    if (props.hideAccountInformation) {
+    if (hideAccountInformation) {
       return null;
     }
 
     const displayTextField = createTextField('display', 'Display', 'text', display, handleDisplayChange);
     const emailTextField = createTextField('email', 'Email', 'email', email, handleEmailChange);
-    const emailOriginal = get(props, 'profile.email', '');
+    const emailOriginal = get(profile, 'email', '');
     const emailDirty = emailOriginal.toLowerCase() !== email.toLowerCase();
 
     const emailWarning = (
@@ -206,7 +237,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
 
     return (
       <React.Fragment>
-        <h4>{props.accountInformationHeaderText}</h4>
+        <h4>{accountInformationHeaderText}</h4>
         {displayTextField}
         {emailTextField}
         {emailWarning}
@@ -220,7 +251,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
    * @returns The jsx for the update password section.
    */
   function createUpdatePassword() {
-    if (props.hidePassword) {
+    if (hidePassword) {
       return null;
     }
 
@@ -229,7 +260,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
 
     return (
       <React.Fragment>
-        <h4>{props.passwordHeaderText}</h4>
+        <h4>{passwordHeaderText}</h4>
         {passwordTextField}
         {confirmTextField}
       </React.Fragment>
@@ -254,7 +285,7 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     <React.Fragment>
       {avatarDialog}
       <form className={`ZProfileForm-root ${styles.classes.root}`} data-testid='ZProfileForm-root' noValidate={true} onSubmit={handleSave}>
-        <ZPaperCard avatar={formIcon} headerText={props.headerText} subHeaderText={props.subHeaderText} loading={props.loading} disabled={props.disabled} actionText={props.saveText} actionType='submit'>
+        <ZPaperCard avatar={formIcon} headerText={headerText} subHeaderText={subHeaderText} loading={loading} disabled={disabled} actionText={saveText} actionType='submit'>
           {accountInformation}
           {updatePassword}
         </ZPaperCard>
@@ -262,20 +293,3 @@ export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
     </React.Fragment>
   );
 }
-
-ZProfileForm.defaultProps = {
-  hideAccountInformation: false,
-  hidePassword: false,
-
-  headerText: 'Profile',
-  subHeaderText: 'Update your information',
-  saveText: 'Update Profile',
-  accountInformationHeaderText: 'Account Information',
-  passwordHeaderText: 'Update Password',
-
-  loading: false,
-  disabled: false,
-
-  profile: null,
-  onProfileChange: noop
-};

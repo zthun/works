@@ -78,8 +78,7 @@ export { IZProfileActivationFormProps } from './profile/profile-activation-form.
 export { IZProfileAvatarFormProps, ZProfileAvatarForm } from './profile/profile-avatar-form';
 export { ZProfileButton } from './profile/profile-button';
 export { IZProfileButtonProps } from './profile/profile-button.props';
-export { ZProfileForm } from './profile/profile-form';
-export { IZProfileFormProps } from './profile/profile-form.props';
+export { IZProfileFormProps, ZProfileForm } from './profile/profile-form';
 export { IZProfileService, useProfileService, selectAvatar, ZProfileService, ZProfileServiceContext } from './profile/profile-service.context';
 export { useProfile, useProfileAndWatch, useProfileRoot, ZProfileContext } from './profile/profile.context';
 // Store
