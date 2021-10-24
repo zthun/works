@@ -73,8 +73,7 @@ export { ZLoginTab } from './login/login-tab.enum';
 export { ZLoginTabs } from './login/login-tabs';
 export { IZLoginTabsProps } from './login/login-tabs.props';
 // Profile
-export { ZProfileActivationForm } from './profile/profile-activation-form';
-export { IZProfileActivationFormProps } from './profile/profile-activation-form.props';
+export { IZProfileActivationFormProps, ZProfileActivationForm } from './profile/profile-activation-form';
 export { IZProfileAvatarFormProps, ZProfileAvatarForm } from './profile/profile-avatar-form';
 export { IZProfileButtonProps, ZProfileButton } from './profile/profile-button';
 export { IZProfileFormProps, ZProfileForm } from './profile/profile-form';
