@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 import { IZTypedocEntity } from '@zthun/works.core';
-import { ZTypedocViewerSource } from '@zthun/works.react';
+import { ZCardAvatar, ZTypedocViewerSource } from '@zthun/works.react';
 import { get } from 'lodash';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
@@ -41,7 +41,7 @@ export function ZApiPage() {
     hist.push(`/learn/${pkg}/api/${id}`);
   }
 
-  const avatar = <img className='ZPaperCard-avatar ZPaperCard-avatar-xl' src={img} />;
+  const avatar = <ZCardAvatar src={img} size='xl' />;
   const actionText = entityId ? 'Back to API' : 'Back to README';
   const handleAction = entityId ? handleApi : handleLearn;
 

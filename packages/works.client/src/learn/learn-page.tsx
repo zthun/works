@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import { ZMarkdownViewer } from '@zthun/works.react';
+import { ZCardAvatar, ZMarkdownViewer } from '@zthun/works.react';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ export function ZLearnPage() {
   const { pkg } = useParams<{ pkg: string }>();
   const src = `docs/${pkg}.README.md`;
   const img = `images/svg/${pkg}.svg`;
-  const avatar = <img className='ZPaperCard-avatar ZPaperCard-avatar-xl' src={img} />;
+  const avatar = <ZCardAvatar src={img} size='xl' />;
 
   /**
    * Occurs when the api button is clicked.
