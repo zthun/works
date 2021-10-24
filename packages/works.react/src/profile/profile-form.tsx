@@ -48,16 +48,16 @@ const useProfileFormStyles = makeStyles()((theme) => ({
 /**
  * Creates a form for modifying the users profile.
  *
- * @param p The properties for the form.
+ * @param props The properties for the form.
  *
  * @returns The jsx rendering of the profile form.
  */
-export function ZProfileForm(p: IZProfileFormProps): JSX.Element {
-  const [email, setEmail] = useState<string>(get(p, 'profile.email', ''));
-  const [display, setDisplay] = useState<string>(get(p, 'profile.display', ''));
-  const [password, setPassword] = useState<string>(get(p, 'profile.password', ''));
-  const [confirm, setConfirm] = useState<string>(get(p, 'profile.confirm', ''));
-  const [avatar, setAvatar] = useState<string>(get(p, 'profile.avatar'));
+export function ZProfileForm(props: IZProfileFormProps): JSX.Element {
+  const [email, setEmail] = useState<string>(get(props, 'profile.email', ''));
+  const [display, setDisplay] = useState<string>(get(props, 'profile.display', ''));
+  const [password, setPassword] = useState<string>(get(props, 'profile.password', ''));
+  const [confirm, setConfirm] = useState<string>(get(props, 'profile.confirm', ''));
+  const [avatar, setAvatar] = useState<string>(get(props, 'profile.avatar'));
   const [editAvatar, setEditAvatar] = useState(false);
   const styles = useProfileFormStyles();
   const avatarToShow = selectAvatar(avatar, email);
@@ -77,7 +77,7 @@ export function ZProfileForm(p: IZProfileFormProps): JSX.Element {
 
     profile,
     onProfileChange = noop
-  } = p;
+  } = props;
 
   /**
    * Builds a profile given the current state of the form.
