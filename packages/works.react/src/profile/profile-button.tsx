@@ -1,11 +1,36 @@
-import { Button, Grid, Hidden, Typography } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
+import { Button, Grid, Hidden, Typography } from '@mui/material';
+import { IZProfile } from '@zthun/works.core';
 import { ZUrlBuilder } from '@zthun/works.url';
 import { noop } from 'lodash';
 import React, { useEffect, useState } from 'react';
+import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { ZCircularProgress } from '../loading/circular-progress';
-import { IZProfileButtonProps } from './profile-button.props';
 import { useProfileService } from './profile-service.context';
+
+/**
+ * Represents properties for the profile button.
+ */
+export interface IZProfileButtonProps extends IZComponentDisabled {
+  /**
+   * The current profile being displayed.
+   *
+   * If this is undefined, then the loading indicator is shown.
+   * If this is null, then the Login button is shown.
+   * If this is truthy, then the profile display and avatar is shown.
+   */
+  profile: IZProfile;
+
+  /**
+   * Occurs when the button is clicked when the Login button is displayed.
+   */
+  onLogin?: () => void;
+
+  /**
+   * Occurs when the button is clicked when the profile information is displayed.
+   */
+  onProfile?: () => void;
+}
 
 /**
  * Represents a tri-state button that displays the profile information based on 3 possible states.
