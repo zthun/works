@@ -5,5 +5,5 @@ export interface IZComponentDescription {
   /**
    * The description of the component.
    */
-  description: string;
+  description?: string;
 }
