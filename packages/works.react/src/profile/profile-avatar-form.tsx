@@ -9,11 +9,12 @@ import { Alert, AlertTitle, Button, Collapse, Grid, IconButton, Slider, Typograp
 import { ZProfileAvatarMaxBytes } from '@zthun/works.core';
 import { ZPrintableColor, ZPrintableDrawing, ZPrintableGroup, ZPrintableImage, ZPrintableTransform, ZToolingPan } from '@zthun/works.draw';
 import React, { useEffect, useRef, useState } from 'react';
-import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { ZPaperCard } from '../card/paper-card';
+import { IZComponentDisabled } from '../component/component-disabled.interface';
+import { IZComponentLoading } from '../component/component-loading.interface';
 import { useFileSelect } from '../file/file-select.context';
 import { useImageReader } from '../image/image-reader.context';
-import { IZComponentLoading } from '../component/component-loading.interface';
+import { makeStyles } from '../theme/make-styles';
 
 export interface IZProfileAvatarFormProps extends IZComponentLoading, IZComponentDisabled {
   headerText?: string;
@@ -25,6 +26,33 @@ export interface IZProfileAvatarFormProps extends IZComponentLoading, IZComponen
   avatar: string;
   onAvatarChange: (avatar: string) => void;
 }
+
+const useProfileAvatarFormStyles = makeStyles()((theme) => ({
+  root: {
+    width: 400
+  },
+
+  picture: {
+    'border': `${theme.sizing.thickness.md} solid ${theme.palette.common.black}`,
+    'cursor': 'grab',
+
+    '&:active': {
+      cursor: 'grabbing'
+    }
+  },
+
+  zoom: {
+    width: `calc(${theme.sizing.avatar.xl} - 4em)`
+  },
+
+  percent: {
+    width: '2.6em'
+  },
+
+  toolbar: {
+    alignSelf: 'stretch'
+  }
+}));
 
 /**
  * Renders a form that allows the user to edit his/her avatar.
@@ -38,7 +66,7 @@ export interface IZProfileAvatarFormProps extends IZComponentLoading, IZComponen
  */
 export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   const {
-    headerText,
+    headerText = 'Avatar',
     subHeaderText = 'Update your representation',
     saveText = 'Update Avatar',
     clearText = 'Clear',
@@ -59,6 +87,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   const pan = useRef<ZToolingPan>(new ZToolingPan());
   const [scalePercent, setScalePercent] = useState(100);
   const [oversized, setOversized] = useState(0);
+  const styles = useProfileAvatarFormStyles();
 
   useEffect(render, [avatar]);
   useEffect(redraw);
@@ -241,7 +270,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   function createDrawingArea() {
     return (
       <Grid item>
-        <canvas className='ZProfileAvatarForm-picture' data-testid='ZProfileAvatarForm-picture' ref={cvs} height={256} width={256} />
+        <canvas className={`ZProfileAvatarForm-picture ${styles.classes.picture}`} data-testid='ZProfileAvatarForm-picture' ref={cvs} height={256} width={256} />
       </Grid>
     );
   }
@@ -258,11 +287,11 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
           <Grid item>
             <ZoomInIcon className='ZProfileAvatarForm-zoom-icon' fontSize='small' />
           </Grid>
-          <Grid item>
+          <Grid item className={styles.classes.zoom}>
             <Slider className='ZProfileAvatarForm-zoom' disabled={disabled} data-testid='ZProfileAvatarForm-zoom' title='Zoom' value={scalePercent} defaultValue={100} min={0} max={200} onChange={handleZoom} />
           </Grid>
           <Grid item>
-            <Typography className='ZProfileAvatarForm-percent' data-testid='ZProfileAvatarForm-percent'>
+            <Typography className={`ZProfileAvatarForm-percent ${styles.classes.percent}`} data-testid='ZProfileAvatarForm-percent'>
               {Math.round(scalePercent)}%
             </Typography>
           </Grid>
@@ -280,7 +309,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
    */
   function createActionButtons() {
     return (
-      <Grid item className='ZProfileAvatarForm-toolbar'>
+      <Grid item className={`ZProfileAvatarForm-toolbar ${styles.classes.toolbar}`}>
         <Grid container spacing={2}>
           <Grid item sm={6}>
             <Button className='ZProfileAvatarForm-btn-save' data-testid='ZProfileAvatarForm-btn-save' fullWidth={true} variant='outlined' type='submit' disabled={disabled} color='primary' onClick={handleSave}>
@@ -298,7 +327,7 @@ export function ZProfileAvatarForm(props: IZProfileAvatarFormProps) {
   }
 
   return (
-    <ZPaperCard className='ZProfileAvatarForm-root' data-testid='ZProfileAvatarForm-root' avatar={<PhotoCameraIcon fontSize='large' />} loading={loading} headerText={headerText} subHeaderText={subHeaderText}>
+    <ZPaperCard className={`ZProfileAvatarForm-root ${styles.classes.root}`} data-testid='ZProfileAvatarForm-root' avatar={<PhotoCameraIcon fontSize='large' />} loading={loading} headerText={headerText} subHeaderText={subHeaderText}>
       <Grid container justifyContent='center' alignItems='center' direction='column' spacing={1}>
         {createOversizedAlert()}
         {createToolbar()}
