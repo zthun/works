@@ -10,7 +10,7 @@ export { ZHttpCodeInformationalResponse, ZHttpCodeInformationalResponseNames, ZH
 export { ZHttpCodeRedirection, ZHttpCodeRedirectionNames, ZHttpCodeRedirectionDescriptions } from './result/http-code-redirection.enum';
 export { ZHttpCodeServer, ZHttpCodeServerNames, ZHttpCodeServerDescriptions } from './result/http-code-server.enum';
 export { ZHttpCodeSuccess, ZHttpCodeSuccessNames, ZHttpCodeSuccessDescriptions } from './result/http-code-success.enum';
-export { ZHttpCode, getHttpCodeName, getHttpCodeDescription } from './result/http-code.type';
+export { ZHttpCode, ZHttpCodeSeverity, ZHttpCodeCategory, getHttpCodeName, getHttpCodeDescription, getHttpCodeSeverity, getHttpCodeCategory } from './result/http-code.type';
 export { ZHttpResultBuilder } from './result/http-result-builder.class';
 export { IZHttpResult } from './result/http-result.interface';
 // Service
