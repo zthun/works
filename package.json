@@ -30,7 +30,7 @@
     "packages/works.k8s"
   ],
   "scripts": {
-    "clean": "rimraf dist docs reports *.tgz *.log packages/**/dist packages/**/docs packages/**/*.tgz packages/**/*.log  packages/**/css",
+    "clean": "rimraf 'dist' 'docs' 'reports' '*.tgz' '*.log' 'packages/**/dist' 'packages/**/docs' 'packages/**/*.tgz' 'packages/**/*.log'  'packages/**/css'",
     "test": "jest --coverage --detectOpenHandles",
     "lint": "lint-janitor",
     "build": "lerna run build",
