@@ -1,53 +1,7 @@
-.ZTopBar-root,
-.ZTopNav-root {
-  height: @sizing-toolbar;
-
-  .ZTopBar-btn-home,
-  .ZTopNav-btn-home {
-    height: @sizing-toolbar;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  .ZTopBar-title,
-  .ZTopNav-title {
-    display: block;
-    font-size: @sizing-font-lg;
-
-    @media (max-width: 400px) {
-      display: none;
-    }
-  }
-
-  .ZTopBar-options,
-  .ZTopNav-options {
-    flex-grow: 1;
-  }
-}
-
 .ZTopNav-avatar {
   height: 5rem;
   margin-right: @spacing-sm;
   border-radius: @rounding-circle;
   border: @thickness-xs solid @color-gainsboro;
   background: @color-white;
-}
-
-.ZTopNav-app-icon {
-  fill: currentColor;
-  width: 1em;
-  height: 1em;
-  display: inline-block;
-  font-size: 1.5rem;
-  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  flex-shrink: 0;
-  user-select: none;
-  color: rgb(@color-black, 0.54);
-}
-
-.ZTopBar-drawer-more,
-.ZTopNav-drawer-more {
-  min-width: @sizing-drawer;
 }
