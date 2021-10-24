@@ -4,6 +4,7 @@ import { IZProfile } from '@zthun/works.core';
 import { ZUrlBuilder } from '@zthun/works.url';
 import { noop } from 'lodash';
 import React, { useEffect, useState } from 'react';
+import { makeStyles } from '../theme/make-styles';
 import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { useProfileService } from './profile-service.context';
@@ -32,6 +33,16 @@ export interface IZProfileButtonProps extends IZComponentDisabled {
   onProfile?: () => void;
 }
 
+const useProfileButtonStyles = makeStyles()((theme) => ({
+  avatar: {
+    height: theme.sizing.avatar.sm,
+    width: theme.sizing.avatar.sm,
+    borderRadius: theme.rounding.circle,
+    border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[400]}`,
+    background: theme.palette.common.white
+  }
+}));
+
 /**
  * Represents a tri-state button that displays the profile information based on 3 possible states.
  *
@@ -51,6 +62,7 @@ export function ZProfileButton(props: IZProfileButtonProps) {
   const profiles = useProfileService();
   const [avatar, setAvatar] = useState(new ZUrlBuilder().gravatar().build());
   const [display, setDisplay] = useState('');
+  const styles = useProfileButtonStyles();
 
   useEffect(() => {
     let _setAvatar = setAvatar;
@@ -106,7 +118,7 @@ export function ZProfileButton(props: IZProfileButtonProps) {
       <Button className='ZProfileButton-root ZProfileButton-profile' data-testid='ZProfileButton-profile' color='inherit' onClick={onProfile} disabled={disabled}>
         <Grid container spacing={2} justifyContent='center' alignItems='center' wrap='nowrap'>
           <Grid item>
-            <img className='ZProfileButton-avatar' data-testid='ZProfileButton-avatar' src={avatar} />
+            <img className={`ZProfileButton-avatar ${styles.classes.avatar}`} data-testid='ZProfileButton-avatar' src={avatar} />
           </Grid>
           <Hidden only='xs'>
             <Grid item>{display}</Grid>
