@@ -8,6 +8,7 @@ export { ZWebAppLayout } from './apps/web-app-layout';
 export { IZWebAppService, useWebAppService, ZWebAppService, ZWebAppServiceContext } from './apps/web-app-service.context';
 export { useWebApps, useWebAppsAndWatch, useWebAppsRoot, ZWebAppsContext } from './apps/web-apps.context';
 // Cards
+export { IZCardAvatarProps, ZCardAvatar } from './card/card-avatar';
 export { IZPaperCardProps, ZPaperCard } from './card/paper-card';
 // Codes
 export { IZHttpStatusCodeCardProps, ZHttpStatusCodeCard } from './codes/http-code-card';

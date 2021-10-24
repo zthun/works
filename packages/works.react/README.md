@@ -16,29 +16,6 @@ npm install @zthun/works.react
 yarn add @zthun/works.react
 ```
 
-You'll also want the themes package to make it look correct.
-
-```sh
-# NPM
-npm install @zthun/works.themes
-# Yarn
-yarn add @zthun/works.themes
-```
-
-The best way to apply the themes package is to simply use webpack in your client application and import the package directly.
-
-```less
-@import '@zthun/works.themes';
-```
-
-After that, every component in the @zthun/works.react package will look like it does on [zthunworks.com](https://zthunworks.com).
-
-Note that currently, the themes package is written in less. If you are using sass or css, you will want to import the css file instead of the less file.
-
-```scss
-@use '@zthun/works.themes/css/index';
-```
-
 ## Paper Card
 
 ![Paper Card](images/png/works.react.card.png)
@@ -119,7 +96,7 @@ export function MyPage() {
   const img = `images/svg/${pkg}.svg`;
   const src = `docs/${pkg}.typedoc.json`;
 
-  const avatar = <img className='ZPaperCard-avatar ZPaperCard-avatar-lg' src={img} />;
+  const avatar = <ZCardAvatar src={img} size='lg' />;
 
   return (
     <Grid container={true} spacing={3} className='ZApiPage-root' data-testid='ZApiPage-root' justifyContent='center'>
