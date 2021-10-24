@@ -66,12 +66,8 @@ export { useImageReader, ZImageReaderContext } from './image/image-reader.contex
 export { ZCircularBackdrop } from './loading/circular-backdrop';
 export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';
 // Login
-export { ZLoginCredentialsForm } from './login/login-credentials-form';
-export { IZLoginCredentialsFormProps } from './login/login-credentials-form.props';
-export { useLogin, useLoginState, ZLoginStateContext } from './login/login-state.context';
-export { ZLoginTab } from './login/login-tab.enum';
-export { ZLoginTabs } from './login/login-tabs';
-export { IZLoginTabsProps } from './login/login-tabs.props';
+export { IZLoginCredentialsFormProps, ZLoginCredentialsForm } from './login/login-credentials-form';
+export { IZLoginTabsProps, ZLoginTab, ZLoginTabs } from './login/login-tabs';
 // Profile
 export { IZProfileActivationFormProps, ZProfileActivationForm } from './profile/profile-activation-form';
 export { IZProfileAvatarFormProps, ZProfileAvatarForm } from './profile/profile-avatar-form';
