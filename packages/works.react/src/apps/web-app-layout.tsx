@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@mui/system';
 import React from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { GlobalStyles } from 'tss-react';
 import { ZAlertList } from '../alert/alert-list';
 import { renderStatusCodePage } from '../codes/status-code-page';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
@@ -22,6 +23,13 @@ export interface IZWebAppLayout extends IZTopNavProps, IZComponentHierarchy {
   home?: string;
 }
 
+const globalStyles = {
+  body: {
+    backgroundColor: 'whitesmoke',
+    margin: 0
+  }
+};
+
 /**
  * Represents a standard layout for a ZWebApp.
  *
@@ -41,6 +49,7 @@ export function ZWebAppLayout(props: IZWebAppLayout) {
 
   return (
     <div className='ZWebAppLayout-root'>
+      <GlobalStyles styles={globalStyles} />
       <ThemeProvider theme={theme}>
         <HashRouter>
           <ZTopNav {...props} />
