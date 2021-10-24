@@ -6,22 +6,34 @@ import { ZCardAvatar } from './card-avatar';
 
 describe('ZCardAvatar', () => {
   let src: string;
+  let size: 'auto' | 'max' | 'xl' | 'lg' | 'md' | 'sm';
 
   async function createTestTarget() {
-    const target = render(<ZCardAvatar src={src} size='md' />);
+    const target = render(<ZCardAvatar src={src} size={size} />);
     await waitFor(() => expect(target.container.querySelector('.ZCardAvatar-root')).not.toBeNull());
     return target;
   }
 
   beforeEach(() => {
     src = new ZUrlBuilder().gravatar().build();
+    size = undefined;
   });
 
-  it('should render the component.', () => {
+  it('should render the component.', async () => {
     // Arrange
     // Act
-    const target = createTestTarget();
+    const target = await createTestTarget();
     // Assert
     expect(target).toBeTruthy();
+  });
+
+  it('should render the component with the appropriate size.', async () => {
+    // Arrange
+    size = 'xl';
+    const target = await createTestTarget();
+    // Act
+    const actual = target.container.querySelector(`.ZCardAvatar-${size}`);
+    // Assert
+    expect(actual).not.toBeNull();
   });
 });
