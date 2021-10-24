@@ -154,7 +154,21 @@ export function useZthunworksTheme(): ZthunworksTheme {
         none: 0
       },
       toolbar: {
-        md: '64px'
+        md: '4em'
+      }
+    }
+  };
+
+  // Typography
+  mui.typography.h1.fontSize = base.sizing.font.xl;
+  mui.typography.h2.fontSize = base.sizing.font.lg;
+  mui.typography.h3.fontSize = base.sizing.font.md;
+
+  // Card
+  mui.components.MuiCardMedia = {
+    styleOverrides: {
+      root: {
+        objectFit: 'fill'
       }
     }
   };
