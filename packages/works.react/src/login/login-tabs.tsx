@@ -7,6 +7,7 @@ import { noop } from 'lodash';
 import React, { useState } from 'react';
 import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { IZComponentLoading } from '../component/component-loading.interface';
+import { makeStyles } from '../theme/make-styles';
 import { ZLoginCredentialsForm } from './login-credentials-form';
 
 /**
@@ -97,6 +98,12 @@ export interface IZLoginTabsProps extends IZComponentLoading, IZComponentDisable
   onRecoverCredentialsChange?(credentials: IZLogin): void;
 }
 
+const useLoginTabsStyles = makeStyles()((theme) => ({
+  container: {
+    paddingBottom: theme.sizing.gaps.sm
+  }
+}));
+
 /**
  * Represents a tab based ui that shows different variations of a {@link ZLoginCredentialsForm} component.
  *
@@ -128,6 +135,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
   } = props;
 
   const [tab, setTab] = useState(initialTab);
+  const styles = useLoginTabsStyles();
 
   /**
    * Occurs when the user changes a tab.
@@ -149,7 +157,7 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
 
   return (
     <div className='ZLoginTabs-root' data-testid='ZLoginTabs-root'>
-      <div className='ZLoginTabs-tab-container'>
+      <div className={`ZLoginTabs-tab-container ${styles.classes.container}`}>
         <Tabs centered={true} value={tab} onChange={handleTabChange}>
           {loginTab}
           {signUpTab}
