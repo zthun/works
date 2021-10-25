@@ -12,11 +12,76 @@ import { IZComponentHeader } from '../component/component-header.interface';
 import { IZComponentSizeable } from '../component/component-sizeable.interface';
 import { IZComponentSource } from '../component/component-source.interface';
 import { useHttpService } from '../http/http-service.context';
+import { makeStyles } from '../theme/make-styles';
 
 /**
  * Represents properties for the markdown viewer.
  */
 export interface IZMarkdownProps extends IZComponentHeader, IZComponentSizeable, IZComponentActionable, IZComponentSource {}
+
+const useMarkdownViewerStyles = makeStyles()((theme) => {
+  const tableBorder = `${theme.sizing.thickness.md} solid ${theme.palette.grey[400]}`;
+  const colorCode = '#1e1e1e';
+
+  const td = {
+    'padding': theme.sizing.gaps.sm,
+    'borderBottom': tableBorder,
+    'borderRight': tableBorder,
+
+    '&:last-child': {
+      borderRight: 0
+    }
+  };
+
+  return {
+    markdown: {
+      a: {
+        textDecoration: 'none',
+        color: theme.palette.primary.main
+      },
+
+      table: {
+        borderSpacing: theme.sizing.gaps.none,
+        border: tableBorder,
+
+        th: {
+          textAlign: 'left',
+          textTransform: 'uppercase',
+          color: 'gainsboro',
+          backgroundColor: colorCode,
+          ...td
+        },
+
+        td: td,
+
+        tr: {
+          '&:last-child': {
+            td: {
+              borderBottom: theme.sizing.gaps.none
+            }
+          }
+        }
+      },
+
+      blockquote: {
+        backgroundColor: 'gainsboro',
+        margin: theme.sizing.gaps.none,
+        padding: theme.sizing.gaps.md
+      },
+
+      // Note:  I don't know why 6em works and not 2em.
+      // Just going with it for now.
+      pre: {
+        maxWidth: 'calc(100vw - 6em)',
+        overflow: 'auto',
+        background: colorCode,
+        color: theme.palette.common.white,
+        border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[400]}`,
+        padding: theme.sizing.gaps.sm
+      }
+    }
+  };
+});
 
 /**
  * Renders markdown files from a url or content string.
@@ -31,6 +96,7 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
   const [markdown, setMarkdown] = useState('');
   const http = useHttpService();
   const markdownEl = useRef<HTMLDivElement>();
+  const styles = useMarkdownViewerStyles();
 
   useEffect(loadMarkdown, [src]);
 
@@ -77,7 +143,7 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
       onAction={onAction}
     >
       <div ref={markdownEl}>
-        <ReactMarkdown className='ZMarkdownViewer-markdown' remarkPlugins={[gfm]} linkTarget='_blank'>
+        <ReactMarkdown className={`ZMarkdownViewer-markdown ${styles.classes.markdown}`} remarkPlugins={[gfm]} linkTarget='_blank'>
           {markdown}
         </ReactMarkdown>
       </div>
