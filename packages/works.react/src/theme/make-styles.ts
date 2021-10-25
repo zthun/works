@@ -181,6 +181,15 @@ export function useZthunworksTheme(): ZthunworksTheme {
     }
   };
 
+  // Label
+  mui.components.MuiFormLabel = {
+    styleOverrides: {
+      asterisk: {
+        color: mui.palette.error.dark
+      }
+    }
+  };
+
   return Object.assign({}, mui, base);
 }
 

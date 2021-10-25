@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 import { IZLogin, ZLoginBuilder } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { FormEvent, useState } from 'react';
@@ -6,6 +6,7 @@ import { ZPaperCard } from '../card/paper-card';
 import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { IZComponentHeader } from '../component/component-header.interface';
 import { IZComponentLoading } from '../component/component-loading.interface';
+import { makeStyles } from '../theme/make-styles';
 
 /**
  * Represents properties for the ZLoginCredentialsForm.
@@ -101,6 +102,17 @@ export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZCompo
   onCredentialsChange(val: IZLogin): void;
 }
 
+const useLoginCredentialsFormStyles = makeStyles()((theme) => ({
+  root: {
+    'minWidth': theme.sizing.card.sm,
+    'maxWidth': theme.sizing.card.md,
+
+    '& .MuiTextField-root': {
+      marginBottom: theme.sizing.gaps.md
+    }
+  }
+}));
+
 /**
  * Represents a credentials form that allows you to modify an IZLogin object.
  *
@@ -132,6 +144,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
   const [email, setEmail] = useState(get(credentials, 'email', ''));
   const [password, setPassword] = useState(get(credentials, 'password', ''));
   const [confirm, setConfirm] = useState(get(credentials, 'confirm', ''));
+  const styles = useLoginCredentialsFormStyles();
 
   /**
    * Occurs when the user makes a change to the email field.
@@ -238,37 +251,12 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
     );
 
   return (
-    <form className='ZLoginCredentialsForm-root' data-testid='ZLoginCredentialsForm-root' noValidate={true} onSubmit={handleAction}>
+    <Box className={`ZLoginCredentialsForm-root ${styles.classes.root}`} data-testid='ZLoginCredentialsForm-root' component='form' noValidate={true} onSubmit={handleAction}>
       <ZPaperCard disabled={disabled} loading={loading} headerText={headerText} subHeaderText={subHeaderText} actionText={actionText} actionType='submit' avatar={avatar}>
         {emailTextField}
         {passwordTextField}
         {confirmTextField}
       </ZPaperCard>
-    </form>
+    </Box>
   );
 }
-
-/**
- * The default properties.
- *
- * @see IZLoginCredentialsFormProps for the default values.
- */
-ZLoginCredentialsForm.defaultProps = {
-  headerText: 'Create Account',
-  subHeaderText: 'Enter account credentials',
-  actionText: 'Create',
-  loading: false,
-  disabled: false,
-  avatar: null,
-
-  hideEmail: false,
-  hidePassword: false,
-  hideConfirm: false,
-
-  nameEmail: 'username',
-  namePassword: 'password',
-  nameConfirm: 'confirm',
-
-  credentials: null,
-  onCredentialsChange: noop
-};
