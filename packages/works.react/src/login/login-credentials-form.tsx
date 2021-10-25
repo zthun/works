@@ -19,7 +19,7 @@ export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZCompo
    *
    * @default "Create"
    */
-  actionText: string;
+  actionText?: string;
 
   /**
    * Gets or sets whether to hide the email field.
@@ -30,7 +30,7 @@ export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZCompo
    *
    * @default false
    */
-  hideEmail: boolean;
+  hideEmail?: boolean;
 
   /**
    * Gets or sets whether to hide the password field.
@@ -43,7 +43,7 @@ export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZCompo
    *
    * @default false
    */
-  hidePassword: boolean;
+  hidePassword?: boolean;
 
   /**
    * Gets or sets whether to hide the confirm password field.
@@ -54,7 +54,7 @@ export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZCompo
    *
    * @default false
    */
-  hideConfirm: boolean;
+  hideConfirm?: boolean;
 
   /**
    * Gets or sets the name of the email field.
@@ -63,7 +63,7 @@ export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZCompo
    *
    * @default 'username'
    */
-  nameEmail: string;
+  nameEmail?: string;
 
   /**
    * Gets or sets the name of the password field.
@@ -72,7 +72,7 @@ export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZCompo
    *
    * @default 'password'
    */
-  namePassword: string;
+  namePassword?: string;
 
   /**
    * Gets or sets the confirm field.
@@ -81,7 +81,7 @@ export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZCompo
    *
    * @default 'confirm'
    */
-  nameConfirm: string;
+  nameConfirm?: string;
 
   /**
    * Gets or sets the current credentials object.
@@ -91,7 +91,7 @@ export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZCompo
    *
    * @default null
    */
-  credentials: IZLogin;
+  credentials?: IZLogin;
 
   /**
    * Occurs when the user clicks the action button to confirm the credentials object.
@@ -109,9 +109,29 @@ export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZCompo
  * @returns The jsx that renders the credentials form.
  */
 export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
-  const [email, setEmail] = useState(get(props, 'credentials.email', ''));
-  const [password, setPassword] = useState(get(props, 'credentials.password', ''));
-  const [confirm, setConfirm] = useState(get(props, 'credentials.confirm', ''));
+  const {
+    headerText = 'Create Account',
+    subHeaderText = 'Enter account credentials',
+    actionText = 'Create',
+    loading = false,
+    disabled = false,
+    avatar = null,
+
+    hideEmail = false,
+    hidePassword = false,
+    hideConfirm = false,
+
+    nameEmail = 'username',
+    namePassword = 'password',
+    nameConfirm = 'confirm',
+
+    credentials = null,
+    onCredentialsChange = noop
+  } = props;
+
+  const [email, setEmail] = useState(get(credentials, 'email', ''));
+  const [password, setPassword] = useState(get(credentials, 'password', ''));
+  const [confirm, setConfirm] = useState(get(credentials, 'confirm', ''));
 
   /**
    * Occurs when the user makes a change to the email field.
@@ -149,16 +169,16 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
     e.preventDefault();
     let login = new ZLoginBuilder().email(email);
 
-    if (!props.hidePassword && !props.hideConfirm) {
+    if (!hidePassword && !hideConfirm) {
       login = login.password(password).confirm(confirm);
-    } else if (!props.hidePassword) {
+    } else if (!hidePassword) {
       login = login.password(password).autoConfirm();
     }
 
-    props.onCredentialsChange(login.build());
+    onCredentialsChange(login.build());
   }
 
-  const emailTextField = props.hideEmail ? null : (
+  const emailTextField = hideEmail ? null : (
     <TextField
       className='ZLoginCredentialsForm-input ZLoginCredentialsForm-input-email'
       data-testid='ZLoginCredentialsForm-input-email'
@@ -166,39 +186,39 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
       required={true}
       label='Email'
       type='email'
-      name={props.nameEmail}
-      autoComplete={props.nameEmail}
+      name={nameEmail}
+      autoComplete={nameEmail}
       margin='none'
       variant='outlined'
       autoFocus={true}
       value={email}
-      disabled={props.disabled}
+      disabled={disabled}
       onInput={handleEmailChange}
       onChange={handleEmailChange}
     />
   );
 
-  const passwordTextField = props.hidePassword ? null : (
+  const passwordTextField = hidePassword ? null : (
     <TextField
       className='ZLoginCredentialsForm-input ZLoginCredentialsForm-input-password'
       data-testid='ZLoginCredentialsForm-input-password'
       fullWidth={true}
       required={true}
       label='Password'
-      name={props.namePassword}
-      autoComplete={props.namePassword}
+      name={namePassword}
+      autoComplete={namePassword}
       type='password'
       margin='none'
       variant='outlined'
       value={password}
-      disabled={props.disabled}
+      disabled={disabled}
       onInput={handlePasswordChange}
       onChange={handlePasswordChange}
     />
   );
 
   const confirmTextField =
-    props.hidePassword || props.hideConfirm ? null : (
+    hidePassword || hideConfirm ? null : (
       <TextField
         className='ZLoginCredentialsForm-input ZLoginCredentialsForm-input-confirm'
         data-testid='ZLoginCredentialsForm-input-confirm'
@@ -206,12 +226,12 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
         required={true}
         label='Confirm password'
         type='password'
-        name={props.nameConfirm}
-        autoComplete={props.namePassword}
+        name={nameConfirm}
+        autoComplete={namePassword}
         margin='none'
         variant='outlined'
         value={confirm}
-        disabled={props.disabled}
+        disabled={disabled}
         onInput={handleConfirmChange}
         onChange={handleConfirmChange}
       />
@@ -219,7 +239,7 @@ export function ZLoginCredentialsForm(props: IZLoginCredentialsFormProps) {
 
   return (
     <form className='ZLoginCredentialsForm-root' data-testid='ZLoginCredentialsForm-root' noValidate={true} onSubmit={handleAction}>
-      <ZPaperCard disabled={props.disabled} loading={props.loading} headerText={props.headerText} subHeaderText={props.subHeaderText} actionText={props.actionText} actionType='submit' avatar={props.avatar}>
+      <ZPaperCard disabled={disabled} loading={loading} headerText={headerText} subHeaderText={subHeaderText} actionText={actionText} actionType='submit' avatar={avatar}>
         {emailTextField}
         {passwordTextField}
         {confirmTextField}
