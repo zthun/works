@@ -1,7 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import { ZLoginTab } from './login-tab.enum';
-import { ZLoginTabs } from './login-tabs';
+import { ZLoginTab, ZLoginTabs } from './login-tabs';
 
 describe('ZLoginTabs', () => {
   it('renders the default form.', () => {
@@ -16,7 +15,7 @@ describe('ZLoginTabs', () => {
   describe('Options', () => {
     it('shows the login tab if hideLoginTab is false.', () => {
       // Arrange
-      const target = render(<ZLoginTabs tab={ZLoginTab.Create} hideLoginTab={false} />);
+      const target = render(<ZLoginTabs initialTab={ZLoginTab.Create} hideLoginTab={false} />);
       // Act
       const actual = target.queryByTestId('ZLoginTabs-tab-login');
       // Assert
@@ -25,7 +24,7 @@ describe('ZLoginTabs', () => {
 
     it('hides the login tab if hideLoginTab is true.', () => {
       // Arrange
-      const target = render(<ZLoginTabs tab={ZLoginTab.Create} hideLoginTab={true} />);
+      const target = render(<ZLoginTabs initialTab={ZLoginTab.Create} hideLoginTab={true} />);
       // Act
       const actual = target.queryByTestId('ZLoginTabs-tab-login');
       // Assert
@@ -68,7 +67,7 @@ describe('ZLoginTabs', () => {
   describe('Tabs', () => {
     it('initializes to the login tab.', () => {
       // Arrange
-      const target = render(<ZLoginTabs tab={ZLoginTab.Login} />);
+      const target = render(<ZLoginTabs initialTab={ZLoginTab.Login} />);
       // Act
       const actual = target.queryByTestId('ZLoginTabs-form-login');
       // Assert
@@ -77,7 +76,7 @@ describe('ZLoginTabs', () => {
 
     it('initializes to the create tab.', () => {
       // Arrange
-      const target = render(<ZLoginTabs tab={ZLoginTab.Create} />);
+      const target = render(<ZLoginTabs initialTab={ZLoginTab.Create} />);
       // Act
       const actual = target.queryByTestId('ZLoginTabs-form-create');
       // Assert
@@ -86,7 +85,7 @@ describe('ZLoginTabs', () => {
 
     it('initializes to the recover tab.', () => {
       // Arrange
-      const target = render(<ZLoginTabs tab={ZLoginTab.Recover} />);
+      const target = render(<ZLoginTabs initialTab={ZLoginTab.Recover} />);
       // Act
       const actual = target.queryByTestId('ZLoginTabs-form-recover');
       // Assert
@@ -95,7 +94,7 @@ describe('ZLoginTabs', () => {
 
     it('switches to the recover tab.', () => {
       // Arrange
-      const target = render(<ZLoginTabs tab={ZLoginTab.Login} />);
+      const target = render(<ZLoginTabs initialTab={ZLoginTab.Login} />);
       // Act
       const tab = target.queryByTestId('ZLoginTabs-tab-recover');
       fireEvent.click(tab);
@@ -106,7 +105,7 @@ describe('ZLoginTabs', () => {
 
     it('switches to the create tab.', () => {
       // Arrange
-      const target = render(<ZLoginTabs tab={ZLoginTab.Recover} />);
+      const target = render(<ZLoginTabs initialTab={ZLoginTab.Recover} />);
       // Act
       const tab = target.queryByTestId('ZLoginTabs-tab-create');
       fireEvent.click(tab);
@@ -117,7 +116,7 @@ describe('ZLoginTabs', () => {
 
     it('switches to the login tab.', () => {
       // Arrange
-      const target = render(<ZLoginTabs tab={ZLoginTab.Create} />);
+      const target = render(<ZLoginTabs initialTab={ZLoginTab.Create} />);
       // Act
       const tab = target.queryByTestId('ZLoginTabs-tab-login');
       fireEvent.click(tab);

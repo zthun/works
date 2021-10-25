@@ -23,60 +23,51 @@ export enum ZLoginTab {
  */
 export interface IZLoginTabsProps extends IZComponentLoading, IZComponentDisabled {
   /**
-   * Gets or sets the selected tab.
+   * Gets or sets the initial selected tab.
    *
    * @default ZLoginTab.Login
    */
-  tab: ZLoginTab;
+  initialTab?: ZLoginTab;
 
   /**
    * Gets or sets the credentials for the login tab.
    *
    * @default null
    */
-  loginCredentials: IZLogin;
+  loginCredentials?: IZLogin;
 
   /**
    * Gets or sets the starting credentials for the create tab.
    *
    * @default null
    */
-  createCredentials: IZLogin;
+  createCredentials?: IZLogin;
 
   /**
    * Gets or sets the starting credentials for the recover tab.
    *
    * @default null
    */
-  recoverCredentials: IZLogin;
+  recoverCredentials?: IZLogin;
 
   /**
    * Gets or sets whether to hide the login tab.
    *
    * @default false
    */
-  hideLoginTab: boolean;
+  hideLoginTab?: boolean;
 
   /**
    * Gets or sets whether to hide the create tab.
    *
    * @default false
    */
-  hideCreateTab: boolean;
+  hideCreateTab?: boolean;
 
   /**
    * Gets or sets whether to hide the recover tab.
    */
-  hideRecoverTab: boolean;
-
-  /**
-   * Occurs when the tab changes.
-   *
-   * @param tab The tab id that was selected.
-   *
-   * @default noop
-   */
-  onTabChange(tab: ZLoginTab): void;
+  hideRecoverTab?: boolean;
 
   /**
    * Occurs when the login credentials are committed.
@@ -85,7 +76,7 @@ export interface IZLoginTabsProps extends IZComponentLoading, IZComponentDisable
    *
    * @default noop
    */
-  onLoginCredentialsChange(credentials: IZLogin): void;
+  onLoginCredentialsChange?(credentials: IZLogin): void;
 
   /**
    * Occurs when the create credentials are committed.
@@ -94,7 +85,7 @@ export interface IZLoginTabsProps extends IZComponentLoading, IZComponentDisable
    *
    * @default noop
    */
-  onCreateCredentialsChange(credentials: IZLogin): void;
+  onCreateCredentialsChange?(credentials: IZLogin): void;
 
   /**
    * Occurs when the recover credentials are committed.
@@ -103,7 +94,7 @@ export interface IZLoginTabsProps extends IZComponentLoading, IZComponentDisable
    *
    * @default noop
    */
-  onRecoverCredentialsChange(credentials: IZLogin): void;
+  onRecoverCredentialsChange?(credentials: IZLogin): void;
 }
 
 /**
@@ -118,7 +109,25 @@ export interface IZLoginTabsProps extends IZComponentLoading, IZComponentDisable
  * @returns The jsx that renders the login tabs.
  */
 export function ZLoginTabs(props: IZLoginTabsProps) {
-  const [tab, setTab] = useState(props.tab);
+  const {
+    loading = false,
+    disabled = false,
+
+    initialTab = ZLoginTab.Login,
+    loginCredentials = null,
+    createCredentials = null,
+    recoverCredentials = null,
+
+    hideLoginTab = false,
+    hideCreateTab = false,
+    hideRecoverTab = false,
+
+    onLoginCredentialsChange = noop,
+    onCreateCredentialsChange = noop,
+    onRecoverCredentialsChange = noop
+  } = props;
+
+  const [tab, setTab] = useState(initialTab);
 
   /**
    * Occurs when the user changes a tab.
@@ -130,14 +139,13 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
    */
   function handleTabChange(_: any, name: ZLoginTab) {
     setTab(name);
-    props.onTabChange(name);
   }
 
-  const loginTab = props.hideLoginTab ? null : <Tab className='ZLoginTabs-tab-login' data-testid='ZLoginTabs-tab-login' icon={<LockOpenIcon />} label='LOGIN' value={ZLoginTab.Login} disabled={props.loading} />;
+  const loginTab = hideLoginTab ? null : <Tab className='ZLoginTabs-tab-login' data-testid='ZLoginTabs-tab-login' icon={<LockOpenIcon />} label='LOGIN' value={ZLoginTab.Login} disabled={loading} />;
 
-  const signUpTab = props.hideCreateTab ? null : <Tab className='ZLoginTabs-tab-create' data-testid='ZLoginTabs-tab-create' icon={<PersonAddIcon />} label='CREATE' value={ZLoginTab.Create} disabled={props.loading} />;
+  const signUpTab = hideCreateTab ? null : <Tab className='ZLoginTabs-tab-create' data-testid='ZLoginTabs-tab-create' icon={<PersonAddIcon />} label='CREATE' value={ZLoginTab.Create} disabled={loading} />;
 
-  const recoverTab = props.hideRecoverTab ? null : <Tab className='ZLoginTabs-tab-recover' data-testid='ZLoginTabs-tab-recover' icon={<HelpOutlineIcon />} label='RECOVER' value={ZLoginTab.Recover} disabled={props.loading} />;
+  const recoverTab = hideRecoverTab ? null : <Tab className='ZLoginTabs-tab-recover' data-testid='ZLoginTabs-tab-recover' icon={<HelpOutlineIcon />} label='RECOVER' value={ZLoginTab.Recover} disabled={loading} />;
 
   return (
     <div className='ZLoginTabs-root' data-testid='ZLoginTabs-root'>
@@ -155,11 +163,11 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
           subHeaderText='Enter your credentials'
           actionText='Login'
           avatar={<LockOpenIcon fontSize='large' />}
-          loading={props.loading}
-          disabled={props.disabled}
+          loading={loading}
+          disabled={disabled}
           hideConfirm={true}
-          credentials={props.loginCredentials}
-          onCredentialsChange={props.onLoginCredentialsChange}
+          credentials={loginCredentials}
+          onCredentialsChange={onLoginCredentialsChange}
         />
       </div>
 
@@ -169,13 +177,13 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
           subHeaderText='Enter new account information'
           actionText='Create account'
           avatar={<PersonAddIcon fontSize='large' />}
-          loading={props.loading}
-          disabled={props.disabled}
+          loading={loading}
+          disabled={disabled}
           nameEmail='new-email'
           namePassword='new-password'
           nameConfirm='new-password-confirm'
-          credentials={props.createCredentials}
-          onCredentialsChange={props.onCreateCredentialsChange}
+          credentials={createCredentials}
+          onCredentialsChange={onCreateCredentialsChange}
         />
       </div>
 
@@ -185,37 +193,15 @@ export function ZLoginTabs(props: IZLoginTabsProps) {
           subHeaderText='Get back into your account'
           actionText='Request password reset'
           avatar={<HelpOutlineIcon fontSize='large' />}
-          loading={props.loading}
-          disabled={props.disabled}
+          loading={loading}
+          disabled={disabled}
           hidePassword={true}
           hideConfirm={true}
           nameEmail='recover-email'
-          credentials={props.recoverCredentials}
-          onCredentialsChange={props.onRecoverCredentialsChange}
+          credentials={recoverCredentials}
+          onCredentialsChange={onRecoverCredentialsChange}
         />
       </div>
     </div>
   );
 }
-
-/**
- * The default properties.  See {@link IZLoginTabsProps} for values.
- */
-ZLoginTabs.defaultProps = {
-  loading: false,
-  disabled: false,
-
-  tab: ZLoginTab.Login,
-  loginCredentials: null,
-  createCredentials: null,
-  recoverCredentials: null,
-
-  hideLoginTab: false,
-  hideCreateTab: false,
-  hideRecoverTab: false,
-
-  onTabChange: noop,
-  onLoginCredentialsChange: noop,
-  onCreateCredentialsChange: noop,
-  onRecoverCredentialsChange: noop
-};
