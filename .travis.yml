@@ -1,8 +1,8 @@
 language: node_js
-node_js: 16.2.0
+node_js: 16.11.1
 sudo: required
 install:
-  - npm ci
+  - yarn install
 script:
   - yarn lint
   - yarn test
