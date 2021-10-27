@@ -1,6 +1,33 @@
 import { Typography } from '@mui/material';
+import { IZTypedocComment } from '@zthun/works.core';
 import React from 'react';
-import { IZTypedocCommentViewerProps } from './typedoc-comment-viewer.props';
+import { makeStyles } from '../theme/make-styles';
+
+/**
+ * Represents the properties for the comment viewer.
+ */
+export interface IZTypedocCommentViewerProps {
+  /**
+   * The comment to render.
+   */
+  comment: IZTypedocComment;
+}
+
+const useTypedocCommentViewerStyles = makeStyles()((theme) => {
+  const token = {
+    'marginBottom': theme.sizing.gaps.md,
+
+    '&.MuiTypography-root': {
+      marginBottom: theme.sizing.gaps.md
+    }
+  };
+
+  return {
+    short: token,
+    text: token,
+    returns: token
+  };
+});
 
 /**
  * Renders a typedoc comment object.
@@ -10,33 +37,38 @@ import { IZTypedocCommentViewerProps } from './typedoc-comment-viewer.props';
  * @returns The jsx for the comment viewer.
  */
 export function ZTypedocCommentViewer(props: IZTypedocCommentViewerProps) {
-  if (!props.comment) {
+  const { comment } = props;
+  const styles = useTypedocCommentViewerStyles();
+
+  if (!comment) {
     return null;
   }
 
-  const short = props.comment.shortText ? (
-    <Typography className='ZTypedocCommentViewer-short' variant='body2'>
-      {props.comment.shortText}
+  const { shortText, text, returns } = comment;
+
+  const shortNode = shortText ? (
+    <Typography className={`ZTypedocCommentViewer-short ${styles.classes.short}`} variant='body2'>
+      {shortText}
     </Typography>
   ) : null;
 
-  const long = props.comment.text ? (
-    <Typography className='ZTypedocCommentViewer-text' variant='body2'>
-      {props.comment.text}
+  const longNode = text ? (
+    <Typography className={`ZTypedocCommentViewer-text ${styles.classes.text}`} variant='body2'>
+      {text}
     </Typography>
   ) : null;
 
-  const returns = props.comment.returns ? (
-    <Typography className='ZTypedocCommentViewer-returns' variant='body2'>
-      {props.comment.returns}
+  const returnNode = returns ? (
+    <Typography className={`ZTypedocCommentViewer-returns ${styles.classes.returns}`} variant='body2'>
+      {returns}
     </Typography>
   ) : null;
 
   return (
     <div className='ZTypedocCommentViewer-root' data-testid='ZTypedocCommentViewer-root'>
-      {short}
-      {long}
-      {returns}
+      {shortNode}
+      {longNode}
+      {returnNode}
     </div>
   );
 }

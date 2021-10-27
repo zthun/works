@@ -31,8 +31,7 @@ export { ZContent } from './content/content';
 // Doc
 export { renderMarkdownPage, ZMarkdownPage } from './doc/markdown-page';
 export { IZMarkdownProps, ZMarkdownViewer } from './doc/markdown-viewer';
-export { ZTypedocCommentViewer } from './doc/typedoc-comment-viewer';
-export { IZTypedocCommentViewerProps } from './doc/typedoc-comment-viewer.props';
+export { IZTypedocCommentViewerProps, ZTypedocCommentViewer } from './doc/typedoc-comment-viewer';
 export { createTypedocTypography } from './doc/typedoc-create-typography.function';
 export { ZTypedocEntityViewer } from './doc/typedoc-entity-viewer';
 export { IZTypedocEntityViewerProps } from './doc/typedoc-entity-viewer.props';
