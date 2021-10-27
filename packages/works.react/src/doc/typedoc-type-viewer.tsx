@@ -1,9 +1,82 @@
 import { IZTypedocType, ZTypedocTypeKind } from '@zthun/works.core';
-import { noop } from 'lodash';
 import React, { ElementType, Fragment, ReactNode } from 'react';
+import { shade } from '../theme/shade';
+import { IZComponentEntityRedirect } from '../component/component-entity-redirect.interface';
+import { makeStyles } from '../theme/make-styles';
 import { createTypedocTypography } from './typedoc-create-typography.function';
 import { ZTypedocTypeListViewer } from './typedoc-type-list-viewer';
-import { IZTypedocTypeViewerProps } from './typedoc-type-viewer.props';
+
+/**
+ * Represents properties for the type viewer.
+ */
+export interface IZTypedocTypeViewerProps extends IZComponentEntityRedirect<number> {
+  /**
+   * The type to view.
+   */
+  type: IZTypedocType;
+
+  /**
+   * Suffix element.
+   *
+   * @default null
+   */
+  suffix?: ReactNode;
+
+  /**
+   * Prefix element.
+   *
+   * @default null
+   */
+  prefix?: ReactNode;
+
+  /**
+   * An option that forces the type to be situated at a div root instead of a fragment.
+   *
+   * @default true
+   */
+  container?: boolean;
+
+  /**
+   * An option to ignore reference ids even if they are present.
+   *
+   * @default false
+   */
+  ignoreReferenceIds?: boolean;
+}
+
+export const useTypedocTypeViewerStyles = makeStyles()((theme) => {
+  return {
+    root: {
+      'fontFamily': theme.fonts.fixed,
+      'display': 'inline-block',
+
+      'a': {
+        'cursor': 'pointer',
+        'color': theme.palette.secondary.main,
+
+        '&:hover': {
+          color: shade(theme.palette.secondary.main, -64)
+        }
+      },
+
+      'strong': {
+        fontWeight: 'bold'
+      },
+
+      '.MuiTypography-root': {
+        fontFamily: theme.fonts.fixed
+      }
+    },
+
+    title: {
+      fontStyle: 'italic'
+    },
+
+    keyword: {
+      whiteSpace: 'pre-wrap'
+    }
+  };
+});
 
 /**
  * Constructs the jsx for the typedoc type viewer.
@@ -13,6 +86,9 @@ import { IZTypedocTypeViewerProps } from './typedoc-type-viewer.props';
  * @returns The jsx for the type viewer.
  */
 export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
+  const { type, suffix = null, prefix = null, container = true, ignoreReferenceIds = false, onEntity } = props;
+  const styles = useTypedocTypeViewerStyles();
+
   /**
    * Occurs when the user clicks on another entity.
    *
@@ -21,7 +97,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function handleReference(e: any) {
     const element = e.target as HTMLElement;
     const id = +element.getAttribute('data-entity');
-    props.onEntity(id);
+    onEntity(id);
   }
 
   /**
@@ -39,9 +115,9 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     return createTypedocTypography(children, component, undefined, clasz, id, click);
   }
 
-  const createKeyword: (children: ReactNode) => ReactNode = createTypography.bind(null, 'ZTypedocTypeViewer-keyword', 'span');
+  const createKeyword: (children: ReactNode) => ReactNode = createTypography.bind(null, `ZTypedocTypeViewer-keyword ${styles.classes.keyword}`, 'span');
   const createText: (children: ReactNode) => ReactNode = createTypography.bind(null, 'ZTypedocTypeViewer-text', 'span');
-  const createTitle: (component: ElementType<any>, children: ReactNode, id?: any, click?: (e: any) => void) => ReactNode = createTypography.bind(null, 'ZTypedocTypeViewer-title');
+  const createTitle: (component: ElementType<any>, children: ReactNode, id?: any, click?: (e: any) => void) => ReactNode = createTypography.bind(null, `ZTypedocTypeViewer-title ${styles.classes.title}`);
 
   /**
    * Creates an inner type.
@@ -54,7 +130,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for the inner type.
    */
   function createType(ty: IZTypedocType, prefix: ReactNode = null, suffix: ReactNode = null) {
-    return <ZTypedocTypeViewer type={ty} container={false} onEntity={props.onEntity} prefix={prefix} suffix={suffix} />;
+    return <ZTypedocTypeViewer type={ty} container={false} onEntity={onEntity} prefix={prefix} suffix={suffix} />;
   }
 
   /**
@@ -69,7 +145,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    *
    */
   function createTypeList(types: IZTypedocType[], prefix?: ReactNode, suffix?: ReactNode, separator?: string) {
-    return <ZTypedocTypeListViewer types={types} prefix={prefix} suffix={suffix} separator={separator} container={false} onEntity={props.onEntity} />;
+    return <ZTypedocTypeListViewer types={types} prefix={prefix} suffix={suffix} separator={separator} container={false} onEntity={onEntity} />;
   }
 
   /**
@@ -80,8 +156,8 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function createIntrinsicElement() {
     return (
       <Fragment>
-        {createTitle('span', props.type.name)}
-        {createTypeList(props.type.typeArguments, '<', '>')}
+        {createTitle('span', type.name)}
+        {createTypeList(type.typeArguments, '<', '>')}
       </Fragment>
     );
   }
@@ -92,14 +168,14 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for a literal element.
    */
   function createLiteralElement() {
-    const value = props.type.value;
+    const value = type.value;
     const literalType = typeof value;
     const wrap = literalType === 'string' ? createKeyword('"') : null;
 
     return (
       <Fragment>
         {wrap}
-        {createText(props.type.value)}
+        {createText(type.value)}
         {wrap}
       </Fragment>
     );
@@ -111,14 +187,14 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for a reference type element.
    */
   function createReferenceElement() {
-    if (props.ignoreReferenceIds || props.type.id == null) {
+    if (ignoreReferenceIds || type.id == null) {
       return createIntrinsicElement();
     }
 
     return (
       <Fragment>
-        {createTitle('a', props.type.name, props.type.id, handleReference)}
-        {createTypeList(props.type.typeArguments, '<', '>')}
+        {createTitle('a', type.name, type.id, handleReference)}
+        {createTypeList(type.typeArguments, '<', '>')}
       </Fragment>
     );
   }
@@ -131,13 +207,13 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function createConditionalElement() {
     return (
       <Fragment>
-        {createType(props.type.checkType)}
+        {createType(type.checkType)}
         {createKeyword(' extends ')}
-        {createType(props.type.extendsType)}
+        {createType(type.extendsType)}
         {createKeyword(' ? ')}
-        {createType(props.type.trueType)}
+        {createType(type.trueType)}
         {createKeyword(' : ')}
-        {createType(props.type.falseType)}
+        {createType(type.falseType)}
       </Fragment>
     );
   }
@@ -148,11 +224,11 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for a predicate element.
    */
   function createPredicateElement() {
-    const asserts: ReactNode = props.type.asserts ? createKeyword('asserts ') : null;
-    const target: ReactNode = props.type.targetType ? (
+    const asserts: ReactNode = type.asserts ? createKeyword('asserts ') : null;
+    const target: ReactNode = type.targetType ? (
       <Fragment>
         {createKeyword(' is ')}
-        {createType(props.type.targetType)}
+        {createType(type.targetType)}
       </Fragment>
     ) : null;
 
@@ -173,9 +249,9 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function createIndexAccessElement() {
     return (
       <Fragment>
-        {createType(props.type.objectType)}
+        {createType(type.objectType)}
         {createKeyword('[')}
-        {createType(props.type.indexType)}
+        {createType(type.indexType)}
         {createKeyword(']')}
       </Fragment>
     );
@@ -191,18 +267,18 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       '+': 'readonly ',
       '-': '-readonly ',
       '': null
-    }[props.type.readonlyModifier || ''];
+    }[type.readonlyModifier || ''];
 
     const opt = {
       '+': '?',
       '-': '-?',
       '': null
-    }[props.type.optionalModifier || ''];
+    }[type.optionalModifier || ''];
 
-    const as = props.type.nameType ? (
+    const as = type.nameType ? (
       <Fragment>
         {createKeyword(' as ')}
-        {createType(props.type.nameType)}
+        {createType(type.nameType)}
       </Fragment>
     ) : null;
 
@@ -211,14 +287,14 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
         {createKeyword('{')}
         {createKeyword(read)}
         {createKeyword('[')}
-        {createText(props.type.parameter)}
+        {createText(type.parameter)}
         {createKeyword(' in ')}
-        {createType(props.type.parameterType)}
+        {createType(type.parameterType)}
         {as}
         {createKeyword(']')}
         {createKeyword(opt)}
         {createKeyword(': ')}
-        {createType(props.type.templateType)}
+        {createType(type.templateType)}
         {createKeyword('}')}
       </Fragment>
     );
@@ -235,7 +311,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
     return (
       <Fragment>
         {createKeyword('infer ')}
-        {createText(props.type.name)}
+        {createText(type.name)}
       </Fragment>
     );
   }
@@ -247,7 +323,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    */
   function createReflectionElement() {
     // This will be done later.  For now, we will stub this one out.
-    const isFunction = !props.type.declaration.children && props.type.declaration.signatures;
+    const isFunction = !type.declaration.children && type.declaration.signatures;
     const display = isFunction ? 'function' : 'object';
 
     return <Fragment>{createType({ type: ZTypedocTypeKind.Intrinsic, name: display })}</Fragment>;
@@ -259,9 +335,9 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
    * @returns The jsx for the type.
    */
   function createTypeElement() {
-    switch (props.type.type) {
+    switch (type.type) {
       case ZTypedocTypeKind.Array:
-        return createType(props.type.elementType, null, '[]');
+        return createType(type.elementType, null, '[]');
       case ZTypedocTypeKind.Conditional:
         return createConditionalElement();
       case ZTypedocTypeKind.IndexedAccess:
@@ -269,7 +345,7 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       case ZTypedocTypeKind.Inferred:
         return createInferredElement();
       case ZTypedocTypeKind.Intersection:
-        return createTypeList(props.type.types, null, null, ' & ');
+        return createTypeList(type.types, null, null, ' & ');
       case ZTypedocTypeKind.Intrinsic:
       case ZTypedocTypeKind.TypeParameter:
         return createIntrinsicElement();
@@ -278,23 +354,23 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
       case ZTypedocTypeKind.Mapped:
         return createMappedElement();
       case ZTypedocTypeKind.Optional:
-        return createType(props.type.elementType, null, '?');
+        return createType(type.elementType, null, '?');
       case ZTypedocTypeKind.Predicate:
         return createPredicateElement();
       case ZTypedocTypeKind.Query:
-        return createType(props.type.queryType, 'typeof ');
+        return createType(type.queryType, 'typeof ');
       case ZTypedocTypeKind.Reference:
         return createReferenceElement();
       case ZTypedocTypeKind.Reflection:
         return createReflectionElement();
       case ZTypedocTypeKind.Rest:
-        return createType(props.type.elementType, '...');
+        return createType(type.elementType, '...');
       case ZTypedocTypeKind.Tuple:
-        return createTypeList(props.type.elements, '[', ']');
+        return createTypeList(type.elements, '[', ']');
       case ZTypedocTypeKind.TypeOperator:
-        return createType(props.type.target, `${props.type.operator} `);
+        return createType(type.target, `${type.operator} `);
       case ZTypedocTypeKind.Union:
-        return createTypeList(props.type.types, null, null, ' | ');
+        return createTypeList(type.types, null, null, ' | ');
       // case ZTypedocTypeKind.Unknown:
       default:
         return null;
@@ -309,24 +385,16 @@ export function ZTypedocTypeViewer(props: IZTypedocTypeViewerProps) {
   function createFlow() {
     return (
       <Fragment>
-        {createKeyword(props.prefix)}
+        {createKeyword(prefix)}
         {createTypeElement()}
-        {createKeyword(props.suffix)}
+        {createKeyword(suffix)}
       </Fragment>
     );
   }
 
-  if (!props.type) {
+  if (!type) {
     return null;
   }
 
-  return props.container ? <div className='ZTypedocTypeViewer-root'>{createFlow()}</div> : <Fragment>{createFlow()}</Fragment>;
+  return container ? <div className={`ZTypedocTypeViewer-root ${styles.classes.root}`}>{createFlow()}</div> : <Fragment>{createFlow()}</Fragment>;
 }
-
-ZTypedocTypeViewer.defaultProps = {
-  suffix: null,
-  prefix: null,
-  container: true,
-  ignoreReferenceIds: false,
-  onEntity: noop
-};

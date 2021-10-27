@@ -1,8 +1,56 @@
-import { noop } from 'lodash';
-import React, { Fragment } from 'react';
+import { IZTypedocType } from '@zthun/works.core';
+import React, { ElementType, Fragment, ReactNode } from 'react';
+import { IZComponentEntityRedirect } from '../component/component-entity-redirect.interface';
 import { createTypedocTypography } from './typedoc-create-typography.function';
-import { IZTypedocTypeListViewerProps } from './typedoc-type-list-viewer.props';
-import { ZTypedocTypeViewer } from './typedoc-type-viewer';
+import { useTypedocTypeViewerStyles, ZTypedocTypeViewer } from './typedoc-type-viewer';
+
+/**
+ * Represents properties for the ZTypedocTypeListViewer component.
+ */
+export interface IZTypedocTypeListViewerProps extends IZComponentEntityRedirect<number> {
+  /**
+   * The list of types to render.
+   */
+  types: IZTypedocType[];
+
+  /**
+   * The optional prefix.
+   *
+   * @default null
+   */
+  prefix?: ReactNode;
+
+  /**
+   * The optional suffix.
+   *
+   * @default null
+   */
+  suffix?: ReactNode;
+
+  /**
+   * How to render the prefix node.
+   *
+   * @default 'span'
+   */
+  prefixContainer?: ElementType<any>;
+
+  /**
+   * How to render the suffix.
+   *
+   * @default 'span'
+   */
+  suffixContainer?: ElementType<any>;
+
+  /**
+   * The optional separator.
+   */
+  separator?: ReactNode;
+
+  /**
+   * A flag that determines whether or not to show the component in a root container or to inject it inline with a fragment root.
+   */
+  container?: boolean;
+}
 
 /**
  * Renders a type list.
@@ -12,7 +60,10 @@ import { ZTypedocTypeViewer } from './typedoc-type-viewer';
  * @returns The jsx for a type list.
  */
 export function ZTypedocTypeListViewer(props: IZTypedocTypeListViewerProps) {
-  if (!props.types || !props.types.length) {
+  const { types, prefix = null, prefixContainer = 'span', suffix = null, suffixContainer = 'span', separator = ', ', container = true, onEntity } = props;
+  const styles = useTypedocTypeViewerStyles();
+
+  if (!types || !types.length) {
     return null;
   }
 
@@ -24,11 +75,11 @@ export function ZTypedocTypeListViewer(props: IZTypedocTypeListViewerProps) {
   function createFlow() {
     return (
       <Fragment>
-        {createTypedocTypography(props.prefix, props.prefixContainer, undefined, 'ZTypedocTypeListViewer-keyword')}
-        {props.types.map((ty, i) => (
-          <ZTypedocTypeViewer key={i} type={ty} container={props.container} onEntity={props.onEntity} suffix={i === props.types.length - 1 ? null : props.separator} />
+        {createTypedocTypography(prefix, prefixContainer, undefined, `ZTypedocTypeListViewer-keyword ${styles.classes.keyword}`)}
+        {types.map((ty, i) => (
+          <ZTypedocTypeViewer key={i} type={ty} container={container} onEntity={onEntity} suffix={i === types.length - 1 ? null : separator} />
         ))}
-        {createTypedocTypography(props.suffix, props.suffixContainer, undefined, 'ZTypedocTypeListViewer-keyword')}
+        {createTypedocTypography(suffix, suffixContainer, undefined, `ZTypedocTypeListViewer-keyword ${styles.classes.keyword}`)}
       </Fragment>
     );
   }
@@ -40,21 +91,11 @@ export function ZTypedocTypeListViewer(props: IZTypedocTypeListViewerProps) {
    */
   function createContainerFlow() {
     return (
-      <div className='ZTypedocTypeListViewer-root' data-testid='ZTypedocTypeListViewer-root'>
+      <div className={`ZTypedocTypeListViewer-root ${styles.classes.root}`} data-testid='ZTypedocTypeListViewer-root'>
         {createFlow()}
       </div>
     );
   }
 
-  return props.container ? createContainerFlow() : createFlow();
+  return container ? createContainerFlow() : createFlow();
 }
-
-ZTypedocTypeListViewer.defaultProps = {
-  prefix: null,
-  prefixContainer: 'span',
-  suffix: null,
-  suffixContainer: 'span',
-  separator: ', ',
-  container: true,
-  onEntity: noop
-};
