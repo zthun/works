@@ -44,9 +44,9 @@ describe('ZProfileForm', () => {
   }
 
   beforeEach(() => {
-    hideAccountInformation = false;
-    hidePassword = false;
-    disabled = false;
+    hideAccountInformation = undefined;
+    hidePassword = undefined;
+    disabled = undefined;
     profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').build();
 
     const canvas = document.createElement('canvas');
@@ -56,7 +56,7 @@ describe('ZProfileForm', () => {
     imageReader = createMocked<IZImageReader>(['read']);
     imageReader.read.mockResolvedValue(canvas);
 
-    onProfileChange = jest.fn();
+    onProfileChange = undefined;
   });
 
   describe('Disabled', () => {
@@ -201,6 +201,10 @@ describe('ZProfileForm', () => {
   });
 
   describe('Save', () => {
+    beforeEach(() => {
+      onProfileChange = jest.fn();
+    });
+
     it('should fire the profileChange method with the updated profile.', async () => {
       // Arrange
       const target = await createTestTarget();

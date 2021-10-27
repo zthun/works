@@ -28,9 +28,9 @@ describe('ZProfileActivationForm', () => {
   }
 
   beforeEach(() => {
-    disabled = false;
+    disabled = undefined;
     activation = new ZProfileActivationBuilder().email('gambit@marvel.com').build();
-    onActivationChange = jest.fn();
+    onActivationChange = undefined;
   });
 
   it('renders the form.', async () => {
@@ -43,6 +43,10 @@ describe('ZProfileActivationForm', () => {
   });
 
   describe('Activation', () => {
+    beforeEach(() => {
+      onActivationChange = jest.fn();
+    });
+
     it('should update the activation.', async () => {
       // Arrange
       const target = await createTestTarget();
