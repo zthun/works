@@ -36,8 +36,7 @@ export { createTypedocTypography } from './doc/typedoc-create-typography.functio
 export { ZTypedocEntityViewer } from './doc/typedoc-entity-viewer';
 export { IZTypedocEntityViewerProps } from './doc/typedoc-entity-viewer.props';
 export { IZTypedocFlagsViewerProps, ZTypedocFlagsViewer } from './doc/typedoc-flags-viewer';
-export { ZTypedocIcon } from './doc/typedoc-icon';
-export { IZTypedocIconProps } from './doc/typedoc-icon.props';
+export { IZTypedocIconProps, ZTypedocIcon } from './doc/typedoc-icon';
 export { IZTypedocSignatureListViewerProps, ZTypedocSignatureListViewer } from './doc/typedoc-signature-list-viewer';
 export { IZTypedocTypeListViewerProps, ZTypedocTypeListViewer } from './doc/typedoc-type-list-viewer';
 export { IZTypedocTypeParametersViewerProps, ZTypedocTypeParametersViewer } from './doc/typedoc-type-parameters-viewer';
