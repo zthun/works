@@ -15,15 +15,11 @@ export interface IZTypedocTypeListViewerProps extends IZComponentEntityRedirect<
 
   /**
    * The optional prefix.
-   *
-   * @default null
    */
   prefix?: ReactNode;
 
   /**
    * The optional suffix.
-   *
-   * @default null
    */
   suffix?: ReactNode;
 
@@ -60,7 +56,7 @@ export interface IZTypedocTypeListViewerProps extends IZComponentEntityRedirect<
  * @returns The jsx for a type list.
  */
 export function ZTypedocTypeListViewer(props: IZTypedocTypeListViewerProps) {
-  const { types, prefix = null, prefixContainer = 'span', suffix = null, suffixContainer = 'span', separator = ', ', container = true, onEntity } = props;
+  const { types, prefix, prefixContainer = 'span', suffix, suffixContainer = 'span', separator = ', ', container = true, onEntity } = props;
   const styles = useTypedocTypeViewerStyles();
 
   if (!types || !types.length) {

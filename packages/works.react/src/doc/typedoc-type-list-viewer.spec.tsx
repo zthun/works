@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { render } from '@testing-library/react';
 import { IZTypedocType, ZTypedocTypeKind } from '@zthun/works.core';
+import { noop } from 'lodash';
 import React from 'react';
 import { ZTypedocTypeListViewer } from './typedoc-type-list-viewer';
 
@@ -9,7 +10,7 @@ describe('ZTypedocTypeListViewer', () => {
   let container: boolean;
 
   function createTestTarget() {
-    return render(<ZTypedocTypeListViewer types={types} prefix='[' suffix=']' separator=';' container={container} />);
+    return render(<ZTypedocTypeListViewer types={types} prefix='[' suffix=']' separator=';' container={container} onEntity={noop} />);
   }
 
   beforeEach(() => {
