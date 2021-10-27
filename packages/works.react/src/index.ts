@@ -35,8 +35,7 @@ export { IZTypedocCommentViewerProps, ZTypedocCommentViewer } from './doc/typedo
 export { createTypedocTypography } from './doc/typedoc-create-typography.function';
 export { ZTypedocEntityViewer } from './doc/typedoc-entity-viewer';
 export { IZTypedocEntityViewerProps } from './doc/typedoc-entity-viewer.props';
-export { ZTypedocFlagsViewer } from './doc/typedoc-flags-viewer';
-export { IZTypedocFlagsViewerProps } from './doc/typedoc-flags-viewer.props';
+export { IZTypedocFlagsViewerProps, ZTypedocFlagsViewer } from './doc/typedoc-flags-viewer';
 export { ZTypedocIcon } from './doc/typedoc-icon';
 export { IZTypedocIconProps } from './doc/typedoc-icon.props';
 export { IZTypedocSignatureListViewerProps, ZTypedocSignatureListViewer } from './doc/typedoc-signature-list-viewer';
