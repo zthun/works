@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { act, fireEvent, render } from '@testing-library/react';
 import { IZTypedocEntity, ZTypedocKind, ZTypedocTypeKind } from '@zthun/works.core';
-import { first, last } from 'lodash';
+import { first, last, noop } from 'lodash';
 import React from 'react';
 import { ZTypedocSignatureListViewer } from './typedoc-signature-list-viewer';
 
@@ -9,7 +9,7 @@ describe('ZTypedocSignatureListViewer', () => {
   let signatures: IZTypedocEntity[];
 
   function createTestTarget() {
-    return render(<ZTypedocSignatureListViewer signatures={signatures} />);
+    return render(<ZTypedocSignatureListViewer signatures={signatures} onEntity={noop} />);
   }
 
   function assertRendersSignature(expected: string) {

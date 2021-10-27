@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { render } from '@testing-library/react';
 import { IZTypedocEntity, ZTypedocKind, ZTypedocTypeKind } from '@zthun/works.core';
+import { noop } from 'lodash';
 import React from 'react';
 import { ZTypedocTypeParametersViewer } from './typedoc-type-parameters-viewer';
 
@@ -8,7 +9,7 @@ describe('ZTypedocTypeParametersViewer', () => {
   let types: IZTypedocEntity[];
 
   function createTestTarget() {
-    return render(<ZTypedocTypeParametersViewer types={types} />);
+    return render(<ZTypedocTypeParametersViewer types={types} onEntity={noop} />);
   }
 
   describe('Falsy', () => {

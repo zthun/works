@@ -40,12 +40,10 @@ export { ZTypedocFlagsViewer } from './doc/typedoc-flags-viewer';
 export { IZTypedocFlagsViewerProps } from './doc/typedoc-flags-viewer.props';
 export { ZTypedocIcon } from './doc/typedoc-icon';
 export { IZTypedocIconProps } from './doc/typedoc-icon.props';
-export { ZTypedocSignatureListViewer } from './doc/typedoc-signature-list-viewer';
-export { IZTypedocSignatureListViewerProps } from './doc/typedoc-signature-list-viewer.props';
+export { IZTypedocSignatureListViewerProps, ZTypedocSignatureListViewer } from './doc/typedoc-signature-list-viewer';
 export { ZTypedocTypeListViewer } from './doc/typedoc-type-list-viewer';
 export { IZTypedocTypeListViewerProps } from './doc/typedoc-type-list-viewer.props';
-export { ZTypedocTypeParametersViewer } from './doc/typedoc-type-parameters-viewer';
-export { IZTypedocTypeParametersViewerProps } from './doc/typedoc-type-parameters-viewer.props';
+export { IZTypedocTypeParametersViewerProps, ZTypedocTypeParametersViewer } from './doc/typedoc-type-parameters-viewer';
 export { ZTypedocTypeViewer } from './doc/typedoc-type-viewer';
 export { IZTypedocTypeViewerProps } from './doc/typedoc-type-viewer.props';
 export { ZTypedocViewer } from './doc/typedoc-viewer';
@@ -57,7 +55,7 @@ export { useErrorHandler, ZErrorHandlerContext } from './error/error-handler.con
 export { ZErrorMessageHandlerAlert } from './error/error-message-handler-alert';
 export { ZErrorMessageHandlerLogger } from './error/error-message-handler-logger';
 // File
-export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelect as ZFileSelectInput, ZFileSelectContext } from './file/file-select.context';
+export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelectContext } from './file/file-select.context';
 // Http
 export { useHttpService, ZHttpServiceContext } from './http/http-service.context';
 // Image
@@ -80,6 +78,7 @@ export { ZDataState } from './store/data-state.class';
 export { IZDataState } from './store/data-state.interface';
 export { useWatchableState } from './store/use-watchable-state.hook';
 // Theme
+export { shade } from './theme/shade';
 export { makeStyles } from './theme/make-styles';
 // Top
 export { ZTopNavAvatar } from './top/top-nav-avatar';
