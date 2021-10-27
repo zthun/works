@@ -41,8 +41,7 @@ export { IZTypedocTypeListViewerProps, ZTypedocTypeListViewer } from './doc/type
 export { IZTypedocTypeParametersViewerProps, ZTypedocTypeParametersViewer } from './doc/typedoc-type-parameters-viewer';
 export { IZTypedocTypeViewerProps, ZTypedocTypeViewer } from './doc/typedoc-type-viewer';
 export { ZTypedocViewer } from './doc/typedoc-viewer';
-export { ZTypedocViewerSource } from './doc/typedoc-viewer-source';
-export { IZTypedocViewerSourceProps } from './doc/typedoc-viewer-source.props';
+export { IZTypedocViewerSourceProps, ZTypedocViewerSource } from './doc/typedoc-viewer-source';
 export { IZTypedocViewerProps } from './doc/typedoc-viewer.props';
 // Error
 export { useErrorHandler, ZErrorHandlerContext } from './error/error-handler.context';

@@ -18,7 +18,7 @@ describe('ZTypedocViewerSource', () => {
   function createTestTarget() {
     return render(
       <ZHttpServiceContext.Provider value={http}>
-        <ZTypedocViewerSource src='/path/to/typedoc.json' entityId={entityId} onAction={onAction} onEntity={onEntity} />
+        <ZTypedocViewerSource src='/path/to/typedoc.json' headerText='Test Typedoc' entityId={entityId} onAction={onAction} onEntity={onEntity} />
       </ZHttpServiceContext.Provider>
     );
   }
