@@ -1,10 +1,10 @@
 import { createMakeStyles } from 'tss-react';
-import { Theme, useTheme as useMuiTheme } from '@mui/material';
+import { Palette, Theme, useTheme as useMuiTheme } from '@mui/material';
 
 /**
  * Represents the options for sizes for components.
  */
-export interface ZthunworksSizeOptions {
+export interface IZSizeOptions {
   /**
    * Smallest possible size.
    */
@@ -42,9 +42,16 @@ export interface ZthunworksSizeOptions {
 }
 
 /**
+ * Represents options for supported font families.
+ */
+export interface IZFontFamilies {
+  fixed: string;
+}
+
+/**
  * Options for border rounding geometry.
  */
-export interface ZthunworksGeometryOptions {
+export interface IZGeometryOptions {
   /**
    * Square rounding.
    *
@@ -61,30 +68,65 @@ export interface ZthunworksGeometryOptions {
 }
 
 /**
+ * An extension of the standard palette with additional colors.
+ */
+export interface IZExtendedPalette extends Palette {
+  doc: {
+    enumeration: string;
+    accessor: string;
+    class: string;
+    interface: string;
+    alias: string;
+    constructor: string;
+    property: string;
+    function: string;
+    variable: string;
+    namespace: string;
+    subEntity: string;
+
+    flags: {
+      general: string;
+      abstract: string;
+      static: string;
+      readonly: string;
+      const: string;
+      protected: string;
+      private: string;
+      rest: string;
+    };
+  };
+}
+
+/**
  * The overall theme for the Zthunworks domain.
  *
  * This extends material UI's main theme and adds
  * some helpers and size options.
  */
-export interface ZthunworksTheme extends Theme {
+export interface IZTheme extends Theme {
+  fonts: IZFontFamilies;
   /**
    * Rounding options.
    */
-  rounding: ZthunworksGeometryOptions;
+  rounding: IZGeometryOptions;
+  /**
+   * Palette options.
+   */
+  palette: IZExtendedPalette & Palette;
   /**
    * Sizing options.
    */
   sizing: {
-    alerts: ZthunworksSizeOptions;
-    avatar: ZthunworksSizeOptions;
-    card: ZthunworksSizeOptions;
-    drawer: ZthunworksSizeOptions;
-    font: ZthunworksSizeOptions;
-    gaps: ZthunworksSizeOptions;
-    image: ZthunworksSizeOptions;
-    icon: ZthunworksSizeOptions;
-    thickness: ZthunworksSizeOptions;
-    toolbar: ZthunworksSizeOptions;
+    alerts: IZSizeOptions;
+    avatar: IZSizeOptions;
+    card: IZSizeOptions;
+    drawer: IZSizeOptions;
+    font: IZSizeOptions;
+    gaps: IZSizeOptions;
+    image: IZSizeOptions;
+    icon: IZSizeOptions;
+    thickness: IZSizeOptions;
+    toolbar: IZSizeOptions;
   };
 }
 
@@ -95,10 +137,14 @@ export interface ZthunworksTheme extends Theme {
  *
  * @returns The zthunworks theme.
  */
-export function useZthunworksTheme(): ZthunworksTheme {
+export function useZthunworksTheme(): IZTheme {
   const mui = useMuiTheme();
 
   const base = {
+    fonts: {
+      /* cspell:disable-next-line */
+      fixed: "'Menlo', 'Monaco', 'Consolas', 'Courier New', 'monospace'"
+    },
     rounding: {
       square: 0,
       circle: '50%'
@@ -167,6 +213,33 @@ export function useZthunworksTheme(): ZthunworksTheme {
     }
   };
 
+  const palette: IZExtendedPalette = Object.assign({}, mui.palette, {
+    doc: {
+      enumeration: '#937210',
+      accessor: '#f5a429',
+      class: '#0672de',
+      interface: '#647f1b',
+      alias: '#9600ff',
+      constructor: '#14a219',
+      property: '#cc1e1e',
+      function: '#5a5a5a',
+      variable: '#6200a9',
+      namespace: '#9600ff',
+      subEntity: '#e9ebec',
+
+      flags: {
+        general: mui.palette.grey[500],
+        abstract: mui.palette.error.main,
+        static: mui.palette.info.main,
+        readonly: '#7a00d1',
+        const: mui.palette.success.main,
+        protected: mui.palette.warning.main,
+        private: mui.palette.common.black,
+        rest: mui.palette.primary.main
+      }
+    }
+  });
+
   // Typography
   mui.typography.h1.fontSize = base.sizing.font.xl;
   mui.typography.h2.fontSize = base.sizing.font.lg;
@@ -190,7 +263,7 @@ export function useZthunworksTheme(): ZthunworksTheme {
     }
   };
 
-  return Object.assign({}, mui, base);
+  return Object.assign({}, mui, base, { palette });
 }
 
 export const { makeStyles } = createMakeStyles({ useTheme: useZthunworksTheme });
