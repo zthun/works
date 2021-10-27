@@ -5,19 +5,19 @@ export enum ZTypedocKind {
   /**
    * The root entity.
    */
-  Project = 0,
+  Project = 1,
   /**
    * External module.
    */
-  ExternalModule = 1,
+  ExternalModule = 2,
   /**
    * Namespace.
    */
-  Namespace = 2,
+  Namespace = 4,
   /**
    * Enum type.
    */
-  Enum = 4,
+  Enum = 8,
   /**
    * An enum member.
    */
