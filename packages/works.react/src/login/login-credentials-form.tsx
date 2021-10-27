@@ -11,7 +11,7 @@ import { makeStyles } from '../theme/make-styles';
 /**
  * Represents properties for the ZLoginCredentialsForm.
  */
-export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZComponentDisabled, IZComponentHeader {
+export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZComponentDisabled, Partial<IZComponentHeader> {
   /**
    * The text for the action button.
    *
@@ -99,7 +99,7 @@ export interface IZLoginCredentialsFormProps extends IZComponentLoading, IZCompo
    *
    * @default noop
    */
-  onCredentialsChange(val: IZLogin): void;
+  onCredentialsChange?(val: IZLogin): void;
 }
 
 const useLoginCredentialsFormStyles = makeStyles()((theme) => ({
