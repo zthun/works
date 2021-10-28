@@ -4255,7 +4255,6 @@ __metadata:
     "@zthun/works.core": ^1.2.0
     "@zthun/works.draw": ^1.0.0
     "@zthun/works.react": ^1.4.0
-    "@zthun/works.themes": ^1.4.0
     "@zthun/works.url": ^1.2.0
     react: ^17.0.0
     react-dom: ^17.0.0
@@ -4409,7 +4408,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.themes@^1.4.0, @zthun/works.themes@workspace:packages/works.themes":
+"@zthun/works.themes@workspace:packages/works.themes":
   version: 0.0.0-use.local
   resolution: "@zthun/works.themes@workspace:packages/works.themes"
   languageName: unknown
