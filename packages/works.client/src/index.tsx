@@ -36,7 +36,6 @@ import { render } from 'react-dom';
 import { Route } from 'react-router-dom';
 import '../images/svg/zthunworks-owl.svg';
 import { ZHomePage } from './home/home-page';
-import './index.less';
 import { ZApiPage } from './learn/api-page';
 import { ZLearnPage } from './learn/learn-page';
 import { ZLoginPage } from './login/login-page';
