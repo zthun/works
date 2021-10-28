@@ -1,9 +1,21 @@
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { Grid, Typography } from '@mui/material';
-import { ZPaperCard } from '@zthun/works.react';
+import { makeStyles, ZPaperCard } from '@zthun/works.react';
 import { kebabCase } from 'lodash';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+
+const useHomePageStyles = makeStyles()(() => ({
+  learn: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+
+  summary: {
+    height: '10em',
+    overflow: 'auto'
+  }
+}));
 
 /**
  * Renders the home page.
@@ -12,6 +24,7 @@ import { useHistory } from 'react-router-dom';
  */
 export function ZHomePage() {
   const hist = useHistory();
+  const styles = useHomePageStyles();
 
   /**
    * Navigates to the learn page with the given name id.
@@ -44,9 +57,9 @@ export function ZHomePage() {
   function createLearn(pkg: string, name: string, description: string, onAction: () => void) {
     const identifier = kebabCase(name);
     return (
-      <Grid item={true} className={`ZHomePage-learn ZHomePage-learn-${identifier}`} data-testid={`ZHomePage-learn-${identifier}`} xs={12} sm={6} md={4} lg={3} xl={2}>
+      <Grid item={true} className={`ZHomePage-learn ZHomePage-learn-${identifier} ${styles.classes.learn}`} data-testid={`ZHomePage-learn-${identifier}`} xs={12} sm={6} md={4} lg={3} xl={2}>
         <ZPaperCard headerText={name} subHeaderText={`@zthun/${pkg}`} imageUrl={`/images/svg/${pkg}.svg`} imageHeight='lg' size='auto' avatar={<LocalLibraryIcon fontSize='large' />} actionText='Learn More...' onAction={onAction}>
-          <Typography className='ZHomePage-summary-text'>{description}</Typography>
+          <Typography className={`ZHomePage-summary-text ${styles.classes.summary}`}>{description}</Typography>
         </ZPaperCard>
       </Grid>
     );
