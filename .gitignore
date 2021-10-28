@@ -12,7 +12,6 @@ reports
 node_modules
 
 # Specific packages
-packages/works.themes/css
 packages/works.install/charts
 
 # OS Turds
