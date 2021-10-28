@@ -27,7 +27,6 @@ import { renderMarkdownPage, ZTopNavAvatar, ZWebAppLayout } from '@zthun/works.r
 import '@zthun/works.react/docs/typedoc.json';
 import '@zthun/works.react/images';
 import '@zthun/works.react/README.md';
-import '@zthun/works.themes/images';
 import { ZUrlBuilder } from '@zthun/works.url';
 import '@zthun/works.url/docs/typedoc.json';
 import '@zthun/works.url/images';
@@ -35,6 +34,7 @@ import '@zthun/works.url/README.md';
 import React from 'react';
 import { render } from 'react-dom';
 import { Route } from 'react-router-dom';
+import '../images/svg/zthunworks-owl.svg';
 import { ZHomePage } from './home/home-page';
 import './index.less';
 import { ZApiPage } from './learn/api-page';
