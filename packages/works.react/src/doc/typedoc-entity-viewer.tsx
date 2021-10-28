@@ -56,7 +56,7 @@ const useTypedocEntityViewerStyles = makeStyles()((theme) => ({
  * @returns The jsx that displays the entity information.
  */
 export function ZTypedocEntityViewer(props: IZTypedocEntityViewerProps) {
-  const { entity, actionText, actionType = 'button', actionColor = 'primary', size = 'xl', onAction = noop, onEntity } = props;
+  const { entity, actionText, actionType = 'button', actionColor = 'primary', size = 'auto', onAction = noop, onEntity } = props;
   const styles = useTypedocEntityViewerStyles();
 
   /**

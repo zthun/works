@@ -40,9 +40,8 @@ export { IZTypedocSignatureListViewerProps, ZTypedocSignatureListViewer } from '
 export { IZTypedocTypeListViewerProps, ZTypedocTypeListViewer } from './doc/typedoc-type-list-viewer';
 export { IZTypedocTypeParametersViewerProps, ZTypedocTypeParametersViewer } from './doc/typedoc-type-parameters-viewer';
 export { IZTypedocTypeViewerProps, ZTypedocTypeViewer } from './doc/typedoc-type-viewer';
-export { ZTypedocViewer } from './doc/typedoc-viewer';
+export { IZTypedocViewerProps, ZTypedocViewer } from './doc/typedoc-viewer';
 export { IZTypedocViewerSourceProps, ZTypedocViewerSource } from './doc/typedoc-viewer-source';
-export { IZTypedocViewerProps } from './doc/typedoc-viewer.props';
 // Error
 export { useErrorHandler, ZErrorHandlerContext } from './error/error-handler.context';
 export { ZErrorMessageHandlerAlert } from './error/error-message-handler-alert';
