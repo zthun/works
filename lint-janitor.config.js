@@ -3,16 +3,14 @@ const k8sTemplates = ['packages/works.k8s/templates/**'];
 const partialGenerated = ['cspell.json', 'lerna.json'];
 
 const esFiles = ['*.js', '*.ts', 'packages/**/src/**/*.ts', 'packages/**/src/**/*.tsx'];
-const styleFiles = ['packages/**/src/**/*.less', 'packages/**/less/**/*.less'];
 const htmlFiles = ['packages/**/src/**/*.html'];
 const markdownFiles = ['*.md', 'packages/**/*.md'];
 const jsonFiles = ['*.json', 'packages/**/*.json'];
 const yamlFiles = ['*.yaml', '*.yml', 'packages/**/*.yaml', 'packages/**/*.yml'];
-const prettyFiles = [].concat(esFiles).concat(styleFiles).concat(htmlFiles).concat(markdownFiles).concat(jsonFiles).concat(yamlFiles);
-const spellingFiles = [].concat(esFiles).concat(styleFiles).concat(htmlFiles).concat(markdownFiles).concat(jsonFiles).concat(yamlFiles);
+const prettyFiles = [].concat(esFiles).concat(htmlFiles).concat(markdownFiles).concat(jsonFiles).concat(yamlFiles);
+const spellingFiles = [].concat(esFiles).concat(htmlFiles).concat(markdownFiles).concat(jsonFiles).concat(yamlFiles);
 
 const esFilesExclude = generated;
-const styleFilesExclude = generated;
 const htmlFilesExclude = generated;
 const markdownFilesExclude = generated;
 const jsonFilesExclude = generated;
@@ -23,8 +21,6 @@ const spellingFilesExclude = generated.concat(k8sTemplates).concat(partialGenera
 module.exports = {
   esFiles,
   esFilesExclude,
-  styleFiles,
-  styleFilesExclude,
   htmlFiles,
   htmlFilesExclude,
   markdownFiles,
