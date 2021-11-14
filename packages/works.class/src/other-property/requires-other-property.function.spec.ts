@@ -1,5 +1,4 @@
 /* eslint-disable require-jsdoc */
-import { IZLogin, ZLoginBuilder } from '@zthun/works.core';
 import { registerDecorator, ValidationArguments } from 'class-validator';
 import { RequiresOtherProperty, RequiresOtherPropertyValidator } from './requires-other-property.function';
 
@@ -17,10 +16,10 @@ describe('RequiresOtherProperty', () => {
   });
 
   describe('Validate', () => {
-    let passwordConfirm: IZLogin;
+    let passwordConfirm: { password: string; confirm: string };
 
     beforeEach(() => {
-      passwordConfirm = new ZLoginBuilder().password('bad-password').autoConfirm().build();
+      passwordConfirm = { password: 'bad-password', confirm: 'bad-password' };
     });
 
     function assertValid<T extends object>(expected: boolean, object: T, property: keyof T, propertyToCheck: keyof T) {

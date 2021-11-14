@@ -1,5 +1,4 @@
 /* eslint-disable require-jsdoc */
-import { IZLogin, ZLoginBuilder } from '@zthun/works.core';
 import { registerDecorator, ValidationArguments } from 'class-validator';
 import { EqualsOtherProperty, EqualsOtherPropertyValidator } from './equals-other-property.function';
 
@@ -17,12 +16,12 @@ describe('EqualsOtherProperty', () => {
   });
 
   describe('Validate', () => {
-    let matchedPasswords: IZLogin;
-    let mismatchedPasswords: IZLogin;
+    let matchedPasswords: { password: string; confirm: string };
+    let mismatchedPasswords: { password: string; confirm: string };
 
     beforeEach(() => {
-      matchedPasswords = new ZLoginBuilder().password('bad-password').autoConfirm().build();
-      mismatchedPasswords = new ZLoginBuilder().password('password').confirm('password-c').build();
+      matchedPasswords = { password: 'bad-password', confirm: 'bad-password' };
+      mismatchedPasswords = { password: 'bad-password', confirm: 'bad-password-c' };
     });
 
     function assertValid<T extends object>(expected: boolean, object: T, value: T[keyof T], property: keyof T, propertyToMatch: keyof T) {
