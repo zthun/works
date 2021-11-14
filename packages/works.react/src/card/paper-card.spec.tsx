@@ -2,7 +2,7 @@
 
 import { act, fireEvent, render } from '@testing-library/react';
 import { ZDataUrlBuilder, ZMimeTypeImage } from '@zthun/works.url';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { ZPaperCard } from './paper-card';
 
 describe('ZPaperCard', () => {
@@ -10,7 +10,7 @@ describe('ZPaperCard', () => {
   let disabled: boolean;
   let media: string;
   let actionText: string;
-  let confirmation: ReactNode;
+  let confirmation: string;
   let autoConfirm: boolean;
 
   async function createTestTarget() {
