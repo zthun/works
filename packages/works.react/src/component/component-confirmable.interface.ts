@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactElement } from 'react';
 
 /**
  * Represents a component that has a confirmation.
@@ -7,7 +7,7 @@ export interface IZComponentConfirmable {
   /**
    * The confirmation display.
    */
-  confirmation?: ReactNode;
+  confirmation?: string | ReactElement;
 
   /**
    * The confirmation color.
