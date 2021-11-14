@@ -25,7 +25,6 @@
     "docs/**"
   ],
   "dependencies": {
-    "class-transformer": "^0.4.0",
     "class-validator": "~0.13.1",
     "lodash": "^4.17.21"
   },

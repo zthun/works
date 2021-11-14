@@ -28,13 +28,9 @@
     "@nestjs/common": "^8.2.0",
     "@nestjs/core": "^8.2.0",
     "@nestjs/platform-express": "^8.2.0",
-    "@zthun/works.class": "^1.2.0",
-    "@zthun/works.core": "^1.2.0",
-    "@zthun/works.dal": "^1.2.0",
     "@zthun/works.nest": "^1.2.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.4.0",
-    "uuid": "^8.3.2"
+    "rxjs": "^7.4.0"
   },
   "publishConfig": {
     "access": "public"
