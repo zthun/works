@@ -29,6 +29,7 @@
     "@zthun/works.class": "^1.2.0",
     "@zthun/works.core": "^1.2.0",
     "@zthun/works.dal": "^1.2.0",
+    "@zthun/works.http": "^1.2.0",
     "@zthun/works.url": "^1.2.0",
     "bcryptjs": "^2.4.3",
     "class-transformer": "~0.4.0",
