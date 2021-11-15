@@ -15,7 +15,8 @@
   "scripts": {
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:esm": "tsc -p ./tsconfig.esm.json",
-    "build": "yarn build:cjs && yarn build:esm && typedoc"
+    "build": "yarn build:cjs && yarn build:esm && typedoc",
+    "plink": "npm link"
   },
   "publishConfig": {
     "access": "public"

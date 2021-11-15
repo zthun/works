@@ -38,7 +38,8 @@
     "docker:build": "lerna run docker:build",
     "docker": "yarn docker:build && yarn docker:publish",
     "prepare": "husky install",
-    "release": "yarn make && lerna publish --conventional-commits -m \"chore: publish [skip ci]\""
+    "release": "yarn make && lerna publish --conventional-commits -m \"chore: publish [skip ci]\"",
+    "plink": "lerna run plink"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
