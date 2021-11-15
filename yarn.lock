@@ -4466,7 +4466,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.class@workspace:packages/works.class"
   dependencies:
-    class-transformer: ^0.4.0
     class-validator: ~0.13.1
     lodash: ^4.17.21
   languageName: unknown
@@ -4507,6 +4506,7 @@ __metadata:
   resolution: "@zthun/works.draw@workspace:packages/works.draw"
   dependencies:
     canvas: ^2.8.0
+    lodash: ^4.17.21
     rxjs: ^7.4.0
   languageName: unknown
   linkType: soft
@@ -4562,6 +4562,7 @@ __metadata:
     "@zthun/works.class": ^1.2.0
     "@zthun/works.core": ^1.2.0
     "@zthun/works.dal": ^1.2.0
+    "@zthun/works.http": ^1.2.0
     "@zthun/works.url": ^1.2.0
     bcryptjs: ^2.4.3
     class-transformer: ~0.4.0
@@ -4593,6 +4594,7 @@ __metadata:
     "@emotion/styled": ^11.6.0
     "@mui/icons-material": ^5.1.0
     "@mui/material": ^5.1.0
+    "@mui/system": ^5.1.0
     "@zthun/works.core": ^1.2.0
     "@zthun/works.draw": ^1.0.0
     "@zthun/works.error": ^1.2.0
@@ -4601,6 +4603,7 @@ __metadata:
     "@zthun/works.message": ^1.2.0
     "@zthun/works.url": ^1.2.0
     highlight.js: =11.3.1
+    lodash: ^4.17.21
     md5: ^2.3.0
     react-markdown: ^6.0.3
     react-router-dom: ^5.3.0
@@ -4620,13 +4623,9 @@ __metadata:
     "@nestjs/common": ^8.2.0
     "@nestjs/core": ^8.2.0
     "@nestjs/platform-express": ^8.2.0
-    "@zthun/works.class": ^1.2.0
-    "@zthun/works.core": ^1.2.0
-    "@zthun/works.dal": ^1.2.0
     "@zthun/works.nest": ^1.2.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
-    uuid: ^8.3.2
   bin:
     zthun-works-server: ./bin/main.js
   languageName: unknown
@@ -6003,7 +6002,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"class-transformer@npm:^0.4.0, class-transformer@npm:~0.4.0":
+"class-transformer@npm:~0.4.0":
   version: 0.4.0
   resolution: "class-transformer@npm:0.4.0"
   checksum: 4057346b512705b1a5a68025b025a5be1ff847d7e0e76e82bbb937f832cf6235c5f66e874487d4bd35d67401411e8a3279c9d36bdd8c800336d5507ee6e94af0
