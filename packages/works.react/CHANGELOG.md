@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/zthun/works/compare/v1.4.0...v2.0.0) (2021-11-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* updating to latest packages
+* the login state context has been removed
+* removing deprecated top bar
+* switching to tss-react
+* alert snackbar has been removed
+* updated to latest material design
+* removed deprecated services
+* removed deprecated packages
+
+### Features
+
+* added support for code context display ([37fb522](https://github.com/zthun/works/commit/37fb522ceaf252de196d45b53a64cadd91d85fcb))
+* added the new card avatar component ([7ca36cc](https://github.com/zthun/works/commit/7ca36cc85794a074b73b590edc6b9cb8e7504038))
+* added the shade function for lighten and darken colors ([7b8ab1e](https://github.com/zthun/works/commit/7b8ab1e0fc6bf95517f7f0166fe9ce3f36a57fe3))
+* added the top nav avatar component ([be9974a](https://github.com/zthun/works/commit/be9974a28b388c873f655a1c1b3c88e4e5b6ac1b))
+* added theme sizes for max and fonts ([5f7307b](https://github.com/zthun/works/commit/5f7307bd53940b22abc50af40e7df532beacdb67))
+* added zoom and zoom out buttons ([36471e9](https://github.com/zthun/works/commit/36471e907a87555fb222048dd0614df767a6d261))
+* alert snackbar has been removed ([858b450](https://github.com/zthun/works/commit/858b4504b19b1aef43fe72971d45aee9856b8048))
+* converted circular backdrop to use css in js ([7a0da36](https://github.com/zthun/works/commit/7a0da36e96a93455023b8a7f45bf699f97f84043))
+* converted paper card to use css in js ([6d225b1](https://github.com/zthun/works/commit/6d225b146f8e728dad688fd11dbdbf39c995f46a))
+* removing deprecated top bar ([e127e86](https://github.com/zthun/works/commit/e127e86f839e2678ee72f6a3ed9a5e4bdf40752c))
+* switching to tss-react ([12bb360](https://github.com/zthun/works/commit/12bb360cd24e412c508be1526b2380c687e11307))
+* the login state context has been removed ([c381c34](https://github.com/zthun/works/commit/c381c34e394c2d39b2632f5d928485d21a001ec1))
+* the paper card can now render data urls that buffer svg images ([90f8320](https://github.com/zthun/works/commit/90f83201d28060ff09694cf47d13e68b7029d617))
+* the top nave has been converted to use jss ([fecbcd0](https://github.com/zthun/works/commit/fecbcd04408e6d127b115aefe5fca242a017a7a8))
+* the web app layout now provides the zthunworks theme ([acfbaf5](https://github.com/zthun/works/commit/acfbaf5aca76f1d0df1b4c656cf5eb569ecc04aa))
+* updated to latest material design ([7dc6c94](https://github.com/zthun/works/commit/7dc6c94e3b267f8bf84949c85c742d8b6dc7cdb7))
+* updating to material 5 ([b87ada5](https://github.com/zthun/works/commit/b87ada528231b3165125064b2ecf1a2bab1c64b3))
+
+
+### Bug Fixes
+
+* the profile should now be set to null if the read fails ([b26fdd7](https://github.com/zthun/works/commit/b26fdd778b1795bb95ce2b6dac6974b65e907508))
+
+
+### Miscellaneous Chores
+
+* removed deprecated packages ([94cc618](https://github.com/zthun/works/commit/94cc6180d12ce87e4f5f3604b98f3915cf339b96))
+* removed deprecated services ([9145902](https://github.com/zthun/works/commit/9145902706fa1209d638b30d888eeaefa680f19a))
+* updating to latest packages ([d1fe1ba](https://github.com/zthun/works/commit/d1fe1baf3bd92aa56f46b7d05f1a2d4e330e5e03))
+
+
+
 ## [1.4.0](https://github.com/zthun/works/compare/v1.3.0...v1.4.0) (2021-09-03)
 
 

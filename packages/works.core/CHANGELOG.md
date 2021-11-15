@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/zthun/works/compare/v1.4.0...v2.0.0) (2021-11-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* updated to latest typedoc spec
+* removed deprecated packages
+
+### Features
+
+* added the route option contract ([b4a6d13](https://github.com/zthun/works/commit/b4a6d138d0079c4fe372b388d61c9c3804fd7c40))
+* updated to latest typedoc spec ([290cacb](https://github.com/zthun/works/commit/290cacb2db4619e8e03f1a14fe871de15f51a069))
+* web apps can now contain a title and description ([b90c8a4](https://github.com/zthun/works/commit/b90c8a4d3679f9088868a16084986e2ca10afe20))
+
+
+### Miscellaneous Chores
+
+* removed deprecated packages ([2747afc](https://github.com/zthun/works/commit/2747afcff460dc59e05dad9479a97b5db44db379))
+
+
+
 ## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
 
 

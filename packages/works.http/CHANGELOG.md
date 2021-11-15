@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/zthun/works/compare/v1.4.0...v2.0.0) (2021-11-15)
+
+
+### Features
+
+* added the ability to get the category and severity of a code ([3c0d4f2](https://github.com/zthun/works/commit/3c0d4f2722e3e81e6a1348d09aea98424d750431))
+
+
+
 ## [1.2.0](https://github.com/zthun/works/compare/v1.1.0...v1.2.0) (2021-09-01)
 
 

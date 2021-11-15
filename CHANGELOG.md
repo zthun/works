@@ -3,6 +3,110 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/zthun/works/compare/v1.4.0...v2.0.0) (2021-11-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* updating to latest packages
+* deprecated the themes package
+* removed the doc styles
+* updated to latest typedoc spec
+* removed entity viewer styles
+* removed the typedoc icon styles
+* removed the typedoc type styles
+* remove the flags styles
+* removing the typedoc comment styles
+* removed the typedoc signature list viewer styles
+* removing markdown styles
+* removed login styles
+* the login state context has been removed
+* removing all profile styles
+* removed the profile avatar form styles
+* removed the profile button styles
+* removed the profile form styles
+* fully removed top styles
+* removed topnav styles
+* removing deprecated top bar
+* removing page themes
+* removed all card styles
+* removed loading styles
+* removed content in favor of css in js
+* the http code card styles have been removed
+* removed paper card styles in exchange for jss
+* switching to tss-react
+* alert snackbar has been removed
+* alerts now use tss-react for styling
+* updated to latest material design
+* removed deprecated services
+* removed deprecated packages
+* removed deprecated packages
+
+### Features
+
+* added support for code context display ([37fb522](https://github.com/zthun/works/commit/37fb522ceaf252de196d45b53a64cadd91d85fcb))
+* added the ability to get the category and severity of a code ([3c0d4f2](https://github.com/zthun/works/commit/3c0d4f2722e3e81e6a1348d09aea98424d750431))
+* added the http module ([62e6f95](https://github.com/zthun/works/commit/62e6f957034e4743060324d1737300e1fef8084a))
+* added the new card avatar component ([7ca36cc](https://github.com/zthun/works/commit/7ca36cc85794a074b73b590edc6b9cb8e7504038))
+* added the route option contract ([b4a6d13](https://github.com/zthun/works/commit/b4a6d138d0079c4fe372b388d61c9c3804fd7c40))
+* added the shade function for lighten and darken colors ([7b8ab1e](https://github.com/zthun/works/commit/7b8ab1e0fc6bf95517f7f0166fe9ce3f36a57fe3))
+* added the top nav avatar component ([be9974a](https://github.com/zthun/works/commit/be9974a28b388c873f655a1c1b3c88e4e5b6ac1b))
+* added theme sizes for max and fonts ([5f7307b](https://github.com/zthun/works/commit/5f7307bd53940b22abc50af40e7df532beacdb67))
+* added zoom and zoom out buttons ([36471e9](https://github.com/zthun/works/commit/36471e907a87555fb222048dd0614df767a6d261))
+* adding pnpm support ([4ecdfa0](https://github.com/zthun/works/commit/4ecdfa0d2744b24bbda54f7663eeffcde709da46))
+* alert snackbar has been removed ([858b450](https://github.com/zthun/works/commit/858b4504b19b1aef43fe72971d45aee9856b8048))
+* alerts now use tss-react for styling ([104e9e4](https://github.com/zthun/works/commit/104e9e41d81d0c3920fa28ab50bf724827fae706))
+* converted circular backdrop to use css in js ([7a0da36](https://github.com/zthun/works/commit/7a0da36e96a93455023b8a7f45bf699f97f84043))
+* converted paper card to use css in js ([6d225b1](https://github.com/zthun/works/commit/6d225b146f8e728dad688fd11dbdbf39c995f46a))
+* deprecated the themes package ([043d883](https://github.com/zthun/works/commit/043d88338da2f8de75aa825131cfabddde0ff8eb))
+* fully removed top styles ([d643e01](https://github.com/zthun/works/commit/d643e01b9b790fca3d54e3e39348508e208810a6))
+* page themes are now stored directly in the html ([5976774](https://github.com/zthun/works/commit/59767746de001a6f27c5b4bab274bc850d889c63))
+* remove the flags styles ([fb86ba3](https://github.com/zthun/works/commit/fb86ba34fa7da2fdf4064a9c7dd18167f8fc8e40))
+* removed all card styles ([f46dcff](https://github.com/zthun/works/commit/f46dcff964911b7372ab533a18c64264e6b52069))
+* removed content in favor of css in js ([c2de6d4](https://github.com/zthun/works/commit/c2de6d4cb0b8db1cf2d5d0bdf0c811ea3aa86bdd))
+* removed entity viewer styles ([5cb4839](https://github.com/zthun/works/commit/5cb4839cdf4920b627176b8700e676e8746230ef))
+* removed loading styles ([d480f56](https://github.com/zthun/works/commit/d480f560737be3dce437db48972aedfacfcc2725))
+* removed login styles ([24581f8](https://github.com/zthun/works/commit/24581f832bb9c5e9bffa108ea47cab6f3d15ccca))
+* removed paper card styles in exchange for jss ([7ab082a](https://github.com/zthun/works/commit/7ab082a7068fa2f0677e5f86e81d25df2ad388b5))
+* removed the doc styles ([ad2da62](https://github.com/zthun/works/commit/ad2da624f420a3df6a223fd0c1eb1860950f4912))
+* removed the profile avatar form styles ([6ae3ee0](https://github.com/zthun/works/commit/6ae3ee05ad043e8fd18fa6186ea7d5fecd674af4))
+* removed the profile button styles ([c4bbdd9](https://github.com/zthun/works/commit/c4bbdd9c560bd1676095c7c978c61a6a5ca9370b))
+* removed the profile form styles ([76c8baa](https://github.com/zthun/works/commit/76c8baace7433b4d884f0f763d731ebeba52873a))
+* removed the typedoc icon styles ([59146e9](https://github.com/zthun/works/commit/59146e913a525bb5567a4c1638055d0bd9b7aa82))
+* removed the typedoc signature list viewer styles ([9856f88](https://github.com/zthun/works/commit/9856f88bbdc1a37feb96f2ab9906637c4b250526))
+* removed the typedoc type styles ([947d2e1](https://github.com/zthun/works/commit/947d2e185a960684f9ea9ee9c13095b6a8ad64b4))
+* removed topnav styles ([364008f](https://github.com/zthun/works/commit/364008fcc80e1b159b70209d59d6eac99578bcbe))
+* removing all profile styles ([9ed296e](https://github.com/zthun/works/commit/9ed296e1cde6dab2ccbbf5076c6f333d81bf2874))
+* removing deprecated top bar ([e127e86](https://github.com/zthun/works/commit/e127e86f839e2678ee72f6a3ed9a5e4bdf40752c))
+* removing markdown styles ([f161069](https://github.com/zthun/works/commit/f161069f759f4014c59e0346213af7aff5dee7e0))
+* removing page themes ([67ef1a6](https://github.com/zthun/works/commit/67ef1a6672a33459a17af240c309cf55eb69e652))
+* removing the typedoc comment styles ([0728d52](https://github.com/zthun/works/commit/0728d5261be031819515fc252fc65a7ade877cee))
+* switching to tss-react ([12bb360](https://github.com/zthun/works/commit/12bb360cd24e412c508be1526b2380c687e11307))
+* the http code card styles have been removed ([356a904](https://github.com/zthun/works/commit/356a9048f6d55ea5090d3cee672111f7c176748c))
+* the login state context has been removed ([c381c34](https://github.com/zthun/works/commit/c381c34e394c2d39b2632f5d928485d21a001ec1))
+* the paper card can now render data urls that buffer svg images ([90f8320](https://github.com/zthun/works/commit/90f83201d28060ff09694cf47d13e68b7029d617))
+* the top nave has been converted to use jss ([fecbcd0](https://github.com/zthun/works/commit/fecbcd04408e6d127b115aefe5fca242a017a7a8))
+* the web app layout now provides the zthunworks theme ([acfbaf5](https://github.com/zthun/works/commit/acfbaf5aca76f1d0df1b4c656cf5eb569ecc04aa))
+* updated to latest material design ([7dc6c94](https://github.com/zthun/works/commit/7dc6c94e3b267f8bf84949c85c742d8b6dc7cdb7))
+* updated to latest typedoc spec ([290cacb](https://github.com/zthun/works/commit/290cacb2db4619e8e03f1a14fe871de15f51a069))
+* updating to material 5 ([b87ada5](https://github.com/zthun/works/commit/b87ada528231b3165125064b2ecf1a2bab1c64b3))
+* web apps can now contain a title and description ([b90c8a4](https://github.com/zthun/works/commit/b90c8a4d3679f9088868a16084986e2ca10afe20))
+
+
+### Bug Fixes
+
+* the profile should now be set to null if the read fails ([b26fdd7](https://github.com/zthun/works/commit/b26fdd778b1795bb95ce2b6dac6974b65e907508))
+
+
+### Miscellaneous Chores
+
+* removed deprecated packages ([94cc618](https://github.com/zthun/works/commit/94cc6180d12ce87e4f5f3604b98f3915cf339b96))
+* removed deprecated packages ([2747afc](https://github.com/zthun/works/commit/2747afcff460dc59e05dad9479a97b5db44db379))
+* removed deprecated services ([9145902](https://github.com/zthun/works/commit/9145902706fa1209d638b30d888eeaefa680f19a))
+* updating to latest packages ([d1fe1ba](https://github.com/zthun/works/commit/d1fe1baf3bd92aa56f46b7d05f1a2d4e330e5e03))
+
+
+
 ## [1.4.0](https://github.com/zthun/works/compare/v1.3.0...v1.4.0) (2021-09-03)
 
 
