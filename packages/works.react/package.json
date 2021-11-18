@@ -30,9 +30,9 @@
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
-    "@mui/icons-material": "^5.1.0",
-    "@mui/material": "^5.1.0",
-    "@mui/system": "^5.1.0",
+    "@mui/icons-material": "^5.1.1",
+    "@mui/material": "^5.1.1",
+    "@mui/system": "^5.1.1",
     "@zthun/works.core": "^2.0.0",
     "@zthun/works.draw": "^2.0.0",
     "@zthun/works.error": "^2.0.0",
@@ -47,7 +47,7 @@
     "react-router-dom": "^5.3.0",
     "remark-gfm": "^1.0.0",
     "rxjs": "^7.4.0",
-    "tss-react": "^2.0.4"
+    "tss-react": "^2.1.0"
   },
   "peerDependencies": {
     "react": "^17.0.0",

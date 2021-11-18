@@ -1,4 +1,4 @@
-import { Collection, MongoClient, MongoClientOptions, OptionalId } from 'mongodb';
+import { Collection, MongoClient, MongoClientOptions } from 'mongodb';
 import { v4 } from 'uuid';
 import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';
 import { IZDatabaseOptions } from '../options/database-options.interface';
@@ -77,12 +77,13 @@ export class ZDatabaseMongo implements IZDatabase {
    * @returns The create query.
    */
   public create<T>(source: string, template: T[]): IZDatabaseQuery<T[]> {
-    return new ZDatabaseQuery(() =>
+    return new ZDatabaseQuery<T[]>(() =>
       this._do(source, async (docs: Collection<T>) => {
-        template = template.map((t: any) => ({ ...t, _id: t._id || v4() }));
-        const result = await docs.insertMany(template as OptionalId<T>[]);
+        const withIds = template.map((t: any) => ({ ...t, _id: t._id || v4() }));
+        const result = await docs.insertMany(withIds);
         const ids = Object.keys(result.insertedIds).map((index) => result.insertedIds[index]);
-        return docs.find({ _id: { $in: ids } }).toArray();
+        const items = await docs.find({ _id: { $in: ids } }).toArray();
+        return items as T[];
       })
     );
   }

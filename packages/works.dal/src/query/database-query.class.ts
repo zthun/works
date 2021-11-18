@@ -1,4 +1,4 @@
-import { IZDatabaseQuery, JoinCriteria, SortCriteria, SortDirection, Filter } from './database-query.interface';
+import { Filter, IZDatabaseQuery, JoinCriteria, SortCriteria, SortDirection } from './database-query.interface';
 
 /**
  * Represents an implementation of the IZDatabaseQuery interface.
