@@ -10,7 +10,7 @@ jobs:
     - stage: Build
       name: Analyze
       script: yarn lint
-    - script: yarn test
+    - script: yarn test --runInBand
       name: Test
     - script: yarn build
       name: Build
