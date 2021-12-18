@@ -1,9 +1,9 @@
 /* eslint-disable require-jsdoc */
 import { IZConfigEntry, IZLogin, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
+import { ZUsersClient } from '@zthun/works.users';
 import { Request, Response } from 'express';
 import { v4 } from 'uuid';
-import { ZUsersService } from '../../users/users.service';
 import { ZCommonConfigService } from '../../vault/common-config.service';
 import { ZAuthConfigService } from '../config/auth-config.service';
 import { ZTokensService } from './tokens.service';
@@ -11,7 +11,7 @@ import { ZTokensService } from './tokens.service';
 describe('ZTokensService', () => {
   let secret: IZConfigEntry<string>;
   let domain: IZConfigEntry<string>;
-  let users: jest.Mocked<ZUsersService>;
+  let users: jest.Mocked<ZUsersClient>;
   let commonConfig: jest.Mocked<ZCommonConfigService>;
   let authConfig: jest.Mocked<ZAuthConfigService>;
 

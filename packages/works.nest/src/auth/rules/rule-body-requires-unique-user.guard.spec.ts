@@ -3,12 +3,12 @@ import { ConflictException } from '@nestjs/common';
 import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
 import { IZLogin, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
+import { ZUsersClient } from '@zthun/works.users';
 import { Request } from 'express';
-import { ZUsersService } from '../../users/users.service';
 import { ZRuleBodyRequiresUniqueUser } from './rule-body-requires-unique-user.guard';
 
 describe('ZRuleBodyRequiresUniqueUser', () => {
-  let users: jest.Mocked<ZUsersService>;
+  let users: jest.Mocked<ZUsersClient>;
   let login: IZLogin;
   let req: jest.Mocked<Request>;
   let host: jest.Mocked<HttpArgumentsHost>;

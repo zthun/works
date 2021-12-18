@@ -42,11 +42,11 @@ Once you have the environment variables set, you can list, query, create, update
 import { Module } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ZProfileBuilder, IZProfile } from '@zthun/works.core';
-import { ZUsersModule } from '@zthun/works.nest';
+import { ZUsersModule } from '@zthun/works.users';
 
 @Controller('profiles')
 export class ProfilesController {
-  public constructor(private readonly _users: ZUsersService) {}
+  public constructor(private readonly _users: ZUsersClient) {}
 
   @Get()
   public async list(): Promise<IZProfile[]> {

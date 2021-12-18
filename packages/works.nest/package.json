@@ -32,6 +32,7 @@
     "@zthun/works.dal": "^2.0.0",
     "@zthun/works.http": "^2.0.0",
     "@zthun/works.url": "^2.0.0",
+    "@zthun/works.users": "^2.0.0",
     "bcryptjs": "^2.4.3",
     "class-transformer": "~0.4.0",
     "cookie-parser": "^1.4.6",
@@ -45,6 +46,7 @@
   "peerDependencies": {
     "@nestjs/common": "^8.0.6",
     "@nestjs/core": "^8.0.6",
+    "@nestjs/microservices": "^8.0.6",
     "@nestjs/platform-express": "^8.0.6"
   },
   "sideEffects": false,

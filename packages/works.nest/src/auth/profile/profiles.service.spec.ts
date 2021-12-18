@@ -1,10 +1,10 @@
 /* eslint-disable require-jsdoc */
-import { IZConfigEntry, IZLogin, IZProfile, IZServer, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZProfileBuilder, ZUserBuilder, IZEmail } from '@zthun/works.core';
+import { IZConfigEntry, IZEmail, IZLogin, IZProfile, IZServer, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
+import { ZUsersClient } from '@zthun/works.users';
 import { v4 } from 'uuid';
 import { ZEmailService } from '../../notifications/email.service';
 import { ZNotificationsConfigService } from '../../notifications/notifications-config.service';
-import { ZUsersService } from '../../users/users.service';
 import { ZCommonConfigService } from '../../vault/common-config.service';
 import { ZProfilesService } from './profiles.service';
 
@@ -13,7 +13,7 @@ describe('ZProfilesService', () => {
   let notifier: IZConfigEntry<string>;
   let domain: IZConfigEntry<string>;
 
-  let users: jest.Mocked<ZUsersService>;
+  let users: jest.Mocked<ZUsersClient>;
   let email: jest.Mocked<ZEmailService>;
   let commonConfig: jest.Mocked<ZCommonConfigService>;
   let notificationsConfig: jest.Mocked<ZNotificationsConfigService>;
@@ -28,7 +28,7 @@ describe('ZProfilesService', () => {
 
     domain = new ZConfigEntryBuilder().scope(ZCommonConfigService.SCOPE).key(ZCommonConfigService.KEY_DOMAIN).value(ZCommonConfigService.DEFAULT_DOMAIN).build();
 
-    users = createMocked<ZUsersService>(['create', 'update', 'remove', 'activate', 'deactivate', 'recover', 'findByEmail']);
+    users = createMocked<ZUsersClient>(['create', 'update', 'remove', 'activate', 'deactivate', 'recover', 'findByEmail']);
 
     email = createMocked<ZEmailService>(['send']);
     email.send.mockReturnValue(Promise.resolve());

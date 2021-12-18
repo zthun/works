@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { IZEmail, IZLogin, IZProfile, IZUser, ZEmailBuilder, ZEmailEnvelopeBuilder, ZProfileBuilder } from '@zthun/works.core';
+import { ZUsersClient } from '@zthun/works.users';
 import { ZEmailService } from '../../notifications/email.service';
 import { ZNotificationsConfigService } from '../../notifications/notifications-config.service';
-import { ZUsersService } from '../../users/users.service';
 import { ZCommonConfigService } from '../../vault/common-config.service';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class ZProfilesService {
    * @param _commonConfig The common configuration service.
    * @param _notificationsConfig The notifications configuration service.
    */
-  public constructor(private _users: ZUsersService, private _email: ZEmailService, private _commonConfig: ZCommonConfigService, private _notificationsConfig: ZNotificationsConfigService) {}
+  public constructor(private _users: ZUsersClient, private _email: ZEmailService, private _commonConfig: ZCommonConfigService, private _notificationsConfig: ZNotificationsConfigService) {}
 
   /**
    * Creates a profile object from a login.

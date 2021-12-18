@@ -3,12 +3,12 @@ import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { HttpArgumentsHost } from '@nestjs/common/interfaces';
 import { IZLogin, ZLoginBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
+import { ZUsersClient } from '@zthun/works.users';
 import { Request } from 'express';
-import { ZUsersService } from '../../users/users.service';
 import { ZRuleBodyRequiresCredentials } from './rule-body-requires-credentials.guard';
 
 describe('ZRuleBodyRequiresCredentials', () => {
-  let users: jest.Mocked<ZUsersService>;
+  let users: jest.Mocked<ZUsersClient>;
   let login: IZLogin;
   let req: jest.Mocked<Request>;
   let host: jest.Mocked<HttpArgumentsHost>;

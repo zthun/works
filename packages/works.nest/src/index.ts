@@ -35,11 +35,6 @@ export { ZNotificationsModule } from './notifications/notifications.module';
 // Options
 export { ZOptionsController } from './options/options.controller';
 export { ZOptionsModule } from './options/options.module';
-// Users
-export { ZUsersCollections } from './users/users.collections';
-export { ZUsersDatabase } from './users/users.database';
-export { ZUsersModule } from './users/users.module';
-export { ZUsersService } from './users/users.service';
 // Vault
 export { ZCommonConfigService } from './vault/common-config.service';
 export { ZVaultCollections } from './vault/vault.collections';

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { IZLogin, IZUser } from '@zthun/works.core';
+import { ZUsersClient } from '@zthun/works.users';
 import { CookieOptions, Request, Response } from 'express';
 import { sign, SignOptions, verify } from 'jsonwebtoken';
 import { get } from 'lodash';
-import { ZUsersService } from '../../users/users.service';
 import { ZCommonConfigService } from '../../vault/common-config.service';
 import { ZAuthConfigService } from '../config/auth-config.service';
 
@@ -24,7 +24,7 @@ export class ZTokensService {
    * @param _commonConfig The common configuration service that contains core values.
    * @param _authConfig The auth configuration service that contains auth options.
    */
-  public constructor(private readonly _users: ZUsersService, private readonly _commonConfig: ZCommonConfigService, private readonly _authConfig: ZAuthConfigService) {}
+  public constructor(private readonly _users: ZUsersClient, private readonly _commonConfig: ZCommonConfigService, private readonly _authConfig: ZAuthConfigService) {}
 
   /**
    * Injects the jwt with the appropriate credentials into the response object.
