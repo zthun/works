@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { IZLogin, IZProfile, IZUser } from '@zthun/works.core';
 import { lastValueFrom } from 'rxjs';
-import { ZUsersToken } from './users.config';
 
 @Injectable()
 /**
@@ -14,7 +13,7 @@ export class ZUsersClient {
    *
    * @param _dal The data access layer.
    */
-  public constructor(@Inject(ZUsersToken) private readonly _users: ClientProxy) {}
+  public constructor(@Inject('Users.Service') private readonly _users: ClientProxy) {}
 
   /**
    * Gets a specific user by their id.
