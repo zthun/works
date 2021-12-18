@@ -3,7 +3,6 @@ import { Module } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { ZDatabaseMongo, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
-import { ZUsersPort } from '@zthun/works.users';
 import { env } from 'process';
 import { ZUsersDatabase } from './users.database';
 import { ZUsersService } from './users.service';
@@ -22,4 +21,4 @@ import { ZUsersService } from './users.service';
  */
 export class ZUsersModule {}
 
-NestFactory.createMicroservice<MicroserviceOptions>(ZUsersModule, { options: { host: '0.0.0.0', port: ZUsersPort } }).then((app) => app.listen());
+NestFactory.createMicroservice<MicroserviceOptions>(ZUsersModule, { options: { host: '0.0.0.0', port: 4000 } }).then((app) => app.listen());
