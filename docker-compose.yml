@@ -12,6 +12,7 @@ services:
       - zthunworks-services-api
       - zthunworks-services-client
       - zthunworks-services-server
+      - zthunworks-services-users
   # Node Ports
   zthunworks-services-api:
     image: node:16.6.0
@@ -37,10 +38,23 @@ services:
       - DATABASE_VAULT_URL=mongodb://zthunworks-databases-vault:27017
       - DATABASE_USERS_URL=mongodb://zthunworks-databases-users:27017
     depends_on:
+      - zthunworks-services-users
       - zthunworks-databases-vault
       - zthunworks-databases-users
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.server run debug
+  zthunworks-services-users:
+    image: node:16.6.0
+    ports:
+      - 9231:9229
+    volumes:
+      - .:/usr/dev
+    environment:
+      - DATABASE_URL=mongodb://zthunworks-databases-users:27017
+    depends_on:
+      - zthunworks-databases-users
+    working_dir: /usr/dev
+    command: npm --workspace @zthun/works.users-service run debug
   # Databases
   zthunworks-databases-vault:
     image: mongo:4.2.0

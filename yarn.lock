@@ -3071,6 +3071,50 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nestjs/microservices@npm:^8.2.1":
+  version: 8.2.4
+  resolution: "@nestjs/microservices@npm:8.2.4"
+  dependencies:
+    iterare: 1.2.1
+    json-socket: 0.3.0
+    tslib: 2.3.1
+  peerDependencies:
+    "@grpc/grpc-js": "*"
+    "@nestjs/common": ^8.0.0
+    "@nestjs/core": ^8.0.0
+    "@nestjs/websockets": ^8.0.0
+    amqp-connection-manager: "*"
+    amqplib: "*"
+    cache-manager: "*"
+    kafkajs: "*"
+    mqtt: "*"
+    nats: "*"
+    redis: "*"
+    reflect-metadata: ^0.1.12
+    rxjs: ^7.1.0
+  peerDependenciesMeta:
+    "@grpc/grpc-js":
+      optional: true
+    "@nestjs/websockets":
+      optional: true
+    amqp-connection-manager:
+      optional: true
+    amqplib:
+      optional: true
+    cache-manager:
+      optional: true
+    kafkajs:
+      optional: true
+    mqtt:
+      optional: true
+    nats:
+      optional: true
+    redis:
+      optional: true
+  checksum: b5dfe2ff1ea962f25239e1163e4da7f679b5399d4a0fb709ef9c2c147b4b3f81607ac339344597f286179e1ffcbc2da7477e3e7fb970994baf3689965c30441a
+  languageName: node
+  linkType: hard
+
 "@nestjs/platform-express@npm:^8.2.1":
   version: 8.2.1
   resolution: "@nestjs/platform-express@npm:8.2.1"
@@ -4401,6 +4445,7 @@ __metadata:
   dependencies:
     "@nestjs/common": ^8.2.1
     "@nestjs/core": ^8.2.1
+    "@nestjs/microservices": ^8.2.1
     "@nestjs/platform-express": ^8.2.1
     "@zthun/works.class": ^2.0.0
     "@zthun/works.core": ^2.0.0
@@ -4516,6 +4561,7 @@ __metadata:
     "@zthun/works.dal": ^2.0.0
     "@zthun/works.http": ^2.0.0
     "@zthun/works.url": ^2.0.0
+    "@zthun/works.users": ^2.0.0
     bcryptjs: ^2.4.3
     class-transformer: ~0.4.0
     cookie-parser: ^1.4.6
@@ -4528,6 +4574,7 @@ __metadata:
   peerDependencies:
     "@nestjs/common": ^8.0.6
     "@nestjs/core": ^8.0.6
+    "@nestjs/microservices": ^8.0.6
     "@nestjs/platform-express": ^8.0.6
   languageName: unknown
   linkType: soft
@@ -4574,6 +4621,7 @@ __metadata:
   dependencies:
     "@nestjs/common": ^8.2.1
     "@nestjs/core": ^8.2.1
+    "@nestjs/microservices": ^8.2.1
     "@nestjs/platform-express": ^8.2.1
     "@zthun/works.nest": ^2.0.0
     reflect-metadata: ^0.1.13
@@ -4590,6 +4638,32 @@ __metadata:
     buffer: ^6.0.3
     lodash: ^4.17.21
     url-parse: ^1.5.3
+  languageName: unknown
+  linkType: soft
+
+"@zthun/works.users-service@workspace:packages/works.users-service":
+  version: 0.0.0-use.local
+  resolution: "@zthun/works.users-service@workspace:packages/works.users-service"
+  dependencies:
+    "@nestjs/common": ^8.2.1
+    "@nestjs/core": ^8.2.1
+    "@nestjs/microservices": ^8.2.1
+    "@zthun/works.core": ^2.0.0
+    "@zthun/works.dal": ^2.0.0
+    "@zthun/works.users": ^2.0.0
+    reflect-metadata: ^0.1.13
+    rxjs: ^7.4.0
+  languageName: unknown
+  linkType: soft
+
+"@zthun/works.users@^2.0.0, @zthun/works.users@workspace:packages/works.users":
+  version: 0.0.0-use.local
+  resolution: "@zthun/works.users@workspace:packages/works.users"
+  dependencies:
+    "@zthun/works.core": ^2.0.0
+    rxjs: ^7.4.0
+  peerDependencies:
+    "@nestjs/microservices": ^8.0.6
   languageName: unknown
   linkType: soft
 
@@ -10880,6 +10954,13 @@ __metadata:
   version: 0.2.3
   resolution: "json-schema@npm:0.2.3"
   checksum: bbc2070988fb5f2a2266a31b956f1b5660e03ea7eaa95b33402901274f625feb586ae0c485e1df854fde40a7f0dc679f3b3ca8e5b8d31f8ea07a0d834de785c7
+  languageName: node
+  linkType: hard
+
+"json-socket@npm:0.3.0":
+  version: 0.3.0
+  resolution: "json-socket@npm:0.3.0"
+  checksum: 43e112523547c26a7f54259ac2cc222276d59a619d4d467554d8903f4d56752fd5ed6e23f27b14767dbe55bf0d8eab98640e0c09825fdf329cb8257e38eb6a45
   languageName: node
   linkType: hard
 

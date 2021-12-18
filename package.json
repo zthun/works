@@ -22,6 +22,8 @@
     "packages/works.draw",
     "packages/works.react",
     "packages/works.client",
+    "packages/works.users-service",
+    "packages/works.users",
     "packages/works.nest",
     "packages/works.server",
     "packages/works.api",
