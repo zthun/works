@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "module": "commonjs",
+    "sourceMap": true,
+    "paths": {
+      "@zthun/works.jest": ["../works.jest/src/index"],
+      "@zthun/works.core": ["../works.core/src/index"],
+      "@zthun/works.dal": ["../works.dal/src/index"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}
