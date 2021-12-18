@@ -1,0 +1,39 @@
+{
+  "name": "@zthun/works.users-service",
+  "version": "2.0.0",
+  "description": "A zthunworks microservice that manages users and profiles.",
+  "author": "Anthony Bonta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zthun/works",
+    "directory": "packages/works.users-service"
+  },
+  "main": "./dist/main.js",
+  "scripts": {
+    "docker:publish": "docker push zthun/works.users-service:latest && docker push zthun/works.users-service:$(node -p \"require('./package.json').version\")",
+    "docker:build": "npm pack && docker build . -t zthun/works.users-service:latest -t zthun/works.users-service:$(node -p \"require('./package.json').version\")",
+    "build": "tsc -p tsconfig.prod.json",
+    "debug": "nodemon",
+    "start": "node ./dist/main.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "images/**",
+    "dist/**",
+    "docs/**"
+  ],
+  "dependencies": {
+    "@nestjs/common": "^8.2.1",
+    "@nestjs/core": "^8.2.1",
+    "@nestjs/microservices": "^8.2.1",
+    "@zthun/works.core": "^2.0.0",
+    "@zthun/works.dal": "^2.0.0",
+    "@zthun/works.users": "^2.0.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.4.0"
+  },
+  "sideEffects": false
+}
