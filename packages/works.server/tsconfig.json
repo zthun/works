@@ -9,7 +9,8 @@
       "@zthun/works.class": ["../works.class/src/index"],
       "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.nest": ["../works.nest/src/index"],
-      "@zthun/works.dal": ["../works.dal/src/index"]
+      "@zthun/works.dal": ["../works.dal/src/index"],
+      "@zthun/works.users": ["../works.users/src/index"]
     }
   },
   "include": ["src/**/*.ts"]
