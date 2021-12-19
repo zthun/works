@@ -31,6 +31,7 @@
     "rxjs": "^7.4.0"
   },
   "peerDependencies": {
+    "@nestjs/common": "^8.0.6",
     "@nestjs/microservices": "^8.0.6"
   },
   "sideEffects": false
