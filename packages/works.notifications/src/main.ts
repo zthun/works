@@ -5,7 +5,7 @@ import { MicroserviceOptions } from '@nestjs/microservices';
 import { ZNotificationsService } from './notifications.service';
 
 /**
- * Represents the module that handles notifications.
+ * Represents the main entry point for this microservice.
  */
 @Module({
   controllers: [ZNotificationsService]

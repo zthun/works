@@ -8,7 +8,7 @@ import { ZUsersDatabase } from './users.database';
 import { ZUsersService } from './users.service';
 
 /**
- * Represents the entrypoint module for this microservice.
+ * Represents the entry point module for this microservice.
  */
 @Module({
   providers: [

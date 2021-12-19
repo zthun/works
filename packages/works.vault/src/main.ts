@@ -8,7 +8,7 @@ import { ZVaultDatabase } from './vault.database';
 import { ZVaultService } from './vault.service';
 
 /**
- * Represents the entrypoint module for this microservice.
+ * Represents the entry point module for this microservice.
  */
 @Module({
   providers: [
