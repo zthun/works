@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ .Chart.Name }}-deployments-vault
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-pods-vault
+  template:
+    metadata:
+      name: {{ .Chart.Name }}-pods-vault
+      labels:
+        app: {{ .Chart.Name }}-pods-vault
+        version: {{ .Chart.AppVersion }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-pods-vault
+          image: {{ .Values.images.scope }}/{{ .Values.images.vault }}:{{ .Chart.AppVersion }}
+          ports:
+            - containerPort: 4000
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Chart.Name }}-secrets-db-urls
+                  key: database-vault-url

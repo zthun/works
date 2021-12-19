@@ -1,0 +1,22 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ .Chart.Name }}-deployments-notifications
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-pods-notifications
+  template:
+    metadata:
+      name: {{ .Chart.Name }}-pods-notifications
+      labels:
+        app: {{ .Chart.Name }}-pods-notifications
+        version: {{ .Chart.AppVersion }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-pods-notifications
+          image: {{ .Values.images.scope }}/{{ .Values.images.notifications }}:{{ .Chart.AppVersion }}
+          ports:
+            - containerPort: 4000

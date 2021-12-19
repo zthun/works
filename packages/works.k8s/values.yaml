@@ -10,6 +10,9 @@ images:
   scope: zthun
   server: works.server
   client: works.client
+  users: works.users
+  vault: works.vault
+  notifications: works.notifications
 
 database:
   vault: vault.database.zthunworks.com
