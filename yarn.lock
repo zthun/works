@@ -4559,6 +4559,7 @@ __metadata:
     "@zthun/works.core": ^2.0.0
     rxjs: ^7.4.0
   peerDependencies:
+    "@nestjs/common": ^8.0.6
     "@nestjs/microservices": ^8.0.6
   languageName: unknown
   linkType: soft
@@ -4569,7 +4570,6 @@ __metadata:
   dependencies:
     "@zthun/works.class": ^2.0.0
     "@zthun/works.core": ^2.0.0
-    "@zthun/works.dal": ^2.0.0
     "@zthun/works.http": ^2.0.0
     "@zthun/works.microservices": ^2.0.0
     "@zthun/works.url": ^2.0.0
@@ -4586,6 +4586,22 @@ __metadata:
     "@nestjs/core": ^8.0.6
     "@nestjs/microservices": ^8.0.6
     "@nestjs/platform-express": ^8.0.6
+  languageName: unknown
+  linkType: soft
+
+"@zthun/works.notifications@workspace:packages/works.notifications":
+  version: 0.0.0-use.local
+  resolution: "@zthun/works.notifications@workspace:packages/works.notifications"
+  dependencies:
+    "@nestjs/common": ^8.2.1
+    "@nestjs/core": ^8.2.1
+    "@nestjs/microservices": ^8.2.1
+    "@zthun/works.core": ^2.0.0
+    nodemailer: ^6.7.1
+    reflect-metadata: ^0.1.13
+    rxjs: ^7.4.0
+  bin:
+    zthun-works-notifications: ./bin/main.js
   languageName: unknown
   linkType: soft
 

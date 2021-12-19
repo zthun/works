@@ -23,6 +23,7 @@
     "packages/works.react",
     "packages/works.client",
     "packages/works.microservices",
+    "packages/works.notifications",
     "packages/works.users",
     "packages/works.vault",
     "packages/works.nest",
