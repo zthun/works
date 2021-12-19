@@ -32,9 +32,6 @@ export { ZHealthController } from './health/health.controller';
 export { ZHealthModule } from './health/health.module';
 // Http
 export { ZHttpServiceToken, ZHttpServiceProvider, ZHttpModule } from './http/http.module';
-// Notifications
-export { ZEmailService } from './notifications/email.service';
-export { ZNotificationsModule } from './notifications/notifications.module';
 // Options
 export { ZOptionsController } from './options/options.controller';
 export { ZOptionsModule } from './options/options.module';

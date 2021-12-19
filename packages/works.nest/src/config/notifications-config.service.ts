@@ -26,7 +26,7 @@ export class ZNotificationsConfigService implements OnModuleInit {
   /**
    * The default value for the smtp config.
    */
-  public static readonly DEFAULT_SMTP = new ZServerBuilder().address(`smtp.${ZCommonConfigService.DEFAULT_DOMAIN}`).build();
+  public static readonly DEFAULT_SMTP = new ZServerBuilder().address(`smtp.${ZCommonConfigService.DEFAULT_DOMAIN}`).port(25).build();
 
   /**
    * The default value for the notifier config.

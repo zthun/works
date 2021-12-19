@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IZEmail, IZLogin, IZProfile, IZUser, ZEmailBuilder, ZEmailEnvelopeBuilder, ZProfileBuilder } from '@zthun/works.core';
-import { ZUsersClient } from '@zthun/works.microservices';
-import { ZEmailService } from '../../notifications/email.service';
+import { ZNotificationsClient, ZUsersClient } from '@zthun/works.microservices';
 import { ZNotificationsConfigService } from '../../config/notifications-config.service';
 import { ZCommonConfigService } from '../../config/common-config.service';
 
@@ -14,11 +13,11 @@ export class ZProfilesService {
    * Initializes a new instance of this object.
    *
    * @param _users The users service.
-   * @param _email The email service.
+   * @param _notifications The notifications service.
    * @param _commonConfig The common configuration service.
    * @param _notificationsConfig The notifications configuration service.
    */
-  public constructor(private _users: ZUsersClient, private _email: ZEmailService, private _commonConfig: ZCommonConfigService, private _notificationsConfig: ZNotificationsConfigService) {}
+  public constructor(private _users: ZUsersClient, private _notifications: ZNotificationsClient, private _commonConfig: ZCommonConfigService, private _notificationsConfig: ZNotificationsConfigService) {}
 
   /**
    * Creates a profile object from a login.
@@ -87,7 +86,7 @@ export class ZProfilesService {
       <p>Thanks for joining ${domain.value}.  We hope you enjoy your stay.</p>
     `;
     const email = new ZEmailBuilder().message(msg).subject(subject).envelope(envelope).build();
-    await this._email.send(email, server.value);
+    await this._notifications.sendEmail(email, server.value);
     return email;
   }
 
@@ -171,7 +170,7 @@ export class ZProfilesService {
       <p>If you did not make this request, then it is recommended to log into the system and update your email/password as someone may be trying to access your account.</p>`;
 
     const email = new ZEmailBuilder().message(msg).subject(subject).envelope(envelope).build();
-    await this._email.send(email, server.value);
+    await this._notifications.sendEmail(email, server.value);
     return email;
   }
 
