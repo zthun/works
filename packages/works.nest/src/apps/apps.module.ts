@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ZVaultModule } from '../vault/vault.module';
+import { ZVaultModule } from '@zthun/works.microservices';
+import { ZConfigModule } from '../config/config.module';
 import { ZAppsService } from './apps.service';
 import { ZWebAppsController } from './web-apps/web-apps.controller';
 
 @Module({
   providers: [ZAppsService],
-  imports: [ZVaultModule],
+  imports: [ZVaultModule, ZConfigModule],
   controllers: [ZWebAppsController],
   exports: [ZAppsService]
 })

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
-import { ZCommonConfigService } from '../vault/common-config.service';
 import { ZUrlBuilder } from '@zthun/works.url';
+import { ZCommonConfigService } from '../config/common-config.service';
 
 @Injectable()
 /**

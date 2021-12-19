@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
-import { ZCommonConfigService } from '../vault/common-config.service';
+import { ZCommonConfigService } from '../config/common-config.service';
 import { ZAppsService } from './apps.service';
 
 describe('ZAppsService', () => {

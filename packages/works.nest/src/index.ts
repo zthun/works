@@ -21,6 +21,10 @@ export { ZRuleCookieRequiresAuth } from './auth/rules/rule-cookie-requires-auth.
 export { ZTokensLoginDto } from './auth/tokens/tokens-login.dto';
 export { ZTokensController } from './auth/tokens/tokens.controller';
 export { ZTokensService } from './auth/tokens/tokens.service';
+// Config
+export { ZCommonConfigService } from './config/common-config.service';
+export { ZNotificationsConfigService } from './config/notifications-config.service';
+export { ZConfigModule } from './config/config.module';
 // Error
 export { ZExceptionFactory } from './error/exception-factory.class';
 // Health
@@ -30,14 +34,7 @@ export { ZHealthModule } from './health/health.module';
 export { ZHttpServiceToken, ZHttpServiceProvider, ZHttpModule } from './http/http.module';
 // Notifications
 export { ZEmailService } from './notifications/email.service';
-export { ZNotificationsConfigService } from './notifications/notifications-config.service';
 export { ZNotificationsModule } from './notifications/notifications.module';
 // Options
 export { ZOptionsController } from './options/options.controller';
 export { ZOptionsModule } from './options/options.module';
-// Vault
-export { ZCommonConfigService } from './vault/common-config.service';
-export { ZVaultCollections } from './vault/vault.collections';
-export { ZVaultDatabase } from './vault/vault.database';
-export { ZVaultModule } from './vault/vault.module';
-export { ZVaultService } from './vault/vault.service';

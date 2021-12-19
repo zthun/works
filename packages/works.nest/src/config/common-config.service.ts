@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
-import { ZVaultService } from './vault.service';
+import { ZVaultClient } from '@zthun/works.microservices';
 
 @Injectable()
 /**
@@ -27,7 +27,7 @@ export class ZCommonConfigService implements OnModuleInit {
    *
    * @param _vault The service for reading and writing to the vault.
    */
-  public constructor(private readonly _vault: ZVaultService) {}
+  public constructor(private readonly _vault: ZVaultClient) {}
 
   /**
    * Initializes this service.

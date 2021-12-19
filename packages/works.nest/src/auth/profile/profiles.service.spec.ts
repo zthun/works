@@ -4,8 +4,8 @@ import { createMocked } from '@zthun/works.jest';
 import { ZUsersClient } from '@zthun/works.microservices';
 import { v4 } from 'uuid';
 import { ZEmailService } from '../../notifications/email.service';
-import { ZNotificationsConfigService } from '../../notifications/notifications-config.service';
-import { ZCommonConfigService } from '../../vault/common-config.service';
+import { ZNotificationsConfigService } from '../../config/notifications-config.service';
+import { ZCommonConfigService } from '../../config/common-config.service';
 import { ZProfilesService } from './profiles.service';
 
 describe('ZProfilesService', () => {

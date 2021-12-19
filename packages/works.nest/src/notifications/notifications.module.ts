@@ -1,9 +1,9 @@
 /* istanbul ignore file */
 
 import { Module } from '@nestjs/common';
-import { ZVaultModule } from '../vault/vault.module';
+import { ZVaultModule } from '@zthun/works.microservices';
 import { ZEmailService } from './email.service';
-import { ZNotificationsConfigService } from './notifications-config.service';
+import { ZNotificationsConfigService } from '../config/notifications-config.service';
 
 @Module({
   imports: [ZVaultModule],

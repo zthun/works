@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { IZEmail, IZLogin, IZProfile, IZUser, ZEmailBuilder, ZEmailEnvelopeBuilder, ZProfileBuilder } from '@zthun/works.core';
 import { ZUsersClient } from '@zthun/works.microservices';
 import { ZEmailService } from '../../notifications/email.service';
-import { ZNotificationsConfigService } from '../../notifications/notifications-config.service';
-import { ZCommonConfigService } from '../../vault/common-config.service';
+import { ZNotificationsConfigService } from '../../config/notifications-config.service';
+import { ZCommonConfigService } from '../../config/common-config.service';
 
 @Injectable()
 /**

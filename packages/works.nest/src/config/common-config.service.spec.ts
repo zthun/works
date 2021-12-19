@@ -1,11 +1,11 @@
 /* eslint-disable require-jsdoc */
 import { ZConfigEntryBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
+import { ZVaultClient } from '@zthun/works.microservices';
 import { ZCommonConfigService } from './common-config.service';
-import { ZVaultService } from './vault.service';
 
 describe('ZCommonConfigService', () => {
-  let vault: jest.Mocked<ZVaultService>;
+  let vault: jest.Mocked<ZVaultClient>;
 
   async function createTestTarget() {
     const target = new ZCommonConfigService(vault);

@@ -4,7 +4,7 @@ import { createMocked } from '@zthun/works.jest';
 import { ZUsersClient } from '@zthun/works.microservices';
 import { Request, Response } from 'express';
 import { v4 } from 'uuid';
-import { ZCommonConfigService } from '../../vault/common-config.service';
+import { ZCommonConfigService } from '../../config/common-config.service';
 import { ZAuthConfigService } from '../config/auth-config.service';
 import { ZTokensService } from './tokens.service';
 

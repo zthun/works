@@ -4,7 +4,7 @@ import { ZUsersClient } from '@zthun/works.microservices';
 import { CookieOptions, Request, Response } from 'express';
 import { sign, SignOptions, verify } from 'jsonwebtoken';
 import { get } from 'lodash';
-import { ZCommonConfigService } from '../../vault/common-config.service';
+import { ZCommonConfigService } from '../../config/common-config.service';
 import { ZAuthConfigService } from '../config/auth-config.service';
 
 @Injectable()
