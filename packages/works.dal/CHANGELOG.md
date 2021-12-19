@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/zthun/works/compare/v2.0.0...v2.1.0) (2021-12-19)
+
+
+### Bug Fixes
+
+* stopping an in memory database now cleans the instance ([2c8cc0c](https://github.com/zthun/works/commit/2c8cc0c40197e63255d71887804651dd179c7de1))
+* updated packages with bug fixes ([dc49918](https://github.com/zthun/works/commit/dc499187c0a25d1a35f5c53ca1290c1bae40e135))
+
+
+
 ## [2.0.0](https://github.com/zthun/works/compare/v1.4.0...v2.0.0) (2021-11-15)
 
 

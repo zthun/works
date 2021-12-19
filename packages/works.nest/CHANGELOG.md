@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/zthun/works/compare/v2.0.0...v2.1.0) (2021-12-19)
+
+
+### Features
+
+* moved the configurations to a new config module ([8656036](https://github.com/zthun/works/commit/8656036f42db5fd666a19504779876cb5d8a4bc9))
+* no longer depends on nodemailer ([7ac6e17](https://github.com/zthun/works/commit/7ac6e172d4ae0d46188973990de7f94475f96135))
+* update to use the new notifications microservice ([7625e52](https://github.com/zthun/works/commit/7625e5233e8720996703e98175e3b15aef58b76a))
+* works.nest no longer depends on works.dal ([3b53905](https://github.com/zthun/works/commit/3b53905bd5c93c5627f0706d4f4b5ae89cdd8c09))
+
+
+### Bug Fixes
+
+* updated packages with bug fixes ([dc49918](https://github.com/zthun/works/commit/dc499187c0a25d1a35f5c53ca1290c1bae40e135))
+
+
+
 ## [2.0.0](https://github.com/zthun/works/compare/v1.4.0...v2.0.0) (2021-11-15)
 
 

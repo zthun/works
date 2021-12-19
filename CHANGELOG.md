@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/zthun/works/compare/v2.0.0...v2.1.0) (2021-12-19)
+
+
+### Features
+
+* added a dev smtp server ([1e0a1f5](https://github.com/zthun/works/commit/1e0a1f5516bd287b971d34a96e52ec6d6afa82e2))
+* added support for an assertion that a sendable proxy sends a pattern and payload ([a843848](https://github.com/zthun/works/commit/a84384842eda4c0395ea7d8b1b1247ac58f20c60))
+* added the new users microservice ([cb7d0f6](https://github.com/zthun/works/commit/cb7d0f69e2a44b42aea1c53dd7313c6de1051dd5))
+* added the notifications client ([76e53fd](https://github.com/zthun/works/commit/76e53fd961808f0d45b5b13abbe35e61d1f30cb8))
+* added the notifications micro service ([54f506f](https://github.com/zthun/works/commit/54f506ffa1816bb013212790a04a243e0f838b73))
+* added the notifications microservice ([5e74ae5](https://github.com/zthun/works/commit/5e74ae5331000713b7322c4b62b8b2496e691e87))
+* added the users microservice ([3a9ae75](https://github.com/zthun/works/commit/3a9ae753cae212dc98e0daad969e576cc2259bbe))
+* added the users package ([c5a40a6](https://github.com/zthun/works/commit/c5a40a6fb6e2061f98aa96692977614ae30b78cd))
+* added the vault client ([fcddca9](https://github.com/zthun/works/commit/fcddca956b85d99969cc71b31c7dec2f5e202971))
+* added the vault microservice ([fcb9989](https://github.com/zthun/works/commit/fcb99890803e1e8018b41e43bbcf285821be891e))
+* added works.microservices ([9864b77](https://github.com/zthun/works/commit/9864b77d6526d91f4b8f77cf1a4bb58e6b1c70c9))
+* adding deployments for new microservices ([64551d2](https://github.com/zthun/works/commit/64551d28bd72222a6d2d334e9c017daa601a2fc4))
+* moved the configurations to a new config module ([8656036](https://github.com/zthun/works/commit/8656036f42db5fd666a19504779876cb5d8a4bc9))
+* no longer depends on nodemailer ([7ac6e17](https://github.com/zthun/works/commit/7ac6e172d4ae0d46188973990de7f94475f96135))
+* update to use the new notifications microservice ([7625e52](https://github.com/zthun/works/commit/7625e5233e8720996703e98175e3b15aef58b76a))
+* works.nest no longer depends on works.dal ([3b53905](https://github.com/zthun/works/commit/3b53905bd5c93c5627f0706d4f4b5ae89cdd8c09))
+
+
+### Bug Fixes
+
+* reactivating your account now properly ends the spinner ([1eecba2](https://github.com/zthun/works/commit/1eecba2c004bc996c70914256ba1e412792803b0))
+* removing npm engine requirement from works.server and works.api ([cb4461b](https://github.com/zthun/works/commit/cb4461b9ba1d881268c0623e5ba76e5f51d5dd1f))
+* stopping an in memory database now cleans the instance ([2c8cc0c](https://github.com/zthun/works/commit/2c8cc0c40197e63255d71887804651dd179c7de1))
+* updated packages with bug fixes ([dc49918](https://github.com/zthun/works/commit/dc499187c0a25d1a35f5c53ca1290c1bae40e135))
+
+
+
 ## [2.0.0](https://github.com/zthun/works/compare/v1.4.0...v2.0.0) (2021-11-15)
 
 

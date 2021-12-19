@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/zthun/works/compare/v2.0.0...v2.1.0) (2021-12-19)
+
+
+### Bug Fixes
+
+* reactivating your account now properly ends the spinner ([1eecba2](https://github.com/zthun/works/commit/1eecba2c004bc996c70914256ba1e412792803b0))
+
+
+
 ## [2.0.0](https://github.com/zthun/works/compare/v1.4.0...v2.0.0) (2021-11-15)
 
 

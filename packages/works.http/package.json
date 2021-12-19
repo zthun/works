@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.http",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A simple service to make http calls or mock http calls.",
   "author": "Anthony Bonta",
   "license": "MIT",

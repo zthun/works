@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/zthun/works/compare/v2.0.0...v2.1.0) (2021-12-19)
+
+
+### Features
+
+* added support for an assertion that a sendable proxy sends a pattern and payload ([a843848](https://github.com/zthun/works/commit/a84384842eda4c0395ea7d8b1b1247ac58f20c60))
+
+
+
 ## [2.0.0](https://github.com/zthun/works/compare/v1.4.0...v2.0.0) (2021-11-15)
 
 **Note:** Version bump only for package @zthun/works.jest
