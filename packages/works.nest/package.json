@@ -33,7 +33,6 @@
     "@zthun/works.http": "^2.0.0",
     "@zthun/works.microservices": "^2.0.0",
     "@zthun/works.url": "^2.0.0",
-    "bcryptjs": "^2.4.3",
     "class-transformer": "~0.4.0",
     "cookie-parser": "^1.4.6",
     "helmet": "^4.6.0",
