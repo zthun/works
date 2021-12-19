@@ -55,6 +55,18 @@ services:
       - zthunworks-databases-users
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.users-service run debug
+  zthunworks-services-vault:
+    image: node:16.6.0
+    ports:
+      - 9232:9229
+    volumes:
+      - .:/usr/dev
+    environment:
+      - DATABASE_URL=mongodb://zthunworks-databases-vault:27017
+    depends_on:
+      - zthunworks-databases-vault
+    working_dir: /usr/dev
+    command: npm --workspace @zthun/works.vault-service run debug
   # Databases
   zthunworks-databases-vault:
     image: mongo:4.2.0

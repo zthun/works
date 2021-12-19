@@ -4552,6 +4552,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@zthun/works.microservices@^2.0.0, @zthun/works.microservices@workspace:packages/works.microservices":
+  version: 0.0.0-use.local
+  resolution: "@zthun/works.microservices@workspace:packages/works.microservices"
+  dependencies:
+    "@zthun/works.core": ^2.0.0
+    rxjs: ^7.4.0
+  peerDependencies:
+    "@nestjs/microservices": ^8.0.6
+  languageName: unknown
+  linkType: soft
+
 "@zthun/works.nest@^2.0.0, @zthun/works.nest@workspace:packages/works.nest":
   version: 0.0.0-use.local
   resolution: "@zthun/works.nest@workspace:packages/works.nest"
@@ -4560,8 +4571,8 @@ __metadata:
     "@zthun/works.core": ^2.0.0
     "@zthun/works.dal": ^2.0.0
     "@zthun/works.http": ^2.0.0
+    "@zthun/works.microservices": ^2.0.0
     "@zthun/works.url": ^2.0.0
-    "@zthun/works.users": ^2.0.0
     bcryptjs: ^2.4.3
     class-transformer: ~0.4.0
     cookie-parser: ^1.4.6
@@ -4650,20 +4661,22 @@ __metadata:
     "@nestjs/microservices": ^8.2.1
     "@zthun/works.core": ^2.0.0
     "@zthun/works.dal": ^2.0.0
-    "@zthun/works.users": ^2.0.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
   languageName: unknown
   linkType: soft
 
-"@zthun/works.users@^2.0.0, @zthun/works.users@workspace:packages/works.users":
+"@zthun/works.vault-service@workspace:packages/works.vault-service":
   version: 0.0.0-use.local
-  resolution: "@zthun/works.users@workspace:packages/works.users"
+  resolution: "@zthun/works.vault-service@workspace:packages/works.vault-service"
   dependencies:
+    "@nestjs/common": ^8.2.1
+    "@nestjs/core": ^8.2.1
+    "@nestjs/microservices": ^8.2.1
     "@zthun/works.core": ^2.0.0
+    "@zthun/works.dal": ^2.0.0
+    reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
-  peerDependencies:
-    "@nestjs/microservices": ^8.0.6
   languageName: unknown
   linkType: soft
 

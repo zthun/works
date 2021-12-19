@@ -13,10 +13,10 @@
       "@zthun/works.jest": ["works.jest/src/index"],
       "@zthun/works.logger": ["works.logger/src/index"],
       "@zthun/works.message": ["works.message/src/index"],
+      "@zthun/works.microservices": ["works.microservices/src/index"],
       "@zthun/works.nest": ["works.nest/src/index"],
       "@zthun/works.react": ["works.react/src/index"],
-      "@zthun/works.url": ["works.url/src/index"],
-      "@zthun/works.users": ["works.users/src/index"]
+      "@zthun/works.url": ["works.url/src/index"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
