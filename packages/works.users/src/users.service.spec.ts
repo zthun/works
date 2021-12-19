@@ -9,7 +9,7 @@ import { v4 } from 'uuid';
 import { ZUsersCollections } from './users.database';
 import { ZUsersService } from './users.service';
 
-xdescribe('ZUsersService', () => {
+describe('ZUsersService', () => {
   let mongo: ZDatabaseMemory;
   let dal: IZDatabase;
   let userA: IZUser;
