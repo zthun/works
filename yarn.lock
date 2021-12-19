@@ -4573,7 +4573,6 @@ __metadata:
     "@zthun/works.http": ^2.0.0
     "@zthun/works.microservices": ^2.0.0
     "@zthun/works.url": ^2.0.0
-    bcryptjs: ^2.4.3
     class-transformer: ~0.4.0
     cookie-parser: ^1.4.6
     helmet: ^4.6.0
@@ -4661,8 +4660,12 @@ __metadata:
     "@nestjs/microservices": ^8.2.1
     "@zthun/works.core": ^2.0.0
     "@zthun/works.dal": ^2.0.0
+    bcryptjs: ^2.4.3
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
+    uuid: ^8.3.2
+  bin:
+    zthun-works-users: ./bin/main.js
   languageName: unknown
   linkType: soft
 
@@ -4677,6 +4680,8 @@ __metadata:
     "@zthun/works.dal": ^2.0.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
+  bin:
+    zthun-works-vault: ./bin/main.js
   languageName: unknown
   linkType: soft
 
