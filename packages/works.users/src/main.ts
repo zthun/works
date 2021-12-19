@@ -7,6 +7,9 @@ import { env } from 'process';
 import { ZUsersDatabase } from './users.database';
 import { ZUsersService } from './users.service';
 
+/**
+ * Represents the entrypoint module for this microservice.
+ */
 @Module({
   providers: [
     {
@@ -16,9 +19,6 @@ import { ZUsersService } from './users.service';
   ],
   controllers: [ZUsersService]
 })
-/**
- * Represents the module that handles users.
- */
-export class ZUsersModule {}
+class ZMicroserviceModule {}
 
-NestFactory.createMicroservice<MicroserviceOptions>(ZUsersModule, { options: { host: '0.0.0.0', port: 4000 } }).then((app) => app.listen());
+NestFactory.createMicroservice<MicroserviceOptions>(ZMicroserviceModule, { options: { host: '0.0.0.0', port: 4000 } }).then((app) => app.listen());
