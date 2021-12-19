@@ -1,4 +1,7 @@
 /* istanbul ignore file */
+// Notifications
+export { ZNotificationsModule } from './notifications/notifications.module';
+export { ZNotificationsClient } from './notifications/notifications.client';
 // Users
 export { ZUsersModule } from './users/users.module';
 export { ZUsersClient } from './users/users.client';
