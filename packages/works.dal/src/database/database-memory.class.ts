@@ -76,7 +76,7 @@ export class ZDatabaseMemory implements IZDatabase {
       return true;
     }
 
-    const killed = await this._server.stop();
+    const killed = await this._server.stop(true);
     this._running = null;
     this._server = null;
     return killed;
