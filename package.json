@@ -24,7 +24,7 @@
     "packages/works.client",
     "packages/works.microservices",
     "packages/works.users",
-    "packages/works.vault-service",
+    "packages/works.vault",
     "packages/works.nest",
     "packages/works.server",
     "packages/works.api",

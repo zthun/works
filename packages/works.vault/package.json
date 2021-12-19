@@ -1,5 +1,5 @@
 {
-  "name": "@zthun/works.vault-service",
+  "name": "@zthun/works.vault",
   "version": "2.0.0",
   "description": "A zthunworks microservice that manages the system vault configurations.",
   "author": "Anthony Bonta",
@@ -7,12 +7,12 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/works",
-    "directory": "packages/works.vault-service"
+    "directory": "packages/works.vault"
   },
   "main": "./dist/main.js",
   "scripts": {
-    "docker:publish": "docker push zthun/works.vault-service:latest && docker push zthun/works.vault-service:$(node -p \"require('./package.json').version\")",
-    "docker:build": "npm pack && docker build . -t zthun/works.vault-service:latest -t zthun/works.vault-service:$(node -p \"require('./package.json').version\")",
+    "docker:publish": "docker push zthun/works.vault:latest && docker push zthun/works.vault:$(node -p \"require('./package.json').version\")",
+    "docker:build": "npm pack && docker build . -t zthun/works.vault:latest -t zthun/works.vault:$(node -p \"require('./package.json').version\")",
     "build": "tsc -p tsconfig.prod.json",
     "debug": "nodemon",
     "start": "node ./dist/main.js"

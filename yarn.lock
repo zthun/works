@@ -4666,9 +4666,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.vault-service@workspace:packages/works.vault-service":
+"@zthun/works.vault@workspace:packages/works.vault":
   version: 0.0.0-use.local
-  resolution: "@zthun/works.vault-service@workspace:packages/works.vault-service"
+  resolution: "@zthun/works.vault@workspace:packages/works.vault"
   dependencies:
     "@nestjs/common": ^8.2.1
     "@nestjs/core": ^8.2.1
