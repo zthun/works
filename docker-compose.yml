@@ -96,3 +96,8 @@ services:
       - zthunworks-databases-users
     environment:
       - ME_CONFIG_MONGODB_SERVER=zthunworks-databases-users
+  smtp.zthunworks.com:
+    image: rnwood/smtp4dev:v3.1
+    ports:
+      - 8083:80
+      - 25:25
