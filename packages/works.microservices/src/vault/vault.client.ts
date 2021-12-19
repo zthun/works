@@ -13,7 +13,7 @@ export class ZVaultClient {
    *
    * @param _vault The client proxy used to connect to the vault microservice.
    */
-  public constructor(@Inject('Users.Service') private readonly _vault: ClientProxy) {}
+  public constructor(@Inject('Vault.Service') private readonly _vault: ClientProxy) {}
 
   /**
    * Reads a configuration item by scope and key.
