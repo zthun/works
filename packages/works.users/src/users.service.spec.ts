@@ -18,7 +18,7 @@ describe('ZUsersService', () => {
   let loginB: IZLogin;
 
   beforeAll(async () => {
-    mongo = await ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('user-controller-test').build());
+    mongo = await ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('user-service-test').build());
     await mongo.start();
     dal = mongo;
   });
