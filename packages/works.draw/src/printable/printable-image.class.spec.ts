@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { createMocked } from '@zthun/works.jest';
-import { IZImageReader } from '../image/image-reader.interface';
+import { IZImageReader } from '../image/image-reader';
 import { ZPrintableImage } from './printable-image.class';
 
 describe('ZPrintableImage', () => {
