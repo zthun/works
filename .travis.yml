@@ -1,5 +1,5 @@
 language: node_js
-node_js: 17.0.1
+node_js: 17.2.0
 dist: xenial
 os:
   - linux
