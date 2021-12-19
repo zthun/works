@@ -80,6 +80,7 @@ export function ZProfilePage() {
       setActivation(body);
       const update = await profileSvc.reactivate(body);
       alerts.create(new ZAlertBuilder().success().message('Activation code sent. Please check your email.').build());
+      setReactivating(false);
       profile.set(update);
     } catch (err) {
       errors.handle(err);
