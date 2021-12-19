@@ -138,6 +138,15 @@ describe('ZUsersService', () => {
       // Assert
       expect(actual).toEqual(userA);
     });
+
+    it('returns null if no such user can be found.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.find({ _id: v4() });
+      // Assert
+      expect(actual).toBeNull();
+    });
   });
 
   describe('Update', () => {

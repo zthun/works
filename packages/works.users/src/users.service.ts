@@ -24,16 +24,18 @@ export class ZUsersService {
   public constructor(@Inject(ZUsersDatabase.Token) private readonly _dal: IZDatabase) {}
 
   /**
-   * Gets a specific user by their id.
+   * Gets a specific user by their id or email.
    *
-   * @param filter The filter that contains the _id of the user to find.
+   * @param filter The filter that contains the _id or email of the user to find.  If you specify both,
+   *               then the user is only returned if the user with the given email matches the user
+   *               with the given id.
    *
-   * @returns A promise that, when resolved, has the found user.  Returns undefined if no such user exists.
+   * @returns A promise that, when resolved, has the found user.  Returns null if no such user exists.
    */
-  @MessagePattern({ cmd: 'findById' })
+  @MessagePattern({ cmd: 'find' })
   public async find(filter: { _id?: string; email?: string }): Promise<IZUser> {
     const [user] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter(filter).run();
-    return user;
+    return user || null;
   }
 
   /**
@@ -124,7 +126,7 @@ export class ZUsersService {
    *
    * @returns A promise that, when resolved, returns the updated user.
    */
-  @MessagePattern({ cmd: 'activate' })
+  @MessagePattern({ cmd: 'deactivate' })
   public async deactivate({ user }: { user: IZUser }): Promise<IZUser> {
     const copy = new ZUserBuilder().copy(user).inactive(v4()).build();
     await this._dal.update<IZUser>(ZUsersCollections.Users, copy).filter({ _id: copy._id }).run();
@@ -162,10 +164,11 @@ export class ZUsersService {
    * @returns A promise that resolves when the login has been set.
    */
   @MessagePattern({ cmd: 'login' })
-  public async login({ id }: { id: string }): Promise<void> {
+  public async login({ id }: { id: string }): Promise<null> {
     const current = await this.find({ _id: id });
     const updated = new ZUserBuilder().copy(current).login().build();
     await this._dal.update<IZUser>(ZUsersCollections.Users, updated).filter({ _id: updated._id }).run();
+    return null;
   }
 
   /**
