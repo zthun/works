@@ -1,18 +1,18 @@
 {
-  "name": "@zthun/works.users-service",
+  "name": "@zthun/works.users",
   "version": "2.0.0",
-  "description": "A zthunworks microservice that manages users and profiles.",
+  "description": "A zthunworks microservice that manages users, profiles, and logins.",
   "author": "Anthony Bonta",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/works",
-    "directory": "packages/works.users-service"
+    "directory": "packages/works.users"
   },
   "main": "./dist/main.js",
   "scripts": {
-    "docker:publish": "docker push zthun/works.users-service:latest && docker push zthun/works.users-service:$(node -p \"require('./package.json').version\")",
-    "docker:build": "npm pack && docker build . -t zthun/works.users-service:latest -t zthun/works.users-service:$(node -p \"require('./package.json').version\")",
+    "docker:publish": "docker push zthun/works.users:latest && docker push zthun/works.users:$(node -p \"require('./package.json').version\")",
+    "docker:build": "npm pack && docker build . -t zthun/works.users:latest -t zthun/works.users:$(node -p \"require('./package.json').version\")",
     "build": "tsc -p tsconfig.prod.json",
     "debug": "nodemon",
     "start": "node ./dist/main.js"

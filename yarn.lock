@@ -4652,9 +4652,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.users-service@workspace:packages/works.users-service":
+"@zthun/works.users@workspace:packages/works.users":
   version: 0.0.0-use.local
-  resolution: "@zthun/works.users-service@workspace:packages/works.users-service"
+  resolution: "@zthun/works.users@workspace:packages/works.users"
   dependencies:
     "@nestjs/common": ^8.2.1
     "@nestjs/core": ^8.2.1

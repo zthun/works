@@ -54,7 +54,7 @@ services:
     depends_on:
       - zthunworks-databases-users
     working_dir: /usr/dev
-    command: npm --workspace @zthun/works.users-service run debug
+    command: npm --workspace @zthun/works.users run debug
   zthunworks-services-vault:
     image: node:16.6.0
     ports:
