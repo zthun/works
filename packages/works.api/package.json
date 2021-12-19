@@ -14,8 +14,7 @@
     "zthun-works-api": "./bin/main.js"
   },
   "engines": {
-    "node": "^16.6.0",
-    "npm": "^8.0.0"
+    "node": "^16.6.0"
   },
   "scripts": {
     "docker:publish": "docker push zthun/works.api:latest && docker push zthun/works.api:$(node -p \"require('./package.json').version\")",
