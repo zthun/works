@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "clean": "rimraf 'dist' 'docs' 'reports' '*.tgz' '*.log' 'packages/**/dist' 'packages/**/docs' 'packages/**/*.tgz' 'packages/**/*.log'",
-    "test": "jest --coverage --detectOpenHandles",
+    "test": "jest --coverage",
     "lint": "lint-janitor",
     "build": "lerna run build",
     "make": "yarn clean && yarn lint && yarn test && yarn build",
