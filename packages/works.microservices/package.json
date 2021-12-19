@@ -1,0 +1,37 @@
+{
+  "name": "@zthun/works.microservices",
+  "version": "2.0.0",
+  "description": "The works microservice clients for tcp access to each service.",
+  "author": "Anthony Bonta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zthun/works",
+    "directory": "packages/works.microservices"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "build": "yarn build:cjs && yarn build:esm && typedoc",
+    "plink": "npm link"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "images/**",
+    "dist/**",
+    "docs/**"
+  ],
+  "dependencies": {
+    "@zthun/works.core": "^2.0.0",
+    "rxjs": "^7.4.0"
+  },
+  "peerDependencies": {
+    "@nestjs/microservices": "^8.0.6"
+  },
+  "sideEffects": false
+}
