@@ -28,12 +28,16 @@ export class ZUsersService {
    *
    * @param filter The filter that contains the _id or email of the user to find.  If you specify both,
    *               then the user is only returned if the user with the given email matches the user
-   *               with the given id.
+   *               with the given id.  If both id and email are falsy, then null is returned.
    *
    * @returns A promise that, when resolved, has the found user.  Returns null if no such user exists.
    */
   @MessagePattern({ cmd: 'find' })
   public async find(filter: { _id?: string; email?: string }): Promise<IZUser> {
+    if (!filter._id && !filter.email) {
+      return null;
+    }
+
     const [user] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter(filter).run();
     return user || null;
   }
@@ -201,7 +205,7 @@ export class ZUsersService {
    * @returns A promise that, when resolve, has returned the deleted user.
    */
   @MessagePattern({ cmd: 'remove' })
-  public async remove(id: string): Promise<IZUser> {
+  public async remove({ id }: { id: string }): Promise<IZUser> {
     const [user] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: id }).run();
     await this._dal.delete(ZUsersCollections.Users).filter({ _id: id }).run();
     return user;

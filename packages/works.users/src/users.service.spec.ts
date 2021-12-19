@@ -147,6 +147,15 @@ describe('ZUsersService', () => {
       // Assert
       expect(actual).toBeNull();
     });
+
+    it('returns null if _id and email are both falsy.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.find({});
+      // Assert
+      expect(actual).toBeNull();
+    });
   });
 
   describe('Update', () => {
@@ -266,7 +275,7 @@ describe('ZUsersService', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      await target.remove(userA._id);
+      await target.remove({ id: userA._id });
       const blobs = await dal.read(ZUsersCollections.Users).filter({ _id: userA._id }).run();
       // Assert
       expect(blobs.length).toEqual(0);
