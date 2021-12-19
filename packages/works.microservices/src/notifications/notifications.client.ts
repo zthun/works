@@ -13,7 +13,7 @@ export class ZNotificationsClient {
    *
    * @param _notifications The client proxy to access the microservice over transport.
    */
-  public constructor(@Inject('Users.Service') private readonly _notifications: ClientProxy) {}
+  public constructor(@Inject('Notifications.Service') private readonly _notifications: ClientProxy) {}
   /**
    * Sends an email message.
    *
