@@ -8,12 +8,10 @@
  * https://github.com/jsdom/jsdom/issues/1721
  */
 
-import { IZImageReader } from './image-reader.interface';
-
 /**
- * Represents the standard implementation of the image reader object.
+ * Represents an object that can be used to read an image.
  */
-export class ZImageReader implements IZImageReader {
+export interface IZImageReader {
   /**
    * Reads the data blob.
    *
@@ -22,7 +20,23 @@ export class ZImageReader implements IZImageReader {
    * @returns A promise that returns the loaded canvas.  If the read fails,
    *          then a canvas that is a 1x1 white pixel will be returned.
    */
-  public read(data: Blob): Promise<HTMLCanvasElement> {
+  read(data: string | Blob): Promise<HTMLCanvasElement>;
+}
+
+/**
+ * Represents the standard implementation of the image reader object.
+ */
+export class ZImageReader implements IZImageReader {
+  /* istanbul ignore next */
+  /**
+   * Reads the data blob.
+   *
+   * @param data The data to read.  This can be a url to an image or a Blob that can convert locally to an image.
+   *
+   * @returns A promise that returns the loaded canvas.  If the read fails,
+   *          then a canvas that is a 1x1 white pixel will be returned.
+   */
+  public read(data: string | Blob): Promise<HTMLCanvasElement> {
     const canvas = document.createElement('canvas');
     canvas.width = 1;
     canvas.height = 1;

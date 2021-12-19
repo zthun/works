@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { IZImageReader } from '../image/image-reader.interface';
+import { IZImageReader } from '../image/image-reader';
 import { IZPrintable } from './printable.interface';
 
 /**

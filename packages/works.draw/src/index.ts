@@ -1,8 +1,7 @@
 /* istanbul ignore file */
 
 // Image
-export { ZImageReader } from './image/image-reader.class';
-export { IZImageReader } from './image/image-reader.interface';
+export { IZImageReader, ZImageReader } from './image/image-reader';
 // Printable (2d)
 export { ZPrintableColor } from './printable/printable-color.class';
 export { ZPrintableDrawing } from './printable/printable-drawing.class';
