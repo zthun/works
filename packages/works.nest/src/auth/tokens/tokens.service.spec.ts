@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { IZConfigEntry, IZLogin, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
-import { ZUsersClient } from '@zthun/works.users';
+import { ZUsersClient } from '@zthun/works.microservices';
 import { Request, Response } from 'express';
 import { v4 } from 'uuid';
 import { ZCommonConfigService } from '../../vault/common-config.service';

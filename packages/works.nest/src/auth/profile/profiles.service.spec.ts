@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { IZConfigEntry, IZEmail, IZLogin, IZProfile, IZServer, IZUser, ZConfigEntryBuilder, ZLoginBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
-import { ZUsersClient } from '@zthun/works.users';
+import { ZUsersClient } from '@zthun/works.microservices';
 import { v4 } from 'uuid';
 import { ZEmailService } from '../../notifications/email.service';
 import { ZNotificationsConfigService } from '../../notifications/notifications-config.service';

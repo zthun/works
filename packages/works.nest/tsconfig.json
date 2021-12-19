@@ -8,8 +8,8 @@
       "@zthun/works.class": ["../works.class/src/index"],
       "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.dal": ["../works.dal/src/index"],
-      "@zthun/works.url": ["../works.url/src/index"],
-      "@zthun/works.users": ["../works.users/src/index"]
+      "@zthun/works.microservices": ["../works.microservices/src/index"],
+      "@zthun/works.url": ["../works.url/src/index"]
     }
   },
   "include": ["src/**/*.ts"]

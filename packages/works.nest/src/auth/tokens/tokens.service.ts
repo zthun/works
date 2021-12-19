@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IZLogin, IZUser } from '@zthun/works.core';
-import { ZUsersClient } from '@zthun/works.users';
+import { ZUsersClient } from '@zthun/works.microservices';
 import { CookieOptions, Request, Response } from 'express';
 import { sign, SignOptions, verify } from 'jsonwebtoken';
 import { get } from 'lodash';

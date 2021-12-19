@@ -42,7 +42,7 @@ Once you have the environment variables set, you can list, query, create, update
 import { Module } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ZProfileBuilder, IZProfile } from '@zthun/works.core';
-import { ZUsersModule } from '@zthun/works.users';
+import { ZUsersModule } from '@zthun/works.microservices';
 
 @Controller('profiles')
 export class ProfilesController {

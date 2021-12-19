@@ -3,7 +3,7 @@ import { ConflictException } from '@nestjs/common';
 import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
 import { IZLogin, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
-import { ZUsersClient } from '@zthun/works.users';
+import { ZUsersClient } from '@zthun/works.microservices';
 import { Request } from 'express';
 import { ZRuleBodyRequiresUniqueUser } from './rule-body-requires-unique-user.guard';
 
