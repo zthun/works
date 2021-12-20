@@ -77,13 +77,32 @@ describe('ZCookieBuilder', () => {
     });
 
     describe('Expiration', () => {
+      it('should set the expiration date.', () => {
+        const expected = new Date(Date.now());
+        assertBuilderSetsProperty(
+          expected.toJSON(),
+          createTestTarget,
+          (t) => t.expires(expected),
+          (c: IZCookie) => c.expires
+        );
+      });
+
       it('should set the expiration date to one day from this moment.', () => {
-        const expected = new Date(Date.now() + ZCookieBuilder.MillisecondsOneDay).getTime();
+        const expected = new Date(Date.now() + ZCookieBuilder.MillisecondsOneDay).toJSON();
         assertBuilderSetsProperty(
           true,
           createTestTarget,
           (t) => t.expiresTomorrow(),
-          (c: IZCookie) => c.expires.getTime() >= expected
+          (c: IZCookie) => c.expires >= expected
+        );
+      });
+
+      it('should remove the expiration.', () => {
+        assertBuilderSetsProperty(
+          undefined,
+          createTestTarget,
+          (t) => t.expiresTomorrow().immortal(),
+          (c: IZCookie) => c.expires
         );
       });
     });
@@ -165,12 +184,12 @@ describe('ZCookieBuilder', () => {
     });
 
     it('expires in 24 hours.', () => {
-      const expected = createTestTarget().expiresTomorrow().build().expires.getTime();
+      const expected = createTestTarget().expiresTomorrow().build().expires;
       assertBuilderSetsProperty(
         true,
         createTestTarget,
         (t) => t.authentication(),
-        (c: IZCookie) => c.expires.getTime() >= expected
+        (c: IZCookie) => c.expires >= expected
       );
     });
   });

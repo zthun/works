@@ -15,9 +15,9 @@ export interface IZCookie {
    */
   domain?: string;
   /**
-   * The date at which the cookie expires
+   * The utc formatted date at which the cookie expires
    */
-  expires?: Date;
+  expires?: string;
   /**
    * A flag that determines if this is a secure cookie.
    */
@@ -93,8 +93,8 @@ export class ZCookieBuilder {
    *
    * @returns This object.
    */
-  public expires(val: Date): this {
-    this._cookie.expires = val;
+  public expires(val: Date | string): this {
+    this._cookie.expires = typeof val === 'string' ? val : val.toJSON();
     return this;
   }
 
@@ -107,6 +107,16 @@ export class ZCookieBuilder {
    */
   public expiresTomorrow(): this {
     return this.expires(new Date(Date.now() + ZCookieBuilder.MillisecondsOneDay));
+  }
+
+  /**
+   * Removes the cookie expiration.
+   *
+   * @returns This object.
+   */
+  public immortal(): this {
+    delete this._cookie.expires;
+    return this;
   }
 
   /**
@@ -131,20 +141,6 @@ export class ZCookieBuilder {
   public sameSite(val: 'lax' | 'strict' | 'none'): this {
     this._cookie.sameSite = val;
     return this;
-  }
-
-  /**
-   * Creates a token based authentication cookie.
-   *
-   * @param token The token value for the cookie.  You
-   *              can leave this as undefined to set it
-   *              later.
-   *
-   * @returns This object.
-   */
-  public authentication(token?: string): this {
-    const builder = this.name('Authentication').expiresTomorrow().secure().httpOnly();
-    return token == null ? builder : builder.value(token);
   }
 
   /**
@@ -180,6 +176,20 @@ export class ZCookieBuilder {
   public httpOnly(val = true): this {
     this._cookie.httpOnly = val;
     return this;
+  }
+
+  /**
+   * Creates a token based authentication cookie.
+   *
+   * @param token The token value for the cookie.  You
+   *              can leave this as undefined to set it
+   *              later.
+   *
+   * @returns This object.
+   */
+  public authentication(token?: string): this {
+    const builder = this.name('Authentication').expiresTomorrow().secure().httpOnly();
+    return token == null ? builder : builder.value(token);
   }
 
   /**
