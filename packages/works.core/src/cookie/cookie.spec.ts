@@ -82,7 +82,7 @@ describe('ZCookieBuilder', () => {
         assertBuilderSetsProperty(
           expected.toJSON(),
           createTestTarget,
-          (t) => t.expires(expected),
+          (t, v) => t.expires(v),
           (c: IZCookie) => c.expires
         );
       });
