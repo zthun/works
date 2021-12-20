@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 
 import { Module } from '@nestjs/common';
-import { ZCookiesModule, ZNotificationsModule, ZUsersModule, ZVaultModule } from '@zthun/works.microservices';
+import { ZCookiesModule, ZNotificationsModule, ZUsersModule } from '@zthun/works.microservices';
 import { ZConfigModule } from '../config/config.module';
 import { ZSecurityModule } from '../security/security.module';
 import { ZProfilesController } from './profile/profiles.controller';
@@ -10,7 +10,7 @@ import { ZTokensController } from './tokens/tokens.controller';
 import { ZTokensService } from './tokens/tokens.service';
 
 @Module({
-  imports: [ZVaultModule, ZUsersModule, ZNotificationsModule, ZConfigModule, ZCookiesModule, ZSecurityModule],
+  imports: [ZUsersModule, ZNotificationsModule, ZConfigModule, ZCookiesModule, ZSecurityModule],
   providers: [ZTokensService, ZProfilesService],
   controllers: [ZTokensController, ZProfilesController],
   exports: [ZTokensService]
