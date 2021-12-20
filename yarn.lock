@@ -4473,10 +4473,10 @@ __metadata:
     "@nestjs/core": ^8.2.4
     "@nestjs/microservices": ^8.2.4
     "@nestjs/platform-express": ^8.2.4
-    "@zthun/works.class": ^2.0.0
+    "@zthun/works.class": ^2.1.0
     "@zthun/works.core": ^2.0.0
-    "@zthun/works.dal": ^2.0.0
-    "@zthun/works.nest": ^2.0.0
+    "@zthun/works.dal": ^2.1.0
+    "@zthun/works.nest": ^2.1.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
     uuid: ^8.3.2
@@ -4485,7 +4485,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.class@^2.0.0, @zthun/works.class@workspace:packages/works.class":
+"@zthun/works.class@^2.1.0, @zthun/works.class@workspace:packages/works.class":
   version: 0.0.0-use.local
   resolution: "@zthun/works.class@workspace:packages/works.class"
   dependencies:
@@ -4499,11 +4499,27 @@ __metadata:
   resolution: "@zthun/works.client@workspace:packages/works.client"
   dependencies:
     "@zthun/works.core": ^2.0.0
-    "@zthun/works.draw": ^2.0.0
-    "@zthun/works.react": ^2.0.0
+    "@zthun/works.draw": ^2.1.0
+    "@zthun/works.react": ^2.1.0
     "@zthun/works.url": ^2.0.0
     react: ^17.0.2
     react-dom: ^17.0.2
+  languageName: unknown
+  linkType: soft
+
+"@zthun/works.cookies@workspace:packages/works.cookies":
+  version: 0.0.0-use.local
+  resolution: "@zthun/works.cookies@workspace:packages/works.cookies"
+  dependencies:
+    "@nestjs/common": ^8.2.4
+    "@nestjs/core": ^8.2.4
+    "@nestjs/microservices": ^8.2.4
+    "@zthun/works.core": ^2.0.0
+    jsonwebtoken: ^8.5.1
+    reflect-metadata: ^0.1.13
+    rxjs: ^7.4.0
+  bin:
+    zthun-works-cookies: ./bin/main.js
   languageName: unknown
   linkType: soft
 
@@ -4513,7 +4529,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.dal@^2.0.0, @zthun/works.dal@workspace:packages/works.dal":
+"@zthun/works.dal@^2.1.0, @zthun/works.dal@workspace:packages/works.dal":
   version: 0.0.0-use.local
   resolution: "@zthun/works.dal@workspace:packages/works.dal"
   dependencies:
@@ -4524,7 +4540,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.draw@^2.0.0, @zthun/works.draw@workspace:packages/works.draw":
+"@zthun/works.draw@^2.1.0, @zthun/works.draw@workspace:packages/works.draw":
   version: 0.0.0-use.local
   resolution: "@zthun/works.draw@workspace:packages/works.draw"
   dependencies:
@@ -4540,7 +4556,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.http@^2.0.0, @zthun/works.http@workspace:packages/works.http":
+"@zthun/works.http@^2.1.0, @zthun/works.http@workspace:packages/works.http":
   version: 0.0.0-use.local
   resolution: "@zthun/works.http@workspace:packages/works.http"
   dependencies:
@@ -4578,7 +4594,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.microservices@^2.0.0, @zthun/works.microservices@workspace:packages/works.microservices":
+"@zthun/works.microservices@^2.1.0, @zthun/works.microservices@workspace:packages/works.microservices":
   version: 0.0.0-use.local
   resolution: "@zthun/works.microservices@workspace:packages/works.microservices"
   dependencies:
@@ -4590,19 +4606,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.nest@^2.0.0, @zthun/works.nest@workspace:packages/works.nest":
+"@zthun/works.nest@^2.1.0, @zthun/works.nest@workspace:packages/works.nest":
   version: 0.0.0-use.local
   resolution: "@zthun/works.nest@workspace:packages/works.nest"
   dependencies:
-    "@zthun/works.class": ^2.0.0
+    "@zthun/works.class": ^2.1.0
     "@zthun/works.core": ^2.0.0
-    "@zthun/works.http": ^2.0.0
-    "@zthun/works.microservices": ^2.0.0
+    "@zthun/works.http": ^2.1.0
+    "@zthun/works.microservices": ^2.1.0
     "@zthun/works.url": ^2.0.0
     class-transformer: ~0.5.1
     cookie-parser: ^1.4.6
     helmet: ^4.6.0
-    jsonwebtoken: ^8.5.1
     lodash: ^4.17.21
     rxjs: ^7.4.0
     uuid: ^8.3.2
@@ -4636,7 +4651,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.react@^2.0.0, @zthun/works.react@workspace:packages/works.react":
+"@zthun/works.react@^2.1.0, @zthun/works.react@workspace:packages/works.react":
   version: 0.0.0-use.local
   resolution: "@zthun/works.react@workspace:packages/works.react"
   dependencies:
@@ -4646,9 +4661,9 @@ __metadata:
     "@mui/material": ^5.2.4
     "@mui/system": ^5.2.4
     "@zthun/works.core": ^2.0.0
-    "@zthun/works.draw": ^2.0.0
+    "@zthun/works.draw": ^2.1.0
     "@zthun/works.error": ^2.0.0
-    "@zthun/works.http": ^2.0.0
+    "@zthun/works.http": ^2.1.0
     "@zthun/works.logger": ^2.0.0
     "@zthun/works.message": ^2.0.0
     "@zthun/works.url": ^2.0.0
@@ -4674,7 +4689,7 @@ __metadata:
     "@nestjs/core": ^8.2.4
     "@nestjs/microservices": ^8.2.4
     "@nestjs/platform-express": ^8.2.4
-    "@zthun/works.nest": ^2.0.0
+    "@zthun/works.nest": ^2.1.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
   bin:
@@ -4700,7 +4715,7 @@ __metadata:
     "@nestjs/core": ^8.2.4
     "@nestjs/microservices": ^8.2.4
     "@zthun/works.core": ^2.0.0
-    "@zthun/works.dal": ^2.0.0
+    "@zthun/works.dal": ^2.1.0
     bcryptjs: ^2.4.3
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
@@ -4718,7 +4733,7 @@ __metadata:
     "@nestjs/core": ^8.2.4
     "@nestjs/microservices": ^8.2.4
     "@zthun/works.core": ^2.0.0
-    "@zthun/works.dal": ^2.0.0
+    "@zthun/works.dal": ^2.1.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
   bin:
