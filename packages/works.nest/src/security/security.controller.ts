@@ -1,6 +1,6 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, Req, Res } from '@nestjs/common';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { ZSecurityService } from './security.service';
 
 @Controller('identity')
@@ -22,12 +22,21 @@ export class ZSecurityController {
    * Reads the user profile from the cookie.
    *
    * @param req The request object.
+   * @param res The response object.
    *
    * @returns The profile object given the requested cookie.
    */
   @Get()
-  public async read(@Req() req: Request): Promise<IZProfile> {
+  public async read(@Req() req: Request, @Res() res: Response): Promise<IZProfile> {
     const user = await this._security.extract(req);
-    return new ZProfileBuilder().user(user).build();
+
+    if (user == null) {
+      res.status(201).send(null);
+      return null;
+    }
+
+    const profile = new ZProfileBuilder().user(user).build();
+    res.status(200).send(profile);
+    return profile;
   }
 }
