@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/zthun/works/compare/v2.1.0...v2.2.0) (2021-12-20)
+
+
+### Features
+
+* added a cookie contract ([fc86937](https://github.com/zthun/works/commit/fc869370626fe89ed24db7935ee2e0f78fe94a09))
+
+
+
 ## [2.0.0](https://github.com/zthun/works/compare/v1.4.0...v2.0.0) (2021-11-15)
 
 

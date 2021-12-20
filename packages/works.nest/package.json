@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.nest",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "The main module for nestjs based routes and modules for @zthun scoped projects.",
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -28,9 +28,9 @@
   ],
   "dependencies": {
     "@zthun/works.class": "^2.1.0",
-    "@zthun/works.core": "^2.0.0",
+    "@zthun/works.core": "^2.2.0",
     "@zthun/works.http": "^2.1.0",
-    "@zthun/works.microservices": "^2.1.0",
+    "@zthun/works.microservices": "^2.2.0",
     "@zthun/works.url": "^2.0.0",
     "class-transformer": "~0.5.1",
     "cookie-parser": "^1.4.6",

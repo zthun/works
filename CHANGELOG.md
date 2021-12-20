@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/zthun/works/compare/v2.1.0...v2.2.0) (2021-12-20)
+
+
+### Features
+
+* added a cookie contract ([fc86937](https://github.com/zthun/works/commit/fc869370626fe89ed24db7935ee2e0f78fe94a09))
+* added teh cookies microservice ([405b01c](https://github.com/zthun/works/commit/405b01c86efc96f2b0604f1fd65087a8aa02f8f2))
+* added the cookies client ([7666f91](https://github.com/zthun/works/commit/7666f91fd755f613a1248b635ab6f5b36d6e5ba3))
+* adding cookies microservice to deployment ([d44b977](https://github.com/zthun/works/commit/d44b977ef04764b39d2c8aa5a16ac9bdc71bae0f))
+* the nest package no longer depends on jsonwebtoken ([2ab34ab](https://github.com/zthun/works/commit/2ab34ab34db881dc3c9cd91b4f45417f35805ce2))
+
+
+
 ## [2.1.0](https://github.com/zthun/works/compare/v2.0.0...v2.1.0) (2021-12-19)
 
 

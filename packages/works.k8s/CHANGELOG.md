@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/zthun/works/compare/v2.1.0...v2.2.0) (2021-12-20)
+
+
+### Features
+
+* adding cookies microservice to deployment ([d44b977](https://github.com/zthun/works/commit/d44b977ef04764b39d2c8aa5a16ac9bdc71bae0f))
+
+
+
 ## [2.1.0](https://github.com/zthun/works/compare/v2.0.0...v2.1.0) (2021-12-19)
 
 

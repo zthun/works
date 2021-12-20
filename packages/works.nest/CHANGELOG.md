@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/zthun/works/compare/v2.1.0...v2.2.0) (2021-12-20)
+
+
+### Features
+
+* the nest package no longer depends on jsonwebtoken ([2ab34ab](https://github.com/zthun/works/commit/2ab34ab34db881dc3c9cd91b4f45417f35805ce2))
+
+
+
 ## [2.1.0](https://github.com/zthun/works/compare/v2.0.0...v2.1.0) (2021-12-19)
 
 

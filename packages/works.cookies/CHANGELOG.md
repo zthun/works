@@ -5,15 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [2.2.0](https://github.com/zthun/works/compare/v2.1.0...v2.2.0) (2021-12-20)
 
-**Note:** Version bump only for package @zthun/works.users
-
-
-
-
-
-## [2.1.0](https://github.com/zthun/works/compare/v2.0.0...v2.1.0) (2021-12-19)
-
 
 ### Features
 
-* added the users package ([c5a40a6](https://github.com/zthun/works/commit/c5a40a6fb6e2061f98aa96692977614ae30b78cd))
+* added teh cookies microservice ([405b01c](https://github.com/zthun/works/commit/405b01c86efc96f2b0604f1fd65087a8aa02f8f2))

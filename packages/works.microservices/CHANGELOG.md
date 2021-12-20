@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/zthun/works/compare/v2.1.0...v2.2.0) (2021-12-20)
+
+
+### Features
+
+* added the cookies client ([7666f91](https://github.com/zthun/works/commit/7666f91fd755f613a1248b635ab6f5b36d6e5ba3))
+
+
+
 ## [2.1.0](https://github.com/zthun/works/compare/v2.0.0...v2.1.0) (2021-12-19)
 
 

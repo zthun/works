@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.client",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A client application that can be used to login to works.server application.",
   "browser": "./dist/works.client.min.js",
   "repository": {
@@ -24,9 +24,9 @@
     "images/**"
   ],
   "devDependencies": {
-    "@zthun/works.core": "^2.0.0",
+    "@zthun/works.core": "^2.2.0",
     "@zthun/works.draw": "^2.1.0",
-    "@zthun/works.react": "^2.1.0",
+    "@zthun/works.react": "^2.2.0",
     "@zthun/works.url": "^2.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
