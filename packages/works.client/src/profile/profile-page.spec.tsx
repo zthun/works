@@ -4,7 +4,7 @@ import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { IZErrorHandler } from '@zthun/works.error';
 import { createMocked } from '@zthun/works.jest';
 import { IZAlertService, ZAlertSeverity } from '@zthun/works.message';
-import { IZDataState, IZProfileService, ZAlertServiceContext, ZDataState, ZErrorHandlerContext, ZProfileContext, ZProfileServiceContext } from '@zthun/works.react';
+import { IZDataState, IZProfileService, ZAlertServiceContext, ZDataState, ZErrorHandlerContext, ZIdentityContext, ZProfileServiceContext } from '@zthun/works.react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { lastValueFrom, of } from 'rxjs';
@@ -26,13 +26,13 @@ describe('ZProfilePage', () => {
       target = render(
         <ZErrorHandlerContext.Provider value={errors}>
           <ZAlertServiceContext.Provider value={alerts}>
-            <ZProfileContext.Provider value={state}>
+            <ZIdentityContext.Provider value={state}>
               <MemoryRouter>
                 <ZProfileServiceContext.Provider value={profileSvc}>
                   <ZProfilePage />
                 </ZProfileServiceContext.Provider>
               </MemoryRouter>
-            </ZProfileContext.Provider>
+            </ZIdentityContext.Provider>
           </ZAlertServiceContext.Provider>
         </ZErrorHandlerContext.Provider>
       );

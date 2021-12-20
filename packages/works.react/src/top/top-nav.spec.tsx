@@ -7,7 +7,7 @@ import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { ZWebAppsContext } from '../apps/web-apps.context';
-import { ZProfileContext } from '../profile/profile.context';
+import { ZIdentityContext } from '../identity/identity.context';
 import { ZDataState } from '../store/data-state.class';
 import { ZWindowServiceContext } from '../window/window-service.context';
 import { ZTopNav } from './top-nav';
@@ -29,11 +29,11 @@ describe('ZTopNav', () => {
       target = render(
         <ZWindowServiceContext.Provider value={$window}>
           <ZWebAppsContext.Provider value={webApps}>
-            <ZProfileContext.Provider value={profile}>
+            <ZIdentityContext.Provider value={profile}>
               <Router history={history}>
                 <ZTopNav headerText={appName} whoami={whoami} profileApp={profileApp} />
               </Router>
-            </ZProfileContext.Provider>
+            </ZIdentityContext.Provider>
           </ZWebAppsContext.Provider>
         </ZWindowServiceContext.Provider>
       );
@@ -90,14 +90,14 @@ describe('ZTopNav', () => {
     });
 
     function findProfileButton(target: RenderResult) {
-      return target.findByTestId('ZProfileButton-profile');
+      return target.container.querySelector('.ZIdentityButton-profile');
     }
 
     it('should render the profile button.', async () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const btn = await findProfileButton(target);
+      const btn = findProfileButton(target);
       // Assert
       expect(btn).toBeTruthy();
     });
@@ -107,7 +107,7 @@ describe('ZTopNav', () => {
       webApps = new ZDataState(null);
       const target = await createTestTarget();
       // Act
-      const btn = await findProfileButton(target);
+      const btn = findProfileButton(target);
       fireEvent.click(btn);
       // Assert
       expect($window.open).not.toHaveBeenCalled();
@@ -117,7 +117,7 @@ describe('ZTopNav', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const btn = await findProfileButton(target);
+      const btn = findProfileButton(target);
       fireEvent.click(btn);
       // Assert
       expect($window.open).not.toHaveBeenCalled();
@@ -128,7 +128,7 @@ describe('ZTopNav', () => {
       profileApp = 'profiler';
       const target = await createTestTarget();
       // Act
-      const btn = await findProfileButton(target);
+      const btn = findProfileButton(target);
       fireEvent.click(btn);
       // Assert
       expect($window.open).toHaveBeenCalledWith(profiler.domain, '_self');

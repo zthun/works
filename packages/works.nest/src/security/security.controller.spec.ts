@@ -19,7 +19,9 @@ describe('ZSecurityController', () => {
     gambit = new ZProfileBuilder().email('gambit@marvel.com').active().build();
 
     req = createMocked<Request>();
-    res = createMocked<Response>(['status']);
+    res = createMocked<Response>(['status', 'send']);
+    res.status.mockReturnValue(res);
+    res.send.mockReturnValue(res);
 
     jwt = createMocked<ZSecurityService>(['extract']);
     jwt.extract.mockResolvedValue(new ZUserBuilder().email('gambit@marvel.com').super().active().build());
