@@ -32,7 +32,7 @@ export class ZCookiesService {
         if (err) {
           reject(err);
         }
-        resolve(new ZCookieBuilder().name('Authentication').expiresTomorrow().secure().httpOnly().domain(domain).value(jwt).build());
+        resolve(new ZCookieBuilder().authentication(jwt).domain(domain).build());
       });
     });
   }

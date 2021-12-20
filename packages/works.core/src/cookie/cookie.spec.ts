@@ -11,7 +11,7 @@ describe('ZCookieBuilder', () => {
   describe('Properties', () => {
     it('should set the name.', () => {
       assertBuilderSetsProperty(
-        'Authentication',
+        'CookieName',
         createTestTarget,
         (t, v) => t.name(v),
         (c: IZCookie) => c.name
@@ -124,6 +124,54 @@ describe('ZCookieBuilder', () => {
           (c: IZCookie) => c.secure
         );
       });
+    });
+  });
+
+  describe('Authentication', () => {
+    it('sets the name.', () => {
+      assertBuilderSetsProperty(
+        'Authentication',
+        createTestTarget,
+        (t) => t.authentication(),
+        (c: IZCookie) => c.name
+      );
+    });
+
+    it('sets the secure flag.', () => {
+      assertBuilderSetsProperty(
+        true,
+        createTestTarget,
+        (t) => t.authentication(),
+        (c: IZCookie) => c.secure
+      );
+    });
+
+    it('sets the http only flag.', () => {
+      assertBuilderSetsProperty(
+        true,
+        createTestTarget,
+        (t) => t.authentication(),
+        (c: IZCookie) => c.httpOnly
+      );
+    });
+
+    it('sets the value.', () => {
+      assertBuilderSetsProperty(
+        v4(),
+        createTestTarget,
+        (t, v) => t.authentication(v),
+        (c: IZCookie) => c.value
+      );
+    });
+
+    it('expires in 24 hours.', () => {
+      const expected = createTestTarget().expiresTomorrow().build().expires.getTime();
+      assertBuilderSetsProperty(
+        true,
+        createTestTarget,
+        (t) => t.authentication(),
+        (c: IZCookie) => c.expires.getTime() >= expected
+      );
     });
   });
 });

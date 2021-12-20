@@ -134,6 +134,20 @@ export class ZCookieBuilder {
   }
 
   /**
+   * Creates a token based authentication cookie.
+   *
+   * @param token The token value for the cookie.  You
+   *              can leave this as undefined to set it
+   *              later.
+   *
+   * @returns This object.
+   */
+  public authentication(token?: string): this {
+    const builder = this.name('Authentication').expiresTomorrow().secure().httpOnly();
+    return token == null ? builder : builder.value(token);
+  }
+
+  /**
    * Sets the same site policy to 'lax'
    *
    * @returns This object.
