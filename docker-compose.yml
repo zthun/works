@@ -84,16 +84,11 @@ services:
   zthunworks-databases:
     image: mongo:4.2.0
   # Utilities
-  database.zthunworks.com:
+  zthunworks-database-client:
     image: mongo-express:0.49
-    ports:
-      - 8081:8081
     depends_on:
       - zthunworks-databases
     environment:
       - ME_CONFIG_MONGODB_SERVER=zthunworks-databases
-  smtp.zthunworks.com:
+  zthunworks-smtp-client:
     image: rnwood/smtp4dev:v3.1
-    ports:
-      - 8083:80
-      - 25:25
