@@ -13,6 +13,7 @@ images:
   users: works.users
   vault: works.vault
   notifications: works.notifications
+  cookies: works.cookies
 
 database:
   vault: vault.database.zthunworks.com
