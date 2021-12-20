@@ -6,7 +6,7 @@ import { ZAlertList } from '../alert/alert-list';
 import { renderStatusCodePage } from '../codes/status-code-page';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
 import { ZContent } from '../content/content';
-import { useProfileRoot } from '../profile/profile.context';
+import { useIdentityRoot } from '../identity/identity.context';
 import { useZthunworksTheme } from '../theme/make-styles';
 import { IZTopNavProps, ZTopNav } from '../top/top-nav';
 import { useWebAppsRoot } from './web-apps.context';
@@ -42,7 +42,7 @@ const globalStyles = {
  */
 export function ZWebAppLayout(props: IZWebAppLayout) {
   useWebAppsRoot();
-  useProfileRoot();
+  useIdentityRoot();
 
   const { children, home = '/home' } = props;
   const theme = useZthunworksTheme();

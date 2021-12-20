@@ -1,7 +1,7 @@
-import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import GithubIcon from '@mui/icons-material/GitHub';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import { IZWebApp } from '@zthun/works.core';
 import { ZDataUrlBuilder } from '@zthun/works.url';
 import { first } from 'lodash';
@@ -9,11 +9,11 @@ import React, { ReactNode, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useWebAppsAndWatch } from '../apps/web-apps.context';
 import { IZComponentHeader } from '../component/component-header.interface';
+import { ZIdentityButton } from '../identity/identity-button';
+import { useIdentityAndWatch } from '../identity/identity.context';
 import { ZCircularProgress } from '../loading/circular-progress';
-import { ZProfileButton } from '../profile/profile-button';
-import { useProfileAndWatch } from '../profile/profile.context';
-import { useWindowService } from '../window/window-service.context';
 import { makeStyles } from '../theme/make-styles';
+import { useWindowService } from '../window/window-service.context';
 
 /**
  * Represents properties for the top nav menu.
@@ -71,16 +71,6 @@ const useTopNavStyles = makeStyles()((theme) => ({
     userSelect: 'none',
     color: `rgb(${theme.palette.common.black}, 0.54)`
   }
-
-  /*
-  avatar: {
-    height: '5rem',
-    marginRight: theme.sizing.gaps.sm,
-    borderRadius: theme.rounding.circle,
-    border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[200]}`,
-    background: theme.palette.common.white
-  }
-  */
 }));
 
 /**
@@ -99,7 +89,7 @@ const useTopNavStyles = makeStyles()((theme) => ({
  */
 export function ZTopNav(props: IZTopNavProps) {
   const [moreShown, setMoreShown] = useState(false);
-  const profile = useProfileAndWatch();
+  const profile = useIdentityAndWatch();
   const apps = useWebAppsAndWatch();
   const history = useHistory();
   const win = useWindowService();
@@ -267,7 +257,7 @@ export function ZTopNav(props: IZTopNavProps) {
       <Toolbar>
         {createHomeButton()}
         <Typography className={`ZTopNav-options ${styles.classes.options}`}>&nbsp;</Typography>
-        <ZProfileButton profile={profile.data} onLogin={handleProfile} onProfile={handleProfile} />
+        <ZIdentityButton profile={profile.data} onLogin={handleProfile} onProfile={handleProfile} />
         {createMoreButton()}
       </Toolbar>
     </AppBar>
