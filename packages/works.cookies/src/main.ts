@@ -2,12 +2,13 @@
 import { Module } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
+import { ZCookiesService } from './cookies.service';
 
 /**
  * Represents the entry point module for this microservice.
  */
 @Module({
-  controllers: []
+  controllers: [ZCookiesService]
 })
 class ZMicroserviceModule {}
 
