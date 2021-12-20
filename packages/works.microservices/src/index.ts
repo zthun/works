@@ -1,10 +1,13 @@
 /* istanbul ignore file */
+// Cookies
+export { ZCookiesClient } from './cookies/cookies.client';
+export { ZCookiesModule } from './cookies/cookies.module';
 // Notifications
-export { ZNotificationsModule } from './notifications/notifications.module';
 export { ZNotificationsClient } from './notifications/notifications.client';
+export { ZNotificationsModule } from './notifications/notifications.module';
 // Users
-export { ZUsersModule } from './users/users.module';
 export { ZUsersClient } from './users/users.client';
+export { ZUsersModule } from './users/users.module';
 // Vault
-export { ZVaultModule } from './vault/vault.module';
 export { ZVaultClient } from './vault/vault.client';
+export { ZVaultModule } from './vault/vault.module';
