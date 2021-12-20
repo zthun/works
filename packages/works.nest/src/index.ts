@@ -2,6 +2,7 @@
 
 // App
 export { ZNestApplication } from './app/nest-application.class';
+export { ZNestApplicationModule } from './app/nest-application.module';
 // Apps
 export { ZAppsModule } from './apps/apps.module';
 export { ZAppsService } from './apps/apps.service';
@@ -28,9 +29,6 @@ export { ZHealthController } from './health/health.controller';
 export { ZHealthModule } from './health/health.module';
 // Http
 export { ZHttpModule, ZHttpServiceProvider, ZHttpServiceToken } from './http/http.module';
-// Options
-export { ZOptionsController } from './options/options.controller';
-export { ZOptionsModule } from './options/options.module';
 // Security
 export { ZRuleCookieRequiresAuthActivated } from './security/rule-cookie-requires-auth-activated.guard';
 export { ZRuleCookieRequiresAuthAny } from './security/rule-cookie-requires-auth-any.guard';
