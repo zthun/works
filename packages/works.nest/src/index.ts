@@ -15,18 +15,12 @@ export { ZProfilesService } from './auth/profile/profiles.service';
 export { ZRuleBodyRequiresActivationKey } from './auth/rules/rule-body-requires-activation-key.guard';
 export { ZRuleBodyRequiresCredentials } from './auth/rules/rule-body-requires-credentials.guard';
 export { ZRuleBodyRequiresUniqueUser } from './auth/rules/rule-body-requires-unique-user.guard';
-export { ZRuleCookieRequiresAuthActivated } from './auth/rules/rule-cookie-requires-auth-activated.guard';
-export { ZRuleCookieRequiresAuthAny } from './auth/rules/rule-cookie-requires-auth-any.guard';
-export { ZRuleCookieRequiresAuthDeactivated } from './auth/rules/rule-cookie-requires-auth-deactivated.guard';
-export { ZRuleCookieRequiresAuthRegular } from './auth/rules/rule-cookie-requires-auth-regular.guard';
-export { ZRuleCookieRequiresAuth } from './auth/rules/rule-cookie-requires-auth.guard';
 export { ZTokensLoginDto } from './auth/tokens/tokens-login.dto';
 export { ZTokensController } from './auth/tokens/tokens.controller';
 export { ZTokensService } from './auth/tokens/tokens.service';
 // Config
-export { ZCommonConfigService } from './config/common-config.service';
 export { ZConfigModule } from './config/config.module';
-export { ZNotificationsConfigService } from './config/notifications-config.service';
+export { ZWorksConfigService } from './config/works-config.service';
 // Error
 export { ZExceptionFactory } from './error/exception-factory.class';
 // Health
@@ -37,3 +31,11 @@ export { ZHttpModule, ZHttpServiceProvider, ZHttpServiceToken } from './http/htt
 // Options
 export { ZOptionsController } from './options/options.controller';
 export { ZOptionsModule } from './options/options.module';
+// Security
+export { ZRuleCookieRequiresAuthActivated } from './security/rule-cookie-requires-auth-activated.guard';
+export { ZRuleCookieRequiresAuthAny } from './security/rule-cookie-requires-auth-any.guard';
+export { ZRuleCookieRequiresAuthDeactivated } from './security/rule-cookie-requires-auth-deactivated.guard';
+export { ZRuleCookieRequiresAuthRegular } from './security/rule-cookie-requires-auth-regular.guard';
+export { ZRuleCookieRequiresAuth } from './security/rule-cookie-requires-auth.guard';
+export { ZSecurityModule } from './security/security.module';
+export { ZSecurityService } from './security/security.service';
