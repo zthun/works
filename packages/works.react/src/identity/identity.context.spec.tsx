@@ -5,26 +5,26 @@ import { createMocked } from '@zthun/works.jest';
 import React from 'react';
 import { ZDataState } from '../store/data-state.class';
 import { IZDataState } from '../store/data-state.interface';
-import { IZProfileService, ZProfileServiceContext } from './profile-service.context';
-import { useProfileRoot, ZProfileContext } from './profile.context';
+import { IZIdentityService, ZIdentityServiceContext } from './identity-service.context';
+import { useIdentityRoot, ZIdentityContext } from './identity.context';
 
 function ZProfileRoot() {
-  useProfileRoot();
+  useIdentityRoot();
   return <div />;
 }
 
-describe('Profile', () => {
+describe('Identity', () => {
   let profile: IZProfile;
   let globalProfile: IZDataState<IZProfile>;
-  let profileService: jest.Mocked<IZProfileService>;
+  let profileService: jest.Mocked<IZIdentityService>;
 
   async function createTestTarget() {
     const target = render(
-      <ZProfileContext.Provider value={globalProfile}>
-        <ZProfileServiceContext.Provider value={profileService}>
+      <ZIdentityContext.Provider value={globalProfile}>
+        <ZIdentityServiceContext.Provider value={profileService}>
           <ZProfileRoot></ZProfileRoot>
-        </ZProfileServiceContext.Provider>
-      </ZProfileContext.Provider>
+        </ZIdentityServiceContext.Provider>
+      </ZIdentityContext.Provider>
     );
     await waitFor(async () => !!globalProfile.data);
     return target;

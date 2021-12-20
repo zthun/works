@@ -6,12 +6,12 @@ import { createMocked } from '@zthun/works.jest';
 import { ZUrlBuilder } from '@zthun/works.url';
 import React from 'react';
 import { delay, lastValueFrom, of } from 'rxjs';
-import { ZProfileButton } from './profile-button';
-import { IZProfileService, ZProfileServiceContext } from './profile-service.context';
+import { ZIdentityButton } from './identity-button';
+import { IZIdentityService, ZIdentityServiceContext } from './identity-service.context';
 
-describe('ZProfileButton', () => {
+describe('ZIdentityButton', () => {
   let profile: IZProfile;
-  let profiles: jest.Mocked<IZProfileService>;
+  let profiles: jest.Mocked<IZIdentityService>;
   let onLogin: jest.Mock;
   let onProfile: jest.Mock;
   let disabled: boolean;
@@ -22,7 +22,7 @@ describe('ZProfileButton', () => {
     disabled = undefined;
     profile = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').build();
 
-    profiles = createMocked<IZProfileService>(['getDisplay', 'getAvatar']);
+    profiles = createMocked<IZIdentityService>(['getDisplay', 'getAvatar']);
     profiles.getDisplay.mockResolvedValue('Display');
     profiles.getAvatar.mockResolvedValue(new ZUrlBuilder().gravatar().build());
   });
@@ -32,9 +32,9 @@ describe('ZProfileButton', () => {
 
     await act(async () => {
       target = render(
-        <ZProfileServiceContext.Provider value={profiles}>
-          <ZProfileButton profile={profile} onLogin={onLogin} onProfile={onProfile} disabled={disabled} />
-        </ZProfileServiceContext.Provider>
+        <ZIdentityServiceContext.Provider value={profiles}>
+          <ZIdentityButton profile={profile} onLogin={onLogin} onProfile={onProfile} disabled={disabled} />
+        </ZIdentityServiceContext.Provider>
       );
       await lastValueFrom(of(true).pipe(delay(2)));
     });
@@ -51,7 +51,7 @@ describe('ZProfileButton', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const spinner = target.getByTestId('ZProfileButton-loading');
+      const spinner = target.container.querySelector('.ZIdentityButton-loading');
       // Assert
       expect(spinner).toBeTruthy();
     });
@@ -66,7 +66,7 @@ describe('ZProfileButton', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const actual = target.getByTestId('ZProfileButton-login');
+      const actual = target.container.querySelector('.ZIdentityButton-login');
       // Assert
       expect(actual).toBeTruthy();
     });
@@ -76,7 +76,7 @@ describe('ZProfileButton', () => {
       onLogin = jest.fn();
       const target = await createTestTarget();
       // Act
-      const actual = target.getByTestId('ZProfileButton-login');
+      const actual = target.container.querySelector('.ZIdentityButton-login');
       fireEvent.click(actual);
       // Assert
       expect(onLogin).toHaveBeenCalled();
@@ -88,7 +88,7 @@ describe('ZProfileButton', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const actual = target.getByTestId('ZProfileButton-profile');
+      const actual = target.container.querySelector('.ZIdentityButton-profile');
       // Assert
       expect(actual).toBeTruthy();
     });
@@ -98,7 +98,7 @@ describe('ZProfileButton', () => {
       onProfile = jest.fn();
       const target = await createTestTarget();
       // Act
-      const btn = target.getByTestId('ZProfileButton-profile');
+      const btn = target.container.querySelector('.ZIdentityButton-profile');
       fireEvent.click(btn);
       // Assert
       expect(onProfile).toHaveBeenCalled();
@@ -114,7 +114,7 @@ describe('ZProfileButton', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const btn = target.getByTestId('ZProfileButton-profile') as HTMLInputElement;
+      const btn = target.container.querySelector('.ZIdentityButton-profile') as HTMLInputElement;
       const actual = btn.disabled;
       // Assert
       expect(actual).toBeTruthy();

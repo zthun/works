@@ -3,12 +3,12 @@ import { createContext, useContext, useEffect } from 'react';
 import { ZDataState } from '../store/data-state.class';
 import { IZDataState } from '../store/data-state.interface';
 import { useWatchableState } from '../store/use-watchable-state.hook';
-import { useProfileService } from './profile-service.context';
+import { useIdentityService } from './identity-service.context';
 
 /**
  * The profile context.
  */
-export const ZProfileContext = createContext<IZDataState<IZProfile>>(new ZDataState<IZProfile>(null));
+export const ZIdentityContext = createContext<IZDataState<IZProfile>>(new ZDataState<IZProfile>(null));
 
 /**
  * Uses the global profile.
@@ -17,8 +17,8 @@ export const ZProfileContext = createContext<IZDataState<IZProfile>>(new ZDataSt
  *
  * @returns The global profile.
  */
-export function useProfile() {
-  return useContext(ZProfileContext);
+export function useIdentity() {
+  return useContext(ZIdentityContext);
 }
 
 /**
@@ -26,19 +26,19 @@ export function useProfile() {
  *
  * @returns The value of the profile context.
  */
-export function useProfileRoot() {
-  const service = useProfileService();
-  const profile = useProfile();
+export function useIdentityRoot() {
+  const service = useIdentityService();
+  const identity = useIdentity();
 
   useEffect(() => {
-    profile.set();
+    identity.set();
     service
       .read()
-      .then((p) => profile.set(p))
-      .catch(() => profile.set(null));
+      .then((p) => identity.set(p))
+      .catch(() => identity.set(null));
   });
 
-  return profile;
+  return identity;
 }
 
 /**
@@ -46,7 +46,7 @@ export function useProfileRoot() {
  *
  * @returns The global profile.
  */
-export function useProfileAndWatch() {
-  const profile = useProfile();
-  return useWatchableState(profile.data, profile.dataChange, profile);
+export function useIdentityAndWatch() {
+  const identity = useIdentity();
+  return useWatchableState(identity.data, identity.dataChange, identity);
 }

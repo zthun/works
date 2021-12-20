@@ -4,15 +4,15 @@ import { IZProfile } from '@zthun/works.core';
 import { ZUrlBuilder } from '@zthun/works.url';
 import { noop } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '../theme/make-styles';
 import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { ZCircularProgress } from '../loading/circular-progress';
-import { useProfileService } from './profile-service.context';
+import { makeStyles } from '../theme/make-styles';
+import { useIdentityService } from './identity-service.context';
 
 /**
  * Represents properties for the profile button.
  */
-export interface IZProfileButtonProps extends IZComponentDisabled {
+export interface IZIdentityButtonProps extends IZComponentDisabled {
   /**
    * The current profile being displayed.
    *
@@ -33,7 +33,7 @@ export interface IZProfileButtonProps extends IZComponentDisabled {
   onProfile?: () => void;
 }
 
-const useProfileButtonStyles = makeStyles()((theme) => ({
+const useIdentityButtonStyles = makeStyles()((theme) => ({
   avatar: {
     height: theme.sizing.avatar.sm,
     width: theme.sizing.avatar.sm,
@@ -50,7 +50,7 @@ const useProfileButtonStyles = makeStyles()((theme) => ({
  *
  * @returns The jsx that renders the profile menu.
  */
-export function ZProfileButton(props: IZProfileButtonProps) {
+export function ZIdentityButton(props: IZIdentityButtonProps) {
   const {
     profile,
     disabled = false,
@@ -59,10 +59,10 @@ export function ZProfileButton(props: IZProfileButtonProps) {
     onProfile = noop
   } = props;
 
-  const profiles = useProfileService();
+  const profiles = useIdentityService();
   const [avatar, setAvatar] = useState(new ZUrlBuilder().gravatar().build());
   const [display, setDisplay] = useState('');
-  const styles = useProfileButtonStyles();
+  const styles = useIdentityButtonStyles();
 
   useEffect(() => {
     let _setAvatar = setAvatar;
@@ -86,7 +86,7 @@ export function ZProfileButton(props: IZProfileButtonProps) {
    */
   function createLoginButton() {
     return (
-      <Button className='ZProfileButton-root ZProfileButton-login' data-testid='ZProfileButton-login' color='inherit' disabled={disabled} onClick={onLogin}>
+      <Button className='ZIdentityButton-root ZIdentityButton-login' color='inherit' disabled={disabled} onClick={onLogin}>
         <PersonIcon />
         <Hidden only='xs'>
           <Typography>LOGIN</Typography>
@@ -103,7 +103,7 @@ export function ZProfileButton(props: IZProfileButtonProps) {
    * @returns The profile loading item jsx.
    */
   function createProfileLoading() {
-    return <ZCircularProgress className='ZProfileButton-root ZProfileButton-loading' data-testid='ZProfileButton-loading' />;
+    return <ZCircularProgress className='ZIdentityButton-root ZIdentityButton-loading' />;
   }
 
   /**
@@ -115,10 +115,10 @@ export function ZProfileButton(props: IZProfileButtonProps) {
    */
   function createProfileButton() {
     return (
-      <Button className='ZProfileButton-root ZProfileButton-profile' data-testid='ZProfileButton-profile' color='inherit' onClick={onProfile} disabled={disabled}>
+      <Button className='ZIdentityButton-root ZIdentityButton-profile' color='inherit' onClick={onProfile} disabled={disabled}>
         <Grid container spacing={2} justifyContent='center' alignItems='center' wrap='nowrap'>
           <Grid item>
-            <img className={`ZProfileButton-avatar ${styles.classes.avatar}`} data-testid='ZProfileButton-avatar' src={avatar} />
+            <img className={`ZIdentityButton-avatar ${styles.classes.avatar}`} src={avatar} />
           </Grid>
           <Hidden only='xs'>
             <Grid item>{display}</Grid>
