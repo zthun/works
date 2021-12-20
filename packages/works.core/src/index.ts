@@ -7,6 +7,8 @@ export { ZAssert } from './assert/assert.class';
 // Config
 export { ZConfigEntryBuilder } from './configs/config-entry-builder.class';
 export { IZConfigEntry } from './configs/config-entry.interface';
+// Cookie
+export { IZCookie, ZCookieBuilder } from './cookie/cookie';
 // Doc
 export { IZTypedocCommentTag } from './doc/typedoc-comment-tag.interface';
 export { IZTypedocComment } from './doc/typedoc-comment.interface';
