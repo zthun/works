@@ -1,0 +1,41 @@
+import { Injectable } from '@nestjs/common';
+import { IZUser, ZCookieBuilder } from '@zthun/works.core';
+import { ZCookiesClient, ZUsersClient } from '@zthun/works.microservices';
+import { Request } from 'express';
+import { get } from 'lodash';
+import { ZWorksConfigService } from '../config/works-config.service';
+
+@Injectable()
+/**
+ * Represents a service that can be used to sign, verify, inject and extract a jwt token.
+ *
+ * This is a helper service that combines the ZUsersClient and ZCookiesClient to extract the
+ * user from the cookie auth token.  It's possible to do this without this service, but this
+ * service makes it much easier to do.
+ */
+export class ZSecurityService {
+  /**
+   * Initializes a new instance of this object.
+   *
+   * @param _users The user repository for retrieving and updating users.
+   * @param _cookies The cookies client for retrieving cookies.
+   * @param _commonConfig The common configuration service that contains core values.
+   * @param _authConfig The auth configuration service that contains auth options.
+   */
+  public constructor(private readonly _users: ZUsersClient, private readonly _cookies: ZCookiesClient, private readonly _worksConfig: ZWorksConfigService) {}
+
+  /**
+   * Extracts a user from a request object.
+   *
+   * @param req The request to extract the user from.
+   *
+   * @returns A promise that, when resolved, has extracted the user.
+   */
+  public async extract(req: Request): Promise<IZUser> {
+    const cookie = new ZCookieBuilder().authentication().build();
+    const jwt = get(req, `cookies[${cookie.name}]`);
+    const { value: secret } = await this._worksConfig.secret();
+    const id = await this._cookies.whoIs(jwt, secret);
+    return id == null ? null : this._users.findById(id);
+  }
+}
