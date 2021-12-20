@@ -4474,9 +4474,9 @@ __metadata:
     "@nestjs/microservices": ^8.2.4
     "@nestjs/platform-express": ^8.2.4
     "@zthun/works.class": ^2.1.0
-    "@zthun/works.core": ^2.0.0
+    "@zthun/works.core": ^2.2.0
     "@zthun/works.dal": ^2.1.0
-    "@zthun/works.nest": ^2.1.0
+    "@zthun/works.nest": ^2.2.1
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
     uuid: ^8.3.2
@@ -4498,9 +4498,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.client@workspace:packages/works.client"
   dependencies:
-    "@zthun/works.core": ^2.0.0
+    "@zthun/works.core": ^2.2.0
     "@zthun/works.draw": ^2.1.0
-    "@zthun/works.react": ^2.1.0
+    "@zthun/works.react": ^2.2.0
     "@zthun/works.url": ^2.0.0
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -4514,7 +4514,7 @@ __metadata:
     "@nestjs/common": ^8.2.4
     "@nestjs/core": ^8.2.4
     "@nestjs/microservices": ^8.2.4
-    "@zthun/works.core": ^2.0.0
+    "@zthun/works.core": ^2.2.0
     jsonwebtoken: ^8.5.1
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
@@ -4523,7 +4523,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.core@^2.0.0, @zthun/works.core@workspace:packages/works.core":
+"@zthun/works.core@^2.2.0, @zthun/works.core@workspace:packages/works.core":
   version: 0.0.0-use.local
   resolution: "@zthun/works.core@workspace:packages/works.core"
   languageName: unknown
@@ -4594,11 +4594,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.microservices@^2.1.0, @zthun/works.microservices@workspace:packages/works.microservices":
+"@zthun/works.microservices@^2.2.0, @zthun/works.microservices@workspace:packages/works.microservices":
   version: 0.0.0-use.local
   resolution: "@zthun/works.microservices@workspace:packages/works.microservices"
   dependencies:
-    "@zthun/works.core": ^2.0.0
+    "@zthun/works.core": ^2.2.0
     rxjs: ^7.4.0
   peerDependencies:
     "@nestjs/common": ^8.0.6
@@ -4606,14 +4606,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.nest@^2.1.0, @zthun/works.nest@workspace:packages/works.nest":
+"@zthun/works.nest@^2.2.1, @zthun/works.nest@workspace:packages/works.nest":
   version: 0.0.0-use.local
   resolution: "@zthun/works.nest@workspace:packages/works.nest"
   dependencies:
     "@zthun/works.class": ^2.1.0
-    "@zthun/works.core": ^2.0.0
+    "@zthun/works.core": ^2.2.0
     "@zthun/works.http": ^2.1.0
-    "@zthun/works.microservices": ^2.1.0
+    "@zthun/works.microservices": ^2.2.0
     "@zthun/works.url": ^2.0.0
     class-transformer: ~0.5.1
     cookie-parser: ^1.4.6
@@ -4636,7 +4636,7 @@ __metadata:
     "@nestjs/common": ^8.2.4
     "@nestjs/core": ^8.2.4
     "@nestjs/microservices": ^8.2.4
-    "@zthun/works.core": ^2.0.0
+    "@zthun/works.core": ^2.2.0
     nodemailer: ^6.7.2
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
@@ -4651,7 +4651,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.react@^2.1.0, @zthun/works.react@workspace:packages/works.react":
+"@zthun/works.react@^2.2.0, @zthun/works.react@workspace:packages/works.react":
   version: 0.0.0-use.local
   resolution: "@zthun/works.react@workspace:packages/works.react"
   dependencies:
@@ -4660,7 +4660,7 @@ __metadata:
     "@mui/icons-material": ^5.2.4
     "@mui/material": ^5.2.4
     "@mui/system": ^5.2.4
-    "@zthun/works.core": ^2.0.0
+    "@zthun/works.core": ^2.2.0
     "@zthun/works.draw": ^2.1.0
     "@zthun/works.error": ^2.0.0
     "@zthun/works.http": ^2.1.0
@@ -4689,7 +4689,7 @@ __metadata:
     "@nestjs/core": ^8.2.4
     "@nestjs/microservices": ^8.2.4
     "@nestjs/platform-express": ^8.2.4
-    "@zthun/works.nest": ^2.1.0
+    "@zthun/works.nest": ^2.2.1
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
   bin:
@@ -4714,7 +4714,7 @@ __metadata:
     "@nestjs/common": ^8.2.4
     "@nestjs/core": ^8.2.4
     "@nestjs/microservices": ^8.2.4
-    "@zthun/works.core": ^2.0.0
+    "@zthun/works.core": ^2.2.0
     "@zthun/works.dal": ^2.1.0
     bcryptjs: ^2.4.3
     reflect-metadata: ^0.1.13
@@ -4732,7 +4732,7 @@ __metadata:
     "@nestjs/common": ^8.2.4
     "@nestjs/core": ^8.2.4
     "@nestjs/microservices": ^8.2.4
-    "@zthun/works.core": ^2.0.0
+    "@zthun/works.core": ^2.2.0
     "@zthun/works.dal": ^2.1.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
