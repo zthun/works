@@ -2,15 +2,17 @@
 
 import { Module } from '@nestjs/common';
 import { ZVaultModule } from '@zthun/works.microservices';
-import { ZCommonConfigService } from './common-config.service';
-import { ZNotificationsConfigService } from './notifications-config.service';
+import { ZWorksConfigService } from './works-config.service';
 
 @Module({
   imports: [ZVaultModule],
-  providers: [ZCommonConfigService, ZNotificationsConfigService],
-  exports: [ZCommonConfigService, ZNotificationsConfigService]
+  providers: [ZWorksConfigService],
+  exports: [ZWorksConfigService]
 })
 /**
- * Represents a module for handling notifications.
+ * Represents a module for handling basic zthunworks configurations.
+ *
+ * This is a wrapper around the vault module which will allow you to retrieve specific
+ * common config values without having to know their scopes and keys.
  */
 export class ZConfigModule {}
