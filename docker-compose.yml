@@ -84,11 +84,11 @@ services:
   zthunworks-databases:
     image: mongo:4.2.0
   # Utilities
-  zthunworks-database-client:
+  database.zthunworks.com:
     image: mongo-express:0.49
     depends_on:
       - zthunworks-databases
     environment:
       - ME_CONFIG_MONGODB_SERVER=zthunworks-databases
-  zthunworks-smtp-client:
+  smtp.zthunworks.com:
     image: rnwood/smtp4dev:v3.1
