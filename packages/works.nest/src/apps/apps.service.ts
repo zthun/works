@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
 import { ZUrlBuilder } from '@zthun/works.url';
-import { ZCommonConfigService } from '../config/common-config.service';
+import { ZWorksConfigService } from '../config/works-config.service';
 
 @Injectable()
 /**
@@ -19,7 +19,7 @@ export class ZAppsService {
    *
    * @param _vault The service used to retrieve the domain configuration.
    */
-  public constructor(private _common: ZCommonConfigService) {}
+  public constructor(private _common: ZWorksConfigService) {}
 
   /**
    * Creates an ico file from an svg stream.

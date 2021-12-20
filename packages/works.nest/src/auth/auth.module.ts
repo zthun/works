@@ -3,17 +3,17 @@
 import { Module } from '@nestjs/common';
 import { ZCookiesModule, ZNotificationsModule, ZUsersModule, ZVaultModule } from '@zthun/works.microservices';
 import { ZConfigModule } from '../config/config.module';
-import { ZAuthConfigService } from './config/auth-config.service';
+import { ZSecurityModule } from '../security/security.module';
 import { ZProfilesController } from './profile/profiles.controller';
 import { ZProfilesService } from './profile/profiles.service';
 import { ZTokensController } from './tokens/tokens.controller';
 import { ZTokensService } from './tokens/tokens.service';
 
 @Module({
-  imports: [ZVaultModule, ZUsersModule, ZNotificationsModule, ZConfigModule, ZCookiesModule],
-  providers: [ZTokensService, ZProfilesService, ZAuthConfigService],
+  imports: [ZVaultModule, ZUsersModule, ZNotificationsModule, ZConfigModule, ZCookiesModule, ZSecurityModule],
+  providers: [ZTokensService, ZProfilesService],
   controllers: [ZTokensController, ZProfilesController],
-  exports: [ZTokensService, ZAuthConfigService]
+  exports: [ZTokensService]
 })
 /**
  * Represents a module that includes all services regarding authentication.

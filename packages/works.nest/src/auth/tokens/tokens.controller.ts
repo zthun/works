@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Post, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
+import { ZRuleCookieRequiresAuthAny } from '../../security/rule-cookie-requires-auth-any.guard';
 import { ZRuleBodyRequiresCredentials } from '../rules/rule-body-requires-credentials.guard';
-import { ZRuleCookieRequiresAuthAny } from '../rules/rule-cookie-requires-auth-any.guard';
 import { ZTokensLoginDto } from './tokens-login.dto';
 import { ZTokensService } from './tokens.service';
 
