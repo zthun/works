@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.0](https://github.com/zthun/works/compare/v2.2.1...v2.3.0) (2021-12-20)
+
+
+### Features
+
+* added the security module for cross cutting cookie reads ([4b51273](https://github.com/zthun/works/commit/4b512731c1d0117b0493d5071e3404f05e71d8e9))
+* combined the configs into one system configuration ([16b9280](https://github.com/zthun/works/commit/16b928042a664448ca935e77cb3971b2ce77f1b4))
+* moved cookie rules to the security module ([5433621](https://github.com/zthun/works/commit/54336214318a8fde31089b1f3c8ccab56e1e945a))
+
+
+
 ### [2.2.1](https://github.com/zthun/works/compare/v2.2.0...v2.2.1) (2021-12-20)
 
 

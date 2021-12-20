@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.react",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A react component package that contains react based components for @zthun scoped packages.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -33,7 +33,7 @@
     "@mui/icons-material": "^5.2.4",
     "@mui/material": "^5.2.4",
     "@mui/system": "^5.2.4",
-    "@zthun/works.core": "^2.2.0",
+    "@zthun/works.core": "^2.3.0",
     "@zthun/works.draw": "^2.1.0",
     "@zthun/works.error": "^2.0.0",
     "@zthun/works.http": "^2.1.0",

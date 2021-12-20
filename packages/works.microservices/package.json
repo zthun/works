@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.microservices",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "The works microservice clients for tcp access to each service.",
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -27,7 +27,7 @@
     "docs/**"
   ],
   "dependencies": {
-    "@zthun/works.core": "^2.2.0",
+    "@zthun/works.core": "^2.3.0",
     "rxjs": "^7.4.0"
   },
   "peerDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.vault",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A zthunworks microservice that manages the system vault configurations.",
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -32,7 +32,7 @@
     "@nestjs/common": "^8.2.4",
     "@nestjs/core": "^8.2.4",
     "@nestjs/microservices": "^8.2.4",
-    "@zthun/works.core": "^2.2.0",
+    "@zthun/works.core": "^2.3.0",
     "@zthun/works.dal": "^2.1.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.4.0"

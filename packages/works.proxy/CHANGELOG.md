@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.0](https://github.com/zthun/works/compare/v2.2.1...v2.3.0) (2021-12-20)
+
+
+### Reverts
+
+* hostname ([81febbd](https://github.com/zthun/works/commit/81febbd37fd8508673811cf70a1056646860330f))
+
+
+
 ## [2.1.0](https://github.com/zthun/works/compare/v2.0.0...v2.1.0) (2021-12-19)
 
 **Note:** Version bump only for package @zthun/works.proxy
