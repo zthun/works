@@ -1,11 +1,11 @@
-import { Grid, Typography } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
+import { Grid, Typography } from '@mui/material';
 import { IZProfile, IZProfileActivation, ZProfileActivationBuilder } from '@zthun/works.core';
 import { ZAlertBuilder } from '@zthun/works.message';
-import { useAlertService, useErrorHandler, useProfileAndWatch, useProfileService, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
+import { useAlertService, useErrorHandler, useIdentityAndWatch, useProfileService, ZCircularProgress, ZPaperCard, ZProfileActivationForm, ZProfileForm } from '@zthun/works.react';
 import { get } from 'lodash';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
@@ -16,7 +16,7 @@ import { Redirect } from 'react-router-dom';
  * @returns The jsx that renders the profile page.
  */
 export function ZProfilePage() {
-  const profile = useProfileAndWatch();
+  const profile = useIdentityAndWatch();
   const alerts = useAlertService();
   const errors = useErrorHandler();
   const profileSvc = useProfileService();

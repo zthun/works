@@ -1,7 +1,7 @@
 import { CircularProgress, Grid } from '@mui/material';
 import { IZLogin } from '@zthun/works.core';
 import { ZAlertBuilder } from '@zthun/works.message';
-import { useAlertService, useErrorHandler, useProfileAndWatch, useProfileService, ZLoginTabs } from '@zthun/works.react';
+import { useAlertService, useErrorHandler, useIdentityAndWatch, useProfileService, ZLoginTabs } from '@zthun/works.react';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ import { Redirect } from 'react-router-dom';
  */
 export function ZLoginPage(): JSX.Element {
   const [working, setWorking] = useState(false);
-  const logged = useProfileAndWatch();
+  const logged = useIdentityAndWatch();
   const profileSvc = useProfileService();
   const alerts = useAlertService();
   const errors = useErrorHandler();
