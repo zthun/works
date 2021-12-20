@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.nest",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "The main module for nestjs based routes and modules for @zthun scoped projects.",
   "author": "Anthony Bonta",
   "license": "MIT",

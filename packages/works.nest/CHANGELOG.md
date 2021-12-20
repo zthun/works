@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.2.1](https://github.com/zthun/works/compare/v2.2.0...v2.2.1) (2021-12-20)
+
+
+### Bug Fixes
+
+* export the additional cookie rules ([2829474](https://github.com/zthun/works/commit/28294746ff7b7118f4d1cffb49b06ef1349bc80c))
+
+
+
 ## [2.2.0](https://github.com/zthun/works/compare/v2.1.0...v2.2.0) (2021-12-20)
 
 
