@@ -38,8 +38,6 @@ import '../images/svg/zthunworks-owl.svg';
 import { ZHomePage } from './home/home-page';
 import { ZApiPage } from './learn/api-page';
 import { ZLearnPage } from './learn/learn-page';
-import { ZLoginPage } from './login/login-page';
-import { ZProfilePage } from './profile/profile-page';
 
 const ZUrlMarkdownTerms = new ZUrlBuilder().location().hash('').path('legal/TERMS.md').build();
 const ZUrlMarkdownPrivacy = new ZUrlBuilder().location().hash('').path('legal/PRIVACY.md').build();
@@ -50,8 +48,6 @@ const renderTermsPage = renderMarkdownPage.bind(null, { src: ZUrlMarkdownTerms, 
 render(
   <ZWebAppLayout headerText='Zthunworks' whoami='portal' profileApp='roadblock' avatar={ZAvatarOwl}>
     <Route exact path='/home' component={ZHomePage} />
-    <Route exact path='/login' component={ZLoginPage} />
-    <Route exact path='/profile' component={ZProfilePage} />
     <Route exact path='/privacy' render={renderPrivacyPage} />
     <Route exact path='/terms' render={renderTermsPage} />
     <Route exact path='/learn/:pkg' component={ZLearnPage} />
