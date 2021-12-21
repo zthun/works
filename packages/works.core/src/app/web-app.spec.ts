@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
+import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 import { IZWebApp, ZWebAppBuilder } from './web-app';
 
 describe('ZWebAppBuilder', () => {
@@ -70,6 +70,13 @@ describe('ZWebAppBuilder', () => {
         (t, v) => t.source(v),
         (a: IZWebApp) => a.source
       );
+    });
+  });
+
+  describe('Copy', () => {
+    it('should copy another web app.', () => {
+      const other = createTestTarget().id('learn').description('Documentation').name('Learn').domain('https://docs.zthunworks.com').icon(null).short('docs').source('https://github.com/zthun/docs').build();
+      assertBuilderCopiesObject(other, createTestTarget);
     });
   });
 });

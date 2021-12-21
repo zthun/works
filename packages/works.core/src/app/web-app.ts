@@ -145,6 +145,18 @@ export class ZWebAppBuilder {
   }
 
   /**
+   * Copies another IZWebApp to this builder.
+   *
+   * @param other The web app to copy.
+   *
+   * @returns This object.
+   */
+  public copy(other: IZWebApp): this {
+    this._app = { ...this._app, ...other };
+    return this;
+  }
+
+  /**
    * Returns a copy of the built application.
    *
    * @returns A copy of the app that has currently been built.
