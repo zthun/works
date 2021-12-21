@@ -28,6 +28,7 @@
   ],
   "dependencies": {
     "@zthun/works.core": "^2.3.0",
+    "lodash": "^4.17.21",
     "rxjs": "^7.4.0"
   },
   "peerDependencies": {
