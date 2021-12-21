@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.server",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "The server side package for the @zthun/works platform.",
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "@nestjs/core": "^8.2.4",
     "@nestjs/microservices": "^8.2.4",
     "@nestjs/platform-express": "^8.2.4",
-    "@zthun/works.nest": "^2.4.0",
+    "@zthun/works.nest": "^2.4.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.4.0"
   },

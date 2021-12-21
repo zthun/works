@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.4.1](https://github.com/zthun/works/compare/v2.4.0...v2.4.1) (2021-12-21)
+
+
+### Bug Fixes
+
+* don't import from a bucket ([8e8665c](https://github.com/zthun/works/commit/8e8665c7bb7ee2cb4a1631e781fc2172234cfc38))
+
+
+
 ## [2.4.0](https://github.com/zthun/works/compare/v2.3.0...v2.4.0) (2021-12-21)
 
 
