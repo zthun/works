@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
+import { ZAppsModule } from 'src';
 import { ZHealthModule } from '../health/health.module';
 import { ZSecurityModule } from '../security/security.module';
 
 @Module({
-  imports: [ZSecurityModule, ZHealthModule],
-  exports: [ZSecurityModule, ZHealthModule]
+  imports: [ZSecurityModule, ZHealthModule, ZAppsModule],
+  exports: [ZSecurityModule, ZHealthModule, ZAppsModule]
 })
 /**
  * Represents a composite module that joins all modules for a works application.
