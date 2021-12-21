@@ -59,14 +59,6 @@ export { useImageReader, ZImageReaderContext } from './image/image-reader.contex
 // Loading
 export { ZCircularBackdrop } from './loading/circular-backdrop';
 export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';
-// Login
-export { IZLoginCredentialsFormProps, ZLoginCredentialsForm } from './login/login-credentials-form';
-export { IZLoginTabsProps, ZLoginTab, ZLoginTabs } from './login/login-tabs';
-// Profile
-export { IZProfileActivationFormProps, ZProfileActivationForm } from './profile/profile-activation-form';
-export { IZProfileAvatarFormProps, ZProfileAvatarForm } from './profile/profile-avatar-form';
-export { IZProfileFormProps, ZProfileForm } from './profile/profile-form';
-export { IZProfileService, selectAvatar, useProfileService, ZProfileService, ZProfileServiceContext } from './profile/profile-service.context';
 // Store
 export { ZDataState } from './store/data-state.class';
 export { IZDataState } from './store/data-state.interface';

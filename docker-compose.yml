@@ -72,6 +72,14 @@ services:
       - .:/usr/dev
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.notifications run debug
+  zthunworks-services-apps:
+    image: node:16.6.0
+    ports:
+      - 9233:9229
+    volumes:
+      - .:/usr/dev
+    working_dir: /usr/dev
+    command: npm --workspace @zthun/works.apps run debug
   zthunworks-services-cookies:
     image: node:16.6.0
     ports:

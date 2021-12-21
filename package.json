@@ -25,6 +25,7 @@
     "packages/works.microservices",
     "packages/works.cookies",
     "packages/works.notifications",
+    "packages/works.apps",
     "packages/works.users",
     "packages/works.vault",
     "packages/works.nest",
