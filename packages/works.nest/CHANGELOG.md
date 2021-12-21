@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.0](https://github.com/zthun/works/compare/v2.3.0...v2.4.0) (2021-12-21)
+
+
+### Features
+
+* added a root application module that standardizes routes and cross cutting features ([b1979cf](https://github.com/zthun/works/commit/b1979cf30400eee2a06c6a8621c2a4b902619ec0))
+* added the security controller ([ff83859](https://github.com/zthun/works/commit/ff83859f9e1daab4efebfd2ca3a81f695c1e9b4c))
+
+
+### Bug Fixes
+
+* removing the options module ([2618edb](https://github.com/zthun/works/commit/2618edbf13c014c8de4e15f906337ffd70090839))
+
+
+
 ## [2.3.0](https://github.com/zthun/works/compare/v2.2.1...v2.3.0) (2021-12-20)
 
 
