@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ZAppsModule } from 'src';
+import { ZAppsModule } from '../apps/apps.module';
 import { ZHealthModule } from '../health/health.module';
 import { ZSecurityModule } from '../security/security.module';
 
