@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-pods-server
-          image: {{ .Values.images.scope }}/{{ .Values.images.server }}:{{ .Chart.AppVersion }}
+          image: {{ .Values.images.scope }}/{{ .Values.images.server }}
           ports:
             - containerPort: 3000

@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-pods-notifications
-          image: {{ .Values.images.scope }}/{{ .Values.images.notifications }}:{{ .Chart.AppVersion }}
+          image: {{ .Values.images.scope }}/{{ .Values.images.notifications }}
           ports:
             - containerPort: 4000

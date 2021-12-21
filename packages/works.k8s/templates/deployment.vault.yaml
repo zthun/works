@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-pods-vault
-          image: {{ .Values.images.scope }}/{{ .Values.images.vault }}:{{ .Chart.AppVersion }}
+          image: {{ .Values.images.scope }}/{{ .Values.images.vault }}
           ports:
             - containerPort: 4000
           env:

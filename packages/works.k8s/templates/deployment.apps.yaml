@@ -1,22 +1,22 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: {{ .Chart.Name }}-deployments-cookies
+  name: {{ .Chart.Name }}-deployments-apps
   namespace: {{ .Release.Namespace }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-pods-cookies
+      app: {{ .Chart.Name }}-pods-apps
   template:
     metadata:
-      name: {{ .Chart.Name }}-pods-cookies
+      name: {{ .Chart.Name }}-pods-apps
       labels:
-        app: {{ .Chart.Name }}-pods-cookies
+        app: {{ .Chart.Name }}-pods-apps
         version: {{ .Chart.AppVersion }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}-pods-cookies
-          image: {{ .Values.images.scope }}/{{ .Values.images.cookies }}
+        - name: {{ .Chart.Name }}-pods-apps
+          image: {{ .Values.images.scope }}/{{ .Values.images.apps }}
           ports:
             - containerPort: 4000

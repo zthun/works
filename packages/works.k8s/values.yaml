@@ -8,12 +8,13 @@ cert:
 
 images:
   scope: zthun
-  server: works.server
-  client: works.client
-  users: works.users
-  vault: works.vault
-  notifications: works.notifications
-  cookies: works.cookies
+  apps: works.apps:3.0.0
+  server: works.server:3.0.0
+  client: works.client:3.0.0
+  users: works.users:3.0.0
+  vault: works.vault:3.0.0
+  notifications: works.notifications:3.0.0
+  cookies: works.cookies:3.0.0
 
 database:
   vault: vault.database.zthunworks.com

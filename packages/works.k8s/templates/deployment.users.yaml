@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-pods-users
-          image: {{ .Values.images.scope }}/{{ .Values.images.users }}:{{ .Chart.AppVersion }}
+          image: {{ .Values.images.scope }}/{{ .Values.images.users }}
           ports:
             - containerPort: 4000
           env:
