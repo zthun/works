@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { IZUser, ZCookieBuilder } from '@zthun/works.core';
-import { ZCookiesClient, ZUsersClient } from '@zthun/works.microservices';
+import { ZCookiesClient, ZUsersClient, ZVaultClient } from '@zthun/works.microservices';
 import { Request } from 'express';
 import { get } from 'lodash';
-import { ZWorksConfigService } from '../config/works-config.service';
+import { ZConfigEntries } from '../config/config.module';
 
 @Injectable()
 /**
@@ -22,7 +22,7 @@ export class ZSecurityService {
    * @param _commonConfig The common configuration service that contains core values.
    * @param _authConfig The auth configuration service that contains auth options.
    */
-  public constructor(private readonly _users: ZUsersClient, private readonly _cookies: ZCookiesClient, private readonly _worksConfig: ZWorksConfigService) {}
+  public constructor(private readonly _users: ZUsersClient, private readonly _cookies: ZCookiesClient, private readonly _vault: ZVaultClient) {}
 
   /**
    * Extracts a user from a request object.
@@ -34,7 +34,7 @@ export class ZSecurityService {
   public async extract(req: Request): Promise<IZUser> {
     const cookie = new ZCookieBuilder().authentication().build();
     const jwt = get(req, `cookies[${cookie.name}]`);
-    const { value: secret } = await this._worksConfig.secret();
+    const { value: secret } = await this._vault.get(ZConfigEntries.identity.secret);
     const id = await this._cookies.whoIs(jwt, secret);
     return id == null ? null : this._users.findById(id);
   }

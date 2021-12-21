@@ -1,30 +1,26 @@
 /* eslint-disable require-jsdoc */
-import { IZConfigEntry, IZCookie, IZUser, ZConfigEntryBuilder, ZCookieBuilder, ZUserBuilder } from '@zthun/works.core';
+import { IZCookie, IZUser, ZCookieBuilder, ZUserBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
-import { ZCookiesClient, ZUsersClient } from '@zthun/works.microservices';
+import { ZCookiesClient, ZUsersClient, ZVaultClient, ZVaultMemoryClient } from '@zthun/works.microservices';
 import { Request } from 'express';
 import { v4 } from 'uuid';
-import { ZWorksConfigService } from '../config/works-config.service';
+import { ZConfigEntries } from '../config/config.module';
 import { ZSecurityService } from './security.service';
 
 describe('ZSecurityService', () => {
-  let secret: IZConfigEntry<string>;
-  let domain: IZConfigEntry<string>;
   let cookie: IZCookie;
   let users: jest.Mocked<ZUsersClient>;
   let user: IZUser;
   let req: jest.Mocked<Request>;
   let cookies: jest.Mocked<ZCookiesClient>;
-  let worksConfig: jest.Mocked<ZWorksConfigService>;
+  let vault: ZVaultClient;
 
   function createTestTarget() {
-    return new ZSecurityService(users, cookies, worksConfig);
+    return new ZSecurityService(users, cookies, vault);
   }
 
   beforeEach(() => {
-    secret = new ZConfigEntryBuilder().scope(ZWorksConfigService.SCOPE_COOKIES).key(ZWorksConfigService.KEY_COOKIES_SECRET).generate().build();
-    domain = new ZConfigEntryBuilder().scope(ZWorksConfigService.SCOPE_COMMON).key(ZWorksConfigService.KEY_COMMON_DOMAIN).value('marvel.com').build();
-    cookie = new ZCookieBuilder().domain(domain.value).expiresTomorrow().secure().httpOnly().build();
+    cookie = new ZCookieBuilder().domain(ZConfigEntries.common.domain.value).expiresTomorrow().secure().httpOnly().build();
 
     users = createMocked(['findByEmail', 'findById', 'login']);
     users.findByEmail.mockReturnValue(Promise.resolve(null));
@@ -35,9 +31,7 @@ describe('ZSecurityService', () => {
     cookies.createAuthentication.mockResolvedValue(cookie);
     cookies.whoIs.mockResolvedValue(null);
 
-    worksConfig = createMocked<ZWorksConfigService>(['domain', 'secret']);
-    worksConfig.domain.mockResolvedValue(domain);
-    worksConfig.secret.mockResolvedValue(secret);
+    vault = new ZVaultMemoryClient();
 
     user = new ZUserBuilder().email('wolverine@marvel.com').password('foo').id('0').super().build();
     users.findById.mockReturnValue(Promise.resolve(user));
@@ -48,7 +42,7 @@ describe('ZSecurityService', () => {
   it('should extract the user from the auth cookie in the request.', async () => {
     // Arrange
     const target = createTestTarget();
-    const cookie = new ZCookieBuilder().authentication(v4()).domain(domain.value).build();
+    const cookie = new ZCookieBuilder().authentication(v4()).domain(ZConfigEntries.common.domain.value).build();
     req.cookies[cookie.name] = cookie.value;
     // Act
     const actual = await target.extract(req);
