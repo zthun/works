@@ -6,6 +6,7 @@ import { kebabCase } from 'lodash';
 import React, { ReactNode, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useWebApp, useWebAppsAndWatch } from '../apps/web-apps.context';
+import { ZHealthIndicator } from '../health/health-indicator';
 import { ZIdentityButton } from '../identity/identity-button';
 import { useIdentityAndWatch } from '../identity/identity.context';
 import { ZImageSource } from '../image/image-source';
@@ -353,6 +354,7 @@ export function ZTopNav(props: IZTopNavProps) {
         {createHomeButton()}
         <Typography className={`ZTopNav-options ${styles.classes.options}`}></Typography>
         <ZIdentityButton profile={identity.data} onLogin={handleProfile} onProfile={handleProfile} />
+        <ZHealthIndicator />
         {createMoreButton()}
       </Toolbar>
     </AppBar>
