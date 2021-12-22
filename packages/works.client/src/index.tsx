@@ -23,7 +23,7 @@ import '@zthun/works.jest/README.md';
 import '@zthun/works.nest/docs/typedoc.json';
 import '@zthun/works.nest/images';
 import '@zthun/works.nest/README.md';
-import { renderMarkdownPage, ZTopNavAvatar, ZWebAppLayout } from '@zthun/works.react';
+import { renderMarkdownPage, ZWebAppLayout } from '@zthun/works.react';
 import '@zthun/works.react/docs/typedoc.json';
 import '@zthun/works.react/images';
 import '@zthun/works.react/README.md';
@@ -41,12 +41,11 @@ import { ZLearnPage } from './learn/learn-page';
 
 const ZUrlMarkdownTerms = new ZUrlBuilder().location().hash('').path('legal/TERMS.md').build();
 const ZUrlMarkdownPrivacy = new ZUrlBuilder().location().hash('').path('legal/PRIVACY.md').build();
-const ZAvatarOwl = <ZTopNavAvatar src='images/svg/zthunworks-owl.svg' />;
 const renderPrivacyPage = renderMarkdownPage.bind(null, { src: ZUrlMarkdownPrivacy, headerText: 'Privacy', subHeaderText: 'Information collection', avatar: <InfoIcon fontSize='large' />, size: 'lg' });
 const renderTermsPage = renderMarkdownPage.bind(null, { src: ZUrlMarkdownTerms, headerText: 'Terms', subHeaderText: 'Usage of this website', avatar: <MouseIcon fontSize='large' />, size: 'lg' });
 
 render(
-  <ZWebAppLayout headerText='Zthunworks' whoami='docs' profileApp='roadblock' avatar={ZAvatarOwl}>
+  <ZWebAppLayout whoami='docs' profileApp='roadblock'>
     <Route exact path='/home' component={ZHomePage} />
     <Route exact path='/privacy' render={renderPrivacyPage} />
     <Route exact path='/terms' render={renderTermsPage} />
