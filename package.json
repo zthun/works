@@ -58,6 +58,7 @@
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.13",
+    "@types/history": "^4.7.9",
     "@types/jest": "^27.0.3",
     "@types/jsdom": "^16.2.13",
     "@types/jsonwebtoken": "^8.5.6",
