@@ -48,7 +48,10 @@ const renderTermsPage = renderMarkdownPage.bind(null, { src: ZUrlMarkdownTerms, 
 const termsIcon = <MouseIcon fontSize='inherit' />;
 const privacyIcon = <InfoIcon fontSize='inherit' />;
 
-const routes = [new ZRouteOptionBuilder().name('Privacy').path('/privacy').avatar(privacyIcon).owner(whoami).build(), new ZRouteOptionBuilder().name('Terms').avatar(termsIcon).path('/terms').owner(whoami).build()];
+const routes = [
+  new ZRouteOptionBuilder().name('Privacy').path('/privacy').description('What information do we collect?').avatar(privacyIcon).owner(whoami).build(),
+  new ZRouteOptionBuilder().name('Terms').description('What is your right to reject?').avatar(termsIcon).path('/terms').owner(whoami).build()
+];
 
 render(
   <ZWebAppLayout whoami={whoami} profileApp='roadblock' routes={routes}>

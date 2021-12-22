@@ -55,11 +55,11 @@ export class ZAppsService {
     const supportIcon = await this._loadSvg(ZAppsService.IconSupport);
 
     const webApps = [
-      new ZWebAppBuilder().id('learn').name('Learn').icon(learnIcon).source('https://github.com/zthun/works').build(),
-      new ZWebAppBuilder().id('roadblock').name('Roadblock').icon(roadblockIcon).source('https://github.com/zthun/roadblock').build(),
-      new ZWebAppBuilder().id('terms').name('Terms').icon(termsIcon).build(),
-      new ZWebAppBuilder().id('privacy').name('Privacy').icon(privacyIcon).build(),
-      new ZWebAppBuilder().id('support').name('Support').icon(supportIcon).build()
+      new ZWebAppBuilder().id('learn').name('Learn').icon(learnIcon).short('What is Zthunworks?').source('https://github.com/zthun/works').build(),
+      new ZWebAppBuilder().id('roadblock').name('Roadblock').icon(roadblockIcon).short('Who are you?').source('https://github.com/zthun/roadblock').build(),
+      new ZWebAppBuilder().id('terms').name('Terms').icon(termsIcon).short('What is your right to reject?').build(),
+      new ZWebAppBuilder().id('privacy').name('Privacy').short('What information do we collect?').icon(privacyIcon).build(),
+      new ZWebAppBuilder().id('support').name('Support').short('What do you need help with?').icon(supportIcon).build()
     ];
 
     return Promise.resolve(webApps);
