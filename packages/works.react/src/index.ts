@@ -56,6 +56,7 @@ export { ZIdentityService, ZIdentityServiceContext } from './identity/identity-s
 export { useIdentity, useIdentityAndWatch, useIdentityRoot, ZIdentityContext } from './identity/identity.context';
 // Image
 export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
+export { ZImageSource } from './image/image-source';
 // Loading
 export { ZCircularBackdrop } from './loading/circular-backdrop';
 export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';
@@ -63,11 +64,10 @@ export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-p
 export { ZDataState } from './store/data-state.class';
 export { IZDataState } from './store/data-state.interface';
 export { useWatchableState } from './store/use-watchable-state.hook';
-export { makeStyles } from './theme/make-styles';
 // Theme
+export { makeStyles } from './theme/make-styles';
 export { shade } from './theme/shade';
-export { IZTopNavProps, ZTopNav } from './top/top-nav';
 // Top
-export { ZTopNavAvatar } from './top/top-nav-avatar';
+export { IZTopNavProps, ZTopNav } from './top/top-nav';
 // Window
 export { useWindowService, ZWindowServiceContext } from './window/window-service.context';
