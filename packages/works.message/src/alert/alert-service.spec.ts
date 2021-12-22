@@ -21,6 +21,7 @@ describe('ZAlertService', () => {
   });
 
   afterAll(() => {
+    jest.runOnlyPendingTimers();
     jest.useRealTimers();
   });
 
