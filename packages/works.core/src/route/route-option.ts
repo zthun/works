@@ -18,6 +18,11 @@ export interface IZRouteOption {
   name?: string;
 
   /**
+   * A description of the route.
+   */
+  description?: string;
+
+  /**
    * An avatar representation of the route.
    *
    * This can be anything you want and it's
@@ -80,6 +85,18 @@ export class ZRouteOptionBuilder {
    */
   public name(name: string): this {
     this._route.name = name;
+    return this;
+  }
+
+  /**
+   * Sets the description of the route.
+   *
+   * @param description The route description.
+   *
+   * @returns This object.
+   */
+  public description(description: string): this {
+    this._route.description = description;
     return this;
   }
 

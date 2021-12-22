@@ -36,6 +36,15 @@ describe('ZRouteOptionBuilder', () => {
       );
     });
 
+    it('should set the description.', () => {
+      assertBuilderSetsProperty(
+        'Description',
+        createTestTarget,
+        (t, v) => t.description(v),
+        (r: IZRouteOption) => r.description
+      );
+    });
+
     it('should set the avatar.', () => {
       assertBuilderSetsProperty(
         '<img src="avatar.png" />',
