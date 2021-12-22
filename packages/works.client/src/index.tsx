@@ -6,6 +6,7 @@ import '@zthun/lint-janitor/images';
 import '@zthun/lint-janitor/README.md';
 import '@zthun/works.class/docs/typedoc.json';
 import '@zthun/works.class/README.md';
+import { ZRouteOptionBuilder } from '@zthun/works.core';
 import '@zthun/works.core/docs/typedoc.json';
 import '@zthun/works.core/images';
 import '@zthun/works.core/PRIVACY.md';
@@ -39,13 +40,18 @@ import { ZHomePage } from './home/home-page';
 import { ZApiPage } from './learn/api-page';
 import { ZLearnPage } from './learn/learn-page';
 
+const whoami = 'learn';
 const ZUrlMarkdownTerms = new ZUrlBuilder().location().hash('').path('legal/TERMS.md').build();
 const ZUrlMarkdownPrivacy = new ZUrlBuilder().location().hash('').path('legal/PRIVACY.md').build();
 const renderPrivacyPage = renderMarkdownPage.bind(null, { src: ZUrlMarkdownPrivacy, headerText: 'Privacy', subHeaderText: 'Information collection', avatar: <InfoIcon fontSize='large' />, size: 'lg' });
 const renderTermsPage = renderMarkdownPage.bind(null, { src: ZUrlMarkdownTerms, headerText: 'Terms', subHeaderText: 'Usage of this website', avatar: <MouseIcon fontSize='large' />, size: 'lg' });
+const termsIcon = <MouseIcon fontSize='inherit' />;
+const privacyIcon = <InfoIcon fontSize='inherit' />;
+
+const routes = [new ZRouteOptionBuilder().name('Privacy').path('/privacy').avatar(privacyIcon).owner(whoami).build(), new ZRouteOptionBuilder().name('Terms').avatar(termsIcon).path('/terms').owner(whoami).build()];
 
 render(
-  <ZWebAppLayout whoami='learn' profileApp='roadblock'>
+  <ZWebAppLayout whoami={whoami} profileApp='roadblock' routes={routes}>
     <Route exact path='/home' component={ZHomePage} />
     <Route exact path='/privacy' render={renderPrivacyPage} />
     <Route exact path='/terms' render={renderTermsPage} />
