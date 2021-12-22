@@ -46,7 +46,7 @@ const renderPrivacyPage = renderMarkdownPage.bind(null, { src: ZUrlMarkdownPriva
 const renderTermsPage = renderMarkdownPage.bind(null, { src: ZUrlMarkdownTerms, headerText: 'Terms', subHeaderText: 'Usage of this website', avatar: <MouseIcon fontSize='large' />, size: 'lg' });
 
 render(
-  <ZWebAppLayout headerText='Zthunworks' whoami='portal' profileApp='roadblock' avatar={ZAvatarOwl}>
+  <ZWebAppLayout headerText='Zthunworks' whoami='docs' profileApp='roadblock' avatar={ZAvatarOwl}>
     <Route exact path='/home' component={ZHomePage} />
     <Route exact path='/privacy' render={renderPrivacyPage} />
     <Route exact path='/terms' render={renderTermsPage} />
