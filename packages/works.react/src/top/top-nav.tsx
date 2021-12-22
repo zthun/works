@@ -3,14 +3,12 @@ import HomeIcon from '@mui/icons-material/Home';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import { IZWebApp } from '@zthun/works.core';
-import { ZDataUrlBuilder } from '@zthun/works.url';
-import { first } from 'lodash';
 import React, { ReactNode, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useWebAppsAndWatch } from '../apps/web-apps.context';
-import { IZComponentHeader } from '../component/component-header.interface';
+import { useWebApp, useWebAppsAndWatch } from '../apps/web-apps.context';
 import { ZIdentityButton } from '../identity/identity-button';
 import { useIdentityAndWatch } from '../identity/identity.context';
+import { ZImageSource } from '../image/image-source';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { makeStyles } from '../theme/make-styles';
 import { useWindowService } from '../window/window-service.context';
@@ -18,27 +16,18 @@ import { useWindowService } from '../window/window-service.context';
 /**
  * Represents properties for the top nav menu.
  */
-export interface IZTopNavProps extends IZComponentHeader {
+export interface IZTopNavProps {
   /**
    * The id of the profile app.
    *
-   * If you don't set this, then it will default to
-   * the zthunworks profile app.
-   *
-   * @default roadblock
+   * If you don't set this, then it will hide the profile button.
    */
   profileApp?: string;
 
   /**
    * The current id of the given application.
-   *
-   * The reason for setting this is to hide the application from
-   * the list of web apps.
-   *
-   * If this is not set, the this component will not include
-   * the github link.
    */
-  whoami?: string;
+  whoami: string;
 }
 
 const useTopNavStyles = makeStyles()((theme) => ({
@@ -70,6 +59,14 @@ const useTopNavStyles = makeStyles()((theme) => ({
     flexShrink: 0,
     userSelect: 'none',
     color: `rgb(${theme.palette.common.black}, 0.54)`
+  },
+
+  avatar: {
+    height: '5rem',
+    marginRight: theme.sizing.gaps.sm,
+    borderRadius: theme.rounding.circle,
+    border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[200]}`,
+    background: theme.palette.common.white
   }
 }));
 
@@ -88,9 +85,12 @@ const useTopNavStyles = makeStyles()((theme) => ({
  * @returns The jsx for the standard top nav.
  */
 export function ZTopNav(props: IZTopNavProps) {
+  const { profileApp, whoami } = props;
   const [moreShown, setMoreShown] = useState(false);
-  const profile = useIdentityAndWatch();
+  const identity = useIdentityAndWatch();
   const apps = useWebAppsAndWatch();
+  const who = useWebApp(whoami);
+  const profile = useWebApp(profileApp);
   const history = useHistory();
   const win = useWindowService();
   const styles = useTopNavStyles();
@@ -112,11 +112,19 @@ export function ZTopNav(props: IZTopNavProps) {
    * @returns The jsx for the home button.
    */
   function createHomeButton() {
+    if (who === undefined) {
+      return <ZCircularProgress className='ZTopNav-home-loading' size='sm' />;
+    }
+
+    if (who == null) {
+      return null;
+    }
+
     return (
       <Button className={`ZTopNav-btn-home ${styles.classes.home}`} data-testid='ZTopNav-btn-home' color='inherit' onClick={handleHome}>
-        {props.avatar}
+        <ZImageSource className={`ZTopNav-avatar ${styles.classes.avatar}`} src={who.icon} />;
         <Typography className={`ZTopNav-title ${styles.classes.title}`} color='inherit' variant='h1'>
-          {props.headerText}
+          {who.name}
         </Typography>
       </Button>
     );
@@ -139,14 +147,11 @@ export function ZTopNav(props: IZTopNavProps) {
   function handleProfile() {
     setMoreShown(false);
 
-    const list = apps.data || [];
-    const security = first(list.filter((app) => app._id === props.profileApp));
-
-    if (security == null) {
+    if (profile == null) {
       return;
     }
 
-    win.open(security.domain, '_self');
+    win.open(profile.domain, '_self');
   }
 
   /**
@@ -155,17 +160,14 @@ export function ZTopNav(props: IZTopNavProps) {
    * @returns The jsx for the source link.
    */
   function createNavSource() {
-    const list = apps.data || [];
-    const self = first(list.filter((app) => app._id === props.whoami));
-
-    if (!self?.source) {
+    if (!who?.source) {
       return null;
     }
 
     return (
       <>
         <Divider />
-        {createNavItem('github', 'Github', <GithubIcon />, handleLink.bind(null, self.source, '_blank'))}
+        {createNavItem('github', 'Github', <GithubIcon />, handleLink.bind(null, who.source, '_blank'))}
       </>
     );
   }
@@ -178,19 +180,7 @@ export function ZTopNav(props: IZTopNavProps) {
    * @returns The icon image
    */
   function createAppIcon(icon: string) {
-    if (!icon) {
-      return null;
-    }
-
-    if (icon.startsWith('data:image/svg+xml')) {
-      // SVG images can go into html directly.
-      const info = new ZDataUrlBuilder().parse(icon).info();
-      const __html = info.buffer.toString();
-      return <div className={`ZTopNav-app-icon ${styles.classes.icon}`} dangerouslySetInnerHTML={{ __html }} />;
-    }
-
-    // This is some other url.  Use the img tag for this one.
-    return <img src={icon} className='ZTopNav-app-icon'></img>;
+    return <ZImageSource className={`ZTopNav-app-icon ${styles.classes.icon}`} src={icon} />;
   }
 
   /**
@@ -257,7 +247,7 @@ export function ZTopNav(props: IZTopNavProps) {
       <Toolbar>
         {createHomeButton()}
         <Typography className={`ZTopNav-options ${styles.classes.options}`}>&nbsp;</Typography>
-        <ZIdentityButton profile={profile.data} onLogin={handleProfile} onProfile={handleProfile} />
+        <ZIdentityButton profile={identity.data} onLogin={handleProfile} onProfile={handleProfile} />
         {createMoreButton()}
       </Toolbar>
     </AppBar>
