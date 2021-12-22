@@ -11,7 +11,7 @@
   },
   "main": "./dist/main.js",
   "bin": {
-    "zthun-works-cookies": "./bin/main.js"
+    "zthun-works-apps": "./bin/main.js"
   },
   "scripts": {
     "docker:publish": "docker push zthun/works.apps:latest && docker push zthun/works.apps:$(node -p \"require('./package.json').version\")",
