@@ -3,8 +3,8 @@ import { renderHook } from '@testing-library/react-hooks';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import React from 'react';
-import { ZDataState } from '../store/data-state.class';
-import { IZDataState } from '../store/data-state.interface';
+import { ZDataState } from '../state/data-state.class';
+import { IZDataState } from '../state/data-state.interface';
 import { IZWebAppService, ZWebAppServiceContext } from './web-app-service.context';
 import { useWebApp, useWebAppsRoot, ZWebAppsContext } from './web-apps.context';
 

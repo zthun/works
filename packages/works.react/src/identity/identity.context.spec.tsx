@@ -3,8 +3,8 @@ import { render, waitFor } from '@testing-library/react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import React from 'react';
-import { ZDataState } from '../store/data-state.class';
-import { IZDataState } from '../store/data-state.interface';
+import { ZDataState } from '../state/data-state.class';
+import { IZDataState } from '../state/data-state.interface';
 import { IZIdentityService, ZIdentityServiceContext } from './identity-service.context';
 import { useIdentityRoot, ZIdentityContext } from './identity.context';
 

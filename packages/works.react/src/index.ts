@@ -61,9 +61,9 @@ export { ZImageSource } from './image/image-source';
 export { ZCircularBackdrop } from './loading/circular-backdrop';
 export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';
 // Store
-export { ZDataState } from './store/data-state.class';
-export { IZDataState } from './store/data-state.interface';
-export { useWatchableState } from './store/use-watchable-state.hook';
+export { ZDataState } from './state/data-state.class';
+export { IZDataState } from './state/data-state.interface';
+export { useWatchableState } from './state/use-watchable-state.hook';
 // Theme
 export { makeStyles } from './theme/make-styles';
 export { shade } from './theme/shade';

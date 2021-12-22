@@ -8,7 +8,7 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import { ZWebAppsContext } from '../apps/web-apps.context';
 import { ZIdentityContext } from '../identity/identity.context';
-import { ZDataState } from '../store/data-state.class';
+import { ZDataState } from '../state/data-state.class';
 import { ZWindowServiceContext } from '../window/window-service.context';
 import { ZTopNav } from './top-nav';
 

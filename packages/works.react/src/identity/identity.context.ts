@@ -1,8 +1,8 @@
 import { IZProfile } from '@zthun/works.core';
 import { createContext, useContext, useEffect } from 'react';
-import { ZDataState } from '../store/data-state.class';
-import { IZDataState } from '../store/data-state.interface';
-import { useWatchableState } from '../store/use-watchable-state.hook';
+import { ZDataState } from '../state/data-state.class';
+import { IZDataState } from '../state/data-state.interface';
+import { useWatchableState } from '../state/use-watchable-state.hook';
 import { useIdentityService } from './identity-service.context';
 
 /**
