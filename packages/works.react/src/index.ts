@@ -52,7 +52,7 @@ export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelectContext } from './
 export { useHttpService, ZHttpServiceContext } from './http/http-service.context';
 // Identity
 export { IZIdentityButtonProps, ZIdentityButton } from './identity/identity-button';
-export { ZIdentityService, ZIdentityServiceContext } from './identity/identity-service.context';
+export { selectAvatar, useIdentityService, ZIdentityService, ZIdentityServiceContext } from './identity/identity-service.context';
 export { useIdentity, useIdentityAndWatch, useIdentityRoot, ZIdentityContext } from './identity/identity.context';
 // Image
 export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
