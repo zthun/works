@@ -7,6 +7,7 @@ import { kebabCase, last } from 'lodash';
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { ZWebAppsContext } from '../apps/web-apps.context';
+import { IZHealthService, ZHealthServiceContext } from '../health/health-service.context';
 import { ZIdentityContext } from '../identity/identity.context';
 import { ZDataState } from '../state/data-state.class';
 import { ZWindowServiceContext } from '../window/window-service.context';
@@ -19,6 +20,7 @@ describe('ZTopNav', () => {
   let routes: IZRouteOption[];
   let profile: ZDataState<IZProfile>;
   let webApps: ZDataState<IZWebApp[]>;
+  let health: jest.Mocked<IZHealthService>;
   let $window: jest.Mocked<Window>;
 
   async function createTestTarget() {
@@ -26,9 +28,11 @@ describe('ZTopNav', () => {
       <ZWindowServiceContext.Provider value={$window}>
         <ZWebAppsContext.Provider value={webApps}>
           <ZIdentityContext.Provider value={profile}>
-            <Router history={history}>
-              <ZTopNav whoami={whoami} profileApp={profileApp} routes={routes} />
-            </Router>
+            <ZHealthServiceContext.Provider value={health}>
+              <Router history={history}>
+                <ZTopNav whoami={whoami} profileApp={profileApp} routes={routes} />
+              </Router>
+            </ZHealthServiceContext.Provider>
           </ZIdentityContext.Provider>
         </ZWebAppsContext.Provider>
       </ZWindowServiceContext.Provider>
@@ -46,6 +50,9 @@ describe('ZTopNav', () => {
     whoami = undefined;
     profileApp = undefined;
     $window = createMocked(['open']);
+
+    health = createMocked(['read']);
+    health.read.mockResolvedValue(true);
   });
 
   describe('Home', () => {
