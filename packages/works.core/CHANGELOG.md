@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/zthun/works/compare/v2.4.1...v3.0.0) (2021-12-22)
+
+
+### Features
+
+* a route option can now have a description ([2123a74](https://github.com/zthun/works/commit/2123a74034d27f5b1268309662f42a32cbfa6896))
+* a web app can now copy another web app ([0e1468c](https://github.com/zthun/works/commit/0e1468ce1d0208a01300cd0b7d8e091193fc1808))
+* you can now set a generic avatar on the route option ([4f97b4a](https://github.com/zthun/works/commit/4f97b4a09da1d3acf3a82ed34e082ed677d96fc5))
+* you can now set the name of a route option ([57ef7d8](https://github.com/zthun/works/commit/57ef7d8f6c1389e2c02ad5176976772646b84176))
+
+
+
 ## [2.3.0](https://github.com/zthun/works/compare/v2.2.1...v2.3.0) (2021-12-20)
 
 **Note:** Version bump only for package @zthun/works.core

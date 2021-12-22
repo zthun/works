@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/zthun/works/compare/v2.4.1...v3.0.0) (2021-12-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* the top nav avatar has become the image source component
+* the top nav is now app based and less configurable
+* removed the profile and login from react
+
+### Features
+
+* added a health indicator button ([294572b](https://github.com/zthun/works/commit/294572b46b10a4b748181d83a7b398b622b7c154))
+* added a hook to get the web app by id ([448ecb3](https://github.com/zthun/works/commit/448ecb3c9db8bbdc04b989450e7ce9da597530fd))
+* added the apps microservice ([65ac076](https://github.com/zthun/works/commit/65ac076498a3883241c8519f04171f0171da5a11))
+* added the use safe state hook ([5ae550e](https://github.com/zthun/works/commit/5ae550e4d72e9f6596e636335195381ffbf78e92))
+* removed the profile and login from react ([37b3d66](https://github.com/zthun/works/commit/37b3d66fee9e42722616f708a7f784af0692b5f9))
+* the top nav avatar has become the image source component ([fa96f84](https://github.com/zthun/works/commit/fa96f840ff88fe95cc5c75083ec0b66c6ca723f5))
+* the top nav can now display routes ([15c8e45](https://github.com/zthun/works/commit/15c8e45bc3e13f31ed5510ec506160e6c6d6c6f5))
+* the top nav is now app based and less configurable ([f2c71c6](https://github.com/zthun/works/commit/f2c71c62182fdc0d227aa4d9a9d11022cb513a38))
+* the top nav now displays the server health ([65e2374](https://github.com/zthun/works/commit/65e23745dabc2510c1c6e9f97a72d585e931a649))
+* the top nav now shows descriptions ([c8b0bbe](https://github.com/zthun/works/commit/c8b0bbef011d309b0c38d1f1cfee3ba0ebbec2dc))
+
+
+
 ## [2.4.0](https://github.com/zthun/works/compare/v2.3.0...v2.4.0) (2021-12-21)
 
 **Note:** Version bump only for package @zthun/works.react

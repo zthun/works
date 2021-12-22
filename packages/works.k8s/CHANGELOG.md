@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/zthun/works/compare/v2.4.1...v3.0.0) (2021-12-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* you now can deploy individual versions of services
+
+### Features
+
+* you now can deploy individual versions of services ([c82c700](https://github.com/zthun/works/commit/c82c700d5807d19c7640291edb90e9cc02e7a950))
+
+
+
 ## [2.2.0](https://github.com/zthun/works/compare/v2.1.0...v2.2.0) (2021-12-20)
 
 

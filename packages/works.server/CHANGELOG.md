@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/zthun/works/compare/v2.4.1...v3.0.0) (2021-12-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed the profile and login from react
+
+### Features
+
+* removed the profile and login from react ([37b3d66](https://github.com/zthun/works/commit/37b3d66fee9e42722616f708a7f784af0692b5f9))
+
+
+
 ### [2.4.1](https://github.com/zthun/works/compare/v2.4.0...v2.4.1) (2021-12-21)
 
 **Note:** Version bump only for package @zthun/works.server

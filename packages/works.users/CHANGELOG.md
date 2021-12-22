@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/zthun/works/compare/v2.4.1...v3.0.0) (2021-12-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed the auth module from works.nest.  This has transitioned over to roadblock
+
+### Features
+
+* removed the auth module from works.nest.  This has transitioned over to roadblock ([06ce096](https://github.com/zthun/works/commit/06ce096e4bd014a3793c97fa5f7457b075ca0535))
+
+
+
 ## [2.3.0](https://github.com/zthun/works/compare/v2.2.1...v2.3.0) (2021-12-20)
 
 **Note:** Version bump only for package @zthun/works.users

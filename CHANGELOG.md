@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/zthun/works/compare/v2.4.1...v3.0.0) (2021-12-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* the top nav avatar has become the image source component
+* the top nav is now app based and less configurable
+* renamed apps module to applications module
+* removed the profile and login from react
+* you now can deploy individual versions of services
+* removed images no longer relevant to works.nest
+* removed the auth module from works.nest.  This has transitioned over to roadblock
+
+### Features
+
+* a route option can now have a description ([2123a74](https://github.com/zthun/works/commit/2123a74034d27f5b1268309662f42a32cbfa6896))
+* a web app can now copy another web app ([0e1468c](https://github.com/zthun/works/commit/0e1468ce1d0208a01300cd0b7d8e091193fc1808))
+* added a health indicator button ([294572b](https://github.com/zthun/works/commit/294572b46b10a4b748181d83a7b398b622b7c154))
+* added a hook to get the web app by id ([448ecb3](https://github.com/zthun/works/commit/448ecb3c9db8bbdc04b989450e7ce9da597530fd))
+* added a memory vault client for easier unit testing ([dd533a2](https://github.com/zthun/works/commit/dd533a2581c4244c399613cfc16fb009dbd515bb))
+* added local route site map navigation ([aeece73](https://github.com/zthun/works/commit/aeece73df827bf36025a2674093bbc0bd5060846))
+* added real icons for each app ([9309a6e](https://github.com/zthun/works/commit/9309a6e304bdd34c4e200c3232c0060e6259b27b))
+* added the apps client ([205c681](https://github.com/zthun/works/commit/205c681dfc534c00052f739d1bac3ee17f5e8d70))
+* added the apps microservice ([65ac076](https://github.com/zthun/works/commit/65ac076498a3883241c8519f04171f0171da5a11))
+* added the use safe state hook ([5ae550e](https://github.com/zthun/works/commit/5ae550e4d72e9f6596e636335195381ffbf78e92))
+* apps now have source information ([b895f55](https://github.com/zthun/works/commit/b895f5539c716b77c51702c1fc89eed67461c2e4))
+* removed images no longer relevant to works.nest ([6ee2df8](https://github.com/zthun/works/commit/6ee2df80469f48a2fbbab8e7930249f4a169b16b))
+* removed the auth module from works.nest.  This has transitioned over to roadblock ([06ce096](https://github.com/zthun/works/commit/06ce096e4bd014a3793c97fa5f7457b075ca0535))
+* removed the profile and login from react ([37b3d66](https://github.com/zthun/works/commit/37b3d66fee9e42722616f708a7f784af0692b5f9))
+* the apps and routes now have descriptions ([7bedb9f](https://github.com/zthun/works/commit/7bedb9fcbd13a40abb2184821e698d51653194fd))
+* the top nav avatar has become the image source component ([fa96f84](https://github.com/zthun/works/commit/fa96f840ff88fe95cc5c75083ec0b66c6ca723f5))
+* the top nav can now display routes ([15c8e45](https://github.com/zthun/works/commit/15c8e45bc3e13f31ed5510ec506160e6c6d6c6f5))
+* the top nav is now app based and less configurable ([f2c71c6](https://github.com/zthun/works/commit/f2c71c62182fdc0d227aa4d9a9d11022cb513a38))
+* the top nav now displays the server health ([65e2374](https://github.com/zthun/works/commit/65e23745dabc2510c1c6e9f97a72d585e931a649))
+* the top nav now shows descriptions ([c8b0bbe](https://github.com/zthun/works/commit/c8b0bbef011d309b0c38d1f1cfee3ba0ebbec2dc))
+* works.apps now includes assets ([ff095c5](https://github.com/zthun/works/commit/ff095c5e2c742cdc00c2e3d0f1de7c2ef944dd87))
+* you can now set a generic avatar on the route option ([4f97b4a](https://github.com/zthun/works/commit/4f97b4a09da1d3acf3a82ed34e082ed677d96fc5))
+* you can now set the name of a route option ([57ef7d8](https://github.com/zthun/works/commit/57ef7d8f6c1389e2c02ad5176976772646b84176))
+* you now can deploy individual versions of services ([c82c700](https://github.com/zthun/works/commit/c82c700d5807d19c7640291edb90e9cc02e7a950))
+
+
+### Code Refactoring
+
+* renamed apps module to applications module ([3ed9a04](https://github.com/zthun/works/commit/3ed9a04de4ea2aa2723b0bee6931667fb7d37fb5))
+
+
+
 ### [2.4.1](https://github.com/zthun/works/compare/v2.4.0...v2.4.1) (2021-12-21)
 
 

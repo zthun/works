@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/zthun/works/compare/v2.4.1...v3.0.0) (2021-12-22)
+
+
+### Features
+
+* added local route site map navigation ([aeece73](https://github.com/zthun/works/commit/aeece73df827bf36025a2674093bbc0bd5060846))
+* the apps and routes now have descriptions ([7bedb9f](https://github.com/zthun/works/commit/7bedb9fcbd13a40abb2184821e698d51653194fd))
+
+
+
 ## [2.4.0](https://github.com/zthun/works/compare/v2.3.0...v2.4.0) (2021-12-21)
 
 **Note:** Version bump only for package @zthun/works.client

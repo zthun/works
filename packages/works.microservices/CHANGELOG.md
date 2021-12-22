@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/zthun/works/compare/v2.4.1...v3.0.0) (2021-12-22)
+
+
+### Features
+
+* added a memory vault client for easier unit testing ([dd533a2](https://github.com/zthun/works/commit/dd533a2581c4244c399613cfc16fb009dbd515bb))
+* added the apps client ([205c681](https://github.com/zthun/works/commit/205c681dfc534c00052f739d1bac3ee17f5e8d70))
+
+
+
 ## [2.3.0](https://github.com/zthun/works/compare/v2.2.1...v2.3.0) (2021-12-20)
 
 **Note:** Version bump only for package @zthun/works.microservices
