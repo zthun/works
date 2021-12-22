@@ -43,6 +43,11 @@ const useTopNavStyles = makeStyles()((theme) => ({
   title: {
     [theme.breakpoints.down('md')]: {
       display: 'none'
+    },
+    textAlign: 'left',
+
+    h6: {
+      fontSize: theme.sizing.font.xs
     }
   },
 
@@ -143,9 +148,14 @@ export function ZTopNav(props: IZTopNavProps) {
     return (
       <Button className={`ZTopNav-btn-home ${styles.classes.home}`} data-testid='ZTopNav-btn-home' color='inherit' onClick={handleHome}>
         <ZImageSource className={`ZTopNav-avatar ${styles.classes.avatar}`} src={who.icon} />
-        <Typography className={`ZTopNav-title ${styles.classes.title}`} color='inherit' variant='h1'>
-          {who.name}
-        </Typography>
+        <div className={`ZTopNav-title ${styles.classes.title}`}>
+          <Typography color='inherit' variant='h1'>
+            {who.name}
+          </Typography>
+          <Typography color='inherit' variant='subtitle1'>
+            {who.short}
+          </Typography>
+        </div>
       </Button>
     );
   }
@@ -192,7 +202,7 @@ export function ZTopNav(props: IZTopNavProps) {
 
     return (
       <>
-        {createNavItem('github', 'Github', icon, handleLink.bind(null, who.source, '_blank'))}
+        {createNavItem('github', 'Github', 'View the source code', icon, handleLink.bind(null, who.source, '_blank'))}
         <Divider />
       </>
     );
@@ -210,7 +220,7 @@ export function ZTopNav(props: IZTopNavProps) {
 
     return (
       <>
-        {createNavItem('home', who.name, createAppIcon(who.icon), handleHome)}
+        {createNavItem('home', who.name, who.short, createAppIcon(who.icon), handleHome)}
         <Divider />
       </>
     );
@@ -247,7 +257,7 @@ export function ZTopNav(props: IZTopNavProps) {
 
     return (
       <>
-        {data.filter((app) => ignore.indexOf(app._id) < 0).map((app) => createNavItem(app._id, app.name, createAppIcon(app.icon), handleLink.bind(null, app.domain, '_self')))}
+        {data.filter((app) => ignore.indexOf(app._id) < 0).map((app) => createNavItem(app._id, app.name, app.short, createAppIcon(app.icon), handleLink.bind(null, app.domain, '_self')))}
         <Divider />
       </>
     );
@@ -258,19 +268,20 @@ export function ZTopNav(props: IZTopNavProps) {
    *
    * @param id The id of the nav item.
    * @param display The display text.
+   * @param description The secondary text.
    * @param avatar The avatar for the item.
    * @param handler The handler for the item.
    *
    * @returns The jsx for the nav list item.
    */
-  function createNavItem(id: string, display: string, avatar: ReactNode, handler) {
+  function createNavItem(id: string, display: string, description: string, avatar: ReactNode, handler: any) {
     const key = kebabCase(id);
     const clasz = `ZTopNav-drawer-more-item ZTopNav-drawer-more-item-${key}`;
 
     return (
-      <ListItem key={key} className={clasz} button onClick={handler}>
+      <ListItem key={key} className={clasz} button title={description} onClick={handler}>
         <ListItemIcon>{avatar}</ListItemIcon>
-        <ListItemText primary={display} />
+        <ListItemText primary={display} secondary={description} />
       </ListItem>
     );
   }
@@ -290,7 +301,7 @@ export function ZTopNav(props: IZTopNavProps) {
 
     const avatar = <div className={`ZTopNav-app-icon ${styles.classes.icon}`}>{route.avatar}</div>;
 
-    return createNavItem(route.path, route.name, avatar, handleRoute);
+    return createNavItem(route.path, route.name, route.description, avatar, handleRoute);
   }
 
   /**
