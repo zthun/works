@@ -1,5 +1,6 @@
 import { IZWebApp } from '@zthun/works.core';
-import { createContext, useContext, useEffect } from 'react';
+import { first } from 'lodash';
+import { createContext, useContext, useEffect, useMemo } from 'react';
 import { ZDataState } from '../store/data-state.class';
 import { IZDataState } from '../store/data-state.interface';
 import { useWatchableState } from '../store/use-watchable-state.hook';
@@ -45,4 +46,33 @@ export function useWebAppsRoot() {
 export function useWebAppsAndWatch() {
   const apps = useWebApps();
   return useWatchableState(apps.data, apps.dataChange, apps);
+}
+
+/**
+ * Returns the current instance of a specific web app.
+ *
+ * @param id The id of the web app to watch for.
+ *
+ * @returns The application information for a given app id.
+ */
+export function useWebApp(id: string): IZWebApp {
+  const { data } = useWebAppsAndWatch();
+  const webApp = useMemo<IZWebApp>(() => {
+    if (!id) {
+      return null;
+    }
+
+    if (data === undefined) {
+      return undefined;
+    }
+
+    if (data === null) {
+      return null;
+    }
+
+    const app = first(data.filter((app) => app._id === id));
+    return app || null;
+  }, [data, id]);
+
+  return webApp;
 }
