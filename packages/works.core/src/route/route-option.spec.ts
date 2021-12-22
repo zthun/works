@@ -27,6 +27,15 @@ describe('ZRouteOptionBuilder', () => {
       );
     });
 
+    it('should set the name.', () => {
+      assertBuilderSetsProperty(
+        'Information',
+        createTestTarget,
+        (t, v) => t.name(v),
+        (r: IZRouteOption) => r.name
+      );
+    });
+
     it('should set the method to get.', () => {
       assertBuilderSetsProperty(
         'get',

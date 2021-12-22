@@ -1,5 +1,5 @@
 /**
- * Represents a potential api option path.
+ * Represents a potential api option path or a ui routed path.
  */
 export interface IZRouteOption {
   /**
@@ -13,9 +13,14 @@ export interface IZRouteOption {
   path: string;
 
   /**
+   * The display name of the route.
+   */
+  name?: string;
+
+  /**
    * The http method to access the route.
    */
-  method: 'get' | 'put' | 'post' | 'delete' | 'patch' | 'options' | 'head';
+  method?: 'get' | 'put' | 'post' | 'delete' | 'patch' | 'options' | 'head';
 }
 
 /**
@@ -29,8 +34,7 @@ export class ZRouteOptionBuilder {
    */
   public constructor() {
     this._route = {
-      path: '',
-      method: 'get'
+      path: ''
     };
   }
 
@@ -55,6 +59,18 @@ export class ZRouteOptionBuilder {
    */
   public path(path: string): this {
     this._route.path = path;
+    return this;
+  }
+
+  /**
+   * Sets the display name of the route.
+   *
+   * @param name The name.
+   *
+   * @returns This object.
+   */
+  public name(name: string): this {
+    this._route.name = name;
     return this;
   }
 
