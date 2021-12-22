@@ -1,13 +1,12 @@
 /* istanbul ignore file */
 
 import { Module } from '@nestjs/common';
-import { ZCookiesModule, ZUsersModule } from '@zthun/works.microservices';
-import { ZConfigModule } from '../config/config.module';
+import { ZCookiesModule, ZUsersModule, ZVaultModule } from '@zthun/works.microservices';
 import { ZSecurityController } from './security.controller';
 import { ZSecurityService } from './security.service';
 
 @Module({
-  imports: [ZConfigModule, ZUsersModule, ZCookiesModule],
+  imports: [ZVaultModule, ZUsersModule, ZCookiesModule],
   controllers: [ZSecurityController],
   providers: [ZSecurityService],
   exports: [ZSecurityService]
