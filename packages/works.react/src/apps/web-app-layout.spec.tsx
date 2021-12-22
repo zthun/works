@@ -15,8 +15,7 @@ describe('ZWebAppLayout', () => {
     const target = render(
       <ZIdentityServiceContext.Provider value={profileService}>
         <ZWebAppServiceContext.Provider value={webAppService}>
-          <ZWebAppLayout headerText='Test Webapp' />
-          );
+          <ZWebAppLayout whoami='docs' />
         </ZWebAppServiceContext.Provider>
       </ZIdentityServiceContext.Provider>
     );
