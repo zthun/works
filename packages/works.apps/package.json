@@ -24,9 +24,9 @@
     "access": "public"
   },
   "files": [
-    "images/**",
-    "dist/**",
-    "docs/**"
+    "assets",
+    "dist",
+    "docs"
   ],
   "dependencies": {
     "@nestjs/common": "^8.2.4",
