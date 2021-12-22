@@ -1,8 +1,9 @@
 /* eslint-disable require-jsdoc */
 import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
-import { IZProfile, IZWebApp, ZProfileBuilder, ZWebAppBuilder } from '@zthun/works.core';
+import { IZProfile, IZRouteOption, IZWebApp, ZProfileBuilder, ZRouteOptionBuilder, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { createMemoryHistory, MemoryHistory } from 'history';
+import { kebabCase, last } from 'lodash';
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { ZWebAppsContext } from '../apps/web-apps.context';
@@ -15,28 +16,25 @@ describe('ZTopNav', () => {
   let history: MemoryHistory;
   let whoami: string;
   let profileApp: string;
+  let routes: IZRouteOption[];
   let profile: ZDataState<IZProfile>;
   let webApps: ZDataState<IZWebApp[]>;
   let $window: jest.Mocked<Window>;
 
   async function createTestTarget() {
-    let target: RenderResult;
+    const target = render(
+      <ZWindowServiceContext.Provider value={$window}>
+        <ZWebAppsContext.Provider value={webApps}>
+          <ZIdentityContext.Provider value={profile}>
+            <Router history={history}>
+              <ZTopNav whoami={whoami} profileApp={profileApp} routes={routes} />
+            </Router>
+          </ZIdentityContext.Provider>
+        </ZWebAppsContext.Provider>
+      </ZWindowServiceContext.Provider>
+    );
 
-    await act(async () => {
-      target = render(
-        <ZWindowServiceContext.Provider value={$window}>
-          <ZWebAppsContext.Provider value={webApps}>
-            <ZIdentityContext.Provider value={profile}>
-              <Router history={history}>
-                <ZTopNav whoami={whoami} profileApp={profileApp} />
-              </Router>
-            </ZIdentityContext.Provider>
-          </ZWebAppsContext.Provider>
-        </ZWindowServiceContext.Provider>
-      );
-      await waitFor(() => true);
-    });
-
+    await waitFor(async () => expect(target.container.querySelector('.ZTopNav-root')).toBeTruthy());
     return target;
   }
 
@@ -44,18 +42,10 @@ describe('ZTopNav', () => {
     history = createMemoryHistory();
     profile = new ZDataState<IZProfile>(undefined);
     webApps = new ZDataState<IZWebApp[]>(undefined);
+    routes = undefined;
     whoami = undefined;
     profileApp = undefined;
     $window = createMocked(['open']);
-  });
-
-  it('renders the component', async () => {
-    // Arrange
-    const target = await createTestTarget();
-    // Act
-    const actual = target.getByTestId('ZTopNav-root');
-    // Assert
-    expect(actual).toBeTruthy();
   });
 
   describe('Home', () => {
@@ -170,7 +160,8 @@ describe('ZTopNav', () => {
     }
 
     async function findMenuItem(drawer: HTMLElement, id: string) {
-      const clasz = `.ZTopNav-drawer-more-item-${id}`;
+      const key = kebabCase(id);
+      const clasz = `.ZTopNav-drawer-more-item-${key}`;
       return drawer.querySelector(clasz);
     }
 
@@ -193,6 +184,9 @@ describe('ZTopNav', () => {
     describe('Home', () => {
       it('should navigate to home (visible to everyone).', async () => {
         // Arrange
+        const home = new ZWebAppBuilder().id('home').name('Home').domain('https://home.zthunworks.com').build();
+        webApps = new ZDataState([home]);
+        whoami = home._id;
         const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
@@ -227,22 +221,21 @@ describe('ZTopNav', () => {
         expect(actual).toBeTruthy();
       });
 
-      it('should not render any applications if the app list fails to load (only Home shows up).', async () => {
+      it('should not render any applications if the app list fails to load.', async () => {
         // Arrange
         webApps = new ZDataState(null);
         const target = await createTestTarget();
-        const expected = 1;
         // Act
         const drawer = await openNavDrawer(target);
         const actual = drawer.querySelectorAll('.ZTopNav-drawer-more-item');
         // Assert
-        expect(actual.length).toEqual(expected);
+        expect(actual.length).toBeFalsy();
       });
 
-      it('should list all the apps (plus home).', async () => {
+      it('should list all the apps.', async () => {
         // Arrange
         const target = await createTestTarget();
-        const expected = apps.length + 1;
+        const expected = apps.length;
         // Act
         const drawer = await openNavDrawer(target);
         const actual = drawer.querySelectorAll('.ZTopNav-drawer-more-item');
@@ -270,6 +263,38 @@ describe('ZTopNav', () => {
         const actual = drawer.querySelector(`.ZTopNav-drawer-more-item-${profileApp}`);
         // Arrange
         expect(actual).toBeFalsy();
+      });
+    });
+
+    describe('Routes', () => {
+      let information: IZRouteOption;
+      let version: IZRouteOption;
+
+      beforeEach(() => {
+        information = new ZRouteOptionBuilder().name('Information').path('/information').build();
+        version = new ZRouteOptionBuilder().name('Version').path('/version').build();
+        routes = [information, version];
+      });
+
+      it('should render the route list.', async () => {
+        // Arrange
+        const target = await createTestTarget();
+        // Assert
+        const drawer = await openNavDrawer(target);
+        const informationItem = await findMenuItem(drawer, information.path);
+        const versionItem = await findMenuItem(drawer, version.path);
+        // Assert
+        expect(informationItem && versionItem).toBeTruthy();
+      });
+
+      it('should push the route path into the history when clicked.', async () => {
+        // Arrange
+        const target = await createTestTarget();
+        // Assert
+        const drawer = await openNavDrawer(target);
+        await clickMenuItem(drawer, version.path);
+        // Assert
+        expect(last(history.entries).pathname).toEqual(version.path);
       });
     });
 

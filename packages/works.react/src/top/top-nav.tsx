@@ -1,7 +1,8 @@
 import GithubIcon from '@mui/icons-material/GitHub';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
-import { IZWebApp } from '@zthun/works.core';
+import { IZRouteOption } from '@zthun/works.core';
+import { kebabCase } from 'lodash';
 import React, { ReactNode, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useWebApp, useWebAppsAndWatch } from '../apps/web-apps.context';
@@ -27,6 +28,11 @@ export interface IZTopNavProps {
    * The current id of the given application.
    */
   whoami: string;
+
+  /**
+   * Optional routes heading routes to include for you application.
+   */
+  routes?: IZRouteOption[];
 }
 
 const useTopNavStyles = makeStyles()((theme) => ({
@@ -45,7 +51,11 @@ const useTopNavStyles = makeStyles()((theme) => ({
   },
 
   drawer: {
-    minWidth: theme.sizing.drawer.md
+    'minWidth': theme.sizing.drawer.md,
+
+    '.MuiDivider-root:last-child': {
+      display: 'none'
+    }
   },
 
   icon: {
@@ -182,8 +192,8 @@ export function ZTopNav(props: IZTopNavProps) {
 
     return (
       <>
-        <Divider />
         {createNavItem('github', 'Github', icon, handleLink.bind(null, who.source, '_blank'))}
+        <Divider />
       </>
     );
   }
@@ -223,13 +233,24 @@ export function ZTopNav(props: IZTopNavProps) {
    * @returns The nav app list.
    */
   function createNavApps() {
-    if (apps.data === undefined) {
+    const { data } = apps;
+
+    if (data === undefined) {
       return <ZCircularProgress show />;
     }
 
+    if (!data?.length) {
+      return null;
+    }
+
     const ignore = [undefined, null, props.whoami, props.profileApp];
-    const list: IZWebApp[] = apps.data || [];
-    return <>{list.filter((app) => ignore.indexOf(app._id) < 0).map((app) => createNavItem(app._id, app.name, createAppIcon(app.icon), handleLink.bind(null, app.domain, '_self')))}</>;
+
+    return (
+      <>
+        {data.filter((app) => ignore.indexOf(app._id) < 0).map((app) => createNavItem(app._id, app.name, createAppIcon(app.icon), handleLink.bind(null, app.domain, '_self')))}
+        <Divider />
+      </>
+    );
   }
 
   /**
@@ -243,13 +264,52 @@ export function ZTopNav(props: IZTopNavProps) {
    * @returns The jsx for the nav list item.
    */
   function createNavItem(id: string, display: string, avatar: ReactNode, handler) {
-    const clasz = `ZTopNav-drawer-more-item ZTopNav-drawer-more-item-${id}`;
+    const key = kebabCase(id);
+    const clasz = `ZTopNav-drawer-more-item ZTopNav-drawer-more-item-${key}`;
 
     return (
-      <ListItem key={id} className={clasz} button onClick={handler}>
+      <ListItem key={key} className={clasz} button onClick={handler}>
         <ListItemIcon>{avatar}</ListItemIcon>
         <ListItemText primary={display} />
       </ListItem>
+    );
+  }
+
+  /**
+   * Creates an individual route item.
+   *
+   * @param route The route to make an item for.
+   *
+   * @returns The jsx for the route.
+   */
+  function createNavRoute(route: IZRouteOption) {
+    const handleRoute = () => {
+      setMoreShown(false);
+      history.push(route.path);
+    };
+
+    const avatar = <div className={`ZTopNav-app-icon ${styles.classes.icon}`}>{route.avatar}</div>;
+
+    return createNavItem(route.path, route.name, avatar, handleRoute);
+  }
+
+  /**
+   * Creates the route options for the app.
+   *
+   * @returns The jsx for displaying route information.
+   */
+  function createNavRoutes() {
+    const { routes } = props;
+
+    if (!routes?.length) {
+      return null;
+    }
+
+    return (
+      <>
+        {routes.map((route) => createNavRoute(route))}
+        <Divider />
+      </>
     );
   }
 
@@ -268,6 +328,7 @@ export function ZTopNav(props: IZTopNavProps) {
           <List className={`ZTopNav-drawer-more ${styles.classes.drawer}`} data-testid='ZTopNav-drawer-more'>
             {createNavHome()}
             {createNavApps()}
+            {createNavRoutes()}
             {createNavSource()}
           </List>
         </Drawer>
@@ -279,7 +340,7 @@ export function ZTopNav(props: IZTopNavProps) {
     <AppBar className='ZTopNav-root' position='sticky' color='primary' data-testid='ZTopNav-root'>
       <Toolbar>
         {createHomeButton()}
-        <Typography className={`ZTopNav-options ${styles.classes.options}`}>&nbsp;</Typography>
+        <Typography className={`ZTopNav-options ${styles.classes.options}`}></Typography>
         <ZIdentityButton profile={identity.data} onLogin={handleProfile} onProfile={handleProfile} />
         {createMoreButton()}
       </Toolbar>
