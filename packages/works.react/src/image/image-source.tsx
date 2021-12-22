@@ -29,5 +29,5 @@ export function ZImageSource(props: IZImageSourceProps) {
     return <div className={clasz} dangerouslySetInnerHTML={{ __html }} />;
   }
 
-  return <img src={src} className={clasz} />;
+  return <img className={clasz} src={src} />;
 }
