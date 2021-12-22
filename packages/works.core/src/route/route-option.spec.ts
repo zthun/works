@@ -36,6 +36,15 @@ describe('ZRouteOptionBuilder', () => {
       );
     });
 
+    it('should set the avatar.', () => {
+      assertBuilderSetsProperty(
+        '<img src="avatar.png" />',
+        createTestTarget,
+        (t, v) => t.avatar(v),
+        (r: IZRouteOption) => r.avatar
+      );
+    });
+
     it('should set the method to get.', () => {
       assertBuilderSetsProperty(
         'get',
@@ -102,7 +111,8 @@ describe('ZRouteOptionBuilder', () => {
 
   describe('Copy', () => {
     it('should copy another route option.', () => {
-      const expected = new ZRouteOptionBuilder().head().owner(v4()).path('/api/options').build();
+      const avatar = Buffer.from('1234', 'binary');
+      const expected = new ZRouteOptionBuilder().head().owner(v4()).avatar(avatar).path('/api/options').build();
       assertBuilderCopiesObject(expected, createTestTarget);
     });
   });

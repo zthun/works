@@ -18,6 +18,15 @@ export interface IZRouteOption {
   name?: string;
 
   /**
+   * An avatar representation of the route.
+   *
+   * This can be anything you want and it's
+   * meaning is based on the context of where it
+   * is consumed.
+   */
+  avatar?: any;
+
+  /**
    * The http method to access the route.
    */
   method?: 'get' | 'put' | 'post' | 'delete' | 'patch' | 'options' | 'head';
@@ -71,6 +80,18 @@ export class ZRouteOptionBuilder {
    */
   public name(name: string): this {
     this._route.name = name;
+    return this;
+  }
+
+  /**
+   * Sets the avatar of the route.
+   *
+   * @param avatar The avatar.
+   *
+   * @returns This object.
+   */
+  public avatar(avatar: any): this {
+    this._route.avatar = avatar;
     return this;
   }
 
@@ -143,7 +164,7 @@ export class ZRouteOptionBuilder {
    * @returns This object.
    */
   public copy(other: IZRouteOption): this {
-    this._route = JSON.parse(JSON.stringify(other));
+    this._route = { ...this._route, ...other };
     return this;
   }
 
@@ -153,6 +174,6 @@ export class ZRouteOptionBuilder {
    * @returns The build object.
    */
   public build(): IZRouteOption {
-    return JSON.parse(JSON.stringify(this._route));
+    return { ...this._route };
   }
 }
