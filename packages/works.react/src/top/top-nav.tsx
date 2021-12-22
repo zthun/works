@@ -1,5 +1,4 @@
 import GithubIcon from '@mui/icons-material/GitHub';
-import HomeIcon from '@mui/icons-material/Home';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import { IZWebApp } from '@zthun/works.core';
@@ -54,19 +53,30 @@ const useTopNavStyles = makeStyles()((theme) => ({
     width: theme.sizing.icon.md,
     height: theme.sizing.icon.md,
     display: 'inline-block',
-    fontSize: theme.sizing.font.xl,
+    fontSize: '3rem',
     transition: 'fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
     flexShrink: 0,
     userSelect: 'none',
-    color: `rgb(${theme.palette.common.black}, 0.54)`
+    color: `rgb(${theme.palette.common.black}, 0.54)`,
+
+    svg: {
+      width: theme.sizing.icon.md,
+      height: theme.sizing.icon.md
+    }
   },
 
   avatar: {
     height: '5rem',
+    width: '5rem',
     marginRight: theme.sizing.gaps.sm,
     borderRadius: theme.rounding.circle,
     border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[200]}`,
-    background: theme.palette.common.white
+    background: theme.palette.common.white,
+
+    svg: {
+      height: '5rem',
+      width: '5rem'
+    }
   }
 }));
 
@@ -122,7 +132,7 @@ export function ZTopNav(props: IZTopNavProps) {
 
     return (
       <Button className={`ZTopNav-btn-home ${styles.classes.home}`} data-testid='ZTopNav-btn-home' color='inherit' onClick={handleHome}>
-        <ZImageSource className={`ZTopNav-avatar ${styles.classes.avatar}`} src={who.icon} />;
+        <ZImageSource className={`ZTopNav-avatar ${styles.classes.avatar}`} src={who.icon} />
         <Typography className={`ZTopNav-title ${styles.classes.title}`} color='inherit' variant='h1'>
           {who.name}
         </Typography>
@@ -164,10 +174,34 @@ export function ZTopNav(props: IZTopNavProps) {
       return null;
     }
 
+    const icon = (
+      <div className={`ZTopNav-app-icon ${styles.classes.icon}`}>
+        <GithubIcon fontSize='inherit' />
+      </div>
+    );
+
     return (
       <>
         <Divider />
-        {createNavItem('github', 'Github', <GithubIcon />, handleLink.bind(null, who.source, '_blank'))}
+        {createNavItem('github', 'Github', icon, handleLink.bind(null, who.source, '_blank'))}
+      </>
+    );
+  }
+
+  /**
+   * Creates the home button in the nav.
+   *
+   * @returns The jsx for the home nav item
+   */
+  function createNavHome() {
+    if (who == null) {
+      return null;
+    }
+
+    return (
+      <>
+        {createNavItem('home', who.name, createAppIcon(who.icon), handleHome)}
+        <Divider />
       </>
     );
   }
@@ -232,8 +266,7 @@ export function ZTopNav(props: IZTopNavProps) {
         </Button>
         <Drawer anchor='right' open={moreShown} onClose={handleCloseMore}>
           <List className={`ZTopNav-drawer-more ${styles.classes.drawer}`} data-testid='ZTopNav-drawer-more'>
-            {createNavItem('home', 'Home', <HomeIcon />, handleHome)}
-            <Divider />
+            {createNavHome()}
             {createNavApps()}
             {createNavSource()}
           </List>
