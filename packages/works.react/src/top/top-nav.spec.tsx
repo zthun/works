@@ -2,7 +2,6 @@
 import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
 import { IZProfile, IZWebApp, ZProfileBuilder, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
-import { ZDataUrlBuilder, ZMimeTypeImage, ZUrlBuilder } from '@zthun/works.url';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router-dom';
@@ -13,8 +12,6 @@ import { ZWindowServiceContext } from '../window/window-service.context';
 import { ZTopNav } from './top-nav';
 
 describe('ZTopNav', () => {
-  const appName = 'ZTHUNWORKS';
-
   let history: MemoryHistory;
   let whoami: string;
   let profileApp: string;
@@ -31,7 +28,7 @@ describe('ZTopNav', () => {
           <ZWebAppsContext.Provider value={webApps}>
             <ZIdentityContext.Provider value={profile}>
               <Router history={history}>
-                <ZTopNav headerText={appName} whoami={whoami} profileApp={profileApp} />
+                <ZTopNav whoami={whoami} profileApp={profileApp} />
               </Router>
             </ZIdentityContext.Provider>
           </ZWebAppsContext.Provider>
@@ -62,12 +59,40 @@ describe('ZTopNav', () => {
   });
 
   describe('Home', () => {
+    let home: IZWebApp;
+
+    beforeEach(() => {
+      home = new ZWebAppBuilder().id('home').name('Home').build();
+      webApps = new ZDataState<IZWebApp[]>([home]);
+      whoami = 'home';
+    });
+
+    it('should show a small loading indicator when the apps are loading.', async () => {
+      // Arrange
+      webApps.set();
+      const target = await createTestTarget();
+      // Act
+      const actual = target.container.querySelector('.ZTopNav-home-loading');
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('should hide the home page button if the whoami app cannot be found.', async () => {
+      // Arrange
+      whoami = 'hidden';
+      const target = await createTestTarget();
+      // Act
+      const actual = target.queryByText(home.name);
+      // Assert
+      expect(actual).toBeFalsy();
+    });
+
     it('should move to the home page (visible to everyone).', async () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const home = target.getByText(appName);
-      fireEvent.click(home);
+      const homeBtn = target.getByText(home.name);
+      fireEvent.click(homeBtn);
       // Assert
       expect(history.location.pathname).toEqual('/');
     });
@@ -245,32 +270,6 @@ describe('ZTopNav', () => {
         const actual = drawer.querySelector(`.ZTopNav-drawer-more-item-${profileApp}`);
         // Arrange
         expect(actual).toBeFalsy();
-      });
-
-      it('should render the app icon as a raw svg if it exists.', async () => {
-        // Arrange
-        portal.icon = new ZDataUrlBuilder()
-          .encode('base64')
-          .buffer('<svg focusable="false" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>')
-          .mimeType(ZMimeTypeImage.SVG)
-          .build();
-        const target = await createTestTarget();
-        // Act
-        const drawer = await openNavDrawer(target);
-        const actual = drawer.querySelector(`.ZTopNav-drawer-more-item-${portal._id} div.ZTopNav-app-icon`);
-        // Assert
-        expect(actual).toBeTruthy();
-      });
-
-      it('should render the app icon as a raster image if the url is not a svg data url.', async () => {
-        // Arrange
-        portal.icon = new ZUrlBuilder().gravatar().build();
-        const target = await createTestTarget();
-        // Act
-        const drawer = await openNavDrawer(target);
-        const actual = drawer.querySelector(`.ZTopNav-drawer-more-item-${portal._id} img.ZTopNav-app-icon`);
-        // Assert
-        expect(actual).toBeTruthy();
       });
     });
 
