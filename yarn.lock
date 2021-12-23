@@ -4251,7 +4251,7 @@ __metadata:
     "@nestjs/platform-express": ^8.2.4
     "@zthun/works.class": ^3.0.0
     "@zthun/works.core": ^3.0.0
-    "@zthun/works.dal": ^3.0.0
+    "@zthun/works.dal": ^3.0.1
     "@zthun/works.nest": ^3.0.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
@@ -4292,7 +4292,7 @@ __metadata:
   dependencies:
     "@zthun/works.core": ^3.0.0
     "@zthun/works.draw": ^3.0.0
-    "@zthun/works.react": ^3.0.0
+    "@zthun/works.react": ^3.0.1
     "@zthun/works.url": ^3.0.0
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -4321,7 +4321,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.dal@^3.0.0, @zthun/works.dal@workspace:packages/works.dal":
+"@zthun/works.dal@^3.0.1, @zthun/works.dal@workspace:packages/works.dal":
   version: 0.0.0-use.local
   resolution: "@zthun/works.dal@workspace:packages/works.dal"
   dependencies:
@@ -4444,7 +4444,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.react@^3.0.0, @zthun/works.react@workspace:packages/works.react":
+"@zthun/works.react@^3.0.1, @zthun/works.react@workspace:packages/works.react":
   version: 0.0.0-use.local
   resolution: "@zthun/works.react@workspace:packages/works.react"
   dependencies:
@@ -4508,7 +4508,7 @@ __metadata:
     "@nestjs/core": ^8.2.4
     "@nestjs/microservices": ^8.2.4
     "@zthun/works.core": ^3.0.0
-    "@zthun/works.dal": ^3.0.0
+    "@zthun/works.dal": ^3.0.1
     bcryptjs: ^2.4.3
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
@@ -4526,7 +4526,7 @@ __metadata:
     "@nestjs/core": ^8.2.4
     "@nestjs/microservices": ^8.2.4
     "@zthun/works.core": ^3.0.0
-    "@zthun/works.dal": ^3.0.0
+    "@zthun/works.dal": ^3.0.1
     reflect-metadata: ^0.1.13
     rxjs: ^7.4.0
   bin:
