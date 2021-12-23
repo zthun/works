@@ -1,5 +1,6 @@
 import { Controller, Get, Req, Res } from '@nestjs/common';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
+import { ZHttpCodeSuccess } from '@zthun/works.http';
 import { Request, Response } from 'express';
 import { ZSecurityService } from './security.service';
 
@@ -31,12 +32,12 @@ export class ZSecurityController {
     const user = await this._security.extract(req);
 
     if (user == null) {
-      res.status(201).send(null);
+      res.status(ZHttpCodeSuccess.NoContent).send(null);
       return null;
     }
 
     const profile = new ZProfileBuilder().user(user).build();
-    res.status(200).send(profile);
+    res.status(ZHttpCodeSuccess.OK).send(profile);
     return profile;
   }
 }

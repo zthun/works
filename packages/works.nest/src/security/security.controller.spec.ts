@@ -1,5 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { IZProfile, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
+import { ZHttpCodeSuccess } from '@zthun/works.http';
 import { createMocked } from '@zthun/works.jest';
 import { Request, Response } from 'express';
 import { ZSecurityController } from './security.controller';
@@ -37,14 +38,14 @@ describe('ZSecurityController', () => {
       expect(actual).toEqual(gambit);
     });
 
-    it('sets the response to a 201 status if no user exists.', async () => {
+    it('sets the response to a no content status if no user exists.', async () => {
       // Arrange
       jwt.extract.mockResolvedValue(null);
       const target = createTestTarget();
       // Act
       await target.read(req, res);
       // Assert
-      expect(res.status).toHaveBeenCalledWith(201);
+      expect(res.status).toHaveBeenCalledWith(ZHttpCodeSuccess.NoContent);
     });
 
     it('returns null if no such user exists.', async () => {
