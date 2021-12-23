@@ -30,9 +30,9 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@mui/icons-material": "^5.2.4",
-    "@mui/material": "^5.2.4",
-    "@mui/system": "^5.2.4",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.5",
+    "@mui/system": "^5.2.5",
     "@zthun/works.core": "^3.0.0",
     "@zthun/works.draw": "^3.0.0",
     "@zthun/works.error": "^3.0.0",
