@@ -1,5 +1,4 @@
 # This compose file is intended to match the kubernetes composition as close as possible.
-version: '3.7'
 services:
   # Load Balancer (Entry Point)
   local.zthunworks.com:
