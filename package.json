@@ -29,10 +29,8 @@
     "packages/works.users",
     "packages/works.vault",
     "packages/works.nest",
-    "packages/works.server",
     "packages/works.api",
-    "packages/works.proxy",
-    "packages/works.k8s"
+    "packages/works.proxy"
   ],
   "scripts": {
     "clean": "rimraf 'dist' 'docs' 'reports' '*.tgz' '*.log' 'packages/**/dist' 'packages/**/docs' 'packages/**/*.tgz' 'packages/**/*.log'",
