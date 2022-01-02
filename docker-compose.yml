@@ -12,33 +12,27 @@ services:
       - zthunworks-services-client
       - zthunworks-services-server
   # Node Ports
-  zthunworks-services-api:
-    image: node:16.6.0
-    ports:
-      - 9230:9229
-    volumes:
-      - .:/usr/dev
-    working_dir: /usr/dev
-    command: npm --workspace @zthun/works.api run debug
+
   zthunworks-services-client:
     image: node:16.6.0
     volumes:
       - .:/usr/dev
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.client run debug
-  zthunworks-services-server:
+  zthunworks-services-api:
     image: node:16.6.0
     ports:
       - 9229:9229
     volumes:
       - .:/usr/dev
     depends_on:
+      - zthunworks-services-apps
       - zthunworks-services-users
       - zthunworks-services-vault
       - zthunworks-services-notifications
       - zthunworks-services-cookies
     working_dir: /usr/dev
-    command: npm --workspace @zthun/works.server run debug
+    command: npm --workspace @zthun/works.api run debug
   zthunworks-services-users:
     image: node:16.6.0
     ports:
