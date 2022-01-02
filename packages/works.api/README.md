@@ -1,15 +1,14 @@
 # Description
 
-This is an empty application that only responds to the health and options checks.
-
-[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
+This is the most basic api application that can act as an api for any zthunworks application that doesn't need anything more
+than the basic calls.
 
 ## Usage
 
 The server is meant to be ran in a docker container.
 
 ```sh
-docker run -p 3000:3000
+docker run @zthun/works.api -p 3000:3000
 ```
 
 You can run the server locally if you want, but setup is dependant on your environment.

@@ -2,8 +2,6 @@
 
 This is the main data contract package for @zthun scoped projects. It contains a collection of interfaces and object builders which represents different structures throughout the Zthunworks system.
 
-[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
-
 ## Installation
 
 ```sh

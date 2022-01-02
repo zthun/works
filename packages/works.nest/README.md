@@ -2,8 +2,6 @@
 
 Zthunworks Nest services implement standard distributable services that can be reused across applications for consistency.
 
-[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
-
 ## Installation
 
 ```sh

@@ -1,7 +1,7 @@
 {
   "name": "@zthun/works.client",
   "version": "3.0.1",
-  "description": "A client application that can be used to login to works.server application.",
+  "description": "The application for learning about the building blocks of zthunworks.",
   "browser": "./dist/works.client.min.js",
   "repository": {
     "type": "git",

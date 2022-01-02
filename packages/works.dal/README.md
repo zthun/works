@@ -2,8 +2,6 @@
 
 This package contains the generic data access layer for @zthun scoped projects.
 
-[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
-
 ## Installation
 
 ```sh

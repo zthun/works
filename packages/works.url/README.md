@@ -2,8 +2,6 @@
 
 A very small library that allows you to build a new url or parse an existing url to modify it.
 
-[![Build Status](https://travis-ci.com/zthun/works.svg?branch=master)](https://travis-ci.com/zthun/works)
-
 ## Installation
 
 ```sh
