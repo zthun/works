@@ -1,5 +1,4 @@
 const generated = ['**/CHANGELOG.md', 'packages/**/dist/**', 'packages/**/docs/**', 'node_modules/**', 'packages/**/node_modules/**', 'package-lock.json', '.yarnrc.yml'];
-const k8sTemplates = ['packages/works.k8s/templates/**'];
 const partialGenerated = ['cspell.json', 'lerna.json'];
 
 const esFiles = ['*.js', '*.ts', 'packages/**/src/**/*.ts', 'packages/**/src/**/*.tsx'];
@@ -14,9 +13,9 @@ const esFilesExclude = generated;
 const htmlFilesExclude = generated;
 const markdownFilesExclude = generated;
 const jsonFilesExclude = generated;
-const yamlFilesExclude = generated.concat(k8sTemplates);
-const prettyFilesExclude = generated.concat(k8sTemplates).concat(partialGenerated);
-const spellingFilesExclude = generated.concat(k8sTemplates).concat(partialGenerated);
+const yamlFilesExclude = generated;
+const prettyFilesExclude = generated.concat(partialGenerated);
+const spellingFilesExclude = generated.concat(partialGenerated);
 
 module.exports = {
   esFiles,
