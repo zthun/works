@@ -4364,12 +4364,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.k8s@workspace:packages/works.k8s":
-  version: 0.0.0-use.local
-  resolution: "@zthun/works.k8s@workspace:packages/works.k8s"
-  languageName: unknown
-  linkType: soft
-
 "@zthun/works.logger@^3.0.0, @zthun/works.logger@workspace:packages/works.logger":
   version: 0.0.0-use.local
   resolution: "@zthun/works.logger@workspace:packages/works.logger"
@@ -4471,22 +4465,6 @@ __metadata:
   peerDependencies:
     react: ^17.0.0
     react-dom: ^17.0.0
-  languageName: unknown
-  linkType: soft
-
-"@zthun/works.server@workspace:packages/works.server":
-  version: 0.0.0-use.local
-  resolution: "@zthun/works.server@workspace:packages/works.server"
-  dependencies:
-    "@nestjs/common": ^8.2.4
-    "@nestjs/core": ^8.2.4
-    "@nestjs/microservices": ^8.2.4
-    "@nestjs/platform-express": ^8.2.4
-    "@zthun/works.nest": ^3.0.0
-    reflect-metadata: ^0.1.13
-    rxjs: ^7.4.0
-  bin:
-    zthun-works-server: ./bin/main.js
   languageName: unknown
   linkType: soft
 
