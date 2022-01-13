@@ -10,16 +10,19 @@ jobs:
     executor: node
     steps:
       - checkout
+      - run: 'yarn install'
       - run: 'yarn lint'
   test:
     executor: node
     steps:
       - checkout
+      - run: 'yarn install'
       - run: 'yarn test'
   build:
     executor: node
     steps:
       - checkout
+      - run: 'yarn install'
       - run: 'yarn build'
 
 workflows:
