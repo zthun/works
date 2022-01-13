@@ -2,12 +2,13 @@ import { pathsToModuleNameMapper } from 'ts-jest';
 import { compilerOptions } from './tsconfig.json';
 
 export default {
-  rootDir: compilerOptions.baseUrl,
-  testTimeout: 60000,
-  testRegex: '.spec.(ts|tsx)$',
-  transform: { '^.+\\.(ts|tsx)$': 'ts-jest' },
-  testEnvironment: 'jsdom',
+  coverageDirectory: '../reports/coverage',
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
-  coverageDirectory: '../reports/coverage'
+  reporters: ['default', ['jest-junit', { outputDirectory: 'reports/results' }]],
+  rootDir: compilerOptions.baseUrl,
+  testEnvironment: 'jsdom',
+  testRegex: '.spec.(ts|tsx)$',
+  testTimeout: 60000,
+  transform: { '^.+\\.(ts|tsx)$': 'ts-jest' }
 };

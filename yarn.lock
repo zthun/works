@@ -4545,6 +4545,7 @@ __metadata:
     html-webpack-plugin: ^5.5.0
     husky: ^7.0.4
     jest: ^27.4.5
+    jest-junit: ^13.0.0
     jsdom: ^19.0.0
     lerna: ^4.0.0
     nodemon: ^2.0.15
@@ -10176,6 +10177,18 @@ __metadata:
     pretty-format: ^27.4.2
     throat: ^6.0.1
   checksum: 9759e865f39390f71c83a3cabb3196c2655df2bf3771b71d9c2f2db400cec96ab7eff1b44e8b582280c07db985538bacb408dd6a42aff83984b0a27b2968fa36
+  languageName: node
+  linkType: hard
+
+"jest-junit@npm:^13.0.0":
+  version: 13.0.0
+  resolution: "jest-junit@npm:13.0.0"
+  dependencies:
+    mkdirp: ^1.0.4
+    strip-ansi: ^6.0.1
+    uuid: ^8.3.2
+    xml: ^1.0.1
+  checksum: d3a1bf6e98250837d1a9939cd54f29a7bd4fb835af30e92d0d544300fbe634eb86d2b018c79a7a35b123d933bf3e6c96ba13c0161cdefbf66fc3ab771707572e
   languageName: node
   linkType: hard
 
@@ -17162,7 +17175,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xml@npm:1.0.1":
+"xml@npm:1.0.1, xml@npm:^1.0.1":
   version: 1.0.1
   resolution: "xml@npm:1.0.1"
   checksum: 11b5545ef3f8fec3fa29ce251f50ad7b6c97c103ed4d851306ec23366f5fa4699dd6a942262df52313a0cd1840ab26256da253c023bad3309d8ce46fe6020ca0

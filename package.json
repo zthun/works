@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "clean": "rimraf 'dist' 'docs' 'reports' '*.tgz' '*.log' 'packages/**/dist' 'packages/**/docs' 'packages/**/*.tgz' 'packages/**/*.log'",
-    "test": "jest --coverage --detectOpenHandles",
+    "test": "jest --coverage",
     "lint": "lint-janitor",
     "build": "lerna run build",
     "make": "yarn clean && yarn lint && yarn test && yarn build",
@@ -75,6 +75,7 @@
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
     "jest": "^27.4.5",
+    "jest-junit": "^13.0.0",
     "jsdom": "^19.0.0",
     "lerna": "^4.0.0",
     "nodemon": "^2.0.15",
