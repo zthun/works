@@ -1,0 +1,30 @@
+version: 2.1
+
+executors:
+  node:
+    docker:
+      - image: node:17.3.0
+
+jobs:
+  analyze:
+    executor: node
+    steps:
+      - checkout
+      - run: 'yarn lint'
+  test:
+    executor: node
+    steps:
+      - checkout
+      - run: 'yarn test'
+  build:
+    executor: node
+    steps:
+      - checkout
+      - run: 'yarn build'
+
+workflows:
+  make:
+    jobs:
+      - analyze
+      - test
+      - build
