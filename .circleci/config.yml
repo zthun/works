@@ -18,6 +18,10 @@ jobs:
       - checkout
       - run: 'yarn install'
       - run: 'yarn test'
+      - store_artifacts:
+          path: reports/coverage
+      - store_test_results:
+          path: reports/results/junit.xml
   build:
     executor: node
     steps:
