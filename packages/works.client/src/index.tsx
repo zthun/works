@@ -1,12 +1,9 @@
 /* istanbul ignore file */
-import InfoIcon from '@mui/icons-material/Info';
-import MouseIcon from '@mui/icons-material/Mouse';
 import '@zthun/lint-janitor/docs/typedoc.json';
 import '@zthun/lint-janitor/images';
 import '@zthun/lint-janitor/README.md';
 import '@zthun/works.class/docs/typedoc.json';
 import '@zthun/works.class/README.md';
-import { ZRouteOptionBuilder } from '@zthun/works.core';
 import '@zthun/works.core/docs/typedoc.json';
 import '@zthun/works.core/images';
 import '@zthun/works.core/PRIVACY.md';
@@ -24,11 +21,10 @@ import '@zthun/works.jest/README.md';
 import '@zthun/works.nest/docs/typedoc.json';
 import '@zthun/works.nest/images';
 import '@zthun/works.nest/README.md';
-import { renderMarkdownPage, ZWebAppLayout } from '@zthun/works.react';
+import { ZWebAppLayout } from '@zthun/works.react';
 import '@zthun/works.react/docs/typedoc.json';
 import '@zthun/works.react/images';
 import '@zthun/works.react/README.md';
-import { ZUrlBuilder } from '@zthun/works.url';
 import '@zthun/works.url/docs/typedoc.json';
 import '@zthun/works.url/images';
 import '@zthun/works.url/README.md';
@@ -41,23 +37,10 @@ import { ZApiPage } from './learn/api-page';
 import { ZLearnPage } from './learn/learn-page';
 
 const whoami = 'learn';
-const ZUrlMarkdownTerms = new ZUrlBuilder().location().hash('').path('legal/TERMS.md').build();
-const ZUrlMarkdownPrivacy = new ZUrlBuilder().location().hash('').path('legal/PRIVACY.md').build();
-const renderPrivacyPage = renderMarkdownPage.bind(null, { src: ZUrlMarkdownPrivacy, headerText: 'Privacy', subHeaderText: 'Information collection', avatar: <InfoIcon fontSize='large' />, size: 'lg' });
-const renderTermsPage = renderMarkdownPage.bind(null, { src: ZUrlMarkdownTerms, headerText: 'Terms', subHeaderText: 'Usage of this website', avatar: <MouseIcon fontSize='large' />, size: 'lg' });
-const termsIcon = <MouseIcon fontSize='inherit' />;
-const privacyIcon = <InfoIcon fontSize='inherit' />;
-
-const routes = [
-  new ZRouteOptionBuilder().name('Privacy').path('/privacy').description('What information do we collect?').avatar(privacyIcon).owner(whoami).build(),
-  new ZRouteOptionBuilder().name('Terms').description('What is your right to reject?').avatar(termsIcon).path('/terms').owner(whoami).build()
-];
 
 render(
-  <ZWebAppLayout whoami={whoami} profileApp='roadblock' routes={routes}>
+  <ZWebAppLayout whoami={whoami} profileApp='roadblock'>
     <Route exact path='/home' component={ZHomePage} />
-    <Route exact path='/privacy' render={renderPrivacyPage} />
-    <Route exact path='/terms' render={renderTermsPage} />
     <Route exact path='/learn/:pkg' component={ZLearnPage} />
     <Route exact path='/learn/:pkg/api' component={ZApiPage} />
     <Route exact path='/learn/:pkg/api/:enid' component={ZApiPage} />
