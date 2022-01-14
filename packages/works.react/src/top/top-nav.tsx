@@ -139,7 +139,7 @@ export function ZTopNav(props: IZTopNavProps) {
    */
   function createHomeButton() {
     if (who === undefined) {
-      return <ZCircularProgress className='ZTopNav-home-loading' size='sm' />;
+      return <ZCircularProgress className='ZTopNav-home-loading' />;
     }
 
     if (who == null) {
@@ -247,7 +247,17 @@ export function ZTopNav(props: IZTopNavProps) {
     const { data } = apps;
 
     if (data === undefined) {
-      return <ZCircularProgress show />;
+      return (
+        <>
+          <ListItem className='ZTopNav-drawer-more-apps-loading' button title='Loading'>
+            <ListItemIcon>
+              <ZCircularProgress show size='lg' />
+            </ListItemIcon>
+            <ListItemText>Loading...</ListItemText>
+          </ListItem>
+          <Divider />
+        </>
+      );
     }
 
     if (!data?.length) {
