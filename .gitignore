@@ -11,9 +11,6 @@ reports
 # Node Modules
 node_modules
 
-# Specific packages
-packages/works.install/charts
-
 # OS Turds
 .DS_Store
 
