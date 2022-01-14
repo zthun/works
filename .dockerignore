@@ -1,0 +1,19 @@
+# Generated Outputs
+dist
+docs
+coverage
+reports
+*.lerna_backup
+*.log
+*.tgz
+.rpt2_cache
+
+# Node Modules
+node_modules
+
+# OS Turds
+.DS_Store
+
+# Yarn
+.yarn/cache
+.yarn/*.gz
