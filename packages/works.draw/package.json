@@ -27,7 +27,7 @@
   "dependencies": {
     "canvas": "^2.8.0",
     "lodash": "^4.17.21",
-    "rxjs": "^7.4.0"
+    "rxjs": "^7.5.2"
   },
   "sideEffects": false
 }

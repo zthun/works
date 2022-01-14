@@ -28,7 +28,7 @@
   "dependencies": {
     "buffer": "^6.0.3",
     "lodash": "^4.17.21",
-    "url-parse": "^1.5.3"
+    "url-parse": "^1.5.4"
   },
   "sideEffects": false
 }

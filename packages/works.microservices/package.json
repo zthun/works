@@ -28,7 +28,7 @@
   "dependencies": {
     "@zthun/works.core": "^3.0.2",
     "lodash": "^4.17.21",
-    "rxjs": "^7.4.0"
+    "rxjs": "^7.5.2"
   },
   "peerDependencies": {
     "@nestjs/common": "^8.0.6",
