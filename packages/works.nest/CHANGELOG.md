@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.0.2](https://github.com/zthun/works/compare/v3.0.1...v3.0.2) (2022-01-14)
+
+
+### Bug Fixes
+
+* identity should return no content, not created for no user ([aec1d77](https://github.com/zthun/works/commit/aec1d7775b0704033a0b3c0979a08766350e4484))
+
+
+
 ## [3.0.0](https://github.com/zthun/works/compare/v2.4.1...v3.0.0) (2021-12-22)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.logger",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "A simple set of service classes to log to the console and help build other loggers.",
   "author": "Anthony Bonta",
   "license": "MIT",

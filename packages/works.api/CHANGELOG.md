@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.0.2](https://github.com/zthun/works/compare/v3.0.1...v3.0.2) (2022-01-14)
+
+
+### Bug Fixes
+
+* the works.api now properly adds in the standard controllers ([9827e5e](https://github.com/zthun/works/commit/9827e5e0b6d6858bc38ae31dbfcca482b1182d17))
+
+
+
 ### [3.0.1](https://github.com/zthun/works/compare/v3.0.0...v3.0.1) (2021-12-23)
 
 **Note:** Version bump only for package @zthun/works.api

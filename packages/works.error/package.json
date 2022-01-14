@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.error",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "Interfaces and objects that deal with handling errors.",
   "author": "Anthony Bonta",
   "license": "MIT",

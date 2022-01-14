@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.0.2](https://github.com/zthun/works/compare/v3.0.1...v3.0.2) (2022-01-14)
+
+
+### Bug Fixes
+
+* useWebApp should now properly be exported ([28344c9](https://github.com/zthun/works/commit/28344c90b4f61f1766f468341be2211711352b56))
+
+
+
 ### [3.0.1](https://github.com/zthun/works/compare/v3.0.0...v3.0.1) (2021-12-23)
 
 

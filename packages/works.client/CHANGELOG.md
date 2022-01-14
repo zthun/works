@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.0.2](https://github.com/zthun/works/compare/v3.0.1...v3.0.2) (2022-01-14)
+
+
+### Bug Fixes
+
+* the routes for privacy and terms are no longer needed ([a2c22a6](https://github.com/zthun/works/commit/a2c22a6c6c05ec1eae7d7d334f46666338e9db60))
+
+
+
 ### [3.0.1](https://github.com/zthun/works/compare/v3.0.0...v3.0.1) (2021-12-23)
 
 **Note:** Version bump only for package @zthun/works.client

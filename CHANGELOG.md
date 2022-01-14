@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.0.2](https://github.com/zthun/works/compare/v3.0.1...v3.0.2) (2022-01-14)
+
+
+### Bug Fixes
+
+* identity should return no content, not created for no user ([aec1d77](https://github.com/zthun/works/commit/aec1d7775b0704033a0b3c0979a08766350e4484))
+* the routes for privacy and terms are no longer needed ([a2c22a6](https://github.com/zthun/works/commit/a2c22a6c6c05ec1eae7d7d334f46666338e9db60))
+* the works.api now properly adds in the standard controllers ([9827e5e](https://github.com/zthun/works/commit/9827e5e0b6d6858bc38ae31dbfcca482b1182d17))
+* useWebApp should now properly be exported ([28344c9](https://github.com/zthun/works/commit/28344c90b4f61f1766f468341be2211711352b56))
+
+
+
 ### [3.0.1](https://github.com/zthun/works/compare/v3.0.0...v3.0.1) (2021-12-23)
 
 
