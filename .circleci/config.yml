@@ -1,33 +1,43 @@
 version: 2.1
 
 executors:
-  node:
-    docker:
-      - image: node:17.3.0
+  system:
+    machine:
+      image: ubuntu-1604:202004-01
+
+commands:
+  run_docker_target:
+    parameters:
+      target:
+        type: string
+    steps:
+      - checkout
+      - run:
+          command: |
+            export DOCKER_BUILDKIT=1
+            docker build . --target <<parameters.target>>
 
 jobs:
   analyze:
-    executor: node
+    executor: system
     steps:
       - checkout
-      - run: 'yarn install'
-      - run: 'yarn lint'
+      - run_docker_target:
+          target: analyze
+
   test:
-    executor: node
+    executor: system
     steps:
       - checkout
-      - run: 'yarn install'
-      - run: 'yarn test'
-      - store_artifacts:
-          path: reports/coverage
-      - store_test_results:
-          path: reports/results/junit.xml
+      - run_docker_target:
+          target: test
+
   build:
-    executor: node
+    executor: system
     steps:
       - checkout
-      - run: 'yarn install'
-      - run: 'yarn build'
+      - run_docker_target:
+          target: build
 
 workflows:
   make:
