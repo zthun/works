@@ -1,20 +1,12 @@
 import { CircularProgress } from '@mui/material';
 import React from 'react';
+import { IZComponentSizeable } from '../component/component-sizeable.interface';
 import { IZComponentStyle } from '../component/component-style.interface';
 
 /**
  * Represents properties for the circular progress component.
  */
-export interface IZCircularProgressProps extends IZComponentStyle {
-  /**
-   * An html size string that represents the size.
-   *
-   * @example 2em
-   *
-   * @default '1em';
-   */
-  size?: string;
-
+export interface IZCircularProgressProps extends IZComponentStyle, IZComponentSizeable {
   /**
    * The spinner color.
    *
@@ -38,7 +30,15 @@ export interface IZCircularProgressProps extends IZComponentStyle {
  * @returns The jsx for a circular loading progress.
  */
 export function ZCircularProgress(props: IZCircularProgressProps): JSX.Element {
-  const { className = '', show = true, size = '1em', color = 'inherit' } = props;
+  const { className = '', show = true, size = 'auto', color = 'inherit' } = props;
 
-  return show ? <CircularProgress className={`${className} ZCircularProgress-root`} data-testid={props['data-testid']} size={size} color={color} /> : null;
+  // Note: Max and auto will result in the default
+  const sizeMap = {
+    sm: '1rem',
+    md: '2rem',
+    lg: '2.5rem',
+    xl: '3rem'
+  };
+
+  return show ? <CircularProgress className={`${className} ZCircularProgress-root`} data-testid={props['data-testid']} size={sizeMap[size]} color={color} /> : null;
 }

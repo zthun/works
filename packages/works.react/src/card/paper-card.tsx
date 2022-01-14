@@ -2,7 +2,6 @@ import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Checkbox
 import { ZDataUrlBuilder, ZMimeTypeImage } from '@zthun/works.url';
 import { noop } from 'lodash';
 import React, { useState } from 'react';
-import { makeStyles } from '../theme/make-styles';
 import { IZComponentActionable } from '../component/component-actionable.interface';
 import { IZComponentConfirmable } from '../component/component-confirmable.interface';
 import { IZComponentDisabled } from '../component/component-disabled.interface';
@@ -13,6 +12,7 @@ import { IZComponentMedia } from '../component/component-media.interface';
 import { IZComponentSizeable } from '../component/component-sizeable.interface';
 import { IZComponentStyle } from '../component/component-style.interface';
 import { ZCircularBackdrop } from '../loading/circular-backdrop';
+import { makeStyles } from '../theme/make-styles';
 
 /**
  * Represents the properties for the paper card component.
@@ -172,7 +172,7 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
 
   return (
     <Paper className={`${className} ZPaperCard-root ZPaperCard-size-${size} ${styles.classes.root}`} data-testid={props['data-testid']} elevation={5}>
-      <ZCircularBackdrop className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={loading} size='2.5em' />
+      <ZCircularBackdrop className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={loading} size='xl' />
       <Card>
         {createHeader()}
         {createMedia()}
