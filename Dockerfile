@@ -1,8 +1,7 @@
 FROM node:17.3.0 as setup
 WORKDIR /usr/dev
 COPY . .
-RUN npm install -g git-credential-env && \
-    yarn install
+RUN yarn install
 
 FROM setup as analyze
 RUN yarn lint
@@ -14,14 +13,16 @@ FROM setup as build
 RUN yarn build
 
 FROM build as release
-RUN git config --global user.name "works-build-bot" && \
+USER root
+RUN git config --global credential.helper store && \
+    git config --global user.name "works-build-bot" && \
     git config --global user.email "build@zthunworks.com" && \
     git checkout master && \
     npx lerna version --conventional-commits --no-git-tag-version --yes && \
     yarn install && \
     git add . && \
-    git commit -m "chore: publish [skip ci]" && \
-    git push
+    git commit --allow-empty -m "chore: version [skip ci]" && \
+    --mount=type=secret,id=GITHUB_CREDENTIALS,dst=/root/.git-credentials git push
 
 FROM node:17.3.0-alpine as works.api
 COPY --from=build /usr/dev/packages/works.api/zthun-works.api*.tgz /usr/src/packages/zthun-works.api.tgz
