@@ -17,7 +17,7 @@ USER root
 RUN --mount=type=secret,id=GIT_CREDENTIALS,dst=/root/.git-credentials git config --global credential.helper store && \
     git config --global user.name "circle-ci" && \
     git config --global user.email "circle-ci@zthunworks.com" && \
-    git checkout master && \
+    git checkout latest && \
     npx lerna version --conventional-commits --no-git-tag-version --yes && \
     yarn install && \
     git add . && \
