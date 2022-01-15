@@ -49,7 +49,7 @@ jobs:
           target: release
 
 workflows:
-  verify:
+  make:
     jobs:
       - analyze
       - test
@@ -58,7 +58,6 @@ workflows:
           requires:
             - analyze
             - test
-            - build
           filters:
             branches:
               only:
