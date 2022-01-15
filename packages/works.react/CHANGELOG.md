@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.0.5](https://github.com/zthun/works/compare/v3.0.2...v3.0.5) (2022-01-15)
+
+
+### Bug Fixes
+
+* circular progress now properly uses size mapping ([5fd01bf](https://github.com/zthun/works/commit/5fd01bf4acf276863067684c0ce7860598901822))
+* the top nav spinner now displays properly in the header ([878d4c9](https://github.com/zthun/works/commit/878d4c9d4162e938f786b2da5a15d8072682209c))
+
+
+
 ### [3.0.4](https://github.com/zthun/works/compare/v3.0.2...v3.0.4) (2022-01-15)
 
 

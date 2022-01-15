@@ -3,7 +3,7 @@
     "packages/*"
   ],
   "stream": true,
-  "version": "3.0.4",
+  "version": "3.0.5",
   "command": {
     "publish": {
       "message": "chore(release): publish [skip ci]"
