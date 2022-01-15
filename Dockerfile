@@ -1,7 +1,8 @@
 FROM node:17.3.0 as setup
 WORKDIR /usr/dev
 COPY . .
-RUN yarn install
+RUN npm install -g git-credential-env && \
+    yarn install
 
 FROM setup as analyze
 RUN yarn lint
@@ -17,6 +18,7 @@ RUN git config --global user.name "works-build-bot" && \
     git config --global user.email "build@zthunworks.com" && \
     git checkout master && \
     npx lerna version --conventional-commits --no-git-tag-version --yes && \
+    yarn install && \
     git add . && \
     git commit -m "chore: publish [skip ci]" && \
     git push
