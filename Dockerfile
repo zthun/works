@@ -9,9 +9,7 @@ WORKDIR /usr/dev
 COPY . .
 RUN git config --global credential.helper store && \
     git config --global user.name "circle-ci" && \
-    git config --global user.email "circle-ci@zthunworks.com" && \
-    git add . && \
-    git commit -m "chore: version [skip ci]"
+    git config --global user.email "circle-ci@zthunworks.com"
 RUN --mount=type=secret,id=GITHUB_CREDENTIALS,dst=/root/.git-credentials git push
 
 FROM setup as analyze
