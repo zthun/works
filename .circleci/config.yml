@@ -15,6 +15,7 @@ commands:
       - run: mkdir .secrets
       - run: echo $GIT_CREDENTIALS >> .secrets/.git-credentials
       - run: echo $NPM_CREDENTIALS >> .secrets/.npmrc
+      - run: ls -al .secrets
       - run:
           command: |
             export DOCKER_BUILDKIT=1
