@@ -13,12 +13,10 @@ commands:
     steps:
       - checkout
       - run: mkdir .secrets
-      - run: touch .secrets/.git-credentials
-      - run: touch .secrets/.npmrc
       - run: echo $GIT_CREDENTIALS >> .secrets/.git-credentials
       - run: echo $NPM_CREDENTIALS >> .secrets/.npmrc
       - run: export DOCKER_BUILDKIT=1
-      - run: docker build --target <<parameters.target>> --secret id=GIT_CREDENTIALS,src=.secrets/.git-credentials --secret id=NPM_CREDENTIALS,src=.secrets/.npmrc
+      - run: docker build --target <<parameters.target>> --secret id=GIT_CREDENTIALS,src=.secrets/.git-credentials --secret id=NPM_CREDENTIALS,src=.secrets/.npmrc .
       - run: rm -fr .secrets
 
 jobs:
