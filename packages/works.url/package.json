@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.url",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "A simple class used to build or parse a URL.",
   "author": "Anthony Bonta",
   "license": "MIT",

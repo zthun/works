@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.message",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "A system for handling messages and questions for the user.",
   "author": "Anthony Bonta",
   "license": "MIT",
