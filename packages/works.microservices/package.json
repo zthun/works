@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.microservices",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "The works microservice clients for tcp access to each service.",
   "author": "Anthony Bonta",
   "license": "MIT",

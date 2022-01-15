@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.apps",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A zthunworks microservice that manages the available applications in the zthunworks system.",
   "author": "Anthony Bonta",
   "license": "MIT",

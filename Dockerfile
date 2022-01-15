@@ -3,15 +3,6 @@ WORKDIR /usr/dev
 COPY . .
 RUN yarn install
 
-
-FROM node:17.3.0 as push
-WORKDIR /usr/dev
-COPY . .
-RUN git config --global credential.helper store && \
-    git config --global user.name "circle-ci" && \
-    git config --global user.email "circle-ci@zthunworks.com"
-RUN --mount=type=secret,id=GITHUB_CREDENTIALS,dst=/root/.git-credentials git push
-
 FROM setup as analyze
 RUN yarn lint
 
@@ -23,7 +14,7 @@ RUN yarn build
 
 FROM build as release
 USER root
-RUN --mount=type=secret,id=GITHUB_CREDENTIALS,dst=/root/.git-credentials  git config --global credential.helper store && \
+RUN --mount=type=secret,id=GIT_CREDENTIALS,dst=/root/.git-credentials  git config --global credential.helper store && \
     git config --global user.name "zthun" && \
     git config --global user.email "build@zthunworks.com" && \
     git checkout master && \
