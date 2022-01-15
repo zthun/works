@@ -19,7 +19,7 @@ commands:
       - run:
           command: |
             export DOCKER_BUILDKIT=1
-            docker build --target <<parameters.target>> --secret id=GIT_CREDENTIALS,src=.secrets/.git-credentials --secret id=NPM_CREDENTIALS,src=.secrets/.npmrc .
+            docker build --target <<parameters.target>> --secret id=GIT_CREDENTIALS,src=.secrets/.git-credentials --secret id=NPM_CREDENTIALS,src=.secrets/.npmrc --progress=plain .
       - run: rm -fr .secrets
 
 jobs:
