@@ -3,7 +3,7 @@ version: 2.1
 executors:
   system:
     machine:
-      image: ubuntu-1604:202004-01
+      image: ubuntu-2004:202111-02
 
 commands:
   run_docker_target:
@@ -15,7 +15,10 @@ commands:
       - run:
           command: |
             export DOCKER_BUILDKIT=1
-            docker build . --target <<parameters.target>>
+            echo $GIT_CREDENTIALS >> .secrets/.git-credentials
+            echo $NPM_CREDENTIALS >> .secrets/.npmrc
+            docker build --target <<parameters.target>> --secret id=GIT_CREDENTIALS,src=.secrets/.git-credentials --secret id=NPM_CREDENTIALS,src=.secrets/.npmrc
+            rm -fr .secrets
 
 jobs:
   analyze:
@@ -39,9 +42,25 @@ jobs:
       - run_docker_target:
           target: build
 
+  release:
+    executor: system
+    steps:
+      - checkout
+      - run_docker_target:
+          target: release
+
 workflows:
-  make:
+  verify:
     jobs:
       - analyze
       - test
       - build
+      - release:
+          requires:
+            - analyze
+            - test
+            - build
+          filters:
+            branches:
+              only:
+                - latest
