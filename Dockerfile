@@ -1,7 +1,7 @@
 FROM node:17.3.0 as setup
 WORKDIR /usr/dev
 COPY . .
-RUN yarn install
+RUN git remote -v && yarn install
 
 FROM setup as analyze
 RUN yarn lint
