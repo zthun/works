@@ -41,8 +41,7 @@
     "docker:publish": "lerna run docker:publish",
     "docker:build": "lerna run docker:build",
     "docker": "yarn docker:build && yarn docker:publish",
-    "prepare": "husky install",
-    "version": "yarn install && git stage yarn.lock"
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
