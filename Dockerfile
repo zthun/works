@@ -15,7 +15,7 @@ RUN yarn build
 FROM build as release
 USER root
 RUN git config --global credential.helper store && \
-    git config --global user.name "circle-ci" && \
+    git config --global user.name "Circle CI" && \
     git config --global user.email "circle-ci@zthunworks.com" && \
     git checkout latest
 RUN --mount=type=secret,id=GIT_CREDENTIALS,dst=/root/.git-credentials npx lerna version --conventional-commits --yes -m "chore: version [skip ci]"
