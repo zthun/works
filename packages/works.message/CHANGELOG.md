@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.0.7](https://github.com/zthun/works/compare/v3.0.6...v3.0.7) (2022-01-16)
+
+**Note:** Version bump only for package @zthun/works.message
+
+
+
+
+
 ### [3.0.6](https://github.com/zthun/works/compare/v3.0.2...v3.0.6) (2022-01-16)
 
 **Note:** Version bump only for package @zthun/works.message

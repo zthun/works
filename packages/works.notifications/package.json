@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.notifications",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "A zthunworks microservice that manages notification messages.",
   "author": "Anthony Bonta",
   "license": "MIT",
