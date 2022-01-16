@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.cookies",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "A zthunworks microservice that manages secure cookies for the application.",
   "author": "Anthony Bonta",
   "license": "MIT",
