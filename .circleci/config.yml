@@ -26,28 +26,24 @@ jobs:
   analyze:
     executor: system
     steps:
-      - checkout
       - run_docker_target:
           target: analyze
 
   test:
     executor: system
     steps:
-      - checkout
       - run_docker_target:
           target: test
 
   build:
     executor: system
     steps:
-      - checkout
       - run_docker_target:
           target: build
 
   release:
     executor: system
     steps:
-      - checkout
       - run_docker_target:
           target: release
 
