@@ -58,7 +58,6 @@ jobs:
             docker build . --target works.apps -t zthun/works.apps:latest -t zthun/works.apps:$(npm show @zthun/works.apps version) --progress=plain
             docker build . --target works.cookies -t zthun/works.cookies:latest -t zthun/works.cookies:$(npm show @zthun/works.cookies version) --progress=plain
             docker build . --target works.notifications -t zthun/works.notifications:latest -t zthun/works.notifications:$(npm show @zthun/works.notifications version) --progress=plain
-
             docker build . --target works.api -t zthun/works.api:latest -t zthun/works.api:$(npm show @zthun/works.api version) --progress=plain
             docker build . --target works.client -t zthun/works.client:latest -t zthun/works.client:$(npm show @zthun/works.client version) --progress=plain
 
