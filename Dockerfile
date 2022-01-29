@@ -43,6 +43,11 @@ RUN npm install -g @zthun/works.notifications
 EXPOSE 4000
 CMD ["zthun-works-notifications"]
 
+FROM node:17.3.0-alpine as works.users
+RUN npm install -g @zthun/works.users
+EXPOSE 4000
+CMD ["zthun-works-users"]
+
 FROM node:17.3.0-alpine as works.api
 RUN npm install -g @zthun/works.api
 EXPOSE 3000

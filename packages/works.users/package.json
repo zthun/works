@@ -14,8 +14,6 @@
     "zthun-works-users": "./bin/main.js"
   },
   "scripts": {
-    "docker:publish": "docker push zthun/works.users:latest && docker push zthun/works.users:$(node -p \"require('./package.json').version\")",
-    "docker:build": "npm pack && docker build . -t zthun/works.users:latest -t zthun/works.users:$(node -p \"require('./package.json').version\")",
     "build": "tsc -p tsconfig.prod.json",
     "debug": "nodemon",
     "start": "node ./dist/main.js"
