@@ -9,9 +9,5 @@
     "type": "git",
     "url": "https://github.com/zthun/works",
     "directory": "packages/works.proxy"
-  },
-  "scripts": {
-    "docker:publish": "docker push zthun/works.proxy:latest && docker push zthun/works.proxy:$(node -p \"require('./package.json').version\")",
-    "docker:build": "docker build . -t zthun/works.proxy:latest -t zthun/works.proxy:$(node -p \"require('./package.json').version\")"
   }
 }
