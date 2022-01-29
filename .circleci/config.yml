@@ -47,6 +47,21 @@ jobs:
       - run_docker_target:
           target: release
 
+  dockerize:
+    executor: system
+    steps:
+      - checkout
+      - run:
+          command: |
+            export DOCKER_BUILDKIT=1
+            docker login -e $DOCKERHUB_EMAIL -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+            docker build packages/works.api --target works.api -t zthun/works.api:latest -t zthun/works.api:$(npm show @zthun/works.api version)
+            docker build packages/works.client --target works.client -t zthun/works.client:latest -t zthun/works.client:$(npm show @zthun/works.client version)
+            docker push zthun/works.api:latest
+            docker push zthun/works.api:$(npm show @zthun/works.api version)
+            docker push zthun/works.client:latest
+            docker push zthun/works.client:$(npm show @zthun/works.client version)
+
 workflows:
   make:
     jobs:
@@ -67,3 +82,8 @@ workflows:
             branches:
               only:
                 - latest
+      - dockerize:
+          context:
+            - credentials
+          requires:
+            - release
