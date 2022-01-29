@@ -14,8 +14,6 @@
     "zthun-works-notifications": "./bin/main.js"
   },
   "scripts": {
-    "docker:publish": "docker push zthun/works.notifications:latest && docker push zthun/works.notifications:$(node -p \"require('./package.json').version\")",
-    "docker:build": "npm pack && docker build . -t zthun/works.notifications:latest -t zthun/works.notifications:$(node -p \"require('./package.json').version\")",
     "build": "tsc -p tsconfig.prod.json",
     "debug": "nodemon",
     "start": "node ./dist/main.js"
