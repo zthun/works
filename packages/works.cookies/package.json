@@ -14,8 +14,6 @@
     "zthun-works-cookies": "./bin/main.js"
   },
   "scripts": {
-    "docker:publish": "docker push zthun/works.cookies:latest && docker push zthun/works.cookies:$(node -p \"require('./package.json').version\")",
-    "docker:build": "npm pack && docker build . -t zthun/works.cookies:latest -t zthun/works.cookies:$(node -p \"require('./package.json').version\")",
     "build": "tsc -p tsconfig.prod.json",
     "debug": "nodemon",
     "start": "node ./dist/main.js"
