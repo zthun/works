@@ -14,8 +14,6 @@
     "zthun-works-vault": "./bin/main.js"
   },
   "scripts": {
-    "docker:publish": "docker push zthun/works.vault:latest && docker push zthun/works.vault:$(node -p \"require('./package.json').version\")",
-    "docker:build": "npm pack && docker build . -t zthun/works.vault:latest -t zthun/works.vault:$(node -p \"require('./package.json').version\")",
     "build": "tsc -p tsconfig.prod.json",
     "debug": "nodemon",
     "start": "node ./dist/main.js"
