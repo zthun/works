@@ -54,13 +54,24 @@ jobs:
       - run:
           command: |
             export DOCKER_BUILDKIT=1
-            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-            docker build . --target works.api -t zthun/works.api:latest -t zthun/works.api:$(npm show @zthun/works.api version)
-            docker build . --target works.client -t zthun/works.client:latest -t zthun/works.client:$(npm show @zthun/works.client version)
-            docker push zthun/works.api:latest
-            docker push zthun/works.api:$(npm show @zthun/works.api version)
-            docker push zthun/works.client:latest
-            docker push zthun/works.client:$(npm show @zthun/works.client version)
+            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD --progress=plain
+            docker build . --target works.apps -t zthun/works.apps:latest -t zthun/works.apps:$(npm show @zthun/works.apps version) --progress=plain
+            docker build . --target works.cookies -t zthun/works.cookies:latest -t zthun/works.cookies:$(npm show @zthun/works.cookies version) --progress=plain
+            docker build . --target works.notifications -t zthun/works.notifications:latest -t zthun/works.notifications:$(npm show @zthun/works.notifications version) --progress=plain
+
+            docker build . --target works.api -t zthun/works.api:latest -t zthun/works.api:$(npm show @zthun/works.api version) --progress=plain
+            docker build . --target works.client -t zthun/works.client:latest -t zthun/works.client:$(npm show @zthun/works.client version) --progress=plain
+
+            docker push zthun/works.apps:latest --progress=plain
+            docker push zthun/works.apps:$(npm show @zthun/works.apps version) --progress=plain
+            docker push zthun/works.cookies:latest --progress=plain
+            docker push zthun/works.cookies:$(npm show @zthun/works.cookies version) --progress=plain
+            docker push zthun/works.notifications:latest --progress=plain
+            docker push zthun/works.notifications:$(npm show @zthun/works.notifications version) --progress=plain
+            docker push zthun/works.api:latest --progress=plain
+            docker push zthun/works.api:$(npm show @zthun/works.api version) --progress=plain
+            docker push zthun/works.client:latest --progress=plain
+            docker push zthun/works.client:$(npm show @zthun/works.client version) --progress=plain
 
 workflows:
   make:
