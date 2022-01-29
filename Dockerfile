@@ -29,10 +29,12 @@ RUN --mount=type=secret,id=GIT_CREDENTIALS,dst=/root/.git-credentials npx lerna 
 RUN --mount=type=secret,id=NPM_CREDENTIALS,dst=/root/.npmrc npx lerna publish from-package --yes
 
 FROM node:17.3.0-alpine as works.api
-COPY --from=build /usr/dev/packages/works.api/zthun-works.api*.tgz /usr/src/packages/zthun-works.api.tgz
-RUN npm install -g /usr/src/packages/zthun-works.api.tgz
+RUN npm install -g @zthun/works.api
 EXPOSE 3000
 CMD ["zthun-works-api"]
 
+FROM node:17.3.0-alpine as works.client.install
+RUN npm install -g @zthun/works.client
+
 FROM nginx:1.21.5-alpine as works.client
-COPY --from=build /usr/dev/packages/works.client/dist/. /usr/share/nginx/html/
+COPY --from=works.client.install /usr/local/lib/node_modules/@zthun/works.client/dist/. /usr/share/nginx/html/

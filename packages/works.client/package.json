@@ -9,8 +9,6 @@
     "directory": "packages/works.client"
   },
   "scripts": {
-    "docker:publish": "docker push zthun/works.client && docker push zthun/works.client:$(node -p \"require('./package.json').version\")",
-    "docker:build": "docker build . -t zthun/works.client:latest -t zthun/works.client:$(node -p \"require('./package.json').version\")",
     "build": "webpack --env production",
     "debug": "webpack serve --env development"
   },

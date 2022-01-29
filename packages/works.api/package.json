@@ -17,8 +17,6 @@
     "node": "^16.6.0"
   },
   "scripts": {
-    "docker:publish": "docker push zthun/works.api:latest && docker push zthun/works.api:$(node -p \"require('./package.json').version\")",
-    "docker:build": "docker build . -t zthun/works.api:latest -t zthun/works.api:$(node -p \"require('./package.json').version\")",
     "build": "tsc -p tsconfig.prod.json && npm pack",
     "debug": "nodemon",
     "start": "node ./dist/main.js"
