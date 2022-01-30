@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.users",
-  "version": "3.0.7",
+  "version": "3.0.9",
   "description": "A zthunworks microservice that manages users, profiles, and logins.",
   "author": "Anthony Bonta",
   "license": "MIT",
