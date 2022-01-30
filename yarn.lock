@@ -3496,13 +3496,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/history@npm:^4.7.11":
-  version: 4.7.11
-  resolution: "@types/history@npm:4.7.11"
-  checksum: c92e2ba407dcab0581a9afdf98f533aa41b61a71133420a6d92b1ca9839f741ab1f9395b17454ba5b88cb86020b70b22d74a1950ccfbdfd9beeaa5459fdc3464
-  languageName: node
-  linkType: hard
-
 "@types/html-minifier-terser@npm:^6.0.0":
   version: 6.1.0
   resolution: "@types/html-minifier-terser@npm:6.1.0"
@@ -4490,7 +4483,7 @@ __metadata:
     "@zthun/works.url": ^3.0.7
     class-transformer: ~0.5.1
     cookie-parser: ^1.4.6
-    helmet: ^4.6.0
+    helmet: ^5.0.2
     lodash: ^4.17.21
     rxjs: ^7.5.2
     uuid: ^8.3.2
@@ -4540,7 +4533,7 @@ __metadata:
     "@zthun/works.logger": ^3.0.2
     "@zthun/works.message": ^3.0.7
     "@zthun/works.url": ^3.0.7
-    highlight.js: =11.3.1
+    highlight.js: =11.4.0
     lodash: ^4.17.21
     md5: ^2.3.0
     react-markdown: ^6.0.3
@@ -4611,7 +4604,6 @@ __metadata:
     "@types/bcryptjs": ^2.4.2
     "@types/cookie-parser": ^1.4.2
     "@types/express": ^4.17.13
-    "@types/history": ^4.7.11
     "@types/jest": ^27.4.0
     "@types/jsdom": ^16.2.14
     "@types/jsonwebtoken": ^8.5.8
@@ -4623,8 +4615,6 @@ __metadata:
     "@types/uuid": ^8.3.4
     "@zthun/lint-janitor": ^11.2.0
     "@zthun/lint-janitor-config": ^11.2.0
-    eslint: ^8.8.0
-    eslint-plugin-react: ^7.28.0
     favicons: ^6.2.2
     favicons-webpack-plugin: ^5.0.2
     file-loader: ^6.2.0
@@ -8865,17 +8855,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"helmet@npm:^4.6.0":
-  version: 4.6.0
-  resolution: "helmet@npm:4.6.0"
-  checksum: 139ad678d1cab207b043c206f50f6744eff2ef1f463e4626d36718b45b337485c77d10260ef9d89d292fa678da5153d86b08172b3b365cc8e680241015ed3a49
+"helmet@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "helmet@npm:5.0.2"
+  checksum: 3fe107f3f73fb6a79173e5599f87a016c69f1c7cc46bcde1c60043ea36e64f893434592890d3c0be68f1d35731f2f2f22094a1cfd70438f9d35740861071dcf3
   languageName: node
   linkType: hard
 
-"highlight.js@npm:=11.3.1":
-  version: 11.3.1
-  resolution: "highlight.js@npm:11.3.1"
-  checksum: 9adaaa1fe5aaae0ca522f9355bc2a7387f76ab362f88c32c86879b99f606619a9aa33c32ffc94cd893987e71ba5d2de6f3e325ed9e8eac65e5872d251e8cba3a
+"highlight.js@npm:=11.4.0":
+  version: 11.4.0
+  resolution: "highlight.js@npm:11.4.0"
+  checksum: df57994d1e6d8d32a0c8826d9b3019b86b36bae570fd849f807b538f12a2188b1aa775e1653c2b591c24eacd736c262dfb193e2bd3b155800ea6f882a611989c
   languageName: node
   linkType: hard
 
