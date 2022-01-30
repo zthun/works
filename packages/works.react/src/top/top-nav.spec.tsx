@@ -3,7 +3,7 @@ import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/
 import { IZProfile, IZRouteOption, IZWebApp, ZProfileBuilder, ZRouteOptionBuilder, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { createMemoryHistory, MemoryHistory } from 'history';
-import { kebabCase, last } from 'lodash';
+import { kebabCase } from 'lodash';
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { ZWebAppsContext } from '../apps/web-apps.context';
@@ -301,7 +301,7 @@ describe('ZTopNav', () => {
         const drawer = await openNavDrawer(target);
         await clickMenuItem(drawer, version.path);
         // Assert
-        expect(last(history.entries).pathname).toEqual(version.path);
+        expect(history.location.pathname).toEqual(version.path);
       });
     });
 

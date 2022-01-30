@@ -39,6 +39,7 @@
     "@zthun/works.message": "^3.0.7",
     "@zthun/works.url": "^3.0.7",
     "highlight.js": "=11.4.0",
+    "history": "^5.2.0",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "react-markdown": "^6.0.3",
