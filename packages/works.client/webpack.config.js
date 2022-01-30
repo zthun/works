@@ -6,8 +6,8 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 function config(env) {
-  const dir = path.resolve(__dirname, path.dirname(pkg.browser));
-  const file = path.basename(pkg.browser);
+  const dir = path.resolve(__dirname, path.dirname(pkg.umd));
+  const file = path.basename(pkg.umd);
 
   const cfg = {
     entry: './src/index.tsx',
