@@ -33,7 +33,7 @@
     "@zthun/works.url": "^3.0.7",
     "class-transformer": "~0.5.1",
     "cookie-parser": "^1.4.6",
-    "helmet": "^4.6.0",
+    "helmet": "^5.0.2",
     "lodash": "^4.17.21",
     "rxjs": "^7.5.2",
     "uuid": "^8.3.2"
