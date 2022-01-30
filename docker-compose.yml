@@ -1,26 +1,28 @@
-# This compose file is intended to match the kubernetes composition as close as possible.
 services:
   # Load Balancer (Entry Point)
   local.zthunworks.com:
-    build: ./packages/works.proxy
+    image: nginx:1.21.5-alpine
     ports:
       - 80:80
       - 443:443
       - 8080:8080
+    volumes:
+      - ./packages/works.proxy/shared:/etc/nginx/shared
+      - ./packages/works.proxy/certs:/etc/nginx/certs
+      - ./packages/works.proxy/conf.d:/etc/nginx/conf.d
     depends_on:
       - zthunworks-services-api
       - zthunworks-services-client
-      - zthunworks-services-server
-  # Node Ports
 
+  # Node Ports
   zthunworks-services-client:
-    image: node:16.6.0
+    image: node:17.3.0
     volumes:
       - .:/usr/dev
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.client run debug
   zthunworks-services-api:
-    image: node:16.6.0
+    image: node:17.3.0
     ports:
       - 9229:9229
     volumes:
@@ -34,7 +36,7 @@ services:
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.api run debug
   zthunworks-services-users:
-    image: node:16.6.0
+    image: node:17.3.0
     ports:
       - 9231:9229
     volumes:
@@ -46,7 +48,7 @@ services:
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.users run debug
   zthunworks-services-vault:
-    image: node:16.6.0
+    image: node:17.3.0
     ports:
       - 9232:9229
     volumes:
@@ -58,7 +60,7 @@ services:
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.vault run debug
   zthunworks-services-notifications:
-    image: node:16.6.0
+    image: node:17.3.0
     ports:
       - 9233:9229
     volumes:
@@ -66,7 +68,7 @@ services:
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.notifications run debug
   zthunworks-services-cookies:
-    image: node:16.6.0
+    image: node:17.3.0
     ports:
       - 9234:9229
     volumes:
@@ -74,7 +76,7 @@ services:
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.cookies run debug
   zthunworks-services-apps:
-    image: node:16.6.0
+    image: node:17.3.0
     ports:
       - 9235:9229
     volumes:
@@ -83,10 +85,10 @@ services:
     command: npm --workspace @zthun/works.apps run debug
   # Databases
   zthunworks-databases:
-    image: mongo:4.2.0
+    image: mongo:5.0.5
   # Utilities
   database.zthunworks.com:
-    image: mongo-express:0.49
+    image: mongo-express:0.54.0
     depends_on:
       - zthunworks-databases
     environment:
