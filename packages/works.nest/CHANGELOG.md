@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.0](https://github.com/zthun/works/compare/v3.0.10...v3.1.0) (2022-01-30)
+
+
+### Features
+
+* updating to latest helmet ([5f41414](https://github.com/zthun/works/commit/5f41414c096fecc7baf287cf1e26bab22996b320))
+
+
+
 ### [3.0.7](https://github.com/zthun/works/compare/v3.0.6...v3.0.7) (2022-01-16)
 
 **Note:** Version bump only for package @zthun/works.nest

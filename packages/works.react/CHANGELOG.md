@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.0](https://github.com/zthun/works/compare/v3.0.10...v3.1.0) (2022-01-30)
+
+
+### Features
+
+* updating highlight js to 11.4.0 ([bfe7c53](https://github.com/zthun/works/commit/bfe7c53b61260a97d50eb03e14e6779484d318f7))
+
+
+
 ### [3.0.7](https://github.com/zthun/works/compare/v3.0.6...v3.0.7) (2022-01-16)
 
 **Note:** Version bump only for package @zthun/works.react
