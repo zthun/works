@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.1.1](https://github.com/zthun/works/compare/v3.1.0...v3.1.1) (2022-01-31)
+
+
+### Bug Fixes
+
+* get and put should now be synchronized ([9223362](https://github.com/zthun/works/commit/9223362d5ba908b07c1735b706d321ff062456d7))
+
+
+
 ## [3.1.0](https://github.com/zthun/works/compare/v3.0.10...v3.1.0) (2022-01-30)
 
 
