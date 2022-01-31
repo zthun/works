@@ -34,20 +34,22 @@ export class ZVaultService {
    * Gets the existing configuration value.
    *
    * If no config with the given scope and key exists, then the
-   * configuration is added with the value.  Otherwise, the value
-   * is overwritten with the stored value.
+   * configuration is added with the default value.
    *
    * @param entry The current configuration to read.  If the scope and key of the config exists,
    *              then the existing config entity is returned, otherwise, the config value is added and
-   * @returns A promise that, when resolved, gives the existing config.
+   * @returns A promise that, when resolved, returns the value that is currently in the database.
    */
   @MessagePattern({ cmd: 'get' })
   public async get<T>({ entry }: { entry: IZConfigEntry<T> }): Promise<IZConfigEntry<T>> {
-    let config = await this.read<T>({ scope: entry.scope, key: entry.key });
+    let config = await this.read<T>(entry);
 
     if (!config) {
       config = new ZConfigEntryBuilder().copy(entry).build();
-      [config] = await this._dal.create(ZVaultCollections.Configs, [config]).run();
+      [config] = await this._dal
+        .create(ZVaultCollections.Configs, [config])
+        .run()
+        .catch(() => Promise.all([this.read<T>(entry)]));
     }
 
     return config;
@@ -56,20 +58,21 @@ export class ZVaultService {
   /**
    * Adds a configuration entry or updates an existing entry.
    *
+   * Be careful with multiple calls going through all at the same time.
+   * This method is a last one in wins system.
+   *
    * @param param0 The configuration entry to add or update.
    *
-   * @returns A promise that, when resolve, returns the updated value.
+   * @returns A promise that, when resolve, returns the value that is currently in the database.
    */
   @MessagePattern({ cmd: 'put' })
   public async put<T>({ entry }: { entry: IZConfigEntry<T> }): Promise<IZConfigEntry<T>> {
-    let config = await this.read<T>({ scope: entry.scope, key: entry.key });
-
-    if (!config) {
-      const items = [entry];
-      [config] = await this._dal.create<IZConfigEntry<T>>(ZVaultCollections.Configs, items).run();
-    } else {
-      await this._dal.update<IZConfigEntry>(ZVaultCollections.Configs, config).filter({ _id: config._id }).run();
-    }
+    const items = [entry];
+    const config = await this._dal
+      .create<IZConfigEntry<T>>(ZVaultCollections.Configs, items)
+      .run()
+      .catch(() => this._dal.update<IZConfigEntry>(ZVaultCollections.Configs, entry).filter({ _id: entry._id }).run())
+      .then(() => this.read<T>(entry));
 
     return config;
   }

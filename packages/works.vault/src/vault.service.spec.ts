@@ -2,8 +2,8 @@
  * @jest-environment node
  */
 /* eslint-disable require-jsdoc */
-import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
+import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
 import { ZVaultCollections } from './vault.database';
 import { ZVaultService } from './vault.service';
 
@@ -63,6 +63,18 @@ describe('ZVaultService', () => {
         // Assert
         expect(actual.value).toEqual(expected);
       });
+
+      it('is synchronized if multiple get requests come in at the same time.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        const expected = true;
+        const cfg = new ZConfigEntryBuilder().scope('common').key('secure').value(expected).build();
+        // Act
+        const [one, two, three] = await Promise.all([target.get({ entry: cfg }), target.get({ entry: cfg }), target.get({ entry: cfg })]);
+        const actual = one.value || two.value || three.value;
+        // Assert
+        expect(actual).toEqual(expected);
+      });
     });
   });
 
@@ -86,6 +98,18 @@ describe('ZVaultService', () => {
         await target.put({ entry: expected });
         expected.value = true;
         const actual = await target.put({ entry: expected });
+        // Assert
+        expect(actual).toEqual(expected);
+      });
+
+      it('is synchronized if multiple get requests come in at the same time.', async () => {
+        // Arrange
+        const target = createTestTarget();
+        const expected = new ZConfigEntryBuilder().scope('common').key('secure').value(true).build();
+        const payload = { entry: expected };
+        // Act
+        await Promise.all([target.put(payload), target.put(payload), target.put(payload)]);
+        const actual = await target.get(payload);
         // Assert
         expect(actual).toEqual(expected);
       });
