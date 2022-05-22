@@ -10,6 +10,7 @@
     "clasz",
     "cleancss",
     "commitlint",
+    "csstype",
     "favicons",
     "gainsboro",
     "gteq",
@@ -38,5 +39,10 @@
     "zthun",
     "Zthunworks"
   ],
-  "dictionaries": ["typescript", "node", "npm", "en_US"]
+  "dictionaries": [
+    "typescript",
+    "node",
+    "npm",
+    "en_US"
+  ]
 }
