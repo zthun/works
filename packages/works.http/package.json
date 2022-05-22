@@ -26,7 +26,7 @@
     "images"
   ],
   "dependencies": {
-    "axios": "~0.25.0"
+    "axios": "~0.27.2"
   },
   "sideEffects": false
 }

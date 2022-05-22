@@ -4732,7 +4732,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.http@workspace:packages/works.http"
   dependencies:
-    axios: ~0.25.0
+    axios: ~0.27.2
   languageName: unknown
   linkType: soft
 
@@ -4768,8 +4768,8 @@ __metadata:
     lodash: ^4.17.21
     rxjs: ^7.5.5
   peerDependencies:
-    "@nestjs/common": ^8.0.6
-    "@nestjs/microservices": ^8.0.6
+    "@nestjs/common": ^8.4.0
+    "@nestjs/microservices": ^8.4.0
   languageName: unknown
   linkType: soft
 
@@ -4789,10 +4789,10 @@ __metadata:
     rxjs: ^7.5.5
     uuid: ^8.3.2
   peerDependencies:
-    "@nestjs/common": ^8.0.6
-    "@nestjs/core": ^8.0.6
-    "@nestjs/microservices": ^8.0.6
-    "@nestjs/platform-express": ^8.0.6
+    "@nestjs/common": ^8.4.0
+    "@nestjs/core": ^8.4.0
+    "@nestjs/microservices": ^8.4.0
+    "@nestjs/platform-express": ^8.4.0
   languageName: unknown
   linkType: soft
 
@@ -5501,22 +5501,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:0.27.2":
+"axios@npm:0.27.2, axios@npm:~0.27.2":
   version: 0.27.2
   resolution: "axios@npm:0.27.2"
   dependencies:
     follow-redirects: ^1.14.9
     form-data: ^4.0.0
   checksum: 38cb7540465fe8c4102850c4368053c21683af85c5fdf0ea619f9628abbcb59415d1e22ebc8a6390d2bbc9b58a9806c874f139767389c862ec9b772235f06854
-  languageName: node
-  linkType: hard
-
-"axios@npm:~0.25.0":
-  version: 0.25.0
-  resolution: "axios@npm:0.25.0"
-  dependencies:
-    follow-redirects: ^1.14.7
-  checksum: 2a8a3787c05f2a0c9c3878f49782357e2a9f38945b93018fb0c4fd788171c43dceefbb577988628e09fea53952744d1ecebde234b561f1e703aa43e0a598a3ad
   languageName: node
   linkType: hard
 
@@ -8608,7 +8599,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.7":
+"follow-redirects@npm:^1.0.0":
   version: 1.14.7
   resolution: "follow-redirects@npm:1.14.7"
   peerDependenciesMeta:
