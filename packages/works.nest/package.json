@@ -33,16 +33,16 @@
     "@zthun/works.url": "^3.0.7",
     "class-transformer": "~0.5.1",
     "cookie-parser": "^1.4.6",
-    "helmet": "^5.0.2",
+    "helmet": "^5.1.0",
     "lodash": "^4.17.21",
-    "rxjs": "^7.5.2",
+    "rxjs": "^7.5.5",
     "uuid": "^8.3.2"
   },
   "peerDependencies": {
-    "@nestjs/common": "^8.0.6",
-    "@nestjs/core": "^8.0.6",
-    "@nestjs/microservices": "^8.0.6",
-    "@nestjs/platform-express": "^8.0.6"
+    "@nestjs/common": "^8.4.0",
+    "@nestjs/core": "^8.4.0",
+    "@nestjs/microservices": "^8.4.0",
+    "@nestjs/platform-express": "^8.4.0"
   },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"

@@ -28,11 +28,11 @@
   "dependencies": {
     "@zthun/works.core": "^3.0.2",
     "lodash": "^4.17.21",
-    "rxjs": "^7.5.2"
+    "rxjs": "^7.5.5"
   },
   "peerDependencies": {
-    "@nestjs/common": "^8.0.6",
-    "@nestjs/microservices": "^8.0.6"
+    "@nestjs/common": "^8.4.0",
+    "@nestjs/microservices": "^8.4.0"
   },
   "sideEffects": false
 }
