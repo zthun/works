@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { act } from '@testing-library/react';
-import { renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react';
 import { useSafeState } from './use-safe-state';
 
 describe('useSafeState', () => {

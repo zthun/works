@@ -46,7 +46,7 @@ export function ZApiPage() {
   const handleAction = entityId ? handleApi : handleLearn;
 
   return (
-    <Grid container={true} spacing={3} className='ZApiPage-root' data-testid='ZApiPage-root' justifyContent='center'>
+    <Grid container={true} spacing={3} className='ZApiPage-root' justifyContent='center'>
       <Grid item={true}>
         <ZTypedocViewerSource src={src} avatar={avatar} actionText={actionText} entityId={entityId} onAction={handleAction} onEntity={handleEntity} />
       </Grid>

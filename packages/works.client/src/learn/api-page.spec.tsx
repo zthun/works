@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 
-import { act, fireEvent, render } from '@testing-library/react';
-import { IZTypedoc, ZTypedocKind, ZTypedocTypeKind } from '@zthun/works.core';
+import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
+import { IZTypedoc, IZTypedocEntity, ZTypedocKind, ZTypedocTypeKind } from '@zthun/works.core';
 import { ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
 import { ZHttpServiceContext } from '@zthun/works.react';
 import { createMemoryHistory, MemoryHistory } from 'history';
@@ -16,8 +16,8 @@ describe('ZApiPage', () => {
   let typedoc: IZTypedoc;
   let http: ZHttpServiceMock;
 
-  function createTestTarget() {
-    return render(
+  async function createTestTarget() {
+    const target = render(
       <ZHttpServiceContext.Provider value={http}>
         <Router history={history}>
           <Route path='/learn/:pkg/api' exact={true} component={ZApiPage} />
@@ -25,6 +25,11 @@ describe('ZApiPage', () => {
         </Router>
       </ZHttpServiceContext.Provider>
     );
+
+    await waitFor(() => expect(target.container.querySelector('.ZApiPage-root')).toBeTruthy());
+    await waitFor(() => expect(target.container.querySelector('.ZCircularProgress-root')).toBeFalsy());
+
+    return target;
   }
 
   beforeEach(() => {
@@ -88,34 +93,44 @@ describe('ZApiPage', () => {
     http.set(src, ZHttpMethod.Get, new ZHttpResultBuilder().data(typedoc).build());
   });
 
+  async function clickBackToButton(target: RenderResult) {
+    const btn = target.container.querySelector<HTMLButtonElement>('.ZPaperCard-btn-action');
+    await act(async () => {
+      fireEvent.click(btn);
+    });
+  }
+
   describe('Without entity', () => {
+    async function clickLink(entity: IZTypedocEntity, target: RenderResult) {
+      const { id } = entity;
+      const testId = `ZTypedocViewer-entity-${id}`;
+      const link = target.getByTestId(testId);
+      await act(async () => {
+        fireEvent.click(link);
+      });
+    }
+
     beforeEach(() => {
       history = createMemoryHistory({ initialEntries: [`/learn/${pkg}/api`] });
     });
 
     it('navigates back to the learn page when the learn button is clicked.', async () => {
       // Arrange
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        const target = createTestTarget();
-        const btn = await target.findByTestId('ZPaperCard-btn-action');
-        fireEvent.click(btn);
-      });
+      await clickBackToButton(target);
       // Assert
       expect(history.location.pathname).toEqual(`/learn/${pkg}`);
     });
 
     it('navigates to an entity when the entity is clicked.', async () => {
       // Arrange
-      const expected = typedoc.children[0].id;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        const target = createTestTarget();
-        const btn = await target.findByTestId(`ZTypedocViewer-entity-${expected}`);
-        fireEvent.click(btn);
-      });
+      const [entity] = typedoc.children;
+      await clickLink(entity, target);
       // Assert
-      expect(history.location.pathname).toEqual(`/learn/${pkg}/api/${expected}`);
+      expect(history.location.pathname).toEqual(`/learn/${pkg}/api/${entity.id}`);
     });
   });
 
@@ -127,11 +142,11 @@ describe('ZApiPage', () => {
     it('navigates to the id that was clicked in the entity viewer.', async () => {
       // Arrange
       const expected = 11;
+      const target = await createTestTarget();
       // Act
       await act(async () => {
-        const target = createTestTarget();
-        const link = await target.findAllByText('ZBinaryOperator');
-        fireEvent.click(link[0]);
+        const [link] = await target.findAllByText('ZBinaryOperator');
+        fireEvent.click(link);
       });
       // Assert
       expect(history.location.pathname).toEqual(`/learn/${pkg}/api/${expected}`);
@@ -139,12 +154,9 @@ describe('ZApiPage', () => {
 
     it('navigates back to the api page when the action button is clicked.', async () => {
       // Arrange
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        const target = createTestTarget();
-        const btn = await target.findByTestId('ZPaperCard-btn-action');
-        fireEvent.click(btn);
-      });
+      await clickBackToButton(target);
       // Assert
       expect(history.location.pathname).toEqual(`/learn/${pkg}/api`);
     });

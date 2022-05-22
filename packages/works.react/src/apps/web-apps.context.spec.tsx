@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import React from 'react';
@@ -103,21 +103,17 @@ describe('WebApps', () => {
 
     it('should set the global profile.', async () => {
       // Arrange
-      const target = await createTestTarget();
-      // Act
-      const currentApps = globalWebApps.data;
-      // Assert
-      target.waitFor(() => currentApps === webApps);
+      await createTestTarget();
+      // Act & Assert
+      await waitFor(() => expect(globalWebApps.data).toEqual(webApps));
     });
 
     it('should set the global profile list to null if the service fails.', async () => {
       // Arrange
       webAppsService.list.mockRejectedValue('failed');
-      const target = await createTestTarget();
-      // Act
-      const currentApps = globalWebApps.data;
-      // Assert
-      target.waitFor(() => currentApps === null);
+      await createTestTarget();
+      // Act & Assert
+      await waitFor(() => expect(globalWebApps.data).toBeNull());
     });
   });
 });

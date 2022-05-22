@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import { useImageReader } from './image-reader.context';
 
 describe('useImageReader', () => {

@@ -39,6 +39,8 @@ describe('ZTopNav', () => {
     );
 
     await waitFor(async () => expect(target.container.querySelector('.ZTopNav-root')).toBeTruthy());
+    await waitFor(async () => expect(target.container.querySelector('.ZHealthIndicator-ok')).toBeTruthy());
+
     return target;
   }
 

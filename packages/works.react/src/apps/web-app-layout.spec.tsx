@@ -21,6 +21,7 @@ describe('ZWebAppLayout', () => {
     );
 
     await waitFor(() => expect(target.container.querySelector('.ZWebAppLayout-root')).not.toBeNull());
+    await waitFor(() => expect(target.container.querySelector('.ZCircularProgress-root')).toBeFalsy());
     return target;
   }
 

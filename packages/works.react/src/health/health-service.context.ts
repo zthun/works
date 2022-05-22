@@ -58,9 +58,10 @@ export const ZHealthServiceContext = createContext<IZHealthService>(new ZHealthS
 
 /**
  * A hook that returns the current implementation of the health service.
+ *
+ * @returns The current implementation of the health service
  */
-export const useHealthService = useContext.bind(null, ZHealthServiceContext);
-
+export const useHealthService = () => useContext(ZHealthServiceContext);
 /**
  * A hook that returns the current health of the api.
  *
@@ -75,6 +76,7 @@ export function useHealth() {
    * Refreshes the current health.
    */
   async function refresh() {
+    await Promise.resolve();
     setHealth(undefined);
     const result = await service.read();
     setHealth(result);

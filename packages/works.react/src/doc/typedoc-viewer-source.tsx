@@ -2,9 +2,7 @@ import { Typography } from '@mui/material';
 import { IZTypedoc, IZTypedocEntity } from '@zthun/works.core';
 import { ZHttpRequestBuilder } from '@zthun/works.http';
 import { first } from 'lodash';
-import React, { useEffect, useState } from 'react';
-import { from, of, Subject } from 'rxjs';
-import { catchError, finalize, map, takeUntil } from 'rxjs/operators';
+import React, { useEffect } from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { IZComponentActionable } from '../component/component-actionable.interface';
 import { IZComponentEntityRedirect } from '../component/component-entity-redirect.interface';
@@ -12,6 +10,7 @@ import { IZComponentHeader } from '../component/component-header.interface';
 import { IZComponentSizeable } from '../component/component-sizeable.interface';
 import { IZComponentSource } from '../component/component-source.interface';
 import { useHttpService } from '../http/http-service.context';
+import { useSafeState } from '../state/use-safe-state';
 import { ZTypedocEntityViewer } from './typedoc-entity-viewer';
 import { ZTypedocViewer } from './typedoc-viewer';
 
@@ -41,33 +40,30 @@ export function ZTypedocViewerSource(props: IZTypedocViewerSourceProps) {
   const { src, entityId, headerText = 'Typedoc' } = props;
 
   const http = useHttpService();
-  const [typedoc, setTypedoc] = useState<IZTypedoc>(null);
-  const [loading, setLoading] = useState(false);
+  const [typedoc, setTypedoc] = useSafeState<IZTypedoc>(null);
+  const [loading, setLoading] = useSafeState(false);
 
-  useEffect(loadTypedoc, [src]);
+  useEffect(() => {
+    loadTypedoc();
+  }, [src]);
 
   /**
    * Loads the typedoc information into this viewer.
    *
    * @returns A callback that cleans up the current markdown load.
    */
-  function loadTypedoc() {
-    const canceled = new Subject<any>();
+  async function loadTypedoc() {
     const req = new ZHttpRequestBuilder().get().url(src).build();
     setLoading(true);
-    from(http.request(req))
-      .pipe(
-        takeUntil(canceled),
-        map((res) => res.data),
-        finalize(() => setLoading(false)),
-        catchError(() => of(null))
-      )
-      .subscribe((td) => setTypedoc(td));
 
-    return () => {
-      canceled.next(undefined);
-      canceled.complete();
-    };
+    try {
+      const { data } = await http.request(req);
+      setTypedoc(data);
+    } catch {
+      setTypedoc(null);
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (typedoc == null) {

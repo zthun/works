@@ -1,11 +1,12 @@
-import { render, waitFor } from '@testing-library/react';
+/* eslint-disable require-jsdoc */
+
+import { render, RenderResult, waitFor } from '@testing-library/react';
 import { createMocked } from '@zthun/works.jest';
 import { noop } from 'lodash';
 import React from 'react';
 import { ZHealthIndicator } from './health-indicator';
 import { IZHealthService, ZHealthServiceContext } from './health-service.context';
 
-/* eslint-disable require-jsdoc */
 describe('ZHealthIndicator', () => {
   let health: jest.Mocked<IZHealthService>;
 
@@ -24,10 +25,18 @@ describe('ZHealthIndicator', () => {
     health = createMocked(['read']);
   });
 
+  async function waitForIndicator(expected: 'ok' | 'warn', target: RenderResult) {
+    await waitFor(() => {
+      const actual = target.container.querySelector(`.ZHealthIndicator-${expected}`);
+      expect(actual).toBeTruthy();
+    });
+  }
+
   it('should render a loading indicator if the health is loading.', async () => {
+    // Arrange
     health.read.mockReturnValue(new Promise(noop));
     const target = await createTestTarget();
-    // Act
+    // Act & Assert
     const actual = target.container.querySelector('.ZCircularProgress-root');
     // Assert
     expect(actual).toBeTruthy();
@@ -37,19 +46,15 @@ describe('ZHealthIndicator', () => {
     // Arrange
     health.read.mockResolvedValue(true);
     const target = await createTestTarget();
-    // Act
-    const actual = target.container.querySelector('.ZHealthIndicator-ok');
-    // Assert
-    expect(actual).toBeTruthy();
+    // Act & Assert
+    await waitForIndicator('ok', target);
   });
 
   it('should render error if the service is down.', async () => {
     // Arrange
     health.read.mockResolvedValue(false);
     const target = await createTestTarget();
-    // Act
-    const actual = target.container.querySelector('.ZHealthIndicator-warn');
-    // Assert
-    expect(actual).toBeTruthy();
+    // Act & Assert
+    await waitForIndicator('warn', target);
   });
 });

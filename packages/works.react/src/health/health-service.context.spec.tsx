@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { ZHttpCodeServer, ZHttpCodeSuccess, ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
 import { createMocked } from '@zthun/works.jest';
 import React from 'react';
@@ -43,7 +43,6 @@ describe('useHealth', () => {
   async function createTestTarget() {
     const wrapper = ({ children }) => <ZHealthServiceContext.Provider value={health}>{children}</ZHealthServiceContext.Provider>;
     const target = renderHook(() => useHealth(), { wrapper });
-    await target.waitForNextUpdate();
     return target;
   }
 
@@ -56,9 +55,10 @@ describe('useHealth', () => {
     // Arrange
     const target = await createTestTarget();
     // Act
-    const [actual] = target.result.current;
-    target.unmount();
-    // Assert
-    expect(actual).toEqual(true);
+    await waitFor(() => {
+      const [actual] = target.result.current;
+      // Assert
+      expect(actual).toEqual(true);
+    });
   });
 });

@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { act, fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { IZTypedoc, ZTypedocKind, ZTypedocTypeKind } from '@zthun/works.core';
 import { ZHttpCodeClient, ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
 import React from 'react';
@@ -15,12 +15,16 @@ describe('ZTypedocViewerSource', () => {
   let src: string;
   let http: ZHttpServiceMock;
 
-  function createTestTarget() {
-    return render(
+  async function createTestTarget() {
+    const target = render(
       <ZHttpServiceContext.Provider value={http}>
         <ZTypedocViewerSource src='/path/to/typedoc.json' headerText='Test Typedoc' entityId={entityId} onAction={onAction} onEntity={onEntity} />
       </ZHttpServiceContext.Provider>
     );
+
+    await waitFor(() => expect(target.container.querySelector('.ZCircularProgress-root')).toBeFalsy());
+
+    return target;
   }
 
   beforeEach(() => {
@@ -90,13 +94,10 @@ describe('ZTypedocViewerSource', () => {
   describe('Typedoc', () => {
     it('renders the typedoc not loaded if the request fails.', async () => {
       // Arrange
-      let actual: HTMLElement = null;
       http.set(src, ZHttpMethod.Get, new ZHttpResultBuilder().status(ZHttpCodeClient.NotFound).build());
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        const target = createTestTarget();
-        actual = await target.findByTestId('ZTypedocViewer-no-typedoc-loaded');
-      });
+      const actual = await target.findByTestId('ZTypedocViewer-no-typedoc-loaded');
       // Assert
       expect(actual).toBeTruthy();
     });
@@ -104,12 +105,9 @@ describe('ZTypedocViewerSource', () => {
     it('renders the globals.', async () => {
       // Arrange
       const expected = `ZTypedocViewer-entity-${typedoc.children[0].id}`;
-      let actual: HTMLElement = null;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        const target = createTestTarget();
-        actual = await target.findByTestId(expected);
-      });
+      const actual = await target.findByTestId(expected);
       // Assert
       expect(actual).toBeTruthy();
     });
@@ -117,9 +115,9 @@ describe('ZTypedocViewerSource', () => {
     it('navigates to an entity when the entity is clicked.', async () => {
       // Arrange
       const expected = typedoc.children[0].id;
+      const target = await createTestTarget();
       // Act
       await act(async () => {
-        const target = createTestTarget();
         const btn = await target.findByTestId(`ZTypedocViewer-entity-${expected}`);
         fireEvent.click(btn);
       });
@@ -136,12 +134,9 @@ describe('ZTypedocViewerSource', () => {
     it('renders the entity.', async () => {
       // Arrange
       const expected = 'ZTypedocEntityViewer-root';
-      let actual: HTMLElement = null;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        const target = createTestTarget();
-        actual = await target.findByTestId(expected);
-      });
+      const actual = await target.findByTestId(expected);
       // Assert
       expect(actual).toBeTruthy();
     });
@@ -149,21 +144,18 @@ describe('ZTypedocViewerSource', () => {
     it('displays an error if no entity is found.', async () => {
       // Arrange
       entityId = 99999999;
-      let actual: HTMLElement = null;
+      const target = await createTestTarget();
       // Act
-      await act(async () => {
-        const target = createTestTarget();
-        actual = await target.findByTestId('ZTypedocViewer-no-entity-found');
-      });
+      const actual = await target.findByTestId('ZTypedocViewer-no-entity-found');
       expect(actual).toBeTruthy();
     });
 
     it('navigates to the id that was clicked in the entity viewer.', async () => {
       // Arrange
       const expected = 11;
+      const target = await createTestTarget();
       // Act
       await act(async () => {
-        const target = createTestTarget();
         const link = await target.findAllByText('ZBinaryOperator');
         fireEvent.click(link[0]);
       });
