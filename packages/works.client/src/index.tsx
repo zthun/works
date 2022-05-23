@@ -36,14 +36,12 @@ import { ZHomePage } from './home/home-page';
 import { ZApiPage } from './learn/api-page';
 import { ZLearnPage } from './learn/learn-page';
 
-const whoami = 'learn';
-
 render(
-  <ZWebAppLayout whoami={whoami} profileApp='roadblock'>
-    <Route exact path='/home' component={ZHomePage} />
-    <Route exact path='/learn/:pkg' component={ZLearnPage} />
-    <Route exact path='/learn/:pkg/api' component={ZApiPage} />
-    <Route exact path='/learn/:pkg/api/:enid' component={ZApiPage} />
+  <ZWebAppLayout whoami='learn' profileApp='roadblock'>
+    <Route path='/home' element={<ZHomePage />} />
+    <Route path='/learn/:pkg/api/:enid' element={<ZApiPage />} />
+    <Route path='/learn/:pkg/api' element={<ZApiPage />} />
+    <Route path='/learn/:pkg' element={<ZLearnPage />} />
   </ZWebAppLayout>,
   document.getElementById('zthunworks')
 );

@@ -6,7 +6,7 @@ import { ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.
 import { ZHttpServiceContext } from '@zthun/works.react';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
-import { Route, Router } from 'react-router-dom';
+import { Route, Router, Routes } from 'react-router-dom';
 import { ZApiPage } from './api-page';
 
 describe('ZApiPage', () => {
@@ -19,9 +19,12 @@ describe('ZApiPage', () => {
   async function createTestTarget() {
     const target = render(
       <ZHttpServiceContext.Provider value={http}>
-        <Router history={history}>
-          <Route path='/learn/:pkg/api' exact={true} component={ZApiPage} />
-          <Route path='/learn/:pkg/api/:enid' exact={true} component={ZApiPage} />
+        <Router location={history.location} navigator={history}>
+          <Routes>
+            <Route path='/learn/:pkg/api' element={<ZApiPage />}>
+              <Route path=':enid' element={<ZApiPage />} />
+            </Route>
+          </Routes>
         </Router>
       </ZHttpServiceContext.Provider>
     );

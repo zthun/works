@@ -4,7 +4,7 @@ import { ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.
 import { ZHttpServiceContext } from '@zthun/works.react';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
-import { Route, Router } from 'react-router-dom';
+import { Route, Router, Routes } from 'react-router-dom';
 import { ZLearnPage } from './learn-page';
 
 describe('ZLearnPage', () => {
@@ -15,19 +15,22 @@ describe('ZLearnPage', () => {
   async function createTestTarget() {
     const target = render(
       <ZHttpServiceContext.Provider value={http}>
-        <Router history={history}>
-          <Route path='/learn/:pkg' component={ZLearnPage} />
+        <Router location={history.location} navigator={history}>
+          <Routes>
+            <Route path='/learn/:pkg' element={<ZLearnPage />} />
+          </Routes>
         </Router>
       </ZHttpServiceContext.Provider>
     );
 
     await waitFor(() => expect(target.container.querySelector('.ZLearnPage-root')).toBeTruthy());
+    await waitFor(() => expect(target.container.querySelector('.ZCircularProgress-root')).toBeFalsy());
     return target;
   }
 
   async function clickGoToApiButton(target: RenderResult) {
     const btn = target.container.querySelector<HTMLButtonElement>('.ZPaperCard-btn-action');
-    await act(() => {
+    await act(async () => {
       fireEvent.click(btn);
     });
   }

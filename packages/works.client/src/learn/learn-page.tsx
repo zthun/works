@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import { ZCardAvatar, ZMarkdownViewer } from '@zthun/works.react';
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 /**
  * Returns the jsx for the learn page.
@@ -9,23 +9,16 @@ import { useHistory, useParams } from 'react-router-dom';
  * @returns The jsx for the learn page.
  */
 export function ZLearnPage() {
-  const hist = useHistory();
+  const navigate = useNavigate();
   const { pkg } = useParams<{ pkg: string }>();
   const src = `docs/${pkg}.README.md`;
   const img = `images/svg/${pkg}.svg`;
   const avatar = <ZCardAvatar src={img} size='xl' />;
 
-  /**
-   * Occurs when the api button is clicked.
-   */
-  function handleApi() {
-    hist.push(`/learn/${pkg}/api`);
-  }
-
   return (
-    <Grid container={true} spacing={3} className='ZLearnPage-root' justifyContent='center'>
-      <Grid item={true}>
-        <ZMarkdownViewer src={src} avatar={avatar} actionText='View the API' onAction={handleApi} headerText='README' subHeaderText={pkg} size='lg' />
+    <Grid container spacing={3} className='ZLearnPage-root' justifyContent='center'>
+      <Grid item>
+        <ZMarkdownViewer src={src} avatar={avatar} actionText='View the API' onAction={navigate.bind(null, `/learn/${pkg}/api`)} headerText='README' subHeaderText={pkg} size='lg' />
       </Grid>
     </Grid>
   );

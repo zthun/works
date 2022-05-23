@@ -3,7 +3,7 @@ import { Grid, Typography } from '@mui/material';
 import { makeStyles, ZPaperCard } from '@zthun/works.react';
 import { kebabCase } from 'lodash';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const useHomePageStyles = makeStyles()(() => ({
   learn: {
@@ -23,7 +23,7 @@ const useHomePageStyles = makeStyles()(() => ({
  * @returns The jsx that renders the home page.
  */
 export function ZHomePage() {
-  const hist = useHistory();
+  const navigate = useNavigate();
   const styles = useHomePageStyles();
 
   /**
@@ -32,7 +32,7 @@ export function ZHomePage() {
    * @param name The name page to navigate to.
    */
   function learn(name: string) {
-    hist.push(`/learn/${name}`);
+    navigate(`/learn/${name}`);
   }
 
   const learnReact = learn.bind(null, 'works.react');

@@ -1,16 +1,16 @@
 /* eslint-disable require-jsdoc */
-import { act, render, fireEvent } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
+import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { ZHomePage } from './home-page';
-import { createMemoryHistory, MemoryHistory } from 'history';
 
 describe('ZHomePage', () => {
   let history: MemoryHistory;
 
   function createTestTarget() {
     return render(
-      <Router history={history}>
+      <Router location={history.location} navigator={history}>
         <ZHomePage />
       </Router>
     );

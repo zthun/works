@@ -3,7 +3,7 @@ import { IZTypedocEntity } from '@zthun/works.core';
 import { ZCardAvatar, ZTypedocViewerSource } from '@zthun/works.react';
 import { get } from 'lodash';
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 /**
  * Represents the api page for a package.
@@ -12,7 +12,7 @@ import { useHistory, useParams } from 'react-router-dom';
  */
 export function ZApiPage() {
   const { pkg, enid } = useParams<{ pkg: string; enid?: string }>();
-  const hist = useHistory();
+  const navigate = useNavigate();
   const img = `images/svg/${pkg}.svg`;
   const src = `docs/${pkg}.typedoc.json`;
   const entityId = +enid;
@@ -21,14 +21,14 @@ export function ZApiPage() {
    * Navigates back to the learn page.
    */
   function handleLearn() {
-    hist.push(`/learn/${pkg}`);
+    navigate(`/learn/${pkg}`);
   }
 
   /**
    * Navigates to the root api page of the package.
    */
   function handleApi() {
-    hist.push(`/learn/${pkg}/api`);
+    navigate(`/learn/${pkg}/api`);
   }
 
   /**
@@ -38,7 +38,7 @@ export function ZApiPage() {
    */
   function handleEntity(entity: IZTypedocEntity | number) {
     const id = get(entity, 'id', entity);
-    hist.push(`/learn/${pkg}/api/${id}`);
+    navigate(`/learn/${pkg}/api/${id}`);
   }
 
   const avatar = <ZCardAvatar src={img} size='xl' />;
@@ -46,8 +46,8 @@ export function ZApiPage() {
   const handleAction = entityId ? handleApi : handleLearn;
 
   return (
-    <Grid container={true} spacing={3} className='ZApiPage-root' justifyContent='center'>
-      <Grid item={true}>
+    <Grid container spacing={3} className='ZApiPage-root' justifyContent='center'>
+      <Grid item>
         <ZTypedocViewerSource src={src} avatar={avatar} actionText={actionText} entityId={entityId} onAction={handleAction} onEntity={handleEntity} />
       </Grid>
     </Grid>
