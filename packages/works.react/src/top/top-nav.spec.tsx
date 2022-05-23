@@ -29,7 +29,7 @@ describe('ZTopNav', () => {
         <ZWebAppsContext.Provider value={webApps}>
           <ZIdentityContext.Provider value={profile}>
             <ZHealthServiceContext.Provider value={health}>
-              <Router history={history}>
+              <Router location={history.location} navigator={history}>
                 <ZTopNav whoami={whoami} profileApp={profileApp} routes={routes} />
               </Router>
             </ZHealthServiceContext.Provider>

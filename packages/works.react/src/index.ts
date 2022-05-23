@@ -12,7 +12,7 @@ export { IZCardAvatarProps, ZCardAvatar } from './card/card-avatar';
 export { IZPaperCardProps, ZPaperCard } from './card/paper-card';
 // Codes
 export { IZHttpStatusCodeCardProps, ZHttpStatusCodeCard } from './codes/http-code-card';
-export { IZStatusCodePageProps, renderStatusCodePage, ZStatusCodePage } from './codes/status-code-page';
+export { IZStatusCodePageProps, ZStatusCodePage } from './codes/status-code-page';
 // Component
 export { IZComponentActionable } from './component/component-actionable.interface';
 export { IZComponentConfirmable } from './component/component-confirmable.interface';

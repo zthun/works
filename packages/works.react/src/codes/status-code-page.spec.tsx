@@ -1,36 +1,35 @@
 /* eslint-disable require-jsdoc */
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { renderStatusCodePage, ZStatusCodePage } from './status-code-page';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { ZStatusCodePage } from './status-code-page';
 
 describe('ZStatusCodePage', () => {
   let code: number;
 
-  function createTestTarget() {
-    return render(<ZStatusCodePage code={code} />);
+  async function createTestTarget() {
+    const target = render(
+      <MemoryRouter initialEntries={[`/${code}`]}>
+        <Routes>
+          <Route path='/:code' element={<ZStatusCodePage name='code' />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    await waitFor(() => expect(target.container.querySelector('.ZStatusCodePage-root')).toBeTruthy());
+
+    return target;
   }
 
   beforeEach(() => {
     code = 404;
   });
 
-  it('should render the page.', () => {
+  it('should render the page.', async () => {
     // Arrange
-    const target = createTestTarget();
     // Act
-    const actual = target.getByTestId('ZStatusCodePage-root');
+    const target = await createTestTarget();
     // Assert
-    expect(actual).toBeTruthy();
-  });
-
-  it('should render the status code page with support for a route param.', async () => {
-    // Arrange
-    const props = { match: { params: { code }, isExact: true, path: 'status-code/:code', url: null } } as RouteComponentProps<any>;
-    const target = render(renderStatusCodePage('code', props));
-    // Act
-    const actual = target.container.querySelector(`.ZHttpStatusCodeCard-code-${code}`);
-    // Assert
-    expect(actual).toBeTruthy();
+    expect(target).toBeTruthy();
   });
 });

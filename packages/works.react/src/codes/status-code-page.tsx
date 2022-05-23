@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import { ZHttpCode } from '@zthun/works.http';
 import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ZHttpStatusCodeCard } from './http-code-card';
 
 /**
@@ -9,9 +9,9 @@ import { ZHttpStatusCodeCard } from './http-code-card';
  */
 export interface IZStatusCodePageProps {
   /**
-   * The code to display information about.
+   * The name of the route param that contains the code.
    */
-  code: number | string;
+  name: string;
 }
 
 /**
@@ -22,28 +22,14 @@ export interface IZStatusCodePageProps {
  * @returns The jsx that renders the status code page.
  */
 export function ZStatusCodePage(props: IZStatusCodePageProps) {
+  const params = useParams();
+  const code: ZHttpCode = +params[props.name];
+
   return (
-    <Grid container={true} spacing={3} className='ZStatusCodePage-root' data-testid='ZStatusCodePage-root' justifyContent='center'>
+    <Grid container={true} spacing={3} className='ZStatusCodePage-root' justifyContent='center'>
       <Grid item={true}>
-        <ZHttpStatusCodeCard code={+props.code as ZHttpCode} />
+        <ZHttpStatusCodeCard code={code} />
       </Grid>
     </Grid>
   );
-}
-
-/**
- * Returns the jsx to render a status code page.
- *
- * This method is useful to use when you want to render a full status code page.
- * To use this, bind it with the name of the parameter you want.
- *
- * @example <Route render={renderStatusCodePage.bind(null, 'code')}
- *
- * @param name The name of the param on the route that holds the code.
- * @param props The route properties that holds the current url information.
- *
- * @returns The jsx to render a status code page.
- */
-export function renderStatusCodePage(name: string, props: RouteComponentProps<any>) {
-  return <ZStatusCodePage code={props.match.params.code} />;
 }

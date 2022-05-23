@@ -1,9 +1,9 @@
 import { ThemeProvider } from '@mui/system';
 import React from 'react';
-import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { GlobalStyles } from 'tss-react';
 import { ZAlertList } from '../alert/alert-list';
-import { renderStatusCodePage } from '../codes/status-code-page';
+import { ZStatusCodePage } from '../codes/status-code-page';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
 import { ZContent } from '../content/content';
 import { useIdentityRoot } from '../identity/identity.context';
@@ -54,12 +54,12 @@ export function ZWebAppLayout(props: IZWebAppLayout) {
         <HashRouter>
           <ZTopNav {...props} />
           <ZContent>
-            <Switch>
+            <Routes>
               {children}
-              <Route exact path='/status-code/:code' render={renderStatusCodePage.bind(null, 'code')} />
-              <Redirect exact from='/' to={home} />
-              <Redirect to='/status-code/404' />
-            </Switch>
+              <Route path='/status-code/:code' element={<ZStatusCodePage name='code' />} />
+              <Route path='/' element={<Navigate to={home} />} />
+              <Route path='*' element={<Navigate to={'/status-code/404'} />} />
+            </Routes>
           </ZContent>
         </HashRouter>
         <ZAlertList />

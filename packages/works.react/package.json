@@ -44,7 +44,7 @@
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "react-markdown": "^6.0.3",
-    "react-router-dom": "^5.3.3",
+    "react-router-dom": "^6.3.0",
     "remark-gfm": "^1.0.0",
     "rxjs": "^7.5.5",
     "tss-react": "^3.6.2"

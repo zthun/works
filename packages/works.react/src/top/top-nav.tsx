@@ -4,7 +4,7 @@ import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItem
 import { IZRouteOption } from '@zthun/works.core';
 import { kebabCase } from 'lodash';
 import React, { ReactNode, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useWebApp, useWebAppsAndWatch } from '../apps/web-apps.context';
 import { ZHealthIndicator } from '../health/health-indicator';
 import { ZIdentityButton } from '../identity/identity-button';
@@ -117,7 +117,7 @@ export function ZTopNav(props: IZTopNavProps) {
   const apps = useWebAppsAndWatch();
   const who = useWebApp(whoami);
   const profile = useWebApp(profileApp);
-  const history = useHistory();
+  const navigate = useNavigate();
   const win = useWindowService();
   const styles = useTopNavStyles();
 
@@ -129,7 +129,7 @@ export function ZTopNav(props: IZTopNavProps) {
    */
   function handleHome() {
     setMoreShown(false);
-    history.push('/');
+    navigate('/');
   }
 
   /**
@@ -307,7 +307,7 @@ export function ZTopNav(props: IZTopNavProps) {
   function createNavRoute(route: IZRouteOption) {
     const handleRoute = () => {
       setMoreShown(false);
-      history.push(route.path);
+      navigate(route.path);
     };
 
     const avatar = <div className={`ZTopNav-app-icon ${styles.classes.icon}`}>{route.avatar}</div>;
