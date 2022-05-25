@@ -5,10 +5,10 @@ import { createMocked } from '@zthun/works.jest';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { kebabCase } from 'lodash';
 import React from 'react';
-import { Router } from 'react-router-dom';
 import { ZWebAppsContext } from '../apps/web-apps.context';
 import { IZHealthService, ZHealthServiceContext } from '../health/health-service.context';
 import { ZIdentityContext } from '../identity/identity.context';
+import { ZTestRouter } from '../router/router-dom';
 import { ZDataState } from '../state/data-state.class';
 import { ZWindowServiceContext } from '../window/window-service.context';
 import { ZTopNav } from './top-nav';
@@ -29,9 +29,9 @@ describe('ZTopNav', () => {
         <ZWebAppsContext.Provider value={webApps}>
           <ZIdentityContext.Provider value={profile}>
             <ZHealthServiceContext.Provider value={health}>
-              <Router location={history.location} navigator={history}>
+              <ZTestRouter location={history.location} navigator={history}>
                 <ZTopNav whoami={whoami} profileApp={profileApp} routes={routes} />
-              </Router>
+              </ZTestRouter>
             </ZHealthServiceContext.Provider>
           </ZIdentityContext.Provider>
         </ZWebAppsContext.Provider>

@@ -60,6 +60,8 @@ export { ZImageSource } from './image/image-source';
 // Loading
 export { ZCircularBackdrop } from './loading/circular-backdrop';
 export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';
+// Router
+export { useNavigate, useParams, ZNavigate, ZOutlet, ZRoute, ZRouteMap, ZRouter, ZTestRouter } from './router/router-dom';
 // State
 export { ZDataState } from './state/data-state.class';
 export { IZDataState } from './state/data-state.interface';

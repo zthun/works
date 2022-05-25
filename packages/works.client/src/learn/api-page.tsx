@@ -1,9 +1,8 @@
 import { Grid } from '@mui/material';
 import { IZTypedocEntity } from '@zthun/works.core';
-import { ZCardAvatar, ZTypedocViewerSource } from '@zthun/works.react';
+import { useNavigate, useParams, ZCardAvatar, ZTypedocViewerSource } from '@zthun/works.react';
 import { get } from 'lodash';
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 
 /**
  * Represents the api page for a package.

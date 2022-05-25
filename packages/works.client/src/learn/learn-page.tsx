@@ -1,7 +1,6 @@
 import { Grid } from '@mui/material';
-import { ZCardAvatar, ZMarkdownViewer } from '@zthun/works.react';
+import { useNavigate, useParams, ZCardAvatar, ZMarkdownViewer } from '@zthun/works.react';
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 
 /**
  * Returns the jsx for the learn page.

@@ -1,10 +1,9 @@
 /* eslint-disable require-jsdoc */
 import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
 import { ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
-import { ZHttpServiceContext } from '@zthun/works.react';
+import { ZHttpServiceContext, ZRoute, ZRouteMap, ZTestRouter } from '@zthun/works.react';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
-import { Route, Router, Routes } from 'react-router-dom';
 import { ZLearnPage } from './learn-page';
 
 describe('ZLearnPage', () => {
@@ -15,11 +14,11 @@ describe('ZLearnPage', () => {
   async function createTestTarget() {
     const target = render(
       <ZHttpServiceContext.Provider value={http}>
-        <Router location={history.location} navigator={history}>
-          <Routes>
-            <Route path='/learn/:pkg' element={<ZLearnPage />} />
-          </Routes>
-        </Router>
+        <ZTestRouter location={history.location} navigator={history}>
+          <ZRouteMap>
+            <ZRoute path='/learn/:pkg' element={<ZLearnPage />} />
+          </ZRouteMap>
+        </ZTestRouter>
       </ZHttpServiceContext.Provider>
     );
 

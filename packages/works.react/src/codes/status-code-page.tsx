@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import { ZHttpCode } from '@zthun/works.http';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from '../router/router-dom';
 import { ZHttpStatusCodeCard } from './http-code-card';
 
 /**

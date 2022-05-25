@@ -1,19 +1,22 @@
 /* eslint-disable require-jsdoc */
 import { render, waitFor } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
 import React from 'react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { ZRoute, ZRouteMap, ZTestRouter } from '../router/router-dom';
 import { ZStatusCodePage } from './status-code-page';
 
 describe('ZStatusCodePage', () => {
   let code: number;
 
   async function createTestTarget() {
+    const history = createMemoryHistory({ initialEntries: [`/${code}`] });
+
     const target = render(
-      <MemoryRouter initialEntries={[`/${code}`]}>
-        <Routes>
-          <Route path='/:code' element={<ZStatusCodePage name='code' />} />
-        </Routes>
-      </MemoryRouter>
+      <ZTestRouter location={history.location} navigator={history}>
+        <ZRouteMap>
+          <ZRoute path='/:code' element={<ZStatusCodePage name='code' />} />
+        </ZRouteMap>
+      </ZTestRouter>
     );
 
     await waitFor(() => expect(target.container.querySelector('.ZStatusCodePage-root')).toBeTruthy());

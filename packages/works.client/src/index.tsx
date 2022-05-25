@@ -21,7 +21,7 @@ import '@zthun/works.jest/README.md';
 import '@zthun/works.nest/docs/typedoc.json';
 import '@zthun/works.nest/images';
 import '@zthun/works.nest/README.md';
-import { ZWebAppLayout } from '@zthun/works.react';
+import { ZRoute, ZWebAppLayout } from '@zthun/works.react';
 import '@zthun/works.react/docs/typedoc.json';
 import '@zthun/works.react/images';
 import '@zthun/works.react/README.md';
@@ -29,19 +29,19 @@ import '@zthun/works.url/docs/typedoc.json';
 import '@zthun/works.url/images';
 import '@zthun/works.url/README.md';
 import React from 'react';
-import { render } from 'react-dom';
-import { Route } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
 import '../images/svg/zthunworks-owl.svg';
 import { ZHomePage } from './home/home-page';
 import { ZApiPage } from './learn/api-page';
 import { ZLearnPage } from './learn/learn-page';
 
-render(
+const container = createRoot(document.getElementById('zthunworks'));
+
+container.render(
   <ZWebAppLayout whoami='learn' profileApp='roadblock'>
-    <Route path='/home' element={<ZHomePage />} />
-    <Route path='/learn/:pkg/api/:enid' element={<ZApiPage />} />
-    <Route path='/learn/:pkg/api' element={<ZApiPage />} />
-    <Route path='/learn/:pkg' element={<ZLearnPage />} />
-  </ZWebAppLayout>,
-  document.getElementById('zthunworks')
+    <ZRoute path='/home' element={<ZHomePage />} />
+    <ZRoute path='/learn/:pkg/api/:enid' element={<ZApiPage />} />
+    <ZRoute path='/learn/:pkg/api' element={<ZApiPage />} />
+    <ZRoute path='/learn/:pkg' element={<ZLearnPage />} />
+  </ZWebAppLayout>
 );

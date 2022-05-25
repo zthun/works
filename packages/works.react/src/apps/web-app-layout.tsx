@@ -1,12 +1,12 @@
 import { ThemeProvider } from '@mui/system';
 import React from 'react';
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { GlobalStyles } from 'tss-react';
 import { ZAlertList } from '../alert/alert-list';
 import { ZStatusCodePage } from '../codes/status-code-page';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
 import { ZContent } from '../content/content';
 import { useIdentityRoot } from '../identity/identity.context';
+import { ZNavigate, ZRoute, ZRouteMap, ZRouter } from '../router/router-dom';
 import { useZthunworksTheme } from '../theme/make-styles';
 import { IZTopNavProps, ZTopNav } from '../top/top-nav';
 import { useWebAppsRoot } from './web-apps.context';
@@ -51,17 +51,17 @@ export function ZWebAppLayout(props: IZWebAppLayout) {
     <div className='ZWebAppLayout-root'>
       <GlobalStyles styles={globalStyles} />
       <ThemeProvider theme={theme}>
-        <HashRouter>
+        <ZRouter>
           <ZTopNav {...props} />
           <ZContent>
-            <Routes>
+            <ZRouteMap>
               {children}
-              <Route path='/status-code/:code' element={<ZStatusCodePage name='code' />} />
-              <Route path='/' element={<Navigate to={home} />} />
-              <Route path='*' element={<Navigate to={'/status-code/404'} />} />
-            </Routes>
+              <ZRoute path='/status-code/:code' element={<ZStatusCodePage name='code' />} />
+              <ZRoute path='/' element={<ZNavigate to={home} />} />
+              <ZRoute path='*' element={<ZNavigate to={'/status-code/404'} />} />
+            </ZRouteMap>
           </ZContent>
-        </HashRouter>
+        </ZRouter>
         <ZAlertList />
       </ThemeProvider>
     </div>

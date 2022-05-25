@@ -4,13 +4,13 @@ import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItem
 import { IZRouteOption } from '@zthun/works.core';
 import { kebabCase } from 'lodash';
 import React, { ReactNode, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useWebApp, useWebAppsAndWatch } from '../apps/web-apps.context';
 import { ZHealthIndicator } from '../health/health-indicator';
 import { ZIdentityButton } from '../identity/identity-button';
 import { useIdentityAndWatch } from '../identity/identity.context';
 import { ZImageSource } from '../image/image-source';
 import { ZCircularProgress } from '../loading/circular-progress';
+import { useNavigate } from '../router/router-dom';
 import { makeStyles } from '../theme/make-styles';
 import { useWindowService } from '../window/window-service.context';
 

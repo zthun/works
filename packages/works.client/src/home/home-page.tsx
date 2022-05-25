@@ -1,9 +1,8 @@
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { Grid, Typography } from '@mui/material';
-import { makeStyles, ZPaperCard } from '@zthun/works.react';
+import { makeStyles, useNavigate, ZPaperCard } from '@zthun/works.react';
 import { kebabCase } from 'lodash';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const useHomePageStyles = makeStyles()(() => ({
   learn: {

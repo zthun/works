@@ -3,10 +3,9 @@
 import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
 import { IZTypedoc, IZTypedocEntity, ZTypedocKind, ZTypedocTypeKind } from '@zthun/works.core';
 import { ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
-import { ZHttpServiceContext } from '@zthun/works.react';
+import { ZHttpServiceContext, ZRoute, ZRouteMap, ZTestRouter } from '@zthun/works.react';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
-import { Route, Router, Routes } from 'react-router-dom';
 import { ZApiPage } from './api-page';
 
 describe('ZApiPage', () => {
@@ -19,13 +18,13 @@ describe('ZApiPage', () => {
   async function createTestTarget() {
     const target = render(
       <ZHttpServiceContext.Provider value={http}>
-        <Router location={history.location} navigator={history}>
-          <Routes>
-            <Route path='/learn/:pkg/api' element={<ZApiPage />}>
-              <Route path=':enid' element={<ZApiPage />} />
-            </Route>
-          </Routes>
-        </Router>
+        <ZTestRouter location={history.location} navigator={history}>
+          <ZRouteMap>
+            <ZRoute path='/learn/:pkg/api' element={<ZApiPage />}>
+              <ZRoute path=':enid' element={<ZApiPage />} />
+            </ZRoute>
+          </ZRouteMap>
+        </ZTestRouter>
       </ZHttpServiceContext.Provider>
     );
 

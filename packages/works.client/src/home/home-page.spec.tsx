@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
 import { act, fireEvent, render } from '@testing-library/react';
+import { ZTestRouter } from '@zthun/works.react';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
-import { Router } from 'react-router-dom';
 import { ZHomePage } from './home-page';
 
 describe('ZHomePage', () => {
@@ -10,9 +10,9 @@ describe('ZHomePage', () => {
 
   function createTestTarget() {
     return render(
-      <Router location={history.location} navigator={history}>
+      <ZTestRouter location={history.location} navigator={history}>
         <ZHomePage />
-      </Router>
+      </ZTestRouter>
     );
   }
 
