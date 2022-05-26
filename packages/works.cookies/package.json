@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.cookies",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "A zthunworks microservice that manages secure cookies for the application.",
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -30,7 +30,7 @@
     "@nestjs/common": "^8.4.5",
     "@nestjs/core": "^8.4.5",
     "@nestjs/microservices": "^8.4.5",
-    "@zthun/works.core": "^3.0.2",
+    "@zthun/works.core": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.5"

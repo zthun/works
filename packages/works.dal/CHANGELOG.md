@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0](https://github.com/zthun/works/compare/v3.1.2...v4.0.0) (2022-05-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* updated mongodb system to 4.6
+
+### Features
+
+* updated mongodb memory server ([529c43f](https://github.com/zthun/works/commit/529c43f8848c225ea21306e3760f78a31b73f9d2))
+* updated mongodb system to 4.6 ([b4f63d6](https://github.com/zthun/works/commit/b4f63d619a4d5f5b9e4d332662955616d985ea02))
+
+
+
 ## [3.1.0](https://github.com/zthun/works/compare/v3.0.10...v3.1.0) (2022-01-30)
 
 **Note:** Version bump only for package @zthun/works.dal

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0](https://github.com/zthun/works/compare/v3.1.2...v4.0.0) (2022-05-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to react 18
+
+### Features
+
+* updated highlight.js to 11.5.1 ([ab14e74](https://github.com/zthun/works/commit/ab14e74bf3a73e744f6e23534a1f0b5758b53543))
+* updated with latest react router api ([0081faf](https://github.com/zthun/works/commit/0081faf0b8bb0e84b8f4d55d355069b0db790da4))
+* upgrade to react 18 ([4f8869e](https://github.com/zthun/works/commit/4f8869e319166c122bda69923705cd6512c0e83c))
+
+
+
 ## [3.1.0](https://github.com/zthun/works/compare/v3.0.10...v3.1.0) (2022-01-30)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.api",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "This is an empty application used for mocking applications in other apps.",
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -26,10 +26,10 @@
     "@nestjs/core": "^8.4.5",
     "@nestjs/microservices": "^8.4.5",
     "@nestjs/platform-express": "^8.4.5",
-    "@zthun/works.class": "^3.0.2",
-    "@zthun/works.core": "^3.0.2",
-    "@zthun/works.dal": "^3.1.0",
-    "@zthun/works.nest": "^3.1.0",
+    "@zthun/works.class": "^4.0.0",
+    "@zthun/works.core": "^4.0.0",
+    "@zthun/works.dal": "^4.0.0",
+    "@zthun/works.nest": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.5",
     "uuid": "^8.3.2"

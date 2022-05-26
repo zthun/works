@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works.draw",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "A package that contains the modeling and algorithms to draw to a canvas.",
   "author": "Anthony Bonta",
   "license": "MIT",

@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0](https://github.com/zthun/works/compare/v3.1.2...v4.0.0) (2022-05-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* updated react-router-dom to 6.3
+* upgrade to react 18
+* updated nestjs version requirement to 8.4
+* updated mongodb system to 4.6
+
+### Features
+
+* updated highlight.js to 11.5.1 ([ab14e74](https://github.com/zthun/works/commit/ab14e74bf3a73e744f6e23534a1f0b5758b53543))
+* updated material ([e95924f](https://github.com/zthun/works/commit/e95924f43b384ee6af2038c1af5c5d0412471450))
+* updated mongodb memory server ([529c43f](https://github.com/zthun/works/commit/529c43f8848c225ea21306e3760f78a31b73f9d2))
+* updated mongodb system to 4.6 ([b4f63d6](https://github.com/zthun/works/commit/b4f63d619a4d5f5b9e4d332662955616d985ea02))
+* updated nestjs version requirement to 8.4 ([ee6df1b](https://github.com/zthun/works/commit/ee6df1b46f053d8e91292281cc195a05564730e3))
+* updated react-router-dom to 6.3 ([6a4ed89](https://github.com/zthun/works/commit/6a4ed89706084ba89d12337af23dc4150f2d9bc4))
+* updated with latest react router api ([0081faf](https://github.com/zthun/works/commit/0081faf0b8bb0e84b8f4d55d355069b0db790da4))
+* upgrade to react 18 ([4f8869e](https://github.com/zthun/works/commit/4f8869e319166c122bda69923705cd6512c0e83c))
+
+
+
 ### [3.1.2](https://github.com/zthun/works/compare/v3.1.1...v3.1.2) (2022-03-23)
 
 **Note:** Version bump only for package @zthun/works
