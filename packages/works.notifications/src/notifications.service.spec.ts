@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { IZEmail, IZEmailEnvelope, IZServer, ZEmailBuilder, ZEmailEnvelopeBuilder, ZServerBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
+import { first } from 'lodash';
 import { createTransport } from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 import { ZNotificationsService } from './notifications.service';
@@ -38,11 +39,29 @@ describe('ZNotificationsService', () => {
     it('should send the email message.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = { from: envelope.from, to: envelope.to[0], cc: undefined, bcc: envelope.bcc[0], subject: msg.subject, html: msg.message };
+      const from = envelope.from as string;
+      const to = first(envelope.to) as string;
+      const bcc = first(envelope.bcc) as string;
+      const subject = msg.subject as string;
+      const html = msg.message as string;
+      const expected = { from, to, bcc, subject, html };
       // Act
       await target.sendEmail({ msg, smtp });
       // Assert
       expect(mail.sendMail).toHaveBeenCalledWith(expect.objectContaining(expected));
+    });
+
+    it('should send the email without the to field.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      delete msg.envelope.to;
+      delete msg.envelope.bcc;
+      msg.envelope.cc = ['xmen@marvel.com'];
+      const cc = first(msg.envelope.cc) as string;
+      // Act
+      await target.sendEmail({ msg, smtp });
+      // Assert
+      expect(mail.sendMail).toHaveBeenCalledWith(expect.objectContaining({ cc }));
     });
 
     it('should return null upon success.', async () => {

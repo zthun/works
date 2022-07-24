@@ -11,8 +11,7 @@ export class ZNotificationsService {
   /**
    * Sends an email message.
    *
-   * @param msg The message to send.
-   * @param smtp The smtp server to use when sending the message.
+   * @param args The message to send with the server to send to.
    *
    * @returns A promise that, when resolved has sent the mail.  Returns a rejected promise if
    *          the send fails. Upon success, null is returned.
@@ -35,9 +34,9 @@ export class ZNotificationsService {
     });
 
     const from = new ZEmailContactAddressBuilder().address(msg.envelope.from).build();
-    const to = new ZEmailContactAddressBuilder().addresses(msg.envelope.to).build();
-    const cc = new ZEmailContactAddressBuilder().addresses(msg.envelope.cc).build();
-    const bcc = new ZEmailContactAddressBuilder().addresses(msg.envelope.bcc).build();
+    const to = new ZEmailContactAddressBuilder().addresses(msg.envelope.to || []).build();
+    const cc = new ZEmailContactAddressBuilder().addresses(msg.envelope.cc || []).build();
+    const bcc = new ZEmailContactAddressBuilder().addresses(msg.envelope.bcc || []).build();
     const subject = msg.subject;
     const html = msg.message;
 
