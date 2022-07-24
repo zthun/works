@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { ZHttpCodeRedirection } from './http-code-redirection.enum';
+import { ZHttpCodeRedirection } from './http-code-redirection';
+import { IZHttpResult } from './http-result';
 import { ZHttpResultBuilder } from './http-result-builder.class';
-import { IZHttpResult } from './http-result.interface';
 
 describe('ZHttpResultBuilder', () => {
   function createTestTarget() {

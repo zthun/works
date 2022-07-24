@@ -1,6 +1,25 @@
-import { ZHttpCodeSuccess } from './http-code-success.enum';
-import { ZHttpCode } from './http-code.type';
-import { IZHttpResult } from './http-result.interface';
+import { ZHttpCode } from './http-code';
+import { ZHttpCodeSuccess } from './http-code-success';
+
+/**
+ * Represents a result from an http request.
+ */
+export interface IZHttpResult<TResult = any> {
+  /**
+   * The status code.
+   */
+  status: ZHttpCode;
+
+  /**
+   * The set of headers that was returned.
+   */
+  headers: Record<string, string>;
+
+  /**
+   * The actual body result of the invocation.
+   */
+  data?: TResult;
+}
 
 /**
  * Represents a builder for an IZHttpResult class.
@@ -14,7 +33,6 @@ export class ZHttpResultBuilder<TData = any> {
   public constructor() {
     this._result = {
       status: ZHttpCodeSuccess.OK,
-      data: null,
       headers: {}
     };
   }
@@ -26,7 +44,7 @@ export class ZHttpResultBuilder<TData = any> {
    *
    * @returns This object.
    */
-  public data(data: TData): this {
+  public data(data: TData | undefined): this {
     this._result.data = data;
     return this;
   }
