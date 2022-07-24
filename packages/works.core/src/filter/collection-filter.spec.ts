@@ -1,8 +1,6 @@
 /* eslint-disable require-jsdoc */
-import { ZCollectionFilterBuilder } from './collection-filter-builder.class';
-import { IZCollectionFilter } from './collection-filter.interface';
-import { ZCollectionOperator } from './collection-operator.enum';
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
+import { IZCollectionFilter, ZCollectionFilterBuilder, ZCollectionOperator } from './collection-filter';
 
 describe('CollectionFilterBuilder', () => {
   function createTestTarget() {

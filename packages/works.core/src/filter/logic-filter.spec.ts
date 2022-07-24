@@ -1,12 +1,10 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { ZBinaryFilterBuilder } from './binary-filter-builder.class';
-import { ZCollectionFilterBuilder } from './collection-filter-builder.class';
-import { IZFilter } from './filter.type';
-import { ZLogicFilterBuilder } from './logic-filter-builder.class';
-import { ZLogicOperator } from './logic-operator.enum';
-import { ZUnaryFilterBuilder } from './unary-filter-builder.class';
-import { IZLogicFilter } from './logic-filter.interface';
+import { ZBinaryFilterBuilder } from './binary-filter';
+import { ZCollectionFilterBuilder } from './collection-filter';
+import { IZFilter } from './filter';
+import { IZLogicFilter, ZLogicFilterBuilder, ZLogicOperator } from './logic-filter';
+import { ZUnaryFilterBuilder } from './unary-filter';
 
 describe('LogicFilterBuilder', () => {
   let clauseA: IZFilter;

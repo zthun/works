@@ -1,5 +1,34 @@
-import { IZCollectionFilter } from './collection-filter.interface';
-import { ZCollectionOperator } from './collection-operator.enum';
+/**
+ * Represents an operator that compares collections.
+ */
+export enum ZCollectionOperator {
+  /**
+   * In
+   */
+  In = 'in',
+  /**
+   * Not in.
+   */
+  NotIn = 'not-in'
+}
+
+/**
+ * A filter that operates on a collection of values.
+ */
+export interface IZCollectionFilter<T = any> {
+  /**
+   * The collection field.
+   */
+  field: string;
+  /**
+   * The collection operator against the field.
+   */
+  operator: ZCollectionOperator;
+  /**
+   * The values to compare the field against.
+   */
+  values: T[];
+}
 
 /**
  * Represents a builder for a collection filter.
@@ -12,7 +41,7 @@ export class ZCollectionFilterBuilder<T = any> {
    */
   public constructor() {
     this._filter = {
-      field: null,
+      field: '',
       operator: ZCollectionOperator.In,
       values: []
     };

@@ -1,5 +1,54 @@
-import { IZBinaryFilter } from './binary-filter.interface';
-import { ZBinaryOperator } from './binary-operator.enum';
+/**
+ * Represents the available operators for a binary filter.
+ */
+export enum ZBinaryOperator {
+  /**
+   * Equals
+   */
+  Equal = 'eq',
+  /**
+   * Not equals.
+   */
+  NotEqual = 'neq',
+  /**
+   * Less than.
+   */
+  LessThan = 'lt',
+  /**
+   * Greater than.
+   */
+  GreaterThan = 'gt',
+  /**
+   * Less than or equal to.
+   */
+  LessThanEqualTo = 'lteq',
+  /**
+   * Greater than or equal to.
+   */
+  GreaterThanEqualTo = 'gteq',
+  /**
+   * Like (Contains)
+   */
+  Like = 'like'
+}
+
+/**
+ * Represents a standard comparison filter between a field and a wanted value.
+ */
+export interface IZBinaryFilter<T = any> {
+  /**
+   * The filed to sort by.
+   */
+  field: string;
+  /**
+   * The comparison operator.
+   */
+  operator: ZBinaryOperator;
+  /**
+   * The value to sort by.
+   */
+  value: T;
+}
 
 /**
  * Represents an object that can build up a binary filter.
@@ -12,8 +61,8 @@ export class ZBinaryFilterBuilder<T = any> {
    */
   public constructor() {
     this._filter = {
-      field: null,
-      value: null,
+      field: '',
+      value: null as any,
       operator: ZBinaryOperator.Equal
     };
   }

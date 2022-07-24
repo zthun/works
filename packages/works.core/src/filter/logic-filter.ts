@@ -1,6 +1,32 @@
-import { IZFilter } from './filter.type';
-import { IZLogicFilter } from './logic-filter.interface';
-import { ZLogicOperator } from './logic-operator.enum';
+import { IZFilter } from './filter';
+
+/**
+ * Represents the connector for a logic filter.
+ */
+export enum ZLogicOperator {
+  /**
+   * And.
+   */
+  And = 'and',
+  /**
+   * Or
+   */
+  Or = 'or'
+}
+
+/**
+ * Represents a composite logical filter.
+ */
+export interface IZLogicFilter {
+  /**
+   * The collection of child clauses.
+   */
+  clauses: IZFilter[];
+  /**
+   * The operator relationship between the clauses.
+   */
+  operator: ZLogicOperator;
+}
 
 /**
  * Represents a builder for a logic filter.

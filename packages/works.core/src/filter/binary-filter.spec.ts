@@ -1,8 +1,6 @@
 /* eslint-disable require-jsdoc */
-import { ZBinaryFilterBuilder } from './binary-filter-builder.class';
-import { IZBinaryFilter } from './binary-filter.interface';
-import { ZBinaryOperator } from './binary-operator.enum';
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
+import { IZBinaryFilter, ZBinaryFilterBuilder, ZBinaryOperator } from './binary-filter';
 
 describe('BinaryFilterBuilder', () => {
   function createTestTarget() {

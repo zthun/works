@@ -1,5 +1,30 @@
-import { IZUnaryFilter } from './unary-filter.interface';
-import { ZUnaryOperator } from './unary-operator.enum';
+/**
+ * Operators for a unary filter.
+ */
+export enum ZUnaryOperator {
+  /**
+   * Is null.
+   */
+  IsNull = 'null',
+  /**
+   * Is not null.
+   */
+  IsNotNull = 'is-not-null'
+}
+
+/**
+ * Represents a yes/no style filter.
+ */
+export interface IZUnaryFilter {
+  /**
+   * The field to apply the filter on.
+   */
+  field: string;
+  /**
+   * The operator for the filter.
+   */
+  operator: ZUnaryOperator;
+}
 
 /**
  * Represents a builder for a UnaryFilter object.
@@ -9,12 +34,10 @@ export class ZUnaryFilterBuilder {
 
   /**
    * Initializes a new instance of this object.
-   *
-   * @param field The field to operate on.
    */
   public constructor() {
     this._filter = {
-      field: null,
+      field: '',
       operator: ZUnaryOperator.IsNull
     };
   }

@@ -1,13 +1,12 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { ZUnaryFilterBuilder } from './unary-filter-builder.class';
-import { ZUnaryOperator } from './unary-operator.enum';
-import { IZUnaryFilter } from './unary-filter.interface';
+import { IZUnaryFilter, ZUnaryFilterBuilder, ZUnaryOperator } from './unary-filter';
 
 describe('UnaryFilterBuilder', () => {
   function createTestTarget() {
     return new ZUnaryFilterBuilder();
   }
+
   it('sets the field.', () => {
     assertBuilderSetsProperty(
       'field',

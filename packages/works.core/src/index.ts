@@ -25,19 +25,11 @@ export { IZEmailContact, ZEmailContactBuilder } from './email/email-contact';
 export { ZEmailContactAddressBuilder } from './email/email-contact-address';
 export { IZEmailEnvelope, ZEmailEnvelopeBuilder } from './email/email-envelope';
 // Filter
-export { ZBinaryFilterBuilder } from './filter/binary-filter-builder.class';
-export { IZBinaryFilter } from './filter/binary-filter.interface';
-export { ZBinaryOperator } from './filter/binary-operator.enum';
-export { ZCollectionFilterBuilder } from './filter/collection-filter-builder.class';
-export { IZCollectionFilter } from './filter/collection-filter.interface';
-export { ZCollectionOperator } from './filter/collection-operator.enum';
-export { IZFilter } from './filter/filter.type';
-export { ZLogicFilterBuilder } from './filter/logic-filter-builder.class';
-export { IZLogicFilter } from './filter/logic-filter.interface';
-export { ZLogicOperator } from './filter/logic-operator.enum';
-export { ZUnaryFilterBuilder } from './filter/unary-filter-builder.class';
-export { IZUnaryFilter } from './filter/unary-filter.interface';
-export { ZUnaryOperator } from './filter/unary-operator.enum';
+export { IZBinaryFilter, ZBinaryFilterBuilder, ZBinaryOperator } from './filter/binary-filter';
+export { IZCollectionFilter, ZCollectionFilterBuilder, ZCollectionOperator } from './filter/collection-filter';
+export { IZFilter } from './filter/filter';
+export { IZLogicFilter, ZLogicFilterBuilder, ZLogicOperator } from './filter/logic-filter';
+export { IZUnaryFilter, ZUnaryFilterBuilder, ZUnaryOperator } from './filter/unary-filter';
 // Route
 export { IZRouteOption, ZRouteOptionBuilder } from './route/route-option';
 // Server
