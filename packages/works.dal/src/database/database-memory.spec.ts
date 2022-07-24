@@ -3,9 +3,8 @@
  */
 /* eslint-disable require-jsdoc */
 import { v4 } from 'uuid';
-import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';
-import { IZDatabaseOptions } from '../options/database-options.interface';
-import { ZDatabaseMemory } from './database-memory.class';
+import { IZDatabaseOptions, ZDatabaseOptionsBuilder } from '../options/database-options';
+import { ZDatabaseMemory } from './database-memory';
 
 describe('ZDatabaseMemory', () => {
   let database: string;

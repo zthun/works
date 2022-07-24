@@ -1,11 +1,9 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { getPortPromise } from 'portfinder';
-import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';
-import { IZDatabaseOptions } from '../options/database-options.interface';
-import { ZDatabaseQuery } from '../query/database-query.class';
-import { IZDatabaseQuery } from '../query/database-query.interface';
-import { ZDatabaseMongo } from './database-mongo.class';
-import { IZDatabase } from './database.interface';
+import { IZDatabaseOptions, ZDatabaseOptionsBuilder } from '../options/database-options';
+import { IZDatabaseQuery, ZDatabaseQuery } from '../query/database-query';
+import { IZDatabase } from './database';
+import { ZDatabaseMongo } from './database-mongo';
 
 /**
  * Represents an in memory database.
@@ -14,8 +12,8 @@ import { IZDatabase } from './database.interface';
  * here for testing and mocking.
  */
 export class ZDatabaseMemory implements IZDatabase {
-  private _server: MongoMemoryServer;
-  private _running: Promise<void>;
+  private _server: MongoMemoryServer | null;
+  private _running: Promise<void> | null;
   private _port: number;
 
   /**
@@ -76,7 +74,7 @@ export class ZDatabaseMemory implements IZDatabase {
       return true;
     }
 
-    const killed = await this._server.stop(true);
+    const killed = await this._server.stop({ doCleanup: true });
     this._running = null;
     this._server = null;
     return killed;
