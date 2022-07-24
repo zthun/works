@@ -7,7 +7,7 @@ export interface IZConfigEntry<T = any> {
   /**
    * The id of the config entry.
    *
-   * This will normally be ${scope}.${key}
+   * This will normally be (scope).(key)
    */
   _id: string;
 
