@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
+
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { identity } from 'lodash';
-import { ZUrlBuilder } from './url-builder.class';
-import { IZUrlInfo } from './url-info.interface';
+import { IZUrlInfo, ZUrlBuilder } from './url';
 
 describe('ZUrlBuilder', () => {
   let loc: Location;
@@ -14,7 +14,7 @@ describe('ZUrlBuilder', () => {
     hostname = 'facebook.com';
 
     loc = {
-      ancestorOrigins: null,
+      ancestorOrigins: {} as unknown as DOMStringList,
       hash: '',
       host: '',
       hostname,

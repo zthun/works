@@ -1,6 +1,53 @@
 import { trim, trimEnd, trimStart } from 'lodash';
 import URLParse from 'url-parse';
-import { IZUrlInfo } from './url-info.interface';
+
+/**
+ * Represents information about a url.
+ */
+export interface IZUrlInfo {
+  /**
+   * The protocol for the url.
+   */
+  protocol: string;
+
+  /**
+   * The username.
+   */
+  username?: string;
+
+  /**
+   * The password.
+   */
+  password?: string;
+
+  /**
+   * The host.
+   */
+  hostname: string;
+
+  /**
+   * The port number.
+   */
+  port?: number;
+
+  /**
+   * A list of current paths.
+   *
+   * You can always get the full path using
+   * path.join('/')
+   */
+  path: string[];
+
+  /**
+   * The client side hash route.
+   */
+  hash?: string;
+
+  /**
+   * The key value params.
+   */
+  params: Array<{ key: string; val: string }>;
+}
 
 /**
  * Represents an object that is helpful in building a url.
@@ -66,9 +113,6 @@ export class ZUrlBuilder {
     this._url = {
       protocol,
       hostname,
-      username: null,
-      password: null,
-      port: null,
       path: ['/'],
       hash: '',
       params: []
@@ -139,9 +183,9 @@ export class ZUrlBuilder {
       .hostname(current.hostname)
       .hash(current.hash)
       .path(current.pathname)
-      .port(current.port ? +current.port : null);
+      .port(current.port ? +current.port : undefined);
 
-    Object.keys(current.query).forEach((key) => this.param(key, current.query[key]));
+    Object.keys(current.query).forEach((key) => this.param(key, current.query[key] as string));
 
     return this;
   }
@@ -182,7 +226,7 @@ export class ZUrlBuilder {
    *
    * @returns This object.
    */
-  public username(user: string): this {
+  public username(user: string | undefined): this {
     this._url.username = user;
     return this;
   }
@@ -196,7 +240,7 @@ export class ZUrlBuilder {
    *
    * @returns This object.
    */
-  public password(pwd: string): this {
+  public password(pwd: string | undefined): this {
     this._url.password = pwd;
     return this;
   }
@@ -250,7 +294,7 @@ export class ZUrlBuilder {
    *
    * @returns This object.
    */
-  public port(port: number): this {
+  public port(port: number | undefined): this {
     this._url.port = port;
     return this;
   }
@@ -286,7 +330,7 @@ export class ZUrlBuilder {
    *
    * @returns This object.
    */
-  public hash(hash: string): this {
+  public hash(hash: string | undefined): this {
     this._url.hash = hash;
     return this;
   }
