@@ -1,4 +1,7 @@
-import { IZProfileActivation } from './profile-activation.interface';
+export interface IZProfileActivation {
+  email: string;
+  key: string;
+}
 
 /**
  * Represents a builder for an IZProfileActivation object.
@@ -11,8 +14,8 @@ export class ZProfileActivationBuilder {
    */
   public constructor() {
     this._activation = {
-      email: null,
-      key: null
+      email: '',
+      key: ''
     };
   }
 

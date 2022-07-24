@@ -1,8 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
-import { ZProfileActivationBuilder } from './profile-activation-builder.class';
-import { IZProfileActivation } from './profile-activation.interface';
+import { IZProfileActivation, ZProfileActivationBuilder } from './profile-activation';
 
 describe('ZProfileActivationBuilder', () => {
   function createTestTarget() {

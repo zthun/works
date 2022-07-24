@@ -1,10 +1,8 @@
 /* eslint-disable require-jsdoc */
-import { v4 } from 'uuid';
-import { ZUserBuilder } from '../users/user-builder.class';
-import { IZUser } from '../users/user.interface';
-import { ZProfileBuilder } from './profile-builder.class';
-import { IZProfile } from './profile.interface';
 import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
+import { v4 } from 'uuid';
+import { IZUser, ZUserBuilder } from '../users/user';
+import { IZProfile, ZProfileBuilder } from './profile';
 
 describe('ZProfileBuilder', () => {
   function createTestTarget() {

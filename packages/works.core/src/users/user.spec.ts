@@ -1,8 +1,7 @@
 /* eslint-disable require-jsdoc */
+import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
-import { ZUserBuilder } from './user-builder.class';
-import { IZUser } from './user.interface';
-import { assertBuilderSetsProperty, assertBuilderCopiesObject } from '@zthun/works.jest';
+import { IZUser, ZUserBuilder } from './user';
 
 describe('ZUserBuilder', () => {
   function createTestTarget() {
@@ -51,7 +50,7 @@ describe('ZUserBuilder', () => {
         v4(),
         createTestTarget,
         (t, v) => t.inactive(v),
-        (u: IZUser) => u.activator.key
+        (u: IZUser) => u.activator?.key
       );
     });
 
@@ -63,7 +62,7 @@ describe('ZUserBuilder', () => {
       // Act
       const actual = target.inactive(v4(), time).build();
       // Assert
-      expect(actual.activator.exp).toBeGreaterThanOrEqual(expected);
+      expect(actual.activator?.exp).toBeGreaterThanOrEqual(expected);
     });
 
     it('sets the user active', () => {
@@ -80,7 +79,7 @@ describe('ZUserBuilder', () => {
         v4(),
         createTestTarget,
         (t, v) => t.recover(v),
-        (u: IZUser) => u.recovery.password
+        (u: IZUser) => u.recovery?.password
       );
     });
 
@@ -92,7 +91,7 @@ describe('ZUserBuilder', () => {
       // Act
       const actual = target.recover(v4(), time).build();
       // Assert
-      expect(actual.recovery.exp).toBeGreaterThanOrEqual(expected);
+      expect(actual.recovery?.exp).toBeGreaterThanOrEqual(expected);
     });
 
     it('sets the the user recovery password to null on login.', () => {
