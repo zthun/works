@@ -1,10 +1,10 @@
 /* eslint-disable require-jsdoc */
-import { ZHttpCodeClient, ZHttpCodeClientDescriptions, ZHttpCodeClientNames } from './http-code-client.enum';
-import { ZHttpCodeInformationalResponse, ZHttpCodeInformationalResponseDescriptions, ZHttpCodeInformationalResponseNames } from './http-code-informational-response.enum';
-import { ZHttpCodeRedirection, ZHttpCodeRedirectionDescriptions, ZHttpCodeRedirectionNames } from './http-code-redirection.enum';
-import { ZHttpCodeServer, ZHttpCodeServerDescriptions, ZHttpCodeServerNames } from './http-code-server.enum';
-import { ZHttpCodeSuccess, ZHttpCodeSuccessDescriptions, ZHttpCodeSuccessNames } from './http-code-success.enum';
-import { getHttpCodeCategory, getHttpCodeDescription, getHttpCodeName, getHttpCodeSeverity, ZHttpCode, ZHttpCodeCategory, ZHttpCodeSeverity } from './http-code.type';
+import { getHttpCodeCategory, getHttpCodeDescription, getHttpCodeName, getHttpCodeSeverity, ZHttpCode, ZHttpCodeCategory, ZHttpCodeSeverity } from './http-code';
+import { ZHttpCodeClient, ZHttpCodeClientDescriptions, ZHttpCodeClientNames } from './http-code-client';
+import { ZHttpCodeInformationalResponse, ZHttpCodeInformationalResponseDescriptions, ZHttpCodeInformationalResponseNames } from './http-code-informational-response';
+import { ZHttpCodeRedirection, ZHttpCodeRedirectionDescriptions, ZHttpCodeRedirectionNames } from './http-code-redirection';
+import { ZHttpCodeServer, ZHttpCodeServerDescriptions, ZHttpCodeServerNames } from './http-code-server';
+import { ZHttpCodeSuccess, ZHttpCodeSuccessDescriptions, ZHttpCodeSuccessNames } from './http-code-success';
 
 describe('ZHttpCode', () => {
   function assertValueFromDictionary(fn: (code: ZHttpCode) => string, dictionary: { [key: number]: string }, code: ZHttpCode) {
