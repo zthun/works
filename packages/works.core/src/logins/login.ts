@@ -1,4 +1,26 @@
-import { IZLogin } from './login.interface';
+/**
+ * Represents a login to the system.
+ *
+ * This is used for creating and posting tokens.  This object is non storable.
+ */
+export interface IZLogin {
+  /**
+   * The login email.
+   */
+  email: string;
+
+  /**
+   * The login password.
+   */
+  password?: string;
+
+  /**
+   * The password confirmation.
+   *
+   * Required when creating a user or updating a user.
+   */
+  confirm?: string;
+}
 
 /**
  * Represents a build for a login object.
@@ -11,7 +33,7 @@ export class ZLoginBuilder {
    */
   public constructor() {
     this._login = {
-      email: null
+      email: ''
     };
   }
 
@@ -71,7 +93,8 @@ export class ZLoginBuilder {
    * @returns This object.
    */
   public autoConfirm(): this {
-    return this.confirm(this._login.password);
+    this._login.confirm = this._login.password;
+    return this;
   }
 
   /**

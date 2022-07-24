@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { v4 } from 'uuid';
-import { ZLoginBuilder } from './login-builder.class';
-import { IZLogin } from './login.interface';
+import { IZLogin, ZLoginBuilder } from './login';
 
 describe('ZLoginBuilder', () => {
   function createTestTarget() {
