@@ -1,5 +1,30 @@
-import { ZSortDirection } from './sort-direction.enum';
-import { IZSort } from './sort.interface';
+/**
+ * A sorting direction.
+ */
+export enum ZSortDirection {
+  /**
+   * Ascending sort.
+   */
+  Ascending = 'asc',
+  /**
+   * Descending sort.
+   */
+  Descending = 'desc'
+}
+
+/**
+ * Represents an option for sorting.
+ */
+export interface IZSort {
+  /**
+   * The field id to sort by.
+   */
+  field: string;
+  /**
+   * The direction to sort.
+   */
+  direction: ZSortDirection;
+}
 
 /**
  * Represents a builder for a sort list.
@@ -18,7 +43,6 @@ export class ZSortBuilder {
    * Adds an ascending order clause.
    *
    * @param field The field to sort by.
-   * @param direction The sort direction.
    *
    * @returns This object
    */

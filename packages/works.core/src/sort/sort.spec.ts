@@ -1,8 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { ZSortDirection } from './sort-direction.enum';
-import { ZSortBuilder } from './sort-builder.class';
-import { IZSort } from './sort.interface';
+import { IZSort, ZSortBuilder, ZSortDirection } from './sort';
 
 describe('Sort Builder', () => {
   function createTestTarget() {

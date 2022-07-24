@@ -44,9 +44,7 @@ export { IZRouteOption, ZRouteOptionBuilder } from './route/route-option';
 export { ZServerBuilder } from './server/server-builder.class';
 export { IZServer } from './server/server.interface';
 // Sort
-export { ZSortBuilder } from './sort/sort-builder.class';
-export { ZSortDirection } from './sort/sort-direction.enum';
-export { IZSort } from './sort/sort.interface';
+export { IZSort, ZSortBuilder, ZSortDirection } from './sort/sort';
 // User
 export { IZLogin, ZLoginBuilder } from './users/login';
 export { IZProfile, ZProfileAvatarMaxBytes, ZProfileAvatarSize, ZProfileBuilder } from './users/profile';
