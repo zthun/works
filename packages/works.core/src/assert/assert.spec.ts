@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { ZAssert } from './assert.class';
+import { ZAssert } from './assert';
 
 describe('ZAssert', () => {
   function createTestTarget() {
