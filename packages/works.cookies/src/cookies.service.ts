@@ -25,6 +25,10 @@ export class ZCookiesService {
       expiresIn: '24h'
     };
 
+    if (!user._id) {
+      return Promise.reject(new Error('User is not a valid user'));
+    }
+
     const payload = { user: user._id };
 
     return new Promise((resolve, reject) => {
@@ -46,13 +50,13 @@ export class ZCookiesService {
    *          or has expired, then null is returned.
    */
   @MessagePattern({ cmd: 'whoIs' })
-  public async whoIs({ jwt, secret }: { jwt: string; secret: string }): Promise<string> {
+  public async whoIs({ jwt, secret }: { jwt: string; secret: string }): Promise<string | null> {
     return new Promise((resolve) => {
       verify(jwt, secret, (err: Error | null, decoded: { user: string } | undefined) => {
         if (err) {
           resolve(null);
         }
-        resolve(decoded.user);
+        resolve(decoded?.user || null);
       });
     });
   }

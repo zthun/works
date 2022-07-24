@@ -13,7 +13,7 @@ describe('ZCookiesService', () => {
 
   beforeEach(() => {
     user = new ZUserBuilder().id(v4()).email('gambit@marvel.com').build();
-    secret = new ZConfigEntryBuilder<string>().generate().build().value;
+    secret = new ZConfigEntryBuilder<string>().generate().build().value as string;
   });
 
   describe('Create Authentication Token', () => {
@@ -26,11 +26,11 @@ describe('ZCookiesService', () => {
       expect(actual.value).toBeTruthy();
     });
 
-    it('should return a rejected cookie if the user is falsy.', async () => {
+    it('should return a rejected cookie if the user is invalid.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = target.createAuthentication({ user: null, secret });
+      const actual = target.createAuthentication({ user: new ZUserBuilder().build(), secret });
       // Assert
       await expect(actual).rejects.toBeTruthy();
     });
@@ -39,7 +39,7 @@ describe('ZCookiesService', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = target.createAuthentication({ user, secret: null });
+      const actual = target.createAuthentication({ user, secret: '' });
       // Assert
       await expect(actual).rejects.toBeTruthy();
     });
@@ -84,20 +84,11 @@ describe('ZCookiesService', () => {
       expect(id).toEqual(user._id);
     });
 
-    it('should return null if the jwt is undefined.', async () => {
+    it('should return null if the jwt is falsy.', async () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = await target.whoIs({ jwt: undefined, secret });
-      // Assert
-      expect(actual).toBeNull();
-    });
-
-    it('should return null if the jwt is null.', async () => {
-      // Arrange
-      const target = createTestTarget();
-      // Act
-      const actual = await target.whoIs({ jwt: null, secret });
+      const actual = await target.whoIs({ jwt: '', secret });
       // Assert
       expect(actual).toBeNull();
     });

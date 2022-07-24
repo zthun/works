@@ -81,7 +81,7 @@ export class ZCookieBuilder {
    *
    * @returns This object.
    */
-  public domain(val: string): this {
+  public domain(val: string | undefined): this {
     this._cookie.domain = val;
     return this;
   }
@@ -93,7 +93,12 @@ export class ZCookieBuilder {
    *
    * @returns This object.
    */
-  public expires(val: Date | string): this {
+  public expires(val: Date | string | undefined): this {
+    if (val == null) {
+      delete this._cookie.expires;
+      return this;
+    }
+
     this._cookie.expires = typeof val === 'string' ? val : val.toJSON();
     return this;
   }
@@ -114,10 +119,7 @@ export class ZCookieBuilder {
    *
    * @returns This object.
    */
-  public immortal(): this {
-    delete this._cookie.expires;
-    return this;
-  }
+  public immortal: () => this = this.expires.bind(this, undefined);
 
   /**
    * Sets the cookie secure flag.
