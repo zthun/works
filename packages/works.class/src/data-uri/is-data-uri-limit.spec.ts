@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { registerDecorator, ValidationArguments } from 'class-validator';
-import { IsDataURILimit, IsDataURILimitValidator } from './is-data-uri-limit.function';
+import { IsDataURILimit, IsDataURILimitValidator } from './is-data-uri-limit';
 
 jest.mock('class-validator');
 
@@ -25,7 +25,7 @@ describe('IsDataURILimit', () => {
       const args: ValidationArguments = {
         constraints: [min, max],
         value,
-        object: null,
+        object: {},
         targetName: 'whatever',
         property: 'whatever'
       };

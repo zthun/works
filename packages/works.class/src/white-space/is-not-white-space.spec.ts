@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { registerDecorator } from 'class-validator';
-import { IsNotWhiteSpace, IsNotWhiteSpaceValidator } from './is-not-white-space.function';
+import { IsNotWhiteSpace, IsNotWhiteSpaceValidator } from './is-not-white-space';
 
 jest.mock('class-validator');
 

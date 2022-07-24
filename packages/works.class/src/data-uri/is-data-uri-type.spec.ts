@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { registerDecorator, ValidationArguments } from 'class-validator';
-import { IsDataURIType, IsDataURITypeValidator } from './is-data-uri-type.function';
+import { IsDataURIType, IsDataURITypeValidator } from './is-data-uri-type';
 
 jest.mock('class-validator');
 
@@ -22,7 +22,7 @@ describe('IsDataURIType', () => {
       const args: ValidationArguments = {
         constraints: types,
         value,
-        object: null,
+        object: {},
         targetName: 'whatever',
         property: 'whatever'
       };

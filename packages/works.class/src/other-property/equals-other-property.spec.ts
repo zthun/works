@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { registerDecorator, ValidationArguments } from 'class-validator';
-import { EqualsOtherProperty, EqualsOtherPropertyValidator } from './equals-other-property.function';
+import { EqualsOtherProperty, EqualsOtherPropertyValidator } from './equals-other-property';
 
 jest.mock('class-validator');
 
@@ -30,7 +30,7 @@ describe('EqualsOtherProperty', () => {
       const args: ValidationArguments = {
         object,
         constraints: [propertyToMatch],
-        targetName: null,
+        targetName: '',
         value,
         property: String(property)
       };

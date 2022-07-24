@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { registerDecorator, ValidationArguments } from 'class-validator';
-import { RequiresOtherProperty, RequiresOtherPropertyValidator } from './requires-other-property.function';
+import { RequiresOtherProperty, RequiresOtherPropertyValidator } from './requires-other-property';
 
 jest.mock('class-validator');
 
@@ -16,7 +16,7 @@ describe('RequiresOtherProperty', () => {
   });
 
   describe('Validate', () => {
-    let passwordConfirm: { password: string; confirm: string };
+    let passwordConfirm: { password: string; confirm?: string };
 
     beforeEach(() => {
       passwordConfirm = { password: 'bad-password', confirm: 'bad-password' };
@@ -28,7 +28,7 @@ describe('RequiresOtherProperty', () => {
       const args: ValidationArguments = {
         object,
         constraints: [propertyToCheck],
-        targetName: null,
+        targetName: '',
         value: 'whatever',
         property: String(property)
       };
