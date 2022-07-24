@@ -1,13 +1,11 @@
 /* istanbul ignore file */
 
 // Data
-export { ZDataUrlBuilder } from './data/data-url-builder.class';
-export { IZDataUrlInfo } from './data/data-url-info.interface';
+export { IZDataUrlInfo, ZDataUrlBuilder } from './data/data-url';
 // Mime-Types
-export { ZMimeTypeApplication } from './mime/mime-type-application.enum';
-export { ZMimeTypeImage } from './mime/mime-type-image.enum';
-export { ZMimeTypeText } from './mime/mime-type-text.enum';
-export { ZMimeType, ZSupportedMimeTypes } from './mime/mime-type.type';
+export { ZMimeType, ZSupportedMimeTypes } from './mime/mime-type';
+export { ZMimeTypeApplication } from './mime/mime-type-application';
+export { ZMimeTypeImage } from './mime/mime-type-image';
+export { ZMimeTypeText } from './mime/mime-type-text';
 // URL
-export { ZUrlBuilder } from './url/url-builder.class';
-export { IZUrlInfo } from './url/url-info.interface';
+export { IZUrlInfo, ZUrlBuilder } from './url/url';

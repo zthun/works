@@ -1,8 +1,27 @@
 import { Buffer } from 'buffer';
 import { last } from 'lodash';
-import { ZMimeTypeApplication } from '../mime/mime-type-application.enum';
-import { ZSupportedMimeTypes } from '../mime/mime-type.type';
-import { IZDataUrlInfo } from './data-url-info.interface';
+import { ZSupportedMimeTypes } from '../mime/mime-type';
+import { ZMimeTypeApplication } from '../mime/mime-type-application';
+
+/**
+ * Represents information about a data url.
+ */
+export interface IZDataUrlInfo {
+  /**
+   * The content information mime type.
+   */
+  mimeType: string;
+
+  /**
+   * The output encoding.
+   */
+  encoding: 'base64' | 'utf8';
+
+  /**
+   * The raw data buffer.
+   */
+  buffer: Buffer;
+}
 
 /**
  * Represents an object that is helpful in building a data url with support
@@ -43,7 +62,7 @@ export class ZDataUrlBuilder {
       return this;
     }
 
-    url = url.substr(5);
+    url = url.substring(5);
     const parts = url.split(',');
 
     if (parts.length < 2) {
@@ -95,10 +114,6 @@ export class ZDataUrlBuilder {
    *
    * @param data The data to set.  If you pass a raw string, then the input encoding
    *             is expected to be utf8.
-   * @param encoding The output encoding of the data.  If this is not set, then this is
-   *                 assumed utf8.  Remember that this is NOT what the current data
-   *                 buffer is encoded with.  This is the output encoding.  The input encoding
-   *                 is included in the buffer.
    * @returns This object.
    */
   public buffer(data: Buffer | string): this {

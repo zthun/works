@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { identity } from 'lodash';
-import { ZMimeTypeText } from '../mime/mime-type-text.enum';
-import { ZDataUrlBuilder } from './data-url-builder.class';
+import { ZMimeTypeText } from '../mime/mime-type-text';
+import { ZDataUrlBuilder } from './data-url';
 
 describe('ZDataUrlBuilder', () => {
   function createTestTarget() {
