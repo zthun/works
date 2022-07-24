@@ -10,27 +10,27 @@ export interface IZWebApp {
   /**
    * The application name.
    */
-  name: string;
+  name?: string;
 
   /**
    * A short subtitle for the application.
    */
-  short: string;
+  short?: string;
 
   /**
    * The application description.
    */
-  description: string;
+  description?: string;
 
   /**
    * The domain uri of the application.
    */
-  domain: string;
+  domain?: string;
 
   /**
    * The data url of the app icon.
    */
-  icon: string;
+  icon?: string;
 
   /**
    * The url for the source code if open sourced.
@@ -48,14 +48,7 @@ export class ZWebAppBuilder {
    * Initializes a new instance of this object.
    */
   public constructor() {
-    this._app = {
-      _id: null,
-      name: null,
-      short: null,
-      description: null,
-      domain: null,
-      icon: null
-    };
+    this._app = { _id: '' };
   }
 
   /**
