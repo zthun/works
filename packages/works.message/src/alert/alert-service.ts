@@ -137,7 +137,7 @@ export class ZAlertService implements IZAlertService {
    * @returns The alert that was removed, or null if no such alert
    *          exists.
    */
-  private _tryRemove(id: string): IZAlert {
+  private _tryRemove(id: string): IZAlert | null {
     const alerts = ZAlertService._getAlerts();
     const index = findIndex(alerts, (alert) => alert._id === id);
 

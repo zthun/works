@@ -1,8 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
-import { IZAlert, ZAlertBuilder } from './alert';
-import { ZAlertSeverity } from './alert-severity.enum';
+import { IZAlert, ZAlertBuilder, ZAlertSeverity } from './alert';
 
 describe('ZAlertBuilder', () => {
   function createTestTarget() {
