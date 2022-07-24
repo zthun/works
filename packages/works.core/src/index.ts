@@ -5,8 +5,7 @@ export { IZWebApp, ZWebAppBuilder } from './app/web-app';
 // Assert
 export { ZAssert } from './assert/assert.class';
 // Config
-export { ZConfigEntryBuilder } from './configs/config-entry-builder.class';
-export { IZConfigEntry } from './configs/config-entry.interface';
+export { IZConfigEntry, ZConfigEntryBuilder } from './configs/config-entry';
 // Cookie
 export { IZCookie, ZCookieBuilder } from './cookie/cookie';
 // Doc
@@ -21,13 +20,10 @@ export { ZTypedocTypeKind } from './doc/typedoc-type-kind.enum';
 export { IZTypedocType } from './doc/typedoc-type.interface';
 export { IZTypedoc } from './doc/typedoc.interface';
 // Email
-export { ZEmailBuilder } from './email/email-builder.class';
-export { ZEmailContactAddressBuilder } from './email/email-contact-address-builder.class';
-export { ZEmailContactBuilder } from './email/email-contact-builder.class';
-export { IZEmailContact } from './email/email-contact.interface';
-export { ZEmailEnvelopeBuilder } from './email/email-envelope-builder.class';
-export { IZEmailEnvelope } from './email/email-envelope.interface';
-export { IZEmail } from './email/email.interface';
+export { IZEmail, ZEmailBuilder } from './email/email';
+export { IZEmailContact, ZEmailContactBuilder } from './email/email-contact';
+export { ZEmailContactAddressBuilder } from './email/email-contact-address';
+export { IZEmailEnvelope, ZEmailEnvelopeBuilder } from './email/email-envelope';
 // Filter
 export { ZBinaryFilterBuilder } from './filter/binary-filter-builder.class';
 export { IZBinaryFilter } from './filter/binary-filter.interface';
@@ -42,14 +38,6 @@ export { ZLogicOperator } from './filter/logic-operator.enum';
 export { ZUnaryFilterBuilder } from './filter/unary-filter-builder.class';
 export { IZUnaryFilter } from './filter/unary-filter.interface';
 export { ZUnaryOperator } from './filter/unary-operator.enum';
-// Login
-export { ZLoginBuilder } from './logins/login-builder.class';
-export { IZLogin } from './logins/login.interface';
-// Profile
-export { ZProfileActivationBuilder } from './profiles/profile-activation-builder.class';
-export { IZProfileActivation } from './profiles/profile-activation.interface';
-export { ZProfileBuilder } from './profiles/profile-builder.class';
-export { IZProfile, ZProfileAvatarMaxBytes, ZProfileAvatarSize } from './profiles/profile.interface';
 // Route
 export { IZRouteOption, ZRouteOptionBuilder } from './route/route-option';
 // Server
@@ -59,6 +47,8 @@ export { IZServer } from './server/server.interface';
 export { ZSortBuilder } from './sort/sort-builder.class';
 export { ZSortDirection } from './sort/sort-direction.enum';
 export { IZSort } from './sort/sort.interface';
-// Users
-export { ZUserBuilder } from './users/user-builder.class';
-export { IZUser } from './users/user.interface';
+// User
+export { IZLogin, ZLoginBuilder } from './users/login';
+export { IZProfile, ZProfileAvatarMaxBytes, ZProfileAvatarSize, ZProfileBuilder } from './users/profile';
+export { IZProfileActivation, ZProfileActivationBuilder } from './users/profile-activation';
+export { IZUser, ZUserBuilder } from './users/user';
