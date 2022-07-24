@@ -6,7 +6,7 @@
  * @param buildFn The method that builds upon the constructed target.
  * @param getFn The method that retrieves the actual property to be compared against.
  */
-export function assertBuilderSetsProperty<TExpected, TBuilt, TBuilder extends { build: () => TBuilt }>(expected: TExpected, createTestTarget: () => TBuilder, buildFn: (t: TBuilder, v: TExpected) => TBuilder, getFn: (b: TBuilt) => TExpected) {
+export function assertBuilderSetsProperty<TExpected, TBuilt, TBuilder extends { build: () => TBuilt }>(expected: TExpected, createTestTarget: () => TBuilder, buildFn: (t: TBuilder, v: TExpected) => TBuilder, getFn: (b: TBuilt) => TExpected | undefined) {
   // Arrange
   const target = createTestTarget();
   // Act
