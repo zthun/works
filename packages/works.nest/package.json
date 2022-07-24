@@ -39,10 +39,10 @@
     "uuid": "^8.3.2"
   },
   "peerDependencies": {
-    "@nestjs/common": "^8.4.0",
-    "@nestjs/core": "^8.4.0",
-    "@nestjs/microservices": "^8.4.0",
-    "@nestjs/platform-express": "^8.4.0"
+    "@nestjs/common": "^9.0.5",
+    "@nestjs/core": "^9.0.5",
+    "@nestjs/microservices": "^9.0.5",
+    "@nestjs/platform-express": "^9.0.5"
   },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"

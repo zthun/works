@@ -22,10 +22,10 @@
     "start": "node ./dist/main.js"
   },
   "dependencies": {
-    "@nestjs/common": "^8.4.7",
-    "@nestjs/core": "^8.4.7",
-    "@nestjs/microservices": "^8.4.7",
-    "@nestjs/platform-express": "^8.4.7",
+    "@nestjs/common": "^9.0.5",
+    "@nestjs/core": "^9.0.5",
+    "@nestjs/microservices": "^9.0.5",
+    "@nestjs/platform-express": "^9.0.5",
     "@zthun/works.class": "^4.0.0",
     "@zthun/works.core": "^4.0.0",
     "@zthun/works.dal": "^4.0.0",
