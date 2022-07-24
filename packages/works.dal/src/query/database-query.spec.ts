@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZDatabaseQuery } from './database-query.class';
-import { Filter, JoinCriteria, SortAscending, SortCriteria, SortDescending } from './database-query.interface';
+import { Filter, JoinCriteria, SortAscending, SortCriteria, SortDescending, ZDatabaseQuery } from './database-query';
 
 describe('ZDatabaseQuery', () => {
   let invoke: (query: ZDatabaseQuery<any>) => Promise<any>;
