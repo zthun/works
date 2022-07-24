@@ -26,8 +26,8 @@
     "@zthun/works.draw": "^4.0.0",
     "@zthun/works.react": "^4.0.0",
     "@zthun/works.url": "^4.0.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"

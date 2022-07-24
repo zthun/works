@@ -99,7 +99,7 @@ export class ZDatabaseMongo implements IZDatabase {
   public update<T>(source: string, template: Partial<T>): IZDatabaseQuery<number> {
     return new ZDatabaseQuery((query) =>
       this._do(source, async (docs: Collection<T>) => {
-        const result = await docs.updateMany(query.$filter, { $set: template });
+        const result = await docs.updateMany(query.$filter, { $set: template as any });
         return result.modifiedCount;
       })
     );

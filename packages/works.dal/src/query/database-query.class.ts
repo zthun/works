@@ -162,7 +162,7 @@ export class ZDatabaseQuery<R> implements IZDatabaseQuery<R> {
    * @returns This object.
    */
   public join<L, F>(from: string, local: keyof L, foreign: keyof F, as: string): this {
-    this._join.push({ from, local: `${local}`, foreign: `${foreign}`, as });
+    this._join.push({ from, local: `${String(local)}`, foreign: `${String(foreign)}`, as });
     return this;
   }
 
