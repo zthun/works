@@ -1,10 +1,8 @@
 import { Collection, MongoClient, MongoClientOptions } from 'mongodb';
 import { v4 } from 'uuid';
-import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';
-import { IZDatabaseOptions } from '../options/database-options.interface';
-import { ZDatabaseQuery } from '../query/database-query.class';
-import { IZDatabaseQuery } from '../query/database-query.interface';
-import { IZDatabase } from './database.interface';
+import { IZDatabaseOptions, ZDatabaseOptionsBuilder } from '../options/database-options';
+import { IZDatabaseQuery, ZDatabaseQuery } from '../query/database-query';
+import { IZDatabase } from './database';
 
 /**
  * Represents an IZDatabase object that connects to mongodb.
@@ -99,7 +97,7 @@ export class ZDatabaseMongo implements IZDatabase {
   public update<T>(source: string, template: Partial<T>): IZDatabaseQuery<number> {
     return new ZDatabaseQuery((query) =>
       this._do(source, async (docs: Collection<T>) => {
-        const result = await docs.updateMany(query.$filter, { $set: template as any });
+        const result = await docs.updateMany(query.$filter as any, { $set: template as any });
         return result.modifiedCount;
       })
     );

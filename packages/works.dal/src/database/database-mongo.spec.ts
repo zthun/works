@@ -4,12 +4,11 @@
 
 /* eslint-disable require-jsdoc */
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import { v4 } from 'uuid';
-import { ZDatabaseOptionsBuilder } from '../options/database-options-builder.class';
-import { SortAscending } from '../query/database-query.interface';
-import { ZDatabaseMongo } from './database-mongo.class';
 import { getPortPromise } from 'portfinder';
-import { IZDatabaseOptions } from '../options/database-options.interface';
+import { v4 } from 'uuid';
+import { IZDatabaseOptions, ZDatabaseOptionsBuilder } from '../options/database-options';
+import { SortAscending } from '../query/database-query';
+import { ZDatabaseMongo } from './database-mongo';
 
 describe('ZDatabaseMongo', () => {
   let server: MongoMemoryServer;
