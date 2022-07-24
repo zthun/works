@@ -1,9 +1,7 @@
-import { ZHttpMethod } from '../request/http-method.enum';
-import { IZHttpRequest } from '../request/http-request.interface';
-import { ZHttpCodeClient } from '../result/http-code-client.enum';
-import { ZHttpResultBuilder } from '../result/http-result-builder.class';
-import { IZHttpResult } from '../result/http-result.interface';
-import { IZHttpService } from './http-service.interface';
+import { IZHttpRequest, ZHttpMethod } from '../request/http-request';
+import { ZHttpCodeClient } from '../result/http-code-client';
+import { IZHttpResult, ZHttpResultBuilder } from '../result/http-result';
+import { IZHttpService } from './http-service';
 
 /**
  * Represents a mock http service that can be useful for demos,

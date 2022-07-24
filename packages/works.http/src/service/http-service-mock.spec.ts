@@ -1,15 +1,15 @@
 /* eslint-disable require-jsdoc */
 import { ZHttpMethod } from '../request/http-method.enum';
+import { IZHttpRequest } from '../request/http-request';
 import { ZHttpRequestBuilder } from '../request/http-request-builder.class';
-import { IZHttpRequest } from '../request/http-request.interface';
-import { ZHttpCodeClient } from '../result/http-code-client.enum';
-import { ZHttpCodeInformationalResponse } from '../result/http-code-informational-response.enum';
-import { ZHttpCodeServer } from '../result/http-code-server.enum';
-import { ZHttpCodeSuccess } from '../result/http-code-success.enum';
-import { ZHttpCode } from '../result/http-code.type';
+import { ZHttpCode } from '../result/http-code';
+import { ZHttpCodeClient } from '../result/http-code-client';
+import { ZHttpCodeInformationalResponse } from '../result/http-code-informational-response';
+import { ZHttpCodeServer } from '../result/http-code-server';
+import { ZHttpCodeSuccess } from '../result/http-code-success';
+import { IZHttpResult } from '../result/http-result';
 import { ZHttpResultBuilder } from '../result/http-result-builder.class';
-import { IZHttpResult } from '../result/http-result.interface';
-import { ZHttpServiceMock } from './http-service-mock.class';
+import { ZHttpServiceMock } from './http-service-mock';
 
 describe('ZHttpServiceMock', () => {
   function createTestTarget() {
