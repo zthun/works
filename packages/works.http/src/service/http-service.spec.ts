@@ -1,8 +1,7 @@
 /* eslint-disable require-jsdoc */
 import axios, { AxiosError, AxiosPromise } from 'axios';
-import { ZHttpRequestBuilder } from '../request/http-request-builder.class';
-import { IZHttpRequest } from '../request/http-request.interface';
-import { ZHttpService } from './http-service.class';
+import { IZHttpRequest, ZHttpRequestBuilder } from '../request/http-request';
+import { ZHttpService } from './http-service';
 
 jest.mock('axios');
 
@@ -39,7 +38,7 @@ describe('ZHttpService', () => {
 
       error = {
         name: 'Error',
-        config: null,
+        config: {},
         response: {
           data,
           status: 404,
@@ -90,7 +89,6 @@ describe('ZHttpService', () => {
     it('should return a rejected promise with a generic message if something else goes wrong.', async () => {
       delete error.request;
       delete error.response;
-      delete error.message;
       (axios as unknown as jest.Mock<AxiosPromise<string>>).mockRejectedValue({});
       const target = createTestTarget();
       // Act
