@@ -96,7 +96,7 @@ describe('ZUserBuilder', () => {
 
     it('sets the the user recovery password to null on login.', () => {
       assertBuilderSetsProperty(
-        null,
+        undefined,
         createTestTarget,
         (t) => t.recover(v4()).login(),
         (u: IZUser) => u.recovery

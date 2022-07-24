@@ -93,7 +93,7 @@ describe('ZCookieBuilder', () => {
           true,
           createTestTarget,
           (t) => t.expiresTomorrow(),
-          (c: IZCookie) => c.expires >= expected
+          (c: IZCookie) => (c.expires as string) >= expected
         );
       });
 
@@ -184,12 +184,12 @@ describe('ZCookieBuilder', () => {
     });
 
     it('expires in 24 hours.', () => {
-      const expected = createTestTarget().expiresTomorrow().build().expires;
+      const expected = createTestTarget().expiresTomorrow().build().expires as string;
       assertBuilderSetsProperty(
         true,
         createTestTarget,
         (t) => t.authentication(),
-        (c: IZCookie) => c.expires >= expected
+        (c: IZCookie) => (c.expires as string) >= expected
       );
     });
   });
