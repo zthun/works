@@ -41,8 +41,7 @@ export { ZUnaryOperator } from './filter/unary-operator.enum';
 // Route
 export { IZRouteOption, ZRouteOptionBuilder } from './route/route-option';
 // Server
-export { ZServerBuilder } from './server/server-builder.class';
-export { IZServer } from './server/server.interface';
+export { IZServer, ZServerBuilder } from './server/server';
 // Sort
 export { IZSort, ZSortBuilder, ZSortDirection } from './sort/sort';
 // User
