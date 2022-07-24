@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { ZConfigEntryBuilder } from './config-entry-builder.class';
-import { IZConfigEntry } from './config-entry.interface';
+import { IZConfigEntry, ZConfigEntryBuilder } from './config-entry';
 
 describe('ZConfigEntryBuilder', () => {
   function createTestTarget() {
@@ -117,7 +116,7 @@ describe('ZConfigEntryBuilder', () => {
       // Act
       const actual = target.build().value;
       // Assert
-      expect(actual.length).toBeGreaterThanOrEqual(256);
+      expect(actual?.length).toBeGreaterThanOrEqual(256);
     });
   });
 });
