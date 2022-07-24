@@ -15,7 +15,9 @@ export class ZVaultMemoryClient extends ZVaultClient {
    * Initializes a new instance of this object.
    */
   public constructor() {
-    super(null);
+    // We're not actually going to be using the ClientProxy so we
+    // can just cheese this here.
+    super({} as any);
   }
 
   /**
@@ -27,9 +29,9 @@ export class ZVaultMemoryClient extends ZVaultClient {
    * @returns A promise that, when resolved, has the configuration for the specified scope and key.  Resolves
    *          to null if non such scope and key exists.
    */
-  public async read<T>(scope: string, key: string): Promise<IZConfigEntry<T>> {
+  public async read<T>(scope: string, key: string): Promise<IZConfigEntry<T> | null> {
     const value = get(this._memory, `${scope}.${key}`);
-    return value == null ? null : Promise.resolve(new ZConfigEntryBuilder().scope(scope).key(key).value(value).build());
+    return value == null ? Promise.resolve(null) : Promise.resolve(new ZConfigEntryBuilder().scope(scope).key(key).value(value).build());
   }
 
   /**

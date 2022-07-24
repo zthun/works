@@ -24,7 +24,7 @@ export class ZVaultClient {
    * @returns A promise that, when resolved, has the configuration for the specified scope and key.  Resolves
    *          to null if non such scope and key exists.
    */
-  public async read<T>(scope: string, key: string): Promise<IZConfigEntry<T>> {
+  public async read<T>(scope: string, key: string): Promise<IZConfigEntry<T> | null> {
     return lastValueFrom(this._vault.send({ cmd: 'read' }, { scope, key }));
   }
 
@@ -37,6 +37,8 @@ export class ZVaultClient {
    *
    * @param entry The current configuration to read.  If the scope and key of the config exists,
    *              then the existing config entity is returned, otherwise, the config value is added and
+   *              the new config value is returned.
+   *
    * @returns A promise that, when resolved, gives the existing config.
    */
   public async get<T>(entry: IZConfigEntry<T>): Promise<IZConfigEntry<T>> {
