@@ -1,5 +1,4 @@
-import { ZLogLevel } from '../log/log-level.enum';
-import { IZLogEntry } from '../log/log-entry';
+import { IZLogEntry, ZLogLevel } from '../log/log-entry';
 import { IZLogger } from '../log/logger';
 
 /**

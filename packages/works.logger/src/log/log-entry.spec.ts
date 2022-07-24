@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { IZLogEntry, ZLogEntryBuilder } from './log-entry';
-import { ZLogLevel } from './log-level.enum';
+import { IZLogEntry, ZLogEntryBuilder, ZLogLevel } from './log-entry';
 
 describe('ZLogEntryBuilder', () => {
   function createTestTarget() {
