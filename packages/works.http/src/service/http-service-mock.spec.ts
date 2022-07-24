@@ -1,14 +1,11 @@
 /* eslint-disable require-jsdoc */
-import { ZHttpMethod } from '../request/http-method.enum';
-import { IZHttpRequest } from '../request/http-request';
-import { ZHttpRequestBuilder } from '../request/http-request-builder.class';
+import { IZHttpRequest, ZHttpMethod, ZHttpRequestBuilder } from '../request/http-request';
 import { ZHttpCode } from '../result/http-code';
 import { ZHttpCodeClient } from '../result/http-code-client';
 import { ZHttpCodeInformationalResponse } from '../result/http-code-informational-response';
 import { ZHttpCodeServer } from '../result/http-code-server';
 import { ZHttpCodeSuccess } from '../result/http-code-success';
-import { IZHttpResult } from '../result/http-result';
-import { ZHttpResultBuilder } from '../result/http-result-builder.class';
+import { IZHttpResult, ZHttpResultBuilder } from '../result/http-result';
 import { ZHttpServiceMock } from './http-service-mock';
 
 describe('ZHttpServiceMock', () => {
