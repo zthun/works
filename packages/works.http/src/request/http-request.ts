@@ -1,5 +1,96 @@
-import { ZHttpMethod } from './http-method.enum';
-import { IZHttpRequest } from './http-request.interface';
+/**
+ * Represents an available method for an http invocation.
+ */
+export enum ZHttpMethod {
+  /**
+   * GET
+   *
+   * Used for reads
+   */
+  Get = 'get',
+
+  /**
+   * PUT
+   *
+   * Used for updates.
+   */
+  Put = 'put',
+
+  /**
+   * POST
+   *
+   * Use for create.
+   */
+  Post = 'post',
+
+  /**
+   * DELETE.
+   *
+   * Used for....delete..duh.
+   */
+  Delete = 'delete',
+
+  /**
+   * PATCH.
+   *
+   * Used for updates but only
+   * partials of objects.
+   */
+  Patch = 'patch',
+
+  /**
+   * OPTIONS
+   *
+   * Used to retrieve the available methods and
+   * accessors for a single api.  Normally used
+   * by the browser.
+   */
+  Options = 'options',
+
+  /**
+   * HEAD
+   *
+   * Used for retrieving the headers that would
+   * be returned.
+   */
+  Head = 'head'
+}
+
+/**
+ * Represents a http request.
+ */
+export interface IZHttpRequest<TBody = any> {
+  /**
+   * The method, or verb, to invoke the request with.
+   */
+  method: ZHttpMethod;
+
+  /**
+   * The url to target.
+   *
+   * You can use the @zthun/works.url package to
+   * easily construct urls.
+   */
+  url: string;
+
+  /**
+   * The post body.
+   *
+   * Only should really be used for POST style
+   * calls which accept a body.
+   */
+  body?: TBody;
+
+  /**
+   * Request headers.
+   */
+  headers?: Record<string, string>;
+
+  /**
+   * The timeout before the rest method fails
+   */
+  timeout?: number;
+}
 
 /**
  * Represents a builder for an http request.
@@ -13,7 +104,7 @@ export class ZHttpRequestBuilder<TBody = any> {
   public constructor() {
     this._request = {
       method: ZHttpMethod.Get,
-      url: null
+      url: ''
     };
   }
 
@@ -129,7 +220,7 @@ export class ZHttpRequestBuilder<TBody = any> {
    *
    * @returns This object.
    */
-  public header(key: string, value: string | number | boolean): this {
+  public header(key: string, value: string | number | boolean | null): this {
     this._request.headers = this._request.headers || {};
 
     if (value == null) {

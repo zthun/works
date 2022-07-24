@@ -1,8 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
-import { ZHttpMethod } from './http-method.enum';
-import { ZHttpRequestBuilder } from './http-request-builder.class';
-import { IZHttpRequest } from './http-request.interface';
+import { IZHttpRequest, ZHttpMethod, ZHttpRequestBuilder } from './http-request';
 
 describe('ZHttpRequestBuilder', () => {
   function createTestTarget() {
