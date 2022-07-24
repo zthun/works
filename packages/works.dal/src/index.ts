@@ -1,9 +1,7 @@
 /* istanbul ignore file */
 
-export { ZDatabaseMemory } from './database/database-memory.class';
-export { ZDatabaseMongo } from './database/database-mongo.class';
-export { IZDatabase } from './database/database.interface';
-export { ZDatabaseOptionsBuilder } from './options/database-options-builder.class';
-export { IZDatabaseOptions } from './options/database-options.interface';
-export { ZDatabaseQuery } from './query/database-query.class';
-export { IZDatabaseQuery, SortAscending, SortCriteria, SortDescending, SortDirection, JoinCriteria, Filter } from './query/database-query.interface';
+export { IZDatabase } from './database/database';
+export { ZDatabaseMemory } from './database/database-memory';
+export { ZDatabaseMongo } from './database/database-mongo';
+export { IZDatabaseOptions, ZDatabaseOptionsBuilder } from './options/database-options';
+export { Filter, IZDatabaseQuery, JoinCriteria, SortAscending, SortCriteria, SortDescending, SortDirection, ZDatabaseQuery } from './query/database-query';
