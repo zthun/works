@@ -1,4 +1,4 @@
-import { IZEmailContact } from './email-contact.interface';
+import { IZEmailContact } from './email-contact';
 
 /**
  * Represents a builder that will build a comma separated list of addresses for an email message.
@@ -65,6 +65,6 @@ export class ZEmailContactAddressBuilder {
       return !!ct;
     };
 
-    return this._addresses.map(addr).filter(truthy).join(this._delimiter) || undefined;
+    return this._addresses.map(addr).filter(truthy).join(this._delimiter);
   }
 }

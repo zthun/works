@@ -1,12 +1,10 @@
 /* eslint-disable require-jsdoc */
 
 import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
-import { ZEmailBuilder } from './email-builder.class';
-import { ZEmailEnvelopeBuilder } from './email-envelope-builder.class';
-import { IZEmailEnvelope } from './email-envelope.interface';
-import { IZEmail } from './email.interface';
+import { IZEmail, ZEmailBuilder } from './email';
+import { IZEmailEnvelope, ZEmailEnvelopeBuilder } from './email-envelope';
 
-describe('ZEmailContactBuilder.', () => {
+describe('ZEmailBuilder.', () => {
   let envelope: IZEmailEnvelope;
 
   beforeEach(() => {
