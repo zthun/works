@@ -1,4 +1,20 @@
-import { IZDatabaseOptions } from './database-options.interface';
+/**
+ * Represents options for a database.
+ */
+export interface IZDatabaseOptions {
+  /**
+   * The name of the database to connect to and modify.
+   */
+  database: string;
+  /**
+   * The database connection string.
+   */
+  url?: string;
+  /**
+   * The timeout value for connections.
+   */
+  timeout?: number;
+}
 
 /**
  * Represents an object that can be used to build a database options object.
