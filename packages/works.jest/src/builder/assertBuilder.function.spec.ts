@@ -13,9 +13,9 @@ describe('Builder', () => {
 
     public constructor() {
       this._build = {
-        first: null,
-        second: null,
-        third: null
+        first: '',
+        second: 0,
+        third: false
       };
     }
 
