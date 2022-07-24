@@ -87,8 +87,6 @@ describe('ZHttpService', () => {
     });
 
     it('should return a rejected promise with a generic message if something else goes wrong.', async () => {
-      delete error.request;
-      delete error.response;
       (axios as unknown as jest.Mock<AxiosPromise<string>>).mockRejectedValue({});
       const target = createTestTarget();
       // Act

@@ -52,7 +52,7 @@ export class ZHttpService implements IZHttpService {
         builder = builder.status(ZHttpCodeServer.ServiceUnavailable).data('The target endpoint could not be reached.  You may need to try again later.');
       } else {
         // Some other error occurred.
-        builder = builder.status(ZHttpCodeServer.InternalServerError).data(error.message);
+        builder = builder.status(ZHttpCodeServer.InternalServerError).data(error.message || 'An unexpected error occurred.');
       }
 
       return Promise.reject(builder.build());
