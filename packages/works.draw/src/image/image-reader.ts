@@ -1,5 +1,7 @@
 /* istanbul ignore file */
 
+import { get2d } from '../canvas/renderer';
+
 /*
  * The methods in this module are untestable in the jest framework.
  *
@@ -40,7 +42,7 @@ export class ZImageReader implements IZImageReader {
     const canvas = document.createElement('canvas');
     canvas.width = 1;
     canvas.height = 1;
-    const bmp = canvas.getContext('2d');
+    const bmp = get2d(canvas);
 
     return new Promise<HTMLCanvasElement>((resolve) => {
       const url = typeof data === 'string' ? data : URL.createObjectURL(data);

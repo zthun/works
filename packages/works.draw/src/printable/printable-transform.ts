@@ -1,7 +1,7 @@
-import { IZTransformScale } from '../transform/transform-scale.interface';
-import { IZTransformSkew } from '../transform/transform-skew.interface';
-import { IZTransformTranslate } from '../transform/transform-translate.interface';
-import { IZPrintable } from './printable.interface';
+import { IZTransformScale } from '../transform/transform-scale';
+import { IZTransformSkew } from '../transform/transform-skew';
+import { IZTransformTranslate } from '../transform/transform-translate';
+import { IZPrintable } from './printable';
 
 /**
  * Represents a printable object that will apply a transformation matrix to the context.

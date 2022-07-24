@@ -1,4 +1,4 @@
-import { IZPrintable } from './printable.interface';
+import { IZPrintable } from './printable';
 
 /**
  * Represents printable object that prints a color to the entire context.

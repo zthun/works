@@ -1,8 +1,9 @@
 /* eslint-disable require-jsdoc */
-import { ZPrintableDrawing } from './printable-drawing.class';
-import { ZPrintableGroup } from './printable-group.class';
-import { ZPrintableNothing } from './printable-nothing.class';
-import { IZPrintable } from './printable.interface';
+import { get2d } from '../canvas/renderer';
+import { IZPrintable } from './printable';
+import { ZPrintableDrawing } from './printable-drawing';
+import { ZPrintableGroup } from './printable-group';
+import { ZPrintableNothing } from './printable-nothing';
 
 describe('ZPrintableDrawing', () => {
   let canvas: HTMLCanvasElement;
@@ -44,7 +45,7 @@ describe('ZPrintableDrawing', () => {
     // Arrange
     const target = createTestTarget();
     // Act
-    target.print(canvas.getContext('2d'));
+    target.print(get2d(canvas));
     // Assert
     expect(printed).toEqual([background, bottom, middle, top, foreground]);
   });

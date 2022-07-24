@@ -1,5 +1,5 @@
 import { noop } from 'lodash';
-import { IZPrintable } from './printable.interface';
+import { IZPrintable } from './printable';
 
 /**
  * A printable object that does nothing.

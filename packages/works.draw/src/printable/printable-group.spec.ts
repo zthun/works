@@ -1,7 +1,8 @@
 /* eslint-disable require-jsdoc */
-import { ZPrintableGroup } from './printable-group.class';
-import { ZPrintableNothing } from './printable-nothing.class';
-import { IZPrintable } from './printable.interface';
+import { get2d } from '../canvas/renderer';
+import { IZPrintable } from './printable';
+import { ZPrintableGroup } from './printable-group';
+import { ZPrintableNothing } from './printable-nothing';
 
 describe('ZPrintableGroup', () => {
   let canvas: HTMLCanvasElement;
@@ -33,7 +34,7 @@ describe('ZPrintableGroup', () => {
     // Arrange
     const target = createTestTarget();
     // Act
-    target.print(canvas.getContext('2d'));
+    target.print(get2d(canvas));
     // Assert
     expect(true).toBeTruthy();
   });
@@ -42,7 +43,7 @@ describe('ZPrintableGroup', () => {
     // Arrange
     const target = createTestTarget([bottom, middle, top]);
     // Act
-    target.print(canvas.getContext('2d'));
+    target.print(get2d(canvas));
     // Assert
     expect(printed).toEqual([bottom, middle, top]);
   });

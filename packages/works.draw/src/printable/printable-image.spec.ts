@@ -1,7 +1,8 @@
 /* eslint-disable require-jsdoc */
 import { createMocked } from '@zthun/works.jest';
+import { get2d } from '../canvas/renderer';
 import { IZImageReader } from '../image/image-reader';
-import { ZPrintableImage } from './printable-image.class';
+import { ZPrintableImage } from './printable-image';
 
 describe('ZPrintableImage', () => {
   let image: HTMLCanvasElement;
@@ -17,7 +18,7 @@ describe('ZPrintableImage', () => {
     canvas.width = 200;
     canvas.height = 200;
 
-    jest.spyOn(canvas.getContext('2d'), 'drawImage');
+    jest.spyOn(get2d(canvas), 'drawImage');
 
     image = document.createElement('canvas');
     image.width = 15;
@@ -53,12 +54,11 @@ describe('ZPrintableImage', () => {
     it('should stamp the image onto the canvas.', async () => {
       // Arrange
       const target = createTestTarget();
-      const context = canvas.getContext('2d');
       await target.import(new Blob());
       // Act
-      target.print(context);
+      target.print(get2d(canvas));
       // Assert
-      expect(context.drawImage).toHaveBeenCalledWith(image, 0, 0);
+      expect(get2d(canvas).drawImage).toHaveBeenCalledWith(image, 0, 0);
     });
   });
 });

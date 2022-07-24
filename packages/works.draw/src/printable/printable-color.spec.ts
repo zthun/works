@@ -1,8 +1,10 @@
 /* eslint-disable require-jsdoc */
-import { ZPrintableColor } from './printable-color.class';
+import { get2d } from '../canvas/renderer';
+import { ZPrintableColor } from './printable-color';
 
 describe('ZPrintableColor', () => {
   let canvas: HTMLCanvasElement;
+  let context: CanvasRenderingContext2D;
 
   function createTestTarget(color?: string) {
     return new ZPrintableColor(color);
@@ -13,22 +15,22 @@ describe('ZPrintableColor', () => {
     canvas.width = 200;
     canvas.height = 200;
 
-    jest.spyOn(canvas.getContext('2d'), 'fillRect');
+    context = get2d(canvas);
+    jest.spyOn(context, 'fillRect');
   });
 
   it('should print color to the entire canvas.', () => {
     // Arrange
     const target = createTestTarget();
     // Act
-    target.print(canvas.getContext('2d'));
+    target.print(context);
     // Assert
-    expect(canvas.getContext('2d').fillRect).toHaveBeenCalledWith(0, 0, canvas.width, canvas.height);
+    expect(context.fillRect).toHaveBeenCalledWith(0, 0, canvas.width, canvas.height);
   });
 
   it('should print the correct color.', () => {
     // Arrange
     const target = createTestTarget('#123456');
-    const context = canvas.getContext('2d');
     // Act
     target.print(context);
     // Assert

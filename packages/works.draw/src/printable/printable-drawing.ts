@@ -1,6 +1,7 @@
-import { IZPrintable } from './printable.interface';
-import { ZPrintableColor } from './printable-color.class';
-import { ZPrintableNothing } from './printable-nothing.class';
+import { get2d } from '../canvas/renderer';
+import { IZPrintable } from './printable';
+import { ZPrintableColor } from './printable-color';
+import { ZPrintableNothing } from './printable-nothing';
 
 /**
  * Represents a drawing that can be output to a canvas object.
@@ -46,7 +47,7 @@ export class ZPrintableDrawing implements IZPrintable {
     this._canvas.width = context.canvas.width;
     this._canvas.height = context.canvas.height;
 
-    const buffer = this._canvas.getContext('2d');
+    const buffer = get2d(this._canvas);
     buffer.clearRect(0, 0, this._canvas.width, this._canvas.height);
 
     this.background.print(buffer);

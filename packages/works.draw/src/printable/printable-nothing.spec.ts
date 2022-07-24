@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZPrintableNothing } from './printable-nothing.class';
+import { ZPrintableNothing } from './printable-nothing';
 
 describe('ZPrintableNothing', () => {
   function createTestTarget() {

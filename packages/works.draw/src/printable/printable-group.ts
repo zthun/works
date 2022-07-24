@@ -1,4 +1,4 @@
-import { IZPrintable } from './printable.interface';
+import { IZPrintable } from './printable';
 
 /**
  * Represents a collection of printable objects that can be transformed.

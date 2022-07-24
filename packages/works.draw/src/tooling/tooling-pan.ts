@@ -1,8 +1,8 @@
 import { fromEvent, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { IZPrintable } from '../printable/printable.interface';
-import { IZTransformTranslate } from '../transform/transform-translate.interface';
-import { IZTooling } from './tooling.interface';
+import { IZPrintable } from '../printable/printable';
+import { IZTransformTranslate } from '../transform/transform-translate';
+import { IZTooling } from './tooling';
 
 /**
  * Represents a tool to pan a transform across a canvas.

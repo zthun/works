@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { IZImageReader } from '../image/image-reader';
-import { IZPrintable } from './printable.interface';
+import { IZPrintable } from './printable';
 
 /**
  * Represents an object that can load an image to print to a canvas.
@@ -31,7 +31,7 @@ export class ZPrintableImage implements IZPrintable {
     this._canvas = document.createElement('canvas');
     this._canvas.width = 1;
     this._canvas.height = 1;
-    this._canvas.getContext('2d').clearRect(0, 0, 1, 1);
+    this._canvas.getContext('2d')?.clearRect(0, 0, 1, 1);
   }
 
   /**
@@ -41,7 +41,7 @@ export class ZPrintableImage implements IZPrintable {
    *
    * @returns A promise that, when resolved, has loaded the image.
    */
-  public async import(urlOrBinary: string | Blob): Promise<void> {
+  public async import(urlOrBinary: string | Blob | null): Promise<void> {
     if (!urlOrBinary) {
       this._canvas = document.createElement('canvas');
       this._canvas.width = 1;

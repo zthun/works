@@ -1,9 +1,10 @@
 /* eslint-disable require-jsdoc */
-import { ZPrintableNothing } from '../printable/printable-nothing.class';
-import { ZPrintableTransform } from '../printable/printable-transform.class';
-import { IZPrintable } from '../printable/printable.interface';
-import { IZTransformTranslate } from '../transform/transform-translate.interface';
-import { ZToolingPan } from './tooling-pan.class';
+import { get2d } from '../canvas/renderer';
+import { IZPrintable } from '../printable/printable';
+import { ZPrintableNothing } from '../printable/printable-nothing';
+import { ZPrintableTransform } from '../printable/printable-transform';
+import { IZTransformTranslate } from '../transform/transform-translate';
+import { ZToolingPan } from './tooling-pan';
 
 describe('ZToolingPan', () => {
   let canvas: HTMLCanvasElement;
@@ -13,7 +14,7 @@ describe('ZToolingPan', () => {
 
   function createTestTarget() {
     _target = new ZToolingPan();
-    _target.init(canvas, canvas.getContext('2d'), drawing, transform);
+    _target.init(canvas, get2d(canvas), drawing, transform);
     return _target;
   }
 
