@@ -47,8 +47,8 @@ export class ZErrorHandler implements IZErrorHandler {
    *
    * @returns The unwrapped message or null if the message could not be detected.
    */
-  private _unwrapMessages(err: any): string[] {
-    let msg = null;
+  private _unwrapMessages(err: any): string[] | null {
+    let msg: string[] | null = null;
 
     if (Object.hasOwnProperty.call(err, 'code')) {
       // This is probably a ZError.  Try to extract a message.
@@ -118,7 +118,7 @@ export class ZErrorHandler implements IZErrorHandler {
     }
 
     if (typeof err === 'symbol') {
-      return [err.description];
+      return [err.description || ''];
     }
 
     return [`${err}`];

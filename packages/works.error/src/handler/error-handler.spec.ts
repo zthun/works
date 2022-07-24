@@ -55,6 +55,10 @@ describe('ErrorHandler', () => {
       it('should pass the string description directly to the message handler.', async () => {
         await assertMessageHandlerReceivesMessage('msg', Symbol('msg'));
       });
+
+      it('should return the empty string if the symbol has no description.', async () => {
+        await assertMessageHandlerReceivesMessage('', Symbol());
+      });
     });
 
     describe('BigInt', () => {
