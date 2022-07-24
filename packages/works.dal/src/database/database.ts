@@ -1,4 +1,4 @@
-import { IZDatabaseQuery } from '../query/database-query.interface';
+import { IZDatabaseQuery } from '../query/database-query';
 
 /**
  * Represents a set of database operations for a document database.
@@ -7,7 +7,6 @@ export interface IZDatabase {
   /**
    * Retrieves the count of documents from the source.
    *
-   * @param database The database to query from.
    * @param source The source to count.
    *
    * @returns The query object that can be used to modify and invoke the query.
@@ -17,7 +16,6 @@ export interface IZDatabase {
   /**
    * Inserts many documents in the database.
    *
-   * @param database The database to query from.
    * @param source The source to create into.
    * @param template The template document with or without the ids.
    *
