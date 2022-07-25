@@ -38,11 +38,11 @@ export class ZHttpService implements IZHttpService {
         timeout: req.timeout,
         headers: req.headers
       });
-      return new ZHttpResultBuilder().data(res.data).headers(res.headers).status(res.status).build();
+      return new ZHttpResultBuilder(res.data).headers(res.headers).status(res.status).build();
     } catch (e) {
       const error = e as AxiosError;
 
-      let builder = new ZHttpResultBuilder().headers({});
+      let builder = new ZHttpResultBuilder<any>(null).headers({});
 
       if (error.response) {
         // A call was made to the server and the status falls outside the accepted success range.

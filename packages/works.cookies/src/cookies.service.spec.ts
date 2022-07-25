@@ -13,7 +13,7 @@ describe('ZCookiesService', () => {
 
   beforeEach(() => {
     user = new ZUserBuilder().id(v4()).email('gambit@marvel.com').build();
-    secret = new ZConfigEntryBuilder<string>().generate().build().value as string;
+    secret = new ZConfigEntryBuilder(null).generate().build().value as string;
   });
 
   describe('Create Authentication Token', () => {

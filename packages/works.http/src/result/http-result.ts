@@ -18,7 +18,7 @@ export interface IZHttpResult<TResult = any> {
   /**
    * The actual body result of the invocation.
    */
-  data?: TResult;
+  data: TResult;
 }
 
 /**
@@ -29,11 +29,14 @@ export class ZHttpResultBuilder<TData = any> {
 
   /**
    * Initializes a new instance of this object.
+   *
+   * @param data The data result.
    */
-  public constructor() {
+  public constructor(data: TData) {
     this._result = {
       status: ZHttpCodeSuccess.OK,
-      headers: {}
+      headers: {},
+      data
     };
   }
 
@@ -44,7 +47,7 @@ export class ZHttpResultBuilder<TData = any> {
    *
    * @returns This object.
    */
-  public data(data: TData | undefined): this {
+  public data(data: TData): this {
     this._result.data = data;
     return this;
   }

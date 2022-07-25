@@ -25,7 +25,7 @@ describe('ZHttpServiceMock', () => {
     async function assertCompletes(requestFn: (t: ZHttpServiceMock, r: IZHttpRequest) => Promise<IZHttpResult>, code: ZHttpCode) {
       // Arrange
       const target = createTestTarget();
-      const expected = new ZHttpResultBuilder().data(data).status(code).build();
+      const expected = new ZHttpResultBuilder(data).status(code).build();
       target.set(endpoint, ZHttpMethod.Get, expected);
       const req = new ZHttpRequestBuilder().get().url(endpoint).build();
       // Act
@@ -61,17 +61,17 @@ describe('ZHttpServiceMock', () => {
     let numbersEndpoint: string;
 
     function list<T>(arr: T[]) {
-      return new ZHttpResultBuilder().data(arr).status(ZHttpCodeSuccess.OK).build();
+      return new ZHttpResultBuilder(arr).status(ZHttpCodeSuccess.OK).build();
     }
 
     function create<T>(arr: T[], req: IZHttpRequest) {
       arr.push(req.body.data);
-      return new ZHttpResultBuilder().data(req.body.data).status(ZHttpCodeSuccess.Created).build();
+      return new ZHttpResultBuilder(req.body.data).status(ZHttpCodeSuccess.Created).build();
     }
 
     function update<T>(arr: T[], req: IZHttpRequest) {
       arr[req.body.index] = req.body.data;
-      return new ZHttpResultBuilder().data(req.body.data).status(ZHttpCodeSuccess.OK).build();
+      return new ZHttpResultBuilder(req.body.data).status(ZHttpCodeSuccess.OK).build();
     }
 
     function createPopulatedTarget() {

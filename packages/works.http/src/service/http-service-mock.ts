@@ -39,7 +39,7 @@ export class ZHttpServiceMock implements IZHttpService {
     const result = endpointConfig?.[req.method];
 
     if (result == null) {
-      const notFound = new ZHttpResultBuilder().data(null).status(ZHttpCodeClient.NotFound).build();
+      const notFound = new ZHttpResultBuilder(null).status(ZHttpCodeClient.NotFound).build();
       return Promise.reject(notFound);
     }
 

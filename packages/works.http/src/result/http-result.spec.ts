@@ -5,7 +5,7 @@ import { IZHttpResult, ZHttpResultBuilder } from './http-result';
 
 describe('ZHttpResultBuilder', () => {
   function createTestTarget() {
-    return new ZHttpResultBuilder();
+    return new ZHttpResultBuilder(null);
   }
 
   describe('Properties', () => {
