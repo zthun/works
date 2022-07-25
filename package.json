@@ -37,7 +37,8 @@
     "test": "jest --coverage --detect-open-handles",
     "lint": "lint-janitor",
     "build": "lerna run build",
-    "make": "yarn clean && yarn lint && yarn test && yarn build",
+    "doc": "lerna run doc",
+    "make": "yarn clean && yarn lint && yarn test && yarn build && yarn doc",
     "postinstall": "husky install"
   },
   "devDependencies": {

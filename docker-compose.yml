@@ -12,10 +12,10 @@ services:
       - ./packages/works.proxy/conf.d:/etc/nginx/conf.d
     depends_on:
       - zthunworks-services-api
-      - zthunworks-services-client
+      - zthunworks-services-web
 
   # Node Ports
-  zthunworks-services-client:
+  zthunworks-services-web:
     image: node:17.3.0
     volumes:
       - .:/usr/dev
