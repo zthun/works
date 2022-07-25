@@ -12,14 +12,14 @@ export enum ZConfigScope {
 
 export const ZConfigEntries = Object.freeze({
   [ZConfigScope.Common]: {
-    domain: new ZConfigEntryBuilder<string>().scope(ZConfigScope.Common).key('domain').value('zthunworks.com').build()
+    domain: new ZConfigEntryBuilder<string>('zthunworks.com').scope(ZConfigScope.Common).key('domain').build()
   },
   [ZConfigScope.Notifications]: {
-    smtp: new ZConfigEntryBuilder<IZServer>().scope(ZConfigScope.Notifications).key('smtp').value(new ZServerBuilder().address(`smtp.zthunworks.com`).port(25).build()).build(),
-    notifier: new ZConfigEntryBuilder<string>().scope(ZConfigScope.Notifications).key('notifier').value('notifications@zthunworks.com').build()
+    smtp: new ZConfigEntryBuilder<IZServer>(new ZServerBuilder().address(`smtp.zthunworks.com`).port(25).build()).scope(ZConfigScope.Notifications).key('smtp').build(),
+    notifier: new ZConfigEntryBuilder<string>('notifications@zthunworks.com').scope(ZConfigScope.Notifications).key('notifier').build()
   },
   [ZConfigScope.Identity]: {
-    secret: new ZConfigEntryBuilder<string>().scope(ZConfigScope.Identity).key('secret').generate().build()
+    secret: new ZConfigEntryBuilder(null).scope(ZConfigScope.Identity).key('secret').generate().build()
   }
 });
 

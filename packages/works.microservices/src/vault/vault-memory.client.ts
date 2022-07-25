@@ -31,7 +31,7 @@ export class ZVaultMemoryClient extends ZVaultClient {
    */
   public async read<T>(scope: string, key: string): Promise<IZConfigEntry<T> | null> {
     const value = get(this._memory, `${scope}.${key}`);
-    return value == null ? Promise.resolve(null) : Promise.resolve(new ZConfigEntryBuilder().scope(scope).key(key).value(value).build());
+    return value == null ? Promise.resolve(null) : Promise.resolve(new ZConfigEntryBuilder(value).scope(scope).key(key).build());
   }
 
   /**
@@ -64,6 +64,6 @@ export class ZVaultMemoryClient extends ZVaultClient {
    */
   public async put<T>(entry: IZConfigEntry<T>): Promise<IZConfigEntry<T>> {
     set(this._memory, `${entry.scope}.${entry.key}`, entry.value);
-    return Promise.resolve(new ZConfigEntryBuilder().copy(entry).build());
+    return Promise.resolve(new ZConfigEntryBuilder(entry.value).copy(entry).build());
   }
 }

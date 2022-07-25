@@ -28,8 +28,8 @@ describe('ZVaultService', () => {
   });
 
   beforeEach(async () => {
-    configA = new ZConfigEntryBuilder().scope('common').key('domain').value('zthunworks.com').build();
-    configB = new ZConfigEntryBuilder().scope('authentication.secrets').key('jwt').generate().build();
+    configA = new ZConfigEntryBuilder('zthunworks.com').scope('common').key('domain').build();
+    configB = new ZConfigEntryBuilder(null).scope('authentication.secrets').key('jwt').generate().build();
 
     [configA, configB] = await dal.create(ZVaultCollections.Configs, [configA, configB]).run();
   });
@@ -43,7 +43,7 @@ describe('ZVaultService', () => {
       it('will retrieve the existing value.', async () => {
         // Arrange
         const target = createTestTarget();
-        const expected = new ZConfigEntryBuilder().copy(configA).build();
+        const expected = new ZConfigEntryBuilder(null).copy(configA).build();
         configA.value = 'not-correct';
         // Act
         const actual = await target.get({ entry: configA });
@@ -55,7 +55,7 @@ describe('ZVaultService', () => {
         // Arrange
         const target = createTestTarget();
         const expected = true;
-        const cfg = new ZConfigEntryBuilder().scope('common').key('secure').value(expected).build();
+        const cfg = new ZConfigEntryBuilder(expected).scope('common').key('secure').build();
         // Act
         await target.get({ entry: cfg });
         cfg.value = !expected;
@@ -68,7 +68,7 @@ describe('ZVaultService', () => {
         // Arrange
         const target = createTestTarget();
         const expected = true;
-        const cfg = new ZConfigEntryBuilder().scope('common').key('secure').value(expected).build();
+        const cfg = new ZConfigEntryBuilder(expected).scope('common').key('secure').build();
         // Act
         const [one, two, three] = await Promise.all([target.get({ entry: cfg }), target.get({ entry: cfg }), target.get({ entry: cfg })]);
         const actual = one.value || two.value || three.value;
@@ -83,7 +83,7 @@ describe('ZVaultService', () => {
       it('will add a key that does not exist.', async () => {
         // Arrange
         const target = createTestTarget();
-        const expected = new ZConfigEntryBuilder<boolean>().scope('common').key('secure').value(true).build();
+        const expected = new ZConfigEntryBuilder<boolean>(true).scope('common').key('secure').build();
         // Act
         const actual = await target.put({ entry: expected });
         // Assert
@@ -93,7 +93,7 @@ describe('ZVaultService', () => {
       it('will update an existing key if it exists.', async () => {
         // Arrange
         const target = createTestTarget();
-        const expected = new ZConfigEntryBuilder().scope('common').key('secure').value(true).build();
+        const expected = new ZConfigEntryBuilder(true).scope('common').key('secure').build();
         // Act
         await target.put({ entry: expected });
         expected.value = true;
@@ -105,7 +105,7 @@ describe('ZVaultService', () => {
       it('is synchronized if multiple get requests come in at the same time.', async () => {
         // Arrange
         const target = createTestTarget();
-        const expected = new ZConfigEntryBuilder().scope('common').key('secure').value(true).build();
+        const expected = new ZConfigEntryBuilder(true).scope('common').key('secure').build();
         const payload = { entry: expected };
         // Act
         await Promise.all([target.put(payload), target.put(payload), target.put(payload)]);

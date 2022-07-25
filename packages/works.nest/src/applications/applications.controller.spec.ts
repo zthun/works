@@ -20,7 +20,7 @@ describe('ZApplicationsController', () => {
     service = createMocked(['listWebApps']);
     service.listWebApps.mockResolvedValue(apps);
 
-    domain = new ZConfigEntryBuilder<string>().scope('common').key('domain').value('zthunworks.com').build();
+    domain = new ZConfigEntryBuilder<string>('zthunworks.com').scope('common').key('domain').build();
     config = new ZVaultMemoryClient();
     config.put(domain);
   });
