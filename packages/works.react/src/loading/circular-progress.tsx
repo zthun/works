@@ -29,7 +29,7 @@ export interface IZCircularProgressProps extends IZComponentStyle, IZComponentSi
  *
  * @returns The jsx for a circular loading progress.
  */
-export function ZCircularProgress(props: IZCircularProgressProps): JSX.Element {
+export function ZCircularProgress(props: IZCircularProgressProps) {
   const { className = '', show = true, size = 'auto', color = 'inherit' } = props;
 
   // Note: Max and auto will result in the default

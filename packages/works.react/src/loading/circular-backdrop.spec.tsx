@@ -5,7 +5,7 @@ import React from 'react';
 import { ZCircularBackdrop } from './circular-backdrop';
 
 describe('ZCircularBackdrop', () => {
-  let show: boolean;
+  let show: boolean | undefined;
 
   async function createTestTarget() {
     return render(<ZCircularBackdrop show={show} data-testid='ZCircularBackdrop-test' />);
