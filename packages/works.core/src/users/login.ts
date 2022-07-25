@@ -12,7 +12,7 @@ export interface IZLogin {
   /**
    * The login password.
    */
-  password?: string;
+  password: string;
 
   /**
    * The password confirmation.
@@ -33,7 +33,8 @@ export class ZLoginBuilder {
    */
   public constructor() {
     this._login = {
-      email: ''
+      email: '',
+      password: ''
     };
   }
 
