@@ -13,12 +13,12 @@ export interface IZDataState<T> {
    * If it is undefined, then it is currently being loaded.
    * If it is an actual object, that means that it has been loaded.
    */
-  readonly data?: T;
+  readonly data: T | null | undefined;
 
   /**
    * The observable that streams in changes to the data.
    */
-  readonly dataChange: Observable<T>;
+  readonly dataChange: Observable<T | null | undefined>;
 
   /**
    * Sets the data state.
@@ -27,5 +27,5 @@ export interface IZDataState<T> {
    *
    * @param val The value to set.  Use the convention that undefined is loading, null is no value, and truthy is loaded and has a value.
    */
-  set(val?: T): void;
+  set(val?: T | null): void;
 }

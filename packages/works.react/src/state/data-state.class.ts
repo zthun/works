@@ -14,12 +14,12 @@ export class ZDataState<T> implements IZDataState<T> {
    * If it is undefined, then it is currently being loaded/refreshed.
    * If it is an actual object, that means that it has been loaded.
    */
-  public data?: T;
+  public data: T | null | undefined;
 
   /**
    * The underlying data change object.
    */
-  private _dataChange = new Subject<T>();
+  private _dataChange = new Subject<T | null | undefined>();
 
   /**
    * Occurs when the data object changes.
@@ -33,7 +33,7 @@ export class ZDataState<T> implements IZDataState<T> {
    *
    * @param initial The initial value of the data.
    */
-  public constructor(initial?: T) {
+  public constructor(initial?: T | null | undefined) {
     this.data = initial;
   }
 
@@ -44,7 +44,7 @@ export class ZDataState<T> implements IZDataState<T> {
    *
    * @returns The data that was updated.
    */
-  public set(val?: T) {
+  public set(val?: T | null | undefined) {
     if (this.data === val) {
       // There are no changes to be made.
       return this.data;
