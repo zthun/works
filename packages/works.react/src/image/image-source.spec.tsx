@@ -6,7 +6,7 @@ import React from 'react';
 import { ZImageSource } from './image-source';
 
 describe('ZImageSource', () => {
-  let src: string;
+  let src: string | undefined;
 
   async function createTestTarget() {
     const target = render(<ZImageSource src={src} />);
@@ -15,12 +15,12 @@ describe('ZImageSource', () => {
   }
 
   beforeEach(() => {
-    src = null;
+    src = undefined;
   });
 
   it('renders an empty div if the source is falsy.', async () => {
     // Arrange
-    src = null;
+    src = undefined;
     const target = await createTestTarget();
     // Act
     const actual = target.container.querySelector('div.ZImageSource-root');
