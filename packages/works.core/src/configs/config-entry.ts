@@ -27,7 +27,7 @@ export interface IZConfigEntry<T = any> {
   /**
    * The value of the entry.
    */
-  value: T | null;
+  value: T;
 }
 
 /**
@@ -38,13 +38,15 @@ export class ZConfigEntryBuilder<T = any> {
 
   /**
    * Initializes a new instance of this object.
+   *
+   * @param value The initial (default) value.
    */
-  public constructor() {
+  public constructor(value: T) {
     this._entry = {
       _id: '',
       scope: '',
       key: '',
-      value: null
+      value
     };
   }
 
@@ -97,7 +99,7 @@ export class ZConfigEntryBuilder<T = any> {
     // a bunch of crypto currency nonsense when bundled to a web app.  So we'll just randomize it here.
     // The original call would look like randomBytes(length).toString(encoding);
     const val = Buffer.from(Uint8Array.from({ length }, () => Math.random() * 256)).toString(encoding);
-    return new ZConfigEntryBuilder<string>().scope(this._entry.scope).key(this._entry.key).value(val);
+    return new ZConfigEntryBuilder<string>('').scope(this._entry.scope).key(this._entry.key).value(val);
   }
 
   /**

@@ -4,7 +4,7 @@ import { IZConfigEntry, ZConfigEntryBuilder } from './config-entry';
 
 describe('ZConfigEntryBuilder', () => {
   function createTestTarget() {
-    return new ZConfigEntryBuilder();
+    return new ZConfigEntryBuilder('');
   }
 
   describe('Assign', () => {
@@ -22,7 +22,7 @@ describe('ZConfigEntryBuilder', () => {
   describe('Copy', () => {
     it('creates a copy', () => {
       // Arrange
-      const other = new ZConfigEntryBuilder().key('domain').value('zthunworks.com').build();
+      const other = new ZConfigEntryBuilder('').key('domain').value('zthunworks.com').build();
       const target = createTestTarget();
       // Act
       const actual = target.copy(other).build();
