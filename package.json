@@ -21,7 +21,7 @@
     "packages/works.dal",
     "packages/works.draw",
     "packages/works.react",
-    "packages/works.client",
+    "packages/works.web",
     "packages/works.microservices",
     "packages/works.cookies",
     "packages/works.notifications",

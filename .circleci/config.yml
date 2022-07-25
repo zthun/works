@@ -62,7 +62,7 @@ jobs:
             docker build . --target works.users -t zthun/works.users:latest -t zthun/works.users:$(npm show @zthun/works.users version) --progress=plain
             docker build . --target works.vault -t zthun/works.vault:latest -t zthun/works.vault:$(npm show @zthun/works.vault version) --progress=plain
             docker build . --target works.api -t zthun/works.api:latest -t zthun/works.api:$(npm show @zthun/works.api version) --progress=plain
-            docker build . --target works.client -t zthun/works.client:latest -t zthun/works.client:$(npm show @zthun/works.client version) --progress=plain
+            docker build . --target works.web -t zthun/works.web:latest -t zthun/works.web:$(npm show @zthun/works.web version) --progress=plain
             docker push zthun/works.proxy:latest
             docker push zthun/works.proxy:$(node -p "require('./packages/works.proxy/package.json').version")
             docker push zthun/works.apps:latest
@@ -77,8 +77,8 @@ jobs:
             docker push zthun/works.vault:$(npm show @zthun/works.vault version)
             docker push zthun/works.api:latest
             docker push zthun/works.api:$(npm show @zthun/works.api version)
-            docker push zthun/works.client:latest
-            docker push zthun/works.client:$(npm show @zthun/works.client version)
+            docker push zthun/works.web:latest
+            docker push zthun/works.web:$(npm show @zthun/works.web version)
 
 workflows:
   make:

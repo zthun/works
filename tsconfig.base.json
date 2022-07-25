@@ -8,6 +8,7 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "declaration": true,
+    "strictNullChecks": true,
     "jsx": "react",
     "target": "es5",
     "module": "commonjs"

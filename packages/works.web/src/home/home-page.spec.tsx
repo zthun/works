@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 import { act, fireEvent, render } from '@testing-library/react';
 import { ZTestRouter } from '@zthun/works.react';
@@ -28,7 +29,7 @@ describe('ZHomePage', () => {
     await act(async () => {
       const box = await target.findByTestId(identifier);
       const learn = box.querySelector('.ZPaperCard-btn-action');
-      fireEvent.click(learn);
+      fireEvent.click(learn!);
     });
     // Assert
     expect(history.location.pathname).toEqual(expected);

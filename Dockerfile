@@ -64,8 +64,8 @@ RUN npm install -g @zthun/works.api
 EXPOSE 3000
 CMD ["zthun-works-api"]
 
-FROM node:17.3.0-alpine as works.client.install
-RUN npm install -g @zthun/works.client
+FROM node:17.3.0-alpine as works.web.install
+RUN npm install -g @zthun/works.web
 
-FROM nginx:1.21.5-alpine as works.client
-COPY --from=works.client.install /usr/local/lib/node_modules/@zthun/works.client/dist/. /usr/share/nginx/html/
+FROM nginx:1.21.5-alpine as works.web
+COPY --from=works.web.install /usr/local/lib/node_modules/@zthun/works.web/dist/. /usr/share/nginx/html/

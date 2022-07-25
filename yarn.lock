@@ -4885,19 +4885,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.client@workspace:packages/works.client":
-  version: 0.0.0-use.local
-  resolution: "@zthun/works.client@workspace:packages/works.client"
-  dependencies:
-    "@zthun/works.core": ^4.0.0
-    "@zthun/works.draw": ^4.0.0
-    "@zthun/works.react": ^4.0.0
-    "@zthun/works.url": ^4.0.0
-    react: ^18.2.0
-    react-dom: ^18.2.0
-  languageName: unknown
-  linkType: soft
-
 "@zthun/works.cookies@workspace:packages/works.cookies":
   version: 0.0.0-use.local
   resolution: "@zthun/works.cookies@workspace:packages/works.cookies"
@@ -5110,6 +5097,19 @@ __metadata:
     rxjs: ^7.5.6
   bin:
     zthun-works-vault: ./bin/main.js
+  languageName: unknown
+  linkType: soft
+
+"@zthun/works.web@workspace:packages/works.web":
+  version: 0.0.0-use.local
+  resolution: "@zthun/works.web@workspace:packages/works.web"
+  dependencies:
+    "@zthun/works.core": ^4.0.0
+    "@zthun/works.draw": ^4.0.0
+    "@zthun/works.react": ^4.0.0
+    "@zthun/works.url": ^4.0.0
+    react: ^18.2.0
+    react-dom: ^18.2.0
   languageName: unknown
   linkType: soft
 

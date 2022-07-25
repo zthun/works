@@ -1,12 +1,12 @@
 {
-  "name": "@zthun/works.client",
+  "name": "@zthun/works.web",
   "version": "4.0.0",
   "description": "The application for learning about the building blocks of zthunworks.",
-  "umd": "./dist/works.client.min.js",
+  "umd": "./dist/works.web.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/works",
-    "directory": "packages/works.client"
+    "directory": "packages/works.web"
   },
   "scripts": {
     "build": "webpack --env production",
