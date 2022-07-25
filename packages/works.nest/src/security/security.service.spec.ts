@@ -25,7 +25,7 @@ describe('ZSecurityService', () => {
     users = createMocked(['findByEmail', 'findById', 'login']);
     users.findByEmail.mockReturnValue(Promise.resolve(null));
     users.findById.mockReturnValue(Promise.resolve(null));
-    users.login.mockReturnValue(Promise.resolve());
+    users.login.mockReturnValue(Promise.resolve(null));
 
     cookies = createMocked(['createAuthentication', 'whoIs']);
     cookies.createAuthentication.mockResolvedValue(cookie);

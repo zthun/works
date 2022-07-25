@@ -31,7 +31,7 @@ export class ZSecurityService {
    *
    * @returns A promise that, when resolved, has extracted the user.
    */
-  public async extract(req: Request): Promise<IZUser> {
+  public async extract(req: Request): Promise<IZUser | null> {
     const cookie = new ZCookieBuilder().authentication().build();
     const jwt = get(req, `cookies[${cookie.name}]`);
     const { value: secret } = await this._vault.get(ZConfigEntries.identity.secret);

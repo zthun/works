@@ -28,7 +28,7 @@ export class ZSecurityController {
    * @returns The profile object given the requested cookie.
    */
   @Get()
-  public async read(@Req() req: Request, @Res() res: Response): Promise<IZProfile> {
+  public async read(@Req() req: Request, @Res() res: Response): Promise<IZProfile | null> {
     const user = await this._security.extract(req);
 
     if (user == null) {
