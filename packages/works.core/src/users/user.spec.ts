@@ -67,7 +67,7 @@ describe('ZUserBuilder', () => {
 
     it('sets the user active', () => {
       assertBuilderSetsProperty(
-        undefined,
+        null,
         createTestTarget,
         (t) => t.inactive(v4()).active(),
         (u: IZUser) => u.activator
@@ -96,7 +96,7 @@ describe('ZUserBuilder', () => {
 
     it('sets the the user recovery password to null on login.', () => {
       assertBuilderSetsProperty(
-        undefined,
+        null,
         createTestTarget,
         (t) => t.recover(v4()).login(),
         (u: IZUser) => u.recovery
