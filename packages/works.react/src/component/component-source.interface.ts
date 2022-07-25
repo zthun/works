@@ -5,5 +5,5 @@ export interface IZComponentSource {
   /**
    * The source to load.
    */
-  src: string;
+  src?: string;
 }
