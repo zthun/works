@@ -24,4 +24,12 @@ describe('ZRuleCookieRequestAuthAny', () => {
     // Assert
     expect(() => target.claim(new ZUserBuilder().inactive(v4()).build())).toThrow();
   });
+
+  it('throws a ForbiddenException if the user is falsy.', async () => {
+    // Arrange
+    const target = createTestTarget();
+    // Act
+    // Assert
+    expect(() => target.claim(null)).toThrow();
+  });
 });

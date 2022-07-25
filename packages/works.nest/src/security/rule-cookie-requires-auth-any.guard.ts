@@ -14,7 +14,7 @@ export class ZRuleCookieRequiresAuthAny extends ZRuleCookieRequiresAuth {
    *
    * @throws UnauthorizedException if user is falsy.
    */
-  public claim(user: IZUser) {
+  public claim(user: IZUser | null) {
     ZAssert.claim(!!user, 'You are not authenticated.  Please log in.').assert((msg) => new UnauthorizedException(msg));
   }
 }

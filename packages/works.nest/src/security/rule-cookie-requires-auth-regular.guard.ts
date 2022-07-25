@@ -14,7 +14,7 @@ export class ZRuleCookieRequiresAuthRegular extends ZRuleCookieRequiresAuth {
    *
    * @throws ForbiddenException if the user is the super user.
    */
-  public claim(user: IZUser) {
-    ZAssert.claim(!user.super, 'You cannot perform this action on the super user.').assert((msg) => new ForbiddenException(msg));
+  public claim(user: IZUser | null) {
+    ZAssert.claim(!!user && !user.super, 'You cannot perform this action on the super user.').assert((msg) => new ForbiddenException(msg));
   }
 }

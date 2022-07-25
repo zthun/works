@@ -25,4 +25,12 @@ describe('ZRuleCookieRequestAuthAny', () => {
     // Assert
     expect(() => target.claim(new ZUserBuilder().active().build())).toThrow(ConflictException);
   });
+
+  it('throws a ConflictException if the user is falsy.', async () => {
+    // Arrange
+    const target = createTestTarget();
+    // Act
+    // Assert
+    expect(() => target.claim(null)).toThrow(ConflictException);
+  });
 });

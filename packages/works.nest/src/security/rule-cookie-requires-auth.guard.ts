@@ -35,5 +35,5 @@ export abstract class ZRuleCookieRequiresAuth implements CanActivate {
    *
    * @throws HttpException if any claims fail.
    */
-  public abstract claim(user: IZUser): void;
+  public abstract claim(user: IZUser | null): void;
 }

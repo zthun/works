@@ -12,9 +12,9 @@ export class ZRuleCookieRequiresAuthActivated extends ZRuleCookieRequiresAuth {
    *
    * @param user The user to check.
    *
-   * @throws A ForbiddenException if the user is not activated.
+   * @throws A ForbiddenException if the user is not activated or is null.
    */
-  public claim(user: IZUser) {
-    ZAssert.claim(!user.activator, 'Your account has not been activated.  Please activate your account before performing this action.').assert((msg) => new ForbiddenException(msg));
+  public claim(user: IZUser | null) {
+    ZAssert.claim(!!user && !user.activator, 'Your account has not been activated.  Please activate your account before performing this action.').assert((msg) => new ForbiddenException(msg));
   }
 }
