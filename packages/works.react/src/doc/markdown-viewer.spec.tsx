@@ -33,7 +33,7 @@ describe('ZMarkdownViewer', () => {
     _This is test markdown_
     `;
 
-    const result = new ZHttpResultBuilder().status(ZHttpCodeSuccess.OK).data(markdown).build();
+    const result = new ZHttpResultBuilder(markdown).status(ZHttpCodeSuccess.OK).build();
     http.set(url, ZHttpMethod.Get, () => result);
   });
 
@@ -49,7 +49,7 @@ describe('ZMarkdownViewer', () => {
   it('should render an error markdown if an error occurs while retrieving the source.', async () => {
     // Arrange
     const error = 'An error occurred retrieving the markdown.';
-    const result = new ZHttpResultBuilder().status(ZHttpCodeClient.Forbidden).data(error).build();
+    const result = new ZHttpResultBuilder(error).status(ZHttpCodeClient.Forbidden).build();
     http.set(url, ZHttpMethod.Get, result);
     const target = await createTestTarget();
     // Act

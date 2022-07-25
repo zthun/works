@@ -91,14 +91,14 @@ const useMarkdownViewerStyles = makeStyles()((theme) => {
  * @returns The jsx to render a markdown file.
  */
 export function ZMarkdownViewer(props: IZMarkdownProps) {
-  const { src, headerText, subHeaderText = '', avatar = null, actionText = null, actionColor = 'primary', actionType = 'button', size = 'auto', onAction = noop } = props;
+  const { src, headerText, subHeaderText = '', avatar, actionText, actionColor = 'primary', actionType = 'button', size = 'auto', onAction = noop } = props;
 
   const [markdown, setMarkdown] = useState('');
   const http = useHttpService();
-  const markdownEl = useRef<HTMLDivElement>();
+  const markdownEl = useRef<HTMLDivElement>(null);
   const styles = useMarkdownViewerStyles();
 
-  useEffect(loadMarkdown, [src]);
+  useEffect(loadMarkdown, [src, markdownEl.current]);
 
   /**
    * Loads the markdown into this viewer.
@@ -108,6 +108,10 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
   function loadMarkdown() {
     const canceled = new Subject<any>();
     setMarkdown('');
+
+    if (src == null || markdownEl.current == null) {
+      return;
+    }
 
     const request = new ZHttpRequestBuilder().get().url(src).build();
 
@@ -119,7 +123,7 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
       )
       .subscribe((md) => {
         setMarkdown(md);
-        markdownEl.current.querySelectorAll('code').forEach((block) => highlight.highlightElement(block));
+        markdownEl.current?.querySelectorAll('code').forEach((block) => highlight.highlightElement(block));
       });
 
     return () => {

@@ -21,7 +21,7 @@ describe('ZMarkdownPage', () => {
     markdown = '# Markdown';
 
     http = new ZHttpServiceMock();
-    http.set('markdown.md', ZHttpMethod.Get, new ZHttpResultBuilder().data(markdown).build());
+    http.set('markdown.md', ZHttpMethod.Get, new ZHttpResultBuilder(markdown).build());
   });
 
   it('renders the page.', async () => {
