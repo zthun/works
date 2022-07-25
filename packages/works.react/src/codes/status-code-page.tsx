@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import { ZHttpCode } from '@zthun/works.http';
+import { ZHttpCode, ZHttpCodeSuccess } from '@zthun/works.http';
 import React from 'react';
 import { useParams } from '../router/router-dom';
 import { ZHttpStatusCodeCard } from './http-code-card';
@@ -23,7 +23,7 @@ export interface IZStatusCodePageProps {
  */
 export function ZStatusCodePage(props: IZStatusCodePageProps) {
   const params = useParams();
-  const code: ZHttpCode = +params[props.name];
+  const code: ZHttpCode = +(params[props.name] || ZHttpCodeSuccess.OK);
 
   return (
     <Grid container={true} spacing={3} className='ZStatusCodePage-root' justifyContent='center'>

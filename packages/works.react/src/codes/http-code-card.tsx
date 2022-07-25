@@ -1,10 +1,10 @@
-import { Typography } from '@mui/material';
-import EmojiFoodBeverageTwoToneIcon from '@mui/icons-material/EmojiFoodBeverageTwoTone';
-import WarningIcon from '@mui/icons-material/Warning';
-import InfoIcon from '@mui/icons-material/Info';
-import ForwardIcon from '@mui/icons-material/Forward';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import EmojiFoodBeverageTwoToneIcon from '@mui/icons-material/EmojiFoodBeverageTwoTone';
 import ErrorIcon from '@mui/icons-material/Error';
+import ForwardIcon from '@mui/icons-material/Forward';
+import InfoIcon from '@mui/icons-material/Info';
+import WarningIcon from '@mui/icons-material/Warning';
+import { Typography } from '@mui/material';
 import { getHttpCodeCategory, getHttpCodeDescription, getHttpCodeName, getHttpCodeSeverity, ZHttpCode, ZHttpCodeClient, ZHttpCodeSeverity } from '@zthun/works.http';
 import React from 'react';
 import { ZPaperCard } from '../card/paper-card';
@@ -92,14 +92,6 @@ export function ZHttpStatusCodeCard(props: IZHttpStatusCodeCardProps) {
 
     return <ErrorIcon className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-server ${styles.classes.icon}`} data-testid='ZHttpStatusCodeCard-server' />;
   }
-
-  /*
-  let avatar = <WarningIcon className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-client ${styles.classes.icon}`} data-testid='ZHttpStatusCodeCard-client' />;
-
-  if (props.code === ZHttpCodeClient.ImATeapot) {
-    avatar = <EmojiFoodBeverageTwoToneIcon className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-teapot ${styles.classes.icon}`} data-testid='ZHttpStatusCodeCard-teapot' />;
-  }
-  */
 
   return (
     <ZPaperCard className='ZHttpStatusCodeCard-root' data-testid='ZHttpStatusCodeCard-root' avatar={renderAvatar()} headerText={heading} subHeaderText={name}>
