@@ -41,7 +41,7 @@ export function ZHealthIndicator() {
    */
   function renderTooltip() {
     if (health === undefined) {
-      return null;
+      return undefined;
     }
 
     return health ? 'The server is reporting healthy.' : 'The server is in an unhealthy state.  You will have to try again later.';

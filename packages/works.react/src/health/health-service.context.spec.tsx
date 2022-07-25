@@ -14,7 +14,7 @@ describe('ZHealthService', () => {
 
   beforeEach(() => {
     http = new ZHttpServiceMock();
-    http.set(ZHealthService.createHealthUrl(), ZHttpMethod.Get, new ZHttpResultBuilder().status(ZHttpCodeSuccess.OK).data(true).build());
+    http.set(ZHealthService.createHealthUrl(), ZHttpMethod.Get, new ZHttpResultBuilder(true).status(ZHttpCodeSuccess.OK).build());
   });
 
   it('should return the value from the service request.', async () => {
@@ -28,7 +28,7 @@ describe('ZHealthService', () => {
 
   it('should return false if the endpoint is missing.', async () => {
     // Arrange
-    http.set(ZHealthService.createHealthUrl(), ZHttpMethod.Get, new ZHttpResultBuilder().status(ZHttpCodeServer.BadGateway).build());
+    http.set(ZHealthService.createHealthUrl(), ZHttpMethod.Get, new ZHttpResultBuilder(null).status(ZHttpCodeServer.BadGateway).build());
     const target = createTestTarget();
     // Act
     const actual = await target.read();

@@ -68,8 +68,8 @@ export const useHealthService = () => useContext(ZHealthServiceContext);
  * @returns The current health of the api along with a method to refresh it.
  *          Returns undefined if the health check is loading.
  */
-export function useHealth() {
-  const [health, setHealth] = useSafeState(undefined);
+export function useHealth(): [boolean | null | undefined, () => Promise<void>] {
+  const [health, setHealth] = useSafeState<boolean | null | undefined>(undefined);
   const service = useHealthService();
 
   /**
