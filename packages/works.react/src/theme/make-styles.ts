@@ -1,5 +1,5 @@
-import { createMakeStyles } from 'tss-react';
 import { Palette, Theme, useTheme as useMuiTheme } from '@mui/material';
+import { createMakeStyles } from 'tss-react';
 
 /**
  * Represents the options for sizes for components.
@@ -100,7 +100,7 @@ export interface IZExtendedPalette extends Palette {
 /**
  * The overall theme for the Zthunworks domain.
  *
- * This extends material UI's main theme and adds
+ * This extends material main theme and adds
  * some helpers and size options.
  */
 export interface IZTheme extends Theme {
@@ -246,6 +246,8 @@ export function useZthunworksTheme(): IZTheme {
   mui.typography.h3.fontSize = base.sizing.font.md;
 
   // Card
+  mui.components = mui.components || {};
+
   mui.components.MuiCardMedia = {
     styleOverrides: {
       root: {
