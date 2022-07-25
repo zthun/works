@@ -6,7 +6,7 @@ import { ZCardAvatar } from './card-avatar';
 
 describe('ZCardAvatar', () => {
   let src: string;
-  let size: 'auto' | 'max' | 'xl' | 'lg' | 'md' | 'sm';
+  let size: 'auto' | 'max' | 'xl' | 'lg' | 'md' | 'sm' | undefined;
 
   async function createTestTarget() {
     const target = render(<ZCardAvatar src={src} size={size} />);
