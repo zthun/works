@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 import { act, fireEvent, render, RenderResult } from '@testing-library/react';
 import { createMocked } from '@zthun/works.jest';
@@ -19,7 +20,7 @@ describe('ZAlertList', () => {
   let alertService: jest.Mocked<IZAlertService>;
 
   async function createTestTarget() {
-    let target: RenderResult;
+    let target: RenderResult = render(<></>);
 
     await act(async () => {
       target = render(
@@ -55,7 +56,7 @@ describe('ZAlertList', () => {
   }
 
   async function getAlert(id: string, target: RenderResult) {
-    const alert = target.container.querySelector(`.ZAlertList-alert-${id}`);
+    const alert = target.container.querySelector(`.ZAlertList-alert-${id}`)!;
     return Promise.resolve(alert);
   }
 
@@ -70,7 +71,7 @@ describe('ZAlertList', () => {
     const alert = await getAlert(id, target);
     const x = first(alert.getElementsByTagName('button'));
     await act(async () => {
-      fireEvent.click(x);
+      fireEvent.click(x!);
       await lastValueFrom(of(true).pipe(delay(0)));
     });
   }
