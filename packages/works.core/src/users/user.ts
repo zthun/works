@@ -27,7 +27,7 @@ export interface IZUser {
    *
    * This is a temporary password that has an expiration date.
    */
-  recovery?: { password: string; exp: number };
+  recovery: { password: string; exp: number } | null;
 
   /**
    * The users display name.
@@ -42,7 +42,7 @@ export interface IZUser {
    * This will be in the url and they won't need to stored once the user has been activated.
    * This should never be sent back with the profile information.
    */
-  activator?: { key: string; exp: number };
+  activator: { key: string; exp: number } | null;
 
   /**
    * Gets a value that indicates whether or not the user is the super user.
@@ -77,7 +77,9 @@ export class ZUserBuilder {
     this._user = {
       _id: '',
       email: '',
-      password: ''
+      password: '',
+      activator: null,
+      recovery: null
     };
   }
 
@@ -137,7 +139,7 @@ export class ZUserBuilder {
    * @returns This object.
    */
   public active(): this {
-    delete this._user.activator;
+    this._user.activator = null;
     return this;
   }
 
@@ -188,7 +190,7 @@ export class ZUserBuilder {
    */
   public login() {
     this._user.login = new Date().getTime();
-    delete this._user.recovery;
+    this._user.recovery = null;
     return this;
   }
 
