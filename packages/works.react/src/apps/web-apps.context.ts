@@ -9,7 +9,7 @@ import { useWebAppService } from './web-app-service.context';
 /**
  * Represents the context for the global list of web apps that the nav bar should link to.
  */
-export const ZWebAppsContext = createContext<IZDataState<IZWebApp[]>>(new ZDataState<IZWebApp[]>(null));
+export const ZWebAppsContext = createContext<IZDataState<IZWebApp[]>>(new ZDataState<IZWebApp[]>());
 
 /**
  * Gets the current list of web apps.
@@ -55,9 +55,9 @@ export function useWebAppsAndWatch() {
  *
  * @returns The application information for a given app id.
  */
-export function useWebApp(id: string): IZWebApp {
+export function useWebApp(id: string | undefined): IZWebApp | null | undefined {
   const { data } = useWebAppsAndWatch();
-  const webApp = useMemo<IZWebApp>(() => {
+  const webApp = useMemo<IZWebApp | null | undefined>(() => {
     if (!id) {
       return null;
     }

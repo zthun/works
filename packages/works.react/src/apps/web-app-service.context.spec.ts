@@ -24,7 +24,7 @@ describe('ZWebAppsService', () => {
         new ZWebAppBuilder().id('gateway`').name('Status').domain('https://gateway.zthunworks.com').build()
       ];
 
-      http.set(ZWebAppService.createWebAppsUrl(), ZHttpMethod.Get, new ZHttpResultBuilder().data(apps).build());
+      http.set(ZWebAppService.createWebAppsUrl(), ZHttpMethod.Get, new ZHttpResultBuilder(apps).build());
     });
 
     it('should return the full list of web applications.', async () => {

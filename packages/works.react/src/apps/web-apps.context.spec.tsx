@@ -27,7 +27,7 @@ describe('WebApps', () => {
   });
 
   describe('useWebApp', () => {
-    let id: string;
+    let id: string | undefined;
 
     async function createTestTarget() {
       const wrapper = ({ children }) => <ZWebAppsContext.Provider value={globalWebApps}>{children}</ZWebAppsContext.Provider>;
