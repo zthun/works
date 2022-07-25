@@ -14,7 +14,12 @@ import { ZVaultService } from './vault.service';
   providers: [
     {
       provide: ZVaultDatabase.Token,
-      useValue: ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().database(ZVaultDatabase.Name).url(env.DATABASE_URL).build())
+      useValue: ZDatabaseMongo.connect(
+        new ZDatabaseOptionsBuilder()
+          .database(ZVaultDatabase.Name)
+          .url(env.DATABASE_URL || 'database.zthunworks.com')
+          .build()
+      )
     }
   ],
   controllers: [ZVaultService]

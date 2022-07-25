@@ -14,7 +14,12 @@ import { ZUsersService } from './users.service';
   providers: [
     {
       provide: ZUsersDatabase.Token,
-      useValue: ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().database(ZUsersDatabase.Name).url(env.DATABASE_URL).build())
+      useValue: ZDatabaseMongo.connect(
+        new ZDatabaseOptionsBuilder()
+          .database(ZUsersDatabase.Name)
+          .url(env.DATABASE_URL || 'database.zthunworks.com')
+          .build()
+      )
     }
   ],
   controllers: [ZUsersService]
