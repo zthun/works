@@ -101,9 +101,9 @@ export class ZUsersClient {
    *
    * @param id The id of the account to login.
    *
-   * @returns A promise that resolves when the login has been set.
+   * @returns A promise that, when resolved, has returned the updated user.  Returns null if no such user exists.
    */
-  public async login(id: string): Promise<void> {
+  public async login(id: string): Promise<IZUser | null> {
     return lastValueFrom(this._users.send({ cmd: 'login' }, { id }));
   }
 

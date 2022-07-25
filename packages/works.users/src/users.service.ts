@@ -4,7 +4,7 @@ import { IZLogin, IZProfile, IZUser, ZUserBuilder } from '@zthun/works.core';
 import { IZDatabase } from '@zthun/works.dal';
 import { compare, hash } from 'bcryptjs';
 import { v4 } from 'uuid';
-import { ZUsersDatabase, ZUsersCollections } from './users.database';
+import { ZUsersCollections, ZUsersDatabase } from './users.database';
 
 @Controller()
 /**
@@ -33,7 +33,7 @@ export class ZUsersService {
    * @returns A promise that, when resolved, has the found user.  Returns null if no such user exists.
    */
   @MessagePattern({ cmd: 'find' })
-  public async find(filter: { _id?: string; email?: string }): Promise<IZUser> {
+  public async find(filter: { _id?: string; email?: string }): Promise<IZUser | null> {
     if (!filter._id && !filter.email) {
       return null;
     }
@@ -71,17 +71,17 @@ export class ZUsersService {
    * @returns A promise that, when resolved, has returned the updated user.
    */
   @MessagePattern({ cmd: 'update' })
-  public async update({ id, profile }: { id: string; profile: IZProfile }): Promise<IZUser> {
+  public async update({ id, profile }: { id: string; profile: IZProfile }): Promise<IZUser | null> {
     const template: Partial<IZUser> = {};
 
-    if (Object.prototype.hasOwnProperty.call(profile, 'email')) {
+    if (profile.email != null) {
       // Changing the email will cause the account to inactivate.
       const temp = new ZUserBuilder().email(profile.email).inactive(v4()).build();
       template.activator = temp.activator;
       template.email = temp.email;
     }
 
-    if (Object.prototype.hasOwnProperty.call(profile, 'password')) {
+    if (profile.password != null) {
       template.password = await hash(profile.password, ZUsersService.BcryptRounds);
       template.recovery = null;
     }
@@ -146,7 +146,7 @@ export class ZUsersService {
    * @returns A promise that resolves to the generated password for the user with the expiration date.  Resolves to null if no user with the given email exists.
    */
   @MessagePattern({ cmd: 'recover' })
-  public async recover({ email }: { email: string }): Promise<string> {
+  public async recover({ email }: { email: string }): Promise<string | null> {
     const current = await this.find({ email });
 
     if (current) {
@@ -165,14 +165,20 @@ export class ZUsersService {
    *
    * @param id The id of the account to login.
    *
-   * @returns A promise that resolves when the login has been set.
+   * @returns A promise that resolves with the user that has been logged in, or null if
+   * no such user exists.
    */
   @MessagePattern({ cmd: 'login' })
-  public async login({ id }: { id: string }): Promise<null> {
+  public async login({ id }: { id: string }): Promise<IZUser | null> {
     const current = await this.find({ _id: id });
+
+    if (current == null) {
+      return null;
+    }
+
     const updated = new ZUserBuilder().copy(current).login().build();
     await this._dal.update<IZUser>(ZUsersCollections.Users, updated).filter({ _id: updated._id }).run();
-    return null;
+    return updated;
   }
 
   /**

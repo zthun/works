@@ -1,9 +1,10 @@
 /**
  * @jest-environment node
  */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
-import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
 import { IZLogin, IZProfile, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
+import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
 import { compare, hash } from 'bcryptjs';
 import { v4 } from 'uuid';
 import { ZUsersCollections } from './users.database';
@@ -193,7 +194,7 @@ describe('ZUsersService', () => {
       // Act
       await target.update({ id: userA._id, profile });
       const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
-      const same = await compare(profile.password, actual.password);
+      const same = await compare(profile.password!, actual.password);
       // Assert
       expect(same).toBeTruthy();
     });
@@ -319,7 +320,10 @@ describe('ZUsersService', () => {
       // Arrange
       const target = createTestTarget();
       const pwd = await target.recover({ email: userA.email });
-      const login = new ZLoginBuilder().copy(loginA).password(pwd).build();
+      const login = new ZLoginBuilder()
+        .copy(loginA)
+        .password(pwd as string)
+        .build();
       // Act
       const actual = await target.compare({ credentials: login });
       // Assert
@@ -330,10 +334,10 @@ describe('ZUsersService', () => {
       // Arrange
       const target = createTestTarget();
       const pwd = await target.recover({ email: userA.email });
-      userA = await target.find({ _id: userA._id });
-      userA.recovery.exp = new Date().getTime();
+      const user = await target.find({ _id: userA._id });
+      user!.recovery!.exp = new Date().getTime();
       await dal.update(ZUsersCollections.Users, userA).filter({ _id: userA._id }).run();
-      const login = new ZLoginBuilder().copy(loginA).password(pwd).build();
+      const login = new ZLoginBuilder().copy(loginA).password(pwd!).build();
       // Act
       const actual = await target.compare({ credentials: login });
       // Assert
@@ -381,7 +385,7 @@ describe('ZUsersService', () => {
       // Act
       const generated = await target.recover({ email: userA.email });
       const [user] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
-      const actual = await compare(generated, user.recovery.password);
+      const actual = await compare(generated as string, user.recovery?.password as string);
       // Assert
       expect(actual).toBeTruthy();
     });
