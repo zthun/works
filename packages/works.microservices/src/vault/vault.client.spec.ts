@@ -23,14 +23,14 @@ describe('VaultClient', () => {
     });
 
     it('gets by entry.', async () => {
-      const entry = new ZConfigEntryBuilder().scope('common').key('domain').build();
+      const entry = new ZConfigEntryBuilder(null).scope('common').key('domain').build();
       await assertProxySendsMessage({ cmd: 'get' }, { entry }, proxy, createTestTarget, (t, p) => t.get(p.entry));
     });
   });
 
   describe('Write', () => {
     it('puts by entry.', async () => {
-      const entry = new ZConfigEntryBuilder().scope('common').key('domain').value('local.zthunworks.com').build();
+      const entry = new ZConfigEntryBuilder('local.zthunworks.com').scope('common').key('domain').build();
       await assertProxySendsMessage({ cmd: 'put' }, { entry }, proxy, createTestTarget, (t, p) => t.put(p.entry));
     });
   });
