@@ -19,36 +19,40 @@ import { makeStyles } from '../theme/make-styles';
  */
 export interface IZPaperCardProps extends IZComponentHeader, IZComponentHierarchy, IZComponentStyle, IZComponentMedia, IZComponentSizeable, IZComponentLoading, IZComponentDisabled, IZComponentActionable, IZComponentConfirmable {}
 
-const usePaperCardStyles = makeStyles<IZPaperCardProps>()((theme, props) => ({
-  root: {
-    position: 'relative',
-    width: theme.sizing.card[props.size]
-  },
-  header: {
-    paddingBottom: theme.sizing.gaps.none,
+const usePaperCardStyles = makeStyles<IZPaperCardProps>()((theme, props) => {
+  const { size = 'auto', imageWidth = 'auto', imageHeight = 'auto' } = props;
 
-    h3: {
-      fontSize: theme.sizing.font.xl,
-      padding: theme.sizing.gaps.none,
-      margin: theme.sizing.gaps.none
+  return {
+    root: {
+      position: 'relative',
+      width: theme.sizing.card[size]
+    },
+    header: {
+      paddingBottom: theme.sizing.gaps.none,
+
+      h3: {
+        fontSize: theme.sizing.font.xl,
+        padding: theme.sizing.gaps.none,
+        margin: theme.sizing.gaps.none
+      }
+    },
+    media: {
+      objectFit: 'fill',
+      margin: 'auto',
+      textAlign: 'center',
+      paddingTop: theme.sizing.gaps.sm,
+      paddingBottom: theme.sizing.gaps.sm,
+      width: theme.sizing.image[imageWidth],
+      height: theme.sizing.image[imageHeight]
+    },
+    actions: {
+      padding: theme.sizing.gaps.md
+    },
+    confirm: {
+      marginTop: theme.sizing.gaps.md
     }
-  },
-  media: {
-    objectFit: 'fill',
-    margin: 'auto',
-    textAlign: 'center',
-    paddingTop: theme.sizing.gaps.sm,
-    paddingBottom: theme.sizing.gaps.sm,
-    width: theme.sizing.image[props.imageWidth],
-    height: theme.sizing.image[props.imageHeight]
-  },
-  actions: {
-    padding: theme.sizing.gaps.md
-  },
-  confirm: {
-    marginTop: theme.sizing.gaps.md
-  }
-}));
+  };
+});
 
 /**
  * Renders a material ui card wrapped in paper at a standard elevation.
@@ -73,7 +77,7 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
     actionType = 'button',
     actionColor = 'primary',
     confirmation = null,
-    confirmationName = null,
+    confirmationName,
     confirmationColor = 'default',
     autoConfirm = false,
     avatar = null,
@@ -159,7 +163,7 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
       return null;
     }
 
-    const isDisabled = disabled || (confirmation && !confirmed);
+    const isDisabled = disabled || !!(confirmation && !confirmed);
 
     return (
       <CardActions className={`ZPaperCard-actions ${styles.classes.actions}`} data-testid='ZPaperCard-actions'>

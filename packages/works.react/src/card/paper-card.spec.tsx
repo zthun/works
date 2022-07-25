@@ -8,9 +8,9 @@ import { ZPaperCard } from './paper-card';
 describe('ZPaperCard', () => {
   let loading: boolean;
   let disabled: boolean;
-  let media: string;
-  let actionText: string;
-  let confirmation: string;
+  let media: string | undefined;
+  let actionText: string | undefined;
+  let confirmation: string | undefined;
   let autoConfirm: boolean;
 
   async function createTestTarget() {
@@ -19,9 +19,9 @@ describe('ZPaperCard', () => {
 
   beforeEach(() => {
     loading = false;
-    media = null;
-    actionText = null;
-    confirmation = null;
+    media = undefined;
+    actionText = undefined;
+    confirmation = undefined;
     disabled = false;
     autoConfirm = false;
   });
