@@ -20,9 +20,9 @@ export class ZUsersClient {
    *
    * @param _id The id of the user to find.
    *
-   * @returns A promise that, when resolved, has the found user.  Returns undefined if no such user exists.
+   * @returns A promise that, when resolved, has the found user.  Returns null if no such user exists.
    */
-  public async findById(_id: string): Promise<IZUser> {
+  public async findById(_id: string): Promise<IZUser | null> {
     return lastValueFrom(this._users.send({ cmd: 'find' }, { _id }));
   }
 
@@ -33,7 +33,7 @@ export class ZUsersClient {
    *
    * @returns A promise that, when resolved, has the found user by their email.  Returns null if no such user exists.
    */
-  public async findByEmail(email: string): Promise<IZUser> {
+  public async findByEmail(email: string): Promise<IZUser | null> {
     return lastValueFrom(this._users.send({ cmd: 'find' }, { email }));
   }
 
@@ -54,9 +54,9 @@ export class ZUsersClient {
    * @param id The id of the user to update.
    * @param profile The profile template to update the user with.
    *
-   * @returns A promise that, when resolved, has returned the updated user.
+   * @returns A promise that, when resolved, has returned the updated user.  Returns null if no such user exists.
    */
-  public async update(id: string, profile: IZProfile): Promise<IZUser> {
+  public async update(id: string, profile: IZProfile): Promise<IZUser | null> {
     return lastValueFrom(this._users.send({ cmd: 'update' }, { id, profile }));
   }
 
@@ -92,7 +92,7 @@ export class ZUsersClient {
    *
    * @returns A promise that resolves to the generated password for the user with the expiration date.  Resolves to null if no user with the given email exists.
    */
-  public async recover(email: string): Promise<string> {
+  public async recover(email: string): Promise<string | null> {
     return lastValueFrom(this._users.send({ cmd: 'recover' }, { email }));
   }
 
@@ -112,9 +112,9 @@ export class ZUsersClient {
    *
    * @param id The id of the user to  delete.
    *
-   * @returns A promise that, when resolve, has returned the deleted user.
+   * @returns A promise that, when resolve, has returned the deleted user.  Returns null if no such user exists.
    */
-  public async remove(id: string): Promise<IZUser> {
+  public async remove(id: string): Promise<IZUser | null> {
     return lastValueFrom(this._users.send({ cmd: 'remove' }, { id }));
   }
 
@@ -125,7 +125,7 @@ export class ZUsersClient {
    *
    * @returns A promise that resolves to true if the credentials match.  False if they do not.
    */
-  public async compare(credentials: IZLogin) {
+  public async compare(credentials: IZLogin): Promise<boolean> {
     return lastValueFrom(this._users.send({ cmd: 'compare' }, { credentials }));
   }
 }
