@@ -87,7 +87,7 @@ export class ZProfileBuilder {
    *
    * @returns This object.
    */
-  public display(val: string): this {
+  public display(val: string | undefined): this {
     this._profile.display = val;
     return this;
   }
@@ -143,7 +143,7 @@ export class ZProfileBuilder {
    *
    * @returns This object.
    */
-  public avatar(url: string): this {
+  public avatar(url: string | undefined): this {
     this._profile.avatar = url;
     return this;
   }
