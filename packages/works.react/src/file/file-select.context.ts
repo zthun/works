@@ -7,6 +7,7 @@
  * service that will not have any unit tests.
  */
 
+import { first } from 'lodash';
 import { createContext, useContext } from 'react';
 
 /**
@@ -21,7 +22,7 @@ export interface IZFileSelect {
   /**
    * Opens the file select dialog.
    *
-   * @param filter The file filter.
+   * @param accept The file filter.
    * @param cb The callback if the user accepts the file.
    */
   open(accept: string, cb: (file: File) => void): void;
@@ -51,8 +52,9 @@ export class ZFileSelect implements IZFileSelect {
     this._input.style.top = '0';
     this._input.style.zIndex = '-1';
     this._input.onchange = () => {
-      if (this._input.files[0]) {
-        this._cb(this._input.files[0]);
+      const file = first(this._input.files);
+      if (file) {
+        this._cb(file);
       }
     };
     container.appendChild(this._input);

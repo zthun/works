@@ -2,7 +2,6 @@
   "useWorkspaces": true,
   "stream": true,
   "version": "4.0.0",
-  "concurrency": 2,
   "command": {
     "publish": {
       "message": "chore(release): publish [skip ci]"

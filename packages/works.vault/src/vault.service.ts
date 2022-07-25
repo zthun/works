@@ -45,7 +45,7 @@ export class ZVaultService {
     let config = await this.read<T>(entry);
 
     if (!config) {
-      config = new ZConfigEntryBuilder().copy(entry).build();
+      config = new ZConfigEntryBuilder(entry.value).copy(entry).build();
       [config] = await this._dal
         .create(ZVaultCollections.Configs, [config])
         .run()

@@ -20,7 +20,7 @@ describe('ZCookiesClient', () => {
   beforeEach(() => {
     jwt = v4();
     user = new ZUserBuilder().id(v4()).build();
-    secret = new ZConfigEntryBuilder().generate().build().value as string;
+    secret = new ZConfigEntryBuilder(null).generate().build().value as string;
     domain = 'zthunworks.com';
 
     proxy = createMocked(['send']);
