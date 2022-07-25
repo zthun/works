@@ -24,7 +24,7 @@ describe('ZExceptionFactory', () => {
   });
 
   describe('Message Format', () => {
-    function assertFormat(expected: string | string[], messages: string[]) {
+    function assertFormat(expected: string | string[], messages: string[] | null) {
       // Arrange
       // Act
       const actual = ZExceptionFactory.messageFormat(messages);

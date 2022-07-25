@@ -14,7 +14,7 @@ export class ZExceptionFactory {
    * @returns This method returns the empty string if messages is falsy or empty.  If messages contains
    *          only one item, then messages[0] is returned, otherwise messages is returned.
    */
-  public static messageFormat(messages: string[]) {
+  public static messageFormat(messages: string[] | null) {
     if (!messages || messages.length === 0) {
       return '';
     }
