@@ -41,7 +41,7 @@ export class ZCookiesClient {
    * @returns A promise that, when resolved, returns the user id for the jwt.  If the token is no longer valid,
    *          or has expired, then null is returned.
    */
-  public async whoIs(jwt: string, secret: string): Promise<string> {
+  public async whoIs(jwt: string, secret: string): Promise<string | null> {
     return lastValueFrom(this._cookies.send({ cmd: 'whoIs' }, { jwt, secret }));
   }
 }
