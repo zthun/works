@@ -234,7 +234,7 @@ export function ZTopNav(props: IZTopNavProps) {
    *
    * @returns The icon image
    */
-  function createAppIcon(icon: string) {
+  function createAppIcon(icon: string | undefined) {
     return <ZImageSource className={`ZTopNav-app-icon ${styles.classes.icon}`} src={icon} />;
   }
 
@@ -285,7 +285,7 @@ export function ZTopNav(props: IZTopNavProps) {
    *
    * @returns The jsx for the nav list item.
    */
-  function createNavItem(id: string, display: string, description: string, avatar: ReactNode, handler: any) {
+  function createNavItem(id: string, display: string | undefined, description: string | undefined, avatar: ReactNode, handler: any) {
     const key = kebabCase(id);
     const clasz = `ZTopNav-drawer-more-item ZTopNav-drawer-more-item-${key}`;
 

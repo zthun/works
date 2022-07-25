@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
 import { IZProfile, IZRouteOption, IZWebApp, ZProfileBuilder, ZRouteOptionBuilder, ZWebAppBuilder } from '@zthun/works.core';
@@ -16,8 +17,8 @@ import { ZTopNav } from './top-nav';
 describe('ZTopNav', () => {
   let history: MemoryHistory;
   let whoami: string;
-  let profileApp: string;
-  let routes: IZRouteOption[];
+  let profileApp: string | undefined;
+  let routes: IZRouteOption[] | undefined;
   let profile: ZDataState<IZProfile>;
   let webApps: ZDataState<IZWebApp[]>;
   let health: jest.Mocked<IZHealthService>;
@@ -49,7 +50,7 @@ describe('ZTopNav', () => {
     profile = new ZDataState<IZProfile>(undefined);
     webApps = new ZDataState<IZWebApp[]>(undefined);
     routes = undefined;
-    whoami = undefined;
+    whoami = 'home';
     profileApp = undefined;
     $window = createMocked(['open']);
 
@@ -63,7 +64,6 @@ describe('ZTopNav', () => {
     beforeEach(() => {
       home = new ZWebAppBuilder().id('home').name('Home').build();
       webApps = new ZDataState<IZWebApp[]>([home]);
-      whoami = 'home';
     });
 
     it('should show a small loading indicator when the apps are loading.', async () => {
@@ -81,7 +81,7 @@ describe('ZTopNav', () => {
       whoami = 'hidden';
       const target = await createTestTarget();
       // Act
-      const actual = target.queryByText(home.name);
+      const actual = target.queryByText(home.name!);
       // Assert
       expect(actual).toBeFalsy();
     });
@@ -90,7 +90,7 @@ describe('ZTopNav', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const homeBtn = target.getByText(home.name);
+      const homeBtn = target.getByText(home.name!);
       fireEvent.click(homeBtn);
       // Assert
       expect(history.location.pathname).toEqual('/');
@@ -128,11 +128,11 @@ describe('ZTopNav', () => {
 
     it('should not navigate anywhere if the app list does not exist yet.', async () => {
       // Arrange
-      webApps = new ZDataState(null);
+      webApps = new ZDataState<IZWebApp[]>(null);
       const target = await createTestTarget();
       // Act
       const btn = findProfileButton(target);
-      fireEvent.click(btn);
+      fireEvent.click(btn!);
       // Assert
       expect($window.open).not.toHaveBeenCalled();
     });
@@ -142,7 +142,7 @@ describe('ZTopNav', () => {
       const target = await createTestTarget();
       // Act
       const btn = findProfileButton(target);
-      fireEvent.click(btn);
+      fireEvent.click(btn!);
       // Assert
       expect($window.open).not.toHaveBeenCalled();
     });
@@ -153,7 +153,7 @@ describe('ZTopNav', () => {
       const target = await createTestTarget();
       // Act
       const btn = findProfileButton(target);
-      fireEvent.click(btn);
+      fireEvent.click(btn!);
       // Assert
       expect($window.open).toHaveBeenCalledWith(profiler.domain, '_self');
     });
@@ -177,7 +177,7 @@ describe('ZTopNav', () => {
     async function clickMenuItem(drawer: HTMLElement, id: string) {
       await act(async () => {
         const item = await findMenuItem(drawer, id);
-        fireEvent.click(item);
+        fireEvent.click(item!);
       });
     }
 
@@ -221,7 +221,7 @@ describe('ZTopNav', () => {
 
       it('should render a loading indicator while apps are loading.', async () => {
         // Arrange
-        webApps = new ZDataState(undefined);
+        webApps = new ZDataState<IZWebApp[]>(undefined);
         const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
@@ -232,7 +232,7 @@ describe('ZTopNav', () => {
 
       it('should not render any applications if the app list fails to load.', async () => {
         // Arrange
-        webApps = new ZDataState(null);
+        webApps = new ZDataState<IZWebApp[]>(null);
         const target = await createTestTarget();
         // Act
         const drawer = await openNavDrawer(target);
