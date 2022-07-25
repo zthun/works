@@ -13,7 +13,7 @@ export interface IZIdentityService {
    *
    * @returns A promise that returns the current profile information.
    */
-  read(): Promise<IZProfile>;
+  read(): Promise<IZProfile | null>;
 
   /**
    * Helper method that retrieves the avatar url for a profile.
@@ -22,7 +22,7 @@ export interface IZIdentityService {
    *
    * @returns The url to load for representation of the profile.
    */
-  getAvatar(profile: IZProfile): Promise<string>;
+  getAvatar(profile: IZProfile | null | undefined): Promise<string>;
 
   /**
    * Gets the display for a profile.
@@ -31,7 +31,7 @@ export interface IZIdentityService {
    *
    * @returns The appropriate display for the profile.
    */
-  getDisplay(profile: IZProfile): Promise<string>;
+  getDisplay(profile: IZProfile | null | undefined): Promise<string>;
 }
 
 /**
@@ -59,7 +59,7 @@ export class ZIdentityService implements IZIdentityService {
    *
    * @returns A promise that returns the current profile information.
    */
-  public async read(): Promise<IZProfile> {
+  public async read(): Promise<IZProfile | null> {
     try {
       const req = new ZHttpRequestBuilder().get().url(ZIdentityService.createIdentityUrl()).build();
       const response = await this._http.request(req);
@@ -79,7 +79,7 @@ export class ZIdentityService implements IZIdentityService {
    *
    * @returns A promise that resolves with the avatar data.
    */
-  public getAvatar(profile: IZProfile): Promise<string> {
+  public getAvatar(profile: IZProfile | null | undefined): Promise<string> {
     const avatar = profile?.avatar;
     const email = profile?.email;
     const data = selectAvatar(avatar, email);
@@ -93,7 +93,7 @@ export class ZIdentityService implements IZIdentityService {
    *
    * @returns The appropriate display for the profile.
    */
-  public getDisplay(profile: IZProfile): Promise<string> {
+  public getDisplay(profile: IZProfile | null | undefined): Promise<string> {
     const display = profile?.display;
     const email = profile?.email;
     return Promise.resolve(display || email || '');
@@ -124,6 +124,6 @@ export function useIdentityService() {
  *          falsy.  If the user does not have a gravatar, then the default gravatar
  *          image is shown.
  */
-export function selectAvatar(avatar: string, email: string): string {
+export function selectAvatar(avatar: string | null | undefined, email: string | null | undefined): string {
   return avatar || new ZUrlBuilder().gravatar(email ? md5(email) : '', ZProfileAvatarSize).build();
 }

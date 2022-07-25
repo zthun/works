@@ -20,7 +20,7 @@ export interface IZIdentityButtonProps extends IZComponentDisabled {
    * If this is null, then the Login button is shown.
    * If this is truthy, then the profile display and avatar is shown.
    */
-  profile: IZProfile;
+  profile: IZProfile | null | undefined;
 
   /**
    * Occurs when the button is clicked when the Login button is displayed.

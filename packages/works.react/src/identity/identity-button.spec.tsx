@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 
 import { act, fireEvent, render, RenderResult } from '@testing-library/react';
@@ -10,11 +11,11 @@ import { ZIdentityButton } from './identity-button';
 import { IZIdentityService, ZIdentityServiceContext } from './identity-service.context';
 
 describe('ZIdentityButton', () => {
-  let profile: IZProfile;
+  let profile: IZProfile | null | undefined;
   let profiles: jest.Mocked<IZIdentityService>;
-  let onLogin: jest.Mock;
-  let onProfile: jest.Mock;
-  let disabled: boolean;
+  let onLogin: jest.Mock | undefined;
+  let onProfile: jest.Mock | undefined;
+  let disabled: boolean | undefined;
 
   beforeEach(() => {
     onLogin = undefined;
@@ -28,7 +29,7 @@ describe('ZIdentityButton', () => {
   });
 
   async function createTestTarget() {
-    let target: RenderResult;
+    let target: RenderResult = render(<></>);
 
     await act(async () => {
       target = render(
@@ -77,7 +78,7 @@ describe('ZIdentityButton', () => {
       const target = await createTestTarget();
       // Act
       const actual = target.container.querySelector('.ZIdentityButton-login');
-      fireEvent.click(actual);
+      fireEvent.click(actual!);
       // Assert
       expect(onLogin).toHaveBeenCalled();
     });
@@ -99,7 +100,7 @@ describe('ZIdentityButton', () => {
       const target = await createTestTarget();
       // Act
       const btn = target.container.querySelector('.ZIdentityButton-profile');
-      fireEvent.click(btn);
+      fireEvent.click(btn!);
       // Assert
       expect(onProfile).toHaveBeenCalled();
     });
