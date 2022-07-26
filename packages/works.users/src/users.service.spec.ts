@@ -336,7 +336,7 @@ describe('ZUsersService', () => {
       const pwd = await target.recover({ email: userA.email });
       const user = await target.find({ _id: userA._id });
       user!.recovery!.exp = new Date().getTime();
-      await dal.update(ZUsersCollections.Users, userA).filter({ _id: userA._id }).run();
+      await dal.update(ZUsersCollections.Users, user!).filter({ _id: user!._id }).run();
       const login = new ZLoginBuilder().copy(loginA).password(pwd!).build();
       // Act
       const actual = await target.compare({ credentials: login });
@@ -353,6 +353,30 @@ describe('ZUsersService', () => {
       const actual = await target.compare({ credentials: loginA });
       // Assert
       expect(actual).toBeFalsy();
+    });
+  });
+
+  describe('Login', () => {
+    beforeEach(async () => {
+      [userA] = await dal.create(ZUsersCollections.Users, [userA]).run();
+    });
+
+    it('should return null if no such user exists.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.login({ id: 'not-an-id' });
+      // Assert
+      expect(actual).toBeNull();
+    });
+
+    it('should return the user that just logged in.', async () => {
+      // Arrange
+      const target = createTestTarget();
+      // Act
+      const actual = await target.login({ id: userA._id });
+      // Assert
+      expect(actual!._id).toEqual(userA._id);
     });
   });
 
