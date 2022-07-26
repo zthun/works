@@ -1,4 +1,5 @@
 import { Palette, Theme, useTheme as useMuiTheme } from '@mui/material';
+import { firstDefined } from '@zthun/works.core';
 import { createMakeStyles } from 'tss-react';
 
 /**
@@ -246,7 +247,7 @@ export function useZthunworksTheme(): IZTheme {
   mui.typography.h3.fontSize = base.sizing.font.md;
 
   // Card
-  mui.components = mui.components || {};
+  mui.components = firstDefined({}, mui.components);
 
   mui.components.MuiCardMedia = {
     styleOverrides: {

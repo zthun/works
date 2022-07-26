@@ -12,9 +12,10 @@ describe('ZPaperCard', () => {
   let actionText: string | undefined;
   let confirmation: string | undefined;
   let autoConfirm: boolean;
+  let onAction: jest.Mock | undefined;
 
   async function createTestTarget() {
-    return render(<ZPaperCard headerText='Paper Card Test' disabled={disabled} loading={loading} imageUrl={media} actionText={actionText} confirmation={confirmation} autoConfirm={autoConfirm} />);
+    return render(<ZPaperCard headerText='Paper Card Test' disabled={disabled} loading={loading} imageUrl={media} actionText={actionText} confirmation={confirmation} autoConfirm={autoConfirm} onAction={onAction} />);
   }
 
   beforeEach(() => {
@@ -24,15 +25,7 @@ describe('ZPaperCard', () => {
     confirmation = undefined;
     disabled = false;
     autoConfirm = false;
-  });
-
-  it('renders the component.', async () => {
-    // Arrange
-    const target = await createTestTarget();
-    // Act
-    const actual = target.getByText('Paper Card Test');
-    // Assert
-    expect(actual).toBeTruthy();
+    onAction = undefined;
   });
 
   describe('Disabled', () => {
@@ -176,6 +169,20 @@ describe('ZPaperCard', () => {
       const actual = target.queryByTestId('ZPaperCard-btn-action');
       // Assert
       expect(actual).toBeTruthy();
+    });
+
+    it('invokes the onAction method when the action button is clicked.', async () => {
+      // Arrange
+      onAction = jest.fn();
+      actionText = 'Go';
+      const target = await createTestTarget();
+      // Act
+      const actual = target.queryByTestId('ZPaperCard-btn-action');
+      await act(async () => {
+        fireEvent.click(actual!);
+      });
+      // Assert
+      expect(onAction).toHaveBeenCalled();
     });
   });
 });

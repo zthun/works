@@ -10,7 +10,7 @@ import { ZHttpServiceContext } from '../http/http-service.context';
 import { ZMarkdownViewer } from './markdown-viewer';
 
 describe('ZMarkdownViewer', () => {
-  let url: string;
+  let url: string | undefined;
   let markdown: string;
   let http: ZHttpServiceMock;
 
@@ -26,22 +26,37 @@ describe('ZMarkdownViewer', () => {
 
   beforeEach(() => {
     http = new ZHttpServiceMock();
-
     url = 'https://zthunworks.com/docs/README.md';
 
     markdown = `# Test
     _This is test markdown_
+
+    \`\`\`json
+    {
+      "key": "value"
+    }
+    \`\`\`
     `;
 
     const result = new ZHttpResultBuilder(markdown).status(ZHttpCodeSuccess.OK).build();
     http.set(url, ZHttpMethod.Get, () => result);
   });
 
+  it('should render empty markdown if the source is falsy.', async () => {
+    // Arrange
+    url = undefined;
+    const target = await createTestTarget();
+    // Act
+    const actual = target.container.querySelector('.ZMarkdownViewer-markdown')!.innerHTML;
+    // Assert
+    expect(actual).toBeFalsy();
+  });
+
   it('should render the markdown from the source.', async () => {
     // Arrange
     const target = await createTestTarget();
     // Act
-    const actual = target.getByTestId('ZMarkdownViewer-root').innerHTML;
+    const actual = target.container.querySelector('.ZMarkdownViewer-markdown')!.innerHTML;
     // Assert
     expect(actual).toContain('<h1>Test</h1>');
   });
@@ -50,10 +65,10 @@ describe('ZMarkdownViewer', () => {
     // Arrange
     const error = 'An error occurred retrieving the markdown.';
     const result = new ZHttpResultBuilder(error).status(ZHttpCodeClient.Forbidden).build();
-    http.set(url, ZHttpMethod.Get, result);
+    http.set(url!, ZHttpMethod.Get, result);
     const target = await createTestTarget();
     // Act
-    const actual = target.getByTestId('ZMarkdownViewer-root').innerHTML;
+    const actual = target.container.querySelector('.ZMarkdownViewer-markdown')!.innerHTML;
     // Assert
     expect(actual).toContain(error);
   });
