@@ -29,7 +29,7 @@ export class ZEmailContactAddressBuilder {
    * @returns This object.
    */
   public addresses(val: Array<string | IZEmailContact>) {
-    this._addresses = (val || []).slice();
+    this._addresses = val.slice();
     return this;
   }
 
