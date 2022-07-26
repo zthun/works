@@ -41,3 +41,5 @@ export { IZLogin, ZLoginBuilder } from './users/login';
 export { IZProfile, ZProfileAvatarMaxBytes, ZProfileAvatarSize, ZProfileBuilder } from './users/profile';
 export { IZProfileActivation, ZProfileActivationBuilder } from './users/profile-activation';
 export { IZUser, ZUserBuilder } from './users/user';
+// Util
+export { firstDefined } from './util/first-defined';
