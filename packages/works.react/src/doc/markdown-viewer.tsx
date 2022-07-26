@@ -1,17 +1,17 @@
-import { IZHttpResult, ZHttpRequestBuilder } from '@zthun/works.http';
+import { sleep } from '@zthun/works.core';
+import { ZHttpRequestBuilder } from '@zthun/works.http';
 import highlight from 'highlight.js';
 import { noop } from 'lodash';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
-import { from, of, Subject } from 'rxjs';
-import { catchError, map, takeUntil } from 'rxjs/operators';
 import { ZPaperCard } from '../card/paper-card';
 import { IZComponentActionable } from '../component/component-actionable.interface';
 import { IZComponentHeader } from '../component/component-header.interface';
 import { IZComponentSizeable } from '../component/component-sizeable.interface';
 import { IZComponentSource } from '../component/component-source.interface';
 import { useHttpService } from '../http/http-service.context';
+import { useSafeState } from '../state/use-safe-state';
 import { makeStyles } from '../theme/make-styles';
 
 /**
@@ -93,43 +93,47 @@ const useMarkdownViewerStyles = makeStyles()((theme) => {
 export function ZMarkdownViewer(props: IZMarkdownProps) {
   const { src, headerText, subHeaderText = '', avatar, actionText, actionColor = 'primary', actionType = 'button', size = 'auto', onAction = noop } = props;
 
-  const [markdown, setMarkdown] = useState('');
+  const [markdown, setMarkdown] = useSafeState('');
   const http = useHttpService();
   const markdownEl = useRef<HTMLDivElement>(null);
   const styles = useMarkdownViewerStyles();
 
-  useEffect(loadMarkdown, [src, markdownEl.current]);
+  useEffect(() => {
+    loadMarkdown();
+  }, [src]);
+
+  useEffect(() => {
+    highlightMarkdown();
+  }, [markdownEl.current]);
+
+  /**
+   * Runs the markdown code highlighting.
+   */
+  async function highlightMarkdown() {
+    // ReactMarkdown sometimes needs a bit of time to refresh before running the highlight.
+    await sleep(10);
+    markdownEl.current?.querySelectorAll('code').forEach((block) => highlight.highlightElement(block));
+  }
 
   /**
    * Loads the markdown into this viewer.
-   *
-   * @returns A callback that cleans up the current markdown load.
    */
-  function loadMarkdown() {
-    const canceled = new Subject<any>();
+  async function loadMarkdown() {
     setMarkdown('');
 
-    if (src == null || markdownEl.current == null) {
+    if (src == null) {
       return;
     }
 
     const request = new ZHttpRequestBuilder().get().url(src).build();
 
-    from(http.request<string>(request))
-      .pipe(
-        takeUntil(canceled),
-        map((res) => res.data),
-        catchError((err: IZHttpResult) => of(`Unable to retrieve ${src}.  ${err.data}.`))
-      )
-      .subscribe((md) => {
-        setMarkdown(md);
-        markdownEl.current?.querySelectorAll('code').forEach((block) => highlight.highlightElement(block));
-      });
-
-    return () => {
-      canceled.next(undefined);
-      canceled.complete();
-    };
+    try {
+      const { data } = await http.request<string>(request);
+      setMarkdown(data);
+      await highlightMarkdown();
+    } catch (err) {
+      setMarkdown(`Unable to retrieve ${src}.  ${err.data}.`);
+    }
   }
 
   return (
