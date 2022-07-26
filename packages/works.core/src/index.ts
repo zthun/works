@@ -43,3 +43,4 @@ export { IZProfileActivation, ZProfileActivationBuilder } from './users/profile-
 export { IZUser, ZUserBuilder } from './users/user';
 // Util
 export { firstDefined } from './util/first-defined';
+export { sleep } from './util/sleep';
