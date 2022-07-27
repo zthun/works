@@ -78,6 +78,11 @@ const useTopNavStyles = makeStyles()((theme) => ({
     svg: {
       width: theme.sizing.icon.md,
       height: theme.sizing.icon.md
+    },
+
+    img: {
+      width: theme.sizing.icon.md,
+      height: theme.sizing.icon.md
     }
   },
 
