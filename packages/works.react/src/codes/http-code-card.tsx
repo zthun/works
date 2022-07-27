@@ -38,7 +38,7 @@ const useHttpStatusCodeCardStyles = makeStyles<IZHttpStatusCodeCardProps>()((the
       maxWidth: '30rem'
     },
     code: {
-      fontSize: '6rem',
+      fontSize: '6rem !important',
       color: theme.palette.secondary.main,
       opacity: '0.75',
       textAlign: 'center'
