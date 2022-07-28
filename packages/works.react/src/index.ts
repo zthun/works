@@ -4,7 +4,6 @@
 export { ZAlertList } from './alert/alert-list';
 export { useAlertService, ZAlertServiceContext } from './alert/alert-service.context';
 // Apps
-export { ZWebAppLayout } from './apps/web-app-layout';
 export { IZWebAppService, useWebAppService, ZWebAppService, ZWebAppServiceContext } from './apps/web-app-service.context';
 export { useWebApp, useWebApps, useWebAppsAndWatch, useWebAppsRoot, ZWebAppsContext } from './apps/web-apps.context';
 // Cards
@@ -17,6 +16,7 @@ export { IZStatusCodePageProps, ZStatusCodePage } from './codes/status-code-page
 export { IZComponentActionable } from './component/component-actionable.interface';
 export { IZComponentConfirmable } from './component/component-confirmable.interface';
 export { IZComponentDescription } from './component/component-description.interface';
+export { IZComponentDimensions2d } from './component/component-dimensions-2d';
 export { IZComponentDisabled } from './component/component-disabled.interface';
 export { IZComponentEntityRedirect } from './component/component-entity-redirect.interface';
 export { IZComponentHeader } from './component/component-header.interface';
@@ -46,6 +46,8 @@ export { useIdentity, useIdentityAndWatch, useIdentityRoot, ZIdentityContext } f
 // Image
 export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
 export { ZImageSource } from './image/image-source';
+// Layout
+export { ZWebAppLayout } from './layout/web-app-layout';
 // Loading
 export { ZCircularBackdrop } from './loading/circular-backdrop';
 export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';
@@ -59,6 +61,9 @@ export { useWatchableState } from './state/use-watchable-state.hook';
 // Theme
 export { makeStyles } from './theme/make-styles';
 export { shade } from './theme/shade';
+// Toolbar
+export { ZToolbar } from './toolbar/toolbar';
+export { IZToolbarItemRoute, ZToolbarItemRoute } from './toolbar/toolbar-item-route';
 // Top
 export { IZTopNavProps, ZTopNav } from './top/top-nav';
 // Window
