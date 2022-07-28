@@ -61,6 +61,7 @@ export { useWatchableState } from './state/use-watchable-state.hook';
 // Theme
 export { makeStyles } from './theme/make-styles';
 export { shade } from './theme/shade';
+export { StateColor } from './theme/state-color';
 // Toolbar
 export { ZToolbar } from './toolbar/toolbar';
 export { IZToolbarItemRoute, ZToolbarItemRoute } from './toolbar/toolbar-item-route';
