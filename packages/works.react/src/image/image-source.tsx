@@ -1,9 +1,19 @@
+import { firstDefined } from '@zthun/works.core';
 import { ZDataUrlBuilder } from '@zthun/works.url';
 import React from 'react';
+import { IZComponentDimensions2d } from '../component/component-dimensions-2d';
 import { IZComponentSource } from '../component/component-source.interface';
 import { IZComponentStyle } from '../component/component-style.interface';
+import { makeStyles } from '../theme/make-styles';
 
-export interface IZImageSourceProps extends IZComponentSource, IZComponentStyle {}
+export interface IZImageSourceProps extends IZComponentSource, IZComponentStyle, IZComponentDimensions2d {}
+
+const useImageSourceStyles = makeStyles<IZImageSourceProps>()((theme, props) => ({
+  root: {
+    height: theme.sizing.image[firstDefined('auto', props.height)],
+    width: theme.sizing.image[firstDefined('auto', props.width)]
+  }
+}));
 
 /**
  * Represents an image.
@@ -16,7 +26,8 @@ export interface IZImageSourceProps extends IZComponentSource, IZComponentStyle 
  */
 export function ZImageSource(props: IZImageSourceProps) {
   const { className = '', src } = props;
-  const clasz = `ZImageSource-root ${className}`;
+  const styles = useImageSourceStyles(props);
+  const clasz = `ZImageSource-root ${className} ${styles.classes.root}`;
 
   if (!src) {
     return <div className={clasz} />;
