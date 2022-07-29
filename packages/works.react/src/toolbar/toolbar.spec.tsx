@@ -50,7 +50,7 @@ describe('ZToolbar', () => {
       await clickToolbarRoute(target);
       const actual = history.location.pathname;
       // Assert
-      expect(actual).toEqual(routePath);
+      expect(actual).toEqual(`/${routePath}`);
     });
   });
 

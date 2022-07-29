@@ -14,7 +14,7 @@ const useToolbarStyles = makeStyles()((theme) => ({
       'flexWrap': 'nowrap',
       'marginLeft': theme.sizing.gaps.md,
 
-      ':first-child': {
+      ':first-of-type': {
         marginLeft: theme.sizing.gaps.none
       }
     }
