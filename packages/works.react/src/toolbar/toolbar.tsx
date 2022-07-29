@@ -1,5 +1,7 @@
 import React from 'react';
+import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
+import { IZComponentLoading } from '../component/component-loading.interface';
 import { makeStyles } from '../theme/make-styles';
 
 const useToolbarStyles = makeStyles()((theme) => ({
@@ -7,10 +9,19 @@ const useToolbarStyles = makeStyles()((theme) => ({
     'display': 'flex',
 
     '.ZToolbar-item': {
-      marginLeft: theme.sizing.gaps.md
+      'display': 'flex',
+      'alignItems': 'center',
+      'flexWrap': 'nowrap',
+      'marginLeft': theme.sizing.gaps.md,
+
+      ':first-child': {
+        marginLeft: theme.sizing.gaps.none
+      }
     }
   }
 }));
+
+export interface IZToolbarItem extends IZComponentDisabled, IZComponentLoading {}
 
 /**
  * Represents a toolbar.
