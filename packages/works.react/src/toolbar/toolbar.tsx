@@ -1,7 +1,9 @@
+import { cssClass } from '@zthun/works.core';
 import React from 'react';
 import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
 import { IZComponentLoading } from '../component/component-loading.interface';
+import { IZComponentStyle } from '../component/component-style.interface';
 import { makeStyles } from '../theme/make-styles';
 
 const useToolbarStyles = makeStyles()((theme) => ({
@@ -23,6 +25,8 @@ const useToolbarStyles = makeStyles()((theme) => ({
 
 export interface IZToolbarItem extends IZComponentDisabled, IZComponentLoading {}
 
+export interface IZToolbar extends IZComponentHierarchy, IZComponentStyle {}
+
 /**
  * Represents a toolbar.
  *
@@ -32,10 +36,11 @@ export interface IZToolbarItem extends IZComponentDisabled, IZComponentLoading {
  * @returns
  *        The JSX to render the toolbar.
  */
-export function ZToolbar(props: IZComponentHierarchy) {
-  const { children } = props;
+export function ZToolbar(props: IZToolbar) {
+  const { className, children } = props;
 
   const styles = useToolbarStyles();
+  const toolbarClass = cssClass('ZToolbar-root', className, styles.classes.root);
 
-  return <div className={`ZToolbar-root ${styles.classes.root}`}>{children}</div>;
+  return <div className={toolbarClass}>{children}</div>;
 }
