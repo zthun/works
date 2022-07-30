@@ -47,10 +47,14 @@ export { useIdentity, useIdentityAndWatch, useIdentityRoot, ZIdentityContext } f
 export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
 export { ZImageSource } from './image/image-source';
 // Layout
+export { IZGridLayout, ZGridLayout } from './layout/grid-layout';
 export { ZWebAppLayout } from './layout/web-app-layout';
 // Loading
 export { ZCircularBackdrop } from './loading/circular-backdrop';
 export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';
+// Menu
+export { IZMenu, ZMenu } from './menu/menu';
+export { IZMenuItem, ZMenuItem } from './menu/menu-item';
 // Router
 export { useNavigate, useParams, ZNavigate, ZOutlet, ZRoute, ZRouteMap, ZRouter, ZTestRouter } from './router/router-dom';
 // State
@@ -64,7 +68,6 @@ export { shade } from './theme/shade';
 export { StateColor } from './theme/state-color';
 // Toolbar
 export { ZToolbar } from './toolbar/toolbar';
-export { IZToolbarItemRoute, ZToolbarItemRoute } from './toolbar/toolbar-item-route';
 // Top
 export { IZTopNavProps, ZTopNav } from './top/top-nav';
 // Window
