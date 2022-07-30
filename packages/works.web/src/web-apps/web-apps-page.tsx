@@ -1,7 +1,11 @@
+import ElectricalServicesIcon from '@mui/icons-material/ElectricalServices';
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import SettingsIcon from '@mui/icons-material/Settings';
 import StartIcon from '@mui/icons-material/Start';
 import WarningIcon from '@mui/icons-material/Warning';
-import { makeStyles, ZNavigate, ZRoute, ZRouteMap, ZToolbar, ZToolbarItemRoute } from '@zthun/works.react';
+import { makeStyles, useNavigate, ZMenu, ZMenuItem, ZNavigate, ZRoute, ZRouteMap, ZToolbar } from '@zthun/works.react';
 import React from 'react';
+import { ZButton } from '../../../works.react/src/buttons/button';
 import { ZAlertsPage } from './components/alerts/alerts-page';
 import { ZGettingStartedPage } from './getting-started/getting-started-page';
 
@@ -18,17 +22,29 @@ const useWebAppPageStyles = makeStyles()((theme) => ({
  */
 export function ZWebAppsPage() {
   const styles = useWebAppPageStyles();
+  const navigate = useNavigate();
 
   return (
     <div className='ZWebAppsPage-root'>
       <ZToolbar className={styles.classes.toolbar}>
-        <ZToolbarItemRoute avatar={<StartIcon color='success' />} color='info' outline headerText='Getting Started' subHeaderText='Where do I begin?' path='getting-started' />
-        <ZToolbarItemRoute avatar={<WarningIcon color='warning' />} color='info' outline headerText='Alerts' subHeaderText='Notify users' path='alerts' />
+        <ZButton avatar={<StartIcon color='success' />} color='info' outline onClick={navigate.bind(null, 'getting-started')}>
+          Getting Started
+        </ZButton>
+        <ZMenu avatar={<SettingsIcon color='primary' />} color='info' outline headerText='Components'>
+          <ZMenuItem avatar={<WarningIcon color='warning' />} onClick={navigate.bind(null, 'components/alerts')}>
+            Alerts
+          </ZMenuItem>
+        </ZMenu>
+        <ZMenu avatar={<ElectricalServicesIcon color='warning' />} color='info' outline headerText='Services'>
+          <ZMenuItem avatar={<MedicalServicesIcon color='success' />}>Health</ZMenuItem>
+        </ZMenu>
       </ZToolbar>
 
       <ZRouteMap>
         <ZRoute path='getting-started' element={<ZGettingStartedPage />} />
-        <ZRoute path='alerts' element={<ZAlertsPage />} />
+        <ZRoute path='components'>
+          <ZRoute path='alerts' element={<ZAlertsPage />} />
+        </ZRoute>
         <ZRoute path='/' element={<ZNavigate to='getting-started' />} />
         <ZRoute path='*' element={<ZNavigate to={'/status-code/404'} />} />
       </ZRouteMap>
