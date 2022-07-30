@@ -65,26 +65,6 @@ describe('ZButton', () => {
     });
   });
 
-  describe('Avatar', () => {
-    async function assertRendersAvatar(expected: boolean, _avatar: ReactNode | undefined) {
-      // Arrange
-      avatar = _avatar;
-      const target = await createTestTarget();
-      // Act
-      const actual = target.container.querySelector('.ZButton-avatar');
-      // Assert
-      expect(!!actual).toEqual(expected);
-    }
-
-    it('should render the avatar when set.', async () => {
-      await assertRendersAvatar(true, '<(^^)>');
-    });
-
-    it('should not render the avatar when the avatar is undefined.', async () => {
-      await assertRendersAvatar(false, undefined);
-    });
-  });
-
   describe('Disabled', () => {
     async function assertDisabled(expected: boolean, _disabled: boolean | undefined) {
       // Arrange
