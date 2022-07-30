@@ -1,1 +1,9 @@
-export type ZStateColor = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'inherit' | 'info';
+export enum ZStateColor {
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Success = 'success',
+  Warning = 'warning',
+  Error = 'error',
+  Inherit = 'inherit',
+  Info = 'info'
+}
