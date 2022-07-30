@@ -1,1 +1,1 @@
-export type StateColor = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'inherit' | 'info';
+export type ZStateColor = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'inherit' | 'info';
