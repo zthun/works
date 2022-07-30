@@ -9,11 +9,11 @@ import { IZComponentLoading } from '../component/component-loading.interface';
 import { IZComponentStyle } from '../component/component-style.interface';
 import { ZGridLayout } from '../layout/grid-layout';
 import { ZCircularProgress } from '../loading/circular-progress';
-import { StateColor } from '../theme/state-color';
+import { ZStateColor } from '../theme/state-color';
 
 export interface IZButton extends IZComponentHierarchy, IZComponentDisabled, IZComponentLoading, IZComponentStyle {
   avatar?: ReactNode;
-  color?: StateColor;
+  color?: ZStateColor;
   outline?: boolean;
 
   onClick?: (e: React.MouseEvent) => any;
