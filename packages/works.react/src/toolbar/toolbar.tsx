@@ -9,21 +9,17 @@ import { makeStyles } from '../theme/make-styles';
 const useToolbarStyles = makeStyles()((theme) => ({
   root: {
     'display': 'flex',
+    'alignItems': 'center',
+    'flexWrap': 'nowrap',
+    'marginLeft': `-${theme.sizing.gaps.md}`,
 
-    '.ZToolbar-item': {
-      'display': 'flex',
-      'alignItems': 'center',
-      'flexWrap': 'nowrap',
-      'marginLeft': theme.sizing.gaps.md,
-
-      ':first-of-type': {
-        marginLeft: theme.sizing.gaps.none
-      }
+    '>*': {
+      marginLeft: `${theme.sizing.gaps.md} !important`
     }
   }
 }));
 
-export interface IZToolbarItem extends IZComponentDisabled, IZComponentLoading {}
+export interface IZToolbarItem extends IZComponentDisabled, IZComponentLoading, IZComponentStyle {}
 
 export interface IZToolbar extends IZComponentHierarchy, IZComponentStyle {}
 
