@@ -241,7 +241,14 @@ export function useZthunworksTheme(): IZTheme {
     }
   });
 
-  // Typography
+  // Fonts
+  const family = ['Roboto', 'Arial', 'sans-serif'].join(',');
+  mui.typography.fontFamily = family;
+  mui.typography.body1.fontFamily = family;
+  mui.typography.h1.fontFamily = family;
+  mui.typography.h2.fontFamily = family;
+  mui.typography.h3.fontFamily = family;
+
   mui.typography.h1.fontSize = base.sizing.font.xl;
   mui.typography.h2.fontSize = base.sizing.font.lg;
   mui.typography.h3.fontSize = base.sizing.font.md;
