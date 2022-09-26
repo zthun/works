@@ -22,7 +22,7 @@ import { useSafeState } from './use-safe-state';
 export function usePropState<T>(current: T | undefined, setCurrent: ((val: T) => void) | undefined): [T | undefined, (val: T) => void] {
   const [localCurrent, setLocalCurrent] = useSafeState<T | undefined>(current);
 
-  const _current = current ?? localCurrent;
+  const _current = current === undefined ? localCurrent : current;
 
   const _setCurrent = (val: T) => {
     setLocalCurrent(val);
