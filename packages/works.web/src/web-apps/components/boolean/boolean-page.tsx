@@ -17,9 +17,12 @@ export function ZBooleanPage() {
   const [_type] = type;
   const types: ZBooleanStyle[] = ['checkbox', 'radio', 'inline-radio', 'switch'];
 
+  const truthy = startCase(_type);
+  const falsy = `${startCase(_type)} Off`;
+
   return (
     <ZPaperCard className='ZBooleanPage-root' headerText={'Boolean'} subHeaderText='Basic togglers' avatar={<CheckBoxIcon color='success' fontSize='large' />}>
-      <ZBoolean disabled={disabled} value={value} onValueChange={setValue.bind(null)} type={_type} truthy='True' falsy='False' />
+      <ZBoolean disabled={disabled} value={value} onValueChange={setValue.bind(null)} type={_type} truthy={truthy} falsy={falsy} />
 
       <h2>Options</h2>
       <ZGridLayout gap='md'>
