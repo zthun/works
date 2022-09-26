@@ -14,5 +14,5 @@ export interface IZActivity {
    *        A promise when the element has
    *        been clicked.
    */
-  click(element: Element): Promise<void>;
+  click(element: Element): Promise<any>;
 }
