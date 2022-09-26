@@ -10,27 +10,7 @@
     "url": "https://github.com/zthun/works"
   },
   "workspaces": [
-    "packages/works.jest",
-    "packages/works.url",
-    "packages/works.error",
-    "packages/works.logger",
-    "packages/works.http",
-    "packages/works.message",
-    "packages/works.class",
-    "packages/works.core",
-    "packages/works.dal",
-    "packages/works.draw",
-    "packages/works.react",
-    "packages/works.web",
-    "packages/works.microservices",
-    "packages/works.cookies",
-    "packages/works.notifications",
-    "packages/works.apps",
-    "packages/works.users",
-    "packages/works.vault",
-    "packages/works.nest",
-    "packages/works.api",
-    "packages/works.proxy"
+    "packages/*"
   ],
   "scripts": {
     "clean": "rimraf 'dist' 'docs' 'reports' '*.tgz' '*.log' 'packages/**/dist' 'packages/**/docs' 'packages/**/*.tgz' 'packages/**/*.log'",
