@@ -5,6 +5,8 @@
     "sourceMap": true,
     "declarationDir": "dist/types",
     "paths": {
+      "@zthun/works.cirque": ["../works.cirque/src/index"],
+      "@zthun/works.cirque-du-react-test": ["../works.cirque-du-react-test/src/index"],
       "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.draw": ["../works.draw/src/index"],
       "@zthun/works.error": ["../works.error/src/index"],

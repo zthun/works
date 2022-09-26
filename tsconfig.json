@@ -5,6 +5,8 @@
     "target": "esnext",
     "paths": {
       "@zthun/works.class": ["works.class/src/index"],
+      "@zthun/works.cirque": ["works.cirque/src/index"],
+      "@zthun/works.cirque-du-react-test": ["works.cirque-du-react-test/src/index"],
       "@zthun/works.core": ["works.core/src/index"],
       "@zthun/works.dal": ["works.dal/src/index"],
       "@zthun/works.draw": ["works.draw/src/index"],
