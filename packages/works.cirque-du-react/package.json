@@ -1,13 +1,13 @@
 {
-  "name": "@zthun/works.cirque-du-react-test",
+  "name": "@zthun/works.cirque-du-react",
   "version": "4.0.0",
-  "description": "A cirque performance for the @testing-library/react actions.",
+  "description": "A cirque performance for unit testing react applications and components.",
   "author": "Anthony Bonta",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/works",
-    "directory": "packages/works.cirque-du-react-test"
+    "directory": "packages/works.cirque-du-react"
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
