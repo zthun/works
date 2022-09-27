@@ -4930,9 +4930,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.cirque-du-react-test@workspace:packages/works.cirque-du-react-test":
+"@zthun/works.cirque-du-react@workspace:packages/works.cirque-du-react":
   version: 0.0.0-use.local
-  resolution: "@zthun/works.cirque-du-react-test@workspace:packages/works.cirque-du-react-test"
+  resolution: "@zthun/works.cirque-du-react@workspace:packages/works.cirque-du-react"
   dependencies:
     "@testing-library/react": ^13.3.0
   peerDependencies:
@@ -5123,6 +5123,7 @@ __metadata:
     remark-gfm: ^1.0.0
     rxjs: ^7.5.6
     tss-react: ^3.7.1
+    uuid: ^8.3.2
   peerDependencies:
     react: ^18.1.0
     react-dom: ^18.1.0
