@@ -1,12 +1,12 @@
 /* eslint-disable require-jsdoc */
 import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
-import { ZCircusPerformer, ZCircusSetupRender, ZCircusWaitReact } from '@zthun/works.cirque-du-react';
+import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import { ZBoolean, ZBooleanStyle } from './boolean';
 import { ZBooleanComponentModel } from './boolean.cm';
 
 describe('ZBoolean', () => {
-  const waiter: IZCircusWait = new ZCircusWaitReact();
+  const waiter: IZCircusWait = new ZCircusWait();
   const performer: IZCircusPerformer = new ZCircusPerformer();
 
   let disabled: boolean | undefined;
