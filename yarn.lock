@@ -4939,12 +4939,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.cirque-du-react@workspace:packages/works.cirque-du-react":
+"@zthun/works.cirque-du-react@^4.0.0, @zthun/works.cirque-du-react@workspace:packages/works.cirque-du-react":
   version: 0.0.0-use.local
   resolution: "@zthun/works.cirque-du-react@workspace:packages/works.cirque-du-react"
   dependencies:
     "@testing-library/react": ^13.3.0
     "@testing-library/user-event": ^14.4.3
+    "@zthun/works.cirque": ^4.0.0
+    react: ^18.2.0
+    react-dom: ^18.2.0
   peerDependencies:
     jest: ^27.0.0
     react: ^18.2.0
@@ -5116,6 +5119,7 @@ __metadata:
     "@mui/material": ^5.10.6
     "@mui/system": ^5.10.6
     "@zthun/works.cirque": ^4.0.0
+    "@zthun/works.cirque-du-react": ^4.0.0
     "@zthun/works.core": ^4.0.0
     "@zthun/works.draw": ^4.0.0
     "@zthun/works.error": ^4.0.0
