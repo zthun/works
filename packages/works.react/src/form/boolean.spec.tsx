@@ -1,23 +1,24 @@
 /* eslint-disable require-jsdoc */
-import { render } from '@testing-library/react';
-import { ZActivityReactTest, ZPerformanceReactTest } from '@zthun/works.cirque-du-react-test';
+import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
+import { ZCircusPerformer, ZCircusSetupRender, ZCircusWaitReact } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import { ZBoolean, ZBooleanStyle } from './boolean';
-import { ZBooleanRcm } from './boolean.rcm';
+import { ZBooleanComponentModel } from './boolean.rcm';
 
 describe('ZBoolean', () => {
-  const performance = new ZPerformanceReactTest();
-  const activity = new ZActivityReactTest();
+  const waiter: IZCircusWait = new ZCircusWaitReact();
+  const performer: IZCircusPerformer = new ZCircusPerformer();
+
   let disabled: boolean | undefined;
   let value: boolean | null | undefined;
   let onCheckChanged: jest.Mock | undefined;
   let type: ZBooleanStyle | undefined;
 
   async function createTestTarget() {
-    const rendered = render(<ZBoolean value={value} onValueChange={onCheckChanged} disabled={disabled} type={type} truthy='Yes' falsy='No' />);
-    await performance.wait(() => !!ZBooleanRcm.find(rendered.container).length);
-    const [target] = ZBooleanRcm.find(rendered.container);
-    return new ZBooleanRcm(target, performance, activity);
+    const rendered = await new ZCircusSetupRender(<ZBoolean value={value} onValueChange={onCheckChanged} disabled={disabled} type={type} truthy='Yes' falsy='No' />).setup();
+    await waiter.wait(() => rendered.container.querySelector('.ZBoolean-root') != null);
+    const [target] = ZBooleanComponentModel.find(rendered.container);
+    return new ZBooleanComponentModel(target, performer);
   }
 
   beforeEach(() => {

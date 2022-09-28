@@ -1,10 +1,10 @@
 /* eslint-disable require-jsdoc */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { IZActivity, IZPerformance } from '@zthun/works.cirque';
+import { IZCircusPerformer, ZCircusActBuilder } from '@zthun/works.cirque';
 
 import { ZBooleanStyle } from './boolean';
 
-interface ZBooleanStyleRcm {
+interface ZBooleanTypeImplementation {
   readonly type: ZBooleanStyle;
   readonly value: boolean | null;
   readonly disabled: boolean;
@@ -12,13 +12,13 @@ interface ZBooleanStyleRcm {
   toggle(value?: boolean): Promise<void>;
 }
 
-class ZBooleanCheckbox implements ZBooleanStyleRcm {
+class ZBooleanCheckboxImplementation implements ZBooleanTypeImplementation {
   /**
    * Initializes a new instance of this object.
    *
    * @param _element The element for the checkbox.
    */
-  public constructor(public readonly type: 'checkbox' | 'switch', private readonly _element: HTMLElement, private readonly _performance: IZPerformance, private readonly _activity: IZActivity) {}
+  public constructor(public readonly type: 'checkbox' | 'switch', private readonly _element: HTMLElement, private readonly _performer: IZCircusPerformer) {}
 
   /**
    * Gets the underlying input element.
@@ -70,12 +70,13 @@ class ZBooleanCheckbox implements ZBooleanStyleRcm {
       return;
     }
 
-    await this._performance.perform(() => this._activity.click(this._input));
+    const act = new ZCircusActBuilder().moveTo(this._input).leftMouseClick().build();
+    await this._performer.perform(act);
   }
 }
 
-class ZBooleanRadio implements ZBooleanStyleRcm {
-  public constructor(public readonly type: 'radio' | 'inline-radio', private readonly _element: HTMLElement, private readonly _performance: IZPerformance, private readonly _activity: IZActivity) {}
+class ZBooleanRadioImplementation implements ZBooleanTypeImplementation {
+  public constructor(public readonly type: 'radio' | 'inline-radio', private readonly _element: HTMLElement, private readonly _performer: IZCircusPerformer) {}
 
   private get _truthy(): HTMLInputElement {
     return this._element.querySelector('.ZBoolean-radio-truthy input')!;
@@ -111,48 +112,45 @@ class ZBooleanRadio implements ZBooleanStyleRcm {
 
   public async toggle(value?: boolean) {
     const state = value == null ? !this.value : value;
-
-    if (state) {
-      await this._performance.perform(() => this._activity.click(this._truthy));
-    } else {
-      await this._performance.perform(() => this._activity.click(this._falsy));
-    }
+    const act = new ZCircusActBuilder()
+      .moveTo(state ? this._truthy : this._falsy)
+      .leftMouseClick()
+      .build();
+    await this._performer.perform(act);
   }
 }
 
 /**
  * Represents a react component model for the ZBoolean component.
  */
-export class ZBooleanRcm {
+export class ZBooleanComponentModel {
   /**
    * Initializes a new instance of this object.
    *
    * @param _element
    *        The root element for the boolean component.
-   * @param _performance
-   *        The circus performance api to perform various actions and wait for things to happen.
-   * @param _activity
-   *        The circus activity api to perform specific user actions.
+   * @param _performer
+   *        The circus performer.
    */
-  public constructor(private _element: HTMLElement, private _performance: IZPerformance, private _activity: IZActivity) {}
+  public constructor(private _element: HTMLElement, private _performer: IZCircusPerformer) {}
 
   /**
    * Gets the specific implementation of the boolean.
    *
    * @returns The specific implementation of the boolean.
    */
-  private get _impl(): ZBooleanStyleRcm {
+  private get _impl(): ZBooleanTypeImplementation {
     const type: string = this._element.getAttribute('data-type') as ZBooleanStyle;
 
     switch (type) {
       case 'radio':
-        return new ZBooleanRadio('radio', this._element.querySelector<HTMLElement>('.ZBoolean-radio')!, this._performance, this._activity);
+        return new ZBooleanRadioImplementation('radio', this._element.querySelector<HTMLElement>('.ZBoolean-radio')!, this._performer);
       case 'inline-radio':
-        return new ZBooleanRadio('inline-radio', this._element.querySelector<HTMLElement>('.ZBoolean-inline-radio')!, this._performance, this._activity);
+        return new ZBooleanRadioImplementation('inline-radio', this._element.querySelector<HTMLElement>('.ZBoolean-inline-radio')!, this._performer);
       case 'switch':
-        return new ZBooleanCheckbox('switch', this._element.querySelector<HTMLElement>('.ZBoolean-switch')!, this._performance, this._activity);
+        return new ZBooleanCheckboxImplementation('switch', this._element.querySelector<HTMLElement>('.ZBoolean-switch')!, this._performer);
       default:
-        return new ZBooleanCheckbox('checkbox', this._element.querySelector<HTMLElement>('.ZBoolean-checkbox')!, this._performance, this._activity);
+        return new ZBooleanCheckboxImplementation('checkbox', this._element.querySelector<HTMLElement>('.ZBoolean-checkbox')!, this._performer);
     }
   }
 
