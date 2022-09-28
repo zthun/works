@@ -4,7 +4,7 @@ import { IZCircusWait } from '@zthun/works.cirque';
 /**
  * Wraps the @testing-library/react waitFor method.
  */
-export class ZCircusWaitReact implements IZCircusWait {
+export class ZCircusWait implements IZCircusWait {
   /**
    * Waits for the predicate to be truthy.
    *

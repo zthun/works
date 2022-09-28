@@ -1,10 +1,10 @@
 /* eslint-disable require-jsdoc */
 import { stubFalse } from 'lodash';
-import { ZCircusWaitReact } from './circus-wait-react';
+import { ZCircusWait } from './circus-wait';
 
 describe('ZCircusWaitReact', () => {
   function createTestTarget() {
-    return new ZCircusWaitReact();
+    return new ZCircusWait();
   }
 
   it('should reject if the wait predicate never becomes true', async () => {

@@ -2,6 +2,6 @@
 
 // Performance
 export { ZCircusPerformer } from './performance/circus-performer';
-export { ZCircusWaitReact } from './performance/circus-wait-react';
+export { ZCircusWait } from './performance/circus-wait';
 // Setup
 export { ZCircusSetupRender } from './setup/circus-setup-render';
