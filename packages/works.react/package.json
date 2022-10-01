@@ -53,7 +53,10 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@zthun/works.cirque-du-react": "^4.0.0"
+    "@testing-library/react": "^13.3.0",
+    "@zthun/works.cirque-du-react": "^4.0.0",
+    "@zthun/works.jest": "^4.0.0",
+    "jest": "^27.5.1"
   },
   "peerDependencies": {
     "react": "^18.1.0",

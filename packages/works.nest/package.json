@@ -33,11 +33,17 @@
     "@zthun/works.microservices": "^4.0.0",
     "@zthun/works.url": "^4.0.0",
     "class-transformer": "~0.5.1",
+    "class-validator": "~0.13.2",
     "cookie-parser": "^1.4.6",
+    "express": "^4.17.3",
     "helmet": "^5.1.1",
     "lodash": "^4.17.21",
     "rxjs": "^7.5.6",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@zthun/works.jest": "^4.0.0",
+    "jest": "^27.5.1"
   },
   "peerDependencies": {
     "@nestjs/common": "^9.0.5",

@@ -18,6 +18,10 @@
     "build": "yarn build:cjs && yarn build:esm",
     "doc": "typedoc"
   },
+  "devDependencies": {
+    "@zthun/works.jest": "^4.0.0",
+    "jest": "^27.5.1"
+  },
   "publishConfig": {
     "access": "public"
   },

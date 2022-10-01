@@ -31,5 +31,9 @@
     "lodash": "^4.17.21",
     "url-parse": "^1.5.10"
   },
+  "devDependencies": {
+    "@zthun/works.jest": "^4.0.0",
+    "jest": "^27.5.1"
+  },
   "sideEffects": false
 }

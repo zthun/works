@@ -29,7 +29,12 @@
   "dependencies": {
     "@zthun/works.core": "^4.0.0",
     "lodash": "^4.17.21",
-    "rxjs": "^7.5.6"
+    "rxjs": "^7.5.6",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@zthun/works.jest": "^4.0.0",
+    "jest": "^27.5.1"
   },
   "peerDependencies": {
     "@nestjs/common": "^9.0.5",
