@@ -1,4 +1,12 @@
-const generated = ['**/CHANGELOG.md', 'packages/**/dist/**', 'packages/**/docs/**', 'node_modules/**', 'packages/**/node_modules/**', 'package-lock.json', '.yarnrc.yml'];
+const generated = [
+  '**/CHANGELOG.md',
+  'packages/**/dist/**',
+  'packages/**/docs/**',
+  'node_modules/**',
+  'packages/**/node_modules/**',
+  'package-lock.json',
+  '.yarnrc.yml'
+];
 const partialGenerated = ['cspell.json', 'lerna.json'];
 
 const esFiles = ['*.js', '*.ts', 'packages/**/src/**/*.ts', 'packages/**/src/**/*.tsx'];
