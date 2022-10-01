@@ -39,7 +39,7 @@
     "@types/uuid": "^8.3.4",
     "@zthun/lint-janitor": "^13.0.1",
     "@zthun/lint-janitor-config": "^13.0.1",
-    "favicons": "^7.0.1",
+    "favicons": "^6.2.2",
     "favicons-webpack-plugin": "^5.0.2",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
