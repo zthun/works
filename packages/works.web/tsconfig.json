@@ -6,6 +6,7 @@
     "declaration": false,
     "sourceMap": true,
     "paths": {
+      "@zthun/works.cirque": ["../works.cirque/src/index"],
       "@zthun/works.jest": ["../works.jest/src/index"],
       "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.draw": ["../works.draw/src/index"],
