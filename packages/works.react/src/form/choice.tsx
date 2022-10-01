@@ -1,5 +1,5 @@
 import ClearIcon from '@mui/icons-material/Clear';
-import { Chip, FormControl, IconButton, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { FormControl, IconButton, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { cssClass } from '@zthun/works.core';
 import { castArray, first, isArray } from 'lodash';
 import React, { ReactNode, useMemo } from 'react';
@@ -10,9 +10,19 @@ import { IZComponentValue } from '../component/component-value';
 import { usePropState } from '../state/use-prop-state';
 import { makeStyles } from '../theme/make-styles';
 
+interface IZChoiceOption {
+  key: string | number;
+  option: any;
+}
+
+export enum ZChoiceType {
+  DropDown = 'drop-down',
+  ButtonGroup = 'button-group'
+}
+
 export interface IZChoice extends IZComponentDisabled, IZComponentStyle, IZComponentValue<Array<any>> {
   headerText: string;
-  type?: 'select' | 'button-group';
+  type?: ZChoiceType;
   multiple?: boolean;
   indelible?: boolean;
   options: Array<any>;
@@ -28,9 +38,18 @@ const useChoiceStyles = makeStyles()((theme) => {
       marginRight: `${theme.sizing.gaps.md} !important`
     },
     chip: {
-      '&.MuiChip-root': {
-        height: 'auto',
-        marginRight: theme.sizing.gaps.xs
+      'display': 'inline-flex',
+      'flexWrap': 'wrap',
+
+      '.ZChoice-value': {
+        fontSize: theme.sizing.font.sm,
+        backgroundColor: theme.palette.grey[600],
+        color: theme.palette.common.white,
+        borderRadius: theme.rounding.chip,
+        paddingLeft: theme.sizing.gaps.sm,
+        paddingRight: theme.sizing.gaps.sm,
+        marginRight: theme.sizing.gaps.xs,
+        marginBottom: theme.sizing.gaps.xs
       }
     }
   };
@@ -53,6 +72,7 @@ export function ZChoice(props: IZChoice) {
     headerText,
     multiple,
     options,
+    type = ZChoiceType.DropDown,
     value,
     identifier,
     onValueChange,
@@ -62,19 +82,29 @@ export function ZChoice(props: IZChoice) {
   const [_value, _setValue] = usePropState(value, onValueChange);
   const labelId = useMemo(() => v4(), []);
   const styles = useChoiceStyles();
-  const optionsLookup = useMemo(_getLookup, [options, identifier]);
+  const [_options, _lookup] = useMemo(_convertOptions, [options, identifier]);
   const selectClass = cssClass('ZChoice-root', className);
 
   /**
-   * Gets the list of selected options.
+   * Converts from the initial options to the option list with a lookup table.
    *
    * @returns
-   *      The list of selected options.
+   *        A tuple with the first being the options list and the second being
+   *        a lookup table to map keys to options.
    */
-  function _getLookup() {
-    const valueToOptionsMap = new Map<any, any>();
-    options.forEach((op) => valueToOptionsMap.set(_identity(op), op));
-    return valueToOptionsMap;
+  function _convertOptions(): [IZChoiceOption[], Map<any, IZChoiceOption>] {
+    const optionList = options.map<IZChoiceOption>((op) => ({
+      key: identifier == null ? v4() : identifier(op),
+      option: op
+    }));
+
+    const lookup = new Map<any, any>();
+    optionList.forEach((op) => {
+      lookup.set(op.option, op);
+      lookup.set(op.key, op);
+    });
+
+    return [optionList, lookup];
   }
 
   /**
@@ -107,17 +137,20 @@ export function ZChoice(props: IZChoice) {
   /**
    * Casts the value to either the first value in the array or the entire array if multiple is set.
    *
-   * @returns _value if multiple is true, the first item in value if multiple is false.  Returns
-   *          undefined if there are no selected values.
+   * @returns
+   *        _value if multiple is true, the first item in value if multiple is false.  Returns
+   *        undefined if there are no selected values.
    */
   function castValue() {
-    return multiple ? _value : first(value);
+    const actual = _value == null ? [] : _value;
+    return multiple ? actual : first(actual);
   }
 
   /**
    * Handles when the selection changes.
    *
-   * @param event The selection change event.
+   * @param event
+   *        The selection change event.
    */
   function handleSelect(event: SelectChangeEvent<any>) {
     const selected = castArray(event.target.value);
@@ -127,40 +160,51 @@ export function ZChoice(props: IZChoice) {
   /**
    * Renders the item that is currently selected.
    *
-   * @param value The current value of the selector.
+   * @param value
+   *        The current value of the selector.
    *
    * @returns
-   *      The JSX that renders the selected item.
+   *        The JSX that renders the selected item.
    */
   function renderSelectedItem(value: any) {
+    const _renderSelected = (option: IZChoiceOption | undefined) => (
+      <div className='ZChoice-value' key={option?.key} data-value={option?.key}>
+        {renderValue(option?.option)}
+      </div>
+    );
+
     if (isArray(value)) {
-      const className = cssClass(`ZChoice-chip`, styles.classes.chip);
-      return value
-        .map((v) => optionsLookup.get(v))
-        .map((v, i) => <Chip className={className} key={i} label={renderValue(v)} />);
+      const className = cssClass('ZChoice-chip-list', styles.classes.chip);
+      return (
+        <div className={className}>{value.map((v) => _lookup.get(v)).map((option) => _renderSelected(option))}</div>
+      );
     }
 
-    const option = optionsLookup.get(value);
-    return renderValue(option);
+    const option = _lookup.get(value);
+    return _renderSelected(option);
   }
 
   /**
    * Renders the menu items.
    *
-   * @returns The JSX that renders the underlying items.
+   * @returns
+   *        The JSX that renders the underlying items.
    */
   function renderMenuItems() {
-    const renderMenuItem = (option: any, i: number) => {
-      const value = _identity(option);
-      const key = identifier ? value : i;
+    const renderMenuItem = (option: IZChoiceOption) => {
+      const value = _identity(option.option);
+      const { key } = option;
+
       return (
-        <MenuItem key={key} value={value}>
-          {renderOption(option)}
+        <MenuItem className='ZChoice-select-menu' key={key} value={value}>
+          <div className='ZChoice-option' data-value={key}>
+            {renderOption(option.option)}
+          </div>
         </MenuItem>
       );
     };
 
-    return options.map(renderMenuItem);
+    return _options.map(renderMenuItem);
   }
 
   /**
@@ -188,19 +232,23 @@ export function ZChoice(props: IZChoice) {
   /**
    * Renders the component as a select drop down.
    *
-   * @returns The JSX that describes the select.
+   * @returns
+   *        The JSX that describes the select.
    */
-  function renderSelect() {
-    const className = cssClass('ZChoice-select');
+  function renderChoice() {
     return (
-      <FormControl className={className} fullWidth>
-        <InputLabel id={labelId}>{headerText}</InputLabel>
+      <FormControl fullWidth>
+        <InputLabel className='ZChoice-label' id={labelId}>
+          {headerText}
+        </InputLabel>
         <Select
+          className='ZChoice-select-drop-down'
           labelId={labelId}
           disabled={disabled}
           value={castValue()}
           label={headerText}
           multiple={multiple}
+          MenuProps={{ className: 'ZChoice-select-menu' }}
           onChange={handleSelect}
           renderValue={renderSelectedItem}
           endAdornment={renderClear()}
@@ -211,5 +259,9 @@ export function ZChoice(props: IZChoice) {
     );
   }
 
-  return <div className={selectClass}>{renderSelect()}</div>;
+  return (
+    <div className={selectClass} data-type={type}>
+      {renderChoice()}
+    </div>
+  );
 }
