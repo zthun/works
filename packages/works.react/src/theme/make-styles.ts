@@ -66,6 +66,13 @@ export interface IZGeometryOptions {
    * Basically 50%.
    */
   circle?: number | string;
+
+  /**
+   * Chip rounding.
+   *
+   * This is usually half of the current font.
+   */
+  chip?: number | string;
 }
 
 /**
@@ -148,7 +155,8 @@ export function useZthunworksTheme(): IZTheme {
     },
     rounding: {
       square: 0,
-      circle: '50%'
+      circle: '50%',
+      chip: '0.5em'
     },
     sizing: {
       alerts: {
