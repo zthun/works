@@ -264,6 +264,16 @@ export function useZthunworksTheme(): IZTheme {
     }
   };
 
+  // Checkbox
+  mui.components.MuiCheckbox = {
+    styleOverrides: {
+      root: {
+        paddingTop: base.sizing.gaps.xs,
+        paddingBottom: base.sizing.gaps.xs
+      }
+    }
+  };
+
   // Label
   mui.components.MuiFormLabel = {
     styleOverrides: {
