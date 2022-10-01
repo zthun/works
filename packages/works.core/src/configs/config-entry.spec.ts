@@ -33,7 +33,11 @@ describe('ZConfigEntryBuilder', () => {
   });
 
   describe('Properties', () => {
-    function assertPropertySet<T>(expected: T, buildFn: (target: ZConfigEntryBuilder, value: T) => ZConfigEntryBuilder, actualFn: (config: IZConfigEntry) => T) {
+    function assertPropertySet<T>(
+      expected: T,
+      buildFn: (target: ZConfigEntryBuilder, value: T) => ZConfigEntryBuilder,
+      actualFn: (config: IZConfigEntry) => T
+    ) {
       // Arrange
       const target = createTestTarget();
       // Act

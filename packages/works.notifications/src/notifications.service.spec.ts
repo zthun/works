@@ -1,5 +1,12 @@
 /* eslint-disable require-jsdoc */
-import { IZEmail, IZEmailEnvelope, IZServer, ZEmailBuilder, ZEmailEnvelopeBuilder, ZServerBuilder } from '@zthun/works.core';
+import {
+  IZEmail,
+  IZEmailEnvelope,
+  IZServer,
+  ZEmailBuilder,
+  ZEmailEnvelopeBuilder,
+  ZServerBuilder
+} from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { first } from 'lodash';
 import { createTransport } from 'nodemailer';
@@ -32,8 +39,16 @@ describe('ZNotificationsService', () => {
 
     beforeEach(() => {
       smtp = new ZServerBuilder().address('smtp.zthunworks.com').port(25).build();
-      envelope = new ZEmailEnvelopeBuilder().from('x@marvel.com').to('xmen@marvel.com').bcc('avengers@marvel.com').build();
-      msg = new ZEmailBuilder().envelope(envelope).subject('Mission Briefing').message('<p>See attached document for mission briefing.</p>').build();
+      envelope = new ZEmailEnvelopeBuilder()
+        .from('x@marvel.com')
+        .to('xmen@marvel.com')
+        .bcc('avengers@marvel.com')
+        .build();
+      msg = new ZEmailBuilder()
+        .envelope(envelope)
+        .subject('Mission Briefing')
+        .message('<p>See attached document for mission briefing.</p>')
+        .build();
     });
 
     it('should send the email message.', async () => {

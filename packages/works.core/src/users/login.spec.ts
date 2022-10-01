@@ -21,7 +21,11 @@ describe('ZLoginBuilder', () => {
   });
 
   describe('Properties', () => {
-    function assertPropertySet<T>(expected: T, buildFn: (target: ZLoginBuilder) => ZLoginBuilder, actualFn: (user: IZLogin) => T) {
+    function assertPropertySet<T>(
+      expected: T,
+      buildFn: (target: ZLoginBuilder) => ZLoginBuilder,
+      actualFn: (user: IZLogin) => T
+    ) {
       // Arrange
       const target = createTestTarget();
       // Act

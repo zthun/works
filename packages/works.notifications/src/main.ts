@@ -12,4 +12,6 @@ import { ZNotificationsService } from './notifications.service';
 })
 class ZMicroserviceModule {}
 
-NestFactory.createMicroservice<MicroserviceOptions>(ZMicroserviceModule, { options: { host: '0.0.0.0', port: 4000 } }).then((app) => app.listen());
+NestFactory.createMicroservice<MicroserviceOptions>(ZMicroserviceModule, {
+  options: { host: '0.0.0.0', port: 4000 }
+}).then((app) => app.listen());

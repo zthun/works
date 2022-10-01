@@ -15,6 +15,8 @@ export class ZRuleCookieRequiresAuthDeactivated extends ZRuleCookieRequiresAuth 
    * @throws ConflictException if the user is activated.
    */
   public claim(user: IZUser | null) {
-    ZAssert.claim(!!user?.activator, 'This account has already been activated.').assert((msg) => new ConflictException(msg));
+    ZAssert.claim(!!user?.activator, 'This account has already been activated.').assert(
+      (msg) => new ConflictException(msg)
+    );
   }
 }

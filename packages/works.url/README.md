@@ -22,7 +22,16 @@ function createUrls(): string[] {
   return [
     // Create urls from scratch
     // Outputs: ftp://zthunworks.com:3662/path/to/resource/?foo=bar&name=joe/#/home
-    new ZUrlBuilder().protocol('ftp').host('zthunworks.com').path('/path/to').append('resource').port(3662).param('foo', 'bar').param('name', 'joe').hash('home').build(),
+    new ZUrlBuilder()
+      .protocol('ftp')
+      .host('zthunworks.com')
+      .path('/path/to')
+      .append('resource')
+      .port(3662)
+      .param('foo', 'bar')
+      .param('name', 'joe')
+      .hash('home')
+      .build(),
 
     // Create urls based on the current browser location.
     // Outputs: https://zthunworks.com/#/home

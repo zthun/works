@@ -54,7 +54,9 @@ describe('ZLoggerConsole', () => {
       // Act
       target.log(entry);
       // Assert
-      expect(cons.error).toHaveBeenCalledWith(`[${entry.created.toLocaleString()}]: ${ZLoggerConsole.FATAL} - ${entry.message}`);
+      expect(cons.error).toHaveBeenCalledWith(
+        `[${entry.created.toLocaleString()}]: ${ZLoggerConsole.FATAL} - ${entry.message}`
+      );
     });
   });
 });

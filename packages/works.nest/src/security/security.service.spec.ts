@@ -20,7 +20,12 @@ describe('ZSecurityService', () => {
   }
 
   beforeEach(() => {
-    cookie = new ZCookieBuilder().domain(ZConfigEntries.common.domain.value).expiresTomorrow().secure().httpOnly().build();
+    cookie = new ZCookieBuilder()
+      .domain(ZConfigEntries.common.domain.value)
+      .expiresTomorrow()
+      .secure()
+      .httpOnly()
+      .build();
 
     users = createMocked(['findByEmail', 'findById', 'login']);
     users.findByEmail.mockReturnValue(Promise.resolve(null));

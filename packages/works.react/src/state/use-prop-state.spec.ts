@@ -16,7 +16,10 @@ describe('usePropState', () => {
     setCurrent = undefined;
   });
 
-  async function setValueAndRerender(expected: string, target: RenderHookResult<[string | undefined, (val: string) => void], any>) {
+  async function setValueAndRerender(
+    expected: string,
+    target: RenderHookResult<[string | undefined, (val: string) => void], any>
+  ) {
     const [, setVal] = target.result.current;
 
     await act(async () => {

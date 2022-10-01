@@ -8,7 +8,14 @@ import { ZErrorMessageHandlerLogger } from './error-message-handler-logger';
 /**
  * The error recovery context.
  */
-export const ZErrorHandlerContext = createContext<IZErrorHandler>(new ZErrorHandler(new ZErrorMessageHandlerComposite([new ZErrorMessageHandlerAlert(new ZAlertService()), new ZErrorMessageHandlerLogger(new ZLoggerConsole(console))])));
+export const ZErrorHandlerContext = createContext<IZErrorHandler>(
+  new ZErrorHandler(
+    new ZErrorMessageHandlerComposite([
+      new ZErrorMessageHandlerAlert(new ZAlertService()),
+      new ZErrorMessageHandlerLogger(new ZLoggerConsole(console))
+    ])
+  )
+);
 
 /**
  * Gets the current error handler implementation.

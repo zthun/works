@@ -46,7 +46,11 @@ export class ZNotificationsService {
       await transport.sendMail(mail);
       return null;
     } catch {
-      return Promise.reject(new ServiceUnavailableException('The email server is currently not available.  You will need to try this again later.'));
+      return Promise.reject(
+        new ServiceUnavailableException(
+          'The email server is currently not available.  You will need to try this again later.'
+        )
+      );
     }
   }
 }

@@ -18,7 +18,11 @@ class ZBooleanCheckboxImplementation implements ZBooleanTypeImplementation {
    *
    * @param _element The element for the checkbox.
    */
-  public constructor(public readonly type: 'checkbox' | 'switch', private readonly _element: HTMLElement, private readonly _performer: IZCircusPerformer) {}
+  public constructor(
+    public readonly type: 'checkbox' | 'switch',
+    private readonly _element: HTMLElement,
+    private readonly _performer: IZCircusPerformer
+  ) {}
 
   /**
    * Gets the underlying input element.
@@ -76,7 +80,11 @@ class ZBooleanCheckboxImplementation implements ZBooleanTypeImplementation {
 }
 
 class ZBooleanRadioImplementation implements ZBooleanTypeImplementation {
-  public constructor(public readonly type: 'radio' | 'inline-radio', private readonly _element: HTMLElement, private readonly _performer: IZCircusPerformer) {}
+  public constructor(
+    public readonly type: 'radio' | 'inline-radio',
+    private readonly _element: HTMLElement,
+    private readonly _performer: IZCircusPerformer
+  ) {}
 
   private get _truthy(): HTMLInputElement {
     return this._element.querySelector('.ZBoolean-radio-truthy input')!;
@@ -144,13 +152,29 @@ export class ZBooleanComponentModel {
 
     switch (type) {
       case 'radio':
-        return new ZBooleanRadioImplementation('radio', this._element.querySelector<HTMLElement>('.ZBoolean-radio')!, this._performer);
+        return new ZBooleanRadioImplementation(
+          'radio',
+          this._element.querySelector<HTMLElement>('.ZBoolean-radio')!,
+          this._performer
+        );
       case 'inline-radio':
-        return new ZBooleanRadioImplementation('inline-radio', this._element.querySelector<HTMLElement>('.ZBoolean-inline-radio')!, this._performer);
+        return new ZBooleanRadioImplementation(
+          'inline-radio',
+          this._element.querySelector<HTMLElement>('.ZBoolean-inline-radio')!,
+          this._performer
+        );
       case 'switch':
-        return new ZBooleanCheckboxImplementation('switch', this._element.querySelector<HTMLElement>('.ZBoolean-switch')!, this._performer);
+        return new ZBooleanCheckboxImplementation(
+          'switch',
+          this._element.querySelector<HTMLElement>('.ZBoolean-switch')!,
+          this._performer
+        );
       default:
-        return new ZBooleanCheckboxImplementation('checkbox', this._element.querySelector<HTMLElement>('.ZBoolean-checkbox')!, this._performer);
+        return new ZBooleanCheckboxImplementation(
+          'checkbox',
+          this._element.querySelector<HTMLElement>('.ZBoolean-checkbox')!,
+          this._performer
+        );
     }
   }
 

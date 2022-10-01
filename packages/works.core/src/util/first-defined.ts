@@ -14,7 +14,11 @@
  *        remaining are null or undefined, then fallback is returned.
  *
  */
-export function firstDefined<T = any>(fallback: T, first: T | null | undefined, ...remaining: (T | null | undefined)[]): T {
+export function firstDefined<T = any>(
+  fallback: T,
+  first: T | null | undefined,
+  ...remaining: (T | null | undefined)[]
+): T {
   if (first != null) {
     return first;
   }

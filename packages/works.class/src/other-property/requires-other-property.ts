@@ -1,4 +1,10 @@
-import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import {
+  registerDecorator,
+  ValidationArguments,
+  ValidationOptions,
+  ValidatorConstraint,
+  ValidatorConstraintInterface
+} from 'class-validator';
 import { get } from 'lodash';
 
 @ValidatorConstraint({ name: 'requires-other-property', async: false })

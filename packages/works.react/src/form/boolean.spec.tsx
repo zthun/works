@@ -15,7 +15,9 @@ describe('ZBoolean', () => {
   let type: ZBooleanStyle | undefined;
 
   async function createTestTarget() {
-    const rendered = await new ZCircusSetupRender(<ZBoolean value={value} onValueChange={onCheckChanged} disabled={disabled} type={type} truthy='Yes' falsy='No' />).setup();
+    const rendered = await new ZCircusSetupRender(
+      <ZBoolean value={value} onValueChange={onCheckChanged} disabled={disabled} type={type} truthy='Yes' falsy='No' />
+    ).setup();
     await waiter.wait(() => rendered.container.querySelector('.ZBoolean-root') != null);
     const [target] = ZBooleanComponentModel.find(rendered.container);
     return new ZBooleanComponentModel(target, performer);

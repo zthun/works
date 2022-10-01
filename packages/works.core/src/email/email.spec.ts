@@ -46,7 +46,14 @@ describe('ZEmailBuilder.', () => {
 
   describe('Copy', () => {
     it('should copy another email.', () => {
-      assertBuilderCopiesObject(createTestTarget().envelope(envelope).message('Missing briefing is in another message.').subject('Mission briefing').build(), createTestTarget);
+      assertBuilderCopiesObject(
+        createTestTarget()
+          .envelope(envelope)
+          .message('Missing briefing is in another message.')
+          .subject('Mission briefing')
+          .build(),
+        createTestTarget
+      );
     });
   });
 
@@ -54,7 +61,11 @@ describe('ZEmailBuilder.', () => {
     it('should assign another email.', () => {
       const subject = 'Mission Briefing';
       const message = 'Check attachments for missing briefing.';
-      assertBuilderAssignsObject(createTestTarget().envelope(envelope).subject(subject).message(message).build(), () => createTestTarget().subject(subject), { envelope, message });
+      assertBuilderAssignsObject(
+        createTestTarget().envelope(envelope).subject(subject).message(message).build(),
+        () => createTestTarget().subject(subject),
+        { envelope, message }
+      );
     });
   });
 });

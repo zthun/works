@@ -14,7 +14,13 @@ describe('ZHttpService', () => {
     it('should return a resolved result from the request.', async () => {
       // Arrange
       const expected = 'Success';
-      (axios as unknown as jest.Mock<AxiosPromise<string>>).mockResolvedValue({ status: 200, statusText: 'Success', data: expected, config: {}, headers: {} });
+      (axios as unknown as jest.Mock<AxiosPromise<string>>).mockResolvedValue({
+        status: 200,
+        statusText: 'Success',
+        data: expected,
+        config: {},
+        headers: {}
+      });
       const target = createTestTarget();
       const req = new ZHttpRequestBuilder().get().url('https://www.zthunworks.com/api/health').build();
       // Act

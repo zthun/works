@@ -28,10 +28,18 @@ describe('ZCookiesClient', () => {
   });
 
   it('creates the authentication cookie.', async () => {
-    await assertProxySendsMessage({ cmd: 'createAuthentication' }, { user, secret, domain }, proxy, createTestTarget, (t, p) => t.createAuthentication(p.user, p.secret, p.domain));
+    await assertProxySendsMessage(
+      { cmd: 'createAuthentication' },
+      { user, secret, domain },
+      proxy,
+      createTestTarget,
+      (t, p) => t.createAuthentication(p.user, p.secret, p.domain)
+    );
   });
 
   it('decodes the jwt secret.', async () => {
-    await assertProxySendsMessage({ cmd: 'whoIs' }, { jwt, secret }, proxy, createTestTarget, (t, p) => t.whoIs(p.jwt, p.secret));
+    await assertProxySendsMessage({ cmd: 'whoIs' }, { jwt, secret }, proxy, createTestTarget, (t, p) =>
+      t.whoIs(p.jwt, p.secret)
+    );
   });
 });

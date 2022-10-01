@@ -40,5 +40,12 @@ export function ZCircularProgress(props: IZCircularProgressProps) {
     xl: '3rem'
   };
 
-  return show ? <CircularProgress className={`${className} ZCircularProgress-root`} data-testid={props['data-testid']} size={sizeMap[size]} color={color} /> : null;
+  return show ? (
+    <CircularProgress
+      className={`${className} ZCircularProgress-root`}
+      data-testid={props['data-testid']}
+      size={sizeMap[size]}
+      color={color}
+    />
+  ) : null;
 }

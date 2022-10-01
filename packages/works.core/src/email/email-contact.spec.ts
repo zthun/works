@@ -39,16 +39,23 @@ describe('ZEmailContactBuilder.', () => {
 
   describe('Copy', () => {
     it('should copy another contact.', () => {
-      assertBuilderCopiesObject(createTestTarget().address('gambit@marvel.com').display('Gambit').type('user').build(), createTestTarget);
+      assertBuilderCopiesObject(
+        createTestTarget().address('gambit@marvel.com').display('Gambit').type('user').build(),
+        createTestTarget
+      );
     });
   });
 
   describe('Assign', () => {
     it('should assign another contact.', () => {
-      assertBuilderAssignsObject(createTestTarget().address('gambit@marvel.com').display('Gambit').type('user').build(), () => createTestTarget().address('psylocke@marvel.com').display('Psylocke').type('user'), {
-        address: 'gambit@marvel.com',
-        display: 'Gambit'
-      });
+      assertBuilderAssignsObject(
+        createTestTarget().address('gambit@marvel.com').display('Gambit').type('user').build(),
+        () => createTestTarget().address('psylocke@marvel.com').display('Psylocke').type('user'),
+        {
+          address: 'gambit@marvel.com',
+          display: 'Gambit'
+        }
+      );
     });
   });
 });

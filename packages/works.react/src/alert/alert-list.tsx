@@ -51,7 +51,12 @@ export function ZAlertList() {
   const components = alerts.map((alert) => {
     const handleCloseAlert = handleClose.bind(this, alert);
     return (
-      <Alert className={`ZAlertList-alert ZAlertList-alert-${alert._id} ${styles.classes.alert}`} key={alert._id} severity={alert.severity} onClose={handleCloseAlert}>
+      <Alert
+        className={`ZAlertList-alert ZAlertList-alert-${alert._id} ${styles.classes.alert}`}
+        key={alert._id}
+        severity={alert.severity}
+        onClose={handleCloseAlert}
+      >
         <AlertTitle>{alert.header}</AlertTitle>
         <div className='ZAlertList-alert-message'>{alert.message}</div>
       </Alert>

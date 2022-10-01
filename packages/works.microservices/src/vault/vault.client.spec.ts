@@ -19,7 +19,13 @@ describe('VaultClient', () => {
 
   describe('Read', () => {
     it('gets by scope and key.', async () => {
-      await assertProxySendsMessage({ cmd: 'read' }, { scope: 'common', key: 'domain' }, proxy, createTestTarget, (t, p) => t.read(p.scope, p.key));
+      await assertProxySendsMessage(
+        { cmd: 'read' },
+        { scope: 'common', key: 'domain' },
+        proxy,
+        createTestTarget,
+        (t, p) => t.read(p.scope, p.key)
+      );
     });
 
     it('gets by entry.', async () => {

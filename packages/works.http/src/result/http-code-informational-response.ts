@@ -53,7 +53,10 @@ export const ZHttpCodeInformationalResponseNames = {
  */
 export const ZHttpCodeInformationalResponseDescriptions = {
   [ZHttpCodeInformationalResponse.Continue]: 'The client should continue to send the request body.',
-  [ZHttpCodeInformationalResponse.SwitchingProtocols]: 'The requestor has asked the server to switch protocols and the server has agreed to do so.',
-  [ZHttpCodeInformationalResponse.Processing]: 'The server has received and is processing the request, but a response is not available yet.',
-  [ZHttpCodeInformationalResponse.EarlyHints]: 'There are some early response headers available for you before the final message.'
+  [ZHttpCodeInformationalResponse.SwitchingProtocols]:
+    'The requestor has asked the server to switch protocols and the server has agreed to do so.',
+  [ZHttpCodeInformationalResponse.Processing]:
+    'The server has received and is processing the request, but a response is not available yet.',
+  [ZHttpCodeInformationalResponse.EarlyHints]:
+    'There are some early response headers available for you before the final message.'
 };

@@ -1,13 +1,33 @@
 /* eslint-disable require-jsdoc */
-import { getHttpCodeCategory, getHttpCodeDescription, getHttpCodeName, getHttpCodeSeverity, ZHttpCode, ZHttpCodeCategory, ZHttpCodeSeverity } from './http-code';
+import {
+  getHttpCodeCategory,
+  getHttpCodeDescription,
+  getHttpCodeName,
+  getHttpCodeSeverity,
+  ZHttpCode,
+  ZHttpCodeCategory,
+  ZHttpCodeSeverity
+} from './http-code';
 import { ZHttpCodeClient, ZHttpCodeClientDescriptions, ZHttpCodeClientNames } from './http-code-client';
-import { ZHttpCodeInformationalResponse, ZHttpCodeInformationalResponseDescriptions, ZHttpCodeInformationalResponseNames } from './http-code-informational-response';
-import { ZHttpCodeRedirection, ZHttpCodeRedirectionDescriptions, ZHttpCodeRedirectionNames } from './http-code-redirection';
+import {
+  ZHttpCodeInformationalResponse,
+  ZHttpCodeInformationalResponseDescriptions,
+  ZHttpCodeInformationalResponseNames
+} from './http-code-informational-response';
+import {
+  ZHttpCodeRedirection,
+  ZHttpCodeRedirectionDescriptions,
+  ZHttpCodeRedirectionNames
+} from './http-code-redirection';
 import { ZHttpCodeServer, ZHttpCodeServerDescriptions, ZHttpCodeServerNames } from './http-code-server';
 import { ZHttpCodeSuccess, ZHttpCodeSuccessDescriptions, ZHttpCodeSuccessNames } from './http-code-success';
 
 describe('ZHttpCode', () => {
-  function assertValueFromDictionary(fn: (code: ZHttpCode) => string, dictionary: { [key: number]: string }, code: ZHttpCode) {
+  function assertValueFromDictionary(
+    fn: (code: ZHttpCode) => string,
+    dictionary: { [key: number]: string },
+    code: ZHttpCode
+  ) {
     // Arrange
     const expected = dictionary[code];
     // Act

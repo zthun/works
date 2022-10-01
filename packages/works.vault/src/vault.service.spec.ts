@@ -70,7 +70,11 @@ describe('ZVaultService', () => {
         const expected = true;
         const cfg = new ZConfigEntryBuilder(expected).scope('common').key('secure').build();
         // Act
-        const [one, two, three] = await Promise.all([target.get({ entry: cfg }), target.get({ entry: cfg }), target.get({ entry: cfg })]);
+        const [one, two, three] = await Promise.all([
+          target.get({ entry: cfg }),
+          target.get({ entry: cfg }),
+          target.get({ entry: cfg })
+        ]);
         const actual = one.value || two.value || three.value;
         // Assert
         expect(actual).toEqual(expected);

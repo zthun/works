@@ -1,13 +1,26 @@
 import { ZHttpCodeClient, ZHttpCodeClientDescriptions, ZHttpCodeClientNames } from './http-code-client';
-import { ZHttpCodeInformationalResponse, ZHttpCodeInformationalResponseDescriptions, ZHttpCodeInformationalResponseNames } from './http-code-informational-response';
-import { ZHttpCodeRedirection, ZHttpCodeRedirectionDescriptions, ZHttpCodeRedirectionNames } from './http-code-redirection';
+import {
+  ZHttpCodeInformationalResponse,
+  ZHttpCodeInformationalResponseDescriptions,
+  ZHttpCodeInformationalResponseNames
+} from './http-code-informational-response';
+import {
+  ZHttpCodeRedirection,
+  ZHttpCodeRedirectionDescriptions,
+  ZHttpCodeRedirectionNames
+} from './http-code-redirection';
 import { ZHttpCodeServer, ZHttpCodeServerDescriptions, ZHttpCodeServerNames } from './http-code-server';
 import { ZHttpCodeSuccess, ZHttpCodeSuccessDescriptions, ZHttpCodeSuccessNames } from './http-code-success';
 
 /**
  * Represents a category of http code.
  */
-export type ZHttpCode = ZHttpCodeInformationalResponse | ZHttpCodeSuccess | ZHttpCodeRedirection | ZHttpCodeClient | ZHttpCodeServer;
+export type ZHttpCode =
+  | ZHttpCodeInformationalResponse
+  | ZHttpCodeSuccess
+  | ZHttpCodeRedirection
+  | ZHttpCodeClient
+  | ZHttpCodeServer;
 
 /**
  * Represents the category name for an http code.
@@ -65,7 +78,13 @@ export enum ZHttpCodeSeverity {
  * @returns The english friendly name of a code.
  */
 export function getHttpCodeName(code: ZHttpCode): string {
-  return ZHttpCodeInformationalResponseNames[code] || ZHttpCodeSuccessNames[code] || ZHttpCodeRedirectionNames[code] || ZHttpCodeClientNames[code] || ZHttpCodeServerNames[code];
+  return (
+    ZHttpCodeInformationalResponseNames[code] ||
+    ZHttpCodeSuccessNames[code] ||
+    ZHttpCodeRedirectionNames[code] ||
+    ZHttpCodeClientNames[code] ||
+    ZHttpCodeServerNames[code]
+  );
 }
 
 /**
@@ -76,7 +95,13 @@ export function getHttpCodeName(code: ZHttpCode): string {
  * @returns The english friendly description of a code.
  */
 export function getHttpCodeDescription(code: ZHttpCode) {
-  return ZHttpCodeInformationalResponseDescriptions[code] || ZHttpCodeSuccessDescriptions[code] || ZHttpCodeRedirectionDescriptions[code] || ZHttpCodeClientDescriptions[code] || ZHttpCodeServerDescriptions[code];
+  return (
+    ZHttpCodeInformationalResponseDescriptions[code] ||
+    ZHttpCodeSuccessDescriptions[code] ||
+    ZHttpCodeRedirectionDescriptions[code] ||
+    ZHttpCodeClientDescriptions[code] ||
+    ZHttpCodeServerDescriptions[code]
+  );
 }
 
 /**

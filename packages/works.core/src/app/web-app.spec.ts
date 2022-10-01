@@ -75,7 +75,14 @@ describe('ZWebAppBuilder', () => {
 
   describe('Copy', () => {
     it('should copy another web app.', () => {
-      const other = createTestTarget().id('learn').description('Documentation').name('Learn').domain('https://docs.zthunworks.com').short('docs').source('https://github.com/zthun/docs').build();
+      const other = createTestTarget()
+        .id('learn')
+        .description('Documentation')
+        .name('Learn')
+        .domain('https://docs.zthunworks.com')
+        .short('docs')
+        .source('https://github.com/zthun/docs')
+        .build();
       assertBuilderCopiesObject(other, createTestTarget);
     });
   });

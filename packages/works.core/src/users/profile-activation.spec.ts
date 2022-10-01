@@ -37,7 +37,11 @@ describe('ZProfileActivationBuilder', () => {
   describe('Assign', () => {
     it('assigns properties from another activation.', () => {
       const key = v4();
-      assertBuilderAssignsObject(createTestTarget().email('x@marvel.com').key(key).build(), () => createTestTarget().email('gambit@marvel.com').key(key), { email: 'x@marvel.com' });
+      assertBuilderAssignsObject(
+        createTestTarget().email('x@marvel.com').key(key).build(),
+        () => createTestTarget().email('gambit@marvel.com').key(key),
+        { email: 'x@marvel.com' }
+      );
     });
   });
 });

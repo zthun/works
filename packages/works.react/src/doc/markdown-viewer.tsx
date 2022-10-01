@@ -17,7 +17,11 @@ import { makeStyles } from '../theme/make-styles';
 /**
  * Represents properties for the markdown viewer.
  */
-export interface IZMarkdownProps extends IZComponentHeader, IZComponentSizeable, IZComponentActionable, IZComponentSource {}
+export interface IZMarkdownProps
+  extends IZComponentHeader,
+    IZComponentSizeable,
+    IZComponentActionable,
+    IZComponentSource {}
 
 const useMarkdownViewerStyles = makeStyles()((theme) => {
   const tableBorder = `${theme.sizing.thickness.md} solid ${theme.palette.grey[400]}`;
@@ -91,7 +95,17 @@ const useMarkdownViewerStyles = makeStyles()((theme) => {
  * @returns The jsx to render a markdown file.
  */
 export function ZMarkdownViewer(props: IZMarkdownProps) {
-  const { src, headerText, subHeaderText = '', avatar, actionText, actionColor = 'primary', actionType = 'button', size = 'auto', onAction = noop } = props;
+  const {
+    src,
+    headerText,
+    subHeaderText = '',
+    avatar,
+    actionText,
+    actionColor = 'primary',
+    actionType = 'button',
+    size = 'auto',
+    onAction = noop
+  } = props;
 
   const [markdown, setMarkdown] = useSafeState('');
   const http = useHttpService();
@@ -151,7 +165,11 @@ export function ZMarkdownViewer(props: IZMarkdownProps) {
       onAction={onAction}
     >
       <div ref={markdownEl}>
-        <ReactMarkdown className={`ZMarkdownViewer-markdown ${styles.classes.markdown}`} remarkPlugins={[gfm]} linkTarget='_blank'>
+        <ReactMarkdown
+          className={`ZMarkdownViewer-markdown ${styles.classes.markdown}`}
+          remarkPlugins={[gfm]}
+          linkTarget='_blank'
+        >
           {markdown}
         </ReactMarkdown>
       </div>

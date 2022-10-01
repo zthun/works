@@ -29,7 +29,11 @@ describe('ZDatabaseOptionsBuilder', () => {
 
   describe('Copy', () => {
     it('copies all properties.', () => {
-      const expected = createTestTarget().database('database').url('mongodb://database.zthunworks.com').timeout(500).build();
+      const expected = createTestTarget()
+        .database('database')
+        .url('mongodb://database.zthunworks.com')
+        .timeout(500)
+        .build();
       assertBuilderCopiesObject(expected, createTestTarget);
     });
   });

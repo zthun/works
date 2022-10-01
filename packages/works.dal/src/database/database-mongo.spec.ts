@@ -36,7 +36,9 @@ describe('ZDatabaseMongo', () => {
   }
 
   function createBadHostTestTarget(): ZDatabaseMongo {
-    return ZDatabaseMongo.connect(new ZDatabaseOptionsBuilder().copy(options).url('mongodb://bad-host:1111').timeout(100).build());
+    return ZDatabaseMongo.connect(
+      new ZDatabaseOptionsBuilder().copy(options).url('mongodb://bad-host:1111').timeout(100).build()
+    );
   }
 
   describe('Connection', () => {
@@ -266,9 +268,16 @@ describe('ZDatabaseMongo', () => {
       it('joins the data.', async () => {
         // Arrange
         const target = await createPopulatedTarget();
-        const expected = [Object.assign({}, bamBam, { father: [barney], mother: [betty] }), Object.assign({}, pebbles, { father: [fred], mother: [wilma] })];
+        const expected = [
+          Object.assign({}, bamBam, { father: [barney], mother: [betty] }),
+          Object.assign({}, pebbles, { father: [fred], mother: [wilma] })
+        ];
         // Act
-        const actual = await target.read(kidsSource).join(parentsSource, 'fatherId', '_id', 'father').join(parentsSource, 'motherId', '_id', 'mother').run();
+        const actual = await target
+          .read(kidsSource)
+          .join(parentsSource, 'fatherId', '_id', 'father')
+          .join(parentsSource, 'motherId', '_id', 'mother')
+          .run();
         // Assert
         expect(actual).toEqual(expected);
       });

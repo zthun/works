@@ -1,7 +1,14 @@
 /* eslint-disable require-jsdoc */
 
 import { render } from '@testing-library/react';
-import { ZHttpCode, ZHttpCodeClient, ZHttpCodeInformationalResponse, ZHttpCodeRedirection, ZHttpCodeServer, ZHttpCodeSuccess } from '@zthun/works.http';
+import {
+  ZHttpCode,
+  ZHttpCodeClient,
+  ZHttpCodeInformationalResponse,
+  ZHttpCodeRedirection,
+  ZHttpCodeServer,
+  ZHttpCodeSuccess
+} from '@zthun/works.http';
 import React from 'react';
 import { ZHttpStatusCodeCard } from './http-code-card';
 

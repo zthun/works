@@ -20,7 +20,15 @@ export class ZCookiesService {
    * @returns A promise that resolves with the auth cookie.
    */
   @MessagePattern({ cmd: 'createAuthentication' })
-  public async createAuthentication({ user, domain, secret }: { user: IZUser; domain?: string; secret: string }): Promise<IZCookie> {
+  public async createAuthentication({
+    user,
+    domain,
+    secret
+  }: {
+    user: IZUser;
+    domain?: string;
+    secret: string;
+  }): Promise<IZCookie> {
     const options: SignOptions = {
       expiresIn: '24h'
     };

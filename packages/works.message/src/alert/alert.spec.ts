@@ -118,7 +118,9 @@ describe('ZAlertBuilder', () => {
   describe('Assign', () => {
     it('assigns the partial alert.', () => {
       const expected = createTestTarget().message('updated-warning').build();
-      assertBuilderAssignsObject(expected, () => createTestTarget().message('warning-message'), { message: expected.message });
+      assertBuilderAssignsObject(expected, () => createTestTarget().message('warning-message'), {
+        message: expected.message
+      });
     });
   });
 });

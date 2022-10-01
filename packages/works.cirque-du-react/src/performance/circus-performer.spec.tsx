@@ -10,7 +10,11 @@ describe('ZCircusPerformer', () => {
     return new ZCircusPerformer();
   }
 
-  async function assertElementEventRaised(expected: jest.Mock, render: () => Promise<HTMLElement>, buildAct: (e: HTMLElement) => ZCircusActBuilder) {
+  async function assertElementEventRaised(
+    expected: jest.Mock,
+    render: () => Promise<HTMLElement>,
+    buildAct: (e: HTMLElement) => ZCircusActBuilder
+  ) {
     // Arrange.
     const target = createTestTarget();
     const element = await render();
@@ -28,7 +32,15 @@ describe('ZCircusPerformer', () => {
     let onClick: jest.Mock;
 
     async function createPointerTestRender() {
-      const jsx = <button type='button' onMouseDown={onMouseDown} onClick={onClick} onMouseUp={onMouseUp} onMouseOver={onMouseOver} />;
+      const jsx = (
+        <button
+          type='button'
+          onMouseDown={onMouseDown}
+          onClick={onClick}
+          onMouseUp={onMouseUp}
+          onMouseOver={onMouseOver}
+        />
+      );
       const rendered = await new ZCircusSetupRender(jsx).setup();
       return rendered.container.querySelector<HTMLElement>('button')!;
     }
@@ -45,15 +57,21 @@ describe('ZCircusPerformer', () => {
     });
 
     it('should click and hold the left mouse button', async () => {
-      await assertElementEventRaised(onMouseDown, createPointerTestRender, (e) => new ZCircusActBuilder().moveTo(e).leftMouseDown());
+      await assertElementEventRaised(onMouseDown, createPointerTestRender, (e) =>
+        new ZCircusActBuilder().moveTo(e).leftMouseDown()
+      );
     });
 
     it('should release the left mouse button', async () => {
-      await assertElementEventRaised(onMouseUp, createPointerTestRender, (e) => new ZCircusActBuilder().moveTo(e).leftMouseDown().leftMouseUp());
+      await assertElementEventRaised(onMouseUp, createPointerTestRender, (e) =>
+        new ZCircusActBuilder().moveTo(e).leftMouseDown().leftMouseUp()
+      );
     });
 
     it('should click the the left mouse button', async () => {
-      await assertElementEventRaised(onClick, createPointerTestRender, (e) => new ZCircusActBuilder().moveTo(e).leftMouseClick());
+      await assertElementEventRaised(onClick, createPointerTestRender, (e) =>
+        new ZCircusActBuilder().moveTo(e).leftMouseClick()
+      );
     });
   });
 });

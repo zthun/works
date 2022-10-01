@@ -78,7 +78,14 @@ describe('ZProfileBuilder', () => {
     let gambit: IZUser;
 
     beforeEach(() => {
-      gambit = new ZUserBuilder().email('gambit@marvel.com').password('not-a-great-password').display('Gambit').avatar('https://steamavatar.io/img/14777429602y3IT.jpg').active().super().build();
+      gambit = new ZUserBuilder()
+        .email('gambit@marvel.com')
+        .password('not-a-great-password')
+        .display('Gambit')
+        .avatar('https://steamavatar.io/img/14777429602y3IT.jpg')
+        .active()
+        .super()
+        .build();
     });
 
     it('copies the email.', () => {
@@ -138,7 +145,11 @@ describe('ZProfileBuilder', () => {
 
   describe('Copy and Assignment', () => {
     it('copies another profile.', () => {
-      const gambit = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').avatar('https://steamavatar.io/img/14777429602y3IT.jpg').build();
+      const gambit = new ZProfileBuilder()
+        .email('gambit@marvel.com')
+        .display('Gambit')
+        .avatar('https://steamavatar.io/img/14777429602y3IT.jpg')
+        .build();
       assertBuilderCopiesObject(gambit, createTestTarget);
     });
 

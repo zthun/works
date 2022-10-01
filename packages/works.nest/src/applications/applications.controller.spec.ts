@@ -29,7 +29,9 @@ describe('ZApplicationsController', () => {
     it('should return all apps.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = apps.map((app) => new ZWebAppBuilder().copy(app).domain(`https://${app._id}.${domain.value}`).build());
+      const expected = apps.map((app) =>
+        new ZWebAppBuilder().copy(app).domain(`https://${app._id}.${domain.value}`).build()
+      );
       // Act
       const actual = await target.listWebApps();
       // Assert

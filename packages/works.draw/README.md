@@ -1,6 +1,7 @@
 # Description
 
-The draw package allows a developer to manipulate a canvas object similar to how applications such as The Gimp and Photoshop structure their drawings.
+The draw package allows a developer to manipulate a canvas object similar to how applications such as The Gimp and
+Photoshop structure their drawings.
 
 ## Installation
 
@@ -13,13 +14,19 @@ yarn add rxjs @zthun/works.draw
 
 ## Introduction
 
-Draw is structured with the root item being of type ZPrintableDrawing. A printable drawing is a model representation of how to render to an HTML Canvas drawing context and is structured in three stacked layers, the background, the middleground, and the foreground.
+Draw is structured with the root item being of type ZPrintableDrawing. A printable drawing is a model representation of
+how to render to an HTML Canvas drawing context and is structured in three stacked layers, the background, the
+middleground, and the foreground.
 
-All of the layers have the same structure; the only difference between the layers is that any transformations that occur in each of the layers do not affect the other layers. For example, lets say the entire middleground has a scaling transformation of 200%. When the middleground is drawn, it will draw at 200% of its size, but when the foreground is drawn after it, it will reset the transformation.
+All of the layers have the same structure; the only difference between the layers is that any transformations that occur
+in each of the layers do not affect the other layers. For example, lets say the entire middleground has a scaling
+transformation of 200%. When the middleground is drawn, it will draw at 200% of its size, but when the foreground is
+drawn after it, it will reset the transformation.
 
 ## Printable
 
-Currently, the following printable objects are available to you and each printable object implements the IZPrintable interface.
+Currently, the following printable objects are available to you and each printable object implements the IZPrintable
+interface.
 
 ```ts
 /**
@@ -56,7 +63,13 @@ export class ZPrintableTransform {}
 ```
 
 ```ts
-import { ZPrintableDrawing, ZPrintableImage, ZPrintableGroup, ZPrintableTransform, ZPrintableColor } from '@zthun/works.draw';
+import {
+  ZPrintableDrawing,
+  ZPrintableImage,
+  ZPrintableGroup,
+  ZPrintableTransform,
+  ZPrintableColor
+} from '@zthun/works.draw';
 
 async function draw(canvas: HTMLCanvasElement) {
   const url = 'https://images.to.draw/my-image.jpg';
@@ -74,7 +87,8 @@ async function draw(canvas: HTMLCanvasElement) {
 
 ## Tools
 
-Tools are a concept that help with implementing user actions against a canvas and all tools implement the IZTooling interface. The following tools are currently available:
+Tools are a concept that help with implementing user actions against a canvas and all tools implement the IZTooling
+interface. The following tools are currently available:
 
 ```ts
 /**

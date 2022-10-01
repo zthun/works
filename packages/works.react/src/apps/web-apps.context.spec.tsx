@@ -16,8 +16,18 @@ describe('WebApps', () => {
   let webAppsService: jest.Mocked<IZWebAppService>;
 
   beforeEach(() => {
-    portal = new ZWebAppBuilder().id('portal').name('Portal').domain('https://portal.zthunworks.com').source('https://github.com/zthun/portal').build();
-    legal = new ZWebAppBuilder().id('legal').name('Legal').domain('https://legal.zthunworks.com').source('https://github.com/zthun/legal').build();
+    portal = new ZWebAppBuilder()
+      .id('portal')
+      .name('Portal')
+      .domain('https://portal.zthunworks.com')
+      .source('https://github.com/zthun/portal')
+      .build();
+    legal = new ZWebAppBuilder()
+      .id('legal')
+      .name('Legal')
+      .domain('https://legal.zthunworks.com')
+      .source('https://github.com/zthun/legal')
+      .build();
     webApps = [portal, legal];
 
     globalWebApps = new ZDataState(undefined);
@@ -30,7 +40,9 @@ describe('WebApps', () => {
     let id: string | undefined;
 
     async function createTestTarget() {
-      const wrapper = ({ children }) => <ZWebAppsContext.Provider value={globalWebApps}>{children}</ZWebAppsContext.Provider>;
+      const wrapper = ({ children }) => (
+        <ZWebAppsContext.Provider value={globalWebApps}>{children}</ZWebAppsContext.Provider>
+      );
       const target = renderHook(() => useWebApp(id), { wrapper });
       return target;
     }

@@ -11,7 +11,9 @@ describe('RequiresOtherProperty', () => {
       // Act
       RequiresOtherProperty('property')({}, 'name');
       // Assert
-      expect(registerDecorator).toHaveBeenCalledWith(expect.objectContaining({ validator: RequiresOtherPropertyValidator, constraints: ['property'] }));
+      expect(registerDecorator).toHaveBeenCalledWith(
+        expect.objectContaining({ validator: RequiresOtherPropertyValidator, constraints: ['property'] })
+      );
     });
   });
 

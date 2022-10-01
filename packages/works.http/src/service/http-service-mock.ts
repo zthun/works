@@ -21,7 +21,11 @@ export class ZHttpServiceMock implements IZHttpService {
    * @param verb The endpoint verb to respond to.
    * @param invoke The result method.  If this is falsy, then the endpoint is removed.
    */
-  public set<TResult = any>(endpoint: string, verb: ZHttpMethod, invoke: IZHttpResult<TResult> | ((req: IZHttpRequest) => IZHttpResult<TResult> | Promise<IZHttpResult<TResult>>)) {
+  public set<TResult = any>(
+    endpoint: string,
+    verb: ZHttpMethod,
+    invoke: IZHttpResult<TResult> | ((req: IZHttpRequest) => IZHttpResult<TResult> | Promise<IZHttpResult<TResult>>)
+  ) {
     this._mapping[endpoint] = this._mapping[endpoint] || {};
     this._mapping[endpoint][verb] = typeof invoke === 'function' ? invoke : () => invoke;
   }

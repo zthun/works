@@ -24,7 +24,13 @@ export abstract class ZNestApplication {
     app.use(json({ limit: '500kb' }));
     app.use(cookieParser());
     app.setGlobalPrefix('api');
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, exceptionFactory: ZExceptionFactory.messageOnly }));
+    app.useGlobalPipes(
+      new ValidationPipe({
+        whitelist: true,
+        forbidNonWhitelisted: true,
+        exceptionFactory: ZExceptionFactory.messageOnly
+      })
+    );
     return app;
   }
 

@@ -79,7 +79,12 @@ export function ZChoicePage() {
   }
 
   return (
-    <ZPaperCard className='ZChoicePage-root' headerText='Choice' subHeaderText='Select from a list of options' avatar={<TouchAppIcon color='warning' fontSize='large' />}>
+    <ZPaperCard
+      className='ZChoicePage-root'
+      headerText='Choice'
+      subHeaderText='Select from a list of options'
+      avatar={<TouchAppIcon color='warning' fontSize='large' />}
+    >
       <ZChoice
         disabled={disabled}
         headerText='Hero'

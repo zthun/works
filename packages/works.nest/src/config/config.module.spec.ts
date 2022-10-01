@@ -20,7 +20,9 @@ describe('ZConfigModule', () => {
 
   it('should initialize all of the entries in ZConfigEntries.', async () => {
     // Arrange
-    const expected: IZConfigEntry<any>[] = flatten(Object.keys(ZConfigEntries).map((scope) => Object.values<IZConfigEntry<any>>(ZConfigEntries[scope])));
+    const expected: IZConfigEntry<any>[] = flatten(
+      Object.keys(ZConfigEntries).map((scope) => Object.values<IZConfigEntry<any>>(ZConfigEntries[scope]))
+    );
     // Act
     await createTestTarget();
     // Assert

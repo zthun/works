@@ -60,8 +60,16 @@ export function ZBoolean(props: IZBoolean) {
 
     return (
       <div className={`ZBoolean-${type}`}>
-        <FormControlLabel className={truthyClass} control={<Radio disabled={disabled} checked={isTrue} onChange={setIfChecked.bind(null, true)} />} label={truthy} />
-        <FormControlLabel className={falsyClass} control={<Radio disabled={disabled} checked={isFalse} onChange={setIfChecked.bind(null, false)} />} label={falsy} />
+        <FormControlLabel
+          className={truthyClass}
+          control={<Radio disabled={disabled} checked={isTrue} onChange={setIfChecked.bind(null, true)} />}
+          label={truthy}
+        />
+        <FormControlLabel
+          className={falsyClass}
+          control={<Radio disabled={disabled} checked={isFalse} onChange={setIfChecked.bind(null, false)} />}
+          label={falsy}
+        />
       </div>
     );
   }
@@ -74,7 +82,13 @@ export function ZBoolean(props: IZBoolean) {
    */
   function renderSwitch() {
     const checked = !!_value;
-    return <FormControlLabel className='ZBoolean-switch' control={<Switch disabled={disabled} checked={checked} onChange={(_, checked) => _setValue(checked)} />} label={truthy} />;
+    return (
+      <FormControlLabel
+        className='ZBoolean-switch'
+        control={<Switch disabled={disabled} checked={checked} onChange={(_, checked) => _setValue(checked)} />}
+        label={truthy}
+      />
+    );
   }
 
   /**
@@ -85,7 +99,20 @@ export function ZBoolean(props: IZBoolean) {
   function renderCheckbox() {
     const checked = _value == null ? false : _value;
     const indeterminate = _value === null;
-    return <FormControlLabel className='ZBoolean-checkbox' control={<Checkbox disabled={disabled} checked={checked} indeterminate={indeterminate} onChange={(_, checked) => _setValue(checked)} />} label={truthy} />;
+    return (
+      <FormControlLabel
+        className='ZBoolean-checkbox'
+        control={
+          <Checkbox
+            disabled={disabled}
+            checked={checked}
+            indeterminate={indeterminate}
+            onChange={(_, checked) => _setValue(checked)}
+          />
+        }
+        label={truthy}
+      />
+    );
   }
 
   const renderBoolean: Record<ZBooleanStyle, () => ReactNode> = {

@@ -1,7 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
-import { IZProfile, IZRouteOption, IZWebApp, ZProfileBuilder, ZRouteOptionBuilder, ZWebAppBuilder } from '@zthun/works.core';
+import {
+  IZProfile,
+  IZRouteOption,
+  IZWebApp,
+  ZProfileBuilder,
+  ZRouteOptionBuilder,
+  ZWebAppBuilder
+} from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { kebabCase } from 'lodash';
@@ -212,9 +219,24 @@ describe('ZTopNav', () => {
       let apps: IZWebApp[];
 
       beforeEach(() => {
-        roadblock = new ZWebAppBuilder().id('roadblock').name('Roadblock').domain('https://roadblock.zthunworks.com').source('https://github.com/zthun/roadblock').build();
-        portal = new ZWebAppBuilder().id('portal').name('Portal').domain('https://portal.zthunworks.com').source('https://github.com/zthun/portal').build();
-        legal = new ZWebAppBuilder().id('legal').name('Legal').domain('https://legal.zthunworks.com').source('https://github.com/zthun/legal').build();
+        roadblock = new ZWebAppBuilder()
+          .id('roadblock')
+          .name('Roadblock')
+          .domain('https://roadblock.zthunworks.com')
+          .source('https://github.com/zthun/roadblock')
+          .build();
+        portal = new ZWebAppBuilder()
+          .id('portal')
+          .name('Portal')
+          .domain('https://portal.zthunworks.com')
+          .source('https://github.com/zthun/portal')
+          .build();
+        legal = new ZWebAppBuilder()
+          .id('legal')
+          .name('Legal')
+          .domain('https://legal.zthunworks.com')
+          .source('https://github.com/zthun/legal')
+          .build();
         apps = [roadblock, portal, legal];
         webApps = new ZDataState(apps);
       });
@@ -311,7 +333,12 @@ describe('ZTopNav', () => {
       let me: IZWebApp;
 
       beforeEach(() => {
-        me = new ZWebAppBuilder().id('myself').domain('https://myself.zthunworks.com').name('Myself').source('https://github.com/zthun/works').build();
+        me = new ZWebAppBuilder()
+          .id('myself')
+          .domain('https://myself.zthunworks.com')
+          .name('Myself')
+          .source('https://github.com/zthun/works')
+          .build();
         webApps = new ZDataState([me]);
         whoami = 'myself';
       });

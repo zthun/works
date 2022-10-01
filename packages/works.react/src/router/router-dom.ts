@@ -1,4 +1,13 @@
-import { HashRouter, Navigate, Outlet, Route, Router, Routes, useNavigate as _useNavigate, useParams as _useParams } from 'react-router-dom';
+import {
+  HashRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Router,
+  Routes,
+  useNavigate as _useNavigate,
+  useParams as _useParams
+} from 'react-router-dom';
 
 export const ZRouter = HashRouter;
 export const ZTestRouter = Router;

@@ -22,7 +22,10 @@ describe('ZHttpServiceMock', () => {
       data = { value: 100 };
     });
 
-    async function assertCompletes(requestFn: (t: ZHttpServiceMock, r: IZHttpRequest) => Promise<IZHttpResult>, code: ZHttpCode) {
+    async function assertCompletes(
+      requestFn: (t: ZHttpServiceMock, r: IZHttpRequest) => Promise<IZHttpResult>,
+      code: ZHttpCode
+    ) {
       // Arrange
       const target = createTestTarget();
       const expected = new ZHttpResultBuilder(data).status(code).build();
@@ -34,8 +37,14 @@ describe('ZHttpServiceMock', () => {
       expect(actual).toEqual(expected);
     }
 
-    const assertResolvesRequest: (code: ZHttpCode) => Promise<void> = assertCompletes.bind(null, (t: ZHttpServiceMock, r: IZHttpRequest) => t.request(r));
-    const assertRejectsRequest: (code: ZHttpCode) => Promise<void> = assertCompletes.bind(null, (t: ZHttpServiceMock, r: IZHttpRequest) => t.request(r).catch((e) => Promise.resolve(e)));
+    const assertResolvesRequest: (code: ZHttpCode) => Promise<void> = assertCompletes.bind(
+      null,
+      (t: ZHttpServiceMock, r: IZHttpRequest) => t.request(r)
+    );
+    const assertRejectsRequest: (code: ZHttpCode) => Promise<void> = assertCompletes.bind(
+      null,
+      (t: ZHttpServiceMock, r: IZHttpRequest) => t.request(r).catch((e) => Promise.resolve(e))
+    );
 
     it('should return a resolved promise for code 100.', async () => {
       await assertResolvesRequest(ZHttpCodeInformationalResponse.EarlyHints);

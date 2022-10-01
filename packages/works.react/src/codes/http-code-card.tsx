@@ -5,7 +5,15 @@ import ForwardIcon from '@mui/icons-material/Forward';
 import InfoIcon from '@mui/icons-material/Info';
 import WarningIcon from '@mui/icons-material/Warning';
 import { Typography } from '@mui/material';
-import { getHttpCodeCategory, getHttpCodeDescription, getHttpCodeName, getHttpCodeSeverity, ZHttpCode, ZHttpCodeClient, ZHttpCodeSeverity } from '@zthun/works.http';
+import {
+  getHttpCodeCategory,
+  getHttpCodeDescription,
+  getHttpCodeName,
+  getHttpCodeSeverity,
+  ZHttpCode,
+  ZHttpCodeClient,
+  ZHttpCodeSeverity
+} from '@zthun/works.http';
 import React from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { makeStyles } from '../theme/make-styles';
@@ -71,34 +79,78 @@ export function ZHttpStatusCodeCard(props: IZHttpStatusCodeCardProps) {
    */
   function renderAvatar() {
     if (code === ZHttpCodeClient.ImATeapot) {
-      return <EmojiFoodBeverageTwoToneIcon className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-teapot ${styles.classes.icon}`} data-testid='ZHttpStatusCodeCard-teapot' />;
+      return (
+        <EmojiFoodBeverageTwoToneIcon
+          className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-teapot ${styles.classes.icon}`}
+          data-testid='ZHttpStatusCodeCard-teapot'
+        />
+      );
     }
 
     if (code >= 100 && code < 200) {
-      return <InfoIcon className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-info ${styles.classes.icon}`} data-testid='ZHttpStatusCodeCard-info' />;
+      return (
+        <InfoIcon
+          className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-info ${styles.classes.icon}`}
+          data-testid='ZHttpStatusCodeCard-info'
+        />
+      );
     }
 
     if (code >= 200 && code < 300) {
-      return <CheckCircleIcon className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-success ${styles.classes.icon}`} data-testid='ZHttpStatusCodeCard-success' />;
+      return (
+        <CheckCircleIcon
+          className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-success ${styles.classes.icon}`}
+          data-testid='ZHttpStatusCodeCard-success'
+        />
+      );
     }
 
     if (code >= 300 && code < 400) {
-      return <ForwardIcon className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-redirect ${styles.classes.icon}`} data-testid='ZHttpStatusCodeCard-redirect' />;
+      return (
+        <ForwardIcon
+          className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-redirect ${styles.classes.icon}`}
+          data-testid='ZHttpStatusCodeCard-redirect'
+        />
+      );
     }
 
     if (code >= 400 && code < 500) {
-      return <WarningIcon className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-client ${styles.classes.icon}`} data-testid='ZHttpStatusCodeCard-client' />;
+      return (
+        <WarningIcon
+          className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-client ${styles.classes.icon}`}
+          data-testid='ZHttpStatusCodeCard-client'
+        />
+      );
     }
 
-    return <ErrorIcon className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-server ${styles.classes.icon}`} data-testid='ZHttpStatusCodeCard-server' />;
+    return (
+      <ErrorIcon
+        className={`ZHttpStatusCodeCard-icon ZHttpStatusCodeCard-server ${styles.classes.icon}`}
+        data-testid='ZHttpStatusCodeCard-server'
+      />
+    );
   }
 
   return (
-    <ZPaperCard className='ZHttpStatusCodeCard-root' data-testid='ZHttpStatusCodeCard-root' avatar={renderAvatar()} headerText={heading} subHeaderText={name}>
-      <Typography variant='body1' component='p' className={`ZHttpStatusCodeCard-description ${styles.classes.description}`}>
+    <ZPaperCard
+      className='ZHttpStatusCodeCard-root'
+      data-testid='ZHttpStatusCodeCard-root'
+      avatar={renderAvatar()}
+      headerText={heading}
+      subHeaderText={name}
+    >
+      <Typography
+        variant='body1'
+        component='p'
+        className={`ZHttpStatusCodeCard-description ${styles.classes.description}`}
+      >
         {description}
       </Typography>
-      <Typography variant='body2' component='div' className={`ZHttpStatusCodeCard-code ZHttpStatusCodeCard-code-${code} ${styles.classes.code}`}>
+      <Typography
+        variant='body2'
+        component='div'
+        className={`ZHttpStatusCodeCard-code ZHttpStatusCodeCard-code-${code} ${styles.classes.code}`}
+      >
         {props.code}
       </Typography>
     </ZPaperCard>

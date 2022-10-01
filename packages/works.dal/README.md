@@ -13,7 +13,9 @@ yarn install @zthun/works.dal
 
 ## Usage
 
-The basic usage of the dal layer is to build up a query that you want results from and fire it off against the actual database that it is connected to. You always start by setting up a connection, either globally or as part of the query process.
+The basic usage of the dal layer is to build up a query that you want results from and fire it off against the actual
+database that it is connected to. You always start by setting up a connection, either globally or as part of the query
+process.
 
 ```ts
 import { IZDatabase, IZDatabaseOptions, ZDatabaseOptionsBuilder, ZDatabaseZDatabaseMongo } from '@zthun/works.dal';
@@ -27,7 +29,8 @@ async function getFoo(connection: string, id: string) {
 }
 ```
 
-The best practice for this is to inject the database based on the framework you are using. For example, using nestjs, you can create an injectable database as such.
+The best practice for this is to inject the database based on the framework you are using. For example, using nestjs,
+you can create an injectable database as such.
 
 ```ts
 import { Module } from '@nestjs/common';
@@ -70,9 +73,12 @@ export class FooService {
 
 ## Unit Testing
 
-There is also an in memory database used for unit testing. The in memory database will connect in the same manner that the ZMongoDatabase does, however, it will always run on port **32769** on the localhost using the mongodb protocol.
+There is also an in memory database used for unit testing. The in memory database will connect in the same manner that
+the ZMongoDatabase does, however, it will always run on port **32769** on the localhost using the mongodb protocol.
 
-Since the database run is global, it has an unfortunate side effect of requiring cleanup and only one of them should be running at a time. If you are using jest as your testing framework, you need to make sure that jest runs with the --runInBand option to not clash and cause other tests to fail.
+Since the database run is global, it has an unfortunate side effect of requiring cleanup and only one of them should be
+running at a time. If you are using jest as your testing framework, you need to make sure that jest runs with the
+--runInBand option to not clash and cause other tests to fail.
 
 ```ts
 import {

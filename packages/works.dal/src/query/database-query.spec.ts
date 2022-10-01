@@ -46,7 +46,11 @@ describe('ZDatabaseQuery', () => {
     invoke = jest.fn((options) => Promise.resolve(options));
   });
 
-  async function assertOptions<T>(expected: T, build: () => ZDatabaseQuery<any>, actualFn: (options: ZDatabaseQuery<any>) => T) {
+  async function assertOptions<T>(
+    expected: T,
+    build: () => ZDatabaseQuery<any>,
+    actualFn: (options: ZDatabaseQuery<any>) => T
+  ) {
     // Arrange
     const target = build();
     // Act
@@ -56,7 +60,11 @@ describe('ZDatabaseQuery', () => {
     expect(actual).toEqual(expected);
   }
 
-  async function assertCopies<T>(expected: T, build: () => ZDatabaseQuery<any>, actualFn: (q: ZDatabaseQuery<any>) => T) {
+  async function assertCopies<T>(
+    expected: T,
+    build: () => ZDatabaseQuery<any>,
+    actualFn: (q: ZDatabaseQuery<any>) => T
+  ) {
     // Arrange
     const target = new ZDatabaseQuery(invoke);
     const other = build();

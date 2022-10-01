@@ -30,7 +30,8 @@ export class ZLoggerConsole implements IZLogger {
     const fn = this._logFnMap[entry.level] || ((msg: string) => this._console.log(msg));
 
     const timestamp = `[${entry.created.toLocaleString()}]`;
-    const payload = entry.level === ZLogLevel.CATASTROPHE ? `: ${ZLoggerConsole.FATAL} - ${entry.message}` : `: ${entry.message}`;
+    const payload =
+      entry.level === ZLogLevel.CATASTROPHE ? `: ${ZLoggerConsole.FATAL} - ${entry.message}` : `: ${entry.message}`;
     fn(`${timestamp}${payload}`);
   }
 }

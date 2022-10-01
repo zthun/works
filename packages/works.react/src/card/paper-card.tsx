@@ -1,4 +1,14 @@
-import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Checkbox, FormControlLabel, Paper } from '@mui/material';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Checkbox,
+  FormControlLabel,
+  Paper
+} from '@mui/material';
 import { ZDataUrlBuilder, ZMimeTypeImage } from '@zthun/works.url';
 import { noop } from 'lodash';
 import React, { useState } from 'react';
@@ -17,7 +27,16 @@ import { makeStyles } from '../theme/make-styles';
 /**
  * Represents the properties for the paper card component.
  */
-export interface IZPaperCardProps extends IZComponentHeader, IZComponentHierarchy, IZComponentStyle, IZComponentMedia, IZComponentSizeable, IZComponentLoading, IZComponentDisabled, IZComponentActionable, IZComponentConfirmable {}
+export interface IZPaperCardProps
+  extends IZComponentHeader,
+    IZComponentHierarchy,
+    IZComponentStyle,
+    IZComponentMedia,
+    IZComponentSizeable,
+    IZComponentLoading,
+    IZComponentDisabled,
+    IZComponentActionable,
+    IZComponentConfirmable {}
 
 const usePaperCardStyles = makeStyles<IZPaperCardProps>()((theme, props) => {
   const { size = 'auto', imageWidth = 'auto', imageHeight = 'auto' } = props;
@@ -111,7 +130,14 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
    * @returns The jsx for the CardHeader component.
    */
   function createHeader() {
-    return <CardHeader className={`ZPaperCard-header ${styles.classes.header}`} avatar={avatar} title={<h3>{headerText}</h3>} subheader={subHeaderText} />;
+    return (
+      <CardHeader
+        className={`ZPaperCard-header ${styles.classes.header}`}
+        avatar={avatar}
+        title={<h3>{headerText}</h3>}
+        subheader={subHeaderText}
+      />
+    );
   }
 
   /**
@@ -129,10 +155,23 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
     if (dataUri.mimeType === ZMimeTypeImage.SVG) {
       // The buffer itself is just the <svg> tag. So we'll just use that.
       const image = dataUri.buffer.toString();
-      return <div className={`ZPaperCard-media ZPaperCard-svg ZPaperCard-media-width-${imageWidth} ZPaperCard-media-height-${imageHeight} ${styles.classes.media}`} dangerouslySetInnerHTML={{ __html: image }} />;
+      return (
+        <div
+          className={`ZPaperCard-media ZPaperCard-svg ZPaperCard-media-width-${imageWidth} ZPaperCard-media-height-${imageHeight} ${styles.classes.media}`}
+          dangerouslySetInnerHTML={{ __html: image }}
+        />
+      );
     }
 
-    return <CardMedia className={`ZPaperCard-media ZPaperCard-media-width-${imageWidth} ZPaperCard-media-height-${imageHeight} ${styles.classes.media}`} data-testid='ZPaperCard-media' component='img' image={imageUrl} title={headerText} />;
+    return (
+      <CardMedia
+        className={`ZPaperCard-media ZPaperCard-media-width-${imageWidth} ZPaperCard-media-height-${imageHeight} ${styles.classes.media}`}
+        data-testid='ZPaperCard-media'
+        component='img'
+        image={imageUrl}
+        title={headerText}
+      />
+    );
   }
 
   /**
@@ -143,7 +182,19 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
   function createContent() {
     const confirm =
       confirmation && actionText ? (
-        <FormControlLabel className={`ZPaperCard-actions-confirm ${styles.classes.confirm}`} control={<Checkbox checked={confirmed} onChange={updateConfirmed} color={confirmationColor} name={confirmationName} />} label={confirmation} disabled={disabled} />
+        <FormControlLabel
+          className={`ZPaperCard-actions-confirm ${styles.classes.confirm}`}
+          control={
+            <Checkbox
+              checked={confirmed}
+              onChange={updateConfirmed}
+              color={confirmationColor}
+              name={confirmationName}
+            />
+          }
+          label={confirmation}
+          disabled={disabled}
+        />
       ) : null;
     return (
       <CardContent>
@@ -167,7 +218,16 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
 
     return (
       <CardActions className={`ZPaperCard-actions ${styles.classes.actions}`} data-testid='ZPaperCard-actions'>
-        <Button className='ZPaperCard-btn-action' data-testid='ZPaperCard-btn-action' fullWidth={true} variant='outlined' type={actionType} disabled={isDisabled} color={actionColor} onClick={handleAction}>
+        <Button
+          className='ZPaperCard-btn-action'
+          data-testid='ZPaperCard-btn-action'
+          fullWidth={true}
+          variant='outlined'
+          type={actionType}
+          disabled={isDisabled}
+          color={actionColor}
+          onClick={handleAction}
+        >
           {actionText}
         </Button>
       </CardActions>
@@ -175,8 +235,17 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
   }
 
   return (
-    <Paper className={`${className} ZPaperCard-root ZPaperCard-size-${size} ${styles.classes.root}`} data-testid={props['data-testid']} elevation={5}>
-      <ZCircularBackdrop className='ZPaperCard-progress-loading' data-testid='ZPaperCard-progress-loading' show={loading} size='xl' />
+    <Paper
+      className={`${className} ZPaperCard-root ZPaperCard-size-${size} ${styles.classes.root}`}
+      data-testid={props['data-testid']}
+      elevation={5}
+    >
+      <ZCircularBackdrop
+        className='ZPaperCard-progress-loading'
+        data-testid='ZPaperCard-progress-loading'
+        show={loading}
+        size='xl'
+      />
       <Card>
         {createHeader()}
         {createMedia()}

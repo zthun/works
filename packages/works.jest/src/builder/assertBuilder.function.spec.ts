@@ -1,5 +1,9 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from './assertBuilder.function';
+import {
+  assertBuilderAssignsObject,
+  assertBuilderCopiesObject,
+  assertBuilderSetsProperty
+} from './assertBuilder.function';
 
 describe('Builder', () => {
   interface IBuilt {
@@ -72,7 +76,10 @@ describe('Builder', () => {
 
   describe('assertBuilderAssignsObject', () => {
     it('should pass if the builder successfully assigns all properties from the other object.', () => {
-      assertBuilderAssignsObject(new Builder().first('first').third().build(), createTestTarget, { first: 'first', third: true });
+      assertBuilderAssignsObject(new Builder().first('first').third().build(), createTestTarget, {
+        first: 'first',
+        third: true
+      });
     });
   });
 });

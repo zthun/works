@@ -11,7 +11,9 @@ describe('EqualsOtherProperty', () => {
       // Act
       EqualsOtherProperty('property')({}, 'name');
       // Assert
-      expect(registerDecorator).toHaveBeenCalledWith(expect.objectContaining({ validator: EqualsOtherPropertyValidator, constraints: ['property'] }));
+      expect(registerDecorator).toHaveBeenCalledWith(
+        expect.objectContaining({ validator: EqualsOtherPropertyValidator, constraints: ['property'] })
+      );
     });
   });
 
@@ -24,7 +26,13 @@ describe('EqualsOtherProperty', () => {
       mismatchedPasswords = { password: 'bad-password', confirm: 'bad-password-c' };
     });
 
-    function assertValid<T extends object>(expected: boolean, object: T, value: T[keyof T], property: keyof T, propertyToMatch: keyof T) {
+    function assertValid<T extends object>(
+      expected: boolean,
+      object: T,
+      value: T[keyof T],
+      property: keyof T,
+      propertyToMatch: keyof T
+    ) {
       // Arrange
       const target = new EqualsOtherPropertyValidator();
       const args: ValidationArguments = {

@@ -225,21 +225,29 @@ export const ZHttpCodeClientDescriptions = {
   [ZHttpCodeClient.RequestTimeout]: 'The server timed out waiting for a request.  Please try again.',
   [ZHttpCodeClient.Conflict]: 'There was a conflict with request.  Try something else.',
   [ZHttpCodeClient.Gone]: 'The resource you requested is no longer available.',
-  [ZHttpCodeClient.LengthRequired]: 'Your request did not specify the length of its content, which is required by the requested resource.',
-  [ZHttpCodeClient.PreconditionFailed]: 'The server did not meet the requirements that was required to meet the request.',
+  [ZHttpCodeClient.LengthRequired]:
+    'Your request did not specify the length of its content, which is required by the requested resource.',
+  [ZHttpCodeClient.PreconditionFailed]:
+    'The server did not meet the requirements that was required to meet the request.',
   [ZHttpCodeClient.PayloadTooLarge]: 'The request is too large and the server cannot handle it.',
   [ZHttpCodeClient.URITooLong]: 'The URI provided was too long for the server to process.',
   [ZHttpCodeClient.UnsupportedMediaType]: 'The media type requested is not supported by the server.',
-  [ZHttpCodeClient.RangeNotSatisfiable]: 'A portion of the file was requested by the server cannot supply said portion.',
+  [ZHttpCodeClient.RangeNotSatisfiable]:
+    'A portion of the file was requested by the server cannot supply said portion.',
   [ZHttpCodeClient.ExpectationFailed]: 'The server cannot meet the requirements of the expectation made of it.',
-  [ZHttpCodeClient.ImATeapot]: 'Short and stout.  Here is my handle, here is my spout.  When I get all steamed up, hear me shout.  Tip me over and pour me out!',
-  [ZHttpCodeClient.MisdirectedRequest]: 'The request was directed at the server, but the server cannot produce a response.',
-  [ZHttpCodeClient.UnProcessableEntity]: 'The request was well-formed but was unable to be followed due to semantic errors.',
+  [ZHttpCodeClient.ImATeapot]:
+    'Short and stout.  Here is my handle, here is my spout.  When I get all steamed up, hear me shout.  Tip me over and pour me out!',
+  [ZHttpCodeClient.MisdirectedRequest]:
+    'The request was directed at the server, but the server cannot produce a response.',
+  [ZHttpCodeClient.UnProcessableEntity]:
+    'The request was well-formed but was unable to be followed due to semantic errors.',
   [ZHttpCodeClient.Locked]: 'The resource that is being accessed is locked.',
-  [ZHttpCodeClient.FailedDependency]: 'The request failed because it depended on another request and that request failed.',
+  [ZHttpCodeClient.FailedDependency]:
+    'The request failed because it depended on another request and that request failed.',
   [ZHttpCodeClient.UpgradeRequired]: 'The client needs to switch to a different protocol.',
   [ZHttpCodeClient.PreconditionFailed]: 'The origin server requires the request to be conditional.',
   [ZHttpCodeClient.TooManyRequests]: 'The user has sent too many requests in a given amount of time.',
-  [ZHttpCodeClient.RequestHeaderFieldsTooLarge]: 'The request cannot be processed because the collective header fields are too large.',
+  [ZHttpCodeClient.RequestHeaderFieldsTooLarge]:
+    'The request cannot be processed because the collective header fields are too large.',
   [ZHttpCodeClient.UnavailableForLegalReasons]: 'Call your lawyer!'
 };

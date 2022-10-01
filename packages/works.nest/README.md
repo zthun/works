@@ -1,6 +1,7 @@
 # Description
 
-Zthunworks Nest services implement standard distributable services that can be reused across applications for consistency.
+Zthunworks Nest services implement standard distributable services that can be reused across applications for
+consistency.
 
 ## Installation
 
@@ -11,7 +12,9 @@ npm install @zthun/works.nest
 yarn add @zthun/works.nest
 ```
 
-This package is divided into modules that automatically add specific http routes and services to your application without you having to add additional implementation. This package is built around the [nestjs](https://nestjs.com/) framework.
+This package is divided into modules that automatically add specific http routes and services to your application
+without you having to add additional implementation. This package is built around the [nestjs](https://nestjs.com/)
+framework.
 
 ## Health Module
 

@@ -6,7 +6,12 @@
  * @param buildFn The method that builds upon the constructed target.
  * @param getFn The method that retrieves the actual property to be compared against.
  */
-export function assertBuilderSetsProperty<TExpected, TBuilt, TBuilder extends { build: () => TBuilt }>(expected: TExpected, createTestTarget: () => TBuilder, buildFn: (t: TBuilder, v: TExpected) => TBuilder, getFn: (b: TBuilt) => TExpected | undefined) {
+export function assertBuilderSetsProperty<TExpected, TBuilt, TBuilder extends { build: () => TBuilt }>(
+  expected: TExpected,
+  createTestTarget: () => TBuilder,
+  buildFn: (t: TBuilder, v: TExpected) => TBuilder,
+  getFn: (b: TBuilt) => TExpected | undefined
+) {
   // Arrange
   const target = createTestTarget();
   // Act
@@ -22,7 +27,10 @@ export function assertBuilderSetsProperty<TExpected, TBuilt, TBuilder extends { 
  * @param expected A fully built object to be copied.
  * @param createTestTarget The method that constructs an empty target to copy the expected and compare the built object with.
  */
-export function assertBuilderCopiesObject<TBuilt, TBuilder extends { build: () => TBuilt; copy: (other: TBuilt) => TBuilder }>(expected: TBuilt, createTestTarget: () => TBuilder) {
+export function assertBuilderCopiesObject<
+  TBuilt,
+  TBuilder extends { build: () => TBuilt; copy: (other: TBuilt) => TBuilder }
+>(expected: TBuilt, createTestTarget: () => TBuilder) {
   // Arrange
   const target = createTestTarget();
   // Act
@@ -38,7 +46,10 @@ export function assertBuilderCopiesObject<TBuilt, TBuilder extends { build: () =
  * @param createTestTarget The method that constructs an empty target.
  * @param partial A partial object to assign.  This assigned to the empty target should equal the expected target.
  */
-export function assertBuilderAssignsObject<TBuilt, TBuilder extends { build: () => TBuilt; assign: (other: Partial<TBuilt>) => TBuilder }>(expected: TBuilt, createTestTarget: () => TBuilder, partial: Partial<TBuilt>) {
+export function assertBuilderAssignsObject<
+  TBuilt,
+  TBuilder extends { build: () => TBuilt; assign: (other: Partial<TBuilt>) => TBuilder }
+>(expected: TBuilt, createTestTarget: () => TBuilder, partial: Partial<TBuilt>) {
   // Arrange
   const target = createTestTarget();
   // Act

@@ -17,7 +17,12 @@ describe('ZDataUrlBuilder', () => {
 
     it('should set the raw data.', () => {
       const expected = 'data:text/plain,hello';
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.mimeType(ZMimeTypeText.Plain).buffer(Buffer.from('hello')), identity);
+      assertBuilderSetsProperty(
+        expected,
+        createTestTarget,
+        (t) => t.mimeType(ZMimeTypeText.Plain).buffer(Buffer.from('hello')),
+        identity
+      );
     });
 
     it('should default the mime type to text/plain', () => {
@@ -29,7 +34,12 @@ describe('ZDataUrlBuilder', () => {
       const raw = 'one,two,three';
       const data = Buffer.from(raw).toString('base64');
       const expected = `data:text/css;base64,${data}`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.mimeType(ZMimeTypeText.CSS).buffer(raw).encode('base64'), identity);
+      assertBuilderSetsProperty(
+        expected,
+        createTestTarget,
+        (t) => t.mimeType(ZMimeTypeText.CSS).buffer(raw).encode('base64'),
+        identity
+      );
     });
 
     it('should escape necessary characters if the encoding is utf8.', () => {

@@ -22,7 +22,11 @@ export class ZSecurityService {
    * @param _commonConfig The common configuration service that contains core values.
    * @param _authConfig The auth configuration service that contains auth options.
    */
-  public constructor(private readonly _users: ZUsersClient, private readonly _cookies: ZCookiesClient, private readonly _vault: ZVaultClient) {}
+  public constructor(
+    private readonly _users: ZUsersClient,
+    private readonly _cookies: ZCookiesClient,
+    private readonly _vault: ZVaultClient
+  ) {}
 
   /**
    * Extracts a user from a request object.

@@ -1,6 +1,12 @@
 /* eslint-disable require-jsdoc */
 import { renderHook, waitFor } from '@testing-library/react';
-import { ZHttpCodeServer, ZHttpCodeSuccess, ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/works.http';
+import {
+  ZHttpCodeServer,
+  ZHttpCodeSuccess,
+  ZHttpMethod,
+  ZHttpResultBuilder,
+  ZHttpServiceMock
+} from '@zthun/works.http';
 import { createMocked } from '@zthun/works.jest';
 import React from 'react';
 import { IZHealthService, useHealth, ZHealthService, ZHealthServiceContext } from './health-service.context';
@@ -14,7 +20,11 @@ describe('ZHealthService', () => {
 
   beforeEach(() => {
     http = new ZHttpServiceMock();
-    http.set(ZHealthService.createHealthUrl(), ZHttpMethod.Get, new ZHttpResultBuilder(true).status(ZHttpCodeSuccess.OK).build());
+    http.set(
+      ZHealthService.createHealthUrl(),
+      ZHttpMethod.Get,
+      new ZHttpResultBuilder(true).status(ZHttpCodeSuccess.OK).build()
+    );
   });
 
   it('should return the value from the service request.', async () => {
@@ -28,7 +38,11 @@ describe('ZHealthService', () => {
 
   it('should return false if the endpoint is missing.', async () => {
     // Arrange
-    http.set(ZHealthService.createHealthUrl(), ZHttpMethod.Get, new ZHttpResultBuilder(null).status(ZHttpCodeServer.BadGateway).build());
+    http.set(
+      ZHealthService.createHealthUrl(),
+      ZHttpMethod.Get,
+      new ZHttpResultBuilder(null).status(ZHttpCodeServer.BadGateway).build()
+    );
     const target = createTestTarget();
     // Act
     const actual = await target.read();
@@ -41,7 +55,9 @@ describe('useHealth', () => {
   let health: jest.Mocked<IZHealthService>;
 
   async function createTestTarget() {
-    const wrapper = ({ children }) => <ZHealthServiceContext.Provider value={health}>{children}</ZHealthServiceContext.Provider>;
+    const wrapper = ({ children }) => (
+      <ZHealthServiceContext.Provider value={health}>{children}</ZHealthServiceContext.Provider>
+    );
     const target = renderHook(() => useHealth(), { wrapper });
     return target;
   }

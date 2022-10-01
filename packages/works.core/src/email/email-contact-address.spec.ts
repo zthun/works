@@ -23,15 +23,30 @@ describe('ZEmailContactAddressBuilder', () => {
   });
 
   it('should returns a comma separated list of items.', () => {
-    assertBuilderSetsProperty([gambit, wolverine.address, x].join(', '), createTestTarget, (t) => t.addresses([gambit, wolverine]).address(x), identity);
+    assertBuilderSetsProperty(
+      [gambit, wolverine.address, x].join(', '),
+      createTestTarget,
+      (t) => t.addresses([gambit, wolverine]).address(x),
+      identity
+    );
   });
 
   it('should filter out falsy items.', () => {
-    assertBuilderSetsProperty([gambit, wolverine.address, x].join(', '), createTestTarget, (t) => t.addresses([gambit, wolverine]).address(psylocke).address('').address(x), identity);
+    assertBuilderSetsProperty(
+      [gambit, wolverine.address, x].join(', '),
+      createTestTarget,
+      (t) => t.addresses([gambit, wolverine]).address(psylocke).address('').address(x),
+      identity
+    );
   });
 
   it('should respect the delimiter.', () => {
-    assertBuilderSetsProperty([gambit, wolverine.address, x].join('; '), createTestTarget, (t) => t.addresses([gambit, wolverine]).address(x).delimiter('; '), identity);
+    assertBuilderSetsProperty(
+      [gambit, wolverine.address, x].join('; '),
+      createTestTarget,
+      (t) => t.addresses([gambit, wolverine]).address(x).delimiter('; '),
+      identity
+    );
   });
 
   it('returns empty string for an empty list of addresses.', () => {

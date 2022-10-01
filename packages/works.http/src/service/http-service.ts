@@ -49,10 +49,14 @@ export class ZHttpService implements IZHttpService {
         builder = builder.headers(error.response.headers).status(error.response.status).data(error.response.data);
       } else if (error.request) {
         // The request was made but the server was never hit.
-        builder = builder.status(ZHttpCodeServer.ServiceUnavailable).data('The target endpoint could not be reached.  You may need to try again later.');
+        builder = builder
+          .status(ZHttpCodeServer.ServiceUnavailable)
+          .data('The target endpoint could not be reached.  You may need to try again later.');
       } else {
         // Some other error occurred.
-        builder = builder.status(ZHttpCodeServer.InternalServerError).data(error.message || 'An unexpected error occurred.');
+        builder = builder
+          .status(ZHttpCodeServer.InternalServerError)
+          .data(error.message || 'An unexpected error occurred.');
       }
 
       return Promise.reject(builder.build());

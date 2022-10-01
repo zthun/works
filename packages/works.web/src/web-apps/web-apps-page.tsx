@@ -6,7 +6,18 @@ import SmartButtonIcon from '@mui/icons-material/SmartButton';
 import StartIcon from '@mui/icons-material/Start';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
 import WarningIcon from '@mui/icons-material/Warning';
-import { makeStyles, useNavigate, ZButton, ZMenu, ZMenuItem, ZNavigate, ZRoute, ZRouteMap, ZStateColor, ZToolbar } from '@zthun/works.react';
+import {
+  makeStyles,
+  useNavigate,
+  ZButton,
+  ZMenu,
+  ZMenuItem,
+  ZNavigate,
+  ZRoute,
+  ZRouteMap,
+  ZStateColor,
+  ZToolbar
+} from '@zthun/works.react';
 import React from 'react';
 import { ZAlertsPage } from './components/alerts/alerts-page';
 import { ZBooleanPage } from './components/boolean/boolean-page';
@@ -32,7 +43,12 @@ export function ZWebAppsPage() {
   return (
     <div className='ZWebAppsPage-root'>
       <ZToolbar className={styles.classes.toolbar}>
-        <ZButton avatar={<StartIcon color='success' />} color={ZStateColor.Info} outline onClick={navigate.bind(null, 'getting-started')}>
+        <ZButton
+          avatar={<StartIcon color='success' />}
+          color={ZStateColor.Info}
+          outline
+          onClick={navigate.bind(null, 'getting-started')}
+        >
           Getting Started
         </ZButton>
         <ZMenu avatar={<SettingsIcon color='primary' />} color={ZStateColor.Info} outline headerText='Components'>
@@ -49,7 +65,12 @@ export function ZWebAppsPage() {
             Choice
           </ZMenuItem>
         </ZMenu>
-        <ZMenu avatar={<ElectricalServicesIcon color='warning' />} color={ZStateColor.Info} outline headerText='Services'>
+        <ZMenu
+          avatar={<ElectricalServicesIcon color='warning' />}
+          color={ZStateColor.Info}
+          outline
+          headerText='Services'
+        >
           <ZMenuItem avatar={<MedicalServicesIcon color='success' />}>Health</ZMenuItem>
         </ZMenu>
       </ZToolbar>

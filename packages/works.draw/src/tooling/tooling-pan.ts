@@ -25,7 +25,12 @@ export class ZToolingPan implements IZTooling {
    * @param drawing The drawing responsible for printing updates.
    * @param transform The transform to update.
    */
-  public init(target: HTMLElement, context: CanvasRenderingContext2D, drawing: IZPrintable, transform: IZTransformTranslate) {
+  public init(
+    target: HTMLElement,
+    context: CanvasRenderingContext2D,
+    drawing: IZPrintable,
+    transform: IZTransformTranslate
+  ) {
     this.destroy();
 
     this._destroy = new Subject();

@@ -29,7 +29,9 @@ describe('ZNotificationsClient', () => {
     });
 
     it('sends an email.', async () => {
-      await assertProxySendsMessage({ cmd: 'sendEmail' }, { msg, smtp }, proxy, createTestTarget, (t, p) => t.sendEmail(p.msg, p.smtp));
+      await assertProxySendsMessage({ cmd: 'sendEmail' }, { msg, smtp }, proxy, createTestTarget, (t, p) =>
+        t.sendEmail(p.msg, p.smtp)
+      );
     });
   });
 });

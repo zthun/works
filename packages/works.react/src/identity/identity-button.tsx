@@ -86,7 +86,12 @@ export function ZIdentityButton(props: IZIdentityButtonProps) {
    */
   function createLoginButton() {
     return (
-      <Button className='ZIdentityButton-root ZIdentityButton-login' color='inherit' disabled={disabled} onClick={onLogin}>
+      <Button
+        className='ZIdentityButton-root ZIdentityButton-login'
+        color='inherit'
+        disabled={disabled}
+        onClick={onLogin}
+      >
         <PersonIcon />
         <Hidden only='xs'>
           <Typography>LOGIN</Typography>
@@ -115,7 +120,12 @@ export function ZIdentityButton(props: IZIdentityButtonProps) {
    */
   function createProfileButton() {
     return (
-      <Button className='ZIdentityButton-root ZIdentityButton-profile' color='inherit' onClick={onProfile} disabled={disabled}>
+      <Button
+        className='ZIdentityButton-root ZIdentityButton-profile'
+        color='inherit'
+        onClick={onProfile}
+        disabled={disabled}
+      >
         <Grid container spacing={2} justifyContent='center' alignItems='center' wrap='nowrap'>
           <Grid item>
             <img className={`ZIdentityButton-avatar ${styles.classes.avatar}`} src={avatar} />

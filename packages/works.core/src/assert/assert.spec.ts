@@ -12,7 +12,10 @@ describe('ZAssert', () => {
       // Arrange
       const target = createTestTarget();
       // Act
-      const actual = target.claim(true, 'Should not throw').claim(true, 'Should also not throw').claim(false, 'Should throw');
+      const actual = target
+        .claim(true, 'Should not throw')
+        .claim(true, 'Should also not throw')
+        .claim(false, 'Should throw');
       // Assert
       expect(() => actual.assert((msg) => new Error(msg))).toThrow();
     });

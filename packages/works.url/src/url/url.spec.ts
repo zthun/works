@@ -62,7 +62,12 @@ describe('ZUrlBuilder', () => {
 
     it('cleans the path.', () => {
       const expected = `${protocol}://${hostname}/a/b/c/d`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.append('////a/b/////').append('c').append('/d///'), identity);
+      assertBuilderSetsProperty(
+        expected,
+        createTestTarget,
+        (t) => t.append('////a/b/////').append('c').append('/d///'),
+        identity
+      );
     });
 
     it('sets the hash.', () => {
@@ -87,7 +92,12 @@ describe('ZUrlBuilder', () => {
 
     it('adds the search.', () => {
       const expected = `${protocol}://${hostname}/?paramA=a&paramB=b`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.param('paramA', 'a').param('paramB', 'b'), identity);
+      assertBuilderSetsProperty(
+        expected,
+        createTestTarget,
+        (t) => t.param('paramA', 'a').param('paramB', 'b'),
+        identity
+      );
     });
 
     it('adds a subdomain.', () => {
@@ -97,7 +107,12 @@ describe('ZUrlBuilder', () => {
 
     it('replaces a subdomain.', () => {
       const expected = `${protocol}://mail.${hostname}`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.subdomain('email').popSubdomain().subdomain('mail'), identity);
+      assertBuilderSetsProperty(
+        expected,
+        createTestTarget,
+        (t) => t.subdomain('email').popSubdomain().subdomain('mail'),
+        identity
+      );
     });
 
     it('sets the domain as the host if the host is not set.', () => {
@@ -147,7 +162,24 @@ describe('ZUrlBuilder', () => {
       // Arrange
       const url = 'https://google.com:9086/foo/bar#hhh';
       const expected = 'http://user:password@mail.google.com:9099/a/b/c/?valA=c&valB=d#h32';
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.parse(url).protocol('http').port(9099).path('a').append('b/c').param('valA', 'c').param('valB', 'd').hash('h32').username('user').password('password').subdomain('mail'), identity);
+      assertBuilderSetsProperty(
+        expected,
+        createTestTarget,
+        (t) =>
+          t
+            .parse(url)
+            .protocol('http')
+            .port(9099)
+            .path('a')
+            .append('b/c')
+            .param('valA', 'c')
+            .param('valB', 'd')
+            .hash('h32')
+            .username('user')
+            .password('password')
+            .subdomain('mail'),
+        identity
+      );
     });
 
     it('can be modified to use a different port.', () => {

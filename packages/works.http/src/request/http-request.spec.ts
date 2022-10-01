@@ -170,7 +170,12 @@ describe('ZHttpRequestBuilder', () => {
 
   describe('Copy', () => {
     it('should copy another request.', () => {
-      const expected = new ZHttpRequestBuilder().post({ value: 10 }).url('http://google.com').timeout(5000).header('keep-alive', true).build();
+      const expected = new ZHttpRequestBuilder()
+        .post({ value: 10 })
+        .url('http://google.com')
+        .timeout(5000)
+        .header('keep-alive', true)
+        .build();
       assertBuilderCopiesObject(expected, createTestTarget);
     });
   });

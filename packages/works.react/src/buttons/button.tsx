@@ -27,7 +27,16 @@ export interface IZButton extends IZComponentHierarchy, IZComponentDisabled, IZC
  * @returns The JSX to render this button.
  */
 export function ZButton(props: IZButton) {
-  const { className, children, color = ZStateColor.Inherit, disabled, loading = false, outline, avatar, onClick = noop } = props;
+  const {
+    className,
+    children,
+    color = ZStateColor.Inherit,
+    disabled,
+    loading = false,
+    outline,
+    avatar,
+    onClick = noop
+  } = props;
   const buttonClass = cssClass('ZButton-root', className);
   const variant = outline ? 'outlined' : 'contained';
 

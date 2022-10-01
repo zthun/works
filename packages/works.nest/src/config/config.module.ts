@@ -15,8 +15,14 @@ export const ZConfigEntries = Object.freeze({
     domain: new ZConfigEntryBuilder<string>('zthunworks.com').scope(ZConfigScope.Common).key('domain').build()
   },
   [ZConfigScope.Notifications]: {
-    smtp: new ZConfigEntryBuilder<IZServer>(new ZServerBuilder().address(`smtp.zthunworks.com`).port(25).build()).scope(ZConfigScope.Notifications).key('smtp').build(),
-    notifier: new ZConfigEntryBuilder<string>('notifications@zthunworks.com').scope(ZConfigScope.Notifications).key('notifier').build()
+    smtp: new ZConfigEntryBuilder<IZServer>(new ZServerBuilder().address(`smtp.zthunworks.com`).port(25).build())
+      .scope(ZConfigScope.Notifications)
+      .key('smtp')
+      .build(),
+    notifier: new ZConfigEntryBuilder<string>('notifications@zthunworks.com')
+      .scope(ZConfigScope.Notifications)
+      .key('notifier')
+      .build()
   },
   [ZConfigScope.Identity]: {
     secret: new ZConfigEntryBuilder(null).scope(ZConfigScope.Identity).key('secret').generate().build()

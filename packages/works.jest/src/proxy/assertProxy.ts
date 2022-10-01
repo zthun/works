@@ -10,7 +10,13 @@
  * @param createTestTarget The target creation factory
  * @param sendFn The method that should cause the invocation of the proxy send method.
  */
-export async function assertProxySendsMessage<T, C>(pattern: any, payload: T, proxy: jest.Mocked<{ send: (pattern: any, payload: any) => any }>, createTestTarget: () => C, sendFn: (t: C, p: T) => Promise<any>) {
+export async function assertProxySendsMessage<T, C>(
+  pattern: any,
+  payload: T,
+  proxy: jest.Mocked<{ send: (pattern: any, payload: any) => any }>,
+  createTestTarget: () => C,
+  sendFn: (t: C, p: T) => Promise<any>
+) {
   // Arrange.
   const target = createTestTarget();
   // Act - note - The Promise.resolve just handles the case that we should await something if the proxy is returning promises.

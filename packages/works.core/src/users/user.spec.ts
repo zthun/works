@@ -133,7 +133,13 @@ describe('ZUserBuilder', () => {
 
   describe('Copy', () => {
     it('copies another user.', () => {
-      const userA = createTestTarget().email(v4()).password(v4()).id(v4()).inactive('some-activator-password').recover('some-recovery-password', 1000).build();
+      const userA = createTestTarget()
+        .email(v4())
+        .password(v4())
+        .id(v4())
+        .inactive('some-activator-password')
+        .recover('some-recovery-password', 1000)
+        .build();
       assertBuilderCopiesObject(userA, createTestTarget);
     });
   });

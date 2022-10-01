@@ -46,7 +46,19 @@ const useChoiceStyles = makeStyles()((theme) => {
  *        The JSX to render the component.
  */
 export function ZChoice(props: IZChoice) {
-  const { className, disabled, indelible, headerText, multiple, options, value, identifier, onValueChange, renderOption = _renderOption, renderValue = renderOption } = props;
+  const {
+    className,
+    disabled,
+    indelible,
+    headerText,
+    multiple,
+    options,
+    value,
+    identifier,
+    onValueChange,
+    renderOption = _renderOption,
+    renderValue = renderOption
+  } = props;
   const [_value, _setValue] = usePropState(value, onValueChange);
   const labelId = useMemo(() => v4(), []);
   const styles = useChoiceStyles();
@@ -123,7 +135,9 @@ export function ZChoice(props: IZChoice) {
   function renderSelectedItem(value: any) {
     if (isArray(value)) {
       const className = cssClass(`ZChoice-chip`, styles.classes.chip);
-      return value.map((v) => optionsLookup.get(v)).map((v, i) => <Chip className={className} key={i} label={renderValue(v)} />);
+      return value
+        .map((v) => optionsLookup.get(v))
+        .map((v, i) => <Chip className={className} key={i} label={renderValue(v)} />);
     }
 
     const option = optionsLookup.get(value);
@@ -181,7 +195,16 @@ export function ZChoice(props: IZChoice) {
     return (
       <FormControl className={className} fullWidth>
         <InputLabel id={labelId}>{headerText}</InputLabel>
-        <Select labelId={labelId} disabled={disabled} value={castValue()} label={headerText} multiple={multiple} onChange={handleSelect} renderValue={renderSelectedItem} endAdornment={renderClear()}>
+        <Select
+          labelId={labelId}
+          disabled={disabled}
+          value={castValue()}
+          label={headerText}
+          multiple={multiple}
+          onChange={handleSelect}
+          renderValue={renderSelectedItem}
+          endAdornment={renderClear()}
+        >
           {renderMenuItems()}
         </Select>
       </FormControl>

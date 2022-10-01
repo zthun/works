@@ -86,13 +86,20 @@ export const ZHttpCodeServerNames = {
  */
 export const ZHttpCodeServerDescriptions = {
   [ZHttpCodeServer.InternalServerError]: 'An unexpected condition was encountered on the server.',
-  [ZHttpCodeServer.NotImplemented]: 'The server either does not recognize the request method, or it lacks the ability to fulfil the request. Usually this implies future availability (e.g., a new feature of a web-service API).',
-  [ZHttpCodeServer.BadGateway]: ' The server was acting as a gateway or proxy and received an invalid response from the upstream server.',
-  [ZHttpCodeServer.ServiceUnavailable]: 'The server is currently unavailable (because it is overloaded or down for maintenance). Generally, this is a temporary state.',
-  [ZHttpCodeServer.GatewayTimeout]: 'The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.',
-  [ZHttpCodeServer.HttpVersionNotSupported]: 'The server does not support the HTTP protocol version used in the request.',
-  [ZHttpCodeServer.VariantAlsoNegotiates]: ' Transparent content negotiation for the request results in a circular reference.',
-  [ZHttpCodeServer.InsufficientStorage]: 'The server is unable to store the representation needed to complete the request.',
+  [ZHttpCodeServer.NotImplemented]:
+    'The server either does not recognize the request method, or it lacks the ability to fulfil the request. Usually this implies future availability (e.g., a new feature of a web-service API).',
+  [ZHttpCodeServer.BadGateway]:
+    ' The server was acting as a gateway or proxy and received an invalid response from the upstream server.',
+  [ZHttpCodeServer.ServiceUnavailable]:
+    'The server is currently unavailable (because it is overloaded or down for maintenance). Generally, this is a temporary state.',
+  [ZHttpCodeServer.GatewayTimeout]:
+    'The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.',
+  [ZHttpCodeServer.HttpVersionNotSupported]:
+    'The server does not support the HTTP protocol version used in the request.',
+  [ZHttpCodeServer.VariantAlsoNegotiates]:
+    ' Transparent content negotiation for the request results in a circular reference.',
+  [ZHttpCodeServer.InsufficientStorage]:
+    'The server is unable to store the representation needed to complete the request.',
   [ZHttpCodeServer.LoopDetected]: 'The server detected an infinite loop while processing the request.',
   [ZHttpCodeServer.NotExtended]: 'Further extensions to the request are required for the server to fulfil it.',
   [ZHttpCodeServer.NetworkAuthenticationRequired]: 'The client needs to authenticate to gain network access.'

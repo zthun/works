@@ -1,6 +1,17 @@
 import GithubIcon from '@mui/icons-material/GitHub';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
+import {
+  AppBar,
+  Button,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  Typography
+} from '@mui/material';
 import { IZRouteOption } from '@zthun/works.core';
 import { kebabCase } from 'lodash';
 import React, { ReactNode, useState } from 'react';
@@ -152,7 +163,12 @@ export function ZTopNav(props: IZTopNavProps) {
     }
 
     return (
-      <Button className={`ZTopNav-btn-home ${styles.classes.home}`} data-testid='ZTopNav-btn-home' color='inherit' onClick={handleHome}>
+      <Button
+        className={`ZTopNav-btn-home ${styles.classes.home}`}
+        data-testid='ZTopNav-btn-home'
+        color='inherit'
+        onClick={handleHome}
+      >
         <ZImageSource className={`ZTopNav-avatar ${styles.classes.avatar}`} src={who.icon} />
         <div className={`ZTopNav-title ${styles.classes.title}`}>
           <Typography color='inherit' variant='h1'>
@@ -273,7 +289,17 @@ export function ZTopNav(props: IZTopNavProps) {
 
     return (
       <>
-        {data.filter((app) => ignore.indexOf(app._id) < 0).map((app) => createNavItem(app._id, app.name, app.short, createAppIcon(app.icon), handleLink.bind(null, app.domain, '_self')))}
+        {data
+          .filter((app) => ignore.indexOf(app._id) < 0)
+          .map((app) =>
+            createNavItem(
+              app._id,
+              app.name,
+              app.short,
+              createAppIcon(app.icon),
+              handleLink.bind(null, app.domain, '_self')
+            )
+          )}
         <Divider />
       </>
     );
@@ -290,7 +316,13 @@ export function ZTopNav(props: IZTopNavProps) {
    *
    * @returns The jsx for the nav list item.
    */
-  function createNavItem(id: string, display: string | undefined, description: string | undefined, avatar: ReactNode, handler: any) {
+  function createNavItem(
+    id: string,
+    display: string | undefined,
+    description: string | undefined,
+    avatar: ReactNode,
+    handler: any
+  ) {
     const key = kebabCase(id);
     const clasz = `ZTopNav-drawer-more-item ZTopNav-drawer-more-item-${key}`;
 
