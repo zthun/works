@@ -47,7 +47,10 @@ export { ZErrorMessageHandlerLogger } from './error/error-message-handler-logger
 export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelectContext } from './file/file-select.context';
 // Form
 export { IZBoolean, ZBoolean, ZBooleanStyle } from './form/boolean';
+export { ZBooleanComponentModel } from './form/boolean.cm';
 export { IZChoice, ZChoice } from './form/choice';
+export { ZChoiceOptionComponentModel } from './form/choice-option.cm';
+export { ZChoiceComponentModel } from './form/choice.cm';
 // Http
 export { useHttpService, ZHttpServiceContext } from './http/http-service.context';
 // Identity
