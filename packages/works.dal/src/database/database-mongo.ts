@@ -76,7 +76,7 @@ export class ZDatabaseMongo implements IZDatabase {
    */
   public create<T>(source: string, template: T[]): IZDatabaseQuery<T[]> {
     return new ZDatabaseQuery<T[]>(() =>
-      this._do(source, async (docs: Collection<T>) => {
+      this._do(source, async (docs: Collection<any>) => {
         const withIds = template.map((t: any) => ({ ...t, _id: t._id || v4() }));
         const result = await docs.insertMany(withIds);
         const ids = Object.keys(result.insertedIds).map((index) => result.insertedIds[index]);
@@ -96,7 +96,7 @@ export class ZDatabaseMongo implements IZDatabase {
    */
   public update<T>(source: string, template: Partial<T>): IZDatabaseQuery<number> {
     return new ZDatabaseQuery((query) =>
-      this._do(source, async (docs: Collection<T>) => {
+      this._do(source, async (docs: Collection<any>) => {
         const result = await docs.updateMany(query.$filter as any, { $set: template as any });
         return result.modifiedCount;
       })
@@ -112,11 +112,13 @@ export class ZDatabaseMongo implements IZDatabase {
    */
   public read<T>(source: string): IZDatabaseQuery<T[]> {
     return new ZDatabaseQuery((query) =>
-      this._do(source, async (docs: Collection<T>) => {
+      this._do(source, async (docs: Collection<any>) => {
         const aggregate: any[] = [{ $match: query.$filter }];
 
         if (query.$join.length > 0) {
-          query.$join.forEach((j) => aggregate.push({ $lookup: { from: j.from, localField: j.local, foreignField: j.foreign, as: j.as } }));
+          query.$join.forEach((j) =>
+            aggregate.push({ $lookup: { from: j.from, localField: j.local, foreignField: j.foreign, as: j.as } })
+          );
         }
 
         if (query.$sort.length > 0) {
@@ -132,7 +134,7 @@ export class ZDatabaseMongo implements IZDatabase {
           aggregate.push({ $limit: take });
         }
 
-        return docs.aggregate<T>(aggregate).toArray();
+        return docs.aggregate<any>(aggregate).toArray();
       })
     );
   }
@@ -166,7 +168,7 @@ export class ZDatabaseMongo implements IZDatabase {
    * @returns A promise that, when resolved, has retrieved the results of the query operation.  Rejects if
    * fn(col) throws an exception or if a connection cannot be established.
    */
-  private async _do<C, T>(collection: string, fn: (col: Collection<C>) => Promise<T>) {
+  private async _do<T>(collection: string, fn: (col: Collection) => Promise<T>) {
     const options: MongoClientOptions = {};
 
     if (this._options.timeout) {
@@ -179,7 +181,7 @@ export class ZDatabaseMongo implements IZDatabase {
       const connection = client.connect();
       const conn = await connection;
       const db = conn.db(this.$database);
-      const col = db.collection<C>(collection);
+      const col = db.collection(collection);
       const res: T = await fn(col);
       return res;
     } finally {

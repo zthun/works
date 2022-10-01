@@ -14,7 +14,7 @@ export class ZCircusSetupRender implements IZCircusSetup<RenderResult> {
    * @param _options
    *        The options for the render.
    */
-  public constructor(private _element: ReactElement, private _options?: RenderOptions) {}
+  public constructor(private _element: ReactElement, private _options?: RenderOptions<any, any, any>) {}
 
   /**
    * Renders the element and returns the result once it is ready.
