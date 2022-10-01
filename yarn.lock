@@ -3793,6 +3793,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@testing-library/dom@npm:^8.18.1":
+  version: 8.18.1
+  resolution: "@testing-library/dom@npm:8.18.1"
+  dependencies:
+    "@babel/code-frame": ^7.10.4
+    "@babel/runtime": ^7.12.5
+    "@types/aria-query": ^4.2.0
+    aria-query: ^5.0.0
+    chalk: ^4.1.0
+    dom-accessibility-api: ^0.5.9
+    lz-string: ^1.4.4
+    pretty-format: ^27.0.2
+  checksum: 432a7da2bb626b11375b22e22d12c02317b35d69c0f69972c03bd0104895b496f21dc5b9d4447adef6e0c9acb3c0a64337f7d38c9667dbbacf09d5cd523394dd
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^8.5.0":
   version: 8.13.0
   resolution: "@testing-library/dom@npm:8.13.0"
@@ -4943,9 +4959,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.cirque-du-react@workspace:packages/works.cirque-du-react"
   dependencies:
+    "@testing-library/dom": ^8.18.1
     "@testing-library/react": ^13.3.0
     "@testing-library/user-event": ^14.4.3
     "@zthun/works.cirque": ^4.0.0
+    lodash: ^4.17.21
     react: ^18.2.0
     react-dom: ^18.2.0
   peerDependencies:
@@ -4981,6 +4999,7 @@ __metadata:
     jsonwebtoken: ^8.5.1
     reflect-metadata: ^0.1.13
     rxjs: ^7.5.6
+    uuid: ^8.3.2
   bin:
     zthun-works-cookies: ./bin/main.js
   languageName: unknown
@@ -4989,6 +5008,11 @@ __metadata:
 "@zthun/works.core@^4.0.0, @zthun/works.core@workspace:packages/works.core":
   version: 0.0.0-use.local
   resolution: "@zthun/works.core@workspace:packages/works.core"
+  dependencies:
+    "@zthun/works.jest": ^4.0.0
+    jest: ^27.5.1
+    lodash: ^4.17.21
+    uuid: ^8.3.2
   languageName: unknown
   linkType: soft
 
@@ -4996,6 +5020,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.dal@workspace:packages/works.dal"
   dependencies:
+    "@zthun/works.jest": ^4.0.0
+    jest: ^27.5.1
     mongodb: ^4.8.0
     mongodb-memory-server: ^8.8.0
     portfinder: ^1.0.28
@@ -5007,7 +5033,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.draw@workspace:packages/works.draw"
   dependencies:
+    "@zthun/works.jest": ^4.0.0
     canvas: ^2.9.3
+    jest: ^27.5.1
     lodash: ^4.17.21
     rxjs: ^7.5.6
   languageName: unknown
@@ -5016,6 +5044,9 @@ __metadata:
 "@zthun/works.error@^4.0.0, @zthun/works.error@workspace:packages/works.error":
   version: 0.0.0-use.local
   resolution: "@zthun/works.error@workspace:packages/works.error"
+  dependencies:
+    "@zthun/works.jest": ^4.0.0
+    jest: ^27.5.1
   languageName: unknown
   linkType: soft
 
@@ -5023,13 +5054,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.http@workspace:packages/works.http"
   dependencies:
+    "@zthun/works.jest": ^4.0.0
     axios: ~0.27.2
+    jest: ^27.5.1
   languageName: unknown
   linkType: soft
 
-"@zthun/works.jest@workspace:packages/works.jest":
+"@zthun/works.jest@^4.0.0, @zthun/works.jest@workspace:packages/works.jest":
   version: 0.0.0-use.local
   resolution: "@zthun/works.jest@workspace:packages/works.jest"
+  dependencies:
+    jest: ^27.5.1
+    uuid: ^8.3.2
   peerDependencies:
     jest: ^27.0.0
   languageName: unknown
@@ -5038,6 +5074,9 @@ __metadata:
 "@zthun/works.logger@^4.0.0, @zthun/works.logger@workspace:packages/works.logger":
   version: 0.0.0-use.local
   resolution: "@zthun/works.logger@workspace:packages/works.logger"
+  dependencies:
+    "@zthun/works.jest": ^4.0.0
+    jest: ^27.5.1
   languageName: unknown
   linkType: soft
 
@@ -5045,6 +5084,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.message@workspace:packages/works.message"
   dependencies:
+    "@zthun/works.jest": ^4.0.0
+    jest: ^27.5.1
     lodash: ^4.17.21
     rxjs: ^7.5.6
     uuid: ^8.3.2
@@ -5056,8 +5097,11 @@ __metadata:
   resolution: "@zthun/works.microservices@workspace:packages/works.microservices"
   dependencies:
     "@zthun/works.core": ^4.0.0
+    "@zthun/works.jest": ^4.0.0
+    jest: ^27.5.1
     lodash: ^4.17.21
     rxjs: ^7.5.6
+    uuid: ^8.3.2
   peerDependencies:
     "@nestjs/common": ^9.0.5
     "@nestjs/microservices": ^9.0.5
@@ -5071,11 +5115,15 @@ __metadata:
     "@zthun/works.class": ^4.0.0
     "@zthun/works.core": ^4.0.0
     "@zthun/works.http": ^4.0.0
+    "@zthun/works.jest": ^4.0.0
     "@zthun/works.microservices": ^4.0.0
     "@zthun/works.url": ^4.0.0
     class-transformer: ~0.5.1
+    class-validator: ~0.13.2
     cookie-parser: ^1.4.6
+    express: ^4.17.3
     helmet: ^5.1.1
+    jest: ^27.5.1
     lodash: ^4.17.21
     rxjs: ^7.5.6
     uuid: ^8.3.2
@@ -5095,9 +5143,13 @@ __metadata:
     "@nestjs/core": ^9.0.5
     "@nestjs/microservices": ^9.0.5
     "@zthun/works.core": ^4.0.0
+    "@zthun/works.jest": ^4.0.0
+    jest: ^27.5.1
+    lodash: ^4.17.21
     nodemailer: ^6.7.7
     reflect-metadata: ^0.1.13
     rxjs: ^7.5.6
+    uuid: ^8.3.2
   bin:
     zthun-works-notifications: ./bin/main.js
   languageName: unknown
@@ -5118,18 +5170,21 @@ __metadata:
     "@mui/icons-material": ^5.10.6
     "@mui/material": ^5.10.6
     "@mui/system": ^5.10.6
+    "@testing-library/react": ^13.3.0
     "@zthun/works.cirque": ^4.0.0
     "@zthun/works.cirque-du-react": ^4.0.0
     "@zthun/works.core": ^4.0.0
     "@zthun/works.draw": ^4.0.0
     "@zthun/works.error": ^4.0.0
     "@zthun/works.http": ^4.0.0
+    "@zthun/works.jest": ^4.0.0
     "@zthun/works.logger": ^4.0.0
     "@zthun/works.message": ^4.0.0
     "@zthun/works.url": ^4.0.0
     csstype: ^3.1.0
     highlight.js: =11.5.1
     history: ^5.3.0
+    jest: ^27.5.1
     lodash: ^4.17.21
     md5: ^2.3.0
     react-markdown: ^6.0.3
@@ -5148,7 +5203,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.url@workspace:packages/works.url"
   dependencies:
+    "@zthun/works.jest": ^4.0.0
     buffer: ^6.0.3
+    jest: ^27.5.1
     lodash: ^4.17.21
     url-parse: ^1.5.10
   languageName: unknown
@@ -5192,10 +5249,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.web@workspace:packages/works.web"
   dependencies:
+    "@mui/icons-material": ^5.10.6
+    "@mui/material": ^5.10.6
+    "@testing-library/jest-dom": ^5.16.4
+    "@testing-library/react": ^13.3.0
     "@zthun/works.core": ^4.0.0
     "@zthun/works.draw": ^4.0.0
+    "@zthun/works.message": ^4.0.0
     "@zthun/works.react": ^4.0.0
     "@zthun/works.url": ^4.0.0
+    history: ^5.3.0
+    lodash: ^4.17.21
     react: ^18.2.0
     react-dom: ^18.2.0
   languageName: unknown
@@ -5208,8 +5272,6 @@ __metadata:
     "@babel/core": ^7.18.9
     "@commitlint/cli": ^17.0.3
     "@commitlint/config-conventional": ^17.0.3
-    "@testing-library/jest-dom": ^5.16.4
-    "@testing-library/react": ^13.3.0
     "@types/bcryptjs": ^2.4.2
     "@types/cookie-parser": ^1.4.3
     "@types/express": ^4.17.13
