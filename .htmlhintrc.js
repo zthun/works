@@ -1,2 +1,1 @@
-const config = require('@zthun/htmlhint-config');
-module.exports = config;
+module.exports = require('@zthun/lint-janitor-config/htmlhint');

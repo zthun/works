@@ -1,2 +1,1 @@
-const options = require('@zthun/prettier-config');
-module.exports = options;
+module.exports = require('@zthun/lint-janitor-config/prettier');
