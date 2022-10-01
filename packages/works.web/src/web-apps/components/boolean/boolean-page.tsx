@@ -49,7 +49,14 @@ export function ZBooleanPage() {
       <h2>Options</h2>
       <ZGridLayout gap='md'>
         <ZBoolean value={disabled} onValueChange={setDisabled} truthy='Disabled' />
-        <ZChoice options={types} headerText='Type' value={type} onValueChange={setType} renderOption={startCase} />
+        <ZChoice
+          options={types}
+          headerText='Type'
+          indelible
+          value={type}
+          onValueChange={setType}
+          renderOption={startCase}
+        />
         <ZToolbar>
           <ZButton
             avatar={<CheckBoxIcon color='success' />}

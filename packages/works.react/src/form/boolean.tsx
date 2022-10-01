@@ -13,7 +13,13 @@ export type ZBooleanStyle = 'checkbox' | 'radio' | 'inline-radio' | 'switch';
 const useBooleanStyles = makeStyles()(() => {
   return {
     radio: {
-      display: 'block !important'
+      display: 'flex'
+    },
+    radioBlock: {
+      flexDirection: 'column'
+    },
+    radioInline: {
+      flexDirection: 'row'
     }
   };
 });
@@ -49,8 +55,11 @@ export function ZBoolean(props: IZBoolean) {
   function renderRadio(row: boolean) {
     const isTrue = _value === true;
     const isFalse = _value === false;
-    const truthyClass = cssClass('ZBoolean-radio-truthy', row ? undefined : styles.classes.radio);
-    const falsyClass = cssClass('ZBoolean-radio-falsy', row ? undefined : styles.classes.radio);
+    const className = cssClass(
+      `ZBoolean-${type}`,
+      styles.classes.radio,
+      row ? styles.classes.radioInline : styles.classes.radioBlock
+    );
 
     const setIfChecked = (value: boolean, _: any, checked: boolean) => {
       if (checked) {
@@ -59,14 +68,14 @@ export function ZBoolean(props: IZBoolean) {
     };
 
     return (
-      <div className={`ZBoolean-${type}`}>
+      <div className={className}>
         <FormControlLabel
-          className={truthyClass}
+          className='ZBoolean-radio-truthy'
           control={<Radio disabled={disabled} checked={isTrue} onChange={setIfChecked.bind(null, true)} />}
           label={truthy}
         />
         <FormControlLabel
-          className={falsyClass}
+          className='ZBoolean-radio-falsy'
           control={<Radio disabled={disabled} checked={isFalse} onChange={setIfChecked.bind(null, false)} />}
           label={falsy}
         />
