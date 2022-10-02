@@ -1,6 +1,15 @@
+import BalanceIcon from '@mui/icons-material/Balance';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
 
-import { useSafeState, ZBoolean, ZChoiceDropDown, ZGridLayout, ZPaperCard } from '@zthun/works.react';
+import {
+  useSafeState,
+  ZBoolean,
+  ZChoiceAutocomplete,
+  ZChoiceDropDown,
+  ZGridLayout,
+  ZLineItemLayout,
+  ZPaperCard
+} from '@zthun/works.react';
 import React from 'react';
 
 interface Superhero {
@@ -49,7 +58,13 @@ export function ZChoicePage() {
    *        The JSX to render the superhero.
    */
   function renderSuperhero(h: Superhero) {
-    return `${h.alias} (${h.name})`;
+    return (
+      <ZLineItemLayout
+        className='ZChoicePage-hero'
+        prefix={<BalanceIcon fontSize='inherit' />}
+        body={getHeroDisplay(h)}
+      />
+    );
   }
 
   /**
@@ -82,10 +97,25 @@ export function ZChoicePage() {
     <ZPaperCard
       className='ZChoicePage-root'
       headerText='Choice'
-      subHeaderText='Select from a list of options'
+      subHeaderText='Select from a list of options.'
       avatar={<TouchAppIcon color='warning' fontSize='large' />}
     >
+      <h2>Drop Down</h2>
       <ZChoiceDropDown
+        disabled={disabled}
+        label='Hero'
+        indelible={indelible}
+        multiple={multiple}
+        value={values}
+        identifier={getHeroIdentity}
+        display={getHeroDisplay}
+        onValueChange={setValues}
+        options={Superheroes}
+        renderOption={renderSuperhero}
+      />
+
+      <h2>Autocomplete</h2>
+      <ZChoiceAutocomplete
         disabled={disabled}
         label='Hero'
         indelible={indelible}

@@ -22,12 +22,12 @@ const useChoiceDropDownStyles = makeStyles()((theme) => {
       'flexWrap': 'wrap',
 
       '.ZChoice-value': {
-        fontSize: theme.sizing.font.sm,
-        backgroundColor: theme.palette.grey[600],
-        color: theme.palette.common.white,
+        fontSize: '0.8125rem',
+        backgroundColor: theme.palette.grey[200],
+        color: theme.palette.common.black,
         borderRadius: theme.rounding.chip,
         padding: `${theme.sizing.gaps.xs} ${theme.sizing.gaps.sm}`,
-        margin: 2
+        margin: 3
       }
     }
   };

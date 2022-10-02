@@ -49,6 +49,7 @@ export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelectContext } from './
 export { IZBoolean, ZBoolean, ZBooleanStyle } from './form/boolean';
 export { ZBooleanComponentModel } from './form/boolean.cm';
 export { IZChoice, IZChoiceApi, IZChoiceOption, useChoice } from './form/choice';
+export { ZChoiceAutocomplete } from './form/choice-autocomplete';
 export { ZChoiceDropDown } from './form/choice-drop-down';
 export { ZChoiceDropDownComponentModel as ZChoiceComponentModel } from './form/choice-drop-down.cm';
 export { ZChoiceOptionComponentModel } from './form/choice-option.cm';
@@ -68,6 +69,7 @@ export { useImageReader, ZImageReaderContext } from './image/image-reader.contex
 export { ZImageSource } from './image/image-source';
 // Layout
 export { IZGridLayout, ZGridLayout } from './layout/grid-layout';
+export { IZLineItemLayout, ZLineItemLayout } from './layout/line-item-layout';
 export { ZWebAppLayout } from './layout/web-app-layout';
 // Loading
 export { ZCircularBackdrop } from './loading/circular-backdrop';

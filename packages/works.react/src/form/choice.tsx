@@ -23,42 +23,6 @@ export interface IZChoice<O, V> extends IZComponentDisabled, IZComponentStyle, I
   renderOption?: (option: O) => ReactNode;
 }
 
-/**
-   * Renders as an auto complete.
-   *
-   * @returns
-   *        The JSX to render this component as an auto complete
-   *        where the user can search with free form.
-   *
-  function renderAutoComplete() {
-    const handleSelect = (_: SyntheticEvent<any>, value: IZChoiceOption<T, V> | IZChoiceOption[]) => {
-      const selected = castArray(value);
-      const values = selected.map((ch) => _identity(ch.option));
-      _setValue(values);
-    };
-
-    const actual = _value ?? [];
-    const choices = _castValue(actual.map((op) => _lookup.get(op)));
-
-    return (
-      <Autocomplete
-        className='ZChoice-auto-complete'
-        autoHighlight
-        autoSelect
-        disabled={disabled}
-        options={_options}
-        value={choices}
-        onChange={handleSelect}
-        multiple={multiple}
-        getOptionLabel={(ch: IZChoiceOption) => display(ch.option)}
-        isOptionEqualToValue={(o: IZChoiceOption, v: IZChoiceOption) => o.key === v.key}
-        renderOption={(props, ch: IZChoiceOption) => <li {...props}>{renderOption(ch.option)}</li>}
-        renderInput={(params) => <TextField {...params} label={headerText} />}
-      />
-    );
-  }
-  */
-
 export interface IZChoiceApi<O, V> {
   readonly choices: IZChoiceOption<O, V>[];
   readonly lookup: Map<O | V | string, IZChoiceOption<O, V>>;
