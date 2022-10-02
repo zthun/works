@@ -156,7 +156,7 @@ export function useZthunworksTheme(): IZTheme {
     rounding: {
       square: 0,
       circle: '50%',
-      chip: '0.5em'
+      chip: '1em'
     },
     sizing: {
       alerts: {
@@ -295,7 +295,7 @@ export function useZthunworksTheme(): IZTheme {
   mui.components.MuiInputBase = {
     styleOverrides: {
       root: {
-        minHeight: '3.1875rem'
+        minHeight: '3.5rem'
       }
     }
   };
