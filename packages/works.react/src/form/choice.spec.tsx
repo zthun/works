@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
 import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
-import { identity, range } from 'lodash';
+import { identity, noop, range } from 'lodash';
 import React from 'react';
 import { ReactNode } from 'react-markdown';
 import { ZChoice, ZChoiceType } from './choice';
@@ -159,6 +159,18 @@ describe('Choice', () => {
     expect(actual).toEqual(expected);
   }
 
+  async function shouldNotSelectAnythingIfSelectedOptionIsNotAvailable() {
+    // Arrange.
+    selected = undefined;
+    onValueChange = undefined;
+    const target = await createTestTarget();
+    // Act.
+    await target.select('not-an-option');
+    const actual = target.selected;
+    // Assert.
+    expect(actual).toEqual([]);
+  }
+
   describe('Default', () => {
     it('should render a drop down choice', async () => {
       await shouldRenderChoice(ZChoiceType.DropDown);
@@ -186,6 +198,21 @@ describe('Choice', () => {
       await shouldSelectByObject();
     });
 
+    it('should select the raw value if there is no option for the value', async () => {
+      // Arrange.
+      const expected = 'not-a-value';
+      const warn = jest.spyOn(console, 'warn');
+      warn.mockImplementation(noop);
+      selected = [expected];
+      const target = await createTestTarget();
+      // Act.
+      const [_selected] = target.selected;
+      const actual = _selected.text;
+      warn.mockRestore();
+      // Assert.
+      expect(actual).toEqual(expected);
+    });
+
     it('should not be able to clear if the choice is indelible', async () => {
       await shouldNotBeAbleToClearIfTheChoiceIsIndelible();
     });
@@ -200,6 +227,10 @@ describe('Choice', () => {
 
     it('should append selections if multiple is turned on', async () => {
       await shouldAppendSelectionsIfMultipleIsTurnedOn();
+    });
+
+    it('should not select anything if the selected option is not available', async () => {
+      await shouldNotSelectAnythingIfSelectedOptionIsNotAvailable();
     });
   });
 });

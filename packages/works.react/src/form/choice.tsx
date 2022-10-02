@@ -143,7 +143,8 @@ export function ZChoice(props: IZChoice) {
    */
   function castValue() {
     const actual = _value == null ? [] : _value;
-    return multiple ? actual : first(actual);
+    const firstValue = first(actual) || '';
+    return multiple ? actual : firstValue;
   }
 
   /**
@@ -169,7 +170,7 @@ export function ZChoice(props: IZChoice) {
   function renderSelectedItem(value: any) {
     const _renderSelected = (option: IZChoiceOption | undefined) => (
       <div className='ZChoice-value' key={option?.key} data-value={option?.key}>
-        {renderValue(option?.option)}
+        {renderValue(option?.option || value)}
       </div>
     );
 
