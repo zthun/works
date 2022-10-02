@@ -1,6 +1,6 @@
 import TouchAppIcon from '@mui/icons-material/TouchApp';
 
-import { useSafeState, ZBoolean, ZChoice, ZGridLayout, ZPaperCard } from '@zthun/works.react';
+import { useSafeState, ZBoolean, ZChoiceDropDown, ZGridLayout, ZPaperCard } from '@zthun/works.react';
 import React from 'react';
 
 interface Superhero {
@@ -53,19 +53,6 @@ export function ZChoicePage() {
   }
 
   /**
-   * Returns the superhero shortname.
-   *
-   * @param h
-   *        The superhero to render.
-   *
-   * @returns
-   *        The JSX for rendering a shorthand superhero.
-   */
-  function renderSuperheroShorthand(h: Superhero) {
-    return h.alias;
-  }
-
-  /**
    * Gets the identifier value of a superhero.
    *
    * @param h
@@ -78,6 +65,19 @@ export function ZChoicePage() {
     return h.id;
   }
 
+  /**
+   * Gets the display for a hero.
+   *
+   * @param h
+   *        The hero to display.
+   *
+   * @returns
+   *        The display name for the hero.
+   */
+  function getHeroDisplay(h: Superhero) {
+    return `${h.alias} (${h.name})`;
+  }
+
   return (
     <ZPaperCard
       className='ZChoicePage-root'
@@ -85,21 +85,21 @@ export function ZChoicePage() {
       subHeaderText='Select from a list of options'
       avatar={<TouchAppIcon color='warning' fontSize='large' />}
     >
-      <ZChoice
+      <ZChoiceDropDown
         disabled={disabled}
-        headerText='Hero'
+        label='Hero'
         indelible={indelible}
         multiple={multiple}
         value={values}
         identifier={getHeroIdentity}
+        display={getHeroDisplay}
         onValueChange={setValues}
         options={Superheroes}
         renderOption={renderSuperhero}
-        renderValue={renderSuperheroShorthand}
       />
 
       <h2>Options</h2>
-      <ZGridLayout gap='xs'>
+      <ZGridLayout gap='sm'>
         <ZBoolean value={disabled} onValueChange={setDisabled} truthy='Disabled' />
         <ZBoolean value={multiple} onValueChange={setMultiple} truthy='Multiple' />
         <ZBoolean value={indelible} onValueChange={setIndelible} truthy='Indelible' />

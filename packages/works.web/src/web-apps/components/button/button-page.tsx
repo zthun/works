@@ -7,12 +7,12 @@ import {
   useSafeState,
   ZBoolean,
   ZButton,
-  ZChoice,
+  ZChoiceDropDown,
   ZGridLayout,
   ZPaperCard,
   ZStateColor
 } from '@zthun/works.react';
-import { startCase, values } from 'lodash';
+import { identity, startCase, values } from 'lodash';
 import React from 'react';
 
 /**
@@ -64,11 +64,12 @@ export function ZButtonPage() {
         <ZBoolean value={loading} onValueChange={setLoading} truthy='Loading' />
         <ZBoolean value={disabled} onValueChange={setDisabled} truthy='Disabled' />
         <ZBoolean value={outline} onValueChange={setOutline} truthy='Outline' />
-        <ZChoice
+        <ZChoiceDropDown
           value={[color]}
           onValueChange={_setColor}
-          headerText='Color'
+          label='Color'
           options={colors}
+          identifier={identity}
           renderOption={(c) => startCase(String(c))}
         />
       </ZGridLayout>

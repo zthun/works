@@ -6,13 +6,13 @@ import {
   ZBoolean,
   ZBooleanStyle,
   ZButton,
-  ZChoice,
+  ZChoiceDropDown,
   ZGridLayout,
   ZPaperCard,
   ZStateColor,
   ZToolbar
 } from '@zthun/works.react';
-import { startCase } from 'lodash';
+import { identity, startCase } from 'lodash';
 import React from 'react';
 
 /**
@@ -49,11 +49,12 @@ export function ZBooleanPage() {
       <h2>Options</h2>
       <ZGridLayout gap='md'>
         <ZBoolean value={disabled} onValueChange={setDisabled} truthy='Disabled' />
-        <ZChoice
+        <ZChoiceDropDown
           options={types}
-          headerText='Type'
+          label='Type'
           indelible
           value={type}
+          identifier={identity}
           onValueChange={setType}
           renderOption={startCase}
         />

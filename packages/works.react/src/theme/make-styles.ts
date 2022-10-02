@@ -291,6 +291,15 @@ export function useZthunworksTheme(): IZTheme {
     }
   };
 
+  // Inputs
+  mui.components.MuiInputBase = {
+    styleOverrides: {
+      root: {
+        minHeight: '3.1875rem'
+      }
+    }
+  };
+
   return Object.assign({}, mui, base, { palette });
 }
 

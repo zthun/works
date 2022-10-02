@@ -1,89 +1,89 @@
-import ClearIcon from '@mui/icons-material/Clear';
-import { FormControl, IconButton, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { cssClass } from '@zthun/works.core';
-import { castArray, first, isArray } from 'lodash';
-import React, { ReactNode, useMemo } from 'react';
+import { first } from 'lodash';
+import { ReactNode, useMemo } from 'react';
 import { v4 } from 'uuid';
 import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { IZComponentStyle } from '../component/component-style.interface';
 import { IZComponentValue } from '../component/component-value';
 import { usePropState } from '../state/use-prop-state';
-import { makeStyles } from '../theme/make-styles';
 
-interface IZChoiceOption {
-  key: string | number;
-  option: any;
+export interface IZChoiceOption<O, V> {
+  key: string;
+  value: V;
+  option: O;
 }
 
-export enum ZChoiceType {
-  DropDown = 'drop-down',
-  ButtonGroup = 'button-group'
-}
-
-export interface IZChoice extends IZComponentDisabled, IZComponentStyle, IZComponentValue<Array<any>> {
-  headerText: string;
-  type?: ZChoiceType;
+export interface IZChoice<O, V> extends IZComponentDisabled, IZComponentStyle, IZComponentValue<Array<V>> {
+  label: string;
   multiple?: boolean;
   indelible?: boolean;
-  options: Array<any>;
+  options: Array<O>;
 
-  identifier?: (option: any) => string | number;
-  renderValue?: (value: any) => ReactNode;
-  renderOption?: (option: any) => ReactNode;
+  identifier: (option: O) => V;
+  display?: (option: O) => string;
+  renderOption?: (option: O) => ReactNode;
 }
 
-const useChoiceStyles = makeStyles()((theme) => {
-  return {
-    clear: {
-      marginRight: `${theme.sizing.gaps.md} !important`
-    },
-    chip: {
-      'display': 'inline-flex',
-      'flexWrap': 'wrap',
+/**
+   * Renders as an auto complete.
+   *
+   * @returns
+   *        The JSX to render this component as an auto complete
+   *        where the user can search with free form.
+   *
+  function renderAutoComplete() {
+    const handleSelect = (_: SyntheticEvent<any>, value: IZChoiceOption<T, V> | IZChoiceOption[]) => {
+      const selected = castArray(value);
+      const values = selected.map((ch) => _identity(ch.option));
+      _setValue(values);
+    };
 
-      '.ZChoice-value': {
-        fontSize: theme.sizing.font.sm,
-        backgroundColor: theme.palette.grey[600],
-        color: theme.palette.common.white,
-        borderRadius: theme.rounding.chip,
-        paddingLeft: theme.sizing.gaps.sm,
-        paddingRight: theme.sizing.gaps.sm,
-        marginRight: theme.sizing.gaps.xs,
-        marginBottom: theme.sizing.gaps.xs
-      }
-    }
-  };
-});
+    const actual = _value ?? [];
+    const choices = _castValue(actual.map((op) => _lookup.get(op)));
+
+    return (
+      <Autocomplete
+        className='ZChoice-auto-complete'
+        autoHighlight
+        autoSelect
+        disabled={disabled}
+        options={_options}
+        value={choices}
+        onChange={handleSelect}
+        multiple={multiple}
+        getOptionLabel={(ch: IZChoiceOption) => display(ch.option)}
+        isOptionEqualToValue={(o: IZChoiceOption, v: IZChoiceOption) => o.key === v.key}
+        renderOption={(props, ch: IZChoiceOption) => <li {...props}>{renderOption(ch.option)}</li>}
+        renderInput={(params) => <TextField {...params} label={headerText} />}
+      />
+    );
+  }
+  */
+
+export interface IZChoiceApi<O, V> {
+  readonly choices: IZChoiceOption<O, V>[];
+  readonly lookup: Map<O | V | string, IZChoiceOption<O, V>>;
+  readonly value: V[] | undefined;
+
+  cast(value: V[] | undefined, fallback: any): V | V[];
+  display(option: O): string;
+  render(option: O): ReactNode;
+  setValue(value: V[]): void;
+}
 
 /**
- * A component that can be used to select item values.
+ * Imports the common foundation for all choice components.
  *
  * @param props
- *        The properties for this component.
+ *        The properties for a choice component.
  *
  * @returns
- *        The JSX to render the component.
+ *        The API to render a choice component.
  */
-export function ZChoice(props: IZChoice) {
-  const {
-    className,
-    disabled,
-    indelible,
-    headerText,
-    multiple,
-    options,
-    type = ZChoiceType.DropDown,
-    value,
-    identifier,
-    onValueChange,
-    renderOption = _renderOption,
-    renderValue = renderOption
-  } = props;
+export function useChoice<O = any, V = O>(props: IZChoice<O, V>): IZChoiceApi<O, V> {
+  const { value, onValueChange, options, identifier, display = _display, multiple, renderOption = display } = props;
+
   const [_value, _setValue] = usePropState(value, onValueChange);
-  const labelId = useMemo(() => v4(), []);
-  const styles = useChoiceStyles();
-  const [_options, _lookup] = useMemo(_convertOptions, [options, identifier]);
-  const selectClass = cssClass('ZChoice-root', className);
+  const [choices, lookup] = useMemo(_choices, [options, identifier]);
 
   /**
    * Converts from the initial options to the option list with a lookup table.
@@ -92,15 +92,18 @@ export function ZChoice(props: IZChoice) {
    *        A tuple with the first being the options list and the second being
    *        a lookup table to map keys to options.
    */
-  function _convertOptions(): [IZChoiceOption[], Map<any, IZChoiceOption>] {
-    const optionList = options.map<IZChoiceOption>((op) => ({
-      key: identifier == null ? v4() : identifier(op),
+  function _choices(): [IZChoiceOption<O, V>[], Map<O | V | string, IZChoiceOption<O, V>>] {
+    const optionList = options.map<IZChoiceOption<O, V>>((op) => ({
+      key: v4(),
+      value: identifier(op),
       option: op
     }));
 
-    const lookup = new Map<any, any>();
+    const lookup = new Map<O | V | string, IZChoiceOption<O, V>>();
+
     optionList.forEach((op) => {
       lookup.set(op.option, op);
+      lookup.set(op.value, op);
       lookup.set(op.key, op);
     });
 
@@ -108,161 +111,45 @@ export function ZChoice(props: IZChoice) {
   }
 
   /**
-   * Returns the value representation of an option.
+   * Returns the default display text of an option.
    *
    * @param option
-   *        The option to convert.
+   *        The option to retrieve the display text for.
    *
    * @returns
-   *        The value returned from identifier(option) if
-   *        identifier is truthy, or option if it is falsy.
+   *        The option converted to a string.
    */
-  function _identity(option: any) {
-    return identifier ? identifier(option) : option;
+  function _display(option: O) {
+    return String(option);
   }
 
   /**
-   * Default way to render an option.
+   * Casts the value to the first value in the array or the array itself if multiple is on.
    *
-   * @param option
-   *        The option to render.
-   *
-   * @returns
-   *        The string representation of the option.
-   */
-  function _renderOption(option: any) {
-    return <>{String(option)}</>;
-  }
-
-  /**
-   * Casts the value to either the first value in the array or the entire array if multiple is set.
+   * @param value
+   *        The value to cast or undefined if there is currently no value.
+   * @param fallback
+   *        The fallback value to use if value is undefined.
    *
    * @returns
-   *        _value if multiple is true, the first item in value if multiple is false.  Returns
-   *        undefined if there are no selected values.
+   *        The empty array if value is undefined.  Value if multiple
+   *        is true, or the first value in the array if multiple is false.
+   *        Returns fallback if the array is empty and multiple is false.
    */
-  function castValue() {
-    const actual = _value == null ? [] : _value;
-    const firstValue = first(actual) || '';
+  function cast(value: V[] | undefined, fallback: any): V | V[] {
+    const actual = value ?? [];
+    const firstValue = first(actual) || fallback;
     return multiple ? actual : firstValue;
   }
 
-  /**
-   * Handles when the selection changes.
-   *
-   * @param event
-   *        The selection change event.
-   */
-  function handleSelect(event: SelectChangeEvent<any>) {
-    const selected = castArray(event.target.value);
-    _setValue(selected);
-  }
+  return {
+    choices,
+    lookup,
+    value: _value,
 
-  /**
-   * Renders the item that is currently selected.
-   *
-   * @param value
-   *        The current value of the selector.
-   *
-   * @returns
-   *        The JSX that renders the selected item.
-   */
-  function renderSelectedItem(value: any) {
-    const _renderSelected = (option: IZChoiceOption | undefined) => (
-      <div className='ZChoice-value' key={option?.key} data-value={option?.key}>
-        {renderValue(option?.option || value)}
-      </div>
-    );
-
-    if (isArray(value)) {
-      const className = cssClass('ZChoice-chip-list', styles.classes.chip);
-      return (
-        <div className={className}>{value.map((v) => _lookup.get(v)).map((option) => _renderSelected(option))}</div>
-      );
-    }
-
-    const option = _lookup.get(value);
-    return _renderSelected(option);
-  }
-
-  /**
-   * Renders the menu items.
-   *
-   * @returns
-   *        The JSX that renders the underlying items.
-   */
-  function renderMenuItems() {
-    const renderMenuItem = (option: IZChoiceOption) => {
-      const value = _identity(option.option);
-      const { key } = option;
-
-      return (
-        <MenuItem className='ZChoice-select-menu' key={key} value={value}>
-          <div className='ZChoice-option' data-value={key}>
-            {renderOption(option.option)}
-          </div>
-        </MenuItem>
-      );
-    };
-
-    return _options.map(renderMenuItem);
-  }
-
-  /**
-   * Renders the clear icon.
-   *
-   * @returns
-   *        The JSX to render the clear button.
-   */
-  function renderClear() {
-    const empty = !value?.length;
-
-    if (empty || disabled || indelible) {
-      return null;
-    }
-
-    const className = cssClass('ZChoice-clear', styles.classes.clear);
-
-    return (
-      <IconButton className={className} onClick={_setValue.bind(null, [])}>
-        <ClearIcon />
-      </IconButton>
-    );
-  }
-
-  /**
-   * Renders the component as a select drop down.
-   *
-   * @returns
-   *        The JSX that describes the select.
-   */
-  function renderChoice() {
-    return (
-      <FormControl fullWidth>
-        <InputLabel className='ZChoice-label' id={labelId}>
-          {headerText}
-        </InputLabel>
-        <Select
-          className='ZChoice-select-drop-down'
-          labelId={labelId}
-          disabled={disabled}
-          value={castValue()}
-          label={headerText}
-          multiple={multiple}
-          MenuProps={{ className: 'ZChoice-select-menu' }}
-          onChange={handleSelect}
-          renderValue={renderSelectedItem}
-          endAdornment={renderClear()}
-        >
-          {renderMenuItems()}
-        </Select>
-      </FormControl>
-    );
-  }
-
-  return (
-    <div className={selectClass} data-type={type}>
-      {renderChoice()}
-    </div>
-  );
+    cast,
+    display,
+    render: renderOption,
+    setValue: _setValue
+  };
 }

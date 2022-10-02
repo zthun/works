@@ -4,68 +4,54 @@ import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.
 import { identity, noop, range } from 'lodash';
 import React from 'react';
 import { ReactNode } from 'react-markdown';
-import { ZChoice, ZChoiceType } from './choice';
-import { ZChoiceComponentModel } from './choice.cm';
+import { ZChoiceDropDown } from './choice-drop-down';
+import { ZChoiceDropDownComponentModel } from './choice-drop-down.cm';
 
-describe('Choice', () => {
+describe('ZChoiceDropDown', () => {
   const performer: IZCircusPerformer = new ZCircusPerformer();
   const waiter: IZCircusWait = new ZCircusWait();
 
   let options: any[];
-  let type: ZChoiceType | undefined;
+  let identifier: (op: any) => any;
+
   let selected: any[] | undefined;
   let multiple: boolean | undefined;
   let indelible: boolean | undefined;
-  let identifier: undefined | ((op: any) => string | number);
   let onValueChange: jest.Mock | undefined;
   let renderOption: undefined | ((op: any) => ReactNode);
-  let renderValue: undefined | ((op: any) => ReactNode);
 
   async function createTestTarget() {
     const element = (
-      <ZChoice
+      <ZChoiceDropDown
         options={options}
-        headerText='Choice Test'
-        type={type}
+        label='Choice Test'
         indelible={indelible}
         multiple={multiple}
         value={selected}
         onValueChange={onValueChange}
         identifier={identifier}
         renderOption={renderOption}
-        renderValue={renderValue}
       />
     );
 
     const rendered = await new ZCircusSetupRender(element).setup();
-    await waiter.wait(() => ZChoiceComponentModel.find(rendered.container).length > 0);
-    const [target] = ZChoiceComponentModel.find(rendered.container);
-    return new ZChoiceComponentModel(target, performer, waiter);
+    await waiter.wait(() => ZChoiceDropDownComponentModel.find(rendered.container).length > 0);
+    const [target] = ZChoiceDropDownComponentModel.find(rendered.container);
+    return new ZChoiceDropDownComponentModel(target, performer, waiter);
   }
 
   beforeEach(() => {
     selected = undefined;
-    type = undefined;
     indelible = undefined;
     multiple = undefined;
-    identifier = undefined;
     onValueChange = undefined;
     renderOption = undefined;
-    renderValue = undefined;
 
+    identifier = identity;
     options = ['One', 'Two', 'Three', 'Four', 'Five'];
   });
 
-  async function shouldRenderChoice(expected: ZChoiceType) {
-    // Arrange.
-    const target = await createTestTarget();
-    // Act.
-    const actual = target.type;
-    // Assert.
-    expect(actual).toEqual(expected);
-  }
-
-  async function shouldRenderOptionsWhenOpened() {
+  it('should render all options when opened', async () => {
     // Arrange.
     const target = await createTestTarget();
     // Act.
@@ -73,13 +59,12 @@ describe('Choice', () => {
     const actual = _options.map((op) => op.text);
     // Assert.
     expect(actual).toEqual(options);
-  }
+  });
 
-  async function shouldSelectByIdentifier() {
+  it('should select by an identifier', async () => {
     // Arrange.
     options = range(1, 5).map((id) => ({ id, name: `${id}` }));
     identifier = (op) => op.id;
-    renderValue = (op) => op.name;
     renderOption = (op) => op.name;
     const [, expected] = options;
     selected = [expected.id];
@@ -89,9 +74,9 @@ describe('Choice', () => {
     const actual = _selected.text;
     // Assert.
     expect(actual).toEqual(expected.name);
-  }
+  });
 
-  async function shouldSelectByObject() {
+  it('should select by the entire object', async () => {
     // Arrange.
     const [, , expected] = options;
     selected = [expected];
@@ -101,9 +86,24 @@ describe('Choice', () => {
     const actual = _selected.text;
     // Assert.
     expect(actual).toEqual(expected);
-  }
+  });
 
-  async function shouldNotBeAbleToClearIfTheChoiceIsIndelible() {
+  it('should select the raw value if there is no option for the value', async () => {
+    // Arrange.
+    const expected = 'not-a-value';
+    const warn = jest.spyOn(console, 'warn');
+    warn.mockImplementation(noop);
+    selected = [expected];
+    const target = await createTestTarget();
+    // Act.
+    const [_selected] = target.selected;
+    const actual = _selected.text;
+    warn.mockRestore();
+    // Assert.
+    expect(actual).toEqual(expected);
+  });
+
+  it('should not be able to clear if the choice is indelible', async () => {
     // Arrange.
     indelible = true;
     multiple = true;
@@ -114,9 +114,9 @@ describe('Choice', () => {
     await target.clear();
     // Assert.
     expect(onValueChange).not.toHaveBeenCalled();
-  }
+  });
 
-  async function shouldClearTheSelection() {
+  it('should clear the selection', async () => {
     // Arrange.
     selected = options;
     onValueChange = jest.fn();
@@ -125,9 +125,9 @@ describe('Choice', () => {
     await target.clear();
     // Assert.
     expect(onValueChange).toHaveBeenCalledWith([]);
-  }
+  });
 
-  async function shouldChangeSelectionToASingleItemIfMultipleIsOff() {
+  it('should change the selection to a single item if multiple is off', async () => {
     // Arrange.
     selected = undefined;
     onValueChange = undefined;
@@ -141,9 +141,9 @@ describe('Choice', () => {
     const actual = target.selected.map((ch) => ch.text);
     // Assert
     expect(actual).toEqual(expected);
-  }
+  });
 
-  async function shouldAppendSelectionsIfMultipleIsTurnedOn() {
+  it('should append selections if multiple is turned on', async () => {
     // Arrange.
     selected = undefined;
     onValueChange = undefined;
@@ -157,9 +157,9 @@ describe('Choice', () => {
     const actual = target.selected.map((ch) => ch.text);
     // Assert.
     expect(actual).toEqual(expected);
-  }
+  });
 
-  async function shouldNotSelectAnythingIfSelectedOptionIsNotAvailable() {
+  it('should not select anything if the selected option is not available', async () => {
     // Arrange.
     selected = undefined;
     onValueChange = undefined;
@@ -169,68 +169,5 @@ describe('Choice', () => {
     const actual = target.selected;
     // Assert.
     expect(actual).toEqual([]);
-  }
-
-  describe('Default', () => {
-    it('should render a drop down choice', async () => {
-      await shouldRenderChoice(ZChoiceType.DropDown);
-    });
-  });
-
-  describe('Drop Down', () => {
-    beforeEach(() => {
-      type = ZChoiceType.DropDown;
-    });
-
-    it('should render a drop down choice', async () => {
-      await shouldRenderChoice(ZChoiceType.DropDown);
-    });
-
-    it('should render all options when opened', async () => {
-      await shouldRenderOptionsWhenOpened();
-    });
-
-    it('should select by an identifier', async () => {
-      await shouldSelectByIdentifier();
-    });
-
-    it('should select by the entire object', async () => {
-      await shouldSelectByObject();
-    });
-
-    it('should select the raw value if there is no option for the value', async () => {
-      // Arrange.
-      const expected = 'not-a-value';
-      const warn = jest.spyOn(console, 'warn');
-      warn.mockImplementation(noop);
-      selected = [expected];
-      const target = await createTestTarget();
-      // Act.
-      const [_selected] = target.selected;
-      const actual = _selected.text;
-      warn.mockRestore();
-      // Assert.
-      expect(actual).toEqual(expected);
-    });
-
-    it('should not be able to clear if the choice is indelible', async () => {
-      await shouldNotBeAbleToClearIfTheChoiceIsIndelible();
-    });
-
-    it('should clear the selection', async () => {
-      await shouldClearTheSelection();
-    });
-
-    it('should change the selection to a single item if multiple is off', async () => {
-      await shouldChangeSelectionToASingleItemIfMultipleIsOff();
-    });
-
-    it('should append selections if multiple is turned on', async () => {
-      await shouldAppendSelectionsIfMultipleIsTurnedOn();
-    });
-
-    it('should not select anything if the selected option is not available', async () => {
-      await shouldNotSelectAnythingIfSelectedOptionIsNotAvailable();
-    });
   });
 });

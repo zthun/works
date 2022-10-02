@@ -48,9 +48,10 @@ export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelectContext } from './
 // Form
 export { IZBoolean, ZBoolean, ZBooleanStyle } from './form/boolean';
 export { ZBooleanComponentModel } from './form/boolean.cm';
-export { IZChoice, ZChoice } from './form/choice';
+export { IZChoice, IZChoiceApi, IZChoiceOption, useChoice } from './form/choice';
+export { ZChoiceDropDown } from './form/choice-drop-down';
+export { ZChoiceDropDownComponentModel as ZChoiceComponentModel } from './form/choice-drop-down.cm';
 export { ZChoiceOptionComponentModel } from './form/choice-option.cm';
-export { ZChoiceComponentModel } from './form/choice.cm';
 // Http
 export { useHttpService, ZHttpServiceContext } from './http/http-service.context';
 // Identity
