@@ -11,6 +11,9 @@ const useChoiceAutocompleteStyles = makeStyles()((theme) => {
       '.MuiSelect-select': {
         padding: theme.sizing.gaps.sm
       }
+    },
+    invisible: {
+      display: 'none'
     }
   };
 });
@@ -35,9 +38,8 @@ export function ZChoiceAutocomplete<O, V>(props: IZChoice<O, V>) {
     setValue(values);
   };
 
-  const actual = value ?? [];
-  const chosen = actual.map((v) => lookup.get(v));
-  const choice = multiple ? chosen : first(chosen) || null;
+  const chosen = (value ?? []).map((v) => lookup.get(v));
+  const choice = multiple ? chosen : first(chosen);
 
   /**
    * Gets the appropriate label for the chosen option.
@@ -92,7 +94,23 @@ export function ZChoiceAutocomplete<O, V>(props: IZChoice<O, V>) {
    *        The react node that renders the text field.
    */
   function renderInput(props: AutocompleteRenderInputParams) {
-    return <TextField {...props} label={label} />;
+    const valuesClassName = cssClass('ZChoice-values', styles.classes.invisible);
+
+    const _renderBackingValue = (ch: IZChoiceOption<O, V> | undefined, i: number) => (
+      <div key={ch?.key || i} className='ZChoice-value' data-value={ch?.value}>
+        {ch ? display(ch.option) : ''}
+      </div>
+    );
+
+    // Note here that the underlying element(s) beside the text field are mostly for test automation.
+    // It allows those trying to test to read the values that are currently selected which is somewhat
+    // limited with MUI as MUI just renders the the value as the display for the autocomplete.
+    return (
+      <>
+        <TextField {...props} label={label} />
+        <div className={valuesClassName}>{castArray(choice).map(_renderBackingValue)}</div>
+      </>
+    );
   }
 
   return (
