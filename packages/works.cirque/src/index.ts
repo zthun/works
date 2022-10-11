@@ -2,7 +2,7 @@
 
 // Anticipation
 export { IZCircusWait } from './anticipation/circus-wait';
-export { optional, required } from './anticipation/obligation';
+export { required } from './anticipation/obligation';
 // Performance
 export { IZCircusAct, ZCircusActBuilder } from './performance/circus-act';
 export { IZCircusAction, ZCircusActionType } from './performance/circus-action';

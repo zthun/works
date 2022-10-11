@@ -26,20 +26,3 @@ export async function required<T>(val: T | null | undefined | Promise<T | null |
 
   return _val;
 }
-
-/**
- * Allows an async value to return null if it gets rejected.
- *
- * @param val
- *        The value to wait on.
- *
- * @returns A promise that resolves to val if it resolves, or null
- *          if it rejects.
- */
-export async function optional<T>(val: Promise<T>): Promise<T | null> {
-  try {
-    return await val;
-  } catch {
-    return null;
-  }
-}
