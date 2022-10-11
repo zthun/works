@@ -261,9 +261,19 @@ export function useZthunworksTheme(): IZTheme {
   mui.typography.h2.fontSize = base.sizing.font.lg;
   mui.typography.h3.fontSize = base.sizing.font.md;
 
-  // Card
   mui.components = firstDefined({}, mui.components);
 
+  // Autocomplete
+  mui.components.MuiAutocomplete = {
+    styleOverrides: {
+      clearIndicator: {
+        fontSize: base.sizing.font.lg,
+        visibility: 'visible'
+      }
+    }
+  };
+
+  // Card
   mui.components.MuiCardMedia = {
     styleOverrides: {
       root: {
