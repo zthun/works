@@ -15,6 +15,8 @@ const useChoiceDropDownStyles = makeStyles()((theme) => {
       }
     },
     clear: {
+      fontSize: theme.sizing.font.lg,
+      padding: theme.sizing.gaps.xs,
       marginRight: `${theme.sizing.gaps.md} !important`
     },
     chip: {
@@ -64,7 +66,7 @@ export function ZChoiceDropDown<O, V>(props: IZChoice<O, V>) {
       const { key, value, option } = choice;
 
       return (
-        <MenuItem className='ZChoice-drop-down-menu ZChoice-option' key={key} value={value as any}>
+        <MenuItem className='ZChoice-option' key={key} value={value as any}>
           {render(option)}
         </MenuItem>
       );
@@ -90,7 +92,7 @@ export function ZChoiceDropDown<O, V>(props: IZChoice<O, V>) {
 
     return (
       <IconButton className={className} onClick={setValue.bind(null, [])}>
-        <ClearIcon />
+        <ClearIcon fontSize='inherit' />
       </IconButton>
     );
   }
@@ -132,12 +134,13 @@ export function ZChoiceDropDown<O, V>(props: IZChoice<O, V>) {
     <FormControl className={cssClass('ZChoice-root', 'ZChoice-drop-down', styles.classes.root, className)} fullWidth>
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select
+        classes={{ select: 'ZChoice-toggler' }}
         labelId={labelId}
         disabled={disabled}
         value={cast(value, '')}
         label={label}
         multiple={multiple}
-        MenuProps={{ className: 'ZChoice-drop-down-menu' }}
+        MenuProps={{ className: 'ZChoice-options' }}
         onChange={handleSelect}
         renderValue={renderSelectedItem}
         endAdornment={renderClear()}

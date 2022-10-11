@@ -5,10 +5,8 @@ import { identity, noop, range } from 'lodash';
 import React from 'react';
 import { ReactNode } from 'react-markdown';
 import { ZChoiceAutocomplete } from './choice-autocomplete';
-import { ZChoiceAutocompleteComponentModel } from './choice-autocomplete.cm';
 import { ZChoiceDropDown } from './choice-drop-down';
-import { ZChoiceDropDownComponentModel } from './choice-drop-down.cm';
-import { IZChoiceComponentModel } from './choice.cm';
+import { ZChoiceComponentModel } from './choice.cm';
 
 describe('ZChoice', () => {
   const performer: IZCircusPerformer = new ZCircusPerformer();
@@ -36,7 +34,7 @@ describe('ZChoice', () => {
     options = ['One', 'Two', 'Three', 'Four', 'Five'];
   });
 
-  async function shouldRenderAllOptionsWhenOpened(createTestTarget: () => Promise<IZChoiceComponentModel>) {
+  async function shouldRenderAllOptionsWhenOpened(createTestTarget: () => Promise<ZChoiceComponentModel>) {
     // Arrange.
     const target = await createTestTarget();
     // Act.
@@ -46,7 +44,7 @@ describe('ZChoice', () => {
     expect(actual).toEqual(options);
   }
 
-  async function shouldRenderCustomOptionDisplay(createTestTarget: () => Promise<IZChoiceComponentModel>) {
+  async function shouldRenderCustomOptionDisplay(createTestTarget: () => Promise<ZChoiceComponentModel>) {
     // Arrange.
     const expected = 'EXPECTED: ';
     renderOption = (op) => `${expected}${op}`;
@@ -58,7 +56,7 @@ describe('ZChoice', () => {
     expect(actual).toBeTruthy();
   }
 
-  async function shouldSelectByIdentifier(createTestTarget: () => Promise<IZChoiceComponentModel>) {
+  async function shouldSelectByIdentifier(createTestTarget: () => Promise<ZChoiceComponentModel>) {
     // Arrange.
     options = range(1, 5).map((id) => ({ id, name: `${id}` }));
     identifier = (op) => op.id;
@@ -73,7 +71,7 @@ describe('ZChoice', () => {
     expect(actual).toEqual(expected.name);
   }
 
-  async function shouldSelectByTheEntireObject(createTestTarget: () => Promise<IZChoiceComponentModel>) {
+  async function shouldSelectByTheEntireObject(createTestTarget: () => Promise<ZChoiceComponentModel>) {
     // Arrange.
     const [, , expected] = options;
     selected = [expected];
@@ -85,7 +83,7 @@ describe('ZChoice', () => {
     expect(actual).toEqual(expected);
   }
 
-  async function shouldNotBeAbleToClearIfTheChoiceIsIndelible(createTestTarget: () => Promise<IZChoiceComponentModel>) {
+  async function shouldNotBeAbleToClearIfTheChoiceIsIndelible(createTestTarget: () => Promise<ZChoiceComponentModel>) {
     // Arrange.
     indelible = true;
     multiple = true;
@@ -98,7 +96,7 @@ describe('ZChoice', () => {
     expect(onValueChange).not.toHaveBeenCalled();
   }
 
-  async function shouldClearTheSelection(createTestTarget: () => Promise<IZChoiceComponentModel>) {
+  async function shouldClearTheSelection(createTestTarget: () => Promise<ZChoiceComponentModel>) {
     // Arrange.
     selected = options;
     onValueChange = jest.fn();
@@ -109,7 +107,7 @@ describe('ZChoice', () => {
     expect(onValueChange).toHaveBeenCalledWith([]);
   }
 
-  async function shouldChangeSelectionToSingleIfMultipleOff(createTestTarget: () => Promise<IZChoiceComponentModel>) {
+  async function shouldChangeSelectionToSingleIfMultipleOff(createTestTarget: () => Promise<ZChoiceComponentModel>) {
     // Arrange.
     selected = undefined;
     onValueChange = undefined;
@@ -125,7 +123,7 @@ describe('ZChoice', () => {
     expect(actual).toEqual(expected);
   }
 
-  async function shouldAppendSelectionIfMultipleOn(createTestTarget: () => Promise<IZChoiceComponentModel>) {
+  async function shouldAppendSelectionIfMultipleOn(createTestTarget: () => Promise<ZChoiceComponentModel>) {
     // Arrange.
     selected = undefined;
     onValueChange = undefined;
@@ -141,7 +139,7 @@ describe('ZChoice', () => {
     expect(actual).toEqual(expected);
   }
 
-  async function shouldSelectNothingIfOptionIsUnavailable(createTestTarget: () => Promise<IZChoiceComponentModel>) {
+  async function shouldSelectNothingIfOptionIsUnavailable(createTestTarget: () => Promise<ZChoiceComponentModel>) {
     // Arrange.
     selected = undefined;
     onValueChange = undefined;
@@ -170,9 +168,9 @@ describe('ZChoice', () => {
       );
 
       const rendered = await new ZCircusSetupRender(element).setup();
-      await waiter.wait(() => ZChoiceDropDownComponentModel.find(rendered.container).length > 0);
-      const [target] = ZChoiceDropDownComponentModel.find(rendered.container);
-      return new ZChoiceDropDownComponentModel(target, performer, waiter);
+      await waiter.wait(() => ZChoiceComponentModel.find(rendered.container).length > 0);
+      const [target] = ZChoiceComponentModel.find(rendered.container);
+      return new ZChoiceComponentModel(target, performer, waiter);
     }
 
     it('should render all options when opened', async () => {
@@ -244,9 +242,9 @@ describe('ZChoice', () => {
       );
 
       const rendered = await new ZCircusSetupRender(element).setup();
-      await waiter.wait(() => ZChoiceAutocompleteComponentModel.find(rendered.container).length > 0);
-      const [target] = ZChoiceAutocompleteComponentModel.find(rendered.container);
-      return new ZChoiceAutocompleteComponentModel(target, performer, waiter);
+      await waiter.wait(() => ZChoiceComponentModel.find(rendered.container).length > 0);
+      const [target] = ZChoiceComponentModel.find(rendered.container);
+      return new ZChoiceComponentModel(target, performer, waiter);
     }
 
     it('should render all options when opened', async () => {

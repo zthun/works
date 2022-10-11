@@ -28,18 +28,20 @@ const useChoiceAutocompleteStyles = makeStyles()((theme) => {
  *        The JSX to render the choice component.
  */
 export function ZChoiceAutocomplete<O, V>(props: IZChoice<O, V>) {
-  const { className, label, disabled, multiple, identifier } = props;
+  const { className, label, disabled, multiple, indelible, identifier } = props;
   const { choices, value, lookup, render, display, setValue } = useChoice(props);
   const styles = useChoiceAutocompleteStyles();
 
-  const handleSelect = (_: SyntheticEvent<any>, value: IZChoiceOption<O, V> | IZChoiceOption<O, V>[]) => {
+  const handleSelect = (_: SyntheticEvent<any>, value: IZChoiceOption<O, V> | IZChoiceOption<O, V>[] | undefined) => {
+    value = value == null ? [] : value;
     const selected = castArray(value);
     const values = selected.map((ch) => identifier(ch.option));
     setValue(values);
   };
 
   const chosen = (value ?? []).map((v) => lookup.get(v));
-  const choice = multiple ? chosen : first(chosen);
+  const choice = multiple ? chosen : first(chosen) || null;
+  const clearClassName = cssClass('ZChoice-clear', chosen.length ? undefined : styles.classes.invisible);
 
   /**
    * Gets the appropriate label for the chosen option.
@@ -51,7 +53,7 @@ export function ZChoiceAutocomplete<O, V>(props: IZChoice<O, V>) {
    *        The react node to render the choice.
    */
   function getOptionLabel(ch: IZChoiceOption<O, V>) {
-    return ch == null ? '' : display(ch.option);
+    return display(ch.option);
   }
 
   /**
@@ -65,8 +67,8 @@ export function ZChoiceAutocomplete<O, V>(props: IZChoice<O, V>) {
    * @returns
    *        True if o and v are equivalent.  False otherwise.
    */
-  function isOptionEqualToValue(o: IZChoiceOption<O, V>, v: IZChoiceOption<O, V>) {
-    return o.value === v.value;
+  function isOptionEqualToValue(o: IZChoiceOption<O, V>, v: IZChoiceOption<O, V> | undefined) {
+    return o.value === v?.value;
   }
 
   /**
@@ -81,7 +83,12 @@ export function ZChoiceAutocomplete<O, V>(props: IZChoice<O, V>) {
    *        The react node that renders the option.
    */
   function renderOption(props: HTMLAttributes<HTMLLIElement>, v: IZChoiceOption<O, V>) {
-    return <li {...props}>{render(v.option)}</li>;
+    const liClassName = cssClass(props.className, 'ZChoice-option');
+    return (
+      <li key={v.key} {...props} className={liClassName} data-key={v.key} data-value={v.value}>
+        {render(v.option)}
+      </li>
+    );
   }
 
   /**
@@ -96,11 +103,17 @@ export function ZChoiceAutocomplete<O, V>(props: IZChoice<O, V>) {
   function renderInput(props: AutocompleteRenderInputParams) {
     const valuesClassName = cssClass('ZChoice-values', styles.classes.invisible);
 
-    const _renderBackingValue = (ch: IZChoiceOption<O, V> | undefined, i: number) => (
-      <div key={ch?.key || i} className='ZChoice-value' data-value={ch?.value}>
-        {ch ? display(ch.option) : ''}
-      </div>
-    );
+    const _renderBackingValue = (ch: IZChoiceOption<O, V> | undefined) => {
+      if (ch == null) {
+        return null;
+      }
+
+      return (
+        <div key={ch.key} className='ZChoice-value' data-value={ch.value}>
+          {display(ch.option)}
+        </div>
+      );
+    };
 
     // Note here that the underlying element(s) beside the text field are mostly for test automation.
     // It allows those trying to test to read the values that are currently selected which is somewhat
@@ -116,8 +129,14 @@ export function ZChoiceAutocomplete<O, V>(props: IZChoice<O, V>) {
   return (
     <Autocomplete
       className={cssClass('ZChoice-root', 'ZChoice-autocomplete', styles.classes.root, className)}
+      componentsProps={{
+        clearIndicator: { className: clearClassName },
+        popper: { className: 'ZChoice-options' },
+        popupIndicator: { className: 'ZChoice-toggler' }
+      }}
       autoHighlight
       disabled={disabled}
+      disableClearable={indelible}
       options={choices}
       value={choice}
       onChange={handleSelect}
