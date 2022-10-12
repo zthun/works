@@ -9,7 +9,7 @@ describe('ZToolbar', () => {
   async function createTestTarget() {
     const target = render(
       <ZToolbar>
-        <ZButton className='test-toolbar-button'>Toolbar Button</ZButton>
+        <ZButton className='test-toolbar-button' label='Toolbar Button' />
       </ZToolbar>
     );
 

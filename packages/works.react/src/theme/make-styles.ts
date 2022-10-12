@@ -256,6 +256,7 @@ export function useZthunworksTheme(): IZTheme {
   mui.typography.h1.fontFamily = family;
   mui.typography.h2.fontFamily = family;
   mui.typography.h3.fontFamily = family;
+  mui.typography.button.fontFamily = family;
 
   mui.typography.h1.fontSize = base.sizing.font.xl;
   mui.typography.h2.fontSize = base.sizing.font.lg;

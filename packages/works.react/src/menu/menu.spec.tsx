@@ -14,10 +14,8 @@ describe('ZMenu', () => {
 
   async function createTestTarget() {
     const target = render(
-      <ZMenu headerText='Menu Test' open={open} onOpen={onOpen}>
-        <ZMenuItem className='test-menu-item' onClick={onClick}>
-          Test Menu Item
-        </ZMenuItem>
+      <ZMenu label='Menu Test' open={open} onOpen={onOpen}>
+        <ZMenuItem className='test-menu-item' onClick={onClick} label='Test Menu Item' />
       </ZMenu>
     );
 
