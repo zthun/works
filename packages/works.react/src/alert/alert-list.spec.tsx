@@ -1,16 +1,21 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
-import { act, fireEvent, render, RenderResult } from '@testing-library/react';
+import { ZCircusActBuilder } from '@zthun/works.cirque';
+import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
+import { sleep } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
-import { IZAlert, IZAlertService, ZAlertBuilder } from '@zthun/works.message';
-import { first } from 'lodash';
+import { IZAlert, IZAlertService, ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import React from 'react';
-import { delay, lastValueFrom, of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { v4 } from 'uuid';
 import { ZAlertList } from './alert-list';
+import { ZAlertListComponentModel } from './alert-list.cm';
 import { ZAlertServiceContext } from './alert-service.context';
 
 describe('ZAlertList', () => {
+  const performer = new ZCircusPerformer();
+  const waiter = new ZCircusWait();
+
   let events: Subject<IZAlert[]>;
   let success: IZAlert;
   let error: IZAlert;
@@ -20,25 +25,22 @@ describe('ZAlertList', () => {
   let alertService: jest.Mocked<IZAlertService>;
 
   async function createTestTarget() {
-    let target: RenderResult = render(<></>);
+    const element = (
+      <ZAlertServiceContext.Provider value={alertService}>
+        <ZAlertList />
+      </ZAlertServiceContext.Provider>
+    );
 
-    await act(async () => {
-      target = render(
-        <ZAlertServiceContext.Provider value={alertService}>
-          <ZAlertList />
-        </ZAlertServiceContext.Provider>
-      );
-
-      await lastValueFrom(of(true).pipe(delay(0)));
-    });
-
-    return target;
+    const result = await new ZCircusSetupRender(element).setup();
+    await waiter.wait(() => !!ZAlertListComponentModel.find(result.container).length);
+    const [target] = ZAlertListComponentModel.find(result.container);
+    return new ZAlertListComponentModel(target, performer);
   }
 
   beforeEach(() => {
     events = new Subject<IZAlert[]>();
 
-    success = new ZAlertBuilder().success().message('Success Message').id(v4()).build();
+    success = new ZAlertBuilder().success().message('Success Message').header('Yay!').id(v4()).build();
     error = new ZAlertBuilder().error().message('Error Message').id(v4()).build();
     info = new ZAlertBuilder().info().message('Info Message').id(v4()).build();
     warning = new ZAlertBuilder().warning().message('Warning Message').id(v4()).build();
@@ -50,74 +52,146 @@ describe('ZAlertList', () => {
     alertService.watch.mockReturnValue(events);
   });
 
-  async function getAlerts(target: RenderResult) {
-    const alerts = target.container.querySelectorAll('.ZAlertList-alert');
-    return Promise.resolve(alerts);
-  }
-
-  async function getAlert(id: string, target: RenderResult) {
-    const alert = target.container.querySelector(`.ZAlertList-alert-${id}`)!;
-    return Promise.resolve(alert);
-  }
-
   async function publishAlerts(alerts: IZAlert[]) {
-    await act(async () => {
-      events.next(alerts);
-      await lastValueFrom(of(true).pipe(delay(0)));
-    });
+    const act = new ZCircusActBuilder()
+      .magic(async () => {
+        events.next(alerts);
+        await sleep(1);
+      })
+      .build();
+    await performer.perform(act);
   }
 
-  async function removeAlert(id: string, target: RenderResult) {
-    const alert = await getAlert(id, target);
-    const x = first(alert.getElementsByTagName('button'));
-    await act(async () => {
-      fireEvent.click(x!);
-      await lastValueFrom(of(true).pipe(delay(0)));
+  describe('List', () => {
+    it('should render an empty list of alerts when rendered first.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const actual = await target.alerts();
+      // Assert
+      expect(actual.length).toBeFalsy();
     });
-  }
 
-  it('should render an empty list of alerts when rendered first.', async () => {
-    // Arrange
-    const target = await createTestTarget();
-    // Act
-    const actual = await getAlerts(target);
-    // Assert
-    expect(actual.length).toBeFalsy();
+    it('should render the alerts that come in from the service.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      await publishAlerts([success, warning]);
+      const alertSuccess = await target.alert(success);
+      const alertWarning = await target.alert(warning);
+      const actual = alertSuccess && alertWarning;
+      // Assert
+      expect(actual).toBeTruthy();
+    });
+
+    it('should render the alerts from the alert service at the start.', async () => {
+      // Arrange
+      alertService.all.mockResolvedValue(alerts);
+      const expected = alerts.map((a) => a._id);
+      const target = await createTestTarget();
+      // Act
+      const renderedAlerts = await target.alerts();
+      const actual = renderedAlerts.map((a) => a.id);
+      // Assert
+      expect(actual).toEqual(expected);
+    });
   });
 
-  it('should render the alerts that come in from the service.', async () => {
-    // Arrange
-    const target = await createTestTarget();
-    // Act
-    await publishAlerts([success, warning]);
-    const alertSuccess = await getAlert(success._id, target);
-    const alertWarning = await getAlert(warning._id, target);
-    const actual = alertSuccess && alertWarning;
-    // Assert
-    expect(actual).toBeTruthy();
+  describe('Close', () => {
+    it('should close the selected alert.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      await publishAlerts([success, warning]);
+      await target.close(success);
+      // Assert
+      expect(alertService.remove).toHaveBeenCalledWith(success._id);
+    });
+
+    it('should not close non existing alert.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      const id = v4();
+      // Act.
+      const alert = await target.alert(id);
+      await target.close(alert);
+      // Assert.
+      expect(alertService.remove).not.toHaveBeenCalled();
+    });
   });
 
-  it('should render the alerts from the alert service at the start.', async () => {
-    // Arrange
-    alertService.all.mockResolvedValue(alerts);
-    const target = await createTestTarget();
-    // Act
-    const alertSuccess = await getAlert(success._id, target);
-    const alertError = await getAlert(error._id, target);
-    const alertWarning = await getAlert(warning._id, target);
-    const alertInfo = await getAlert(info._id, target);
-    const actual = alertSuccess && alertError && alertWarning && alertInfo;
-    // Assert
-    expect(actual).toBeTruthy();
+  describe('Header', () => {
+    it('should render the correct header', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      await publishAlerts([success]);
+      // Act.
+      const alert = await target.alert(success);
+      const actual = await alert.header();
+      // Assert.
+      expect(actual).toEqual(success.header);
+    });
   });
 
-  it('should close the selected alert.', async () => {
-    // Arrange
-    const target = await createTestTarget();
-    // Act
-    await publishAlerts([success, warning]);
-    await removeAlert(success._id, target);
-    // Assert
-    expect(alertService.remove).toHaveBeenCalledWith(success._id);
+  describe('Message', () => {
+    it('should render the correct message', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      await publishAlerts([success]);
+      // Act.
+      const alert = await target.alert(success);
+      const actual = await alert.message();
+      // Assert.
+      expect(actual).toEqual(success.message);
+    });
+
+    it('should not render messages for timed out alerts', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const alert = await target.alert(v4());
+      const actual = await alert.message();
+      // Assert.
+      expect(actual).toBeNull();
+    });
+  });
+
+  describe('Severity', () => {
+    async function assertRendersMessageSeverity(expected: ZAlertSeverity, alert: IZAlert) {
+      // Arrange.
+      const target = await createTestTarget();
+      await publishAlerts([alert]);
+      // Act.
+      const _alert = await target.alert(alert);
+      const actual = await _alert.severity();
+      // Assert.
+      expect(actual).toEqual(expected);
+    }
+
+    it('should render a success message', async () => {
+      await assertRendersMessageSeverity(ZAlertSeverity.Success, success);
+    });
+
+    it('should render a warning message', async () => {
+      await assertRendersMessageSeverity(ZAlertSeverity.Warning, warning);
+    });
+
+    it('should render an error message', async () => {
+      await assertRendersMessageSeverity(ZAlertSeverity.Error, error);
+    });
+
+    it('should render an info message', async () => {
+      await assertRendersMessageSeverity(ZAlertSeverity.Info, info);
+    });
+
+    it('should not render anything for a dead alert', async () => {
+      // Arrange.
+      const target = await createTestTarget();
+      // Act.
+      const _alert = await target.alert(v4());
+      const actual = await _alert.severity();
+      // Assert.
+      expect(actual).toBeNull();
+    });
   });
 });

@@ -1,7 +1,7 @@
 import { Alert, AlertTitle } from '@mui/material';
 import { IZAlert } from '@zthun/works.message';
-import { noop } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSafeState } from '../state/use-safe-state';
 import { makeStyles } from '../theme/make-styles';
 import { useAlertService } from './alert-service.context';
 
@@ -23,20 +23,14 @@ const useAlertStyles = makeStyles()((theme) => ({
  * @returns The jsx for the alert stack.
  */
 export function ZAlertList() {
-  const [alerts, setAlerts] = useState<IZAlert[]>([]);
+  const [alerts, setAlerts] = useSafeState<IZAlert[]>([]);
   const service = useAlertService();
   const styles = useAlertStyles();
 
   useEffect(() => {
-    let _setAlerts = setAlerts;
-
-    service.all().then((alerts) => _setAlerts(alerts));
+    service.all().then((alerts) => setAlerts(alerts));
     const subscription = service.watch().subscribe((alerts) => setAlerts(alerts));
-
-    return () => {
-      _setAlerts = noop;
-      subscription.unsubscribe();
-    };
+    return () => subscription.unsubscribe();
   }, []);
 
   /**
@@ -51,15 +45,12 @@ export function ZAlertList() {
   const components = alerts.map((alert) => {
     const handleCloseAlert = handleClose.bind(this, alert);
     return (
-      <Alert
-        className={`ZAlertList-alert ZAlertList-alert-${alert._id} ${styles.classes.alert}`}
-        key={alert._id}
-        severity={alert.severity}
-        onClose={handleCloseAlert}
-      >
-        <AlertTitle>{alert.header}</AlertTitle>
-        <div className='ZAlertList-alert-message'>{alert.message}</div>
-      </Alert>
+      <div key={alert._id} className='ZAlertList-alert' data-alert-id={alert._id} data-alert-severity={alert.severity}>
+        <Alert className={styles.classes.alert} severity={alert.severity} onClose={handleCloseAlert}>
+          <AlertTitle className='ZAlertList-alert-header'>{alert.header}</AlertTitle>
+          <div className='ZAlertList-alert-message'>{alert.message}</div>
+        </Alert>
+      </div>
     );
   });
 
