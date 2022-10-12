@@ -1,7 +1,9 @@
+import { IZComponentAvatar } from './component-avatar';
+
 /**
  * Represents a component that contains a header and subheader.
  */
-export interface IZComponentHeader {
+export interface IZComponentHeader extends IZComponentAvatar {
   /**
    * The header text.
    */
@@ -11,11 +13,4 @@ export interface IZComponentHeader {
    * The subheader text.
    */
   subHeaderText?: string;
-
-  /**
-   * The avatar icon for the heading component.
-   *
-   * @default null
-   */
-  avatar?: React.ReactNode;
 }
