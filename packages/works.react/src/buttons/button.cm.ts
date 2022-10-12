@@ -1,5 +1,4 @@
-import { ZCircusActBuilder } from '@zthun/works.cirque';
-import { ZCircusPerformer } from '@zthun/works.cirque-du-react';
+import { IZCircusPerformer, ZCircusActBuilder } from '@zthun/works.cirque';
 import { required } from '@zthun/works.core';
 
 /**
@@ -14,7 +13,7 @@ export class ZButtonComponentModel {
    * @param _performer
    *        The circus performer responsible for clicking the button.
    */
-  public constructor(private _element: HTMLButtonElement, private _performer: ZCircusPerformer) {}
+  public constructor(private _element: HTMLButtonElement, private _performer: IZCircusPerformer) {}
 
   /**
    * Gets whether the button is in the loading state.
