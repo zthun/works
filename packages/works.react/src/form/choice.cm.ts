@@ -1,4 +1,5 @@
-import { IZCircusPerformer, IZCircusWait, required, ZCircusActBuilder } from '@zthun/works.cirque';
+import { IZCircusPerformer, IZCircusWait, ZCircusActBuilder } from '@zthun/works.cirque';
+import { required } from '@zthun/works.core';
 import { find } from 'lodash';
 import { ZChoiceOptionComponentModel } from './choice-option.cm';
 
