@@ -73,6 +73,7 @@ export { ZImageSource } from './image/image-source';
 // Layout
 export { IZGridLayout, ZGridLayout } from './layout/grid-layout';
 export { IZLineItemLayout, ZLineItemLayout } from './layout/line-item-layout';
+export { ZLineItemLayoutComponentModel } from './layout/line-item-layout.cm';
 export { ZWebAppLayout } from './layout/web-app-layout';
 // Loading
 export { ZCircularBackdrop } from './loading/circular-backdrop';
