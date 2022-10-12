@@ -1,18 +1,23 @@
 import { Button } from '@mui/material';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import { cssClass } from '@zthun/works.core';
 import { noop } from 'lodash';
+import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentDisabled } from '../component/component-disabled.interface';
-import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
+import { IZComponentLabel } from '../component/component-label';
 import { IZComponentLoading } from '../component/component-loading.interface';
 import { IZComponentStyle } from '../component/component-style.interface';
 import { ZGridLayout } from '../layout/grid-layout';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { ZStateColor } from '../theme/state-color';
 
-export interface IZButton extends IZComponentHierarchy, IZComponentDisabled, IZComponentLoading, IZComponentStyle {
-  avatar?: ReactNode;
+export interface IZButton
+  extends IZComponentAvatar,
+    IZComponentLabel,
+    IZComponentDisabled,
+    IZComponentLoading,
+    IZComponentStyle {
   color?: ZStateColor;
   outline?: boolean;
 
@@ -29,10 +34,10 @@ export interface IZButton extends IZComponentHierarchy, IZComponentDisabled, IZC
 export function ZButton(props: IZButton) {
   const {
     className,
-    children,
     color = ZStateColor.Inherit,
     disabled,
     loading = false,
+    label,
     outline,
     avatar,
     onClick = noop
@@ -44,7 +49,7 @@ export function ZButton(props: IZButton) {
     <Button className={buttonClass} color={color} variant={variant} disabled={disabled} onClick={onClick}>
       <ZGridLayout alignItems='center' columns='auto 1fr auto' gap='sm'>
         {avatar}
-        <div className='ZButton-content'>{children}</div>
+        <div className='ZButton-content'>{label}</div>
         <ZCircularProgress className='ZButton-loading' size='sm' show={!!loading} />
       </ZGridLayout>
     </Button>

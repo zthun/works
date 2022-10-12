@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 
-import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
+import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
 import React, { ReactNode } from 'react';
 import { ZButton } from './button';
+import { ZButtonComponentModel } from './button.cm';
 
 describe('ZButton', () => {
+  const performer = new ZCircusPerformer();
+  const waiter = new ZCircusWait();
+
   let avatar: ReactNode | undefined;
   let loading: boolean | undefined;
   let disabled: boolean | undefined;
@@ -13,15 +17,21 @@ describe('ZButton', () => {
   let onClick: jest.Mock | undefined;
 
   async function createTestTarget() {
-    const target = render(
-      <ZButton avatar={avatar} disabled={disabled} loading={loading} outline={outline} onClick={onClick}>
-        <div className='ZButton-test-content'></div>
-      </ZButton>
+    const element = (
+      <ZButton
+        avatar={avatar}
+        disabled={disabled}
+        loading={loading}
+        outline={outline}
+        onClick={onClick}
+        label='ZButton-test-content'
+      />
     );
 
-    await waitFor(() => expect(target.container.querySelector('.ZButton-root')).toBeTruthy());
-
-    return target;
+    const result = await new ZCircusSetupRender(element).setup();
+    await waiter.wait(() => !!ZButtonComponentModel.find(result.container).length);
+    const [target] = ZButtonComponentModel.find(result.container);
+    return new ZButtonComponentModel(target, performer);
   }
 
   beforeEach(() => {
@@ -36,7 +46,7 @@ describe('ZButton', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const actual = target.container.querySelector('.ZButton-test-content');
+      const actual = await target.text();
       // Assert
       expect(actual).not.toBeNull();
     });
@@ -47,19 +57,11 @@ describe('ZButton', () => {
       onClick = jest.fn();
     });
 
-    async function clickButton(target: RenderResult) {
-      const button = target.container.querySelector('.ZButton-root');
-
-      await act(async () => {
-        fireEvent.click(button!);
-      });
-    }
-
     it('should raise the onClick event when the button is clicked.', async () => {
       // Arrange.
       const target = await createTestTarget();
       // Act.
-      await clickButton(target);
+      await target.click();
       // Assert
       expect(onClick).toHaveBeenCalledTimes(1);
     });
@@ -71,8 +73,7 @@ describe('ZButton', () => {
       disabled = _disabled;
       const target = await createTestTarget();
       // Act
-      const input = target.container.querySelector<HTMLButtonElement>('.ZButton-root')!;
-      const actual = input.disabled;
+      const actual = await target.disabled();
       // Assert
       expect(actual).toEqual(expected);
     }
@@ -96,7 +97,7 @@ describe('ZButton', () => {
       loading = _loading;
       const target = await createTestTarget();
       // Act
-      const actual = target.container.querySelector('.ZCircularProgress-root');
+      const actual = await target.loading();
       // Assert
       expect(!!actual).toEqual(expected);
     }
@@ -120,7 +121,7 @@ describe('ZButton', () => {
       outline = _outline;
       const target = await createTestTarget();
       // Act
-      const actual = target.container.querySelector('.MuiButton-outlined');
+      const actual = await target.outlined();
       // Assert
       expect(!!actual).toEqual(expected);
     }

@@ -13,6 +13,7 @@ export {
 export { useWebApp, useWebApps, useWebAppsAndWatch, useWebAppsRoot, ZWebAppsContext } from './apps/web-apps.context';
 // Buttons
 export { IZButton, ZButton } from './buttons/button';
+export { ZButtonComponentModel } from './buttons/button.cm';
 // Cards
 export { IZCardAvatarProps, ZCardAvatar } from './card/card-avatar';
 export { IZPaperCardProps, ZPaperCard } from './card/paper-card';
@@ -21,6 +22,7 @@ export { IZHttpStatusCodeCardProps, ZHttpStatusCodeCard } from './codes/http-cod
 export { IZStatusCodePageProps, ZStatusCodePage } from './codes/status-code-page';
 // Component
 export { IZComponentActionable } from './component/component-actionable.interface';
+export { IZComponentAvatar } from './component/component-avatar';
 export { IZComponentConfirmable } from './component/component-confirmable.interface';
 export { IZComponentDescription } from './component/component-description.interface';
 export { IZComponentDimensions2d } from './component/component-dimensions-2d';
