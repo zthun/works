@@ -17,7 +17,8 @@ export class ZCircusPerformer implements IZCircusPerformer {
     const dictionary: Record<ZCircusActionType, (a?: IZCircusAction) => any> = {
       [ZCircusActionType.MoveTo]: (a: IZCircusAction) => user.pointer({ target: a.context }),
       [ZCircusActionType.LeftMouseDown]: () => user.pointer('[MouseLeft>]'),
-      [ZCircusActionType.LeftMouseUp]: () => user.pointer('[/MouseLeft]')
+      [ZCircusActionType.LeftMouseUp]: () => user.pointer('[/MouseLeft]'),
+      [ZCircusActionType.Magic]: (a: IZCircusAction) => a.context()
     };
 
     await act(async () => {

@@ -35,6 +35,7 @@ export class ZCircusActBuilder {
   public moveTo: (element: Element) => this = this._action.bind(this, ZCircusActionType.MoveTo);
   public leftMouseDown: () => this = this._action.bind(this, ZCircusActionType.LeftMouseDown);
   public leftMouseUp: () => this = this._action.bind(this, ZCircusActionType.LeftMouseUp);
+  public magic: (action: () => Promise<any>) => this = this._action.bind(this, ZCircusActionType.Magic);
 
   /**
    * Alias to leftMouseDown + leftMouseUp
