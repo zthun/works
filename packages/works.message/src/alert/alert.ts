@@ -77,16 +77,27 @@ export class ZAlertBuilder {
   }
 
   /**
+   * Sets the severity of the alert.
+   *
+   * @param severity
+   *        The value to set.
+   *
+   * @returns
+   *        This object.
+   */
+  public severity(severity: ZAlertSeverity): this {
+    this._alert.severity = severity;
+    return this;
+  }
+
+  /**
    * Sets the severity to success.
    *
    * Sets the header if it is not already set.
    *
    * @returns This object.
    */
-  public success(): this {
-    this._alert.severity = ZAlertSeverity.Success;
-    return this;
-  }
+  public success: () => this = this.severity.bind(this, ZAlertSeverity.Success);
 
   /**
    * Sets the severity to info.
@@ -95,10 +106,7 @@ export class ZAlertBuilder {
    *
    * @returns This object.
    */
-  public info(): this {
-    this._alert.severity = ZAlertSeverity.Info;
-    return this;
-  }
+  public info: () => this = this.severity.bind(this, ZAlertSeverity.Info);
 
   /**
    * Sets the severity to warning.
@@ -107,10 +115,7 @@ export class ZAlertBuilder {
    *
    * @returns This object.
    */
-  public warning(): this {
-    this._alert.severity = ZAlertSeverity.Warning;
-    return this;
-  }
+  public warning: () => this = this.severity.bind(this, ZAlertSeverity.Warning);
 
   /**
    * Sets the severity to error.
@@ -119,10 +124,7 @@ export class ZAlertBuilder {
    *
    * @returns This object.
    */
-  public error(): this {
-    this._alert.severity = ZAlertSeverity.Error;
-    return this;
-  }
+  public error: () => this = this.severity.bind(this, ZAlertSeverity.Error);
 
   /**
    * Sets the id for the alert.
@@ -181,10 +183,7 @@ export class ZAlertBuilder {
    *
    * @returns This object.
    */
-  public immortal(): this {
-    this._alert.timeToLive = Infinity;
-    return this;
-  }
+  public immortal: () => this = this.time.bind(this, Infinity);
 
   /**
    * Assigns all the properties in other to the current alert.
