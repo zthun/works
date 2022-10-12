@@ -50,25 +50,22 @@ export function ZBooleanPage() {
           outline
           color={ZStateColor.Success}
           onClick={setValue.bind(null, true)}
-        >
-          True
-        </ZButton>
+          label='True'
+        />
         <ZButton
           avatar={<CheckBoxOutlineBlankIcon color='error' />}
           outline
           color={ZStateColor.Error}
           onClick={setValue.bind(null, false)}
-        >
-          False
-        </ZButton>
+          label='False'
+        />
         <ZButton
           avatar={<IndeterminateCheckBoxIcon color='warning' />}
           outline
           color={ZStateColor.Warning}
           onClick={setValue.bind(null, null)}
-        >
-          Indeterminate
-        </ZButton>
+          label='Indeterminate'
+        />
       </ZToolbar>
     </ZPaperCard>
   );

@@ -2,13 +2,13 @@ import { Menu } from '@mui/material';
 import { cssClass } from '@zthun/works.core';
 import React, { useEffect, useRef } from 'react';
 import { IZButton, ZButton } from '../buttons/button';
-import { IZComponentHeader } from '../component/component-header.interface';
+import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
 import { usePropState } from '../state/use-prop-state';
 import { useSafeState } from '../state/use-safe-state';
 import { makeStyles } from '../theme/make-styles';
 import { ZMenuEvent } from './menu-event';
 
-export interface IZMenu extends Omit<IZComponentHeader, 'subHeaderText'>, Omit<IZButton, 'onClick'> {
+export interface IZMenu extends IZComponentHierarchy, Omit<IZButton, 'onClick'> {
   open?: boolean;
 
   onOpen?: (open: boolean) => void;
@@ -46,7 +46,7 @@ const useMenuStyles = makeStyles<IZMenuState>()((theme, state) => {
  * @returns The JSX to render the menu component.
  */
 export function ZMenu(props: IZMenu) {
-  const { className, children, headerText, open, onOpen } = props;
+  const { className, children, open, onOpen } = props;
   const [_open, _setOpen] = usePropState(open, onOpen);
   const [anchor, setAnchor] = useSafeState<Element | null | undefined>(undefined);
   const container = useRef<HTMLDivElement>(null);
@@ -99,10 +99,7 @@ export function ZMenu(props: IZMenu) {
 
   return (
     <div className={containerClassName} ref={container}>
-      <ZButton {...props} className={buttonClassName} onClick={toggle.bind(null)}>
-        {headerText}
-      </ZButton>
-
+      <ZButton {...props} className={buttonClassName} onClick={toggle.bind(null)} />
       {renderMenu()}
     </div>
   );

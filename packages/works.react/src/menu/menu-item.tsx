@@ -3,12 +3,11 @@ import { cssClass } from '@zthun/works.core';
 import { noop } from 'lodash';
 import React from 'react';
 import { IZButton } from '../buttons/button';
-import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
 import { ZGridLayout } from '../layout/grid-layout';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { ZMenuEvent } from './menu-event';
 
-export interface IZMenuItem extends IZComponentHierarchy, Omit<IZButton, 'color'>, Omit<IZButton, 'outline'> {}
+export interface IZMenuItem extends Omit<IZButton, 'color'>, Omit<IZButton, 'outline'> {}
 
 /**
  * Represents a menu item in a menu.
@@ -20,7 +19,7 @@ export interface IZMenuItem extends IZComponentHierarchy, Omit<IZButton, 'color'
  *        The JSX that renders the menu.
  */
 export function ZMenuItem(props: IZMenuItem) {
-  const { avatar, className, children, loading, onClick = noop } = props;
+  const { avatar, className, label, loading, onClick = noop } = props;
 
   const menuItemClass = cssClass('ZMenuItem-root', className);
 
@@ -38,7 +37,7 @@ export function ZMenuItem(props: IZMenuItem) {
     <MenuItem {...props} className={menuItemClass} onClick={handleClick}>
       <ZGridLayout alignItems='center' columns='auto 1fr auto' gap='sm'>
         {avatar}
-        <div className='ZMenuItem-content'>{children}</div>
+        <div className='ZMenuItem-content'>{label}</div>
         <ZCircularProgress size='sm' show={!!loading} />
       </ZGridLayout>
     </MenuItem>

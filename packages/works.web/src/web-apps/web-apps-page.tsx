@@ -48,30 +48,32 @@ export function ZWebAppsPage() {
           color={ZStateColor.Info}
           outline
           onClick={navigate.bind(null, 'getting-started')}
-        >
-          Getting Started
-        </ZButton>
-        <ZMenu avatar={<SettingsIcon color='primary' />} color={ZStateColor.Info} outline headerText='Components'>
-          <ZMenuItem avatar={<WarningIcon color='warning' />} onClick={navigate.bind(null, 'components/alerts')}>
-            Alerts
-          </ZMenuItem>
-          <ZMenuItem avatar={<CheckBoxIcon color='success' />} onClick={navigate.bind(null, 'components/boolean')}>
-            Boolean
-          </ZMenuItem>
-          <ZMenuItem avatar={<SmartButtonIcon color='error' />} onClick={navigate.bind(null, 'components/button')}>
-            Button
-          </ZMenuItem>
-          <ZMenuItem avatar={<TouchAppIcon color='warning' />} onClick={navigate.bind(null, 'components/choice')}>
-            Choice
-          </ZMenuItem>
+          label='Getting Started'
+        />
+        <ZMenu avatar={<SettingsIcon color='primary' />} color={ZStateColor.Info} outline label='Components'>
+          <ZMenuItem
+            avatar={<WarningIcon color='warning' />}
+            onClick={navigate.bind(null, 'components/alerts')}
+            label='Alerts'
+          />
+          <ZMenuItem
+            avatar={<CheckBoxIcon color='success' />}
+            onClick={navigate.bind(null, 'components/boolean')}
+            label='Boolean'
+          />
+          <ZMenuItem
+            avatar={<SmartButtonIcon color='error' />}
+            onClick={navigate.bind(null, 'components/button')}
+            label='Button'
+          />
+          <ZMenuItem
+            avatar={<TouchAppIcon color='warning' />}
+            onClick={navigate.bind(null, 'components/choice')}
+            label='Choice'
+          />
         </ZMenu>
-        <ZMenu
-          avatar={<ElectricalServicesIcon color='warning' />}
-          color={ZStateColor.Info}
-          outline
-          headerText='Services'
-        >
-          <ZMenuItem avatar={<MedicalServicesIcon color='success' />}>Health</ZMenuItem>
+        <ZMenu avatar={<ElectricalServicesIcon color='warning' />} color={ZStateColor.Info} outline label='Services'>
+          <ZMenuItem avatar={<MedicalServicesIcon color='success' />} label='Health' />
         </ZMenu>
       </ZToolbar>
 

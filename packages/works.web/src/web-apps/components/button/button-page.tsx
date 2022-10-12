@@ -55,9 +55,8 @@ export function ZButtonPage() {
         color={color}
         outline={outline}
         onClick={handleClick}
-      >
-        Click Me!
-      </ZButton>
+        label='Button'
+      />
 
       <h2>Options</h2>
       <ZGridLayout gap='md'>
