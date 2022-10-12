@@ -2,6 +2,7 @@ import { first } from 'lodash';
 import { ReactNode, useMemo } from 'react';
 import { v4 } from 'uuid';
 import { IZComponentDisabled } from '../component/component-disabled.interface';
+import { IZComponentLabel } from '../component/component-label';
 import { IZComponentStyle } from '../component/component-style.interface';
 import { IZComponentValue } from '../component/component-value';
 import { usePropState } from '../state/use-prop-state';
@@ -12,8 +13,11 @@ export interface IZChoiceOption<O, V> {
   option: O;
 }
 
-export interface IZChoice<O, V> extends IZComponentDisabled, IZComponentStyle, IZComponentValue<Array<V>> {
-  label: string;
+export interface IZChoice<O, V>
+  extends IZComponentDisabled,
+    IZComponentStyle,
+    IZComponentValue<Array<V>>,
+    IZComponentLabel {
   multiple?: boolean;
   indelible?: boolean;
   options: Array<O>;
