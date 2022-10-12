@@ -1,6 +1,7 @@
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import { IZCircusSetup } from '@zthun/works.cirque';
 import { ReactElement } from 'react';
+import { act } from 'react-dom/test-utils';
 
 /**
  * Represents a setup that renders a react component.
@@ -24,6 +25,13 @@ export class ZCircusSetupRender implements IZCircusSetup<RenderResult> {
    *      result if the render never becomes ready.
    */
   public async setup(): Promise<RenderResult> {
-    return render(this._element, this._options);
+    let result: RenderResult;
+
+    await act(async () => {
+      result = render(this._element, this._options);
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return result!;
   }
 }
