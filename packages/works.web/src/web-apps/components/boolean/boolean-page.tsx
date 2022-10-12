@@ -3,16 +3,14 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 import {
   useSafeState,
-  ZBoolean,
-  ZBooleanStyle,
+  ZBooleanCheckbox,
+  ZBooleanSwitch,
   ZButton,
-  ZChoiceDropDown,
   ZGridLayout,
   ZPaperCard,
   ZStateColor,
   ZToolbar
 } from '@zthun/works.react';
-import { identity, startCase } from 'lodash';
 import React from 'react';
 
 /**
@@ -23,12 +21,6 @@ import React from 'react';
 export function ZBooleanPage() {
   const [disabled, setDisabled] = useSafeState(false);
   const [value, setValue] = useSafeState<boolean | null>(false);
-  const [type, setType] = useSafeState<ZBooleanStyle[]>(['checkbox']);
-  const [_type] = type;
-  const types: ZBooleanStyle[] = ['checkbox', 'radio', 'inline-radio', 'switch'];
-
-  const truthy = startCase(_type);
-  const falsy = `${startCase(_type)} Off`;
 
   return (
     <ZPaperCard
@@ -37,54 +29,47 @@ export function ZBooleanPage() {
       subHeaderText='Basic togglers'
       avatar={<CheckBoxIcon color='success' fontSize='large' />}
     >
-      <ZBoolean
-        disabled={disabled}
-        value={value}
-        onValueChange={setValue.bind(null)}
-        type={_type}
-        truthy={truthy}
-        falsy={falsy}
-      />
+      <h2>Checkbox</h2>
+      <ZBooleanCheckbox disabled={disabled} value={value} onValueChange={setValue.bind(null)} label='Checkbox' />
+
+      <h2>Switch</h2>
+      <ZBooleanSwitch disabled={disabled} value={!!value} onValueChange={setValue.bind(null)} label='Switch' />
+
+      <h2>Value</h2>
+      <div>{JSON.stringify(value)}</div>
 
       <h2>Options</h2>
       <ZGridLayout gap='md'>
-        <ZBoolean value={disabled} onValueChange={setDisabled} truthy='Disabled' />
-        <ZChoiceDropDown
-          options={types}
-          label='Type'
-          indelible
-          value={type}
-          identifier={identity}
-          onValueChange={setType}
-          renderOption={startCase}
-        />
-        <ZToolbar>
-          <ZButton
-            avatar={<CheckBoxIcon color='success' />}
-            outline
-            color={ZStateColor.Success}
-            onClick={setValue.bind(null, true)}
-          >
-            True
-          </ZButton>
-          <ZButton
-            avatar={<CheckBoxOutlineBlankIcon color='error' />}
-            outline
-            color={ZStateColor.Error}
-            onClick={setValue.bind(null, false)}
-          >
-            False
-          </ZButton>
-          <ZButton
-            avatar={<IndeterminateCheckBoxIcon color='warning' />}
-            outline
-            color={ZStateColor.Warning}
-            onClick={setValue.bind(null, null)}
-          >
-            Indeterminate
-          </ZButton>
-        </ZToolbar>
+        <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
       </ZGridLayout>
+
+      <h2>Operations</h2>
+      <ZToolbar>
+        <ZButton
+          avatar={<CheckBoxIcon color='success' />}
+          outline
+          color={ZStateColor.Success}
+          onClick={setValue.bind(null, true)}
+        >
+          True
+        </ZButton>
+        <ZButton
+          avatar={<CheckBoxOutlineBlankIcon color='error' />}
+          outline
+          color={ZStateColor.Error}
+          onClick={setValue.bind(null, false)}
+        >
+          False
+        </ZButton>
+        <ZButton
+          avatar={<IndeterminateCheckBoxIcon color='warning' />}
+          outline
+          color={ZStateColor.Warning}
+          onClick={setValue.bind(null, null)}
+        >
+          Indeterminate
+        </ZButton>
+      </ZToolbar>
     </ZPaperCard>
   );
 }

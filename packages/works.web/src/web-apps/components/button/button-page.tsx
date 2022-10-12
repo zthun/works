@@ -5,7 +5,7 @@ import { ZAlertBuilder } from '@zthun/works.message';
 import {
   useAlertService,
   useSafeState,
-  ZBoolean,
+  ZBooleanSwitch,
   ZButton,
   ZChoiceDropDown,
   ZGridLayout,
@@ -61,9 +61,9 @@ export function ZButtonPage() {
 
       <h2>Options</h2>
       <ZGridLayout gap='md'>
-        <ZBoolean value={loading} onValueChange={setLoading} truthy='Loading' />
-        <ZBoolean value={disabled} onValueChange={setDisabled} truthy='Disabled' />
-        <ZBoolean value={outline} onValueChange={setOutline} truthy='Outline' />
+        <ZBooleanSwitch value={loading} onValueChange={setLoading} label='Loading' />
+        <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
+        <ZBooleanSwitch value={outline} onValueChange={setOutline} label='Outline' />
         <ZChoiceDropDown
           value={[color]}
           onValueChange={_setColor}

@@ -28,6 +28,7 @@ export { IZComponentDisabled } from './component/component-disabled.interface';
 export { IZComponentEntityRedirect } from './component/component-entity-redirect.interface';
 export { IZComponentHeader } from './component/component-header.interface';
 export { IZComponentHierarchy } from './component/component-hierarchy.interface';
+export { IZComponentLabel } from './component/component-label';
 export { IZComponentLoading } from './component/component-loading.interface';
 export { IZComponentMedia } from './component/component-media.interface';
 export { IZComponentSizeable } from './component/component-sizeable.interface';
@@ -46,7 +47,9 @@ export { ZErrorMessageHandlerLogger } from './error/error-message-handler-logger
 // File
 export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelectContext } from './file/file-select.context';
 // Form
-export { IZBoolean, ZBoolean, ZBooleanStyle } from './form/boolean';
+export { IZBoolean } from './form/boolean';
+export { ZBooleanCheckbox } from './form/boolean-checkbox';
+export { ZBooleanSwitch } from './form/boolean-switch';
 export { ZBooleanComponentModel } from './form/boolean.cm';
 export { IZChoice, IZChoiceApi, IZChoiceOption, useChoice } from './form/choice';
 export { ZChoiceAutocomplete } from './form/choice-autocomplete';

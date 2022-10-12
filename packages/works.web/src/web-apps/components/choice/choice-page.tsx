@@ -3,7 +3,7 @@ import TouchAppIcon from '@mui/icons-material/TouchApp';
 
 import {
   useSafeState,
-  ZBoolean,
+  ZBooleanSwitch,
   ZChoiceAutocomplete,
   ZChoiceDropDown,
   ZGridLayout,
@@ -130,9 +130,9 @@ export function ZChoicePage() {
 
       <h2>Options</h2>
       <ZGridLayout gap='sm'>
-        <ZBoolean value={disabled} onValueChange={setDisabled} truthy='Disabled' />
-        <ZBoolean value={multiple} onValueChange={setMultiple} truthy='Multiple' />
-        <ZBoolean value={indelible} onValueChange={setIndelible} truthy='Indelible' />
+        <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
+        <ZBooleanSwitch value={multiple} onValueChange={setMultiple} label='Multiple' />
+        <ZBooleanSwitch value={indelible} onValueChange={setIndelible} label='Indelible' />
       </ZGridLayout>
 
       <h2>Selected</h2>
