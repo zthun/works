@@ -51,8 +51,8 @@ export { ZBooleanComponentModel } from './form/boolean.cm';
 export { IZChoice, IZChoiceApi, IZChoiceOption, useChoice } from './form/choice';
 export { ZChoiceAutocomplete } from './form/choice-autocomplete';
 export { ZChoiceDropDown } from './form/choice-drop-down';
-export { ZChoiceDropDownComponentModel as ZChoiceComponentModel } from './form/choice-drop-down.cm';
 export { ZChoiceOptionComponentModel } from './form/choice-option.cm';
+export { ZChoiceComponentModel } from './form/choice.cm';
 // Http
 export { useHttpService, ZHttpServiceContext } from './http/http-service.context';
 // Identity
