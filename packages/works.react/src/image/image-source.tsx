@@ -1,4 +1,4 @@
-import { firstDefined } from '@zthun/works.core';
+import { cssClass, firstDefined } from '@zthun/works.core';
 import { ZDataUrlBuilder } from '@zthun/works.url';
 import React from 'react';
 import { IZComponentDimensions2d } from '../component/component-dimensions-2d';
@@ -17,11 +17,14 @@ const useImageSourceStyles = makeStyles<IZImageSourceProps>()((theme, props) => 
 
   return {
     root: {
-      height,
-      width,
       textAlign: align,
 
       svg: {
+        height,
+        width
+      },
+
+      img: {
         height,
         width
       }
@@ -41,7 +44,7 @@ const useImageSourceStyles = makeStyles<IZImageSourceProps>()((theme, props) => 
 export function ZImageSource(props: IZImageSourceProps) {
   const { className, src } = props;
   const styles = useImageSourceStyles(props);
-  const clasz = `ZImageSource-root ${className} ${styles.classes.root}`;
+  const clasz = cssClass('ZImageSource-root', className, styles.classes.root);
 
   if (!src) {
     return <div className={clasz} />;
@@ -54,5 +57,9 @@ export function ZImageSource(props: IZImageSourceProps) {
     return <div className={clasz} dangerouslySetInnerHTML={{ __html }} />;
   }
 
-  return <img className={clasz} src={src} />;
+  return (
+    <div className={clasz}>
+      <img src={src} />
+    </div>
+  );
 }
