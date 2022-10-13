@@ -48,6 +48,20 @@ export function ZButtonPage() {
       subHeaderText='Standard button component'
       avatar={<SmartButtonIcon color='error' fontSize='large' />}
     >
+      <h3>Description</h3>
+
+      <p>
+        Buttons are the staple of most application design and have been so for decades. It is a very clean concept to
+        click a button that corresponds to an action and users are very used to clicking these.
+      </p>
+
+      <p>
+        Buttons can have a label, but if you want to save real estate, you can always use a simple <i>iconography </i>
+        button with a tooltip if you desire.
+      </p>
+
+      <h3>Button Demo</h3>
+
       <ZButton
         avatar={<CheckCircleIcon fontSize='small' />}
         loading={loading}
@@ -58,7 +72,19 @@ export function ZButtonPage() {
         label='Button'
       />
 
-      <h2>Options</h2>
+      <h3>Iconography Demo</h3>
+
+      <ZButton
+        label={<CheckCircleIcon fontSize='small' />}
+        loading={loading}
+        disabled={disabled}
+        color={color}
+        outline={outline}
+        onClick={handleClick}
+        tooltip='Iconography Button'
+      />
+
+      <h3>Options</h3>
       <ZGridLayout gap='md'>
         <ZBooleanSwitch value={loading} onValueChange={setLoading} label='Loading' />
         <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />

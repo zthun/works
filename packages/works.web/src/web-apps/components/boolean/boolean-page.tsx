@@ -29,16 +29,37 @@ export function ZBooleanPage() {
       subHeaderText='Basic togglers'
       avatar={<CheckBoxIcon color='success' fontSize='large' />}
     >
-      <h2>Checkbox</h2>
+      <h3>Description</h3>
+
+      <p>
+        It is almost inevitable that you will need some form of values that represent true and false. There are many
+        ways to represent such a value in a web form.
+      </p>
+
+      <h3>Checkbox Demo</h3>
+
+      <p>
+        The most basic way to represent true or false is with a checkbox. A checkbox is checked when the value is true,
+        and unchecked when the value is false. With a checkbox, there is also a 3rd, indeterminate state for which the
+        logic value cannot be determined. We use JavaScripts null value for this state.
+      </p>
+
       <ZBooleanCheckbox disabled={disabled} value={value} onValueChange={setValue.bind(null)} label='Checkbox' />
 
-      <h2>Switch</h2>
+      <h3>Switch Demo</h3>
+
+      <p>
+        Another, more modern way to represent true and false is with a switch. A switch is more pleasing to the eyes of
+        a user, but the only downside is that it cannot have an indeterminate state. If you do not have a pressing need
+        for supporting a null state for true and false, then a switch is the better choice.
+      </p>
+
       <ZBooleanSwitch disabled={disabled} value={!!value} onValueChange={setValue.bind(null)} label='Switch' />
 
-      <h2>Value</h2>
+      <h3>Value</h3>
       <div>{JSON.stringify(value)}</div>
 
-      <h2>Options</h2>
+      <h3>Options</h3>
       <ZGridLayout gap='md'>
         <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
       </ZGridLayout>
