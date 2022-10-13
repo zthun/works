@@ -151,7 +151,8 @@ export function useZthunworksTheme(): IZTheme {
   const base = {
     fonts: {
       /* cspell:disable-next-line */
-      fixed: "'Menlo', 'Monaco', 'Consolas', 'Courier New', 'monospace'"
+      fixed: "'Menlo', 'Monaco', 'Consolas', 'Courier New', 'monospace'",
+      document: "'Roboto', 'Arial', 'sans-serif'"
     },
     rounding: {
       square: 0,
@@ -185,6 +186,14 @@ export function useZthunworksTheme(): IZTheme {
         md: '1em',
         lg: '1.2em',
         xl: '1.5em'
+      },
+      headers: {
+        xs: '1.25em',
+        sm: '1.5em',
+        md: '2em',
+        lg: '2.5em',
+        xl: '3em',
+        max: '4em'
       },
       gaps: {
         xs: '0.25rem',
@@ -249,18 +258,29 @@ export function useZthunworksTheme(): IZTheme {
     }
   });
 
-  // Fonts
-  const family = ['Roboto', 'Arial', 'sans-serif'].join(',');
-  mui.typography.fontFamily = family;
-  mui.typography.body1.fontFamily = family;
-  mui.typography.h1.fontFamily = family;
-  mui.typography.h2.fontFamily = family;
-  mui.typography.h3.fontFamily = family;
-  mui.typography.button.fontFamily = family;
+  // Typography
+  mui.typography.fontFamily = base.fonts.document;
+  mui.typography.body1.fontFamily = base.fonts.document;
+  mui.typography.h1.fontFamily = base.fonts.document;
+  mui.typography.h2.fontFamily = base.fonts.document;
+  mui.typography.h3.fontFamily = base.fonts.document;
+  mui.typography.h4.fontFamily = base.fonts.document;
+  mui.typography.h5.fontFamily = base.fonts.document;
+  mui.typography.h6.fontFamily = base.fonts.document;
+  mui.typography.body1.fontFamily = base.fonts.document;
+  mui.typography.body2.fontFamily = base.fonts.document;
+  mui.typography.subtitle1.fontFamily = base.fonts.document;
+  mui.typography.subtitle2.fontFamily = base.fonts.document;
+  mui.typography.caption.fontFamily = base.fonts.document;
+  mui.typography.overline.fontFamily = base.fonts.document;
+  mui.typography.button.fontFamily = base.fonts.document;
 
-  mui.typography.h1.fontSize = base.sizing.font.xl;
-  mui.typography.h2.fontSize = base.sizing.font.lg;
-  mui.typography.h3.fontSize = base.sizing.font.md;
+  mui.typography.h1.fontSize = base.sizing.headers.max;
+  mui.typography.h2.fontSize = base.sizing.headers.xl;
+  mui.typography.h3.fontSize = base.sizing.headers.lg;
+  mui.typography.h4.fontSize = base.sizing.headers.md;
+  mui.typography.h5.fontSize = base.sizing.headers.sm;
+  mui.typography.h6.fontSize = base.sizing.headers.xs;
 
   mui.components = firstDefined({}, mui.components);
 
@@ -275,6 +295,13 @@ export function useZthunworksTheme(): IZTheme {
   };
 
   // Card
+  mui.components.MuiCardHeader = {
+    styleOverrides: {
+      avatar: {
+        fontSize: base.sizing.headers.max
+      }
+    }
+  };
   mui.components.MuiCardMedia = {
     styleOverrides: {
       root: {
@@ -307,6 +334,15 @@ export function useZthunworksTheme(): IZTheme {
     styleOverrides: {
       root: {
         minHeight: '3.5rem'
+      }
+    }
+  };
+
+  // Toolbar
+  mui.components.MuiToolbar = {
+    styleOverrides: {
+      regular: {
+        minHeight: '6em'
       }
     }
   };
