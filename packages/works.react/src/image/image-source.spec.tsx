@@ -49,7 +49,7 @@ describe('ZImageSource', () => {
     src = new ZUrlBuilder().gravatar().build();
     const target = await createTestTarget();
     // Act
-    const actual = target.container.querySelector(`img.ZImageSource-root`);
+    const actual = target.container.querySelector(`.ZImageSource-root img`);
     // Assert
     expect(actual).toBeTruthy();
   });
