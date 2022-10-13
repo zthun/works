@@ -54,11 +54,13 @@ export function ZButton(props: IZButton) {
 
   return (
     <Tooltip title={tooltip}>
-      <Button className={buttonClass} color={color} variant={variant} disabled={disabled} onClick={onClick}>
-        {avatar}
-        <div className={contentClass}>{label}</div>
-        <ZCircularProgress className='ZButton-loading' size='sm' show={!!loading} />
-      </Button>
+      <span>
+        <Button className={buttonClass} color={color} variant={variant} disabled={disabled} onClick={onClick}>
+          {avatar}
+          <div className={contentClass}>{label}</div>
+          <ZCircularProgress className='ZButton-loading' size='sm' show={!!loading} />
+        </Button>
+      </span>
     </Tooltip>
   );
 }
