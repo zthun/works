@@ -56,21 +56,22 @@ export function ZAlertsPage() {
       avatar={<WarningIcon color='warning' fontSize='large' />}
     >
       <h3>Description</h3>
+
       <p>
         Alerts allow you to give quick feedback to users after performing actions. Zthunworks alerts use a toaster style
         to keep notifications out of the way and easy to manager and see. All alerts, by default, have a time limit, at
         which point, they will expire and be removed. Alerts are normally kept at the root and a web app will contain a
         single alert list. This allows all alerts to be displayed in a uniform fashion.
       </p>
-      <p>
-        Alerts are broken up by 4 levels of severity.
-        <ol>
-          <li>Success: Something was successful and you want to notify the user of said success.</li>
-          <li>Warning: Something may have gone wrong, but it will not stop the user from continuing.</li>
-          <li>Error: Something bad happened. The user cannot perform the operation they were attempting to perform.</li>
-          <li>Info: Informational messages which help to educate the user on different topics.</li>
-        </ol>
-      </p>
+
+      <p>Alerts are broken up by 4 levels of severity.</p>
+
+      <ol>
+        <li>Success: Something was successful and you want to notify the user of said success.</li>
+        <li>Warning: Something may have gone wrong, but it will not stop the user from continuing.</li>
+        <li>Error: Something bad happened. The user cannot perform the operation they were attempting to perform.</li>
+        <li>Info: Informational messages which help to educate the user on different topics.</li>
+      </ol>
 
       <p>
         It is also possible to construct perpetual alerts that never leave the alert list. This is useful if you want to
