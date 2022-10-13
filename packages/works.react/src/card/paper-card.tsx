@@ -62,7 +62,12 @@ const usePaperCardStyles = makeStyles<IZPaperCardProps>()((theme, props) => {
       paddingTop: theme.sizing.gaps.sm,
       paddingBottom: theme.sizing.gaps.sm,
       width: theme.sizing.image[imageWidth],
-      height: theme.sizing.image[imageHeight]
+      height: theme.sizing.image[imageHeight],
+
+      svg: {
+        width: theme.sizing.image[imageWidth],
+        height: theme.sizing.image[imageHeight]
+      }
     },
     actions: {
       padding: theme.sizing.gaps.md
