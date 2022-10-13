@@ -107,7 +107,7 @@ export function ZAlertsPage() {
           color={ZStateColor.Info}
           outline
           onClick={openAlert.bind(null, ZAlertSeverity.Info, 'Just some basic information.')}
-          label='Error'
+          label='Information'
         />
       </ZGridLayout>
 
