@@ -26,7 +26,7 @@ export function ZHomePage() {
       headerText='The Works System'
       subHeaderText='Make Development Easier'
     >
-      <ZImageSource src={learn?.icon} />
+      <ZImageSource src={learn?.icon} height='xl' />
       <p>Zthunworks is an application management system that is used to make building tiny applications easier.</p>
       <p>
         The works system is divided into multiple layers that make up a system that is similar to an onion architecture.
