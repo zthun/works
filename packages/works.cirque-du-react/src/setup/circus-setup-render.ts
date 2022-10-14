@@ -1,7 +1,6 @@
-import { render, RenderOptions, RenderResult } from '@testing-library/react';
+import { act, render, RenderOptions, RenderResult } from '@testing-library/react';
 import { IZCircusSetup } from '@zthun/works.cirque';
 import { ReactElement } from 'react';
-import { act } from 'react-dom/test-utils';
 
 /**
  * Represents a setup that renders a react component.
