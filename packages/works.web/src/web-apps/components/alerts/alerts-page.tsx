@@ -53,7 +53,7 @@ export function ZAlertsPage() {
       className='ZAlertsPage-root'
       headerText='Alerts'
       subHeaderText='User feedback'
-      avatar={<WarningIcon color='warning' fontSize='large' />}
+      avatar={<WarningIcon color='warning' fontSize='inherit' />}
     >
       <h3>Description</h3>
 
@@ -108,7 +108,7 @@ export function ZAlertsPage() {
           color={ZStateColor.Info}
           outline
           onClick={openAlert.bind(null, ZAlertSeverity.Info, 'Just some basic information.')}
-          label='Information'
+          label='Info'
         />
       </ZGridLayout>
 

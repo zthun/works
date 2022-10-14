@@ -46,7 +46,7 @@ export function ZButtonPage() {
       className='ZButtonPage-root'
       headerText={'Button'}
       subHeaderText='Standard button component'
-      avatar={<SmartButtonIcon color='error' fontSize='large' />}
+      avatar={<SmartButtonIcon color='error' fontSize='inherit' />}
     >
       <h3>Description</h3>
 

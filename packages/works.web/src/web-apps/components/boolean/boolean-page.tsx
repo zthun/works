@@ -27,7 +27,7 @@ export function ZBooleanPage() {
       className='ZBooleanPage-root'
       headerText={'Boolean'}
       subHeaderText='Basic togglers'
-      avatar={<CheckBoxIcon color='success' fontSize='large' />}
+      avatar={<CheckBoxIcon color='success' fontSize='inherit' />}
     >
       <h3>Description</h3>
 

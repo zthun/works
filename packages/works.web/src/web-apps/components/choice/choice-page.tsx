@@ -98,7 +98,7 @@ export function ZChoicePage() {
       className='ZChoicePage-root'
       headerText='Choice'
       subHeaderText='Select from a list of options.'
-      avatar={<TouchAppIcon color='warning' fontSize='large' />}
+      avatar={<TouchAppIcon color='warning' fontSize='inherit' />}
     >
       <h2>Drop Down</h2>
       <ZChoiceDropDown
