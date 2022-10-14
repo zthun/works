@@ -59,8 +59,8 @@ export class ZAlertComponentModel {
    */
   public header(): Promise<string | null> {
     return this._valueIfAlive(null, async (element: HTMLElement) => {
-      const header = await required(element.querySelector<HTMLElement>('.ZAlertList-alert-header'));
-      return header.textContent;
+      const header = element.querySelector<HTMLElement>('.ZAlertList-alert-header');
+      return header?.textContent || null;
     });
   }
 

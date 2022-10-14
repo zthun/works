@@ -131,6 +131,17 @@ describe('ZAlertList', () => {
       // Assert.
       expect(actual).toEqual(success.header);
     });
+
+    it('should not render a header if it is not set', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      await publishAlerts([warning]);
+      // Act.
+      const alert = await target.alert(warning);
+      const actual = await alert.header();
+      // Assert.
+      expect(actual).toBeNull();
+    });
   });
 
   describe('Message', () => {

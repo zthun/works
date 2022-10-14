@@ -36,10 +36,23 @@ export function ZAlertList() {
   /**
    * Closes the specific alert.
    *
-   * @param alert The alert to remove.
+   * @param alert
+   *        The alert to remove.
    */
   function handleClose(alert: IZAlert) {
     service.remove(alert._id);
+  }
+
+  /**
+   * Renders the alert header.
+   *
+   * @param alert
+   *        The alert that contains the header to render.
+   * @returns
+   *        The JSX for the alert header.
+   */
+  function renderHeader(alert: IZAlert) {
+    return alert.header ? <AlertTitle className='ZAlertList-alert-header'>{alert.header}</AlertTitle> : null;
   }
 
   const components = alerts.map((alert) => {
@@ -47,7 +60,7 @@ export function ZAlertList() {
     return (
       <div key={alert._id} className='ZAlertList-alert' data-alert-id={alert._id} data-alert-severity={alert.severity}>
         <Alert className={styles.classes.alert} severity={alert.severity} onClose={handleCloseAlert}>
-          <AlertTitle className='ZAlertList-alert-header'>{alert.header}</AlertTitle>
+          {renderHeader(alert)}
           <div className='ZAlertList-alert-message'>{alert.message}</div>
         </Alert>
       </div>
