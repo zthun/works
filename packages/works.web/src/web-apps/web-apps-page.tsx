@@ -1,3 +1,4 @@
+import AbcIcon from '@mui/icons-material/Abc';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import ElectricalServicesIcon from '@mui/icons-material/ElectricalServices';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
@@ -23,6 +24,7 @@ import { ZAlertsPage } from './components/alerts/alerts-page';
 import { ZBooleanPage } from './components/boolean/boolean-page';
 import { ZButtonPage } from './components/button/button-page';
 import { ZChoicePage } from './components/choice/choice-page';
+import { ZTypographyPage } from './components/typography/typography-page';
 import { ZGettingStartedPage } from './getting-started/getting-started-page';
 
 const useWebAppPageStyles = makeStyles()((theme) => ({
@@ -71,6 +73,11 @@ export function ZWebAppsPage() {
             onClick={navigate.bind(null, 'components/choice')}
             label='Choice'
           />
+          <ZMenuItem
+            avatar={<AbcIcon color='inherit' />}
+            onClick={navigate.bind(null, 'components/typography')}
+            label='Typography'
+          />
         </ZMenu>
         <ZMenu avatar={<ElectricalServicesIcon color='warning' />} color={ZStateColor.Info} outline label='Services'>
           <ZMenuItem avatar={<MedicalServicesIcon color='success' />} label='Health' />
@@ -84,6 +91,7 @@ export function ZWebAppsPage() {
           <ZRoute path='boolean' element={<ZBooleanPage />} />
           <ZRoute path='button' element={<ZButtonPage />} />
           <ZRoute path='choice' element={<ZChoicePage />} />
+          <ZRoute path='typography' element={<ZTypographyPage />} />
         </ZRoute>
         <ZRoute path='/' element={<ZNavigate to='getting-started' />} />
         <ZRoute path='*' element={<ZNavigate to={'/status-code/404'} />} />
