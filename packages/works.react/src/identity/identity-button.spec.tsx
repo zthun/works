@@ -1,16 +1,19 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 
-import { act, fireEvent, render, RenderResult } from '@testing-library/react';
+import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { ZUrlBuilder } from '@zthun/works.url';
 import React from 'react';
-import { delay, lastValueFrom, of } from 'rxjs';
 import { ZIdentityButton } from './identity-button';
+import { ZIdentityButtonComponentModel } from './identity-button.cm';
 import { IZIdentityService, ZIdentityServiceContext } from './identity-service.context';
 
 describe('ZIdentityButton', () => {
+  const performer = new ZCircusPerformer();
+  const waiter = new ZCircusWait();
+
   let profile: IZProfile | null | undefined;
   let profiles: jest.Mocked<IZIdentityService>;
   let onLogin: jest.Mock | undefined;
@@ -29,18 +32,16 @@ describe('ZIdentityButton', () => {
   });
 
   async function createTestTarget() {
-    let target: RenderResult = render(<></>);
+    const element = (
+      <ZIdentityServiceContext.Provider value={profiles}>
+        <ZIdentityButton profile={profile} onLogin={onLogin} onProfile={onProfile} disabled={disabled} />
+      </ZIdentityServiceContext.Provider>
+    );
 
-    await act(async () => {
-      target = render(
-        <ZIdentityServiceContext.Provider value={profiles}>
-          <ZIdentityButton profile={profile} onLogin={onLogin} onProfile={onProfile} disabled={disabled} />
-        </ZIdentityServiceContext.Provider>
-      );
-      await lastValueFrom(of(true).pipe(delay(2)));
-    });
-
-    return target;
+    const result = await new ZCircusSetupRender(element).setup();
+    await waiter.wait(() => !!ZIdentityButtonComponentModel.find(result.container).length);
+    const [target] = ZIdentityButtonComponentModel.find(result.container);
+    return new ZIdentityButtonComponentModel(target, performer, waiter);
   }
 
   describe('Loading', () => {
@@ -52,9 +53,18 @@ describe('ZIdentityButton', () => {
       // Arrange
       const target = await createTestTarget();
       // Act
-      const spinner = target.container.querySelector('.ZIdentityButton-loading');
+      const actual = await target.loading();
       // Assert
-      expect(spinner).toBeTruthy();
+      expect(actual).toBeTruthy();
+    });
+
+    it('should be considered disabled.', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const actual = await target.disabled();
+      // Assert
+      expect(actual).toBeTruthy();
     });
   });
 
@@ -66,8 +76,9 @@ describe('ZIdentityButton', () => {
     it('shows the login button.', async () => {
       // Arrange
       const target = await createTestTarget();
+      await target.load();
       // Act
-      const actual = target.container.querySelector('.ZIdentityButton-login');
+      const actual = await target.unauthenticated();
       // Assert
       expect(actual).toBeTruthy();
     });
@@ -76,11 +87,22 @@ describe('ZIdentityButton', () => {
       // Arrange
       onLogin = jest.fn();
       const target = await createTestTarget();
+      await target.load();
       // Act
-      const actual = target.container.querySelector('.ZIdentityButton-login');
-      fireEvent.click(actual!);
+      await target.click();
       // Assert
       expect(onLogin).toHaveBeenCalled();
+    });
+
+    it('should disable the button.', async () => {
+      // Arrange
+      disabled = true;
+      const target = await createTestTarget();
+      await target.load();
+      // Act
+      const actual = await target.disabled();
+      // Assert
+      expect(actual).toBeTruthy();
     });
   });
 
@@ -88,8 +110,9 @@ describe('ZIdentityButton', () => {
     it('renders the profile button.', async () => {
       // Arrange
       const target = await createTestTarget();
+      await target.load();
       // Act
-      const actual = target.container.querySelector('.ZIdentityButton-profile');
+      const actual = await target.authenticated();
       // Assert
       expect(actual).toBeTruthy();
     });
@@ -98,25 +121,20 @@ describe('ZIdentityButton', () => {
       // Arrange
       onProfile = jest.fn();
       const target = await createTestTarget();
+      await target.load();
       // Act
-      const btn = target.container.querySelector('.ZIdentityButton-profile');
-      fireEvent.click(btn!);
+      await target.click();
       // Assert
       expect(onProfile).toHaveBeenCalled();
-    });
-  });
-
-  describe('Disabled', () => {
-    beforeEach(() => {
-      disabled = true;
     });
 
     it('should disable the button.', async () => {
       // Arrange
+      disabled = true;
       const target = await createTestTarget();
+      await target.load();
       // Act
-      const btn = target.container.querySelector('.ZIdentityButton-profile') as HTMLInputElement;
-      const actual = btn.disabled;
+      const actual = await target.disabled();
       // Assert
       expect(actual).toBeTruthy();
     });
