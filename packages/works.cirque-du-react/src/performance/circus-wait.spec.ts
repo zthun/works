@@ -18,7 +18,7 @@ describe('ZCircusWaitReact', () => {
   it('should resolve once the wait predicate becomes true', async () => {
     // Arrange.
     const predicate = jest.fn();
-    predicate.mockReturnValueOnce(false).mockReturnValueOnce(false).mockReturnValue(true);
+    predicate.mockReturnValueOnce(false).mockReturnValueOnce(Promise.resolve(false)).mockReturnValue(true);
     const target = createTestTarget();
     // Act.
     await target.wait(predicate);

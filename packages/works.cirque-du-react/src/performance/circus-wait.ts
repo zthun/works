@@ -11,9 +11,9 @@ export class ZCircusWait implements IZCircusWait {
    * @param predicate
    *        The predicate to wait on.
    */
-  public async wait(predicate: () => boolean): Promise<void> {
-    await waitFor(() => {
-      const result = predicate();
+  public async wait(predicate: () => boolean | Promise<boolean>): Promise<void> {
+    await waitFor(async () => {
+      const result = await predicate();
       return result ? Promise.resolve() : Promise.reject();
     });
   }
