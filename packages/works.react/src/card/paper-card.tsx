@@ -23,6 +23,7 @@ import { IZComponentSizeable } from '../component/component-sizeable.interface';
 import { IZComponentStyle } from '../component/component-style.interface';
 import { ZCircularBackdrop } from '../loading/circular-backdrop';
 import { makeStyles } from '../theme/make-styles';
+import { ZCaption, ZH2 } from '../typography/typography';
 
 /**
  * Represents the properties for the paper card component.
@@ -44,16 +45,11 @@ const usePaperCardStyles = makeStyles<IZPaperCardProps>()((theme, props) => {
   return {
     root: {
       position: 'relative',
-      width: theme.sizing.card[size]
+      maxWidth: theme.sizing.card[size],
+      minWidth: theme.sizing.card.xs
     },
     header: {
-      paddingBottom: theme.sizing.gaps.none,
-
-      h3: {
-        fontSize: theme.sizing.font.xl,
-        padding: theme.sizing.gaps.none,
-        margin: theme.sizing.gaps.none
-      }
+      paddingBottom: theme.sizing.gaps.none
     },
     media: {
       objectFit: 'fill',
@@ -139,8 +135,8 @@ export function ZPaperCard(props: IZPaperCardProps): JSX.Element {
       <CardHeader
         className={`ZPaperCard-header ${styles.classes.header}`}
         avatar={avatar}
-        title={<h3>{headerText}</h3>}
-        subheader={subHeaderText}
+        title={<ZH2 compact>{headerText}</ZH2>}
+        subheader={<ZCaption compact>{subHeaderText}</ZCaption>}
       />
     );
   }
