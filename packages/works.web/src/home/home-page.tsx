@@ -1,7 +1,7 @@
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import PublicIcon from '@mui/icons-material/Public';
 import Terminal from '@mui/icons-material/Terminal';
-import { makeStyles, useNavigate, useWebApp, ZPaperCard } from '@zthun/works.react';
+import { makeStyles, useNavigate, useWebApp, ZPaperCard, ZParagraph, ZSubtitle } from '@zthun/works.react';
 
 import React from 'react';
 
@@ -17,9 +17,7 @@ const useHomePageStyles = makeStyles()((theme) => ({
     border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[400]}`,
     padding: theme.sizing.gaps.lg,
     marginTop: theme.sizing.gaps.md,
-    marginBottom: theme.sizing.gaps.md,
-    fontStyle: 'italic',
-    fontSize: theme.sizing.font.lg
+    marginBottom: theme.sizing.gaps.md
   }
 }));
 
@@ -30,42 +28,43 @@ const useHomePageStyles = makeStyles()((theme) => ({
  */
 export function ZHomePage() {
   const learn = useWebApp('learn');
-  const styles = useHomePageStyles();
+  const { classes } = useHomePageStyles();
   const navigate = useNavigate();
 
   return (
     <div className='ZHomePage-root'>
       <ZPaperCard
-        className={styles.classes.section}
+        className={classes.section}
         size='xl'
-        avatar={<Terminal />}
+        avatar={<Terminal fontSize='inherit' />}
         imageUrl={learn?.icon}
         imageHeight='xl'
+        imageWidth='xl'
         headerText='The Works System'
         subHeaderText='Make Development Easier'
       >
-        <div className={styles.classes.quote}>Users perform at their best when they have absolute focus.</div>
+        <ZSubtitle className={classes.quote}>Users perform at their best when they have absolute focus.</ZSubtitle>
 
-        <p>
+        <ZParagraph>
           Zthunworks is an application management system that is used to make building tiny applications easier. Tiny
           applications have the ability to work together but are independent by definition. One of the best examples of
           taking a Monolith application and converting it down to smaller pieces was iTunes by Apple. While iTunes was
           excellent for playing and managing music, the features to manage movies and photos was out of place and caused
           iTunes to become very bloated with features. Apple eventually split the Monolith into Music, Photos, Podcasts,
           Books and TV.
-        </p>
+        </ZParagraph>
 
-        <p>
+        <ZParagraph>
           The works system is built around this philosophy, in that users do their best when they are focused on just a
           single task at a time. Thus, the works system builds tiny subsystems and components to help create a suite of
           applications to do everyday things.
-        </p>
+        </ZParagraph>
       </ZPaperCard>
 
       <ZPaperCard
-        className={styles.classes.section}
+        className={classes.section}
         size='xl'
-        avatar={<PublicIcon />}
+        avatar={<PublicIcon fontSize='inherit' />}
         headerText='Web Apps'
         imageUrl='images/svg/react.svg'
         imageHeight='xl'
@@ -74,25 +73,25 @@ export function ZHomePage() {
         actionColor='primary'
         onAction={() => navigate('/web-apps/getting-started')}
       >
-        <div className={styles.classes.quote}>The smaller the better.</div>
+        <ZSubtitle className={classes.quote}>The smaller the better.</ZSubtitle>
 
-        <p>
+        <ZParagraph>
           Web Apps are the front line for users to perform everyday tasks. Zthunworks uses React as its framework of
           choice. React has a lot of community support, is easy to setup, and it integrates well with other libraries.
-        </p>
+        </ZParagraph>
 
-        <p>
+        <ZParagraph>
           Web Apps should be small and portable and should do one thing and one thing well. Similar to how microservices
           operate, a tiny app is easier to maintain and a working application should minimize regressions between
           versions. The larger the application, the more likely that regressions will be found, so by having apps that
           are small and focused, you can
-        </p>
+        </ZParagraph>
       </ZPaperCard>
 
       <ZPaperCard
-        className={styles.classes.section}
+        className={classes.section}
         size='xl'
-        avatar={<DensitySmallIcon />}
+        avatar={<DensitySmallIcon fontSize='inherit' />}
         headerText='Microservices'
         imageUrl='images/svg/nest.svg'
         imageHeight='xl'
@@ -101,21 +100,21 @@ export function ZHomePage() {
         actionColor='secondary'
         onAction={() => navigate('/microservices')}
       >
-        <div className={styles.classes.quote}>SOLID code is best.</div>
+        <ZSubtitle className={classes.quote}>SOLID code is best.</ZSubtitle>
 
-        <p>
+        <ZParagraph>
           Zthunworks uses microservices under the hood to ensure that functionality has less regressions between
           versions. Microservice architectures have advantages and disadvantages, but they follow a principle that is
           similar to the philosophy of how Zthunworks develops web applications. The smaller the better.
-        </p>
+        </ZParagraph>
 
-        <p>
+        <ZParagraph>
           A lot of places tout that they use microservices, when in reality, they simply use lots of distributed
           services that directly talk to one another. This is not a good way to do microservices as direct microservice
           communication is akin to creating coupled dependencies. You might as well deploy internet dlls and prey for
           the best. Instead, Zthunworks creates microservices that are isolated from each other using the Nest framework
           and their orchestration is left up to each application backend to determine the actual business logic.
-        </p>
+        </ZParagraph>
       </ZPaperCard>
     </div>
   );
