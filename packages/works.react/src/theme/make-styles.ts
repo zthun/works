@@ -1,4 +1,4 @@
-import { Palette, Theme, useTheme as useMuiTheme } from '@mui/material';
+import { Theme, useTheme as useMuiTheme } from '@mui/material';
 import { firstDefined } from '@zthun/works.core';
 import { createMakeStyles } from 'tss-react';
 
@@ -47,6 +47,7 @@ export interface IZSizeOptions {
  */
 export interface IZFontFamilies {
   fixed: string;
+  document: string;
 }
 
 /**
@@ -76,36 +77,6 @@ export interface IZGeometryOptions {
 }
 
 /**
- * An extension of the standard palette with additional colors.
- */
-export interface IZExtendedPalette extends Palette {
-  doc: {
-    enumeration: string;
-    accessor: string;
-    class: string;
-    interface: string;
-    alias: string;
-    constructor: string;
-    property: string;
-    function: string;
-    variable: string;
-    namespace: string;
-    subEntity: string;
-
-    flags: {
-      general: string;
-      abstract: string;
-      static: string;
-      readonly: string;
-      const: string;
-      protected: string;
-      private: string;
-      rest: string;
-    };
-  };
-}
-
-/**
  * The overall theme for the Zthunworks domain.
  *
  * This extends material main theme and adds
@@ -117,10 +88,6 @@ export interface IZTheme extends Theme {
    * Rounding options.
    */
   rounding: IZGeometryOptions;
-  /**
-   * Palette options.
-   */
-  palette: IZExtendedPalette & Palette;
   /**
    * Sizing options.
    */
@@ -157,7 +124,7 @@ export function useZthunworksTheme(): IZTheme {
     rounding: {
       square: 0,
       circle: '50%',
-      chip: '1em'
+      chip: '1rem'
     },
     sizing: {
       alerts: {
@@ -171,6 +138,7 @@ export function useZthunworksTheme(): IZTheme {
         xl: '256px'
       },
       card: {
+        xs: '18rem',
         sm: '18rem',
         md: '30rem',
         lg: '50rem',
@@ -181,19 +149,19 @@ export function useZthunworksTheme(): IZTheme {
         md: '15rem'
       },
       font: {
-        xs: '0.625em',
-        sm: '0.8em',
-        md: '1em',
-        lg: '1.2em',
-        xl: '1.5em'
+        xs: '0.8rem',
+        sm: '0.9rem',
+        md: '1rem',
+        lg: '1.2rem',
+        xl: '1.5rem'
       },
       headers: {
-        xs: '1.25em',
-        sm: '1.5em',
-        md: '2em',
-        lg: '2.5em',
-        xl: '3em',
-        max: '4em'
+        xs: '1.15rem',
+        sm: '1.35rem',
+        md: '1.5rem',
+        lg: '2rem',
+        xl: '2.5rem',
+        max: '3rem'
       },
       gaps: {
         xs: '0.25rem',
@@ -226,63 +194,69 @@ export function useZthunworksTheme(): IZTheme {
         none: 0
       },
       toolbar: {
-        md: '4em'
+        md: '6.5rem'
       }
     }
   };
 
-  const palette: IZExtendedPalette = Object.assign({}, mui.palette, {
-    doc: {
-      enumeration: '#937210',
-      accessor: '#f5a429',
-      class: '#0672de',
-      interface: '#647f1b',
-      alias: '#9600ff',
-      constructor: '#14a219',
-      property: '#cc1e1e',
-      function: '#5a5a5a',
-      variable: '#6200a9',
-      namespace: '#9600ff',
-      subEntity: '#e9ebec',
-
-      flags: {
-        general: mui.palette.grey[500],
-        abstract: mui.palette.error.main,
-        static: mui.palette.info.main,
-        readonly: '#7a00d1',
-        const: mui.palette.success.main,
-        protected: mui.palette.warning.main,
-        private: mui.palette.common.black,
-        rest: mui.palette.primary.main
-      }
-    }
-  });
+  mui.components = firstDefined({}, mui.components);
 
   // Typography
   mui.typography.fontFamily = base.fonts.document;
   mui.typography.body1.fontFamily = base.fonts.document;
-  mui.typography.h1.fontFamily = base.fonts.document;
-  mui.typography.h2.fontFamily = base.fonts.document;
-  mui.typography.h3.fontFamily = base.fonts.document;
-  mui.typography.h4.fontFamily = base.fonts.document;
-  mui.typography.h5.fontFamily = base.fonts.document;
-  mui.typography.h6.fontFamily = base.fonts.document;
-  mui.typography.body1.fontFamily = base.fonts.document;
-  mui.typography.body2.fontFamily = base.fonts.document;
-  mui.typography.subtitle1.fontFamily = base.fonts.document;
-  mui.typography.subtitle2.fontFamily = base.fonts.document;
-  mui.typography.caption.fontFamily = base.fonts.document;
-  mui.typography.overline.fontFamily = base.fonts.document;
-  mui.typography.button.fontFamily = base.fonts.document;
 
-  mui.typography.h1.fontSize = base.sizing.headers.max;
-  mui.typography.h2.fontSize = base.sizing.headers.xl;
-  mui.typography.h3.fontSize = base.sizing.headers.lg;
-  mui.typography.h4.fontSize = base.sizing.headers.md;
-  mui.typography.h5.fontSize = base.sizing.headers.sm;
-  mui.typography.h6.fontSize = base.sizing.headers.xs;
+  const createTypography = () => ({
+    fontFamily: base.fonts.document
+  });
 
-  mui.components = firstDefined({}, mui.components);
+  const createHeaderTypography = (fontSize: string) => ({
+    ...createTypography(),
+    fontSize: `calc(${fontSize} * 0.80)`,
+    [mui.breakpoints.up('sm')]: {
+      fontSize: `calc(${fontSize} * 0.85)`
+    },
+    [mui.breakpoints.up('md')]: {
+      fontSize: `calc(${fontSize} * 0.90)`
+    },
+    [mui.breakpoints.up('lg')]: {
+      fontSize: `calc(${fontSize} * 0.95)`
+    },
+    [mui.breakpoints.up('xl')]: {
+      fontSize
+    }
+  });
+
+  const createTextTypography = (fontSize: string) => ({
+    ...createTypography(),
+    fontSize: `calc(${fontSize} * 0.95)`,
+    [mui.breakpoints.up('md')]: {
+      fontSize
+    }
+  });
+
+  mui.typography.h1 = createHeaderTypography(base.sizing.headers.max);
+  mui.typography.h2 = createHeaderTypography(base.sizing.headers.xl);
+  mui.typography.h3 = createHeaderTypography(base.sizing.headers.lg);
+  mui.typography.h4 = createHeaderTypography(base.sizing.headers.md);
+  mui.typography.h5 = createHeaderTypography(base.sizing.headers.sm);
+  mui.typography.h6 = createHeaderTypography(base.sizing.headers.xs);
+
+  mui.typography.body1 = createTextTypography(base.sizing.font.md);
+  mui.typography.body2 = createTextTypography(base.sizing.font.md);
+  mui.typography.subtitle1 = createTextTypography(base.sizing.font.md);
+  mui.typography.subtitle2 = createTextTypography(base.sizing.font.md);
+  mui.typography.caption = createTextTypography(base.sizing.font.sm);
+  mui.typography.overline = createTextTypography(base.sizing.font.sm);
+
+  mui.typography.button = createTextTypography(base.sizing.font.md);
+
+  mui.components.MuiTypography = {
+    styleOverrides: {
+      gutterBottom: {
+        marginBottom: base.sizing.gaps.md
+      }
+    }
+  };
 
   // Autocomplete
   mui.components.MuiAutocomplete = {
@@ -347,7 +321,7 @@ export function useZthunworksTheme(): IZTheme {
     }
   };
 
-  return Object.assign({}, mui, base, { palette });
+  return Object.assign({}, mui, base);
 }
 
 export const { makeStyles } = createMakeStyles({ useTheme: useZthunworksTheme });
