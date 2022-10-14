@@ -107,5 +107,19 @@ export { ZStateColor } from './theme/state-color';
 export { ZToolbar } from './toolbar/toolbar';
 // Top
 export { IZTopNavProps, ZTopNav } from './top/top-nav';
+// Typography
+export {
+  IZTypographyProps,
+  ZCaption,
+  ZH1,
+  ZH2,
+  ZH3,
+  ZH4,
+  ZH5,
+  ZH6,
+  ZOverline,
+  ZParagraph,
+  ZSubtitle
+} from './typography/typography';
 // Window
 export { useWindowService, ZWindowServiceContext } from './window/window-service.context';
