@@ -1,18 +1,7 @@
 import GithubIcon from '@mui/icons-material/GitHub';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import {
-  AppBar,
-  Button,
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
-  Typography
-} from '@mui/material';
-import { IZRouteOption } from '@zthun/works.core';
+import { AppBar, Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { cssClass, IZRouteOption } from '@zthun/works.core';
 import { kebabCase } from 'lodash';
 import React, { ReactNode, useState } from 'react';
 import { useWebApp, useWebAppsAndWatch } from '../apps/web-apps.context';
@@ -20,9 +9,11 @@ import { ZHealthIndicator } from '../health/health-indicator';
 import { ZIdentityButton } from '../identity/identity-button';
 import { useIdentityAndWatch } from '../identity/identity.context';
 import { ZImageSource } from '../image/image-source';
+import { ZGridLayout } from '../layout/grid-layout';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { useNavigate } from '../router/router-dom';
 import { makeStyles } from '../theme/make-styles';
+import { ZCaption, ZH1 } from '../typography/typography';
 import { useWindowService } from '../window/window-service.context';
 
 /**
@@ -48,19 +39,15 @@ export interface IZTopNavProps {
 }
 
 const useTopNavStyles = makeStyles()((theme) => ({
-  home: {
+  root: {
     height: theme.sizing.toolbar.md
   },
 
   title: {
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none'
     },
-    textAlign: 'left',
-
-    h6: {
-      fontSize: theme.sizing.font.xs
-    }
+    textAlign: 'left'
   },
 
   options: {
@@ -163,20 +150,11 @@ export function ZTopNav(props: IZTopNavProps) {
     }
 
     return (
-      <Button
-        className={`ZTopNav-btn-home ${styles.classes.home}`}
-        data-testid='ZTopNav-btn-home'
-        color='inherit'
-        onClick={handleHome}
-      >
+      <Button className='ZTopNav-btn-home' data-testid='ZTopNav-btn-home' color='inherit' onClick={handleHome}>
         <ZImageSource className={`ZTopNav-avatar ${styles.classes.avatar}`} src={who.icon} />
         <div className={`ZTopNav-title ${styles.classes.title}`}>
-          <Typography color='inherit' variant='h1'>
-            {who.name}
-          </Typography>
-          <Typography color='inherit' variant='subtitle1'>
-            {who.short}
-          </Typography>
+          <ZH1 compact>{who.name}</ZH1>
+          <ZCaption compact>{who.short}</ZCaption>
         </div>
       </Button>
     );
@@ -396,14 +374,19 @@ export function ZTopNav(props: IZTopNavProps) {
   }
 
   return (
-    <AppBar className='ZTopNav-root' position='sticky' color='primary' data-testid='ZTopNav-root'>
-      <Toolbar>
+    <AppBar
+      className={cssClass('ZTopNav-root', styles.classes.root)}
+      position='sticky'
+      color='primary'
+      data-testid='ZTopNav-root'
+    >
+      <ZGridLayout columns='auto 1fr auto auto auto' alignItems='center'>
         {createHomeButton()}
-        <Typography className={`ZTopNav-options ${styles.classes.options}`}></Typography>
+        <span />
         <ZIdentityButton profile={identity.data} onLogin={handleProfile} onProfile={handleProfile} />
         <ZHealthIndicator />
         {createMoreButton()}
-      </Toolbar>
+      </ZGridLayout>
     </AppBar>
   );
 }
