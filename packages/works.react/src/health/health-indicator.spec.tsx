@@ -1,43 +1,42 @@
 /* eslint-disable require-jsdoc */
 
-import { render, RenderResult, waitFor } from '@testing-library/react';
+import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
 import { createMocked } from '@zthun/works.jest';
 import { noop } from 'lodash';
 import React from 'react';
 import { ZHealthIndicator } from './health-indicator';
+import { ZHealthIndicatorComponentModel } from './health-indicator.cm';
 import { IZHealthService, ZHealthServiceContext } from './health-service.context';
 
 describe('ZHealthIndicator', () => {
+  const performer = new ZCircusPerformer();
+  const waiter = new ZCircusWait();
+
   let health: jest.Mocked<IZHealthService>;
 
   async function createTestTarget() {
-    const target = render(
+    const element = (
       <ZHealthServiceContext.Provider value={health}>
         <ZHealthIndicator />
       </ZHealthServiceContext.Provider>
     );
 
-    await waitFor(() => expect(target.container.querySelector('.ZHealthIndicator-root')).toBeTruthy());
-    return target;
+    const result = await new ZCircusSetupRender(element).setup();
+    await waiter.wait(() => !!ZHealthIndicatorComponentModel.find(result.container).length);
+    const [target] = ZHealthIndicatorComponentModel.find(result.container);
+    return new ZHealthIndicatorComponentModel(target, performer, waiter);
   }
 
   beforeEach(() => {
     health = createMocked(['read']);
   });
 
-  async function waitForIndicator(expected: 'ok' | 'warn', target: RenderResult) {
-    await waitFor(() => {
-      const actual = target.container.querySelector(`.ZHealthIndicator-${expected}`);
-      expect(actual).toBeTruthy();
-    });
-  }
-
   it('should render a loading indicator if the health is loading.', async () => {
     // Arrange
     health.read.mockReturnValue(new Promise(noop));
     const target = await createTestTarget();
     // Act & Assert
-    const actual = target.container.querySelector('.ZCircularProgress-root');
+    const actual = await target.loading();
     // Assert
     expect(actual).toBeTruthy();
   });
@@ -46,15 +45,35 @@ describe('ZHealthIndicator', () => {
     // Arrange
     health.read.mockResolvedValue(true);
     const target = await createTestTarget();
-    // Act & Assert
-    await waitForIndicator('ok', target);
+    await target.load();
+    // Act.
+    const actual = await target.healthy();
+    // Assert.
+    expect(actual).toBeTruthy();
   });
 
   it('should render error if the service is down.', async () => {
     // Arrange
     health.read.mockResolvedValue(false);
     const target = await createTestTarget();
-    // Act & Assert
-    await waitForIndicator('warn', target);
+    await target.load();
+    // Act
+    const actual = await target.unhealthy();
+    // Assert
+    expect(actual).toBeTruthy();
+  });
+
+  it('should refresh the status when the indicator is clicked.', async () => {
+    // Arrange
+    health.read.mockResolvedValue(true);
+    const target = await createTestTarget();
+    await target.load();
+    health.read.mockClear();
+    health.read.mockResolvedValue(false);
+    // Act
+    await target.refresh();
+    const actual = await target.healthy();
+    // Assert
+    expect(actual).toBeFalsy();
   });
 });

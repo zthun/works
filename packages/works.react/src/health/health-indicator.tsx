@@ -56,7 +56,7 @@ export function ZHealthIndicator() {
    */
   function renderHealth() {
     if (health === undefined) {
-      return <ZCircularProgress show />;
+      return <ZCircularProgress className='ZHealthIndicator-loading' show />;
     }
 
     const clasz = health ? `ZHealthIndicator-ok ${styles.classes.ok}` : `ZHealthIndicator-warn ${styles.classes.warn}`;
