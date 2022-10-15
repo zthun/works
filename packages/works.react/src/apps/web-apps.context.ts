@@ -4,10 +4,12 @@ import { createContext, useContext, useEffect, useMemo } from 'react';
 import { ZDataState } from '../state/data-state.class';
 import { IZDataState } from '../state/data-state.interface';
 import { useWatchableState } from '../state/use-watchable-state.hook';
-import { useWebAppService } from './web-app-service.context';
+import { useWebAppService } from './web-app-service';
 
 /**
  * Represents the context for the global list of web apps that the nav bar should link to.
+ *
+ * @deprecated Avoid this pattern.
  */
 export const ZWebAppsContext = createContext<IZDataState<IZWebApp[]>>(new ZDataState<IZWebApp[]>());
 
@@ -15,6 +17,8 @@ export const ZWebAppsContext = createContext<IZDataState<IZWebApp[]>>(new ZDataS
  * Gets the current list of web apps.
  *
  * @returns The current list of web apps.
+ *
+ * @deprecated Use useWebApps from the service file instead.
  */
 export const useWebApps: () => IZDataState<IZWebApp[]> = useContext.bind(null, ZWebAppsContext);
 
@@ -22,6 +26,8 @@ export const useWebApps: () => IZDataState<IZWebApp[]> = useContext.bind(null, Z
  * Imports the workflow to load the initial set of web apps at the root of the application.
  *
  * @returns The value of the web apps context.
+ *
+ * @deprecated Avoid this pattern.
  */
 export function useWebAppsRoot() {
   const service = useWebAppService();
@@ -42,6 +48,8 @@ export function useWebAppsRoot() {
  * Returns the current list of web apps and watches the web app list for changes.
  *
  * @returns The current list of web apps.
+ *
+ * @deprecated Avoid this pattern
  */
 export function useWebAppsAndWatch() {
   const apps = useWebApps();
@@ -54,6 +62,8 @@ export function useWebAppsAndWatch() {
  * @param id The id of the web app to watch for.
  *
  * @returns The application information for a given app id.
+ *
+ * @deprecated Use useWebApp from the web app service instead.
  */
 export function useWebApp(id: string | undefined): IZWebApp | null | undefined {
   const { data } = useWebAppsAndWatch();

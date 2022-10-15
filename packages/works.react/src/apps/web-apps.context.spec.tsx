@@ -5,7 +5,7 @@ import { createMocked } from '@zthun/works.jest';
 import React from 'react';
 import { ZDataState } from '../state/data-state.class';
 import { IZDataState } from '../state/data-state.interface';
-import { IZWebAppService, ZWebAppServiceContext } from './web-app-service.context';
+import { IZWebAppService, ZWebAppServiceContext } from './web-app-service';
 import { useWebApp, useWebAppsRoot, ZWebAppsContext } from './web-apps.context';
 
 describe('WebApps', () => {

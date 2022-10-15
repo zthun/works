@@ -1,7 +1,9 @@
 import { IZWebApp } from '@zthun/works.core';
 import { ZHttpRequestBuilder, ZHttpService } from '@zthun/works.http';
 import { ZUrlBuilder } from '@zthun/works.url';
+import { first } from 'lodash';
 import { createContext, useContext } from 'react';
+import { useAsyncState } from '../state/use-async-state';
 
 /**
  * Represents a service used to retrieve the applications in the zthunworks domain.
@@ -10,10 +12,23 @@ export interface IZWebAppService {
   /**
    * Get a list of all apps in the system.
    *
-   * @returns A promise that resolves with every app, or a rejected
-   *          promise if an error occurs.
+   * @returns
+   *        A promise that resolves with every app, or a rejected
+   *        promise if an error occurs.
    */
   list(): Promise<IZWebApp[]>;
+
+  /**
+   * Gets a single web application.
+   *
+   * @param id
+   *        The id of the web app to retrieve.
+   *
+   * @returns
+   *        The web app discovered.  Returns rejected
+   *        if the web app cannot be found.
+   */
+  read(id: string): Promise<IZWebApp>;
 }
 
 /**
@@ -47,6 +62,27 @@ export class ZWebAppService implements IZWebAppService {
     const apps = await this._http.request<IZWebApp[]>(req);
     return apps.data;
   }
+
+  /**
+   * Gets a single web application.
+   *
+   * @param id
+   *        The id of the web app to retrieve.
+   *
+   * @returns
+   *        The web app discovered.  Returns rejected
+   *        if the web app cannot be found.
+   */
+  public async read(id: string): Promise<IZWebApp> {
+    const apps = await this.list();
+    const app = first(apps.filter((app) => app._id === id));
+
+    if (!app) {
+      throw new Error(`The web app with id, ${id}, does not exist.`);
+    }
+
+    return app;
+  }
 }
 
 /**
@@ -61,4 +97,29 @@ export const ZWebAppServiceContext = createContext<IZWebAppService>(new ZWebAppS
  */
 export function useWebAppService() {
   return useContext(ZWebAppServiceContext);
+}
+
+/**
+ * Uses all web apps.
+ *
+ * @returns
+ *        An async state of all web apps.
+ */
+export function useWebApps() {
+  const service = useWebAppService();
+  return useAsyncState(() => service.list());
+}
+
+/**
+ * Uses a specific web application.
+ *
+ * @param id
+ *        The id of the application to retrieve.
+ *
+ * @returns
+ *        An async state of the webapp to retrieve.
+ */
+export function useWebApp(id: string) {
+  const service = useWebAppService();
+  return useAsyncState(() => service.read(id));
 }
