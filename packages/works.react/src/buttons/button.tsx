@@ -19,6 +19,7 @@ export interface IZButton
     IZComponentLoading,
     IZComponentStyle {
   color?: ZStateColor;
+  borderless?: boolean;
   outline?: boolean;
   tooltip?: ReactNode;
 
@@ -34,6 +35,17 @@ const useButtonStyles = makeStyles<IZButton>()((theme) => ({
     marginLeft: theme.sizing.gaps.sm,
     marginRight: theme.sizing.gaps.sm,
     display: 'flex'
+  },
+  borderless: {
+    'border': 0,
+    'boxShadow': 'none',
+
+    '&:hover': {
+      boxShadow: 'none'
+    },
+    '&:active': {
+      boxShadow: 'none'
+    }
   }
 }));
 
@@ -45,10 +57,17 @@ const useButtonStyles = makeStyles<IZButton>()((theme) => ({
  * @returns The JSX to render this button.
  */
 export function ZButton(props: IZButton) {
-  const { avatar, className, color, disabled, loading, label, outline, tooltip, onClick = noop } = props;
+  const { avatar, className, color, borderless, disabled, loading, label, outline, tooltip, onClick = noop } = props;
 
   const { classes } = useButtonStyles(props);
-  const buttonClass = cssClass('ZButton-root', className, classes.button);
+  const buttonClass = cssClass(
+    'ZButton-root',
+    ['ZButton-borderless', !!borderless],
+    ['ZButton-outline', !!outline],
+    className,
+    classes.button,
+    [classes.borderless, !!borderless]
+  );
   const contentClass = cssClass('ZButton-content', classes.content);
   const variant = outline ? 'outlined' : 'contained';
 

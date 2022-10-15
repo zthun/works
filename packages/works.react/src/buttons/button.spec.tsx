@@ -14,6 +14,7 @@ describe('ZButton', () => {
   let loading: boolean | undefined;
   let disabled: boolean | undefined;
   let outline: boolean | undefined;
+  let borderless: boolean | undefined;
   let onClick: jest.Mock | undefined;
 
   async function createTestTarget() {
@@ -23,6 +24,7 @@ describe('ZButton', () => {
         disabled={disabled}
         loading={loading}
         outline={outline}
+        borderless={borderless}
         onClick={onClick}
         label='ZButton-test-content'
       />
@@ -115,7 +117,27 @@ describe('ZButton', () => {
     });
   });
 
-  describe('Color', () => {
+  describe('Borderless', () => {
+    async function assertBorderless(expected: boolean, _borderless: boolean) {
+      // Arrange
+      borderless = _borderless;
+      const target = await createTestTarget();
+      // Act.
+      const actual = await target.borderless();
+      // Assert
+      expect(!!actual).toEqual(expected);
+    }
+
+    it('should keep the border if the borderless flag is false.', async () => {
+      await assertBorderless(false, false);
+    });
+
+    it('should keep the border if the borderless flag is true.', async () => {
+      await assertBorderless(true, true);
+    });
+  });
+
+  describe('Outline', () => {
     async function assertOutline(expected: boolean, _outline: boolean | undefined) {
       // Arrange
       outline = _outline;

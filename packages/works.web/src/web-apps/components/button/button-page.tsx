@@ -26,6 +26,7 @@ export function ZButtonPage() {
   const [disabled, setDisabled] = useSafeState(false);
   const [color, setColor] = useSafeState<ZStateColor>(ZStateColor.Inherit);
   const [outline, setOutline] = useSafeState(false);
+  const [borderless, setBorderless] = useSafeState(false);
   const colors = values(ZStateColor);
   const _setColor = setFirstOrDefault.bind(null, setColor, ZStateColor.Inherit);
 
@@ -67,6 +68,7 @@ export function ZButtonPage() {
         loading={loading}
         disabled={disabled}
         color={color}
+        borderless={borderless}
         outline={outline}
         onClick={handleClick}
         label='Button'
@@ -79,6 +81,7 @@ export function ZButtonPage() {
         loading={loading}
         disabled={disabled}
         color={color}
+        borderless={borderless}
         outline={outline}
         onClick={handleClick}
         tooltip='Iconography Button'
@@ -89,6 +92,7 @@ export function ZButtonPage() {
         <ZBooleanSwitch value={loading} onValueChange={setLoading} label='Loading' />
         <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
         <ZBooleanSwitch value={outline} onValueChange={setOutline} label='Outline' />
+        <ZBooleanSwitch value={borderless} onValueChange={setBorderless} label='Borderless' />
         <ZChoiceDropDown
           value={[color]}
           onValueChange={_setColor}
