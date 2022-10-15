@@ -42,7 +42,17 @@ export class ZButtonComponentModel {
    *        True if the button is outlined.  False otherwise.
    */
   public async outlined(): Promise<boolean> {
-    return Promise.resolve(this._element.classList.contains('MuiButton-outlined'));
+    return Promise.resolve(this._element.classList.contains('ZButton-outlined'));
+  }
+
+  /**
+   * Gets whether the button is borderless.
+   *
+   * @returns
+   *        True if the button is borderless.  False otherwise.
+   */
+  public async borderless(): Promise<boolean> {
+    return Promise.resolve(this._element.classList.contains('ZButton-borderless'));
   }
 
   /**
