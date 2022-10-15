@@ -4,7 +4,7 @@ import { act, render, waitFor } from '@testing-library/react';
 import { createMocked } from '@zthun/works.jest';
 import { ZUrlBuilder } from '@zthun/works.url';
 import React from 'react';
-import { IZWebAppService, ZWebAppServiceContext } from '../apps/web-app-service.context';
+import { IZWebAppService, ZWebAppServiceContext } from '../apps/web-app-service';
 import { IZHealthService, ZHealthServiceContext } from '../health/health-service.context';
 import { IZIdentityService, ZIdentityServiceContext } from '../identity/identity-service.context';
 import { ZWebAppLayout } from './web-app-layout';
