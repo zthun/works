@@ -33,7 +33,7 @@ describe('ZButton', () => {
     const result = await new ZCircusSetupRender(element).setup();
     await waiter.wait(() => !!ZButtonComponentModel.find(result.container).length);
     const [target] = ZButtonComponentModel.find(result.container);
-    return new ZButtonComponentModel(target, performer);
+    return new ZButtonComponentModel(target, performer, waiter);
   }
 
   beforeEach(() => {
