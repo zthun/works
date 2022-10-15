@@ -4,12 +4,9 @@
 export { ZAlertList } from './alert/alert-list';
 export { useAlertService, ZAlertServiceContext } from './alert/alert-service.context';
 // Apps
-export {
-  IZWebAppService,
-  useWebAppService,
-  ZWebAppService,
-  ZWebAppServiceContext
-} from './apps/web-app-service.context';
+export { IZWebAppHomeButton, ZWebAppHomeButton } from './apps/web-app-home-button';
+export { ZWebAppHomeButtonComponentModel } from './apps/web-app-home-button.cm';
+export { IZWebAppService, useWebAppService, ZWebAppService, ZWebAppServiceContext } from './apps/web-app-service';
 export { useWebApp, useWebApps, useWebAppsAndWatch, useWebAppsRoot, ZWebAppsContext } from './apps/web-apps.context';
 // Buttons
 export { IZButton, ZButton } from './buttons/button';
@@ -58,10 +55,14 @@ export { ZChoiceAutocomplete } from './form/choice-autocomplete';
 export { ZChoiceDropDown } from './form/choice-drop-down';
 export { ZChoiceOptionComponentModel } from './form/choice-option.cm';
 export { ZChoiceComponentModel } from './form/choice.cm';
+// Health
+export { ZHealthIndicator } from './health/health-indicator';
+export { ZHealthIndicatorComponentModel } from './health/health-indicator.cm';
 // Http
 export { useHttpService, ZHttpServiceContext } from './http/http-service.context';
 // Identity
 export { IZIdentityButtonProps, ZIdentityButton } from './identity/identity-button';
+export { ZIdentityButtonComponentModel } from './identity/identity-button.cm';
 export {
   selectAvatar,
   useIdentityService,
