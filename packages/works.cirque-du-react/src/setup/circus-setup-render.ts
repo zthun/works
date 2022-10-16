@@ -1,4 +1,4 @@
-import { act, render, RenderOptions, RenderResult } from '@testing-library/react';
+import { render, RenderOptions, RenderResult } from '@testing-library/react/pure';
 import { IZCircusSetup } from '@zthun/works.cirque';
 import { ReactElement } from 'react';
 
@@ -14,7 +14,11 @@ export class ZCircusSetupRender implements IZCircusSetup<RenderResult> {
    * @param _options
    *        The options for the render.
    */
-  public constructor(private _element: ReactElement, private _options?: RenderOptions<any, any, any>) {}
+  public constructor(private _element: ReactElement, private _options?: RenderOptions<any, any, any>) {
+    // We will flush the event loops ourselves.  Trying to mingle this with @testing-library
+    // is a mess.  So we will just turn all this off.
+    global.IS_REACT_ACT_ENVIRONMENT = false;
+  }
 
   /**
    * Renders the element and returns the result once it is ready.
@@ -24,13 +28,8 @@ export class ZCircusSetupRender implements IZCircusSetup<RenderResult> {
    *      result if the render never becomes ready.
    */
   public async setup(): Promise<RenderResult> {
-    let result: RenderResult;
-
-    await act(async () => {
-      result = render(this._element, this._options);
-    });
-
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return result!;
+    const result = render(this._element, this._options);
+    await new Promise((resolve) => setTimeout(resolve, 1));
+    return result;
   }
 }

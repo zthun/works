@@ -35,6 +35,9 @@ export class ZCircusActBuilder {
   public moveTo: (element: Element) => this = this._action.bind(this, ZCircusActionType.MoveTo);
   public leftMouseDown: () => this = this._action.bind(this, ZCircusActionType.LeftMouseDown);
   public leftMouseUp: () => this = this._action.bind(this, ZCircusActionType.LeftMouseUp);
+  public keysClick: (keys: string) => this = this._action.bind(this, ZCircusActionType.KeysClick);
+  public keysPress: (keys: string) => this = this._action.bind(this, ZCircusActionType.KeysPress);
+  public keysRelease: (keys: string) => this = this._action.bind(this, ZCircusActionType.KeysRelease);
   public magic: (action: () => Promise<any>) => this = this._action.bind(this, ZCircusActionType.Magic);
 
   /**
@@ -45,6 +48,19 @@ export class ZCircusActBuilder {
    */
   public leftMouseClick(): this {
     return this.leftMouseDown().leftMouseUp();
+  }
+
+  /**
+   * Alias to moveTo + leftMouseClick
+   *
+   * @param element
+   *        The element to click.
+   *
+   * @returns
+   *        This object.
+   */
+  public click(element: Element) {
+    return this.moveTo(element).leftMouseClick();
   }
 
   /**
