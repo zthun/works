@@ -2,6 +2,7 @@ import AbcIcon from '@mui/icons-material/Abc';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import ElectricalServicesIcon from '@mui/icons-material/ElectricalServices';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SmartButtonIcon from '@mui/icons-material/SmartButton';
 import StartIcon from '@mui/icons-material/Start';
@@ -24,6 +25,7 @@ import { ZAlertsPage } from './components/alerts-page';
 import { ZBooleanPage } from './components/boolean-page';
 import { ZButtonPage } from './components/button-page';
 import { ZChoicePage } from './components/choice-page';
+import { ZDrawerPage } from './components/drawer-page';
 import { ZTypographyPage } from './components/typography-page';
 import { ZGettingStartedPage } from './getting-started/getting-started-page';
 
@@ -74,6 +76,11 @@ export function ZWebAppsPage() {
             label='Choice'
           />
           <ZMenuItem
+            avatar={<MenuOpenIcon color='success' />}
+            onClick={navigate.bind(null, 'components/drawer')}
+            label='Drawer'
+          />
+          <ZMenuItem
             avatar={<AbcIcon color='inherit' />}
             onClick={navigate.bind(null, 'components/typography')}
             label='Typography'
@@ -91,6 +98,7 @@ export function ZWebAppsPage() {
           <ZRoute path='boolean' element={<ZBooleanPage />} />
           <ZRoute path='button' element={<ZButtonPage />} />
           <ZRoute path='choice' element={<ZChoicePage />} />
+          <ZRoute path='drawer' element={<ZDrawerPage />} />
           <ZRoute path='typography' element={<ZTypographyPage />} />
         </ZRoute>
         <ZRoute path='/' element={<ZNavigate to='getting-started' />} />

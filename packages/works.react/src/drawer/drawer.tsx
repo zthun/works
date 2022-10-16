@@ -3,9 +3,13 @@ import { cssClass } from '@zthun/works.core';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
 import { IZComponentStyle } from '../component/component-style.interface';
+import { ZStateAnchor } from '../theme/state-anchor';
 
+/**
+ * Represents props for the drawer.
+ */
 export interface IZDrawer extends IZComponentHierarchy, IZComponentStyle {
-  anchor?: 'left' | 'right' | 'top' | 'bottom';
+  anchor?: ZStateAnchor;
   open: boolean;
 
   onClose(): void;
@@ -25,7 +29,7 @@ export function ZDrawer(props: IZDrawer) {
   const _className = cssClass('ZDrawer-root', className);
 
   return (
-    <Drawer className={_className} anchor={anchor} open={open} onClose={onClose} transitionDuration={10}>
+    <Drawer className={_className} anchor={anchor} open={open} onClose={onClose}>
       {children}
     </Drawer>
   );

@@ -39,6 +39,11 @@ export { ZContent } from './content/content';
 // Doc
 export { renderMarkdownPage, ZMarkdownPage } from './doc/markdown-page';
 export { IZMarkdownProps, ZMarkdownViewer } from './doc/markdown-viewer';
+// Drawer
+export { IZDrawer, ZDrawer } from './drawer/drawer';
+export { IZDrawerButton, ZDrawerButton } from './drawer/drawer-button';
+export { ZDrawerButtonComponentModel } from './drawer/drawer-button.cm';
+export { ZDrawerComponentModel } from './drawer/drawer.cm';
 // Error
 export { useErrorHandler, ZErrorHandlerContext } from './error/error-handler.context';
 export { ZErrorMessageHandlerAlert } from './error/error-message-handler-alert';
@@ -73,10 +78,11 @@ export { useIdentity, useIdentityAndWatch, useIdentityRoot, ZIdentityContext } f
 // Image
 export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
 export { ZImageSource } from './image/image-source';
-// Layout
 export { IZGridLayout, ZGridLayout } from './layout/grid-layout';
 export { IZLineItemLayout, ZLineItemLayout } from './layout/line-item-layout';
 export { ZLineItemLayoutComponentModel } from './layout/line-item-layout.cm';
+// Layout
+export { ZPaddedBox } from './layout/padded-box';
 export { ZWebAppLayout } from './layout/web-app-layout';
 // Loading
 export { ZCircularBackdrop } from './loading/circular-backdrop';
@@ -103,7 +109,10 @@ export { useWatchableState } from './state/use-watchable-state.hook';
 // Theme
 export { makeStyles } from './theme/make-styles';
 export { shade } from './theme/shade';
+export { ZStateAnchor } from './theme/state-anchor';
 export { ZStateColor } from './theme/state-color';
+export { ZStateOrientation } from './theme/state-orientation';
+export { ZStateSize } from './theme/state-size';
 // Toolbar
 export { ZToolbar } from './toolbar/toolbar';
 // Top
