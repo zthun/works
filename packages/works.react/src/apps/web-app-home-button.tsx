@@ -3,10 +3,11 @@ import ErrorIcon from '@mui/icons-material/Error';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import { cssClass } from '@zthun/works.core';
 
-import { noop, startCase } from 'lodash';
+import { startCase } from 'lodash';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IZButton, ZButton } from '../buttons/button';
+import { IZComponentStyle } from '../component/component-style.interface';
 import { ZImageSource } from '../image/image-source';
 import { asStateData, isStateErrored, isStateLoading } from '../state/use-async-state';
 import { makeStyles } from '../theme/make-styles';
@@ -16,7 +17,7 @@ import { useWebApp } from './web-app-service';
 /**
  * The properties for the web app home button.
  */
-export interface IZWebAppHomeButton extends Omit<IZButton, 'label' | 'avatar' | 'onClick'> {
+export interface IZWebAppHomeButton extends IZComponentStyle {
   /**
    * The application id to display the icon, name, and description for.
    */
@@ -28,14 +29,9 @@ export interface IZWebAppHomeButton extends Omit<IZButton, 'label' | 'avatar' | 
   route?: string;
 
   /**
-   * An event which occurs before the navigation.
+   * Props for the underlying button component.
    */
-  onBeforeNavigate?(): any;
-
-  /**
-   * An event which occurs after the navigation happens.
-   */
-  onAfterNavigate?(): any;
+  ButtonProps?: Omit<IZButton, 'avatar' | 'label' | 'loading' | 'onClick'>;
 }
 
 const useWebAppHomeButtonStyles = makeStyles()((theme) => ({
@@ -72,17 +68,12 @@ const useWebAppHomeButtonStyles = makeStyles()((theme) => ({
  *        The JSX for the home button.
  */
 export function ZWebAppHomeButton(props: IZWebAppHomeButton) {
-  const { className, whoami, route = '/', onBeforeNavigate = noop, onAfterNavigate = noop } = props;
+  const { className, whoami, route = '/', ButtonProps } = props;
   const [who] = useWebApp(whoami);
   const navigate = useNavigate();
   const { classes } = useWebAppHomeButtonStyles();
   const _className = cssClass('ZWebAppHomeButton-root', className);
-
-  const handleClick = () => {
-    onBeforeNavigate();
-    navigate(route);
-    onAfterNavigate();
-  };
+  const _buttonClassName = cssClass('ZWebAppHomeButton-button', ButtonProps?.className);
 
   const renderAvatar = () => {
     const className = cssClass('ZWebAppHomeButton-avatar', classes.avatar);
@@ -123,13 +114,15 @@ export function ZWebAppHomeButton(props: IZWebAppHomeButton) {
   };
 
   return (
-    <ZButton
-      {...props}
-      className={_className}
-      avatar={renderAvatar()}
-      label={renderLabel()}
-      loading={isStateLoading(who)}
-      onClick={handleClick}
-    />
+    <div className={_className}>
+      <ZButton
+        {...ButtonProps}
+        className={_buttonClassName}
+        avatar={renderAvatar()}
+        label={renderLabel()}
+        loading={isStateLoading(who)}
+        onClick={navigate.bind(null, route)}
+      />
+    </div>
   );
 }

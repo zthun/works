@@ -1,12 +1,11 @@
 import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
+import { required } from '@zthun/works.core';
 import { ZButtonComponentModel } from '../buttons/button.cm';
 
 /**
  * Represents the component model for the ZWebAppHomeButton.
  */
 export class ZWebAppHomeButtonComponentModel {
-  private readonly _button: ZButtonComponentModel;
-
   /**
    * Initializes a new instance of this object.
    *
@@ -18,21 +17,21 @@ export class ZWebAppHomeButtonComponentModel {
    *        The waiter responsible for waiting for load states.
    */
   public constructor(
-    private readonly _element: HTMLButtonElement,
-    readonly _performer: IZCircusPerformer,
-    readonly _waiter: IZCircusWait
-  ) {
-    this._button = new ZButtonComponentModel(_element, _performer, _waiter);
-  }
+    private readonly _element: HTMLElement,
+    private readonly _performer: IZCircusPerformer,
+    private readonly _waiter: IZCircusWait
+  ) {}
 
   /**
-   * Gets whether the button is loading the web application.
+   * Gets the underlying button component.
    *
    * @returns
-   *        True if the home button is loading.  False otherwise.
+   *      The underlying button component.
    */
-  public async loading(): Promise<boolean> {
-    return this._button.loading();
+  public async button(): Promise<ZButtonComponentModel> {
+    const clasz = '.ZWebAppHomeButton-button';
+    const btn = await required(this._element.querySelector<HTMLButtonElement>(clasz));
+    return new ZButtonComponentModel(btn, this._performer, this._waiter);
   }
 
   /**
@@ -53,24 +52,6 @@ export class ZWebAppHomeButtonComponentModel {
    */
   public async description(): Promise<string | null | undefined> {
     return this._element.querySelector('.ZWebAppHomeButton-description')?.textContent;
-  }
-
-  /**
-   * Waits for the loading to complete.
-   *
-   * @returns A promise that resolves once the button is ready.
-   */
-  public load(): Promise<void> {
-    return this._button.load();
-  }
-
-  /**
-   * Clicks the button.
-   *
-   * @returns A promise that resolves once the button is clicked.
-   */
-  public navigate(): Promise<void> {
-    return this._button.click();
   }
 
   /**

@@ -21,19 +21,12 @@ describe('ZWebAppHomeButton', () => {
   let route: string | undefined;
   let testApp: IZWebApp;
   let webAppService: jest.Mocked<IZWebAppService>;
-  let onBeforeNavigate: jest.Mock | undefined;
-  let onAfterNavigate: jest.Mock | undefined;
 
   async function createTestTarget() {
     const element = (
       <ZWebAppServiceContext.Provider value={webAppService}>
         <ZTestRouter location={history.location} navigator={history}>
-          <ZWebAppHomeButton
-            whoami={whoami}
-            route={route}
-            onBeforeNavigate={onBeforeNavigate}
-            onAfterNavigate={onAfterNavigate}
-          />
+          <ZWebAppHomeButton whoami={whoami} route={route} />
         </ZTestRouter>
       </ZWebAppServiceContext.Provider>
     );
@@ -69,7 +62,7 @@ describe('ZWebAppHomeButton', () => {
       webAppService.read.mockReturnValue(new Promise(noop));
       const target = await createTestTarget();
       // Act.
-      const actual = await target.loading();
+      const actual = await (await target.button()).loading();
       // Assert.
       expect(actual).toBeTruthy();
     });
@@ -80,7 +73,7 @@ describe('ZWebAppHomeButton', () => {
       // Arrange.
       delete testApp.icon;
       const target = await createTestTarget();
-      await target.load();
+      await (await target.button()).load();
       // Act.
       const actual = await target.name();
       // Assert.
@@ -91,7 +84,7 @@ describe('ZWebAppHomeButton', () => {
       // Arrange.
       webAppService.read.mockRejectedValue(new Error('Something went wrong'));
       const target = await createTestTarget();
-      await target.load();
+      await (await target.button()).load();
       const expected = startCase(whoami);
       // Act.
       const actual = await target.name();
@@ -104,7 +97,7 @@ describe('ZWebAppHomeButton', () => {
     it('should render the short description', async () => {
       // Arrange.
       const target = await createTestTarget();
-      await target.load();
+      await (await target.button()).load();
       // act.
       const actual = await target.description();
       // Assert.
@@ -116,7 +109,7 @@ describe('ZWebAppHomeButton', () => {
       const expected = new Error('Something went wrong');
       webAppService.read.mockRejectedValue(expected);
       const target = await createTestTarget();
-      await target.load();
+      await (await target.button()).load();
       // act.
       const actual = await target.description();
       // Assert.
@@ -128,9 +121,10 @@ describe('ZWebAppHomeButton', () => {
     it('should navigate to the home route', async () => {
       // Arrange.
       const target = await createTestTarget();
-      await target.load();
+      const button = await target.button();
+      await button.load();
       // Act.
-      await target.navigate();
+      await button.click();
       // Assert.
       expect(history.location.pathname).toEqual('/');
     });
@@ -139,33 +133,12 @@ describe('ZWebAppHomeButton', () => {
       // Arrange.
       route = '/custom';
       const target = await createTestTarget();
-      await target.load();
+      const button = await target.button();
+      await button.load();
       // Act.
-      await target.navigate();
+      await button.click();
       // Assert.
       expect(history.location.pathname).toEqual('/custom');
-    });
-
-    it('should raise the onBeforeNavigate event', async () => {
-      // Arrange.
-      onBeforeNavigate = jest.fn();
-      const target = await createTestTarget();
-      await target.load();
-      // Act.
-      await target.navigate();
-      // Assert.
-      expect(onBeforeNavigate).toHaveBeenCalled();
-    });
-
-    it('should raise the onAfterNavigate event', async () => {
-      // Arrange.
-      onAfterNavigate = jest.fn();
-      const target = await createTestTarget();
-      await target.load();
-      // Act.
-      await target.navigate();
-      // Assert.
-      expect(onAfterNavigate).toHaveBeenCalled();
     });
   });
 });
