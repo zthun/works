@@ -20,11 +20,11 @@ import {
   ZToolbar
 } from '@zthun/works.react';
 import React from 'react';
-import { ZAlertsPage } from './components/alerts/alerts-page';
-import { ZBooleanPage } from './components/boolean/boolean-page';
-import { ZButtonPage } from './components/button/button-page';
-import { ZChoicePage } from './components/choice/choice-page';
-import { ZTypographyPage } from './components/typography/typography-page';
+import { ZAlertsPage } from './components/alerts-page';
+import { ZBooleanPage } from './components/boolean-page';
+import { ZButtonPage } from './components/button-page';
+import { ZChoicePage } from './components/choice-page';
+import { ZTypographyPage } from './components/typography-page';
 import { ZGettingStartedPage } from './getting-started/getting-started-page';
 
 const useWebAppPageStyles = makeStyles()((theme) => ({
