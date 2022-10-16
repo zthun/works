@@ -65,7 +65,7 @@ describe('ZChoice', () => {
     selected = [expected.id];
     const target = await createTestTarget();
     // Act.
-    const [_selected] = target.selected;
+    const [_selected] = await target.selected();
     const actual = _selected.text;
     // Assert.
     expect(actual).toEqual(expected.name);
@@ -77,7 +77,7 @@ describe('ZChoice', () => {
     selected = [expected];
     const target = await createTestTarget();
     // Act.
-    const [_selected] = target.selected;
+    const [_selected] = await target.selected();
     const actual = _selected.text;
     // Assert.
     expect(actual).toEqual(expected);
@@ -118,7 +118,8 @@ describe('ZChoice', () => {
     // Act.
     await target.select(options[0]);
     await target.select(options[1]);
-    const actual = target.selected.map((ch) => ch.text);
+    const selection = await target.selected();
+    const actual = selection.map((ch) => ch.text);
     // Assert
     expect(actual).toEqual(expected);
   }
@@ -134,7 +135,8 @@ describe('ZChoice', () => {
     const menu = await target.open();
     await target.select(menu[0]);
     await target.select(menu[1]);
-    const actual = target.selected.map((ch) => ch.text);
+    const selection = await target.selected();
+    const actual = selection.map((ch) => ch.text);
     // Assert.
     expect(actual).toEqual(expected);
   }
@@ -146,7 +148,7 @@ describe('ZChoice', () => {
     const target = await createTestTarget();
     // Act.
     await target.select('not-an-option');
-    const actual = target.selected;
+    const actual = await target.selected();
     // Assert.
     expect(actual).toEqual([]);
   }
@@ -217,7 +219,7 @@ describe('ZChoice', () => {
       selected = [expected];
       const target = await createTestTarget();
       // Act.
-      const [_selected] = target.selected;
+      const [_selected] = await target.selected();
       const actual = _selected.text;
       warn.mockRestore();
       // Assert.

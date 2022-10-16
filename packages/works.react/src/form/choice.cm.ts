@@ -25,11 +25,21 @@ export class ZChoiceComponentModel {
 
   /**
    * Gets the list of selected items.
+   *
+   * @returns The list of selected items.
    */
-  public get selected(): ZChoiceOptionComponentModel[] {
-    return Array.from(this._element.querySelectorAll<HTMLElement>('.ZChoice-value')).map(
-      (e: HTMLElement) => new ZChoiceOptionComponentModel(e)
-    );
+  private _selected(): ZChoiceOptionComponentModel[] {
+    const values = this._element.querySelectorAll<HTMLElement>('.ZChoice-value');
+    return Array.from(values).map((e) => new ZChoiceOptionComponentModel(e));
+  }
+
+  /**
+   * Gets the list of selected items.
+   *
+   * @returns The list of selected items.
+   */
+  public selected(): Promise<ZChoiceOptionComponentModel[]> {
+    return Promise.resolve(this._selected());
   }
 
   /**
@@ -58,8 +68,9 @@ export class ZChoiceComponentModel {
    *        A promise that resolves once the list is
    *        hidden.
    */
-  public async close(): Promise<void> {
-    return Promise.resolve();
+  public close(): Promise<void> {
+    const act = new ZCircusActBuilder().keysClick('[Escape]').build();
+    return this._performer.perform(act);
   }
 
   /**
