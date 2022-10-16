@@ -5,6 +5,7 @@ import {
   Route,
   Router,
   Routes,
+  useLocation as _useLocation,
   useNavigate as _useNavigate,
   useParams as _useParams
 } from 'react-router-dom';
@@ -17,4 +18,5 @@ export const ZNavigate = Navigate;
 export const ZOutlet = Outlet;
 
 export const useNavigate = _useNavigate;
+export const useLocation = _useLocation;
 export const useParams = _useParams;
