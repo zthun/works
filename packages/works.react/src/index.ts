@@ -45,9 +45,6 @@ export { IZComponentStyle } from './component/component-style.interface';
 export { IZComponentValue } from './component/component-value';
 // Content
 export { ZContent } from './content/content';
-// Doc
-export { renderMarkdownPage, ZMarkdownPage } from './doc/markdown-page';
-export { IZMarkdownProps, ZMarkdownViewer } from './doc/markdown-viewer';
 // Drawer
 export { IZDrawer, ZDrawer } from './drawer/drawer';
 export { IZDrawerButton, ZDrawerButton } from './drawer/drawer-button';

@@ -2,8 +2,7 @@
 import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
 import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
 import { identity, noop, range } from 'lodash';
-import React from 'react';
-import { ReactNode } from 'react-markdown';
+import React, { ReactNode } from 'react';
 import { ZChoiceAutocomplete } from './choice-autocomplete';
 import { ZChoiceDropDown } from './choice-drop-down';
 import { ZChoiceComponentModel } from './choice.cm';
