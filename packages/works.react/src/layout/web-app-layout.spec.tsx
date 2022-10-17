@@ -2,21 +2,20 @@
 
 import { act, render, waitFor } from '@testing-library/react';
 import { createMocked } from '@zthun/works.jest';
-import { ZUrlBuilder } from '@zthun/works.url';
 import React from 'react';
 import { IZWebAppService, ZWebAppServiceContext } from '../apps/web-app-service';
 import { IZHealthService, ZHealthServiceContext } from '../health/health-service.context';
-import { IZIdentityService, ZIdentityServiceContext } from '../identity/identity-service.context';
+import { IZIdentityService, ZIdentityServiceContext } from '../identity/identity-service';
 import { ZWebAppLayout } from './web-app-layout';
 
 describe('ZWebAppLayout', () => {
-  let profileService: jest.Mocked<IZIdentityService>;
+  let identityService: jest.Mocked<IZIdentityService>;
   let healthService: jest.Mocked<IZHealthService>;
   let webAppService: jest.Mocked<IZWebAppService>;
 
   async function createTestTarget() {
     const target = render(
-      <ZIdentityServiceContext.Provider value={profileService}>
+      <ZIdentityServiceContext.Provider value={identityService}>
         <ZWebAppServiceContext.Provider value={webAppService}>
           <ZHealthServiceContext.Provider value={healthService}>
             <ZWebAppLayout whoami='docs' />
@@ -33,13 +32,12 @@ describe('ZWebAppLayout', () => {
   }
 
   beforeEach(() => {
-    profileService = createMocked(['read', 'getAvatar', 'getDisplay']);
-    profileService.read.mockRejectedValue('Not logged in.');
-    profileService.getAvatar.mockResolvedValue(new ZUrlBuilder().gravatar().build());
-    profileService.getDisplay.mockResolvedValue('');
+    identityService = createMocked(['read']);
+    identityService.read.mockRejectedValue('Not logged in.');
 
-    webAppService = createMocked<IZWebAppService>(['list']);
+    webAppService = createMocked<IZWebAppService>(['list', 'read']);
     webAppService.list.mockResolvedValue([]);
+    webAppService.read.mockRejectedValue(new Error('App not found'));
 
     healthService = createMocked<IZHealthService>(['read']);
     healthService.read.mockResolvedValue(true);
