@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import { cssClass } from '@zthun/works.core';
 import { noop } from 'lodash';
 import { IZComponentAvatar } from '../component/component-avatar';
-import { IZComponentDisabled } from '../component/component-disabled.interface';
+import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentLoading } from '../component/component-loading.interface';
 import { IZComponentStyle } from '../component/component-style.interface';

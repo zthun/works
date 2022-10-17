@@ -28,13 +28,15 @@ export { IZHttpStatusCodeCardProps, ZHttpStatusCodeCard } from './codes/http-cod
 export { IZStatusCodePageProps, ZStatusCodePage } from './codes/status-code-page';
 // Component
 export { IZComponentActionable } from './component/component-actionable.interface';
+export { IZComponentAdornment } from './component/component-adornment';
 export { IZComponentAvatar } from './component/component-avatar';
 export { IZComponentConfirmable } from './component/component-confirmable.interface';
 export { IZComponentDescription } from './component/component-description.interface';
 export { IZComponentDimensions2d } from './component/component-dimensions-2d';
-export { IZComponentDisabled } from './component/component-disabled.interface';
+export { IZComponentDisabled } from './component/component-disabled';
 export { IZComponentEntityRedirect } from './component/component-entity-redirect.interface';
 export { IZComponentHeader } from './component/component-header';
+export { IZComponentHeading } from './component/component-heading';
 export { IZComponentHierarchy } from './component/component-hierarchy.interface';
 export { IZComponentLabel } from './component/component-label';
 export { IZComponentLoading } from './component/component-loading.interface';

@@ -1,8 +1,6 @@
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
-import { IZComponentDisabled } from '../component/component-disabled.interface';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
-import { IZComponentLoading } from '../component/component-loading.interface';
 import { IZComponentStyle } from '../component/component-style.interface';
 import { makeStyles } from '../theme/make-styles';
 
@@ -18,8 +16,6 @@ const useToolbarStyles = makeStyles()((theme) => ({
     }
   }
 }));
-
-export interface IZToolbarItem extends IZComponentDisabled, IZComponentLoading, IZComponentStyle {}
 
 export interface IZToolbar extends IZComponentHierarchy, IZComponentStyle {}
 

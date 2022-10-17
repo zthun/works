@@ -1,7 +1,7 @@
 import { first } from 'lodash';
 import { ReactNode, useMemo } from 'react';
 import { v4 } from 'uuid';
-import { IZComponentDisabled } from '../component/component-disabled.interface';
+import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentStyle } from '../component/component-style.interface';
 import { IZComponentValue } from '../component/component-value';
