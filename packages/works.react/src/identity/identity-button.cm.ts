@@ -1,5 +1,6 @@
-import { IZCircusPerformer, IZCircusWait, ZCircusActBuilder } from '@zthun/works.cirque';
-import { get } from 'lodash';
+import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
+import { required } from '@zthun/works.core';
+import { ZButtonComponentModel } from '../buttons/button.cm';
 
 export type ZIdentityButtonState = 'authenticated' | 'unauthenticated' | 'loading';
 
@@ -21,92 +22,25 @@ export class ZIdentityButtonComponentModel {
   ) {}
 
   /**
-   * Gets the ready state of the button (IE. Not loading)
+   * Gets the underlying button component.
    *
    * @returns
-   *        True if this button is not loading, false otherwise.
+   *        The component model for the button.
    */
-  private _ready() {
-    return !this._element.classList.contains('ZIdentityButton-loading');
+  public async button(): Promise<ZButtonComponentModel> {
+    const [candidate] = ZButtonComponentModel.find(this._element);
+    const btn = await required(candidate);
+    return new ZButtonComponentModel(btn, this._performer, this._wait);
   }
 
   /**
-   * Gets the current state of the button.
+   * Gets whether the button is currently in the authenticated state.
    *
    * @returns
-   *        The state that the button is currently in.
+   *        True if the button is representing an authenticated state.
    */
-  public async state(): Promise<ZIdentityButtonState> {
-    if (!this._ready()) {
-      return 'loading';
-    }
-
-    return this._element.classList.contains('ZIdentityButton-profile') ? 'authenticated' : 'unauthenticated';
-  }
-
-  /**
-   * Gets whether this button is disabled.
-   *
-   * @returns
-   *        True if the button is disabled.  False otherwise.
-   *        This returns true if the button is loading.
-   */
-  public async disabled(): Promise<boolean> {
-    return get(this._element, 'disabled', true);
-  }
-
-  /**
-   * Checks the button to see if it's in the specific state.
-   *
-   * @param state
-   *        The state to check.
-   *
-   * @returns
-   *        True if this button is currently in the given state,
-   *        false otherwise.
-   */
-  private async _isState(state: ZIdentityButtonState) {
-    const _state = await this.state();
-    return _state === state;
-  }
-
-  /**
-   * Gets whether the button is currently loading the users profile information.
-   *
-   * @returns
-   *        True if the state is in the loading state.
-   */
-  public loading: () => Promise<boolean> = this._isState.bind(this, 'loading');
-
-  /**
-   * Gets whether the button is currently loading the users profile information.
-   *
-   * @returns
-   *        True if the state is in the loading state.
-   */
-  public authenticated: () => Promise<boolean> = this._isState.bind(this, 'authenticated');
-
-  /**
-   * Gets whether the button is currently loading the users profile information.
-   *
-   * @returns
-   *        True if the state is in the loading state.
-   */
-  public unauthenticated: () => Promise<boolean> = this._isState.bind(this, 'unauthenticated');
-
-  /**
-   * Waits for this button to finish loading the current profile.
-   */
-  public async load() {
-    await this._wait.wait(() => this._ready());
-  }
-
-  /**
-   * Clicks the button.
-   */
-  public async click() {
-    const act = new ZCircusActBuilder().moveTo(this._element).leftMouseClick().build();
-    await this._performer.perform(act);
+  public authenticated() {
+    return Promise.resolve(this._element.getAttribute('data-authenticated') === 'true');
   }
 
   /**

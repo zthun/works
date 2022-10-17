@@ -1,36 +1,30 @@
 import PersonIcon from '@mui/icons-material/Person';
-import { Button, Grid, Hidden, Typography } from '@mui/material';
-import { IZProfile } from '@zthun/works.core';
+import { cssClass, ZProfileAvatarSize } from '@zthun/works.core';
 import { ZUrlBuilder } from '@zthun/works.url';
-import { noop } from 'lodash';
-import React, { useEffect, useState } from 'react';
-import { IZComponentDisabled } from '../component/component-disabled.interface';
-import { ZCircularProgress } from '../loading/circular-progress';
+import md5 from 'md5';
+import React from 'react';
+import { useOptionalWebApp } from '../apps/web-app-service';
+import { IZButton, ZButton } from '../buttons/button';
+import { isStateLoaded, isStateLoading } from '../state/use-async-state';
 import { makeStyles } from '../theme/make-styles';
-import { useIdentityService } from './identity-service.context';
+import { useWindowService } from '../window/window-service.context';
+import { useIdentity } from './identity-service';
 
 /**
  * Represents properties for the profile button.
  */
-export interface IZIdentityButtonProps extends IZComponentDisabled {
+export interface IZIdentityButtonProps {
   /**
-   * The current profile being displayed.
+   * The properties for the inner button.
+   */
+  ButtonProps?: Omit<IZButton, 'avatar' | 'loading' | 'label' | 'onClick'>;
+
+  /**
+   * The application to navigate to when the profile button is clicked.
    *
-   * If this is undefined, then the loading indicator is shown.
-   * If this is null, then the Login button is shown.
-   * If this is truthy, then the profile display and avatar is shown.
+   * If this is falsy, then no navigation occurs.
    */
-  profile: IZProfile | null | undefined;
-
-  /**
-   * Occurs when the button is clicked when the Login button is displayed.
-   */
-  onLogin?: () => void;
-
-  /**
-   * Occurs when the button is clicked when the profile information is displayed.
-   */
-  onProfile?: () => void;
+  profileApp?: string | null;
 }
 
 const useIdentityButtonStyles = makeStyles()((theme) => ({
@@ -51,92 +45,61 @@ const useIdentityButtonStyles = makeStyles()((theme) => ({
  * @returns The jsx that renders the profile menu.
  */
 export function ZIdentityButton(props: IZIdentityButtonProps) {
-  const {
-    profile,
-    disabled = false,
+  const { ButtonProps, profileApp } = props;
+  const [profile] = useIdentity();
+  const [app] = useOptionalWebApp(profileApp);
+  const win = useWindowService();
+  const { classes } = useIdentityButtonStyles();
+  const authenticated = !!(isStateLoaded(profile) && profile);
 
-    onLogin = noop,
-    onProfile = noop
-  } = props;
+  const handleProfile = () => {
+    if (!isStateLoaded(profile) || !isStateLoaded(app) || app == null) {
+      return;
+    }
 
-  const profiles = useIdentityService();
-  const [avatar, setAvatar] = useState(new ZUrlBuilder().gravatar().build());
-  const [display, setDisplay] = useState('');
-  const styles = useIdentityButtonStyles();
+    win.open(app.domain, '_self');
+  };
 
-  useEffect(() => {
-    let _setAvatar = setAvatar;
-    let _setDisplay = setDisplay;
+  const renderLabel = () => {
+    if (!isStateLoaded(profile)) {
+      return null;
+    }
 
-    profiles.getAvatar(profile).then((a) => _setAvatar(a));
-    profiles.getDisplay(profile).then((d) => _setDisplay(d));
+    if (profile == null) {
+      return <>LOGIN</>;
+    }
 
-    return () => {
-      _setAvatar = noop;
-      _setDisplay = noop;
-    };
-  }, [profile]);
+    const display = profile?.display;
+    const email = profile?.email;
+    return display || email;
+  };
 
-  /**
-   * Creates the root button as a login button jsx.
-   *
-   * This should be used when the user is not logged in.
-   *
-   * @returns The jsx for the menu with a single login button.
-   */
-  function createLoginButton() {
-    return (
-      <Button
-        className='ZIdentityButton-root ZIdentityButton-login'
-        color='inherit'
-        disabled={disabled}
-        onClick={onLogin}
-      >
-        <PersonIcon />
-        <Hidden only='xs'>
-          <Typography>LOGIN</Typography>
-        </Hidden>
-      </Button>
-    );
-  }
+  const renderAvatar = () => {
+    if (!isStateLoaded(profile)) {
+      return null;
+    }
 
-  /**
-   * Creates the profile loading spinner.
-   *
-   * This should be used when the profile is undefined and loading.
-   *
-   * @returns The profile loading item jsx.
-   */
-  function createProfileLoading() {
-    return <ZCircularProgress className='ZIdentityButton-root ZIdentityButton-loading' />;
-  }
+    if (profile == null) {
+      return <PersonIcon />;
+    }
 
-  /**
-   * Creates the profile button jsx.
-   *
-   * This should be used if the user is logged in.
-   *
-   * @returns The profile menu jsx.
-   */
-  function createProfileButton() {
-    return (
-      <Button
-        className='ZIdentityButton-root ZIdentityButton-profile'
-        color='inherit'
-        onClick={onProfile}
-        disabled={disabled}
-      >
-        <Grid container spacing={2} justifyContent='center' alignItems='center' wrap='nowrap'>
-          <Grid item>
-            <img className={`ZIdentityButton-avatar ${styles.classes.avatar}`} src={avatar} />
-          </Grid>
-          <Hidden only='xs'>
-            <Grid item>{display}</Grid>
-          </Hidden>
-        </Grid>
-      </Button>
-    );
-  }
+    const clasz = cssClass('ZIdentityButton-avatar', classes.avatar);
 
-  return profile ? createProfileButton() : profile === undefined ? createProfileLoading() : createLoginButton();
+    const email = profile.email;
+    const avatar = profile.avatar || new ZUrlBuilder().gravatar(email ? md5(email) : '', ZProfileAvatarSize).build();
+
+    return <img className={clasz} src={avatar} />;
+  };
+
+  return (
+    <div className='ZIdentityButton-root' data-authenticated={authenticated}>
+      <ZButton
+        {...ButtonProps}
+        avatar={renderAvatar()}
+        label={renderLabel()}
+        loading={isStateLoading(profile)}
+        onClick={handleProfile}
+      />
+    </div>
+  );
 }
