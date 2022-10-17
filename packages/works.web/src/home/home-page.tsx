@@ -85,7 +85,7 @@ export function ZHomePage() {
           Web Apps should be small and portable and should do one thing and one thing well. Similar to how microservices
           operate, a tiny app is easier to maintain and a working application should minimize regressions between
           versions. The larger the application, the more likely that regressions will be found, so by having apps that
-          are small and focused, you can
+          are small and focused, you can minimize human error while providing features in a fast feedback loop.
         </ZParagraph>
       </ZPaperCard>
 

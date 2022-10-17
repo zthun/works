@@ -128,8 +128,6 @@ export { ZStateOrientation } from './theme/state-orientation';
 export { ZStateSize } from './theme/state-size';
 // Toolbar
 export { ZToolbar } from './toolbar/toolbar';
-// Top
-export { IZTopNavProps, ZTopNav } from './top/top-nav';
 // Typography
 export {
   IZTypographyProps,
