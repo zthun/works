@@ -4,6 +4,8 @@
 export { ZAlertList } from './alert/alert-list';
 export { useAlertService, ZAlertServiceContext } from './alert/alert-service.context';
 // Apps
+export { IZWebAppDrawer, ZWebAppDrawer } from './apps/web-app-drawer';
+export { ZWebAppDrawerComponentModel } from './apps/web-app-drawer.cm';
 export { IZWebAppHomeButton, ZWebAppHomeButton } from './apps/web-app-home-button';
 export { ZWebAppHomeButtonComponentModel } from './apps/web-app-home-button.cm';
 export { IZWebAppService, useWebAppService, ZWebAppService, ZWebAppServiceContext } from './apps/web-app-service';
