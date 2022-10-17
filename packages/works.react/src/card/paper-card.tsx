@@ -15,7 +15,7 @@ import React, { useState } from 'react';
 import { IZComponentActionable } from '../component/component-actionable.interface';
 import { IZComponentConfirmable } from '../component/component-confirmable.interface';
 import { IZComponentDisabled } from '../component/component-disabled.interface';
-import { IZComponentHeader } from '../component/component-header.interface';
+import { IZComponentHeader } from '../component/component-header';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
 import { IZComponentLoading } from '../component/component-loading.interface';
 import { IZComponentMedia } from '../component/component-media.interface';

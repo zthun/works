@@ -34,7 +34,7 @@ export { IZComponentDescription } from './component/component-description.interf
 export { IZComponentDimensions2d } from './component/component-dimensions-2d';
 export { IZComponentDisabled } from './component/component-disabled.interface';
 export { IZComponentEntityRedirect } from './component/component-entity-redirect.interface';
-export { IZComponentHeader } from './component/component-header.interface';
+export { IZComponentHeader } from './component/component-header';
 export { IZComponentHierarchy } from './component/component-hierarchy.interface';
 export { IZComponentLabel } from './component/component-label';
 export { IZComponentLoading } from './component/component-loading.interface';
