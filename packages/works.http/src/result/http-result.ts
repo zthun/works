@@ -13,7 +13,7 @@ export interface IZHttpResult<TResult = any> {
   /**
    * The set of headers that was returned.
    */
-  headers: Record<string, string>;
+  headers: Record<string, string | undefined>;
 
   /**
    * The actual body result of the invocation.
@@ -71,7 +71,7 @@ export class ZHttpResultBuilder<TData = any> {
    *
    * @returns This object.
    */
-  public headers(headers: Record<string, string>): this {
+  public headers(headers: Record<string, string | undefined>): this {
     this._result.headers = headers;
     return this;
   }
