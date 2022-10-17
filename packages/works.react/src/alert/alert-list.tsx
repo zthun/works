@@ -3,7 +3,7 @@ import { IZAlert } from '@zthun/works.message';
 import React, { useEffect } from 'react';
 import { useSafeState } from '../state/use-safe-state';
 import { makeStyles } from '../theme/make-styles';
-import { useAlertService } from './alert-service.context';
+import { useAlertService } from './alert-service';
 
 const useAlertStyles = makeStyles()((theme) => ({
   root: {

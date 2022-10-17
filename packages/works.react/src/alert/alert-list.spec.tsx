@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 import { v4 } from 'uuid';
 import { ZAlertList } from './alert-list';
 import { ZAlertListComponentModel } from './alert-list.cm';
-import { ZAlertServiceContext } from './alert-service.context';
+import { ZAlertServiceContext } from './alert-service';
 
 describe('ZAlertList', () => {
   const performer = new ZCircusPerformer();
