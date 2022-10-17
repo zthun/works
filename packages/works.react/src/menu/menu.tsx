@@ -2,7 +2,7 @@ import { Menu } from '@mui/material';
 import { cssClass } from '@zthun/works.core';
 import React, { useEffect, useRef } from 'react';
 import { IZButton, ZButton } from '../buttons/button';
-import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
+import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { usePropState } from '../state/use-prop-state';
 import { useSafeState } from '../state/use-safe-state';
 import { makeStyles } from '../theme/make-styles';

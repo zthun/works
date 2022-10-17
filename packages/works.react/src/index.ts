@@ -37,7 +37,7 @@ export { IZComponentDisabled } from './component/component-disabled';
 export { IZComponentEntityRedirect } from './component/component-entity-redirect.interface';
 export { IZComponentHeader } from './component/component-header';
 export { IZComponentHeading } from './component/component-heading';
-export { IZComponentHierarchy } from './component/component-hierarchy.interface';
+export { IZComponentHierarchy } from './component/component-hierarchy';
 export { IZComponentLabel } from './component/component-label';
 export { IZComponentLoading } from './component/component-loading.interface';
 export { IZComponentMedia } from './component/component-media.interface';
@@ -86,6 +86,9 @@ export { ZLineItemLayoutComponentModel } from './layout/line-item-layout.cm';
 // Layout
 export { ZPaddedBox } from './layout/padded-box';
 export { ZWebAppLayout } from './layout/web-app-layout';
+// List
+export { ZList } from './list/list';
+export { ZListLineItem } from './list/list-line-item';
 // Loading
 export { ZCircularBackdrop } from './loading/circular-backdrop';
 export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';

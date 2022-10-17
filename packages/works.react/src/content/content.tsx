@@ -1,6 +1,6 @@
 import React from 'react';
+import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { makeStyles } from '../theme/make-styles';
-import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
 
 const useContentStyles = makeStyles()((theme) => ({
   root: {

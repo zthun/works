@@ -3,7 +3,7 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { cssClass } from '@zthun/works.core';
 import React, { ReactNode, useEffect } from 'react';
 import { IZButton, ZButton } from '../buttons/button';
-import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
+import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { IZComponentStyle } from '../component/component-style.';
 import { useSafeState } from '../state/use-safe-state';
 import { IZDrawer, ZDrawer } from './drawer';

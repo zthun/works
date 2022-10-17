@@ -1,6 +1,6 @@
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
-import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
+import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
 

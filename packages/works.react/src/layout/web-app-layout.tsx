@@ -7,7 +7,7 @@ import { ZAlertList } from '../alert/alert-list';
 import { ZWebAppDrawer } from '../apps/web-app-drawer';
 import { ZWebAppHomeButton } from '../apps/web-app-home-button';
 import { ZStatusCodePage } from '../codes/status-code-page';
-import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
+import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { ZContent } from '../content/content';
 import { ZHealthIndicator } from '../health/health-indicator';
 import { ZIdentityButton } from '../identity/identity-button';

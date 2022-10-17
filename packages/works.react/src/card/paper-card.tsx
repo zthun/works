@@ -16,7 +16,7 @@ import { IZComponentActionable } from '../component/component-actionable.interfa
 import { IZComponentConfirmable } from '../component/component-confirmable.interface';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentHeader } from '../component/component-header';
-import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
+import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { IZComponentLoading } from '../component/component-loading.interface';
 import { IZComponentMedia } from '../component/component-media.interface';
 import { IZComponentSizeable } from '../component/component-sizeable.interface';
