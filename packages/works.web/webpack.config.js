@@ -4,6 +4,7 @@ const pkg = require('./package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const NodeWebpackPolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 function config(env) {
   const dir = path.resolve(__dirname, path.dirname(pkg.umd));
@@ -47,6 +48,7 @@ function config(env) {
       ]
     },
     plugins: [
+      new NodeWebpackPolyfillPlugin(),
       new HtmlWebpackPlugin({
         template: './src/index.html'
       }),
