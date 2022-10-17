@@ -83,6 +83,17 @@ services:
       - .:/usr/dev
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.apps run debug
+  # Apps
+  zthunworks-applications-roadblock-api:
+    image: zthun/roadblock.api:latest
+    depends_on:
+      - zthunworks-services-apps
+      - zthunworks-services-users
+      - zthunworks-services-vault
+      - zthunworks-services-notifications
+      - zthunworks-services-cookies
+  zthunworks-applications-roadblock-web:
+    image: zthun/roadblock.web:latest
   # Databases
   zthunworks-databases:
     image: mongo:5.0.5
