@@ -1,7 +1,7 @@
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import PublicIcon from '@mui/icons-material/Public';
 import Terminal from '@mui/icons-material/Terminal';
-import { makeStyles, useNavigate, useWebApp, ZPaperCard, ZParagraph, ZSubtitle } from '@zthun/works.react';
+import { asStateData, makeStyles, useNavigate, useWebApp, ZPaperCard, ZParagraph, ZSubtitle } from '@zthun/works.react';
 
 import React from 'react';
 
@@ -27,9 +27,10 @@ const useHomePageStyles = makeStyles()((theme) => ({
  * @returns The jsx that renders the home page.
  */
 export function ZHomePage() {
-  const learn = useWebApp('learn');
+  const [_learn] = useWebApp('learn');
   const { classes } = useHomePageStyles();
   const navigate = useNavigate();
+  const learn = asStateData(_learn);
 
   return (
     <div className='ZHomePage-root'>
