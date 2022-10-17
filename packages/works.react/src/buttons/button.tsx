@@ -7,7 +7,7 @@ import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentLoading } from '../component/component-loading.interface';
-import { IZComponentStyle } from '../component/component-style.interface';
+import { IZComponentStyle } from '../component/component-style.';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { makeStyles } from '../theme/make-styles';
 import { ZStateColor } from '../theme/state-color';

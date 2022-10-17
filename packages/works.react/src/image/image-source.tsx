@@ -3,7 +3,7 @@ import { ZDataUrlBuilder } from '@zthun/works.url';
 import React from 'react';
 import { IZComponentDimensions2d } from '../component/component-dimensions-2d';
 import { IZComponentSource } from '../component/component-source.interface';
-import { IZComponentStyle } from '../component/component-style.interface';
+import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
 
 export interface IZImageSourceProps extends IZComponentSource, IZComponentStyle, IZComponentDimensions2d {

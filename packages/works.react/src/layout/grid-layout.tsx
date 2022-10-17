@@ -2,7 +2,7 @@ import { cssClass } from '@zthun/works.core';
 import { Property } from 'csstype';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
-import { IZComponentStyle } from '../component/component-style.interface';
+import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
 
 export interface IZGridLayout extends IZComponentStyle, IZComponentHierarchy {

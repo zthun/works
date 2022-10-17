@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import React from 'react';
 import { IZComponentSizeable } from '../component/component-sizeable.interface';
-import { IZComponentStyle } from '../component/component-style.interface';
+import { IZComponentStyle } from '../component/component-style.';
 
 /**
  * Represents properties for the circular progress component.

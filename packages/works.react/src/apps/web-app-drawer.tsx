@@ -9,7 +9,7 @@ import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/materi
 import { cssClass, IZRouteOption } from '@zthun/works.core';
 import { kebabCase, startCase } from 'lodash';
 import React, { ReactNode } from 'react';
-import { IZComponentStyle } from '../component/component-style.interface';
+import { IZComponentStyle } from '../component/component-style.';
 import { IZDrawerButton, ZDrawerButton } from '../drawer/drawer-button';
 import { ZImageSource } from '../image/image-source';
 import { ZCircularProgress } from '../loading/circular-progress';

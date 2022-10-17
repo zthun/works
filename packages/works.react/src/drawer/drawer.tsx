@@ -2,7 +2,7 @@ import { Drawer } from '@mui/material';
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy.interface';
-import { IZComponentStyle } from '../component/component-style.interface';
+import { IZComponentStyle } from '../component/component-style.';
 import { ZStateAnchor } from '../theme/state-anchor';
 
 /**

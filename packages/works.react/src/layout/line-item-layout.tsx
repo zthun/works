@@ -1,6 +1,6 @@
 import { cssClass } from '@zthun/works.core';
 import React, { ReactNode } from 'react';
-import { IZComponentStyle } from '../component/component-style.interface';
+import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
 
 export interface IZLineItemLayout extends IZComponentStyle {

@@ -20,7 +20,7 @@ import { IZComponentHierarchy } from '../component/component-hierarchy.interface
 import { IZComponentLoading } from '../component/component-loading.interface';
 import { IZComponentMedia } from '../component/component-media.interface';
 import { IZComponentSizeable } from '../component/component-sizeable.interface';
-import { IZComponentStyle } from '../component/component-style.interface';
+import { IZComponentStyle } from '../component/component-style.';
 import { ZCircularBackdrop } from '../loading/circular-backdrop';
 import { makeStyles } from '../theme/make-styles';
 import { ZCaption, ZH2 } from '../typography/typography';
