@@ -121,5 +121,20 @@ export function useWebApps() {
  */
 export function useWebApp(id: string) {
   const service = useWebAppService();
-  return useAsyncState(() => service.read(id));
+  return useAsyncState(() => service.read(id), [id]);
+}
+
+/**
+ * Uses a specific web application.
+ *
+ * @param id
+ *        The id of the application to retrieve.  If this is null or
+ *        undefined, then null will be the result.
+ *
+ * @returns
+ *        An async state of the webapp to retrieve.
+ */
+export function useOptionalWebApp(id: string | null | undefined) {
+  const service = useWebAppService();
+  return useAsyncState(() => (id ? service.read(id) : Promise.resolve(null)), [id]);
 }
