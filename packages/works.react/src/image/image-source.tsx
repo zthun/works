@@ -5,6 +5,7 @@ import { IZComponentDimensions2d } from '../component/component-dimensions-2d';
 import { IZComponentSource } from '../component/component-source.interface';
 import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
+import { ZStateSize } from '../theme/state-size';
 
 export interface IZImageSourceProps extends IZComponentSource, IZComponentStyle, IZComponentDimensions2d {
   align?: 'left' | 'center' | 'right';
@@ -12,8 +13,8 @@ export interface IZImageSourceProps extends IZComponentSource, IZComponentStyle,
 
 const useImageSourceStyles = makeStyles<IZImageSourceProps>()((theme, props) => {
   const { align = 'center' } = props;
-  const height = theme.sizing.image[firstDefined('auto', props.height)];
-  const width = theme.sizing.image[firstDefined('auto', props.width)];
+  const height = theme.sizing.image[firstDefined(ZStateSize.Auto, props.height)];
+  const width = theme.sizing.image[firstDefined(ZStateSize.Auto, props.width)];
 
   return {
     root: {
