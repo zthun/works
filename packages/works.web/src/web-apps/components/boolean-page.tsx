@@ -8,7 +8,7 @@ import {
   ZButton,
   ZGridLayout,
   ZPaperCard,
-  ZStateColor,
+  ZSeverityColor,
   ZToolbar
 } from '@zthun/works.react';
 import React from 'react';
@@ -69,21 +69,21 @@ export function ZBooleanPage() {
         <ZButton
           avatar={<CheckBoxIcon color='success' />}
           outline
-          color={ZStateColor.Success}
+          color={ZSeverityColor.Success}
           onClick={setValue.bind(null, true)}
           label='True'
         />
         <ZButton
           avatar={<CheckBoxOutlineBlankIcon color='error' />}
           outline
-          color={ZStateColor.Error}
+          color={ZSeverityColor.Error}
           onClick={setValue.bind(null, false)}
           label='False'
         />
         <ZButton
           avatar={<IndeterminateCheckBoxIcon color='warning' />}
           outline
-          color={ZStateColor.Warning}
+          color={ZSeverityColor.Warning}
           onClick={setValue.bind(null, null)}
           label='Indeterminate'
         />

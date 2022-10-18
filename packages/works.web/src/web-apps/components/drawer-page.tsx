@@ -3,18 +3,20 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import {
   useSafeState,
   ZButton,
+  ZButtonColor,
   ZChoiceDropDown,
+  ZColorless,
   ZDrawerButton,
   ZGridLayout,
   ZH3,
   ZPaddedBox,
   ZPaperCard,
   ZParagraph,
+  ZSeverityColor,
   ZStateAnchor,
-  ZStateColor,
   ZStateSize
 } from '@zthun/works.react';
-import { first, identity, startCase } from 'lodash';
+import { first, identity, startCase, values } from 'lodash';
 import React from 'react';
 
 /**
@@ -24,10 +26,10 @@ import React from 'react';
  */
 export function ZDrawerPage() {
   const [anchor, setAnchor] = useSafeState([ZStateAnchor.Left]);
-  const [color, setColor] = useSafeState([ZStateColor.Inherit]);
+  const [color, setColor] = useSafeState<ZButtonColor[]>([ZColorless.Inherit]);
   const [timestamp, setTimestamp] = useSafeState(new Date().getTime());
-  const anchors = Object.values(ZStateAnchor);
-  const colors = Object.values(ZStateColor);
+  const anchors = values(ZStateAnchor);
+  const colors = values<ZButtonColor>(ZSeverityColor).concat([ZColorless.Inherit]);
 
   const now = () => setTimestamp(new Date().getTime());
 

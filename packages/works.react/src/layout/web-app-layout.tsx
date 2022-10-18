@@ -14,7 +14,7 @@ import { ZIdentityButton } from '../identity/identity-button';
 import { ZNavigate, ZRoute, ZRouteMap, ZRouter } from '../router/router-dom';
 import { useZthunworksTheme } from '../theme/make-styles';
 import { ZStateAnchor } from '../theme/state-anchor';
-import { ZStateColor } from '../theme/state-color';
+import { ZSeverityColor } from '../theme/state-color';
 import { ZGridLayout } from './grid-layout';
 
 /**
@@ -67,7 +67,7 @@ export function ZWebAppLayout(props: IZWebAppLayout) {
   const { children, home = '/home', whoami, profileApp, routes } = props;
   const theme = useZthunworksTheme();
 
-  const ButtonProps = { color: ZStateColor.Primary, borderless: true };
+  const ButtonProps = { color: ZSeverityColor.Primary, borderless: true };
   const DrawerProps = { anchor: ZStateAnchor.Right };
   const DrawerButtonProps = { ButtonProps, DrawerProps };
 

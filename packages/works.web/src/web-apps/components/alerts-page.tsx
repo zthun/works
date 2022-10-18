@@ -10,7 +10,7 @@ import {
   ZButton,
   ZGridLayout,
   ZPaperCard,
-  ZStateColor
+  ZSeverityColor
 } from '@zthun/works.react';
 import { startCase } from 'lodash';
 
@@ -84,28 +84,28 @@ export function ZAlertsPage() {
       <ZGridLayout columns='auto auto' gap='md'>
         <ZButton
           avatar={<CheckCircleIcon fontSize='small' />}
-          color={ZStateColor.Success}
+          color={ZSeverityColor.Success}
           outline
           onClick={openAlert.bind(null, ZAlertSeverity.Success, 'Something was a huge success.  Time to celebrate!')}
           label='Success'
         />
         <ZButton
           avatar={<WarningIcon fontSize='small' />}
-          color={ZStateColor.Warning}
+          color={ZSeverityColor.Warning}
           outline
           onClick={openAlert.bind(null, ZAlertSeverity.Warning, 'You can continue, but something is amiss!')}
           label='Warning'
         />
         <ZButton
           avatar={<ErrorIcon fontSize='small' />}
-          color={ZStateColor.Error}
+          color={ZSeverityColor.Error}
           outline
           onClick={openAlert.bind(null, ZAlertSeverity.Error, 'Uh oh!  Something has gone wrong!')}
           label='Error'
         />
         <ZButton
           avatar={<InfoIcon fontSize='small' />}
-          color={ZStateColor.Info}
+          color={ZSeverityColor.Info}
           outline
           onClick={openAlert.bind(null, ZAlertSeverity.Info, 'Just some basic information.')}
           label='Info'

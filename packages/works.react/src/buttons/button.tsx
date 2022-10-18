@@ -10,7 +10,9 @@ import { IZComponentLoading } from '../component/component-loading.interface';
 import { IZComponentStyle } from '../component/component-style.';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { makeStyles } from '../theme/make-styles';
-import { ZStateColor } from '../theme/state-color';
+import { ZColorless, ZSeverityColor } from '../theme/state-color';
+
+export type ZButtonColor = ZSeverityColor | ZColorless.Inherit;
 
 export interface IZButton
   extends IZComponentAvatar,
@@ -18,7 +20,7 @@ export interface IZButton
     IZComponentDisabled,
     IZComponentLoading,
     IZComponentStyle {
-  color?: ZStateColor;
+  color?: ZButtonColor;
   borderless?: boolean;
   outline?: boolean;
   tooltip?: ReactNode;

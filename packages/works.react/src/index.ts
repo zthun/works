@@ -18,7 +18,7 @@ export {
   ZWebAppServiceContext
 } from './apps/web-app-service';
 // Buttons
-export { IZButton, ZButton } from './buttons/button';
+export { IZButton, ZButton, ZButtonColor } from './buttons/button';
 export { ZButtonComponentModel } from './buttons/button.cm';
 // Cards
 export { IZCardAvatarProps, ZCardAvatar } from './card/card-avatar';
@@ -80,10 +80,11 @@ export { IZIdentityService, useIdentity, useIdentityService, ZIdentityService } 
 // Image
 export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
 export { ZImageSource } from './image/image-source';
+// Layout
+export { ZBorderLayout } from './layout/border-layout';
 export { IZGridLayout, ZGridLayout } from './layout/grid-layout';
 export { IZLineItemLayout, ZLineItemLayout } from './layout/line-item-layout';
 export { ZLineItemLayoutComponentModel } from './layout/line-item-layout.cm';
-// Layout
 export { ZPaddedBox } from './layout/padded-box';
 export { ZWebAppLayout } from './layout/web-app-layout';
 // List
@@ -125,7 +126,7 @@ export { useWatchableState } from './state/use-watchable-state.hook';
 export { makeStyles } from './theme/make-styles';
 export { shade } from './theme/shade';
 export { ZStateAnchor } from './theme/state-anchor';
-export { ZStateColor } from './theme/state-color';
+export { ZColorless, ZHueColor, ZSeverityColor, ZShadeColor, ZStateColor } from './theme/state-color';
 export { ZStateOrientation } from './theme/state-orientation';
 export { ZStateSize } from './theme/state-size';
 // Toolbar

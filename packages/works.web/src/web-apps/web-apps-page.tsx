@@ -18,7 +18,7 @@ import {
   ZNavigate,
   ZRoute,
   ZRouteMap,
-  ZStateColor,
+  ZSeverityColor,
   ZToolbar
 } from '@zthun/works.react';
 import React from 'react';
@@ -51,12 +51,12 @@ export function ZWebAppsPage() {
       <ZToolbar className={styles.classes.toolbar}>
         <ZButton
           avatar={<StartIcon color='success' />}
-          color={ZStateColor.Info}
+          color={ZSeverityColor.Info}
           outline
           onClick={navigate.bind(null, 'getting-started')}
           label='Getting Started'
         />
-        <ZMenu avatar={<SettingsIcon color='primary' />} color={ZStateColor.Info} outline label='Components'>
+        <ZMenu avatar={<SettingsIcon color='primary' />} color={ZSeverityColor.Info} outline label='Components'>
           <ZMenuItem
             avatar={<WarningIcon color='warning' />}
             onClick={navigate.bind(null, 'components/alerts')}
@@ -93,7 +93,7 @@ export function ZWebAppsPage() {
             label='Typography'
           />
         </ZMenu>
-        <ZMenu avatar={<ElectricalServicesIcon color='warning' />} color={ZStateColor.Info} outline label='Services'>
+        <ZMenu avatar={<ElectricalServicesIcon color='warning' />} color={ZSeverityColor.Info} outline label='Services'>
           <ZMenuItem avatar={<MedicalServicesIcon color='success' />} label='Health' />
         </ZMenu>
       </ZToolbar>

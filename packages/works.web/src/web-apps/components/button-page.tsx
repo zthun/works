@@ -7,10 +7,12 @@ import {
   useSafeState,
   ZBooleanSwitch,
   ZButton,
+  ZButtonColor,
   ZChoiceDropDown,
+  ZColorless,
   ZGridLayout,
   ZPaperCard,
-  ZStateColor
+  ZSeverityColor
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
 import React from 'react';
@@ -24,11 +26,11 @@ export function ZButtonPage() {
   const alerts = useAlertService();
   const [loading, setLoading] = useSafeState(false);
   const [disabled, setDisabled] = useSafeState(false);
-  const [color, setColor] = useSafeState<ZStateColor>(ZStateColor.Inherit);
+  const [color, setColor] = useSafeState<ZButtonColor>(ZColorless.Inherit);
   const [outline, setOutline] = useSafeState(false);
   const [borderless, setBorderless] = useSafeState(false);
-  const colors = values(ZStateColor);
-  const _setColor = setFirstOrDefault.bind(null, setColor, ZStateColor.Inherit);
+  const colors = values<ZButtonColor>(ZSeverityColor).concat([ZColorless.Inherit]);
+  const _setColor = setFirstOrDefault.bind(null, setColor, ZColorless.Inherit);
 
   /**
    * Occurs when the button demo is clicked.
