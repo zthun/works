@@ -4,14 +4,13 @@ import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { IZComponentStyle } from '../component/component-style.';
 import { IZComponentWidth } from '../component/component-width';
-import { colorify } from '../theme/colorify';
 import { makeStyles } from '../theme/make-styles';
 import { ZColorless, ZColorTint, ZShadeColor, ZStateColor } from '../theme/state-color';
 import { ZStateSize } from '../theme/state-size';
 
 export interface IZBorderLayout extends IZComponentWidth, IZComponentHierarchy, IZComponentStyle {
   border?: {
-    size?: Exclude<ZStateSize, ZStateSize.Auto | ZStateSize.Max>;
+    size?: ZStateSize;
     style?: Property.BorderStyle;
     color?: ZStateColor;
     tint?: ZColorTint;
@@ -22,21 +21,36 @@ export interface IZBorderLayout extends IZComponentWidth, IZComponentHierarchy, 
   };
 }
 
+const normalizeBorderFields = (border?: {
+  size?: ZStateSize;
+  style?: Property.BorderStyle;
+  color?: ZStateColor;
+  tint?: ZColorTint;
+}): [ZStateSize, ZStateColor, ZColorTint] => {
+  return [
+    firstDefined(ZStateSize.ExtraSmall, border?.size),
+    firstDefined(ZShadeColor.Grey, border?.color),
+    firstDefined(ZColorTint.T400, border?.tint)
+  ];
+};
+
+const normalizeBackgroundFields = (background?: {
+  color?: ZStateColor;
+  tint?: ZColorTint;
+}): [ZStateColor, ZColorTint] => {
+  return [firstDefined(ZColorless.Transparent, background?.color), firstDefined(ZColorTint.Main, background?.tint)];
+};
+
 const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
   const { border, background } = props;
-  const _borderSize = firstDefined(ZStateSize.ExtraSmall, border?.size);
-  const _borderColor = firstDefined(ZShadeColor.Grey, border?.color);
-  const _borderTint = firstDefined(ZColorTint.T400, border?.tint);
+  const [_borderSize, _borderColor, _borderTint] = normalizeBorderFields(border);
+  const [_backgroundColor, _backgroundTint] = normalizeBackgroundFields(background);
 
-  const _backgroundColor = firstDefined(ZColorless.Transparent, background?.color);
-  const _backgroundTint = background?.tint;
-
-  const borderSize = theme.thickness[_borderSize];
-  const borderColor = colorify(theme, _borderColor, _borderTint);
+  const borderSize = theme.thickness(_borderSize);
+  const borderColor = theme.colorify(_borderColor, _borderTint);
   const borderStyle = firstDefined('solid', border?.style);
-
   const width = theme.sizing.card[firstDefined(ZStateSize.Max, props.width)];
-  const backgroundColor = colorify(theme, _backgroundColor, _backgroundTint);
+  const backgroundColor = theme.colorify(_backgroundColor, _backgroundTint);
 
   return {
     root: {
@@ -57,9 +71,25 @@ const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
  *        The JSX for this component.
  */
 export function ZBorderLayout(props: IZBorderLayout) {
-  const { className, children } = props;
+  const { className, children, border, background } = props;
   const { classes } = useBorderLayoutStyles(props);
   const clasz = cssClass('ZBorderLayout-root', className, classes.root);
+  const [borderSize, _borderColor, _borderTint] = normalizeBorderFields(border);
+  const [_backgroundColor, _backgroundTint] = normalizeBackgroundFields(background);
 
-  return <div className={clasz}>{children}</div>;
+  const borderStyle = firstDefined('solid', border?.style);
+  const borderColor = `${_borderColor}[${_borderTint}]`;
+  const backgroundColor = `${_backgroundColor}[${_backgroundTint}]`;
+
+  return (
+    <div
+      data-border-color={borderColor}
+      data-border-size={borderSize}
+      data-border-style={borderStyle}
+      data-background-color={backgroundColor}
+      className={clasz}
+    >
+      {children}
+    </div>
+  );
 }
