@@ -5,19 +5,20 @@ import { castArray, isArray } from 'lodash';
 import React, { ReactNode, useMemo } from 'react';
 import { v4 } from 'uuid';
 import { makeStyles } from '../theme/make-styles';
+import { ZStateSize } from '../theme/state-size';
 import { IZChoice, IZChoiceOption, useChoice } from './choice';
 
 const useChoiceDropDownStyles = makeStyles()((theme) => {
   return {
     root: {
       '.MuiSelect-select': {
-        padding: theme.spacing(0.5)
+        padding: theme.gap(ZStateSize.Small)
       }
     },
     clear: {
       fontSize: '1.2rem',
-      padding: theme.spacing(),
-      marginRight: `${theme.spacing(2)} !important`
+      padding: theme.gap(ZStateSize.Small),
+      marginRight: `${theme.gap()} !important`
     },
     chip: {
       'display': 'inline-flex',
@@ -28,10 +29,10 @@ const useChoiceDropDownStyles = makeStyles()((theme) => {
         backgroundColor: theme.palette.grey[200],
         color: theme.palette.common.black,
         borderRadius: '1rem',
-        paddingLeft: theme.spacing(1.5),
-        paddingRight: theme.spacing(1.5),
-        paddingTop: theme.spacing(0.5),
-        paddingBottom: theme.spacing(0.5),
+        paddingLeft: theme.gap(),
+        paddingRight: theme.gap(),
+        paddingTop: theme.gap(ZStateSize.Small),
+        paddingBottom: theme.gap(ZStateSize.Small),
         margin: 3
       }
     }

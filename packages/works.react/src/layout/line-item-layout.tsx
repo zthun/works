@@ -2,6 +2,7 @@ import { cssClass } from '@zthun/works.core';
 import React, { ReactNode } from 'react';
 import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
+import { ZStateSize } from '../theme/state-size';
 
 export interface IZLineItemLayout extends IZComponentStyle {
   prefix?: ReactNode | (() => ReactNode);
@@ -19,7 +20,7 @@ const useLineItemLayoutStyles = makeStyles()((theme) => {
     },
     prefix: {
       flexGrow: 0,
-      paddingRight: theme.spacing()
+      paddingRight: theme.gap(ZStateSize.Small)
     },
 
     body: {
@@ -29,7 +30,7 @@ const useLineItemLayoutStyles = makeStyles()((theme) => {
 
     suffix: {
       flexGrow: 0,
-      paddingLeft: theme.spacing()
+      paddingLeft: theme.gap(ZStateSize.Small)
     }
   };
 });

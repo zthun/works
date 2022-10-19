@@ -33,7 +33,7 @@ import { ZGettingStartedPage } from './getting-started/getting-started-page';
 
 const useWebAppPageStyles = makeStyles()((theme) => ({
   toolbar: {
-    marginBottom: theme.spacing()
+    marginBottom: theme.gap()
   }
 }));
 

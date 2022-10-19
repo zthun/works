@@ -91,16 +91,12 @@ export interface IZTheme extends Theme {
   /**
    * Converts a ZStateSize enum to a spacing value.
    *
-   * This is the same as calling sizing() with a direct
-   * conversion table of size to spacing multiplier:
+   * This is the same as calling spacing() with a direct
+   * conversion table of size to spacing multiplier.  This mostly a
+   * allows you to use spacing that is a little more reader friendly such as
+   * gap(ZStateSize.Medium) instead of spacing(2).
    *
-   * auto/none: 0
-   * xs: 0.5
-   * sm: 1,
-   * md: 2,
-   * lg: 3,
-   * xl: 4,
-   * max: 6
+   * This is mostly appropriate for margin and padding.
    *
    * @param size
    *        The size to space out.
@@ -108,7 +104,7 @@ export interface IZTheme extends Theme {
    * @returns
    *        A CSS Compatible size option.
    */
-  gap(size: ZStateSize): string;
+  gap(size?: ZStateSize): string;
 
   /**
    * Similar to gap, but uses a smaller multiplier and a smaller
@@ -173,16 +169,16 @@ export function useZthunworksTheme(): IZTheme {
       [ZHueColor.Brown]: brown
     },
 
-    gap: (size: ZStateSize): string => {
+    gap: (size = ZStateSize.Auto): string => {
       const chart: Record<ZStateSize, number> = {
         [ZStateSize.None]: 0,
-        [ZStateSize.Auto]: 0,
+        [ZStateSize.Auto]: 2,
         [ZStateSize.ExtraSmall]: 0.5,
         [ZStateSize.Small]: 1,
         [ZStateSize.Medium]: 2,
         [ZStateSize.Large]: 3,
         [ZStateSize.ExtraLarge]: 4,
-        [ZStateSize.Max]: 6
+        [ZStateSize.Max]: 5
       };
 
       return mui.spacing(chart[size]);
@@ -204,6 +200,7 @@ export function useZthunworksTheme(): IZTheme {
     }
   };
 
+  mui.spacing = createSpacing((abs: number) => `${abs * 0.5}rem`);
   mui.components = firstDefined({}, mui.components);
 
   // Typography
@@ -255,8 +252,6 @@ export function useZthunworksTheme(): IZTheme {
   mui.typography.overline = createTextTypography('0.9rem');
 
   mui.typography.button = createTextTypography('1rem');
-
-  mui.spacing = createSpacing((abs: number) => `${abs * 0.5}rem`);
 
   mui.components.MuiTypography = {
     styleOverrides: {

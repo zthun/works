@@ -9,11 +9,11 @@ const useAlertStyles = makeStyles()((theme) => ({
   root: {
     position: 'fixed',
     top: '7.5rem',
-    right: theme.spacing(2),
+    right: theme.gap(),
     maxWidth: '20rem'
   },
   alert: {
-    marginBottom: theme.spacing()
+    marginBottom: theme.gap()
   }
 }));
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { makeStyles } from '../theme/make-styles';
+import { ZStateSize } from '../theme/state-size';
 
 const useContentStyles = makeStyles()((theme) => ({
   root: {
-    padding: theme.spacing(3)
+    padding: theme.gap(ZStateSize.Large)
   }
 }));
 

@@ -11,6 +11,7 @@ import { IZComponentStyle } from '../component/component-style.';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { makeStyles } from '../theme/make-styles';
 import { ZColorless, ZSeverityColor } from '../theme/state-color';
+import { ZStateSize } from '../theme/state-size';
 
 export type ZButtonColor = ZSeverityColor | ZColorless.Inherit;
 
@@ -34,8 +35,8 @@ const useButtonStyles = makeStyles<IZButton>()((theme) => ({
     alignItems: 'center'
   },
   content: {
-    marginLeft: theme.spacing(),
-    marginRight: theme.spacing(),
+    marginLeft: theme.gap(ZStateSize.Small),
+    marginRight: theme.gap(ZStateSize.Small),
     display: 'flex'
   },
   borderless: {

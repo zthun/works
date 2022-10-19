@@ -26,7 +26,7 @@ const useMenuStyles = makeStyles<IZMenuState>()((theme, state) => {
   return {
     button: {
       '::after': {
-        marginLeft: theme.spacing(),
+        marginLeft: theme.gap(),
         content: open ? '"▲"' : '"▼"'
       }
     },

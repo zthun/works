@@ -9,10 +9,10 @@ const useToolbarStyles = makeStyles()((theme) => ({
     'display': 'flex',
     'alignItems': 'center',
     'flexWrap': 'nowrap',
-    'marginLeft': `-${theme.spacing()}`,
+    'marginLeft': `-${theme.gap()}`,
 
     '>*': {
-      marginLeft: `${theme.spacing()} !important`
+      marginLeft: `${theme.gap()} !important`
     }
   }
 }));

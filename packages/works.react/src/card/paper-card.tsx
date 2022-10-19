@@ -55,8 +55,8 @@ const usePaperCardStyles = makeStyles<IZPaperCardProps>()((theme, props) => {
       objectFit: 'fill',
       margin: 'auto',
       textAlign: 'center',
-      paddingTop: theme.spacing(),
-      paddingBottom: theme.spacing(),
+      paddingTop: theme.gap(),
+      paddingBottom: theme.gap(),
       width: theme.sizing.image[imageWidth],
       height: theme.sizing.image[imageHeight],
 
@@ -66,10 +66,10 @@ const usePaperCardStyles = makeStyles<IZPaperCardProps>()((theme, props) => {
       }
     },
     actions: {
-      padding: theme.spacing()
+      padding: theme.gap()
     },
     confirm: {
-      marginTop: theme.spacing()
+      marginTop: theme.gap()
     }
   };
 });

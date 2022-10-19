@@ -18,15 +18,15 @@ const useHomePageStyles = makeStyles()((theme) => ({
   section: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: theme.spacing()
+    marginBottom: theme.gap()
   },
   quote: {
     textAlign: 'center',
     backgroundColor: theme.palette.grey[200],
     border: `${theme.thickness(ZStateSize.ExtraSmall)} solid ${theme.palette.grey[400]}`,
-    padding: theme.spacing(),
-    marginTop: theme.spacing(),
-    marginBottom: theme.spacing()
+    padding: theme.gap(),
+    marginTop: theme.gap(),
+    marginBottom: theme.gap()
   }
 }));
 
