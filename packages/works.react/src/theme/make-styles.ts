@@ -20,9 +20,19 @@ import {
 } from '@mui/material/colors';
 import { createSpacing } from '@mui/system';
 import { firstDefined } from '@zthun/works.core';
+import { values } from 'lodash';
 import { createMakeStyles } from 'tss-react';
-import { ZHueColor } from './state-color';
+import { ZColorTint, ZHueColor, ZSeverityColor, ZShadeColor, ZStateColor } from './state-color';
 import { ZStateSize } from './state-size';
+
+export type IZColor = Color;
+
+const Severity = values<string>(ZSeverityColor);
+const Hues = values<string>(ZHueColor);
+
+const TintLight = ZColorTint.T100;
+const TintMain = ZColorTint.T500;
+const TintDark = ZColorTint.T900;
 
 /**
  * Represents the options for sizes for components.
@@ -67,7 +77,26 @@ export interface IZSizeOptions {
 /**
  * Options for a color wheel.
  */
-export type IZColor = Color;
+
+const HueMap: Record<ZHueColor, IZColor> = {
+  [ZHueColor.Red]: red,
+  [ZHueColor.Pink]: pink,
+  [ZHueColor.Purple]: purple,
+  [ZHueColor.Violet]: deepPurple,
+  [ZHueColor.Indigo]: indigo,
+  [ZHueColor.Blue]: blue,
+  [ZHueColor.Sky]: lightBlue,
+  [ZHueColor.Cyan]: cyan,
+  [ZHueColor.Teal]: teal,
+  [ZHueColor.Green]: green,
+  [ZHueColor.Olive]: lightGreen,
+  [ZHueColor.Lime]: lime,
+  [ZHueColor.Yellow]: yellow,
+  [ZHueColor.Amber]: amber,
+  [ZHueColor.Orange]: orange,
+  [ZHueColor.Persimmon]: deepOrange,
+  [ZHueColor.Brown]: brown
+};
 
 /**
  * The overall theme for the Zthunworks domain.
@@ -83,10 +112,32 @@ export interface IZTheme extends Theme {
     card: IZSizeOptions;
     image: IZSizeOptions;
   };
+
   /**
-   * Color table
+   * Converts from a color and tint to a hex color.
+   *
+   * @param color
+   *        The color to convert.
+   * @param tint
+   *        The color tint.
+   *
+   * @returns
+   *        A CSS compatible color option.
    */
-  hues: Record<ZHueColor, IZColor>;
+  hexify(color: IZColor, tint: ZColorTint): string;
+
+  /**
+   * Converts from a color and tint to a hex color.
+   *
+   * @param color
+   *        The color to convert.
+   * @param tint
+   *        The color tint.  The default is main.
+   *
+   * @returns
+   *        A CSS compatible color option.
+   */
+  colorify(color: ZStateColor, tint?: ZColorTint): string;
 
   /**
    * Converts a ZStateSize enum to a spacing value.
@@ -102,7 +153,7 @@ export interface IZTheme extends Theme {
    *        The size to space out.
    *
    * @returns
-   *        A CSS Compatible size option.
+   *        A CSS compatible size option.
    */
   gap(size?: ZStateSize): string;
 
@@ -149,27 +200,79 @@ export function useZthunworksTheme(): IZTheme {
         xl: '15em'
       }
     },
-    hues: {
-      [ZHueColor.Red]: red,
-      [ZHueColor.Pink]: pink,
-      [ZHueColor.Purple]: purple,
-      [ZHueColor.Violet]: deepPurple,
-      [ZHueColor.Indigo]: indigo,
-      [ZHueColor.Blue]: blue,
-      [ZHueColor.Sky]: lightBlue,
-      [ZHueColor.Cyan]: cyan,
-      [ZHueColor.Teal]: teal,
-      [ZHueColor.Green]: green,
-      [ZHueColor.Olive]: lightGreen,
-      [ZHueColor.Lime]: lime,
-      [ZHueColor.Yellow]: yellow,
-      [ZHueColor.Amber]: amber,
-      [ZHueColor.Orange]: orange,
-      [ZHueColor.Persimmon]: deepOrange,
-      [ZHueColor.Brown]: brown
+
+    hexify(color: IZColor, tint: ZColorTint): string {
+      if (color[tint]) {
+        // Severity colors will allow Main, Light, and Dark.
+        return color[tint];
+      }
+
+      const _tintWithoutSeverity =
+        tint === ZColorTint.Main
+          ? TintMain
+          : tint === ZColorTint.Light
+          ? TintLight
+          : tint === ZColorTint.Dark
+          ? TintDark
+          : tint;
+
+      if (color[_tintWithoutSeverity]) {
+        return color[_tintWithoutSeverity];
+      }
+
+      // We have a severity but we've requested something like T600 or A200.
+      // For this, we will use the range of 50-300 = light, 400-500 = main,
+      // and 600-900 = dark.
+
+      const _tint = +tint;
+      if (!isNaN(_tint)) {
+        if (_tint < 400) {
+          return color[ZColorTint.Light];
+        }
+
+        if (_tint < 600) {
+          return color[ZColorTint.Main];
+        }
+
+        return color[ZColorTint.Dark];
+      }
+
+      if (tint === ZColorTint.A100) {
+        return color[ZColorTint.Light];
+      }
+
+      if (tint === ZColorTint.A700) {
+        return color[ZColorTint.Dark];
+      }
+
+      return color[ZColorTint.Main];
     },
 
-    gap: (size = ZStateSize.Auto): string => {
+    colorify(color: ZStateColor, tint?: ZColorTint): string {
+      if (color === ZShadeColor.Black) {
+        return mui.palette.common.black;
+      }
+
+      if (color === ZShadeColor.White) {
+        return mui.palette.common.white;
+      }
+
+      if (color === ZShadeColor.Grey) {
+        return this.hexify(mui.palette.grey, tint);
+      }
+
+      if (Hues.indexOf(color) >= 0) {
+        return this.hexify(HueMap[color], tint);
+      }
+
+      if (Severity.indexOf(color) >= 0) {
+        return this.hexify(mui.palette[color], tint);
+      }
+
+      return String(color);
+    },
+
+    gap(size = ZStateSize.Auto): string {
       const chart: Record<ZStateSize, number> = {
         [ZStateSize.None]: 0,
         [ZStateSize.Auto]: 2,
@@ -184,7 +287,7 @@ export function useZthunworksTheme(): IZTheme {
       return mui.spacing(chart[size]);
     },
 
-    thickness: (size: ZStateSize): string => {
+    thickness(size: ZStateSize): string {
       const chart: Record<ZStateSize, string> = {
         [ZStateSize.None]: '0',
         [ZStateSize.Auto]: '0',
@@ -256,7 +359,7 @@ export function useZthunworksTheme(): IZTheme {
   mui.components.MuiTypography = {
     styleOverrides: {
       gutterBottom: {
-        marginBottom: mui.spacing(2)
+        marginBottom: base.gap()
       }
     }
   };
@@ -291,8 +394,8 @@ export function useZthunworksTheme(): IZTheme {
   mui.components.MuiCheckbox = {
     styleOverrides: {
       root: {
-        paddingTop: mui.spacing(),
-        paddingBottom: mui.spacing()
+        paddingTop: base.gap(ZStateSize.Small),
+        paddingBottom: base.gap(ZStateSize.Small)
       }
     }
   };
