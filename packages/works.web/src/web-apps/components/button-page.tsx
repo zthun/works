@@ -12,7 +12,8 @@ import {
   ZColorless,
   ZGridLayout,
   ZPaperCard,
-  ZSeverityColor
+  ZSeverityColor,
+  ZStateSize
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
 import React from 'react';
@@ -90,7 +91,7 @@ export function ZButtonPage() {
       />
 
       <h3>Options</h3>
-      <ZGridLayout gap='md'>
+      <ZGridLayout gap={ZStateSize.Medium}>
         <ZBooleanSwitch value={loading} onValueChange={setLoading} label='Loading' />
         <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
         <ZBooleanSwitch value={outline} onValueChange={setOutline} label='Outline' />

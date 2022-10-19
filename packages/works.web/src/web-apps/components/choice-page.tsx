@@ -8,7 +8,8 @@ import {
   ZChoiceDropDown,
   ZGridLayout,
   ZLineItemLayout,
-  ZPaperCard
+  ZPaperCard,
+  ZStateSize
 } from '@zthun/works.react';
 import React from 'react';
 
@@ -129,7 +130,7 @@ export function ZChoicePage() {
       />
 
       <h2>Options</h2>
-      <ZGridLayout gap='sm'>
+      <ZGridLayout gap={ZStateSize.Small}>
         <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
         <ZBooleanSwitch value={multiple} onValueChange={setMultiple} label='Multiple' />
         <ZBooleanSwitch value={indelible} onValueChange={setIndelible} label='Indelible' />

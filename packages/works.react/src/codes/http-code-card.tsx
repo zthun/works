@@ -42,7 +42,7 @@ const useHttpStatusCodeCardStyles = makeStyles<IZHttpStatusCodeCardProps>()((the
 
   return {
     description: {
-      fontSize: theme.sizing.font.lg,
+      fontSize: '1.5rem',
       maxWidth: '30rem'
     },
     code: {

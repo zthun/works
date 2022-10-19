@@ -1,6 +1,28 @@
-import { Theme, useTheme as useMuiTheme } from '@mui/material';
+import { Color, Theme, useTheme as useMuiTheme } from '@mui/material';
+import {
+  amber,
+  blue,
+  brown,
+  cyan,
+  deepOrange,
+  deepPurple,
+  green,
+  indigo,
+  lightBlue,
+  lightGreen,
+  lime,
+  orange,
+  pink,
+  purple,
+  red,
+  teal,
+  yellow
+} from '@mui/material/colors';
+import { createSpacing } from '@mui/system';
 import { firstDefined } from '@zthun/works.core';
 import { createMakeStyles } from 'tss-react';
+import { ZHueColor } from './state-color';
+import { ZStateSize } from './state-size';
 
 /**
  * Represents the options for sizes for components.
@@ -43,38 +65,9 @@ export interface IZSizeOptions {
 }
 
 /**
- * Represents options for supported font families.
+ * Options for a color wheel.
  */
-export interface IZFontFamilies {
-  fixed: string;
-  document: string;
-}
-
-/**
- * Options for border rounding geometry.
- */
-export interface IZGeometryOptions {
-  /**
-   * Square rounding.
-   *
-   * Basically hard edges.
-   */
-  square?: number | string;
-
-  /**
-   * Circle rounding.
-   *
-   * Basically 50%.
-   */
-  circle?: number | string;
-
-  /**
-   * Chip rounding.
-   *
-   * This is usually half of the current font.
-   */
-  chip?: number | string;
-}
+export type IZColor = Color;
 
 /**
  * The overall theme for the Zthunworks domain.
@@ -83,26 +76,37 @@ export interface IZGeometryOptions {
  * some helpers and size options.
  */
 export interface IZTheme extends Theme {
-  fonts: IZFontFamilies;
-  /**
-   * Rounding options.
-   */
-  rounding: IZGeometryOptions;
   /**
    * Sizing options.
    */
   sizing: {
-    alerts: IZSizeOptions;
-    avatar: IZSizeOptions;
     card: IZSizeOptions;
-    drawer: IZSizeOptions;
-    font: IZSizeOptions;
-    gaps: IZSizeOptions;
     image: IZSizeOptions;
-    icon: IZSizeOptions;
     thickness: IZSizeOptions;
-    toolbar: IZSizeOptions;
   };
+  /**
+   * Color table
+   */
+  hues: Record<ZHueColor, IZColor>;
+
+  /**
+   * Converts a ZStateSize enum to a spacing value.
+   *
+   * This is the same as calling sizing() with a direct
+   * conversion table of size to spacing multiplier:
+   *
+   * auto/none: 0
+   * xs: 0.5
+   * sm: 1,
+   * md: 2,
+   * lg: 3,
+   * xl: 4,
+   * max: 6
+   *
+   * @param size
+   *        The size to space out.
+   */
+  gap(size: ZStateSize): string;
 }
 
 /**
@@ -116,27 +120,7 @@ export function useZthunworksTheme(): IZTheme {
   const mui = useMuiTheme();
 
   const base = {
-    fonts: {
-      /* cspell:disable-next-line */
-      fixed: "'Menlo', 'Monaco', 'Consolas', 'Courier New', 'monospace'",
-      document: "'Roboto', 'Arial', 'sans-serif'"
-    },
-    rounding: {
-      square: 0,
-      circle: '50%',
-      chip: '1rem'
-    },
     sizing: {
-      alerts: {
-        md: '20rem'
-      },
-      avatar: {
-        xs: '32px',
-        sm: '48px',
-        md: '80px',
-        lg: '128px',
-        xl: '256px'
-      },
       card: {
         xs: '18rem',
         sm: '18rem',
@@ -145,45 +129,12 @@ export function useZthunworksTheme(): IZTheme {
         xl: '64rem',
         max: '100%'
       },
-      drawer: {
-        md: '15rem'
-      },
-      font: {
-        xs: '0.8rem',
-        sm: '0.9rem',
-        md: '1rem',
-        lg: '1.2rem',
-        xl: '1.5rem'
-      },
-      headers: {
-        xs: '1.15rem',
-        sm: '1.35rem',
-        md: '1.5rem',
-        lg: '2rem',
-        xl: '2.5rem',
-        max: '3rem'
-      },
-      gaps: {
-        xs: '0.25rem',
-        sm: '0.5rem',
-        md: '1rem',
-        lg: '1.25rem',
-        xl: '1.5rem',
-        none: 0
-      },
       image: {
         xs: '3em',
         sm: '5em',
         md: '8em',
         lg: '10em',
         xl: '15em'
-      },
-      icon: {
-        xs: '0.50em',
-        sm: '0.75em',
-        md: '1em',
-        lg: '1.25em',
-        xl: '1.5em'
       },
       thickness: {
         xs: '0.0625rem',
@@ -192,21 +143,53 @@ export function useZthunworksTheme(): IZTheme {
         lg: '0.12rem',
         xl: '0.15rem',
         none: 0
-      },
-      toolbar: {
-        md: '6.5rem'
       }
+    },
+    hues: {
+      [ZHueColor.Red]: red,
+      [ZHueColor.Pink]: pink,
+      [ZHueColor.Purple]: purple,
+      [ZHueColor.Violet]: deepPurple,
+      [ZHueColor.Indigo]: indigo,
+      [ZHueColor.Blue]: blue,
+      [ZHueColor.Sky]: lightBlue,
+      [ZHueColor.Cyan]: cyan,
+      [ZHueColor.Teal]: teal,
+      [ZHueColor.Green]: green,
+      [ZHueColor.Olive]: lightGreen,
+      [ZHueColor.Lime]: lime,
+      [ZHueColor.Yellow]: yellow,
+      [ZHueColor.Amber]: amber,
+      [ZHueColor.Orange]: orange,
+      [ZHueColor.Persimmon]: deepOrange,
+      [ZHueColor.Brown]: brown
+    },
+
+    gap: (size: ZStateSize): string => {
+      return mui.spacing(
+        {
+          [ZStateSize.None]: 0,
+          [ZStateSize.Auto]: 0,
+          [ZStateSize.ExtraSmall]: 0.5,
+          [ZStateSize.Small]: 1,
+          [ZStateSize.Medium]: 2,
+          [ZStateSize.Large]: 3,
+          [ZStateSize.ExtraLarge]: 4,
+          [ZStateSize.Max]: 6
+        }[size]
+      );
     }
   };
 
   mui.components = firstDefined({}, mui.components);
 
   // Typography
-  mui.typography.fontFamily = base.fonts.document;
-  mui.typography.body1.fontFamily = base.fonts.document;
+  const fonts = "'Roboto', 'Arial', 'sans-serif'";
+  mui.typography.fontFamily = fonts;
+  mui.typography.body1.fontFamily = fonts;
 
   const createTypography = () => ({
-    fontFamily: base.fonts.document
+    fontFamily: fonts
   });
 
   const createHeaderTypography = (fontSize: string) => ({
@@ -234,26 +217,28 @@ export function useZthunworksTheme(): IZTheme {
     }
   });
 
-  mui.typography.h1 = createHeaderTypography(base.sizing.headers.max);
-  mui.typography.h2 = createHeaderTypography(base.sizing.headers.xl);
-  mui.typography.h3 = createHeaderTypography(base.sizing.headers.lg);
-  mui.typography.h4 = createHeaderTypography(base.sizing.headers.md);
-  mui.typography.h5 = createHeaderTypography(base.sizing.headers.sm);
-  mui.typography.h6 = createHeaderTypography(base.sizing.headers.xs);
+  mui.typography.h1 = createHeaderTypography('3rem');
+  mui.typography.h2 = createHeaderTypography('2.5rem');
+  mui.typography.h3 = createHeaderTypography('2rem');
+  mui.typography.h4 = createHeaderTypography('1.5rem');
+  mui.typography.h5 = createHeaderTypography('1.35rem');
+  mui.typography.h6 = createHeaderTypography('1.15rem');
 
-  mui.typography.body1 = createTextTypography(base.sizing.font.md);
-  mui.typography.body2 = createTextTypography(base.sizing.font.md);
-  mui.typography.subtitle1 = createTextTypography(base.sizing.font.md);
-  mui.typography.subtitle2 = createTextTypography(base.sizing.font.md);
-  mui.typography.caption = createTextTypography(base.sizing.font.sm);
-  mui.typography.overline = createTextTypography(base.sizing.font.sm);
+  mui.typography.body1 = createTextTypography('1rem');
+  mui.typography.body2 = createTextTypography('1rem');
+  mui.typography.subtitle1 = createTextTypography('1rem');
+  mui.typography.subtitle2 = createTextTypography('1rem');
+  mui.typography.caption = createTextTypography('0.9rem');
+  mui.typography.overline = createTextTypography('0.9rem');
 
-  mui.typography.button = createTextTypography(base.sizing.font.md);
+  mui.typography.button = createTextTypography('1rem');
+
+  mui.spacing = createSpacing((abs: number) => `${abs * 0.5}rem`);
 
   mui.components.MuiTypography = {
     styleOverrides: {
       gutterBottom: {
-        marginBottom: base.sizing.gaps.md
+        marginBottom: mui.spacing(2)
       }
     }
   };
@@ -262,7 +247,7 @@ export function useZthunworksTheme(): IZTheme {
   mui.components.MuiAutocomplete = {
     styleOverrides: {
       clearIndicator: {
-        fontSize: base.sizing.font.lg,
+        fontSize: '1.2rem',
         visibility: 'visible'
       }
     }
@@ -272,7 +257,7 @@ export function useZthunworksTheme(): IZTheme {
   mui.components.MuiCardHeader = {
     styleOverrides: {
       avatar: {
-        fontSize: base.sizing.headers.max
+        fontSize: '3rem'
       }
     }
   };
@@ -288,8 +273,8 @@ export function useZthunworksTheme(): IZTheme {
   mui.components.MuiCheckbox = {
     styleOverrides: {
       root: {
-        paddingTop: base.sizing.gaps.xs,
-        paddingBottom: base.sizing.gaps.xs
+        paddingTop: mui.spacing(),
+        paddingBottom: mui.spacing()
       }
     }
   };

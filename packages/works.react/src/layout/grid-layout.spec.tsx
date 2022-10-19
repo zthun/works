@@ -1,10 +1,11 @@
 /* eslint-disable require-jsdoc */
 import { ZCircusSetupRender } from '@zthun/works.cirque-du-react';
 import React from 'react';
+import { ZStateSize } from '../theme/state-size';
 import { ZGridLayout } from './grid-layout';
 
 describe('ZGridLayout', () => {
-  let gap: 'sm' | undefined;
+  let gap: ZStateSize | undefined;
 
   beforeEach(() => {
     gap = undefined;
@@ -17,7 +18,7 @@ describe('ZGridLayout', () => {
 
   it('should render with a gap', async () => {
     // Arrange.
-    gap = 'sm';
+    gap = ZStateSize.Medium;
     // Act.
     const target = await createTestTarget();
     // Assert.

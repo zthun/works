@@ -69,7 +69,7 @@ export function ZDrawerPage() {
         </ZPaddedBox>
       </ZDrawerButton>
       <h3>Options</h3>
-      <ZGridLayout gap='md'>
+      <ZGridLayout gap={ZStateSize.Medium}>
         <ZChoiceDropDown
           value={anchor}
           onValueChange={setAnchor}

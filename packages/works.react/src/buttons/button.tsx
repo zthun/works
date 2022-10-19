@@ -34,8 +34,8 @@ const useButtonStyles = makeStyles<IZButton>()((theme) => ({
     alignItems: 'center'
   },
   content: {
-    marginLeft: theme.sizing.gaps.sm,
-    marginRight: theme.sizing.gaps.sm,
+    marginLeft: theme.spacing(),
+    marginRight: theme.spacing(),
     display: 'flex'
   },
   borderless: {

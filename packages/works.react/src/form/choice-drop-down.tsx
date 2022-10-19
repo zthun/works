@@ -11,13 +11,13 @@ const useChoiceDropDownStyles = makeStyles()((theme) => {
   return {
     root: {
       '.MuiSelect-select': {
-        padding: theme.sizing.gaps.sm
+        padding: theme.spacing(0.5)
       }
     },
     clear: {
-      fontSize: theme.sizing.font.lg,
-      padding: theme.sizing.gaps.xs,
-      marginRight: `${theme.sizing.gaps.md} !important`
+      fontSize: '1.2rem',
+      padding: theme.spacing(),
+      marginRight: `${theme.spacing(2)} !important`
     },
     chip: {
       'display': 'inline-flex',
@@ -27,8 +27,11 @@ const useChoiceDropDownStyles = makeStyles()((theme) => {
         fontSize: '0.8125rem',
         backgroundColor: theme.palette.grey[200],
         color: theme.palette.common.black,
-        borderRadius: theme.rounding.chip,
-        padding: `${theme.sizing.gaps.xs} ${theme.sizing.gaps.sm}`,
+        borderRadius: '1rem',
+        paddingLeft: theme.spacing(1.5),
+        paddingRight: theme.spacing(1.5),
+        paddingTop: theme.spacing(0.5),
+        paddingBottom: theme.spacing(0.5),
         margin: 3
       }
     }

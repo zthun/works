@@ -9,7 +9,7 @@ const useChoiceAutocompleteStyles = makeStyles()((theme) => {
   return {
     root: {
       '.MuiSelect-select': {
-        padding: theme.sizing.gaps.sm
+        padding: theme.spacing()
       }
     },
     invisible: {

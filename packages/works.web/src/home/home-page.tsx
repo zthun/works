@@ -9,15 +9,15 @@ const useHomePageStyles = makeStyles()((theme) => ({
   section: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: theme.sizing.gaps.md
+    marginBottom: theme.spacing()
   },
   quote: {
     textAlign: 'center',
     backgroundColor: theme.palette.grey[200],
     border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[400]}`,
-    padding: theme.sizing.gaps.lg,
-    marginTop: theme.sizing.gaps.md,
-    marginBottom: theme.sizing.gaps.md
+    padding: theme.spacing(),
+    marginTop: theme.spacing(),
+    marginBottom: theme.spacing()
   }
 }));
 

@@ -4,25 +4,24 @@ import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
+import { ZStateSize } from '../theme/state-size';
 
 export interface IZGridLayout extends IZComponentStyle, IZComponentHierarchy {
   alignItems?: Property.AlignItems;
-  gap?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  gap?: ZStateSize;
   columns?: Property.GridTemplateColumns;
   rows?: Property.GridTemplateRows;
 }
 
 const useGridStyles = makeStyles<IZGridLayout>()((theme, props) => {
-  const { alignItems, gap = 'none', columns, rows } = props;
-
-  const _gap = theme.sizing.gaps[gap];
+  const { alignItems, gap = ZStateSize.None, columns, rows } = props;
 
   return {
     grid: {
       display: 'grid',
       gridTemplateColumns: columns,
       gridTemplateRows: rows,
-      gap: _gap,
+      gap: theme.gap(gap),
       alignItems
     }
   };

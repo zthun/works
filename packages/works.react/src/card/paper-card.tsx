@@ -49,14 +49,14 @@ const usePaperCardStyles = makeStyles<IZPaperCardProps>()((theme, props) => {
       minWidth: theme.sizing.card.xs
     },
     header: {
-      paddingBottom: theme.sizing.gaps.none
+      paddingBottom: 0
     },
     media: {
       objectFit: 'fill',
       margin: 'auto',
       textAlign: 'center',
-      paddingTop: theme.sizing.gaps.sm,
-      paddingBottom: theme.sizing.gaps.sm,
+      paddingTop: theme.spacing(),
+      paddingBottom: theme.spacing(),
       width: theme.sizing.image[imageWidth],
       height: theme.sizing.image[imageHeight],
 
@@ -66,10 +66,10 @@ const usePaperCardStyles = makeStyles<IZPaperCardProps>()((theme, props) => {
       }
     },
     actions: {
-      padding: theme.sizing.gaps.md
+      padding: theme.spacing()
     },
     confirm: {
-      marginTop: theme.sizing.gaps.md
+      marginTop: theme.spacing()
     }
   };
 });

@@ -23,7 +23,7 @@ export enum ZHueColor {
   Cyan = 'cyan',
   Teal = 'teal',
   Green = 'green',
-  tbd = 'green-light',
+  Olive = 'olive',
   Lime = 'lime',
   Yellow = 'yellow',
   Amber = 'amber',
@@ -48,7 +48,14 @@ export enum ZColorTint {
   T600 = 600,
   T700 = 700,
   T800 = 800,
-  T900 = 900
+  T900 = 900,
+  A100 = 'A100',
+  A200 = 'A200',
+  A400 = 'A400',
+  A700 = 'A700',
+  Dark = 'dark',
+  Main = 'main',
+  Light = 'light'
 }
 
 export type ZStateColor = ZSeverityColor | ZHueColor | ZShadeColor | ZColorless;

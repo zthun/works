@@ -8,12 +8,12 @@ import { useAlertService } from './alert-service';
 const useAlertStyles = makeStyles()((theme) => ({
   root: {
     position: 'fixed',
-    top: `calc(${theme.sizing.toolbar.md} + ${theme.sizing.gaps.md})`,
-    right: theme.sizing.gaps.md,
-    maxWidth: theme.sizing.alerts.md
+    top: '7.5rem',
+    right: theme.spacing(2),
+    maxWidth: '20rem'
   },
   alert: {
-    marginBottom: theme.sizing.gaps.md
+    marginBottom: theme.spacing()
   }
 }));
 

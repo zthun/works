@@ -29,9 +29,9 @@ export interface IZIdentityButtonProps {
 
 const useIdentityButtonStyles = makeStyles()((theme) => ({
   avatar: {
-    height: theme.sizing.avatar.sm,
-    width: theme.sizing.avatar.sm,
-    borderRadius: theme.rounding.circle,
+    height: '3rem',
+    width: '3rem',
+    borderRadius: '50%',
     border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[400]}`,
     background: theme.palette.common.white
   }

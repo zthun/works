@@ -45,8 +45,8 @@ const useWebAppHomeButtonStyles = makeStyles()((theme) => ({
   avatar: {
     height: '5rem',
     width: '5rem',
-    marginRight: theme.sizing.gaps.sm,
-    borderRadius: theme.rounding.circle,
+    marginRight: theme.spacing(),
+    borderRadius: '50%',
     border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[200]}`,
     background: theme.palette.common.white,
 

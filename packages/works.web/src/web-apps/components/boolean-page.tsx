@@ -9,6 +9,7 @@ import {
   ZGridLayout,
   ZPaperCard,
   ZSeverityColor,
+  ZStateSize,
   ZToolbar
 } from '@zthun/works.react';
 import React from 'react';
@@ -60,7 +61,7 @@ export function ZBooleanPage() {
       <div>{JSON.stringify(value)}</div>
 
       <h3>Options</h3>
-      <ZGridLayout gap='md'>
+      <ZGridLayout gap={ZStateSize.Medium}>
         <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
       </ZGridLayout>
 

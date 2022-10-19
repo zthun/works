@@ -10,7 +10,8 @@ import {
   ZButton,
   ZGridLayout,
   ZPaperCard,
-  ZSeverityColor
+  ZSeverityColor,
+  ZStateSize
 } from '@zthun/works.react';
 import { startCase } from 'lodash';
 
@@ -81,7 +82,7 @@ export function ZAlertsPage() {
       </p>
 
       <h3>Demo</h3>
-      <ZGridLayout columns='auto auto' gap='md'>
+      <ZGridLayout columns='auto auto' gap={ZStateSize.Medium}>
         <ZButton
           avatar={<CheckCircleIcon fontSize='small' />}
           color={ZSeverityColor.Success}
@@ -113,7 +114,7 @@ export function ZAlertsPage() {
       </ZGridLayout>
 
       <h3>Options</h3>
-      <ZGridLayout gap='sm'>
+      <ZGridLayout gap={ZStateSize.Small}>
         <ZBooleanSwitch value={immortal} onValueChange={setImmortal} label='Immortal' />
         <ZBooleanSwitch value={header} onValueChange={setHeader} label='Header' />
       </ZGridLayout>

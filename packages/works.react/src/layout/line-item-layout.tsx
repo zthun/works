@@ -19,7 +19,7 @@ const useLineItemLayoutStyles = makeStyles()((theme) => {
     },
     prefix: {
       flexGrow: 0,
-      paddingRight: theme.sizing.gaps.sm
+      paddingRight: theme.spacing()
     },
 
     body: {
@@ -29,7 +29,7 @@ const useLineItemLayoutStyles = makeStyles()((theme) => {
 
     suffix: {
       flexGrow: 0,
-      paddingLeft: theme.sizing.gaps.sm
+      paddingLeft: theme.spacing()
     }
   };
 });

@@ -123,6 +123,7 @@ export {
 export { useSafeState } from './state/use-safe-state';
 export { useWatchableState } from './state/use-watchable-state.hook';
 // Theme
+export { colorify } from './theme/colorify';
 export { makeStyles } from './theme/make-styles';
 export { shade } from './theme/shade';
 export { ZStateAnchor } from './theme/state-anchor';

@@ -48,8 +48,8 @@ export interface IZWebAppDrawer extends IZComponentStyle {
 const useWebAppDrawerStyles = makeStyles()((theme) => ({
   icon: {
     fill: 'currentColor',
-    width: theme.sizing.icon.md,
-    height: theme.sizing.icon.md,
+    width: '1em',
+    height: '1em',
     display: 'inline-block',
     fontSize: '3rem',
     transition: 'fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
@@ -58,13 +58,13 @@ const useWebAppDrawerStyles = makeStyles()((theme) => ({
     color: `rgb(${theme.palette.common.black}, 0.54)`,
 
     svg: {
-      width: theme.sizing.icon.md,
-      height: theme.sizing.icon.md
+      width: '1em',
+      height: '1em'
     },
 
     img: {
-      width: theme.sizing.icon.md,
-      height: theme.sizing.icon.md
+      width: '1em',
+      height: '1em'
     }
   }
 }));

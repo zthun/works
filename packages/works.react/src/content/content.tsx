@@ -4,7 +4,7 @@ import { makeStyles } from '../theme/make-styles';
 
 const useContentStyles = makeStyles()((theme) => ({
   root: {
-    padding: theme.sizing.gaps.xl
+    padding: theme.spacing(3)
   }
 }));
 

@@ -5,7 +5,16 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import InfoIcon from '@mui/icons-material/Info';
 import WarningIcon from '@mui/icons-material/Warning';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
-import { useAlertService, ZH3, ZList, ZListLineItem, ZPaperCard, ZParagraph } from '@zthun/works.react';
+import {
+  useAlertService,
+  ZBorderLayout,
+  ZH3,
+  ZList,
+  ZListLineItem,
+  ZPaperCard,
+  ZParagraph,
+  ZStateSize
+} from '@zthun/works.react';
 import React from 'react';
 
 /**
@@ -43,32 +52,34 @@ export function ZListPage() {
 
       <ZH3>Line Items</ZH3>
 
-      <ZList>
-        <ZListLineItem
-          avatar={<CheckCircleIcon color='success' />}
-          heading={successHeader}
-          subHeading={successMessage}
-          onClick={showAlert.bind(null, successHeader, successMessage, ZAlertSeverity.Success)}
-        />
-        <ZListLineItem
-          avatar={<WarningIcon color='warning' />}
-          heading={warningHeader}
-          subHeading={warningMessage}
-          onClick={showAlert.bind(null, warningHeader, warningMessage, ZAlertSeverity.Warning)}
-        />
-        <ZListLineItem
-          avatar={<ErrorIcon color='error' />}
-          heading={errorHeader}
-          subHeading={errorMessage}
-          onClick={showAlert.bind(null, errorHeader, errorMessage, ZAlertSeverity.Error)}
-        />
-        <ZListLineItem
-          avatar={<InfoIcon color='info' />}
-          heading={infoHeader}
-          subHeading={infoMessage}
-          onClick={showAlert.bind(null, infoHeader, infoMessage, ZAlertSeverity.Info)}
-        />
-      </ZList>
+      <ZBorderLayout width={ZStateSize.Medium}>
+        <ZList>
+          <ZListLineItem
+            avatar={<CheckCircleIcon color='success' />}
+            heading={successHeader}
+            subHeading={successMessage}
+            onClick={showAlert.bind(null, successHeader, successMessage, ZAlertSeverity.Success)}
+          />
+          <ZListLineItem
+            avatar={<WarningIcon color='warning' />}
+            heading={warningHeader}
+            subHeading={warningMessage}
+            onClick={showAlert.bind(null, warningHeader, warningMessage, ZAlertSeverity.Warning)}
+          />
+          <ZListLineItem
+            avatar={<ErrorIcon color='error' />}
+            heading={errorHeader}
+            subHeading={errorMessage}
+            onClick={showAlert.bind(null, errorHeader, errorMessage, ZAlertSeverity.Error)}
+          />
+          <ZListLineItem
+            avatar={<InfoIcon color='info' />}
+            heading={infoHeader}
+            subHeading={infoMessage}
+            onClick={showAlert.bind(null, infoHeader, infoMessage, ZAlertSeverity.Info)}
+          />
+        </ZList>
+      </ZBorderLayout>
     </ZPaperCard>
   );
 }

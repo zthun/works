@@ -14,11 +14,9 @@ export interface IZPaddedBox extends IZComponentHierarchy, IZComponentStyle {
 const useBoxStyles = makeStyles<IZPaddedBox>()((theme, props) => {
   const { padding } = props;
 
-  const _padding = theme.sizing.gaps[padding];
-
   return {
     root: {
-      padding: _padding
+      padding: theme.gap(padding)
     }
   };
 });

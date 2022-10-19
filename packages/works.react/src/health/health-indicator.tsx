@@ -10,7 +10,7 @@ import { useHealth } from './health-service.context';
 const useHealthIndicatorStyles = makeStyles()((theme) => {
   const icon: CSSObject = {
     backgroundColor: theme.palette.common.white,
-    borderRadius: theme.rounding.circle
+    borderRadius: '50%'
   };
 
   return {
