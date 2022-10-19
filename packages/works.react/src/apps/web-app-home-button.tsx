@@ -11,6 +11,7 @@ import { IZComponentStyle } from '../component/component-style.';
 import { ZImageSource } from '../image/image-source';
 import { asStateData, isStateErrored, isStateLoading } from '../state/use-async-state';
 import { makeStyles } from '../theme/make-styles';
+import { ZStateSize } from '../theme/state-size';
 import { ZCaption, ZH1 } from '../typography/typography';
 import { useWebApp } from './web-app-service';
 
@@ -47,7 +48,7 @@ const useWebAppHomeButtonStyles = makeStyles()((theme) => ({
     width: '5rem',
     marginRight: theme.spacing(),
     borderRadius: '50%',
-    border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[200]}`,
+    border: `${theme.thickness(ZStateSize.ExtraSmall)} solid ${theme.palette.grey[200]}`,
     background: theme.palette.common.white,
 
     svg: {

@@ -7,6 +7,7 @@ import { useOptionalWebApp } from '../apps/web-app-service';
 import { IZButton, ZButton } from '../buttons/button';
 import { isStateLoaded, isStateLoading } from '../state/use-async-state';
 import { makeStyles } from '../theme/make-styles';
+import { ZStateSize } from '../theme/state-size';
 import { useWindowService } from '../window/window-service.context';
 import { useIdentity } from './identity-service';
 
@@ -32,7 +33,7 @@ const useIdentityButtonStyles = makeStyles()((theme) => ({
     height: '3rem',
     width: '3rem',
     borderRadius: '50%',
-    border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[400]}`,
+    border: `${theme.thickness(ZStateSize.ExtraSmall)} solid ${theme.palette.grey[400]}`,
     background: theme.palette.common.white
   }
 }));

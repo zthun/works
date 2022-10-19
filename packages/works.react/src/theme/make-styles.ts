@@ -82,7 +82,6 @@ export interface IZTheme extends Theme {
   sizing: {
     card: IZSizeOptions;
     image: IZSizeOptions;
-    thickness: IZSizeOptions;
   };
   /**
    * Color table
@@ -105,8 +104,25 @@ export interface IZTheme extends Theme {
    *
    * @param size
    *        The size to space out.
+   *
+   * @returns
+   *        A CSS Compatible size option.
    */
   gap(size: ZStateSize): string;
+
+  /**
+   * Similar to gap, but uses a smaller multiplier and a smaller
+   * base conversion.
+   *
+   * This is mostly appropriate for border widths and outlines.
+   *
+   * @param size
+   *        The size to space out.
+   *
+   * @returns
+   *        A CSS compatible size option.
+   */
+  thickness(size: ZStateSize): string;
 }
 
 /**
@@ -135,14 +151,6 @@ export function useZthunworksTheme(): IZTheme {
         md: '8em',
         lg: '10em',
         xl: '15em'
-      },
-      thickness: {
-        xs: '0.0625rem',
-        sm: '0.08rem',
-        md: '0.1rem',
-        lg: '0.12rem',
-        xl: '0.15rem',
-        none: 0
       }
     },
     hues: {
@@ -166,18 +174,33 @@ export function useZthunworksTheme(): IZTheme {
     },
 
     gap: (size: ZStateSize): string => {
-      return mui.spacing(
-        {
-          [ZStateSize.None]: 0,
-          [ZStateSize.Auto]: 0,
-          [ZStateSize.ExtraSmall]: 0.5,
-          [ZStateSize.Small]: 1,
-          [ZStateSize.Medium]: 2,
-          [ZStateSize.Large]: 3,
-          [ZStateSize.ExtraLarge]: 4,
-          [ZStateSize.Max]: 6
-        }[size]
-      );
+      const chart: Record<ZStateSize, number> = {
+        [ZStateSize.None]: 0,
+        [ZStateSize.Auto]: 0,
+        [ZStateSize.ExtraSmall]: 0.5,
+        [ZStateSize.Small]: 1,
+        [ZStateSize.Medium]: 2,
+        [ZStateSize.Large]: 3,
+        [ZStateSize.ExtraLarge]: 4,
+        [ZStateSize.Max]: 6
+      };
+
+      return mui.spacing(chart[size]);
+    },
+
+    thickness: (size: ZStateSize): string => {
+      const chart: Record<ZStateSize, string> = {
+        [ZStateSize.None]: '0',
+        [ZStateSize.Auto]: '0',
+        [ZStateSize.ExtraSmall]: '0.0625rem',
+        [ZStateSize.Small]: '0.08rem',
+        [ZStateSize.Medium]: '0.1rem',
+        [ZStateSize.Large]: '0.12rem',
+        [ZStateSize.ExtraLarge]: '0.15rem',
+        [ZStateSize.Max]: '0.2rem'
+      };
+
+      return chart[size];
     }
   };
 

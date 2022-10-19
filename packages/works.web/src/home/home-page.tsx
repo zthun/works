@@ -1,7 +1,16 @@
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import PublicIcon from '@mui/icons-material/Public';
 import Terminal from '@mui/icons-material/Terminal';
-import { asStateData, makeStyles, useNavigate, useWebApp, ZPaperCard, ZParagraph, ZSubtitle } from '@zthun/works.react';
+import {
+  asStateData,
+  makeStyles,
+  useNavigate,
+  useWebApp,
+  ZPaperCard,
+  ZParagraph,
+  ZStateSize,
+  ZSubtitle
+} from '@zthun/works.react';
 
 import React from 'react';
 
@@ -14,7 +23,7 @@ const useHomePageStyles = makeStyles()((theme) => ({
   quote: {
     textAlign: 'center',
     backgroundColor: theme.palette.grey[200],
-    border: `${theme.sizing.thickness.xs} solid ${theme.palette.grey[400]}`,
+    border: `${theme.thickness(ZStateSize.ExtraSmall)} solid ${theme.palette.grey[400]}`,
     padding: theme.spacing(),
     marginTop: theme.spacing(),
     marginBottom: theme.spacing()

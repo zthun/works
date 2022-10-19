@@ -31,7 +31,7 @@ const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
   const _backgroundColor = firstDefined(ZColorless.Transparent, background?.color);
   const _backgroundTint = background?.tint;
 
-  const borderSize = theme.sizing.thickness[_borderSize];
+  const borderSize = theme.thickness[_borderSize];
   const borderColor = colorify(theme, _borderColor, _borderTint);
   const borderStyle = firstDefined('solid', border?.style);
 
