@@ -1,18 +1,18 @@
 // cspell:disable
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ErrorIcon from '@mui/icons-material/Error';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
-import InfoIcon from '@mui/icons-material/Info';
-import WarningIcon from '@mui/icons-material/Warning';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
   useAlertService,
   ZBorderLayout,
+  ZColorTint,
   ZH3,
   ZList,
   ZListLineItem,
   ZPaperCard,
   ZParagraph,
+  ZShadeColor,
   ZStateSize
 } from '@zthun/works.react';
 import React from 'react';
@@ -24,14 +24,6 @@ import React from 'react';
  *    The JSX to render the list demo page.
  */
 export function ZListPage() {
-  const successHeader = 'Success';
-  const successMessage = 'Everything is OK';
-  const warningHeader = 'Warning';
-  const warningMessage = 'Here be dragons';
-  const errorHeader = 'Error';
-  const errorMessage = 'Things have gone wrong';
-  const infoHeader = 'Info';
-  const infoMessage = 'Time for some education';
   const alerts = useAlertService();
 
   const showAlert = async (header: string, msg: string, severity: ZAlertSeverity) => {
@@ -48,35 +40,39 @@ export function ZListPage() {
     >
       <ZH3>Description</ZH3>
 
-      <ZParagraph>Lists help with displaying arrays and collections of data.</ZParagraph>
+      <ZParagraph>
+        Lists help with displaying arrays and collections of data. You can think of a list component as an unordered
+        list (&lt;ul&gt;) in html. The most basic kind of list item comes in the form of a line item. A line item is a
+        basic 0-1-0 flex container that shows an avatar, a text header with a sub header, and an end adornment.
+      </ZParagraph>
 
-      <ZH3>Line Items</ZH3>
+      <ZParagraph>
+        Line items can be clickable or readonly and this can be toggled by simply setting or not setting the onClick
+        event to a truthy or falsy value respectively.
+      </ZParagraph>
 
-      <ZBorderLayout width={ZStateSize.Medium}>
+      <ZBorderLayout background={{ color: ZShadeColor.Grey, tint: ZColorTint.Light }} width={ZStateSize.Medium}>
         <ZList>
           <ZListLineItem
-            avatar={<CheckCircleIcon color='success' />}
-            heading={successHeader}
-            subHeading={successMessage}
-            onClick={showAlert.bind(null, successHeader, successMessage, ZAlertSeverity.Success)}
+            avatar={<CheckCircleIcon color='success' fontSize='large' />}
+            adornment={<FavoriteIcon color='error' fontSize='large' />}
+            heading='Line Item Everything'
+            subHeading='Line item with header, sub header, avatar, adornment'
+            onClick={showAlert.bind(null, 'Success', 'Line items are great', ZAlertSeverity.Success)}
           />
           <ZListLineItem
-            avatar={<WarningIcon color='warning' />}
-            heading={warningHeader}
-            subHeading={warningMessage}
-            onClick={showAlert.bind(null, warningHeader, warningMessage, ZAlertSeverity.Warning)}
+            heading='Text only line item'
+            subHeading='Line item with just text'
+            onClick={showAlert.bind(null, 'Warning', 'Pictures make line items pretty', ZAlertSeverity.Warning)}
           />
           <ZListLineItem
-            avatar={<ErrorIcon color='error' />}
-            heading={errorHeader}
-            subHeading={errorMessage}
-            onClick={showAlert.bind(null, errorHeader, errorMessage, ZAlertSeverity.Error)}
+            avatar={<FavoriteIcon color='info' fontSize='large' />}
+            heading='Avatar and Text (Unclickable)'
           />
           <ZListLineItem
-            avatar={<InfoIcon color='info' />}
-            heading={infoHeader}
-            subHeading={infoMessage}
-            onClick={showAlert.bind(null, infoHeader, infoMessage, ZAlertSeverity.Info)}
+            avatar={<FavoriteIcon color='warning' fontSize='large' />}
+            heading='Avatar, Text, and Adornment (Unclickable)'
+            adornment={<CheckCircleIcon color='primary' fontSize='large' />}
           />
         </ZList>
       </ZBorderLayout>
