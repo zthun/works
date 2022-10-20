@@ -27,7 +27,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@zthun/works.cirque": "^4.0.0",
-    "@zthun/works.cirque-du-react": "^4.0.0",
+    "@zthun/works.cirque-du-selenium": "^4.0.0",
     "@zthun/works.core": "^4.0.0",
     "@zthun/works.draw": "^4.0.0",
     "@zthun/works.message": "^4.0.0",
