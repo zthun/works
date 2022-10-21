@@ -1,5 +1,6 @@
 /* eslint-disable valid-jsdoc */
 import { IZCircusAct, IZCircusDriver } from '@zthun/works.cirque';
+import { keyBy } from 'lodash';
 import { By, WebDriver, WebElement } from 'selenium-webdriver';
 
 /**
@@ -27,6 +28,18 @@ export class ZCircusDriver implements IZCircusDriver {
    */
   public async attribute(attribute: string): Promise<string> {
     return this._search.getAttribute(attribute);
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public async classes(filter?: string[]): Promise<string[]> {
+    const clasz = await this._search.getAttribute('class');
+    const all = clasz.split(' ');
+    const _filter = filter == null ? all : filter;
+    const lookup = keyBy(_filter);
+    const filtered = all.filter((c) => Object.prototype.hasOwnProperty.call(lookup, c));
+    return Promise.resolve(filtered);
   }
 
   /**

@@ -3,7 +3,7 @@
 import { RenderResult, waitFor } from '@testing-library/react/pure';
 import UserEvent from '@testing-library/user-event';
 import { IZCircusAct, IZCircusAction, IZCircusDriver, ZCircusActionType } from '@zthun/works.cirque';
-import { get } from 'lodash';
+import { get, keyBy } from 'lodash';
 
 /**
  * Represents a circus driver that wraps an html element.
@@ -32,6 +32,18 @@ export class ZCircusDriver implements IZCircusDriver {
    */
   public attribute(attribute: string): Promise<string | null> {
     return Promise.resolve(this._element.getAttribute(attribute));
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public classes(filter?: string[]): Promise<string[]> {
+    const list = this._element.classList;
+    const all = Array.from(list);
+    const _filter = filter == null ? all : filter;
+    const lookup = keyBy(_filter);
+    const filtered = all.filter((c) => Object.prototype.hasOwnProperty.call(lookup, c));
+    return Promise.resolve(filtered);
   }
 
   /**

@@ -24,6 +24,19 @@ export interface IZCircusDriver {
   attribute(attribute: string): Promise<string | null>;
 
   /**
+   * Returns a list of classes on the driver context that
+   * match a given filter.
+   *
+   * @param filter
+   *        The filter of classes you want to check for. If you
+   *        just want to get all classes, then just use undefined here.
+   *
+   * @returns
+   *        The list of classes that match the filter.
+   */
+  classes(filter?: []): Promise<string[]>;
+
+  /**
    * Gets the underlying text of the driver context.
    *
    * @returns
