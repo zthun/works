@@ -5,6 +5,7 @@ import { IZComponentAdornment } from '../component/component-adornment';
 import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentHeading } from '../component/component-heading';
+import { IZComponentName } from '../component/component-name';
 import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
 
@@ -16,6 +17,7 @@ export interface IZListLineItem
     IZComponentAdornment,
     IZComponentAvatar,
     IZComponentDisabled,
+    IZComponentName,
     IZComponentStyle {
   /**
    * Occurs when the line item is clicked.
@@ -43,7 +45,7 @@ const useListLineItemStyles = makeStyles<IZListLineItem>()((theme, props) => {
  *        The JSX to render this item.
  */
 export function ZListLineItem(props: IZListLineItem) {
-  const { className, adornment, avatar, heading, subHeading, onClick } = props;
+  const { className, adornment, avatar, heading, name, subHeading, onClick } = props;
   const clasz = cssClass('ZListItem-root', 'ZListLineItem-root', className);
   const { classes } = useListLineItemStyles(props);
 
@@ -64,7 +66,7 @@ export function ZListLineItem(props: IZListLineItem) {
   );
 
   return (
-    <ListItem className={clasz} secondaryAction={adornment}>
+    <ListItem className={clasz} secondaryAction={adornment} data-name={name}>
       {onClick ? renderClickableContents() : renderContents()}
     </ListItem>
   );

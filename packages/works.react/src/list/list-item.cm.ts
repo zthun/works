@@ -1,25 +1,26 @@
+import { IZCircusDriver } from '@zthun/works.cirque';
+
 /**
  * Represents a component model for a single item underneath a ZList.
  */
 export class ZListItemComponentModel {
+  public static readonly Selector = '.ZListItem-root';
+
   /**
    * Initializes a new instance of this object.
    *
-   * @param element
-   *        The element for the list item.
+   * @param driver
+   *        The driver to manage the component model.
    */
-  public constructor(public element: HTMLElement) {}
+  public constructor(public readonly driver: IZCircusDriver) {}
 
   /**
-   * Finds all elements under the container that can be considered ZListLineItem components.
-   *
-   * @param container
-   *        The container to search.
+   * Gets the name of the list item.
    *
    * @returns
-   *        A list of candidates that can be considered ZListItem components.
+   *      The name of the list item.
    */
-  public static find(container: HTMLElement): HTMLElement[] {
-    return Array.from(container.querySelectorAll<HTMLElement>('.ZListItem-root'));
+  public name(): Promise<string | null> {
+    return this.driver.attribute('data-name');
   }
 }

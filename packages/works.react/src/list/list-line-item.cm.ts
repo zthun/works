@@ -1,4 +1,4 @@
-import { IZCircusPerformer, ZCircusActBuilder } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
 import { ZListItemComponentModel } from './list-item.cm';
 
 /**
@@ -13,12 +13,10 @@ export class ZListLineItemComponentModel {
   /**
    * Initializes a new instance of this object.
    *
-   * @param _item
-   *        The item that overall represents the list line item.
-   * @param _performer
-   *        The performer to click on the item.
+   * @param item
+   *        The item that is the abstraction of this item.
    */
-  public constructor(private _item: ZListItemComponentModel, private _performer: IZCircusPerformer) {}
+  public constructor(public item: ZListItemComponentModel) {}
 
   /**
    * Gets the button if this item is clickable.
@@ -27,8 +25,9 @@ export class ZListLineItemComponentModel {
    *        The element for the button, or null if
    *        the element is not clickable.
    */
-  private _button(): Promise<HTMLElement | null> {
-    return Promise.resolve(this._item.element.querySelector<HTMLElement>('.ZListLineItem-button'));
+  private async _button(): Promise<IZCircusDriver | null> {
+    const [button] = await this.item.driver.query('.ZListLineItem-button');
+    return button || null;
   }
 
   /**
@@ -53,7 +52,7 @@ export class ZListLineItemComponentModel {
       return;
     }
 
-    const act = new ZCircusActBuilder().click(btn).build();
-    await this._performer.perform(act);
+    const act = new ZCircusActBuilder().leftMouseClick().build();
+    await btn.perform(act);
   }
 }

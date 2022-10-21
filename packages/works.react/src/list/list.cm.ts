@@ -1,31 +1,21 @@
-import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
+import { IZCircusDriver } from '@zthun/works.cirque';
 import { ZListItemComponentModel } from './list-item.cm';
 
-export type ZListItemConstructor<T> = new (
-  item: ZListItemComponentModel,
-  performer: IZCircusPerformer,
-  wait: IZCircusWait
-) => T;
+export type ZListItemConstructor<T> = new (originator: ZListItemComponentModel) => T;
 
 /**
  * Represents a component model for a list.
  */
 export class ZListComponentModel {
+  public static readonly Selector = '.ZList-root';
+
   /**
    * Initializes a new instance of this object.
    *
-   * @param _element
-   *        The element that contains the list component.
-   * @param _performer
-   *        The performer that is responsible for handling actions on list items.
-   * @param _waiter
-   *        The waiter that is responsible for waiting for events.
+   * @param _driver
+   *        The driver used to manage items in the component.
    */
-  public constructor(
-    private _element: HTMLElement,
-    private _performer: IZCircusPerformer,
-    private _waiter: IZCircusWait
-  ) {}
+  public constructor(private _driver: IZCircusDriver) {}
 
   /**
    * Finds all underlying items and returns them.
@@ -33,41 +23,24 @@ export class ZListComponentModel {
    * @returns
    *        All child items for this component model.
    */
-  public items(): Promise<ZListItemComponentModel[]> {
-    const candidates = ZListItemComponentModel.find(this._element);
+  public async items(): Promise<ZListItemComponentModel[]> {
+    const candidates = await this._driver.query(ZListItemComponentModel.Selector);
     const items = candidates.map((c) => new ZListItemComponentModel(c));
     return Promise.resolve(items);
   }
 
   /**
-   * Finds all items by a specific class.
+   * Finds the first item by a specific name.
    *
-   * @param model
-   *        The type of model to construct for each found class.
-   * @param clasz
-   *        The class to search for.
+   * @param name
+   *        The name of the item to search for.
    *
    * @returns
-   *        All child items that contain clasz.
+   *        The item with the given name or null if no such item exists.
    */
-  public async itemsByClass<T>(model: ZListItemConstructor<T>, clasz: string): Promise<T[]> {
-    const all = await this.items();
-    return all
-      .filter((a) => a.element.classList.contains(clasz))
-      .map((m) => new model(m, this._performer, this._waiter));
-  }
-
-  /**
-   * Searches for a component model that can be considered a ZListComponent model.
-   *
-   * @param container
-   *        The container to search.
-   *
-   * @returns
-   *        The list of elements that can be used
-   *        to represent a ZList component.
-   */
-  public static find(container: HTMLElement): HTMLElement[] {
-    return Array.from(container.querySelectorAll<HTMLElement>('.ZList-root'));
+  public async item(name: string): Promise<ZListItemComponentModel | null> {
+    const query = `${ZListItemComponentModel.Selector}[data-name="${name}"]`;
+    const [item] = await this._driver.query(query);
+    return item == null ? null : new ZListItemComponentModel(item);
   }
 }
