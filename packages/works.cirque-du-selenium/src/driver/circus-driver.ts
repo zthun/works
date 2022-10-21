@@ -100,6 +100,14 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
+  public body(): Promise<IZCircusDriver> {
+    const body = this._seleniumDriver.findElement(By.name('body'));
+    return Promise.resolve(new ZCircusDriver(this._seleniumDriver, body));
+  }
+
+  /**
+   * @inheritdoc
+   */
   public async perform(act: IZCircusAct): Promise<void> {
     let performance = this._seleniumDriver.actions();
 

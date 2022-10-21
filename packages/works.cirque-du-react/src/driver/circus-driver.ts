@@ -92,6 +92,13 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
+  public body(): Promise<IZCircusDriver> {
+    return Promise.resolve(new ZCircusDriver(this._result, document.body));
+  }
+
+  /**
+   * @inheritdoc
+   */
   public async select(selector: string): Promise<IZCircusDriver> {
     const drivers = await this.query(selector);
 

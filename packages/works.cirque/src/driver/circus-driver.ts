@@ -107,6 +107,19 @@ export interface IZCircusDriver {
   query(selector: string): Promise<IZCircusDriver[]>;
 
   /**
+   * Jumps to the body element.
+   *
+   * This is useful if you are opening modals
+   * and popups that don't exist from withing the
+   * driver context.
+   *
+   * @returns
+   *        A new driver that contains the document
+   *        body as the context.
+   */
+  body(): Promise<IZCircusDriver>;
+
+  /**
    * Performs an action against the driver context.
    *
    * @param act
