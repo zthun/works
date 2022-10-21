@@ -1,5 +1,4 @@
-import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
-import { required, sleep } from '@zthun/works.core';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZButtonComponentModel } from '../buttons/button.cm';
 import { ZDrawerComponentModel } from './drawer.cm';
 
@@ -7,28 +6,21 @@ import { ZDrawerComponentModel } from './drawer.cm';
  * Represents the component model for a drawer button component.
  */
 export class ZDrawerButtonComponentModel {
+  public static readonly Selector = '.ZDrawerButton-root';
+
   /**
    * Initializes a new instance of this object.
    *
-   * @param _element
-   *        The element that represents the button.
-   * @param _performer
-   *        The performer used to click the button.
-   * @param _waiter
-   *        The waiter used to wait for the drawer to open.
+   * @param _driver
+   *        The driver that manages the component.
    */
-  public constructor(
-    private readonly _element: HTMLElement,
-    private readonly _performer: IZCircusPerformer,
-    private readonly _waiter: IZCircusWait
-  ) {}
+  public constructor(private _driver: IZCircusDriver) {}
 
   /**
    * Gets the inner button.
    */
   private async _button() {
-    const inner = await required(this._element.querySelector<HTMLButtonElement>('.ZButton-root'));
-    return new ZButtonComponentModel(inner, this._performer, this._waiter);
+    return ZCircusComponentModel.create(this._driver, ZButtonComponentModel, ZButtonComponentModel.Selector);
   }
 
   /**
@@ -37,18 +29,9 @@ export class ZDrawerButtonComponentModel {
    * @returns
    *        True if the drawer is open.  False otherwise.
    */
-  private _opened() {
-    return !!ZDrawerComponentModel.find(document.body).length;
-  }
-
-  /**
-   * Gets a value that determines if this drawer is opened.
-   *
-   * @returns
-   *        True if the drawer is open.  False otherwise.
-   */
-  public opened(): Promise<boolean> {
-    return Promise.resolve(this._opened());
+  public async opened(): Promise<boolean> {
+    const body = await this._driver.body();
+    return body.peek(ZDrawerComponentModel.Selector);
   }
 
   /**
@@ -60,9 +43,9 @@ export class ZDrawerButtonComponentModel {
   public async open(): Promise<ZDrawerComponentModel> {
     const button = await this._button();
     await button.click();
-    this._waiter.wait(() => this._opened());
-    const [drawer] = ZDrawerComponentModel.find(document.body);
-    return new ZDrawerComponentModel(drawer, this._performer);
+    await this._driver.wait(() => this.opened());
+    const body = await this._driver.body();
+    return ZCircusComponentModel.create(body, ZDrawerComponentModel, ZDrawerComponentModel.Selector);
   }
 
   /**
@@ -71,9 +54,8 @@ export class ZDrawerButtonComponentModel {
    * @returns
    *      A promise that resolves once the drawer is closed.
    */
-  private async _waitForClose() {
-    await sleep(500);
-    return this._waiter.wait(() => !this._opened());
+  private _waitForClose() {
+    return this._driver.wait(() => this.opened().then((open) => !open));
   }
 
   /**
@@ -96,18 +78,5 @@ export class ZDrawerButtonComponentModel {
   public async escape(drawer: ZDrawerComponentModel) {
     await drawer.escape();
     return this._waitForClose();
-  }
-
-  /**
-   * Finds all elements that can be considered drawer buttons.
-   *
-   * @param container
-   *        The container to search.
-   *
-   * @returns
-   *        The list of candidates that can be considered drawer buttons.
-   */
-  public static find(container: HTMLElement): HTMLElement[] {
-    return Array.from(container.querySelectorAll<HTMLElement>('.ZDrawerButton-root'));
   }
 }

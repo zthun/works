@@ -1,20 +1,22 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import { ZDrawerButton } from './drawer-button';
 import { ZDrawerButtonComponentModel } from './drawer-button.cm';
 
 describe('ZDrawer', () => {
-  const performer = new ZCircusPerformer();
-  const waiter = new ZCircusWait();
+  let _driver: IZCircusDriver;
 
   async function createTestTarget() {
     const element = <ZDrawerButton />;
-    const result = await new ZCircusSetupRender(element).setup();
-    await waiter.wait(() => !!ZDrawerButtonComponentModel.find(result.container).length);
-    const [target] = ZDrawerButtonComponentModel.find(result.container);
-    return new ZDrawerButtonComponentModel(target, performer, waiter);
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(_driver, ZDrawerButtonComponentModel, ZDrawerButtonComponentModel.Selector);
   }
+
+  afterEach(async () => {
+    await _driver.destroy();
+  });
 
   it('should open the drawer', async () => {
     // Arrange.
