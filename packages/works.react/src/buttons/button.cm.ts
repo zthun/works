@@ -1,34 +1,27 @@
-import { IZCircusPerformer, IZCircusWait, ZCircusActBuilder } from '@zthun/works.cirque';
-import { required } from '@zthun/works.core';
+import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
 
 /**
  * Represents the component model for a button element.
  */
 export class ZButtonComponentModel {
+  public static readonly Selector = '.ZButton-root';
+
   /**
    * Initializes a new instance of this object.
    *
-   * @param _element
-   *        The element that represents the button.
-   * @param _performer
-   *        The circus performer responsible for clicking the button.
-   * @param _waiter
-   *        The circus waiter to wait for specific conditions.
+   * @param _driver
+   *        The driver to manage the component.
    */
-  public constructor(
-    private _element: HTMLButtonElement,
-    private _performer: IZCircusPerformer,
-    private _waiter: IZCircusWait
-  ) {}
+  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
-   * Gets whether the button is in the loading state.
+   * Returns the name of the button.
    *
    * @returns
-   *        True if the button is in the loading state.  False otherwise.
+   *        The button name if it has one.  Null otherwise.
    */
-  private _loading() {
-    return !!this._element.querySelector('.ZCircularProgress-root');
+  public name(): Promise<string | null> {
+    return this._driver.attribute('data-name');
   }
 
   /**
@@ -38,7 +31,7 @@ export class ZButtonComponentModel {
    *        True if the button is in the loading state.  False otherwise.
    */
   public loading(): Promise<boolean> {
-    return Promise.resolve(this._loading());
+    return this._driver.peek('.ZCircularProgress-root');
   }
 
   /**
@@ -48,7 +41,7 @@ export class ZButtonComponentModel {
    *        True if the button is disabled.  False otherwise.
    */
   public disabled(): Promise<boolean> {
-    return Promise.resolve(this._element.disabled);
+    return this._driver.disabled();
   }
 
   /**
@@ -57,8 +50,9 @@ export class ZButtonComponentModel {
    * @returns
    *        True if the button is outlined.  False otherwise.
    */
-  public outlined(): Promise<boolean> {
-    return Promise.resolve(this._element.classList.contains('ZButton-outline'));
+  public async outlined(): Promise<boolean> {
+    const c = await this._driver.classes(['ZButton-outline']);
+    return !!c.length;
   }
 
   /**
@@ -67,8 +61,9 @@ export class ZButtonComponentModel {
    * @returns
    *        True if the button is borderless.  False otherwise.
    */
-  public borderless(): Promise<boolean> {
-    return Promise.resolve(this._element.classList.contains('ZButton-borderless'));
+  public async borderless(): Promise<boolean> {
+    const c = await this._driver.classes(['ZButton-borderless']);
+    return !!c.length;
   }
 
   /**
@@ -78,8 +73,8 @@ export class ZButtonComponentModel {
    *        The button content text, if any.
    */
   public async text(): Promise<string | null> {
-    const content = await required(this._element.querySelector<HTMLElement>('.ZButton-content'));
-    return content.textContent;
+    const content = await this._driver.select('.ZButton-content');
+    return content.text();
   }
 
   /**
@@ -88,8 +83,8 @@ export class ZButtonComponentModel {
    * @returns A promise that resolves when the button is clicked.
    */
   public click(): Promise<void> {
-    const act = new ZCircusActBuilder().moveTo(this._element).leftMouseClick().build();
-    return this._performer.perform(act);
+    const act = new ZCircusActBuilder().click().build();
+    return this._driver.perform(act);
   }
 
   /**
@@ -99,19 +94,6 @@ export class ZButtonComponentModel {
    *        A promise that resolves once the button is ready.
    */
   public load(): Promise<void> {
-    return this._waiter.wait(() => !this._loading());
-  }
-
-  /**
-   * Finds all button components on the page.
-   *
-   * @param container
-   *        The container to search for.
-   *
-   * @returns
-   *        The list of components that can be considered ZButton components.
-   */
-  public static find(container: HTMLElement): HTMLButtonElement[] {
-    return Array.from(container.querySelectorAll<HTMLButtonElement>('.ZButton-root'));
+    return this._driver.wait(() => this.loading().then((l) => !!l));
   }
 }

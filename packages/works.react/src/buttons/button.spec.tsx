@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 
-import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactNode } from 'react';
 import { ZButton } from './button';
 import { ZButtonComponentModel } from './button.cm';
 
 describe('ZButton', () => {
-  const performer = new ZCircusPerformer();
-  const waiter = new ZCircusWait();
+  let _driver: IZCircusDriver;
 
   let avatar: ReactNode | undefined;
   let loading: boolean | undefined;
@@ -30,10 +29,8 @@ describe('ZButton', () => {
       />
     );
 
-    const result = await new ZCircusSetupRender(element).setup();
-    await waiter.wait(() => !!ZButtonComponentModel.find(result.container).length);
-    const [target] = ZButtonComponentModel.find(result.container);
-    return new ZButtonComponentModel(target, performer, waiter);
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    return await ZCircusComponentModel.create(_driver, ZButtonComponentModel, ZButtonComponentModel.Selector);
   }
 
   beforeEach(() => {
@@ -41,6 +38,10 @@ describe('ZButton', () => {
     loading = undefined;
     outline = undefined;
     onClick = undefined;
+  });
+
+  afterEach(async () => {
+    await _driver.destroy();
   });
 
   describe('Content', () => {

@@ -7,6 +7,7 @@ import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentLoading } from '../component/component-loading.interface';
+import { IZComponentName } from '../component/component-name';
 import { IZComponentStyle } from '../component/component-style.';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { makeStyles } from '../theme/make-styles';
@@ -20,7 +21,8 @@ export interface IZButton
     IZComponentLabel,
     IZComponentDisabled,
     IZComponentLoading,
-    IZComponentStyle {
+    IZComponentStyle,
+    IZComponentName {
   color?: ZButtonColor;
   borderless?: boolean;
   outline?: boolean;
@@ -60,7 +62,19 @@ const useButtonStyles = makeStyles<IZButton>()((theme) => ({
  * @returns The JSX to render this button.
  */
 export function ZButton(props: IZButton) {
-  const { avatar, className, color, borderless, disabled, loading, label, outline, tooltip, onClick = noop } = props;
+  const {
+    avatar,
+    className,
+    color,
+    borderless,
+    disabled,
+    loading,
+    label,
+    name,
+    outline,
+    tooltip,
+    onClick = noop
+  } = props;
 
   const { classes } = useButtonStyles(props);
   const buttonClass = cssClass(
@@ -77,7 +91,14 @@ export function ZButton(props: IZButton) {
   return (
     <Tooltip title={tooltip}>
       <span>
-        <Button className={buttonClass} color={color} variant={variant} disabled={disabled} onClick={onClick}>
+        <Button
+          className={buttonClass}
+          data-name={name}
+          color={color}
+          variant={variant}
+          disabled={disabled}
+          onClick={onClick}
+        >
           {avatar}
           <div className={contentClass}>{label}</div>
           <ZCircularProgress className='ZButton-loading' size='sm' show={!!loading} />
