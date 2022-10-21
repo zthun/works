@@ -61,6 +61,13 @@ export class ZCircusDriver implements IZCircusDriver {
   }
 
   /**
+   * @Inheritdoc
+   */
+  public selected(): Promise<boolean> {
+    return Promise.resolve(get(this._element, 'checked', false));
+  }
+
+  /**
    * @inheritdoc
    */
   public disabled(): Promise<boolean> {

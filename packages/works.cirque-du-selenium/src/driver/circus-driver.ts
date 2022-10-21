@@ -12,6 +12,8 @@ export class ZCircusDriver implements IZCircusDriver {
    *
    * @param _seleniumDriver
    *        The underlying web driver.
+   * @param _search
+   *        The search context.
    */
   public constructor(private _seleniumDriver: WebDriver, private _search: WebElement) {}
 
@@ -54,6 +56,13 @@ export class ZCircusDriver implements IZCircusDriver {
    */
   public value(): Promise<string> {
     return this.attribute('value');
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public selected(): Promise<boolean> {
+    return this._search.isSelected();
   }
 
   /**
