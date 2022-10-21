@@ -13,7 +13,7 @@ export class ZListPageComponentModel {
    * @param _driver
    *        The circus driver to manage the page.
    */
-  public constructor(private _driver: IZCircusDriver) {}
+  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Gets the alerts on the page.

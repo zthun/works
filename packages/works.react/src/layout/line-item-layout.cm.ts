@@ -14,7 +14,7 @@ export class ZLineItemLayoutComponentModel {
    * @param _driver
    *        The circus driver to manage the component.
    */
-  public constructor(private _driver: IZCircusDriver) {}
+  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Returns the prefix element.

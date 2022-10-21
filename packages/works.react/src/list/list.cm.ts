@@ -15,7 +15,7 @@ export class ZListComponentModel {
    * @param _driver
    *        The driver used to manage items in the component.
    */
-  public constructor(private _driver: IZCircusDriver) {}
+  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Finds all underlying items and returns them.
