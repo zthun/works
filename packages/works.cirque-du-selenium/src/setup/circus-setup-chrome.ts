@@ -1,5 +1,5 @@
 import { IZCircusDriver, IZCircusSetup } from '@zthun/works.cirque';
-import { Browser, Builder, By } from 'selenium-webdriver';
+import { Browser, Builder, By, Capabilities } from 'selenium-webdriver';
 import { ZCircusDriver } from '../driver/circus-driver';
 
 /**
@@ -20,7 +20,9 @@ export class ZCircusSetupChrome implements IZCircusSetup<IZCircusDriver> {
    * Constructs a new browser window and navigates to it.
    */
   public async setup() {
-    const driver = new Builder().forBrowser(Browser.CHROME).build();
+    const options = Capabilities.chrome();
+    options.setAcceptInsecureCerts(true);
+    const driver = new Builder().forBrowser(Browser.CHROME).withCapabilities(options).build();
     await driver.get(this.url);
     const root = driver.findElement(By.css('html'));
     return new ZCircusDriver(driver, root);

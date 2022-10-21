@@ -56,21 +56,25 @@ export function ZListPage() {
           <ZListLineItem
             avatar={<CheckCircleIcon color='success' fontSize='large' />}
             adornment={<FavoriteIcon color='error' fontSize='large' />}
+            name='everything'
             heading='Line Item Everything'
             subHeading='Line item with header, sub header, avatar, adornment'
             onClick={showAlert.bind(null, 'Success', 'Line items are great', ZAlertSeverity.Success)}
           />
           <ZListLineItem
+            name='text-only'
             heading='Text only line item'
             subHeading='Line item with just text'
             onClick={showAlert.bind(null, 'Warning', 'Pictures make line items pretty', ZAlertSeverity.Warning)}
           />
           <ZListLineItem
             avatar={<FavoriteIcon color='info' fontSize='large' />}
+            name='avatar-and-text'
             heading='Avatar and Text (Unclickable)'
           />
           <ZListLineItem
             avatar={<FavoriteIcon color='warning' fontSize='large' />}
+            name='avatar-text-and-adornment'
             heading='Avatar, Text, and Adornment (Unclickable)'
             adornment={<CheckCircleIcon color='primary' fontSize='large' />}
           />

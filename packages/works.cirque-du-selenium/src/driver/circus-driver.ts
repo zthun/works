@@ -1,7 +1,7 @@
 /* eslint-disable valid-jsdoc */
-import { IZCircusAct, IZCircusDriver } from '@zthun/works.cirque';
+import { IZCircusAct, IZCircusAction, IZCircusDriver, ZCircusActionType } from '@zthun/works.cirque';
 import { keyBy } from 'lodash';
-import { By, WebDriver, WebElement } from 'selenium-webdriver';
+import { Actions, Button, By, WebDriver, WebElement } from 'selenium-webdriver';
 
 /**
  * Represents the circus driver for selenium actions.
@@ -76,14 +76,33 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
-  public perform(act: IZCircusAct): Promise<void> {
-    throw new Error('Method not implemented.');
+  public async perform(act: IZCircusAct): Promise<void> {
+    let performance = this._seleniumDriver.actions();
+
+    const map: Record<ZCircusActionType, (a: IZCircusAction) => Actions> = {
+      [ZCircusActionType.MoveTo]: () => performance,
+      [ZCircusActionType.LeftMouseDown]: () => performance.click(this._search),
+      [ZCircusActionType.LeftMouseUp]: () => performance.release(Button.LEFT),
+      [ZCircusActionType.KeysClick]: () => performance,
+      [ZCircusActionType.KeysPress]: () => performance,
+      [ZCircusActionType.KeysRelease]: () => performance,
+      [ZCircusActionType.Magic]: (a: IZCircusAction) => {
+        a.context();
+        return performance;
+      }
+    };
+
+    act.actions.forEach((action) => {
+      performance = map[action.name](action);
+    });
+
+    await performance.perform();
   }
 
   /**
    * @inheritdoc
    */
-  public wait(predicate: () => boolean | Promise<boolean>): Promise<void> {
-    throw new Error('Method not implemented.');
+  public async wait(predicate: () => boolean | Promise<boolean>): Promise<void> {
+    await this._seleniumDriver.wait(predicate, 10000);
   }
 }
