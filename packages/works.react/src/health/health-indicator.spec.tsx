@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
+import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { createMocked } from '@zthun/works.jest';
 import { noop } from 'lodash';
 import React from 'react';
@@ -9,9 +10,7 @@ import { ZHealthIndicatorComponentModel } from './health-indicator.cm';
 import { IZHealthService, ZHealthServiceContext } from './health-service.context';
 
 describe('ZHealthIndicator', () => {
-  const performer = new ZCircusPerformer();
-  const waiter = new ZCircusWait();
-
+  let _driver: IZCircusDriver;
   let health: jest.Mocked<IZHealthService>;
 
   async function createTestTarget() {
@@ -21,14 +20,18 @@ describe('ZHealthIndicator', () => {
       </ZHealthServiceContext.Provider>
     );
 
-    const result = await new ZCircusSetupRender(element).setup();
-    await waiter.wait(() => !!ZHealthIndicatorComponentModel.find(result.container).length);
-    const [target] = ZHealthIndicatorComponentModel.find(result.container);
-    return new ZHealthIndicatorComponentModel(target, performer, waiter);
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    await _driver.wait(() => _driver.peek(ZHealthIndicatorComponentModel.Selector));
+    const target = await _driver.select(ZHealthIndicatorComponentModel.Selector);
+    return new ZHealthIndicatorComponentModel(target);
   }
 
   beforeEach(() => {
     health = createMocked(['read']);
+  });
+
+  afterEach(async () => {
+    await _driver?.destroy();
   });
 
   it('should render a loading indicator if the health is loading.', async () => {
