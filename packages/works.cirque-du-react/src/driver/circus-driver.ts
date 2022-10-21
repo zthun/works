@@ -54,7 +54,14 @@ export class ZCircusDriver implements IZCircusDriver {
   }
 
   /**
-   * Gets the disabled attribute of the driver underlying context.
+   * @inheritdoc
+   */
+  public value(): Promise<string | null> {
+    return Promise.resolve(get(this._element, 'value', null));
+  }
+
+  /**
+   * @inheritdoc
    */
   public disabled(): Promise<boolean> {
     return Promise.resolve(get(this._element, 'disabled', false));

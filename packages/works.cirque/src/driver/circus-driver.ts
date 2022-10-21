@@ -45,6 +45,27 @@ export interface IZCircusDriver {
   text(): Promise<string | null>;
 
   /**
+   * Gets the underlying value of the driver context if there is one.
+   *
+   * @param fallback
+   *        The fallback value to use in the case that
+   *        the context does have it or the value is undefined.
+   *
+   * @returns
+   *        The underlying value of the driver context if there
+   *        is one.  Returns undefined if there is no value.
+   */
+  value(): Promise<string | null>;
+
+  /**
+   * Gets whether the context described by this driver is disabled.
+   *
+   * @returns
+   *        True if the driver context is disabled.  False if enabled.
+   */
+  disabled(): Promise<boolean>;
+
+  /**
    * Looks at the app structure to see if a css selector will produce any results.
    *
    * @param selector

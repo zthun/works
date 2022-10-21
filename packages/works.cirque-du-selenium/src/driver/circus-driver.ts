@@ -52,6 +52,21 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
+  public value(): Promise<string> {
+    return this.attribute('value');
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public async disabled(): Promise<boolean> {
+    const enabled = await this._search.isEnabled();
+    return !enabled;
+  }
+
+  /**
+   * @inheritdoc
+   */
   public async peek(selector: string): Promise<boolean> {
     const results = await this._search.findElements(By.css(selector));
     return !!results.length;
