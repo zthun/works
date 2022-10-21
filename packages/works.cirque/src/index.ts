@@ -2,6 +2,8 @@
 
 // Anticipation
 export { IZCircusWait } from './anticipation/circus-wait';
+// Component
+export { ZCircusComponentModel, ZCircusComponentModelConstructor } from './component/circus-component-model';
 // Driver
 export { IZCircusDriver } from './driver/circus-driver';
 // Performance

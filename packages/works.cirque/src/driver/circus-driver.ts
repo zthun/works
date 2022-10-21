@@ -34,7 +34,7 @@ export interface IZCircusDriver {
    * @returns
    *        The list of classes that match the filter.
    */
-  classes(filter?: []): Promise<string[]>;
+  classes(filter?: string[]): Promise<string[]>;
 
   /**
    * Gets the underlying text of the driver context.
