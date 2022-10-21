@@ -26,7 +26,7 @@ describe('ZLineItemLayout', () => {
     const element = <ZLineItemLayout prefix={prefix} body={body} suffix={suffix} />;
 
     _driver = await new ZCircusSetupRenderer(element).setup();
-    _driver.wait(() => _driver.peek(ZLineItemLayoutComponentModel.Selector));
+    await _driver.wait(() => _driver.peek(ZLineItemLayoutComponentModel.Selector));
     const target = await _driver.select(ZLineItemLayoutComponentModel.Selector);
     return new ZLineItemLayoutComponentModel(target);
   }
