@@ -4,6 +4,7 @@
 export { ZAlertList } from './alert/alert-list';
 export { ZAlertListComponentModel } from './alert/alert-list.cm';
 export { useAlertService, ZAlertServiceContext } from './alert/alert-service';
+export { ZAlertComponentModel } from './alert/alert.cm';
 // Apps
 export { IZWebAppDrawer, ZWebAppDrawer } from './apps/web-app-drawer';
 export { ZWebAppDrawerComponentModel } from './apps/web-app-drawer.cm';
