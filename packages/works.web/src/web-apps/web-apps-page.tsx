@@ -27,7 +27,7 @@ import { ZBooleanPage } from './components/boolean-page';
 import { ZButtonPage } from './components/button-page';
 import { ZChoicePage } from './components/choice-page';
 import { ZDrawerPage } from './components/drawer-page';
-import { ZListPage } from './components/list-page';
+import { ZListPage } from './components/list-page/list-page';
 import { ZTypographyPage } from './components/typography-page';
 import { ZGettingStartedPage } from './getting-started/getting-started-page';
 
