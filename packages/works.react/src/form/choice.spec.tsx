@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
-import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
-import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
+import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { identity, noop, range } from 'lodash';
 import React, { ReactNode } from 'react';
 import { ZChoiceAutocomplete } from './choice-autocomplete';
@@ -8,8 +8,7 @@ import { ZChoiceDropDown } from './choice-drop-down';
 import { ZChoiceComponentModel } from './choice.cm';
 
 describe('ZChoice', () => {
-  const performer: IZCircusPerformer = new ZCircusPerformer();
-  const waiter: IZCircusWait = new ZCircusWait();
+  let _driver: IZCircusDriver;
 
   let options: any[];
   let identifier: (op: any) => any;
@@ -33,12 +32,16 @@ describe('ZChoice', () => {
     options = ['One', 'Two', 'Three', 'Four', 'Five'];
   });
 
+  afterEach(async () => {
+    await _driver.destroy();
+  });
+
   async function shouldRenderAllOptionsWhenOpened(createTestTarget: () => Promise<ZChoiceComponentModel>) {
     // Arrange.
     const target = await createTestTarget();
     // Act.
     const _options = await target.open();
-    const actual = _options.map((op) => op.text);
+    const actual = await Promise.all(_options.map((op) => op.text()));
     // Assert.
     expect(actual).toEqual(options);
   }
@@ -50,7 +53,8 @@ describe('ZChoice', () => {
     const target = await createTestTarget();
     // Act.
     const _options = await target.open();
-    const actual = _options.map((op) => op.text).every((v) => v.startsWith(expected));
+    const text = await Promise.all(_options.map((op) => op.text()));
+    const actual = text.every((v) => v.startsWith(expected));
     // Assert.
     expect(actual).toBeTruthy();
   }
@@ -65,7 +69,7 @@ describe('ZChoice', () => {
     const target = await createTestTarget();
     // Act.
     const [_selected] = await target.selected();
-    const actual = _selected.text;
+    const actual = await _selected.text();
     // Assert.
     expect(actual).toEqual(expected.name);
   }
@@ -77,7 +81,7 @@ describe('ZChoice', () => {
     const target = await createTestTarget();
     // Act.
     const [_selected] = await target.selected();
-    const actual = _selected.text;
+    const actual = await _selected.text();
     // Assert.
     expect(actual).toEqual(expected);
   }
@@ -118,7 +122,7 @@ describe('ZChoice', () => {
     await target.select(options[0]);
     await target.select(options[1]);
     const selection = await target.selected();
-    const actual = selection.map((ch) => ch.text);
+    const actual = await Promise.all(selection.map((ch) => ch.text()));
     // Assert
     expect(actual).toEqual(expected);
   }
@@ -135,7 +139,7 @@ describe('ZChoice', () => {
     await target.select(menu[0]);
     await target.select(menu[1]);
     const selection = await target.selected();
-    const actual = selection.map((ch) => ch.text);
+    const actual = await Promise.all(selection.map((ch) => ch.text()));
     // Assert.
     expect(actual).toEqual(expected);
   }
@@ -168,10 +172,10 @@ describe('ZChoice', () => {
         />
       );
 
-      const rendered = await new ZCircusSetupRender(element).setup();
-      await waiter.wait(() => ZChoiceComponentModel.find(rendered.container).length > 0);
-      const [target] = ZChoiceComponentModel.find(rendered.container);
-      return new ZChoiceComponentModel(target, performer, waiter);
+      _driver = await new ZCircusSetupRenderer(element).setup();
+      await _driver.wait(() => _driver.peek(ZChoiceComponentModel.Selector));
+      const target = await _driver.select(ZChoiceComponentModel.Selector);
+      return new ZChoiceComponentModel(target);
     }
 
     it('should render all options when opened', async () => {
@@ -219,7 +223,7 @@ describe('ZChoice', () => {
       const target = await createTestTarget();
       // Act.
       const [_selected] = await target.selected();
-      const actual = _selected.text;
+      const actual = await _selected.text();
       warn.mockRestore();
       // Assert.
       expect(actual).toEqual(expected);
@@ -242,10 +246,10 @@ describe('ZChoice', () => {
         />
       );
 
-      const rendered = await new ZCircusSetupRender(element).setup();
-      await waiter.wait(() => ZChoiceComponentModel.find(rendered.container).length > 0);
-      const [target] = ZChoiceComponentModel.find(rendered.container);
-      return new ZChoiceComponentModel(target, performer, waiter);
+      _driver = await new ZCircusSetupRenderer(element).setup();
+      await _driver.wait(() => _driver.peek(ZChoiceComponentModel.Selector));
+      const target = await _driver.select(ZChoiceComponentModel.Selector);
+      return new ZChoiceComponentModel(target);
     }
 
     it('should render all options when opened', async () => {

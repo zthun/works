@@ -1,62 +1,63 @@
-import { IZCircusPerformer, IZCircusWait, ZCircusActBuilder } from '@zthun/works.cirque';
-import { required } from '@zthun/works.core';
-import { find } from 'lodash';
+import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
+import { findIndex } from 'lodash';
 import { ZChoiceOptionComponentModel } from './choice-option.cm';
 
 /**
  * Represents a generic common implementation of a ZChoiceComponent model.
  */
 export class ZChoiceComponentModel {
+  public static readonly Selector = '.ZChoice-root';
+
   /**
    * Initializes a new instance of this object.
    *
-   * @param _element
-   *        The element that represents the root of the ZChoice object.
-   * @param _performer
-   *        The circus performer responsible for performing user actions.
-   * @param _wait
-   *        The wait implementation to halt the circus.
+   * @param _driver
+   *        The driver to manage the component.
    */
-  public constructor(
-    private readonly _element: HTMLElement,
-    private readonly _performer: IZCircusPerformer,
-    private readonly _wait: IZCircusWait
-  ) {}
+  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Gets the list of selected items.
    *
-   * @returns The list of selected items.
+   * @returns
+   *        The list of selected items.
    */
-  private _selected(): ZChoiceOptionComponentModel[] {
-    const values = this._element.querySelectorAll<HTMLElement>('.ZChoice-value');
+  public async selected(): Promise<ZChoiceOptionComponentModel[]> {
+    const values = await this._driver.query('.ZChoice-value');
     return Array.from(values).map((e) => new ZChoiceOptionComponentModel(e));
   }
 
   /**
-   * Gets the list of selected items.
+   * Gets whether the options list is visible.
    *
-   * @returns The list of selected items.
+   * @returns
+   *        True if the options list is visible.  False otherwise.
    */
-  public selected(): Promise<ZChoiceOptionComponentModel[]> {
-    return Promise.resolve(this._selected());
+  public async opened() {
+    const body = await this._driver.body();
+    return body.peek('.ZChoice-options');
   }
 
   /**
    * Force shows the options in the case that they are hidden.
    *
-   * @returns The list of available options.
+   * @returns
+   *        The list of available options.
    */
   public async open(): Promise<ZChoiceOptionComponentModel[]> {
-    if (this._findOptionContainer(document.body) == null) {
-      const toggler = await this._findToggler();
-      const act = new ZCircusActBuilder().moveTo(toggler).leftMouseClick().build();
-      await this._performer.perform(act);
-      await this._wait.wait(() => this._findOptionContainer(document.body) != null);
+    const opened = await this.opened();
+
+    if (!opened) {
+      const toggler = await this._driver.select('.ZChoice-root .ZChoice-toggler');
+      const act = new ZCircusActBuilder().click().build();
+      await toggler.perform(act);
+      await toggler.wait(() => this.opened());
     }
 
-    const menu = await required(this._findOptionContainer(document.body));
-    return this._findOptions(menu);
+    const body = await this._driver.body();
+    const menu = await body.select('.ZChoice-options');
+    const options = await menu.query('.ZChoice-option');
+    return options.map((e) => new ZChoiceOptionComponentModel(e));
   }
 
   /**
@@ -70,7 +71,7 @@ export class ZChoiceComponentModel {
    */
   public close(): Promise<void> {
     const act = new ZCircusActBuilder().keysClick('[Escape]').build();
-    return this._performer.perform(act);
+    return this._driver.perform(act);
   }
 
   /**
@@ -81,12 +82,17 @@ export class ZChoiceComponentModel {
    */
   public async select(option: ZChoiceOptionComponentModel | string | number): Promise<void> {
     const options = await this.open();
-    const value = option instanceof ZChoiceOptionComponentModel ? option.value : String(option);
-    const optionToSelect = find(options, (op) => op.value === value);
+    const value = await (option instanceof ZChoiceOptionComponentModel
+      ? option.value()
+      : Promise.resolve(String(option)));
 
-    if (optionToSelect != null) {
-      const act = new ZCircusActBuilder().moveTo(optionToSelect.element).leftMouseClick().build();
-      await this._performer.perform(act);
+    const values = await Promise.all(options.map((op) => op.value()));
+    const optionToSelect = findIndex(values, (v) => v === value);
+
+    if (optionToSelect >= 0) {
+      const context = options[optionToSelect];
+      const act = new ZCircusActBuilder().click().build();
+      await context.driver.perform(act);
     }
 
     await this.close();
@@ -96,72 +102,13 @@ export class ZChoiceComponentModel {
    * Clears the drop down selection if the drop down is not indelible
    */
   public async clear(): Promise<void> {
-    const cross = this._element.querySelector<HTMLButtonElement>('.ZChoice-clear');
+    const [cross] = await this._driver.query('.ZChoice-clear');
 
     if (!cross) {
       return;
     }
 
-    const act = new ZCircusActBuilder().moveTo(cross).leftMouseClick().build();
-    await this._performer.perform(act);
-  }
-
-  /**
-   * Retrieves all of the choice options under the given container.
-   *
-   * @param container
-   *        The container to query.
-   *
-   * @returns
-   *        The list of options discovered under the container.
-   */
-  private _findOptions(container: HTMLElement) {
-    const options = Array.from(container.querySelectorAll<HTMLElement>('.ZChoice-option'));
-    return options.map((e) => new ZChoiceOptionComponentModel(e));
-  }
-
-  /**
-   * Finds the container for the options.
-   *
-   * @param container
-   *        The root element to search for the container.
-   *
-   * @returns
-   *        The container element by which you can use with
-   *        findOptions to query each individual option.
-   */
-  private _findOptionContainer(container: HTMLElement) {
-    return container.querySelector<HTMLElement>('.ZChoice-options');
-  }
-
-  /**
-   * Finds the element that can be clicked on to show the option list.
-   *
-   * @returns
-   *        The element that can be clicked on to show the option list.
-   */
-  /**
-   * Finds the element that can be clicked on to show the option list.
-   *
-   * @returns
-   *        The element that can be clicked on to show the option list.
-   */
-  private _findToggler() {
-    const query = '.ZChoice-root .ZChoice-toggler';
-    return required(this._element.querySelector<HTMLElement>(query));
-  }
-
-  /**
-   * Finds all elements in the dom that can be considered ZChoice objects.
-   *
-   * @param container
-   *        The container to search in.
-   *
-   * @returns
-   *        The array of HTMLElements that can be considered ZChoice
-   *        components.
-   */
-  public static find(container: Element): HTMLElement[] {
-    return Array.from(container.querySelectorAll('.ZChoice-root'));
+    const act = new ZCircusActBuilder().click().build();
+    await cross.perform(act);
   }
 }

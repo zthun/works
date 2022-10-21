@@ -1,3 +1,4 @@
+import { IZCircusDriver } from '@zthun/works.cirque';
 import { firstDefined } from '@zthun/works.core';
 
 /**
@@ -7,22 +8,29 @@ export class ZChoiceOptionComponentModel {
   /**
    * Initializes a new instance of this object.
    *
-   * @param element
-   *        The element that represents the root of the model.
+   * @param driver
+   *        The driver to manage the component.
    */
-  public constructor(public readonly element: HTMLElement) {}
+  public constructor(public readonly driver: IZCircusDriver) {}
 
   /**
-   * Gets the value from the data-value attribute.
+   * Gets the value for the option.
+   *
+   * @returns
+   *      The value for the option.
    */
-  public get value(): string | null {
-    return this.element.getAttribute('data-value');
+  public value(): Promise<string | null> {
+    return this.driver.attribute('data-value');
   }
 
   /**
    * Gets the raw text string of the value.
+   *
+   * @returns
+   *        The text of the option.
    */
-  public get text(): string {
-    return firstDefined<string>('', this.element.textContent);
+  public async text(): Promise<string> {
+    const text = await this.driver.text();
+    return firstDefined('', text);
   }
 }
