@@ -113,8 +113,6 @@ export {
   ZTestRouter
 } from './router/router-dom';
 // State
-export { ZDataState } from './state/data-state.class';
-export { IZDataState } from './state/data-state.interface';
 export {
   asStateData,
   isStateErrored,
@@ -126,7 +124,6 @@ export {
   ZAsyncLoading
 } from './state/use-async-state';
 export { useSafeState } from './state/use-safe-state';
-export { useWatchableState } from './state/use-watchable-state.hook';
 // Theme
 export { makeStyles } from './theme/make-styles';
 export { ZStateAnchor } from './theme/state-anchor';
