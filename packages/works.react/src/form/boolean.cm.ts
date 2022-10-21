@@ -1,16 +1,17 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { IZCircusPerformer, ZCircusActBuilder } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
 
 /**
  * Represents a react component model for the ZBoolean component.
  */
 export class ZBooleanComponentModel {
+  public static readonly Selector = '.ZBoolean-root';
+
   /**
    * Initializes a new instance of this object.
    *
    * @param _element The element for the checkbox.
    */
-  public constructor(private readonly _element: HTMLElement, private readonly _performer: IZCircusPerformer) {}
+  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Gets the underlying input element.
@@ -18,8 +19,8 @@ export class ZBooleanComponentModel {
    * @returns
    *        The underlying input element.
    */
-  private get _input(): HTMLInputElement {
-    return this._element.querySelector('input[type="checkbox"]')!;
+  private async _input(): Promise<IZCircusDriver> {
+    return this._driver.select('input[type="checkbox"]');
   }
 
   /**
@@ -29,8 +30,8 @@ export class ZBooleanComponentModel {
    *      True if the component is disabled,
    *      false otherwise.
    */
-  public get disabled(): boolean {
-    return this._input.disabled;
+  public async disabled(): Promise<boolean> {
+    return (await this._input()).disabled();
   }
 
   /**
@@ -39,9 +40,10 @@ export class ZBooleanComponentModel {
    * @returns
    *        The check state value or null if indeterminate.
    */
-  public get value(): boolean | null {
-    const input = this._input;
-    return input.getAttribute('data-indeterminate') === 'true' ? null : input.checked;
+  public async value(): Promise<boolean | null> {
+    const input = await this._input();
+    const indeterminate = await input.attribute('data-indeterminate');
+    return indeterminate === 'true' ? null : input.selected();
   }
 
   /**
@@ -56,27 +58,16 @@ export class ZBooleanComponentModel {
    *        A promise that resolves once the toggle
    *        has reached the given state.
    */
-  public async toggle(value?: boolean) {
-    if (this.value === value) {
+  public async toggle(value?: boolean): Promise<void> {
+    const current = await this.value();
+
+    if (current === value) {
       // Already in the state we need to be in.
       return;
     }
 
-    const act = new ZCircusActBuilder().moveTo(this._input).leftMouseClick().build();
-    await this._performer.perform(act);
-  }
-
-  /**
-   * Finds all elements in the dom that can be considered ZBoolean objects.
-   *
-   * @param container
-   *        The container to search in.
-   *
-   * @returns
-   *        The array of HTMLElements that can be considered ZBoolean
-   *        components.
-   */
-  public static find(container: HTMLElement): HTMLElement[] {
-    return Array.from(container.querySelectorAll<HTMLElement>('.ZBoolean-root'));
+    const input = await this._input();
+    const act = new ZCircusActBuilder().click().build();
+    await input.perform(act);
   }
 }

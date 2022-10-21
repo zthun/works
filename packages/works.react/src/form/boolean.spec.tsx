@@ -1,28 +1,37 @@
 /* eslint-disable require-jsdoc */
-import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
-import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
-import React from 'react';
+import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import React, { ReactElement } from 'react';
 import { ZBooleanCheckbox } from './boolean-checkbox';
 import { ZBooleanSwitch } from './boolean-switch';
 import { ZBooleanComponentModel } from './boolean.cm';
 
 describe('ZBoolean', () => {
-  const waiter: IZCircusWait = new ZCircusWait();
-  const performer: IZCircusPerformer = new ZCircusPerformer();
-
+  let _driver: IZCircusDriver;
   let disabled: boolean | undefined;
   let onCheckChanged: jest.Mock | undefined;
+
+  async function createComponentModel(element: ReactElement) {
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    await _driver.wait(() => _driver.peek(ZBooleanComponentModel.Selector));
+    const target = await _driver.select(ZBooleanComponentModel.Selector);
+    return new ZBooleanComponentModel(target);
+  }
 
   beforeEach(() => {
     disabled = undefined;
     onCheckChanged = undefined;
   });
 
+  afterEach(async () => {
+    await _driver.destroy();
+  });
+
   async function assertValue<T>(createTestTarget: () => Promise<ZBooleanComponentModel>, expected: T) {
     // Arrange.
     const target = await createTestTarget();
     // Act.
-    const actual = target.value;
+    const actual = await target.value();
     // Assert.
     expect(actual).toEqual(expected);
   }
@@ -32,7 +41,7 @@ describe('ZBoolean', () => {
     disabled = expected;
     const target = await createTestTarget();
     // Act.
-    const actual = target.disabled;
+    const actual = await target.disabled();
     // Assert.
     expect(actual).toEqual(expected);
   }
@@ -57,20 +66,18 @@ describe('ZBoolean', () => {
     await target.toggle(start);
     // Act.
     await target.toggle();
-    const actual = target.value;
+    const actual = await target.value();
     // Assert.
     expect(actual).toEqual(expected);
   }
 
   describe('Checkbox', () => {
     async function createTestTarget(value?: boolean | null) {
-      const rendered = await new ZCircusSetupRender(
+      const element = (
         <ZBooleanCheckbox value={value} onValueChange={onCheckChanged} disabled={disabled} label='Checkbox' />
-      ).setup();
+      );
 
-      await waiter.wait(() => rendered.container.querySelector('.ZBoolean-root') != null);
-      const [target] = ZBooleanComponentModel.find(rendered.container);
-      return new ZBooleanComponentModel(target, performer);
+      return createComponentModel(element);
     }
 
     it('can be disabled.', async () => {
@@ -112,13 +119,11 @@ describe('ZBoolean', () => {
 
   describe('Switch', () => {
     async function createTestTarget(value?: boolean) {
-      const rendered = await new ZCircusSetupRender(
-        <ZBooleanSwitch value={value} onValueChange={onCheckChanged} disabled={disabled} label='Checkbox' />
-      ).setup();
+      const element = (
+        <ZBooleanSwitch value={value} onValueChange={onCheckChanged} disabled={disabled} label='Switch' />
+      );
 
-      await waiter.wait(() => rendered.container.querySelector('.ZBoolean-root') != null);
-      const [target] = ZBooleanComponentModel.find(rendered.container);
-      return new ZBooleanComponentModel(target, performer);
+      return createComponentModel(element);
     }
 
     it('can be disabled.', async () => {
