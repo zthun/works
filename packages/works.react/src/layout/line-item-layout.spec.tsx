@@ -1,11 +1,13 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
+import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactNode } from 'react';
 import { ZLineItemLayout } from './line-item-layout';
 import { ZLineItemLayoutComponentModel } from './line-item-layout.cm';
 
 describe('ZLineItemLayout', () => {
-  const waiter = new ZCircusWait();
+  let _driver: IZCircusDriver;
+
   let prefix: (() => ReactNode) | ReactNode | undefined;
   let body: (() => ReactNode) | ReactNode | undefined;
   let suffix: (() => ReactNode) | ReactNode | undefined;
@@ -16,12 +18,16 @@ describe('ZLineItemLayout', () => {
     suffix = undefined;
   });
 
+  afterEach(async () => {
+    await _driver.destroy();
+  });
+
   async function createTestTarget() {
     const element = <ZLineItemLayout prefix={prefix} body={body} suffix={suffix} />;
 
-    const rendered = await new ZCircusSetupRender(element).setup();
-    waiter.wait(() => !!ZLineItemLayoutComponentModel.find(rendered.container).length);
-    const [target] = ZLineItemLayoutComponentModel.find(rendered.container);
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    _driver.wait(() => _driver.peek(ZLineItemLayoutComponentModel.Selector));
+    const target = await _driver.select(ZLineItemLayoutComponentModel.Selector);
     return new ZLineItemLayoutComponentModel(target);
   }
 
@@ -32,9 +38,9 @@ describe('ZLineItemLayout', () => {
       prefix = expected;
       const target = await createTestTarget();
       // Act.
-      const actual = await target.prefix();
+      const actual = await (await target.prefix()).text();
       // Assert.
-      expect(actual.textContent).toEqual(expected);
+      expect(actual).toEqual(expected);
     });
 
     it('should render as a function', async () => {
@@ -43,18 +49,18 @@ describe('ZLineItemLayout', () => {
       prefix = () => expected;
       const target = await createTestTarget();
       // Act.
-      const actual = await target.prefix();
+      const actual = await (await target.prefix()).text();
       // Assert.
-      expect(actual.textContent).toEqual(expected);
+      expect(actual).toEqual(expected);
     });
 
     it('should render an empty block', async () => {
       // Arrange.
       const target = await createTestTarget();
       // Act.
-      const actual = await target.prefix();
+      const actual = await (await target.prefix()).text();
       // Assert.
-      expect(actual.textContent).toBeFalsy();
+      expect(actual).toBeFalsy();
     });
   });
 
@@ -65,9 +71,9 @@ describe('ZLineItemLayout', () => {
       body = expected;
       const target = await createTestTarget();
       // Act.
-      const actual = await target.body();
+      const actual = await (await target.body()).text();
       // Assert.
-      expect(actual.textContent).toEqual(expected);
+      expect(actual).toEqual(expected);
     });
 
     it('should render as a function', async () => {
@@ -76,18 +82,18 @@ describe('ZLineItemLayout', () => {
       body = () => expected;
       const target = await createTestTarget();
       // Act.
-      const actual = await target.body();
+      const actual = await (await target.body()).text();
       // Assert.
-      expect(actual.textContent).toEqual(expected);
+      expect(actual).toEqual(expected);
     });
 
     it('should render an empty block', async () => {
       // Arrange.
       const target = await createTestTarget();
       // Act.
-      const actual = await target.body();
+      const actual = await (await target.body()).text();
       // Assert.
-      expect(actual.textContent).toBeFalsy();
+      expect(actual).toBeFalsy();
     });
   });
 
@@ -98,9 +104,9 @@ describe('ZLineItemLayout', () => {
       suffix = expected;
       const target = await createTestTarget();
       // Act.
-      const actual = await target.suffix();
+      const actual = await (await target.suffix()).text();
       // Assert.
-      expect(actual.textContent).toEqual(expected);
+      expect(actual).toEqual(expected);
     });
 
     it('should render as a function', async () => {
@@ -109,18 +115,18 @@ describe('ZLineItemLayout', () => {
       suffix = () => expected;
       const target = await createTestTarget();
       // Act.
-      const actual = await target.suffix();
+      const actual = await (await target.suffix()).text();
       // Assert.
-      expect(actual.textContent).toEqual(expected);
+      expect(actual).toEqual(expected);
     });
 
     it('should render an empty block', async () => {
       // Arrange.
       const target = await createTestTarget();
       // Act.
-      const actual = await target.suffix();
+      const actual = await (await target.suffix()).text();
       // Assert.
-      expect(actual.textContent).toBeFalsy();
+      expect(actual).toBeFalsy();
     });
   });
 });

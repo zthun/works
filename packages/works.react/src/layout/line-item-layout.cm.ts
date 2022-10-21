@@ -1,4 +1,4 @@
-import { required } from '@zthun/works.core';
+import { IZCircusDriver } from '@zthun/works.cirque';
 
 /**
  * A component model for the ZLineItem.
@@ -6,13 +6,15 @@ import { required } from '@zthun/works.core';
  * This mostly is just here to help you get the containers for the prefix, body, and suffix.
  */
 export class ZLineItemLayoutComponentModel {
+  public static readonly Selector = '.ZLineItemLayout-root';
+
   /**
    * Initializes a new instance of this object.
    *
-   * @param _element
-   *        The root element that contains the component model.
+   * @param _driver
+   *        The circus driver to manage the component.
    */
-  public constructor(private _element: HTMLElement) {}
+  public constructor(private _driver: IZCircusDriver) {}
 
   /**
    * Returns the prefix element.
@@ -20,8 +22,8 @@ export class ZLineItemLayoutComponentModel {
    * @returns
    *        The prefix element.
    */
-  public prefix(): Promise<HTMLElement> {
-    return required(this._element.querySelector<HTMLElement>('.ZLineItemLayout-prefix'));
+  public prefix(): Promise<IZCircusDriver> {
+    return this._driver.select('.ZLineItemLayout-prefix');
   }
 
   /**
@@ -30,8 +32,8 @@ export class ZLineItemLayoutComponentModel {
    * @returns
    *        The body element.
    */
-  public body(): Promise<HTMLElement> {
-    return required(this._element.querySelector<HTMLElement>('.ZLineItemLayout-body'));
+  public body(): Promise<IZCircusDriver> {
+    return this._driver.select('.ZLineItemLayout-body');
   }
 
   /**
@@ -40,22 +42,7 @@ export class ZLineItemLayoutComponentModel {
    * @returns
    *        The suffix element.
    */
-  public suffix(): Promise<HTMLElement> {
-    return required(this._element.querySelector<HTMLElement>('.ZLineItemLayout-suffix'));
-  }
-
-  /**
-   * Finds all possible line item components in the specific container.
-   *
-   * @param container
-   *        The container to search.
-   *
-   * @returns
-   *        The list of available elements under the container that
-   *        can be considered ZLineItemLayout components.
-   */
-  public static find(container: HTMLElement): HTMLElement[] {
-    const query = '.ZLineItemLayout-root';
-    return Array.from(container.querySelectorAll<HTMLElement>(query));
+  public suffix(): Promise<IZCircusDriver> {
+    return this._driver.select('.ZLineItemLayout-suffix');
   }
 }
