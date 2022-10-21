@@ -32,7 +32,7 @@ export class ZCircusActBuilder {
     return this;
   }
 
-  public moveTo: (element: Element) => this = this._action.bind(this, ZCircusActionType.MoveTo);
+  public moveTo: (element?: Element) => this = this._action.bind(this, ZCircusActionType.MoveTo);
   public leftMouseDown: () => this = this._action.bind(this, ZCircusActionType.LeftMouseDown);
   public leftMouseUp: () => this = this._action.bind(this, ZCircusActionType.LeftMouseUp);
   public keysClick: (keys: string) => this = this._action.bind(this, ZCircusActionType.KeysClick);
@@ -59,7 +59,7 @@ export class ZCircusActBuilder {
    * @returns
    *        This object.
    */
-  public click(element: Element) {
+  public click(element?: Element) {
     return this.moveTo(element).leftMouseClick();
   }
 
