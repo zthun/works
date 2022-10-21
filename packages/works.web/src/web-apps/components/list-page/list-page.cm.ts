@@ -21,7 +21,7 @@ export class ZListPageComponentModel {
    * @returns
    *      The page alerts.
    */
-  public async alerts(): Promise<ZAlertListComponentModel> {
+  public async alertList(): Promise<ZAlertListComponentModel> {
     const root = await this._driver.select(ZAlertListComponentModel.Selector);
     return new ZAlertListComponentModel(root);
   }

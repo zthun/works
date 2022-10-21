@@ -10,28 +10,49 @@ import { ZListPageComponentModel } from './list-page.cm';
 describe('List Page', () => {
   let _driver: IZCircusDriver;
 
-  afterEach(() => {
-    _driver.destroy();
-  });
-
   async function createTestTarget() {
     _driver = await new ZCircusSetupChrome('https://local.zthunworks.com/#/web-apps/components/list').setup();
     await _driver.wait(() => _driver.peek(ZListPageComponentModel.Selector));
     return new ZListPageComponentModel(_driver);
   }
 
-  it('should open a success alert when the everything item is clicked.', async () => {
+  afterEach(async () => {
+    await _driver.destroy();
+  });
+
+  async function assertDisplaysAlert(expected: ZAlertSeverity, name: string) {
     // Arrange.
     const target = await createTestTarget();
     const list = await target.list();
     // Act.
-    const everything = await required(list.item('everything'));
-    const item = new ZListLineItemComponentModel(everything);
-    await item.click();
-    const alerts = await target.alerts();
-    const [alert] = await alerts.alerts();
+    const itemToClick = await required(list.item(name));
+    await new ZListLineItemComponentModel(itemToClick).click();
+    const alertList = await target.alertList();
+    const [alert] = await alertList.alerts();
     const actual = await alert.severity();
     // Assert.
-    expect(actual).toEqual(ZAlertSeverity.Success);
+    expect(actual).toEqual(expected);
+  }
+
+  it('should open a success alert when the everything item is clicked.', async () => {
+    await assertDisplaysAlert(ZAlertSeverity.Success, 'everything');
+  });
+
+  it('should open a warning alert when the text only item is clicked.', async () => {
+    await assertDisplaysAlert(ZAlertSeverity.Warning, 'text-only');
+  });
+
+  it('should not do anything when clicking on the avatar with and without the adornment', async () => {
+    // Arrange.
+    const target = await createTestTarget();
+    const list = await target.list();
+    // Act.
+    const withoutAdornment = await required(list.item('avatar-and-text'));
+    const withAdornment = await required(list.item('avatar-text-and-adornment'));
+    const withoutAdornmentClickable = await new ZListLineItemComponentModel(withoutAdornment).clickable();
+    const withAdornmentClickable = await new ZListLineItemComponentModel(withAdornment).clickable();
+    // Assert.
+    expect(withoutAdornmentClickable).toBeFalsy();
+    expect(withAdornmentClickable).toBeFalsy();
   });
 });
