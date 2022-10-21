@@ -1,7 +1,7 @@
 /* eslint-disable valid-jsdoc */
 import { IZCircusAct, IZCircusAction, IZCircusDriver, ZCircusActionType } from '@zthun/works.cirque';
 import { keyBy } from 'lodash';
-import { Actions, Button, By, WebDriver, WebElement } from 'selenium-webdriver';
+import { Actions, By, WebDriver, WebElement } from 'selenium-webdriver';
 
 /**
  * Represents the circus driver for selenium actions.
@@ -112,12 +112,8 @@ export class ZCircusDriver implements IZCircusDriver {
     let performance = this._seleniumDriver.actions();
 
     const map: Record<ZCircusActionType, (a: IZCircusAction) => Actions> = {
-      [ZCircusActionType.MoveTo]: () => performance,
-      [ZCircusActionType.LeftMouseDown]: () => performance.click(this._search),
-      [ZCircusActionType.LeftMouseUp]: () => performance.release(Button.LEFT),
-      [ZCircusActionType.KeysClick]: () => performance,
-      [ZCircusActionType.KeysPress]: () => performance,
-      [ZCircusActionType.KeysRelease]: () => performance,
+      [ZCircusActionType.Click]: () => performance.click(this._search),
+      [ZCircusActionType.KeysClick]: (a) => performance.sendKeys(a.context),
       [ZCircusActionType.Magic]: (a: IZCircusAction) => {
         a.context();
         return performance;

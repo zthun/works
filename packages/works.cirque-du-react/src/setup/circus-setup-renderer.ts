@@ -6,7 +6,7 @@ import { ZCircusDriver } from '../driver/circus-driver';
 /**
  * Represents a setup that renders a react component.
  */
-export class ZCircusSetupRenderer implements IZCircusSetup<IZCircusDriver> {
+export class ZCircusSetupRenderer implements IZCircusSetup {
   /**
    * Initializes a new instance of this object.
    *

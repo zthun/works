@@ -1,11 +1,11 @@
-import { IZCircusDriver, IZCircusSetup } from '@zthun/works.cirque';
+import { IZCircusSetup } from '@zthun/works.cirque';
 import { Browser, Builder, By, Capabilities } from 'selenium-webdriver';
 import { ZCircusDriver } from '../driver/circus-driver';
 
 /**
  * A setup module for the chrome web driver.
  */
-export class ZCircusSetupChrome implements IZCircusSetup<IZCircusDriver> {
+export class ZCircusSetupChrome implements IZCircusSetup {
   /**
    * Initializes a new instance of this object.
    *

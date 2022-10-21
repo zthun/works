@@ -116,12 +116,8 @@ export class ZCircusDriver implements IZCircusDriver {
     const user = UserEvent.setup();
 
     const dictionary: Record<ZCircusActionType, (a?: IZCircusAction) => any> = {
-      [ZCircusActionType.MoveTo]: () => user.pointer({ target: this._element }),
-      [ZCircusActionType.LeftMouseDown]: () => user.pointer({ keys: '[MouseLeft>]', target: this._element }),
-      [ZCircusActionType.LeftMouseUp]: () => user.pointer({ keys: '[/MouseLeft]', target: this._element }),
+      [ZCircusActionType.Click]: () => user.pointer({ keys: '[MouseLeft]', target: this._element }),
       [ZCircusActionType.KeysClick]: (a: IZCircusAction) => user.keyboard(a.context),
-      [ZCircusActionType.KeysPress]: (a: IZCircusAction) => user.keyboard(`{${a.context}>}`),
-      [ZCircusActionType.KeysRelease]: (a: IZCircusAction) => user.keyboard(`{/${a.context}}`),
       [ZCircusActionType.Magic]: (a: IZCircusAction) => a.context()
     };
 
