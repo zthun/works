@@ -1,13 +1,12 @@
-import { render, RenderOptions, RenderResult } from '@testing-library/react/pure';
-import { IZCircusSetup } from '@zthun/works.cirque';
+import { render, RenderOptions } from '@testing-library/react/pure';
+import { IZCircusDriver, IZCircusSetup } from '@zthun/works.cirque';
 import { ReactElement } from 'react';
+import { ZCircusDriver } from '../driver/circus-driver';
 
 /**
  * Represents a setup that renders a react component.
- *
- * @deprecated Use ZCircusSetupRenderer instead.
  */
-export class ZCircusSetupRender implements IZCircusSetup<RenderResult> {
+export class ZCircusSetupRenderer implements IZCircusSetup<IZCircusDriver> {
   /**
    * Initializes a new instance of this object.
    *
@@ -29,9 +28,9 @@ export class ZCircusSetupRender implements IZCircusSetup<RenderResult> {
    *      The result of the render. Returns a rejected
    *      result if the render never becomes ready.
    */
-  public async setup(): Promise<RenderResult> {
+  public async setup(): Promise<IZCircusDriver> {
     const result = render(this._element, this._options);
     await new Promise((resolve) => setTimeout(resolve, 1));
-    return result;
+    return new ZCircusDriver(result, result.container);
   }
 }

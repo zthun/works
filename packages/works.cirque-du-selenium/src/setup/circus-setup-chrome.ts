@@ -1,17 +1,18 @@
-import { IZCircusSetup } from '@zthun/works.cirque';
-import { Browser, Builder, WebDriver } from 'selenium-webdriver';
+import { IZCircusDriver, IZCircusSetup } from '@zthun/works.cirque';
+import { Browser, Builder, By } from 'selenium-webdriver';
+import { ZCircusDriver } from '../driver/circus-driver';
 
 /**
  * A setup module for the chrome web driver.
  */
-export class ZCircusSetupChrome implements IZCircusSetup<WebDriver> {
+export class ZCircusSetupChrome implements IZCircusSetup<IZCircusDriver> {
   /**
    * Initializes a new instance of this object.
    *
    * @param url
    *        The url to route to.
    */
-  constructor(public readonly url: string) {
+  public constructor(public readonly url: string) {
     require('chromedriver');
   }
 
@@ -21,6 +22,7 @@ export class ZCircusSetupChrome implements IZCircusSetup<WebDriver> {
   public async setup() {
     const driver = new Builder().forBrowser(Browser.CHROME).build();
     await driver.get(this.url);
-    return driver;
+    const root = driver.findElement(By.css('html'));
+    return new ZCircusDriver(driver, root);
   }
 }
