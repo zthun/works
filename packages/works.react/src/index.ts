@@ -42,6 +42,7 @@ export { IZComponentHierarchy } from './component/component-hierarchy';
 export { IZComponentLabel } from './component/component-label';
 export { IZComponentLoading } from './component/component-loading.interface';
 export { IZComponentMedia } from './component/component-media.interface';
+export { IZComponentName } from './component/component-name';
 export { IZComponentSizeable } from './component/component-sizeable.interface';
 export { IZComponentSource } from './component/component-source.interface';
 export { IZComponentStyle } from './component/component-style.';
