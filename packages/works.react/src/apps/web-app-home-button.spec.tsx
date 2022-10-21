@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { ZUrlBuilder } from '@zthun/works.url';
@@ -13,9 +14,7 @@ import { ZWebAppHomeButtonComponentModel } from './web-app-home-button.cm';
 import { IZWebAppService, ZWebAppServiceContext } from './web-app-service';
 
 describe('ZWebAppHomeButton', () => {
-  const performer = new ZCircusPerformer();
-  const waiter = new ZCircusWait();
-
+  let _driver: IZCircusDriver;
   let history: MemoryHistory;
   let whoami: string;
   let route: string | undefined;
@@ -31,10 +30,9 @@ describe('ZWebAppHomeButton', () => {
       </ZWebAppServiceContext.Provider>
     );
 
-    const result = await new ZCircusSetupRender(element).setup();
-    waiter.wait(() => !!ZWebAppHomeButtonComponentModel.find(result.container).length);
-    const [target] = ZWebAppHomeButtonComponentModel.find(result.container);
-    return new ZWebAppHomeButtonComponentModel(target, performer, waiter);
+    const selector = ZWebAppHomeButtonComponentModel.Selector;
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(_driver, ZWebAppHomeButtonComponentModel, selector);
   }
 
   beforeEach(() => {
@@ -54,6 +52,10 @@ describe('ZWebAppHomeButton', () => {
 
     webAppService = createMocked(['read']);
     webAppService.read.mockResolvedValue(testApp);
+  });
+
+  afterEach(async () => {
+    await _driver.destroy();
   });
 
   describe('Loading', () => {

@@ -1,26 +1,19 @@
-import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
-import { required } from '@zthun/works.core';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZButtonComponentModel } from '../buttons/button.cm';
 
 /**
  * Represents the component model for the ZWebAppHomeButton.
  */
 export class ZWebAppHomeButtonComponentModel {
+  public static readonly Selector = '.ZWebAppHomeButton-root';
+
   /**
    * Initializes a new instance of this object.
    *
-   * @param _element
-   *        The element that represents the button.
-   * @param _performer
-   *        The performer responsible for clicking the button.
-   * @param _waiter
-   *        The waiter responsible for waiting for load states.
+   * @param _driver
+   *        The driver that manages the component.
    */
-  public constructor(
-    private readonly _element: HTMLElement,
-    private readonly _performer: IZCircusPerformer,
-    private readonly _waiter: IZCircusWait
-  ) {}
+  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Gets the underlying button component.
@@ -29,9 +22,7 @@ export class ZWebAppHomeButtonComponentModel {
    *      The underlying button component.
    */
   public async button(): Promise<ZButtonComponentModel> {
-    const clasz = '.ZWebAppHomeButton-button';
-    const btn = await required(this._element.querySelector<HTMLButtonElement>(clasz));
-    return new ZButtonComponentModel(btn, this._performer, this._waiter);
+    return ZCircusComponentModel.create(this._driver, ZButtonComponentModel, '.ZWebAppHomeButton-button');
   }
 
   /**
@@ -41,7 +32,8 @@ export class ZWebAppHomeButtonComponentModel {
    *        The app name.
    */
   public async name(): Promise<string | null | undefined> {
-    return this._element.querySelector('.ZWebAppHomeButton-name')?.textContent;
+    const [name] = await this._driver.query('.ZWebAppHomeButton-name');
+    return name?.text();
   }
 
   /**
@@ -51,19 +43,7 @@ export class ZWebAppHomeButtonComponentModel {
    *        The description text.
    */
   public async description(): Promise<string | null | undefined> {
-    return this._element.querySelector('.ZWebAppHomeButton-description')?.textContent;
-  }
-
-  /**
-   * Finds all elements in the container that can be considered ZWebAppHomeButton components.
-   *
-   * @param container
-   *        The container to search.
-   *
-   * @returns
-   *        The list of elements that are candidates for ZWebAppHomeButton components.
-   */
-  public static find(container: HTMLElement): HTMLButtonElement[] {
-    return Array.from(container.querySelectorAll<HTMLButtonElement>('.ZWebAppHomeButton-root'));
+    const [description] = await this._driver.query('.ZWebAppHomeButton-description');
+    return description?.text();
   }
 }
