@@ -10,10 +10,12 @@ describe('ZButton', () => {
   let _driver: IZCircusDriver;
 
   let avatar: ReactNode | undefined;
+  let label: ReactNode | undefined;
   let loading: boolean | undefined;
   let disabled: boolean | undefined;
   let outline: boolean | undefined;
   let borderless: boolean | undefined;
+  let name: string | undefined;
   let onClick: jest.Mock | undefined;
 
   async function createTestTarget() {
@@ -25,7 +27,8 @@ describe('ZButton', () => {
         outline={outline}
         borderless={borderless}
         onClick={onClick}
-        label='ZButton-test-content'
+        label={label}
+        name={name}
       />
     );
 
@@ -37,6 +40,8 @@ describe('ZButton', () => {
     avatar = undefined;
     loading = undefined;
     outline = undefined;
+    label = undefined;
+    name = undefined;
     onClick = undefined;
   });
 
@@ -47,11 +52,22 @@ describe('ZButton', () => {
   describe('Content', () => {
     it('should render the button content', async () => {
       // Arrange
+      label = 'Test Button';
       const target = await createTestTarget();
       // Act
       const actual = await target.text();
       // Assert
-      expect(actual).not.toBeNull();
+      expect(actual).toEqual(label);
+    });
+
+    it('should name the button', async () => {
+      // Arrange.
+      name = 'button-name';
+      const target = await createTestTarget();
+      // Act.
+      const actual = await target.name();
+      // Assert.
+      expect(actual).toEqual(name);
     });
   });
 

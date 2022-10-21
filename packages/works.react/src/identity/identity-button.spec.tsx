@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 
-import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { IZProfile, IZWebApp, ZProfileBuilder, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { noop } from 'lodash';
@@ -13,9 +14,7 @@ import { ZIdentityButtonComponentModel } from './identity-button.cm';
 import { IZIdentityService, ZIdentityServiceContext } from './identity-service';
 
 describe('ZIdentityButton', () => {
-  const performer = new ZCircusPerformer();
-  const waiter = new ZCircusWait();
-
+  let _driver: IZCircusDriver;
   let profileApp: string | undefined;
   let identityService: jest.Mocked<IZIdentityService>;
   let webAppService: jest.Mocked<IZWebAppService>;
@@ -33,6 +32,10 @@ describe('ZIdentityButton', () => {
     win = createMocked(['open']);
   });
 
+  afterEach(async () => {
+    await _driver?.destroy();
+  });
+
   async function createTestTarget() {
     const element = (
       <ZWindowServiceContext.Provider value={win}>
@@ -44,10 +47,8 @@ describe('ZIdentityButton', () => {
       </ZWindowServiceContext.Provider>
     );
 
-    const result = await new ZCircusSetupRender(element).setup();
-    await waiter.wait(() => !!ZIdentityButtonComponentModel.find(result.container).length);
-    const [target] = ZIdentityButtonComponentModel.find(result.container);
-    return new ZIdentityButtonComponentModel(target, performer, waiter);
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(_driver, ZIdentityButtonComponentModel, ZIdentityButtonComponentModel.Selector);
   }
 
   async function createTestTargetAndLoad() {

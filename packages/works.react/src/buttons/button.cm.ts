@@ -94,6 +94,6 @@ export class ZButtonComponentModel {
    *        A promise that resolves once the button is ready.
    */
   public load(): Promise<void> {
-    return this._driver.wait(() => this.loading().then((l) => !!l));
+    return this._driver.wait(() => this.loading().then((l) => !l));
   }
 }

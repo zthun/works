@@ -1,5 +1,4 @@
-import { IZCircusPerformer, IZCircusWait } from '@zthun/works.cirque';
-import { required } from '@zthun/works.core';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZButtonComponentModel } from '../buttons/button.cm';
 
 export type ZIdentityButtonState = 'authenticated' | 'unauthenticated' | 'loading';
@@ -8,18 +7,15 @@ export type ZIdentityButtonState = 'authenticated' | 'unauthenticated' | 'loadin
  * Represents a component model for the identity button.
  */
 export class ZIdentityButtonComponentModel {
+  public static readonly Selector = '.ZIdentityButton-root';
+
   /**
    * Initializes a new instance of this object.
    *
-   * @param _element The button element that represents the identity button.
-   * @param _performer The circus performer responsible for performing the click action.
-   * @param _wait The circus wait implementation.
+   * @param _driver
+   *        The driver that manages the component.
    */
-  public constructor(
-    private readonly _element: HTMLElement,
-    private readonly _performer: IZCircusPerformer,
-    private readonly _wait: IZCircusWait
-  ) {}
+  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Gets the underlying button component.
@@ -27,10 +23,8 @@ export class ZIdentityButtonComponentModel {
    * @returns
    *        The component model for the button.
    */
-  public async button(): Promise<ZButtonComponentModel> {
-    const [candidate] = ZButtonComponentModel.find(this._element);
-    const btn = await required(candidate);
-    return new ZButtonComponentModel(btn, this._performer, this._wait);
+  public button(): Promise<ZButtonComponentModel> {
+    return ZCircusComponentModel.create(this._driver, ZButtonComponentModel, ZButtonComponentModel.Selector);
   }
 
   /**
@@ -39,21 +33,8 @@ export class ZIdentityButtonComponentModel {
    * @returns
    *        True if the button is representing an authenticated state.
    */
-  public authenticated() {
-    return Promise.resolve(this._element.getAttribute('data-authenticated') === 'true');
-  }
-
-  /**
-   * Attempts to find all elements in a container that can be identity button components.
-   *
-   * @param container
-   *        The container to search.
-   *
-   * @returns
-   *        The list of elements that can be candidates for identity
-   *        button components.
-   */
-  public static find(container: HTMLElement): HTMLElement[] {
-    return Array.from(container.querySelectorAll<HTMLElement>('.ZIdentityButton-root'));
+  public async authenticated(): Promise<boolean> {
+    const authenticated = await this._driver.attribute('data-authenticated');
+    return authenticated === 'true';
   }
 }
