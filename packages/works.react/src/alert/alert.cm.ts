@@ -1,6 +1,6 @@
-import { IZCircusPerformer, ZCircusActBuilder } from '@zthun/works.cirque';
-import { required } from '@zthun/works.core';
+import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
 import { ZAlertSeverity } from '@zthun/works.message';
+import { first } from 'lodash';
 
 /**
  * Represents an alert in an alert list.
@@ -13,18 +13,12 @@ export class ZAlertComponentModel {
   /**
    * Initializes a new instance of this object.
    *
-   * @param _container
-   *        The alert list container element.
+   * @param _alertListDriver
+   *        The driver for the parent alert list.
    * @param id
-   *        The id of the alert.
-   * @param _performer
-   *        The performer to close the alert.
+   *        The id of the alert
    */
-  public constructor(
-    private readonly _container: HTMLElement,
-    public readonly id: string,
-    private readonly _performer: IZCircusPerformer
-  ) {}
+  public constructor(private readonly _alertListDriver: IZCircusDriver, public readonly id: string) {}
 
   /**
    * Gets the element for this alert.
@@ -32,8 +26,10 @@ export class ZAlertComponentModel {
    * @returns
    *        The element for this alert.
    */
-  private get _element(): HTMLElement | null {
-    return this._container.querySelector(`.ZAlertList-alert[data-alert-id="${this.id}"]`);
+  private async _driver(): Promise<IZCircusDriver | undefined> {
+    const query = `.ZAlertList-alert[data-alert-id="${this.id}"]`;
+    const found = await this._alertListDriver.query(query);
+    return Promise.resolve(first(found));
   }
 
   /**
@@ -44,10 +40,7 @@ export class ZAlertComponentModel {
    *        if the alert has died.
    */
   public severity(): Promise<ZAlertSeverity | null> {
-    return this._valueIfAlive(
-      null,
-      async (element: HTMLElement) => element.getAttribute('data-alert-severity') as ZAlertSeverity
-    );
+    return this._valueIfAlive(null, (d) => d.attribute('data-alert-severity') as Promise<ZAlertSeverity>);
   }
 
   /**
@@ -58,9 +51,9 @@ export class ZAlertComponentModel {
    *        returns null if the alert has no header.
    */
   public header(): Promise<string | null> {
-    return this._valueIfAlive(null, async (element: HTMLElement) => {
-      const header = element.querySelector<HTMLElement>('.ZAlertList-alert-header');
-      return header?.textContent || null;
+    return this._valueIfAlive(null, async (driver: IZCircusDriver) => {
+      const [header] = await driver.query('.ZAlertList-alert-header');
+      return header?.text() || Promise.resolve(null);
     });
   }
 
@@ -72,9 +65,9 @@ export class ZAlertComponentModel {
    *      if the alert has died.
    */
   public message(): Promise<string | null> {
-    return this._valueIfAlive(null, async (element: HTMLElement) => {
-      const content = await required(element.querySelector<HTMLElement>('.ZAlertList-alert-message'));
-      return content.textContent;
+    return this._valueIfAlive(null, async (driver: IZCircusDriver) => {
+      const content = await driver.select('.ZAlertList-alert-message');
+      return content.text();
     });
   }
 
@@ -82,15 +75,15 @@ export class ZAlertComponentModel {
    * Attempts to close the alert if it is alive.
    */
   public async close(): Promise<void> {
-    const element = this._element;
+    const driver = await this._driver();
 
-    if (!element) {
+    if (!driver) {
       return Promise.resolve();
     }
 
-    const closeButton = await required(element.querySelector('button[aria-label="Close"]'));
-    const act = new ZCircusActBuilder().moveTo(closeButton).leftMouseClick().build();
-    await this._performer.perform(act);
+    const closeButton = await driver.select('button[aria-label="Close"]');
+    const act = new ZCircusActBuilder().leftMouseClick().build();
+    await closeButton.perform(act);
   }
 
   /**
@@ -105,8 +98,8 @@ export class ZAlertComponentModel {
    *        The value returned from factory if the alert is alive,
    *        or fallback if the alert is dead.
    */
-  private _valueIfAlive<T>(fallback: T, factory: (element: HTMLElement) => Promise<T>): Promise<T> {
-    const element = this._element;
+  private async _valueIfAlive<T>(fallback: T, factory: (driver: IZCircusDriver) => Promise<T>): Promise<T> {
+    const element = await this._driver();
 
     if (!element) {
       return Promise.resolve(fallback);
