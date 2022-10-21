@@ -2,6 +2,7 @@
 
 // Alerts
 export { ZAlertList } from './alert/alert-list';
+export { ZAlertListComponentModel } from './alert/alert-list.cm';
 export { useAlertService, ZAlertServiceContext } from './alert/alert-service';
 // Apps
 export { IZWebAppDrawer, ZWebAppDrawer } from './apps/web-app-drawer';
@@ -89,7 +90,10 @@ export { ZPaddedBox } from './layout/padded-box';
 export { ZWebAppLayout } from './layout/web-app-layout';
 // List
 export { ZList } from './list/list';
+export { ZListItemComponentModel } from './list/list-item.cm';
 export { ZListLineItem } from './list/list-line-item';
+export { ZListLineItemComponentModel } from './list/list-line-item.cm';
+export { ZListComponentModel } from './list/list.cm';
 // Loading
 export { ZCircularBackdrop } from './loading/circular-backdrop';
 export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';
