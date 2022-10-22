@@ -1,14 +1,12 @@
-import { IZCircusDriver } from '../driver/circus-driver';
-
 /**
  * Represents a step to setup the circus.
  */
-export interface IZCircusSetup {
+export interface IZCircusSetup<T> {
   /**
    * Sets up the circus environment.
    *
    * @returns
-   *        The driver result from the setup.
+   *        The result from the setup.
    */
-  setup(): Promise<IZCircusDriver>;
+  setup(): Promise<T>;
 }
