@@ -1,31 +1,38 @@
 /* eslint-disable require-jsdoc */
-import { act, renderHook } from '@testing-library/react';
+import { IZCircusReactHook, ZCircusSetupHook } from '@zthun/works.cirque-du-react';
 import { useSafeState } from './use-safe-state';
 
 describe('useSafeState', () => {
-  function createTestTarget() {
-    return renderHook(() => useSafeState(true));
+  let _hook: IZCircusReactHook<[boolean, (val: boolean) => void], any>;
+
+  async function createTestTarget() {
+    _hook = await new ZCircusSetupHook(() => useSafeState(true)).setup();
+    return _hook;
   }
+
+  afterEach(async () => {
+    await _hook.destroy();
+  });
 
   it('should set the state if the component is still mounted.', async () => {
     // Arrange
-    const target = createTestTarget();
-    const [, setter] = target.result.current;
+    const target = await createTestTarget();
+    const [, setter] = await target.current();
     // Act
-    await act(async () => setter(false));
-    const [actual] = target.result.current;
+    setter(false);
+    const [actual] = await target.rerender();
     // Assert
     expect(actual).toBeFalsy();
   });
 
-  it('should not set any states when the component is unmounted.', () => {
+  it('should not set any states when the component is unmounted.', async () => {
     // Arrange
-    const target = createTestTarget();
-    const [, setter] = target.result.current;
+    const target = await createTestTarget();
+    const [, setter] = await target.current();
     // Act
-    target.unmount();
+    await target.destroy();
     setter(false);
-    const [actual] = target.result.current;
+    const [actual] = await target.current();
     // Assert
     expect(actual).toBeTruthy();
   });

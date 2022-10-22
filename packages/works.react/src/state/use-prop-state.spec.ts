@@ -1,14 +1,15 @@
 /* eslint-disable require-jsdoc */
-import { renderHook, RenderHookResult } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { IZCircusReactHook, ZCircusSetupHook } from '@zthun/works.cirque-du-react';
 import { usePropState } from './use-prop-state';
 
 describe('usePropState', () => {
+  let _hook: IZCircusReactHook<[string | undefined, (val: string) => void], any>;
   let current: string | undefined;
   let setCurrent: ((val: string) => void) | undefined;
 
-  function createTestTarget() {
-    return renderHook(() => usePropState(current, setCurrent));
+  async function createTestTarget() {
+    _hook = await new ZCircusSetupHook(() => usePropState(current, setCurrent)).setup();
+    return _hook;
   }
 
   beforeEach(() => {
@@ -16,16 +17,17 @@ describe('usePropState', () => {
     setCurrent = undefined;
   });
 
+  afterEach(async () => {
+    await _hook.destroy();
+  });
+
   async function setValueAndRerender(
     expected: string,
-    target: RenderHookResult<[string | undefined, (val: string) => void], any>
+    target: IZCircusReactHook<[string | undefined, (val: string) => void], any>
   ) {
-    const [, setVal] = target.result.current;
-
-    await act(async () => {
-      setVal(expected);
-      target.rerender();
-    });
+    const [, setVal] = await target.current();
+    setVal(expected);
+    return target.rerender();
   }
 
   describe('Props', () => {
@@ -38,18 +40,18 @@ describe('usePropState', () => {
       current = val;
     }
 
-    it('should return the prop value.', () => {
+    it('should return the prop value.', async () => {
       // Arrange
-      const target = createTestTarget();
+      const target = await createTestTarget();
       // Act
-      const [val] = target.result.current;
+      const [val] = await target.current();
       // Assert
       expect(val).toEqual(current);
     });
 
     it('should set the prop value.', async () => {
       // Arrange.
-      const target = createTestTarget();
+      const target = await createTestTarget();
       const expected = 'value-to-set';
       // Act.
       await setValueAndRerender(expected, target);
@@ -61,11 +63,10 @@ describe('usePropState', () => {
   describe('State', () => {
     it('should set the internal state if the props are undefined.', async () => {
       // Arrange
-      const target = createTestTarget();
+      const target = await createTestTarget();
       const expected = 'updated-value';
       // Act
-      await setValueAndRerender(expected, target);
-      const [actual] = target.result.current;
+      const [actual] = await setValueAndRerender(expected, target);
       // Assert
       expect(actual).toEqual(expected);
     });
