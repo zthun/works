@@ -82,7 +82,7 @@ export class ZAlertComponentModel {
     }
 
     const closeButton = await driver.select('button[aria-label="Close"]');
-    const act = new ZCircusActBuilder().leftMouseClick().build();
+    const act = new ZCircusActBuilder().click().build();
     await closeButton.perform(act);
   }
 
