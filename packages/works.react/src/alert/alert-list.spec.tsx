@@ -112,7 +112,7 @@ describe('ZAlertList', () => {
       expect(alertService.remove).toHaveBeenCalledWith(success._id);
     });
 
-    it('should not close a non existant alert.', async () => {
+    it('should not close an alert that is not alive.', async () => {
       // Arrange.
       const target = await createTestTarget();
       // Act.
