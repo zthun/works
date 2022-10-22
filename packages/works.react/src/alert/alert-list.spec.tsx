@@ -111,6 +111,16 @@ describe('ZAlertList', () => {
       // Assert
       expect(alertService.remove).toHaveBeenCalledWith(success._id);
     });
+
+    it('should not close a non existant alert.', async () => {
+      // Arrange.
+      const target = await createTestTarget();
+      // Act.
+      const alert = await target.alert('alert-has-auto-closed');
+      await alert.close();
+      // Assert.
+      expect(alertService.remove).not.toHaveBeenCalled();
+    });
   });
 
   describe('Header', () => {

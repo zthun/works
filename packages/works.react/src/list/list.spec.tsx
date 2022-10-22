@@ -3,7 +3,7 @@
 import { IZCircusDriver } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { required } from '@zthun/works.core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ZList } from './list';
 import { ZListLineItem } from './list-line-item';
 import { ZListLineItemComponentModel } from './list-line-item.cm';
@@ -11,13 +11,15 @@ import { ZListComponentModel } from './list.cm';
 
 describe('ZList', () => {
   let _driver: IZCircusDriver;
+  let heading: ReactNode | undefined;
+  let subHeading: ReactNode | undefined;
   let onClick: jest.Mock | undefined;
 
   async function createTestTarget() {
     const element = (
       <ZList>
-        <ZListLineItem name='clickable' onClick={onClick} heading='Can Click' />
-        <ZListLineItem name='no-click' heading='No Click' />
+        <ZListLineItem name='clickable' onClick={onClick} heading='Clickable' subHeading='Clicking raises an event' />
+        <ZListLineItem name='no-click' heading={heading} subHeading={subHeading} />
       </ZList>
     );
 
@@ -28,6 +30,8 @@ describe('ZList', () => {
   }
 
   beforeEach(() => {
+    heading = undefined;
+    subHeading = undefined;
     onClick = undefined;
   });
 
@@ -54,7 +58,7 @@ describe('ZList', () => {
   });
 
   describe('Line Items', () => {
-    it('should render the line item without being able to click on it', async () => {
+    it('should render the line item without being able to click on it.', async () => {
       // Arrange.
       const target = await createTestTarget();
       const item = await required(target.item('no-click'));
@@ -67,7 +71,7 @@ describe('ZList', () => {
       expect(actual).toBeFalsy();
     });
 
-    it('should raise the onClick event of a line item if onClick is set', async () => {
+    it('should raise the onClick event of a line item if onClick is set.', async () => {
       // Arrange.
       onClick = jest.fn();
       const target = await createTestTarget();
@@ -79,6 +83,52 @@ describe('ZList', () => {
       // Assert.
       expect(actual).toBeTruthy();
       expect(onClick).toHaveBeenCalled();
+    });
+
+    it('should render the heading.', async () => {
+      // Arrange.
+      heading = 'Test Heading';
+      const target = await createTestTarget();
+      const item = await required(target.item('no-click'));
+      const lineItem = new ZListLineItemComponentModel(item);
+      // Act.
+      const actual = await lineItem.heading();
+      // Assert.
+      expect(actual).toEqual(heading);
+    });
+
+    it('should render an empty heading if not set.', async () => {
+      // Arrange.
+      const target = await createTestTarget();
+      const item = await required(target.item('no-click'));
+      const lineItem = new ZListLineItemComponentModel(item);
+      // Act.
+      const actual = await lineItem.heading();
+      // Assert.
+      expect(actual).toBeNull();
+    });
+
+    it('should render the sub heading.', async () => {
+      // Arrange.
+      subHeading = 'Test Sub Heading';
+      const target = await createTestTarget();
+      const item = await required(target.item('no-click'));
+      const lineItem = new ZListLineItemComponentModel(item);
+      // Act.
+      const actual = await lineItem.subHeading();
+      // Assert.
+      expect(actual).toEqual(subHeading);
+    });
+
+    it('should render an empty sub heading if not set.', async () => {
+      // Arrange.
+      const target = await createTestTarget();
+      const item = await required(target.item('no-click'));
+      const lineItem = new ZListLineItemComponentModel(item);
+      // Act.
+      const actual = await lineItem.subHeading();
+      // Assert.
+      expect(actual).toBeNull();
     });
   });
 });

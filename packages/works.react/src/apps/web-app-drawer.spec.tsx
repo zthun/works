@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 
 import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
@@ -98,6 +99,35 @@ describe('ZWebAppDrawer', () => {
     const actual = await target.open();
     // Assert
     expect(actual.length).toBeGreaterThan(0);
+  });
+
+  describe('Items', () => {
+    it('should find an item by id (data-name)', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const item = await target.item(webAppTerms._id);
+      // Assert
+      expect(item).toBeTruthy();
+    });
+
+    it('should find an item by display name', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const item = await target.item(webAppTerms.name!);
+      // Assert
+      expect(item).toBeTruthy();
+    });
+
+    it('should not return items that do not have a matching name or header', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      // Act
+      const item = await target.item('LOL Wut?');
+      // Assert
+      expect(item).toBeNull();
+    });
   });
 
   describe('Home', () => {
