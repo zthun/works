@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusPerformer, ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { IZRouteOption, IZWebApp, required, ZRouteOptionBuilder, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { ZUrlBuilder } from '@zthun/works.url';
@@ -14,8 +15,7 @@ import { ZWebAppDrawerComponentModel } from './web-app-drawer.cm';
 import { ZWebAppService, ZWebAppServiceContext } from './web-app-service';
 
 describe('ZWebAppDrawer', () => {
-  const performer = new ZCircusPerformer();
-  const waiter = new ZCircusWait();
+  let _driver: IZCircusDriver;
 
   let webAppLearn: IZWebApp;
   let webAppRoadblock: IZWebApp;
@@ -40,10 +40,8 @@ describe('ZWebAppDrawer', () => {
       </ZWindowServiceContext.Provider>
     );
 
-    const result = await new ZCircusSetupRender(element).setup();
-    await waiter.wait(() => !!ZWebAppDrawerComponentModel.find(result.container).length);
-    const [target] = ZWebAppDrawerComponentModel.find(result.container);
-    return new ZWebAppDrawerComponentModel(target, performer, waiter);
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(_driver, ZWebAppDrawerComponentModel, ZWebAppDrawerComponentModel.Selector);
   }
 
   beforeEach(() => {
@@ -89,6 +87,10 @@ describe('ZWebAppDrawer', () => {
     });
   });
 
+  afterEach(async () => {
+    await _driver.destroy();
+  });
+
   it('should open the nav drawer with given web apps.', async () => {
     // Arrange
     const target = await createTestTarget();
@@ -127,7 +129,7 @@ describe('ZWebAppDrawer', () => {
       const target = await createTestTarget();
       // Act.
       const item = await target.home();
-      const actual = await item.name();
+      const actual = await item.heading();
       // Assert.
       expect(actual).toEqual(expected);
     });

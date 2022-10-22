@@ -5,13 +5,15 @@ import ErrorIcon from '@mui/icons-material/Error';
 import GithubIcon from '@mui/icons-material/GitHub';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 
-import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Divider, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { cssClass, IZRouteOption } from '@zthun/works.core';
 import { kebabCase, startCase } from 'lodash';
 import React, { ReactNode } from 'react';
 import { IZComponentStyle } from '../component/component-style.';
 import { IZDrawerButton, ZDrawerButton } from '../drawer/drawer-button';
 import { ZImageSource } from '../image/image-source';
+import { ZList } from '../list/list';
+import { ZListLineItem } from '../list/list-line-item';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { useLocation, useNavigate } from '../router/router-dom';
 import { isStateErrored, isStateLoaded, isStateLoading } from '../state/use-async-state';
@@ -117,10 +119,15 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
     const clasz = cssClass('ZWebAppDrawer-item', `ZWebAppDrawer-item-${type}`);
 
     return (
-      <ListItem key={key} className={clasz} button onClick={handler} data-item-id={id} data-item-type={type}>
-        <ListItemIcon>{avatar}</ListItemIcon>
-        <ListItemText primary={display} secondary={description} />
-      </ListItem>
+      <ZListLineItem
+        key={key}
+        className={clasz}
+        onClick={handler}
+        name={id}
+        avatar={avatar}
+        heading={display}
+        subHeading={description}
+      />
     );
   };
 
@@ -221,12 +228,12 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
   return (
     <div className={_className}>
       <ZDrawerButton {...DrawerButtonProps} className={_drawerButtonClassName} closeOnChange={[location]}>
-        <List className='ZWebAppDrawer-list'>
+        <ZList className='ZWebAppDrawer-list'>
           {createNavHome()}
           {createNavApps()}
           {createNavRoutes()}
           {createNavSource()}
-        </List>
+        </ZList>
       </ZDrawerButton>
     </div>
   );
