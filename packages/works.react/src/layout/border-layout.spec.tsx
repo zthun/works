@@ -1,5 +1,6 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusSetupRender, ZCircusWait } from '@zthun/works.cirque-du-react';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { Property } from 'csstype';
 import { values } from 'lodash';
 import React from 'react';
@@ -9,7 +10,7 @@ import { ZBorderLayout } from './border-layout';
 import { ZBorderLayoutComponentModel } from './border-layout.cm';
 
 describe('ZBorderLayout', () => {
-  const waiter = new ZCircusWait();
+  let _driver: IZCircusDriver;
 
   let border:
     | {
@@ -29,15 +30,17 @@ describe('ZBorderLayout', () => {
 
   async function createTestTarget() {
     const element = <ZBorderLayout border={border} background={background} />;
-    const result = await new ZCircusSetupRender(element).setup();
-    await waiter.wait(() => !!ZBorderLayoutComponentModel.find(result.container).length);
-    const [target] = ZBorderLayoutComponentModel.find(result.container);
-    return new ZBorderLayoutComponentModel(target);
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(_driver, ZBorderLayoutComponentModel, ZBorderLayoutComponentModel.Selector);
   }
 
   beforeEach(() => {
     border = undefined;
     background = undefined;
+  });
+
+  afterEach(async () => {
+    await _driver.destroy();
   });
 
   it('should render a default background of transparent', async () => {

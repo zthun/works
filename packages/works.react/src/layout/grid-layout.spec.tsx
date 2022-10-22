@@ -1,10 +1,12 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusSetupRender } from '@zthun/works.cirque-du-react';
+import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import { ZStateSize } from '../theme/state-size';
 import { ZGridLayout } from './grid-layout';
 
 describe('ZGridLayout', () => {
+  let _driver: IZCircusDriver;
   let gap: ZStateSize | undefined;
 
   beforeEach(() => {
@@ -13,8 +15,13 @@ describe('ZGridLayout', () => {
 
   async function createTestTarget() {
     const element = <ZGridLayout gap={gap} />;
-    return await new ZCircusSetupRender(element).setup();
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    return _driver;
   }
+
+  afterEach(async () => {
+    await _driver.destroy();
+  });
 
   it('should render with a gap', async () => {
     // Arrange.

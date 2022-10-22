@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
-import { ZCircusSetupRender } from '@zthun/works.cirque-du-react';
+import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import {
   IZTypographyProps,
@@ -17,21 +17,26 @@ import {
 } from './typography';
 
 describe('Typography', () => {
+  let _driver: IZCircusDriver;
+
   async function createTestTarget(Typography: (props: IZTypographyProps) => JSX.Element) {
-    const element = <Typography></Typography>;
-    const result = await new ZCircusSetupRender(element).setup();
-    const target = result.container.firstElementChild;
-    return target!;
+    const element = <Typography className='ZTypography-test'></Typography>;
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    return _driver.select('.ZTypography-test');
   }
 
   async function assertTypography(expected: string, Typography: (props: IZTypographyProps) => JSX.Element) {
     // Arrange
     const target = await createTestTarget(Typography);
     // Act
-    const actual = target.nodeName.toLowerCase();
+    const actual = (await target.tag()).toLowerCase();
     // Assert
     expect(actual).toEqual(expected);
   }
+
+  afterEach(async () => {
+    await _driver.destroy();
+  });
 
   describe('Headers', () => {
     it('should render an h1 tag', async () => {

@@ -1,17 +1,18 @@
-import { required } from '@zthun/works.core';
+import { IZCircusDriver } from '@zthun/works.cirque';
 
 /**
  * The component model for a border layout component.
  */
 export class ZBorderLayoutComponentModel {
+  public static readonly Selector = '.ZBorderLayout-root';
+
   /**
    * Initializes a new instance of this object.
    *
-   * @param element
-   *        The element that represents the root of the
-   *        component.
+   * @param driver
+   *        The driver that manages the layout.
    */
-  public constructor(public readonly element: HTMLElement) {}
+  public constructor(public readonly driver: IZCircusDriver) {}
 
   /**
    * Gets the border information.
@@ -20,7 +21,7 @@ export class ZBorderLayoutComponentModel {
    *        The border information.
    */
   public async borderColor() {
-    return required(this.element.getAttribute('data-border-color'));
+    return this.driver.attribute('data-border-color');
   }
 
   /**
@@ -30,7 +31,7 @@ export class ZBorderLayoutComponentModel {
    *         The border size.
    */
   public async borderSize() {
-    return required(this.element.getAttribute('data-border-size'));
+    return this.driver.attribute('data-border-size');
   }
 
   /**
@@ -40,7 +41,7 @@ export class ZBorderLayoutComponentModel {
    *        The border style.
    */
   public async borderStyle() {
-    return required(this.element.getAttribute('data-border-style'));
+    return this.driver.attribute('data-border-style');
   }
 
   /**
@@ -50,19 +51,6 @@ export class ZBorderLayoutComponentModel {
    *        The background color information.
    */
   public async backgroundColor() {
-    return required(this.element.getAttribute('data-background-color'));
-  }
-
-  /**
-   * Gets all elements that can be considered ZBorderLayout components.
-   *
-   * @param container
-   *        The container to search.
-   *
-   * @returns
-   *        The list of candidates that can be considered layout components.
-   */
-  public static find(container: HTMLElement): HTMLElement[] {
-    return Array.from(container.querySelectorAll<HTMLElement>('.ZBorderLayout-root'));
+    return this.driver.attribute('data-background-color');
   }
 }
