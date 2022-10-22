@@ -47,6 +47,13 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
+  public tag(): Promise<string> {
+    return this._search.getTagName();
+  }
+
+  /**
+   * @inheritdoc
+   */
   public text(): Promise<string> {
     return this._search.getText();
   }

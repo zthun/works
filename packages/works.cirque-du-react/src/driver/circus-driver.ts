@@ -37,6 +37,13 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
+  public tag(): Promise<string> {
+    return Promise.resolve(this._element.nodeName);
+  }
+
+  /**
+   * @inheritdoc
+   */
   public classes(filter?: string[]): Promise<string[]> {
     const list = this._element.classList;
     const all = Array.from(list);

@@ -24,6 +24,14 @@ export interface IZCircusDriver {
   attribute(attribute: string): Promise<string | null>;
 
   /**
+   * Gets the tag (node name) of the driver context.
+   *
+   * @returns
+   *        The tag of the driver context.
+   */
+  tag(): Promise<string>;
+
+  /**
    * Returns a list of classes on the driver context that
    * match a given filter.
    *
