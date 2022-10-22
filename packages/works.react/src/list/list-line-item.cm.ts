@@ -52,7 +52,29 @@ export class ZListLineItemComponentModel {
       return;
     }
 
-    const act = new ZCircusActBuilder().leftMouseClick().build();
+    const act = new ZCircusActBuilder().click().build();
     await btn.perform(act);
+  }
+
+  /**
+   * Gets the heading of the line item.
+   *
+   * @returns
+   *        The heading of the line item.
+   */
+  public async heading(): Promise<string | null> {
+    const [text] = await this.item.driver.query('.ZListLineItem-text .MuiListItemText-primary');
+    return text?.text() || null;
+  }
+
+  /**
+   * Gets the sub heading of the line item.
+   *
+   * @returns
+   *        The sub heading of the line item.
+   */
+  public async subHeading(): Promise<string | null> {
+    const [description] = await this.item.driver.query('.ZListLineItem-text .MuiListItemText-secondary');
+    return description?.text() || null;
   }
 }
