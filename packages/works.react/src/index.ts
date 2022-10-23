@@ -23,7 +23,6 @@ export {
 export { IZButton, ZButton, ZButtonColor } from './buttons/button';
 export { ZButtonComponentModel } from './buttons/button.cm';
 // Cards
-export { IZCardAvatarProps, ZCardAvatar } from './card/card-avatar';
 export { IZPaperCardProps, ZPaperCard } from './card/paper-card';
 // Codes
 export { IZHttpStatusCodeCardProps, ZHttpStatusCodeCard } from './codes/http-code-card';
