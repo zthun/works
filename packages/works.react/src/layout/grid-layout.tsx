@@ -8,13 +8,14 @@ import { ZStateSize } from '../theme/state-size';
 
 export interface IZGridLayout extends IZComponentStyle, IZComponentHierarchy {
   alignItems?: Property.AlignItems;
+  justifyContent?: Property.JustifyContent;
   gap?: ZStateSize;
   columns?: Property.GridTemplateColumns;
   rows?: Property.GridTemplateRows;
 }
 
 const useGridStyles = makeStyles<IZGridLayout>()((theme, props) => {
-  const { alignItems, gap = ZStateSize.None, columns, rows } = props;
+  const { alignItems, justifyContent, gap = ZStateSize.None, columns, rows } = props;
 
   return {
     grid: {
@@ -22,7 +23,8 @@ const useGridStyles = makeStyles<IZGridLayout>()((theme, props) => {
       gridTemplateColumns: columns,
       gridTemplateRows: rows,
       gap: theme.gap(gap),
-      alignItems
+      alignItems,
+      justifyContent
     }
   };
 });
