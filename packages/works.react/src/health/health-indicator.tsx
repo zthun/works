@@ -5,7 +5,7 @@ import React from 'react';
 import { CSSObject } from 'tss-react';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { makeStyles } from '../theme/make-styles';
-import { useHealth } from './health-service.context';
+import { useHealth } from './health-service';
 
 const useHealthIndicatorStyles = makeStyles()((theme) => {
   const icon: CSSObject = {

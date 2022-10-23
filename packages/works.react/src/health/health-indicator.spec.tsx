@@ -7,7 +7,7 @@ import { noop } from 'lodash';
 import React from 'react';
 import { ZHealthIndicator } from './health-indicator';
 import { ZHealthIndicatorComponentModel } from './health-indicator.cm';
-import { IZHealthService, ZHealthServiceContext } from './health-service.context';
+import { IZHealthService, ZHealthServiceContext } from './health-service';
 
 describe('ZHealthIndicator', () => {
   let _driver: IZCircusDriver;

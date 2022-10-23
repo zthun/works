@@ -9,7 +9,7 @@ import {
 } from '@zthun/works.http';
 import { createMocked } from '@zthun/works.jest';
 import React from 'react';
-import { IZHealthService, useHealth, ZHealthService, ZHealthServiceContext } from './health-service.context';
+import { IZHealthService, useHealth, ZHealthService, ZHealthServiceContext } from './health-service';
 
 describe('ZHealthService', () => {
   let http: ZHttpServiceMock;
