@@ -11,6 +11,7 @@ import {
   ZHttpCode,
   ZHttpCodeClient
 } from '@zthun/works.http';
+import { get } from 'lodash';
 import React from 'react';
 import { ZPaperCard } from '../card/paper-card';
 import { ZGridLayout } from '../layout/grid-layout';
@@ -20,7 +21,7 @@ import { ZH2, ZSubtitle } from '../typography/typography';
 /**
  * Represents properties for the status code page.
  */
-export interface IZStatusCodePageProps {
+export interface IZStatusCodePage {
   /**
    * The name of the route param that contains the code.
    */
@@ -34,13 +35,10 @@ export interface IZStatusCodePageProps {
  *
  * @returns The jsx that renders the status code page.
  */
-export function ZStatusCodePage(props: IZStatusCodePageProps) {
+export function ZStatusCodePage(props: IZStatusCodePage) {
+  const { name } = props;
   const params = useParams();
-  const code: ZHttpCode = +(params[props.name] || ZHttpCodeClient.ImATeapot);
-
-  const name = getHttpCodeName(code);
-  const heading = getHttpCodeCategory(code);
-  const description = getHttpCodeDescription(code);
+  const code: ZHttpCode = +get(params, name, ZHttpCodeClient.ImATeapot);
 
   const renderAvatar = () => {
     if (code === ZHttpCodeClient.ImATeapot) {
@@ -78,8 +76,13 @@ export function ZStatusCodePage(props: IZStatusCodePageProps) {
 
   return (
     <ZGridLayout className='ZStatusCodePage-root' justifyContent='center'>
-      <ZPaperCard avatar={renderAvatar()} headerText={heading} subHeaderText={name} size='lg'>
-        <ZSubtitle className='ZStatusCodePage-description'>{description}</ZSubtitle>
+      <ZPaperCard
+        avatar={renderAvatar()}
+        headerText={getHttpCodeCategory(code)}
+        subHeaderText={getHttpCodeName(code)}
+        size='lg'
+      >
+        <ZSubtitle className='ZStatusCodePage-description'>{getHttpCodeDescription(code)}</ZSubtitle>
         <ZH2 className='ZStatusCodePage-code'>{code}</ZH2>
       </ZPaperCard>
     </ZGridLayout>

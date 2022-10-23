@@ -24,9 +24,6 @@ export { IZButton, ZButton, ZButtonColor } from './buttons/button';
 export { ZButtonComponentModel } from './buttons/button.cm';
 // Cards
 export { IZPaperCardProps, ZPaperCard } from './card/paper-card';
-// Codes
-export { IZHttpStatusCodeCardProps, ZHttpStatusCodeCard } from './codes/http-code-card';
-export { IZStatusCodePageProps, ZStatusCodePage } from './codes/status-code-page';
 // Component
 export { IZComponentActionable } from './component/component-actionable.interface';
 export { IZComponentAdornment } from './component/component-adornment';
@@ -72,7 +69,7 @@ export { ZChoiceComponentModel } from './form/choice.cm';
 export { ZHealthIndicator } from './health/health-indicator';
 export { ZHealthIndicatorComponentModel } from './health/health-indicator.cm';
 // Http
-export { useHttpService, ZHttpServiceContext } from './http/http-service.context';
+export { IZStatusCodePage, ZStatusCodePage } from './http/status-code-page';
 // Identity
 export { IZIdentityButtonProps, ZIdentityButton } from './identity/identity-button';
 export { ZIdentityButtonComponentModel } from './identity/identity-button.cm';
