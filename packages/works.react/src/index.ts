@@ -114,6 +114,7 @@ export {
   ZTestRouter
 } from './router/router-dom';
 // State
+export { useAmbassadorState } from './state/use-ambassador-state';
 export {
   asStateData,
   asStateError,

@@ -1,14 +1,14 @@
 /* eslint-disable require-jsdoc */
 import { IZCircusReactHook, ZCircusSetupHook } from '@zthun/works.cirque-du-react';
-import { usePropState } from './use-prop-state';
+import { useAmbassadorState } from './use-ambassador-state';
 
-describe('usePropState', () => {
+describe('useAmbassadorState', () => {
   let _hook: IZCircusReactHook<[string | undefined, (val: string) => void], any>;
   let current: string | undefined;
   let setCurrent: ((val: string) => void) | undefined;
 
   async function createTestTarget() {
-    _hook = await new ZCircusSetupHook(() => usePropState(current, setCurrent)).setup();
+    _hook = await new ZCircusSetupHook(() => useAmbassadorState(current, setCurrent)).setup();
     return _hook;
   }
 

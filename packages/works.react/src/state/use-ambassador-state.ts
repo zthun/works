@@ -19,7 +19,7 @@ import { useSafeState } from './use-safe-state';
  *        A tuple where the first item is the current state and the 2nd item is a mutator
  *        method to modify the state.
  */
-export function usePropState<T>(
+export function useAmbassadorState<T>(
   current: T | undefined,
   setCurrent: ((val: T) => void) | undefined
 ): [T | undefined, (val: T) => void] {

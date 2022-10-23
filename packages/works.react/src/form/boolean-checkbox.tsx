@@ -1,7 +1,7 @@
 import { Checkbox, FormControlLabel } from '@mui/material';
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
-import { usePropState } from '../state/use-prop-state';
+import { useAmbassadorState } from '../state/use-ambassador-state';
 import { IZBoolean } from './boolean';
 
 /**
@@ -15,7 +15,7 @@ import { IZBoolean } from './boolean';
  */
 export function ZBooleanCheckbox(props: IZBoolean<boolean | null>) {
   const { className, disabled, label, value, onValueChange } = props;
-  const [_value, _setValue] = usePropState(value, onValueChange);
+  const [_value, _setValue] = useAmbassadorState(value, onValueChange);
   const booleanClass = cssClass('ZBoolean-root', 'ZBoolean-checkbox', className);
   const checked = _value == null ? false : _value;
   const indeterminate = _value === null;

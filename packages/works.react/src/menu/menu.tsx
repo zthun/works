@@ -3,7 +3,7 @@ import { cssClass } from '@zthun/works.core';
 import React, { useEffect, useRef } from 'react';
 import { IZButton, ZButton } from '../buttons/button';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
-import { usePropState } from '../state/use-prop-state';
+import { useAmbassadorState } from '../state/use-ambassador-state';
 import { useSafeState } from '../state/use-safe-state';
 import { makeStyles } from '../theme/make-styles';
 import { ZMenuEvent } from './menu-event';
@@ -47,7 +47,7 @@ const useMenuStyles = makeStyles<IZMenuState>()((theme, state) => {
  */
 export function ZMenu(props: IZMenu) {
   const { className, children, open, onOpen } = props;
-  const [_open, _setOpen] = usePropState(open, onOpen);
+  const [_open, _setOpen] = useAmbassadorState(open, onOpen);
   const [anchor, setAnchor] = useSafeState<Element | null | undefined>(undefined);
   const container = useRef<HTMLDivElement>(null);
   const styles = useMenuStyles({ open: _open, anchor });

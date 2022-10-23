@@ -5,7 +5,7 @@ import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentStyle } from '../component/component-style.';
 import { IZComponentValue } from '../component/component-value';
-import { usePropState } from '../state/use-prop-state';
+import { useAmbassadorState } from '../state/use-ambassador-state';
 
 export interface IZChoiceOption<O, V> {
   key: string;
@@ -50,7 +50,7 @@ export interface IZChoiceApi<O, V> {
 export function useChoice<O = any, V = O>(props: IZChoice<O, V>): IZChoiceApi<O, V> {
   const { value, onValueChange, options, identifier, display = _display, multiple, renderOption = display } = props;
 
-  const [_value, _setValue] = usePropState(value, onValueChange);
+  const [_value, _setValue] = useAmbassadorState(value, onValueChange);
   const [choices, lookup] = useMemo(_choices, [options, identifier]);
 
   /**

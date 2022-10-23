@@ -1,7 +1,7 @@
 import { FormControlLabel, Switch } from '@mui/material';
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
-import { usePropState } from '../state/use-prop-state';
+import { useAmbassadorState } from '../state/use-ambassador-state';
 import { IZBoolean } from './boolean';
 
 /**
@@ -15,7 +15,7 @@ import { IZBoolean } from './boolean';
  */
 export function ZBooleanSwitch(props: IZBoolean<boolean>) {
   const { className, disabled, label, value, onValueChange } = props;
-  const [_value, _setValue] = usePropState(value, onValueChange);
+  const [_value, _setValue] = useAmbassadorState(value, onValueChange);
   const switchClass = cssClass('ZBoolean-root', 'ZBoolean-switch', className);
   const checked = !!_value;
 
