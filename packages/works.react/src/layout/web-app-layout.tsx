@@ -8,14 +8,15 @@ import { ZWebAppDrawer } from '../apps/web-app-drawer';
 import { ZWebAppHomeButton } from '../apps/web-app-home-button';
 import { ZStatusCodePage } from '../codes/status-code-page';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
-import { ZContent } from '../content/content';
 import { ZHealthIndicator } from '../health/health-indicator';
 import { ZIdentityButton } from '../identity/identity-button';
 import { ZNavigate, ZRoute, ZRouteMap, ZRouter } from '../router/router-dom';
 import { useZthunworksTheme } from '../theme/make-styles';
 import { ZStateAnchor } from '../theme/state-anchor';
 import { ZSeverityColor } from '../theme/state-color';
+import { ZStateSize } from '../theme/state-size';
 import { ZGridLayout } from './grid-layout';
+import { ZPaddedBox } from './padded-box';
 
 /**
  * Represents the properties for the standard WebAppLayout.
@@ -85,14 +86,16 @@ export function ZWebAppLayout(props: IZWebAppLayout) {
               <ZWebAppDrawer whoami={whoami} routes={routes} DrawerButtonProps={DrawerButtonProps} />
             </ZGridLayout>
           </AppBar>
-          <ZContent>
-            <ZRouteMap>
-              {children}
-              <ZRoute path='/status-code/:code' element={<ZStatusCodePage name='code' />} />
-              <ZRoute path='/' element={<ZNavigate to={home} />} />
-              <ZRoute path='*' element={<ZNavigate to={'/status-code/404'} />} />
-            </ZRouteMap>
-          </ZContent>
+          <ZPaddedBox padding={ZStateSize.Large}>
+            <main>
+              <ZRouteMap>
+                {children}
+                <ZRoute path='/status-code/:code' element={<ZStatusCodePage name='code' />} />
+                <ZRoute path='/' element={<ZNavigate to={home} />} />
+                <ZRoute path='*' element={<ZNavigate to={'/status-code/404'} />} />
+              </ZRouteMap>
+            </main>
+          </ZPaddedBox>
         </ZRouter>
         <ZAlertList />
       </ThemeProvider>

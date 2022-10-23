@@ -47,8 +47,6 @@ export { IZComponentSizeable } from './component/component-sizeable.interface';
 export { IZComponentSource } from './component/component-source.interface';
 export { IZComponentStyle } from './component/component-style.';
 export { IZComponentValue } from './component/component-value';
-// Content
-export { ZContent } from './content/content';
 // Drawer
 export { IZDrawer, ZDrawer } from './drawer/drawer';
 export { IZDrawerButton, ZDrawerButton } from './drawer/drawer-button';
