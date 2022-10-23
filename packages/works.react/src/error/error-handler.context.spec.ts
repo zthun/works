@@ -1,18 +1,19 @@
 /* eslint-disable require-jsdoc */
-import { renderHook } from '@testing-library/react';
+import { ZCircusSetupHook } from '@zthun/works.cirque-du-react';
+import { ZErrorHandler } from '@zthun/works.error';
 import { useErrorHandler } from './error-handler.context';
 
 describe('useErrorHandler', () => {
-  function createTestTarget() {
-    return renderHook(() => useErrorHandler());
+  async function createTestTarget() {
+    return await new ZCircusSetupHook(() => useErrorHandler()).setup();
   }
 
-  it('should return the default implementation.', () => {
+  it('should return the default implementation.', async () => {
     // Arrange
-    const target = createTestTarget();
+    const target = await createTestTarget();
     // Act
-    const actual = target.result.current;
+    const actual = await target.current();
     // Assert
-    expect(actual).toBeTruthy();
+    expect(actual).toBeInstanceOf(ZErrorHandler);
   });
 });

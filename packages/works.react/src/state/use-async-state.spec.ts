@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { IZCircusReactHook, ZCircusSetupHook } from '@zthun/works.cirque-du-react';
+import { ZCircusSetupHook } from '@zthun/works.cirque-du-react';
 import { sleep } from '@zthun/works.core';
 import { noop } from 'lodash';
 import {
@@ -9,18 +9,16 @@ import {
   isStateLoaded,
   isStateLoading,
   useAsyncState,
-  ZAsyncDataTuple,
   ZAsyncLoading
 } from './use-async-state';
 
 describe('useAsyncState', () => {
-  let _hook: IZCircusReactHook<ZAsyncDataTuple<string>, any>;
   let load: jest.Mock;
 
   async function createTestTarget() {
-    _hook = await new ZCircusSetupHook(() => useAsyncState<string>(load)).setup();
+    const target = await new ZCircusSetupHook(() => useAsyncState<string>(load)).setup();
     await sleep(5);
-    return _hook;
+    return target;
   }
 
   function mockLoadedData(data: string) {
@@ -37,10 +35,6 @@ describe('useAsyncState', () => {
 
   beforeEach(() => {
     load = jest.fn();
-  });
-
-  afterEach(async () => {
-    await _hook?.destroy();
   });
 
   describe('Success', () => {

@@ -1,18 +1,19 @@
 /* eslint-disable require-jsdoc */
-import { renderHook } from '@testing-library/react';
+import { ZCircusSetupHook } from '@zthun/works.cirque-du-react';
+import { ZImageReader } from '@zthun/works.draw';
 import { useImageReader } from './image-reader.context';
 
 describe('useImageReader', () => {
   function createTestTarget() {
-    return renderHook(() => useImageReader());
+    return new ZCircusSetupHook(() => useImageReader()).setup();
   }
 
-  it('should return the default image reader implementation.', () => {
+  it('should return the default image reader implementation.', async () => {
     // Arrange
-    const target = createTestTarget();
+    const target = await createTestTarget();
     // Act
-    const actual = target.result.current;
+    const actual = await target.current();
     // Assert
-    expect(actual).toBeTruthy();
+    expect(actual).toBeInstanceOf(ZImageReader);
   });
 });

@@ -3,22 +3,16 @@ import { IZCircusReactHook, ZCircusSetupHook } from '@zthun/works.cirque-du-reac
 import { useAmbassadorState } from './use-ambassador-state';
 
 describe('useAmbassadorState', () => {
-  let _hook: IZCircusReactHook<[string | undefined, (val: string) => void], any>;
   let current: string | undefined;
   let setCurrent: ((val: string) => void) | undefined;
 
-  async function createTestTarget() {
-    _hook = await new ZCircusSetupHook(() => useAmbassadorState(current, setCurrent)).setup();
-    return _hook;
+  function createTestTarget() {
+    return new ZCircusSetupHook(() => useAmbassadorState(current, setCurrent)).setup();
   }
 
   beforeEach(() => {
     current = undefined;
     setCurrent = undefined;
-  });
-
-  afterEach(async () => {
-    await _hook.destroy();
   });
 
   async function setValueAndRerender(

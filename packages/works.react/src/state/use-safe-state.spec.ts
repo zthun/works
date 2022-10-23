@@ -1,18 +1,11 @@
 /* eslint-disable require-jsdoc */
-import { IZCircusReactHook, ZCircusSetupHook } from '@zthun/works.cirque-du-react';
+import { ZCircusSetupHook } from '@zthun/works.cirque-du-react';
 import { useSafeState } from './use-safe-state';
 
 describe('useSafeState', () => {
-  let _hook: IZCircusReactHook<[boolean, (val: boolean) => void], any>;
-
   async function createTestTarget() {
-    _hook = await new ZCircusSetupHook(() => useSafeState(true)).setup();
-    return _hook;
+    return await new ZCircusSetupHook(() => useSafeState(true)).setup();
   }
-
-  afterEach(async () => {
-    await _hook.destroy();
-  });
 
   it('should set the state if the component is still mounted.', async () => {
     // Arrange

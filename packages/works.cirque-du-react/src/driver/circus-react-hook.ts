@@ -7,6 +7,12 @@ import { RenderHookResult } from '@testing-library/react';
 export interface IZCircusReactHook<T, P> {
   /**
    * Destroys the hook.
+   *
+   * This call is optional.  Hooks will
+   * be destroyed automatically when the test
+   * framework is unmounted.  This is useful
+   * for testing use cases of a hook after the parent
+   * component has been unmounted.
    */
   destroy(): Promise<void>;
 

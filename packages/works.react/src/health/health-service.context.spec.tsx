@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { renderHook, waitFor } from '@testing-library/react';
+import { ZCircusSetupHook } from '@zthun/works.cirque-du-react';
 import {
   ZHttpCodeServer,
   ZHttpCodeSuccess,
@@ -58,8 +58,7 @@ describe('useHealth', () => {
     const wrapper = ({ children }) => (
       <ZHealthServiceContext.Provider value={health}>{children}</ZHealthServiceContext.Provider>
     );
-    const target = renderHook(() => useHealth(), { wrapper });
-    return target;
+    return new ZCircusSetupHook(() => useHealth(), { wrapper }).setup();
   }
 
   beforeEach(() => {
@@ -71,10 +70,8 @@ describe('useHealth', () => {
     // Arrange
     const target = await createTestTarget();
     // Act
-    await waitFor(() => {
-      const [actual] = target.result.current;
-      // Assert
-      expect(actual).toEqual(true);
-    });
+    const [actual] = await target.rerender();
+    // Assert
+    expect(actual).toEqual(true);
   });
 });
