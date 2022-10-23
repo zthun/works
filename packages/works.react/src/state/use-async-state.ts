@@ -114,3 +114,17 @@ export function isStateErrored<T>(data: ZAsyncDataState<T>): data is Error {
 export function asStateData<T>(data: ZAsyncDataState<T>): T | undefined {
   return isStateLoaded(data) ? data : undefined;
 }
+
+/**
+ * Returns the data error.
+ *
+ * @param data
+ *        The data that has possibly errored.
+ *
+ * @returns
+ *        The error that occurred or undefined if the data is
+ *        loading or successful.
+ */
+export function asStateError<T>(data: ZAsyncDataState<T>): Error | undefined {
+  return isStateErrored(data) ? data : undefined;
+}

@@ -116,6 +116,7 @@ export {
 // State
 export {
   asStateData,
+  asStateError,
   isStateErrored,
   isStateLoaded,
   isStateLoading,
