@@ -2,8 +2,9 @@
 import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import {
+  getHttpCodeCategory,
+  getHttpCodeDescription,
   ZHttpCode,
-  ZHttpCodeCategory,
   ZHttpCodeClient,
   ZHttpCodeInformationalResponse,
   ZHttpCodeRedirection,
@@ -43,39 +44,40 @@ describe('ZStatusCodePage', () => {
     await _driver?.destroy();
   });
 
-  async function assertRendersPageWithCorrectCode(code: ZHttpCode, category: ZHttpCodeCategory) {
+  async function assertRendersPageWithCorrectCode(code: ZHttpCode) {
     // Arrange
     history = createMemoryHistory({ initialEntries: [`/${code}`] });
+    const description = getHttpCodeDescription(code);
+    const category = getHttpCodeCategory(code);
     const target = await createTestTarget();
     // Act
     const actualCode = await target.code();
     const actualCategory = await target.category();
+    const actualDescription = await target.description();
     // Assert
     expect(actualCode).toEqual(code);
     expect(actualCategory).toEqual(category);
+    expect(actualDescription).toEqual(description);
   }
 
   it('should render the page with an info code', async () => {
-    await assertRendersPageWithCorrectCode(
-      ZHttpCodeInformationalResponse.EarlyHints,
-      ZHttpCodeCategory.InformationalResponse
-    );
+    await assertRendersPageWithCorrectCode(ZHttpCodeInformationalResponse.EarlyHints);
   });
 
   it('should render the page with a success code', async () => {
-    await assertRendersPageWithCorrectCode(ZHttpCodeSuccess.NoContent, ZHttpCodeCategory.Success);
+    await assertRendersPageWithCorrectCode(ZHttpCodeSuccess.NoContent);
   });
 
   it('should render the page with a redirection code', async () => {
-    await assertRendersPageWithCorrectCode(ZHttpCodeRedirection.MultipleChoices, ZHttpCodeCategory.Redirection);
+    await assertRendersPageWithCorrectCode(ZHttpCodeRedirection.MultipleChoices);
   });
 
   it('should render the page with a client code.', async () => {
-    await assertRendersPageWithCorrectCode(ZHttpCodeClient.NotFound, ZHttpCodeCategory.Client);
+    await assertRendersPageWithCorrectCode(ZHttpCodeClient.NotFound);
   });
 
   it('should render the page with a server code.', async () => {
-    await assertRendersPageWithCorrectCode(ZHttpCodeServer.BadGateway, ZHttpCodeCategory.Server);
+    await assertRendersPageWithCorrectCode(ZHttpCodeServer.BadGateway);
   });
 
   it('should render the page with 418 for a non valid parameter', async () => {
