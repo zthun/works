@@ -1,52 +1,102 @@
 /* eslint-disable require-jsdoc */
-import { render, waitFor } from '@testing-library/react';
-import { ZHttpCode, ZHttpCodeClient } from '@zthun/works.http';
-import { createMemoryHistory } from 'history';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import {
+  ZHttpCode,
+  ZHttpCodeCategory,
+  ZHttpCodeClient,
+  ZHttpCodeInformationalResponse,
+  ZHttpCodeRedirection,
+  ZHttpCodeServer,
+  ZHttpCodeSuccess
+} from '@zthun/works.http';
+import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
 import { ZRoute, ZRouteMap, ZTestRouter } from '../router/router-dom';
 import { ZStatusCodePage } from './status-code-page';
+import { ZStatusCodePageComponentModel } from './status-code-page.cm';
 
 describe('ZStatusCodePage', () => {
-  let code: number;
-  let name: string;
+  let _driver: IZCircusDriver;
+  let history: MemoryHistory;
+  let name: string | undefined;
 
   async function createTestTarget() {
-    const history = createMemoryHistory({ initialEntries: [`/${code}`] });
-
-    const target = render(
+    const path = name ?? 'code';
+    const element = (
       <ZTestRouter location={history.location} navigator={history}>
         <ZRouteMap>
-          <ZRoute path='/:code' element={<ZStatusCodePage name={name} />} />
+          <ZRoute path={`/:${path}`} element={<ZStatusCodePage name={name} />} />
         </ZRouteMap>
       </ZTestRouter>
     );
 
-    await waitFor(() => expect(target.container.querySelector('.ZStatusCodePage-root')).toBeTruthy());
-
-    return target;
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(_driver, ZStatusCodePageComponentModel, ZStatusCodePageComponentModel.Selector);
   }
 
   beforeEach(() => {
-    code = 404;
-    name = 'code';
+    name = undefined;
   });
 
-  async function assertRendersPageWithCorrectCode(expected: ZHttpCode) {
+  afterEach(async () => {
+    await _driver?.destroy();
+  });
+
+  async function assertRendersPageWithCorrectCode(code: ZHttpCode, category: ZHttpCodeCategory) {
     // Arrange
-    code = expected;
+    history = createMemoryHistory({ initialEntries: [`/${code}`] });
     const target = await createTestTarget();
     // Act
-    const actual = target.container.querySelector(`.ZHttpStatusCodeCard-code-${code}`);
+    const actualCode = await target.code();
+    const actualCategory = await target.category();
     // Assert
-    expect(actual).not.toBeNull();
+    expect(actualCode).toEqual(code);
+    expect(actualCategory).toEqual(category);
   }
 
-  it('should render the page with the given code.', async () => {
-    await assertRendersPageWithCorrectCode(ZHttpCodeClient.NotFound);
+  it('should render the page with an info code', async () => {
+    await assertRendersPageWithCorrectCode(
+      ZHttpCodeInformationalResponse.EarlyHints,
+      ZHttpCodeCategory.InformationalResponse
+    );
   });
 
-  it('should render the page with 417 for a parameter that does not exist', async () => {
-    name = 'not-the-code';
-    await assertRendersPageWithCorrectCode(ZHttpCodeClient.ImATeapot);
+  it('should render the page with a success code', async () => {
+    await assertRendersPageWithCorrectCode(ZHttpCodeSuccess.NoContent, ZHttpCodeCategory.Success);
+  });
+
+  it('should render the page with a redirection code', async () => {
+    await assertRendersPageWithCorrectCode(ZHttpCodeRedirection.MultipleChoices, ZHttpCodeCategory.Redirection);
+  });
+
+  it('should render the page with a client code.', async () => {
+    await assertRendersPageWithCorrectCode(ZHttpCodeClient.NotFound, ZHttpCodeCategory.Client);
+  });
+
+  it('should render the page with a server code.', async () => {
+    await assertRendersPageWithCorrectCode(ZHttpCodeServer.BadGateway, ZHttpCodeCategory.Server);
+  });
+
+  it('should render the page with 418 for a non valid parameter', async () => {
+    // Arrange.
+    history = createMemoryHistory({ initialEntries: [`/lol-wut?`] });
+    const expected = ZHttpCodeClient.ImATeapot;
+    const target = await createTestTarget();
+    // Act.
+    const actual = await target.code();
+    // Assert.
+    expect(actual).toEqual(expected);
+  });
+
+  it('should render the code with a custom name', async () => {
+    // Arrange
+    name = 'httpStatus';
+    history = createMemoryHistory({ initialEntries: ['/200'] });
+    const target = await createTestTarget();
+    // Act.
+    const actual = await target.code();
+    // Assert.
+    expect(actual).toEqual(ZHttpCodeSuccess.OK);
   });
 });

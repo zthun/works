@@ -4,29 +4,42 @@ import ErrorIcon from '@mui/icons-material/Error';
 import ForwardIcon from '@mui/icons-material/Forward';
 import InfoIcon from '@mui/icons-material/Info';
 import WarningIcon from '@mui/icons-material/Warning';
+import { cssClass } from '@zthun/works.core';
 import {
   getHttpCodeCategory,
   getHttpCodeDescription,
   getHttpCodeName,
+  getHttpCodeSeverity,
   ZHttpCode,
+  ZHttpCodeCategory,
   ZHttpCodeClient
 } from '@zthun/works.http';
 import { get } from 'lodash';
 import React from 'react';
 import { ZPaperCard } from '../card/paper-card';
+import { IZComponentName } from '../component/component-name';
 import { ZGridLayout } from '../layout/grid-layout';
 import { useParams } from '../router/router-dom';
-import { ZH2, ZSubtitle } from '../typography/typography';
+import { makeStyles } from '../theme/make-styles';
+import { ZSeverityColor } from '../theme/state-color';
+import { ZParagraph } from '../typography/typography';
 
-/**
- * Represents properties for the status code page.
- */
-export interface IZStatusCodePage {
-  /**
-   * The name of the route param that contains the code.
-   */
-  name: string;
-}
+const useStatusCodePageStyles = makeStyles<ZHttpCode>()((theme, status) => {
+  // A ZHttpCodeSeverity enum and a ZSeverityColor are compatible.
+  const severity = getHttpCodeSeverity(status) as unknown as ZSeverityColor;
+
+  return {
+    code: {
+      color: theme.colorify(severity),
+      fontFamily: theme.typography.fontFamily,
+      fontWeight: 'bold',
+      fontSize: '8rem',
+      textAlign: 'center',
+      display: 'inline-block',
+      width: '100%'
+    }
+  };
+});
 
 /**
  * Renders a page that displays a status code card.
@@ -35,10 +48,11 @@ export interface IZStatusCodePage {
  *
  * @returns The jsx that renders the status code page.
  */
-export function ZStatusCodePage(props: IZStatusCodePage) {
-  const { name } = props;
+export function ZStatusCodePage(props: IZComponentName) {
+  const { name = 'code' } = props;
   const params = useParams();
-  const code: ZHttpCode = +get(params, name, ZHttpCodeClient.ImATeapot);
+  const code: ZHttpCode = +get(params, name, ZHttpCodeClient.ImATeapot) || 418;
+  const { classes } = useStatusCodePageStyles(code);
 
   const renderAvatar = () => {
     if (code === ZHttpCodeClient.ImATeapot) {
@@ -46,32 +60,64 @@ export function ZStatusCodePage(props: IZStatusCodePage) {
         <EmojiFoodBeverageTwoToneIcon
           className='ZStatusCodePage-icon ZStatusCodePage-teapot'
           fontSize='inherit'
-          color='warning'
+          color='secondary'
+          data-category={ZHttpCodeCategory.Client}
         />
       );
     }
 
     if (code >= 100 && code < 200) {
-      return <InfoIcon className='ZStatusCodePage-icon ZStatusCodePage-info' fontSize='inherit' color='info' />;
+      return (
+        <InfoIcon
+          className='ZStatusCodePage-icon ZStatusCodePage-info'
+          data-category={ZHttpCodeCategory.InformationalResponse}
+          fontSize='inherit'
+          color='info'
+        />
+      );
     }
 
     if (code >= 200 && code < 300) {
       return (
-        <CheckCircleIcon className='ZStatusCodePage-icon ZStatusCodePage-success' fontSize='inherit' color='success' />
+        <CheckCircleIcon
+          className='ZStatusCodePage-icon ZStatusCodePage-success'
+          data-category={ZHttpCodeCategory.Success}
+          fontSize='inherit'
+          color='success'
+        />
       );
     }
 
     if (code >= 300 && code < 400) {
       return (
-        <ForwardIcon className='ZStatusCodePage-icon ZStatusCodePage-redirect' fontSize='inherit' color='success' />
+        <ForwardIcon
+          className='ZStatusCodePage-icon ZStatusCodePage-redirect'
+          data-category={ZHttpCodeCategory.Redirection}
+          fontSize='inherit'
+          color='info'
+        />
       );
     }
 
     if (code >= 400 && code < 500) {
-      return <WarningIcon className='ZStatusCodePage-icon ZStatusCodePage-client' fontSize='inherit' color='warning' />;
+      return (
+        <WarningIcon
+          className='ZStatusCodePage-icon ZStatusCodePage-client'
+          data-category={ZHttpCodeCategory.Client}
+          fontSize='inherit'
+          color='warning'
+        />
+      );
     }
 
-    return <ErrorIcon className='ZStatusCodePage-icon ZStatusCodePage-server' fontSize='inherit' color='error' />;
+    return (
+      <ErrorIcon
+        className='ZStatusCodePage-icon ZStatusCodePage-server'
+        data-category={ZHttpCodeCategory.Server}
+        fontSize='inherit'
+        color='error'
+      />
+    );
   };
 
   return (
@@ -82,8 +128,8 @@ export function ZStatusCodePage(props: IZStatusCodePage) {
         subHeaderText={getHttpCodeName(code)}
         size='lg'
       >
-        <ZSubtitle className='ZStatusCodePage-description'>{getHttpCodeDescription(code)}</ZSubtitle>
-        <ZH2 className='ZStatusCodePage-code'>{code}</ZH2>
+        <ZParagraph className='ZStatusCodePage-description'>{getHttpCodeDescription(code)}</ZParagraph>
+        <span className={cssClass('ZStatusCodePage-code', classes.code)}>{code}</span>
       </ZPaperCard>
     </ZGridLayout>
   );

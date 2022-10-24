@@ -69,7 +69,7 @@ export { ZChoiceComponentModel } from './form/choice.cm';
 export { ZHealthIndicator } from './health/health-indicator';
 export { ZHealthIndicatorComponentModel } from './health/health-indicator.cm';
 // Http
-export { IZStatusCodePage, ZStatusCodePage } from './http/status-code-page';
+export { ZStatusCodePage } from './http/status-code-page';
 // Identity
 export { IZIdentityButtonProps, ZIdentityButton } from './identity/identity-button';
 export { ZIdentityButtonComponentModel } from './identity/identity-button.cm';
