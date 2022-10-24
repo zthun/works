@@ -1,8 +1,7 @@
-import { cssClass } from '@zthun/works.core';
+import { cssClass, ZStateSize } from '@zthun/works.core';
 import React, { ReactNode } from 'react';
 import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
-import { ZStateSize } from '../theme/state-size';
 
 export interface IZLineItemLayout extends IZComponentStyle {
   prefix?: ReactNode | (() => ReactNode);

@@ -1,7 +1,7 @@
 import AppsIcon from '@mui/icons-material/Apps';
 import ErrorIcon from '@mui/icons-material/Error';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
-import { cssClass } from '@zthun/works.core';
+import { cssClass, ZStateSize } from '@zthun/works.core';
 
 import { startCase } from 'lodash';
 import React from 'react';
@@ -11,7 +11,6 @@ import { IZComponentStyle } from '../component/component-style.';
 import { ZImageSource } from '../image/image-source';
 import { asStateData, isStateErrored, isStateLoading } from '../state/use-async-state';
 import { makeStyles } from '../theme/make-styles';
-import { ZStateSize } from '../theme/state-size';
 import { ZCaption, ZH1 } from '../typography/typography';
 import { useWebApp } from './web-app-service';
 

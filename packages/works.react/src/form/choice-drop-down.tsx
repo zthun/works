@@ -1,11 +1,10 @@
 import ClearIcon from '@mui/icons-material/Clear';
 import { FormControl, IconButton, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { cssClass } from '@zthun/works.core';
+import { cssClass, ZStateSize } from '@zthun/works.core';
 import { castArray, isArray } from 'lodash';
 import React, { ReactNode, useMemo } from 'react';
 import { v4 } from 'uuid';
 import { makeStyles } from '../theme/make-styles';
-import { ZStateSize } from '../theme/state-size';
 import { IZChoice, IZChoiceOption, useChoice } from './choice';
 
 const useChoiceDropDownStyles = makeStyles()((theme) => {

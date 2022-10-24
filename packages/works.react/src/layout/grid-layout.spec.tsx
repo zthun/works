@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
 import { IZCircusDriver } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import { ZStateSize } from '@zthun/works.core';
 import React from 'react';
-import { ZStateSize } from '../theme/state-size';
 import { ZGridLayout } from './grid-layout';
 
 describe('ZGridLayout', () => {

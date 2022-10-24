@@ -2,6 +2,7 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import { ZStateSize } from '@zthun/works.core';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
   useAlertService,
@@ -12,8 +13,7 @@ import {
   ZListLineItem,
   ZPaperCard,
   ZParagraph,
-  ZShadeColor,
-  ZStateSize
+  ZShadeColor
 } from '@zthun/works.react';
 import React from 'react';
 

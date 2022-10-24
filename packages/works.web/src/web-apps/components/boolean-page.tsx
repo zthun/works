@@ -1,6 +1,7 @@
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
+import { ZStateSize } from '@zthun/works.core';
 import {
   useSafeState,
   ZBooleanCheckbox,
@@ -9,7 +10,6 @@ import {
   ZGridLayout,
   ZPaperCard,
   ZSeverityColor,
-  ZStateSize,
   ZToolbar
 } from '@zthun/works.react';
 import React from 'react';

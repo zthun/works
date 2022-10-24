@@ -23,16 +23,14 @@ export {
 export { IZButton, ZButton, ZButtonColor } from './buttons/button';
 export { ZButtonComponentModel } from './buttons/button.cm';
 // Cards
+export { IZCard, ZCard } from './card/card';
 export { IZPaperCardProps, ZPaperCard } from './card/paper-card';
 // Component
 export { IZComponentActionable } from './component/component-actionable.interface';
 export { IZComponentAdornment } from './component/component-adornment';
 export { IZComponentAvatar } from './component/component-avatar';
 export { IZComponentConfirmable } from './component/component-confirmable.interface';
-export { IZComponentDescription } from './component/component-description.interface';
-export { IZComponentDimensions2d } from './component/component-dimensions-2d';
 export { IZComponentDisabled } from './component/component-disabled';
-export { IZComponentEntityRedirect } from './component/component-entity-redirect.interface';
 export { IZComponentHeader } from './component/component-header';
 export { IZComponentHeading } from './component/component-heading';
 export { IZComponentHierarchy } from './component/component-hierarchy';
@@ -126,7 +124,6 @@ export { makeStyles } from './theme/make-styles';
 export { ZStateAnchor } from './theme/state-anchor';
 export { ZColorless, ZColorTint, ZHueColor, ZSeverityColor, ZShadeColor, ZStateColor } from './theme/state-color';
 export { ZStateOrientation } from './theme/state-orientation';
-export { ZStateSize } from './theme/state-size';
 // Toolbar
 export { ZToolbar } from './toolbar/toolbar';
 // Typography

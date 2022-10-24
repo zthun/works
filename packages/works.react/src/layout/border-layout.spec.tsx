@@ -1,11 +1,11 @@
 /* eslint-disable require-jsdoc */
 import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import { ZStateSize } from '@zthun/works.core';
 import { Property } from 'csstype';
 import { values } from 'lodash';
 import React from 'react';
 import { ZColorless, ZColorTint, ZHueColor, ZSeverityColor, ZShadeColor, ZStateColor } from '../theme/state-color';
-import { ZStateSize } from '../theme/state-size';
 import { ZBorderLayout } from './border-layout';
 import { ZBorderLayoutComponentModel } from './border-layout.cm';
 
@@ -13,20 +13,20 @@ describe('ZBorderLayout', () => {
   let _driver: IZCircusDriver;
 
   let border:
+    | undefined
     | {
         size?: ZStateSize;
         style?: Property.BorderStyle;
         color?: ZStateColor;
         tint?: ZColorTint;
-      }
-    | undefined;
+      };
 
   let background:
+    | undefined
     | {
         color?: ZStateColor;
         tint?: ZColorTint;
-      }
-    | undefined;
+      };
 
   async function createTestTarget() {
     const element = <ZBorderLayout border={border} background={background} />;

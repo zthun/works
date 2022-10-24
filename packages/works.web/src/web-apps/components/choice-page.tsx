@@ -1,5 +1,6 @@
 import BalanceIcon from '@mui/icons-material/Balance';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
+import { ZStateSize } from '@zthun/works.core';
 
 import {
   useSafeState,
@@ -8,8 +9,7 @@ import {
   ZChoiceDropDown,
   ZGridLayout,
   ZLineItemLayout,
-  ZPaperCard,
-  ZStateSize
+  ZPaperCard
 } from '@zthun/works.react';
 import React from 'react';
 

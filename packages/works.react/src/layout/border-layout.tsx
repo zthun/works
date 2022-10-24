@@ -1,4 +1,4 @@
-import { cssClass, firstDefined } from '@zthun/works.core';
+import { cssClass, firstDefined, ZStateSize } from '@zthun/works.core';
 import { Property } from 'csstype';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
@@ -6,7 +6,6 @@ import { IZComponentStyle } from '../component/component-style.';
 import { IZComponentWidth } from '../component/component-width';
 import { makeStyles } from '../theme/make-styles';
 import { ZColorless, ZColorTint, ZShadeColor, ZStateColor } from '../theme/state-color';
-import { ZStateSize } from '../theme/state-size';
 
 export interface IZBorderLayout extends IZComponentWidth, IZComponentHierarchy, IZComponentStyle {
   border?: {

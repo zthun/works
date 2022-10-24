@@ -1,6 +1,6 @@
 import { AppBar } from '@mui/material';
 import { ThemeProvider } from '@mui/system';
-import { IZRouteOption } from '@zthun/works.core';
+import { IZRouteOption, ZStateSize } from '@zthun/works.core';
 import React from 'react';
 import { GlobalStyles } from 'tss-react';
 import { ZAlertList } from '../alert/alert-list';
@@ -14,7 +14,6 @@ import { ZNavigate, ZRoute, ZRouteMap, ZRouter } from '../router/router-dom';
 import { useZthunworksTheme } from '../theme/make-styles';
 import { ZStateAnchor } from '../theme/state-anchor';
 import { ZSeverityColor } from '../theme/state-color';
-import { ZStateSize } from '../theme/state-size';
 import { ZGridLayout } from './grid-layout';
 import { ZPaddedBox } from './padded-box';
 

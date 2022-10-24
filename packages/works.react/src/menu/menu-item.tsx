@@ -1,11 +1,10 @@
 import { MenuItem } from '@mui/material';
-import { cssClass } from '@zthun/works.core';
+import { cssClass, ZStateSize } from '@zthun/works.core';
 import { noop } from 'lodash';
 import React from 'react';
 import { IZButton } from '../buttons/button';
 import { ZGridLayout } from '../layout/grid-layout';
 import { ZCircularProgress } from '../loading/circular-progress';
-import { ZStateSize } from '../theme/state-size';
 import { ZMenuEvent } from './menu-event';
 
 export interface IZMenuItem extends Omit<IZButton, 'color'>, Omit<IZButton, 'outline'> {}

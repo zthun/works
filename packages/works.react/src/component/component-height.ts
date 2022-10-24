@@ -1,4 +1,4 @@
-import { ZStateSize } from '../theme/state-size';
+import { ZStateSize } from '@zthun/works.core';
 
 /**
  * Represents a component that contains a height.

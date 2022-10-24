@@ -1,13 +1,13 @@
-import { cssClass, firstDefined } from '@zthun/works.core';
+import { cssClass, firstDefined, ZStateSize } from '@zthun/works.core';
 import { ZDataUrlBuilder } from '@zthun/works.url';
 import React from 'react';
-import { IZComponentDimensions2d } from '../component/component-dimensions-2d';
+import { IZComponentHeight } from '../component/component-height';
 import { IZComponentSource } from '../component/component-source.interface';
 import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentWidth } from '../component/component-width';
 import { makeStyles } from '../theme/make-styles';
-import { ZStateSize } from '../theme/state-size';
 
-export interface IZImageSourceProps extends IZComponentSource, IZComponentStyle, IZComponentDimensions2d {
+export interface IZImageSourceProps extends IZComponentSource, IZComponentStyle, IZComponentWidth, IZComponentHeight {
   align?: 'left' | 'center' | 'right';
 }
 

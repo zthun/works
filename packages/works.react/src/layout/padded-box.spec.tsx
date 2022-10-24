@@ -2,8 +2,8 @@
 
 import { IZCircusDriver } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import { ZStateSize } from '@zthun/works.core';
 import React from 'react';
-import { ZStateSize } from '../theme/state-size';
 import { ZPaddedBox } from './padded-box';
 
 describe('ZPaddedBox', () => {

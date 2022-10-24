@@ -1,5 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import { ZStateSize } from '@zthun/works.core';
 import {
   useSafeState,
   ZButton,
@@ -13,8 +14,7 @@ import {
   ZPaperCard,
   ZParagraph,
   ZSeverityColor,
-  ZStateAnchor,
-  ZStateSize
+  ZStateAnchor
 } from '@zthun/works.react';
 import { first, identity, startCase, values } from 'lodash';
 import React from 'react';

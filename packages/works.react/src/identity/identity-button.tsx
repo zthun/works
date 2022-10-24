@@ -1,5 +1,5 @@
 import PersonIcon from '@mui/icons-material/Person';
-import { cssClass, ZProfileAvatarSize } from '@zthun/works.core';
+import { cssClass, ZProfileAvatarSize, ZStateSize } from '@zthun/works.core';
 import { ZUrlBuilder } from '@zthun/works.url';
 import md5 from 'md5';
 import React from 'react';
@@ -7,7 +7,6 @@ import { useOptionalWebApp } from '../apps/web-app-service';
 import { IZButton, ZButton } from '../buttons/button';
 import { isStateLoaded, isStateLoading } from '../state/use-async-state';
 import { makeStyles } from '../theme/make-styles';
-import { ZStateSize } from '../theme/state-size';
 import { useWindowService } from '../window/window-service.context';
 import { useIdentity } from './identity-service';
 

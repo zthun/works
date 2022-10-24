@@ -1,5 +1,8 @@
 /**
  * Represents a component that can be sized.
+ *
+ * @deprecated
+ *        Use IZComponentWidth, IZComponentHeight, or IZcomponentDimensions instead..
  */
 export interface IZComponentSizeable {
   /**

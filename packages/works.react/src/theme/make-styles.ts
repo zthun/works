@@ -19,11 +19,10 @@ import {
   yellow
 } from '@mui/material/colors';
 import { createSpacing } from '@mui/system';
-import { firstDefined } from '@zthun/works.core';
+import { firstDefined, ZStateSize } from '@zthun/works.core';
 import { values } from 'lodash';
 import { createMakeStyles } from 'tss-react';
 import { ZColorTint, ZHueColor, ZSeverityColor, ZShadeColor, ZStateColor } from './state-color';
-import { ZStateSize } from './state-size';
 
 export type IZColor = Color;
 
