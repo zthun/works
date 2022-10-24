@@ -34,6 +34,8 @@ export { IZUnaryFilter, ZUnaryFilterBuilder, ZUnaryOperator } from './filter/una
 export { IZRouteOption, ZRouteOptionBuilder } from './route/route-option';
 // Server
 export { IZServer, ZServerBuilder } from './server/server';
+// Size
+export { ZStateSize, ZStateSizeChart } from './size/state-size';
 // Sort
 export { IZSort, ZSortBuilder, ZSortDirection } from './sort/sort';
 // User
