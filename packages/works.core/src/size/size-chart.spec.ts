@@ -1,8 +1,7 @@
-import { ZSizeChart } from '../size/size';
-import { createSizeChart } from './size-chart';
 import { createSizeChartFixedCss } from './size-chart-fixed-css';
 import { createSizeChartFixedExponential } from './size-chart-fixed-exponential';
 import { createSizeChartFixedFibonacci } from './size-chart-fixed-fibonacci';
+import { createSizeChartFixedGeometric } from './size-chart-fixed-geometric';
 import { createSizeChartFixedLinear } from './size-chart-fixed-linear';
 import { createSizeChartVariedCss } from './size-chart-varied-css';
 import { createSizeChartVoidCss } from './size-chart-void-css';
@@ -11,27 +10,6 @@ import { ZSizeChartVaried, ZSizeVaried } from './size-varied';
 import { ZSizeChartVoid, ZSizeVoid } from './size-void';
 
 describe('Size Chart', () => {
-  it('should create the chart', () => {
-    // Arrange.
-    const expected: ZSizeChart<string> = {
-      [ZSizeFixed.ExtraSmall]: '1px',
-      [ZSizeFixed.Small]: '2px',
-      [ZSizeFixed.Medium]: '3px',
-      [ZSizeFixed.Large]: '4px',
-      [ZSizeFixed.ExtraLarge]: '5px',
-      [ZSizeVaried.Fit]: 'auto',
-      [ZSizeVaried.Full]: '100%',
-      [ZSizeVoid.None]: '0'
-    };
-    const fixed = createSizeChartFixedCss(createSizeChartFixedLinear(1, 0), 'px');
-    const varied = createSizeChartVariedCss();
-    const voided = createSizeChartVoidCss();
-    // Act.
-    const actual = createSizeChart(fixed, varied, voided);
-    // Assert.
-    expect(actual).toEqual(expected);
-  });
-
   describe('Fixed', () => {
     describe('Linear', () => {
       it('should set the sizes', () => {
@@ -75,6 +53,23 @@ describe('Size Chart', () => {
         };
         // Act.
         const actual = createSizeChartFixedLinear(1, 0);
+        // Assert.
+        expect(actual).toEqual(expected);
+      });
+    });
+
+    describe('Geometric', () => {
+      it('should set the sizes', () => {
+        // Arrange
+        const expected: ZSizeChartFixed<number> = {
+          [ZSizeFixed.ExtraSmall]: 10,
+          [ZSizeFixed.Small]: 20,
+          [ZSizeFixed.Medium]: 40,
+          [ZSizeFixed.Large]: 80,
+          [ZSizeFixed.ExtraLarge]: 160
+        };
+        // Act.
+        const actual = createSizeChartFixedGeometric(2, 10);
         // Assert.
         expect(actual).toEqual(expected);
       });

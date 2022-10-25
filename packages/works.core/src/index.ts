@@ -36,10 +36,10 @@ export { IZRouteOption, ZRouteOptionBuilder } from './route/route-option';
 export { IZServer, ZServerBuilder } from './server/server';
 // Size
 export { ZSize, ZSizeChart } from './size/size';
-export { createSizeChart } from './size/size-chart';
 export { createSizeChartFixedCss } from './size/size-chart-fixed-css';
 export { createSizeChartFixedExponential } from './size/size-chart-fixed-exponential';
 export { createSizeChartFixedFibonacci } from './size/size-chart-fixed-fibonacci';
+export { createSizeChartFixedGeometric } from './size/size-chart-fixed-geometric';
 export { createSizeChartFixedLinear } from './size/size-chart-fixed-linear';
 export { createSizeChartVariedCss } from './size/size-chart-varied-css';
 export { createSizeChartVoidCss } from './size/size-chart-void-css';
