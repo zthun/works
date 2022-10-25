@@ -1,26 +1,18 @@
-import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZButtonComponentModel } from '../buttons/button.cm';
 import { ZDrawerComponentModel } from './drawer.cm';
 
 /**
  * Represents the component model for a drawer button component.
  */
-export class ZDrawerButtonComponentModel {
+export class ZDrawerButtonComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZDrawerButton-root';
-
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param _driver
-   *        The driver that manages the component.
-   */
-  public constructor(private _driver: IZCircusDriver) {}
 
   /**
    * Gets the inner button.
    */
   private async _button() {
-    return ZCircusComponentModel.create(this._driver, ZButtonComponentModel, ZButtonComponentModel.Selector);
+    return ZCircusComponentModel.create(this.driver, ZButtonComponentModel, ZButtonComponentModel.Selector);
   }
 
   /**
@@ -30,7 +22,7 @@ export class ZDrawerButtonComponentModel {
    *        True if the drawer is open.  False otherwise.
    */
   public async opened(): Promise<boolean> {
-    const body = await this._driver.body();
+    const body = await this.driver.body();
     return body.peek(ZDrawerComponentModel.Selector);
   }
 
@@ -43,8 +35,8 @@ export class ZDrawerButtonComponentModel {
   public async open(): Promise<ZDrawerComponentModel> {
     const button = await this._button();
     await button.click();
-    await this._driver.wait(() => this.opened());
-    const body = await this._driver.body();
+    await this.driver.wait(() => this.opened());
+    const body = await this.driver.body();
     return ZCircusComponentModel.create(body, ZDrawerComponentModel, ZDrawerComponentModel.Selector);
   }
 
@@ -55,7 +47,7 @@ export class ZDrawerButtonComponentModel {
    *      A promise that resolves once the drawer is closed.
    */
   private _waitForClose() {
-    return this._driver.wait(() => this.opened().then((open) => !open));
+    return this.driver.wait(() => this.opened().then((open) => !open));
   }
 
   /**

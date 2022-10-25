@@ -1,18 +1,10 @@
-import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
 
 /**
  * Represents the component model for a drawer.
  */
-export class ZDrawerComponentModel {
+export class ZDrawerComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZDrawer-root';
-
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param _driver
-   *        The driver to manage the component.
-   */
-  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Gets the paper element for an opened drawer.
@@ -20,7 +12,7 @@ export class ZDrawerComponentModel {
    * @returns The root element for where the drawer is opened.
    */
   public root(): Promise<IZCircusDriver> {
-    return this._driver.select('.MuiDrawer-paper');
+    return this.driver.select('.MuiDrawer-paper');
   }
 
   /**
@@ -30,7 +22,7 @@ export class ZDrawerComponentModel {
    *      A element for the backdrop.
    */
   public backdrop(): Promise<IZCircusDriver> {
-    return this._driver.select('.MuiBackdrop-root');
+    return this.driver.select('.MuiBackdrop-root');
   }
 
   /**
@@ -54,6 +46,6 @@ export class ZDrawerComponentModel {
    */
   public async escape() {
     const act = new ZCircusActBuilder().keysClick('[Escape]').build();
-    return this._driver.perform(act);
+    return this.driver.perform(act);
   }
 }

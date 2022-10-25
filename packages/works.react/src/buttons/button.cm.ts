@@ -1,18 +1,10 @@
-import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
+import { ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
 
 /**
  * Represents the component model for a button element.
  */
-export class ZButtonComponentModel {
+export class ZButtonComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZButton-root';
-
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param _driver
-   *        The driver to manage the component.
-   */
-  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Returns the name of the button.
@@ -21,7 +13,7 @@ export class ZButtonComponentModel {
    *        The button name if it has one.  Null otherwise.
    */
   public name(): Promise<string | null> {
-    return this._driver.attribute('data-name');
+    return this.driver.attribute('data-name');
   }
 
   /**
@@ -31,7 +23,7 @@ export class ZButtonComponentModel {
    *        True if the button is in the loading state.  False otherwise.
    */
   public loading(): Promise<boolean> {
-    return this._driver.peek('.ZCircularProgress-root');
+    return this.driver.peek('.ZCircularProgress-root');
   }
 
   /**
@@ -41,7 +33,7 @@ export class ZButtonComponentModel {
    *        True if the button is disabled.  False otherwise.
    */
   public disabled(): Promise<boolean> {
-    return this._driver.disabled();
+    return this.driver.disabled();
   }
 
   /**
@@ -51,7 +43,7 @@ export class ZButtonComponentModel {
    *        True if the button is outlined.  False otherwise.
    */
   public async outlined(): Promise<boolean> {
-    const c = await this._driver.classes(['ZButton-outline']);
+    const c = await this.driver.classes(['ZButton-outline']);
     return !!c.length;
   }
 
@@ -62,7 +54,7 @@ export class ZButtonComponentModel {
    *        True if the button is borderless.  False otherwise.
    */
   public async borderless(): Promise<boolean> {
-    const c = await this._driver.classes(['ZButton-borderless']);
+    const c = await this.driver.classes(['ZButton-borderless']);
     return !!c.length;
   }
 
@@ -73,7 +65,7 @@ export class ZButtonComponentModel {
    *        The button content text, if any.
    */
   public async text(): Promise<string> {
-    const content = await this._driver.select('.ZButton-content');
+    const content = await this.driver.select('.ZButton-content');
     return content.text();
   }
 
@@ -84,7 +76,7 @@ export class ZButtonComponentModel {
    */
   public click(): Promise<void> {
     const act = new ZCircusActBuilder().click().build();
-    return this._driver.perform(act);
+    return this.driver.perform(act);
   }
 
   /**
@@ -94,6 +86,6 @@ export class ZButtonComponentModel {
    *        A promise that resolves once the button is ready.
    */
   public load(): Promise<void> {
-    return this._driver.wait(() => this.loading().then((l) => !l));
+    return this.driver.wait(() => this.loading().then((l) => !l));
   }
 }

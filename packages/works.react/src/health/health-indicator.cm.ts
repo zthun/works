@@ -1,20 +1,12 @@
-import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
+import { ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
 
 export type ZHealthIndicatorState = 'loading' | 'healthy' | 'unhealthy';
 
 /**
  * Represents a component model for the ZHealthIndicator.
  */
-export class ZHealthIndicatorComponentModel {
+export class ZHealthIndicatorComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZHealthIndicator-root';
-
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param _driver
-   *        The driver to manage the component
-   */
-  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Gets whether the health indicator is loading.
@@ -23,7 +15,7 @@ export class ZHealthIndicatorComponentModel {
    *        True if the component is loading.
    */
   public loading(): Promise<boolean> {
-    return this._driver.peek('.ZHealthIndicator-loading');
+    return this.driver.peek('.ZHealthIndicator-loading');
   }
 
   /**
@@ -33,7 +25,7 @@ export class ZHealthIndicatorComponentModel {
    *        True if the component is healthy.
    */
   public healthy(): Promise<boolean> {
-    return this._driver.peek('.ZHealthIndicator-ok');
+    return this.driver.peek('.ZHealthIndicator-ok');
   }
 
   /**
@@ -43,7 +35,7 @@ export class ZHealthIndicatorComponentModel {
    *        True if the component is unhealthy.
    */
   public unhealthy(): Promise<boolean> {
-    return this._driver.peek('.ZHealthIndicator-warn');
+    return this.driver.peek('.ZHealthIndicator-warn');
   }
 
   /**
@@ -53,7 +45,7 @@ export class ZHealthIndicatorComponentModel {
    *        A promise that resolves once the indicator is no longer loading.
    */
   public load() {
-    return this._driver.wait(() => this.loading().then((l) => !l));
+    return this.driver.wait(() => this.loading().then((l) => !l));
   }
 
   /**
@@ -61,6 +53,6 @@ export class ZHealthIndicatorComponentModel {
    */
   public async refresh() {
     const act = new ZCircusActBuilder().click().build();
-    await this._driver.perform(act);
+    await this.driver.perform(act);
   }
 }

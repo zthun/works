@@ -1,17 +1,9 @@
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 
 /**
  * Represents a choice option or value in the Choice component model.
  */
-export class ZChoiceOptionComponentModel {
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param driver
-   *        The driver to manage the component.
-   */
-  public constructor(public readonly driver: IZCircusDriver) {}
-
+export class ZChoiceOptionComponentModel extends ZCircusComponentModel {
   /**
    * Gets the value for the option.
    *

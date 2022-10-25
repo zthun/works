@@ -1,17 +1,10 @@
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 
 /**
  * Represents the component model for an image source.
  */
-export class ZImageSourceComponentModel {
+export class ZImageSourceComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZImageSource-root';
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param _driver
-   *        The drivers that manages the component.
-   */
-  public constructor(private _driver: IZCircusDriver) {}
 
   /**
    * Gets the image name.
@@ -20,7 +13,7 @@ export class ZImageSourceComponentModel {
    *        The name of the image.
    */
   public name(): Promise<string | null> {
-    return this._driver.attribute('data-name');
+    return this.driver.attribute('data-name');
   }
 
   /**
@@ -30,7 +23,7 @@ export class ZImageSourceComponentModel {
    *        True if the underlying image source is an svg.
    */
   public async svg(): Promise<boolean> {
-    const [tag] = await this._driver.query('svg');
+    const [tag] = await this.driver.query('svg');
     return !!tag;
   }
 
@@ -41,7 +34,7 @@ export class ZImageSourceComponentModel {
    *        True if the underlying image source is an img.
    */
   public async img(): Promise<boolean> {
-    const [tag] = await this._driver.query('img');
+    const [tag] = await this.driver.query('img');
     return !!tag;
   }
 

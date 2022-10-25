@@ -1,19 +1,11 @@
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZAlertListComponentModel, ZListComponentModel } from '@zthun/works.react';
 
 /**
  * The component model for the list page.
  */
-export class ZListPageComponentModel {
+export class ZListPageComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZListPage-root';
-
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param _driver
-   *        The circus driver to manage the page.
-   */
-  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Gets the alerts on the page.
@@ -22,7 +14,7 @@ export class ZListPageComponentModel {
    *      The page alerts.
    */
   public async alertList(): Promise<ZAlertListComponentModel> {
-    const root = await this._driver.select(ZAlertListComponentModel.Selector);
+    const root = await this.driver.select(ZAlertListComponentModel.Selector);
     return new ZAlertListComponentModel(root);
   }
 
@@ -33,7 +25,7 @@ export class ZListPageComponentModel {
    *      The page list.
    */
   public async list(): Promise<ZListComponentModel> {
-    const root = await this._driver.select(ZListComponentModel.Selector);
+    const root = await this.driver.select(ZListComponentModel.Selector);
     return new ZListComponentModel(root);
   }
 }

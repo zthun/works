@@ -32,7 +32,7 @@ export function ZToolbarLayout(props: IZToolbarLayout) {
   const { className, children } = props;
 
   const styles = useToolbarStyles();
-  const toolbarClass = cssClass('ZToolbar-root', className, styles.classes.root);
+  const toolbarClass = cssClass('ZToolbarLayout-root', className, styles.classes.root);
 
   return <div className={toolbarClass}>{children}</div>;
 }

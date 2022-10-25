@@ -1,4 +1,4 @@
-import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { required } from '@zthun/works.core';
 import { first } from 'lodash';
 import { ZDrawerButtonComponentModel } from '../drawer/drawer-button.cm';
@@ -8,16 +8,8 @@ import { ZListComponentModel } from '../list/list.cm';
 /**
  * The component model for the ZWebAppDrawer
  */
-export class ZWebAppDrawerComponentModel {
+export class ZWebAppDrawerComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZWebAppDrawer-root';
-
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param _driver
-   *        The driver that manages the component.
-   */
-  public constructor(private _driver: IZCircusDriver) {}
 
   /**
    * Gets the underlying button responsible for opening the drawer.
@@ -26,11 +18,7 @@ export class ZWebAppDrawerComponentModel {
    *        The underlying drawer button.
    */
   public async button(): Promise<ZDrawerButtonComponentModel> {
-    return ZCircusComponentModel.create(
-      this._driver,
-      ZDrawerButtonComponentModel,
-      ZDrawerButtonComponentModel.Selector
-    );
+    return ZCircusComponentModel.create(this.driver, ZDrawerButtonComponentModel, ZDrawerButtonComponentModel.Selector);
   }
 
   /**

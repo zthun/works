@@ -1,4 +1,4 @@
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZListItemComponentModel } from './list-item.cm';
 
 export type ZListItemConstructor<T> = new (originator: ZListItemComponentModel) => T;
@@ -6,16 +6,8 @@ export type ZListItemConstructor<T> = new (originator: ZListItemComponentModel) 
 /**
  * Represents a component model for a list.
  */
-export class ZListComponentModel {
+export class ZListComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZList-root';
-
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param _driver
-   *        The driver used to manage items in the component.
-   */
-  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Finds all underlying items and returns them.
@@ -24,7 +16,7 @@ export class ZListComponentModel {
    *        All child items for this component model.
    */
   public async items(): Promise<ZListItemComponentModel[]> {
-    const candidates = await this._driver.query(ZListItemComponentModel.Selector);
+    const candidates = await this.driver.query(ZListItemComponentModel.Selector);
     const items = candidates.map((c) => new ZListItemComponentModel(c));
     return Promise.resolve(items);
   }
@@ -40,7 +32,7 @@ export class ZListComponentModel {
    */
   public async item(name: string): Promise<ZListItemComponentModel | null> {
     const query = `${ZListItemComponentModel.Selector}[data-name="${name}"]`;
-    const [item] = await this._driver.query(query);
+    const [item] = await this.driver.query(query);
     return item == null ? null : new ZListItemComponentModel(item);
   }
 }

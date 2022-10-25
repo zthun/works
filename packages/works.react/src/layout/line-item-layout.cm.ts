@@ -1,20 +1,12 @@
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
 
 /**
  * A component model for the ZLineItem.
  *
  * This mostly is just here to help you get the containers for the prefix, body, and suffix.
  */
-export class ZLineItemLayoutComponentModel {
+export class ZLineItemLayoutComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZLineItemLayout-root';
-
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param _driver
-   *        The circus driver to manage the component.
-   */
-  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Returns the prefix element.
@@ -23,7 +15,7 @@ export class ZLineItemLayoutComponentModel {
    *        The prefix element.
    */
   public prefix(): Promise<IZCircusDriver> {
-    return this._driver.select('.ZLineItemLayout-prefix');
+    return this.driver.select('.ZLineItemLayout-prefix');
   }
 
   /**
@@ -33,7 +25,7 @@ export class ZLineItemLayoutComponentModel {
    *        The body element.
    */
   public body(): Promise<IZCircusDriver> {
-    return this._driver.select('.ZLineItemLayout-body');
+    return this.driver.select('.ZLineItemLayout-body');
   }
 
   /**
@@ -43,6 +35,6 @@ export class ZLineItemLayoutComponentModel {
    *        The suffix element.
    */
   public suffix(): Promise<IZCircusDriver> {
-    return this._driver.select('.ZLineItemLayout-suffix');
+    return this.driver.select('.ZLineItemLayout-suffix');
   }
 }

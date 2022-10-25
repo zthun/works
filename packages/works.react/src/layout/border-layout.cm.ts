@@ -1,18 +1,10 @@
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 
 /**
  * The component model for a border layout component.
  */
-export class ZBorderLayoutComponentModel {
+export class ZBorderLayoutComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZBorderLayout-root';
-
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param driver
-   *        The driver that manages the layout.
-   */
-  public constructor(public readonly driver: IZCircusDriver) {}
 
   /**
    * Gets the border information.

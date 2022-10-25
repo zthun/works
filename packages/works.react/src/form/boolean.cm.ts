@@ -1,17 +1,10 @@
-import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
 
 /**
  * Represents a react component model for the ZBoolean component.
  */
-export class ZBooleanComponentModel {
+export class ZBooleanComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZBoolean-root';
-
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param _element The element for the checkbox.
-   */
-  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Gets the underlying input element.
@@ -20,7 +13,7 @@ export class ZBooleanComponentModel {
    *        The underlying input element.
    */
   private async _input(): Promise<IZCircusDriver> {
-    return this._driver.select('input[type="checkbox"]');
+    return this.driver.select('input[type="checkbox"]');
   }
 
   /**

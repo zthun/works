@@ -15,7 +15,7 @@ export abstract class ZCircusComponentModel {
    * @param driver
    *        The driver that manages this component.
    */
-  public constructor(public driver: IZCircusDriver) {}
+  public constructor(public readonly driver: IZCircusDriver) {}
 
   /**
    * Constructs a new CircusComponentModel by waiting for a context selector to become available.
