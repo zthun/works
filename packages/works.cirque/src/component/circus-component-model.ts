@@ -10,6 +10,14 @@ export type ZCircusComponentModelConstructor<T> = new (driver: IZCircusDriver) =
  */
 export abstract class ZCircusComponentModel {
   /**
+   * Initializes a new instance of this object.
+   *
+   * @param driver
+   *        The driver that manages this component.
+   */
+  public constructor(public driver: IZCircusDriver) {}
+
+  /**
    * Constructs a new CircusComponentModel by waiting for a context selector to become available.
    *
    * @param driver

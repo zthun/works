@@ -1,20 +1,12 @@
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { IZAlert } from '@zthun/works.message';
 import { ZAlertComponentModel } from './alert.cm';
 
 /**
  * Represents a component model for the alert list.
  */
-export class ZAlertListComponentModel {
+export class ZAlertListComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZAlertList-root';
-
-  /**
-   * Initializes a new instance of this object.
-   *
-   * @param _driver
-   *        The circus driver to manage the component.
-   */
-  public constructor(private readonly _driver: IZCircusDriver) {}
 
   /**
    * Gets a quick snapshot of the alerts in the current list.
@@ -23,7 +15,7 @@ export class ZAlertListComponentModel {
    *        The list of alerts in the current list.
    */
   public async alerts(): Promise<ZAlertComponentModel[]> {
-    const candidates = await this._driver.query('.ZAlertList-alert');
+    const candidates = await this.driver.query('.ZAlertList-alert');
     const ids = await Promise.all(candidates.map((c) => c.attribute('data-alert-id')));
     return Promise.all(ids.map((id) => id as string).map((id) => this.alert(id)));
   }
@@ -41,6 +33,6 @@ export class ZAlertListComponentModel {
    */
   public alert(alertOrId: IZAlert | string): Promise<ZAlertComponentModel> {
     const id = typeof alertOrId === 'string' ? alertOrId : alertOrId._id;
-    return Promise.resolve(new ZAlertComponentModel(this._driver, id));
+    return Promise.resolve(new ZAlertComponentModel(this.driver, id));
   }
 }
