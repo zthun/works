@@ -43,7 +43,7 @@ export { IZDrawerButton, ZDrawerButton } from './drawer/drawer-button';
 export { ZDrawerButtonComponentModel } from './drawer/drawer-button.cm';
 export { ZDrawerComponentModel } from './drawer/drawer.cm';
 // Error
-export { useErrorHandler, ZErrorHandlerContext } from './error/error-handler.context';
+export { useErrorHandler, ZErrorHandlerContext } from './error/error-handler';
 export { ZErrorMessageHandlerAlert } from './error/error-message-handler-alert';
 export { ZErrorMessageHandlerLogger } from './error/error-message-handler-logger';
 // File

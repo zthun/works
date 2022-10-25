@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { ZCircusSetupHook } from '@zthun/works.cirque-du-react';
 import { ZErrorHandler } from '@zthun/works.error';
-import { useErrorHandler } from './error-handler.context';
+import { useErrorHandler } from './error-handler';
 
 describe('useErrorHandler', () => {
   async function createTestTarget() {
