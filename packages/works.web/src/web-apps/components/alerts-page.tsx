@@ -2,7 +2,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 import InfoIcon from '@mui/icons-material/Info';
 import WarningIcon from '@mui/icons-material/Warning';
-import { ZStateSize } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.core';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
   useAlertService,
@@ -82,7 +82,7 @@ export function ZAlertsPage() {
       </p>
 
       <h3>Demo</h3>
-      <ZGridLayout columns='auto auto' gap={ZStateSize.Medium}>
+      <ZGridLayout columns='auto auto' gap={ZSizeFixed.Medium}>
         <ZButton
           avatar={<CheckCircleIcon fontSize='small' />}
           color={ZSeverityColor.Success}
@@ -114,7 +114,7 @@ export function ZAlertsPage() {
       </ZGridLayout>
 
       <h3>Options</h3>
-      <ZGridLayout gap={ZStateSize.Small}>
+      <ZGridLayout gap={ZSizeFixed.Small}>
         <ZBooleanSwitch value={immortal} onValueChange={setImmortal} label='Immortal' />
         <ZBooleanSwitch value={header} onValueChange={setHeader} label='Header' />
       </ZGridLayout>

@@ -1,7 +1,7 @@
 import AppsIcon from '@mui/icons-material/Apps';
 import ErrorIcon from '@mui/icons-material/Error';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
-import { cssClass, ZStateSize } from '@zthun/works.core';
+import { cssClass, ZSizeFixed } from '@zthun/works.core';
 
 import { startCase } from 'lodash';
 import React from 'react';
@@ -47,7 +47,7 @@ const useWebAppHomeButtonStyles = makeStyles()((theme) => ({
     width: '5rem',
     marginRight: theme.gap(),
     borderRadius: '50%',
-    border: `${theme.thickness(ZStateSize.ExtraSmall)} solid ${theme.palette.grey[200]}`,
+    border: `${theme.thickness(ZSizeFixed.ExtraSmall)} solid ${theme.palette.grey[200]}`,
     background: theme.palette.common.white,
 
     svg: {

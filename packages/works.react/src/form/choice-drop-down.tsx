@@ -1,6 +1,6 @@
 import ClearIcon from '@mui/icons-material/Clear';
 import { FormControl, IconButton, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { cssClass, ZStateSize } from '@zthun/works.core';
+import { cssClass, ZSizeFixed } from '@zthun/works.core';
 import { castArray, isArray } from 'lodash';
 import React, { ReactNode, useMemo } from 'react';
 import { v4 } from 'uuid';
@@ -11,12 +11,12 @@ const useChoiceDropDownStyles = makeStyles()((theme) => {
   return {
     root: {
       '.MuiSelect-select': {
-        padding: theme.gap(ZStateSize.Small)
+        padding: theme.gap(ZSizeFixed.Small)
       }
     },
     clear: {
       fontSize: '1.2rem',
-      padding: theme.gap(ZStateSize.Small),
+      padding: theme.gap(ZSizeFixed.Small),
       marginRight: `${theme.gap()} !important`
     },
     chip: {
@@ -30,8 +30,8 @@ const useChoiceDropDownStyles = makeStyles()((theme) => {
         borderRadius: '1rem',
         paddingLeft: theme.gap(),
         paddingRight: theme.gap(),
-        paddingTop: theme.gap(ZStateSize.Small),
-        paddingBottom: theme.gap(ZStateSize.Small),
+        paddingTop: theme.gap(ZSizeFixed.Small),
+        paddingBottom: theme.gap(ZSizeFixed.Small),
         margin: 3
       }
     }

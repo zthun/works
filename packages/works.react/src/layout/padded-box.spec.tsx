@@ -2,7 +2,7 @@
 
 import { IZCircusDriver } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
-import { ZStateSize } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.core';
 import React from 'react';
 import { ZPaddedBox } from './padded-box';
 
@@ -10,7 +10,7 @@ describe('ZPaddedBox', () => {
   let _driver: IZCircusDriver;
 
   async function createTestTarget() {
-    const element = <ZPaddedBox padding={ZStateSize.Large} />;
+    const element = <ZPaddedBox padding={ZSizeFixed.Large} />;
     _driver = await new ZCircusSetupRenderer(element).setup();
     return _driver;
   }

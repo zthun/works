@@ -1,4 +1,4 @@
-import { cssClass, firstDefined, ZStateSize } from '@zthun/works.core';
+import { cssClass, firstDefined, ZSizeFixed, ZSizeVaried, ZSizeVoid } from '@zthun/works.core';
 import { Property } from 'csstype';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
@@ -9,7 +9,7 @@ import { ZColorless, ZColorTint, ZShadeColor, ZStateColor } from '../theme/state
 
 export interface IZBorderLayout extends IZComponentWidth, IZComponentHierarchy, IZComponentStyle {
   border?: {
-    size?: ZStateSize;
+    size?: ZSizeFixed | ZSizeVoid;
     style?: Property.BorderStyle;
     color?: ZStateColor;
     tint?: ZColorTint;
@@ -21,13 +21,13 @@ export interface IZBorderLayout extends IZComponentWidth, IZComponentHierarchy, 
 }
 
 const normalizeBorderFields = (border?: {
-  size?: ZStateSize;
+  size?: ZSizeFixed | ZSizeVoid;
   style?: Property.BorderStyle;
   color?: ZStateColor;
   tint?: ZColorTint;
-}): [ZStateSize, ZStateColor, ZColorTint] => {
+}): [ZSizeFixed | ZSizeVoid, ZStateColor, ZColorTint] => {
   return [
-    firstDefined(ZStateSize.ExtraSmall, border?.size),
+    firstDefined(ZSizeFixed.ExtraSmall, border?.size),
     firstDefined(ZShadeColor.Grey, border?.color),
     firstDefined(ZColorTint.T400, border?.tint)
   ];
@@ -48,7 +48,7 @@ const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
   const borderSize = theme.thickness(_borderSize);
   const borderColor = theme.colorify(_borderColor, _borderTint);
   const borderStyle = firstDefined('solid', border?.style);
-  const width = theme.sizing.card[firstDefined(ZStateSize.Max, props.width)];
+  const width = theme.sizing.card[firstDefined(ZSizeVaried.Full, props.width)];
   const backgroundColor = theme.colorify(_backgroundColor, _backgroundTint);
 
   return {

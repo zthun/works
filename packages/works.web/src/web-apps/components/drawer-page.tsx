@@ -1,6 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import { ZStateSize } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.core';
 import {
   useSafeState,
   ZButton,
@@ -57,7 +57,7 @@ export function ZDrawerPage() {
         DrawerProps={{ anchor: first(anchor) }}
         closeOnChange={[timestamp]}
       >
-        <ZPaddedBox padding={ZStateSize.Medium}>
+        <ZPaddedBox padding={ZSizeFixed.Medium}>
           <ZH3>Drawer</ZH3>
           <ZParagraph>You can put whatever you want in a drawer.</ZParagraph>
           <ZButton
@@ -69,7 +69,7 @@ export function ZDrawerPage() {
         </ZPaddedBox>
       </ZDrawerButton>
       <h3>Options</h3>
-      <ZGridLayout gap={ZStateSize.Medium}>
+      <ZGridLayout gap={ZSizeFixed.Medium}>
         <ZChoiceDropDown
           value={anchor}
           onValueChange={setAnchor}

@@ -1,13 +1,11 @@
-import { cssClass, ZStateSize } from '@zthun/works.core';
+import { cssClass, ZSizeFixed, ZSizeVoid } from '@zthun/works.core';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
 
-type ZStatePaddingSize = Exclude<ZStateSize, ZStateSize.Auto | ZStateSize.Max | ZStateSize.None>;
-
 export interface IZPaddedBox extends IZComponentHierarchy, IZComponentStyle {
-  padding: ZStatePaddingSize;
+  padding: ZSizeFixed | ZSizeVoid;
 }
 
 const useBoxStyles = makeStyles<IZPaddedBox>()((theme, props) => {

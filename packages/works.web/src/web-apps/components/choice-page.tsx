@@ -1,6 +1,6 @@
 import BalanceIcon from '@mui/icons-material/Balance';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
-import { ZStateSize } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.core';
 
 import {
   useSafeState,
@@ -130,7 +130,7 @@ export function ZChoicePage() {
       />
 
       <h2>Options</h2>
-      <ZGridLayout gap={ZStateSize.Small}>
+      <ZGridLayout gap={ZSizeFixed.Small}>
         <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
         <ZBooleanSwitch value={multiple} onValueChange={setMultiple} label='Multiple' />
         <ZBooleanSwitch value={indelible} onValueChange={setIndelible} label='Indelible' />

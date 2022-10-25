@@ -1,7 +1,7 @@
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
-import { ZStateSize } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.core';
 import {
   useSafeState,
   ZBooleanCheckbox,
@@ -61,7 +61,7 @@ export function ZBooleanPage() {
       <div>{JSON.stringify(value)}</div>
 
       <h3>Options</h3>
-      <ZGridLayout gap={ZStateSize.Medium}>
+      <ZGridLayout gap={ZSizeFixed.Medium}>
         <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
       </ZGridLayout>
 

@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
-import { ZStateSize } from '@zthun/works.core';
+import { ZSizeFixed, ZSizeVoid } from '@zthun/works.core';
 import { Property } from 'csstype';
 import { values } from 'lodash';
 import React from 'react';
@@ -15,7 +15,7 @@ describe('ZBorderLayout', () => {
   let border:
     | undefined
     | {
-        size?: ZStateSize;
+        size?: ZSizeFixed | ZSizeVoid;
         style?: Property.BorderStyle;
         color?: ZStateColor;
         tint?: ZColorTint;
@@ -78,7 +78,7 @@ describe('ZBorderLayout', () => {
     // Act.
     const actual = await target.borderSize();
     // Assert.
-    expect(actual).toEqual(ZStateSize.ExtraSmall);
+    expect(actual).toEqual(ZSizeFixed.ExtraSmall);
   });
 
   async function assertRendersBackground(color: ZStateColor, tint: ZColorTint) {
@@ -145,17 +145,19 @@ describe('ZBorderLayout', () => {
     });
   });
 
-  values(ZStateSize).forEach((size) => {
-    it(`should render a border of size ${size}`, async () => {
-      // Arrange.
-      border = { size };
-      const target = await createTestTarget();
-      // Act.
-      const actual = await target.borderSize();
-      // Assert.
-      expect(actual).toEqual(size);
+  values<ZSizeFixed | ZSizeVoid>(ZSizeFixed)
+    .concat(values(ZSizeVoid))
+    .forEach((size) => {
+      it(`should render a border of size ${size}`, async () => {
+        // Arrange.
+        border = { size };
+        const target = await createTestTarget();
+        // Act.
+        const actual = await target.borderSize();
+        // Assert.
+        expect(actual).toEqual(size);
+      });
     });
-  });
 
   ['solid', 'dashed', 'dotted'].forEach((style) => {
     it(`should render a border with style ${style}`, async () => {

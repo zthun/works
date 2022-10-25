@@ -1,5 +1,5 @@
 import { MenuItem } from '@mui/material';
-import { cssClass, ZStateSize } from '@zthun/works.core';
+import { cssClass, ZSizeFixed } from '@zthun/works.core';
 import { noop } from 'lodash';
 import React from 'react';
 import { IZButton } from '../buttons/button';
@@ -35,7 +35,7 @@ export function ZMenuItem(props: IZMenuItem) {
 
   return (
     <MenuItem {...props} className={menuItemClass} onClick={handleClick}>
-      <ZGridLayout alignItems='center' columns='auto 1fr auto' gap={ZStateSize.Small}>
+      <ZGridLayout alignItems='center' columns='auto 1fr auto' gap={ZSizeFixed.Small}>
         {avatar}
         <div className='ZMenuItem-content'>{label}</div>
         <ZCircularProgress size='sm' show={!!loading} />

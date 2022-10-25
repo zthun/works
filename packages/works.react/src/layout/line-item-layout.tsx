@@ -1,4 +1,4 @@
-import { cssClass, ZStateSize } from '@zthun/works.core';
+import { cssClass, ZSizeFixed } from '@zthun/works.core';
 import React, { ReactNode } from 'react';
 import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
@@ -19,7 +19,7 @@ const useLineItemLayoutStyles = makeStyles()((theme) => {
     },
     prefix: {
       flexGrow: 0,
-      paddingRight: theme.gap(ZStateSize.Small)
+      paddingRight: theme.gap(ZSizeFixed.Small)
     },
 
     body: {
@@ -29,7 +29,7 @@ const useLineItemLayoutStyles = makeStyles()((theme) => {
 
     suffix: {
       flexGrow: 0,
-      paddingLeft: theme.gap(ZStateSize.Small)
+      paddingLeft: theme.gap(ZSizeFixed.Small)
     }
   };
 });

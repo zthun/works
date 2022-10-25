@@ -1,4 +1,4 @@
-import { ZStateSize } from '@zthun/works.core';
+import { ZSize } from '@zthun/works.core';
 
 /**
  * Represents a component that contains a height.
@@ -7,5 +7,5 @@ export interface IZComponentHeight {
   /**
    * The height of the component.
    */
-  height?: ZStateSize;
+  height?: ZSize;
 }

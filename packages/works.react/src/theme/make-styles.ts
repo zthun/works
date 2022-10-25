@@ -19,7 +19,15 @@ import {
   yellow
 } from '@mui/material/colors';
 import { createSpacing } from '@mui/system';
-import { firstDefined, ZStateSize } from '@zthun/works.core';
+import {
+  createSizeChartFixedCss,
+  createSizeChartFixedFibonacci,
+  createSizeChartFixedLinear,
+  createSizeChartVoidCss,
+  firstDefined,
+  ZSizeFixed,
+  ZSizeVoid
+} from '@zthun/works.core';
 import { values } from 'lodash';
 import { createMakeStyles } from 'tss-react';
 import { ZColorTint, ZHueColor, ZSeverityColor, ZShadeColor, ZStateColor } from './state-color';
@@ -73,10 +81,19 @@ export interface IZSizeOptions {
   none?: number | string;
 }
 
+const GapChart = {
+  ...createSizeChartFixedFibonacci(0.5, 1),
+  ...createSizeChartVoidZero()
+};
+
+const ThicknessChart = {
+  ...createSizeChartFixedCss(createSizeChartFixedLinear(0.0625, 0), 'rem'),
+  ...createSizeChartVoidCss()
+};
+
 /**
  * Options for a color wheel.
  */
-
 const HueMap: Record<ZHueColor, IZColor> = {
   [ZHueColor.Red]: red,
   [ZHueColor.Pink]: pink,
@@ -139,12 +156,12 @@ export interface IZTheme extends Theme {
   colorify(color: ZStateColor, tint?: ZColorTint): string;
 
   /**
-   * Converts a ZStateSize enum to a spacing value.
+   * Converts a size enum to a spacing value.
    *
    * This is the same as calling spacing() with a direct
    * conversion table of size to spacing multiplier.  This mostly a
    * allows you to use spacing that is a little more reader friendly such as
-   * gap(ZStateSize.Medium) instead of spacing(2).
+   * gap(ZSizeFixed.Medium) instead of spacing(2).
    *
    * This is mostly appropriate for margin and padding.
    *
@@ -154,7 +171,7 @@ export interface IZTheme extends Theme {
    * @returns
    *        A CSS compatible size option.
    */
-  gap(size?: ZStateSize): string;
+  gap(size?: ZSizeFixed | ZSizeVoid): string;
 
   /**
    * Similar to gap, but uses a smaller multiplier and a smaller
@@ -168,7 +185,7 @@ export interface IZTheme extends Theme {
    * @returns
    *        A CSS compatible size option.
    */
-  thickness(size: ZStateSize): string;
+  thickness(size: ZSizeFixed | ZSizeVoid): string;
 }
 
 /**
@@ -271,34 +288,12 @@ export function useZthunworksTheme(): IZTheme {
       return String(color);
     },
 
-    gap(size = ZStateSize.Auto): string {
-      const chart: Record<ZStateSize, number> = {
-        [ZStateSize.None]: 0,
-        [ZStateSize.Auto]: 2,
-        [ZStateSize.ExtraSmall]: 0.5,
-        [ZStateSize.Small]: 1,
-        [ZStateSize.Medium]: 2,
-        [ZStateSize.Large]: 3,
-        [ZStateSize.ExtraLarge]: 4,
-        [ZStateSize.Max]: 5
-      };
-
-      return mui.spacing(chart[size]);
+    gap(size: ZSizeFixed | ZSizeVoid = ZSizeFixed.Medium): string {
+      return mui.spacing(GapChart[size]);
     },
 
-    thickness(size: ZStateSize): string {
-      const chart: Record<ZStateSize, string> = {
-        [ZStateSize.None]: '0',
-        [ZStateSize.Auto]: '0',
-        [ZStateSize.ExtraSmall]: '0.0625rem',
-        [ZStateSize.Small]: '0.08rem',
-        [ZStateSize.Medium]: '0.1rem',
-        [ZStateSize.Large]: '0.12rem',
-        [ZStateSize.ExtraLarge]: '0.15rem',
-        [ZStateSize.Max]: '0.2rem'
-      };
-
-      return chart[size];
+    thickness(size: ZSizeFixed | ZSizeVoid = ZSizeFixed.ExtraSmall): string {
+      return ThicknessChart[size];
     }
   };
 
@@ -393,8 +388,8 @@ export function useZthunworksTheme(): IZTheme {
   mui.components.MuiCheckbox = {
     styleOverrides: {
       root: {
-        paddingTop: base.gap(ZStateSize.Small),
-        paddingBottom: base.gap(ZStateSize.Small)
+        paddingTop: base.gap(ZSizeFixed.Small),
+        paddingBottom: base.gap(ZSizeFixed.Small)
       }
     }
   };

@@ -1,4 +1,4 @@
-import { cssClass, ZStateSize } from '@zthun/works.core';
+import { cssClass, ZSizeFixed, ZSizeVoid } from '@zthun/works.core';
 import { Property } from 'csstype';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
@@ -8,13 +8,13 @@ import { makeStyles } from '../theme/make-styles';
 export interface IZGridLayout extends IZComponentStyle, IZComponentHierarchy {
   alignItems?: Property.AlignItems;
   justifyContent?: Property.JustifyContent;
-  gap?: ZStateSize;
+  gap?: ZSizeFixed | ZSizeVoid;
   columns?: Property.GridTemplateColumns;
   rows?: Property.GridTemplateRows;
 }
 
 const useGridStyles = makeStyles<IZGridLayout>()((theme, props) => {
-  const { alignItems, justifyContent, gap = ZStateSize.None, columns, rows } = props;
+  const { alignItems, justifyContent, gap = ZSizeVoid.None, columns, rows } = props;
 
   return {
     grid: {

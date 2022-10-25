@@ -1,4 +1,4 @@
-import { cssClass, firstDefined, ZStateSize } from '@zthun/works.core';
+import { cssClass, firstDefined, ZSizeVaried } from '@zthun/works.core';
 import { ZDataUrlBuilder } from '@zthun/works.url';
 import React from 'react';
 import { IZComponentHeight } from '../component/component-height';
@@ -13,8 +13,8 @@ export interface IZImageSourceProps extends IZComponentSource, IZComponentStyle,
 
 const useImageSourceStyles = makeStyles<IZImageSourceProps>()((theme, props) => {
   const { align = 'center' } = props;
-  const height = theme.sizing.image[firstDefined(ZStateSize.Auto, props.height)];
-  const width = theme.sizing.image[firstDefined(ZStateSize.Auto, props.width)];
+  const height = theme.sizing.image[firstDefined(ZSizeVaried.Fit, props.height)];
+  const width = theme.sizing.image[firstDefined(ZSizeVaried.Fit, props.width)];
 
   return {
     root: {

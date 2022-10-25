@@ -1,17 +1,20 @@
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import PublicIcon from '@mui/icons-material/Public';
 import Terminal from '@mui/icons-material/Terminal';
+import { ZSizeFixed } from '@zthun/works.core';
 import {
   asStateData,
   makeStyles,
   useNavigate,
   useWebApp,
+  ZButton,
+  ZCard,
+  ZImageSource,
   ZPaperCard,
   ZParagraph,
-  ZStateSize,
+  ZSeverityColor,
   ZSubtitle
 } from '@zthun/works.react';
-
 import React from 'react';
 
 const useHomePageStyles = makeStyles()((theme) => ({
@@ -23,7 +26,7 @@ const useHomePageStyles = makeStyles()((theme) => ({
   quote: {
     textAlign: 'center',
     backgroundColor: theme.palette.grey[200],
-    border: `${theme.thickness(ZStateSize.ExtraSmall)} solid ${theme.palette.grey[400]}`,
+    border: `${theme.thickness(ZSizeFixed.ExtraSmall)} solid ${theme.palette.grey[400]}`,
     padding: theme.gap(),
     marginTop: theme.gap(),
     marginBottom: theme.gap()
@@ -43,16 +46,15 @@ export function ZHomePage() {
 
   return (
     <div className='ZHomePage-root'>
-      <ZPaperCard
+      <ZCard
         className={classes.section}
-        size='xl'
+        width={ZSizeFixed.ExtraLarge}
         avatar={<Terminal fontSize='inherit' />}
-        imageUrl={learn?.icon}
-        imageHeight='xl'
-        imageWidth='xl'
-        headerText='The Works System'
-        subHeaderText='Make Development Easier'
+        heading='The Works System'
+        subHeading='Make Development Easier'
       >
+        <ZImageSource src={learn?.icon} height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
+
         <ZSubtitle className={classes.quote}>Users perform at their best when they have absolute focus.</ZSubtitle>
 
         <ZParagraph>
@@ -69,20 +71,24 @@ export function ZHomePage() {
           single task at a time. Thus, the works system builds tiny subsystems and components to help create a suite of
           applications to do everyday things.
         </ZParagraph>
-      </ZPaperCard>
+      </ZCard>
 
-      <ZPaperCard
+      <ZCard
         className={classes.section}
-        size='xl'
+        width={ZSizeFixed.ExtraLarge}
         avatar={<PublicIcon fontSize='inherit' />}
-        headerText='Web Apps'
-        imageUrl='images/svg/react.svg'
-        imageHeight='xl'
-        subHeaderText='Build something for users'
-        actionText='Get Started'
-        actionColor='primary'
-        onAction={() => navigate('/web-apps/getting-started')}
+        heading='Web Apps'
+        subHeading='Build something for users'
+        footer={
+          <ZButton
+            label='Web Apps'
+            onClick={() => navigate('/web-apps/getting-started')}
+            color={ZSeverityColor.Primary}
+          />
+        }
       >
+        <ZImageSource src='images/svg/react.svg' height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
+
         <ZSubtitle className={classes.quote}>The smaller the better.</ZSubtitle>
 
         <ZParagraph>
@@ -96,7 +102,7 @@ export function ZHomePage() {
           versions. The larger the application, the more likely that regressions will be found, so by having apps that
           are small and focused, you can minimize human error while providing features in a fast feedback loop.
         </ZParagraph>
-      </ZPaperCard>
+      </ZCard>
 
       <ZPaperCard
         className={classes.section}

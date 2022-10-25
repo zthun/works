@@ -2,7 +2,7 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
-import { ZStateSize } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.core';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
   useAlertService,
@@ -51,7 +51,7 @@ export function ZListPage() {
         event to a truthy or falsy value respectively.
       </ZParagraph>
 
-      <ZBorderLayout background={{ color: ZShadeColor.Grey, tint: ZColorTint.Light }} width={ZStateSize.Medium}>
+      <ZBorderLayout background={{ color: ZShadeColor.Grey, tint: ZColorTint.Light }} width={ZSizeFixed.Medium}>
         <ZList>
           <ZListLineItem
             avatar={<CheckCircleIcon color='success' fontSize='large' />}
