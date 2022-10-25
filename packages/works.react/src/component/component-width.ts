@@ -3,9 +3,9 @@ import { ZSize } from '@zthun/works.core';
 /**
  * Represents a component that contains an optional width.
  */
-export interface IZComponentWidth {
+export interface IZComponentWidth<TSize = ZSize> {
   /**
    * Width of the component.
    */
-  width?: ZSize;
+  width?: TSize;
 }

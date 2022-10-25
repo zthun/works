@@ -3,9 +3,9 @@ import { ZSize } from '@zthun/works.core';
 /**
  * Represents a component that contains a height.
  */
-export interface IZComponentHeight {
+export interface IZComponentHeight<TSize = ZSize> {
   /**
    * The height of the component.
    */
-  height?: ZSize;
+  height?: TSize;
 }
