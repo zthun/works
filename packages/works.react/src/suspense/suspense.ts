@@ -1,7 +1,7 @@
 import { ZSizeFixed } from '@zthun/works.core';
-
-import { IZComponentHeight } from '../component/component-height';
+import { IZComponentColor } from '../component/component-color';
 import { IZComponentLoading } from '../component/component-loading';
+import { IZComponentName } from '../component/component-name';
 import { IZComponentStyle } from '../component/component-style.';
 import { IZComponentWidth } from '../component/component-width';
 
@@ -11,5 +11,6 @@ import { IZComponentWidth } from '../component/component-width';
 export interface IZSuspense
   extends IZComponentStyle,
     IZComponentWidth<ZSizeFixed>,
-    IZComponentHeight<ZSizeFixed>,
-    IZComponentLoading {}
+    IZComponentLoading,
+    IZComponentName,
+    IZComponentColor {}

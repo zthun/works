@@ -25,13 +25,11 @@ import React from 'react';
  */
 export function ZSuspensePage() {
   const [width, setWidth] = useSafeState<ZSizeFixed>(ZSizeFixed.ExtraSmall);
-  const [height, setHeight] = useSafeState<ZSizeFixed>(ZSizeFixed.ExtraSmall);
   const [color, setColor] = useSafeState<ZStateColor>(ZColorless.Inherit);
   const [tint, setTint] = useSafeState<ZColorTint>(ZColorTint.Main);
   const [loading, setLoading] = useSafeState<boolean>(true);
   const sizes = values(ZSizeFixed);
   const _setWidth = setFirstOrDefault.bind(null, setWidth, ZSizeFixed.ExtraSmall);
-  const _setHeight = setFirstOrDefault.bind(null, setHeight, ZSizeFixed.ExtraSmall);
   const colors = values<ZStateColor>(ZSeverityColor)
     .concat(values(ZHueColor))
     .concat(values(ZShadeColor))
@@ -56,7 +54,7 @@ export function ZSuspensePage() {
         psychologically, they alleviate any user suspense when asynchronous operations are happening in the background.
       </p>
 
-      <ZSuspenseRotate loading={loading} width={width} height={height} />
+      <ZSuspenseRotate loading={loading} color={color} tint={tint} width={width} />
 
       <h3>Options</h3>
       <ZGridLayout gap={ZSizeFixed.Medium}>
@@ -66,23 +64,17 @@ export function ZSuspensePage() {
           value={[width]}
           onValueChange={_setWidth}
           options={sizes}
+          renderOption={startCase}
           identifier={identity}
           label='Width'
-        />
-        <ZChoiceDropDown
-          name='height'
-          value={[height]}
-          onValueChange={_setHeight}
-          options={sizes}
-          identifier={identity}
-          label='Height'
         />
         <ZChoiceDropDown
           name='color'
           value={[color]}
           onValueChange={_setColor}
           options={colors}
-          identifier={startCase}
+          renderOption={startCase}
+          identifier={identity}
           label='Color'
         />
         <ZChoiceDropDown
@@ -90,7 +82,8 @@ export function ZSuspensePage() {
           value={[tint]}
           onValueChange={_setTint}
           options={tints}
-          identifier={startCase}
+          renderOption={startCase}
+          identifier={identity}
           label='Tint'
         />
       </ZGridLayout>
