@@ -1,5 +1,5 @@
 import PersonIcon from '@mui/icons-material/Person';
-import { cssClass, ZProfileAvatarSize, ZSizeFixed } from '@zthun/works.core';
+import { cssClass, ZProfileAvatarSize } from '@zthun/works.core';
 import { ZUrlBuilder } from '@zthun/works.url';
 import md5 from 'md5';
 import React from 'react';
@@ -32,7 +32,7 @@ const useIdentityButtonStyles = makeStyles()((theme) => ({
     height: '3rem',
     width: '3rem',
     borderRadius: '50%',
-    border: `${theme.thickness(ZSizeFixed.ExtraSmall)} solid ${theme.palette.grey[400]}`,
+    border: `${theme.thickness()} solid ${theme.palette.grey[400]}`,
     background: theme.palette.common.white
   }
 }));

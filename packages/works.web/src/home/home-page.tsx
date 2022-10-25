@@ -25,7 +25,7 @@ const useHomePageStyles = makeStyles()((theme) => ({
   quote: {
     textAlign: 'center',
     backgroundColor: theme.palette.grey[200],
-    border: `${theme.thickness(ZSizeFixed.ExtraSmall)} solid ${theme.palette.grey[400]}`,
+    border: `${theme.thickness()} solid ${theme.palette.grey[400]}`,
     padding: theme.gap(),
     marginTop: theme.gap(),
     marginBottom: theme.gap()

@@ -186,7 +186,7 @@ export interface IZTheme extends Theme {
    * @returns
    *        A CSS compatible size option.
    */
-  thickness(size: ZSizeFixed | ZSizeVoid): string;
+  thickness(size?: ZSizeFixed | ZSizeVoid): string;
 }
 
 /**
