@@ -4,7 +4,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import ForwardIcon from '@mui/icons-material/Forward';
 import InfoIcon from '@mui/icons-material/Info';
 import WarningIcon from '@mui/icons-material/Warning';
-import { cssClass } from '@zthun/works.core';
+import { cssClass, ZSizeFixed } from '@zthun/works.core';
 import {
   getHttpCodeCategory,
   getHttpCodeDescription,
@@ -16,7 +16,7 @@ import {
 } from '@zthun/works.http';
 import { get } from 'lodash';
 import React from 'react';
-import { ZPaperCard } from '../card/paper-card';
+import { ZCard } from '../card/card';
 import { IZComponentName } from '../component/component-name';
 import { ZGridLayout } from '../layout/grid-layout';
 import { useParams } from '../router/router-dom';
@@ -122,15 +122,15 @@ export function ZStatusCodePage(props: IZComponentName) {
 
   return (
     <ZGridLayout className='ZStatusCodePage-root' justifyContent='center'>
-      <ZPaperCard
+      <ZCard
         avatar={renderAvatar()}
-        headerText={getHttpCodeCategory(code)}
-        subHeaderText={getHttpCodeName(code)}
-        size='lg'
+        heading={getHttpCodeCategory(code)}
+        subHeading={getHttpCodeName(code)}
+        width={ZSizeFixed.Large}
       >
         <ZParagraph className='ZStatusCodePage-description'>{getHttpCodeDescription(code)}</ZParagraph>
         <span className={cssClass('ZStatusCodePage-code', classes.code)}>{code}</span>
-      </ZPaperCard>
+      </ZCard>
     </ZGridLayout>
   );
 }

@@ -126,7 +126,6 @@ export interface IZTheme extends Theme {
    * Sizing options.
    */
   sizing: {
-    card: IZSizeOptions;
     image: IZSizeOptions;
   };
 
@@ -201,14 +200,6 @@ export function useZthunworksTheme(): IZTheme {
 
   const base = {
     sizing: {
-      card: {
-        xs: '18rem',
-        sm: '18rem',
-        md: '30rem',
-        lg: '50rem',
-        xl: '64rem',
-        max: '100%'
-      },
       image: {
         xs: '3em',
         sm: '5em',

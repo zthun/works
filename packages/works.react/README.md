@@ -14,43 +14,6 @@ npm install @zthun/works.react
 yarn add @zthun/works.react
 ```
 
-## Paper Card
-
-![Paper Card](images/png/works.react.card.png)
-
-The vast majority of the components in @zthun/works.react are built from a **ZPaperCard**. A paper card is a styled
-[Material UI Card](https://material-ui.com/components/cards/) component that sits on top of a
-[Material UI Paper](https://material-ui.com/components/paper/) component for a 3d effect.
-
-The paper card is generally built using the following methodologies.
-
-- The paper card should have a clear title with an avatar icon.
-- There should be a subtitle describing the card.
-- There should be, at most, one primary action that the user can perform on the card.
-- Dangerous actions, such as deletes, should require that the user confirm that they know the consequences of the
-  action.
-
-```ts
-import React from 'react';
-import AddIcon from '@mui/icons-material/Add';
-import { ZPaperCard } from '@zthun/works.react';
-import { IZMyComponentProps } from './my-component.props.ts';
-
-export function MyComponent(props: IZMyComponentProps) {
-  return (
-    <ZPaperCard
-      className='MyComponent-root'
-      headerText='My Component'
-      subHeaderText='My Component Description'
-      avatar={<AddIcon />}
-      size='md'
-    >
-      Content for the PaperCard is here.
-    </ZPaperCard>
-  );
-}
-```
-
 ## Alerts
 
 ![Alert](images/png/works.react.alert.png)
@@ -78,17 +41,16 @@ export function MyComponent() {
   }
 
   return (
-    <ZPaperCard
+    <ZCard
       className='MyComponent-root'
-      headerText='Alert Sample'
-      subHeaderText='Show a success alert'
+      heading='Alert Sample'
+      subHeading='Show a success alert'
       avatar={<AnnouncementIcon />}
-      actionText='Show Alert'
-      onAction={handleAlert}
+      footer={<ZButton label='Show Alert' onClick={handleAlert} />}
     >
       Alerts can have varying severity, messages, and titles. Use them to notify your users that things are happening in
       your application as a result of their actions.
-    </ZPaperCard>
+    </ZCard>
   );
 }
 ```

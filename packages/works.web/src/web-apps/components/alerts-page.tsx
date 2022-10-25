@@ -9,8 +9,8 @@ import {
   useSafeState,
   ZBooleanSwitch,
   ZButton,
+  ZCard,
   ZGridLayout,
-  ZPaperCard,
   ZSeverityColor
 } from '@zthun/works.react';
 import { startCase } from 'lodash';
@@ -50,10 +50,10 @@ export function ZAlertsPage() {
   }
 
   return (
-    <ZPaperCard
+    <ZCard
       className='ZAlertsPage-root'
-      headerText='Alerts'
-      subHeaderText='User feedback'
+      heading='Alerts'
+      subHeading='User feedback'
       avatar={<WarningIcon color='warning' fontSize='inherit' />}
     >
       <h3>Description</h3>
@@ -118,6 +118,6 @@ export function ZAlertsPage() {
         <ZBooleanSwitch value={immortal} onValueChange={setImmortal} label='Immortal' />
         <ZBooleanSwitch value={header} onValueChange={setHeader} label='Header' />
       </ZGridLayout>
-    </ZPaperCard>
+    </ZCard>
   );
 }

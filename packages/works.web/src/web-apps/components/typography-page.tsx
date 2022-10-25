@@ -1,18 +1,6 @@
 // cspell:disable
 import AbcIcon from '@mui/icons-material/Abc';
-import {
-  ZCaption,
-  ZH1,
-  ZH2,
-  ZH3,
-  ZH4,
-  ZH5,
-  ZH6,
-  ZOverline,
-  ZPaperCard,
-  ZParagraph,
-  ZSubtitle
-} from '@zthun/works.react';
+import { ZCaption, ZCard, ZH1, ZH2, ZH3, ZH4, ZH5, ZH6, ZOverline, ZParagraph, ZSubtitle } from '@zthun/works.react';
 import React from 'react';
 
 /**
@@ -22,10 +10,10 @@ import React from 'react';
  */
 export function ZTypographyPage() {
   return (
-    <ZPaperCard
+    <ZCard
       className='ZTypographyPage-root'
-      headerText={'Typography'}
-      subHeaderText='Standard page structures'
+      heading={'Typography'}
+      subHeading='Standard page structures'
       avatar={<AbcIcon color='success' fontSize='inherit' />}
     >
       <ZH3>Description</ZH3>
@@ -66,6 +54,6 @@ export function ZTypographyPage() {
 
       <hr />
       <ZOverline>Overline: Pretium quam vulputate dignissim suspendisse.</ZOverline>
-    </ZPaperCard>
+    </ZCard>
   );
 }

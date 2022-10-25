@@ -7,8 +7,8 @@ import {
   ZBooleanCheckbox,
   ZBooleanSwitch,
   ZButton,
+  ZCard,
   ZGridLayout,
-  ZPaperCard,
   ZSeverityColor,
   ZToolbar
 } from '@zthun/works.react';
@@ -24,10 +24,10 @@ export function ZBooleanPage() {
   const [value, setValue] = useSafeState<boolean | null>(false);
 
   return (
-    <ZPaperCard
+    <ZCard
       className='ZBooleanPage-root'
-      headerText={'Boolean'}
-      subHeaderText='Basic togglers'
+      heading={'Boolean'}
+      subHeading='Basic togglers'
       avatar={<CheckBoxIcon color='success' fontSize='inherit' />}
     >
       <h3>Description</h3>
@@ -89,6 +89,6 @@ export function ZBooleanPage() {
           label='Indeterminate'
         />
       </ZToolbar>
-    </ZPaperCard>
+    </ZCard>
   );
 }

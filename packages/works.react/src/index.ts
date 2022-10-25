@@ -24,19 +24,14 @@ export { IZButton, ZButton, ZButtonColor } from './buttons/button';
 export { ZButtonComponentModel } from './buttons/button.cm';
 // Cards
 export { IZCard, ZCard } from './card/card';
-export { IZPaperCardProps, ZPaperCard } from './card/paper-card';
 // Component
-export { IZComponentActionable } from './component/component-actionable.interface';
 export { IZComponentAdornment } from './component/component-adornment';
 export { IZComponentAvatar } from './component/component-avatar';
-export { IZComponentConfirmable } from './component/component-confirmable.interface';
 export { IZComponentDisabled } from './component/component-disabled';
-export { IZComponentHeader } from './component/component-header';
 export { IZComponentHeading } from './component/component-heading';
 export { IZComponentHierarchy } from './component/component-hierarchy';
 export { IZComponentLabel } from './component/component-label';
-export { IZComponentLoading } from './component/component-loading.interface';
-export { IZComponentMedia } from './component/component-media.interface';
+export { IZComponentLoading } from './component/component-loading';
 export { IZComponentName } from './component/component-name';
 export { IZComponentSizeable } from './component/component-sizeable.interface';
 export { IZComponentSource } from './component/component-source.interface';

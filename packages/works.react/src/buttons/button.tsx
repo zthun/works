@@ -16,7 +16,7 @@ import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentHeight } from '../component/component-height';
 import { IZComponentLabel } from '../component/component-label';
-import { IZComponentLoading } from '../component/component-loading.interface';
+import { IZComponentLoading } from '../component/component-loading';
 import { IZComponentName } from '../component/component-name';
 import { IZComponentStyle } from '../component/component-style.';
 import { IZComponentWidth } from '../component/component-width';

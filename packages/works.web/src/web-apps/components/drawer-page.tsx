@@ -5,13 +5,13 @@ import {
   useSafeState,
   ZButton,
   ZButtonColor,
+  ZCard,
   ZChoiceDropDown,
   ZColorless,
   ZDrawerButton,
   ZGridLayout,
   ZH3,
   ZPaddedBox,
-  ZPaperCard,
   ZParagraph,
   ZSeverityColor,
   ZStateAnchor
@@ -34,10 +34,10 @@ export function ZDrawerPage() {
   const now = () => setTimestamp(new Date().getTime());
 
   return (
-    <ZPaperCard
+    <ZCard
       className='ZDrawerPage-root'
-      headerText='Drawer'
-      subHeaderText='Pop out content'
+      heading='Drawer'
+      subHeading='Pop out content'
       avatar={<MenuOpenIcon color='success' fontSize='inherit' />}
     >
       <h3>Description</h3>
@@ -87,6 +87,6 @@ export function ZDrawerPage() {
           renderOption={startCase}
         />
       </ZGridLayout>
-    </ZPaperCard>
+    </ZCard>
   );
 }

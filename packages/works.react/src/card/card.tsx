@@ -12,7 +12,7 @@ import React, { ReactNode } from 'react';
 import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentHeading } from '../component/component-heading';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
-import { IZComponentLoading } from '../component/component-loading.interface';
+import { IZComponentLoading } from '../component/component-loading';
 import { IZComponentName } from '../component/component-name';
 import { IZComponentStyle } from '../component/component-style.';
 import { IZComponentWidth } from '../component/component-width';

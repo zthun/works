@@ -7,11 +7,11 @@ import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
   useAlertService,
   ZBorderLayout,
+  ZCard,
   ZColorTint,
   ZH3,
   ZList,
   ZListLineItem,
-  ZPaperCard,
   ZParagraph,
   ZShadeColor
 } from '@zthun/works.react';
@@ -32,10 +32,10 @@ export function ZListPage() {
   };
 
   return (
-    <ZPaperCard
+    <ZCard
       className='ZListPage-root'
-      headerText='List'
-      subHeaderText='Showing multiple items'
+      heading='List'
+      subHeading='Showing multiple items'
       avatar={<FormatListNumberedIcon color='info' fontSize='inherit' />}
     >
       <ZH3>Description</ZH3>
@@ -80,6 +80,6 @@ export function ZListPage() {
           />
         </ZList>
       </ZBorderLayout>
-    </ZPaperCard>
+    </ZCard>
   );
 }

@@ -5,11 +5,11 @@ import { ZSizeFixed } from '@zthun/works.core';
 import {
   useSafeState,
   ZBooleanSwitch,
+  ZCard,
   ZChoiceAutocomplete,
   ZChoiceDropDown,
   ZGridLayout,
-  ZLineItemLayout,
-  ZPaperCard
+  ZLineItemLayout
 } from '@zthun/works.react';
 import React from 'react';
 
@@ -95,10 +95,10 @@ export function ZChoicePage() {
   }
 
   return (
-    <ZPaperCard
+    <ZCard
       className='ZChoicePage-root'
-      headerText='Choice'
-      subHeaderText='Select from a list of options.'
+      heading='Choice'
+      subHeading='Select from a list of options.'
       avatar={<TouchAppIcon color='warning' fontSize='inherit' />}
     >
       <h2>Drop Down</h2>
@@ -138,6 +138,6 @@ export function ZChoicePage() {
 
       <h2>Selected</h2>
       <ul>{renderSelected()}</ul>
-    </ZPaperCard>
+    </ZCard>
   );
 }

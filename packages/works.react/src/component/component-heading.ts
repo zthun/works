@@ -8,6 +8,7 @@ export interface IZComponentHeading {
    * The root heading.
    */
   heading?: ReactNode;
+
   /**
    * The sub heading that further describes the heading.
    */
