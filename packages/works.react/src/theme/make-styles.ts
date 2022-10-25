@@ -24,6 +24,7 @@ import {
   createSizeChartFixedFibonacci,
   createSizeChartFixedLinear,
   createSizeChartVoidCss,
+  createSizeChartVoidZero,
   firstDefined,
   ZSizeFixed,
   ZSizeVoid
