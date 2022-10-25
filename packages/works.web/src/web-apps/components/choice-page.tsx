@@ -5,11 +5,15 @@ import { ZSizeFixed } from '@zthun/works.core';
 import {
   useSafeState,
   ZBooleanSwitch,
+  ZCaption,
   ZCard,
   ZChoiceAutocomplete,
   ZChoiceDropDown,
   ZGridLayout,
-  ZLineItemLayout
+  ZH3,
+  ZLineItemLayout,
+  ZPaddedBox,
+  ZParagraph
 } from '@zthun/works.react';
 import React from 'react';
 
@@ -101,43 +105,61 @@ export function ZChoicePage() {
       subHeading='Select from a list of options.'
       avatar={<TouchAppIcon color='warning' fontSize='inherit' />}
     >
-      <h2>Drop Down</h2>
-      <ZChoiceDropDown
-        disabled={disabled}
-        label='Hero'
-        indelible={indelible}
-        multiple={multiple}
-        value={values}
-        identifier={getHeroIdentity}
-        display={getHeroDisplay}
-        onValueChange={setValues}
-        options={Superheroes}
-        renderOption={renderSuperhero}
-      />
+      <ZPaddedBox padding={{ bottom: ZSizeFixed.Large }}>
+        <ZH3>Description</ZH3>
 
-      <h2>Autocomplete</h2>
-      <ZChoiceAutocomplete
-        disabled={disabled}
-        label='Hero'
-        indelible={indelible}
-        multiple={multiple}
-        value={values}
-        identifier={getHeroIdentity}
-        display={getHeroDisplay}
-        onValueChange={setValues}
-        options={Superheroes}
-        renderOption={renderSuperhero}
-      />
+        <ZPaddedBox padding={{ bottom: ZSizeFixed.Large }}>
+          <ZParagraph compact>
+            Choices help the user with valid values. When the user has to pick between a list of multiple choice
+            options, then a choice component is appropriate. There are multiple variations of making choices, but all of
+            them have the same premise. Given a list of possible values to choose from, you can select one or more
+            values.
+          </ZParagraph>
+        </ZPaddedBox>
 
-      <h2>Options</h2>
-      <ZGridLayout gap={ZSizeFixed.Small}>
-        <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
-        <ZBooleanSwitch value={multiple} onValueChange={setMultiple} label='Multiple' />
-        <ZBooleanSwitch value={indelible} onValueChange={setIndelible} label='Indelible' />
-      </ZGridLayout>
+        <ZGridLayout alignItems='center' columns='1fr 1fr' gap={ZSizeFixed.Large}>
+          <ZChoiceDropDown
+            disabled={disabled}
+            label='Drop Down'
+            indelible={indelible}
+            multiple={multiple}
+            value={values}
+            identifier={getHeroIdentity}
+            display={getHeroDisplay}
+            onValueChange={setValues}
+            options={Superheroes}
+            renderOption={renderSuperhero}
+          />
 
-      <h2>Selected</h2>
-      <ul>{renderSelected()}</ul>
+          <ZChoiceAutocomplete
+            disabled={disabled}
+            label='Autocomplete'
+            indelible={indelible}
+            multiple={multiple}
+            value={values}
+            identifier={getHeroIdentity}
+            display={getHeroDisplay}
+            onValueChange={setValues}
+            options={Superheroes}
+            renderOption={renderSuperhero}
+          />
+        </ZGridLayout>
+
+        <ZPaddedBox padding={{ top: ZSizeFixed.Medium }}>
+          <ZCaption compact>Selected</ZCaption>
+          <ul>{renderSelected()}</ul>
+        </ZPaddedBox>
+      </ZPaddedBox>
+
+      <ZPaddedBox padding={{ bottom: ZSizeFixed.Large }}>
+        <ZH3>Options</ZH3>
+
+        <ZGridLayout gap={ZSizeFixed.Small}>
+          <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
+          <ZBooleanSwitch value={multiple} onValueChange={setMultiple} label='Multiple' />
+          <ZBooleanSwitch value={indelible} onValueChange={setIndelible} label='Indelible' />
+        </ZGridLayout>
+      </ZPaddedBox>
     </ZCard>
   );
 }

@@ -8,7 +8,9 @@ import {
   ZColorless,
   ZColorTint,
   ZGridLayout,
+  ZH3,
   ZHueColor,
+  ZParagraph,
   ZSeverityColor,
   ZShadeColor,
   ZStateColor,
@@ -45,18 +47,19 @@ export function ZSuspensePage() {
       subHeading='Spinners that spin'
       avatar={<LoopIcon color='warning' fontSize='inherit' />}
     >
-      <h3>Description</h3>
+      <ZH3>Description</ZH3>
 
-      <p>
+      <ZParagraph>
         If you load data from a server, or have to have the user wait for an operation to complete, then the appropriate
         display for that is some kind of animated, work, icon. These types of displays have very little configuration
         and are generally nothing more than to show users that things are still happening in the background. However,
-        psychologically, they alleviate any user suspense when asynchronous operations are happening in the background.
-      </p>
+        psychologically, they alleviate any user suspense when asynchronous operations are happening.
+      </ZParagraph>
 
       <ZSuspenseRotate loading={loading} color={color} tint={tint} width={width} />
 
-      <h3>Options</h3>
+      <ZH3>Options</ZH3>
+
       <ZGridLayout gap={ZSizeFixed.Medium}>
         <ZBooleanSwitch value={loading} onValueChange={setLoading} label='Loading' />
         <ZChoiceDropDown

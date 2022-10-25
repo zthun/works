@@ -13,8 +13,10 @@ import {
   ZColorless,
   ZGridLayout,
   ZH3,
+  ZPaddedBox,
   ZParagraph,
-  ZSeverityColor
+  ZSeverityColor,
+  ZToolbarLayout
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
 import React from 'react';
@@ -58,79 +60,81 @@ export function ZButtonPage() {
       subHeading='Standard button component'
       avatar={<SmartButtonIcon color='error' fontSize='inherit' />}
     >
-      <ZH3>Description</ZH3>
+      <ZPaddedBox padding={{ bottom: ZSizeFixed.Large }}>
+        <ZH3>Description</ZH3>
 
-      <ZParagraph>
-        Buttons are the staple of most application design and have been so for decades. It is a very clean concept to
-        click a button that corresponds to an action and users are very used to clicking these.
-      </ZParagraph>
+        <ZParagraph>
+          Buttons are the staple of most application design and have been so for decades. It is a very clean concept to
+          click a button that corresponds to an action and users are very used to clicking these.
+        </ZParagraph>
 
-      <ZParagraph>
-        Buttons can have a label, but if you want to save real estate, you can always use a simple <i>iconography </i>
-        button with a tooltip if you desire.
-      </ZParagraph>
+        <ZParagraph>
+          Buttons can have a label, but if you want to save real estate, you can always use a simple <i>iconography </i>
+          button with a tooltip if you desire.
+        </ZParagraph>
 
-      <ZH3>Button Demo</ZH3>
+        <ZToolbarLayout>
+          <ZButton
+            avatar={<CheckCircleIcon fontSize='small' />}
+            loading={loading}
+            disabled={disabled}
+            color={color}
+            borderless={borderless}
+            width={width}
+            height={height}
+            outline={outline}
+            onClick={handleClick}
+            label='Button'
+          />
 
-      <ZButton
-        avatar={<CheckCircleIcon fontSize='small' />}
-        loading={loading}
-        disabled={disabled}
-        color={color}
-        borderless={borderless}
-        width={width}
-        height={height}
-        outline={outline}
-        onClick={handleClick}
-        label='Button'
-      />
+          <ZButton
+            label={<CheckCircleIcon fontSize='small' />}
+            loading={loading}
+            disabled={disabled}
+            color={color}
+            borderless={borderless}
+            width={width}
+            height={height}
+            outline={outline}
+            onClick={handleClick}
+            tooltip='Iconography Button'
+          />
+        </ZToolbarLayout>
+      </ZPaddedBox>
 
-      <ZH3>Iconography Demo</ZH3>
-
-      <ZButton
-        label={<CheckCircleIcon fontSize='small' />}
-        loading={loading}
-        disabled={disabled}
-        color={color}
-        borderless={borderless}
-        width={width}
-        height={height}
-        outline={outline}
-        onClick={handleClick}
-        tooltip='Iconography Button'
-      />
-
-      <ZH3>Options</ZH3>
-      <ZGridLayout gap={ZSizeFixed.Medium}>
-        <ZBooleanSwitch value={loading} onValueChange={setLoading} label='Loading' />
-        <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
-        <ZBooleanSwitch value={outline} onValueChange={setOutline} label='Outline' />
-        <ZBooleanSwitch value={borderless} onValueChange={setBorderless} label='Borderless' />
-        <ZChoiceDropDown
-          value={[color]}
-          onValueChange={_setColor}
-          label='Color'
-          options={colors}
-          identifier={identity}
-          renderOption={(c) => startCase(String(c))}
-        />
-        <ZChoiceDropDown
-          value={[width]}
-          onValueChange={_setWidth}
-          label='Width'
-          options={sizes}
-          identifier={identity}
-          renderOption={(c) => startCase(String(c))}
-        />
-        <ZChoiceDropDown
-          value={[height]}
-          onValueChange={_setHeight}
-          label='Height'
-          options={sizes}
-          identifier={identity}
-          renderOption={(c) => startCase(String(c))}
-        />
-      </ZGridLayout>
+      <ZPaddedBox padding={{ bottom: ZSizeFixed.Large }}>
+        <ZH3>Options</ZH3>
+        <ZGridLayout gap={ZSizeFixed.Medium}>
+          <ZBooleanSwitch value={loading} onValueChange={setLoading} label='Loading' />
+          <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
+          <ZBooleanSwitch value={outline} onValueChange={setOutline} label='Outline' />
+          <ZBooleanSwitch value={borderless} onValueChange={setBorderless} label='Borderless' />
+          <ZChoiceDropDown
+            value={[color]}
+            onValueChange={_setColor}
+            label='Color'
+            options={colors}
+            identifier={identity}
+            renderOption={(c) => startCase(String(c))}
+          />
+          <ZChoiceDropDown
+            value={[width]}
+            onValueChange={_setWidth}
+            label='Width'
+            options={sizes}
+            identifier={identity}
+            renderOption={(c) => startCase(String(c))}
+          />
+          <ZChoiceDropDown
+            value={[height]}
+            onValueChange={_setHeight}
+            label='Height'
+            options={sizes}
+            identifier={identity}
+            renderOption={(c) => startCase(String(c))}
+          />
+        </ZGridLayout>
+      </ZPaddedBox>
     </ZCard>
   );
 }
