@@ -4,6 +4,7 @@ import { first } from 'lodash';
 import { ZDrawerButtonComponentModel } from '../drawer/drawer-button.cm';
 import { ZListLineItemComponentModel } from '../list/list-line-item.cm';
 import { ZListComponentModel } from '../list/list.cm';
+import { ZSuspenseComponentModel } from '../suspense/suspense.cm';
 
 /**
  * The component model for the ZWebAppDrawer
@@ -31,7 +32,7 @@ export class ZWebAppDrawerComponentModel extends ZCircusComponentModel {
     const button = await this.button();
     const drawer = await button.open();
     const container = await drawer.root();
-    await container.wait(() => container.peek('.ZCircularProgress-root').then((c) => !c));
+    await ZSuspenseComponentModel.load(container);
     const list = await ZCircusComponentModel.create(container, ZListComponentModel, ZListComponentModel.Selector);
     const items = await list.items();
     return items.map((i) => new ZListLineItemComponentModel(i));

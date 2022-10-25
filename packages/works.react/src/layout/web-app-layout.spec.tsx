@@ -26,7 +26,7 @@ describe('ZWebAppLayout', () => {
 
     await act(async () => new Promise((resolve) => setTimeout(resolve, 500)));
     await waitFor(() => expect(target.container.querySelector('.ZWebAppLayout-root')).not.toBeNull());
-    await waitFor(() => expect(target.container.querySelector('.ZCircularProgress-root')).toBeFalsy());
+    await waitFor(() => expect(target.container.querySelector('.ZSuspense-root')).toBeFalsy());
 
     return target;
   }

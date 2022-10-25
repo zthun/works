@@ -86,8 +86,6 @@ export { ZListItemComponentModel } from './list/list-item.cm';
 export { ZListLineItem } from './list/list-line-item';
 export { ZListLineItemComponentModel } from './list/list-line-item.cm';
 export { ZListComponentModel } from './list/list.cm';
-// Loading
-export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';
 // Menu
 export { IZMenu, ZMenu } from './menu/menu';
 export { IZMenuItem, ZMenuItem } from './menu/menu-item';
@@ -119,6 +117,7 @@ export { useSafeState } from './state/use-safe-state';
 // Suspense
 export { IZSuspense } from './suspense/suspense';
 export { ZSuspenseRotate } from './suspense/suspense-rotate';
+export { ZSuspenseComponentModel } from './suspense/suspense.cm';
 // Theme
 export { makeStyles } from './theme/make-styles';
 export { ZStateAnchor } from './theme/state-anchor';

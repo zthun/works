@@ -3,7 +3,7 @@ import ReportIcon from '@mui/icons-material/Report';
 import { Button } from '@mui/material';
 import React from 'react';
 import { CSSObject } from 'tss-react';
-import { ZCircularProgress } from '../loading/circular-progress';
+import { ZSuspenseRotate } from '../suspense/suspense-rotate';
 import { makeStyles } from '../theme/make-styles';
 import { useHealth } from './health-service';
 
@@ -56,7 +56,7 @@ export function ZHealthIndicator() {
    */
   function renderHealth() {
     if (health === undefined) {
-      return <ZCircularProgress className='ZHealthIndicator-loading' show />;
+      return <ZSuspenseRotate />;
     }
 
     const clasz = health ? `ZHealthIndicator-ok ${styles.classes.ok}` : `ZHealthIndicator-warn ${styles.classes.warn}`;

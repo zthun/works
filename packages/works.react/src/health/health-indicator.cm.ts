@@ -1,4 +1,5 @@
 import { ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZSuspenseComponentModel } from '../suspense/suspense.cm';
 
 export type ZHealthIndicatorState = 'loading' | 'healthy' | 'unhealthy';
 
@@ -15,7 +16,7 @@ export class ZHealthIndicatorComponentModel extends ZCircusComponentModel {
    *        True if the component is loading.
    */
   public loading(): Promise<boolean> {
-    return this.driver.peek('.ZHealthIndicator-loading');
+    return ZSuspenseComponentModel.loading(this.driver);
   }
 
   /**
