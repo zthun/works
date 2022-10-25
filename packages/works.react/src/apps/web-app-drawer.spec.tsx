@@ -10,7 +10,7 @@ import { createMemoryHistory, MemoryHistory } from 'history';
 import { find, startCase } from 'lodash';
 import React from 'react';
 import { ZTestRouter } from '../router/router-dom';
-import { ZWindowServiceContext } from '../window/window-service.context';
+import { ZWindowServiceContext } from '../window/window-service';
 import { ZWebAppDrawer } from './web-app-drawer';
 import { ZWebAppDrawerComponentModel } from './web-app-drawer.cm';
 import { ZWebAppService, ZWebAppServiceContext } from './web-app-service';

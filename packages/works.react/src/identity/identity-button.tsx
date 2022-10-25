@@ -7,7 +7,7 @@ import { useOptionalWebApp } from '../apps/web-app-service';
 import { IZButton, ZButton } from '../buttons/button';
 import { isStateLoaded, isStateLoading } from '../state/use-async-state';
 import { makeStyles } from '../theme/make-styles';
-import { useWindowService } from '../window/window-service.context';
+import { useWindowService } from '../window/window-service';
 import { useIdentity } from './identity-service';
 
 /**

@@ -136,4 +136,4 @@ export {
   ZSubtitle
 } from './typography/typography';
 // Window
-export { useWindowService, ZWindowServiceContext } from './window/window-service.context';
+export { useWindowService, ZWindowServiceContext } from './window/window-service';

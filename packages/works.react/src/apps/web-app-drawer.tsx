@@ -18,7 +18,7 @@ import { ZCircularProgress } from '../loading/circular-progress';
 import { useLocation, useNavigate } from '../router/router-dom';
 import { isStateErrored, isStateLoaded, isStateLoading } from '../state/use-async-state';
 import { makeStyles } from '../theme/make-styles';
-import { useWindowService } from '../window/window-service.context';
+import { useWindowService } from '../window/window-service';
 import { useWebApp, useWebApps } from './web-app-service';
 
 export interface IZWebAppDrawer extends IZComponentStyle {

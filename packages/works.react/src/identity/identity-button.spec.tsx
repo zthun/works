@@ -8,7 +8,7 @@ import { createMocked } from '@zthun/works.jest';
 import { noop } from 'lodash';
 import React from 'react';
 import { IZWebAppService, ZWebAppServiceContext } from '../apps/web-app-service';
-import { ZWindowServiceContext } from '../window/window-service.context';
+import { ZWindowServiceContext } from '../window/window-service';
 import { ZIdentityButton } from './identity-button';
 import { ZIdentityButtonComponentModel } from './identity-button.cm';
 import { IZIdentityService, ZIdentityServiceContext } from './identity-service';
