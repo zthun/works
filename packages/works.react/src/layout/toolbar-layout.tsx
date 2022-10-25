@@ -17,7 +17,7 @@ const useToolbarStyles = makeStyles()((theme) => ({
   }
 }));
 
-export interface IZToolbar extends IZComponentHierarchy, IZComponentStyle {}
+export interface IZToolbarLayout extends IZComponentHierarchy, IZComponentStyle {}
 
 /**
  * Represents a toolbar.
@@ -28,7 +28,7 @@ export interface IZToolbar extends IZComponentHierarchy, IZComponentStyle {}
  * @returns
  *        The JSX to render the toolbar.
  */
-export function ZToolbar(props: IZToolbar) {
+export function ZToolbarLayout(props: IZToolbarLayout) {
   const { className, children } = props;
 
   const styles = useToolbarStyles();

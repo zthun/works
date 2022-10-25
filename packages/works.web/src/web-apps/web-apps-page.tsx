@@ -18,9 +18,9 @@ import {
   ZNavigate,
   ZRoute,
   ZRouteMap,
-  ZSeverityColor,
-  ZToolbar
+  ZSeverityColor
 } from '@zthun/works.react';
+import { ZToolbarLayout } from '@zthun/works.react/src';
 import React from 'react';
 import { ZAlertsPage } from './components/alerts-page';
 import { ZBooleanPage } from './components/boolean-page';
@@ -48,7 +48,7 @@ export function ZWebAppsPage() {
 
   return (
     <div className='ZWebAppsPage-root'>
-      <ZToolbar className={styles.classes.toolbar}>
+      <ZToolbarLayout className={styles.classes.toolbar}>
         <ZButton
           avatar={<StartIcon color='success' />}
           color={ZSeverityColor.Info}
@@ -96,7 +96,7 @@ export function ZWebAppsPage() {
         <ZMenu avatar={<ElectricalServicesIcon color='warning' />} color={ZSeverityColor.Info} outline label='Services'>
           <ZMenuItem avatar={<MedicalServicesIcon color='success' />} label='Health' />
         </ZMenu>
-      </ZToolbar>
+      </ZToolbarLayout>
 
       <ZRouteMap>
         <ZRoute path='getting-started' element={<ZGettingStartedPage />} />

@@ -10,7 +10,7 @@ import {
   ZCard,
   ZGridLayout,
   ZSeverityColor,
-  ZToolbar
+  ZToolbarLayout
 } from '@zthun/works.react';
 import React from 'react';
 
@@ -66,7 +66,7 @@ export function ZBooleanPage() {
       </ZGridLayout>
 
       <h2>Operations</h2>
-      <ZToolbar>
+      <ZToolbarLayout>
         <ZButton
           avatar={<CheckBoxIcon color='success' />}
           outline
@@ -88,7 +88,7 @@ export function ZBooleanPage() {
           onClick={setValue.bind(null, null)}
           label='Indeterminate'
         />
-      </ZToolbar>
+      </ZToolbarLayout>
     </ZCard>
   );
 }
