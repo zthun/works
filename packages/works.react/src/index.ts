@@ -47,7 +47,7 @@ export { useErrorHandler, ZErrorHandlerContext } from './error/error-handler';
 export { ZErrorMessageHandlerAlert } from './error/error-message-handler-alert';
 export { ZErrorMessageHandlerLogger } from './error/error-message-handler-logger';
 // File
-export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelectContext } from './file/file-select.context';
+export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelectContext } from './file/file-select';
 // Form
 export { IZBoolean } from './form/boolean';
 export { ZBooleanCheckbox } from './form/boolean-checkbox';
