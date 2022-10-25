@@ -76,7 +76,8 @@ export { IZGridLayout, ZGridLayout } from './layout/grid-layout';
 export { IZLineItemLayout, ZLineItemLayout } from './layout/line-item-layout';
 export { ZLineItemLayoutComponentModel } from './layout/line-item-layout.cm';
 export { ZPaddedBox } from './layout/padded-box';
-export { ZToolbar } from './layout/toolbar';
+export { ZToolbar } from './layout/toolbar-layout';
+export { ZToolbarLayoutComponentModel } from './layout/toolbar-layout.cm';
 export { ZWebAppLayout } from './layout/web-app-layout';
 // List
 export { ZList } from './list/list';
