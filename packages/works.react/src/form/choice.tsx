@@ -3,6 +3,7 @@ import { ReactNode, useMemo } from 'react';
 import { v4 } from 'uuid';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentLabel } from '../component/component-label';
+import { IZComponentName } from '../component/component-name';
 import { IZComponentStyle } from '../component/component-style.';
 import { IZComponentValue } from '../component/component-value';
 import { useAmbassadorState } from '../state/use-ambassador-state';
@@ -17,7 +18,8 @@ export interface IZChoice<O, V>
   extends IZComponentDisabled,
     IZComponentStyle,
     IZComponentValue<Array<V>>,
-    IZComponentLabel {
+    IZComponentLabel,
+    IZComponentName {
   multiple?: boolean;
   indelible?: boolean;
   options: Array<O>;
