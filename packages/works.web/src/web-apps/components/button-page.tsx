@@ -1,6 +1,6 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import SmartButtonIcon from '@mui/icons-material/SmartButton';
-import { setFirstOrDefault } from '@zthun/works.core';
+import { setFirstOrDefault, ZSize, ZSizeFixed, ZSizeVaried } from '@zthun/works.core';
 import { ZAlertBuilder } from '@zthun/works.message';
 import {
   useAlertService,
@@ -8,12 +8,13 @@ import {
   ZBooleanSwitch,
   ZButton,
   ZButtonColor,
+  ZCard,
   ZChoiceDropDown,
   ZColorless,
   ZGridLayout,
-  ZPaperCard,
-  ZSeverityColor,
-  ZStateSize
+  ZH3,
+  ZParagraph,
+  ZSeverityColor
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
 import React from 'react';
@@ -28,10 +29,15 @@ export function ZButtonPage() {
   const [loading, setLoading] = useSafeState(false);
   const [disabled, setDisabled] = useSafeState(false);
   const [color, setColor] = useSafeState<ZButtonColor>(ZColorless.Inherit);
+  const [width, setWidth] = useSafeState<ZSize>(ZSizeVaried.Fit);
+  const [height, setHeight] = useSafeState<ZSize>(ZSizeVaried.Fit);
   const [outline, setOutline] = useSafeState(false);
   const [borderless, setBorderless] = useSafeState(false);
   const colors = values<ZButtonColor>(ZSeverityColor).concat([ZColorless.Inherit]);
   const _setColor = setFirstOrDefault.bind(null, setColor, ZColorless.Inherit);
+  const sizes = values<ZSize>(ZSizeFixed).concat(values(ZSizeVaried));
+  const _setWidth = setFirstOrDefault.bind(null, setWidth, ZSizeVaried.Fit);
+  const _setHeight = setFirstOrDefault.bind(null, setHeight, ZSizeVaried.Fit);
 
   /**
    * Occurs when the button demo is clicked.
@@ -46,25 +52,25 @@ export function ZButtonPage() {
   }
 
   return (
-    <ZPaperCard
+    <ZCard
       className='ZButtonPage-root'
-      headerText={'Button'}
-      subHeaderText='Standard button component'
+      heading='Button'
+      subHeading='Standard button component'
       avatar={<SmartButtonIcon color='error' fontSize='inherit' />}
     >
-      <h3>Description</h3>
+      <ZH3>Description</ZH3>
 
-      <p>
+      <ZParagraph>
         Buttons are the staple of most application design and have been so for decades. It is a very clean concept to
         click a button that corresponds to an action and users are very used to clicking these.
-      </p>
+      </ZParagraph>
 
-      <p>
+      <ZParagraph>
         Buttons can have a label, but if you want to save real estate, you can always use a simple <i>iconography </i>
         button with a tooltip if you desire.
-      </p>
+      </ZParagraph>
 
-      <h3>Button Demo</h3>
+      <ZH3>Button Demo</ZH3>
 
       <ZButton
         avatar={<CheckCircleIcon fontSize='small' />}
@@ -72,12 +78,14 @@ export function ZButtonPage() {
         disabled={disabled}
         color={color}
         borderless={borderless}
+        width={width}
+        height={height}
         outline={outline}
         onClick={handleClick}
         label='Button'
       />
 
-      <h3>Iconography Demo</h3>
+      <ZH3>Iconography Demo</ZH3>
 
       <ZButton
         label={<CheckCircleIcon fontSize='small' />}
@@ -85,13 +93,15 @@ export function ZButtonPage() {
         disabled={disabled}
         color={color}
         borderless={borderless}
+        width={width}
+        height={height}
         outline={outline}
         onClick={handleClick}
         tooltip='Iconography Button'
       />
 
-      <h3>Options</h3>
-      <ZGridLayout gap={ZStateSize.Medium}>
+      <ZH3>Options</ZH3>
+      <ZGridLayout gap={ZSizeFixed.Medium}>
         <ZBooleanSwitch value={loading} onValueChange={setLoading} label='Loading' />
         <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
         <ZBooleanSwitch value={outline} onValueChange={setOutline} label='Outline' />
@@ -104,7 +114,23 @@ export function ZButtonPage() {
           identifier={identity}
           renderOption={(c) => startCase(String(c))}
         />
+        <ZChoiceDropDown
+          value={[width]}
+          onValueChange={_setWidth}
+          label='Width'
+          options={sizes}
+          identifier={identity}
+          renderOption={(c) => startCase(String(c))}
+        />
+        <ZChoiceDropDown
+          value={[height]}
+          onValueChange={_setHeight}
+          label='Height'
+          options={sizes}
+          identifier={identity}
+          renderOption={(c) => startCase(String(c))}
+        />
       </ZGridLayout>
-    </ZPaperCard>
+    </ZCard>
   );
 }

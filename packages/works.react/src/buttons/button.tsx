@@ -1,18 +1,28 @@
 import { Button, Tooltip } from '@mui/material';
 import React, { ReactNode } from 'react';
 
-import { cssClass } from '@zthun/works.core';
+import {
+  createSizeChartFixedCss,
+  createSizeChartFixedLinear,
+  createSizeChartVariedCss,
+  createSizeChartVoidCss,
+  cssClass,
+  ZSizeChart,
+  ZSizeFixed,
+  ZSizeVaried
+} from '@zthun/works.core';
 import { noop } from 'lodash';
 import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentDisabled } from '../component/component-disabled';
+import { IZComponentHeight } from '../component/component-height';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentLoading } from '../component/component-loading.interface';
 import { IZComponentName } from '../component/component-name';
 import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentWidth } from '../component/component-width';
 import { ZCircularProgress } from '../loading/circular-progress';
 import { makeStyles } from '../theme/make-styles';
 import { ZColorless, ZSeverityColor } from '../theme/state-color';
-import { ZStateSize } from '../theme/state-size';
 
 export type ZButtonColor = ZSeverityColor | ZColorless.Inherit;
 
@@ -22,37 +32,54 @@ export interface IZButton
     IZComponentDisabled,
     IZComponentLoading,
     IZComponentStyle,
-    IZComponentName {
-  color?: ZButtonColor;
+    IZComponentName,
+    IZComponentWidth,
+    IZComponentHeight {
   borderless?: boolean;
+  color?: ZButtonColor;
   outline?: boolean;
   tooltip?: ReactNode;
 
   onClick?: (e: React.MouseEvent) => any;
 }
 
-const useButtonStyles = makeStyles<IZButton>()((theme) => ({
-  button: {
-    display: 'inline-flex',
-    alignItems: 'center'
-  },
-  content: {
-    marginLeft: theme.gap(ZStateSize.Small),
-    marginRight: theme.gap(ZStateSize.Small),
-    display: 'flex'
-  },
-  borderless: {
-    'border': 0,
-    'boxShadow': 'none',
+const ChartFixed = createSizeChartFixedCss(createSizeChartFixedLinear(2, 2), 'rem');
+const ChartVaried = createSizeChartVariedCss();
+const ChartVoid = createSizeChartVoidCss();
+const ButtonSizeChart: ZSizeChart<string> = { ...ChartFixed, ...ChartVaried, ...ChartVoid };
 
-    '&:hover': {
-      boxShadow: 'none'
+const useButtonStyles = makeStyles<IZButton>()((theme, props) => {
+  const { width = ZSizeVaried.Fit, height = ZSizeVaried.Fit } = props;
+
+  return {
+    wrapper: {
+      display: 'inline-flex',
+      width: ButtonSizeChart[width],
+      height: ButtonSizeChart[height]
     },
-    '&:active': {
-      boxShadow: 'none'
+    button: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      width: '100%'
+    },
+    content: {
+      marginLeft: theme.gap(ZSizeFixed.Small),
+      marginRight: theme.gap(ZSizeFixed.Small),
+      display: 'flex'
+    },
+    borderless: {
+      'border': 0,
+      'boxShadow': 'none',
+
+      '&:hover': {
+        boxShadow: 'none'
+      },
+      '&:active': {
+        boxShadow: 'none'
+      }
     }
-  }
-}));
+  };
+});
 
 /**
  * Represents a basic button component.
@@ -90,7 +117,7 @@ export function ZButton(props: IZButton) {
 
   return (
     <Tooltip title={tooltip}>
-      <span>
+      <span className={classes.wrapper}>
         <Button
           className={buttonClass}
           data-name={name}
