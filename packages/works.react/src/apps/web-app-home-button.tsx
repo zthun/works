@@ -1,7 +1,7 @@
 import AppsIcon from '@mui/icons-material/Apps';
 import ErrorIcon from '@mui/icons-material/Error';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
-import { cssClass } from '@zthun/works.core';
+import { cssClass, ZSizeFixed } from '@zthun/works.core';
 
 import { startCase } from 'lodash';
 import React from 'react';
@@ -43,8 +43,8 @@ const useWebAppHomeButtonStyles = makeStyles()((theme) => ({
   },
 
   avatar: {
-    height: '5rem',
-    width: '5rem',
+    height: '4rem',
+    width: '4rem',
     marginRight: theme.gap(),
     borderRadius: '50%',
     border: `${theme.thickness()} solid ${theme.palette.grey[200]}`,
@@ -90,7 +90,7 @@ export function ZWebAppHomeButton(props: IZWebAppHomeButton) {
       return <AppsIcon className={className} fontSize='inherit' color='success' />;
     }
 
-    return <ZImageSource className={className} src={who.icon} />;
+    return <ZImageSource className={className} src={who.icon} width={ZSizeFixed.Medium} height={ZSizeFixed.Medium} />;
   };
 
   const renderLabel = () => {

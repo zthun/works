@@ -64,7 +64,7 @@ const globalStyles = {
  * @returns The jsx for the web app layout.
  */
 export function ZWebAppLayout(props: IZWebAppLayout) {
-  const { children, home = '/home', whoami, profileApp, routes } = props;
+  const { children, home = '/home', whoami, profileApp } = props;
   const theme = useZthunworksTheme();
 
   const ButtonProps = { color: ZSeverityColor.Primary, borderless: true };
@@ -82,7 +82,7 @@ export function ZWebAppLayout(props: IZWebAppLayout) {
               <span />
               <ZIdentityButton profileApp={profileApp} ButtonProps={ButtonProps} />
               <ZHealthIndicator />
-              <ZWebAppDrawer whoami={whoami} routes={routes} DrawerButtonProps={DrawerButtonProps} />
+              <ZWebAppDrawer whoami={whoami} DrawerButtonProps={DrawerButtonProps} />
             </ZGridLayout>
           </AppBar>
           <ZPaddedBox padding={ZSizeFixed.Large}>

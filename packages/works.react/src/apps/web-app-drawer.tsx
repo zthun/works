@@ -5,8 +5,8 @@ import ErrorIcon from '@mui/icons-material/Error';
 import GithubIcon from '@mui/icons-material/GitHub';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 
-import { Divider, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import { cssClass, IZRouteOption } from '@zthun/works.core';
+import { Divider } from '@mui/material';
+import { cssClass, ZSizeFixed } from '@zthun/works.core';
 import { kebabCase, startCase } from 'lodash';
 import React, { ReactNode } from 'react';
 import { IZComponentStyle } from '../component/component-style.';
@@ -35,11 +35,6 @@ export interface IZWebAppDrawer extends IZComponentStyle {
   home?: string;
 
   /**
-   * Optional routes heading routes to include for you application.
-   */
-  routes?: IZRouteOption[];
-
-  /**
    * The identity of the current application.
    *
    * This is used to organize the top home list item.
@@ -49,25 +44,8 @@ export interface IZWebAppDrawer extends IZComponentStyle {
 
 const useWebAppDrawerStyles = makeStyles()((theme) => ({
   icon: {
-    fill: 'currentColor',
-    width: '1em',
-    height: '1em',
-    display: 'inline-block',
-    fontSize: '3rem',
-    transition: 'fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-    flexShrink: 0,
-    userSelect: 'none',
-    color: `rgb(${theme.palette.common.black}, 0.54)`,
-
-    svg: {
-      width: '1em',
-      height: '1em'
-    },
-
-    img: {
-      width: '1em',
-      height: '1em'
-    }
+    fontSize: '4rem',
+    marginRight: theme.gap()
   }
 }));
 
@@ -81,7 +59,7 @@ const useWebAppDrawerStyles = makeStyles()((theme) => ({
  *        The JSX to render this drawer component.
  */
 export function ZWebAppDrawer(props: IZWebAppDrawer) {
-  const { className, DrawerButtonProps, home = '/', routes, whoami } = props;
+  const { className, DrawerButtonProps, home = '/', whoami } = props;
   const navigate = useNavigate();
   const location = useLocation();
   const win = useWindowService();
@@ -104,7 +82,7 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
       return <AppsIcon className={clasz} color='success' />;
     }
 
-    return <ZImageSource className={clasz} src={icon} />;
+    return <ZImageSource className={clasz} src={icon} width={ZSizeFixed.Medium} height={ZSizeFixed.Medium} />;
   };
 
   const createNavItem = (
@@ -146,34 +124,15 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
     );
   };
 
-  const createNavRoutes = () => {
-    if (!routes?.length) {
-      return null;
-    }
-
-    const createNavRoute = (route: IZRouteOption) => {
-      const avatar = <div className={cssIconClass('ZWebAppDrawer-icon-route')}>{route.avatar}</div>;
-      return createNavItem(route.path, route.name, route.description, avatar, navigate.bind(null, route.path), 'route');
-    };
-
-    return (
-      <>
-        {routes.map((route) => createNavRoute(route))}
-        <Divider />
-      </>
-    );
-  };
-
   const createNavApps = () => {
     if (isStateLoading(apps)) {
       return (
         <>
-          <ListItem className='ZWebAppDrawer-item-loading' button title='Loading'>
-            <ListItemIcon>
-              <ZCircularProgress show size='lg' />
-            </ListItemIcon>
-            <ListItemText>Loading...</ListItemText>
-          </ListItem>
+          <ZListLineItem
+            className='ZWebAppDrawer-item-loading'
+            heading='Loading...'
+            avatar={<ZCircularProgress show size='lg' />}
+          />
           <Divider />
         </>
       );
@@ -231,7 +190,6 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
         <ZList className='ZWebAppDrawer-list'>
           {createNavHome()}
           {createNavApps()}
-          {createNavRoutes()}
           {createNavSource()}
         </ZList>
       </ZDrawerButton>

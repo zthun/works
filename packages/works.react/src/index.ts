@@ -68,8 +68,8 @@ export { IZIdentityButtonProps, ZIdentityButton } from './identity/identity-butt
 export { ZIdentityButtonComponentModel } from './identity/identity-button.cm';
 export { IZIdentityService, useIdentity, useIdentityService, ZIdentityService } from './identity/identity-service';
 // Image
-export { useImageReader, ZImageReaderContext } from './image/image-reader.context';
-export { ZImageSource } from './image/image-source';
+export { IZImageSource, ZImageSource } from './image/image-source';
+export { ZImageSourceComponentModel } from './image/image-source.cm';
 // Layout
 export { ZBorderLayout } from './layout/border-layout';
 export { IZGridLayout, ZGridLayout } from './layout/grid-layout';

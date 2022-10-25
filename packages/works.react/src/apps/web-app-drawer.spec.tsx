@@ -3,7 +3,7 @@
 
 import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
-import { IZRouteOption, IZWebApp, required, ZRouteOptionBuilder, ZWebAppBuilder } from '@zthun/works.core';
+import { IZWebApp, required, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
 import { ZUrlBuilder } from '@zthun/works.url';
 import { createMemoryHistory, MemoryHistory } from 'history';
@@ -21,7 +21,6 @@ describe('ZWebAppDrawer', () => {
   let webAppTerms: IZWebApp;
   let webApps: IZWebApp[];
   let whoami: string;
-  let routes: IZRouteOption[] | undefined;
   let home: string | undefined;
 
   let win: jest.Mocked<Window>;
@@ -33,7 +32,7 @@ describe('ZWebAppDrawer', () => {
       <ZWindowServiceContext.Provider value={win}>
         <ZWebAppServiceContext.Provider value={webAppService}>
           <ZTestRouter location={history.location} navigator={history}>
-            <ZWebAppDrawer whoami={whoami} routes={routes} home={home} />
+            <ZWebAppDrawer whoami={whoami} home={home} />
           </ZTestRouter>
         </ZWebAppServiceContext.Provider>
       </ZWindowServiceContext.Provider>
@@ -44,7 +43,6 @@ describe('ZWebAppDrawer', () => {
   }
 
   beforeEach(() => {
-    routes = undefined;
     home = undefined;
 
     history = createMemoryHistory();
@@ -196,36 +194,6 @@ describe('ZWebAppDrawer', () => {
       await actual.click();
       // Assert.
       expect(win.open).toHaveBeenCalledWith(webAppTerms.domain, '_self');
-    });
-  });
-
-  describe('Routes', () => {
-    let information: IZRouteOption;
-    let version: IZRouteOption;
-
-    beforeEach(() => {
-      information = new ZRouteOptionBuilder().name('Information').path('/information').build();
-      version = new ZRouteOptionBuilder().name('Version').path('/version').build();
-      routes = [information, version];
-    });
-
-    it('should render the route list.', async () => {
-      // Arrange
-      const target = await createTestTarget();
-      // Assert
-      const actual = await target.routes();
-      // Assert
-      expect(actual.length).toEqual(routes?.length);
-    });
-
-    it('should push the route path into the history when clicked.', async () => {
-      // Arrange
-      const target = await createTestTarget();
-      // Assert
-      const route = await target.route(version.path);
-      await route?.click();
-      // Assert
-      expect(history.location.pathname).toEqual(version.path);
     });
   });
 

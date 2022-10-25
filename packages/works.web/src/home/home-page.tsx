@@ -9,6 +9,7 @@ import {
   useWebApp,
   ZButton,
   ZCard,
+  ZGridLayout,
   ZImageSource,
   ZParagraph,
   ZSeverityColor,
@@ -52,7 +53,9 @@ export function ZHomePage() {
         heading='The Works System'
         subHeading='Make Development Easier'
       >
-        <ZImageSource src={learn?.icon} height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
+        <ZGridLayout justifyContent='center'>
+          <ZImageSource src={learn?.icon} height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
+        </ZGridLayout>
 
         <ZSubtitle className={classes.quote}>Users perform at their best when they have absolute focus.</ZSubtitle>
 
@@ -88,7 +91,9 @@ export function ZHomePage() {
           />
         }
       >
-        <ZImageSource src='images/svg/react.svg' height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
+        <ZGridLayout justifyContent='center'>
+          <ZImageSource src='images/svg/react.svg' height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
+        </ZGridLayout>
 
         <ZSubtitle className={classes.quote}>The smaller the better.</ZSubtitle>
 
@@ -121,7 +126,9 @@ export function ZHomePage() {
           />
         }
       >
-        <ZImageSource src='images/svg/nest.svg' height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
+        <ZGridLayout justifyContent='center'>
+          <ZImageSource src='images/svg/nest.svg' height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
+        </ZGridLayout>
 
         <ZSubtitle className={classes.quote}>SOLID code is best.</ZSubtitle>
 

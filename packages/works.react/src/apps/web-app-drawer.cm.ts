@@ -151,30 +151,6 @@ export class ZWebAppDrawerComponentModel {
   }
 
   /**
-   * Returns the route items.
-   *
-   * @returns
-   *        The route items.
-   */
-  public async routes(): Promise<ZListLineItemComponentModel[]> {
-    return this._findItemsByType('route');
-  }
-
-  /**
-   * Finds a specific route by path or name.
-   *
-   * @param pathOrHeading
-   *        The path or name of the route.
-   *
-   * @returns
-   *        The item for the route or null if no such item exists.
-   */
-  public async route(pathOrHeading: string): Promise<ZListLineItemComponentModel | null> {
-    const items = await this.routes();
-    return this._findItemByNameOrHeading(items, pathOrHeading);
-  }
-
-  /**
    * Returns the source item if it exists.
    *
    * @returns

@@ -1,4 +1,14 @@
-import { cssClass, firstDefined, ZSizeFixed, ZSizeVaried, ZSizeVoid } from '@zthun/works.core';
+import {
+  createSizeChartFixedCss,
+  createSizeChartFixedGeometric,
+  createSizeChartVariedCss,
+  createSizeChartVoidCss,
+  cssClass,
+  firstDefined,
+  ZSizeFixed,
+  ZSizeVaried,
+  ZSizeVoid
+} from '@zthun/works.core';
 import { Property } from 'csstype';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
@@ -40,21 +50,27 @@ const normalizeBackgroundFields = (background?: {
   return [firstDefined(ZColorless.Transparent, background?.color), firstDefined(ZColorTint.Main, background?.tint)];
 };
 
+const BorderLayoutSizeChart = {
+  ...createSizeChartFixedCss(createSizeChartFixedGeometric(1.4, 18), 'rem'),
+  ...createSizeChartVariedCss(),
+  ...createSizeChartVoidCss()
+};
+
 const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
-  const { border, background } = props;
+  const { border, background, width = ZSizeVaried.Full } = props;
   const [_borderSize, _borderColor, _borderTint] = normalizeBorderFields(border);
   const [_backgroundColor, _backgroundTint] = normalizeBackgroundFields(background);
 
   const borderSize = theme.thickness(_borderSize);
   const borderColor = theme.colorify(_borderColor, _borderTint);
   const borderStyle = firstDefined('solid', border?.style);
-  const width = theme.sizing.card[firstDefined(ZSizeVaried.Full, props.width)];
+  const _width = BorderLayoutSizeChart[width];
   const backgroundColor = theme.colorify(_backgroundColor, _backgroundTint);
 
   return {
     root: {
       border: `${borderSize} ${borderStyle} ${borderColor}`,
-      width,
+      width: _width,
       backgroundColor
     }
   };
