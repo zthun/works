@@ -20,7 +20,7 @@ import { IZComponentLoading } from '../component/component-loading';
 import { IZComponentName } from '../component/component-name';
 import { IZComponentStyle } from '../component/component-style.';
 import { IZComponentWidth } from '../component/component-width';
-import { ZCircularProgress } from '../loading/circular-progress';
+import { ZSuspenseRotate } from '../suspense/suspense-rotate';
 import { makeStyles } from '../theme/make-styles';
 import { ZColorless, ZSeverityColor } from '../theme/state-color';
 
@@ -128,7 +128,12 @@ export function ZButton(props: IZButton) {
         >
           {avatar}
           <div className={contentClass}>{label}</div>
-          <ZCircularProgress className='ZButton-loading' size='sm' show={!!loading} />
+          <ZSuspenseRotate
+            className='ZButton-loading'
+            width={ZSizeFixed.ExtraSmall}
+            color={ZColorless.Inherit}
+            loading={!!loading}
+          />
         </Button>
       </span>
     </Tooltip>

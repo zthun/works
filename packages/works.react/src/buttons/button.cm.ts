@@ -1,4 +1,5 @@
 import { ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZSuspenseComponentModel } from '../suspense/suspense.cm';
 
 /**
  * Represents the component model for a button element.
@@ -23,7 +24,7 @@ export class ZButtonComponentModel extends ZCircusComponentModel {
    *        True if the button is in the loading state.  False otherwise.
    */
   public loading(): Promise<boolean> {
-    return this.driver.peek('.ZCircularProgress-root');
+    return ZSuspenseComponentModel.loading(this.driver);
   }
 
   /**
