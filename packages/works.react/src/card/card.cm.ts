@@ -20,7 +20,7 @@ export class ZCardComponentModel {
    * @returns
    *        The text content of the heading.
    */
-  public async heading(): Promise<string | null> {
+  public async heading(): Promise<string> {
     const heading = await this._driver.select('.ZCard-header-heading');
     return heading.text();
   }
@@ -31,7 +31,7 @@ export class ZCardComponentModel {
    * @returns
    *        The text content of the sub heading.
    */
-  public async subHeading(): Promise<string | null> {
+  public async subHeading(): Promise<string> {
     const subHeading = await this._driver.select('.ZCard-header-subheading');
     return subHeading.text();
   }

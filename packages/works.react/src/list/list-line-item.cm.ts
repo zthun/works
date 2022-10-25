@@ -62,19 +62,20 @@ export class ZListLineItemComponentModel {
    * @returns
    *        The heading of the line item.
    */
-  public async heading(): Promise<string | null> {
+  public async heading(): Promise<string> {
     const [text] = await this.item.driver.query('.ZListLineItem-text .MuiListItemText-primary');
-    return text?.text() || null;
+    return text?.text() || '';
   }
 
   /**
    * Gets the sub heading of the line item.
    *
    * @returns
-   *        The sub heading of the line item.
+   *        The sub heading of the line item or null if the heading
+   *        does not exist.
    */
-  public async subHeading(): Promise<string | null> {
+  public async subHeading(): Promise<string> {
     const [description] = await this.item.driver.query('.ZListLineItem-text .MuiListItemText-secondary');
-    return description?.text() || null;
+    return description?.text() || '';
   }
 }

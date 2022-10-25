@@ -1,14 +1,12 @@
 /* eslint-disable require-jsdoc */
 
-import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactNode } from 'react';
 import { ZButton } from './button';
 import { ZButtonComponentModel } from './button.cm';
 
 describe('ZButton', () => {
-  let _driver: IZCircusDriver;
-
   let avatar: ReactNode | undefined;
   let label: ReactNode | undefined;
   let loading: boolean | undefined;
@@ -32,8 +30,8 @@ describe('ZButton', () => {
       />
     );
 
-    _driver = await new ZCircusSetupRenderer(element).setup();
-    return await ZCircusComponentModel.create(_driver, ZButtonComponentModel, ZButtonComponentModel.Selector);
+    const driver = await new ZCircusSetupRenderer(element).setup();
+    return await ZCircusComponentModel.create(driver, ZButtonComponentModel, ZButtonComponentModel.Selector);
   }
 
   beforeEach(() => {
@@ -43,10 +41,6 @@ describe('ZButton', () => {
     label = undefined;
     name = undefined;
     onClick = undefined;
-  });
-
-  afterEach(async () => {
-    await _driver.destroy();
   });
 
   describe('Content', () => {

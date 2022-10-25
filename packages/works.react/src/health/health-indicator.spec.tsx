@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { createMocked } from '@zthun/works.jest';
 import { noop } from 'lodash';
@@ -10,7 +10,6 @@ import { ZHealthIndicatorComponentModel } from './health-indicator.cm';
 import { IZHealthService, ZHealthServiceContext } from './health-service';
 
 describe('ZHealthIndicator', () => {
-  let _driver: IZCircusDriver;
   let health: jest.Mocked<IZHealthService>;
 
   async function createTestTarget() {
@@ -20,18 +19,16 @@ describe('ZHealthIndicator', () => {
       </ZHealthServiceContext.Provider>
     );
 
-    _driver = await new ZCircusSetupRenderer(element).setup();
-    await _driver.wait(() => _driver.peek(ZHealthIndicatorComponentModel.Selector));
-    const target = await _driver.select(ZHealthIndicatorComponentModel.Selector);
-    return new ZHealthIndicatorComponentModel(target);
+    const driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(
+      driver,
+      ZHealthIndicatorComponentModel,
+      ZHealthIndicatorComponentModel.Selector
+    );
   }
 
   beforeEach(() => {
     health = createMocked(['read']);
-  });
-
-  afterEach(async () => {
-    await _driver?.destroy();
   });
 
   it('should render a loading indicator if the health is loading.', async () => {

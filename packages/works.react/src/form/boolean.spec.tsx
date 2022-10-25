@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactElement } from 'react';
 import { ZBooleanCheckbox } from './boolean-checkbox';
@@ -7,24 +7,17 @@ import { ZBooleanSwitch } from './boolean-switch';
 import { ZBooleanComponentModel } from './boolean.cm';
 
 describe('ZBoolean', () => {
-  let _driver: IZCircusDriver;
   let disabled: boolean | undefined;
   let onCheckChanged: jest.Mock | undefined;
 
   async function createComponentModel(element: ReactElement) {
-    _driver = await new ZCircusSetupRenderer(element).setup();
-    await _driver.wait(() => _driver.peek(ZBooleanComponentModel.Selector));
-    const target = await _driver.select(ZBooleanComponentModel.Selector);
-    return new ZBooleanComponentModel(target);
+    const driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(driver, ZBooleanComponentModel, ZBooleanComponentModel.Selector);
   }
 
   beforeEach(() => {
     disabled = undefined;
     onCheckChanged = undefined;
-  });
-
-  afterEach(async () => {
-    await _driver.destroy();
   });
 
   async function assertValue<T>(createTestTarget: () => Promise<ZBooleanComponentModel>, expected: T) {

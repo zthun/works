@@ -24,8 +24,7 @@ export class ZStatusCodePageComponentModel {
   public async code(): Promise<ZHttpCode> {
     const block = await this._driver.select('.ZStatusCodePage-code');
     const code = await block.text();
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return +code! as ZHttpCode;
+    return +code as ZHttpCode;
   }
 
   /**

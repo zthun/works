@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { required } from '@zthun/works.core';
 import React, { ReactNode } from 'react';
@@ -10,7 +10,6 @@ import { ZListLineItemComponentModel } from './list-line-item.cm';
 import { ZListComponentModel } from './list.cm';
 
 describe('ZList', () => {
-  let _driver: IZCircusDriver;
   let heading: ReactNode | undefined;
   let subHeading: ReactNode | undefined;
   let onClick: jest.Mock | undefined;
@@ -23,20 +22,14 @@ describe('ZList', () => {
       </ZList>
     );
 
-    _driver = await new ZCircusSetupRenderer(element).setup();
-    await _driver.wait(() => _driver.peek(ZListComponentModel.Selector));
-    const target = await _driver.select(ZListComponentModel.Selector);
-    return new ZListComponentModel(target);
+    const driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(driver, ZListComponentModel, ZListComponentModel.Selector);
   }
 
   beforeEach(() => {
     heading = undefined;
     subHeading = undefined;
     onClick = undefined;
-  });
-
-  afterEach(async () => {
-    await _driver.destroy();
   });
 
   it('should render all items', async () => {
@@ -105,7 +98,7 @@ describe('ZList', () => {
       // Act.
       const actual = await lineItem.heading();
       // Assert.
-      expect(actual).toBeNull();
+      expect(actual).toEqual('');
     });
 
     it('should render the sub heading.', async () => {
@@ -128,7 +121,7 @@ describe('ZList', () => {
       // Act.
       const actual = await lineItem.subHeading();
       // Assert.
-      expect(actual).toBeNull();
+      expect(actual).toEqual('');
     });
   });
 });

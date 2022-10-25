@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import {
   getHttpCodeCategory,
@@ -18,7 +18,6 @@ import { ZStatusCodePage } from './status-code-page';
 import { ZStatusCodePageComponentModel } from './status-code-page.cm';
 
 describe('ZStatusCodePage', () => {
-  let _driver: IZCircusDriver;
   let history: MemoryHistory;
   let name: string | undefined;
 
@@ -32,16 +31,12 @@ describe('ZStatusCodePage', () => {
       </ZTestRouter>
     );
 
-    _driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(_driver, ZStatusCodePageComponentModel, ZStatusCodePageComponentModel.Selector);
+    const driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(driver, ZStatusCodePageComponentModel, ZStatusCodePageComponentModel.Selector);
   }
 
   beforeEach(() => {
     name = undefined;
-  });
-
-  afterEach(async () => {
-    await _driver?.destroy();
   });
 
   async function assertRendersPageWithCorrectCode(code: ZHttpCode) {

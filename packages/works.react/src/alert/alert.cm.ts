@@ -47,13 +47,13 @@ export class ZAlertComponentModel {
    * Gets the header of the alert.
    *
    * @returns
-   *        The alert header or null if the alert has died.  This also
-   *        returns null if the alert has no header.
+   *        The alert header or them empty string if the alert has died.
+   *        This also returns the empty string if no header exists.
    */
-  public header(): Promise<string | null> {
-    return this._valueIfAlive(null, async (driver: IZCircusDriver) => {
+  public header(): Promise<string> {
+    return this._valueIfAlive('', async (driver: IZCircusDriver) => {
       const [header] = await driver.query('.ZAlertList-alert-header');
-      return header?.text() || Promise.resolve(null);
+      return header?.text() || Promise.resolve('');
     });
   }
 
@@ -61,11 +61,11 @@ export class ZAlertComponentModel {
    * Gets the alert message if this alert is still alive.
    *
    * @returns
-   *      The current message for a live alert, or null
+   *      The current message for a live alert, or the empty string
    *      if the alert has died.
    */
-  public message(): Promise<string | null> {
-    return this._valueIfAlive(null, async (driver: IZCircusDriver) => {
+  public message(): Promise<string> {
+    return this._valueIfAlive('', async (driver: IZCircusDriver) => {
       const content = await driver.select('.ZAlertList-alert-message');
       return content.text();
     });

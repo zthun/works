@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { identity, noop, range } from 'lodash';
 import React, { ReactNode } from 'react';
@@ -8,8 +8,6 @@ import { ZChoiceDropDown } from './choice-drop-down';
 import { ZChoiceComponentModel } from './choice.cm';
 
 describe('ZChoice', () => {
-  let _driver: IZCircusDriver;
-
   let options: any[];
   let identifier: (op: any) => any;
 
@@ -30,10 +28,6 @@ describe('ZChoice', () => {
 
     identifier = identity;
     options = ['One', 'Two', 'Three', 'Four', 'Five'];
-  });
-
-  afterEach(async () => {
-    await _driver.destroy();
   });
 
   async function shouldRenderAllOptionsWhenOpened(createTestTarget: () => Promise<ZChoiceComponentModel>) {
@@ -172,10 +166,8 @@ describe('ZChoice', () => {
         />
       );
 
-      _driver = await new ZCircusSetupRenderer(element).setup();
-      await _driver.wait(() => _driver.peek(ZChoiceComponentModel.Selector));
-      const target = await _driver.select(ZChoiceComponentModel.Selector);
-      return new ZChoiceComponentModel(target);
+      const driver = await new ZCircusSetupRenderer(element).setup();
+      return ZCircusComponentModel.create(driver, ZChoiceComponentModel, ZChoiceComponentModel.Selector);
     }
 
     it('should render all options when opened', async () => {
@@ -246,10 +238,8 @@ describe('ZChoice', () => {
         />
       );
 
-      _driver = await new ZCircusSetupRenderer(element).setup();
-      await _driver.wait(() => _driver.peek(ZChoiceComponentModel.Selector));
-      const target = await _driver.select(ZChoiceComponentModel.Selector);
-      return new ZChoiceComponentModel(target);
+      const driver = await new ZCircusSetupRenderer(element).setup();
+      return ZCircusComponentModel.create(driver, ZChoiceComponentModel, ZChoiceComponentModel.Selector);
     }
 
     it('should render all options when opened', async () => {

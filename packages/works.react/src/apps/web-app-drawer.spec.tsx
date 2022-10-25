@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 
-import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { IZRouteOption, IZWebApp, required, ZRouteOptionBuilder, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
@@ -16,8 +16,6 @@ import { ZWebAppDrawerComponentModel } from './web-app-drawer.cm';
 import { ZWebAppService, ZWebAppServiceContext } from './web-app-service';
 
 describe('ZWebAppDrawer', () => {
-  let _driver: IZCircusDriver;
-
   let webAppLearn: IZWebApp;
   let webAppRoadblock: IZWebApp;
   let webAppTerms: IZWebApp;
@@ -41,8 +39,8 @@ describe('ZWebAppDrawer', () => {
       </ZWindowServiceContext.Provider>
     );
 
-    _driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(_driver, ZWebAppDrawerComponentModel, ZWebAppDrawerComponentModel.Selector);
+    const driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(driver, ZWebAppDrawerComponentModel, ZWebAppDrawerComponentModel.Selector);
   }
 
   beforeEach(() => {
@@ -86,10 +84,6 @@ describe('ZWebAppDrawer', () => {
       const app = find(webApps, (a) => a._id === id);
       return app ? Promise.resolve(app) : Promise.reject(new Error('App not found'));
     });
-  });
-
-  afterEach(async () => {
-    await _driver.destroy();
   });
 
   it('should open the nav drawer with given web apps.', async () => {

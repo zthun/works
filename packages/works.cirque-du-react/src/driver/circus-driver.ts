@@ -56,8 +56,8 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
-  public text(): Promise<string | null> {
-    return Promise.resolve(this._element.textContent);
+  public text(): Promise<string> {
+    return Promise.resolve(this._element.textContent || '');
   }
 
   /**

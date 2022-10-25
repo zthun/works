@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
-import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { sleep } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
@@ -13,7 +13,7 @@ import { ZAlertListComponentModel } from './alert-list.cm';
 import { ZAlertServiceContext } from './alert-service';
 
 describe('ZAlertList', () => {
-  let _driver: IZCircusDriver;
+  let driver: IZCircusDriver;
   let events: Subject<IZAlert[]>;
   let success: IZAlert;
   let error: IZAlert;
@@ -29,10 +29,8 @@ describe('ZAlertList', () => {
       </ZAlertServiceContext.Provider>
     );
 
-    _driver = await new ZCircusSetupRenderer(element).setup();
-    await _driver.wait(() => _driver.peek(ZAlertListComponentModel.Selector));
-    const target = await _driver.select(ZAlertListComponentModel.Selector);
-    return new ZAlertListComponentModel(target);
+    driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(driver, ZAlertListComponentModel, ZAlertListComponentModel.Selector);
   }
 
   beforeEach(() => {
@@ -50,9 +48,7 @@ describe('ZAlertList', () => {
     alertService.watch.mockReturnValue(events);
   });
 
-  afterEach(async () => {
-    await _driver.destroy();
-  });
+  afterEach(() => driver.destroy());
 
   async function publishAlerts(alerts: IZAlert[]) {
     const act = new ZCircusActBuilder()
@@ -61,7 +57,7 @@ describe('ZAlertList', () => {
         await sleep(1);
       })
       .build();
-    await _driver.perform(act);
+    await driver.perform(act);
   }
 
   describe('List', () => {
@@ -91,7 +87,7 @@ describe('ZAlertList', () => {
       alertService.all.mockResolvedValue(alerts);
       const expected = alerts.map((a) => a._id);
       const target = await createTestTarget();
-      await _driver.wait(() => target.alerts().then((a) => a.length > 0));
+      await driver.wait(() => target.alerts().then((a) => a.length > 0));
       // Act
       const renderedAlerts = await target.alerts();
       const actual = renderedAlerts.map((a) => a.id);
@@ -143,7 +139,7 @@ describe('ZAlertList', () => {
       const alert = await target.alert(warning);
       const actual = await alert.header();
       // Assert.
-      expect(actual).toBeNull();
+      expect(actual).toEqual('');
     });
 
     it('should return an empty header if the alert is not alive', async () => {
@@ -153,7 +149,7 @@ describe('ZAlertList', () => {
       const alert = await target.alert(success);
       const actual = await alert.header();
       // Assert.
-      expect(actual).toBeNull();
+      expect(actual).toEqual('');
     });
   });
 
@@ -176,7 +172,7 @@ describe('ZAlertList', () => {
       const alert = await target.alert(v4());
       const actual = await alert.message();
       // Assert.
-      expect(actual).toBeNull();
+      expect(actual).toEqual('');
     });
   });
 

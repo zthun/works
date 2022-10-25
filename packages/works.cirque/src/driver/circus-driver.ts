@@ -48,9 +48,10 @@ export interface IZCircusDriver {
    * Gets the underlying text of the driver context.
    *
    * @returns
-   *        The underlying text of the driver context.
+   *        The underlying text of the driver context.  Returns
+   *        the empty string if no text exists.
    */
-  text(): Promise<string | null>;
+  text(): Promise<string>;
 
   /**
    * Gets the underlying value of the driver context if there is one.

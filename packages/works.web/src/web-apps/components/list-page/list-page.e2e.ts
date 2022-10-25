@@ -16,9 +16,7 @@ describe('List Page', () => {
     return new ZListPageComponentModel(_driver);
   }
 
-  afterEach(async () => {
-    await _driver.destroy();
-  });
+  afterEach(() => _driver.destroy());
 
   async function assertDisplaysAlert(expected: ZAlertSeverity, name: string) {
     // Arrange.

@@ -72,7 +72,7 @@ export class ZButtonComponentModel {
    * @returns
    *        The button content text, if any.
    */
-  public async text(): Promise<string | null> {
+  public async text(): Promise<string> {
     const content = await this._driver.select('.ZButton-content');
     return content.text();
   }

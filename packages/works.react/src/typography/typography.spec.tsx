@@ -1,5 +1,4 @@
 /* eslint-disable require-jsdoc */
-import { IZCircusDriver } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import {
@@ -17,12 +16,10 @@ import {
 } from './typography';
 
 describe('Typography', () => {
-  let _driver: IZCircusDriver;
-
   async function createTestTarget(Typography: (props: IZTypographyProps) => JSX.Element) {
     const element = <Typography className='ZTypography-test'></Typography>;
-    _driver = await new ZCircusSetupRenderer(element).setup();
-    return _driver.select('.ZTypography-test');
+    const driver = await new ZCircusSetupRenderer(element).setup();
+    return driver.select('.ZTypography-test');
   }
 
   async function assertTypography(expected: string, Typography: (props: IZTypographyProps) => JSX.Element) {
@@ -33,10 +30,6 @@ describe('Typography', () => {
     // Assert
     expect(actual).toEqual(expected);
   }
-
-  afterEach(async () => {
-    await _driver.destroy();
-  });
 
   describe('Headers', () => {
     it('should render an h1 tag', async () => {

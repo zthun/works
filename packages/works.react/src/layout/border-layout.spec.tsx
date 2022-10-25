@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { ZSizeFixed, ZSizeVoid } from '@zthun/works.core';
 import { Property } from 'csstype';
@@ -10,8 +10,6 @@ import { ZBorderLayout } from './border-layout';
 import { ZBorderLayoutComponentModel } from './border-layout.cm';
 
 describe('ZBorderLayout', () => {
-  let _driver: IZCircusDriver;
-
   let border:
     | undefined
     | {
@@ -30,17 +28,13 @@ describe('ZBorderLayout', () => {
 
   async function createTestTarget() {
     const element = <ZBorderLayout border={border} background={background} />;
-    _driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(_driver, ZBorderLayoutComponentModel, ZBorderLayoutComponentModel.Selector);
+    const driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusComponentModel.create(driver, ZBorderLayoutComponentModel, ZBorderLayoutComponentModel.Selector);
   }
 
   beforeEach(() => {
     border = undefined;
     background = undefined;
-  });
-
-  afterEach(async () => {
-    await _driver.destroy();
   });
 
   it('should render a default background of transparent', async () => {
