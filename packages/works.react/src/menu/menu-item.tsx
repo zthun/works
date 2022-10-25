@@ -2,9 +2,9 @@ import { MenuItem } from '@mui/material';
 import { cssClass, ZSizeFixed } from '@zthun/works.core';
 import { noop } from 'lodash';
 import React from 'react';
-import { ZSuspenseRotate } from 'src/suspense/suspense-rotate';
 import { IZButton } from '../buttons/button';
 import { ZGridLayout } from '../layout/grid-layout';
+import { ZSuspenseRotate } from '../suspense/suspense-rotate';
 import { ZMenuEvent } from './menu-event';
 
 export interface IZMenuItem extends Omit<IZButton, 'color'>, Omit<IZButton, 'outline'> {}
