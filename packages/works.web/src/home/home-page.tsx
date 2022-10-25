@@ -1,7 +1,7 @@
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import PublicIcon from '@mui/icons-material/Public';
 import Terminal from '@mui/icons-material/Terminal';
-import { ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed, ZSizeVaried } from '@zthun/works.core';
 import {
   asStateData,
   makeStyles,
@@ -10,7 +10,6 @@ import {
   ZButton,
   ZCard,
   ZImageSource,
-  ZPaperCard,
   ZParagraph,
   ZSeverityColor,
   ZSubtitle
@@ -48,7 +47,7 @@ export function ZHomePage() {
     <div className='ZHomePage-root'>
       <ZCard
         className={classes.section}
-        width={ZSizeFixed.ExtraLarge}
+        width={ZSizeFixed.Large}
         avatar={<Terminal fontSize='inherit' />}
         heading='The Works System'
         subHeading='Make Development Easier'
@@ -75,15 +74,17 @@ export function ZHomePage() {
 
       <ZCard
         className={classes.section}
-        width={ZSizeFixed.ExtraLarge}
+        width={ZSizeFixed.Large}
         avatar={<PublicIcon fontSize='inherit' />}
         heading='Web Apps'
         subHeading='Build something for users'
         footer={
           <ZButton
-            label='Web Apps'
+            label='Gets Started'
             onClick={() => navigate('/web-apps/getting-started')}
             color={ZSeverityColor.Primary}
+            outline
+            width={ZSizeVaried.Full}
           />
         }
       >
@@ -104,18 +105,24 @@ export function ZHomePage() {
         </ZParagraph>
       </ZCard>
 
-      <ZPaperCard
+      <ZCard
         className={classes.section}
-        size='xl'
+        width={ZSizeFixed.Large}
         avatar={<DensitySmallIcon fontSize='inherit' />}
-        headerText='Microservices'
-        imageUrl='images/svg/nest.svg'
-        imageHeight='xl'
-        subHeaderText='Build foundations for application services'
-        actionText='Get Started'
-        actionColor='secondary'
-        onAction={() => navigate('/microservices')}
+        heading='Microservices'
+        subHeading='Build foundations for application services'
+        footer={
+          <ZButton
+            label='Get Started'
+            onClick={() => navigate('/microservices')}
+            color={ZSeverityColor.Secondary}
+            outline
+            width={ZSizeVaried.Full}
+          />
+        }
       >
+        <ZImageSource src='images/svg/nest.svg' height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
+
         <ZSubtitle className={classes.quote}>SOLID code is best.</ZSubtitle>
 
         <ZParagraph>
@@ -131,7 +138,7 @@ export function ZHomePage() {
           the best. Instead, Zthunworks creates microservices that are isolated from each other using the Nest framework
           and their orchestration is left up to each application backend to determine the actual business logic.
         </ZParagraph>
-      </ZPaperCard>
+      </ZCard>
     </div>
   );
 }
