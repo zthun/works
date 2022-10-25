@@ -2,9 +2,9 @@ import { MenuItem } from '@mui/material';
 import { cssClass, ZSizeFixed } from '@zthun/works.core';
 import { noop } from 'lodash';
 import React from 'react';
+import { ZSuspenseRotate } from 'src/suspense/suspense-rotate';
 import { IZButton } from '../buttons/button';
 import { ZGridLayout } from '../layout/grid-layout';
-import { ZCircularProgress } from '../loading/circular-progress';
 import { ZMenuEvent } from './menu-event';
 
 export interface IZMenuItem extends Omit<IZButton, 'color'>, Omit<IZButton, 'outline'> {}
@@ -38,7 +38,7 @@ export function ZMenuItem(props: IZMenuItem) {
       <ZGridLayout alignItems='center' columns='auto 1fr auto' gap={ZSizeFixed.Small}>
         {avatar}
         <div className='ZMenuItem-content'>{label}</div>
-        <ZCircularProgress size='sm' show={!!loading} />
+        <ZSuspenseRotate width={ZSizeFixed.ExtraSmall} loading={!!loading} />
       </ZGridLayout>
     </MenuItem>
   );

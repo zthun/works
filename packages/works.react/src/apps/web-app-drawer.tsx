@@ -14,9 +14,9 @@ import { IZDrawerButton, ZDrawerButton } from '../drawer/drawer-button';
 import { ZImageSource } from '../image/image-source';
 import { ZList } from '../list/list';
 import { ZListLineItem } from '../list/list-line-item';
-import { ZCircularProgress } from '../loading/circular-progress';
 import { useLocation, useNavigate } from '../router/router-dom';
 import { isStateErrored, isStateLoaded, isStateLoading } from '../state/use-async-state';
+import { ZSuspenseRotate } from '../suspense/suspense-rotate';
 import { makeStyles } from '../theme/make-styles';
 import { useWindowService } from '../window/window-service';
 import { useWebApp, useWebApps } from './web-app-service';
@@ -131,7 +131,7 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
           <ZListLineItem
             className='ZWebAppDrawer-item-loading'
             heading='Loading...'
-            avatar={<ZCircularProgress show size='lg' />}
+            avatar={<ZSuspenseRotate width={ZSizeFixed.Large} />}
           />
           <Divider />
         </>
@@ -164,7 +164,7 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
 
     if (isStateLoading(who)) {
       avatar = <HourglassEmptyIcon className={iconClass} color='info' />;
-      name = <ZCircularProgress show size='lg' />;
+      name = <ZSuspenseRotate width={ZSizeFixed.Large} />;
       short = '';
     } else if (isStateErrored(who)) {
       avatar = <ErrorIcon className={iconClass} color='error' />;
