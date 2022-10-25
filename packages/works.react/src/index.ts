@@ -27,6 +27,7 @@ export { IZCard, ZCard } from './card/card';
 // Component
 export { IZComponentAdornment } from './component/component-adornment';
 export { IZComponentAvatar } from './component/component-avatar';
+export { IZComponentColor } from './component/component-color';
 export { IZComponentDisabled } from './component/component-disabled';
 export { IZComponentHeading } from './component/component-heading';
 export { IZComponentHierarchy } from './component/component-hierarchy';
@@ -86,7 +87,6 @@ export { ZListLineItem } from './list/list-line-item';
 export { ZListLineItemComponentModel } from './list/list-line-item.cm';
 export { ZListComponentModel } from './list/list.cm';
 // Loading
-export { ZCircularBackdrop } from './loading/circular-backdrop';
 export { IZCircularProgressProps, ZCircularProgress } from './loading/circular-progress';
 // Menu
 export { IZMenu, ZMenu } from './menu/menu';
@@ -116,6 +116,9 @@ export {
   ZAsyncLoading
 } from './state/use-async-state';
 export { useSafeState } from './state/use-safe-state';
+// Suspense
+export { IZSuspense } from './suspense/suspense';
+export { ZSuspenseRotate } from './suspense/suspense-rotate';
 // Theme
 export { makeStyles } from './theme/make-styles';
 export { ZStateAnchor } from './theme/state-anchor';
