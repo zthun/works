@@ -42,46 +42,6 @@ const TintLight = ZColorTint.T100;
 const TintMain = ZColorTint.T500;
 const TintDark = ZColorTint.T900;
 
-/**
- * Represents the options for sizes for components.
- */
-export interface IZSizeOptions {
-  /**
-   * Smallest possible size.
-   */
-  xs?: number | string;
-  /**
-   * Small T-Shirt.
-   */
-  sm?: number | string;
-  /**
-   * Medium T-Shirt.
-   *
-   * This should be the default in most cases.
-   */
-  md?: number | string;
-  /**
-   * Large T-Shirt.
-   */
-  lg?: number | string;
-  /**
-   * Extra large T-Shirt.
-   */
-  xl?: number | string;
-  /**
-   * Maximum size.
-   *
-   * This will usually be 100%.
-   */
-  max?: number | string;
-  /**
-   * Empty.
-   *
-   * Mostly a helper as this will usually be 0.
-   */
-  none?: number | string;
-}
-
 const GapChart = {
   ...createSizeChartFixedFibonacci(0.5, 1),
   ...createSizeChartVoidZero()
@@ -122,13 +82,6 @@ const HueMap: Record<ZHueColor, IZColor> = {
  * some helpers and size options.
  */
 export interface IZTheme extends Theme {
-  /**
-   * Sizing options.
-   */
-  sizing: {
-    image: IZSizeOptions;
-  };
-
   /**
    * Converts from a color and tint to a hex color.
    *
@@ -199,16 +152,6 @@ export function useZthunworksTheme(): IZTheme {
   const mui = useMuiTheme();
 
   const base = {
-    sizing: {
-      image: {
-        xs: '3em',
-        sm: '5em',
-        md: '8em',
-        lg: '10em',
-        xl: '15em'
-      }
-    },
-
     hexify(color: IZColor, tint: ZColorTint): string {
       if (color[tint]) {
         // Severity colors will allow Main, Light, and Dark.
