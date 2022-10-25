@@ -76,6 +76,7 @@ export { IZGridLayout, ZGridLayout } from './layout/grid-layout';
 export { IZLineItemLayout, ZLineItemLayout } from './layout/line-item-layout';
 export { ZLineItemLayoutComponentModel } from './layout/line-item-layout.cm';
 export { ZPaddedBox } from './layout/padded-box';
+export { ZToolbar } from './layout/toolbar';
 export { ZWebAppLayout } from './layout/web-app-layout';
 // List
 export { ZList } from './list/list';
@@ -119,8 +120,6 @@ export { makeStyles } from './theme/make-styles';
 export { ZStateAnchor } from './theme/state-anchor';
 export { ZColorless, ZColorTint, ZHueColor, ZSeverityColor, ZShadeColor, ZStateColor } from './theme/state-color';
 export { ZStateOrientation } from './theme/state-orientation';
-// Toolbar
-export { ZToolbar } from './toolbar/toolbar';
 // Typography
 export {
   IZTypographyProps,
