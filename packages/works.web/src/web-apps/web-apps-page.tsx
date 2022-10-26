@@ -8,6 +8,7 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SmartButtonIcon from '@mui/icons-material/SmartButton';
 import StartIcon from '@mui/icons-material/Start';
+import TitleIcon from '@mui/icons-material/Title';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
 import WarningIcon from '@mui/icons-material/Warning';
 import {
@@ -30,6 +31,7 @@ import { ZChoicePage } from './components/choice-page';
 import { ZDrawerPage } from './components/drawer-page';
 import { ZListPage } from './components/list-page/list-page';
 import { ZSuspensePage } from './components/suspense-page/suspense-page';
+import { ZTextPage } from './components/text-page/text-page';
 import { ZTypographyPage } from './components/typography-page';
 import { ZGettingStartedPage } from './getting-started/getting-started-page';
 
@@ -95,6 +97,11 @@ export function ZWebAppsPage() {
             label='Suspense'
           />
           <ZMenuItem
+            avatar={<TitleIcon color='primary' />}
+            onClick={navigate.bind(null, 'components/text')}
+            label='Text'
+          />
+          <ZMenuItem
             avatar={<AbcIcon color='inherit' />}
             onClick={navigate.bind(null, 'components/typography')}
             label='Typography'
@@ -115,6 +122,7 @@ export function ZWebAppsPage() {
           <ZRoute path='drawer' element={<ZDrawerPage />} />
           <ZRoute path='list' element={<ZListPage />} />
           <ZRoute path='suspense' element={<ZSuspensePage />} />
+          <ZRoute path='text' element={<ZTextPage />} />
           <ZRoute path='typography' element={<ZTypographyPage />} />
         </ZRoute>
         <ZRoute path='/' element={<ZNavigate to='getting-started' />} />

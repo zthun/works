@@ -59,6 +59,8 @@ export { ZChoiceAutocomplete } from './form/choice-autocomplete';
 export { ZChoiceDropDown } from './form/choice-drop-down';
 export { ZChoiceOptionComponentModel } from './form/choice-option.cm';
 export { ZChoiceComponentModel } from './form/choice.cm';
+export { IZText } from './form/text';
+export { ZTextInput } from './form/text-input';
 // Health
 export { ZHealthIndicator } from './health/health-indicator';
 export { ZHealthIndicatorComponentModel } from './health/health-indicator.cm';
