@@ -13,6 +13,7 @@ import {
   ZColorless,
   ZGridLayout,
   ZH3,
+  ZNumberSlider,
   ZPaddedBox,
   ZParagraph,
   ZSeverityColor,
@@ -31,15 +32,13 @@ export function ZButtonPage() {
   const [loading, setLoading] = useSafeState(false);
   const [disabled, setDisabled] = useSafeState(false);
   const [color, setColor] = useSafeState<ZButtonColor>(ZColorless.Inherit);
-  const [width, setWidth] = useSafeState<ZSize>(ZSizeVaried.Fit);
-  const [height, setHeight] = useSafeState<ZSize>(ZSizeVaried.Fit);
+  const [width, setWidth] = useSafeState(0);
+  const [height, setHeight] = useSafeState(0);
   const [outline, setOutline] = useSafeState(false);
   const [borderless, setBorderless] = useSafeState(false);
   const colors = values<ZButtonColor>(ZSeverityColor).concat([ZColorless.Inherit]);
   const _setColor = setFirstOrDefault.bind(null, setColor, ZColorless.Inherit);
-  const sizes = values<ZSize>(ZSizeFixed).concat(values(ZSizeVaried));
-  const _setWidth = setFirstOrDefault.bind(null, setWidth, ZSizeVaried.Fit);
-  const _setHeight = setFirstOrDefault.bind(null, setHeight, ZSizeVaried.Fit);
+  const sizes = [ZSizeVaried.Fit as ZSize].concat(values(ZSizeFixed)).concat([ZSizeVaried.Full]);
 
   /**
    * Occurs when the button demo is clicked.
@@ -80,8 +79,8 @@ export function ZButtonPage() {
             disabled={disabled}
             color={color}
             borderless={borderless}
-            width={width}
-            height={height}
+            width={sizes[width]}
+            height={sizes[height]}
             outline={outline}
             onClick={handleClick}
             label='Button'
@@ -93,8 +92,8 @@ export function ZButtonPage() {
             disabled={disabled}
             color={color}
             borderless={borderless}
-            width={width}
-            height={height}
+            width={sizes[width]}
+            height={sizes[height]}
             outline={outline}
             onClick={handleClick}
             tooltip='Iconography Button'
@@ -117,22 +116,25 @@ export function ZButtonPage() {
             identifier={identity}
             renderOption={(c) => startCase(String(c))}
           />
-          <ZChoiceDropDown
-            value={[width]}
-            onValueChange={_setWidth}
-            label='Width'
-            options={sizes}
-            identifier={identity}
-            renderOption={(c) => startCase(String(c))}
-          />
-          <ZChoiceDropDown
-            value={[height]}
-            onValueChange={_setHeight}
-            label='Height'
-            options={sizes}
-            identifier={identity}
-            renderOption={(c) => startCase(String(c))}
-          />
+          <ZGridLayout columns='auto auto 1fr' gap={ZSizeFixed.Large}>
+            <ZNumberSlider
+              label='Width'
+              name='number-width'
+              value={width}
+              width={ZSizeFixed.Small}
+              onValueChange={setWidth}
+              min={0}
+              max={sizes.length - 1}
+            />
+            <ZNumberSlider
+              label='Height'
+              name='number-height'
+              width={ZSizeFixed.Small}
+              value={height}
+              onValueChange={setHeight}
+              max={sizes.length - 1}
+            />
+          </ZGridLayout>
         </ZGridLayout>
       </ZPaddedBox>
     </ZCard>
