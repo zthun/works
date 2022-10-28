@@ -1,8 +1,8 @@
 /* eslint-disable valid-jsdoc */
 
-import { RenderResult, waitFor } from '@testing-library/react/pure';
+import { fireEvent, RenderResult, waitFor } from '@testing-library/react/pure';
 import UserEvent from '@testing-library/user-event';
-import { IZCircusAct, IZCircusAction, IZCircusDriver, ZCircusActionType } from '@zthun/works.cirque';
+import { IZCircusAct, IZCircusAction, IZCircusDriver, ZCircusActionType, ZCircusKey } from '@zthun/works.cirque';
 import { get, keyBy } from 'lodash';
 
 /**
@@ -20,11 +20,18 @@ export class ZCircusDriver implements IZCircusDriver {
   public constructor(private _result: RenderResult, private _element: HTMLElement) {}
 
   /**
+   * Flushes an event loop.
+   */
+  private _flush(): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, 1));
+  }
+
+  /**
    * Destroys the render session.
    */
   public async destroy() {
     this._result.unmount();
-    await new Promise((resolve) => setTimeout(resolve, 1));
+    await this._flush();
   }
 
   /**
@@ -68,7 +75,18 @@ export class ZCircusDriver implements IZCircusDriver {
   }
 
   /**
-   * @Inheritdoc
+   * @inheritdoc
+   */
+  public async input(val?: string): Promise<string | null> {
+    fireEvent.change(this._element, { target: { value: val } });
+    await this._flush();
+    fireEvent.input(this._element, { target: { value: val } });
+    await this._flush();
+    return (this._element as any).value;
+  }
+
+  /**
+   * @inheritdoc
    */
   public selected(): Promise<boolean> {
     return Promise.resolve(get(this._element, 'checked', false));
@@ -123,9 +141,13 @@ export class ZCircusDriver implements IZCircusDriver {
     const user = UserEvent.setup();
 
     const dictionary: Record<ZCircusActionType, (a?: IZCircusAction) => any> = {
-      [ZCircusActionType.Click]: () => user.pointer({ keys: '[MouseLeft]', target: this._element }),
-      [ZCircusActionType.KeysClick]: (a: IZCircusAction) => user.keyboard(a.context),
-      [ZCircusActionType.Magic]: (a: IZCircusAction) => a.context()
+      [ZCircusActionType.MouseLeftDown]: () => user.pointer({ keys: '[MouseLeft>]', target: this._element }),
+      [ZCircusActionType.MouseLeftUp]: () => user.pointer({ keys: '[/MouseLeft]', target: this._element }),
+      [ZCircusActionType.MouseRightDown]: () => user.pointer({ keys: '[MouseRight>]', target: this._element }),
+      [ZCircusActionType.MouseRightUp]: () => user.pointer({ keys: '[/MouseRight]', target: this._element }),
+      [ZCircusActionType.KeyDown]: (a: IZCircusAction<ZCircusKey>) => user.keyboard(`[${a.context.code}>]`),
+      [ZCircusActionType.KeyUp]: (a: IZCircusAction<ZCircusKey>) => user.keyboard(`[/${a.context.code}]`),
+      [ZCircusActionType.Magic]: (a: IZCircusAction<() => any>) => a.context()
     };
 
     let promise = Promise.resolve();
@@ -135,8 +157,7 @@ export class ZCircusDriver implements IZCircusDriver {
     });
 
     await promise;
-    // Flush the queue
-    return new Promise((resolve) => setTimeout(resolve, 1));
+    await this._flush();
   }
 
   /**

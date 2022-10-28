@@ -58,9 +58,30 @@ export interface IZCircusDriver {
    *
    * @returns
    *        The underlying value of the driver context if there
-   *        is one.  Returns undefined if there is no value.
+   *        is one.  Returns null if the driver does not support
+   *        a value.
    */
   value(): Promise<string | null>;
+
+  /**
+   * Attempts to set the value of the driver context directly.
+   *
+   * This is here to support workflows where pressing mouse events
+   * and keys just doesn't work.  This CAN do the same thing
+   * as user input depending on the framework being used,
+   * but the intention is to set the value directly.
+   *
+   * This is mostly to be used with HTMLInputElements, but can be used
+   * with any Element or WebComponent that supports a value field.
+   *
+   * @param val
+   *        The value to set.
+   *
+   * @returns
+   *        The new value, or null if value is not supported for the
+   *        element.
+   */
+  input(val: string): Promise<string | null>;
 
   /**
    * Gets whether the value of the driver context is selected.

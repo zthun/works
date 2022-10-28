@@ -1,7 +1,7 @@
 /* eslint-disable valid-jsdoc */
 import { IZCircusAct, IZCircusAction, IZCircusDriver, ZCircusActionType } from '@zthun/works.cirque';
 import { keyBy } from 'lodash';
-import { Actions, By, WebDriver, WebElement } from 'selenium-webdriver';
+import { Actions, Button, By, WebDriver, WebElement } from 'selenium-webdriver';
 
 /**
  * Represents the circus driver for selenium actions.
@@ -68,6 +68,13 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
+  public async input(): Promise<string | null> {
+    return null;
+  }
+
+  /**
+   * @inheritdoc
+   */
   public selected(): Promise<boolean> {
     return this._search.isSelected();
   }
@@ -119,8 +126,12 @@ export class ZCircusDriver implements IZCircusDriver {
     let performance = this._seleniumDriver.actions();
 
     const map: Record<ZCircusActionType, (a: IZCircusAction) => Actions> = {
-      [ZCircusActionType.Click]: () => performance.click(this._search),
-      [ZCircusActionType.KeysClick]: (a) => performance.sendKeys(a.context),
+      [ZCircusActionType.MouseLeftDown]: () => performance.press(Button.LEFT),
+      [ZCircusActionType.MouseLeftUp]: () => performance.release(Button.LEFT),
+      [ZCircusActionType.MouseRightDown]: () => performance.press(Button.RIGHT),
+      [ZCircusActionType.MouseRightUp]: () => performance.release(Button.RIGHT),
+      [ZCircusActionType.KeyDown]: (a: IZCircusAction) => performance.keyDown(a.context.code),
+      [ZCircusActionType.KeyUp]: (a: IZCircusAction) => performance.keyUp(a.context.code),
       [ZCircusActionType.Magic]: (a: IZCircusAction) => {
         a.context();
         return performance;
