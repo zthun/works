@@ -6,9 +6,9 @@ import { ZLineItemLayout } from './line-item-layout';
 import { ZLineItemLayoutComponentModel } from './line-item-layout.cm';
 
 describe('ZLineItemLayout', () => {
-  let prefix: (() => ReactNode) | ReactNode | undefined;
-  let body: (() => ReactNode) | ReactNode | undefined;
-  let suffix: (() => ReactNode) | ReactNode | undefined;
+  let prefix: ReactNode | undefined;
+  let body: ReactNode | undefined;
+  let suffix: ReactNode | undefined;
 
   beforeEach(() => {
     prefix = undefined;
@@ -25,24 +25,12 @@ describe('ZLineItemLayout', () => {
   describe('Prefix', () => {
     it('should render as a static node', async () => {
       // Arrange.
-      const expected = 'Prefix';
-      prefix = expected;
+      prefix = 'Prefix';
       const target = await createTestTarget();
       // Act.
       const actual = await (await target.prefix()).text();
       // Assert.
-      expect(actual).toEqual(expected);
-    });
-
-    it('should render as a function', async () => {
-      // Arrange.
-      const expected = 'Prefix';
-      prefix = () => expected;
-      const target = await createTestTarget();
-      // Act.
-      const actual = await (await target.prefix()).text();
-      // Assert.
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual(prefix);
     });
 
     it('should render an empty block', async () => {
@@ -58,24 +46,12 @@ describe('ZLineItemLayout', () => {
   describe('Body', () => {
     it('should render as a static node', async () => {
       // Arrange.
-      const expected = 'Body';
-      body = expected;
+      body = 'Body';
       const target = await createTestTarget();
       // Act.
       const actual = await (await target.body()).text();
       // Assert.
-      expect(actual).toEqual(expected);
-    });
-
-    it('should render as a function', async () => {
-      // Arrange.
-      const expected = 'Body';
-      body = () => expected;
-      const target = await createTestTarget();
-      // Act.
-      const actual = await (await target.body()).text();
-      // Assert.
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual(body);
     });
 
     it('should render an empty block', async () => {
@@ -91,24 +67,12 @@ describe('ZLineItemLayout', () => {
   describe('Suffix', () => {
     it('should render as a static node', async () => {
       // Arrange.
-      const expected = 'Suffix';
-      suffix = expected;
+      suffix = 'Suffix';
       const target = await createTestTarget();
       // Act.
       const actual = await (await target.suffix()).text();
       // Assert.
-      expect(actual).toEqual(expected);
-    });
-
-    it('should render as a function', async () => {
-      // Arrange.
-      const expected = 'Suffix';
-      suffix = () => expected;
-      const target = await createTestTarget();
-      // Act.
-      const actual = await (await target.suffix()).text();
-      // Assert.
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual(suffix);
     });
 
     it('should render an empty block', async () => {

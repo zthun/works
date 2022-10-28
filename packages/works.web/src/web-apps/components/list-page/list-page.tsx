@@ -56,11 +56,11 @@ export function ZListPage() {
         <ZBorderLayout background={{ color: ZShadeColor.Grey, tint: ZColorTint.Light }} width={ZSizeFixed.Medium}>
           <ZList>
             <ZListLineItem
-              avatar={<CheckCircleIcon color='success' fontSize='large' />}
-              adornment={<FavoriteIcon color='error' fontSize='large' />}
+              prefix={<CheckCircleIcon color='success' fontSize='large' />}
+              suffix={<FavoriteIcon color='error' fontSize='large' />}
               name='everything'
               heading='Line Item Everything'
-              subHeading='Line item with header, sub header, avatar, adornment'
+              subHeading='Line item with header, sub header, prefix, and suffix'
               onClick={showAlert.bind(null, 'Success', 'Line items are great', ZAlertSeverity.Success)}
             />
             <ZListLineItem
@@ -70,15 +70,15 @@ export function ZListPage() {
               onClick={showAlert.bind(null, 'Warning', 'Pictures make line items pretty', ZAlertSeverity.Warning)}
             />
             <ZListLineItem
-              avatar={<FavoriteIcon color='info' fontSize='large' />}
+              prefix={<FavoriteIcon color='info' fontSize='large' />}
               name='avatar-and-text'
-              heading='Avatar and Text (Unclickable)'
+              heading='Prefix and Text (Unclickable)'
             />
             <ZListLineItem
-              avatar={<FavoriteIcon color='warning' fontSize='large' />}
+              prefix={<FavoriteIcon color='warning' fontSize='large' />}
               name='avatar-text-and-adornment'
-              heading='Avatar, Text, and Adornment (Unclickable)'
-              adornment={<CheckCircleIcon color='primary' fontSize='large' />}
+              heading='Prefix, Text, and Suffix (Unclickable)'
+              suffix={<CheckCircleIcon color='primary' fontSize='large' />}
             />
           </ZList>
         </ZBorderLayout>

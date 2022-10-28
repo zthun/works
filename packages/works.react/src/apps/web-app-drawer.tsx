@@ -102,7 +102,7 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
         className={clasz}
         onClick={handler}
         name={id}
-        avatar={avatar}
+        prefix={avatar}
         heading={display}
         subHeading={description}
       />
@@ -131,7 +131,7 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
           <ZListLineItem
             className='ZWebAppDrawer-item-loading'
             heading='Loading...'
-            avatar={<ZSuspenseRotate width={ZSizeFixed.Large} />}
+            prefix={<ZSuspenseRotate width={ZSizeFixed.Large} />}
           />
           <Divider />
         </>

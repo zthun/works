@@ -1,8 +1,15 @@
 import { ReactNode } from 'react';
 
 /**
- * A component that contains an optional adornment in addition to the main content.
+ * A component that contains optional adornments in addition to the main content.
  */
 export interface IZComponentAdornment {
-  adornment?: ReactNode;
+  /**
+   * The start adornment.
+   */
+  prefix?: ReactNode;
+  /**
+   * The end adornment.
+   */
+  suffix?: ReactNode;
 }

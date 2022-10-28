@@ -2,7 +2,6 @@ import { ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/mat
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
 import { IZComponentAdornment } from '../component/component-adornment';
-import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentHeading } from '../component/component-heading';
 import { IZComponentName } from '../component/component-name';
@@ -15,7 +14,6 @@ import { makeStyles } from '../theme/make-styles';
 export interface IZListLineItem
   extends IZComponentHeading,
     IZComponentAdornment,
-    IZComponentAvatar,
     IZComponentDisabled,
     IZComponentName,
     IZComponentStyle {
@@ -45,7 +43,7 @@ const useListLineItemStyles = makeStyles<IZListLineItem>()((theme, props) => {
  *        The JSX to render this item.
  */
 export function ZListLineItem(props: IZListLineItem) {
-  const { className, adornment, avatar, heading, name, subHeading, onClick } = props;
+  const { className, prefix, heading, name, subHeading, suffix, onClick } = props;
   const clasz = cssClass('ZListItem-root', 'ZListLineItem-root', className);
   const { classes } = useListLineItemStyles(props);
 
@@ -53,7 +51,7 @@ export function ZListLineItem(props: IZListLineItem) {
     const avatarClass = cssClass('ZListLineItem-avatar', classes.avatar);
     return (
       <>
-        <ListItemAvatar className={avatarClass}>{avatar}</ListItemAvatar>
+        <ListItemAvatar className={avatarClass}>{prefix}</ListItemAvatar>
         <ListItemText className='ZListLineItem-text' primary={heading} secondary={subHeading} />
       </>
     );
@@ -66,7 +64,7 @@ export function ZListLineItem(props: IZListLineItem) {
   );
 
   return (
-    <ListItem className={clasz} secondaryAction={adornment} data-name={name}>
+    <ListItem className={clasz} secondaryAction={suffix} data-name={name}>
       {onClick ? renderClickableContents() : renderContents()}
     </ListItem>
   );
