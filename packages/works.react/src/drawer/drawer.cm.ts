@@ -1,4 +1,4 @@
-import { IZCircusDriver, ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusActBuilder, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
 
 /**
  * Represents the component model for a drawer.
@@ -45,7 +45,7 @@ export class ZDrawerComponentModel extends ZCircusComponentModel {
    * @returns A promise that resolves once the escape key is clicked.
    */
   public async escape() {
-    const act = new ZCircusActBuilder().keysClick('[Escape]').build();
+    const act = new ZCircusActBuilder().press(ZCircusKeyboardQwerty.escape).build();
     return this.driver.perform(act);
   }
 }

@@ -1,13 +1,17 @@
 export enum ZCircusActionType {
   // Mouse Actions
-  Click = 'click',
+  MouseLeftDown = 'mouse-left-down',
+  MouseLeftUp = 'mouse-left-up',
+  MouseRightDown = 'mouse-right-down',
+  MouseRightUp = 'mouse-right-up',
   // Keyboard Actions
-  KeysClick = 'keys-click',
+  KeyDown = 'key-down',
+  KeyUp = 'key-up',
   // Custom Actions
   Magic = 'magic'
 }
 
-export interface IZCircusAction {
+export interface IZCircusAction<TContext = any> {
   name: ZCircusActionType;
-  context?: any;
+  context: TContext;
 }

@@ -1,4 +1,4 @@
-import { ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusActBuilder, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
 import { findIndex } from 'lodash';
 import { ZChoiceOptionComponentModel } from './choice-option.cm';
 
@@ -62,7 +62,7 @@ export class ZChoiceComponentModel extends ZCircusComponentModel {
    *        hidden.
    */
   public close(): Promise<void> {
-    const act = new ZCircusActBuilder().keysClick('[Escape]').build();
+    const act = new ZCircusActBuilder().press(ZCircusKeyboardQwerty.escape).build();
     return this.driver.perform(act);
   }
 
