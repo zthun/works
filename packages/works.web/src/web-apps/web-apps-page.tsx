@@ -5,6 +5,7 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import LoopIcon from '@mui/icons-material/Loop';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import NumbersIcon from '@mui/icons-material/Numbers';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SmartButtonIcon from '@mui/icons-material/SmartButton';
 import StartIcon from '@mui/icons-material/Start';
@@ -30,6 +31,7 @@ import { ZButtonPage } from './components/button-page';
 import { ZChoicePage } from './components/choice-page';
 import { ZDrawerPage } from './components/drawer-page';
 import { ZListPage } from './components/list-page/list-page';
+import { ZNumberPage } from './components/number-page/number-page';
 import { ZSuspensePage } from './components/suspense-page/suspense-page';
 import { ZTextPage } from './components/text-page/text-page';
 import { ZTypographyPage } from './components/typography-page';
@@ -92,6 +94,11 @@ export function ZWebAppsPage() {
             label='List'
           />
           <ZMenuItem
+            avatar={<NumbersIcon color='success' />}
+            onClick={navigate.bind(null, 'components/number')}
+            label='Number'
+          />
+          <ZMenuItem
             avatar={<LoopIcon color='warning' />}
             onClick={navigate.bind(null, 'components/suspense')}
             label='Suspense'
@@ -121,6 +128,7 @@ export function ZWebAppsPage() {
           <ZRoute path='choice' element={<ZChoicePage />} />
           <ZRoute path='drawer' element={<ZDrawerPage />} />
           <ZRoute path='list' element={<ZListPage />} />
+          <ZRoute path='number' element={<ZNumberPage />} />
           <ZRoute path='suspense' element={<ZSuspensePage />} />
           <ZRoute path='text' element={<ZTextPage />} />
           <ZRoute path='typography' element={<ZTypographyPage />} />
