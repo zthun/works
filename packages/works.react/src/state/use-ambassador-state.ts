@@ -14,6 +14,8 @@ import { useSafeState } from './use-safe-state';
  *        The mutator method to set the current value.  This can
  *        be undefined, but if it is set, both the internal value and
  *        the prop value are set.
+ * @param initial
+ *        The initial value to set if current is undefined.
  *
  * @returns
  *        A tuple where the first item is the current state and the 2nd item is a mutator
@@ -21,9 +23,10 @@ import { useSafeState } from './use-safe-state';
  */
 export function useAmbassadorState<T>(
   current: T | undefined,
-  setCurrent: ((val: T) => void) | undefined
+  setCurrent: ((val: T) => void) | undefined,
+  initial?: T
 ): [T | undefined, (val: T) => void] {
-  const [localCurrent, setLocalCurrent] = useSafeState<T | undefined>(current);
+  const [localCurrent, setLocalCurrent] = useSafeState<T | undefined>(current || initial);
 
   const _current = current === undefined ? localCurrent : current;
 

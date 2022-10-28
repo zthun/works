@@ -4,14 +4,16 @@ import { useAmbassadorState } from './use-ambassador-state';
 
 describe('useAmbassadorState', () => {
   let current: string | undefined;
+  let initial: string | undefined;
   let setCurrent: ((val: string) => void) | undefined;
 
   function createTestTarget() {
-    return new ZCircusSetupHook(() => useAmbassadorState(current, setCurrent)).setup();
+    return new ZCircusSetupHook(() => useAmbassadorState(current, setCurrent, initial)).setup();
   }
 
   beforeEach(() => {
     current = undefined;
+    initial = undefined;
     setCurrent = undefined;
   });
 
@@ -55,6 +57,16 @@ describe('useAmbassadorState', () => {
   });
 
   describe('State', () => {
+    it('should set an initial value.', async () => {
+      // Arrange
+      initial = 'initial';
+      const target = await createTestTarget();
+      // Act
+      const [actual] = await target.current();
+      // Assert
+      expect(actual).toEqual(initial);
+    });
+
     it('should set the internal state if the props are undefined.', async () => {
       // Arrange
       const target = await createTestTarget();
