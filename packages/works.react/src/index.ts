@@ -63,6 +63,7 @@ export { IZNumber } from './form/number';
 export { ZNumberSlider } from './form/number-slider';
 export { IZText } from './form/text';
 export { ZTextInput } from './form/text-input';
+export { ZTextSensitive } from './form/text-sensitive';
 // Health
 export { ZHealthIndicator } from './health/health-indicator';
 export { ZHealthIndicatorComponentModel } from './health/health-indicator.cm';
