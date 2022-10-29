@@ -1,15 +1,15 @@
-import { ZCircusKey } from './circus-key';
+import { IZCircusKey } from './circus-key';
 import { ZCircusKeyboardQwerty } from './circus-keyboard-qwerty';
 
 /**
  * A translator that can convert from codes and keys to ZCircusKey objects.
  */
-export class ZCircusKeyboardTranslator {
-  public static readonly Qwerty = new ZCircusKeyboardTranslator(Object.values(ZCircusKeyboardQwerty));
+export class ZCircusKeyTranslator {
+  public static readonly Qwerty = new ZCircusKeyTranslator(Object.values(ZCircusKeyboardQwerty));
 
-  private _lowerCaseToKeyValue = new Map<string, ZCircusKey>();
-  private _upperCaseToKeyValue = new Map<string, ZCircusKey>();
-  private _keyCodeToKeyValue = new Map<string, ZCircusKey>();
+  private _lowerCaseToKeyValue = new Map<string, IZCircusKey>();
+  private _upperCaseToKeyValue = new Map<string, IZCircusKey>();
+  private _keyCodeToKeyValue = new Map<string, IZCircusKey>();
 
   /**
    * Initializes a new instance of this object.
@@ -17,7 +17,7 @@ export class ZCircusKeyboardTranslator {
    * @param keys
    *        The collection of keys to support.
    */
-  public constructor(keys: ZCircusKey[]) {
+  public constructor(keys: IZCircusKey[]) {
     keys.forEach((key) => {
       this._lowerCaseToKeyValue.set(key.lower, key);
       this._upperCaseToKeyValue.set(key.upper, key);
@@ -36,7 +36,7 @@ export class ZCircusKeyboardTranslator {
    *        The actual key representation of the specified key
    *        or null if no such key exists.
    */
-  public translate(keyOrCode: string): ZCircusKey | null {
+  public translate(keyOrCode: string): IZCircusKey | null {
     return (
       this._lowerCaseToKeyValue.get(keyOrCode) ||
       this._upperCaseToKeyValue.get(keyOrCode) ||

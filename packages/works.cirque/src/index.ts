@@ -5,9 +5,9 @@ export { ZCircusComponentModel, ZCircusComponentModelConstructor } from './compo
 // Driver
 export { IZCircusDriver } from './driver/circus-driver';
 // Keyboard
-export { ZCircusKey } from './keyboard/circus-key';
+export { IZCircusKey } from './keyboard/circus-key';
 export { ZCircusKeyboardQwerty } from './keyboard/circus-keyboard-qwerty';
 // Performance
 export { IZCircusAct, ZCircusActBuilder } from './performance/circus-act';
-export { IZCircusAction, ZCircusActionType } from './performance/circus-action';
+export { isKeyboardAction, isMouseAction, IZCircusAction, ZCircusActionType } from './performance/circus-action';
 export { IZCircusSetup } from './performance/circus-setup';
