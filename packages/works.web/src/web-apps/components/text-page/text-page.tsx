@@ -1,4 +1,8 @@
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import FlagIcon from '@mui/icons-material/Flag';
+import PrivacyTipIcon from '@mui/icons-material/PrivacyTip';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import SearchIcon from '@mui/icons-material/Search';
 import { ZSizeFixed } from '@zthun/works.core';
 import {
   useSafeState,
@@ -9,7 +13,8 @@ import {
   ZH3,
   ZPaddedBox,
   ZParagraph,
-  ZTextInput
+  ZTextInput,
+  ZTextSensitive
 } from '@zthun/works.react';
 import React from 'react';
 
@@ -20,6 +25,8 @@ import React from 'react';
  */
 export function ZTextPage() {
   const [disabled, setDisabled] = useSafeState(false);
+  const [readOnly, setReadOnly] = useSafeState(false);
+  const [required, setRequired] = useSafeState(false);
   const [value, setValue] = useSafeState('');
 
   return (
@@ -38,8 +45,51 @@ export function ZTextPage() {
         </ZParagraph>
 
         <ZPaddedBox margin={{ bottom: ZSizeFixed.Medium }}>
-          <ZGridLayout alignItems='center' columns='auto 1fr' gap={ZSizeFixed.ExtraSmall}>
-            <ZTextInput value={value} onValueChange={setValue} label='Text Input' />
+          <ZGridLayout alignItems='center' columns='auto auto' gap={ZSizeFixed.Medium}>
+            <ZTextInput
+              disabled={disabled}
+              readOnly={readOnly}
+              value={value}
+              required={required}
+              name='input'
+              placeholder='Placeholder'
+              onValueChange={setValue}
+              label='Text Input'
+            />
+            <ZTextSensitive
+              disabled={disabled}
+              readOnly={readOnly}
+              value={value}
+              required={required}
+              name='sensitive'
+              placeholder='Password'
+              onValueChange={setValue}
+              label='Text Sensitive'
+            />
+            <ZTextInput
+              disabled={disabled}
+              readOnly={readOnly}
+              value={value}
+              required={required}
+              name='adornments'
+              placeholder='Adornments'
+              onValueChange={setValue}
+              label='Text Input With Adornments'
+              prefix={<FlagIcon color='success' />}
+              suffix={<SearchIcon />}
+            />
+            <ZTextSensitive
+              disabled={disabled}
+              readOnly={readOnly}
+              value={value}
+              required={required}
+              name='sensitive-adornments'
+              placeholder='Sensitive Adornments'
+              onValueChange={setValue}
+              label='Sensitive Text With Adornments'
+              prefix={<QuestionMarkIcon color='info' />}
+              suffix={<PrivacyTipIcon />}
+            />
           </ZGridLayout>
         </ZPaddedBox>
 
@@ -51,6 +101,8 @@ export function ZTextPage() {
 
         <ZGridLayout gap={ZSizeFixed.Medium}>
           <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
+          <ZBooleanSwitch value={readOnly} onValueChange={setReadOnly} label='ReadOnly' />
+          <ZBooleanSwitch value={required} onValueChange={setRequired} label='Required' />
         </ZGridLayout>
       </ZPaddedBox>
     </ZCard>
