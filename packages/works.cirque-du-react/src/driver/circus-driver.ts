@@ -2,8 +2,10 @@
 
 import { fireEvent, RenderResult, waitFor } from '@testing-library/react/pure';
 import UserEvent from '@testing-library/user-event';
-import { IZCircusAct, IZCircusAction, IZCircusDriver, ZCircusActionType, ZCircusKey } from '@zthun/works.cirque';
+import { IZCircusAct, IZCircusDriver } from '@zthun/works.cirque';
 import { get, keyBy } from 'lodash';
+import { flush } from '../util/flush';
+import { squash } from '../util/squash';
 
 /**
  * Represents a circus driver that wraps an html element.
@@ -20,18 +22,11 @@ export class ZCircusDriver implements IZCircusDriver {
   public constructor(private _result: RenderResult, private _element: HTMLElement) {}
 
   /**
-   * Flushes an event loop.
-   */
-  private _flush(): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, 1));
-  }
-
-  /**
    * Destroys the render session.
    */
   public async destroy() {
     this._result.unmount();
-    await this._flush();
+    await flush();
   }
 
   /**
@@ -79,9 +74,9 @@ export class ZCircusDriver implements IZCircusDriver {
    */
   public async input(val?: string): Promise<string | null> {
     fireEvent.change(this._element, { target: { value: val } });
-    await this._flush();
+    await flush();
     fireEvent.input(this._element, { target: { value: val } });
-    await this._flush();
+    await flush();
     return (this._element as any).value;
   }
 
@@ -138,26 +133,22 @@ export class ZCircusDriver implements IZCircusDriver {
    * @inheritdoc
    */
   public async perform(act: IZCircusAct): Promise<void> {
-    const user = UserEvent.setup();
+    const user = UserEvent.setup({
+      // As of 14.4.0, auto modify is not yet implemented, so we will do the modifications ourselves.
+      autoModify: false
+    });
 
-    const dictionary: Record<ZCircusActionType, (a?: IZCircusAction) => any> = {
-      [ZCircusActionType.MouseLeftDown]: () => user.pointer({ keys: '[MouseLeft>]', target: this._element }),
-      [ZCircusActionType.MouseLeftUp]: () => user.pointer({ keys: '[/MouseLeft]', target: this._element }),
-      [ZCircusActionType.MouseRightDown]: () => user.pointer({ keys: '[MouseRight>]', target: this._element }),
-      [ZCircusActionType.MouseRightUp]: () => user.pointer({ keys: '[/MouseRight]', target: this._element }),
-      [ZCircusActionType.KeyDown]: (a: IZCircusAction<ZCircusKey>) => user.keyboard(`[${a.context.code}>]`),
-      [ZCircusActionType.KeyUp]: (a: IZCircusAction<ZCircusKey>) => user.keyboard(`[/${a.context.code}]`),
-      [ZCircusActionType.Magic]: (a: IZCircusAction<() => any>) => a.context()
-    };
+    // With user events, all events get squashed to magic.
+    const _act = squash(user, act, this._element);
 
     let promise = Promise.resolve();
 
-    act.actions.forEach((a) => {
-      promise = promise.then(() => dictionary[a.name](a));
+    _act.actions.forEach((a) => {
+      promise = promise.then(() => a.context());
     });
 
     await promise;
-    await this._flush();
+    await flush();
   }
 
   /**
