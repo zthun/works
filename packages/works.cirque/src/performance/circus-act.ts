@@ -1,6 +1,6 @@
-import { ZCircusKey } from '../keyboard/circus-key';
+import { IZCircusKey } from '../keyboard/circus-key';
+import { ZCircusKeyTranslator } from '../keyboard/circus-key-translator';
 import { ZCircusKeyboardQwerty } from '../keyboard/circus-keyboard-qwerty';
-import { ZCircusKeyboardTranslator } from '../keyboard/circus-keyboard-translator';
 import { IZCircusAction, ZCircusActionType } from './circus-action';
 
 /**
@@ -22,6 +22,20 @@ export class ZCircusActBuilder {
   /**
    * Appends an action.
    *
+   * @param action
+   *        The action to append.
+   *
+   * @returns
+   *        This object.
+   */
+  public action(action: IZCircusAction): this {
+    this._actions.push({ ...action });
+    return this;
+  }
+
+  /**
+   * Appends an action.
+   *
    * @param name
    *        The action name.
    * @param context
@@ -30,13 +44,12 @@ export class ZCircusActBuilder {
    * @returns
    *        This object.
    */
-  private _action(name: ZCircusActionType, context?: any) {
-    this._actions.push({ name, context });
-    return this;
+  private _action(name: ZCircusActionType, context?: any): this {
+    return this.action({ name, context });
   }
 
-  public keyDown: (key: ZCircusKey) => this = this._action.bind(this, ZCircusActionType.KeyDown);
-  public keyUp: (key: ZCircusKey) => this = this._action.bind(this, ZCircusActionType.KeyUp);
+  public keyDown: (key: IZCircusKey) => this = this._action.bind(this, ZCircusActionType.KeyDown);
+  public keyUp: (key: IZCircusKey) => this = this._action.bind(this, ZCircusActionType.KeyUp);
 
   public leftMouseDown: () => this = this._action.bind(this, ZCircusActionType.MouseLeftDown);
   public leftMouseUp: () => this = this._action.bind(this, ZCircusActionType.MouseLeftUp);
@@ -52,7 +65,7 @@ export class ZCircusActBuilder {
    * @returns
    *        This object.
    */
-  public press(key: ZCircusKey) {
+  public press(key: IZCircusKey) {
     return this.keyDown(key).keyUp(key);
   }
 
@@ -69,13 +82,13 @@ export class ZCircusActBuilder {
    *        This object.
    */
   public type(keys: string): this {
-    const qwerty = ZCircusKeyboardTranslator.Qwerty;
+    const qwerty = ZCircusKeyTranslator.Qwerty;
 
     for (const key of keys) {
       const k = qwerty.translate(key);
 
       if (key === k?.upper && key !== k?.lower) {
-        this.keyDown(ZCircusKeyboardQwerty.ShiftLeft).press(k).keyUp(ZCircusKeyboardQwerty.ShiftLeft);
+        this.keyDown(ZCircusKeyboardQwerty.shiftLeft).press(k).keyUp(ZCircusKeyboardQwerty.shiftLeft);
       } else if (k != null) {
         this.press(k);
       }
