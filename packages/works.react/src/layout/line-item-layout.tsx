@@ -44,8 +44,7 @@ const useLineItemLayoutStyles = makeStyles()((theme) => {
  *
  */
 export function ZLineItemLayout(props: IZLineItemLayout) {
-  const renderEmptySpace = (): ReactNode => null;
-  const { className, prefix = renderEmptySpace, body = renderEmptySpace, suffix = renderEmptySpace } = props;
+  const { className, prefix, body, suffix } = props;
   const styles = useLineItemLayoutStyles();
 
   return (
