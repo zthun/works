@@ -48,8 +48,6 @@ const useButtonStyles = makeStyles<IZButton>()((theme, props) => {
       width: '100%'
     },
     content: {
-      marginLeft: theme.gap(ZSizeFixed.Small),
-      marginRight: theme.gap(ZSizeFixed.Small),
       display: 'flex'
     },
     borderless: {
