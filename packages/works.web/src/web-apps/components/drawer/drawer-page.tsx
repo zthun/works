@@ -1,6 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import { ZSizeFixed } from '@zthun/works.core';
+import { setFirstOrDefault, ZSizeFixed } from '@zthun/works.core';
 import {
   useSafeState,
   ZButton,
@@ -16,7 +16,7 @@ import {
   ZSeverityColor,
   ZStateAnchor
 } from '@zthun/works.react';
-import { first, identity, startCase, values } from 'lodash';
+import { identity, startCase, values } from 'lodash';
 import React from 'react';
 
 /**
@@ -25,8 +25,8 @@ import React from 'react';
  * @returns The JSX to render the page.
  */
 export function ZDrawerPage() {
-  const [anchor, setAnchor] = useSafeState([ZStateAnchor.Left]);
-  const [color, setColor] = useSafeState<ZButtonColor[]>([ZColorless.Inherit]);
+  const [anchor, setAnchor] = useSafeState<ZStateAnchor>(ZStateAnchor.Left);
+  const [color, setColor] = useSafeState<ZButtonColor>(ZColorless.Inherit);
   const [timestamp, setTimestamp] = useSafeState(new Date().getTime());
   const anchors = values(ZStateAnchor);
   const colors = values<ZButtonColor>(ZSeverityColor).concat([ZColorless.Inherit]);
@@ -55,16 +55,12 @@ export function ZDrawerPage() {
           know where specific pieces of information is.
         </ZParagraph>
 
-        <ZDrawerButton
-          ButtonProps={{ color: first(color) }}
-          DrawerProps={{ anchor: first(anchor) }}
-          closeOnChange={[timestamp]}
-        >
+        <ZDrawerButton ButtonProps={{ color }} DrawerProps={{ anchor }} closeOnChange={[timestamp]}>
           <ZPaddedBox padding={ZSizeFixed.Medium}>
             <ZH3>Drawer</ZH3>
             <ZParagraph>You can put whatever you want in a drawer.</ZParagraph>
             <ZButton
-              color={first(color)}
+              color={color}
               label='Close Drawer'
               avatar={<CloseIcon fontSize='inherit' color='inherit' />}
               onClick={now}
@@ -78,16 +74,17 @@ export function ZDrawerPage() {
 
         <ZGridLayout gap={ZSizeFixed.Medium}>
           <ZChoiceDropDown
-            value={anchor}
-            onValueChange={setAnchor}
+            value={[anchor]}
+            onValueChange={setFirstOrDefault.bind(null, setAnchor, ZStateAnchor.Left)}
             options={anchors}
             label='Anchor'
             identifier={identity}
             renderOption={startCase}
+            indelible
           />
           <ZChoiceDropDown
-            value={color}
-            onValueChange={setColor}
+            value={[color]}
+            onValueChange={setFirstOrDefault.bind(null, setColor, ZColorless.Inherit)}
             options={colors}
             label='Color'
             identifier={identity}

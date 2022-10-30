@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 
 /**
  * A method that can replace useState and is safe to invoke when
@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState } from 'react';
  * @returns A tuple where the first element is the current state, and the second
  *          element is the setter for the state.
  */
-export function useSafeState<T>(initial: T | (() => T)): [T, (val: T | ((v: T) => T)) => void] {
+export function useSafeState<T>(initial: T | (() => T)): [T, Dispatch<SetStateAction<T>>] {
   const abort = useMemo(() => new AbortController(), []);
   useEffect(() => () => abort.abort(), []);
   const [state, setState] = useState(initial);

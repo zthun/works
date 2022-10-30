@@ -76,12 +76,11 @@ export function ZAlertsPage() {
           alerts are immortal, then it will be up to the user to close the alert when they are finished with them.
         </ZParagraph>
 
-        <ZGridLayout gap={ZSizeFixed.Small}>
+        <ZGridLayout columns='25rem' gap={ZSizeFixed.Small}>
           <ZButton
             avatar={<CheckCircleIcon color='inherit' fontSize='small' />}
             color={ZSeverityColor.Success}
             outline
-            width={ZSizeFixed.Large}
             onClick={openAlert.bind(null, ZAlertSeverity.Success, 'Something was a huge success.  Time to celebrate!')}
             label='Success'
           />
@@ -89,7 +88,6 @@ export function ZAlertsPage() {
             avatar={<WarningIcon color='inherit' fontSize='small' />}
             color={ZSeverityColor.Warning}
             outline
-            width={ZSizeFixed.Large}
             onClick={openAlert.bind(null, ZAlertSeverity.Warning, 'You can continue, but something is amiss!')}
             label='Warning'
           />
@@ -97,7 +95,6 @@ export function ZAlertsPage() {
             avatar={<ErrorIcon color='inherit' fontSize='small' />}
             color={ZSeverityColor.Error}
             outline
-            width={ZSizeFixed.Large}
             onClick={openAlert.bind(null, ZAlertSeverity.Error, 'Uh oh!  Something has gone wrong!')}
             label='Error'
           />
@@ -105,7 +102,6 @@ export function ZAlertsPage() {
             avatar={<InfoIcon color='inherit' fontSize='small' />}
             color={ZSeverityColor.Info}
             outline
-            width={ZSizeFixed.Large}
             onClick={openAlert.bind(null, ZAlertSeverity.Info, 'Just some basic information.')}
             label='Info'
           />

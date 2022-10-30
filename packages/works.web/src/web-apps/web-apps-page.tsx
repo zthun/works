@@ -25,16 +25,16 @@ import {
 } from '@zthun/works.react';
 import { ZToolbarLayout } from '@zthun/works.react/src';
 import React from 'react';
-import { ZAlertsPage } from './components/alerts-page';
-import { ZBooleanPage } from './components/boolean-page';
-import { ZButtonPage } from './components/button-page/button-page';
-import { ZChoicePage } from './components/choice-page';
-import { ZDrawerPage } from './components/drawer-page';
-import { ZListPage } from './components/list-page/list-page';
-import { ZNumberPage } from './components/number-page/number-page';
-import { ZSuspensePage } from './components/suspense-page/suspense-page';
-import { ZTextPage } from './components/text-page/text-page';
-import { ZTypographyPage } from './components/typography-page';
+import { ZAlertsPage } from './components/alerts/alerts-page';
+import { ZBooleanPage } from './components/boolean/boolean-page';
+import { ZButtonPage } from './components/button/button-page';
+import { ZChoicePage } from './components/choice/choice-page';
+import { ZDrawerPage } from './components/drawer/drawer-page';
+import { ZListPage } from './components/list/list-page';
+import { ZNumberPage } from './components/number/number-page';
+import { ZSuspensePage } from './components/suspense/suspense-page';
+import { ZTextPage } from './components/text/text-page';
+import { ZTypographyPage } from './components/typography/typography-page';
 import { ZGettingStartedPage } from './getting-started/getting-started-page';
 
 const useWebAppPageStyles = makeStyles()((theme) => ({

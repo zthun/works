@@ -17,7 +17,7 @@ export interface IZChoiceOption<O, V> {
 export interface IZChoice<O, V>
   extends IZComponentDisabled,
     IZComponentStyle,
-    IZComponentValue<Array<V>>,
+    IZComponentValue<V[]>,
     IZComponentLabel,
     IZComponentName {
   multiple?: boolean;
