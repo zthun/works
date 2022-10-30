@@ -71,7 +71,13 @@ export function ZTextInput(props: IZTextInput) {
   };
 
   const renderAdornment = (adornment: ReactNode, position: 'start' | 'end') => {
-    return adornment == null ? null : <InputAdornment position={position}>{adornment}</InputAdornment>;
+    const clasz = cssClass('ZText-adornment', `ZText-adornment-${position}`);
+
+    return adornment == null ? null : (
+      <InputAdornment className={clasz} position={position}>
+        {adornment}
+      </InputAdornment>
+    );
   };
 
   const InputProps: Partial<OutlinedInputProps> = {
@@ -95,6 +101,7 @@ export function ZTextInput(props: IZTextInput) {
       onChange={handleChange}
       onInput={handleChange}
       data-name={name}
+      data-required={required}
     />
   );
 }

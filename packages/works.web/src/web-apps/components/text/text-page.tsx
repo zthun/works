@@ -45,7 +45,7 @@ export function ZTextPage() {
         </ZParagraph>
 
         <ZPaddedBox margin={{ bottom: ZSizeFixed.Medium }}>
-          <ZGridLayout alignItems='center' columns='auto auto' gap={ZSizeFixed.Medium}>
+          <ZGridLayout alignItems='center' columns='16rem ' gap={ZSizeFixed.Medium}>
             <ZTextInput
               disabled={disabled}
               readOnly={readOnly}
@@ -77,7 +77,7 @@ export function ZTextPage() {
               value={value}
               required={required}
               name='input'
-              placeholder='Revealable Password'
+              placeholder='Reveal Password'
               onValueChange={setValue}
               label='Reveal'
               prefix={adornments ? <FlagIcon color='success' /> : null}
