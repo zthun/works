@@ -43,8 +43,8 @@ export function ZSuspensePage() {
 
   return (
     <ZCard
-      className='ZLoadingPage-root'
-      heading='Loading'
+      className='ZSuspensePage-root'
+      heading='Suspense'
       subHeading='Spinners that spin'
       avatar={<LoopIcon color='warning' fontSize='inherit' />}
     >
