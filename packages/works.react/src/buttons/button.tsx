@@ -1,20 +1,10 @@
 import { Button, Tooltip } from '@mui/material';
 import React, { ReactNode } from 'react';
 
-import {
-  createSizeChartFixedCss,
-  createSizeChartFixedLinear,
-  createSizeChartVariedCss,
-  createSizeChartVoidCss,
-  cssClass,
-  ZSizeChart,
-  ZSizeFixed,
-  ZSizeVaried
-} from '@zthun/works.core';
+import { createSizeChartVariedCss, cssClass, ZSizeFixed, ZSizeVaried } from '@zthun/works.core';
 import { noop } from 'lodash';
 import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentDisabled } from '../component/component-disabled';
-import { IZComponentHeight } from '../component/component-height';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentLoading } from '../component/component-loading';
 import { IZComponentName } from '../component/component-name';
@@ -33,8 +23,7 @@ export interface IZButton
     IZComponentLoading,
     IZComponentStyle,
     IZComponentName,
-    IZComponentWidth,
-    IZComponentHeight {
+    IZComponentWidth<ZSizeVaried> {
   borderless?: boolean;
   color?: ZButtonColor;
   outline?: boolean;
@@ -43,19 +32,15 @@ export interface IZButton
   onClick?: (e: React.MouseEvent) => any;
 }
 
-const ChartFixed = createSizeChartFixedCss(createSizeChartFixedLinear(2, 2), 'rem');
-const ChartVaried = createSizeChartVariedCss();
-const ChartVoid = createSizeChartVoidCss();
-const ButtonSizeChart: ZSizeChart<string> = { ...ChartFixed, ...ChartVaried, ...ChartVoid };
+const ButtonSizeChart = createSizeChartVariedCss();
 
 const useButtonStyles = makeStyles<IZButton>()((theme, props) => {
-  const { width = ZSizeVaried.Fit, height = ZSizeVaried.Fit } = props;
+  const { width = ZSizeVaried.Fit } = props;
 
   return {
     wrapper: {
       display: 'inline-flex',
-      width: ButtonSizeChart[width],
-      height: ButtonSizeChart[height]
+      width: ButtonSizeChart[width]
     },
     button: {
       display: 'inline-flex',
