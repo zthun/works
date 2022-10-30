@@ -1,9 +1,7 @@
 export enum ZCircusActionType {
   // Mouse Actions
-  MouseLeftDown = 'mouse-left-down',
-  MouseLeftUp = 'mouse-left-up',
-  MouseRightDown = 'mouse-right-down',
-  MouseRightUp = 'mouse-right-up',
+  MouseDown = 'mouse-down',
+  MouseUp = 'mouse-up',
   // Keyboard Actions
   KeyDown = 'key-down',
   KeyUp = 'key-up',
@@ -28,7 +26,7 @@ export interface IZCircusAction<TContext = any> {
  */
 export function isKeyboardAction(action: IZCircusAction) {
   const { name } = action;
-  return name === ZCircusActionType.KeyDown || name === ZCircusActionType.KeyUp;
+  return [ZCircusActionType.KeyDown, ZCircusActionType.KeyUp].indexOf(name) >= 0;
 }
 
 /**
@@ -42,13 +40,5 @@ export function isKeyboardAction(action: IZCircusAction) {
  */
 export function isMouseAction(action: IZCircusAction) {
   const { name } = action;
-
-  return (
-    [
-      ZCircusActionType.MouseLeftDown,
-      ZCircusActionType.MouseRightDown,
-      ZCircusActionType.MouseLeftUp,
-      ZCircusActionType.MouseRightUp
-    ].indexOf(name) >= 0
-  );
+  return [ZCircusActionType.MouseDown, ZCircusActionType.MouseUp].indexOf(name) >= 0;
 }

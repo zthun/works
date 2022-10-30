@@ -51,8 +51,14 @@ export class ZCircusActBuilder {
   public keyDown: (key: IZCircusKey) => this = this._action.bind(this, ZCircusActionType.KeyDown);
   public keyUp: (key: IZCircusKey) => this = this._action.bind(this, ZCircusActionType.KeyUp);
 
-  public leftMouseDown: () => this = this._action.bind(this, ZCircusActionType.MouseLeftDown);
-  public leftMouseUp: () => this = this._action.bind(this, ZCircusActionType.MouseLeftUp);
+  private _mouseDown: (which: 'Left' | 'Right') => this = this._action.bind(this, ZCircusActionType.MouseDown);
+  private _mouseUp: (which: 'Left' | 'Right') => this = this._action.bind(this, ZCircusActionType.MouseUp);
+
+  public leftMouseDown: () => this = this._mouseDown.bind(this, 'Left');
+  public leftMouseUp: () => this = this._mouseUp.bind(this, 'Left');
+
+  public rightMouseDown: () => this = this._mouseDown.bind(this, 'Right');
+  public rightMouseUp: () => this = this._mouseUp.bind(this, 'Right');
 
   public magic: (action: () => Promise<any>) => this = this._action.bind(this, ZCircusActionType.Magic);
 
@@ -67,6 +73,26 @@ export class ZCircusActBuilder {
    */
   public press(key: IZCircusKey) {
     return this.keyDown(key).keyUp(key);
+  }
+
+  /**
+   * Clicks the left mouse button.
+   *
+   * @returns
+   *        This object.
+   */
+  public click() {
+    return this.leftMouseDown().leftMouseUp();
+  }
+
+  /**
+   * Clicks the right mouse button.
+   *
+   * @returns
+   *        This object
+   */
+  public rightClick() {
+    return this.rightMouseDown().rightMouseUp();
   }
 
   /**
@@ -95,16 +121,6 @@ export class ZCircusActBuilder {
     }
 
     return this;
-  }
-
-  /**
-   * Clicks the left mouse button.
-   *
-   * @returns
-   *        This object.
-   */
-  public click() {
-    return this.leftMouseDown().leftMouseUp();
   }
 
   /**
