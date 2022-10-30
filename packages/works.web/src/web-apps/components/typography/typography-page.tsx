@@ -19,7 +19,7 @@ export function ZTypographyPage() {
       <ZH3>Description</ZH3>
 
       <ZParagraph>
-        Typography is the concept of a document outline. HTMl essentially has this built in with different tags, such as
+        Typography is the concept of a document outline. HTML essentially has this built in with different tags, such as
         &lt;p&gt;. The main reason to use custom typography in your applications is for responsiveness. As you shrink
         and resize the window, or if users access your page on small devices, you want the page to respond to changes
         made.
