@@ -27,7 +27,7 @@ import { ZToolbarLayout } from '@zthun/works.react/src';
 import React from 'react';
 import { ZAlertsPage } from './components/alerts-page';
 import { ZBooleanPage } from './components/boolean-page';
-import { ZButtonPage } from './components/button-page';
+import { ZButtonPage } from './components/button-page/button-page';
 import { ZChoicePage } from './components/choice-page';
 import { ZDrawerPage } from './components/drawer-page';
 import { ZListPage } from './components/list-page/list-page';
