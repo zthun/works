@@ -126,10 +126,8 @@ export class ZCircusDriver implements IZCircusDriver {
     let performance = this._seleniumDriver.actions();
 
     const map: Record<ZCircusActionType, (a: IZCircusAction) => Actions> = {
-      [ZCircusActionType.MouseLeftDown]: () => performance.press(Button.LEFT),
-      [ZCircusActionType.MouseLeftUp]: () => performance.release(Button.LEFT),
-      [ZCircusActionType.MouseRightDown]: () => performance.press(Button.RIGHT),
-      [ZCircusActionType.MouseRightUp]: () => performance.release(Button.RIGHT),
+      [ZCircusActionType.MouseDown]: () => performance.press(Button.LEFT),
+      [ZCircusActionType.MouseUp]: () => performance.release(Button.LEFT),
       [ZCircusActionType.KeyDown]: (a: IZCircusAction) => performance.keyDown(a.context.code),
       [ZCircusActionType.KeyUp]: (a: IZCircusAction) => performance.keyUp(a.context.code),
       [ZCircusActionType.Magic]: (a: IZCircusAction) => {
