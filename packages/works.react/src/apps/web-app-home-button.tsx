@@ -1,7 +1,8 @@
 import AppsIcon from '@mui/icons-material/Apps';
 import ErrorIcon from '@mui/icons-material/Error';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
-import { cssClass, ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { cssClass } from '@zthun/works.core';
 
 import { startCase } from 'lodash';
 import React from 'react';

@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
 
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
-import { ZSizeFixed } from '@zthun/works.core';
 import React, { ReactNode } from 'react';
 import { ZNumberSlider } from './number-slider';
 import { ZNumberComponentModel } from './number.cm';

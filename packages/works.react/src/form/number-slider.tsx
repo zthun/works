@@ -1,12 +1,11 @@
 import { InputLabel, Slider, SliderThumb } from '@mui/material';
 import {
+  createSizeChartFixedArithmetic,
   createSizeChartFixedCss,
-  createSizeChartFixedLinear,
   createSizeChartVariedCss,
-  cssClass,
-  firstDefined,
   ZSizeVaried
-} from '@zthun/works.core';
+} from '@zthun/works.chonky-cat';
+import { cssClass, firstDefined } from '@zthun/works.core';
 import { castArray, first } from 'lodash';
 import React from 'react';
 import { useAmbassadorState } from '../state/use-ambassador-state';
@@ -14,7 +13,7 @@ import { makeStyles } from '../theme/make-styles';
 import { IZNumber } from './number';
 
 const NumberSliderSizeChart = {
-  ...createSizeChartFixedCss(createSizeChartFixedLinear(4, 0, 2), 'rem'),
+  ...createSizeChartFixedCss(createSizeChartFixedArithmetic(4, 2), 'rem'),
   ...createSizeChartVariedCss()
 };
 

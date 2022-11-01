@@ -1,11 +1,11 @@
 import {
   createSizeChartFixedCss,
-  createSizeChartFixedExponential,
+  createSizeChartFixedGeometric,
   createSizeChartVariedCss,
   createSizeChartVoidCss,
-  cssClass,
   ZSizeVaried
-} from '@zthun/works.core';
+} from '@zthun/works.chonky-cat';
+import { cssClass } from '@zthun/works.core';
 import { ZDataUrlBuilder } from '@zthun/works.url';
 import React from 'react';
 import { IZComponentHeight } from '../component/component-height';
@@ -23,7 +23,7 @@ export interface IZImageSource
     IZComponentName {}
 
 const ImageSizeChart = {
-  ...createSizeChartFixedCss(createSizeChartFixedExponential(2, 0), 'rem'),
+  ...createSizeChartFixedCss(createSizeChartFixedGeometric(2, 16), 'rem'),
   ...createSizeChartVariedCss(),
   ...createSizeChartVoidCss()
 };

@@ -1,6 +1,7 @@
 import { AppBar } from '@mui/material';
 import { ThemeProvider } from '@mui/system';
-import { IZRouteOption, ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { IZRouteOption } from '@zthun/works.core';
 import React from 'react';
 import { GlobalStyles } from 'tss-react';
 import { ZAlertList } from '../alert/alert-list';

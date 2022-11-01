@@ -1,4 +1,5 @@
-import { cssClass, firstDefined, ZSizeFixed, ZSizeVaried, ZSizeVoid } from '@zthun/works.core';
+import { ZSizeFixed, ZSizeVaried, ZSizeVoid } from '@zthun/works.chonky-cat';
+import { cssClass, firstDefined } from '@zthun/works.core';
 import { get } from 'lodash';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';

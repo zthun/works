@@ -1,5 +1,6 @@
 import { MenuItem } from '@mui/material';
-import { cssClass, ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { cssClass } from '@zthun/works.core';
 import { noop } from 'lodash';
 import React from 'react';
 import { IZButton } from '../buttons/button';

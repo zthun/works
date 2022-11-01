@@ -1,4 +1,4 @@
-import { ZSize } from '@zthun/works.core';
+import { ZSize } from '@zthun/works.chonky-cat';
 
 /**
  * Represents a component that contains a height.

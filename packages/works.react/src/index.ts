@@ -62,7 +62,8 @@ export { ZChoiceComponentModel } from './form/choice.cm';
 export { IZNumber } from './form/number';
 export { ZNumberSlider } from './form/number-slider';
 export { IZText } from './form/text';
-export { ZTextInput, ZTextType } from './form/text-input';
+export { IZTextArea, ZTextArea } from './form/text-area';
+export { IZTextInput, ZTextInput, ZTextType } from './form/text-input';
 export { ZTextInputReveal } from './form/text-input-reveal';
 // Health
 export { ZHealthIndicator } from './health/health-indicator';

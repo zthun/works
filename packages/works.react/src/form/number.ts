@@ -1,4 +1,4 @@
-import { ZSizeFixed, ZSizeVaried } from '@zthun/works.core';
+import { ZSizeFixed, ZSizeVaried } from '@zthun/works.chonky-cat';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentName } from '../component/component-name';

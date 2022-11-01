@@ -1,7 +1,8 @@
 import { Button, Tooltip } from '@mui/material';
 import React, { ReactNode } from 'react';
 
-import { createSizeChartVariedCss, cssClass, ZSizeFixed, ZSizeVaried } from '@zthun/works.core';
+import { createSizeChartVariedCss, ZSizeFixed, ZSizeVaried } from '@zthun/works.chonky-cat';
+import { cssClass } from '@zthun/works.core';
 import { noop } from 'lodash';
 import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentDisabled } from '../component/component-disabled';

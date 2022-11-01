@@ -4,10 +4,10 @@ import {
   createSizeChartFixedGeometric,
   createSizeChartVariedCss,
   createSizeChartVoidCss,
-  cssClass,
   ZSizeFixed,
   ZSizeVaried
-} from '@zthun/works.core';
+} from '@zthun/works.chonky-cat';
+import { cssClass } from '@zthun/works.core';
 import React, { ReactNode } from 'react';
 import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentHeading } from '../component/component-heading';

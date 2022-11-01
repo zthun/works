@@ -1,6 +1,7 @@
 import ClearIcon from '@mui/icons-material/Clear';
 import { FormControl, IconButton, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { cssClass, ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { cssClass } from '@zthun/works.core';
 import { castArray, isArray } from 'lodash';
 import React, { ReactNode, useMemo } from 'react';
 import { v4 } from 'uuid';

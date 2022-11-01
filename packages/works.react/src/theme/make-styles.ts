@@ -20,15 +20,15 @@ import {
 } from '@mui/material/colors';
 import { createSpacing } from '@mui/system';
 import {
+  createSizeChartFixedArithmetic,
   createSizeChartFixedCss,
   createSizeChartFixedFibonacci,
-  createSizeChartFixedLinear,
   createSizeChartVoidCss,
   createSizeChartVoidZero,
-  firstDefined,
   ZSizeFixed,
   ZSizeVoid
-} from '@zthun/works.core';
+} from '@zthun/works.chonky-cat';
+import { firstDefined } from '@zthun/works.core';
 import { values } from 'lodash';
 import { createMakeStyles } from 'tss-react';
 import { ZColorTint, ZHueColor, ZSeverityColor, ZShadeColor, ZStateColor } from './state-color';
@@ -48,7 +48,7 @@ const GapChart = {
 };
 
 const ThicknessChart = {
-  ...createSizeChartFixedCss(createSizeChartFixedLinear(0.0625, 0), 'rem'),
+  ...createSizeChartFixedCss(createSizeChartFixedArithmetic(0.0625, 0), 'rem'),
   ...createSizeChartVoidCss()
 };
 

@@ -1,5 +1,5 @@
 import NumbersIcon from '@mui/icons-material/Numbers';
-import { ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
 
 import { useSafeState, ZCaption, ZCard, ZH3, ZNumberSlider, ZPaddedBox, ZParagraph } from '@zthun/works.react';
 import React from 'react';

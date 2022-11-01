@@ -1,4 +1,5 @@
-import { cssClass, ZSizeFixed, ZSizeVoid } from '@zthun/works.core';
+import { ZSizeFixed, ZSizeVoid } from '@zthun/works.chonky-cat';
+import { cssClass } from '@zthun/works.core';
 import { Property } from 'csstype';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';

@@ -1,6 +1,7 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import SmartButtonIcon from '@mui/icons-material/SmartButton';
-import { setFirstOrDefault, ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { setFirstOrDefault } from '@zthun/works.core';
 import { ZAlertBuilder } from '@zthun/works.message';
 import {
   useAlertService,

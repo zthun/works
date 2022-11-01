@@ -3,12 +3,11 @@ import {
   createSizeChartFixedGeometric,
   createSizeChartVariedCss,
   createSizeChartVoidCss,
-  cssClass,
-  firstDefined,
   ZSizeFixed,
   ZSizeVaried,
   ZSizeVoid
-} from '@zthun/works.core';
+} from '@zthun/works.chonky-cat';
+import { cssClass, firstDefined } from '@zthun/works.core';
 import { Property } from 'csstype';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';

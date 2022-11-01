@@ -1,5 +1,6 @@
 import LoopIcon from '@mui/icons-material/Loop';
-import { setFirstOrDefault, ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { setFirstOrDefault } from '@zthun/works.core';
 import {
   useSafeState,
   ZBooleanSwitch,

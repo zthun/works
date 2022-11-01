@@ -6,7 +6,8 @@ import GithubIcon from '@mui/icons-material/GitHub';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 
 import { Divider } from '@mui/material';
-import { cssClass, ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { cssClass } from '@zthun/works.core';
 import { kebabCase, startCase } from 'lodash';
 import React, { ReactNode } from 'react';
 import { IZComponentStyle } from '../component/component-style.';

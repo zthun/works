@@ -4,7 +4,8 @@ import ErrorIcon from '@mui/icons-material/Error';
 import ForwardIcon from '@mui/icons-material/Forward';
 import InfoIcon from '@mui/icons-material/Info';
 import WarningIcon from '@mui/icons-material/Warning';
-import { cssClass, ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { cssClass } from '@zthun/works.core';
 import {
   getHttpCodeCategory,
   getHttpCodeDescription,

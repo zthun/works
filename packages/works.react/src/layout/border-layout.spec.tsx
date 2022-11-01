@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
+import { ZSizeFixed, ZSizeVoid } from '@zthun/works.chonky-cat';
 import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
-import { ZSizeFixed, ZSizeVoid } from '@zthun/works.core';
 import { Property } from 'csstype';
 import { values } from 'lodash';
 import React from 'react';

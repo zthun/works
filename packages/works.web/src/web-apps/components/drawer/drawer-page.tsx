@@ -1,6 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import { setFirstOrDefault, ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { setFirstOrDefault } from '@zthun/works.core';
 import {
   useSafeState,
   ZButton,

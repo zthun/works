@@ -1,6 +1,6 @@
 import BalanceIcon from '@mui/icons-material/Balance';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
-import { ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
 
 import {
   useSafeState,

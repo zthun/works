@@ -1,7 +1,7 @@
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import FlagIcon from '@mui/icons-material/Flag';
 import SearchIcon from '@mui/icons-material/Search';
-import { ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import {
   useSafeState,
   ZBooleanSwitch,
@@ -15,6 +15,7 @@ import {
   ZTextInputReveal,
   ZTextType
 } from '@zthun/works.react';
+import { ZTextArea } from '@zthun/works.react/src';
 import React from 'react';
 
 /**
@@ -63,7 +64,7 @@ export function ZTextPage() {
               readOnly={readOnly}
               value={value}
               required={required}
-              name='input'
+              name='password'
               placeholder='Password'
               onValueChange={setValue}
               label='Password'
@@ -76,10 +77,22 @@ export function ZTextPage() {
               readOnly={readOnly}
               value={value}
               required={required}
-              name='input'
+              name='reveal'
               placeholder='Reveal Password'
               onValueChange={setValue}
               label='Reveal'
+              prefix={adornments ? <FlagIcon color='success' /> : null}
+              suffix={adornments ? <SearchIcon /> : null}
+            />
+            <ZTextArea
+              disabled={disabled}
+              readOnly={readOnly}
+              value={value}
+              required={required}
+              name='area'
+              placeholder='Text Area'
+              onValueChange={setValue}
+              label='Area'
               prefix={adornments ? <FlagIcon color='success' /> : null}
               suffix={adornments ? <SearchIcon /> : null}
             />
