@@ -4,6 +4,7 @@
     "baseUrl": "packages",
     "target": "esnext",
     "paths": {
+      "@zthun/works.chonky-cat": ["works.chonky-cat/src/index"],
       "@zthun/works.class": ["works.class/src/index"],
       "@zthun/works.cirque": ["works.cirque/src/index"],
       "@zthun/works.cirque-du-react": ["works.cirque-du-react/src/index"],

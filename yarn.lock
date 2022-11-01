@@ -4704,6 +4704,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@zthun/works.chonky-cat@^4.0.0, @zthun/works.chonky-cat@workspace:packages/works.chonky-cat":
+  version: 0.0.0-use.local
+  resolution: "@zthun/works.chonky-cat@workspace:packages/works.chonky-cat"
+  languageName: unknown
+  linkType: soft
+
 "@zthun/works.cirque-du-react@^4.0.0, @zthun/works.cirque-du-react@workspace:packages/works.cirque-du-react":
   version: 0.0.0-use.local
   resolution: "@zthun/works.cirque-du-react@workspace:packages/works.cirque-du-react"
@@ -4961,6 +4967,7 @@ __metadata:
     "@mui/material": ^5.10.9
     "@mui/system": ^5.10.9
     "@testing-library/react": ^13.4.0
+    "@zthun/works.chonky-cat": ^4.0.0
     "@zthun/works.cirque": ^4.0.0
     "@zthun/works.cirque-du-react": ^4.0.0
     "@zthun/works.core": ^4.0.0

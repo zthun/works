@@ -10,11 +10,11 @@
  */
 export enum ZSizeFixed {
   /**
-   * Extra small.
+   * Extra small (xs)
    */
   ExtraSmall = 'xs',
   /**
-   * Small
+   * Small (sm)
    */
   Small = 'sm',
   /**

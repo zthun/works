@@ -5,6 +5,7 @@
     "sourceMap": true,
     "declarationDir": "dist/types",
     "paths": {
+      "@zthun/works.chonky-cat": ["../works.chonky-cat/src/index"],
       "@zthun/works.cirque": ["../works.cirque/src/index"],
       "@zthun/works.cirque-du-react": ["../works.cirque-du-react/src/index"],
       "@zthun/works.core": ["../works.core/src/index"],

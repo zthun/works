@@ -1,17 +1,17 @@
-import { createSizeChartFixedCss } from './size-chart-fixed-css';
-import { createSizeChartFixedExponential } from './size-chart-fixed-exponential';
-import { createSizeChartFixedFibonacci } from './size-chart-fixed-fibonacci';
-import { createSizeChartFixedGeometric } from './size-chart-fixed-geometric';
-import { createSizeChartFixedLinear } from './size-chart-fixed-linear';
-import { createSizeChartVariedCss } from './size-chart-varied-css';
-import { createSizeChartVoidCss } from './size-chart-void-css';
-import { ZSizeChartFixed, ZSizeFixed } from './size-fixed';
-import { ZSizeChartVaried, ZSizeVaried } from './size-varied';
-import { ZSizeChartVoid, ZSizeVoid } from './size-void';
+import { createSizeChartFixedArithmetic } from './fixed/size-chart-fixed-arithmetic';
+import { createSizeChartFixedCss } from './fixed/size-chart-fixed-css';
+import { createSizeChartFixedFibonacci } from './fixed/size-chart-fixed-fibonacci';
+import { createSizeChartFixedGeometric } from './fixed/size-chart-fixed-geometric';
+import { ZSizeChartFixed, ZSizeFixed } from './fixed/size-fixed';
+import { createSizeChartVariedCss } from './varied/size-chart-varied-css';
+import { ZSizeChartVaried, ZSizeVaried } from './varied/size-varied';
+import { createSizeChartVoidCss } from './void/size-chart-void-css';
+import { createSizeChartVoidZero } from './void/size-chart-void-zero';
+import { ZSizeChartVoid, ZSizeVoid } from './void/size-void';
 
 describe('Size Chart', () => {
   describe('Fixed', () => {
-    describe('Linear', () => {
+    describe('Arithmetic', () => {
       it('should set the sizes', () => {
         // Arrange.
         const expected: ZSizeChartFixed<number> = {
@@ -22,60 +22,13 @@ describe('Size Chart', () => {
           [ZSizeFixed.ExtraLarge]: 17
         };
         // Act.
-        const actual = createSizeChartFixedLinear(2, 1, 4);
-        // Assert.
-        expect(actual).toEqual(expected);
-      });
-
-      it('should set the sizes at x = 1', () => {
-        // Arrange.
-        const expected: ZSizeChartFixed<number> = {
-          [ZSizeFixed.ExtraSmall]: 3,
-          [ZSizeFixed.Small]: 5,
-          [ZSizeFixed.Medium]: 7,
-          [ZSizeFixed.Large]: 9,
-          [ZSizeFixed.ExtraLarge]: 11
-        };
-        // Act.
-        const actual = createSizeChartFixedLinear(2, 1);
-        // Assert.
-        expect(actual).toEqual(expected);
-      });
-
-      it('should set the sizes incrementing', () => {
-        // Arrange.
-        const expected: ZSizeChartFixed<number> = {
-          [ZSizeFixed.ExtraSmall]: 1,
-          [ZSizeFixed.Small]: 2,
-          [ZSizeFixed.Medium]: 3,
-          [ZSizeFixed.Large]: 4,
-          [ZSizeFixed.ExtraLarge]: 5
-        };
-        // Act.
-        const actual = createSizeChartFixedLinear(1, 0);
+        const actual = createSizeChartFixedArithmetic(2, 9);
         // Assert.
         expect(actual).toEqual(expected);
       });
     });
 
     describe('Geometric', () => {
-      it('should set the sizes', () => {
-        // Arrange
-        const expected: ZSizeChartFixed<number> = {
-          [ZSizeFixed.ExtraSmall]: 10,
-          [ZSizeFixed.Small]: 20,
-          [ZSizeFixed.Medium]: 40,
-          [ZSizeFixed.Large]: 80,
-          [ZSizeFixed.ExtraLarge]: 160
-        };
-        // Act.
-        const actual = createSizeChartFixedGeometric(2, 10);
-        // Assert.
-        expect(actual).toEqual(expected);
-      });
-    });
-
-    describe('Exponential', () => {
       it('should set the sizes', () => {
         // Arrange
         const expected: ZSizeChartFixed<number> = {
@@ -86,22 +39,7 @@ describe('Size Chart', () => {
           [ZSizeFixed.ExtraLarge]: 256
         };
         // Act.
-        const actual = createSizeChartFixedExponential(2, 4);
-        // Assert.
-        expect(actual).toEqual(expected);
-      });
-
-      it('should set the sizes starting at x = 1', () => {
-        // Arrange
-        const expected: ZSizeChartFixed<number> = {
-          [ZSizeFixed.ExtraSmall]: 2,
-          [ZSizeFixed.Small]: 4,
-          [ZSizeFixed.Medium]: 8,
-          [ZSizeFixed.Large]: 16,
-          [ZSizeFixed.ExtraLarge]: 32
-        };
-        // Act.
-        const actual = createSizeChartFixedExponential(2);
+        const actual = createSizeChartFixedGeometric(2, 16);
         // Assert.
         expect(actual).toEqual(expected);
       });
@@ -149,7 +87,7 @@ describe('Size Chart', () => {
           [ZSizeFixed.Large]: `4rem`,
           [ZSizeFixed.ExtraLarge]: `5rem`
         };
-        const base = createSizeChartFixedLinear(1, 0);
+        const base = createSizeChartFixedArithmetic(1, 0);
         // Act.
         const actual = createSizeChartFixedCss(base, 'rem');
         // Assert.
@@ -174,13 +112,24 @@ describe('Size Chart', () => {
 
   describe('Void', () => {
     it('should set the sizes', () => {
-      // Arrange.
+      // Arrange
       const expected: ZSizeChartVoid<string> = {
         [ZSizeVoid.None]: '0'
       };
-      // Act.
+      // Act
       const actual = createSizeChartVoidCss();
-      // Assert.
+      // Assert
+      expect(actual).toEqual(expected);
+    });
+
+    it('should set the sizes to 0.', () => {
+      // Arrange
+      const expected: ZSizeChartVoid<number> = {
+        [ZSizeVoid.None]: 0
+      };
+      // Act
+      const actual = createSizeChartVoidZero();
+      // Assert
       expect(actual).toEqual(expected);
     });
   });
