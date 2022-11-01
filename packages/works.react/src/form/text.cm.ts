@@ -13,8 +13,12 @@ export class ZTextComponentModel extends ZCircusComponentModel {
    * @returns
    *      The underlying input driver context.
    */
-  private _input(): Promise<IZCircusDriver> {
-    return this.driver.select('input');
+  private async _input(): Promise<IZCircusDriver> {
+    try {
+      return await this.driver.select('input');
+    } catch {
+      return await this.driver.select('textarea');
+    }
   }
 
   /**

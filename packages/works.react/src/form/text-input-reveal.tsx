@@ -1,6 +1,7 @@
 import VisibilityOn from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { cssClass, ZSizeFixed } from '@zthun/works.core';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { cssClass } from '@zthun/works.core';
 import React, { useState } from 'react';
 import { ZButton } from '../buttons/button';
 import { ZGridLayout } from '../layout/grid-layout';

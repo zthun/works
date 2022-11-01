@@ -3,6 +3,7 @@
 import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactNode } from 'react';
+import { ZTextArea } from './text-area';
 import { ZTextInput, ZTextType } from './text-input';
 import { ZTextInputReveal } from './text-input-reveal';
 import { ZTextComponentModel } from './text.cm';
@@ -164,14 +165,6 @@ describe('ZText', () => {
       await shouldBeMasked(true, createTestTarget.bind(null, ZTextType.Password));
     });
 
-    it('should not render any adornments', async () => {
-      // Arrange
-      const target = await createTestTarget();
-      // Act.
-      // Assert.
-      await expect(target.driver.select('.ZText-adornment')).rejects.toBeTruthy();
-    });
-
     it('should not be able to toggle revealed text', async () => {
       // Arrange.
       const target = await createTestTarget(ZTextType.Text);
@@ -259,6 +252,56 @@ describe('ZText', () => {
       const actual = await target.mask();
       // Assert
       expect(actual).toBeTruthy();
+    });
+  });
+
+  describe('Area', () => {
+    async function createTestTarget() {
+      const element = (
+        <ZTextArea
+          value={value}
+          disabled={disabled}
+          required={required}
+          prefix={prefix}
+          suffix={suffix}
+          onValueChange={onValueChange}
+        />
+      );
+
+      const driver = await new ZCircusSetupRenderer(element).setup();
+      return ZCircusComponentModel.create(driver, ZTextComponentModel, ZTextComponentModel.Selector);
+    }
+
+    it('should render the text value', async () => {
+      await shouldRenderTextValue(createTestTarget);
+    });
+
+    it('should update the value as the user types', async () => {
+      await shouldUpdateTextValue(createTestTarget);
+    });
+
+    it('should raise the onValueChange event when the user types a value', async () => {
+      await shouldRaiseOnValueChange(createTestTarget);
+    });
+
+    it('should be disabled', async () => {
+      await shouldBeDisabled(createTestTarget);
+    });
+
+    it('should be required', async () => {
+      await shouldBeRequired(createTestTarget);
+    });
+
+    it('should render the prefix adornment', async () => {
+      await shouldRenderPrefix(createTestTarget);
+    });
+
+    it('should render the suffix adornment', async () => {
+      await shouldRenderSuffix(createTestTarget);
+    });
+
+    it('should not have masked text', async () => {
+      await shouldBeMasked(false, createTestTarget);
     });
   });
 });

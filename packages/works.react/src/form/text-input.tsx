@@ -1,9 +1,7 @@
-import { InputAdornment, OutlinedInputProps, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { cssClass } from '@zthun/works.core';
-import { get } from 'lodash';
-import React, { ReactNode } from 'react';
-import { useAmbassadorState } from '../state/use-ambassador-state';
-import { IZText } from './text';
+import React from 'react';
+import { IZText, useText } from './text';
 
 /**
  * Represents the type of text.
@@ -44,64 +42,9 @@ export interface IZTextInput extends IZText<string> {
  *        The JSX to render the component.
  */
 export function ZTextInput(props: IZTextInput) {
-  const {
-    className,
-    name,
-    disabled,
-    value,
-    label,
-    required,
-    placeholder,
-    readOnly,
-    prefix,
-    suffix,
-    type = ZTextType.Text,
-    onValueChange
-  } = props;
-
-  const [_value, _setValue] = useAmbassadorState(value, onValueChange, '');
+  const { className, type = ZTextType.Text, name, required } = props;
+  const _textField = useText(props, '');
   const clasz = cssClass('ZText-root ZText-input', className);
 
-  const handleChange = (e: any) => {
-    // This one is a bit weird.  Basically, we want to handle both onChange and onInput
-    // so that form fillers will just automatically populate our fields for username/password
-    // address, etc.  You need to handle both events, even though they're a bit redundant.
-    const _val = get(e, 'target.value');
-    _setValue(_val);
-  };
-
-  const renderAdornment = (adornment: ReactNode, position: 'start' | 'end') => {
-    const clasz = cssClass('ZText-adornment', `ZText-adornment-${position}`);
-
-    return adornment == null ? null : (
-      <InputAdornment className={clasz} position={position}>
-        {adornment}
-      </InputAdornment>
-    );
-  };
-
-  const InputProps: Partial<OutlinedInputProps> = {
-    readOnly,
-    startAdornment: renderAdornment(prefix, 'start'),
-    endAdornment: renderAdornment(suffix, 'end')
-  };
-
-  return (
-    <TextField
-      className={clasz}
-      disabled={disabled}
-      variant='outlined'
-      value={_value}
-      name={name}
-      required={required}
-      placeholder={placeholder}
-      label={label}
-      type={type}
-      InputProps={InputProps}
-      onChange={handleChange}
-      onInput={handleChange}
-      data-name={name}
-      data-required={required}
-    />
-  );
+  return <TextField {..._textField} type={type} className={clasz} data-name={name} data-required={required} />;
 }
