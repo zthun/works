@@ -48,7 +48,7 @@ const GapChart = {
 };
 
 const ThicknessChart = {
-  ...createSizeChartFixedCss(createSizeChartFixedArithmetic(0.0625, 0), 'rem'),
+  ...createSizeChartFixedCss(createSizeChartFixedArithmetic(0.0625, 0.0625), 'rem'),
   ...createSizeChartVoidCss()
 };
 
