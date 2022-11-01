@@ -1,7 +1,16 @@
 import NumbersIcon from '@mui/icons-material/Numbers';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 
-import { useSafeState, ZCaption, ZCard, ZH3, ZNumberSlider, ZPaddedBox, ZParagraph } from '@zthun/works.react';
+import {
+  useSafeState,
+  ZCaption,
+  ZCard,
+  ZH3,
+  ZNumberInput,
+  ZNumberSlider,
+  ZPaddedBox,
+  ZParagraph
+} from '@zthun/works.react';
 import React from 'react';
 
 /**
@@ -11,7 +20,7 @@ import React from 'react';
  *        The JSX to render the number page.
  */
 export function ZNumberPage() {
-  const [value, setValue] = useSafeState<number>(1);
+  const [value, setValue] = useSafeState<number | null>(1);
 
   return (
     <ZCard
@@ -30,15 +39,8 @@ export function ZNumberPage() {
           parsing for you.
         </ZParagraph>
 
-        <ZNumberSlider
-          step={1}
-          min={1}
-          max={1000}
-          label='Slider'
-          width={ZSizeFixed.Large}
-          value={value}
-          onValueChange={setValue}
-        />
+        <ZNumberSlider step={1} min={1} max={1000} label='Slider' value={value || 1} onValueChange={setValue} />
+        <ZNumberInput step={1} min={-Infinity} max={Infinity} label='Input' value={value} onValueChange={setValue} />
 
         <ZCaption>Value: {value}</ZCaption>
       </ZPaddedBox>

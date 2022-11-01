@@ -1,9 +1,9 @@
 /* eslint-disable require-jsdoc */
 
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactNode } from 'react';
+import { ZNumberInput } from './number-input';
 import { ZNumberSlider } from './number-slider';
 import { ZNumberComponentModel } from './number.cm';
 
@@ -13,7 +13,6 @@ describe('ZNumber', () => {
   let step: number | undefined;
   let value: number | undefined;
   let label: ReactNode | undefined;
-  let width: ZSizeFixed | undefined;
   let onValueChange: jest.Mock | undefined;
 
   beforeEach(() => {
@@ -22,36 +21,130 @@ describe('ZNumber', () => {
     value = undefined;
     step = undefined;
     label = undefined;
-    width = undefined;
     onValueChange = undefined;
   });
+
+  async function shouldRenderLabelIfSet(createTestTarget: () => Promise<ZNumberComponentModel>) {
+    // Arrange.
+    label = 'Test Label';
+    const target = await createTestTarget();
+    // Act.
+    const actual = await target.label();
+    // Assert.
+    expect(actual).toEqual(label);
+  }
+
+  async function shouldNotRenderLabelIfFalsy(createTestTarget: () => Promise<ZNumberComponentModel>) {
+    // Arrange.
+    const target = await createTestTarget();
+    // Act.
+    const actual = await target.label();
+    // Assert.
+    expect(actual).toEqual('');
+  }
+
+  async function shouldSetTheMinValue(createTestTarget: () => Promise<ZNumberComponentModel>) {
+    // Arrange.
+    min = 2;
+    const target = await createTestTarget();
+    // Act.
+    const actual = await target.min();
+    // Assert.
+    expect(actual).toEqual(min);
+  }
+
+  async function shouldSetTheMaxValue(createTestTarget: () => Promise<ZNumberComponentModel>) {
+    // Arrange.
+    max = 50;
+    const target = await createTestTarget();
+    // Act.
+    const actual = await target.max();
+    // Assert.
+    expect(actual).toEqual(max);
+  }
+
+  async function shouldUpdateToMaxWhenGoingOneBeyond(createTestTarget: () => Promise<ZNumberComponentModel>) {
+    // Arrange.
+    max = 10;
+    const target = await createTestTarget();
+    // Act.
+    await target.increment(max);
+    await target.increment();
+    const actual = await target.value();
+    // Assert.
+    expect(actual).toEqual(max);
+  }
+
+  async function shouldUpdateToMinWhenGoingOneBefore(createTestTarget: () => Promise<ZNumberComponentModel>) {
+    // Arrange.
+    min = -5;
+    const target = await createTestTarget();
+    // Act.
+    await target.increment(1);
+    await target.decrement(6);
+    await target.decrement();
+    const actual = await target.value();
+    // Assert.
+    expect(actual).toEqual(min);
+  }
+
+  async function shouldSetTheStepValue(createTestTarget: () => Promise<ZNumberComponentModel>) {
+    // Arrange.
+    step = 2;
+    const target = await createTestTarget();
+    // Act.
+    const actual = await target.step();
+    // Assert.
+    expect(actual).toEqual(step);
+  }
+
+  async function shouldIncrementByStep(createTestTarget: () => Promise<ZNumberComponentModel>) {
+    // Arrange.
+    step = 5;
+    min = 2;
+    const target = await createTestTarget();
+    const expected = step + min;
+    await target.decrement(2);
+    // Act.
+    await target.increment();
+    const actual = await target.value();
+    // Assert.
+    expect(actual).toEqual(expected);
+  }
+
+  async function shouldSetTheControlledValue(createTestTarget: () => Promise<ZNumberComponentModel>) {
+    // Arrange.
+    value = 24;
+    const target = await createTestTarget();
+    // Act.
+    const actual = await target.value();
+    // Assert.
+    expect(actual).toEqual(value);
+  }
+
+  async function shouldRaiseOnValueChange(createTestTarget: () => Promise<ZNumberComponentModel>) {
+    // Arrange.
+    min = 5;
+    onValueChange = jest.fn();
+    const target = await createTestTarget();
+    const expected = 1 + min;
+    await target.decrement(2);
+    onValueChange.mockClear();
+    // Act.
+    await target.increment();
+    // Assert.
+    expect(onValueChange).toHaveBeenCalledWith(expected);
+  }
 
   describe('Slider', () => {
     async function createTestTarget() {
       const element = (
-        <ZNumberSlider
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          label={label}
-          onValueChange={onValueChange}
-          width={width}
-        />
+        <ZNumberSlider min={min} max={max} step={step} value={value} label={label} onValueChange={onValueChange} />
       );
 
       const driver = await new ZCircusSetupRenderer(element).setup();
       return ZCircusComponentModel.create(driver, ZNumberComponentModel, ZNumberComponentModel.Selector);
     }
-
-    it('should render the component', async () => {
-      // Arrange.
-      width = ZSizeFixed.ExtraLarge;
-      // Act.
-      const target = await createTestTarget();
-      // Assert.
-      expect(target).toBeTruthy();
-    });
 
     describe('Value', () => {
       it('should default to the minimum value.', async () => {
@@ -63,120 +156,185 @@ describe('ZNumber', () => {
         // Assert.
         expect(actual).toEqual(5);
       });
+
+      it('should set the controlled value.', async () => {
+        await shouldSetTheControlledValue(createTestTarget);
+      });
+
+      it('should raise the onValueChange when the number changes.', async () => {
+        await shouldRaiseOnValueChange(createTestTarget);
+      });
     });
 
     describe('Label', () => {
       it('should render the label if set.', async () => {
-        // Arrange.
-        label = 'Test Label';
-        const target = await createTestTarget();
-        // Act.
-        const actual = await target.label();
-        // Assert.
-        expect(actual).toEqual(label);
+        await shouldRenderLabelIfSet(createTestTarget);
       });
 
       it('should not render the label if falsy.', async () => {
-        // Arrange.
-        const target = await createTestTarget();
-        // Act.
-        const actual = await target.label();
-        // Assert.
-        expect(actual).toEqual('');
+        await shouldNotRenderLabelIfFalsy(createTestTarget);
       });
     });
 
     describe('Range', () => {
       it('should set the min value.', async () => {
-        // Arrange.
-        min = 2;
-        const target = await createTestTarget();
-        // Act.
-        const actual = await target.min();
-        // Assert.
-        expect(actual).toEqual(min);
+        await shouldSetTheMinValue(createTestTarget);
       });
 
       it('should set the max value.', async () => {
-        // Arrange.
-        max = 50;
-        const target = await createTestTarget();
-        // Act.
-        const actual = await target.max();
-        // Assert.
-        expect(actual).toEqual(max);
+        await shouldSetTheMaxValue(createTestTarget);
       });
 
       it('should update to the maximum value when attempting to go one beyond the max.', async () => {
-        // Arrange.
-        max = 10;
-        const target = await createTestTarget();
-        // Act.
-        await target.increment(max);
-        await target.increment();
-        const actual = await target.value();
-        // Assert.
-        expect(actual).toEqual(max);
+        await shouldUpdateToMaxWhenGoingOneBeyond(createTestTarget);
       });
 
       it('should update to the min value when attempting to go one beyond the min.', async () => {
-        // Arrange.
-        min = -5;
-        const target = await createTestTarget();
-        // Act.
-        await target.increment(5);
-        await target.decrement(5);
-        await target.decrement();
-        const actual = await target.value();
-        // Assert.
-        expect(actual).toEqual(min);
+        await shouldUpdateToMinWhenGoingOneBefore(createTestTarget);
       });
     });
 
     describe('Step', () => {
       it('should set the step value.', async () => {
-        // Arrange.
-        step = 2;
-        const target = await createTestTarget();
-        // Act.
-        const actual = await target.step();
-        // Assert.
-        expect(actual).toEqual(step);
+        await shouldSetTheStepValue(createTestTarget);
       });
 
       it('should increment step the appropriate value.', async () => {
+        await shouldIncrementByStep(createTestTarget);
+      });
+    });
+  });
+
+  describe('Input', () => {
+    async function createTestTarget() {
+      const element = (
+        <ZNumberInput min={min} max={max} step={step} value={value} label={label} onValueChange={onValueChange} />
+      );
+
+      const driver = await new ZCircusSetupRenderer(element).setup();
+      return ZCircusComponentModel.create(driver, ZNumberComponentModel, ZNumberComponentModel.Selector);
+    }
+
+    describe('Value', () => {
+      it('should default to null.', async () => {
         // Arrange.
-        step = 5;
-        min = 2;
         const target = await createTestTarget();
-        const expected = step + min;
         // Act.
-        await target.increment();
         const actual = await target.value();
+        // Assert.
+        expect(actual).toBeNull();
+      });
+
+      it('should set the controlled value.', async () => {
+        await shouldSetTheControlledValue(createTestTarget);
+      });
+
+      it('should raise the onValueChange when the number changes.', async () => {
+        await shouldRaiseOnValueChange(createTestTarget);
+      });
+
+      it('should receive the typed number.', async () => {
+        // Arrange.
+        const expected = 42;
+        const target = await createTestTarget();
+        // Act.
+        const actual = await target.keyboard(String(expected));
         // Assert.
         expect(actual).toEqual(expected);
       });
 
-      it('should set the controlled value.', async () => {
+      it('should receive NaN for invalid keyboard inputs.', async () => {
         // Arrange.
-        value = 24;
         const target = await createTestTarget();
         // Act.
-        const actual = await target.value();
+        const actual = await target.keyboard('Not-a-number');
         // Assert.
-        expect(actual).toEqual(value);
+        expect(actual).toBeNaN();
       });
 
-      it('should raise the onValueChange when the number changes.', async () => {
+      it('should recover from NaN to 0 when incrementing.', async () => {
         // Arrange.
-        min = 5;
-        onValueChange = jest.fn();
+        const expected = 0;
         const target = await createTestTarget();
-        const expected = 1 + min;
+        await target.keyboard('Not-a-number');
         // Act.
-        await target.increment();
+        const actual = await target.up();
         // Assert.
-        expect(onValueChange).toHaveBeenCalledWith(expected);
+        expect(actual).toEqual(expected + 1);
+      });
+
+      it('should set null for the value if all text is deleted.', async () => {
+        // Arrange.
+        const target = await createTestTarget();
+        await target.keyboard('2');
+        // Act.
+        await target.clear();
+        const actual = await target.value();
+        // Assert.
+        expect(actual).toBeNull();
+      });
+    });
+
+    describe('Label', () => {
+      it('should render the label if set.', async () => {
+        await shouldRenderLabelIfSet(createTestTarget);
+      });
+
+      it('should not render the label if falsy.', async () => {
+        await shouldNotRenderLabelIfFalsy(createTestTarget);
+      });
+    });
+
+    describe('Range', () => {
+      it('should set the min value.', async () => {
+        await shouldSetTheMinValue(createTestTarget);
+      });
+
+      it('should set the max value.', async () => {
+        await shouldSetTheMaxValue(createTestTarget);
+      });
+
+      it('should update to the maximum value when attempting to go one beyond the max.', async () => {
+        await shouldUpdateToMaxWhenGoingOneBeyond(createTestTarget);
+      });
+
+      it('should update to the min value when attempting to go one beyond the min.', async () => {
+        await shouldUpdateToMinWhenGoingOneBefore(createTestTarget);
+      });
+    });
+
+    describe('Step', () => {
+      it('should set the step value.', async () => {
+        await shouldSetTheStepValue(createTestTarget);
+      });
+
+      it('should increment step the appropriate value.', async () => {
+        await shouldIncrementByStep(createTestTarget);
+      });
+
+      it('should increment when hitting the up arrow key.', async () => {
+        // Arrange.
+        min = 0;
+        const expected = min + 1;
+        const target = await createTestTarget();
+        await target.down(min + 1);
+        // Act.
+        const actual = await target.up();
+        // Assert.
+        expect(actual).toEqual(expected);
+      });
+
+      it('should increment when hitting the up arrow key.', async () => {
+        // Arrange.
+        min = 0;
+        max = 5;
+        const expected = max - 1;
+        const target = await createTestTarget();
+        await target.up(max + 1);
+        // Act.
+        const actual = await target.down();
+        // Assert.
+        expect(actual).toEqual(expected);
       });
     });
   });
