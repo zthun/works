@@ -1,10 +1,13 @@
 import { TextField } from '@mui/material';
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { createSizeChartFixedArithmetic, ZSizeFixed } from '@zthun/works.chonky-cat';
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
 import { IZComponentHeight } from '../component/component-height';
 import { IZText, useText } from './text';
+
 export interface IZTextArea extends IZText, IZComponentHeight<ZSizeFixed> {}
+
+const TextAreaRows = createSizeChartFixedArithmetic(2, 2);
 
 /**
  * Represents a text input that supports multiline.
@@ -16,8 +19,12 @@ export interface IZTextArea extends IZText, IZComponentHeight<ZSizeFixed> {}
  *        The JSX to render this component.
  */
 export function ZTextArea(props: IZTextArea) {
-  const { className, name, required } = props;
+  const { className, name, required, height = ZSizeFixed.Medium } = props;
   const clasz = cssClass('ZText-root', 'ZText-area', className);
   const _textField = useText(props, '');
-  return <TextField {..._textField} multiline className={clasz} data-name={name} data-required={required} />;
+  const rows = TextAreaRows[height];
+
+  return (
+    <TextField {..._textField} className={clasz} multiline rows={rows} data-name={name} data-required={required} />
+  );
 }
