@@ -4707,6 +4707,9 @@ __metadata:
 "@zthun/works.chonky-cat@^4.0.0, @zthun/works.chonky-cat@workspace:packages/works.chonky-cat":
   version: 0.0.0-use.local
   resolution: "@zthun/works.chonky-cat@workspace:packages/works.chonky-cat"
+  dependencies:
+    typedoc: ^0.23.16
+    typescript: ^4.8.4
   languageName: unknown
   linkType: soft
 
