@@ -23,7 +23,7 @@ export interface IZImageSource
     IZComponentName {}
 
 const ImageSizeChart = {
-  ...createSizeChartFixedCss(createSizeChartFixedGeometric(2, 16), 'rem'),
+  ...createSizeChartFixedCss(createSizeChartFixedGeometric(2, 1), 'rem'),
   ...createSizeChartVariedCss(),
   ...createSizeChartVoidCss()
 };
