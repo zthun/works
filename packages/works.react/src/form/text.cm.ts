@@ -1,4 +1,4 @@
-import { IZCircusDriver, ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusActBuilder, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
 import { firstDefined } from '@zthun/works.core';
 
 /**
@@ -90,7 +90,7 @@ export class ZTextComponentModel extends ZCircusComponentModel {
    *        The updated value.
    */
   public async keyboard(text: string): Promise<string | null> {
-    const act = new ZCircusActBuilder().click().type(text).build();
+    const act = new ZCircusActBuilder().click().type(text).press(ZCircusKeyboardQwerty.tab).build();
     const input = await this._input();
     await input.perform(act);
     return this.value();
