@@ -87,7 +87,7 @@ describe('Size Chart', () => {
           [ZSizeFixed.Large]: `4rem`,
           [ZSizeFixed.ExtraLarge]: `5rem`
         };
-        const base = createSizeChartFixedArithmetic(1, 0);
+        const base = createSizeChartFixedArithmetic(1, 1);
         // Act.
         const actual = createSizeChartFixedCss(base, 'rem');
         // Assert.
