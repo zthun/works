@@ -11,6 +11,8 @@ import {
   ZColorTint,
   ZH3,
   ZList,
+  ZListDivider,
+  ZListGroup,
   ZListLineItem,
   ZPaddedBox,
   ZParagraph,
@@ -55,6 +57,20 @@ export function ZListPage() {
 
         <ZBorderLayout background={{ color: ZShadeColor.Grey, tint: ZColorTint.Light }} width={ZSizeFixed.Medium}>
           <ZList>
+            <ZListGroup heading='Without Click Support' />
+            <ZListLineItem
+              prefix={<FavoriteIcon color='info' fontSize='large' />}
+              name='avatar-and-text'
+              heading='Prefix and Text (Unclickable)'
+            />
+            <ZListLineItem
+              prefix={<FavoriteIcon color='warning' fontSize='large' />}
+              name='avatar-text-and-adornment'
+              heading='Prefix, Text, and Suffix (Unclickable)'
+              suffix={<CheckCircleIcon color='primary' fontSize='large' />}
+            />
+            <ZListDivider />
+            <ZListGroup heading='With Click Support'></ZListGroup>
             <ZListLineItem
               prefix={<CheckCircleIcon color='success' fontSize='large' />}
               suffix={<FavoriteIcon color='error' fontSize='large' />}
@@ -68,17 +84,6 @@ export function ZListPage() {
               heading='Text only line item'
               subHeading='Line item with just text'
               onClick={showAlert.bind(null, 'Warning', 'Pictures make line items pretty', ZAlertSeverity.Warning)}
-            />
-            <ZListLineItem
-              prefix={<FavoriteIcon color='info' fontSize='large' />}
-              name='avatar-and-text'
-              heading='Prefix and Text (Unclickable)'
-            />
-            <ZListLineItem
-              prefix={<FavoriteIcon color='warning' fontSize='large' />}
-              name='avatar-text-and-adornment'
-              heading='Prefix, Text, and Suffix (Unclickable)'
-              suffix={<CheckCircleIcon color='primary' fontSize='large' />}
             />
           </ZList>
         </ZBorderLayout>
