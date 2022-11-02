@@ -6,7 +6,7 @@ import { makeStyles } from '../theme/make-styles';
 import { ZColorless, ZColorTint } from '../theme/state-color';
 import { IZSuspense } from './suspense';
 
-const SuspenseRotateSizeChart = createSizeChartFixedCss(createSizeChartFixedArithmetic(1, 0), 'rem');
+const SuspenseRotateSizeChart = createSizeChartFixedCss(createSizeChartFixedArithmetic(1, 1), 'rem');
 
 const useSuspenseRotateStyles = makeStyles<IZSuspense>()((theme, props) => {
   const { color = ZColorless.Inherit, tint = ZColorTint.Main, width = ZSizeFixed.ExtraSmall } = props;
