@@ -89,13 +89,12 @@ export { ZToolbarLayoutComponentModel } from './layout/toolbar-layout.cm';
 export { ZWebAppLayout } from './layout/web-app-layout';
 // List
 export { ZList } from './list/list';
+export { ZListDivider } from './list/list-divider';
+export { ZListGroup } from './list/list-group';
 export { ZListItemComponentModel } from './list/list-item.cm';
 export { ZListLineItem } from './list/list-line-item';
 export { ZListLineItemComponentModel } from './list/list-line-item.cm';
 export { ZListComponentModel } from './list/list.cm';
-// Menu
-export { IZMenu, ZMenu } from './menu/menu';
-export { IZMenuItem, ZMenuItem } from './menu/menu-item';
 // Router
 export {
   useNavigate,
