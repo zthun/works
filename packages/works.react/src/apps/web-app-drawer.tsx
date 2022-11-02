@@ -5,7 +5,6 @@ import ErrorIcon from '@mui/icons-material/Error';
 import GithubIcon from '@mui/icons-material/GitHub';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 
-import { Divider } from '@mui/material';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { cssClass } from '@zthun/works.core';
 import { kebabCase, startCase } from 'lodash';
@@ -14,6 +13,8 @@ import { IZComponentStyle } from '../component/component-style.';
 import { IZDrawerButton, ZDrawerButton } from '../drawer/drawer-button';
 import { ZImageSource } from '../image/image-source';
 import { ZList } from '../list/list';
+import { ZListDivider } from '../list/list-divider';
+import { ZListGroup } from '../list/list-group';
 import { ZListLineItem } from '../list/list-line-item';
 import { useLocation, useNavigate } from '../router/router-dom';
 import { isStateErrored, isStateLoaded, isStateLoading } from '../state/use-async-state';
@@ -119,8 +120,9 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
 
     return (
       <>
+        <ZListGroup heading='Source Code' />
         {createNavItem('github', 'Github', 'View the source code', icon, openBlank.bind(null, who.source), 'source')}
-        <Divider />
+        <ZListDivider />
       </>
     );
   };
@@ -129,12 +131,13 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
     if (isStateLoading(apps)) {
       return (
         <>
+          <ZListGroup heading='Apps' />
           <ZListLineItem
             className='ZWebAppDrawer-item-loading'
             heading='Loading...'
             prefix={<ZSuspenseRotate width={ZSizeFixed.Large} />}
           />
-          <Divider />
+          <ZListDivider />
         </>
       );
     }
@@ -147,12 +150,13 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
 
     return (
       <>
+        <ZListGroup heading='Apps' />
         {apps
           .filter((app) => ignore.indexOf(app._id) < 0)
           .map((app) =>
             createNavItem(app._id, app.name, app.short, createAppIcon(app.icon), openSelf.bind(null, app.domain), 'app')
           )}
-        <Divider />
+        <ZListDivider />
       </>
     );
   };
@@ -179,8 +183,9 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
 
     return (
       <>
+        <ZListGroup heading='Home' />
         {createNavItem(whoami, name, short, avatar, navigate.bind(null, home), 'home')}
-        <Divider />
+        <ZListDivider />
       </>
     );
   };
