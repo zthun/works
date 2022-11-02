@@ -1,7 +1,6 @@
 import { AppBar } from '@mui/material';
 import { ThemeProvider } from '@mui/system';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
-import { IZRouteOption } from '@zthun/works.core';
 import React from 'react';
 import { GlobalStyles } from 'tss-react';
 import { ZAlertList } from '../alert/alert-list';
@@ -33,11 +32,6 @@ export interface IZWebAppLayout extends IZComponentHierarchy {
    * If you don't set this, then it will hide the profile button.
    */
   profileApp?: string;
-
-  /**
-   * Optional routes heading routes to include for you application.
-   */
-  routes?: IZRouteOption[];
 
   /**
    * The home route.
