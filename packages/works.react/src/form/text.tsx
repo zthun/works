@@ -1,7 +1,8 @@
 import { InputAdornment, OutlinedInputProps, TextFieldProps } from '@mui/material';
+import { ZCircusKeyboardQwerty } from '@zthun/works.cirque';
 import { cssClass } from '@zthun/works.core';
 import { get, noop } from 'lodash';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { KeyboardEvent, ReactNode, useEffect, useState } from 'react';
 import { IZComponentAdornment } from '../component/component-adornment';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentLabel } from '../component/component-label';
@@ -71,5 +72,31 @@ export function useText<T>(props: IZText<T>, initial: T): TextFieldProps {
     InputProps,
     onBlur: () => onValueChange(current),
     onInput: (e) => setCurrent(get(e.target, 'value'))
+  };
+}
+
+/**
+ * Constructs a keyboard handler that commits the  value when the enter key is pressed.
+ *
+ * @param props
+ *        The text properties.
+ * @param onKeyDown
+ *        A different key down handler that
+ *
+ * @returns
+ *        A new function that handles the event key in addition to the
+ *        other key handler.
+ *
+ */
+export function withEnterCommit<T>(props: IZText<T>, onKeyDown: (e: KeyboardEvent<HTMLElement>) => any = noop) {
+  const { onValueChange = noop } = props;
+
+  return (e: KeyboardEvent<HTMLElement>) => {
+    if (e.code === ZCircusKeyboardQwerty.enter.code) {
+      const current = get(e.target, 'value', '');
+      onValueChange(current);
+    }
+
+    onKeyDown(e);
   };
 }

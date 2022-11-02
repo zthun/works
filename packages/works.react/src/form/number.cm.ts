@@ -84,7 +84,10 @@ export class ZNumberComponentModel extends ZCircusComponentModel {
    * @param direction
    *        The direction to spin.
    * @param times
-   *        The number of times to spin.
+   *        The number of times to spin.  Only the first
+   *        time is the spinner clicked.  The remaining
+   *        time, the spinner is activated using the
+   *        Enter key.
    *
    * @returns
    *        The input value.
@@ -106,8 +109,12 @@ export class ZNumberComponentModel extends ZCircusComponentModel {
       return this.value();
     }
 
-    for (let i = 0; i < times; ++i) {
+    if (times > 0) {
       await spinner.perform(new ZCircusActBuilder().click().build());
+    }
+
+    for (let i = 1; i < times; ++i) {
+      await spinner.perform(new ZCircusActBuilder().press(ZCircusKeyboardQwerty.enter).build());
     }
 
     return this.value();

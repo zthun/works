@@ -7,7 +7,7 @@ import React, { KeyboardEvent } from 'react';
 import { useAmbassadorState } from '../state/use-ambassador-state';
 import { makeStyles } from '../theme/make-styles';
 import { IZNumber } from './number';
-import { useText } from './text';
+import { IZText, useText, withEnterCommit } from './text';
 
 export const useNumberInputStyles = makeStyles()(() => {
   return {
@@ -74,24 +74,35 @@ export function ZNumberInput(props: IZNumber<number | null>) {
     _setValue(next);
   };
 
+  const handleSpinOnEnter = (direction: 1 | -1, e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.code === ZCircusKeyboardQwerty.enter.code) {
+      e.stopPropagation();
+    }
+  };
+
   const adornment = (
     <div className={cssClass('ZNumber-spinner', classes.spinner)}>
       <button
         className={cssClass('ZNumber-spinner-increment', classes.spin, classes.up)}
         onClick={handleSpin.bind(null, 1)}
+        onKeyDown={handleSpinOnEnter.bind(null, 1)}
       >
         <ArrowDropUpIcon fontSize='inherit' />
       </button>
       <button
         className={cssClass('ZNumber-spinner-decrement', classes.spin, classes.down)}
         onClick={handleSpin.bind(null, -1)}
+        onKeyDown={handleSpinOnEnter.bind(null, -1)}
       >
         <ArrowDropDownIcon fontSize='inherit' />
       </button>
     </div>
   );
 
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const _propsForText: IZText = { ...props, value: __value, onValueChange: handleCommit, suffix: adornment };
+  const _text = useText<string>(_propsForText, '');
+
+  const handleKeyDown = withEnterCommit(_propsForText, (e: KeyboardEvent) => {
     if (e.code === ZCircusKeyboardQwerty.upArrow.code) {
       e.preventDefault();
       handleSpin(1);
@@ -101,9 +112,7 @@ export function ZNumberInput(props: IZNumber<number | null>) {
       e.preventDefault();
       handleSpin(-1);
     }
-  };
-
-  const _text = useText<string>({ ...props, value: __value, onValueChange: handleCommit, suffix: adornment }, '');
+  });
 
   return <TextField {..._text} className={clasz} onKeyDown={handleKeyDown} inputProps={{ min, max, step }} />;
 }

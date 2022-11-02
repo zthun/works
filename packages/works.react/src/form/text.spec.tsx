@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { IZCircusKey, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactNode } from 'react';
 import { ZTextArea } from './text-area';
@@ -49,16 +49,33 @@ describe('ZText', () => {
     expect(actual).toEqual(expected);
   };
 
-  const shouldRaiseOnValueChange = async (createTestTarget: () => Promise<ZTextComponentModel>) => {
+  const shouldRaiseOnValueChange = async (
+    createTestTarget: () => Promise<ZTextComponentModel>,
+    commit?: IZCircusKey
+  ) => {
     // Arrange
     onValueChange = jest.fn();
     // cspell: disable-next-line
     const expected = 'Purus gravida quis blandit turpis cursus in hac habitasse.';
     const target = await createTestTarget();
     // Act
-    await target.keyboard(expected);
+    await target.keyboard(expected, commit);
     // Assert
     expect(onValueChange).toHaveBeenCalledWith(expected);
+  };
+
+  const shouldNotRaiseOnValueChange = async (
+    createTestTarget: () => Promise<ZTextComponentModel>,
+    commit = ZCircusKeyboardQwerty.altLeft
+  ) => {
+    // Arrange
+    onValueChange = jest.fn();
+    // cspell: disable-next-line
+    const target = await createTestTarget();
+    // Act
+    await target.keyboard('No commit', commit);
+    // Assert
+    expect(onValueChange).not.toHaveBeenCalled();
   };
 
   const shouldBeDisabled = async (createTestTarget: () => Promise<ZTextComponentModel>) => {
@@ -133,12 +150,20 @@ describe('ZText', () => {
       await shouldRenderTextValue(createTestTarget);
     });
 
-    it('should update the value as the user types', async () => {
+    it('should update the value when the user types', async () => {
       await shouldUpdateTextValue(createTestTarget);
     });
 
-    it('should raise the onValueChange event when the user types a value', async () => {
+    it('should raise the onValueChange event when the user types a value and commits with tab', async () => {
       await shouldRaiseOnValueChange(createTestTarget);
+    });
+
+    it('should raise the onValueChange event when the user types a value and commits with enter', async () => {
+      await shouldRaiseOnValueChange(createTestTarget, ZCircusKeyboardQwerty.enter);
+    });
+
+    it('should not raise the onValueChange until the user commits the value', async () => {
+      await shouldNotRaiseOnValueChange(createTestTarget);
     });
 
     it('should be disabled', async () => {
@@ -210,8 +235,16 @@ describe('ZText', () => {
       await shouldUpdateTextValue(createTestTarget);
     });
 
-    it('should raise the onValueChange event when the user types a value', async () => {
+    it('should raise the onValueChange event when the user types a value and commits with tab', async () => {
       await shouldRaiseOnValueChange(createTestTarget);
+    });
+
+    it('should raise the onValueChange event when the user types a value and commits with enter', async () => {
+      await shouldRaiseOnValueChange(createTestTarget, ZCircusKeyboardQwerty.enter);
+    });
+
+    it('should not raise the onValueChange until the user commits the value', async () => {
+      await shouldNotRaiseOnValueChange(createTestTarget);
     });
 
     it('should be disabled', async () => {
@@ -276,8 +309,16 @@ describe('ZText', () => {
       await shouldRenderTextValue(createTestTarget);
     });
 
-    it('should update the value as the user types', async () => {
-      await shouldUpdateTextValue(createTestTarget);
+    it('should raise the onValueChange event when the user types a value and commits with tab', async () => {
+      await shouldRaiseOnValueChange(createTestTarget);
+    });
+
+    it('should not raise the onValueChange event when the user types a value and commits with enter', async () => {
+      await shouldNotRaiseOnValueChange(createTestTarget, ZCircusKeyboardQwerty.enter);
+    });
+
+    it('should not raise the onValueChange until the user commits the value', async () => {
+      await shouldNotRaiseOnValueChange(createTestTarget);
     });
 
     it('should raise the onValueChange event when the user types a value', async () => {

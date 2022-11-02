@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
-import { IZText, useText } from './text';
+import { IZText, useText, withEnterCommit } from './text';
 
 /**
  * Represents the type of text.
@@ -45,6 +45,16 @@ export function ZTextInput(props: IZTextInput) {
   const { className, type = ZTextType.Text, name, required } = props;
   const _textField = useText(props, '');
   const clasz = cssClass('ZText-root ZText-input', className);
+  const handleKeyDown = withEnterCommit(props);
 
-  return <TextField {..._textField} type={type} className={clasz} data-name={name} data-required={required} />;
+  return (
+    <TextField
+      {..._textField}
+      type={type}
+      className={clasz}
+      onKeyDown={handleKeyDown}
+      data-name={name}
+      data-required={required}
+    />
+  );
 }

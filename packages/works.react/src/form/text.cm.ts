@@ -85,12 +85,15 @@ export class ZTextComponentModel extends ZCircusComponentModel {
    *
    * @param text
    *        The text to type.
+   * @param commit
+   *        The key to use push last to commit the changes.  Should
+   *        be tab or enter.
    *
    * @returns
    *        The updated value.
    */
-  public async keyboard(text: string): Promise<string | null> {
-    const act = new ZCircusActBuilder().click().type(text).press(ZCircusKeyboardQwerty.tab).build();
+  public async keyboard(text: string, commit = ZCircusKeyboardQwerty.tab): Promise<string | null> {
+    const act = new ZCircusActBuilder().click().type(text).press(commit).build();
     const input = await this._input();
     await input.perform(act);
     return this.value();
