@@ -4,19 +4,13 @@ import React from 'react';
 import { IZComponentAdornment } from '../component/component-adornment';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentHeading } from '../component/component-heading';
-import { IZComponentName } from '../component/component-name';
-import { IZComponentStyle } from '../component/component-style.';
 import { makeStyles } from '../theme/make-styles';
+import { IZListItem } from './list-item';
 
 /**
  * The props for the line item list.
  */
-export interface IZListLineItem
-  extends IZComponentHeading,
-    IZComponentAdornment,
-    IZComponentDisabled,
-    IZComponentName,
-    IZComponentStyle {
+export interface IZListLineItem extends IZListItem, IZComponentHeading, IZComponentAdornment, IZComponentDisabled {
   /**
    * Occurs when the line item is clicked.
    */
@@ -28,7 +22,9 @@ const useListLineItemStyles = makeStyles<IZListLineItem>()((theme, props) => {
 
   return {
     avatar: {
-      marginLeft: gap
+      marginLeft: gap,
+      marginRight: theme.gap(),
+      minWidth: 0
     }
   };
 });
@@ -47,15 +43,12 @@ export function ZListLineItem(props: IZListLineItem) {
   const clasz = cssClass('ZListItem-root', 'ZListLineItem-root', className);
   const { classes } = useListLineItemStyles(props);
 
-  const renderContents = () => {
-    const avatarClass = cssClass('ZListLineItem-avatar', classes.avatar);
-    return (
-      <>
-        <ListItemAvatar className={avatarClass}>{prefix}</ListItemAvatar>
-        <ListItemText className='ZListLineItem-text' primary={heading} secondary={subHeading} />
-      </>
-    );
-  };
+  const renderContents = () => (
+    <>
+      <ListItemAvatar className={cssClass('ZListLineItem-avatar', classes.avatar)}>{prefix}</ListItemAvatar>
+      <ListItemText className='ZListLineItem-text' primary={heading} secondary={subHeading} />
+    </>
+  );
 
   const renderClickableContents = () => (
     <ListItemButton className='ZListLineItem-button' onClick={onClick}>
