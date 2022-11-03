@@ -96,6 +96,11 @@ export { ZListLineItem } from './list/list-line-item';
 export { ZListLineItemComponentModel } from './list/list-line-item.cm';
 export { ZListComponentModel } from './list/list.cm';
 // Router
+export { IZBreadcrumbs } from './router/breadcrumbs';
+export { ZBreadcrumbsLocation } from './router/breadcrumbs-location';
+export { ZBreadcrumbsComponentModel } from './router/breadcrumbs.cm';
+export { IZLink, ZLink } from './router/link';
+export { ZLinkComponentModel } from './router/link.cm';
 export {
   useNavigate,
   useParams,
@@ -145,3 +150,4 @@ export {
 } from './typography/typography';
 // Window
 export { useWindowService, ZWindowServiceContext } from './window/window-service';
+export {};
