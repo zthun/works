@@ -1,4 +1,3 @@
-import NumbersIcon from '@mui/icons-material/Numbers';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 
 import {
@@ -12,6 +11,7 @@ import {
   ZParagraph
 } from '@zthun/works.react';
 import React from 'react';
+import { ZComponentNumber } from '../../web-apps-components';
 
 /**
  * Represents a demo for number inputs.
@@ -25,9 +25,9 @@ export function ZNumberPage() {
   return (
     <ZCard
       className='ZNumberPage-root'
-      heading='Number'
-      subHeading='Spinners and Sliders'
-      avatar={<NumbersIcon color='success' fontSize='inherit' />}
+      heading={ZComponentNumber.name}
+      subHeading={ZComponentNumber.description}
+      avatar={ZComponentNumber.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

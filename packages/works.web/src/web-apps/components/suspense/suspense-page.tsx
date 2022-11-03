@@ -1,4 +1,3 @@
-import LoopIcon from '@mui/icons-material/Loop';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { setFirstOrDefault } from '@zthun/works.core';
 import {
@@ -20,6 +19,7 @@ import {
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
 import React from 'react';
+import { ZComponentSuspense } from '../../web-apps-components';
 
 /**
  * Represents a demo for suspense indicators.
@@ -45,9 +45,9 @@ export function ZSuspensePage() {
   return (
     <ZCard
       className='ZSuspensePage-root'
-      heading='Suspense'
-      subHeading='Spinners that spin'
-      avatar={<LoopIcon color='warning' fontSize='inherit' />}
+      heading={ZComponentSuspense.name}
+      subHeading={ZComponentSuspense.description}
+      avatar={ZComponentSuspense.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

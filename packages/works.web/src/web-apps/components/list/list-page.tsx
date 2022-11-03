@@ -1,7 +1,6 @@
 // cspell:disable
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
@@ -19,6 +18,7 @@ import {
   ZShadeColor
 } from '@zthun/works.react';
 import React from 'react';
+import { ZComponentList } from '../../web-apps-components';
 
 /**
  * Represents a demo for lists.
@@ -37,9 +37,9 @@ export function ZListPage() {
   return (
     <ZCard
       className='ZListPage-root'
-      heading='List'
-      subHeading='Showing multiple items'
-      avatar={<FormatListNumberedIcon color='info' fontSize='inherit' />}
+      heading={ZComponentList.name}
+      subHeading={ZComponentList.description}
+      avatar={ZComponentList.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

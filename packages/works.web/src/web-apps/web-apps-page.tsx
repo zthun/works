@@ -1,13 +1,3 @@
-import AbcIcon from '@mui/icons-material/Abc';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
-import LoopIcon from '@mui/icons-material/Loop';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import NumbersIcon from '@mui/icons-material/Numbers';
-import SmartButtonIcon from '@mui/icons-material/SmartButton';
-import TitleIcon from '@mui/icons-material/Title';
-import TouchAppIcon from '@mui/icons-material/TouchApp';
-import WarningIcon from '@mui/icons-material/Warning';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import {
   useNavigate,
@@ -36,6 +26,7 @@ import { ZSuspensePage } from './components/suspense/suspense-page';
 import { ZTextPage } from './components/text/text-page';
 import { ZTypographyPage } from './components/typography/typography-page';
 import { ZGettingStartedPage } from './getting-started/getting-started-page';
+import { ZWebAppsComponents } from './web-apps-components';
 
 /**
  * Renders the home page.
@@ -74,66 +65,15 @@ export function ZWebAppsPage() {
       >
         <ZList>
           <ZListGroup heading='Components' />
-          <ZListLineItem
-            prefix={<WarningIcon color='warning' fontSize='large' />}
-            heading='Alerts'
-            subHeading='User Feedback'
-            onClick={navigate.bind(null, 'components/alerts')}
-          />
-          <ZListLineItem
-            prefix={<CheckBoxIcon color='success' fontSize='large' />}
-            onClick={navigate.bind(null, 'components/boolean')}
-            heading='Boolean'
-            subHeading='Basic Togglers'
-          />
-          <ZListLineItem
-            prefix={<SmartButtonIcon color='error' fontSize='large' />}
-            onClick={navigate.bind(null, 'components/button')}
-            heading='Button'
-            subHeading='Click To Activate'
-          />
-          <ZListLineItem
-            prefix={<TouchAppIcon color='warning' fontSize='large' />}
-            onClick={navigate.bind(null, 'components/choice')}
-            heading='Choice'
-            subHeading='Select From An Option List'
-          />
-          <ZListLineItem
-            prefix={<MenuOpenIcon color='success' fontSize='large' />}
-            onClick={navigate.bind(null, 'components/drawer')}
-            heading='Drawer'
-            subHeading='Pop-Out Content'
-          />
-          <ZListLineItem
-            prefix={<FormatListNumberedIcon color='info' fontSize='large' />}
-            onClick={navigate.bind(null, 'components/list')}
-            heading='List'
-            subHeading='Showing Multiple Items'
-          />
-          <ZListLineItem
-            prefix={<NumbersIcon color='success' fontSize='large' />}
-            onClick={navigate.bind(null, 'components/number')}
-            heading='Number'
-            subHeading='Spinners And Sliders'
-          />
-          <ZListLineItem
-            prefix={<LoopIcon color='warning' fontSize='large' />}
-            onClick={navigate.bind(null, 'components/suspense')}
-            heading='Suspense'
-            subHeading='Working In The Background'
-          />
-          <ZListLineItem
-            prefix={<TitleIcon color='primary' fontSize='large' />}
-            onClick={navigate.bind(null, 'components/text')}
-            heading='Text'
-            subHeading='Enter Some Strings'
-          />
-          <ZListLineItem
-            prefix={<AbcIcon color='inherit' fontSize='large' />}
-            onClick={navigate.bind(null, 'components/typography')}
-            heading='Typography'
-            subHeading='Standard Page Structures'
-          />
+          {ZWebAppsComponents.map((component) => (
+            <ZListLineItem
+              key={component.path}
+              prefix={component.avatar}
+              heading={component.name}
+              subHeading={component.description}
+              onClick={navigate.bind(null, `components/${component.path}`)}
+            />
+          ))}
         </ZList>
       </ZDrawerButton>
       <ZBreadcrumbsLocation />

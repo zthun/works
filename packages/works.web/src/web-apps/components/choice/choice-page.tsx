@@ -1,5 +1,4 @@
 import BalanceIcon from '@mui/icons-material/Balance';
-import TouchAppIcon from '@mui/icons-material/TouchApp';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 
 import {
@@ -16,6 +15,7 @@ import {
   ZParagraph
 } from '@zthun/works.react';
 import React from 'react';
+import { ZComponentChoice } from '../../web-apps-components';
 
 interface Superhero {
   id: string;
@@ -101,9 +101,9 @@ export function ZChoicePage() {
   return (
     <ZCard
       className='ZChoicePage-root'
-      heading='Choice'
-      subHeading='Select from a list of options.'
-      avatar={<TouchAppIcon color='warning' fontSize='inherit' />}
+      heading={ZComponentChoice.name}
+      subHeading={ZComponentChoice.description}
+      avatar={ZComponentChoice.avatar}
     >
       <ZPaddedBox padding={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

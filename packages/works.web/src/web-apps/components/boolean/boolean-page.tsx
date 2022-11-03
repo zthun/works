@@ -17,6 +17,7 @@ import {
   ZToolbarLayout
 } from '@zthun/works.react';
 import React from 'react';
+import { ZComponentBoolean } from '../../web-apps-components';
 
 /**
  * Represents a demo for booleans.
@@ -30,9 +31,9 @@ export function ZBooleanPage() {
   return (
     <ZCard
       className='ZBooleanPage-root'
-      heading={'Boolean'}
-      subHeading='Basic togglers'
-      avatar={<CheckBoxIcon color='success' fontSize='inherit' />}
+      heading={ZComponentBoolean.name}
+      subHeading={ZComponentBoolean.description}
+      avatar={ZComponentBoolean.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

@@ -1,5 +1,4 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import SmartButtonIcon from '@mui/icons-material/SmartButton';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { setFirstOrDefault } from '@zthun/works.core';
 import { ZAlertBuilder } from '@zthun/works.message';
@@ -21,6 +20,7 @@ import {
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
 import React from 'react';
+import { ZComponentButton } from '../../web-apps-components';
 
 /**
  * Represents a demo for buttons.
@@ -52,9 +52,9 @@ export function ZButtonPage() {
   return (
     <ZCard
       className='ZButtonPage-root'
-      heading='Button'
-      subHeading='Standard button component'
-      avatar={<SmartButtonIcon color='error' fontSize='inherit' />}
+      heading={ZComponentButton.name}
+      subHeading={ZComponentButton.description}
+      avatar={ZComponentButton.avatar}
     >
       <ZPaddedBox padding={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

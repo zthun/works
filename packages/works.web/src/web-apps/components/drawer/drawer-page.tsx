@@ -1,5 +1,4 @@
 import CloseIcon from '@mui/icons-material/Close';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { setFirstOrDefault } from '@zthun/works.core';
 import {
@@ -19,6 +18,7 @@ import {
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
 import React from 'react';
+import { ZComponentDrawer } from '../../web-apps-components';
 
 /**
  * Represents a demo for drawers.
@@ -37,9 +37,9 @@ export function ZDrawerPage() {
   return (
     <ZCard
       className='ZDrawerPage-root'
-      heading='Drawer'
-      subHeading='Pop out content'
-      avatar={<MenuOpenIcon color='success' fontSize='inherit' />}
+      heading={ZComponentDrawer.name}
+      subHeading={ZComponentDrawer.description}
+      avatar={ZComponentDrawer.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

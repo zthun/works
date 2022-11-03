@@ -1,4 +1,3 @@
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import FlagIcon from '@mui/icons-material/Flag';
 import SearchIcon from '@mui/icons-material/Search';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
@@ -17,6 +16,7 @@ import {
 } from '@zthun/works.react';
 import { ZTextArea } from '@zthun/works.react/src';
 import React from 'react';
+import { ZComponentText } from '../../web-apps-components';
 
 /**
  * Represents a demo for text.
@@ -33,9 +33,9 @@ export function ZTextPage() {
   return (
     <ZCard
       className='ZTextPage-root'
-      heading='Text'
-      subHeading='Enter some strings'
-      avatar={<CheckBoxIcon color='success' fontSize='inherit' />}
+      heading={ZComponentText.name}
+      subHeading={ZComponentText.description}
+      avatar={ZComponentText.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

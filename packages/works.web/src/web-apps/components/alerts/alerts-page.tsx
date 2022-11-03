@@ -17,8 +17,8 @@ import {
   ZSeverityColor
 } from '@zthun/works.react';
 import { startCase } from 'lodash';
-
 import React from 'react';
+import { ZComponentAlerts } from '../../web-apps-components';
 
 /**
  * Represents a demo for alerts.
@@ -55,9 +55,9 @@ export function ZAlertsPage() {
   return (
     <ZCard
       className='ZAlertsPage-root'
-      heading='Alerts'
-      subHeading='User feedback'
-      avatar={<WarningIcon color='warning' fontSize='inherit' />}
+      heading={ZComponentAlerts.name}
+      subHeading={ZComponentAlerts.description}
+      avatar={ZComponentAlerts.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>
@@ -76,7 +76,7 @@ export function ZAlertsPage() {
           alerts are immortal, then it will be up to the user to close the alert when they are finished with them.
         </ZParagraph>
 
-        <ZGridLayout columns='25rem' gap={ZSizeFixed.Small}>
+        <ZGridLayout columns='15rem' gap={ZSizeFixed.Small}>
           <ZButton
             avatar={<CheckCircleIcon color='inherit' fontSize='small' />}
             color={ZSeverityColor.Success}
