@@ -15,6 +15,7 @@ import {
   ZDrawerButton,
   ZGridLayout,
   ZList,
+  ZListGroup,
   ZListLineItem,
   ZNavigate,
   ZRoute,
@@ -47,7 +48,6 @@ export function ZWebAppsPage() {
 
   const renderDetails = () => (
     <ZRouteMap>
-      <ZRoute path='getting-started' element={<ZGettingStartedPage />} />
       <ZRoute path='components'>
         <ZRoute path='alerts' element={<ZAlertsPage />} />
         <ZRoute path='boolean' element={<ZBooleanPage />} />
@@ -60,7 +60,7 @@ export function ZWebAppsPage() {
         <ZRoute path='text' element={<ZTextPage />} />
         <ZRoute path='typography' element={<ZTypographyPage />} />
       </ZRoute>
-      <ZRoute path='/' element={<ZNavigate to='getting-started' />} />
+      <ZRoute path='/' element={<ZGettingStartedPage />} />
       <ZRoute path='*' element={<ZNavigate to={'/status-code/404'} />} />
     </ZRouteMap>
   );
@@ -73,6 +73,7 @@ export function ZWebAppsPage() {
         closeOnChange={[location]}
       >
         <ZList>
+          <ZListGroup heading='Components' />
           <ZListLineItem
             prefix={<WarningIcon color='warning' fontSize='large' />}
             heading='Alerts'
@@ -83,46 +84,55 @@ export function ZWebAppsPage() {
             prefix={<CheckBoxIcon color='success' fontSize='large' />}
             onClick={navigate.bind(null, 'components/boolean')}
             heading='Boolean'
+            subHeading='Basic Togglers'
           />
           <ZListLineItem
             prefix={<SmartButtonIcon color='error' fontSize='large' />}
             onClick={navigate.bind(null, 'components/button')}
             heading='Button'
+            subHeading='Click To Activate'
           />
           <ZListLineItem
             prefix={<TouchAppIcon color='warning' fontSize='large' />}
             onClick={navigate.bind(null, 'components/choice')}
             heading='Choice'
+            subHeading='Select From An Option List'
           />
           <ZListLineItem
             prefix={<MenuOpenIcon color='success' fontSize='large' />}
             onClick={navigate.bind(null, 'components/drawer')}
             heading='Drawer'
+            subHeading='Pop-Out Content'
           />
           <ZListLineItem
             prefix={<FormatListNumberedIcon color='info' fontSize='large' />}
             onClick={navigate.bind(null, 'components/list')}
             heading='List'
+            subHeading='Showing Multiple Items'
           />
           <ZListLineItem
             prefix={<NumbersIcon color='success' fontSize='large' />}
             onClick={navigate.bind(null, 'components/number')}
             heading='Number'
+            subHeading='Spinners And Sliders'
           />
           <ZListLineItem
             prefix={<LoopIcon color='warning' fontSize='large' />}
             onClick={navigate.bind(null, 'components/suspense')}
             heading='Suspense'
+            subHeading='Working In The Background'
           />
           <ZListLineItem
             prefix={<TitleIcon color='primary' fontSize='large' />}
             onClick={navigate.bind(null, 'components/text')}
             heading='Text'
+            subHeading='Enter Some Strings'
           />
           <ZListLineItem
             prefix={<AbcIcon color='inherit' fontSize='large' />}
             onClick={navigate.bind(null, 'components/typography')}
             heading='Typography'
+            subHeading='Standard Page Structures'
           />
         </ZList>
       </ZDrawerButton>

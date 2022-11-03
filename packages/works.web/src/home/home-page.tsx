@@ -84,7 +84,7 @@ export function ZHomePage() {
         footer={
           <ZButton
             label='Gets Started'
-            onClick={() => navigate('/web-apps/getting-started')}
+            onClick={() => navigate('/web-apps')}
             color={ZSeverityColor.Primary}
             outline
             width={ZSizeVaried.Full}
