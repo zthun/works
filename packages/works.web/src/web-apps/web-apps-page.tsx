@@ -1,29 +1,28 @@
 import AbcIcon from '@mui/icons-material/Abc';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import ElectricalServicesIcon from '@mui/icons-material/ElectricalServices';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import LoopIcon from '@mui/icons-material/Loop';
-import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import NumbersIcon from '@mui/icons-material/Numbers';
-import SettingsIcon from '@mui/icons-material/Settings';
 import SmartButtonIcon from '@mui/icons-material/SmartButton';
-import StartIcon from '@mui/icons-material/Start';
 import TitleIcon from '@mui/icons-material/Title';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
 import WarningIcon from '@mui/icons-material/Warning';
+import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import {
-  makeStyles,
   useNavigate,
-  ZButton,
-  ZMenu,
-  ZMenuItem,
+  ZBreadcrumbsLocation,
+  ZDrawerButton,
+  ZGridLayout,
+  ZList,
+  ZListLineItem,
   ZNavigate,
   ZRoute,
   ZRouteMap,
-  ZSeverityColor
+  ZSeverityColor,
+  ZStateAnchor
 } from '@zthun/works.react';
-import { ZToolbarLayout } from '@zthun/works.react/src';
+import { useLocation } from '@zthun/works.react/src/router/router-dom';
 import React from 'react';
 import { ZAlertsPage } from './components/alerts/alerts-page';
 import { ZBooleanPage } from './components/boolean/boolean-page';
@@ -37,105 +36,104 @@ import { ZTextPage } from './components/text/text-page';
 import { ZTypographyPage } from './components/typography/typography-page';
 import { ZGettingStartedPage } from './getting-started/getting-started-page';
 
-const useWebAppPageStyles = makeStyles()((theme) => ({
-  toolbar: {
-    marginBottom: theme.gap()
-  }
-}));
-
 /**
  * Renders the home page.
  *
  * @returns The jsx that renders the home page.
  */
 export function ZWebAppsPage() {
-  const styles = useWebAppPageStyles();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const renderDetails = () => (
+    <ZRouteMap>
+      <ZRoute path='getting-started' element={<ZGettingStartedPage />} />
+      <ZRoute path='components'>
+        <ZRoute path='alerts' element={<ZAlertsPage />} />
+        <ZRoute path='boolean' element={<ZBooleanPage />} />
+        <ZRoute path='button' element={<ZButtonPage />} />
+        <ZRoute path='choice' element={<ZChoicePage />} />
+        <ZRoute path='drawer' element={<ZDrawerPage />} />
+        <ZRoute path='list' element={<ZListPage />} />
+        <ZRoute path='number' element={<ZNumberPage />} />
+        <ZRoute path='suspense' element={<ZSuspensePage />} />
+        <ZRoute path='text' element={<ZTextPage />} />
+        <ZRoute path='typography' element={<ZTypographyPage />} />
+      </ZRoute>
+      <ZRoute path='/' element={<ZNavigate to='getting-started' />} />
+      <ZRoute path='*' element={<ZNavigate to={'/status-code/404'} />} />
+    </ZRouteMap>
+  );
+
+  const renderNavigation = () => (
+    <ZGridLayout columns='auto 1fr' gap={ZSizeFixed.Medium} alignItems='center'>
+      <ZDrawerButton
+        DrawerProps={{ anchor: ZStateAnchor.Left }}
+        ButtonProps={{ color: ZSeverityColor.Secondary }}
+        closeOnChange={[location]}
+      >
+        <ZList>
+          <ZListLineItem
+            prefix={<WarningIcon color='warning' fontSize='large' />}
+            heading='Alerts'
+            subHeading='User Feedback'
+            onClick={navigate.bind(null, 'components/alerts')}
+          />
+          <ZListLineItem
+            prefix={<CheckBoxIcon color='success' fontSize='large' />}
+            onClick={navigate.bind(null, 'components/boolean')}
+            heading='Boolean'
+          />
+          <ZListLineItem
+            prefix={<SmartButtonIcon color='error' fontSize='large' />}
+            onClick={navigate.bind(null, 'components/button')}
+            heading='Button'
+          />
+          <ZListLineItem
+            prefix={<TouchAppIcon color='warning' fontSize='large' />}
+            onClick={navigate.bind(null, 'components/choice')}
+            heading='Choice'
+          />
+          <ZListLineItem
+            prefix={<MenuOpenIcon color='success' fontSize='large' />}
+            onClick={navigate.bind(null, 'components/drawer')}
+            heading='Drawer'
+          />
+          <ZListLineItem
+            prefix={<FormatListNumberedIcon color='info' fontSize='large' />}
+            onClick={navigate.bind(null, 'components/list')}
+            heading='List'
+          />
+          <ZListLineItem
+            prefix={<NumbersIcon color='success' fontSize='large' />}
+            onClick={navigate.bind(null, 'components/number')}
+            heading='Number'
+          />
+          <ZListLineItem
+            prefix={<LoopIcon color='warning' fontSize='large' />}
+            onClick={navigate.bind(null, 'components/suspense')}
+            heading='Suspense'
+          />
+          <ZListLineItem
+            prefix={<TitleIcon color='primary' fontSize='large' />}
+            onClick={navigate.bind(null, 'components/text')}
+            heading='Text'
+          />
+          <ZListLineItem
+            prefix={<AbcIcon color='inherit' fontSize='large' />}
+            onClick={navigate.bind(null, 'components/typography')}
+            heading='Typography'
+          />
+        </ZList>
+      </ZDrawerButton>
+      <ZBreadcrumbsLocation />
+    </ZGridLayout>
+  );
 
   return (
-    <div className='ZWebAppsPage-root'>
-      <ZToolbarLayout className={styles.classes.toolbar}>
-        <ZButton
-          avatar={<StartIcon color='success' />}
-          color={ZSeverityColor.Info}
-          outline
-          onClick={navigate.bind(null, 'getting-started')}
-          label='Getting Started'
-        />
-        <ZMenu avatar={<SettingsIcon color='primary' />} color={ZSeverityColor.Info} outline label='Components'>
-          <ZMenuItem
-            avatar={<WarningIcon color='warning' />}
-            onClick={navigate.bind(null, 'components/alerts')}
-            label='Alerts'
-          />
-          <ZMenuItem
-            avatar={<CheckBoxIcon color='success' />}
-            onClick={navigate.bind(null, 'components/boolean')}
-            label='Boolean'
-          />
-          <ZMenuItem
-            avatar={<SmartButtonIcon color='error' />}
-            onClick={navigate.bind(null, 'components/button')}
-            label='Button'
-          />
-          <ZMenuItem
-            avatar={<TouchAppIcon color='warning' />}
-            onClick={navigate.bind(null, 'components/choice')}
-            label='Choice'
-          />
-          <ZMenuItem
-            avatar={<MenuOpenIcon color='success' />}
-            onClick={navigate.bind(null, 'components/drawer')}
-            label='Drawer'
-          />
-          <ZMenuItem
-            avatar={<FormatListNumberedIcon color='info' />}
-            onClick={navigate.bind(null, 'components/list')}
-            label='List'
-          />
-          <ZMenuItem
-            avatar={<NumbersIcon color='success' />}
-            onClick={navigate.bind(null, 'components/number')}
-            label='Number'
-          />
-          <ZMenuItem
-            avatar={<LoopIcon color='warning' />}
-            onClick={navigate.bind(null, 'components/suspense')}
-            label='Suspense'
-          />
-          <ZMenuItem
-            avatar={<TitleIcon color='primary' />}
-            onClick={navigate.bind(null, 'components/text')}
-            label='Text'
-          />
-          <ZMenuItem
-            avatar={<AbcIcon color='inherit' />}
-            onClick={navigate.bind(null, 'components/typography')}
-            label='Typography'
-          />
-        </ZMenu>
-        <ZMenu avatar={<ElectricalServicesIcon color='warning' />} color={ZSeverityColor.Info} outline label='Services'>
-          <ZMenuItem avatar={<MedicalServicesIcon color='success' />} label='Health' />
-        </ZMenu>
-      </ZToolbarLayout>
-
-      <ZRouteMap>
-        <ZRoute path='getting-started' element={<ZGettingStartedPage />} />
-        <ZRoute path='components'>
-          <ZRoute path='alerts' element={<ZAlertsPage />} />
-          <ZRoute path='boolean' element={<ZBooleanPage />} />
-          <ZRoute path='button' element={<ZButtonPage />} />
-          <ZRoute path='choice' element={<ZChoicePage />} />
-          <ZRoute path='drawer' element={<ZDrawerPage />} />
-          <ZRoute path='list' element={<ZListPage />} />
-          <ZRoute path='number' element={<ZNumberPage />} />
-          <ZRoute path='suspense' element={<ZSuspensePage />} />
-          <ZRoute path='text' element={<ZTextPage />} />
-          <ZRoute path='typography' element={<ZTypographyPage />} />
-        </ZRoute>
-        <ZRoute path='/' element={<ZNavigate to='getting-started' />} />
-        <ZRoute path='*' element={<ZNavigate to={'/status-code/404'} />} />
-      </ZRouteMap>
-    </div>
+    <ZGridLayout gap={ZSizeFixed.Large} className='ZWebAppsPage-root'>
+      {renderNavigation()}
+      {renderDetails()}
+    </ZGridLayout>
   );
 }
