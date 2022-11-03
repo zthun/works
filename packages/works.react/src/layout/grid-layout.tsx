@@ -11,11 +11,25 @@ export interface IZGridLayout extends IZComponentStyle, IZComponentHierarchy {
   justifyContent?: Property.JustifyContent;
   gap?: ZSizeFixed | ZSizeVoid;
   columns?: Property.GridTemplateColumns;
+  columnsLg?: Property.GridTemplateColumns;
+  columnsMd?: Property.GridTemplateColumns;
+  columnsSm?: Property.GridTemplateColumns;
+  columnsXs?: Property.GridTemplateColumns;
   rows?: Property.GridTemplateRows;
 }
 
 const useGridStyles = makeStyles<IZGridLayout>()((theme, props) => {
-  const { alignItems, justifyContent, gap = ZSizeVoid.None, columns, rows } = props;
+  const {
+    alignItems,
+    justifyContent,
+    gap = ZSizeVoid.None,
+    columns,
+    columnsLg = columns,
+    columnsMd = columnsLg,
+    columnsSm = columnsMd,
+    columnsXs = columnsSm,
+    rows
+  } = props;
 
   return {
     grid: {
@@ -24,7 +38,23 @@ const useGridStyles = makeStyles<IZGridLayout>()((theme, props) => {
       gridTemplateRows: rows,
       gap: theme.gap(gap),
       alignItems,
-      justifyContent
+      justifyContent,
+
+      [theme.breakpoints.down(ZSizeFixed.Large)]: {
+        gridTemplateColumns: columnsLg
+      },
+
+      [theme.breakpoints.down(ZSizeFixed.Medium)]: {
+        gridTemplateColumns: columnsMd
+      },
+
+      [theme.breakpoints.down(ZSizeFixed.Small)]: {
+        gridTemplateColumns: columnsSm
+      },
+
+      [theme.breakpoints.down(ZSizeFixed.ExtraSmall)]: {
+        gridTemplateColumns: columnsXs
+      }
     }
   };
 });
