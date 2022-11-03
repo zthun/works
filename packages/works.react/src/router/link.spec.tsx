@@ -37,7 +37,7 @@ describe('ZLink', () => {
 
   it('should set the hypertext reference.', async () => {
     // Arrange.
-    href = 'https://google.com';
+    href = '#/path/to/resource';
     const target = await createTestTarget();
     // Act.
     const actual = await target.reference();
@@ -57,7 +57,7 @@ describe('ZLink', () => {
 
   it('should route to the given reference when clicked', async () => {
     // Arrange.
-    href = '/path/to/route';
+    href = '#/path/to/resource';
     onClick = jest.fn();
     const target = await createTestTarget();
     // Act.
