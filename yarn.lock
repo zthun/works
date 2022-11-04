@@ -4836,6 +4836,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@zthun/works.fashion@workspace:packages/works.fashion":
+  version: 0.0.0-use.local
+  resolution: "@zthun/works.fashion@workspace:packages/works.fashion"
+  dependencies:
+    lodash: ^4.17.21
+    typedoc: ^0.23.16
+    typescript: ^4.8.4
+  languageName: unknown
+  linkType: soft
+
 "@zthun/works.http@^4.0.0, @zthun/works.http@workspace:packages/works.http":
   version: 0.0.0-use.local
   resolution: "@zthun/works.http@workspace:packages/works.http"

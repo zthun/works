@@ -1,0 +1,37 @@
+{
+  "name": "@zthun/works.fashion",
+  "version": "4.0.0",
+  "description": "Allows for color generation based on color keys, tints and color maps.",
+  "author": "Anthony Bonta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zthun/works",
+    "directory": "packages/works.fashion"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "build": "yarn build:cjs && yarn build:esm",
+    "doc": "typedoc"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "typedoc": "^0.23.16",
+    "typescript": "^4.8.4"
+  },
+  "files": [
+    "dist/**",
+    "docs/**",
+    "images/**"
+  ],
+  "sideEffects": false
+}
