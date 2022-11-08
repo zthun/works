@@ -7,6 +7,7 @@ import {
   deepOrange,
   deepPurple,
   green,
+  grey,
   indigo,
   lightBlue,
   lightGreen,
@@ -29,18 +30,17 @@ import {
   ZSizeVoid
 } from '@zthun/works.chonky-cat';
 import { firstDefined } from '@zthun/works.core';
-import { values } from 'lodash';
+import {
+  IZFashion,
+  IZFashionComplements,
+  ZFashionBuilder,
+  ZFashionComplementsBuilder,
+  ZHue,
+  ZPaletteBuilder
+} from '@zthun/works.fashion';
 import { createMakeStyles } from 'tss-react';
-import { ZColorTint, ZHueColor, ZSeverityColor, ZShadeColor, ZStateColor } from './state-color';
 
 export type IZColor = Color;
-
-const Severity = values<string>(ZSeverityColor);
-const Hues = values<string>(ZHueColor);
-
-const TintLight = ZColorTint.T100;
-const TintMain = ZColorTint.T500;
-const TintDark = ZColorTint.T900;
 
 const GapChart = {
   ...createSizeChartFixedFibonacci(0.5, 1),
@@ -52,28 +52,61 @@ const ThicknessChart = {
   ...createSizeChartVoidCss()
 };
 
-/**
- * Options for a color wheel.
- */
-const HueMap: Record<ZHueColor, IZColor> = {
-  [ZHueColor.Red]: red,
-  [ZHueColor.Pink]: pink,
-  [ZHueColor.Purple]: purple,
-  [ZHueColor.Violet]: deepPurple,
-  [ZHueColor.Indigo]: indigo,
-  [ZHueColor.Blue]: blue,
-  [ZHueColor.Sky]: lightBlue,
-  [ZHueColor.Cyan]: cyan,
-  [ZHueColor.Teal]: teal,
-  [ZHueColor.Green]: green,
-  [ZHueColor.Olive]: lightGreen,
-  [ZHueColor.Lime]: lime,
-  [ZHueColor.Yellow]: yellow,
-  [ZHueColor.Amber]: amber,
-  [ZHueColor.Orange]: orange,
-  [ZHueColor.Persimmon]: deepOrange,
-  [ZHueColor.Brown]: brown
-};
+const FashionPrimary = new ZFashionComplementsBuilder()
+  .main(new ZFashionBuilder().indigo(400).build())
+  .contrast(new ZFashionBuilder().white().build())
+  .build();
+
+const FashionSecondary = new ZFashionComplementsBuilder()
+  .main(new ZFashionBuilder().violet(600).build())
+  .contrast(new ZFashionBuilder().white().build())
+  .build();
+
+const FashionSuccess = new ZFashionComplementsBuilder()
+  .main(new ZFashionBuilder().green(800).build())
+  .contrast(new ZFashionBuilder().white().build())
+  .build();
+
+const FashionWarning = new ZFashionComplementsBuilder()
+  .main(new ZFashionBuilder().yellow(600).build())
+  .contrast(new ZFashionBuilder().black().build())
+  .build();
+
+const FashionError = new ZFashionComplementsBuilder()
+  .main(new ZFashionBuilder().red(700).build())
+  .contrast(new ZFashionBuilder().white().build())
+  .build();
+
+const FashionInfo = new ZFashionComplementsBuilder()
+  .main(new ZFashionBuilder().sky(200).build())
+  .contrast(new ZFashionBuilder().white().build())
+  .build();
+
+const FashionSimple = new ZFashionComplementsBuilder()
+  .main(new ZFashionBuilder().grey(300).build())
+  .contrast(new ZFashionBuilder().black().build())
+  .build();
+
+const FashionMaterialHue = new ZPaletteBuilder()
+  .luminance(ZHue.Red, red)
+  .luminance(ZHue.Pink, pink)
+  .luminance(ZHue.Purple, purple)
+  .luminance(ZHue.Violet, deepPurple)
+  .luminance(ZHue.Indigo, indigo)
+  .luminance(ZHue.Blue, blue)
+  .luminance(ZHue.Sky, lightBlue)
+  .luminance(ZHue.Cyan, cyan)
+  .luminance(ZHue.Teal, teal)
+  .luminance(ZHue.Green, green)
+  .luminance(ZHue.Olive, lightGreen)
+  .luminance(ZHue.Lime, lime)
+  .luminance(ZHue.Yellow, yellow)
+  .luminance(ZHue.Amber, amber)
+  .luminance(ZHue.Orange, orange)
+  .luminance(ZHue.Persimmon, deepOrange)
+  .luminance(ZHue.Brown, brown)
+  .luminance(ZHue.Grey, grey)
+  .build();
 
 /**
  * The overall theme for the Zthunworks domain.
@@ -83,30 +116,71 @@ const HueMap: Record<ZHueColor, IZColor> = {
  */
 export interface IZTheme extends Theme {
   /**
-   * Converts from a color and tint to a hex color.
+   * Converts from a fashion object to a css color.
    *
-   * @param color
-   *        The color to convert.
-   * @param tint
-   *        The color tint.
+   * @param fashion
+   *        The fashion to convert.
    *
    * @returns
    *        A CSS compatible color option.
    */
-  hexify(color: IZColor, tint: ZColorTint): string;
+  colorify(fashion: IZFashion): string;
 
   /**
-   * Converts from a color and tint to a hex color.
-   *
-   * @param color
-   *        The color to convert.
-   * @param tint
-   *        The color tint.  The default is main.
+   * Primary color.
    *
    * @returns
-   *        A CSS compatible color option.
+   *        The fashion for the primary color palette.
    */
-  colorify(color: ZStateColor, tint?: ZColorTint): string;
+  primary(): IZFashionComplements;
+
+  /**
+   * Secondary color.
+   *
+   * @returns
+   *        The fashion for the secondary color.
+   */
+  secondary(): IZFashionComplements;
+
+  /**
+   * Success color.
+   *
+   * @returns
+   *        The fashion for the success color.
+   */
+  success(): IZFashionComplements;
+
+  /**
+   * Warning color.
+   *
+   * @returns
+   *        The fashion for the warning color.
+   */
+  warning(): IZFashionComplements;
+
+  /**
+   * Error color.
+   *
+   * @returns
+   *        The fashion for the error color.
+   */
+  error(): IZFashionComplements;
+
+  /**
+   * Info color.
+   *
+   * @returns
+   *        The fashion for the info color.
+   */
+  info(): IZFashionComplements;
+
+  /**
+   * Represents a grey color contrast for default fashion.
+   *
+   * @returns
+   *        The basic fashion colors.
+   */
+  simple(): IZFashionComplements;
 
   /**
    * Converts a size enum to a spacing value.
@@ -151,77 +225,28 @@ export interface IZTheme extends Theme {
 export function useZthunworksTheme(): IZTheme {
   const mui = useMuiTheme();
 
+  const palette = new ZPaletteBuilder()
+    .copy(FashionMaterialHue)
+    .crayon(ZHue.Black, mui.palette.common.black)
+    .crayon(ZHue.White, mui.palette.common.white)
+    .build();
+
   const base = {
-    hexify(color: IZColor, tint: ZColorTint): string {
-      if (color[tint]) {
-        // Severity colors will allow Main, Light, and Dark.
-        return color[tint];
+    colorify(fashion: IZFashion): string {
+      if (fashion.hue === null) {
+        return 'rgb(0, 0, 0, 0)';
       }
 
-      const _tintWithoutSeverity =
-        tint === ZColorTint.Main
-          ? TintMain
-          : tint === ZColorTint.Light
-          ? TintLight
-          : tint === ZColorTint.Dark
-          ? TintDark
-          : tint;
-
-      if (color[_tintWithoutSeverity]) {
-        return color[_tintWithoutSeverity];
-      }
-
-      // We have a severity but we've requested something like T600 or A200.
-      // For this, we will use the range of 50-300 = light, 400-500 = main,
-      // and 600-900 = dark.
-
-      const _tint = +tint;
-      if (!isNaN(_tint)) {
-        if (_tint < 400) {
-          return color[ZColorTint.Light];
-        }
-
-        if (_tint < 600) {
-          return color[ZColorTint.Main];
-        }
-
-        return color[ZColorTint.Dark];
-      }
-
-      if (tint === ZColorTint.A100) {
-        return color[ZColorTint.Light];
-      }
-
-      if (tint === ZColorTint.A700) {
-        return color[ZColorTint.Dark];
-      }
-
-      return color[ZColorTint.Main];
+      return palette[fashion.hue][fashion.shade];
     },
 
-    colorify(color: ZStateColor, tint?: ZColorTint): string {
-      if (color === ZShadeColor.Black) {
-        return mui.palette.common.black;
-      }
-
-      if (color === ZShadeColor.White) {
-        return mui.palette.common.white;
-      }
-
-      if (color === ZShadeColor.Grey) {
-        return this.hexify(mui.palette.grey, tint);
-      }
-
-      if (Hues.indexOf(color) >= 0) {
-        return this.hexify(HueMap[color], tint);
-      }
-
-      if (Severity.indexOf(color) >= 0) {
-        return this.hexify(mui.palette[color], tint);
-      }
-
-      return String(color);
-    },
+    primary: () => FashionPrimary,
+    secondary: () => FashionSecondary,
+    success: () => FashionSuccess,
+    warning: () => FashionWarning,
+    error: () => FashionError,
+    info: () => FashionInfo,
+    simple: () => FashionSimple,
 
     gap(size: ZSizeFixed | ZSizeVoid = ZSizeFixed.Medium): string {
       return mui.spacing(GapChart[size]);
@@ -234,6 +259,20 @@ export function useZthunworksTheme(): IZTheme {
 
   mui.spacing = createSpacing((abs: number) => `${abs * 0.5}rem`);
   mui.components = firstDefined({}, mui.components);
+
+  // Palette
+  mui.palette.primary.main = base.colorify(base.primary().main);
+  mui.palette.primary.contrastText = base.colorify(base.primary().contrast);
+  mui.palette.secondary.main = base.colorify(base.secondary().main);
+  mui.palette.secondary.contrastText = base.colorify(base.secondary().contrast);
+  mui.palette.success.main = base.colorify(base.success().main);
+  mui.palette.success.contrastText = base.colorify(base.success().main);
+  mui.palette.warning.main = base.colorify(base.warning().main);
+  mui.palette.warning.contrastText = base.colorify(base.warning().contrast);
+  mui.palette.error.main = base.colorify(base.error().main);
+  mui.palette.error.contrastText = base.colorify(base.error().contrast);
+  mui.palette.info.main = base.colorify(base.info().main);
+  mui.palette.info.contrastText = base.colorify(base.info().contrast);
 
   // Typography
   const fonts = "'Roboto', 'Arial', 'sans-serif'";
