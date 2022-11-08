@@ -37,6 +37,7 @@
     "@zthun/works.core": "^4.0.0",
     "@zthun/works.draw": "^4.0.0",
     "@zthun/works.error": "^4.0.0",
+    "@zthun/works.fashion": "^4.0.0",
     "@zthun/works.http": "^4.0.0",
     "@zthun/works.logger": "^4.0.0",
     "@zthun/works.message": "^4.0.0",
