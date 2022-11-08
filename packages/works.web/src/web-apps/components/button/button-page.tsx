@@ -1,24 +1,24 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { setFirstOrDefault } from '@zthun/works.core';
+import { IZFashionCoordination } from '@zthun/works.fashion';
 import { ZAlertBuilder } from '@zthun/works.message';
 import {
   useAlertService,
   useSafeState,
+  useZthunworksFashion,
+  useZthunworksFashionCoordinations,
   ZBooleanSwitch,
   ZButton,
-  ZButtonColor,
   ZCard,
   ZChoiceDropDown,
-  ZColorless,
   ZGridLayout,
   ZH3,
   ZPaddedBox,
   ZParagraph,
-  ZSeverityColor,
   ZToolbarLayout
 } from '@zthun/works.react';
-import { identity, startCase, values } from 'lodash';
+import { identity } from 'lodash';
 import React from 'react';
 import { ZComponentButton } from '../../web-apps-components';
 
@@ -29,13 +29,14 @@ import { ZComponentButton } from '../../web-apps-components';
  */
 export function ZButtonPage() {
   const alerts = useAlertService();
+  const theme = useZthunworksFashion();
+  const coordinations = useZthunworksFashionCoordinations();
   const [loading, setLoading] = useSafeState(false);
   const [disabled, setDisabled] = useSafeState(false);
-  const [color, setColor] = useSafeState<ZButtonColor>(ZColorless.Inherit);
   const [outline, setOutline] = useSafeState(false);
   const [borderless, setBorderless] = useSafeState(false);
-  const colors = values<ZButtonColor>(ZSeverityColor).concat([ZColorless.Inherit]);
-  const _setColor = setFirstOrDefault.bind(null, setColor, ZColorless.Inherit);
+  const [fashion, setFashion] = useSafeState<IZFashionCoordination>(theme.light);
+  const _setFashion = setFirstOrDefault.bind(null, setFashion, theme.light);
 
   /**
    * Occurs when the button demo is clicked.
@@ -74,21 +75,21 @@ export function ZButtonPage() {
             avatar={<CheckCircleIcon fontSize='small' />}
             loading={loading}
             disabled={disabled}
-            color={color}
             borderless={borderless}
             outline={outline}
             onClick={handleClick}
             label='Button'
+            fashion={fashion}
           />
 
           <ZButton
             label={<CheckCircleIcon fontSize='small' />}
             loading={loading}
             disabled={disabled}
-            color={color}
             borderless={borderless}
             outline={outline}
             onClick={handleClick}
+            fashion={fashion}
             tooltip='Iconography Button'
           />
         </ZToolbarLayout>
@@ -102,12 +103,13 @@ export function ZButtonPage() {
           <ZBooleanSwitch value={outline} onValueChange={setOutline} label='Outline' />
           <ZBooleanSwitch value={borderless} onValueChange={setBorderless} label='Borderless' />
           <ZChoiceDropDown
-            value={[color]}
-            onValueChange={_setColor}
-            label='Color'
-            options={colors}
+            label='Fashion'
+            indelible
+            value={[fashion]}
+            onValueChange={_setFashion}
+            options={coordinations}
+            renderOption={(f) => f.name}
             identifier={identity}
-            renderOption={(c) => startCase(String(c))}
           />
         </ZGridLayout>
       </ZPaddedBox>

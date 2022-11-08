@@ -2,8 +2,8 @@ import { Button, Tooltip } from '@mui/material';
 import React, { ReactNode } from 'react';
 
 import { createSizeChartVariedCss, ZSizeFixed, ZSizeVaried } from '@zthun/works.chonky-cat';
-import { cssClass } from '@zthun/works.core';
-import { IZFashionComplements } from '@zthun/works.fashion';
+import { cssClass, firstDefined } from '@zthun/works.core';
+import { IZFashionCoordination, ZFashionBuilder } from '@zthun/works.fashion';
 import { noop } from 'lodash';
 import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentDisabled } from '../component/component-disabled';
@@ -23,7 +23,7 @@ export interface IZButton
     IZComponentLoading,
     IZComponentStyle,
     IZComponentName,
-    IZComponentFashion<IZFashionComplements>,
+    IZComponentFashion<IZFashionCoordination>,
     IZComponentWidth<ZSizeVaried> {
   borderless?: boolean;
   outline?: boolean;
@@ -35,7 +35,12 @@ export interface IZButton
 const ButtonSizeChart = createSizeChartVariedCss();
 
 const useButtonStyles = makeStyles<IZButton>()((theme, props) => {
-  const { width = ZSizeVaried.Fit, fashion = theme.simple() } = props;
+  const { width = ZSizeVaried.Fit, fashion = theme.fashion().dark } = props;
+
+  const text = theme.colorify(fashion.contrast);
+  const main = theme.colorify(fashion.main);
+  const dark = theme.colorify(firstDefined(fashion.main, fashion.dark));
+  const light = theme.colorify(firstDefined(fashion.main, fashion.light));
 
   return {
     wrapper: {
@@ -43,25 +48,49 @@ const useButtonStyles = makeStyles<IZButton>()((theme, props) => {
       width: ButtonSizeChart[width]
     },
     button: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      width: '100%',
-      color: theme.colorify(fashion.contrast),
-      backgroundColor: theme.colorify(fashion.main)
+      'display': 'inline-flex',
+      'alignItems': 'center',
+      'width': '100%',
+      'color': text,
+      'backgroundColor': main,
+      'borderColor': dark,
+
+      '&:hover': {
+        outline: `${theme.thickness()} solid ${light}`,
+        backgroundColor: dark
+      },
+
+      '&:disabled': {
+        color: 'rgb(0, 0, 0, 0.25)'
+      },
+
+      '&.ZButton-outline': {
+        'backgroundColor': theme.colorify(new ZFashionBuilder().transparent().build()),
+        'color': main,
+        'borderColor': main,
+
+        '&:disabled': {
+          color: 'rgb(0, 0, 0, 0.25)'
+        }
+      },
+
+      '&.ZButton-borderless': {
+        'border': 0,
+        'boxShadow': 'none',
+
+        '&:hover': {
+          border: 0,
+          outline: `${theme.thickness()} solid ${main}`,
+          boxShadow: 'none'
+        },
+        '&:active': {
+          border: 0,
+          boxShadow: 'none'
+        }
+      }
     },
     content: {
       display: 'flex'
-    },
-    borderless: {
-      'border': 0,
-      'boxShadow': 'none',
-
-      '&:hover': {
-        boxShadow: 'none'
-      },
-      '&:active': {
-        boxShadow: 'none'
-      }
     }
   };
 });
@@ -82,8 +111,7 @@ export function ZButton(props: IZButton) {
     ['ZButton-borderless', !!borderless],
     ['ZButton-outline', !!outline],
     className,
-    classes.button,
-    [classes.borderless, !!borderless]
+    classes.button
   );
   const contentClass = cssClass('ZButton-content', classes.content);
   const variant = outline ? 'outlined' : 'contained';
