@@ -33,7 +33,7 @@ interface _IZFashionCoordination {
    *
    * Note that it is not a requirement for this to
    * contract the light and dark fashions.  This
-   * only applies to the main contrast.
+   * only applies to the main fashion.
    */
   contrast: IZFashion;
 }
