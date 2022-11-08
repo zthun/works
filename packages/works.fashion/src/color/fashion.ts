@@ -4,37 +4,27 @@ import { ZShade } from './shade';
 /**
  * Represents a color fashion.
  */
-interface _IZFashion {
+export interface IZFashion {
   /**
    * The base color.
    *
    * If this is null, then the hue should be considered transparent.
    */
-  hue: ZHue | null;
+  readonly hue: ZHue | null;
 
   /**
    * The shade of color.
    *
    * Shade is the process of adding black to a hue baseline.
    */
-  shade: ZShade;
+  readonly shade: ZShade;
 }
-
-/**
- * Represents a color fashion.
- *
- * An IZFashion object is considered immutable.
- *
- * To build an IZFashion object use the
- * ZFashionBuilder class.
- */
-export type IZFashion = Readonly<_IZFashion>;
 
 /**
  * Represents a builder for a fashion object.
  */
 export class ZFashionBuilder {
-  private _fashion: _IZFashion;
+  private _fashion: { -readonly [P in keyof IZFashion]: IZFashion[P] };
 
   /**
    * Initializes a new instance of this object.

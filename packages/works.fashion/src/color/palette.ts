@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
+
 import { keyBy, mapValues } from 'lodash';
 import { IZFashion, ZFashionBuilder } from '../color/fashion';
 import { ZHue } from '../color/hue';
-import { ZLuminance, ZShade, ZShades } from './shade';
+import { ZShade, ZShades } from './shade';
 
 /**
  * Represents a collection of colors and what each color/shade map to.
@@ -9,7 +11,7 @@ import { ZLuminance, ZShade, ZShades } from './shade';
  * A palette is immutable.  To build a palette object, use the
  * ZPaletteBuilder.
  */
-export type IZPalette = Readonly<Record<ZHue, ZLuminance>>;
+export interface IZPalette extends Readonly<Record<ZHue, Record<ZShade, string>>> {}
 
 /**
  * Represents a builder for a color palette.
@@ -25,7 +27,7 @@ export class ZPaletteBuilder {
    * to start.
    */
   public constructor() {
-    this._palette = mapValues(keyBy(ZHue), () => ({} as ZLuminance)) as IZPalette;
+    this._palette = mapValues(keyBy(ZHue), () => ({} as Record<ZShade, string>)) as IZPalette;
 
     this.crayon(ZHue.White, '#FFFFFF')
       .crayon(ZHue.Red, '#FF0000')
@@ -60,8 +62,8 @@ export class ZPaletteBuilder {
    * @returns
    *        This object.
    */
-  public luminance(color: ZHue, values: ZLuminance): this {
-    const copy: ZLuminance = JSON.parse(JSON.stringify(values));
+  public luminance(color: ZHue, values: Record<ZShade, string>): this {
+    const copy: Record<ZShade, string> = JSON.parse(JSON.stringify(values));
     this._palette[color] = copy;
     return this;
   }
