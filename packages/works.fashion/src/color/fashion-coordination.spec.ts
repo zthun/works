@@ -1,11 +1,11 @@
 /* eslint-disable require-jsdoc */
 import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZFashionBuilder } from './fashion';
-import { IZFashionComplements, ZFashionComplementsBuilder } from './fashion-complements';
+import { IZFashionCoordination, ZFashionCoordinationBuilder } from './fashion-coordination';
 
 describe('ZFashionComplements', () => {
   function createTestTarget() {
-    return new ZFashionComplementsBuilder();
+    return new ZFashionCoordinationBuilder();
   }
 
   describe('Properties', () => {
@@ -14,7 +14,7 @@ describe('ZFashionComplements', () => {
         new ZFashionBuilder().red(200).build(),
         createTestTarget,
         (t, v) => t.main(v),
-        (c: IZFashionComplements) => c.main
+        (c: IZFashionCoordination) => c.main
       );
     });
 
@@ -23,7 +23,7 @@ describe('ZFashionComplements', () => {
         new ZFashionBuilder().green(800).build(),
         createTestTarget,
         (t, v) => t.contrast(v),
-        (c: IZFashionComplements) => c.contrast
+        (c: IZFashionCoordination) => c.contrast
       );
     });
   });

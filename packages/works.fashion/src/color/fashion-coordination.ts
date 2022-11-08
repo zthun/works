@@ -1,15 +1,39 @@
 import { IZFashion, ZFashionBuilder } from './fashion';
 
 /**
- * Represents a pair of fashion objects that represents complementary colors.
+ * Represents a set of fashion colors that create a coordinated fashion grouping.
  */
-interface _IZFashionComplements {
+interface _IZFashionCoordination {
+  /**
+   * Optional name of the fashion coordination.
+   */
+  name?: string;
+
   /**
    * The main fashion color.
    */
   main: IZFashion;
+
+  /**
+   * The lighter color.
+   *
+   * Should just use main if this is falsy.
+   */
+  light?: IZFashion;
+
+  /**
+   * The dark color.
+   *
+   * Should just use main if this is falsy.
+   */
+  dark?: IZFashion;
+
   /**
    * The color that contrasts the main.
+   *
+   * Note that it is not a requirement for this to
+   * contract the light and dark fashions.  This
+   * only applies to the main contrast.
    */
   contrast: IZFashion;
 }
@@ -17,13 +41,13 @@ interface _IZFashionComplements {
 /**
  * Represents a pair of fashion objects that represents complementary colors.
  */
-export type IZFashionComplements = Readonly<_IZFashionComplements>;
+export type IZFashionCoordination = Readonly<_IZFashionCoordination>;
 
 /**
  * Represents a builder for a complementary fashion objects.
  */
-export class ZFashionComplementsBuilder {
-  private _complementary: _IZFashionComplements;
+export class ZFashionCoordinationBuilder {
+  private _complementary: _IZFashionCoordination;
 
   /**
    * Initializes a new instance of this object.
@@ -36,6 +60,20 @@ export class ZFashionComplementsBuilder {
       main: new ZFashionBuilder().white().build(),
       contrast: new ZFashionBuilder().black().build()
     };
+  }
+
+  /**
+   * Sets the name.
+   *
+   * @param name
+   *        The name.
+   *
+   * @returns
+   *        This object.
+   */
+  public name(name: string): this {
+    this._complementary.name = name;
+    return this;
   }
 
   /**
@@ -67,6 +105,34 @@ export class ZFashionComplementsBuilder {
   }
 
   /**
+   * Sets the darker version of the main color.
+   *
+   * @param fashion
+   *        The dark fashion.
+   *
+   * @returns
+   *        This object.
+   */
+  public dark(fashion: IZFashion): this {
+    this._complementary.dark = fashion;
+    return this;
+  }
+
+  /**
+   * Sets the light version of the main color.
+   *
+   * @param fashion
+   *        The light fashion.
+   *
+   * @returns
+   *        This object.
+   */
+  public light(fashion: IZFashion): this {
+    this._complementary.light = fashion;
+    return this;
+  }
+
+  /**
    * Clones another fashion complements object into this builder object.
    *
    * @param other
@@ -75,7 +141,7 @@ export class ZFashionComplementsBuilder {
    * @returns
    *        This object.
    */
-  public copy(other: IZFashionComplements): this {
+  public copy(other: IZFashionCoordination): this {
     this._complementary = JSON.parse(JSON.stringify(other));
     return this;
   }
@@ -86,7 +152,7 @@ export class ZFashionComplementsBuilder {
    * @returns
    *        The built complementary object.
    */
-  public build(): IZFashionComplements {
+  public build(): IZFashionCoordination {
     return Object.freeze(JSON.parse(JSON.stringify(this._complementary)));
   }
 }
