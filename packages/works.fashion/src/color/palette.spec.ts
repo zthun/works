@@ -4,7 +4,7 @@ import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/wor
 import { keyBy, mapValues } from 'lodash';
 import { ZFashionBuilder } from './fashion';
 import { ZHue } from './hue';
-import { ZPalette, ZPaletteBuilder } from './palette';
+import { IZPalette, ZPaletteBuilder } from './palette';
 import { ZLuminance, ZShades } from './shade';
 
 describe('ZPalette', () => {
@@ -43,7 +43,7 @@ describe('ZPalette', () => {
           mapValues(keyBy(ZShades), () => '#FF0000') as ZLuminance,
           createTestTarget,
           (t, v) => t.luminance(ZHue.Red, v),
-          (p: ZPalette) => p.red
+          (p: IZPalette) => p.red
         );
       });
     });
@@ -54,7 +54,7 @@ describe('ZPalette', () => {
           '#00FF00',
           createTestTarget,
           (t, v) => t.fashion(v, new ZFashionBuilder().green(700).build()),
-          (p: ZPalette) => p.green[700]
+          (p: IZPalette) => p.green[700]
         );
       });
 

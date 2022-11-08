@@ -9,7 +9,7 @@ import { ZLuminance, ZShade, ZShades } from './shade';
  * A palette is immutable.  To build a palette object, use the
  * ZPaletteBuilder.
  */
-export type ZPalette = Readonly<Record<ZHue, ZLuminance>>;
+export type IZPalette = Readonly<Record<ZHue, ZLuminance>>;
 
 /**
  * Represents a builder for a color palette.
@@ -25,7 +25,7 @@ export class ZPaletteBuilder {
    * to start.
    */
   public constructor() {
-    this._palette = mapValues(keyBy(ZHue), () => ({} as ZLuminance)) as ZPalette;
+    this._palette = mapValues(keyBy(ZHue), () => ({} as ZLuminance)) as IZPalette;
 
     this.crayon(ZHue.White, '#FFFFFF')
       .crayon(ZHue.Red, '#FF0000')
@@ -115,7 +115,7 @@ export class ZPaletteBuilder {
    * @returns
    *        This object.
    */
-  public copy(other: ZPalette): this {
+  public copy(other: IZPalette): this {
     this._palette = JSON.parse(JSON.stringify(other));
     return this;
   }
@@ -126,7 +126,7 @@ export class ZPaletteBuilder {
    * @returns
    *        The current map that has been built.
    */
-  public build(): ZPalette {
+  public build(): IZPalette {
     return Object.freeze(JSON.parse(JSON.stringify(this._palette)));
   }
 }
