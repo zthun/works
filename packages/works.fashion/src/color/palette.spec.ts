@@ -5,7 +5,7 @@ import { keyBy, mapValues } from 'lodash';
 import { ZFashionBuilder } from './fashion';
 import { ZHue } from './hue';
 import { IZPalette, ZPaletteBuilder } from './palette';
-import { ZLuminance, ZShades } from './shade';
+import { ZShade, ZShades } from './shade';
 
 describe('ZPalette', () => {
   function createTestTarget() {
@@ -40,7 +40,7 @@ describe('ZPalette', () => {
     describe('Luminance', () => {
       it('should set the entire luminance for a color', () => {
         assertBuilderSetsProperty(
-          mapValues(keyBy(ZShades), () => '#FF0000') as ZLuminance,
+          mapValues(keyBy(ZShades), () => '#FF0000') as Record<ZShade, string>,
           createTestTarget,
           (t, v) => t.luminance(ZHue.Red, v),
           (p: IZPalette) => p.red
