@@ -1,12 +1,12 @@
 # Description
 
-This is a sizing package that lets you generate size charts based on different sequence generators.
+This is a package which details color theory for generating a site palette for your organizational theme.
 
 ## Installation
 
 ```sh
 # NPM
-npm install @zthun/works.chonky-cat
+npm install @zthun/works.fashion
 # Yarn
-yarn add @zthun/works.chonky-cat
+yarn add @zthun/works.fashion
 ```
