@@ -1,24 +1,5 @@
-import { Color, Theme, useTheme as useMuiTheme } from '@mui/material';
-import {
-  amber,
-  blue,
-  brown,
-  cyan,
-  deepOrange,
-  deepPurple,
-  green,
-  grey,
-  indigo,
-  lightBlue,
-  lightGreen,
-  lime,
-  orange,
-  pink,
-  purple,
-  red,
-  teal,
-  yellow
-} from '@mui/material/colors';
+import { Color, PaletteColor, Theme, useTheme as useMuiTheme } from '@mui/material';
+
 import { createSpacing } from '@mui/system';
 import {
   createSizeChartFixedArithmetic,
@@ -30,15 +11,9 @@ import {
   ZSizeVoid
 } from '@zthun/works.chonky-cat';
 import { firstDefined } from '@zthun/works.core';
-import {
-  IZFashion,
-  IZFashionComplements,
-  ZFashionBuilder,
-  ZFashionComplementsBuilder,
-  ZHue,
-  ZPaletteBuilder
-} from '@zthun/works.fashion';
+import { IZFashion, IZFashionCoordination } from '@zthun/works.fashion';
 import { createMakeStyles } from 'tss-react';
+import { IZthunworksFashion, useZthunworksFashion } from './fashion';
 
 export type IZColor = Color;
 
@@ -51,62 +26,6 @@ const ThicknessChart = {
   ...createSizeChartFixedCss(createSizeChartFixedArithmetic(0.0625, 0.0625), 'rem'),
   ...createSizeChartVoidCss()
 };
-
-const FashionPrimary = new ZFashionComplementsBuilder()
-  .main(new ZFashionBuilder().indigo(400).build())
-  .contrast(new ZFashionBuilder().white().build())
-  .build();
-
-const FashionSecondary = new ZFashionComplementsBuilder()
-  .main(new ZFashionBuilder().violet(600).build())
-  .contrast(new ZFashionBuilder().white().build())
-  .build();
-
-const FashionSuccess = new ZFashionComplementsBuilder()
-  .main(new ZFashionBuilder().green(800).build())
-  .contrast(new ZFashionBuilder().white().build())
-  .build();
-
-const FashionWarning = new ZFashionComplementsBuilder()
-  .main(new ZFashionBuilder().yellow(600).build())
-  .contrast(new ZFashionBuilder().black().build())
-  .build();
-
-const FashionError = new ZFashionComplementsBuilder()
-  .main(new ZFashionBuilder().red(700).build())
-  .contrast(new ZFashionBuilder().white().build())
-  .build();
-
-const FashionInfo = new ZFashionComplementsBuilder()
-  .main(new ZFashionBuilder().sky(200).build())
-  .contrast(new ZFashionBuilder().white().build())
-  .build();
-
-const FashionSimple = new ZFashionComplementsBuilder()
-  .main(new ZFashionBuilder().grey(300).build())
-  .contrast(new ZFashionBuilder().black().build())
-  .build();
-
-const FashionMaterialHue = new ZPaletteBuilder()
-  .luminance(ZHue.Red, red)
-  .luminance(ZHue.Pink, pink)
-  .luminance(ZHue.Purple, purple)
-  .luminance(ZHue.Violet, deepPurple)
-  .luminance(ZHue.Indigo, indigo)
-  .luminance(ZHue.Blue, blue)
-  .luminance(ZHue.Sky, lightBlue)
-  .luminance(ZHue.Cyan, cyan)
-  .luminance(ZHue.Teal, teal)
-  .luminance(ZHue.Green, green)
-  .luminance(ZHue.Olive, lightGreen)
-  .luminance(ZHue.Lime, lime)
-  .luminance(ZHue.Yellow, yellow)
-  .luminance(ZHue.Amber, amber)
-  .luminance(ZHue.Orange, orange)
-  .luminance(ZHue.Persimmon, deepOrange)
-  .luminance(ZHue.Brown, brown)
-  .luminance(ZHue.Grey, grey)
-  .build();
 
 /**
  * The overall theme for the Zthunworks domain.
@@ -127,60 +46,12 @@ export interface IZTheme extends Theme {
   colorify(fashion: IZFashion): string;
 
   /**
-   * Primary color.
+   * Gets the current fashion design and coordination for colors.
    *
-   * @returns
-   *        The fashion for the primary color palette.
+   @returns
+          The current fashion design.
    */
-  primary(): IZFashionComplements;
-
-  /**
-   * Secondary color.
-   *
-   * @returns
-   *        The fashion for the secondary color.
-   */
-  secondary(): IZFashionComplements;
-
-  /**
-   * Success color.
-   *
-   * @returns
-   *        The fashion for the success color.
-   */
-  success(): IZFashionComplements;
-
-  /**
-   * Warning color.
-   *
-   * @returns
-   *        The fashion for the warning color.
-   */
-  warning(): IZFashionComplements;
-
-  /**
-   * Error color.
-   *
-   * @returns
-   *        The fashion for the error color.
-   */
-  error(): IZFashionComplements;
-
-  /**
-   * Info color.
-   *
-   * @returns
-   *        The fashion for the info color.
-   */
-  info(): IZFashionComplements;
-
-  /**
-   * Represents a grey color contrast for default fashion.
-   *
-   * @returns
-   *        The basic fashion colors.
-   */
-  simple(): IZFashionComplements;
+  fashion(): Readonly<IZthunworksFashion>;
 
   /**
    * Converts a size enum to a spacing value.
@@ -224,12 +95,7 @@ export interface IZTheme extends Theme {
  */
 export function useZthunworksTheme(): IZTheme {
   const mui = useMuiTheme();
-
-  const palette = new ZPaletteBuilder()
-    .copy(FashionMaterialHue)
-    .crayon(ZHue.Black, mui.palette.common.black)
-    .crayon(ZHue.White, mui.palette.common.white)
-    .build();
+  const fashionTheme = useZthunworksFashion();
 
   const base = {
     colorify(fashion: IZFashion): string {
@@ -237,16 +103,10 @@ export function useZthunworksTheme(): IZTheme {
         return 'rgb(0, 0, 0, 0)';
       }
 
-      return palette[fashion.hue][fashion.shade];
+      return fashionTheme.palette[fashion.hue][fashion.shade];
     },
 
-    primary: () => FashionPrimary,
-    secondary: () => FashionSecondary,
-    success: () => FashionSuccess,
-    warning: () => FashionWarning,
-    error: () => FashionError,
-    info: () => FashionInfo,
-    simple: () => FashionSimple,
+    fashion: () => fashionTheme,
 
     gap(size: ZSizeFixed | ZSizeVoid = ZSizeFixed.Medium): string {
       return mui.spacing(GapChart[size]);
@@ -260,19 +120,20 @@ export function useZthunworksTheme(): IZTheme {
   mui.spacing = createSpacing((abs: number) => `${abs * 0.5}rem`);
   mui.components = firstDefined({}, mui.components);
 
+  const setCoordination = (mui: PaletteColor, fashion: IZFashionCoordination) => {
+    mui.main = base.colorify(fashion.main);
+    mui.contrastText = base.colorify(fashion.contrast);
+    mui.dark = base.colorify(firstDefined(fashion.main, fashion.dark));
+    mui.light = base.colorify(firstDefined(fashion.main, fashion.light));
+  };
+
   // Palette
-  mui.palette.primary.main = base.colorify(base.primary().main);
-  mui.palette.primary.contrastText = base.colorify(base.primary().contrast);
-  mui.palette.secondary.main = base.colorify(base.secondary().main);
-  mui.palette.secondary.contrastText = base.colorify(base.secondary().contrast);
-  mui.palette.success.main = base.colorify(base.success().main);
-  mui.palette.success.contrastText = base.colorify(base.success().main);
-  mui.palette.warning.main = base.colorify(base.warning().main);
-  mui.palette.warning.contrastText = base.colorify(base.warning().contrast);
-  mui.palette.error.main = base.colorify(base.error().main);
-  mui.palette.error.contrastText = base.colorify(base.error().contrast);
-  mui.palette.info.main = base.colorify(base.info().main);
-  mui.palette.info.contrastText = base.colorify(base.info().contrast);
+  setCoordination(mui.palette.primary, base.fashion().primary);
+  setCoordination(mui.palette.secondary, base.fashion().secondary);
+  setCoordination(mui.palette.success, base.fashion().success);
+  setCoordination(mui.palette.warning, base.fashion().warning);
+  setCoordination(mui.palette.error, base.fashion().error);
+  setCoordination(mui.palette.info, base.fashion().info);
 
   // Typography
   const fonts = "'Roboto', 'Arial', 'sans-serif'";
