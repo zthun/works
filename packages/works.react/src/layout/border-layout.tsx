@@ -8,45 +8,50 @@ import {
   ZSizeVoid
 } from '@zthun/works.chonky-cat';
 import { cssClass, firstDefined } from '@zthun/works.core';
+import { IZFashion, ZFashionBuilder } from '@zthun/works.fashion';
 import { Property } from 'csstype';
 import React from 'react';
+import { IZComponentFashion } from '../component/component-fashion';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { IZComponentStyle } from '../component/component-style.';
 import { IZComponentWidth } from '../component/component-width';
 import { makeStyles } from '../theme/make-styles';
-import { ZColorless, ZColorTint, ZShadeColor, ZStateColor } from '../theme/state-color';
 
-export interface IZBorderLayout extends IZComponentWidth, IZComponentHierarchy, IZComponentStyle {
-  border?: {
-    size?: ZSizeFixed | ZSizeVoid;
-    style?: Property.BorderStyle;
-    color?: ZStateColor;
-    tint?: ZColorTint;
-  };
-  background?: {
-    color?: ZStateColor;
-    tint?: ZColorTint;
-  };
+type ZBorderSize = ZSizeFixed | ZSizeVoid;
+
+interface IZFashionProps extends IZComponentFashion {
+  focus?: IZFashion;
+  hover?: IZFashion;
 }
 
-const normalizeBorderFields = (border?: {
-  size?: ZSizeFixed | ZSizeVoid;
+interface IZBorderProps extends IZFashionProps, IZComponentWidth<ZBorderSize> {
   style?: Property.BorderStyle;
-  color?: ZStateColor;
-  tint?: ZColorTint;
-}): [ZSizeFixed | ZSizeVoid, ZStateColor, ZColorTint] => {
-  return [
-    firstDefined(ZSizeFixed.ExtraSmall, border?.size),
-    firstDefined(ZShadeColor.Grey, border?.color),
-    firstDefined(ZColorTint.T400, border?.tint)
-  ];
+}
+
+export interface IZBorderLayout extends IZComponentWidth, IZComponentHierarchy, IZComponentStyle {
+  border?: IZBorderProps;
+  background?: IZFashionProps;
+}
+
+const normalizeBorderFields = (border?: IZBorderProps): Required<IZBorderProps> => {
+  const transparent = new ZFashionBuilder().transparent().build();
+
+  return {
+    width: firstDefined(ZSizeFixed.ExtraSmall, border?.width),
+    style: firstDefined('solid', border?.style),
+    fashion: firstDefined(transparent, border?.fashion),
+    focus: firstDefined(transparent, border?.focus, border?.fashion),
+    hover: firstDefined(transparent, border?.hover, border?.fashion)
+  };
 };
 
-const normalizeBackgroundFields = (background?: {
-  color?: ZStateColor;
-  tint?: ZColorTint;
-}): [ZStateColor, ZColorTint] => {
-  return [firstDefined(ZColorless.Transparent, background?.color), firstDefined(ZColorTint.Main, background?.tint)];
+const normalizeBackgroundFields = (background?: IZFashionProps): Required<IZFashionProps> => {
+  const transparent = new ZFashionBuilder().transparent().build();
+  return {
+    fashion: firstDefined(transparent, background?.fashion),
+    focus: firstDefined(transparent, background?.focus, background?.fashion),
+    hover: firstDefined(transparent, background?.hover, background?.fashion)
+  };
 };
 
 const BorderLayoutSizeChart = {
@@ -56,21 +61,25 @@ const BorderLayoutSizeChart = {
 };
 
 const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
-  const { border, background, width = ZSizeVaried.Full } = props;
-  const [_borderSize, _borderColor, _borderTint] = normalizeBorderFields(border);
-  const [_backgroundColor, _backgroundTint] = normalizeBackgroundFields(background);
-
-  const borderSize = theme.thickness(_borderSize);
-  const borderColor = theme.colorify(_borderColor, _borderTint);
-  const borderStyle = firstDefined('solid', border?.style);
-  const _width = BorderLayoutSizeChart[width];
-  const backgroundColor = theme.colorify(_backgroundColor, _backgroundTint);
+  const { border, background, width } = props;
+  const _border = normalizeBorderFields(border);
+  const _background = normalizeBackgroundFields(background);
 
   return {
     root: {
-      border: `${borderSize} ${borderStyle} ${borderColor}`,
-      width: _width,
-      backgroundColor
+      'border': `${_border.width} ${_border.style} ${theme.colorify(_border.fashion)}`,
+      'width': BorderLayoutSizeChart[firstDefined(ZSizeVaried.Full, width)],
+      'backgroundColor': theme.colorify(_background.fashion),
+
+      '&:focus': {
+        border: `${_border.width} ${_border.style} ${theme.colorify(_border.focus)}`,
+        backgroundColor: theme.colorify(_background.focus)
+      },
+
+      '&:hover': {
+        border: `${_border.width} ${_border.style} ${theme.colorify(_border.hover)}`,
+        backgroundColor: theme.colorify(_background.hover)
+      }
     }
   };
 });
@@ -85,25 +94,9 @@ const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
  *        The JSX for this component.
  */
 export function ZBorderLayout(props: IZBorderLayout) {
-  const { className, children, border, background } = props;
+  const { className, children } = props;
   const { classes } = useBorderLayoutStyles(props);
   const clasz = cssClass('ZBorderLayout-root', className, classes.root);
-  const [borderSize, _borderColor, _borderTint] = normalizeBorderFields(border);
-  const [_backgroundColor, _backgroundTint] = normalizeBackgroundFields(background);
 
-  const borderStyle = firstDefined('solid', border?.style);
-  const borderColor = `${_borderColor}[${_borderTint}]`;
-  const backgroundColor = `${_backgroundColor}[${_backgroundTint}]`;
-
-  return (
-    <div
-      data-border-color={borderColor}
-      data-border-size={borderSize}
-      data-border-style={borderStyle}
-      data-background-color={backgroundColor}
-      className={clasz}
-    >
-      {children}
-    </div>
-  );
+  return <div className={clasz}>{children}</div>;
 }

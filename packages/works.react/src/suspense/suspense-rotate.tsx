@@ -3,18 +3,16 @@ import { createSizeChartFixedArithmetic, createSizeChartFixedCss, ZSizeFixed } f
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
 import { makeStyles } from '../theme/make-styles';
-import { ZColorless, ZColorTint } from '../theme/state-color';
 import { IZSuspense } from './suspense';
 
 const SuspenseRotateSizeChart = createSizeChartFixedCss(createSizeChartFixedArithmetic(1, 1), 'rem');
 
 const useSuspenseRotateStyles = makeStyles<IZSuspense>()((theme, props) => {
-  const { color = ZColorless.Inherit, tint = ZColorTint.Main, width = ZSizeFixed.ExtraSmall } = props;
+  const { width = ZSizeFixed.ExtraSmall } = props;
   const size = SuspenseRotateSizeChart[width];
 
   return {
     root: {
-      color: theme.colorify(color, tint),
       height: size,
       width: size
     }
@@ -29,7 +27,7 @@ const useSuspenseRotateStyles = makeStyles<IZSuspense>()((theme, props) => {
  * @returns The jsx for a circular loading progress.
  */
 export function ZSuspenseRotate(props: IZSuspense) {
-  const { className, loading = true } = props;
+  const { className, loading = true, name } = props;
   const { classes } = useSuspenseRotateStyles(props);
 
   if (!loading) {
@@ -38,9 +36,5 @@ export function ZSuspenseRotate(props: IZSuspense) {
 
   const clasz = cssClass('ZSuspense-root ZSuspense-rotate', className, classes.root);
 
-  return (
-    <div className={clasz}>
-      <CircularProgress size='inherit' color='inherit' />
-    </div>
-  );
+  return <CircularProgress className={clasz} size='inherit' color='inherit' data-name={name} />;
 }

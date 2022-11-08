@@ -17,6 +17,6 @@ export const ZRouteMap = Routes;
 export const ZNavigate = Navigate;
 export const ZOutlet = Outlet;
 
-export const useNavigate = _useNavigate;
+export const useNavigate: () => (route: string) => void = _useNavigate;
 export const useLocation = _useLocation;
 export const useParams = _useParams;

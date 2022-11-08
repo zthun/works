@@ -6,10 +6,10 @@ import { cssClass } from '@zthun/works.core';
 
 import { startCase } from 'lodash';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { IZButton, ZButton } from '../buttons/button';
 import { IZComponentStyle } from '../component/component-style.';
 import { ZImageSource } from '../image/image-source';
+import { useNavigate } from '../router/router-dom';
 import { asStateData, isStateErrored, isStateLoading } from '../state/use-async-state';
 import { makeStyles } from '../theme/make-styles';
 import { ZCaption, ZH1 } from '../typography/typography';

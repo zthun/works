@@ -20,15 +20,15 @@ export {
   ZWebAppServiceContext
 } from './apps/web-app-service';
 // Buttons
-export { IZButton, ZButton, ZButtonColor } from './buttons/button';
+export { IZButton, ZButton } from './buttons/button';
 export { ZButtonComponentModel } from './buttons/button.cm';
 // Cards
 export { IZCard, ZCard } from './card/card';
 // Component
 export { IZComponentAdornment } from './component/component-adornment';
 export { IZComponentAvatar } from './component/component-avatar';
-export { IZComponentColor } from './component/component-color';
 export { IZComponentDisabled } from './component/component-disabled';
+export { IZComponentFashion } from './component/component-fashion';
 export { IZComponentHeading } from './component/component-heading';
 export { IZComponentHierarchy } from './component/component-hierarchy';
 export { IZComponentLabel } from './component/component-label';
@@ -132,7 +132,6 @@ export { ZSuspenseComponentModel } from './suspense/suspense.cm';
 // Theme
 export { makeStyles } from './theme/make-styles';
 export { ZStateAnchor } from './theme/state-anchor';
-export { ZColorless, ZColorTint, ZHueColor, ZSeverityColor, ZShadeColor, ZStateColor } from './theme/state-color';
 export { ZStateOrientation } from './theme/state-orientation';
 // Typography
 export {
@@ -150,4 +149,3 @@ export {
 } from './typography/typography';
 // Window
 export { useWindowService, ZWindowServiceContext } from './window/window-service';
-export {};

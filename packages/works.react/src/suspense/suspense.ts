@@ -1,5 +1,4 @@
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
-import { IZComponentColor } from '../component/component-color';
 import { IZComponentLoading } from '../component/component-loading';
 import { IZComponentName } from '../component/component-name';
 import { IZComponentStyle } from '../component/component-style.';
@@ -12,5 +11,4 @@ export interface IZSuspense
   extends IZComponentStyle,
     IZComponentWidth<ZSizeFixed>,
     IZComponentLoading,
-    IZComponentName,
-    IZComponentColor {}
+    IZComponentName {}

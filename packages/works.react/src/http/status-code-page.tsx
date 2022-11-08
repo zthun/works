@@ -10,7 +10,6 @@ import {
   getHttpCodeCategory,
   getHttpCodeDescription,
   getHttpCodeName,
-  getHttpCodeSeverity,
   ZHttpCode,
   ZHttpCodeCategory,
   ZHttpCodeClient
@@ -22,16 +21,11 @@ import { IZComponentName } from '../component/component-name';
 import { ZGridLayout } from '../layout/grid-layout';
 import { useParams } from '../router/router-dom';
 import { makeStyles } from '../theme/make-styles';
-import { ZSeverityColor } from '../theme/state-color';
 import { ZParagraph } from '../typography/typography';
 
-const useStatusCodePageStyles = makeStyles<ZHttpCode>()((theme, status) => {
-  // A ZHttpCodeSeverity enum and a ZSeverityColor are compatible.
-  const severity = getHttpCodeSeverity(status) as unknown as ZSeverityColor;
-
+const useStatusCodePageStyles = makeStyles<ZHttpCode>()((theme) => {
   return {
     code: {
-      color: theme.colorify(severity),
       fontFamily: theme.typography.fontFamily,
       fontWeight: 'bold',
       fontSize: '8rem',

@@ -5,16 +5,10 @@ import {
   ZBooleanSwitch,
   ZCard,
   ZChoiceDropDown,
-  ZColorless,
-  ZColorTint,
   ZGridLayout,
   ZH3,
-  ZHueColor,
   ZPaddedBox,
   ZParagraph,
-  ZSeverityColor,
-  ZShadeColor,
-  ZStateColor,
   ZSuspenseRotate
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
@@ -29,18 +23,9 @@ import { ZComponentSuspense } from '../../web-apps-components';
  */
 export function ZSuspensePage() {
   const [width, setWidth] = useSafeState<ZSizeFixed>(ZSizeFixed.ExtraSmall);
-  const [color, setColor] = useSafeState<ZStateColor>(ZColorless.Inherit);
-  const [tint, setTint] = useSafeState<ZColorTint>(ZColorTint.Main);
   const [loading, setLoading] = useSafeState<boolean>(true);
   const sizes = values(ZSizeFixed);
   const _setWidth = setFirstOrDefault.bind(null, setWidth, ZSizeFixed.ExtraSmall);
-  const colors = values<ZStateColor>(ZSeverityColor)
-    .concat(values(ZHueColor))
-    .concat(values(ZShadeColor))
-    .concat(values(ZColorless));
-  const _setColor = setFirstOrDefault.bind(null, setColor, ZColorless.Inherit);
-  const tints = values(ZColorTint);
-  const _setTint = setFirstOrDefault.bind(null, setTint, ZColorTint.Main);
 
   return (
     <ZCard
@@ -60,7 +45,7 @@ export function ZSuspensePage() {
           happening.
         </ZParagraph>
 
-        <ZSuspenseRotate loading={loading} color={color} tint={tint} width={width} />
+        <ZSuspenseRotate loading={loading} width={width} />
       </ZPaddedBox>
 
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
@@ -76,24 +61,6 @@ export function ZSuspensePage() {
             renderOption={startCase}
             identifier={identity}
             label='Width'
-          />
-          <ZChoiceDropDown
-            name='color'
-            value={[color]}
-            onValueChange={_setColor}
-            options={colors}
-            renderOption={startCase}
-            identifier={identity}
-            label='Color'
-          />
-          <ZChoiceDropDown
-            name='tint'
-            value={[tint]}
-            onValueChange={_setTint}
-            options={tints}
-            renderOption={startCase}
-            identifier={identity}
-            label='Tint'
           />
         </ZGridLayout>
       </ZPaddedBox>

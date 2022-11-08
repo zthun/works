@@ -19,6 +19,7 @@ import { ZAlertsPage } from './components/alerts/alerts-page';
 import { ZBooleanPage } from './components/boolean/boolean-page';
 import { ZButtonPage } from './components/button/button-page';
 import { ZChoicePage } from './components/choice/choice-page';
+import { ZComponentsPage } from './components/components-page';
 import { ZDrawerPage } from './components/drawer/drawer-page';
 import { ZListPage } from './components/list/list-page';
 import { ZNumberPage } from './components/number/number-page';
@@ -50,6 +51,7 @@ export function ZWebAppsPage() {
         <ZRoute path='suspense' element={<ZSuspensePage />} />
         <ZRoute path='text' element={<ZTextPage />} />
         <ZRoute path='typography' element={<ZTypographyPage />} />
+        <ZRoute path='' element={<ZComponentsPage />} />
       </ZRoute>
       <ZRoute path='/' element={<ZGettingStartedPage />} />
       <ZRoute path='*' element={<ZNavigate to={'/status-code/404'} />} />

@@ -3,9 +3,11 @@ import React, { ReactNode } from 'react';
 
 import { createSizeChartVariedCss, ZSizeFixed, ZSizeVaried } from '@zthun/works.chonky-cat';
 import { cssClass } from '@zthun/works.core';
+import { IZFashionComplements } from '@zthun/works.fashion';
 import { noop } from 'lodash';
 import { IZComponentAvatar } from '../component/component-avatar';
 import { IZComponentDisabled } from '../component/component-disabled';
+import { IZComponentFashion } from '../component/component-fashion';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentLoading } from '../component/component-loading';
 import { IZComponentName } from '../component/component-name';
@@ -13,9 +15,6 @@ import { IZComponentStyle } from '../component/component-style.';
 import { IZComponentWidth } from '../component/component-width';
 import { ZSuspenseRotate } from '../suspense/suspense-rotate';
 import { makeStyles } from '../theme/make-styles';
-import { ZColorless, ZSeverityColor } from '../theme/state-color';
-
-export type ZButtonColor = ZSeverityColor | ZColorless.Inherit;
 
 export interface IZButton
   extends IZComponentAvatar,
@@ -24,9 +23,9 @@ export interface IZButton
     IZComponentLoading,
     IZComponentStyle,
     IZComponentName,
+    IZComponentFashion<IZFashionComplements>,
     IZComponentWidth<ZSizeVaried> {
   borderless?: boolean;
-  color?: ZButtonColor;
   outline?: boolean;
   tooltip?: ReactNode;
 
@@ -36,7 +35,7 @@ export interface IZButton
 const ButtonSizeChart = createSizeChartVariedCss();
 
 const useButtonStyles = makeStyles<IZButton>()((theme, props) => {
-  const { width = ZSizeVaried.Fit } = props;
+  const { width = ZSizeVaried.Fit, fashion = theme.simple() } = props;
 
   return {
     wrapper: {
@@ -46,7 +45,9 @@ const useButtonStyles = makeStyles<IZButton>()((theme, props) => {
     button: {
       display: 'inline-flex',
       alignItems: 'center',
-      width: '100%'
+      width: '100%',
+      color: theme.colorify(fashion.contrast),
+      backgroundColor: theme.colorify(fashion.main)
     },
     content: {
       display: 'flex'
@@ -73,19 +74,7 @@ const useButtonStyles = makeStyles<IZButton>()((theme, props) => {
  * @returns The JSX to render this button.
  */
 export function ZButton(props: IZButton) {
-  const {
-    avatar,
-    className,
-    color,
-    borderless,
-    disabled,
-    loading,
-    label,
-    name,
-    outline,
-    tooltip,
-    onClick = noop
-  } = props;
+  const { avatar, className, borderless, disabled, loading, label, name, outline, tooltip, onClick = noop } = props;
 
   const { classes } = useButtonStyles(props);
   const buttonClass = cssClass(
@@ -102,22 +91,10 @@ export function ZButton(props: IZButton) {
   return (
     <Tooltip title={tooltip}>
       <span className={classes.wrapper}>
-        <Button
-          className={buttonClass}
-          data-name={name}
-          color={color}
-          variant={variant}
-          disabled={disabled}
-          onClick={onClick}
-        >
+        <Button className={buttonClass} data-name={name} variant={variant} disabled={disabled} onClick={onClick}>
           {avatar}
           <div className={contentClass}>{label}</div>
-          <ZSuspenseRotate
-            className='ZButton-loading'
-            width={ZSizeFixed.ExtraSmall}
-            color={ZColorless.Inherit}
-            loading={!!loading}
-          />
+          <ZSuspenseRotate className='ZButton-loading' width={ZSizeFixed.ExtraSmall} loading={!!loading} />
         </Button>
       </span>
     </Tooltip>
