@@ -58,7 +58,7 @@ describe('ZRouteOptionBuilder', () => {
       assertBuilderSetsProperty(
         'get',
         createTestTarget,
-        (t, v) => t.get(v),
+        (t) => t.get(),
         (r: IZRouteOption) => r.method
       );
     });
@@ -67,7 +67,7 @@ describe('ZRouteOptionBuilder', () => {
       assertBuilderSetsProperty(
         'put',
         createTestTarget,
-        (t, v) => t.put(v),
+        (t) => t.put(),
         (r: IZRouteOption) => r.method
       );
     });
@@ -76,7 +76,7 @@ describe('ZRouteOptionBuilder', () => {
       assertBuilderSetsProperty(
         'post',
         createTestTarget,
-        (t, v) => t.post(v),
+        (t) => t.post(),
         (r: IZRouteOption) => r.method
       );
     });
@@ -85,7 +85,7 @@ describe('ZRouteOptionBuilder', () => {
       assertBuilderSetsProperty(
         'delete',
         createTestTarget,
-        (t, v) => t.delete(v),
+        (t) => t.delete(),
         (r: IZRouteOption) => r.method
       );
     });
@@ -94,7 +94,7 @@ describe('ZRouteOptionBuilder', () => {
       assertBuilderSetsProperty(
         'patch',
         createTestTarget,
-        (t, v) => t.patch(v),
+        (t) => t.patch(),
         (r: IZRouteOption) => r.method
       );
     });
@@ -103,7 +103,7 @@ describe('ZRouteOptionBuilder', () => {
       assertBuilderSetsProperty(
         'head',
         createTestTarget,
-        (t, v) => t.head(v),
+        (t) => t.head(),
         (r: IZRouteOption) => r.method
       );
     });
@@ -112,7 +112,7 @@ describe('ZRouteOptionBuilder', () => {
       assertBuilderSetsProperty(
         'options',
         createTestTarget,
-        (t, v) => t.options(v),
+        (t) => t.options(),
         (r: IZRouteOption) => r.method
       );
     });
