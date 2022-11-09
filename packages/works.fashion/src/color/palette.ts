@@ -52,7 +52,7 @@ export class ZPaletteBuilder {
   }
 
   /**
-   * Sets the fashion model for a color.
+   * Sets the fashion gradient for a color.
    *
    * @param color
    *        The color to set.
@@ -62,7 +62,7 @@ export class ZPaletteBuilder {
    * @returns
    *        This object.
    */
-  public luminance(color: ZHue, values: Record<ZShade, string>): this {
+  public gradient(color: ZHue, values: Record<ZShade, string>): this {
     const copy: Record<ZShade, string> = JSON.parse(JSON.stringify(values));
     this._palette[color] = copy;
     return this;

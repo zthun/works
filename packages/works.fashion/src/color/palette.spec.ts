@@ -42,7 +42,7 @@ describe('ZPalette', () => {
         assertBuilderSetsProperty(
           mapValues(keyBy(ZShades), () => '#FF0000') as Record<ZShade, string>,
           createTestTarget,
-          (t, v) => t.luminance(ZHue.Red, v),
+          (t, v) => t.gradient(ZHue.Red, v),
           (p: IZPalette) => p.red
         );
       });
