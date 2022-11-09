@@ -5,17 +5,16 @@ import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
   useAlertService,
+  useZthunworksFashionDesign,
   ZBorderLayout,
   ZCard,
-  ZColorTint,
   ZH3,
   ZList,
   ZListDivider,
   ZListGroup,
   ZListLineItem,
   ZPaddedBox,
-  ZParagraph,
-  ZShadeColor
+  ZParagraph
 } from '@zthun/works.react';
 import React from 'react';
 import { ZComponentList } from '../../web-apps-components';
@@ -28,6 +27,7 @@ import { ZComponentList } from '../../web-apps-components';
  */
 export function ZListPage() {
   const alerts = useAlertService();
+  const { light } = useZthunworksFashionDesign();
 
   const showAlert = async (header: string, msg: string, severity: ZAlertSeverity) => {
     const alert = new ZAlertBuilder().header(header).message(msg).severity(severity).build();
@@ -55,7 +55,7 @@ export function ZListPage() {
           event to a truthy or falsy value respectively.
         </ZParagraph>
 
-        <ZBorderLayout background={{ color: ZShadeColor.Grey, tint: ZColorTint.Light }} width={ZSizeFixed.Medium}>
+        <ZBorderLayout border={{ fashion: light.dark }} background={{ fashion: light.main }} width={ZSizeFixed.Medium}>
           <ZList>
             <ZListGroup heading='Without Click Support' />
             <ZListLineItem
