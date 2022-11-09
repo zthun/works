@@ -65,19 +65,22 @@ const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
   const _border = normalizeBorderFields(border);
   const _background = normalizeBackgroundFields(background);
 
+  const __border = (fashion: IZFashion) =>
+    `${theme.thickness(_border.width)}  ${_border.style} ${theme.colorify(fashion)}`;
+
   return {
     root: {
-      'border': `${_border.width} ${_border.style} ${theme.colorify(_border.fashion)}`,
+      'border': __border(_border.fashion),
       'width': BorderLayoutSizeChart[firstDefined(ZSizeVaried.Full, width)],
       'backgroundColor': theme.colorify(_background.fashion),
 
       '&:focus': {
-        border: `${_border.width} ${_border.style} ${theme.colorify(_border.focus)}`,
+        border: __border(_border.focus),
         backgroundColor: theme.colorify(_background.focus)
       },
 
       '&:hover': {
-        border: `${_border.width} ${_border.style} ${theme.colorify(_border.hover)}`,
+        border: __border(_border.hover),
         backgroundColor: theme.colorify(_background.hover)
       }
     }
