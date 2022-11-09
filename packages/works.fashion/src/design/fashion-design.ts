@@ -136,9 +136,9 @@ export class ZFashionDesignBuilder {
         .build(),
       dark: new ZFashionCoordinationBuilder()
         .name('Dark')
-        .main(new ZFashionBuilder().grey(700).build())
-        .light(new ZFashionBuilder().grey(600).build())
-        .dark(new ZFashionBuilder().grey(800).build())
+        .main(new ZFashionBuilder().grey(900).build())
+        .light(new ZFashionBuilder().grey(800).build())
+        .dark(new ZFashionBuilder().black().build())
         .contrast(new ZFashionBuilder().white().build())
         .build()
     };
