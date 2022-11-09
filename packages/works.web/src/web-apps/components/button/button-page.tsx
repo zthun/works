@@ -6,8 +6,8 @@ import { ZAlertBuilder } from '@zthun/works.message';
 import {
   useAlertService,
   useSafeState,
-  useZthunworksFashion,
-  useZthunworksFashionCoordinations,
+  useZthunworksFashionDesign,
+  useZthunworksFashionDesigns,
   ZBooleanSwitch,
   ZButton,
   ZCard,
@@ -29,14 +29,14 @@ import { ZComponentButton } from '../../web-apps-components';
  */
 export function ZButtonPage() {
   const alerts = useAlertService();
-  const theme = useZthunworksFashion();
-  const coordinations = useZthunworksFashionCoordinations();
+  const theme = useZthunworksFashionDesign();
+  const designs = useZthunworksFashionDesigns();
   const [loading, setLoading] = useSafeState(false);
   const [disabled, setDisabled] = useSafeState(false);
   const [outline, setOutline] = useSafeState(false);
   const [borderless, setBorderless] = useSafeState(false);
-  const [fashion, setFashion] = useSafeState<IZFashionCoordination>(theme.light);
-  const _setFashion = setFirstOrDefault.bind(null, setFashion, theme.light);
+  const [fashion, setFashion] = useSafeState<IZFashionCoordination>(theme.dark);
+  const _setFashion = setFirstOrDefault.bind(null, setFashion, theme.dark);
 
   /**
    * Occurs when the button demo is clicked.
@@ -107,7 +107,7 @@ export function ZButtonPage() {
             indelible
             value={[fashion]}
             onValueChange={_setFashion}
-            options={coordinations}
+            options={designs}
             renderOption={(f) => f.name}
             identifier={identity}
           />

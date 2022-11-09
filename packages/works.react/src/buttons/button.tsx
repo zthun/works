@@ -42,11 +42,18 @@ const useButtonStyles = makeStyles<IZButton>()((theme, props) => {
   const dark = theme.colorify(firstDefined(fashion.main, fashion.dark));
   const light = theme.colorify(firstDefined(fashion.main, fashion.light));
 
+  const borderless = {
+    border: 0,
+    outline: 'none',
+    boxShadow: 'none'
+  };
+
   return {
     wrapper: {
       display: 'inline-flex',
       width: ButtonSizeChart[width]
     },
+
     button: {
       'display': 'inline-flex',
       'alignItems': 'center',
@@ -71,26 +78,27 @@ const useButtonStyles = makeStyles<IZButton>()((theme, props) => {
 
         '&:disabled': {
           color: 'rgb(0, 0, 0, 0.25)'
+        },
+
+        '&:hover': {
+          backgroundColor: main,
+          color: text
         }
       },
 
       '&.ZButton-borderless': {
-        'border': 0,
-        'boxShadow': 'none',
-
-        '&:hover': {
-          border: 0,
-          outline: `${theme.thickness()} solid ${main}`,
-          boxShadow: 'none'
-        },
-        '&:active': {
-          border: 0,
-          boxShadow: 'none'
-        }
+        ...borderless,
+        '&:hover': borderless,
+        '&:active': borderless
       }
     },
+
     content: {
       display: 'flex'
+    },
+
+    loading: {
+      marginLeft: theme.gap(ZSizeFixed.ExtraSmall)
     }
   };
 });
@@ -122,7 +130,11 @@ export function ZButton(props: IZButton) {
         <Button className={buttonClass} data-name={name} variant={variant} disabled={disabled} onClick={onClick}>
           {avatar}
           <div className={contentClass}>{label}</div>
-          <ZSuspenseRotate className='ZButton-loading' width={ZSizeFixed.ExtraSmall} loading={!!loading} />
+          <ZSuspenseRotate
+            className={cssClass('ZButton-loading', classes.loading)}
+            width={ZSizeFixed.ExtraSmall}
+            loading={!!loading}
+          />
         </Button>
       </span>
     </Tooltip>
