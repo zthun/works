@@ -5,6 +5,7 @@ import { ZSizeFixed, ZSizeVaried } from '@zthun/works.chonky-cat';
 import {
   asStateData,
   makeStyles,
+  useFashionDesign,
   useNavigate,
   useWebApp,
   ZButton,
@@ -12,7 +13,6 @@ import {
   ZGridLayout,
   ZImageSource,
   ZParagraph,
-  ZSeverityColor,
   ZSubtitle
 } from '@zthun/works.react';
 import React from 'react';
@@ -43,6 +43,7 @@ export function ZHomePage() {
   const { classes } = useHomePageStyles();
   const navigate = useNavigate();
   const learn = asStateData(_learn);
+  const { primary, secondary } = useFashionDesign();
 
   return (
     <div className='ZHomePage-root'>
@@ -85,7 +86,7 @@ export function ZHomePage() {
           <ZButton
             label='Gets Started'
             onClick={() => navigate('/web-apps')}
-            color={ZSeverityColor.Primary}
+            fashion={primary}
             outline
             width={ZSizeVaried.Full}
           />
@@ -120,7 +121,7 @@ export function ZHomePage() {
           <ZButton
             label='Get Started'
             onClick={() => navigate('/microservices')}
-            color={ZSeverityColor.Secondary}
+            fashion={secondary}
             outline
             width={ZSizeVaried.Full}
           />
