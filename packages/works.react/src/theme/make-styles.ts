@@ -11,9 +11,9 @@ import {
   ZSizeVoid
 } from '@zthun/works.chonky-cat';
 import { firstDefined } from '@zthun/works.core';
-import { IZFashion, IZFashionCoordination } from '@zthun/works.fashion';
+import { colorify, IZFashion, IZFashionCoordination, IZFashionDesign } from '@zthun/works.fashion';
 import { createMakeStyles } from 'tss-react';
-import { IZthunworksFashion, useZthunworksFashion } from './fashion';
+import { useZthunworksFashionDesign } from './fashion';
 
 export type IZColor = Color;
 
@@ -51,7 +51,7 @@ export interface IZTheme extends Theme {
    @returns
           The current fashion design.
    */
-  fashion(): Readonly<IZthunworksFashion>;
+  fashion(): Readonly<IZFashionDesign>;
 
   /**
    * Converts a size enum to a spacing value.
@@ -95,16 +95,10 @@ export interface IZTheme extends Theme {
  */
 export function useZthunworksTheme(): IZTheme {
   const mui = useMuiTheme();
-  const fashionTheme = useZthunworksFashion();
+  const fashionTheme = useZthunworksFashionDesign();
 
   const base = {
-    colorify(fashion: IZFashion): string {
-      if (fashion.hue === null) {
-        return 'rgb(0, 0, 0, 0)';
-      }
-
-      return fashionTheme.palette[fashion.hue][fashion.shade];
-    },
+    colorify: (fashion: IZFashion) => colorify(fashionTheme.palette, fashion),
 
     fashion: () => fashionTheme,
 
