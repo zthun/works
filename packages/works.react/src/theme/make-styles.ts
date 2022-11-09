@@ -13,7 +13,7 @@ import {
 import { firstDefined } from '@zthun/works.core';
 import { colorify, IZFashion, IZFashionCoordination, IZFashionDesign } from '@zthun/works.fashion';
 import { createMakeStyles } from 'tss-react';
-import { useZthunworksFashionDesign } from './fashion';
+import { useFashionDesign } from './fashion';
 
 export type IZColor = Color;
 
@@ -95,7 +95,7 @@ export interface IZTheme extends Theme {
  */
 export function useZthunworksTheme(): IZTheme {
   const mui = useMuiTheme();
-  const fashionTheme = useZthunworksFashionDesign();
+  const fashionTheme = useFashionDesign();
 
   const base = {
     colorify: (fashion: IZFashion) => colorify(fashionTheme.palette, fashion),

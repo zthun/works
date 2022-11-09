@@ -130,7 +130,8 @@ export { IZSuspense } from './suspense/suspense';
 export { ZSuspenseRotate } from './suspense/suspense-rotate';
 export { ZSuspenseComponentModel } from './suspense/suspense.cm';
 // Theme
-export { makeStyles } from './theme/make-styles';
+export { useFashionCoordinations, useFashionDesign } from './theme/fashion';
+export { IZTheme, makeStyles, useZthunworksTheme } from './theme/make-styles';
 export { ZStateAnchor } from './theme/state-anchor';
 export { ZStateOrientation } from './theme/state-orientation';
 // Typography

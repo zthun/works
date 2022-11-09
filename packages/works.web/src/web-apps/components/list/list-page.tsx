@@ -5,7 +5,7 @@ import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
   useAlertService,
-  useZthunworksFashionDesign,
+  useFashionDesign,
   ZBorderLayout,
   ZCard,
   ZH3,
@@ -27,7 +27,7 @@ import { ZComponentList } from '../../web-apps-components';
  */
 export function ZListPage() {
   const alerts = useAlertService();
-  const { light } = useZthunworksFashionDesign();
+  const { light } = useFashionDesign();
 
   const showAlert = async (header: string, msg: string, severity: ZAlertSeverity) => {
     const alert = new ZAlertBuilder().header(header).message(msg).severity(severity).build();

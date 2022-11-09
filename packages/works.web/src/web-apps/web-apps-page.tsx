@@ -1,7 +1,7 @@
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import {
+  useFashionDesign,
   useNavigate,
-  useZthunworksFashionDesign,
   ZBreadcrumbsLocation,
   ZDrawerButton,
   ZGridLayout,
@@ -37,7 +37,7 @@ import { ZWebAppsComponents } from './web-apps-components';
 export function ZWebAppsPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { secondary } = useZthunworksFashionDesign();
+  const { secondary } = useFashionDesign();
 
   const renderDetails = () => (
     <ZRouteMap>

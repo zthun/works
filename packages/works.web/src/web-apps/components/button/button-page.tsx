@@ -5,9 +5,9 @@ import { IZFashionCoordination } from '@zthun/works.fashion';
 import { ZAlertBuilder } from '@zthun/works.message';
 import {
   useAlertService,
+  useFashionCoordinations,
+  useFashionDesign,
   useSafeState,
-  useZthunworksFashionDesign,
-  useZthunworksFashionDesigns,
   ZBooleanSwitch,
   ZButton,
   ZCard,
@@ -29,8 +29,8 @@ import { ZComponentButton } from '../../web-apps-components';
  */
 export function ZButtonPage() {
   const alerts = useAlertService();
-  const theme = useZthunworksFashionDesign();
-  const designs = useZthunworksFashionDesigns();
+  const theme = useFashionDesign();
+  const designs = useFashionCoordinations();
   const [loading, setLoading] = useSafeState(false);
   const [disabled, setDisabled] = useSafeState(false);
   const [outline, setOutline] = useSafeState(false);

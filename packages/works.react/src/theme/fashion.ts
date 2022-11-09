@@ -21,7 +21,7 @@ import {
 import { IZFashionCoordination, ZFashionDesignBuilder, ZHue, ZPaletteBuilder } from '@zthun/works.fashion';
 import { createContext, useContext } from 'react';
 
-const _ZthunworksPalette = new ZPaletteBuilder()
+const _ZPalette = new ZPaletteBuilder()
   .gradient(ZHue.Red, red)
   .gradient(ZHue.Pink, pink)
   .gradient(ZHue.Purple, purple)
@@ -42,12 +42,12 @@ const _ZthunworksPalette = new ZPaletteBuilder()
   .gradient(ZHue.Grey, grey)
   .build();
 
-const _ZthunworksDesign = new ZFashionDesignBuilder().palette(_ZthunworksPalette).build();
+const _ZDesign = new ZFashionDesignBuilder().palette(_ZPalette).build();
 
 /**
  * The context for setting the fashion design for the entire site theme.
  */
-export const ZthunworksFashionContext = createContext(_ZthunworksDesign);
+export const ZFashionDesignContext = createContext(_ZDesign);
 
 /**
  * Exports the fashion theme for zthunworks applications.
@@ -55,8 +55,8 @@ export const ZthunworksFashionContext = createContext(_ZthunworksDesign);
  * @returns
  *        The theme for zthunworks applications.
  */
-export function useZthunworksFashionDesign() {
-  return useContext(ZthunworksFashionContext);
+export function useFashionDesign() {
+  return useContext(ZFashionDesignContext);
 }
 
 /**
@@ -65,8 +65,8 @@ export function useZthunworksFashionDesign() {
  * @returns
  *        A list of all fashion coordinations.
  */
-export function useZthunworksFashionDesigns(): IZFashionCoordination[] {
-  const fashion = useZthunworksFashionDesign();
+export function useFashionCoordinations(): IZFashionCoordination[] {
+  const fashion = useFashionDesign();
   return [
     fashion.light,
     fashion.dark,
