@@ -3,6 +3,7 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import {
+  useFashionDesign,
   useSafeState,
   ZBooleanCheckbox,
   ZBooleanSwitch,
@@ -13,7 +14,6 @@ import {
   ZH3,
   ZPaddedBox,
   ZParagraph,
-  ZSeverityColor,
   ZToolbarLayout
 } from '@zthun/works.react';
 import React from 'react';
@@ -27,6 +27,7 @@ import { ZComponentBoolean } from '../../web-apps-components';
 export function ZBooleanPage() {
   const [disabled, setDisabled] = useSafeState(false);
   const [value, setValue] = useSafeState<boolean | null>(false);
+  const { success, error, warning } = useFashionDesign();
 
   return (
     <ZCard
@@ -66,23 +67,23 @@ export function ZBooleanPage() {
 
         <ZToolbarLayout>
           <ZButton
-            avatar={<CheckBoxIcon color='success' />}
+            avatar={<CheckBoxIcon />}
             outline
-            color={ZSeverityColor.Success}
+            fashion={success}
             onClick={setValue.bind(null, true)}
             label='True'
           />
           <ZButton
-            avatar={<CheckBoxOutlineBlankIcon color='error' />}
+            avatar={<CheckBoxOutlineBlankIcon />}
             outline
-            color={ZSeverityColor.Error}
+            fashion={error}
             onClick={setValue.bind(null, false)}
             label='False'
           />
           <ZButton
-            avatar={<IndeterminateCheckBoxIcon color='warning' />}
+            avatar={<IndeterminateCheckBoxIcon />}
             outline
-            color={ZSeverityColor.Warning}
+            fashion={warning}
             onClick={setValue.bind(null, null)}
             label='Indeterminate'
           />
