@@ -1,6 +1,7 @@
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import {
   useNavigate,
+  useZthunworksFashionDesign,
   ZBreadcrumbsLocation,
   ZDrawerButton,
   ZGridLayout,
@@ -10,7 +11,6 @@ import {
   ZNavigate,
   ZRoute,
   ZRouteMap,
-  ZSeverityColor,
   ZStateAnchor
 } from '@zthun/works.react';
 import { useLocation } from '@zthun/works.react/src/router/router-dom';
@@ -37,6 +37,7 @@ import { ZWebAppsComponents } from './web-apps-components';
 export function ZWebAppsPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { secondary } = useZthunworksFashionDesign();
 
   const renderDetails = () => (
     <ZRouteMap>
@@ -61,8 +62,8 @@ export function ZWebAppsPage() {
   const renderNavigation = () => (
     <ZGridLayout columns='auto 1fr' gap={ZSizeFixed.Medium} alignItems='center'>
       <ZDrawerButton
+        ButtonProps={{ fashion: secondary }}
         DrawerProps={{ anchor: ZStateAnchor.Left }}
-        ButtonProps={{ color: ZSeverityColor.Secondary }}
         closeOnChange={[location]}
       >
         <ZList>
