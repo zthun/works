@@ -6,6 +6,7 @@ import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
   useAlertService,
+  useFashionDesign,
   useSafeState,
   ZBooleanSwitch,
   ZButton,
@@ -13,8 +14,7 @@ import {
   ZGridLayout,
   ZH3,
   ZPaddedBox,
-  ZParagraph,
-  ZSeverityColor
+  ZParagraph
 } from '@zthun/works.react';
 import { startCase } from 'lodash';
 import React from 'react';
@@ -27,6 +27,7 @@ import { ZComponentAlerts } from '../../web-apps-components';
  */
 export function ZAlertsPage() {
   const [header, setHeader] = useSafeState(false);
+  const { success, warning, error, info } = useFashionDesign();
   const [immortal, setImmortal] = useSafeState(false);
   const service = useAlertService();
 
@@ -79,28 +80,28 @@ export function ZAlertsPage() {
         <ZGridLayout columns='15rem' gap={ZSizeFixed.Small}>
           <ZButton
             avatar={<CheckCircleIcon color='inherit' fontSize='small' />}
-            color={ZSeverityColor.Success}
+            fashion={success}
             outline
             onClick={openAlert.bind(null, ZAlertSeverity.Success, 'Something was a huge success.  Time to celebrate!')}
             label='Success'
           />
           <ZButton
             avatar={<WarningIcon color='inherit' fontSize='small' />}
-            color={ZSeverityColor.Warning}
+            fashion={warning}
             outline
             onClick={openAlert.bind(null, ZAlertSeverity.Warning, 'You can continue, but something is amiss!')}
             label='Warning'
           />
           <ZButton
             avatar={<ErrorIcon color='inherit' fontSize='small' />}
-            color={ZSeverityColor.Error}
+            fashion={error}
             outline
             onClick={openAlert.bind(null, ZAlertSeverity.Error, 'Uh oh!  Something has gone wrong!')}
             label='Error'
           />
           <ZButton
             avatar={<InfoIcon color='inherit' fontSize='small' />}
-            color={ZSeverityColor.Info}
+            fashion={info}
             outline
             onClick={openAlert.bind(null, ZAlertSeverity.Info, 'Just some basic information.')}
             label='Info'
