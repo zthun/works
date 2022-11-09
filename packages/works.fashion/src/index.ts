@@ -15,3 +15,5 @@ export {
   IZFashionDesignSpectrum,
   ZFashionDesignBuilder
 } from './design/fashion-design';
+// Util
+export { colorify } from './util/colorify';
