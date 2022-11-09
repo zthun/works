@@ -61,7 +61,7 @@ export function ZWebAppLayout(props: IZWebAppLayout) {
   const { children, home = '/home', whoami, profileApp } = props;
   const theme = useZthunworksTheme();
 
-  const ButtonProps = { fashion: theme.primary(), borderless: true };
+  const ButtonProps = { fashion: theme.fashion().primary, borderless: true };
   const DrawerProps = { anchor: ZStateAnchor.Right };
   const DrawerButtonProps = { ButtonProps, DrawerProps };
 
