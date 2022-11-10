@@ -47,6 +47,8 @@ export { ZDrawerComponentModel } from './drawer/drawer.cm';
 export { useErrorHandler, ZErrorHandlerContext } from './error/error-handler';
 export { ZErrorMessageHandlerAlert } from './error/error-message-handler-alert';
 export { ZErrorMessageHandlerLogger } from './error/error-message-handler-logger';
+// Fashion
+export { useFashionCoordinations, useFashionDesign } from './fashion/fashion';
 // File
 export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelectContext } from './file/file-select';
 // Form
@@ -130,7 +132,6 @@ export { IZSuspense } from './suspense/suspense';
 export { ZSuspenseRotate } from './suspense/suspense-rotate';
 export { ZSuspenseComponentModel } from './suspense/suspense.cm';
 // Theme
-export { useFashionCoordinations, useFashionDesign } from './theme/fashion';
 export { IZTheme, makeStyles, useZthunworksTheme } from './theme/make-styles';
 export { ZStateAnchor } from './theme/state-anchor';
 export { ZStateOrientation } from './theme/state-orientation';

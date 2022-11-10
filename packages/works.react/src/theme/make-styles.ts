@@ -13,7 +13,7 @@ import {
 import { firstDefined } from '@zthun/works.core';
 import { colorify, IZFashion, IZFashionCoordination, IZFashionDesign } from '@zthun/works.fashion';
 import { createMakeStyles } from 'tss-react';
-import { useFashionDesign } from './fashion';
+import { useFashionDesign } from '../fashion/fashion';
 
 export type IZColor = Color;
 
