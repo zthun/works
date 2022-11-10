@@ -2,11 +2,6 @@ import { ZHue } from './hue';
 import { ZShade } from './shade';
 
 /**
- * The symbol to represent an inherit hue.
- */
-export const ZHueInherit = Symbol('inherit');
-
-/**
  * Represents a color fashion.
  */
 export interface IZFashion {
@@ -15,7 +10,7 @@ export interface IZFashion {
    *
    * If this is null, then the hue should be considered transparent.
    */
-  readonly hue: ZHue | typeof ZHueInherit | null;
+  readonly hue: ZHue | 'inherit' | null;
 
   /**
    * The shade of color.
@@ -50,7 +45,7 @@ export class ZFashionBuilder {
    * @returns
    *        This object.
    */
-  public hue(color: ZHue | typeof ZHueInherit | null): this {
+  public hue(color: ZHue | 'inherit' | null): this {
     this._fashion.hue = color;
     return this;
   }
@@ -91,7 +86,7 @@ export class ZFashionBuilder {
     return this;
   }
 
-  public inherit = this.hue.bind(this, ZHueInherit);
+  public inherit = this.hue.bind(this, 'inherit');
   public transparent = this.hue.bind(this, null);
   public white = this.hue.bind(this, ZHue.White);
   public red = this._color.bind(this, ZHue.Red);

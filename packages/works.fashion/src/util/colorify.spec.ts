@@ -1,6 +1,6 @@
 import { ZFashionBuilder } from '../color/fashion';
 import { ZPaletteBuilder } from '../color/palette';
-import { colorify, ZCssInherit, ZCssTransparent } from './colorify';
+import { colorify, ZCssTransparent } from './colorify';
 
 describe('Colorify', () => {
   it('should return the rgb string for transparency if the fashion represents transparency', () => {
@@ -18,7 +18,7 @@ describe('Colorify', () => {
     // Act.
     const actual = colorify(new ZPaletteBuilder().build(), fashion);
     // Assert.
-    expect(actual).toEqual(ZCssInherit);
+    expect(actual).toEqual('inherit');
   });
 
   it('should return the targeted color', () => {

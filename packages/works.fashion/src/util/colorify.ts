@@ -1,15 +1,10 @@
-import { IZFashion, ZHueInherit } from '../color/fashion';
+import { IZFashion } from '../color/fashion';
 import { IZPalette } from '../color/palette';
 
 /**
  * A string that renders transparent in CSS.
  */
 export const ZCssTransparent = 'rgb(0, 0, 0, 0)';
-
-/**
- * A string that inherits the parent color.
- */
-export const ZCssInherit = 'inherit';
 
 /**
  * A function that translates from a palette color to a css color.
@@ -29,8 +24,8 @@ export function colorify(palette: IZPalette, fashion: IZFashion): string {
     return ZCssTransparent;
   }
 
-  if (fashion.hue === ZHueInherit) {
-    return ZCssInherit;
+  if (fashion.hue === 'inherit') {
+    return fashion.hue;
   }
 
   return palette[fashion.hue][fashion.shade];
