@@ -8,7 +8,7 @@ import {
   ZSizeVoid
 } from '@zthun/works.chonky-cat';
 import { cssClass, firstDefined } from '@zthun/works.core';
-import { IZFashion, ZFashionBuilder } from '@zthun/works.fashion';
+import { IZFashion, IZFashionCoordination, ZFashionBuilder, ZFashionCoordinationBuilder } from '@zthun/works.fashion';
 import { Property } from 'csstype';
 import React from 'react';
 import { IZComponentFashion } from '../component/component-fashion';
@@ -19,18 +19,20 @@ import { makeStyles } from '../theme/make-styles';
 
 type ZBorderSize = ZSizeFixed | ZSizeVoid;
 
-interface IZFashionProps extends IZComponentFashion {
-  focus?: IZFashion;
-  hover?: IZFashion;
+interface IZFashionProps<TFashion> extends IZComponentFashion<TFashion> {
+  focus?: TFashion;
+  hover?: TFashion;
 }
 
-interface IZBorderProps extends IZFashionProps, IZComponentWidth<ZBorderSize> {
+interface IZBorderProps extends IZFashionProps<IZFashion>, IZComponentWidth<ZBorderSize> {
   style?: Property.BorderStyle;
 }
 
+interface IZBackgroundProps extends IZFashionProps<IZFashionCoordination> {}
+
 export interface IZBorderLayout extends IZComponentWidth, IZComponentHierarchy, IZComponentStyle {
   border?: IZBorderProps;
-  background?: IZFashionProps;
+  background?: IZBackgroundProps;
 }
 
 const normalizeBorderFields = (border?: IZBorderProps): Required<IZBorderProps> => {
@@ -45,8 +47,8 @@ const normalizeBorderFields = (border?: IZBorderProps): Required<IZBorderProps> 
   };
 };
 
-const normalizeBackgroundFields = (background?: IZFashionProps): Required<IZFashionProps> => {
-  const transparent = new ZFashionBuilder().transparent().build();
+const normalizeBackgroundFields = (background?: IZBackgroundProps): Required<IZBackgroundProps> => {
+  const transparent = new ZFashionCoordinationBuilder().transparent().build();
   return {
     fashion: firstDefined(transparent, background?.fashion),
     focus: firstDefined(transparent, background?.focus, background?.fashion),
@@ -72,16 +74,19 @@ const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
     root: {
       'border': __border(_border.fashion),
       'width': BorderLayoutSizeChart[firstDefined(ZSizeVaried.Full, width)],
-      'backgroundColor': theme.colorify(_background.fashion),
+      'backgroundColor': theme.colorify(_background.fashion.main),
+      'color': theme.colorify(_background.fashion.contrast),
 
       '&:focus': {
         border: __border(_border.focus),
-        backgroundColor: theme.colorify(_background.focus)
+        backgroundColor: theme.colorify(_background.focus.main),
+        color: theme.colorify(_background.focus.contrast)
       },
 
       '&:hover': {
         border: __border(_border.hover),
-        backgroundColor: theme.colorify(_background.hover)
+        backgroundColor: theme.colorify(_background.hover.main),
+        color: theme.colorify(_background.hover.contrast)
       }
     }
   };

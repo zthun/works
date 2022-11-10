@@ -55,7 +55,7 @@ export function ZListPage() {
           event to a truthy or falsy value respectively.
         </ZParagraph>
 
-        <ZBorderLayout border={{ fashion: light.dark }} background={{ fashion: light.main }} width={ZSizeFixed.Medium}>
+        <ZBorderLayout border={{ fashion: light.dark }} background={{ fashion: light }} width={ZSizeFixed.Medium}>
           <ZList>
             <ZListGroup heading='Without Click Support' />
             <ZListLineItem
