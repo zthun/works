@@ -47,7 +47,7 @@ export type IZFashionCoordination = Readonly<_IZFashionCoordination>;
  * Represents a builder for a complementary fashion objects.
  */
 export class ZFashionCoordinationBuilder {
-  private _complementary: _IZFashionCoordination;
+  private _coordination: _IZFashionCoordination;
 
   /**
    * Initializes a new instance of this object.
@@ -56,7 +56,7 @@ export class ZFashionCoordinationBuilder {
    * for the main and contrast values respectively.
    */
   public constructor() {
-    this._complementary = {
+    this._coordination = {
       main: new ZFashionBuilder().white().build(),
       contrast: new ZFashionBuilder().black().build()
     };
@@ -72,7 +72,7 @@ export class ZFashionCoordinationBuilder {
    *        This object.
    */
   public name(name: string): this {
-    this._complementary.name = name;
+    this._coordination.name = name;
     return this;
   }
 
@@ -86,7 +86,7 @@ export class ZFashionCoordinationBuilder {
    *        This object.
    */
   public main(fashion: IZFashion): this {
-    this._complementary.main = fashion;
+    this._coordination.main = fashion;
     return this;
   }
 
@@ -100,7 +100,7 @@ export class ZFashionCoordinationBuilder {
    *        This object.
    */
   public contrast(fashion: IZFashion): this {
-    this._complementary.contrast = fashion;
+    this._coordination.contrast = fashion;
     return this;
   }
 
@@ -114,7 +114,7 @@ export class ZFashionCoordinationBuilder {
    *        This object.
    */
   public dark(fashion: IZFashion): this {
-    this._complementary.dark = fashion;
+    this._coordination.dark = fashion;
     return this;
   }
 
@@ -128,7 +128,30 @@ export class ZFashionCoordinationBuilder {
    *        This object.
    */
   public light(fashion: IZFashion): this {
-    this._complementary.light = fashion;
+    this._coordination.light = fashion;
+    return this;
+  }
+
+  /**
+   * Builds a coordination for transparency.
+   *
+   * Note that you still need to set the contrast for this
+   * since now there is no way to tell whether or not
+   * the contract against the background can be.
+   *
+   * This sets the main to transparent and removes the light
+   * and dark compliments.
+   *
+   * @returns
+   *        This object.
+   */
+  public transparent(): this {
+    const transparent = new ZFashionBuilder().transparent().build();
+    const inherit = new ZFashionBuilder().inherit().build();
+    this._coordination.main = transparent;
+    this._coordination.contrast = inherit;
+    delete this._coordination.light;
+    delete this._coordination.dark;
     return this;
   }
 
@@ -142,7 +165,7 @@ export class ZFashionCoordinationBuilder {
    *        This object.
    */
   public copy(other: IZFashionCoordination): this {
-    this._complementary = JSON.parse(JSON.stringify(other));
+    this._coordination = JSON.parse(JSON.stringify(other));
     return this;
   }
 
@@ -153,6 +176,6 @@ export class ZFashionCoordinationBuilder {
    *        The built complementary object.
    */
   public build(): IZFashionCoordination {
-    return Object.freeze(JSON.parse(JSON.stringify(this._complementary)));
+    return Object.freeze(JSON.parse(JSON.stringify(this._coordination)));
   }
 }

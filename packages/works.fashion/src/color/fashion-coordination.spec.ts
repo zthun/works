@@ -28,6 +28,44 @@ describe('ZFashionComplements', () => {
     });
   });
 
+  describe('Transparency', () => {
+    it('should set the main to transparent', () => {
+      assertBuilderSetsProperty(
+        null,
+        createTestTarget,
+        (t) => t.transparent(),
+        (c: IZFashionCoordination) => c.main.hue
+      );
+    });
+
+    it('should remove the light', () => {
+      assertBuilderSetsProperty(
+        undefined,
+        createTestTarget,
+        (t) => t.light(new ZFashionBuilder().white().build()).transparent(),
+        (c: IZFashionCoordination) => c.light
+      );
+    });
+
+    it('should remove the dark', () => {
+      assertBuilderSetsProperty(
+        undefined,
+        createTestTarget,
+        (t) => t.dark(new ZFashionBuilder().white().build()).transparent(),
+        (c: IZFashionCoordination) => c.dark
+      );
+    });
+
+    it('should set the contrast to inherit', () => {
+      assertBuilderSetsProperty(
+        'inherit',
+        createTestTarget,
+        (t) => t.contrast(new ZFashionBuilder().white().build()).transparent(),
+        (c: IZFashionCoordination) => c.contrast.hue
+      );
+    });
+  });
+
   describe('Copy', () => {
     it('should copy another complementary object', () => {
       const main = new ZFashionBuilder().grey(800).build();
