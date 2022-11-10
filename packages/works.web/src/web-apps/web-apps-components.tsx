@@ -16,70 +16,70 @@ export const ZComponentAlerts = new ZRouteOptionBuilder()
   .name('Alerts')
   .path('alerts')
   .description('User Feedback')
-  .avatar(<WarningIcon color='warning' fontSize='large' />)
+  .avatar(<WarningIcon fontSize='large' />)
   .build();
 
 export const ZComponentBoolean = new ZRouteOptionBuilder()
   .name('Boolean')
   .path('boolean')
   .description('Basic Togglers')
-  .avatar(<CheckBoxIcon color='success' fontSize='large' />)
+  .avatar(<CheckBoxIcon fontSize='large' />)
   .build();
 
 export const ZComponentButton = new ZRouteOptionBuilder()
   .name('Button')
   .path('button')
   .description('Click To Activate')
-  .avatar(<SmartButtonIcon color='error' fontSize='large' />)
+  .avatar(<SmartButtonIcon fontSize='large' />)
   .build();
 
 export const ZComponentChoice = new ZRouteOptionBuilder()
   .name('Choice')
   .path('choice')
   .description('Select From An Option List')
-  .avatar(<TouchAppIcon color='warning' fontSize='large' />)
+  .avatar(<TouchAppIcon fontSize='large' />)
   .build();
 
 export const ZComponentDrawer = new ZRouteOptionBuilder()
   .name('Drawer')
   .path('drawer')
   .description('Pop-Out Content')
-  .avatar(<MenuOpenIcon color='success' fontSize='large' />)
+  .avatar(<MenuOpenIcon fontSize='large' />)
   .build();
 
 export const ZComponentList = new ZRouteOptionBuilder()
   .name('List')
   .path('list')
   .description('Showing Multiple Items')
-  .avatar(<FormatListNumberedIcon color='info' fontSize='large' />)
+  .avatar(<FormatListNumberedIcon fontSize='large' />)
   .build();
 
 export const ZComponentNumber = new ZRouteOptionBuilder()
   .name('Number')
   .path('number')
   .description('Spinners and Sliders')
-  .avatar(<NumbersIcon color='success' fontSize='large' />)
+  .avatar(<NumbersIcon fontSize='large' />)
   .build();
 
 export const ZComponentSuspense = new ZRouteOptionBuilder()
   .name('Suspense')
   .path('suspense')
   .description('Working In The Background')
-  .avatar(<LoopIcon color='warning' fontSize='large' />)
+  .avatar(<LoopIcon fontSize='large' />)
   .build();
 
 export const ZComponentText = new ZRouteOptionBuilder()
   .name('Text')
   .path('text')
   .description('Enter Some Strings')
-  .avatar(<TitleIcon color='primary' fontSize='large' />)
+  .avatar(<TitleIcon fontSize='large' />)
   .build();
 
 export const ZComponentTypography = new ZRouteOptionBuilder()
   .name('Typography')
   .path('typography')
   .description('Standard Page Structures')
-  .avatar(<AbcIcon color='primary' fontSize='large' />)
+  .avatar(<AbcIcon fontSize='large' />)
   .build();
 
 export const ZWebAppsComponents = [
