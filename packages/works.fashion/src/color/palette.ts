@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
-
 import { keyBy, mapValues } from 'lodash';
 import { IZFashion, ZFashionBuilder } from '../color/fashion';
 import { ZHue } from '../color/hue';
