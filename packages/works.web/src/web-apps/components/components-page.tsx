@@ -2,22 +2,17 @@ import ExtensionIcon from '@mui/icons-material/Extension';
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { cssClass, IZRouteOption } from '@zthun/works.core';
 import {
-  makeStyles,
-  useNavigate,
+  useFashionDesign,
   ZBorderLayout,
   ZCaption,
   ZCard,
-  ZColorTint,
   ZGridLayout,
   ZH3,
   ZLineItemLayout,
-  ZPaddedBox,
-  ZShadeColor
+  ZPaddedBox
 } from '@zthun/works.react';
 import React from 'react';
 import { ZWebAppsComponents } from '../web-apps-components';
-
-const useComponentsPageStyles = makeStyles()(() => ({}));
 
 /**
  * Represents the components page.
@@ -26,16 +21,14 @@ const useComponentsPageStyles = makeStyles()(() => ({}));
  *        The JSX to render the page.
  */
 export function ZComponentsPage() {
-  const navigate = useNavigate();
-
-  const { classes } = useComponentsPageStyles();
+  const { light, primary } = useFashionDesign();
 
   const renderComponent = (route: IZRouteOption) => (
     <ZBorderLayout
       className={cssClass('ZComponentsPage-component')}
       key={route.path}
-      border={{ color: ZShadeColor.Grey, tint: ZColorTint.T400 }}
-      background={{ color: ZShadeColor.Grey, tint: ZColorTint.T200 }}
+      border={{ fashion: light.dark, hover: primary.dark }}
+      background={{ fashion: light, hover: primary }}
     >
       <ZPaddedBox padding={ZSizeFixed.Large}>
         <ZLineItemLayout
