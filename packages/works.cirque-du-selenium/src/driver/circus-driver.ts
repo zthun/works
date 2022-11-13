@@ -122,6 +122,14 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
+  public async focused(): Promise<IZCircusDriver | null> {
+    const focused = await this._seleniumDriver.switchTo().activeElement();
+    return Promise.resolve(new ZCircusDriver(this._seleniumDriver, focused));
+  }
+
+  /**
+   * @inheritdoc
+   */
   public async perform(act: IZCircusAct): Promise<void> {
     let performance = this._seleniumDriver.actions();
 

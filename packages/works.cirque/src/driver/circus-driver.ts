@@ -112,7 +112,7 @@ export interface IZCircusDriver {
   peek(selector: string): Promise<boolean>;
 
   /**
-   * Selects a single item on the page that matches the css selector.
+   * Selects a single item under the driver that matches the css selector.
    *
    * @param selector
    *        The selector to query.
@@ -125,7 +125,7 @@ export interface IZCircusDriver {
   select(selector: string): Promise<IZCircusDriver>;
 
   /**
-   * Selects all items on the page that matches the css selector.
+   * Selects all items under this driver that matches the css selector.
    *
    * @param selector
    *        The selector to query.
@@ -148,6 +148,15 @@ export interface IZCircusDriver {
    *        body as the context.
    */
   body(): Promise<IZCircusDriver>;
+
+  /**
+   * Jumps to the focused element.
+   *
+   * @returns
+   *        A new driver that contains the focused
+   *        element, or null if there is no element focused.
+   */
+  focused(): Promise<IZCircusDriver | null>;
 
   /**
    * Performs an action against the driver context.
