@@ -21,6 +21,7 @@ import { ZButtonPage } from './components/button/button-page';
 import { ZChoicePage } from './components/choice/choice-page';
 import { ZComponentsPage } from './components/components-page';
 import { ZDrawerPage } from './components/drawer/drawer-page';
+import { ZFashionPage } from './components/fashion/fashion-page';
 import { ZListPage } from './components/list/list-page';
 import { ZNumberPage } from './components/number/number-page';
 import { ZSuspensePage } from './components/suspense/suspense-page';
@@ -47,6 +48,7 @@ export function ZWebAppsPage() {
         <ZRoute path='button' element={<ZButtonPage />} />
         <ZRoute path='choice' element={<ZChoicePage />} />
         <ZRoute path='drawer' element={<ZDrawerPage />} />
+        <ZRoute path='fashion' element={<ZFashionPage />} />
         <ZRoute path='list' element={<ZListPage />} />
         <ZRoute path='number' element={<ZNumberPage />} />
         <ZRoute path='suspense' element={<ZSuspensePage />} />

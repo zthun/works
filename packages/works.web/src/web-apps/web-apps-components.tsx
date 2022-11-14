@@ -1,5 +1,6 @@
 import AbcIcon from '@mui/icons-material/Abc';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import DiamondIcon from '@mui/icons-material/Diamond';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import LoopIcon from '@mui/icons-material/Loop';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
@@ -47,6 +48,13 @@ export const ZComponentDrawer = new ZRouteOptionBuilder()
   .avatar(<MenuOpenIcon fontSize='large' />)
   .build();
 
+export const ZComponentFashion = new ZRouteOptionBuilder()
+  .name('Fashion')
+  .path('fashion')
+  .description('Pretty Colors')
+  .avatar(<DiamondIcon fontSize='large' />)
+  .build();
+
 export const ZComponentList = new ZRouteOptionBuilder()
   .name('List')
   .path('list')
@@ -88,6 +96,7 @@ export const ZWebAppsComponents = [
   ZComponentButton,
   ZComponentChoice,
   ZComponentDrawer,
+  ZComponentFashion,
   ZComponentList,
   ZComponentNumber,
   ZComponentSuspense,
