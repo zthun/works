@@ -1,4 +1,5 @@
 import AbcIcon from '@mui/icons-material/Abc';
+import CelebrationIcon from '@mui/icons-material/Celebration';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
@@ -69,6 +70,13 @@ export const ZComponentNumber = new ZRouteOptionBuilder()
   .avatar(<NumbersIcon fontSize='large' />)
   .build();
 
+export const ZComponentPopup = new ZRouteOptionBuilder()
+  .name('Popup')
+  .path('popup')
+  .description('Pop content in and out')
+  .avatar(<CelebrationIcon fontSize='large' />)
+  .build();
+
 export const ZComponentSuspense = new ZRouteOptionBuilder()
   .name('Suspense')
   .path('suspense')
@@ -99,6 +107,7 @@ export const ZWebAppsComponents = [
   ZComponentFashion,
   ZComponentList,
   ZComponentNumber,
+  ZComponentPopup,
   ZComponentSuspense,
   ZComponentText,
   ZComponentTypography

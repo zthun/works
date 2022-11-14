@@ -24,6 +24,7 @@ import { ZDrawerPage } from './components/drawer/drawer-page';
 import { ZFashionPage } from './components/fashion/fashion-page';
 import { ZListPage } from './components/list/list-page';
 import { ZNumberPage } from './components/number/number-page';
+import { ZPopupPage } from './components/popup/popup-page';
 import { ZSuspensePage } from './components/suspense/suspense-page';
 import { ZTextPage } from './components/text/text-page';
 import { ZTypographyPage } from './components/typography/typography-page';
@@ -51,6 +52,7 @@ export function ZWebAppsPage() {
         <ZRoute path='fashion' element={<ZFashionPage />} />
         <ZRoute path='list' element={<ZListPage />} />
         <ZRoute path='number' element={<ZNumberPage />} />
+        <ZRoute path='popup' element={<ZPopupPage />} />
         <ZRoute path='suspense' element={<ZSuspensePage />} />
         <ZRoute path='text' element={<ZTextPage />} />
         <ZRoute path='typography' element={<ZTypographyPage />} />
