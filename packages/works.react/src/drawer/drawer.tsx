@@ -12,7 +12,7 @@ export interface IZDrawer extends IZComponentHierarchy, IZComponentStyle {
   anchor?: ZStateAnchor;
   open: boolean;
 
-  onClose(): void;
+  onClose?(): void;
 }
 
 /**
