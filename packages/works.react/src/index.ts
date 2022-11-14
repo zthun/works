@@ -100,6 +100,11 @@ export { ZListItemComponentModel } from './list/list-item.cm';
 export { ZListLineItem } from './list/list-line-item';
 export { ZListLineItemComponentModel } from './list/list-line-item.cm';
 export { ZListComponentModel } from './list/list.cm';
+// Popup
+export { IZPopup, IZPopupAnchorOrigin, ZPopup, ZPopupPosition } from './popup/popup';
+export { IZPopupButton, ZPopupButton } from './popup/popup-button';
+export { ZPopupButtonComponentModel } from './popup/popup-button.cm';
+export { ZPopupComponentModel } from './popup/popup.cm';
 // Router
 export { IZBreadcrumbs } from './router/breadcrumbs';
 export { ZBreadcrumbsLocation } from './router/breadcrumbs-location';
