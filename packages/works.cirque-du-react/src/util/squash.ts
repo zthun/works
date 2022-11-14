@@ -109,7 +109,7 @@ export function squash(user: any, act: IZCircusAct, element: HTMLElement): IZCir
       for (end; end < act.actions.length && isKeyboardAction(act.actions[end]); ++end);
       const range = act.actions.slice(i, end);
       newAct = newAct.action(squashKeyboardEvents(user, range, state));
-      i = end;
+      i = end - 1;
       continue;
     }
 

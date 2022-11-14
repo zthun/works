@@ -105,5 +105,22 @@ describe('Squash', () => {
       expect(user.pointer).toHaveBeenCalledWith(expect.objectContaining({ keys: '[MouseRight>]', target: element }));
       expect(user.pointer).toHaveBeenCalledWith(expect.objectContaining({ keys: '[/MouseRight]', target: element }));
     });
+
+    it('should squash to a shift click', () => {
+      // Arrange
+      const act = new ZCircusActBuilder()
+        .keyDown(ZCircusKeyboardQwerty.shiftLeft)
+        .click()
+        .keyUp(ZCircusKeyboardQwerty.shiftLeft)
+        .build();
+      // Act.
+      const actual = squash(user, act, element);
+      actual.actions.forEach((a) => a.context());
+      // Assert
+      expect(user.keyboard).toHaveBeenCalledWith('{Shift>}');
+      expect(user.pointer).toHaveBeenCalledWith(expect.objectContaining({ keys: '[MouseLeft>]', target: element }));
+      expect(user.pointer).toHaveBeenCalledWith(expect.objectContaining({ keys: '[/MouseLeft]', target: element }));
+      expect(user.keyboard).toHaveBeenCalledWith('{/Shift}');
+    });
   });
 });
