@@ -49,6 +49,9 @@ export { ZErrorMessageHandlerAlert } from './error/error-message-handler-alert';
 export { ZErrorMessageHandlerLogger } from './error/error-message-handler-logger';
 // Fashion
 export { useFashionCoordinations, useFashionDesign } from './fashion/fashion';
+export { ZFashionBlockComponentModel } from './fashion/fashion-block.cm';
+export { IZFashionGrid, ZFashionGrid } from './fashion/fashion-grid';
+export { ZFashionGridComponentModel } from './fashion/fashion-grid.cm';
 // File
 export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelectContext } from './file/file-select';
 // Form
