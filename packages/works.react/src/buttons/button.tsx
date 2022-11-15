@@ -11,7 +11,7 @@ import { IZComponentFashion } from '../component/component-fashion';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentLoading } from '../component/component-loading';
 import { IZComponentName } from '../component/component-name';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 import { IZComponentWidth } from '../component/component-width';
 import { ZSuspenseRotate } from '../suspense/suspense-rotate';
 import { makeStyles } from '../theme/make-styles';

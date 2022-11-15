@@ -2,7 +2,7 @@ import { cssClass } from '@zthun/works.core';
 import React from 'react';
 import { IZButton, ZButton } from '../buttons/button';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 import { useSafeState } from '../state/use-safe-state';
 import { IZPopup, ZPopup, ZPopupPosition } from './popup';
 

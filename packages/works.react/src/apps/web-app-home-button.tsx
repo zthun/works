@@ -7,7 +7,7 @@ import { cssClass } from '@zthun/works.core';
 import { startCase } from 'lodash';
 import React from 'react';
 import { IZButton, ZButton } from '../buttons/button';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 import { ZImageSource } from '../image/image-source';
 import { useNavigate } from '../router/router-dom';
 import { asStateData, isStateErrored, isStateLoading } from '../state/use-async-state';

@@ -1,4 +1,4 @@
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 
 /**
  * Represents a component that renders breadcrumbs.

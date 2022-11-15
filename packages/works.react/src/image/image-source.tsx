@@ -11,7 +11,7 @@ import React from 'react';
 import { IZComponentHeight } from '../component/component-height';
 import { IZComponentName } from '../component/component-name';
 import { IZComponentSource } from '../component/component-source.interface';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 import { IZComponentWidth } from '../component/component-width';
 import { makeStyles } from '../theme/make-styles';
 

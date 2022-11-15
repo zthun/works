@@ -7,7 +7,7 @@ import { IZComponentAdornment } from '../component/component-adornment';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentName } from '../component/component-name';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 import { IZComponentValue } from '../component/component-value';
 
 /**

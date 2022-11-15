@@ -36,7 +36,7 @@ export { IZComponentLoading } from './component/component-loading';
 export { IZComponentName } from './component/component-name';
 export { IZComponentRange } from './component/component-range';
 export { IZComponentSource } from './component/component-source.interface';
-export { IZComponentStyle } from './component/component-style.';
+export { IZComponentStyle } from './component/component-style';
 export { IZComponentValue } from './component/component-value';
 // Drawer
 export { IZDrawer, ZDrawer } from './drawer/drawer';

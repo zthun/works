@@ -4,7 +4,7 @@ import { noop } from 'lodash';
 import React from 'react';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentName } from '../component/component-name';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 
 /**
  * Represents a link component (anchor tag).

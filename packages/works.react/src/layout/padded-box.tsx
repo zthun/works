@@ -3,7 +3,7 @@ import { cssClass, firstDefined } from '@zthun/works.core';
 import { get } from 'lodash';
 import React from 'react';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 import { makeStyles } from '../theme/make-styles';
 
 export interface IZPaddedBox extends IZComponentHierarchy, IZComponentStyle {

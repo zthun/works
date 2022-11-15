@@ -14,7 +14,7 @@ import { IZComponentHeading } from '../component/component-heading';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { IZComponentLoading } from '../component/component-loading';
 import { IZComponentName } from '../component/component-name';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 import { IZComponentWidth } from '../component/component-width';
 import { makeStyles } from '../theme/make-styles';
 import { ZCaption, ZH2 } from '../typography/typography';

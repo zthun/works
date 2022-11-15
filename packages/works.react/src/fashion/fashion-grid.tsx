@@ -3,7 +3,7 @@ import { ZCircusKeyboardQwerty } from '@zthun/works.cirque';
 import { cssClass } from '@zthun/works.core';
 import { colorify, IZFashion, ZFashionBuilder, ZHue, ZShade, ZShades } from '@zthun/works.fashion';
 import React, { KeyboardEvent, MouseEvent, useMemo } from 'react';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 import { IZComponentValue } from '../component/component-value';
 import { useAmbassadorState } from '../state/use-ambassador-state';
 import { makeStyles } from '../theme/make-styles';

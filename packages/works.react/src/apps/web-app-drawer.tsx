@@ -9,7 +9,7 @@ import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { cssClass } from '@zthun/works.core';
 import { kebabCase, startCase } from 'lodash';
 import React, { ReactNode } from 'react';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 import { IZDrawerButton, ZDrawerButton } from '../drawer/drawer-button';
 import { ZImageSource } from '../image/image-source';
 import { ZList } from '../list/list';

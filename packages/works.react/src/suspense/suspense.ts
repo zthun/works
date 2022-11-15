@@ -1,7 +1,7 @@
 import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { IZComponentLoading } from '../component/component-loading';
 import { IZComponentName } from '../component/component-name';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 import { IZComponentWidth } from '../component/component-width';
 
 /**

@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentName } from '../component/component-name';
-import { IZComponentStyle } from '../component/component-style.';
+import { IZComponentStyle } from '../component/component-style';
 import { IZComponentValue } from '../component/component-value';
 import { useAmbassadorState } from '../state/use-ambassador-state';
 
