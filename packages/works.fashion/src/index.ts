@@ -17,3 +17,4 @@ export {
 } from './design/fashion-design';
 // Util
 export { colorify } from './util/colorify';
+export { stringify } from './util/stringify';
