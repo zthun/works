@@ -1,7 +1,7 @@
 // cspell:disable
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { ZSizeFixed } from '@zthun/works.chonkify';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
   useAlertService,

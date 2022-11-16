@@ -6,7 +6,7 @@
     "declaration": false,
     "sourceMap": true,
     "paths": {
-      "@zthun/works.chonky-cat": ["../works.chonky-cat/src/index"],
+      "@zthun/works.chonkify": ["../works.chonkify/src/index"],
       "@zthun/works.cirque": ["../works.cirque/src/index"],
       "@zthun/works.cirque-du-selenium": ["../works.cirque-du-selenium/src/index"],
       "@zthun/works.fashion": ["../works.fashion/src/index"],

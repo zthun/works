@@ -1,4 +1,4 @@
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { ZSizeFixed } from '@zthun/works.chonkify';
 import { ZCircusKeyboardQwerty } from '@zthun/works.cirque';
 import { cssClass } from '@zthun/works.core';
 import { colorify, IZFashion, ZFashionBuilder, ZHue, ZShade, ZShades } from '@zthun/works.fashion';

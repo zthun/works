@@ -6,7 +6,7 @@ import {
   createSizeChartVoidCss,
   ZSizeFixed,
   ZSizeVaried
-} from '@zthun/works.chonky-cat';
+} from '@zthun/works.chonkify';
 import { cssClass } from '@zthun/works.core';
 import React, { ReactNode } from 'react';
 import { IZComponentAvatar } from '../component/component-avatar';

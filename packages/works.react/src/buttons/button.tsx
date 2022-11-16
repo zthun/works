@@ -1,7 +1,7 @@
 import { Button, Tooltip } from '@mui/material';
 import React, { ReactNode } from 'react';
 
-import { createSizeChartVariedCss, ZSizeFixed, ZSizeVaried } from '@zthun/works.chonky-cat';
+import { createSizeChartVariedCss, ZSizeFixed, ZSizeVaried } from '@zthun/works.chonkify';
 import { cssClass, firstDefined } from '@zthun/works.core';
 import { IZFashionCoordination, ZFashionBuilder } from '@zthun/works.fashion';
 import { noop } from 'lodash';

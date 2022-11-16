@@ -1,5 +1,5 @@
 import ExtensionIcon from '@mui/icons-material/Extension';
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { ZSizeFixed } from '@zthun/works.chonkify';
 import { cssClass, IZRouteOption } from '@zthun/works.core';
 import {
   useFashionDesign,

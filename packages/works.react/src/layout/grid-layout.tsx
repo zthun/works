@@ -1,4 +1,4 @@
-import { ZSizeFixed, ZSizeVoid } from '@zthun/works.chonky-cat';
+import { ZSizeFixed, ZSizeVoid } from '@zthun/works.chonkify';
 import { cssClass } from '@zthun/works.core';
 import { Property } from 'csstype';
 import React from 'react';

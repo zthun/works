@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZSizeFixed, ZSizeVoid } from '@zthun/works.chonky-cat';
+import { ZSizeFixed, ZSizeVoid } from '@zthun/works.chonkify';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { Property } from 'csstype';
 import React from 'react';

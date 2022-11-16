@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material';
-import { createSizeChartFixedArithmetic, ZSizeFixed } from '@zthun/works.chonky-cat';
+import { createSizeChartFixedArithmetic, ZSizeFixed } from '@zthun/works.chonkify';
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
 import { IZComponentHeight } from '../component/component-height';

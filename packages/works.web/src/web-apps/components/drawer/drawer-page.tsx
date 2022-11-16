@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { ZSizeFixed } from '@zthun/works.chonkify';
 import { setFirstOrDefault } from '@zthun/works.core';
 import {
   useFashionDesign,

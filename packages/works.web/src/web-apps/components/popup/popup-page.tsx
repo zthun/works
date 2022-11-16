@@ -1,4 +1,4 @@
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { ZSizeFixed } from '@zthun/works.chonkify';
 import { useFashionDesign, ZCard, ZH3, ZPaddedBox, ZParagraph, ZPopupButton } from '@zthun/works.react';
 import React, { useMemo } from 'react';
 import { ZComponentPopup } from '../../web-apps-components';

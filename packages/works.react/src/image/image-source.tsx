@@ -4,7 +4,7 @@ import {
   createSizeChartVariedCss,
   createSizeChartVoidCss,
   ZSizeVaried
-} from '@zthun/works.chonky-cat';
+} from '@zthun/works.chonkify';
 import { cssClass } from '@zthun/works.core';
 import { ZDataUrlBuilder } from '@zthun/works.url';
 import React from 'react';

@@ -6,7 +6,7 @@ import {
   ZSizeFixed,
   ZSizeVaried,
   ZSizeVoid
-} from '@zthun/works.chonky-cat';
+} from '@zthun/works.chonkify';
 import { cssClass, firstDefined } from '@zthun/works.core';
 import { IZFashion, IZFashionCoordination, ZFashionBuilder, ZFashionCoordinationBuilder } from '@zthun/works.fashion';
 import { Property } from 'csstype';

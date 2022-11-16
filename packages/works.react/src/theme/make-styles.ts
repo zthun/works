@@ -9,7 +9,7 @@ import {
   createSizeChartVoidZero,
   ZSizeFixed,
   ZSizeVoid
-} from '@zthun/works.chonky-cat';
+} from '@zthun/works.chonkify';
 import { firstDefined } from '@zthun/works.core';
 import { colorify, IZFashion, IZFashionCoordination, IZFashionDesign } from '@zthun/works.fashion';
 import { createMakeStyles } from 'tss-react';

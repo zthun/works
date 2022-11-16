@@ -1,7 +1,7 @@
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import PublicIcon from '@mui/icons-material/Public';
 import Terminal from '@mui/icons-material/Terminal';
-import { ZSizeFixed, ZSizeVaried } from '@zthun/works.chonky-cat';
+import { ZSizeFixed, ZSizeVaried } from '@zthun/works.chonkify';
 import {
   asStateData,
   makeStyles,

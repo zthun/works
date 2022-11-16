@@ -1,4 +1,4 @@
-import { ZSizeFixed, ZSizeVaried, ZSizeVoid } from '@zthun/works.chonky-cat';
+import { ZSizeFixed, ZSizeVaried, ZSizeVoid } from '@zthun/works.chonkify';
 import { cssClass, firstDefined } from '@zthun/works.core';
 import { get } from 'lodash';
 import React from 'react';

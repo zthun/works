@@ -4704,9 +4704,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.chonky-cat@^4.0.0, @zthun/works.chonky-cat@workspace:packages/works.chonky-cat":
+"@zthun/works.chonkify@^4.0.0, @zthun/works.chonkify@workspace:packages/works.chonkify":
   version: 0.0.0-use.local
-  resolution: "@zthun/works.chonky-cat@workspace:packages/works.chonky-cat"
+  resolution: "@zthun/works.chonkify@workspace:packages/works.chonkify"
   dependencies:
     typedoc: ^0.23.16
     typescript: ^4.8.4
@@ -4982,7 +4982,7 @@ __metadata:
     "@mui/material": ^5.10.9
     "@mui/system": ^5.10.9
     "@testing-library/react": ^13.4.0
-    "@zthun/works.chonky-cat": ^4.0.0
+    "@zthun/works.chonkify": ^4.0.0
     "@zthun/works.cirque": ^4.0.0
     "@zthun/works.cirque-du-react": ^4.0.0
     "@zthun/works.core": ^4.0.0
@@ -5069,7 +5069,7 @@ __metadata:
     "@mui/material": ^5.10.9
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
-    "@zthun/works.chonky-cat": ^4.0.0
+    "@zthun/works.chonkify": ^4.0.0
     "@zthun/works.cirque": ^4.0.0
     "@zthun/works.cirque-du-selenium": ^4.0.0
     "@zthun/works.core": ^4.0.0

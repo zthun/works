@@ -1,5 +1,5 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { ZSizeFixed } from '@zthun/works.chonkify';
 import { setFirstOrDefault } from '@zthun/works.core';
 import { IZFashionCoordination } from '@zthun/works.fashion';
 import { ZAlertBuilder } from '@zthun/works.message';

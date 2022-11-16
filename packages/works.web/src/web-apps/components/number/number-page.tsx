@@ -1,4 +1,4 @@
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { ZSizeFixed } from '@zthun/works.chonkify';
 
 import {
   useSafeState,

@@ -6,7 +6,7 @@ This is a sizing package that lets you generate size charts based on different s
 
 ```sh
 # NPM
-npm install @zthun/works.chonky-cat
+npm install @zthun/works.chonkify
 # Yarn
-yarn add @zthun/works.chonky-cat
+yarn add @zthun/works.chonkify
 ```

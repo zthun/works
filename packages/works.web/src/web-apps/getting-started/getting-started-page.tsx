@@ -1,4 +1,4 @@
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { ZSizeFixed } from '@zthun/works.chonkify';
 import { ZCard, ZImageSource, ZParagraph } from '@zthun/works.react';
 import React from 'react';
 

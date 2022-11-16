@@ -1,4 +1,4 @@
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
+import { ZSizeFixed } from '@zthun/works.chonkify';
 import { cssClass } from '@zthun/works.core';
 import React, { ReactNode } from 'react';
 import { IZComponentAdornment } from '../component/component-adornment';
