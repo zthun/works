@@ -10,7 +10,7 @@ import {
 import { cssClass, firstDefined } from '@zthun/works.core';
 import { IZFashion, IZFashionCoordination, ZFashionBuilder, ZFashionCoordinationBuilder } from '@zthun/works.fashion';
 import { Property } from 'csstype';
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { IZComponentFashion } from '../component/component-fashion';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { IZComponentStyle } from '../component/component-style';
@@ -33,6 +33,8 @@ interface IZBackgroundProps extends IZFashionProps<IZFashionCoordination> {}
 export interface IZBorderLayout extends IZComponentWidth, IZComponentHierarchy, IZComponentStyle {
   border?: IZBorderProps;
   background?: IZBackgroundProps;
+
+  onClick?: MouseEventHandler;
 }
 
 const normalizeBorderFields = (border?: IZBorderProps): Required<IZBorderProps> => {
@@ -63,7 +65,7 @@ const BorderLayoutSizeChart = {
 };
 
 const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
-  const { border, background, width } = props;
+  const { border, background, width, onClick } = props;
   const _border = normalizeBorderFields(border);
   const _background = normalizeBackgroundFields(background);
 
@@ -72,6 +74,7 @@ const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
 
   return {
     root: {
+      'cursor': onClick ? 'pointer' : 'default',
       'border': __border(_border.fashion),
       'width': BorderLayoutSizeChart[firstDefined(ZSizeVaried.Full, width)],
       'backgroundColor': theme.colorify(_background.fashion.main),
@@ -102,9 +105,14 @@ const useBorderLayoutStyles = makeStyles<IZBorderLayout>()((theme, props) => {
  *        The JSX for this component.
  */
 export function ZBorderLayout(props: IZBorderLayout) {
-  const { className, children } = props;
+  const { className, children, onClick } = props;
   const { classes } = useBorderLayoutStyles(props);
   const clasz = cssClass('ZBorderLayout-root', className, classes.root);
+  const tabIndex = onClick ? 0 : undefined;
 
-  return <div className={clasz}>{children}</div>;
+  return (
+    <div className={clasz} tabIndex={tabIndex} onClick={onClick}>
+      {children}
+    </div>
+  );
 }
