@@ -5,7 +5,6 @@ import { IZFashionCoordination } from '@zthun/works.fashion';
 import { ZAlertBuilder } from '@zthun/works.message';
 import {
   useAlertService,
-  useFashionCoordinations,
   useFashionDesign,
   useSafeState,
   ZBooleanSwitch,
@@ -30,13 +29,22 @@ import { ZComponentButton } from '../../web-apps-components';
 export function ZButtonPage() {
   const alerts = useAlertService();
   const theme = useFashionDesign();
-  const designs = useFashionCoordinations();
   const [loading, setLoading] = useSafeState(false);
   const [disabled, setDisabled] = useSafeState(false);
   const [outline, setOutline] = useSafeState(false);
   const [borderless, setBorderless] = useSafeState(false);
-  const [fashion, setFashion] = useSafeState<IZFashionCoordination>(theme.dark);
-  const _setFashion = setFirstOrDefault.bind(null, setFashion, theme.dark);
+  const [fashion, setFashion] = useSafeState<IZFashionCoordination>(theme.primary);
+  const _setFashion = setFirstOrDefault.bind(null, setFashion, theme.primary);
+  const designs = [
+    theme.primary,
+    theme.secondary,
+    theme.success,
+    theme.warning,
+    theme.error,
+    theme.info,
+    theme.light,
+    theme.dark
+  ];
 
   /**
    * Occurs when the button demo is clicked.

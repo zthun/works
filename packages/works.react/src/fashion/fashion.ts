@@ -18,7 +18,7 @@ import {
   teal,
   yellow
 } from '@mui/material/colors';
-import { IZFashionCoordination, ZFashionDesignBuilder, ZHue, ZPaletteBuilder } from '@zthun/works.fashion';
+import { ZFashionDesignBuilder, ZHue, ZPaletteBuilder } from '@zthun/works.fashion';
 import { createContext, useContext } from 'react';
 
 const _ZPalette = new ZPaletteBuilder()
@@ -57,24 +57,4 @@ export const ZFashionDesignContext = createContext(_ZDesign);
  */
 export function useFashionDesign() {
   return useContext(ZFashionDesignContext);
-}
-
-/**
- * Returns all of the supported fashion coordinations
- *
- * @returns
- *        A list of all fashion coordinations.
- */
-export function useFashionCoordinations(): IZFashionCoordination[] {
-  const fashion = useFashionDesign();
-  return [
-    fashion.light,
-    fashion.dark,
-    fashion.primary,
-    fashion.secondary,
-    fashion.success,
-    fashion.warning,
-    fashion.error,
-    fashion.info
-  ];
 }
