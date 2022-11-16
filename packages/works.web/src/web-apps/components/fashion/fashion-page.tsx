@@ -1,7 +1,5 @@
-import { ZSizeFixed } from '@zthun/works.chonky-cat';
-import { ZFashionBuilder } from '@zthun/works.fashion';
-import { useSafeState, ZCard, ZFashionGrid, ZH3, ZPaddedBox, ZParagraph } from '@zthun/works.react';
-import { startCase } from 'lodash';
+import { stringify, ZFashionBuilder } from '@zthun/works.fashion';
+import { useSafeState, ZCaption, ZCard, ZFashionGrid, ZH3, ZParagraph } from '@zthun/works.react';
 import React from 'react';
 import { ZComponentFashion } from '../../web-apps-components';
 
@@ -13,18 +11,6 @@ import { ZComponentFashion } from '../../web-apps-components';
  */
 export function ZFashionPage() {
   const [fashion, setFashion] = useSafeState(new ZFashionBuilder().build());
-
-  const toFashionString = () => {
-    if (fashion.hue == null) {
-      return 'Transparent';
-    }
-
-    if (fashion.hue === 'inherit') {
-      return 'Inherit';
-    }
-
-    return `${startCase(fashion.hue)}[${fashion.shade}]`;
-  };
 
   return (
     <ZCard
@@ -44,15 +30,9 @@ export function ZFashionPage() {
 
       <ZFashionGrid value={fashion} onValueChange={setFashion} />
 
-      <ZPaddedBox
-        className='ZFashionPage-selected'
-        margin={{ top: ZSizeFixed.Medium }}
-        data-hue={fashion.hue}
-        data-shade={fashion.shade}
-      >
-        <span>Selected: </span>
-        <span className='ZFashionPage-selected-fashion'>{toFashionString()}</span>
-      </ZPaddedBox>
+      <ZCaption className='ZFashionPage-selected' data-hue={fashion.hue} data-shade={fashion.shade}>
+        Selected: {stringify(fashion)}
+      </ZCaption>
     </ZCard>
   );
 }
