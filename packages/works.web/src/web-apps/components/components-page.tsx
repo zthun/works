@@ -3,6 +3,7 @@ import { ZSizeFixed } from '@zthun/works.chonky-cat';
 import { cssClass, IZRouteOption } from '@zthun/works.core';
 import {
   useFashionDesign,
+  useNavigate,
   ZBorderLayout,
   ZCaption,
   ZCard,
@@ -22,6 +23,7 @@ import { ZWebAppsComponents } from '../web-apps-components';
  */
 export function ZComponentsPage() {
   const { light, primary } = useFashionDesign();
+  const navigate = useNavigate();
 
   const renderComponent = (route: IZRouteOption) => (
     <ZBorderLayout
@@ -29,6 +31,7 @@ export function ZComponentsPage() {
       key={route.path}
       border={{ fashion: light.dark, hover: primary.dark }}
       background={{ fashion: light, hover: primary }}
+      onClick={() => navigate(route.path)}
     >
       <ZPaddedBox padding={ZSizeFixed.Large}>
         <ZLineItemLayout
