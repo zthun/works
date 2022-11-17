@@ -62,11 +62,10 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
-  public classes(filter?: string[]): Promise<string[]> {
+  public classes(filter: string[]): Promise<string[]> {
     const list = this._element.classList;
     const all = Array.from(list);
-    const _filter = filter == null ? all : filter;
-    const lookup = keyBy(_filter);
+    const lookup = keyBy(filter);
     const filtered = all.filter((c) => Object.prototype.hasOwnProperty.call(lookup, c));
     return Promise.resolve(filtered);
   }
@@ -136,8 +135,9 @@ export class ZCircusDriver implements IZCircusDriver {
    * @inheritdoc
    */
   public focused(): Promise<IZCircusDriver | null> {
+    // JSDOM actually just focuses the body so this never actually returns null.
     const active = document.activeElement as HTMLElement;
-    return Promise.resolve(active ? new ZCircusDriver(this._result, active) : null);
+    return Promise.resolve(new ZCircusDriver(this._result, active));
   }
 
   /**
