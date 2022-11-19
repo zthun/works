@@ -52,8 +52,6 @@ export { useFashionDesign } from './fashion/fashion';
 export { ZFashionBlockComponentModel } from './fashion/fashion-block.cm';
 export { IZFashionGrid, ZFashionGrid } from './fashion/fashion-grid';
 export { ZFashionGridComponentModel } from './fashion/fashion-grid.cm';
-// File
-export { IZFileSelect, useFileSelect, ZFileSelect, ZFileSelectContext } from './file/file-select';
 // Form
 export { IZBoolean } from './form/boolean';
 export { ZBooleanCheckbox } from './form/boolean-checkbox';
