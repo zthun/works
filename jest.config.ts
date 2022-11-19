@@ -8,7 +8,7 @@ export default {
   reporters: ['default', ['jest-junit', { outputDirectory: 'reports/results' }]],
   rootDir: compilerOptions.baseUrl,
   testEnvironment: 'jsdom',
-  testRegex: '.(spec|e2e).(ts|tsx)$',
+  testRegex: '.spec.(ts|tsx)$',
   testTimeout: 60000,
   transform: { '^.+\\.(ts|tsx)$': 'ts-jest' }
 };

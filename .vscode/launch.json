@@ -7,7 +7,7 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "Debug server",
+      "name": "Attach to @zthun/works.api",
       "port": 9229,
       "address": "0.0.0.0",
       "remoteRoot": "/usr/dev",
@@ -19,7 +19,7 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "Debug users",
+      "name": "Attach to @zthun/works.users microservice",
       "port": 9231,
       "address": "0.0.0.0",
       "remoteRoot": "/usr/dev",
@@ -27,6 +27,14 @@
       "sourceMapPathOverrides": {
         "/usr/dev/*": "${workspaceRoot}/*"
       }
+    },
+    {
+      "name": "Debug e2e Tests",
+      "type": "node",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "program": "${workspaceRoot}/node_modules/@cucumber/cucumber/bin/cucumber-js",
+      "args": ["--tags", "@debug"]
     }
   ]
 }
