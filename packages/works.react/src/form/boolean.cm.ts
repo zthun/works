@@ -7,6 +7,19 @@ export class ZBooleanComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZBoolean-root';
 
   /**
+   * Gets the selector for this component model.
+   *
+   * @param name
+   *        The optional name of the component.
+   *
+   * @returns
+   *        The component model selector.
+   */
+  public static selector(name?: string) {
+    return name ? `${ZBooleanComponentModel.Selector}[data-name="${name}"]` : ZBooleanComponentModel.Selector;
+  }
+
+  /**
    * Gets the underlying input element.
    *
    * @returns

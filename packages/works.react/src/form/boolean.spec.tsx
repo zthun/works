@@ -12,7 +12,7 @@ describe('ZBoolean', () => {
 
   async function createComponentModel(element: ReactElement) {
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZBooleanComponentModel, ZBooleanComponentModel.Selector);
+    return ZCircusComponentModel.create(driver, ZBooleanComponentModel, ZBooleanComponentModel.selector());
   }
 
   beforeEach(() => {

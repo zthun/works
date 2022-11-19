@@ -14,7 +14,7 @@ import { IZBoolean } from './boolean';
  *        The JSX to render the checkbox
  */
 export function ZBooleanCheckbox(props: IZBoolean<boolean | null>) {
-  const { className, disabled, label, value, onValueChange } = props;
+  const { className, disabled, label, value, onValueChange, name } = props;
   const [_value, _setValue] = useAmbassadorState(value, onValueChange);
   const booleanClass = cssClass('ZBoolean-root', 'ZBoolean-checkbox', className);
   const checked = _value == null ? false : _value;
@@ -29,8 +29,11 @@ export function ZBooleanCheckbox(props: IZBoolean<boolean | null>) {
           checked={checked}
           indeterminate={indeterminate}
           onChange={(_, checked) => _setValue(checked)}
+          name={name}
         />
       }
+      name={name}
+      data-name={name}
       label={label}
     />
   );

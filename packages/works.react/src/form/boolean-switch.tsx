@@ -14,7 +14,7 @@ import { IZBoolean } from './boolean';
  *        The JSX to render the checkbox
  */
 export function ZBooleanSwitch(props: IZBoolean<boolean>) {
-  const { className, disabled, label, value, onValueChange } = props;
+  const { className, disabled, label, value, onValueChange, name } = props;
   const [_value, _setValue] = useAmbassadorState(value, onValueChange);
   const switchClass = cssClass('ZBoolean-root', 'ZBoolean-switch', className);
   const checked = !!_value;
@@ -22,8 +22,12 @@ export function ZBooleanSwitch(props: IZBoolean<boolean>) {
   return (
     <FormControlLabel
       className={switchClass}
-      control={<Switch disabled={disabled} checked={checked} onChange={(_, checked) => _setValue(checked)} />}
+      control={
+        <Switch disabled={disabled} checked={checked} onChange={(_, checked) => _setValue(checked)} name={name} />
+      }
       label={label}
+      name={name}
+      data-name={name}
     />
   );
 }
