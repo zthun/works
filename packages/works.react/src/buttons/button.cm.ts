@@ -8,6 +8,19 @@ export class ZButtonComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZButton-root';
 
   /**
+   * Gets a selector for a named button.
+   *
+   * @param name
+   *        The optional name of the button to retrieve.
+   *
+   * @returns
+   *        The selector that can be used to query for a specific button.
+   */
+  public static selector(name?: string) {
+    return name ? `${ZButtonComponentModel.Selector}[name="${name}"]` : ZButtonComponentModel.Selector;
+  }
+
+  /**
    * Returns the name of the button.
    *
    * @returns

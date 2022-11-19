@@ -31,7 +31,7 @@ describe('ZButton', () => {
     );
 
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return await ZCircusComponentModel.create(driver, ZButtonComponentModel, ZButtonComponentModel.Selector);
+    return await ZCircusComponentModel.create(driver, ZButtonComponentModel, ZButtonComponentModel.selector());
   }
 
   beforeEach(() => {
