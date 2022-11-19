@@ -84,9 +84,10 @@ export function ZHomePage() {
         subHeading='Build something for users'
         footer={
           <ZButton
-            label='Gets Started'
+            label='Get Started'
             onClick={() => navigate('/web-apps')}
             fashion={primary}
+            name='web-apps-get-started'
             outline
             width={ZSizeVaried.Full}
           />
@@ -122,6 +123,7 @@ export function ZHomePage() {
             label='Get Started'
             onClick={() => navigate('/microservices')}
             fashion={secondary}
+            name='microservices-get-started'
             outline
             width={ZSizeVaried.Full}
           />
