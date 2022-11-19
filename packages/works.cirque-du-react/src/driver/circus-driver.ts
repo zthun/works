@@ -143,6 +143,28 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
+  public url(): Promise<string>;
+
+  /**
+   * @inheritdoc
+   */
+  public url(to: string): Promise<IZCircusDriver>;
+
+  /**
+   * @inheritdoc
+   */
+  public async url(to?: string): Promise<IZCircusDriver | string> {
+    if (to == null) {
+      return document.URL;
+    }
+
+    global.open(to, '_self');
+    return this.body();
+  }
+
+  /**
+   * @inheritdoc
+   */
   public async select(selector: string): Promise<IZCircusDriver> {
     const drivers = await this.query(selector);
 

@@ -115,7 +115,7 @@ export class ZCircusDriver implements IZCircusDriver {
    * @inheritdoc
    */
   public body(): Promise<IZCircusDriver> {
-    const body = this._seleniumDriver.findElement(By.name('body'));
+    const body = this._seleniumDriver.findElement(By.css('body'));
     return Promise.resolve(new ZCircusDriver(this._seleniumDriver, body));
   }
 
@@ -130,8 +130,33 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
+  public url(): Promise<string>;
+
+  /**
+   * @inheritdoc
+   */
+  public url(to: string): Promise<IZCircusDriver>;
+
+  /**
+   * @inheritdoc
+   */
+  public async url(to?: string): Promise<IZCircusDriver | string> {
+    if (to == null) {
+      return this._seleniumDriver.getCurrentUrl();
+    }
+
+    await this._seleniumDriver.navigate().to(to);
+    return this.body();
+  }
+
+  /**
+   * @inheritdoc
+   */
   public async perform(act: IZCircusAct): Promise<void> {
-    let performance = this._seleniumDriver.actions();
+    // Before we do anything, we need to make sure the element is scrolled into view if possible.
+    await this._seleniumDriver.executeScript('arguments[0].scrollIntoView(true);', this._search);
+
+    let performance = this._seleniumDriver.actions().move({ x: 0, y: 0, origin: this._search });
 
     const map: Record<ZCircusActionType, (a: IZCircusAction) => Actions> = {
       [ZCircusActionType.MouseDown]: () => performance.press(Button.LEFT),
