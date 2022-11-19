@@ -127,7 +127,7 @@ export function ZButton(props: IZButton) {
   return (
     <Tooltip title={tooltip}>
       <span className={classes.wrapper}>
-        <Button className={buttonClass} data-name={name} variant={variant} disabled={disabled} onClick={onClick}>
+        <Button className={buttonClass} variant={variant} disabled={disabled} onClick={onClick} name={name}>
           {avatar}
           <div className={contentClass}>{label}</div>
           <ZSuspenseRotate

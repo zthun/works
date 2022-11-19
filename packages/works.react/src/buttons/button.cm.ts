@@ -14,7 +14,7 @@ export class ZButtonComponentModel extends ZCircusComponentModel {
    *        The button name if it has one.  Null otherwise.
    */
   public name(): Promise<string | null> {
-    return this.driver.attribute('data-name');
+    return this.driver.attribute('name');
   }
 
   /**
