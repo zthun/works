@@ -22,5 +22,5 @@
       "@zthun/works.url": ["../works.url/src/index"]
     }
   },
-  "include": ["src/**/*.tsx", "src/**/*.ts"]
+  "include": ["src/**/*.tsx", "src/**/*.ts", "features/**/*.ts"]
 }
