@@ -83,6 +83,7 @@ export function ZAlertsPage() {
             fashion={success}
             outline
             onClick={openAlert.bind(null, ZAlertSeverity.Success, 'Something was a huge success.  Time to celebrate!')}
+            name='alert-success'
             label='Success'
           />
           <ZButton
@@ -90,6 +91,7 @@ export function ZAlertsPage() {
             fashion={warning}
             outline
             onClick={openAlert.bind(null, ZAlertSeverity.Warning, 'You can continue, but something is amiss!')}
+            name='alert-warning'
             label='Warning'
           />
           <ZButton
@@ -97,6 +99,7 @@ export function ZAlertsPage() {
             fashion={error}
             outline
             onClick={openAlert.bind(null, ZAlertSeverity.Error, 'Uh oh!  Something has gone wrong!')}
+            name='alert-error'
             label='Error'
           />
           <ZButton
@@ -104,6 +107,7 @@ export function ZAlertsPage() {
             fashion={info}
             outline
             onClick={openAlert.bind(null, ZAlertSeverity.Info, 'Just some basic information.')}
+            name='alert-info'
             label='Info'
           />
         </ZGridLayout>
@@ -113,8 +117,8 @@ export function ZAlertsPage() {
         <ZH3>Options</ZH3>
 
         <ZGridLayout gap={ZSizeFixed.Small}>
-          <ZBooleanSwitch value={immortal} onValueChange={setImmortal} label='Immortal' />
-          <ZBooleanSwitch value={header} onValueChange={setHeader} label='Header' />
+          <ZBooleanSwitch value={immortal} onValueChange={setImmortal} label='Immortal' name='option-immortal' />
+          <ZBooleanSwitch value={header} onValueChange={setHeader} label='Header' name='option-header' />
         </ZGridLayout>
       </ZPaddedBox>
     </ZCard>
