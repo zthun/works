@@ -3,7 +3,7 @@ import { createContext, useContext } from 'react';
 /**
  * Represents the window context.
  */
-export const ZWindowServiceContext = createContext<Window>(window);
+export const ZWindowServiceContext = createContext(global);
 
 /**
  * Gets the current window object.
