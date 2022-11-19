@@ -17,7 +17,7 @@ describe('ZIdentityButton', () => {
   let profileApp: string | undefined;
   let identityService: jest.Mocked<IZIdentityService>;
   let webAppService: jest.Mocked<IZWebAppService>;
-  let win: jest.Mocked<Window>;
+  let win: jest.Mocked<typeof globalThis>;
 
   beforeEach(() => {
     profileApp = undefined;

@@ -23,7 +23,7 @@ describe('ZWebAppDrawer', () => {
   let whoami: string;
   let home: string | undefined;
 
-  let win: jest.Mocked<Window>;
+  let win: jest.Mocked<typeof globalThis>;
   let webAppService: jest.Mocked<ZWebAppService>;
   let history: MemoryHistory;
 
