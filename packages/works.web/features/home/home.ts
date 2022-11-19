@@ -1,7 +1,7 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import assert from 'assert';
-import { ZMicroservicesPageComponentModel } from 'works.web/src/microservices/microservices-page.cm';
 import { ZHomePageComponentModel } from '../../src/home/home-page.cm';
+import { ZMicroservicesPageComponentModel } from '../../src/microservices/microservices-page.cm';
 import { ZWebAppsPageComponentModel } from '../../src/web-apps/web-apps-page.cm';
 import { ZLearnWorld } from '../learn-world';
 
