@@ -6,5 +6,5 @@ import React from 'react';
  * @returns The jsx that renders the home page.
  */
 export function ZMicroservicesPage() {
-  return <>Microservices</>;
+  return <div className='ZMicroservicesPage-root'>Microservices</div>;
 }
