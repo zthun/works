@@ -2,13 +2,14 @@ import { InputAdornment, OutlinedInputProps, TextFieldProps } from '@mui/materia
 import { ZCircusKeyboardQwerty } from '@zthun/works.cirque';
 import { cssClass } from '@zthun/works.core';
 import { get, noop } from 'lodash';
-import React, { KeyboardEvent, ReactNode, useEffect, useState } from 'react';
+import React, { KeyboardEvent, ReactNode, useEffect } from 'react';
 import { IZComponentAdornment } from '../component/component-adornment';
 import { IZComponentDisabled } from '../component/component-disabled';
 import { IZComponentLabel } from '../component/component-label';
 import { IZComponentName } from '../component/component-name';
 import { IZComponentStyle } from '../component/component-style';
 import { IZComponentValue } from '../component/component-value';
+import { useSafeState } from '../state/use-safe-state';
 
 /**
  * Represents an input for free form text
@@ -36,14 +37,18 @@ export interface IZText<T = string>
  * @returns
  *        The JSX to render the component.
  */
-export function useText<T>(props: IZText<T>, initial: T): TextFieldProps {
+export function useText<T extends string>(props: IZText<T>, initial: T): TextFieldProps {
   const { name, disabled, value, label, required, placeholder, readOnly, prefix, suffix, onValueChange = noop } = props;
 
-  const [current, setCurrent] = useState(value || initial);
+  const [current, setCurrent] = useSafeState(value || initial);
 
   useEffect(() => {
     setCurrent(value || initial);
   }, [value, initial]);
+
+  const getValue = (e: any): T => {
+    return get(e, 'value');
+  };
 
   const renderAdornment = (adornment: ReactNode, position: 'start' | 'end') => {
     const clasz = cssClass('ZText-adornment', `ZText-adornment-${position}`);
@@ -71,7 +76,7 @@ export function useText<T>(props: IZText<T>, initial: T): TextFieldProps {
     label,
     InputProps,
     onBlur: () => onValueChange(current),
-    onInput: (e) => setCurrent(get(e.target, 'value'))
+    onInput: (e) => setCurrent(getValue(e.target))
   };
 }
 

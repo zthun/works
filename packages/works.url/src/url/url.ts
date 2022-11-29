@@ -127,11 +127,7 @@ export class ZUrlBuilder {
    * @returns This object.
    */
   public location(loc: Location = location): this {
-    this.protocol(loc.protocol)
-      .hostname(loc.hostname)
-      .hash(loc.hash)
-      .path(loc.pathname)
-      .port(+loc.port);
+    this.protocol(loc.protocol).hostname(loc.hostname).hash(loc.hash).path(loc.pathname).port(+loc.port);
 
     let search = loc.search;
 

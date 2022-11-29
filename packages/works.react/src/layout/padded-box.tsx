@@ -31,6 +31,23 @@ export interface IZPaddedBox extends IZComponentHierarchy, IZComponentStyle {
 const useBoxStyles = makeStyles<IZPaddedBox>()((theme, props) => {
   const { padding, margin } = props;
 
+  const asPadding = (pad: ZSizeFixed | ZSizeVoid | object) => {
+    const size = typeof pad === 'object' ? ZSizeVoid.None : pad;
+    return theme.gap(size);
+  };
+
+  const asMargin = (margin: ZSizeFixed | ZSizeVoid | ZSizeVaried.Fit | object) => {
+    if (typeof margin === 'object') {
+      return theme.gap(ZSizeVoid.None);
+    }
+
+    if (margin === ZSizeVaried.Fit) {
+      return 'auto';
+    }
+
+    return theme.gap(margin);
+  };
+
   const pLeft = firstDefined(ZSizeVoid.None, get(padding, 'left'), padding);
   const pRight = firstDefined(ZSizeVoid.None, get(padding, 'right'), padding);
   const pTop = firstDefined(ZSizeVoid.None, get(padding, 'top'), padding);
@@ -43,14 +60,14 @@ const useBoxStyles = makeStyles<IZPaddedBox>()((theme, props) => {
 
   return {
     root: {
-      paddingLeft: theme.gap(pLeft),
-      paddingRight: theme.gap(pRight),
-      paddingTop: theme.gap(pTop),
-      paddingBottom: theme.gap(pBottom),
-      marginLeft: theme.gap(mLeft),
-      marginRight: theme.gap(mRight),
-      marginTop: theme.gap(mTop),
-      marginBottom: theme.gap(mBottom)
+      paddingLeft: asPadding(pLeft),
+      paddingRight: asPadding(pRight),
+      paddingTop: asPadding(pTop),
+      paddingBottom: asPadding(pBottom),
+      marginLeft: asMargin(mLeft),
+      marginRight: asMargin(mRight),
+      marginTop: asMargin(mTop),
+      marginBottom: asMargin(mBottom)
     }
   };
 });

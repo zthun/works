@@ -2,7 +2,7 @@
   "useWorkspaces": true,
   "stream": true,
   "version": "4.0.0",
-  "useNx": true,
+  "nx": true,
   "command": {
     "publish": {
       "message": "chore(release): publish [skip ci]"
