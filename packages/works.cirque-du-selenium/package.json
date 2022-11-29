@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@zthun/works.cirque": "^4.0.0",
-    "chromedriver": "^106.0.1",
+    "chromedriver": "^107.0.3",
     "lodash": "^4.17.21",
     "selenium-webdriver": "^4.6.1"
   },
