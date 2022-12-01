@@ -46,19 +46,34 @@ export function ZBooleanPage() {
 
         <ZPaddedBox margin={{ bottom: ZSizeFixed.Medium }}>
           <ZGridLayout alignItems='center' columns='auto auto 1fr' gap={ZSizeFixed.ExtraSmall}>
-            <ZBooleanCheckbox disabled={disabled} value={value} onValueChange={setValue.bind(null)} label='Checkbox' />
-            <ZBooleanSwitch disabled={disabled} value={!!value} onValueChange={setValue.bind(null)} label='Switch' />
+            <ZBooleanCheckbox
+              disabled={disabled}
+              value={value}
+              onValueChange={setValue.bind(null)}
+              label='Checkbox'
+              name='checkbox'
+            />
+            <ZBooleanSwitch
+              disabled={disabled}
+              value={!!value}
+              onValueChange={setValue.bind(null)}
+              label='Switch'
+              name='switch'
+            />
           </ZGridLayout>
         </ZPaddedBox>
 
-        <ZCaption compact>Value: {JSON.stringify(value)}</ZCaption>
+        <ZCaption compact>
+          <span>Value:</span>
+          <span className='ZBooleanPage-value'>{JSON.stringify(value)}</span>
+        </ZCaption>
       </ZPaddedBox>
 
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Options</ZH3>
 
         <ZGridLayout gap={ZSizeFixed.Medium}>
-          <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
+          <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' name='disabled' />
         </ZGridLayout>
       </ZPaddedBox>
 
@@ -72,6 +87,7 @@ export function ZBooleanPage() {
             fashion={success}
             onClick={setValue.bind(null, true)}
             label='True'
+            name='on'
           />
           <ZButton
             avatar={<CheckBoxOutlineBlankIcon />}
@@ -79,6 +95,7 @@ export function ZBooleanPage() {
             fashion={error}
             onClick={setValue.bind(null, false)}
             label='False'
+            name='off'
           />
           <ZButton
             avatar={<IndeterminateCheckBoxIcon />}
@@ -86,6 +103,7 @@ export function ZBooleanPage() {
             fashion={warning}
             onClick={setValue.bind(null, null)}
             label='Indeterminate'
+            name='indeterminate'
           />
         </ZToolbarLayout>
       </ZPaddedBox>
