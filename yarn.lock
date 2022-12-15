@@ -6255,6 +6255,7 @@ __metadata:
   dependencies:
     "@zthun/works.core": ^4.0.0
     "@zthun/works.jest": ^4.0.0
+    "@zthun/works.logger": ^4.0.0
     jest: ^29.3.1
     lodash: ^4.17.21
     rxjs: ^7.5.7
