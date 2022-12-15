@@ -1,6 +1,6 @@
 import { ClientProxy } from '@nestjs/microservices';
 import { ZConfigEntryBuilder } from '@zthun/works.core';
-import { assertProxySendsMessage, createMocked } from '@zthun/works.jest';
+import { createMocked } from '@zthun/works.jest';
 import { of } from 'rxjs';
 import { ZVaultClient } from './vault.client';
 
@@ -19,25 +19,36 @@ describe('VaultClient', () => {
 
   describe('Read', () => {
     it('gets by scope and key.', async () => {
-      await assertProxySendsMessage(
-        { cmd: 'read' },
-        { scope: 'common', key: 'domain' },
-        proxy,
-        createTestTarget,
-        (t, p) => t.read(p.scope, p.key)
-      );
+      // Arrange.
+      const scope = 'common';
+      const key = 'domain';
+      const target = createTestTarget();
+      // Act.
+      await target.read(scope, key);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'read' }, { scope, key });
     });
 
     it('gets by entry.', async () => {
+      // Arrange.
       const entry = new ZConfigEntryBuilder(null).scope('common').key('domain').build();
-      await assertProxySendsMessage({ cmd: 'get' }, { entry }, proxy, createTestTarget, (t, p) => t.get(p.entry));
+      const target = createTestTarget();
+      // Act.
+      await target.get(entry);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'get' }, { entry });
     });
   });
 
   describe('Write', () => {
     it('puts by entry.', async () => {
+      // Arrange.
       const entry = new ZConfigEntryBuilder('local.zthunworks.com').scope('common').key('domain').build();
-      await assertProxySendsMessage({ cmd: 'put' }, { entry }, proxy, createTestTarget, (t, p) => t.put(p.entry));
+      const target = createTestTarget();
+      // Act.
+      await target.put(entry);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'put' }, { entry });
     });
   });
 });

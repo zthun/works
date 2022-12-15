@@ -11,9 +11,9 @@ export class ZVaultClient {
   /**
    * Initializes a new instance of this object.
    *
-   * @param _vault The client proxy used to connect to the vault microservice.
+   * @param proxy The client proxy used to connect to the vault microservice.
    */
-  public constructor(@Inject('Vault.Service') private readonly _vault: ClientProxy) {}
+  public constructor(@Inject('Vault.Service') public readonly proxy: ClientProxy) {}
 
   /**
    * Reads a configuration item by scope and key.
@@ -25,7 +25,7 @@ export class ZVaultClient {
    *          to null if non such scope and key exists.
    */
   public async read<T>(scope: string, key: string): Promise<IZConfigEntry<T> | null> {
-    return lastValueFrom(this._vault.send({ cmd: 'read' }, { scope, key }));
+    return lastValueFrom(this.proxy.send({ cmd: 'read' }, { scope, key }));
   }
 
   /**
@@ -42,7 +42,7 @@ export class ZVaultClient {
    * @returns A promise that, when resolved, gives the existing config.
    */
   public async get<T>(entry: IZConfigEntry<T>): Promise<IZConfigEntry<T>> {
-    return lastValueFrom(this._vault.send({ cmd: 'get' }, { entry }));
+    return lastValueFrom(this.proxy.send({ cmd: 'get' }, { entry }));
   }
 
   /**
@@ -53,6 +53,17 @@ export class ZVaultClient {
    * @returns A promise that, when resolve, returns the updated value.
    */
   public async put<T>(entry: IZConfigEntry<T>): Promise<IZConfigEntry<T>> {
-    return lastValueFrom(this._vault.send({ cmd: 'put' }, { entry }));
+    return lastValueFrom(this.proxy.send({ cmd: 'put' }, { entry }));
+  }
+
+  /**
+   * Gets the current health of the vault service.
+   *
+   * @returns
+   *        A promise that resolves with true if the vault service is healthy.  If
+   *        the service is not healthy, then a rejected promise is returned.
+   */
+  public async health(): Promise<true> {
+    return lastValueFrom(this.proxy.send({ cmd: 'health' }, {}));
   }
 }
