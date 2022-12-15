@@ -27,12 +27,6 @@ services:
       - 9229:9229
     volumes:
       - .:/usr/dev
-    depends_on:
-      - zthunworks-services-apps
-      - zthunworks-services-users
-      - zthunworks-services-vault
-      - zthunworks-services-notifications
-      - zthunworks-services-cookies
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.api run debug
   zthunworks-services-users:
@@ -43,8 +37,6 @@ services:
       - .:/usr/dev
     environment:
       - DATABASE_URL=mongodb://zthunworks-databases:27017
-    depends_on:
-      - zthunworks-databases
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.users run debug
   zthunworks-services-vault:
@@ -55,8 +47,6 @@ services:
       - .:/usr/dev
     environment:
       - DATABASE_URL=mongodb://zthunworks-databases:27017
-    depends_on:
-      - zthunworks-databases
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.vault run debug
   zthunworks-services-notifications:
@@ -83,20 +73,11 @@ services:
       - .:/usr/dev
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.apps run debug
-  # Apps
-  zthunworks-applications-roadblock-api:
-    image: zthun/roadblock.api:latest
-    depends_on:
-      - zthunworks-services-apps
-      - zthunworks-services-users
-      - zthunworks-services-vault
-      - zthunworks-services-notifications
-      - zthunworks-services-cookies
-  zthunworks-applications-roadblock-web:
-    image: zthun/roadblock.web:latest
   # Databases
   zthunworks-databases:
     image: mongo:5.0.5
+    volumes:
+      - zthunworks-databases-data:/data/db
   # Utilities
   database.zthunworks.com:
     image: mongo-express:0.54.0
@@ -106,3 +87,5 @@ services:
       - ME_CONFIG_MONGODB_SERVER=zthunworks-databases
   smtp.zthunworks.com:
     image: rnwood/smtp4dev:v3.1
+volumes:
+  zthunworks-databases-data:
