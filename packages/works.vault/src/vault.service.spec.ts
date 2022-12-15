@@ -119,4 +119,15 @@ describe('ZVaultService', () => {
       });
     });
   });
+
+  describe('Health', () => {
+    it('should be true', async () => {
+      // Arrange.
+      const target = createTestTarget();
+      // Act
+      const actual = await target.health();
+      // Assert.
+      expect(actual).toEqual(true);
+    });
+  });
 });
