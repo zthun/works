@@ -4,6 +4,7 @@ import {
   useSafeState,
   ZCaption,
   ZCard,
+  ZGridLayout,
   ZH3,
   ZNumberInput,
   ZNumberSlider,
@@ -39,8 +40,19 @@ export function ZNumberPage() {
           parsing for you.
         </ZParagraph>
 
-        <ZNumberSlider step={1} min={1} max={1000} label='Slider' value={value || 1} onValueChange={setValue} />
-        <ZNumberInput step={1} min={-Infinity} max={Infinity} label='Input' value={value} onValueChange={setValue} />
+        <ZPaddedBox padding={ZSizeFixed.Medium}>
+          <ZGridLayout columns='1fr 1fr 1fr' gap={ZSizeFixed.ExtraLarge}>
+            <ZNumberSlider step={1} min={1} max={1000} label='Slider' value={value || 1} onValueChange={setValue} />
+            <ZNumberInput
+              step={1}
+              min={-Infinity}
+              max={Infinity}
+              label='Input'
+              value={value}
+              onValueChange={setValue}
+            />
+          </ZGridLayout>
+        </ZPaddedBox>
 
         <ZCaption>Value: {value}</ZCaption>
       </ZPaddedBox>
