@@ -28,7 +28,7 @@ const useChoiceAutocompleteStyles = makeStyles()((theme) => {
  *        The JSX to render the choice component.
  */
 export function ZChoiceAutocomplete<O, V>(props: IZChoice<O, V>) {
-  const { className, label, disabled, multiple, indelible, identifier } = props;
+  const { className, label, disabled, multiple, name, indelible, identifier } = props;
   const { choices, value, lookup, render, display, setValue } = useChoice(props);
   const styles = useChoiceAutocompleteStyles();
 
@@ -129,6 +129,7 @@ export function ZChoiceAutocomplete<O, V>(props: IZChoice<O, V>) {
   return (
     <Autocomplete
       className={cssClass('ZChoice-root', 'ZChoice-autocomplete', styles.classes.root, className)}
+      data-name={name}
       componentsProps={{
         clearIndicator: { className: clearClassName },
         popper: { className: 'ZChoice-options' },

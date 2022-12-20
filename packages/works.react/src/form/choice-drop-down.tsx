@@ -49,7 +49,7 @@ const useChoiceDropDownStyles = makeStyles()((theme) => {
  *        The JSX to render the choice component.
  */
 export function ZChoiceDropDown<O, V>(props: IZChoice<O, V>) {
-  const { className, label, disabled, multiple, indelible } = props;
+  const { className, label, disabled, multiple, name, indelible } = props;
   const { choices, value, lookup, cast, render, setValue } = useChoice(props);
   const labelId = useMemo(() => v4(), []);
   const styles = useChoiceDropDownStyles();
@@ -135,7 +135,11 @@ export function ZChoiceDropDown<O, V>(props: IZChoice<O, V>) {
   }
 
   return (
-    <FormControl className={cssClass('ZChoice-root', 'ZChoice-drop-down', styles.classes.root, className)} fullWidth>
+    <FormControl
+      className={cssClass('ZChoice-root', 'ZChoice-drop-down', styles.classes.root, className)}
+      fullWidth
+      data-name={name}
+    >
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select
         classes={{ select: 'ZChoice-toggler' }}
