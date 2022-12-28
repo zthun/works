@@ -1,7 +1,7 @@
 import { IZCircusKey } from '../keyboard/circus-key';
 import { ZCircusKeyTranslator } from '../keyboard/circus-key-translator';
 import { ZCircusKeyboardQwerty } from '../keyboard/circus-keyboard-qwerty';
-import { IZCircusAction, ZCircusActionType } from './circus-action';
+import { IZCircusAction, ZCircusActionType, ZCircusMagicFunction, ZCircusMouseButton } from './circus-action';
 
 /**
  * Represents an ordered act in a circus.
@@ -51,8 +51,8 @@ export class ZCircusActBuilder {
   public keyDown: (key: IZCircusKey) => this = this._action.bind(this, ZCircusActionType.KeyDown);
   public keyUp: (key: IZCircusKey) => this = this._action.bind(this, ZCircusActionType.KeyUp);
 
-  private _mouseDown: (which: 'Left' | 'Right') => this = this._action.bind(this, ZCircusActionType.MouseDown);
-  private _mouseUp: (which: 'Left' | 'Right') => this = this._action.bind(this, ZCircusActionType.MouseUp);
+  private _mouseDown: (which: ZCircusMouseButton) => this = this._action.bind(this, ZCircusActionType.MouseDown);
+  private _mouseUp: (which: ZCircusMouseButton) => this = this._action.bind(this, ZCircusActionType.MouseUp);
 
   public leftMouseDown: () => this = this._mouseDown.bind(this, 'Left');
   public leftMouseUp: () => this = this._mouseUp.bind(this, 'Left');
@@ -60,7 +60,7 @@ export class ZCircusActBuilder {
   public rightMouseDown: () => this = this._mouseDown.bind(this, 'Right');
   public rightMouseUp: () => this = this._mouseUp.bind(this, 'Right');
 
-  public magic: (action: () => Promise<any>) => this = this._action.bind(this, ZCircusActionType.Magic);
+  public magic: (action: ZCircusMagicFunction) => this = this._action.bind(this, ZCircusActionType.Magic);
 
   /**
    * Presses a key on the keyboard.
