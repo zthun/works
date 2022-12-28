@@ -1,7 +1,8 @@
 /* eslint-disable valid-jsdoc */
-import { IZCircusAct, IZCircusAction, IZCircusDriver, ZCircusActionType } from '@zthun/works.cirque';
+import { IZCircusAct, IZCircusDriver } from '@zthun/works.cirque';
 import { keyBy } from 'lodash';
-import { Actions, Button, By, WebDriver, WebElement } from 'selenium-webdriver';
+import { By, WebDriver, WebElement } from 'selenium-webdriver';
+import { squash } from '../util/squash';
 
 /**
  * Represents the circus driver for selenium actions.
@@ -156,24 +157,15 @@ export class ZCircusDriver implements IZCircusDriver {
     // Before we do anything, we need to make sure the element is scrolled into view if possible.
     await this._seleniumDriver.executeScript('arguments[0].scrollIntoView(true);', this._search);
 
-    let performance = this._seleniumDriver.actions().move({ x: 0, y: 0, origin: this._search });
+    const factory = () => this._seleniumDriver.actions().move({ x: 0, y: 0, origin: this._search });
+    const _act = squash(factory, act);
+    let promise = Promise.resolve();
 
-    const map: Record<ZCircusActionType, (a: IZCircusAction) => Actions> = {
-      [ZCircusActionType.MouseDown]: () => performance.press(Button.LEFT),
-      [ZCircusActionType.MouseUp]: () => performance.release(Button.LEFT),
-      [ZCircusActionType.KeyDown]: (a: IZCircusAction) => performance.keyDown(a.context.code),
-      [ZCircusActionType.KeyUp]: (a: IZCircusAction) => performance.keyUp(a.context.code),
-      [ZCircusActionType.Magic]: (a: IZCircusAction) => {
-        a.context();
-        return performance;
-      }
-    };
-
-    act.actions.forEach((action) => {
-      performance = map[action.name](action);
+    _act.actions.forEach((a) => {
+      promise = promise.then(() => a.context());
     });
 
-    await performance.perform();
+    return promise;
   }
 
   /**
