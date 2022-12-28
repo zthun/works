@@ -6,7 +6,7 @@ import {
   ZCircusActBuilder,
   ZCircusActionType
 } from '@zthun/works.cirque';
-import { Actions, Button } from 'selenium-webdriver';
+import { Actions, Button, Key } from 'selenium-webdriver';
 
 /**
  * Squashes acts into specific chunks for selenium action sequences.
@@ -31,16 +31,18 @@ export function squash(factory: () => Actions, act: IZCircusAct): IZCircusAct {
     performance = performance || factory();
 
     if (isKeyboardAction(action)) {
+      const key = action.context.upper.toUpperCase();
       if (action.name === ZCircusActionType.KeyDown && action.context.modifier) {
-        performance.keyDown(action.context.lower);
+        performance.keyDown(Key[key]);
       } else if (action.name === ZCircusActionType.KeyUp && action.context.modifier) {
-        performance.keyUp(action.context.lower);
+        performance.keyUp(Key[key]);
       } else if (action.name === ZCircusActionType.KeyDown) {
         // Selenium is limited here.  You can only do modifiers with keyDown and keyUp, everything
         // else has to be with sendKeys, so due to this, we're just going to act on one of them.
         // Since key data is immediately sent once a key is pressed, we will respond to the
         // KeyDown event with no support for repeat keys through press and hold.
-        performance.sendKeys(action.context.lower);
+        const keys = Key[key] || action.context.lower;
+        performance.sendKeys(keys);
       }
     }
 
