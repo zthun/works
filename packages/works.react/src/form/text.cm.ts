@@ -8,6 +8,19 @@ export class ZTextComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZText-root';
 
   /**
+   * Gets a selector for a named button.
+   *
+   * @param name
+   *        The optional name of the button to retrieve.
+   *
+   * @returns
+   *        The selector that can be used to query for a specific button.
+   */
+  public static selector(name?: string) {
+    return name ? `${ZTextComponentModel.Selector}[data-name="${name}"]` : ZTextComponentModel.Selector;
+  }
+
+  /**
    * Gets the underlying input.
    *
    * @returns
@@ -81,6 +94,18 @@ export class ZTextComponentModel extends ZCircusComponentModel {
   }
 
   /**
+   * Gets whether the text input is read only.
+   *
+   * @returns
+   *        True if the text input is read only.
+   *        False otherwise.
+   */
+  public async readOnly(): Promise<boolean> {
+    const input = await this._input();
+    return (await input.attribute('readOnly')) != null;
+  }
+
+  /**
    * Types a text string into the input.
    *
    * @param text
@@ -96,6 +121,37 @@ export class ZTextComponentModel extends ZCircusComponentModel {
     const act = new ZCircusActBuilder().click().type(text).press(commit).build();
     const input = await this._input();
     await input.perform(act);
+    return this.value();
+  }
+
+  /**
+   * Types an essay worth of input paragraphs into the text area.
+   *
+   * Each line is separated by two enter keys.  If the text
+   * component does not support multi-line (I.E. it is not a Text Area)
+   * then this will run all of the text together and commit on every
+   * line break.
+   *
+   * This is somewhat of an easier way to line break multiple text
+   * blocks without having to separate them with the \\n character.
+   *
+   * @param paragraphs
+   *        The list of paragraphs to type.
+   *
+   * @returns
+   *        The value of the text component.
+   */
+  public async essay(paragraphs: string[]): Promise<string | null> {
+    let builder = new ZCircusActBuilder().click();
+
+    paragraphs.forEach((paragraph) => {
+      builder = builder.type(paragraph).press(ZCircusKeyboardQwerty.enter).press(ZCircusKeyboardQwerty.enter);
+    });
+
+    builder = builder.press(ZCircusKeyboardQwerty.tab);
+
+    const input = await this._input();
+    await input.perform(builder.build());
     return this.value();
   }
 
@@ -165,4 +221,37 @@ export class ZTextComponentModel extends ZCircusComponentModel {
   public async mask(): Promise<boolean> {
     return this._mask(true);
   }
+
+  /**
+   * Gets an adornment container.
+   *
+   * @param which
+   *        Which container to query (prefix or suffix).
+   *
+   * @returns
+   *        The adornment container or null if no such container exists.
+   */
+  private async _adornment(which: 'start' | 'end'): Promise<IZCircusDriver | null> {
+    const query = `.ZText-adornment-${which}`;
+    const [adornment] = await this.driver.query(query);
+    return adornment || null;
+  }
+
+  /**
+   * Gets the prefix adornment container.
+   *
+   * @returns
+   *        The prefix adornment container or undefined if there is no
+   *        such adornment.
+   */
+  public prefix: () => Promise<IZCircusDriver | null> = this._adornment.bind(this, 'start');
+
+  /**
+   * Gets the suffix adornment container.
+   *
+   * @returns
+   *        The suffix adornment container or undefined if there is no
+   *        such adornment.
+   */
+  public suffix: () => Promise<IZCircusDriver | null> = this._adornment.bind(this, 'end');
 }

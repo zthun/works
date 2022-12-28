@@ -8,10 +8,14 @@ import { ZTextInput, ZTextType } from './text-input';
 import { ZTextInputReveal } from './text-input-reveal';
 import { ZTextComponentModel } from './text.cm';
 
+// cspell: disable-next-line
+const LOREM = 'Purus gravida quis blandit turpis cursus in hac habitasse.';
+
 describe('ZText', () => {
   let prefix: ReactNode | undefined;
   let suffix: ReactNode | undefined;
   let disabled: boolean | undefined;
+  let readOnly: boolean | undefined;
   let required: boolean | undefined;
   let value: string | undefined;
   let onValueChange: jest.Mock | undefined;
@@ -21,6 +25,7 @@ describe('ZText', () => {
     onValueChange = undefined;
 
     disabled = undefined;
+    readOnly = undefined;
     required = undefined;
 
     prefix = undefined;
@@ -39,14 +44,12 @@ describe('ZText', () => {
 
   const shouldUpdateTextValue = async (createTestTarget: () => Promise<ZTextComponentModel>) => {
     // Arrange
-    // cspell: disable-next-line
-    const expected = 'Purus gravida quis blandit turpis cursus in hac habitasse.';
     const target = await createTestTarget();
     // Act
-    await target.keyboard(expected);
+    await target.keyboard(LOREM);
     const actual = await target.value();
     // Assert
-    expect(actual).toEqual(expected);
+    expect(actual).toEqual(LOREM);
   };
 
   const shouldRaiseOnValueChange = async (
@@ -55,13 +58,11 @@ describe('ZText', () => {
   ) => {
     // Arrange
     onValueChange = jest.fn();
-    // cspell: disable-next-line
-    const expected = 'Purus gravida quis blandit turpis cursus in hac habitasse.';
     const target = await createTestTarget();
     // Act
-    await target.keyboard(expected, commit);
+    await target.keyboard(LOREM, commit);
     // Assert
-    expect(onValueChange).toHaveBeenCalledWith(expected);
+    expect(onValueChange).toHaveBeenCalledWith(LOREM);
   };
 
   const shouldNotRaiseOnValueChange = async (
@@ -84,6 +85,16 @@ describe('ZText', () => {
     const target = await createTestTarget();
     // Act
     const actual = await target.disabled();
+    // Assert
+    expect(actual).toBeTruthy();
+  };
+
+  const shouldBeReadOnly = async (createTestTarget: () => Promise<ZTextComponentModel>) => {
+    // Arrange
+    readOnly = true;
+    const target = await createTestTarget();
+    // Act
+    const actual = await target.readOnly();
     // Assert
     expect(actual).toBeTruthy();
   };
@@ -113,7 +124,7 @@ describe('ZText', () => {
     prefix = <div className={expected}>Prefix</div>;
     const target = await createTestTarget();
     // Act
-    const actual = await target.driver.select(`.${expected}`);
+    const actual = await (await target.prefix())?.select(`.${expected}`);
     // Assert
     expect(actual).toBeTruthy();
   };
@@ -124,7 +135,7 @@ describe('ZText', () => {
     suffix = <div className={expected}>Suffix</div>;
     const target = await createTestTarget();
     // Act
-    const actual = await target.driver.select(`.${expected}`);
+    const actual = await (await target.suffix())?.select(`.${expected}`);
     // Assert
     expect(actual).toBeTruthy();
   };
@@ -137,13 +148,14 @@ describe('ZText', () => {
           value={value}
           disabled={disabled}
           required={required}
+          readOnly={readOnly}
           prefix={prefix}
           suffix={suffix}
           onValueChange={onValueChange}
         />
       );
       const driver = await new ZCircusSetupRenderer(element).setup();
-      return ZCircusComponentModel.create(driver, ZTextComponentModel, ZTextComponentModel.Selector);
+      return ZCircusComponentModel.create(driver, ZTextComponentModel, ZTextComponentModel.selector());
     }
 
     it('should render the text value', async () => {
@@ -168,6 +180,10 @@ describe('ZText', () => {
 
     it('should be disabled', async () => {
       await shouldBeDisabled(createTestTarget);
+    });
+
+    it('should be readOnly', async () => {
+      await shouldBeReadOnly(createTestTarget);
     });
 
     it('should be required', async () => {
@@ -218,13 +234,14 @@ describe('ZText', () => {
           value={value}
           disabled={disabled}
           required={required}
+          readOnly={readOnly}
           prefix={prefix}
           suffix={suffix}
           onValueChange={onValueChange}
         />
       );
       const driver = await new ZCircusSetupRenderer(element).setup();
-      return ZCircusComponentModel.create(driver, ZTextComponentModel, ZTextComponentModel.Selector);
+      return ZCircusComponentModel.create(driver, ZTextComponentModel, ZTextComponentModel.selector());
     }
 
     it('should render the text value', async () => {
@@ -249,6 +266,10 @@ describe('ZText', () => {
 
     it('should be disabled', async () => {
       await shouldBeDisabled(createTestTarget);
+    });
+
+    it('should be readOnly', async () => {
+      await shouldBeReadOnly(createTestTarget);
     });
 
     it('should be required', async () => {
@@ -295,6 +316,7 @@ describe('ZText', () => {
           value={value}
           disabled={disabled}
           required={required}
+          readOnly={readOnly}
           prefix={prefix}
           suffix={suffix}
           onValueChange={onValueChange}
@@ -302,11 +324,22 @@ describe('ZText', () => {
       );
 
       const driver = await new ZCircusSetupRenderer(element).setup();
-      return ZCircusComponentModel.create(driver, ZTextComponentModel, ZTextComponentModel.Selector);
+      return ZCircusComponentModel.create(driver, ZTextComponentModel, ZTextComponentModel.selector());
     }
 
     it('should render the text value', async () => {
       await shouldRenderTextValue(createTestTarget);
+    });
+
+    it('should render a multi line text value', async () => {
+      // Arrange
+      const target = await createTestTarget();
+      const paragraphs = [LOREM, LOREM, LOREM];
+      const expected = paragraphs.join('\n\n').concat('\n\n');
+      // Act
+      const actual = await target.essay(paragraphs);
+      // Assert
+      expect(actual).toEqual(expected);
     });
 
     it('should raise the onValueChange event when the user types a value and commits with tab', async () => {
@@ -327,6 +360,10 @@ describe('ZText', () => {
 
     it('should be disabled', async () => {
       await shouldBeDisabled(createTestTarget);
+    });
+
+    it('should be readOnly', async () => {
+      await shouldBeReadOnly(createTestTarget);
     });
 
     it('should be required', async () => {

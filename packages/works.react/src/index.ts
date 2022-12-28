@@ -69,6 +69,7 @@ export { IZText } from './form/text';
 export { IZTextArea, ZTextArea } from './form/text-area';
 export { IZTextInput, ZTextInput, ZTextType } from './form/text-input';
 export { ZTextInputReveal } from './form/text-input-reveal';
+export { ZTextComponentModel } from './form/text.cm';
 // Health
 export { ZHealthIndicator } from './health/health-indicator';
 export { ZHealthIndicatorComponentModel } from './health/health-indicator.cm';
