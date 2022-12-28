@@ -129,6 +129,7 @@ export function ZChoicePage() {
             onValueChange={setValues}
             options={Superheroes}
             renderOption={renderSuperhero}
+            name='drop-down'
           />
 
           <ZChoiceAutocomplete
@@ -142,6 +143,7 @@ export function ZChoicePage() {
             onValueChange={setValues}
             options={Superheroes}
             renderOption={renderSuperhero}
+            name='autocomplete'
           />
         </ZGridLayout>
 
