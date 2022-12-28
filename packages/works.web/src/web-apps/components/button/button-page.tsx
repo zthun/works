@@ -87,6 +87,7 @@ export function ZButtonPage() {
             outline={outline}
             onClick={handleClick}
             label='Button'
+            name='button'
             fashion={fashion}
           />
 
@@ -98,6 +99,7 @@ export function ZButtonPage() {
             outline={outline}
             onClick={handleClick}
             fashion={fashion}
+            name='icon-button'
             tooltip='Iconography Button'
           />
         </ZToolbarLayout>
@@ -106,10 +108,10 @@ export function ZButtonPage() {
       <ZPaddedBox padding={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Options</ZH3>
         <ZGridLayout gap={ZSizeFixed.Medium}>
-          <ZBooleanSwitch value={loading} onValueChange={setLoading} label='Loading' />
-          <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
-          <ZBooleanSwitch value={outline} onValueChange={setOutline} label='Outline' />
-          <ZBooleanSwitch value={borderless} onValueChange={setBorderless} label='Borderless' />
+          <ZBooleanSwitch value={loading} onValueChange={setLoading} name='loading' label='Loading' />
+          <ZBooleanSwitch value={disabled} onValueChange={setDisabled} name='disabled' label='Disabled' />
+          <ZBooleanSwitch value={outline} onValueChange={setOutline} name='outline' label='Outline' />
+          <ZBooleanSwitch value={borderless} onValueChange={setBorderless} name='borderless' label='Borderless' />
           <ZChoiceDropDown
             label='Fashion'
             indelible
@@ -118,6 +120,7 @@ export function ZButtonPage() {
             options={designs}
             renderOption={(f) => f.name}
             identifier={identity}
+            name='fashion'
           />
         </ZGridLayout>
       </ZPaddedBox>
