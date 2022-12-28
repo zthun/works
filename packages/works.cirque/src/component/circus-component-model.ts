@@ -35,7 +35,8 @@ export abstract class ZCircusComponentModel {
     CircusComponentModel: ZCircusComponentModelConstructor<T>,
     selector: string
   ) {
-    await driver.wait(() => driver.peek(selector));
+    const description = `Searching for a component with selector: ${selector}`;
+    await driver.wait(() => driver.peek(selector), description);
     const target = await driver.select(selector);
     return new CircusComponentModel(target);
   }

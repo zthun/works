@@ -190,6 +190,9 @@ export interface IZCircusDriver {
    *
    * @param predicate
    *        The predicate to wait for.
+   * @param description
+   *        The optional friendly text that describes what the
+   *        engine is waiting for.
    */
-  wait(predicate: () => boolean | Promise<boolean>): Promise<void>;
+  wait(predicate: () => boolean | Promise<boolean>, description?: string): Promise<void>;
 }
