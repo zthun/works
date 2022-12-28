@@ -48,7 +48,7 @@ export { useErrorHandler, ZErrorHandlerContext } from './error/error-handler';
 export { ZErrorMessageHandlerAlert } from './error/error-message-handler-alert';
 export { ZErrorMessageHandlerLogger } from './error/error-message-handler-logger';
 // Fashion
-export { useFashionDesign } from './fashion/fashion';
+export { createDefaultFashionDesign, useFashionDesign } from './fashion/fashion';
 export { ZFashionBlockComponentModel } from './fashion/fashion-block.cm';
 export { IZFashionGrid, ZFashionGrid } from './fashion/fashion-grid';
 export { ZFashionGridComponentModel } from './fashion/fashion-grid.cm';
