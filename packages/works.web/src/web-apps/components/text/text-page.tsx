@@ -99,17 +99,19 @@ export function ZTextPage() {
           </ZGridLayout>
         </ZPaddedBox>
 
-        <ZCaption compact>Value: {JSON.stringify(value)}</ZCaption>
+        <ZCaption className='ZTextPage-value' compact>
+          Value: {JSON.stringify(value)}
+        </ZCaption>
       </ZPaddedBox>
 
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Options</ZH3>
 
         <ZGridLayout gap={ZSizeFixed.Medium}>
-          <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
-          <ZBooleanSwitch value={readOnly} onValueChange={setReadOnly} label='ReadOnly' />
-          <ZBooleanSwitch value={required} onValueChange={setRequired} label='Required' />
-          <ZBooleanSwitch value={adornments} onValueChange={setAdornments} label='Adornments' />
+          <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' name='disabled' />
+          <ZBooleanSwitch value={readOnly} onValueChange={setReadOnly} label='ReadOnly' name='read-only' />
+          <ZBooleanSwitch value={required} onValueChange={setRequired} label='Required' name='required' />
+          <ZBooleanSwitch value={adornments} onValueChange={setAdornments} label='Adornments' name='adornments' />
         </ZGridLayout>
       </ZPaddedBox>
     </ZCard>
