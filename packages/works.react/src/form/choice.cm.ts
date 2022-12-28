@@ -91,8 +91,13 @@ export class ZChoiceComponentModel extends ZCircusComponentModel {
       ? option.value()
       : Promise.resolve(String(option)));
 
-    const values = await Promise.all(options.map((op) => op.value()));
-    const optionToSelect = findIndex(values, (v) => v === value);
+    let values = await Promise.all(options.map((op) => op.value()));
+    let optionToSelect = findIndex(values, (v) => v === value);
+
+    if (optionToSelect < 0) {
+      values = await Promise.all(options.map((op) => op.text()));
+      optionToSelect = findIndex(values, (v) => v === value);
+    }
 
     if (optionToSelect >= 0) {
       const context = options[optionToSelect];
