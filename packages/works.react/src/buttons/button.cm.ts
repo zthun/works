@@ -84,6 +84,27 @@ export class ZButtonComponentModel extends ZCircusComponentModel {
   }
 
   /**
+   * Gets the name of the fashion that is assigned to the button.
+   *
+   * @returns
+   *        The name of the fashion assigned to the button.
+   *        Null if there is no fashion assigned.
+   */
+  public fashion(): Promise<string | null> {
+    return this.driver.attribute('data-fashion');
+  }
+
+  /**
+   * Gets the button color.
+   *
+   * @returns
+   *        The button color.  Null if there is no fashion assigned.
+   */
+  public color(): Promise<string | null> {
+    return this.driver.attribute('data-color');
+  }
+
+  /**
    * Clicks the button.
    *
    * @returns A promise that resolves when the button is clicked.

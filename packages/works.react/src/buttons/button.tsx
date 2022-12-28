@@ -111,7 +111,19 @@ const useButtonStyles = makeStyles<IZButton>()((theme, props) => {
  * @returns The JSX to render this button.
  */
 export function ZButton(props: IZButton) {
-  const { avatar, className, borderless, disabled, loading, label, name, outline, tooltip, onClick = noop } = props;
+  const {
+    avatar,
+    className,
+    borderless,
+    disabled,
+    fashion,
+    loading,
+    label,
+    name,
+    outline,
+    tooltip,
+    onClick = noop
+  } = props;
 
   const { classes } = useButtonStyles(props);
   const buttonClass = cssClass(
@@ -127,7 +139,15 @@ export function ZButton(props: IZButton) {
   return (
     <Tooltip title={tooltip}>
       <span className={classes.wrapper}>
-        <Button className={buttonClass} variant={variant} disabled={disabled} onClick={onClick} name={name}>
+        <Button
+          className={buttonClass}
+          variant={variant}
+          disabled={disabled}
+          onClick={onClick}
+          name={name}
+          data-fashion={fashion?.name}
+          data-color={fashion?.main?.hue}
+        >
           {avatar}
           <div className={contentClass}>{label}</div>
           <ZSuspenseRotate
