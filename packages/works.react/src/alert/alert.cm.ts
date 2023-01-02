@@ -40,7 +40,7 @@ export class ZAlertComponentModel {
    *        if the alert has died.
    */
   public severity(): Promise<ZAlertSeverity | null> {
-    return this._valueIfAlive(null, (d) => d.attribute('data-alert-severity') as Promise<ZAlertSeverity>);
+    return this._valueIfAlive(null, (d) => d.attribute<ZAlertSeverity>('data-alert-severity'));
   }
 
   /**

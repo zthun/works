@@ -76,8 +76,7 @@ export class ZTextComponentModel extends ZCircusComponentModel {
    *        flag.  False otherwise.
    */
   public async required(): Promise<boolean> {
-    const required = await this.driver.attribute('data-required');
-    const value = firstDefined('false', required);
+    const value = await this.driver.attribute('data-required');
     return value === 'true';
   }
 

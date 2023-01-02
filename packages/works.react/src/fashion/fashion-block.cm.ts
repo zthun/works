@@ -1,5 +1,4 @@
 import { ZCircusActBuilder, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
-import { firstDefined } from '@zthun/works.core';
 
 /**
  * Represents a component model for a single square in the ZFashionGrid.
@@ -15,8 +14,7 @@ export class ZFashionBlockComponentModel extends ZCircusComponentModel {
    *      The hue for the block.
    */
   public async hue(): Promise<string> {
-    const hue = await this.driver.attribute('data-hue');
-    return firstDefined('transparent', hue);
+    return await this.driver.attribute('data-hue', 'transparent');
   }
 
   /**
@@ -26,8 +24,7 @@ export class ZFashionBlockComponentModel extends ZCircusComponentModel {
    *        The block shade.
    */
   public async shade(): Promise<number> {
-    const _shade = await this.driver.attribute('data-shade');
-    const shade = firstDefined('0', _shade);
+    const shade = await this.driver.attribute('data-shade', '0');
     return +shade;
   }
 
