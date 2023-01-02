@@ -36,6 +36,7 @@ describe('ZDrawer', () => {
   it('should close the drawer when the user presses the escape key', async () => {
     // Arrange.
     const target = await createTestTarget();
+    await target.open();
     // Act.
     const drawer = await target.open();
     await target.escape(drawer);
