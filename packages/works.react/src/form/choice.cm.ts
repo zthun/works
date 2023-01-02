@@ -33,6 +33,17 @@ export class ZChoiceComponentModel extends ZCircusComponentModel {
   }
 
   /**
+   * Gets a value that determines if the choice component is disabled.
+   *
+   * @returns
+   *        True if the choice component is disabled.  False otherwise.
+   */
+  public async disabled(): Promise<boolean> {
+    const input = await this.driver.select('input');
+    return input.disabled();
+  }
+
+  /**
    * Gets whether the options list is visible.
    *
    * @returns
