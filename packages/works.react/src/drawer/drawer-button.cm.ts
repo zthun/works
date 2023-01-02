@@ -27,17 +27,37 @@ export class ZDrawerButtonComponentModel extends ZCircusComponentModel {
   }
 
   /**
+   * Gets the currently opened drawer.
+   *
+   * @returns
+   *        The opened drawer.  If the drawer is not opened,
+   *        then the returned promise is rejected.
+   */
+  public async drawer(): Promise<ZDrawerComponentModel> {
+    const body = await this.driver.body();
+    return ZCircusComponentModel.create(body, ZDrawerComponentModel, ZDrawerComponentModel.Selector);
+  }
+
+  /**
    * Opens the drawer.
+   *
+   * If the drawer is already opened, then the drawer is just returned and
+   * this method does nothing.
    *
    * @returns
    *        The drawer component model for the open drawer.
    */
   public async open(): Promise<ZDrawerComponentModel> {
+    const _opened = await this.opened();
+
+    if (_opened) {
+      return this.drawer();
+    }
+
     const button = await this._button();
     await button.click();
     await this.driver.wait(() => this.opened());
-    const body = await this.driver.body();
-    return ZCircusComponentModel.create(body, ZDrawerComponentModel, ZDrawerComponentModel.Selector);
+    return this.drawer();
   }
 
   /**
