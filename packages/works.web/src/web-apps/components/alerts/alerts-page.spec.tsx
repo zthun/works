@@ -1,8 +1,7 @@
 import { ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
-import { createMocked } from '@zthun/works.jest';
-import { IZAlert, IZAlertService, ZAlertSeverity } from '@zthun/works.message';
-import { ZAlertServiceContext, ZButtonComponentModel } from '@zthun/works.react';
+import { ZAlertSeverity } from '@zthun/works.message';
+import { ZAlertList, ZButtonComponentModel } from '@zthun/works.react';
 import { startCase } from 'lodash';
 import React from 'react';
 import { ZAlertsPage } from './alerts-page';
@@ -10,22 +9,17 @@ import { ZAlertsPageComponentModel } from './alerts-page.cm';
 
 /* eslint-disable require-jsdoc */
 describe('ZAlertsPage', () => {
-  let alerts: jest.Mocked<IZAlertService>;
-
   async function createTestTarget() {
     const element = (
-      <ZAlertServiceContext.Provider value={alerts}>
+      <>
+        <ZAlertList />
         <ZAlertsPage />
-      </ZAlertServiceContext.Provider>
+      </>
     );
 
     const driver = await new ZCircusSetupRenderer(element).setup();
     return ZCircusComponentModel.create(driver, ZAlertsPageComponentModel, ZAlertsPageComponentModel.Selector);
   }
-
-  beforeEach(() => {
-    alerts = createMocked(['create']);
-  });
 
   describe('Alert Severity', () => {
     async function shouldInvokeAlert(
@@ -37,8 +31,10 @@ describe('ZAlertsPage', () => {
       const button = await create(target);
       // Act.
       await button.click();
+      const [alert] = await (await target.alerts()).alerts();
+      const actual = await alert.severity();
       // Assert.
-      expect(alerts.create).toHaveBeenCalledWith(expect.objectContaining<Partial<IZAlert>>({ severity: expected }));
+      expect(actual).toEqual(expected);
     }
 
     it('should invoke a success alert', async () => {
@@ -69,13 +65,12 @@ describe('ZAlertsPage', () => {
       const button = await create(target);
       // Act.
       await button.click();
+      const [alert] = await (await target.alerts()).alerts();
+      const header = await alert.header();
+      const severity = await alert.severity();
       // Assert.
-      expect(alerts.create).toHaveBeenCalledWith(
-        expect.objectContaining<Partial<IZAlert>>({
-          header: expect.stringContaining(startCase(expected)),
-          severity: expected
-        })
-      );
+      expect(header).toEqual(startCase(expected));
+      expect(severity).toEqual(expected);
     }
 
     it('should add a header to the success alert', async () => {
@@ -106,25 +101,27 @@ describe('ZAlertsPage', () => {
       const button = await create(target);
       // Act.
       await button.click();
+      const [alert] = await (await target.alerts()).alerts();
+      const timeout = await alert.timeout();
+      const severity = await alert.severity();
       // Assert.
-      expect(alerts.create).toHaveBeenCalledWith(
-        expect.objectContaining<Partial<IZAlert>>({ timeToLive: Infinity, severity: expected })
-      );
+      expect(timeout).toEqual(Infinity);
+      expect(severity).toEqual(expected);
     }
 
-    it('should add a header to the success alert', async () => {
+    it('should add a timeout to the success alert', async () => {
       await shouldLiveForever(ZAlertSeverity.Success, (t) => t.success());
     });
 
-    it('should add a header to the error alert', async () => {
+    it('should add a timeout to the error alert', async () => {
       await shouldLiveForever(ZAlertSeverity.Error, (t) => t.error());
     });
 
-    it('should add a header to the warning alert', async () => {
+    it('should add a timeout to the warning alert', async () => {
       await shouldLiveForever(ZAlertSeverity.Warning, (t) => t.warning());
     });
 
-    it('should add a header to the info alert', async () => {
+    it('should add a timeout to the info alert', async () => {
       await shouldLiveForever(ZAlertSeverity.Info, (t) => t.info());
     });
   });
