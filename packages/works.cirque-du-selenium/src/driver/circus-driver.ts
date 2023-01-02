@@ -29,8 +29,19 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
-  public async attribute(attribute: string): Promise<string> {
-    return this._search.getAttribute(attribute);
+  public attribute<T extends string>(attribute: string): Promise<T | null>;
+
+  /**
+   * @inheritdoc
+   */
+  public attribute<T extends string>(attribute: string, fallback: T): Promise<T>;
+
+  /**
+   * @inheritdoc
+   */
+  public async attribute<T extends string>(attribute: string, fallback: T | null = null): Promise<T | null> {
+    const attr = (await this._search.getAttribute(attribute)) as T;
+    return attr == null ? fallback : attr;
   }
 
   /**
@@ -63,7 +74,7 @@ export class ZCircusDriver implements IZCircusDriver {
    * @inheritdoc
    */
   public value(): Promise<string> {
-    return this.attribute('value');
+    return this.attribute('value', '');
   }
 
   /**

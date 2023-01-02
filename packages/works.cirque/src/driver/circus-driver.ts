@@ -21,7 +21,20 @@ export interface IZCircusDriver {
    * @returns
    *        The attribute value, or null if no such value exists.
    */
-  attribute(attribute: string): Promise<string | null>;
+  attribute<T extends string>(attribute: string): Promise<T | null>;
+
+  /**
+   * Returns an attribute of the driver.
+   *
+   * @param attribute
+   *        The attribute to retrieve.
+   * @param fallback
+   *        The fallback value in case the attribute is not set.
+   *
+   * @returns
+   *        The attribute value, or null if no such value exists.
+   */
+  attribute<T extends string>(attribute: string, fallback: T): Promise<T>;
 
   /**
    * Gets the tag (node name) of the driver context.

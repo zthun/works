@@ -48,8 +48,9 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
-  public attribute(attribute: string): Promise<string | null> {
-    return Promise.resolve(this._element.getAttribute(attribute));
+  public attribute<T extends string>(attribute: string, fallback: T | null = null): Promise<T | null> {
+    const attr = this._element.getAttribute(attribute) as T;
+    return Promise.resolve(attr == null ? fallback : attr);
   }
 
   /**
