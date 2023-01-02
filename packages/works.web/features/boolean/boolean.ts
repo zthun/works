@@ -2,20 +2,17 @@ import { Given, Then, When } from '@cucumber/cucumber';
 import assert from 'assert';
 import { ZBooleanPageComponentModel } from '../../src/web-apps/components/boolean/boolean-page.cm';
 import { ZLearnWorld } from '../learn-world';
+import { ZLearnRoute } from '../routes';
 
-interface IZBooleanPage {
-  page: ZBooleanPageComponentModel;
-}
-
-Given('I have navigated to the boolean demo page', async function (this: ZLearnWorld<IZBooleanPage>) {
-  await this.navigate('/web-apps/components/boolean');
+Given('I have navigated to the boolean demo page', async function (this: ZLearnWorld<ZBooleanPageComponentModel>) {
+  await this.navigate(ZLearnRoute.webApps.components.boolean);
   this.parameters.page = await this.create(ZBooleanPageComponentModel, ZBooleanPageComponentModel.Selector);
 });
 
 When(
   'I click on the {string} while it is {string} on the boolean page',
   async function (
-    this: ZLearnWorld<IZBooleanPage>,
+    this: ZLearnWorld<ZBooleanPageComponentModel>,
     demo: 'checkbox' | 'switch',
     state: 'off' | 'on' | 'indeterminate'
   ) {
@@ -29,7 +26,7 @@ When(
 
 When(
   'I click the {string} button on the boolean page',
-  async function (this: ZLearnWorld<IZBooleanPage>, state: 'on' | 'off' | 'indeterminate') {
+  async function (this: ZLearnWorld<ZBooleanPageComponentModel>, state: 'on' | 'off' | 'indeterminate') {
     const { page } = this.parameters;
     const button = await page[state]();
     await button.click();
@@ -38,7 +35,7 @@ When(
 
 When(
   'I toggle the switch for the disabled option to {string} on the boolean page',
-  async function (this: ZLearnWorld<IZBooleanPage>, value: 'on' | 'off') {
+  async function (this: ZLearnWorld<ZBooleanPageComponentModel>, value: 'on' | 'off') {
     const { page } = this.parameters;
     const disabled = await page.disabled();
     const to = value === 'on';
@@ -48,7 +45,7 @@ When(
 
 Then(
   'all demo components are checked {string} on the boolean page',
-  async function (this: ZLearnWorld<IZBooleanPage>, checked: 'on' | 'off') {
+  async function (this: ZLearnWorld<ZBooleanPageComponentModel>, checked: 'on' | 'off') {
     const { page } = this.parameters;
     const checkbox = await page.checkbox();
     const switcher = await page.switch();
@@ -62,7 +59,7 @@ Then(
 
 Then(
   'all demo components are disabled {string} on the boolean page',
-  async function (this: ZLearnWorld<IZBooleanPage>, value: 'on' | 'off') {
+  async function (this: ZLearnWorld<ZBooleanPageComponentModel>, value: 'on' | 'off') {
     const { page } = this.parameters;
     const checkbox = await page.checkbox();
     const switcher = await page.switch();
@@ -76,7 +73,7 @@ Then(
 
 Then(
   'all demo components that support the indeterminate state on the page are indeterminate',
-  async function (this: ZLearnWorld<IZBooleanPage>) {
+  async function (this: ZLearnWorld<ZBooleanPageComponentModel>) {
     const { page } = this.parameters;
     const checkbox = await page.checkbox();
     const value = await checkbox.value();
@@ -86,7 +83,7 @@ Then(
 
 Then(
   'all demo components that do not support the indeterminate state on the page are off',
-  async function (this: ZLearnWorld<IZBooleanPage>) {
+  async function (this: ZLearnWorld<ZBooleanPageComponentModel>) {
     const { page } = this.parameters;
     const switcher = await page.switch();
     const value = await switcher.value();

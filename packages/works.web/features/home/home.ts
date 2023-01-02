@@ -5,31 +5,27 @@ import { ZMicroservicesPageComponentModel } from '../../src/microservices/micros
 import { ZWebAppsPageComponentModel } from '../../src/web-apps/web-apps-page.cm';
 import { ZLearnWorld } from '../learn-world';
 
-interface IZHome {
-  home: ZHomePageComponentModel;
-}
-
-Given('I navigate to the home page', async function (this: ZLearnWorld<IZHome>) {
+Given('I navigate to the home page', async function (this: ZLearnWorld<ZHomePageComponentModel>) {
   await this.navigate('/home');
-  this.parameters.home = await this.create(ZHomePageComponentModel, ZHomePageComponentModel.Selector);
+  this.parameters.page = await this.create(ZHomePageComponentModel, ZHomePageComponentModel.Selector);
 });
 
-When('I click the Get Started button under Web Apps', async function (this: ZLearnWorld<IZHome>) {
-  const { home } = this.parameters;
-  await home.openWebApps();
+When('I click the Get Started button under Web Apps', async function (this: ZLearnWorld<ZHomePageComponentModel>) {
+  const { page } = this.parameters;
+  await page.openWebApps();
 });
 
-Then('I am navigated to the Web Apps page', async function (this: ZLearnWorld<IZHome>) {
+Then('I am navigated to the Web Apps page', async function (this: ZLearnWorld<ZHomePageComponentModel>) {
   const webApps = await this.create(ZWebAppsPageComponentModel, ZWebAppsPageComponentModel.Selector);
   assert.ok(webApps);
 });
 
-When('I click the Get Started button under Microservices', async function (this: ZLearnWorld<IZHome>) {
-  const { home } = this.parameters;
-  await home.openMicroservices();
+When('I click the Get Started button under Microservices', async function (this: ZLearnWorld<ZHomePageComponentModel>) {
+  const { page } = this.parameters;
+  await page.openMicroservices();
 });
 
-Then('I am navigated to the Microservices page', async function (this: ZLearnWorld<IZHome>) {
+Then('I am navigated to the Microservices page', async function (this: ZLearnWorld<ZHomePageComponentModel>) {
   const microservices = await this.create(ZMicroservicesPageComponentModel, ZMicroservicesPageComponentModel.Selector);
   assert.ok(microservices);
 });
