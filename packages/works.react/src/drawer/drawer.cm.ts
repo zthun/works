@@ -1,4 +1,5 @@
 import { IZCircusDriver, ZCircusActBuilder, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
+import { ZStateAnchor } from '../theme/state-anchor';
 
 /**
  * Represents the component model for a drawer.
@@ -47,5 +48,15 @@ export class ZDrawerComponentModel extends ZCircusComponentModel {
   public async escape() {
     const act = new ZCircusActBuilder().press(ZCircusKeyboardQwerty.escape).build();
     return this.driver.perform(act);
+  }
+
+  /**
+   * Gets the current anchor position.
+   *
+   * @returns
+   *    The state anchor for the drawer.
+   */
+  public async anchor(): Promise<ZStateAnchor> {
+    return await this.driver.attribute<ZStateAnchor>('data-anchor', ZStateAnchor.Left);
   }
 }

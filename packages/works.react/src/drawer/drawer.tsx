@@ -29,7 +29,7 @@ export function ZDrawer(props: IZDrawer) {
   const _className = cssClass('ZDrawer-root', className);
 
   return (
-    <Drawer className={_className} anchor={anchor} open={open} onClose={onClose}>
+    <Drawer className={_className} anchor={anchor} open={open} onClose={onClose} data-anchor={anchor}>
       {children}
     </Drawer>
   );
