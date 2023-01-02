@@ -50,7 +50,11 @@ export function ZChoicePage() {
    *        The JSX that renders the selected items.
    */
   function renderSelected() {
-    return values.map((s) => <li key={s}>{s}</li>);
+    return values.map((s) => (
+      <li key={s} className='ZChoicePage-value'>
+        {s}
+      </li>
+    ));
   }
 
   /**
@@ -129,7 +133,7 @@ export function ZChoicePage() {
             onValueChange={setValues}
             options={Superheroes}
             renderOption={renderSuperhero}
-            name='drop-down'
+            name='dropdown'
           />
 
           <ZChoiceAutocomplete
@@ -157,9 +161,9 @@ export function ZChoicePage() {
         <ZH3>Options</ZH3>
 
         <ZGridLayout gap={ZSizeFixed.Small}>
-          <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' />
-          <ZBooleanSwitch value={multiple} onValueChange={setMultiple} label='Multiple' />
-          <ZBooleanSwitch value={indelible} onValueChange={setIndelible} label='Indelible' />
+          <ZBooleanSwitch value={disabled} onValueChange={setDisabled} label='Disabled' name='disabled' />
+          <ZBooleanSwitch value={multiple} onValueChange={setMultiple} label='Multiple' name='multiple' />
+          <ZBooleanSwitch value={indelible} onValueChange={setIndelible} label='Indelible' name='indelible' />
         </ZGridLayout>
       </ZPaddedBox>
     </ZCard>
