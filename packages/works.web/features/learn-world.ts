@@ -4,9 +4,19 @@ import { ZCircusSetupChrome } from '@zthun/works.cirque-du-selenium';
 import { ZUrlBuilder } from '@zthun/works.url';
 
 /**
+ * Represents a modifiable set of parameters.
+ */
+export interface IZLearnPage<T extends ZCircusComponentModel | never> {
+  /**
+   * The page component model.
+   */
+  page: T;
+}
+
+/**
  * The current world
  */
-export class ZLearnWorld<T = any> extends World<T> {
+export class ZLearnWorld<T extends ZCircusComponentModel | never = never> extends World<IZLearnPage<T>> {
   private _driver: IZCircusDriver | null = null;
 
   /**
