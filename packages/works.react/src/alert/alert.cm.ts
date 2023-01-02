@@ -44,6 +44,17 @@ export class ZAlertComponentModel {
   }
 
   /**
+   * Gets the timeout for the alert.
+   *
+   * @returns
+   *        The timeout of the alert or null if the alert has
+   *        died.
+   */
+  public timeout(): Promise<number | null> {
+    return this._valueIfAlive(null, (d) => d.attribute('data-alert-timeout', 'Infinity').then((t) => +t));
+  }
+
+  /**
    * Gets the header of the alert.
    *
    * @returns

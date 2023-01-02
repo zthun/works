@@ -58,7 +58,13 @@ export function ZAlertList() {
   const components = alerts.map((alert) => {
     const handleCloseAlert = handleClose.bind(this, alert);
     return (
-      <div key={alert._id} className='ZAlertList-alert' data-alert-id={alert._id} data-alert-severity={alert.severity}>
+      <div
+        key={alert._id}
+        className='ZAlertList-alert'
+        data-alert-id={alert._id}
+        data-alert-severity={alert.severity}
+        data-alert-timeout={alert.timeToLive}
+      >
         <Alert className={styles.classes.alert} severity={alert.severity} onClose={handleCloseAlert}>
           {renderHeader(alert)}
           <div className='ZAlertList-alert-message'>{alert.message}</div>
