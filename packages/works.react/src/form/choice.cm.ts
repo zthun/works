@@ -85,9 +85,10 @@ export class ZChoiceComponentModel extends ZCircusComponentModel {
    *        A promise that resolves once the list is
    *        hidden.
    */
-  public close(): Promise<void> {
+  public async close(): Promise<void> {
     const act = new ZCircusActBuilder().press(ZCircusKeyboardQwerty.escape).build();
-    return this.driver.perform(act);
+    await this.driver.perform(act);
+    await this.driver.wait(() => this.opened().then((b) => !b));
   }
 
   /**
