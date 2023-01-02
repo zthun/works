@@ -66,6 +66,7 @@ export function ZDrawerPage() {
               avatar={<CloseIcon fontSize='inherit' color='inherit' />}
               fashion={success}
               onClick={now}
+              name='close'
             />
           </ZPaddedBox>
         </ZDrawerButton>
@@ -83,6 +84,7 @@ export function ZDrawerPage() {
             identifier={identity}
             renderOption={startCase}
             indelible
+            name='anchor'
           />
         </ZGridLayout>
       </ZPaddedBox>
