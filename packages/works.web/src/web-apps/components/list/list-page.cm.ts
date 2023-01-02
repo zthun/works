@@ -13,9 +13,12 @@ export class ZListPageComponentModel extends ZCircusComponentModel {
    * @returns
    *      The page alerts.
    */
-  public async alertList(): Promise<ZAlertListComponentModel> {
-    const root = await this.driver.select(ZAlertListComponentModel.Selector);
-    return new ZAlertListComponentModel(root);
+  public async alerts(): Promise<ZAlertListComponentModel> {
+    return ZCircusComponentModel.create(
+      await this.driver.body(),
+      ZAlertListComponentModel,
+      ZAlertListComponentModel.Selector
+    );
   }
 
   /**
@@ -25,7 +28,6 @@ export class ZListPageComponentModel extends ZCircusComponentModel {
    *      The page list.
    */
   public async list(): Promise<ZListComponentModel> {
-    const root = await this.driver.select(ZListComponentModel.Selector);
-    return new ZListComponentModel(root);
+    return ZCircusComponentModel.create(this.driver, ZListComponentModel, ZListComponentModel.Selector);
   }
 }
