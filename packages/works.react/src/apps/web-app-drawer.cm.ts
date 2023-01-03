@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import { required } from '@zthun/works.core';
 import { first } from 'lodash';
 import { ZDrawerButtonComponentModel } from '../drawer/drawer-button.cm';
@@ -19,7 +19,7 @@ export class ZWebAppDrawerComponentModel extends ZCircusComponentModel {
    *        The underlying drawer button.
    */
   public async button(): Promise<ZDrawerButtonComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZDrawerButtonComponentModel, ZDrawerButtonComponentModel.Selector);
+    return ZCircusBy.first(this.driver, ZDrawerButtonComponentModel);
   }
 
   /**
@@ -33,7 +33,7 @@ export class ZWebAppDrawerComponentModel extends ZCircusComponentModel {
     const drawer = await button.open();
     const container = await drawer.root();
     await ZSuspenseComponentModel.load(container);
-    const list = await ZCircusComponentModel.create(container, ZListComponentModel, ZListComponentModel.Selector);
+    const list = await ZCircusBy.first(container, ZListComponentModel);
     const items = await list.items();
     return items.map((i) => new ZListLineItemComponentModel(i));
   }
