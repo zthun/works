@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/works.jest';
+import { createMocked } from '@zthun/spellcraft-jest';
 import { ZLogEntryBuilder } from '../log/log-entry';
 import { IZLogger } from '../log/logger';
 import { ZLoggerComposite } from './logger-composite';

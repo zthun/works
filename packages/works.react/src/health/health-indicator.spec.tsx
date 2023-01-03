@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
 
+import { createMocked } from '@zthun/spellcraft-jest';
 import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
-import { createMocked } from '@zthun/works.jest';
 import { noop } from 'lodash';
 import React from 'react';
 import { ZHealthIndicator } from './health-indicator';

@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
+import { createMocked } from '@zthun/spellcraft-jest';
 import { IZConfigEntry } from '@zthun/works.core';
 import { ZVaultClient } from '@zthun/works.microservices';
 import { flatten } from 'lodash';
-import { createMocked } from '../../../works.jest/src/spy/create-mocked.function';
 import { ZConfigEntries, ZConfigModule } from './config.module';
 
 describe('ZConfigModule', () => {

@@ -4,7 +4,6 @@
     "baseUrl": ".",
     "declarationDir": "dist/types",
     "paths": {
-      "@zthun/works.jest": ["../works.jest/src/index"],
       "@zthun/works.class": ["../works.class/src/index"],
       "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.dal": ["../works.dal/src/index"],

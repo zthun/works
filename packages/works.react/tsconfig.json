@@ -13,7 +13,6 @@
       "@zthun/works.error": ["../works.error/src/index"],
       "@zthun/works.fashion": ["../works.fashion/src/index"],
       "@zthun/works.http": ["../works.http/src/index"],
-      "@zthun/works.jest": ["../works.jest/src/index"],
       "@zthun/works.logger": ["../works.logger/src/index"],
       "@zthun/works.message": ["../works.message/src/index"],
       "@zthun/works.url": ["../works.url/src/index"]

@@ -1,4 +1,5 @@
 /* eslint-disable require-jsdoc */
+import { createMocked } from '@zthun/spellcraft-jest';
 import {
   IZEmail,
   IZEmailEnvelope,
@@ -7,7 +8,6 @@ import {
   ZEmailEnvelopeBuilder,
   ZServerBuilder
 } from '@zthun/works.core';
-import { createMocked } from '@zthun/works.jest';
 import { first } from 'lodash';
 import { createTransport } from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';

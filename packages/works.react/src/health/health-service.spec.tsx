@@ -1,4 +1,5 @@
 /* eslint-disable require-jsdoc */
+import { createMocked } from '@zthun/spellcraft-jest';
 import { ZCircusSetupHook } from '@zthun/works.cirque-du-react';
 import {
   ZHttpCodeServer,
@@ -7,7 +8,6 @@ import {
   ZHttpResultBuilder,
   ZHttpServiceMock
 } from '@zthun/works.http';
-import { createMocked } from '@zthun/works.jest';
 import React from 'react';
 import { IZHealthService, useHealth, ZHealthService, ZHealthServiceContext } from './health-service';
 

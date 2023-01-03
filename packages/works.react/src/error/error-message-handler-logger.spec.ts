@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { createMocked } from '@zthun/works.jest';
+import { createMocked } from '@zthun/spellcraft-jest';
 import { IZLogger, ZLogLevel } from '@zthun/works.logger';
 import { ZErrorMessageHandlerLogger } from './error-message-handler-logger';
 

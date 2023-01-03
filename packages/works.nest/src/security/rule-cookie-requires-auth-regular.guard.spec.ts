@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { ForbiddenException } from '@nestjs/common';
+import { createMocked } from '@zthun/spellcraft-jest';
 import { ZUserBuilder } from '@zthun/works.core';
-import { createMocked } from '@zthun/works.jest';
 import { ZRuleCookieRequiresAuthRegular } from './rule-cookie-requires-auth-regular.guard';
 
 describe('ZRuleCookieRequiresAuthRegular', () => {

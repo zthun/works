@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
+import { createMocked } from '@zthun/spellcraft-jest';
 import { IZCookie, IZUser, ZCookieBuilder, ZUserBuilder } from '@zthun/works.core';
-import { createMocked } from '@zthun/works.jest';
 import { ZCookiesClient, ZUsersClient, ZVaultClient, ZVaultMemoryClient } from '@zthun/works.microservices';
 import { Request } from 'express';
 import { v4 } from 'uuid';

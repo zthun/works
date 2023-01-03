@@ -1,6 +1,6 @@
 import { ClientProxy } from '@nestjs/microservices';
+import { createMocked } from '@zthun/spellcraft-jest';
 import { ZConfigEntryBuilder } from '@zthun/works.core';
-import { createMocked } from '@zthun/works.jest';
 import { of } from 'rxjs';
 import { ZVaultClient } from './vault.client';
 

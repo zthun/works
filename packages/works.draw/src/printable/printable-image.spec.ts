@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/works.jest';
+import { createMocked } from '@zthun/spellcraft-jest';
 import { get2d } from '../canvas/renderer';
 import { IZImageReader } from '../image/image-reader';
 import { ZPrintableImage } from './printable-image';

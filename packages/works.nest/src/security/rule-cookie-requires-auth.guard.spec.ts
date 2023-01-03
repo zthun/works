@@ -1,6 +1,6 @@
 import { ExecutionContext, HttpArgumentsHost } from '@nestjs/common/interfaces';
+import { createMocked } from '@zthun/spellcraft-jest';
 import { ZUserBuilder } from '@zthun/works.core';
-import { createMocked } from '@zthun/works.jest';
 import { Request } from 'express';
 import { ZRuleCookieRequiresAuth } from './rule-cookie-requires-auth.guard';
 import { ZSecurityService } from './security.service';

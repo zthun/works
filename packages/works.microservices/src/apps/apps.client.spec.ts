@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { ClientProxy } from '@nestjs/microservices';
-import { createMocked } from '@zthun/works.jest';
+import { createMocked } from '@zthun/spellcraft-jest';
 import { of } from 'rxjs';
 import { ZAppsClient } from './apps.client';
 

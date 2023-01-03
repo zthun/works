@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { ConflictException } from '@nestjs/common';
+import { createMocked } from '@zthun/spellcraft-jest';
 import { ZUserBuilder } from '@zthun/works.core';
-import { createMocked } from '@zthun/works.jest';
 import { v4 } from 'uuid';
 import { ZRuleCookieRequiresAuthDeactivated } from './rule-cookie-requires-auth-deactivated.guard';
 

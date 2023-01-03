@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
+import { createMocked } from '@zthun/spellcraft-jest';
 import { ZUserBuilder } from '@zthun/works.core';
-import { createMocked } from '@zthun/works.jest';
 import { ZRuleCookieRequiresAuthAny } from './rule-cookie-requires-auth-any.guard';
 
 describe('ZRuleCookieRequestAuthAny', () => {

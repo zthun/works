@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/works.jest';
+import { createMocked } from '@zthun/spellcraft-jest';
 import { IZAlertService } from '@zthun/works.message';
 import { ZErrorMessageHandlerAlert } from './error-message-handler-alert';
 

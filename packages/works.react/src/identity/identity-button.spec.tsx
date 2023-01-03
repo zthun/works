@@ -1,9 +1,9 @@
 /* eslint-disable require-jsdoc */
 
+import { createMocked } from '@zthun/spellcraft-jest';
 import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { IZProfile, IZWebApp, ZProfileBuilder, ZWebAppBuilder } from '@zthun/works.core';
-import { createMocked } from '@zthun/works.jest';
 import { noop } from 'lodash';
 import React from 'react';
 import { IZWebAppService, ZWebAppServiceContext } from '../apps/web-app-service';

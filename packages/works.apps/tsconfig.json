@@ -6,7 +6,6 @@
     "module": "commonjs",
     "sourceMap": true,
     "paths": {
-      "@zthun/works.jest": ["../works.jest/src/index"],
       "@zthun/works.core": ["../works.core/src/index"]
     }
   },

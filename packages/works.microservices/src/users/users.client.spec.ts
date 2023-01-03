@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
 
 import { ClientProxy } from '@nestjs/microservices';
+import { createMocked } from '@zthun/spellcraft-jest';
 import { ZLoginBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
-import { createMocked } from '@zthun/works.jest';
 import { of } from 'rxjs';
 import { v4 } from 'uuid';
 import { ZUsersClient } from './users.client';

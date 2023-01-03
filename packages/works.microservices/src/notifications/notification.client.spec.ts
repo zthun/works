@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { ClientProxy } from '@nestjs/microservices';
+import { createMocked } from '@zthun/spellcraft-jest';
 import { ZEmailBuilder, ZServerBuilder } from '@zthun/works.core';
-import { createMocked } from '@zthun/works.jest';
 import { of } from 'rxjs';
 import { ZNotificationsClient } from './notifications.client';
 

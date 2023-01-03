@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
+import { createMocked } from '@zthun/spellcraft-jest';
 import { IZConfigEntry, IZWebApp, ZConfigEntryBuilder, ZWebAppBuilder } from '@zthun/works.core';
-import { createMocked } from '@zthun/works.jest';
 import { ZAppsClient, ZVaultClient, ZVaultMemoryClient } from '@zthun/works.microservices';
 import { ZApplicationsController } from './applications.controller';
 
