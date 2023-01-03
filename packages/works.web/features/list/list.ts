@@ -2,12 +2,12 @@ import { Then, When } from '@cucumber/cucumber';
 import { ZAlertSeverity } from '@zthun/works.message';
 import { ZListLineItemComponentModel } from '@zthun/works.react';
 import assert from 'assert';
+import { ZLearnPath } from '../../src/routes';
 import { ZListPageComponentModel } from '../../src/web-apps/components/list/list-page.cm';
 import { ZLearnWorld } from '../learn-world';
-import { ZLearnRoute } from '../routes';
 
 When('I navigate to the list demo page', async function (this: ZLearnWorld<ZListPageComponentModel>) {
-  await this.navigate(ZLearnRoute.webApps.components.list);
+  await this.navigate(ZLearnPath.webApps.components.list);
   this.parameters.page = await this.create(ZListPageComponentModel, ZListPageComponentModel.Selector);
 });
 

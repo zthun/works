@@ -29,7 +29,22 @@ import { ZSuspensePage } from './components/suspense/suspense-page';
 import { ZTextPage } from './components/text/text-page';
 import { ZTypographyPage } from './components/typography/typography-page';
 import { ZGettingStartedPage } from './getting-started/getting-started-page';
-import { ZWebAppsComponents } from './web-apps-components';
+import {
+  ZComponentAlerts,
+  ZComponentBoolean,
+  ZComponentButton,
+  ZComponentChoice,
+  ZComponentDrawer,
+  ZComponentFashion,
+  ZComponentList,
+  ZComponentNumber,
+  ZComponentPopup,
+  ZComponents,
+  ZComponentSuspense,
+  ZComponentText,
+  ZComponentTypography,
+  ZWebAppsComponents
+} from './web-apps-components';
 
 /**
  * Renders the home page.
@@ -43,19 +58,19 @@ export function ZWebAppsPage() {
 
   const renderDetails = () => (
     <ZRouteMap>
-      <ZRoute path='components'>
-        <ZRoute path='alerts' element={<ZAlertsPage />} />
-        <ZRoute path='boolean' element={<ZBooleanPage />} />
-        <ZRoute path='button' element={<ZButtonPage />} />
-        <ZRoute path='choice' element={<ZChoicePage />} />
-        <ZRoute path='drawer' element={<ZDrawerPage />} />
-        <ZRoute path='fashion' element={<ZFashionPage />} />
-        <ZRoute path='list' element={<ZListPage />} />
-        <ZRoute path='number' element={<ZNumberPage />} />
-        <ZRoute path='popup' element={<ZPopupPage />} />
-        <ZRoute path='suspense' element={<ZSuspensePage />} />
-        <ZRoute path='text' element={<ZTextPage />} />
-        <ZRoute path='typography' element={<ZTypographyPage />} />
+      <ZRoute path={ZComponents.path}>
+        <ZRoute path={ZComponentAlerts.path} element={<ZAlertsPage />} />
+        <ZRoute path={ZComponentBoolean.path} element={<ZBooleanPage />} />
+        <ZRoute path={ZComponentButton.path} element={<ZButtonPage />} />
+        <ZRoute path={ZComponentChoice.path} element={<ZChoicePage />} />
+        <ZRoute path={ZComponentDrawer.path} element={<ZDrawerPage />} />
+        <ZRoute path={ZComponentFashion.path} element={<ZFashionPage />} />
+        <ZRoute path={ZComponentList.path} element={<ZListPage />} />
+        <ZRoute path={ZComponentNumber.path} element={<ZNumberPage />} />
+        <ZRoute path={ZComponentPopup.path} element={<ZPopupPage />} />
+        <ZRoute path={ZComponentSuspense.path} element={<ZSuspensePage />} />
+        <ZRoute path={ZComponentText.path} element={<ZTextPage />} />
+        <ZRoute path={ZComponentTypography.path} element={<ZTypographyPage />} />
         <ZRoute path='' element={<ZComponentsPage />} />
       </ZRoute>
       <ZRoute path='/' element={<ZGettingStartedPage />} />

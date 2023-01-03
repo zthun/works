@@ -1,11 +1,11 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import assert from 'assert';
+import { ZLearnPath } from '../../src/routes';
 import { ZButtonPageComponentModel } from '../../src/web-apps/components/button/button-page.cm';
 import { ZLearnWorld } from '../learn-world';
-import { ZLearnRoute } from '../routes';
 
 Given('I navigate to the button demo page', async function (this: ZLearnWorld<ZButtonPageComponentModel>) {
-  await this.navigate(ZLearnRoute.webApps.components.button);
+  await this.navigate(ZLearnPath.webApps.components.button);
   this.parameters.page = await this.create(ZButtonPageComponentModel, ZButtonPageComponentModel.Selector);
 });
 

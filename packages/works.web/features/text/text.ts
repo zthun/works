@@ -1,8 +1,8 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import assert from 'assert';
+import { ZLearnPath } from '../../src/routes';
 import { ZTextPageComponentModel } from '../../src/web-apps/components/text/text-page.cm';
 import { ZLearnWorld } from '../learn-world';
-import { ZLearnRoute } from '../routes';
 
 type FieldName = 'text' | 'password' | 'reveal' | 'area';
 type OptionName = 'disabled' | 'readOnly' | 'required' | 'adornments';
@@ -14,7 +14,7 @@ const LOREM3 = 'Ut labore et dolore magna aliqua. Massa sed elementum tempus ege
 // cspell:enable
 
 Given('I navigate to the text demo page', async function (this: ZLearnWorld<ZTextPageComponentModel>) {
-  await this.navigate(ZLearnRoute.webApps.components.text);
+  await this.navigate(ZLearnPath.webApps.components.text);
   this.parameters.page = await this.create(ZTextPageComponentModel, ZTextPageComponentModel.Selector);
 });
 

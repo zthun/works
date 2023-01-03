@@ -3,14 +3,14 @@ import { sleep } from '@zthun/works.core';
 import { ZAlertSeverity } from '@zthun/works.message';
 import { ZButtonComponentModel } from '@zthun/works.react';
 import assert from 'assert';
+import { ZLearnPath } from '../../src/routes';
 import { ZAlertsPageComponentModel } from '../../src/web-apps/components/alerts/alerts-page.cm';
 import { ZLearnWorld } from '../learn-world';
-import { ZLearnRoute } from '../routes';
 
 const TIME = 10000;
 
 Given('I navigate to the alert page', async function (this: ZLearnWorld<ZAlertsPageComponentModel>) {
-  await this.navigate(ZLearnRoute.webApps.components.alerts);
+  await this.navigate(ZLearnPath.webApps.components.alerts);
   this.parameters.page = await this.create(ZAlertsPageComponentModel, ZAlertsPageComponentModel.Selector);
 });
 

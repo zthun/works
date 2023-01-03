@@ -14,6 +14,12 @@ import WarningIcon from '@mui/icons-material/Warning';
 import { ZRouteOptionBuilder } from '@zthun/works.core';
 import React from 'react';
 
+export const ZComponents = new ZRouteOptionBuilder()
+  .name('Components')
+  .path('components')
+  .description('Components')
+  .build();
+
 export const ZComponentAlerts = new ZRouteOptionBuilder()
   .name('Alerts')
   .path('alerts')
