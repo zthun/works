@@ -4,6 +4,15 @@
 export interface IZRouteOption {
   /**
    * The owner of the api route.
+   *
+   * This can be any string identifier that
+   * marks ownership of the route.  If your
+   * routing structure has children, then
+   * this can be the path to the parent route;
+   * If this option represents a rest endpoint,
+   * then it can be the route of the application
+   * service that owns the option.  It's usage
+   * is really up to you.
    */
   owner?: string;
 
@@ -33,6 +42,9 @@ export interface IZRouteOption {
 
   /**
    * The http method to access the route.
+   *
+   * This is optional and only really matters when creating
+   * route options for a rest api.
    */
   method?: 'get' | 'put' | 'post' | 'delete' | 'patch' | 'options' | 'head';
 }
