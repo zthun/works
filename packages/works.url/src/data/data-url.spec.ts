@@ -1,6 +1,4 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { identity } from 'lodash';
 import { ZMimeTypeText } from '../mime/mime-type-text';
 import { ZDataUrlBuilder } from './data-url';
 
@@ -12,40 +10,30 @@ describe('ZDataUrlBuilder', () => {
   describe('Properties', () => {
     it('should default to the empty data uri.', () => {
       const expected = 'data:,';
-      assertBuilderSetsProperty(expected, createTestTarget, identity, identity);
+      expect(createTestTarget().build()).toEqual(expected);
     });
 
     it('should set the raw data.', () => {
       const expected = 'data:text/plain,hello';
-      assertBuilderSetsProperty(
-        expected,
-        createTestTarget,
-        (t) => t.mimeType(ZMimeTypeText.Plain).buffer(Buffer.from('hello')),
-        identity
-      );
+      expect(createTestTarget().mimeType(ZMimeTypeText.Plain).buffer(Buffer.from('hello')).build()).toEqual(expected);
     });
 
     it('should default the mime type to text/plain', () => {
       const expected = 'data:,hello';
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.buffer('hello'), identity);
+      expect(createTestTarget().buffer('hello').build()).toEqual(expected);
     });
 
     it('should encode the data in base 64.', () => {
       const raw = 'one,two,three';
       const data = Buffer.from(raw).toString('base64');
       const expected = `data:text/css;base64,${data}`;
-      assertBuilderSetsProperty(
-        expected,
-        createTestTarget,
-        (t) => t.mimeType(ZMimeTypeText.CSS).buffer(raw).encode('base64'),
-        identity
-      );
+      expect(createTestTarget().mimeType(ZMimeTypeText.CSS).buffer(raw).encode('base64').build()).toEqual(expected);
     });
 
     it('should escape necessary characters if the encoding is utf8.', () => {
       const raw = 'Hello, World!';
       const expected = 'data:,Hello%2C%20World%21';
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.buffer(raw), identity);
+      expect(createTestTarget().buffer(raw).build()).toEqual(expected);
     });
   });
 

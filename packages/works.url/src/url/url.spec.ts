@@ -1,7 +1,5 @@
 /* eslint-disable require-jsdoc */
 
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { identity } from 'lodash';
 import { IZUrlInfo, ZUrlBuilder } from './url';
 
 describe('ZUrlBuilder', () => {
@@ -37,115 +35,100 @@ describe('ZUrlBuilder', () => {
   describe('Parts', () => {
     it('defaults the protocol and hostname.', () => {
       const expected = 'http://localhost';
-      assertBuilderSetsProperty(expected, () => new ZUrlBuilder(), identity, identity);
+      expect(new ZUrlBuilder().build()).toEqual(expected);
     });
 
     it('cleans the protocol.', () => {
       const expected = `${protocol}://${hostname}`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.protocol(`${protocol}://`), identity);
+      expect(createTestTarget().protocol(`${protocol}://`).build()).toEqual(expected);
     });
 
     it('sets the correct host.', () => {
       const expected = `${protocol}://www.yahoo.com`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.hostname('www.yahoo.com'), identity);
+      expect(createTestTarget().hostname('www.yahoo.com').build()).toEqual(expected);
     });
 
     it('cleans the host.', () => {
       const expected = `${protocol}://${hostname}`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.hostname(`////////${hostname}////`), identity);
+      expect(createTestTarget().hostname(`////////${hostname}////`).build()).toEqual(expected);
     });
 
     it('sets the correct path.', () => {
       const expected = `${protocol}://${hostname}/a/b/c/d`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.append('a/b').append('/c/d/'), identity);
+      expect(createTestTarget().append('a/b').append('/c/d/').build()).toEqual(expected);
     });
 
     it('cleans the path.', () => {
       const expected = `${protocol}://${hostname}/a/b/c/d`;
-      assertBuilderSetsProperty(
-        expected,
-        createTestTarget,
-        (t) => t.append('////a/b/////').append('c').append('/d///'),
-        identity
-      );
+      expect(createTestTarget().append('////a/b/////').append('c').append('/d///').build()).toEqual(expected);
     });
 
     it('sets the hash.', () => {
       const expected = `${protocol}://${hostname}/a/b#abcd`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.append('/a/b').hash('abcd'), identity);
+      expect(createTestTarget().append('/a/b').hash('abcd').build()).toEqual(expected);
     });
 
     it('sets the port.', () => {
       const expected = `${protocol}://${hostname}:8080`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.port(8080), identity);
+      expect(createTestTarget().port(8080).build()).toEqual(expected);
     });
 
     it('ignores port 0.', () => {
       const expected = `http://${hostname}`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.protocol('http').port(0), identity);
+      expect(createTestTarget().protocol('http').port(0).build()).toEqual(expected);
     });
 
     it('ignores default ports.', () => {
       const expected = `http://${hostname}`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.protocol('http').port(80), identity);
+      expect(createTestTarget().protocol('http').port(80).build()).toEqual(expected);
     });
 
     it('adds the search.', () => {
       const expected = `${protocol}://${hostname}/?paramA=a&paramB=b`;
-      assertBuilderSetsProperty(
-        expected,
-        createTestTarget,
-        (t) => t.param('paramA', 'a').param('paramB', 'b'),
-        identity
-      );
+      expect(createTestTarget().param('paramA', 'a').param('paramB', 'b').build()).toEqual(expected);
     });
 
     it('adds a subdomain.', () => {
       const expected = `${protocol}://mail.${hostname}`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.subdomain('mail'), identity);
+      expect(createTestTarget().subdomain('mail').build()).toEqual(expected);
     });
 
     it('replaces a subdomain.', () => {
       const expected = `${protocol}://mail.${hostname}`;
-      assertBuilderSetsProperty(
-        expected,
-        createTestTarget,
-        (t) => t.subdomain('email').popSubdomain().subdomain('mail'),
-        identity
-      );
+      expect(createTestTarget().subdomain('email').popSubdomain().subdomain('mail').build()).toEqual(expected);
     });
 
     it('sets the domain as the host if the host is not set.', () => {
       const expected = `${protocol}://mail`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.hostname('').subdomain('mail'), identity);
+      expect(createTestTarget().hostname('').subdomain('mail').build()).toEqual(expected);
     });
 
     it('encodes the parameter values.', () => {
       const valA = 'ab&cd&e//fg';
       const expected = `${protocol}://${hostname}/?paramA=${encodeURIComponent(valA)}`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.param('paramA', valA), identity);
+      expect(createTestTarget().param('paramA', valA).build()).toEqual(expected);
     });
 
     it('sets the user.', () => {
       const expected = `${protocol}://user@${hostname}`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.username('user'), identity);
+      expect(createTestTarget().username('user').build()).toEqual(expected);
     });
 
     it('sets the password.', () => {
       const expected = `${protocol}://user:password@${hostname}`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.username('user').password('password'), identity);
+      expect(createTestTarget().username('user').password('password').build()).toEqual(expected);
     });
 
     it('ignores the password if the user is not set.', () => {
       const expected = `${protocol}://${hostname}`;
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.password('password'), identity);
+      expect(createTestTarget().password('password').build()).toEqual(expected);
     });
   });
 
   describe('Parsing', () => {
     it('correctly parses a url.', () => {
       const expected = 'https://user:password@www.google.com:9086/foo/bar/?valA=a&valB=b#hhh';
-      assertBuilderSetsProperty(expected, createTestTarget, (t, v) => t.parse(v), identity);
+      expect(createTestTarget().parse(expected).build()).toEqual(expected);
     });
 
     it('supports partial uri values.', () => {
@@ -159,34 +142,29 @@ describe('ZUrlBuilder', () => {
     });
 
     it('can be modified.', () => {
-      // Arrange
       const url = 'https://google.com:9086/foo/bar#hhh';
       const expected = 'http://user:password@mail.google.com:9099/a/b/c/?valA=c&valB=d#h32';
-      assertBuilderSetsProperty(
-        expected,
-        createTestTarget,
-        (t) =>
-          t
-            .parse(url)
-            .protocol('http')
-            .port(9099)
-            .path('a')
-            .append('b/c')
-            .param('valA', 'c')
-            .param('valB', 'd')
-            .hash('h32')
-            .username('user')
-            .password('password')
-            .subdomain('mail'),
-        identity
-      );
+      expect(
+        createTestTarget()
+          .parse(url)
+          .protocol('http')
+          .port(9099)
+          .path('a')
+          .append('b/c')
+          .param('valA', 'c')
+          .param('valB', 'd')
+          .hash('h32')
+          .username('user')
+          .password('password')
+          .subdomain('mail')
+          .build()
+      ).toEqual(expected);
     });
 
     it('can be modified to use a different port.', () => {
-      // Arrange
       const url = 'https://www.google.com';
       const expected = 'https://www.google.com:9999';
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.parse(url).port(9999), identity);
+      expect(createTestTarget().parse(url).port(9999).build()).toEqual(expected);
     });
   });
 
@@ -233,14 +211,14 @@ describe('ZUrlBuilder', () => {
 
   describe('Gravatar', () => {
     it('returns the base gravatar url.', () => {
-      assertBuilderSetsProperty(ZUrlBuilder.UrlGravatar, createTestTarget, (t) => t.gravatar(), identity);
+      expect(createTestTarget().gravatar().build()).toEqual(ZUrlBuilder.UrlGravatar);
     });
 
     it('adds the hashed email and size.', () => {
       const hash = 'd41d8cd98f00b204e9800998ecf8427e';
       const size = 256;
       const expected = createTestTarget().parse(ZUrlBuilder.UrlGravatar).append(hash).param('s', `${size}`).build();
-      assertBuilderSetsProperty(expected, createTestTarget, (t) => t.gravatar(hash, size), identity);
+      expect(createTestTarget().gravatar(hash, size).build()).toEqual(expected);
     });
   });
 
