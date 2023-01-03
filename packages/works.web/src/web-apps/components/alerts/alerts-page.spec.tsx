@@ -1,4 +1,6 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+/* eslint-disable require-jsdoc */
+
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { ZAlertSeverity } from '@zthun/works.message';
 import { ZAlertList, ZButtonComponentModel } from '@zthun/works.react';
@@ -7,7 +9,6 @@ import React from 'react';
 import { ZAlertsPage } from './alerts-page';
 import { ZAlertsPageComponentModel } from './alerts-page.cm';
 
-/* eslint-disable require-jsdoc */
 describe('ZAlertsPage', () => {
   async function createTestTarget() {
     const element = (
@@ -18,7 +19,7 @@ describe('ZAlertsPage', () => {
     );
 
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZAlertsPageComponentModel, ZAlertsPageComponentModel.Selector);
+    return ZCircusBy.first(driver, ZAlertsPageComponentModel);
   }
 
   describe('Alert Severity', () => {

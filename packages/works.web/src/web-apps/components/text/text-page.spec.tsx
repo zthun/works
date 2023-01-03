@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { IZCircusKey, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
+import { IZCircusKey, ZCircusBy, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { ZBooleanComponentModel, ZTextComponentModel } from '@zthun/works.react';
 import React from 'react';
@@ -18,7 +18,7 @@ describe('ZTextPage', () => {
   async function createTestTarget() {
     const element = <ZTextPage />;
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZTextPageComponentModel, ZTextPageComponentModel.Selector);
+    return ZCircusBy.first(driver, ZTextPageComponentModel);
   }
 
   async function shouldSetTheValue(expected: string, factory: TextInputFactory, commit?: IZCircusKey) {

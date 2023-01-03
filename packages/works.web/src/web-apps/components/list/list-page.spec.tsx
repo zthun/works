@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { ZAlertSeverity } from '@zthun/works.message';
 import { ZAlertList, ZListLineItemComponentModel } from '@zthun/works.react';
@@ -16,7 +16,7 @@ describe('ZListPage', () => {
       </>
     );
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZListPageComponentModel, ZListPageComponentModel.Selector);
+    return ZCircusBy.first(driver, ZListPageComponentModel);
   }
 
   async function shouldRaiseAnAlert(expected: ZAlertSeverity, name: string) {

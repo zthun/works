@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { ZChoiceComponentModel } from '@zthun/works.react';
 import React from 'react';
@@ -11,7 +11,7 @@ describe('ZChoicePage', () => {
   async function createTestTarget() {
     const element = <ZChoicePage />;
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZChoicePageComponentModel, ZChoicePageComponentModel.Selector);
+    return ZCircusBy.first(driver, ZChoicePageComponentModel);
   }
 
   type ChoicePageFactory = (t: ZChoicePageComponentModel) => Promise<ZChoiceComponentModel>;

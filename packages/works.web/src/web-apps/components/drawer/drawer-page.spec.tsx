@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { ZStateAnchor } from '@zthun/works.react';
 import React from 'react';
@@ -10,7 +10,7 @@ describe('ZDrawerPage', () => {
   async function createTestTarget() {
     const element = <ZDrawerPage />;
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZDrawerPageComponentModel, ZDrawerPageComponentModel.Selector);
+    return ZCircusBy.first(driver, ZDrawerPageComponentModel);
   }
 
   async function shouldPositionDrawer(expected: ZStateAnchor) {

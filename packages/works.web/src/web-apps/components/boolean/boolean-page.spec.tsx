@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { ZBooleanComponentModel, ZButtonComponentModel } from '@zthun/works.react';
 import React from 'react';
@@ -11,7 +11,7 @@ describe('ZBooleanPage', () => {
     const element = <ZBooleanPage />;
 
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZBooleanPageComponentModel, ZBooleanPageComponentModel.Selector);
+    return ZCircusBy.first(driver, ZBooleanPageComponentModel);
   }
 
   async function shouldToggleToValue(

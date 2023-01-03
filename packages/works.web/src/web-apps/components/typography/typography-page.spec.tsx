@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import { ZTypographyPage } from './typography-page';
@@ -10,7 +10,7 @@ describe('ZTypographyPage', () => {
   async function createTestTarget() {
     const element = <ZTypographyPage />;
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZTypographyPageComponentModel, ZTypographyPageComponentModel.Selector);
+    return ZCircusBy.first(driver, ZTypographyPageComponentModel);
   }
 
   it('should render the page.', async () => {

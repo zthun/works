@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { IZFashionCoordination } from '@zthun/works.fashion';
 import { createDefaultFashionDesign, ZAlertList, ZButtonComponentModel } from '@zthun/works.react';
@@ -17,7 +17,7 @@ describe('ZButtonPage', () => {
       </>
     );
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZButtonPageComponentModel, ZButtonPageComponentModel.Selector);
+    return ZCircusBy.first(driver, ZButtonPageComponentModel);
   }
 
   const fashion = createDefaultFashionDesign();
