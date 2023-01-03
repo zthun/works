@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZButtonComponentModel } from '../buttons/button.cm';
 import { ZDrawerComponentModel } from './drawer.cm';
 
@@ -12,7 +12,7 @@ export class ZDrawerButtonComponentModel extends ZCircusComponentModel {
    * Gets the inner button.
    */
   private async _button() {
-    return ZCircusComponentModel.create(this.driver, ZButtonComponentModel, ZButtonComponentModel.Selector);
+    return ZCircusBy.first(this.driver, ZButtonComponentModel);
   }
 
   /**
@@ -34,8 +34,7 @@ export class ZDrawerButtonComponentModel extends ZCircusComponentModel {
    *        then the returned promise is rejected.
    */
   public async drawer(): Promise<ZDrawerComponentModel> {
-    const body = await this.driver.body();
-    return ZCircusComponentModel.create(body, ZDrawerComponentModel, ZDrawerComponentModel.Selector);
+    return ZCircusBy.first(await this.driver.body(), ZDrawerComponentModel);
   }
 
   /**

@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import { ZLink } from './link';
@@ -15,7 +15,7 @@ describe('ZLink', () => {
   async function createTestTarget() {
     const element = <ZLink href={href} name={name} label={label} onClick={onClick} />;
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZLinkComponentModel, ZLinkComponentModel.Selector);
+    return ZCircusBy.first(driver, ZLinkComponentModel);
   }
 
   beforeEach(() => {

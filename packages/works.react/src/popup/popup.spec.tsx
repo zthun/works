@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import { IZPopupAnchorOrigin } from './popup';
@@ -13,7 +13,7 @@ describe('ZPopup', () => {
   async function createTestTarget() {
     const element = <ZPopupButton PopupProps={{ attachOrigin, popupOrigin }}>Content</ZPopupButton>;
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZPopupButtonComponentModel, ZPopupButtonComponentModel.Selector);
+    return ZCircusBy.first(driver, ZPopupButtonComponentModel);
   }
 
   beforeEach(() => {

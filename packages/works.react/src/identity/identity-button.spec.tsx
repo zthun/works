@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
 
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { IZProfile, IZWebApp, ZProfileBuilder, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
@@ -43,7 +42,7 @@ describe('ZIdentityButton', () => {
     );
 
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZIdentityButtonComponentModel, ZIdentityButtonComponentModel.Selector);
+    return ZCircusBy.first(driver, ZIdentityButtonComponentModel);
   }
 
   async function createTestTargetAndLoad() {

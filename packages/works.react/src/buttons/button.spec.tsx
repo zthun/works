@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactNode } from 'react';
 import { ZButton } from './button';
@@ -31,7 +31,7 @@ describe('ZButton', () => {
     );
 
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return await ZCircusComponentModel.create(driver, ZButtonComponentModel, ZButtonComponentModel.selector());
+    return await ZCircusBy.first(driver, ZButtonComponentModel);
   }
 
   beforeEach(() => {

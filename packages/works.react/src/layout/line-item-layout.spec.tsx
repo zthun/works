@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactNode } from 'react';
 import { ZLineItemLayout } from './line-item-layout';
@@ -19,7 +19,7 @@ describe('ZLineItemLayout', () => {
   async function createTestTarget() {
     const element = <ZLineItemLayout prefix={prefix} body={body} suffix={suffix} />;
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZLineItemLayoutComponentModel, ZLineItemLayoutComponentModel.Selector);
+    return ZCircusBy.first(driver, ZLineItemLayoutComponentModel);
   }
 
   describe('Prefix', () => {

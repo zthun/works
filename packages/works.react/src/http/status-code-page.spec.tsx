@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import {
   getHttpCodeCategory,
@@ -32,7 +32,7 @@ describe('ZStatusCodePage', () => {
     );
 
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZStatusCodePageComponentModel, ZStatusCodePageComponentModel.Selector);
+    return ZCircusBy.first(driver, ZStatusCodePageComponentModel);
   }
 
   beforeEach(() => {

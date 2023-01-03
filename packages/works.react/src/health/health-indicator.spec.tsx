@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { createMocked } from '@zthun/works.jest';
 import { noop } from 'lodash';
@@ -20,11 +20,7 @@ describe('ZHealthIndicator', () => {
     );
 
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(
-      driver,
-      ZHealthIndicatorComponentModel,
-      ZHealthIndicatorComponentModel.Selector
-    );
+    return ZCircusBy.first(driver, ZHealthIndicatorComponentModel);
   }
 
   beforeEach(() => {

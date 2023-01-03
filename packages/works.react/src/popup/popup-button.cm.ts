@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZButtonComponentModel } from '../buttons/button.cm';
 import { ZPopupComponentModel } from './popup.cm';
 
@@ -12,7 +12,7 @@ export class ZPopupButtonComponentModel extends ZCircusComponentModel {
    * Retrieves the underlying button component.
    */
   public async button(): Promise<ZButtonComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZButtonComponentModel, ZButtonComponentModel.Selector);
+    return ZCircusBy.first(this.driver, ZButtonComponentModel);
   }
 
   /**
@@ -35,6 +35,6 @@ export class ZPopupButtonComponentModel extends ZCircusComponentModel {
     const button = await this.button();
     await button.click();
     const body = await this.driver.body();
-    return ZCircusComponentModel.create(body, ZPopupComponentModel, ZPopupComponentModel.Selector);
+    return ZCircusBy.first(body, ZPopupComponentModel);
   }
 }

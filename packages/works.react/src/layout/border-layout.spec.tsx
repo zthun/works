@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import { ZBorderLayout } from './border-layout';
@@ -11,7 +11,7 @@ describe('ZBorderLayout', () => {
   async function createTestTarget() {
     const element = <ZBorderLayout onClick={onClick} />;
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZBorderLayoutComponentModel, ZBorderLayoutComponentModel.Selector);
+    return ZCircusBy.first(driver, ZBorderLayoutComponentModel);
   }
 
   beforeEach(() => {

@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { identity, noop, range } from 'lodash';
 import React, { ReactNode } from 'react';
@@ -167,7 +167,7 @@ describe('ZChoice', () => {
       );
 
       const driver = await new ZCircusSetupRenderer(element).setup();
-      return ZCircusComponentModel.create(driver, ZChoiceComponentModel, ZChoiceComponentModel.Selector);
+      return ZCircusBy.first(driver, ZChoiceComponentModel);
     }
 
     it('should render all options when opened', async () => {
@@ -239,7 +239,7 @@ describe('ZChoice', () => {
       );
 
       const driver = await new ZCircusSetupRenderer(element).setup();
-      return ZCircusComponentModel.create(driver, ZChoiceComponentModel, ZChoiceComponentModel.Selector);
+      return ZCircusBy.first(driver, ZChoiceComponentModel);
     }
 
     it('should render all options when opened', async () => {

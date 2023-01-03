@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { IZFashion, ZFashionBuilder, ZHue } from '@zthun/works.fashion';
 import React from 'react';
@@ -15,7 +15,7 @@ describe('ZFashionGrid', () => {
   async function createTestTarget() {
     const element = <ZFashionGrid value={value} onValueChange={onValueChange} />;
     _driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(_driver, ZFashionGridComponentModel, ZFashionGridComponentModel.Selector);
+    return ZCircusBy.first(_driver, ZFashionGridComponentModel);
   }
 
   beforeEach(() => {

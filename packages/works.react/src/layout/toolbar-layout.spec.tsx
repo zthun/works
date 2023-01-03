@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import { ZButton } from '../buttons/button';
@@ -16,7 +16,7 @@ describe('ZToolbarLayout', () => {
     );
 
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZToolbarLayoutComponentModel, ZToolbarLayoutComponentModel.Selector);
+    return ZCircusBy.first(driver, ZToolbarLayoutComponentModel);
   }
 
   it('should render the component.', async () => {

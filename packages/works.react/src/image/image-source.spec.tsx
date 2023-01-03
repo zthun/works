@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { ZDataUrlBuilder, ZMimeTypeImage, ZUrlBuilder } from '@zthun/works.url';
 import React from 'react';
@@ -15,7 +15,7 @@ describe('ZImageSource', () => {
   async function createTestTarget() {
     const element = <ZImageSource src={src} name={name} />;
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZImageSourceComponentModel, ZImageSourceComponentModel.Selector);
+    return ZCircusBy.first(driver, ZImageSourceComponentModel);
   }
 
   beforeEach(() => {

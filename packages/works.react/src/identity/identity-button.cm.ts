@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZButtonComponentModel } from '../buttons/button.cm';
 
 export type ZIdentityButtonState = 'authenticated' | 'unauthenticated' | 'loading';
@@ -16,7 +16,7 @@ export class ZIdentityButtonComponentModel extends ZCircusComponentModel {
    *        The component model for the button.
    */
   public button(): Promise<ZButtonComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZButtonComponentModel, ZButtonComponentModel.Selector);
+    return ZCircusBy.first(this.driver, ZButtonComponentModel);
   }
 
   /**

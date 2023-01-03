@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactElement } from 'react';
 import { ZBooleanCheckbox } from './boolean-checkbox';
@@ -12,7 +12,7 @@ describe('ZBoolean', () => {
 
   async function createComponentModel(element: ReactElement) {
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZBooleanComponentModel, ZBooleanComponentModel.selector());
+    return ZCircusBy.first(driver, ZBooleanComponentModel);
   }
 
   beforeEach(() => {

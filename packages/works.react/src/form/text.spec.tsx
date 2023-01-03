@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { IZCircusKey, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
+import { IZCircusKey, ZCircusBy, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactNode } from 'react';
 import { ZTextArea } from './text-area';
@@ -155,7 +155,7 @@ describe('ZText', () => {
         />
       );
       const driver = await new ZCircusSetupRenderer(element).setup();
-      return ZCircusComponentModel.create(driver, ZTextComponentModel, ZTextComponentModel.selector());
+      return ZCircusBy.first(driver, ZTextComponentModel);
     }
 
     it('should render the text value', async () => {
@@ -241,7 +241,7 @@ describe('ZText', () => {
         />
       );
       const driver = await new ZCircusSetupRenderer(element).setup();
-      return ZCircusComponentModel.create(driver, ZTextComponentModel, ZTextComponentModel.selector());
+      return ZCircusBy.first(driver, ZTextComponentModel);
     }
 
     it('should render the text value', async () => {
@@ -324,7 +324,7 @@ describe('ZText', () => {
       );
 
       const driver = await new ZCircusSetupRenderer(element).setup();
-      return ZCircusComponentModel.create(driver, ZTextComponentModel, ZTextComponentModel.selector());
+      return ZCircusBy.first(driver, ZTextComponentModel);
     }
 
     it('should render the text value', async () => {
