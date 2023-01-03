@@ -20,26 +20,17 @@ const Microservices = '/microservices';
 const Components = `${WebApps}/${ZComponents.path}`;
 
 /**
- * Gets a route that has child routes.
- *
- * @param route
- *        The route to append the star to.
- *
- * @returns
- *        "route/*"
- */
-export function withChildren(route: string) {
-  return `${route}/*`;
-}
-
-/**
  * The full paths for the ZLearn application
  */
 export abstract class ZLearnPath {
-  public static readonly home = Home;
+  public static readonly home = Object.freeze({
+    root: Home
+  });
+
   public static readonly microservices = Object.freeze({
     root: Microservices
   });
+
   public static readonly webApps = Object.freeze({
     root: WebApps,
     components: {
