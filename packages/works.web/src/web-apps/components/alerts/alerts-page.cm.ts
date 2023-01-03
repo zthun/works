@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZAlertListComponentModel, ZBooleanComponentModel, ZButtonComponentModel } from '@zthun/works.react';
 
 /**
@@ -14,11 +14,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The immortal boolean switch.
    */
   public immortal() {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('option-immortal')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'option-immortal');
   }
 
   /**
@@ -28,11 +24,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The header boolean switch.
    */
   public header() {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('option-header')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'option-header');
   }
 
   /**
@@ -42,11 +34,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The success button.
    */
   public success() {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZButtonComponentModel,
-      ZButtonComponentModel.selector('alert-success')
-    );
+    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'alert-success');
   }
 
   /**
@@ -56,11 +44,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The warning button.
    */
   public warning() {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZButtonComponentModel,
-      ZButtonComponentModel.selector('alert-warning')
-    );
+    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'alert-warning');
   }
 
   /**
@@ -70,11 +54,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The error button.
    */
   public error() {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZButtonComponentModel,
-      ZButtonComponentModel.selector('alert-error')
-    );
+    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'alert-error');
   }
 
   /**
@@ -84,11 +64,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The info button.
    */
   public info() {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZButtonComponentModel,
-      ZButtonComponentModel.selector('alert-info')
-    );
+    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'alert-info');
   }
 
   /**
@@ -98,10 +74,6 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The current alert list.
    */
   public async alerts() {
-    return ZCircusComponentModel.create(
-      await this.driver.body(),
-      ZAlertListComponentModel,
-      ZAlertListComponentModel.Selector
-    );
+    return ZCircusBy.first(await this.driver.body(), ZAlertListComponentModel);
   }
 }
