@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZButtonComponentModel } from '@zthun/works.react';
 
 /**
@@ -8,34 +8,22 @@ export class ZHomePageComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZHomePage-root';
 
   /**
-   * Navigates to a child page by clicking a named button.
-   *
-   * @param name
-   *        The name of the button to click.
+   * Gets the button to open web apps.
    *
    * @returns
-   *        A new instance of a component model for the given page.
+   *        The button component model to open web apps.
    */
-  private async _clickNamedButton(name: string) {
-    const buttonTarget = `${ZButtonComponentModel.Selector}[name="${name}"]`;
-    const button = await ZCircusComponentModel.create(this.driver, ZButtonComponentModel, buttonTarget);
-    await button.click();
+  public async webApps(): Promise<ZButtonComponentModel> {
+    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'web-apps-get-started');
   }
 
   /**
-   * Clicks the Get Started button under the web apps card.
-   */
-  public async openWebApps(): Promise<void> {
-    await this._clickNamedButton('web-apps-get-started');
-  }
-
-  /**
-   * Clicks the Get Started button under the microservices card.
+   * Gets the button to open microservices.
    *
    * @returns
-   *        The component model for the microservices page.
+   *        The button component to open microservices.
    */
-  public async openMicroservices(): Promise<void> {
-    await this._clickNamedButton('microservices-get-started');
+  public async microservices(): Promise<ZButtonComponentModel> {
+    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'microservices-get-started');
   }
 }

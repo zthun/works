@@ -29,7 +29,6 @@ describe('ZHomePage', () => {
 
   beforeEach(() => {
     history = createMemoryHistory();
-
     learn = new ZWebAppBuilder().id('learn').name('Learn').build();
     webApps = createMocked(['read']);
     webApps.read.mockResolvedValue(learn);
@@ -39,7 +38,7 @@ describe('ZHomePage', () => {
     // Arrange.
     const target = await createTestTarget();
     // Act.
-    await target.openWebApps();
+    await (await target.webApps()).click();
     // Assert.
     expect(history.location.pathname).toEqual('/web-apps');
   });
@@ -48,7 +47,7 @@ describe('ZHomePage', () => {
     // Arrange.
     const target = await createTestTarget();
     // Act.
-    await target.openMicroservices();
+    await (await target.microservices()).click();
     // Assert.
     expect(history.location.pathname).toEqual('/microservices');
   });

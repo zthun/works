@@ -1,5 +1,11 @@
 import { setDefaultTimeout, setWorldConstructor, World } from '@cucumber/cucumber';
-import { IZCircusDriver, ZCircusComponentModel, ZCircusComponentModelConstructor } from '@zthun/works.cirque';
+import {
+  IZCircusDriver,
+  ZCircusBy,
+  ZCircusComponentFactory,
+  ZCircusComponentModel,
+  ZCircusComponentModelConstructor
+} from '@zthun/works.cirque';
 import { ZCircusSetupChrome } from '@zthun/works.cirque-du-selenium';
 import { ZUrlBuilder } from '@zthun/works.url';
 
@@ -35,12 +41,27 @@ export class ZLearnWorld<T extends ZCircusComponentModel | never = never> extend
    * @param selector
    *        The css selector to query for the root element.
    *
+   * @deprecated Use first instead.
+   *
    * @returns
    *        A new component model of type T.
    */
   public async create<T>(model: ZCircusComponentModelConstructor<T>, selector: string) {
     const driver = await this.open();
     return ZCircusComponentModel.create(driver, model, selector);
+  }
+
+  /**
+   * Constructs a new page component model from the internal driver.
+   *
+   * @param model
+   *        The model to construct.
+   *
+   * @returns
+   *        A new component model of type T.
+   */
+  public async first<T extends ZCircusComponentModel>(model: ZCircusComponentFactory<T>) {
+    return ZCircusBy.first(await this.open(), model);
   }
 
   /**
