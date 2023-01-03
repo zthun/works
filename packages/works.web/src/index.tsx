@@ -17,6 +17,6 @@ container.render(
   <ZWebAppLayout whoami='learn' profileApp='roadblock'>
     <ZRoute path={ZLearnPath.home} element={<ZHomePage />} />
     <ZRoute path={withChildren(ZLearnPath.webApps.root)} element={<ZWebAppsPage />} />
-    <ZRoute path={withChildren(ZLearnPath.microservices)} element={<ZMicroservicesPage />} />
+    <ZRoute path={withChildren(ZLearnPath.microservices.root)} element={<ZMicroservicesPage />} />
   </ZWebAppLayout>
 );
