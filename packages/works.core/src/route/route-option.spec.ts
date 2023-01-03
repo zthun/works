@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
+import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
 import { IZRouteOption, ZRouteOptionBuilder } from './route-option';
 
@@ -122,7 +122,8 @@ describe('ZRouteOptionBuilder', () => {
     it('should copy another route option.', () => {
       const avatar = Buffer.from('1234', 'binary');
       const expected = new ZRouteOptionBuilder().head().owner(v4()).avatar(avatar).path('/api/options').build();
-      assertBuilderCopiesObject(expected, createTestTarget);
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 });

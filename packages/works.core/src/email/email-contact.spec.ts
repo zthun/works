@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
+import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { IZEmailContact, ZEmailContactBuilder } from './email-contact';
 
 describe('ZEmailContactBuilder.', () => {
@@ -39,23 +39,22 @@ describe('ZEmailContactBuilder.', () => {
 
   describe('Copy', () => {
     it('should copy another contact.', () => {
-      assertBuilderCopiesObject(
-        createTestTarget().address('gambit@marvel.com').display('Gambit').type('user').build(),
-        createTestTarget
-      );
+      const expected = createTestTarget().address('gambit@marvel.com').display('Gambit').type('user').build();
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 
   describe('Assign', () => {
     it('should assign another contact.', () => {
-      assertBuilderAssignsObject(
-        createTestTarget().address('gambit@marvel.com').display('Gambit').type('user').build(),
-        () => createTestTarget().address('psylocke@marvel.com').display('Psylocke').type('user'),
-        {
-          address: 'gambit@marvel.com',
-          display: 'Gambit'
-        }
-      );
+      const partial: Partial<IZEmailContact> = {
+        address: 'gambit@marvel.com',
+        display: 'Gambit',
+        type: 'user'
+      };
+      const expected = createTestTarget().address('gambit@marvel.com').display('Gambit').type('user').build();
+      const actual = createTestTarget().assign(partial).build();
+      expect(actual).toEqual(expected);
     });
   });
 });

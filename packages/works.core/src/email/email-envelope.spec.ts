@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
+import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZEmailContactBuilder } from './email-contact';
 import { IZEmailEnvelope, ZEmailEnvelopeBuilder } from './email-envelope';
 
@@ -84,16 +84,15 @@ describe('ZEmailEnvelopeBuilder.', () => {
 
   describe('Copy', () => {
     it('should copy another envelope.', () => {
-      assertBuilderCopiesObject(
-        createTestTarget()
-          .from('gambit@marvel.com')
-          .to('rogue@marvel.com')
-          .cc('wolverine@marvel.com')
-          .cc('cyclops@marvel.com')
-          .bcc('x@marvel.com')
-          .build(),
-        createTestTarget
-      );
+      const expected = createTestTarget()
+        .from('gambit@marvel.com')
+        .to('rogue@marvel.com')
+        .cc('wolverine@marvel.com')
+        .cc('cyclops@marvel.com')
+        .bcc('x@marvel.com')
+        .build();
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 
@@ -103,11 +102,10 @@ describe('ZEmailEnvelopeBuilder.', () => {
       const to = ['rogue@marvel.com'];
       const cc = ['wolverine@marvel.com', 'cyclops@marvel.com'];
       const bcc = ['x@marvel.com'];
-      assertBuilderAssignsObject(
-        createTestTarget().from(from).tos(to).ccs(cc).bccs(bcc).build(),
-        () => createTestTarget().from(from).tos(to),
-        { cc, bcc }
-      );
+      const partial: Partial<IZEmailEnvelope> = { cc, bcc };
+      const expected = createTestTarget().from(from).tos(to).ccs(cc).bccs(bcc).build();
+      const actual = createTestTarget().from(from).tos(to).assign(partial).build();
+      expect(actual).toEqual(expected);
     });
   });
 });

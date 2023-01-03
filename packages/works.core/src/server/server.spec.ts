@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
+import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { IZServer, ZServerBuilder } from './server';
 
 describe('ZServerBuilder.', () => {
@@ -47,10 +47,9 @@ describe('ZServerBuilder.', () => {
 
   describe('Copy', () => {
     it('should copy another server.', () => {
-      assertBuilderCopiesObject(
-        createTestTarget().address('10.0.0.2').port(2096).username('admin').password('secret').build(),
-        createTestTarget
-      );
+      const expected = createTestTarget().address('10.0.0.2').port(2096).username('admin').password('secret').build();
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 
@@ -60,11 +59,9 @@ describe('ZServerBuilder.', () => {
       const port = 2000;
       const username = 'admin';
       const password = 'secret';
-      assertBuilderAssignsObject(
-        createTestTarget().address(address).port(port).username(username).password(password).build(),
-        () => createTestTarget().address(address).port(port),
-        { username, password }
-      );
+      const expected = createTestTarget().address(address).port(port).username(username).password(password).build();
+      const actual = createTestTarget().address(address).port(port).assign({ username, password }).build();
+      expect(actual).toEqual(expected);
     });
   });
 });

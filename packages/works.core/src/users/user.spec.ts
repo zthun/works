@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
+import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
 import { IZUser, ZUserBuilder } from './user';
 
@@ -133,14 +133,15 @@ describe('ZUserBuilder', () => {
 
   describe('Copy', () => {
     it('copies another user.', () => {
-      const userA = createTestTarget()
+      const expected = createTestTarget()
         .email(v4())
         .password(v4())
         .id(v4())
         .inactive('some-activator-password')
         .recover('some-recovery-password', 1000)
         .build();
-      assertBuilderCopiesObject(userA, createTestTarget);
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 });

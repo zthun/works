@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
+import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { IZEmail, ZEmailBuilder } from './email';
 import { IZEmailEnvelope, ZEmailEnvelopeBuilder } from './email-envelope';
 
@@ -46,14 +46,13 @@ describe('ZEmailBuilder.', () => {
 
   describe('Copy', () => {
     it('should copy another email.', () => {
-      assertBuilderCopiesObject(
-        createTestTarget()
-          .envelope(envelope)
-          .message('Missing briefing is in another message.')
-          .subject('Mission briefing')
-          .build(),
-        createTestTarget
-      );
+      const expected = createTestTarget()
+        .envelope(envelope)
+        .message('Missing briefing is in another message.')
+        .subject('Mission briefing')
+        .build();
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 
@@ -61,11 +60,9 @@ describe('ZEmailBuilder.', () => {
     it('should assign another email.', () => {
       const subject = 'Mission Briefing';
       const message = 'Check attachments for missing briefing.';
-      assertBuilderAssignsObject(
-        createTestTarget().envelope(envelope).subject(subject).message(message).build(),
-        () => createTestTarget().subject(subject),
-        { envelope, message }
-      );
+      const expected = createTestTarget().envelope(envelope).subject(subject).message(message).build();
+      const actual = createTestTarget().subject(subject).assign({ envelope, message }).build();
+      expect(actual).toEqual(expected);
     });
   });
 });

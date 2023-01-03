@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
+import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
 import { IZUser, ZUserBuilder } from '../users/user';
 import { IZProfile, ZProfileBuilder } from './profile';
@@ -145,17 +145,21 @@ describe('ZProfileBuilder', () => {
 
   describe('Copy and Assignment', () => {
     it('copies another profile.', () => {
-      const gambit = new ZProfileBuilder()
+      const expected = new ZProfileBuilder()
         .email('gambit@marvel.com')
         .display('Gambit')
         .avatar('https://steamavatar.io/img/14777429602y3IT.jpg')
         .build();
-      assertBuilderCopiesObject(gambit, createTestTarget);
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
 
     it('assigns another profile.', () => {
-      const gambit = new ZProfileBuilder().email('gambit@marvel.com').display('Gambit').build();
-      assertBuilderAssignsObject(gambit, createTestTarget, { email: 'gambit@marvel.com', display: 'Gambit' });
+      const email = 'gambit@marvel.com';
+      const display = 'Gambit';
+      const expected = new ZProfileBuilder().email(email).display(display).build();
+      const actual = createTestTarget().display(display).assign({ email }).build();
+      expect(actual).toEqual(expected);
     });
   });
 });
