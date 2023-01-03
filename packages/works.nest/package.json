@@ -33,19 +33,19 @@
     "@zthun/works.microservices": "^4.0.0",
     "@zthun/works.url": "^4.0.0",
     "class-transformer": "~0.5.1",
-    "class-validator": "~0.13.2",
+    "class-validator": "~0.14.0",
     "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
     "helmet": "^6.0.1",
     "lodash": "^4.17.21",
-    "rxjs": "^7.5.7",
+    "rxjs": "^7.8.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@zthun/works.jest": "^4.0.0",
     "jest": "^29.3.1",
-    "typedoc": "^0.23.21",
-    "typescript": "^4.9.3"
+    "typedoc": "^0.23.23",
+    "typescript": "^4.9.4"
   },
   "peerDependencies": {
     "@nestjs/common": "^9.0.5",

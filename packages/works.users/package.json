@@ -33,7 +33,7 @@
     "@zthun/works.dal": "^4.0.0",
     "bcryptjs": "^2.4.3",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.5.7",
+    "rxjs": "^7.8.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
