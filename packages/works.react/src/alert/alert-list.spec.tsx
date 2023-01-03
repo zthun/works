@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
-import { IZCircusDriver, ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusActBuilder, ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { sleep } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
@@ -30,7 +30,7 @@ describe('ZAlertList', () => {
     );
 
     driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZAlertListComponentModel, ZAlertListComponentModel.Selector);
+    return ZCircusBy.first(driver, ZAlertListComponentModel);
   }
 
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZButtonComponentModel } from '../buttons/button.cm';
 
 /**
@@ -14,7 +14,7 @@ export class ZWebAppHomeButtonComponentModel extends ZCircusComponentModel {
    *      The underlying button component.
    */
   public async button(): Promise<ZButtonComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZButtonComponentModel, '.ZWebAppHomeButton-button');
+    return ZCircusBy.first(this.driver, ZButtonComponentModel);
   }
 
   /**

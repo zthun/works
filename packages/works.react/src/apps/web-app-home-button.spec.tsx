@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
 import { createMocked } from '@zthun/works.jest';
@@ -29,9 +29,8 @@ describe('ZWebAppHomeButton', () => {
       </ZWebAppServiceContext.Provider>
     );
 
-    const selector = ZWebAppHomeButtonComponentModel.Selector;
     const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusComponentModel.create(driver, ZWebAppHomeButtonComponentModel, selector);
+    return ZCircusBy.first(driver, ZWebAppHomeButtonComponentModel);
   }
 
   beforeEach(() => {
