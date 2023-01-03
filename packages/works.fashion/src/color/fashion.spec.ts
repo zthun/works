@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
-import { IZFashion, ZFashionBuilder } from './fashion';
+import { ZFashionBuilder } from './fashion';
 import { ZHue } from './hue';
 import { ZShade } from './shade';
 
@@ -11,7 +10,7 @@ describe('ZFashion', () => {
 
   describe('Hue', () => {
     function assertHue(hue: ZHue, buildFn: (t: ZFashionBuilder) => ZFashionBuilder) {
-      assertBuilderSetsProperty(hue, createTestTarget, buildFn, (f: IZFashion) => f.hue);
+      expect(buildFn(createTestTarget()).build().hue).toEqual(hue);
     }
 
     it('should set white', () => assertHue(ZHue.White, (t) => t.white()));
@@ -38,7 +37,7 @@ describe('ZFashion', () => {
 
   describe('Shade', () => {
     function assertShade(shade: ZShade, buildFn: (t: ZFashionBuilder) => ZFashionBuilder) {
-      assertBuilderSetsProperty(shade, createTestTarget, buildFn, (f: IZFashion) => f.shade);
+      expect(buildFn(createTestTarget()).build().shade).toEqual(shade);
     }
 
     it('should set shade 50', () => assertShade(50, (t) => t.red(50)));
@@ -55,7 +54,9 @@ describe('ZFashion', () => {
 
   describe('Copy', () => {
     it('should copy another fashion', () => {
-      assertBuilderCopiesObject(createTestTarget().amber(200).build(), createTestTarget);
+      const expected = createTestTarget().amber(200).build();
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 });

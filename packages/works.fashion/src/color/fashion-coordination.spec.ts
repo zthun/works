@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZFashionBuilder } from './fashion';
-import { IZFashionCoordination, ZFashionCoordinationBuilder } from './fashion-coordination';
+import { ZFashionCoordinationBuilder } from './fashion-coordination';
 
 describe('ZFashionComplements', () => {
   function createTestTarget() {
@@ -10,59 +9,32 @@ describe('ZFashionComplements', () => {
 
   describe('Properties', () => {
     it('should set the main fashion', () => {
-      assertBuilderSetsProperty(
-        new ZFashionBuilder().red(200).build(),
-        createTestTarget,
-        (t, v) => t.main(v),
-        (c: IZFashionCoordination) => c.main
-      );
+      const expected = new ZFashionBuilder().red(200).build();
+      expect(createTestTarget().main(expected).build().main).toEqual(expected);
     });
 
     it('should set the contrast fashion', () => {
-      assertBuilderSetsProperty(
-        new ZFashionBuilder().green(800).build(),
-        createTestTarget,
-        (t, v) => t.contrast(v),
-        (c: IZFashionCoordination) => c.contrast
-      );
+      const expected = new ZFashionBuilder().green(800).build();
+      expect(createTestTarget().contrast(expected).build().contrast).toEqual(expected);
     });
   });
 
   describe('Transparency', () => {
     it('should set the main to transparent', () => {
-      assertBuilderSetsProperty(
-        null,
-        createTestTarget,
-        (t) => t.transparent(),
-        (c: IZFashionCoordination) => c.main.hue
-      );
+      expect(createTestTarget().transparent().build().main.hue).toBeNull();
     });
 
     it('should remove the light', () => {
-      assertBuilderSetsProperty(
-        undefined,
-        createTestTarget,
-        (t) => t.light(new ZFashionBuilder().white().build()).transparent(),
-        (c: IZFashionCoordination) => c.light
-      );
+      expect(createTestTarget().transparent().build().light).toBeUndefined();
     });
 
     it('should remove the dark', () => {
-      assertBuilderSetsProperty(
-        undefined,
-        createTestTarget,
-        (t) => t.dark(new ZFashionBuilder().white().build()).transparent(),
-        (c: IZFashionCoordination) => c.dark
-      );
+      expect(createTestTarget().transparent().build().dark).toBeUndefined();
     });
 
     it('should set the contrast to inherit', () => {
-      assertBuilderSetsProperty(
-        'inherit',
-        createTestTarget,
-        (t) => t.contrast(new ZFashionBuilder().white().build()).transparent(),
-        (c: IZFashionCoordination) => c.contrast.hue
-      );
+      const white = new ZFashionBuilder().white().build();
+      expect(createTestTarget().contrast(white).transparent().build().contrast.hue).toEqual('inherit');
     });
   });
 
@@ -70,7 +42,9 @@ describe('ZFashionComplements', () => {
     it('should copy another complementary object', () => {
       const main = new ZFashionBuilder().grey(800).build();
       const contrast = new ZFashionBuilder().white().build();
-      assertBuilderCopiesObject(createTestTarget().main(main).contrast(contrast).build(), createTestTarget);
+      const expected = createTestTarget().main(main).contrast(contrast).build();
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 });

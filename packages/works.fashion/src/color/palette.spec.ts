@@ -1,10 +1,9 @@
 /* eslint-disable require-jsdoc */
 
-import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 import { keyBy, mapValues } from 'lodash';
 import { ZFashionBuilder } from './fashion';
 import { ZHue } from './hue';
-import { IZPalette, ZPaletteBuilder } from './palette';
+import { ZPaletteBuilder } from './palette';
 import { ZShade, ZShades } from './shade';
 
 describe('ZPalette', () => {
@@ -37,33 +36,22 @@ describe('ZPalette', () => {
   });
 
   describe('By', () => {
-    describe('Luminance', () => {
-      it('should set the entire luminance for a color', () => {
-        assertBuilderSetsProperty(
-          mapValues(keyBy(ZShades), () => '#FF0000') as Record<ZShade, string>,
-          createTestTarget,
-          (t, v) => t.gradient(ZHue.Red, v),
-          (p: IZPalette) => p.red
-        );
+    describe('Shade', () => {
+      it('should set the entire shade for a color', () => {
+        const expected = mapValues(keyBy(ZShades), () => '#FF0000') as Record<ZShade, string>;
+        expect(createTestTarget().gradient(ZHue.Red, expected).build().red).toEqual(expected);
       });
     });
 
     describe('Fashion', () => {
       it('should set the color and shade of a fashion target.', () => {
-        assertBuilderSetsProperty(
-          '#00FF00',
-          createTestTarget,
-          (t, v) => t.fashion(v, new ZFashionBuilder().green(700).build()),
-          (p: IZPalette) => p.green[700]
-        );
+        const expected = '#00FF00';
+        const actual = createTestTarget().fashion(expected, new ZFashionBuilder().green(700).build()).build();
+        expect(actual.green[700]).toEqual(expected);
       });
 
       it('should throw an Error if the fashion target is transparent.', () => {
-        // Arrange
-        const target = createTestTarget();
-        // Act.
-        const actual = () => target.fashion('#000000', new ZFashionBuilder().transparent().build());
-        // Assert.
+        const actual = () => createTestTarget().fashion('#000000', new ZFashionBuilder().transparent().build());
         expect(actual).toThrowError();
       });
     });
@@ -71,8 +59,9 @@ describe('ZPalette', () => {
 
   describe('Copy', () => {
     it('should copy the color map.', () => {
-      const other = createTestTarget().crayon(ZHue.Orange, '#123456').build();
-      assertBuilderCopiesObject(other, createTestTarget);
+      const expected = createTestTarget().crayon(ZHue.Orange, '#123456').build();
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 });

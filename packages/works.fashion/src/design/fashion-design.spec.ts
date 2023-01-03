@@ -1,11 +1,10 @@
 /* eslint-disable require-jsdoc */
 
-import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZFashionBuilder } from '../color/fashion';
 import { ZFashionCoordinationBuilder } from '../color/fashion-coordination';
 import { ZHue } from '../color/hue';
 import { ZPaletteBuilder } from '../color/palette';
-import { IZFashionDesign, ZFashionDesignBuilder } from './fashion-design';
+import { ZFashionDesignBuilder } from './fashion-design';
 
 describe('ZFashionDesignBuilder', () => {
   function createTestTarget() {
@@ -14,90 +13,54 @@ describe('ZFashionDesignBuilder', () => {
 
   describe('Palette', () => {
     it('should set the palette', () => {
-      assertBuilderSetsProperty(
-        new ZPaletteBuilder().crayon(ZHue.Green, 'rgb(0, 255, 0, 0.9)').build(),
-        createTestTarget,
-        (t, v) => t.palette(v),
-        (d: IZFashionDesign) => d.palette
-      );
+      const expected = new ZPaletteBuilder().crayon(ZHue.Green, 'rgb(0, 255, 0, 0.9)').build();
+      expect(createTestTarget().palette(expected).build().palette).toEqual(expected);
     });
   });
 
   describe('Priority', () => {
     it('should set primary', () => {
-      assertBuilderSetsProperty(
-        new ZFashionCoordinationBuilder().build(),
-        createTestTarget,
-        (t, v) => t.primary(v),
-        (d: IZFashionDesign) => d.primary
-      );
+      const expected = new ZFashionCoordinationBuilder().build();
+      expect(createTestTarget().primary(expected).build().primary).toEqual(expected);
     });
 
     it('should set secondary', () => {
-      assertBuilderSetsProperty(
-        new ZFashionCoordinationBuilder().build(),
-        createTestTarget,
-        (t, v) => t.secondary(v),
-        (d: IZFashionDesign) => d.secondary
-      );
+      const expected = new ZFashionCoordinationBuilder().build();
+      expect(createTestTarget().secondary(expected).build().secondary).toEqual(expected);
     });
   });
 
   describe('Severity', () => {
     it('should set success', () => {
-      assertBuilderSetsProperty(
-        new ZFashionCoordinationBuilder().build(),
-        createTestTarget,
-        (t, v) => t.success(v),
-        (d: IZFashionDesign) => d.success
-      );
+      const expected = new ZFashionCoordinationBuilder().build();
+      expect(createTestTarget().success(expected).build().success).toEqual(expected);
     });
 
     it('should set warning', () => {
-      assertBuilderSetsProperty(
-        new ZFashionCoordinationBuilder().build(),
-        createTestTarget,
-        (t, v) => t.warning(v),
-        (d: IZFashionDesign) => d.warning
-      );
+      const expected = new ZFashionCoordinationBuilder().build();
+      expect(createTestTarget().warning(expected).build().warning).toEqual(expected);
     });
 
     it('should set error', () => {
-      assertBuilderSetsProperty(
-        new ZFashionCoordinationBuilder().build(),
-        createTestTarget,
-        (t, v) => t.error(v),
-        (d: IZFashionDesign) => d.error
-      );
+      const expected = new ZFashionCoordinationBuilder().build();
+      expect(createTestTarget().error(expected).build().error).toEqual(expected);
     });
 
     it('should set info', () => {
-      assertBuilderSetsProperty(
-        new ZFashionCoordinationBuilder().build(),
-        createTestTarget,
-        (t, v) => t.info(v),
-        (d: IZFashionDesign) => d.info
-      );
+      const expected = new ZFashionCoordinationBuilder().build();
+      expect(createTestTarget().info(expected).build().info).toEqual(expected);
     });
   });
 
   describe('Spectrum', () => {
     it('should set dark', () => {
-      assertBuilderSetsProperty(
-        new ZFashionCoordinationBuilder().build(),
-        createTestTarget,
-        (t, v) => t.dark(v),
-        (d: IZFashionDesign) => d.dark
-      );
+      const expected = new ZFashionCoordinationBuilder().build();
+      expect(createTestTarget().dark(expected).build().dark).toEqual(expected);
     });
 
     it('should set light', () => {
-      assertBuilderSetsProperty(
-        new ZFashionCoordinationBuilder().build(),
-        createTestTarget,
-        (t, v) => t.light(v),
-        (d: IZFashionDesign) => d.light
-      );
+      const expected = new ZFashionCoordinationBuilder().build();
+      expect(createTestTarget().light(expected).build().light).toEqual(expected);
     });
   });
 
@@ -105,7 +68,9 @@ describe('ZFashionDesignBuilder', () => {
     it('should copy another design', () => {
       const palette = new ZPaletteBuilder().crayon(ZHue.Green, 'rgb(0, 255, 0, 0.9)').build();
       const primary = new ZFashionCoordinationBuilder().contrast(new ZFashionBuilder().white().build()).build();
-      assertBuilderCopiesObject(createTestTarget().palette(palette).primary(primary).build(), createTestTarget);
+      const expected = createTestTarget().palette(palette).primary(primary).build();
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 });
