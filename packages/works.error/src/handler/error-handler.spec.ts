@@ -1,17 +1,18 @@
 /* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/works.jest';
 import { ZErrorHandler } from './error-handler';
 import { IZErrorMessageHandler } from './error-message-handler';
 
 describe('ErrorHandler', () => {
-  let msg: IZErrorMessageHandler;
+  let msg: jest.Mocked<IZErrorMessageHandler>;
 
   function createTestTarget() {
     return new ZErrorHandler(msg);
   }
 
   beforeEach(() => {
-    msg = createMocked<IZErrorMessageHandler>(['handle']);
+    msg = jest.mocked({
+      handle: jest.fn()
+    });
   });
 
   async function assertMessageHandlerReceivesMessage(expected: string | string[], err: any) {

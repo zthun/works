@@ -1,5 +1,4 @@
 /* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/works.jest';
 import { IZErrorHandler } from '../handler/error-handler';
 import { ZErrorRecovery } from './error-recovery';
 
@@ -11,7 +10,7 @@ describe('ZErrorRecovery', () => {
   }
 
   beforeEach(() => {
-    handler = createMocked<IZErrorHandler>(['handle']);
+    handler = jest.mocked({ handle: jest.fn() });
     handler.handle.mockResolvedValue();
   });
 

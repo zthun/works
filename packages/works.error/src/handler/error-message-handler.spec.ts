@@ -1,5 +1,4 @@
 /* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/works.jest';
 import { IZErrorMessageHandler, ZErrorMessageHandlerComposite } from './error-message-handler';
 
 describe('ZMessageHandler', () => {
@@ -11,8 +10,13 @@ describe('ZMessageHandler', () => {
   }
 
   beforeEach(() => {
-    alerter = createMocked(['handle']);
-    logger = createMocked(['handle']);
+    alerter = jest.mocked({
+      handle: jest.fn()
+    });
+
+    logger = jest.mocked({
+      handle: jest.fn()
+    });
   });
 
   it('should forward the messages to the child handlers.', async () => {
