@@ -1,11 +1,12 @@
+/* eslint-disable require-jsdoc */
+
 import { ClientProxy } from '@nestjs/microservices';
-import { ZUsersClient } from './users.client';
-import { assertProxySendsMessage, createMocked } from '@zthun/works.jest';
+import { ZLoginBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
+import { createMocked } from '@zthun/works.jest';
 import { of } from 'rxjs';
 import { v4 } from 'uuid';
-import { ZLoginBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
+import { ZUsersClient } from './users.client';
 
-/* eslint-disable require-jsdoc */
 describe('UsersClient', () => {
   let proxy: jest.Mocked<ClientProxy>;
 
@@ -20,72 +21,114 @@ describe('UsersClient', () => {
 
   describe('Find', () => {
     it('finds by id.', async () => {
-      await assertProxySendsMessage({ cmd: 'find' }, { _id: v4() }, proxy, createTestTarget, (t, p) =>
-        t.findById(p._id)
-      );
+      // Arrange.
+      const _id = v4();
+      const target = createTestTarget();
+      // Act.
+      await target.findById(_id);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'find' }, { _id });
     });
 
     it('finds by email.', async () => {
-      await assertProxySendsMessage({ cmd: 'find' }, { email: 'test@mail.com' }, proxy, createTestTarget, (t, p) =>
-        t.findByEmail(p.email)
-      );
+      // Arrange.
+      const email = 'gambit@marvel.com';
+      const target = createTestTarget();
+      // Act.
+      await target.findByEmail(email);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'find' }, { email });
     });
   });
 
   describe('Create', () => {
     it('creates a user.', async () => {
+      // Arrange.
       const login = new ZLoginBuilder().email('test@email.com').password('bad-password').build();
-      await assertProxySendsMessage({ cmd: 'create' }, { login }, proxy, createTestTarget, (t, p) => t.create(p.login));
+      const target = createTestTarget();
+      // Act.
+      await target.create(login);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'create' }, { login });
     });
   });
 
   describe('Update', () => {
     it('should update a profile.', async () => {
+      // Arrange.
+      const id = v4();
       const profile = new ZProfileBuilder().email('test@email.com').build();
-      await assertProxySendsMessage({ cmd: 'update' }, { id: v4(), profile }, proxy, createTestTarget, (t, p) =>
-        t.update(p.id, p.profile)
-      );
+      const target = createTestTarget();
+      // Act.
+      await target.update(id, profile);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'update' }, { id, profile });
     });
   });
 
   describe('Delete', () => {
     it('should delete a profile.', async () => {
-      await assertProxySendsMessage({ cmd: 'remove' }, { id: v4() }, proxy, createTestTarget, (t, p) => t.remove(p.id));
+      // Arrange.
+      const id = v4();
+      const target = createTestTarget();
+      // Act.
+      await target.remove(id);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'remove' }, { id });
     });
   });
 
   describe('Login', () => {
     it('timestamps the user login.', async () => {
-      await assertProxySendsMessage({ cmd: 'login' }, { id: v4() }, proxy, createTestTarget, (t, p) => t.login(p.id));
+      // Arrange.
+      const id = v4();
+      const target = createTestTarget();
+      // Act.
+      await target.login(id);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'login' }, { id });
     });
 
     it('recovers a lost password.', async () => {
-      await assertProxySendsMessage({ cmd: 'recover' }, { email: 'test@email.com' }, proxy, createTestTarget, (t, p) =>
-        t.recover(p.email)
-      );
+      // Arrange.
+      const email = 'gambit@marvel.com';
+      const target = createTestTarget();
+      // Act.
+      await target.recover(email);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'recover' }, { email });
     });
 
     it('checks the user/password combination.', async () => {
+      // Arrange.
       const credentials = new ZLoginBuilder().email('test@email.com').password('bad-password').build();
-      await assertProxySendsMessage({ cmd: 'compare' }, { credentials }, proxy, createTestTarget, (t, p) =>
-        t.compare(p.credentials)
-      );
+      const target = createTestTarget();
+      // Act.
+      await target.compare(credentials);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'compare' }, { credentials });
     });
   });
 
   describe('Activation', () => {
     it('should activate a user.', async () => {
+      // Arrange.
       const user = new ZUserBuilder().email('test@email.com').build();
-      await assertProxySendsMessage({ cmd: 'activate' }, { user }, proxy, createTestTarget, (t, p) =>
-        t.activate(p.user)
-      );
+      const target = createTestTarget();
+      // Act.
+      await target.activate(user);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'activate' }, { user });
     });
 
     it('should deactivate a profile.', async () => {
+      // Arrange.
       const user = new ZUserBuilder().email('test@email.com').build();
-      await assertProxySendsMessage({ cmd: 'deactivate' }, { user }, proxy, createTestTarget, (t, p) =>
-        t.deactivate(p.user)
-      );
+      const target = createTestTarget();
+      // Act.
+      await target.deactivate(user);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'deactivate' }, { user });
     });
   });
 });

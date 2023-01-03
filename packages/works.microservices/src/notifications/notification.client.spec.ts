@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { ClientProxy } from '@nestjs/microservices';
-import { IZEmail, IZServer, ZEmailBuilder, ZServerBuilder } from '@zthun/works.core';
-import { assertProxySendsMessage, createMocked } from '@zthun/works.jest';
+import { ZEmailBuilder, ZServerBuilder } from '@zthun/works.core';
+import { createMocked } from '@zthun/works.jest';
 import { of } from 'rxjs';
 import { ZNotificationsClient } from './notifications.client';
 
@@ -20,18 +20,15 @@ describe('ZNotificationsClient', () => {
   });
 
   describe('Email', () => {
-    let msg: IZEmail;
-    let smtp: IZServer;
-
-    beforeEach(() => {
-      msg = new ZEmailBuilder().build();
-      smtp = new ZServerBuilder().build();
-    });
-
     it('sends an email.', async () => {
-      await assertProxySendsMessage({ cmd: 'sendEmail' }, { msg, smtp }, proxy, createTestTarget, (t, p) =>
-        t.sendEmail(p.msg, p.smtp)
-      );
+      // Arrange.
+      const msg = new ZEmailBuilder().build();
+      const smtp = new ZServerBuilder().build();
+      const target = createTestTarget();
+      // Act.
+      await target.sendEmail(msg, smtp);
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'sendEmail' }, { msg, smtp });
     });
   });
 });

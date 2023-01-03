@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
 import { ClientProxy } from '@nestjs/microservices';
-import { assertProxySendsMessage, createMocked } from '@zthun/works.jest';
+import { createMocked } from '@zthun/works.jest';
 import { of } from 'rxjs';
 import { ZAppsClient } from './apps.client';
 
@@ -18,7 +18,12 @@ describe('ZAppsClient', () => {
 
   describe('Web Apps', () => {
     it('lists all web apps.', async () => {
-      await assertProxySendsMessage({ cmd: 'listWebApps' }, {}, proxy, createTestTarget, (t) => t.listWebApps());
+      // Arrange.
+      const target = createTestTarget();
+      // Act.
+      await target.listWebApps();
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'listWebApps' }, {});
     });
   });
 });
