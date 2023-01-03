@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
 
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { IZEmailContact, ZEmailContactBuilder } from './email-contact';
 
 describe('ZEmailContactBuilder.', () => {
@@ -10,30 +9,18 @@ describe('ZEmailContactBuilder.', () => {
 
   describe('Properties', () => {
     it('should set the address.', () => {
-      assertBuilderSetsProperty(
-        'gambit@marvel.com',
-        createTestTarget,
-        (t, v) => t.address(v),
-        (c: IZEmailContact) => c.address
-      );
+      const expected = 'gambit@marvel.com';
+      expect(createTestTarget().address(expected).build().address).toEqual(expected);
     });
 
     it('should set the type.', () => {
-      assertBuilderSetsProperty(
-        'user',
-        createTestTarget,
-        (t, v) => t.type(v),
-        (c: IZEmailContact) => c.type
-      );
+      const expected = 'user';
+      expect(createTestTarget().type(expected).build().type).toEqual(expected);
     });
 
     it('should set the display.', () => {
-      assertBuilderSetsProperty(
-        'Gambit',
-        createTestTarget,
-        (t, v) => t.display(v),
-        (c: IZEmailContact) => c.display
-      );
+      const expected = 'Gambit';
+      expect(createTestTarget().display(expected).build().display).toEqual(expected);
     });
   });
 

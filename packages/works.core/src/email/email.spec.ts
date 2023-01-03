@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
 
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { IZEmail, ZEmailBuilder } from './email';
+import { ZEmailBuilder } from './email';
 import { IZEmailEnvelope, ZEmailEnvelopeBuilder } from './email-envelope';
 
 describe('ZEmailBuilder.', () => {
@@ -17,30 +16,17 @@ describe('ZEmailBuilder.', () => {
 
   describe('Properties', () => {
     it('should set the envelope.', () => {
-      assertBuilderSetsProperty(
-        envelope,
-        createTestTarget,
-        (t, v) => t.envelope(v),
-        (c: IZEmail) => c.envelope
-      );
+      expect(createTestTarget().envelope(envelope).build().envelope).toEqual(envelope);
     });
 
     it('should set the subject.', () => {
-      assertBuilderSetsProperty(
-        'New mission assignment',
-        createTestTarget,
-        (t, v) => t.subject(v),
-        (c: IZEmail) => c.subject
-      );
+      const expected = 'New missing assignment';
+      expect(createTestTarget().subject(expected).build().subject).toEqual(expected);
     });
 
     it('should set the message.', () => {
-      assertBuilderSetsProperty(
-        '<div>See attachment for details of the assignment.</div>',
-        createTestTarget,
-        (t, v) => t.message(v),
-        (c: IZEmail) => c.message
-      );
+      const expected = '<div>See attachment for details of the assignment.</div>';
+      expect(createTestTarget().message(expected).build().message).toEqual(expected);
     });
   });
 
