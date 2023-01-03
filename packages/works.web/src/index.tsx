@@ -10,7 +10,6 @@ import { ZWebAppsPage } from './web-apps/web-apps-page';
 
 require('../images');
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const container = createRoot(document.getElementById('zthunworks')!);
 
 container.render(
