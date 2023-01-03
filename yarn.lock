@@ -6151,7 +6151,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.dal@workspace:packages/works.dal"
   dependencies:
-    "@zthun/works.jest": ^4.0.0
     jest: ^29.3.1
     mongodb: ^4.12.1
     mongodb-memory-server: ^8.10.1

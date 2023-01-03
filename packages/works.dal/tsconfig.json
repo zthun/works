@@ -2,10 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "declarationDir": "dist/types",
-    "paths": {
-      "@zthun/works.jest": ["../works.jest/src/index"]
-    }
+    "declarationDir": "dist/types"
   },
   "include": ["src/**/*.ts"]
 }

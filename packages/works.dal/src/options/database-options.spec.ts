@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderAssignsObject, assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
-import { IZDatabaseOptions, ZDatabaseOptionsBuilder } from './database-options';
+import { ZDatabaseOptionsBuilder } from './database-options';
 
 describe('ZDatabaseOptionsBuilder', () => {
   function createTestTarget() {
@@ -9,21 +8,13 @@ describe('ZDatabaseOptionsBuilder', () => {
 
   describe('Properties', () => {
     it('sets the database.', () => {
-      assertBuilderSetsProperty(
-        'database',
-        createTestTarget,
-        (t, v) => t.database(v),
-        (o: IZDatabaseOptions) => o.database
-      );
+      const expected = 'database';
+      expect(createTestTarget().database(expected).build().database).toEqual(expected);
     });
 
     it('sets the URL.', () => {
-      assertBuilderSetsProperty(
-        'mongodb://database.zthunworks.com',
-        createTestTarget,
-        (t, v) => t.url(v),
-        (o: IZDatabaseOptions) => o.url
-      );
+      const expected = 'mongodb://database.zthunworks.com';
+      expect(createTestTarget().url(expected).build().url).toEqual(expected);
     });
   });
 
@@ -34,15 +25,18 @@ describe('ZDatabaseOptionsBuilder', () => {
         .url('mongodb://database.zthunworks.com')
         .timeout(500)
         .build();
-      assertBuilderCopiesObject(expected, createTestTarget);
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 
   describe('Assign', () => {
     it('updates properties in the builder.', () => {
       const url = 'mongodb://database.zthunworks.com';
+      const database = 'database';
       const expected = createTestTarget().database('database').url(url).build();
-      assertBuilderAssignsObject(expected, () => createTestTarget().url(url), { database: 'database' });
+      const actual = createTestTarget().assign({ database, url }).build();
+      expect(actual).toEqual(expected);
     });
   });
 });
