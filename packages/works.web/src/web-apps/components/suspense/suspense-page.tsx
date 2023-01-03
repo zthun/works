@@ -13,7 +13,7 @@ import {
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
 import React from 'react';
-import { ZComponentSuspense } from '../../web-apps-components';
+import { ZRouteSuspense } from '../../../routes';
 
 /**
  * Represents a demo for suspense indicators.
@@ -30,9 +30,9 @@ export function ZSuspensePage() {
   return (
     <ZCard
       className='ZSuspensePage-root'
-      heading={ZComponentSuspense.name}
-      subHeading={ZComponentSuspense.description}
-      avatar={ZComponentSuspense.avatar}
+      heading={ZRouteSuspense.name}
+      subHeading={ZRouteSuspense.description}
+      avatar={ZRouteSuspense.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

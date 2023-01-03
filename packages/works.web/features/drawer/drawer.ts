@@ -1,12 +1,12 @@
 import { Then, When } from '@cucumber/cucumber';
 import { ZStateAnchor } from '@zthun/works.react';
 import assert from 'assert';
-import { ZLearnPath } from '../../src/routes';
+import { fullPath, ZRouteDrawer } from '../../src/routes';
 import { ZDrawerPageComponentModel } from '../../src/web-apps/components/drawer/drawer-page.cm';
 import { ZLearnWorld } from '../learn-world';
 
 When('I navigate to the drawer demo page', async function (this: ZLearnWorld<ZDrawerPageComponentModel>) {
-  await this.navigate(ZLearnPath.webApps.components.drawer);
+  await this.navigate(fullPath(ZRouteDrawer));
   this.parameters.page = await this.create(ZDrawerPageComponentModel, ZDrawerPageComponentModel.Selector);
 });
 

@@ -16,7 +16,7 @@ import {
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
 import React from 'react';
-import { ZComponentDrawer } from '../../web-apps-components';
+import { ZRouteDrawer } from '../../../routes';
 
 /**
  * Represents a demo for drawers.
@@ -34,9 +34,9 @@ export function ZDrawerPage() {
   return (
     <ZCard
       className='ZDrawerPage-root'
-      heading={ZComponentDrawer.name}
-      subHeading={ZComponentDrawer.description}
-      avatar={ZComponentDrawer.avatar}
+      heading={ZRouteDrawer.name}
+      subHeading={ZRouteDrawer.description}
+      avatar={ZRouteDrawer.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

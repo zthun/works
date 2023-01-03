@@ -1,7 +1,7 @@
 import { ZSizeFixed } from '@zthun/works.chonkify';
 import { useFashionDesign, ZCard, ZH3, ZPaddedBox, ZParagraph, ZPopupButton } from '@zthun/works.react';
 import React, { useMemo } from 'react';
-import { ZComponentPopup } from '../../web-apps-components';
+import { ZRoutePopup } from '../../../routes';
 
 /**
  * Represents a demo for popups.
@@ -16,9 +16,9 @@ export function ZPopupPage() {
   return (
     <ZCard
       className='ZPopupPage-root'
-      heading={ZComponentPopup.name}
-      subHeading={ZComponentPopup.description}
-      avatar={ZComponentPopup.avatar}
+      heading={ZRoutePopup.name}
+      subHeading={ZRoutePopup.description}
+      avatar={ZRoutePopup.avatar}
     >
       <ZH3>Description</ZH3>
 

@@ -12,7 +12,7 @@ import {
   ZParagraph
 } from '@zthun/works.react';
 import React from 'react';
-import { ZComponentNumber } from '../../web-apps-components';
+import { ZRouteNumber } from '../../../routes';
 
 /**
  * Represents a demo for number inputs.
@@ -26,9 +26,9 @@ export function ZNumberPage() {
   return (
     <ZCard
       className='ZNumberPage-root'
-      heading={ZComponentNumber.name}
-      subHeading={ZComponentNumber.description}
-      avatar={ZComponentNumber.avatar}
+      heading={ZRouteNumber.name}
+      subHeading={ZRouteNumber.description}
+      avatar={ZRouteNumber.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

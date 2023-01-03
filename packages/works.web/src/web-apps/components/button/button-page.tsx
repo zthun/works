@@ -19,7 +19,7 @@ import {
 } from '@zthun/works.react';
 import { identity } from 'lodash';
 import React from 'react';
-import { ZComponentButton } from '../../web-apps-components';
+import { ZRouteButton } from '../../../routes';
 
 /**
  * Represents a demo for buttons.
@@ -61,9 +61,9 @@ export function ZButtonPage() {
   return (
     <ZCard
       className='ZButtonPage-root'
-      heading={ZComponentButton.name}
-      subHeading={ZComponentButton.description}
-      avatar={ZComponentButton.avatar}
+      heading={ZRouteButton.name}
+      subHeading={ZRouteButton.description}
+      avatar={ZRouteButton.avatar}
     >
       <ZPaddedBox padding={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

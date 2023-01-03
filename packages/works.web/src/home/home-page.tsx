@@ -16,6 +16,7 @@ import {
   ZSubtitle
 } from '@zthun/works.react';
 import React from 'react';
+import { fullPath, ZRouteMicroservices, ZRouteWebApps } from '../routes';
 
 const useHomePageStyles = makeStyles()((theme) => ({
   section: {
@@ -52,7 +53,7 @@ export function ZHomePage() {
         width={ZSizeFixed.Large}
         avatar={<Terminal fontSize='inherit' />}
         heading='The Works System'
-        subHeading='Make Development Easier'
+        subHeading='Make development easier'
       >
         <ZGridLayout justifyContent='center'>
           <ZImageSource src={learn?.icon} height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
@@ -80,12 +81,12 @@ export function ZHomePage() {
         className={classes.section}
         width={ZSizeFixed.Large}
         avatar={<PublicIcon fontSize='inherit' />}
-        heading='Web Apps'
-        subHeading='Build something for users'
+        heading={ZRouteWebApps.name}
+        subHeading={ZRouteWebApps.description}
         footer={
           <ZButton
             label='Get Started'
-            onClick={() => navigate('/web-apps')}
+            onClick={() => navigate(fullPath(ZRouteWebApps))}
             fashion={primary}
             name='web-apps-get-started'
             outline
@@ -116,12 +117,12 @@ export function ZHomePage() {
         className={classes.section}
         width={ZSizeFixed.Large}
         avatar={<DensitySmallIcon fontSize='inherit' />}
-        heading='Microservices'
-        subHeading='Build foundations for application services'
+        heading={ZRouteMicroservices.name}
+        subHeading={ZRouteMicroservices.description}
         footer={
           <ZButton
             label='Get Started'
-            onClick={() => navigate('/microservices')}
+            onClick={() => navigate(fullPath(ZRouteMicroservices))}
             fashion={secondary}
             name='microservices-get-started'
             outline

@@ -1,6 +1,6 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import assert from 'assert';
-import { ZLearnPath } from '../../src/routes';
+import { fullPath, ZRouteText } from '../../src/routes';
 import { ZTextPageComponentModel } from '../../src/web-apps/components/text/text-page.cm';
 import { ZLearnWorld } from '../learn-world';
 
@@ -14,7 +14,7 @@ const LOREM3 = 'Ut labore et dolore magna aliqua. Massa sed elementum tempus ege
 // cspell:enable
 
 Given('I navigate to the text demo page', async function (this: ZLearnWorld<ZTextPageComponentModel>) {
-  await this.navigate(ZLearnPath.webApps.components.text);
+  await this.navigate(fullPath(ZRouteText));
   this.parameters.page = await this.create(ZTextPageComponentModel, ZTextPageComponentModel.Selector);
 });
 

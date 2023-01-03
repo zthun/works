@@ -3,18 +3,37 @@ import {
   useFashionDesign,
   useNavigate,
   ZBreadcrumbsLocation,
+  ZCard,
   ZDrawerButton,
   ZGridLayout,
   ZList,
   ZListGroup,
   ZListLineItem,
   ZNavigate,
+  ZParagraph,
   ZRoute,
   ZRouteMap,
   ZStateAnchor
 } from '@zthun/works.react';
 import { useLocation } from '@zthun/works.react/src/router/router-dom';
 import React from 'react';
+import {
+  ZRouteAlerts,
+  ZRouteAllComponents,
+  ZRouteBoolean,
+  ZRouteButton,
+  ZRouteChoice,
+  ZRouteComponents,
+  ZRouteDrawer,
+  ZRouteFashion,
+  ZRouteList,
+  ZRouteNumber,
+  ZRoutePopup,
+  ZRouteSuspense,
+  ZRouteText,
+  ZRouteTypography,
+  ZRouteWebApps
+} from '../routes';
 import { ZAlertsPage } from './components/alerts/alerts-page';
 import { ZBooleanPage } from './components/boolean/boolean-page';
 import { ZButtonPage } from './components/button/button-page';
@@ -28,23 +47,6 @@ import { ZPopupPage } from './components/popup/popup-page';
 import { ZSuspensePage } from './components/suspense/suspense-page';
 import { ZTextPage } from './components/text/text-page';
 import { ZTypographyPage } from './components/typography/typography-page';
-import { ZGettingStartedPage } from './getting-started/getting-started-page';
-import {
-  ZComponentAlerts,
-  ZComponentBoolean,
-  ZComponentButton,
-  ZComponentChoice,
-  ZComponentDrawer,
-  ZComponentFashion,
-  ZComponentList,
-  ZComponentNumber,
-  ZComponentPopup,
-  ZComponents,
-  ZComponentSuspense,
-  ZComponentText,
-  ZComponentTypography,
-  ZWebAppsComponents
-} from './web-apps-components';
 
 /**
  * Renders the home page.
@@ -56,24 +58,40 @@ export function ZWebAppsPage() {
   const location = useLocation();
   const { secondary } = useFashionDesign();
 
+  const renderRoot = () => (
+    <ZCard
+      className='ZGettingStartedPage-root'
+      avatar={ZRouteWebApps.avatar}
+      heading={ZRouteWebApps.name}
+      subHeading={ZRouteWebApps.description}
+    >
+      <ZParagraph>
+        Users interact with your web applications through user interfaces. You can develop a great API that is perfectly
+        scalable and clean, but unless there is a friendly way to interact with it, most users will never know about it.
+        This is why developing a solid front end is so important. Front ends allow your users to use your system without
+        needing to know all of the backend implementation that goes into it.
+      </ZParagraph>
+    </ZCard>
+  );
+
   const renderDetails = () => (
     <ZRouteMap>
-      <ZRoute path={ZComponents.path}>
-        <ZRoute path={ZComponentAlerts.path} element={<ZAlertsPage />} />
-        <ZRoute path={ZComponentBoolean.path} element={<ZBooleanPage />} />
-        <ZRoute path={ZComponentButton.path} element={<ZButtonPage />} />
-        <ZRoute path={ZComponentChoice.path} element={<ZChoicePage />} />
-        <ZRoute path={ZComponentDrawer.path} element={<ZDrawerPage />} />
-        <ZRoute path={ZComponentFashion.path} element={<ZFashionPage />} />
-        <ZRoute path={ZComponentList.path} element={<ZListPage />} />
-        <ZRoute path={ZComponentNumber.path} element={<ZNumberPage />} />
-        <ZRoute path={ZComponentPopup.path} element={<ZPopupPage />} />
-        <ZRoute path={ZComponentSuspense.path} element={<ZSuspensePage />} />
-        <ZRoute path={ZComponentText.path} element={<ZTextPage />} />
-        <ZRoute path={ZComponentTypography.path} element={<ZTypographyPage />} />
+      <ZRoute path={ZRouteComponents.path}>
+        <ZRoute path={ZRouteAlerts.path} element={<ZAlertsPage />} />
+        <ZRoute path={ZRouteBoolean.path} element={<ZBooleanPage />} />
+        <ZRoute path={ZRouteButton.path} element={<ZButtonPage />} />
+        <ZRoute path={ZRouteChoice.path} element={<ZChoicePage />} />
+        <ZRoute path={ZRouteDrawer.path} element={<ZDrawerPage />} />
+        <ZRoute path={ZRouteFashion.path} element={<ZFashionPage />} />
+        <ZRoute path={ZRouteList.path} element={<ZListPage />} />
+        <ZRoute path={ZRouteNumber.path} element={<ZNumberPage />} />
+        <ZRoute path={ZRoutePopup.path} element={<ZPopupPage />} />
+        <ZRoute path={ZRouteSuspense.path} element={<ZSuspensePage />} />
+        <ZRoute path={ZRouteText.path} element={<ZTextPage />} />
+        <ZRoute path={ZRouteTypography.path} element={<ZTypographyPage />} />
         <ZRoute path='' element={<ZComponentsPage />} />
       </ZRoute>
-      <ZRoute path='/' element={<ZGettingStartedPage />} />
+      <ZRoute path='/' element={renderRoot()} />
       <ZRoute path='*' element={<ZNavigate to={'/status-code/404'} />} />
     </ZRouteMap>
   );
@@ -86,14 +104,14 @@ export function ZWebAppsPage() {
         closeOnChange={[location]}
       >
         <ZList>
-          <ZListGroup heading='Components' />
-          {ZWebAppsComponents.map((component) => (
+          <ZListGroup heading={ZRouteComponents.name} />
+          {ZRouteAllComponents.map((component) => (
             <ZListLineItem
               key={component.path}
               prefix={component.avatar}
               heading={component.name}
               subHeading={component.description}
-              onClick={navigate.bind(null, `components/${component.path}`)}
+              onClick={navigate.bind(null, `${ZRouteComponents.path}/${component.path}`)}
             />
           ))}
         </ZList>

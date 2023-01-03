@@ -1,7 +1,7 @@
 import { stringify, ZFashionBuilder } from '@zthun/works.fashion';
 import { useSafeState, ZCaption, ZCard, ZFashionGrid, ZH3, ZParagraph } from '@zthun/works.react';
 import React from 'react';
-import { ZComponentFashion } from '../../web-apps-components';
+import { ZRouteFashion } from '../../../routes';
 
 /**
  * Represents a demo for fashion color.
@@ -15,9 +15,9 @@ export function ZFashionPage() {
   return (
     <ZCard
       className='ZFashionPage-root'
-      heading={ZComponentFashion.name}
-      subHeading={ZComponentFashion.description}
-      avatar={ZComponentFashion.avatar}
+      heading={ZRouteFashion.name}
+      subHeading={ZRouteFashion.description}
+      avatar={ZRouteFashion.avatar}
     >
       <ZH3>Description</ZH3>
 

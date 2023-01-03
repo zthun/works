@@ -16,7 +16,7 @@ import {
 } from '@zthun/works.react';
 import { ZTextArea } from '@zthun/works.react/src';
 import React from 'react';
-import { ZComponentText } from '../../web-apps-components';
+import { ZRouteText } from '../../../routes';
 
 /**
  * Represents a demo for text.
@@ -33,9 +33,9 @@ export function ZTextPage() {
   return (
     <ZCard
       className='ZTextPage-root'
-      heading={ZComponentText.name}
-      subHeading={ZComponentText.description}
-      avatar={ZComponentText.avatar}
+      heading={ZRouteText.name}
+      subHeading={ZRouteText.description}
+      avatar={ZRouteText.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

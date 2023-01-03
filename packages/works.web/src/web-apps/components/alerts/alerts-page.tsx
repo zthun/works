@@ -18,7 +18,7 @@ import {
 } from '@zthun/works.react';
 import { startCase } from 'lodash';
 import React from 'react';
-import { ZComponentAlerts } from '../../web-apps-components';
+import { ZRouteAlerts } from '../../../routes';
 
 /**
  * Represents a demo for alerts.
@@ -56,9 +56,9 @@ export function ZAlertsPage() {
   return (
     <ZCard
       className='ZAlertsPage-root'
-      heading={ZComponentAlerts.name}
-      subHeading={ZComponentAlerts.description}
-      avatar={ZComponentAlerts.avatar}
+      heading={ZRouteAlerts.name}
+      subHeading={ZRouteAlerts.description}
+      avatar={ZRouteAlerts.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

@@ -15,7 +15,7 @@ import {
   ZParagraph
 } from '@zthun/works.react';
 import React from 'react';
-import { ZComponentChoice } from '../../web-apps-components';
+import { ZRouteChoice } from '../../../routes';
 
 interface Superhero {
   id: string;
@@ -105,9 +105,9 @@ export function ZChoicePage() {
   return (
     <ZCard
       className='ZChoicePage-root'
-      heading={ZComponentChoice.name}
-      subHeading={ZComponentChoice.description}
-      avatar={ZComponentChoice.avatar}
+      heading={ZRouteChoice.name}
+      subHeading={ZRouteChoice.description}
+      avatar={ZRouteChoice.avatar}
     >
       <ZPaddedBox padding={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

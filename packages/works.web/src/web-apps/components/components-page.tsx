@@ -13,7 +13,7 @@ import {
   ZPaddedBox
 } from '@zthun/works.react';
 import React from 'react';
-import { ZWebAppsComponents } from '../web-apps-components';
+import { ZRouteAllComponents } from '../../routes';
 
 /**
  * Represents the components page.
@@ -61,7 +61,7 @@ export function ZComponentsPage() {
         columnsSm='auto'
         gap={ZSizeFixed.Medium}
       >
-        {ZWebAppsComponents.map(renderComponent)}
+        {ZRouteAllComponents.map(renderComponent)}
       </ZGridLayout>
     </ZCard>
   );

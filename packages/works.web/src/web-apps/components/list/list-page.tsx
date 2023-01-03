@@ -17,7 +17,7 @@ import {
   ZParagraph
 } from '@zthun/works.react';
 import React from 'react';
-import { ZComponentList } from '../../web-apps-components';
+import { ZRouteList } from '../../../routes';
 
 /**
  * Represents a demo for lists.
@@ -37,9 +37,9 @@ export function ZListPage() {
   return (
     <ZCard
       className='ZListPage-root'
-      heading={ZComponentList.name}
-      subHeading={ZComponentList.description}
-      avatar={ZComponentList.avatar}
+      heading={ZRouteList.name}
+      subHeading={ZRouteList.description}
+      avatar={ZRouteList.avatar}
     >
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Description</ZH3>

@@ -1,11 +1,11 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import assert from 'assert';
-import { ZLearnPath } from '../../src/routes';
+import { fullPath, ZRouteBoolean } from '../../src/routes';
 import { ZBooleanPageComponentModel } from '../../src/web-apps/components/boolean/boolean-page.cm';
 import { ZLearnWorld } from '../learn-world';
 
 Given('I have navigated to the boolean demo page', async function (this: ZLearnWorld<ZBooleanPageComponentModel>) {
-  await this.navigate(ZLearnPath.webApps.components.boolean);
+  await this.navigate(fullPath(ZRouteBoolean));
   this.parameters.page = await this.create(ZBooleanPageComponentModel, ZBooleanPageComponentModel.Selector);
 });
 

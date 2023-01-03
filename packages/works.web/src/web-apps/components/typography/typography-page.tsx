@@ -1,7 +1,7 @@
 // cspell:disable
 import { ZCaption, ZCard, ZH1, ZH2, ZH3, ZH4, ZH5, ZH6, ZOverline, ZParagraph, ZSubtitle } from '@zthun/works.react';
 import React from 'react';
-import { ZComponentTypography } from '../../web-apps-components';
+import { ZRouteTypography } from '../../../routes';
 
 /**
  * Represents a demo for typography.
@@ -12,9 +12,9 @@ export function ZTypographyPage() {
   return (
     <ZCard
       className='ZTypographyPage-root'
-      heading={ZComponentTypography.name}
-      subHeading={ZComponentTypography.description}
-      avatar={ZComponentTypography.avatar}
+      heading={ZRouteTypography.name}
+      subHeading={ZRouteTypography.description}
+      avatar={ZRouteTypography.avatar}
     >
       <ZH3>Description</ZH3>
 
