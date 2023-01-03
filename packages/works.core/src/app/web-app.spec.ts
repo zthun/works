@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { IZWebApp, ZWebAppBuilder } from './web-app';
+import { ZWebAppBuilder } from './web-app';
 
 describe('ZWebAppBuilder', () => {
   function createTestTarget() {
@@ -9,67 +8,38 @@ describe('ZWebAppBuilder', () => {
 
   describe('Properties', () => {
     it('should set the id.', () => {
-      assertBuilderSetsProperty(
-        'app',
-        createTestTarget,
-        (t, v) => t.id(v),
-        (a: IZWebApp) => a._id
-      );
+      const expected = 'app';
+      expect(createTestTarget().id(expected).build()._id).toEqual(expected);
     });
 
     it('should set the name.', () => {
-      assertBuilderSetsProperty(
-        'App',
-        createTestTarget,
-        (t, v) => t.name(v),
-        (a: IZWebApp) => a.name
-      );
+      const expected = 'App';
+      expect(createTestTarget().name(expected).build().name).toEqual(expected);
     });
 
     it('should set the short.', () => {
-      assertBuilderSetsProperty(
-        'Short',
-        createTestTarget,
-        (t, v) => t.short(v),
-        (a: IZWebApp) => a.short
-      );
+      const expected = 'Short';
+      expect(createTestTarget().short(expected).build().short).toEqual(expected);
     });
 
     it('should set the description.', () => {
-      assertBuilderSetsProperty(
-        'Description',
-        createTestTarget,
-        (t, v) => t.description(v),
-        (a: IZWebApp) => a.description
-      );
+      const expected = 'Description';
+      expect(createTestTarget().description(expected).build().description).toEqual(expected);
     });
 
     it('should set the domain.', () => {
-      assertBuilderSetsProperty(
-        'https://app.zthunworks.com',
-        createTestTarget,
-        (t, v) => t.domain(v),
-        (a: IZWebApp) => a.domain
-      );
+      const expected = 'https://app.zthunworks.com';
+      expect(createTestTarget().domain(expected).build().domain).toEqual(expected);
     });
 
     it('should set the icon.', () => {
-      assertBuilderSetsProperty(
-        // cspell:disable-next-line
-        'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
-        createTestTarget,
-        (t, v) => t.icon(v),
-        (a: IZWebApp) => a.icon
-      );
+      const expected = 'https://my-icons/sample.png';
+      expect(createTestTarget().icon(expected).build().icon).toEqual(expected);
     });
 
     it('should set the source.', () => {
-      assertBuilderSetsProperty(
-        'https://github.com/zthun/works',
-        createTestTarget,
-        (t, v) => t.source(v),
-        (a: IZWebApp) => a.source
-      );
+      const expected = 'https://github.com/zthun/works';
+      expect(createTestTarget().source(expected).build().source).toEqual(expected);
     });
   });
 
