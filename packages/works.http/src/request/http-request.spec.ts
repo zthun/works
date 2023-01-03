@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderCopiesObject, assertBuilderSetsProperty } from '@zthun/works.jest';
-import { IZHttpRequest, ZHttpMethod, ZHttpRequestBuilder } from './http-request';
+import { ZHttpMethod, ZHttpRequestBuilder } from './http-request';
 
 describe('ZHttpRequestBuilder', () => {
   function createTestTarget() {
@@ -10,116 +9,58 @@ describe('ZHttpRequestBuilder', () => {
   describe('Properties', () => {
     describe('General', () => {
       it('should set the url.', () => {
-        assertBuilderSetsProperty(
-          'https://google.com',
-          createTestTarget,
-          (r, v) => r.url(v),
-          (r: IZHttpRequest) => r.url
-        );
+        const expected = 'https://google.com';
+        expect(createTestTarget().url(expected).build().url).toEqual(expected);
       });
 
       it('should set the timeout.', () => {
-        assertBuilderSetsProperty(
-          5000,
-          createTestTarget,
-          (t, v) => t.timeout(v),
-          (r: IZHttpRequest) => r.timeout
-        );
+        const expected = 5000;
+        expect(createTestTarget().timeout(expected).build().timeout).toEqual(expected);
       });
     });
 
     describe('Method', () => {
       it('should send a GET request.', () => {
-        assertBuilderSetsProperty(
-          ZHttpMethod.Get,
-          createTestTarget,
-          (t) => t.get(),
-          (r: IZHttpRequest) => r.method
-        );
+        expect(createTestTarget().get().build().method).toEqual(ZHttpMethod.Get);
       });
 
       it('should send a POST request.', () => {
-        assertBuilderSetsProperty(
-          ZHttpMethod.Post,
-          createTestTarget,
-          (t) => t.post(),
-          (r: IZHttpRequest) => r.method
-        );
+        expect(createTestTarget().post().build().method).toEqual(ZHttpMethod.Post);
       });
 
       it('should send a POST request with a body.', () => {
-        const body = { value: 0 };
-        assertBuilderSetsProperty(
-          body,
-          createTestTarget,
-          (t, v) => t.post(v),
-          (r: IZHttpRequest) => r.body
-        );
+        const expected = { value: 0 };
+        expect(createTestTarget().post(expected).build().body).toEqual(expected);
       });
 
       it('should send a PUT request.', () => {
-        assertBuilderSetsProperty(
-          ZHttpMethod.Put,
-          createTestTarget,
-          (t) => t.put(),
-          (r: IZHttpRequest) => r.method
-        );
+        expect(createTestTarget().put().build().method).toEqual(ZHttpMethod.Put);
       });
 
       it('should send a PUT request with a body.', () => {
-        const body = { value: 0 };
-        assertBuilderSetsProperty(
-          body,
-          createTestTarget,
-          (t, v) => t.put(v),
-          (r: IZHttpRequest) => r.body
-        );
+        const expected = { value: 0 };
+        expect(createTestTarget().put(expected).build().body).toEqual(expected);
       });
 
       it('should send a DELETE request.', () => {
-        assertBuilderSetsProperty(
-          ZHttpMethod.Delete,
-          createTestTarget,
-          (t) => t.delete(),
-          (r: IZHttpRequest) => r.method
-        );
+        expect(createTestTarget().delete().build().method).toEqual(ZHttpMethod.Delete);
       });
 
       it('should send a PATCH request.', () => {
-        assertBuilderSetsProperty(
-          ZHttpMethod.Patch,
-          createTestTarget,
-          (t) => t.patch(),
-          (r: IZHttpRequest) => r.method
-        );
+        expect(createTestTarget().patch().build().method).toEqual(ZHttpMethod.Patch);
       });
 
       it('should send a PATCH request with a body.', () => {
-        const body = { value: 0 };
-        assertBuilderSetsProperty(
-          body,
-          createTestTarget,
-          (t, v) => t.patch(v),
-          (r: IZHttpRequest) => r.body
-        );
+        const expected = { value: 0 };
+        expect(createTestTarget().patch(expected).build().body).toEqual(expected);
       });
 
       it('should send a OPTIONS request.', () => {
-        assertBuilderSetsProperty(
-          ZHttpMethod.Options,
-          createTestTarget,
-          (t) => t.options(),
-          (r: IZHttpRequest) => r.method
-        );
+        expect(createTestTarget().options().build().method).toEqual(ZHttpMethod.Options);
       });
 
       it('should send a HEAD request.', () => {
-        assertBuilderSetsProperty(
-          ZHttpMethod.Head,
-          createTestTarget,
-          (t) => t.head(),
-          (r: IZHttpRequest) => r.method
-        );
+        expect(createTestTarget().head().build().method).toEqual(ZHttpMethod.Head);
       });
     });
 
@@ -129,13 +70,7 @@ describe('ZHttpRequestBuilder', () => {
           'Keep-Alive': 'true',
           'Connection': 'close'
         };
-
-        assertBuilderSetsProperty(
-          expected,
-          createTestTarget,
-          (t, v) => t.headers(v),
-          (r: IZHttpRequest) => r.headers
-        );
+        expect(createTestTarget().headers(expected).build().headers).toEqual(expected);
       });
 
       it('should add individual headers.', () => {
@@ -144,26 +79,24 @@ describe('ZHttpRequestBuilder', () => {
           connection: 'close',
           time: '5000'
         };
-
-        assertBuilderSetsProperty(
-          expected,
-          createTestTarget,
-          (t) => t.header('keep', true).header('connection', 'close').header('time', 5000),
-          (r: IZHttpRequest) => r.headers
-        );
+        const actual = createTestTarget()
+          .header('keep', true)
+          .header('connection', 'close')
+          .header('time', 5000)
+          .build().headers;
+        expect(actual).toEqual(expected);
       });
 
       it('should add delete headers.', () => {
         const expected = {
           keep: 'true'
         };
-
-        assertBuilderSetsProperty(
-          expected,
-          createTestTarget,
-          (t) => t.header('keep', true).header('connection', 'close').header('connection', null),
-          (r: IZHttpRequest) => r.headers
-        );
+        const actual = createTestTarget()
+          .header('keep', true)
+          .header('connection', 'close')
+          .header('connection', null)
+          .build().headers;
+        expect(actual).toEqual(expected);
       });
     });
   });
@@ -176,7 +109,8 @@ describe('ZHttpRequestBuilder', () => {
         .timeout(5000)
         .header('keep-alive', true)
         .build();
-      assertBuilderCopiesObject(expected, createTestTarget);
+      const actual = createTestTarget().copy(expected).build();
+      expect(actual).toEqual(expected);
     });
   });
 });

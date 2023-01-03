@@ -1,39 +1,25 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZHttpCodeRedirection } from './http-code-redirection';
-import { IZHttpResult, ZHttpResultBuilder } from './http-result';
+import { ZHttpResultBuilder } from './http-result';
 
 describe('ZHttpResultBuilder', () => {
   function createTestTarget() {
-    return new ZHttpResultBuilder(null);
+    return new ZHttpResultBuilder<string | null>(null);
   }
 
   describe('Properties', () => {
     it('should set the data.', () => {
-      assertBuilderSetsProperty(
-        'data',
-        createTestTarget,
-        (t, v) => t.data(v),
-        (r: IZHttpResult) => r.data
-      );
+      const expected = 'data';
+      expect(createTestTarget().data(expected).build().data).toEqual(expected);
     });
 
     it('should set the code.', () => {
-      assertBuilderSetsProperty(
-        ZHttpCodeRedirection.Found,
-        createTestTarget,
-        (t, v) => t.status(v),
-        (r: IZHttpResult) => r.status
-      );
+      expect(createTestTarget().status(ZHttpCodeRedirection.Found).build().status).toEqual(ZHttpCodeRedirection.Found);
     });
 
     it('should set result headers.', () => {
-      assertBuilderSetsProperty(
-        { key: 'value' },
-        createTestTarget,
-        (t, v) => t.headers(v),
-        (r: IZHttpResult) => r.headers
-      );
+      const expected = { key: 'value' };
+      expect(createTestTarget().headers(expected).build().headers).toEqual(expected);
     });
   });
 });
