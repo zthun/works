@@ -2,8 +2,7 @@
 Feature: Button Page
 
 Background:
-  Given I open the learn application
-  And I navigate to the text demo page
+  Given I navigate to the text demo page
 
 @TextPage-Value
 Scenario: Entering in text should set the value field.

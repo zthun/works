@@ -30,6 +30,26 @@ export type ZCircusMouseButton = 'Left' | 'Right' | 'Middle';
 export type ZCircusMagicFunction = () => Promise<any>;
 
 /**
+ * Gets whether an action is one of the specific types.
+ *
+ * @param types
+ *        The types to check.
+ * @param action
+ *        The action to match.
+ *
+ * @returns
+ *        Positive if the action name is one of the given types.
+ */
+const _isActionOneOf = (types: ZCircusActionType[], action: IZCircusAction): action is IZCircusAction<any> => {
+  const { name } = action;
+  return types.indexOf(name) >= 0;
+};
+
+type ZKeyboardTypeGuard = (action: IZCircusAction) => action is IZCircusAction<IZCircusKey>;
+type ZMouseTypeGuard = (action: IZCircusAction) => action is IZCircusAction<ZCircusMouseButton>;
+type ZMagicTypeGuard = (action: IZCircusAction) => action is IZCircusAction<ZCircusMagicFunction>;
+
+/**
  * Gets whether an action represents a keyboard action.
  *
  * @param action
@@ -39,10 +59,10 @@ export type ZCircusMagicFunction = () => Promise<any>;
  *        True if the action represents a key down or key up event.
  *        False otherwise.
  */
-export function isKeyboardAction(action: IZCircusAction): action is IZCircusAction<IZCircusKey> {
-  const { name } = action;
-  return [ZCircusActionType.KeyDown, ZCircusActionType.KeyUp].indexOf(name) >= 0;
-}
+export const isKeyboardAction = _isActionOneOf.bind(null, [
+  ZCircusActionType.KeyDown,
+  ZCircusActionType.KeyUp
+]) as ZKeyboardTypeGuard;
 
 /**
  * Gets whether an action represents a mouse action.
@@ -53,10 +73,10 @@ export function isKeyboardAction(action: IZCircusAction): action is IZCircusActi
  * @returns
  *        True if the action represents a mouse event.
  */
-export function isMouseAction(action: IZCircusAction): action is IZCircusAction<'Left' | 'Right' | 'Middle'> {
-  const { name } = action;
-  return [ZCircusActionType.MouseDown, ZCircusActionType.MouseUp].indexOf(name) >= 0;
-}
+export const isMouseAction = _isActionOneOf.bind(null, [
+  ZCircusActionType.MouseDown,
+  ZCircusActionType.MouseUp
+]) as ZMouseTypeGuard;
 
 /**
  * Gets whether an action represents magic.
@@ -67,6 +87,4 @@ export function isMouseAction(action: IZCircusAction): action is IZCircusAction<
  * @returns
  *        True if the action represents a magic event.
  */
-export function isMagicAction(action: IZCircusAction): action is IZCircusAction<ZCircusMagicFunction> {
-  return action.name === ZCircusActionType.Magic;
-}
+export const isMagicAction = _isActionOneOf.bind(null, [ZCircusActionType.Magic]) as ZMagicTypeGuard;

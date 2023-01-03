@@ -142,28 +142,6 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
-  public url(): Promise<string>;
-
-  /**
-   * @inheritdoc
-   */
-  public url(to: string): Promise<IZCircusDriver>;
-
-  /**
-   * @inheritdoc
-   */
-  public async url(to?: string): Promise<IZCircusDriver | string> {
-    if (to == null) {
-      return this._seleniumDriver.getCurrentUrl();
-    }
-
-    await this._seleniumDriver.navigate().to(to);
-    return this.body();
-  }
-
-  /**
-   * @inheritdoc
-   */
   public async perform(act: IZCircusAct): Promise<void> {
     // Before we do anything, we need to make sure the element is scrolled into view if possible.
     await this._seleniumDriver.executeScript('arguments[0].scrollIntoView(true);', this._search);

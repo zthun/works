@@ -7,8 +7,8 @@ type ChoiceDemo = 'dropdown' | 'autocomplete';
 type OptionCheckbox = 'multiple' | 'disabled' | 'indelible';
 
 When('I navigate to the choice demo page', async function (this: ZLearnWorld<ZChoicePageComponentModel>) {
-  await this.navigate('/web-apps/components/choice');
-  this.parameters.page = await this.create(ZChoicePageComponentModel, ZChoicePageComponentModel.Selector);
+  await this.open('/web-apps/components/choice');
+  this.parameters.page = await this.create(ZChoicePageComponentModel);
 });
 
 When(

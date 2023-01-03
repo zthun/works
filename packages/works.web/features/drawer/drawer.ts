@@ -6,8 +6,8 @@ import { ZDrawerPageComponentModel } from '../../src/web-apps/components/drawer/
 import { ZLearnWorld } from '../learn-world';
 
 When('I navigate to the drawer demo page', async function (this: ZLearnWorld<ZDrawerPageComponentModel>) {
-  await this.navigate(fullPath(ZRouteDrawer));
-  this.parameters.page = await this.create(ZDrawerPageComponentModel, ZDrawerPageComponentModel.Selector);
+  await this.open(fullPath(ZRouteDrawer));
+  this.parameters.page = await this.create(ZDrawerPageComponentModel);
 });
 
 When(

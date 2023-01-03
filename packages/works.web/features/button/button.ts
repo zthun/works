@@ -5,8 +5,8 @@ import { ZButtonPageComponentModel } from '../../src/web-apps/components/button/
 import { ZLearnWorld } from '../learn-world';
 
 Given('I navigate to the button demo page', async function (this: ZLearnWorld<ZButtonPageComponentModel>) {
-  await this.navigate(fullPath(ZRouteButton));
-  this.parameters.page = await this.create(ZButtonPageComponentModel, ZButtonPageComponentModel.Selector);
+  await this.open(fullPath(ZRouteButton));
+  this.parameters.page = await this.create(ZButtonPageComponentModel);
 });
 
 When(

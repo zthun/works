@@ -16,30 +16,4 @@ export abstract class ZCircusComponentModel {
    *        The driver that manages this component.
    */
   public constructor(public readonly driver: IZCircusDriver) {}
-
-  /**
-   * Constructs a new CircusComponentModel by waiting for a context selector to become available.
-   *
-   * @param driver
-   *        The driver used for the wait.
-   * @param CircusComponentModel
-   *        The component model constructor function to create.
-   * @param selector
-   *        The css selector to query for the root context of the component model.
-   *
-   * @deprecated Use ZCircusBy instead.
-   *
-   * @returns
-   *        A new instance of the CircusComponentModel once the selector context is ready.
-   */
-  public static async create<T>(
-    driver: IZCircusDriver,
-    CircusComponentModel: ZCircusComponentModelConstructor<T>,
-    selector: string
-  ) {
-    const description = `Searching for a component with selector: ${selector}`;
-    await driver.wait(() => driver.peek(selector), description);
-    const target = await driver.select(selector);
-    return new CircusComponentModel(target);
-  }
 }

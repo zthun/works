@@ -1,13 +1,13 @@
 /* eslint-disable require-jsdoc */
 
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed, ZSizeVaried } from '@zthun/works.chonkify';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import { ZPaddedBox } from './padded-box';
 
 describe('ZPaddedBox', () => {
   async function createTestTarget() {
-    const element = <ZPaddedBox padding={ZSizeFixed.Large} />;
+    const element = <ZPaddedBox padding={ZSizeFixed.Large} margin={ZSizeVaried.Fit} />;
     const driver = await new ZCircusSetupRenderer(element).setup();
     return driver;
   }

@@ -2,8 +2,7 @@
 Feature: Choice Page
 
 Background:
-  Given I open the learn application
-  And I navigate to the choice demo page
+  Given I navigate to the choice demo page
 
 @ChoicePage-Select
 @ChoicePage-Select-Single

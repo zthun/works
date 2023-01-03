@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZAlertListComponentModel, ZListComponentModel } from '@zthun/works.react';
 
 /**
@@ -14,11 +14,7 @@ export class ZListPageComponentModel extends ZCircusComponentModel {
    *      The page alerts.
    */
   public async alerts(): Promise<ZAlertListComponentModel> {
-    return ZCircusComponentModel.create(
-      await this.driver.body(),
-      ZAlertListComponentModel,
-      ZAlertListComponentModel.Selector
-    );
+    return ZCircusBy.first(await this.driver.body(), ZAlertListComponentModel);
   }
 
   /**
@@ -28,6 +24,6 @@ export class ZListPageComponentModel extends ZCircusComponentModel {
    *      The page list.
    */
   public async list(): Promise<ZListComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZListComponentModel, ZListComponentModel.Selector);
+    return ZCircusBy.first(this.driver, ZListComponentModel);
   }
 }

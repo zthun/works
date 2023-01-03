@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZBooleanComponentModel, ZChoiceComponentModel } from '@zthun/works.react';
 
 /**
@@ -26,7 +26,7 @@ export class ZChoicePageComponentModel extends ZCircusComponentModel {
    *        The drop down choice component.
    */
   public dropdown(): Promise<ZChoiceComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZChoiceComponentModel, ZChoiceComponentModel.selector('dropdown'));
+    return ZCircusBy.named(this.driver, ZChoiceComponentModel, 'dropdown');
   }
 
   /**
@@ -36,11 +36,7 @@ export class ZChoicePageComponentModel extends ZCircusComponentModel {
    *        The auto complete choice component.
    */
   public autocomplete(): Promise<ZChoiceComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZChoiceComponentModel,
-      ZChoiceComponentModel.selector('autocomplete')
-    );
+    return ZCircusBy.named(this.driver, ZChoiceComponentModel, 'autocomplete');
   }
 
   /**
@@ -50,11 +46,7 @@ export class ZChoicePageComponentModel extends ZCircusComponentModel {
    *      The boolean option to disable the drop downs.
    */
   public disabled(): Promise<ZBooleanComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('disabled')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'disabled');
   }
 
   /**
@@ -64,11 +56,7 @@ export class ZChoicePageComponentModel extends ZCircusComponentModel {
    *      The boolean option to select multiple options the drop downs.
    */
   public multiple(): Promise<ZBooleanComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('multiple')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'multiple');
   }
 
   /**
@@ -78,10 +66,6 @@ export class ZChoicePageComponentModel extends ZCircusComponentModel {
    *      The boolean option to remove clear support the drop downs.
    */
   public indelible(): Promise<ZBooleanComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('indelible')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'indelible');
   }
 }

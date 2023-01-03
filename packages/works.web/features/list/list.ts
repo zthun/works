@@ -7,8 +7,8 @@ import { ZListPageComponentModel } from '../../src/web-apps/components/list/list
 import { ZLearnWorld } from '../learn-world';
 
 When('I navigate to the list demo page', async function (this: ZLearnWorld<ZListPageComponentModel>) {
-  await this.navigate(fullPath(ZRouteList));
-  this.parameters.page = await this.create(ZListPageComponentModel, ZListPageComponentModel.Selector);
+  await this.open(fullPath(ZRouteList));
+  this.parameters.page = await this.create(ZListPageComponentModel);
 });
 
 When(

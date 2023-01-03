@@ -4,8 +4,7 @@
 Feature: Boolean Page
 
 Background:
-  Given I open the learn application
-  And I have navigated to the boolean demo page
+  Given I have navigated to the boolean demo page
 
 @BooleanPage-Checkbox
 Scenario: The checkbox should toggle on when clicked while off

@@ -5,8 +5,8 @@ import { ZBooleanPageComponentModel } from '../../src/web-apps/components/boolea
 import { ZLearnWorld } from '../learn-world';
 
 Given('I have navigated to the boolean demo page', async function (this: ZLearnWorld<ZBooleanPageComponentModel>) {
-  await this.navigate(fullPath(ZRouteBoolean));
-  this.parameters.page = await this.create(ZBooleanPageComponentModel, ZBooleanPageComponentModel.Selector);
+  await this.open(fullPath(ZRouteBoolean));
+  this.parameters.page = await this.create(ZBooleanPageComponentModel);
 });
 
 When(

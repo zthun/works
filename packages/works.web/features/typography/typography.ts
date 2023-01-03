@@ -4,6 +4,6 @@ import { ZTypographyPageComponentModel } from '../../src/web-apps/components/typ
 import { ZLearnWorld } from '../learn-world';
 
 When('I navigate to the typography demo page', async function (this: ZLearnWorld<ZTypographyPageComponentModel>) {
-  await this.navigate(fullPath(ZRouteTypography));
-  this.parameters.page = await this.create(ZTypographyPageComponentModel, ZTypographyPageComponentModel.Selector);
+  await this.open(fullPath(ZRouteTypography));
+  this.parameters.page = await this.create(ZTypographyPageComponentModel);
 });

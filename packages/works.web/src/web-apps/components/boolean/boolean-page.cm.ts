@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZBooleanComponentModel, ZButtonComponentModel } from '@zthun/works.react';
 
 /**
@@ -14,8 +14,7 @@ export class ZBooleanPageComponentModel extends ZCircusComponentModel {
    *      The main checkbox demo component.
    */
   public checkbox(): Promise<ZBooleanComponentModel> {
-    const name = 'checkbox';
-    return ZCircusComponentModel.create(this.driver, ZBooleanComponentModel, ZBooleanComponentModel.selector(name));
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'checkbox');
   }
 
   /**
@@ -25,8 +24,7 @@ export class ZBooleanPageComponentModel extends ZCircusComponentModel {
    *      The main switch demo component.
    */
   public switch(): Promise<ZBooleanComponentModel> {
-    const name = 'switch';
-    return ZCircusComponentModel.create(this.driver, ZBooleanComponentModel, ZBooleanComponentModel.selector(name));
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'switch');
   }
 
   /**
@@ -36,8 +34,7 @@ export class ZBooleanPageComponentModel extends ZCircusComponentModel {
    *        The option switch to disable the boolean demos.
    */
   public disabled(): Promise<ZBooleanComponentModel> {
-    const name = 'disabled';
-    return ZCircusComponentModel.create(this.driver, ZBooleanComponentModel, ZBooleanComponentModel.selector(name));
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'disabled');
   }
 
   /**
@@ -47,8 +44,7 @@ export class ZBooleanPageComponentModel extends ZCircusComponentModel {
    *        The button to toggle off all demo booleans.
    */
   public off(): Promise<ZButtonComponentModel> {
-    const name = 'off';
-    return ZCircusComponentModel.create(this.driver, ZButtonComponentModel, ZButtonComponentModel.selector(name));
+    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'off');
   }
 
   /**
@@ -58,8 +54,7 @@ export class ZBooleanPageComponentModel extends ZCircusComponentModel {
    *        The button to toggle on all demo booleans.
    */
   public on(): Promise<ZButtonComponentModel> {
-    const name = 'on';
-    return ZCircusComponentModel.create(this.driver, ZButtonComponentModel, ZButtonComponentModel.selector(name));
+    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'on');
   }
 
   /**
@@ -70,8 +65,7 @@ export class ZBooleanPageComponentModel extends ZCircusComponentModel {
    *        The button to toggle all booleans to the indeterminate state.
    */
   public indeterminate(): Promise<ZButtonComponentModel> {
-    const name = 'indeterminate';
-    return ZCircusComponentModel.create(this.driver, ZButtonComponentModel, ZButtonComponentModel.selector(name));
+    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'indeterminate');
   }
 
   /**

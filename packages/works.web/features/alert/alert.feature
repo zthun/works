@@ -2,8 +2,7 @@
 Feature: Alert Page
 
 Background:
-  Given I open the learn application
-  And I navigate to the alert page
+  Given I navigate to the alert page
 
 @AlertPage-LimitedAlerts
 Scenario: When I click on the alert buttons, I should see the corresponding alert

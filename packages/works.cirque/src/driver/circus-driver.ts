@@ -172,25 +172,6 @@ export interface IZCircusDriver {
   focused(): Promise<IZCircusDriver | null>;
 
   /**
-   * Returns the current url.
-   *
-   * @returns
-   *        The current browser url.
-   */
-  url(): Promise<string>;
-
-  /**
-   * Navigates to a new url.
-   *
-   * @param to
-   *        The url to navigate to.
-   *
-   * @returns
-   *        A new driver that points to the root of the page.
-   */
-  url(to: string): Promise<IZCircusDriver>;
-
-  /**
    * Performs an action against the driver context.
    *
    * @param act

@@ -2,8 +2,7 @@
 Feature: Drawer Page
 
 Background:
-  Given I open the learn application
-  And I navigate to the drawer demo page
+  Given I navigate to the drawer demo page
 
 @DrawerPage-Open
 Scenario: The drawer is opened to an anchored position when the button is clicked

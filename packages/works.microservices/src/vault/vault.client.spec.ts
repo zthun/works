@@ -51,4 +51,15 @@ describe('VaultClient', () => {
       expect(proxy.send).toHaveBeenCalledWith({ cmd: 'put' }, { entry });
     });
   });
+
+  describe('Health', () => {
+    it('should get the health.', async () => {
+      // Arrange.
+      const target = createTestTarget();
+      // Act.
+      await target.health();
+      // Assert.
+      expect(proxy.send).toHaveBeenCalledWith({ cmd: 'health' }, {});
+    });
+  });
 });

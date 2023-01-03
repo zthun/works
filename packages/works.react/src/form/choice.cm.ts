@@ -9,19 +9,6 @@ export class ZChoiceComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZChoice-root';
 
   /**
-   * Gets the selector text by a specific name.
-   *
-   * @param name
-   *        The name of the choice to query.
-   *
-   * @returns
-   *        The css selector that can query for the given choice.
-   */
-  public static selector(name: string) {
-    return `${ZChoiceComponentModel.Selector}[data-name="${name}"]`;
-  }
-
-  /**
    * Gets the list of selected items.
    *
    * @returns

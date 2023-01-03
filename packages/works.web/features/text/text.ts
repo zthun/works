@@ -14,8 +14,8 @@ const LOREM3 = 'Ut labore et dolore magna aliqua. Massa sed elementum tempus ege
 // cspell:enable
 
 Given('I navigate to the text demo page', async function (this: ZLearnWorld<ZTextPageComponentModel>) {
-  await this.navigate(fullPath(ZRouteText));
-  this.parameters.page = await this.create(ZTextPageComponentModel, ZTextPageComponentModel.Selector);
+  await this.open(fullPath(ZRouteText));
+  this.parameters.page = await this.create(ZTextPageComponentModel);
 });
 
 When(

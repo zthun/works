@@ -10,8 +10,8 @@ import { ZLearnWorld } from '../learn-world';
 const TIME = 10000;
 
 Given('I navigate to the alert page', async function (this: ZLearnWorld<ZAlertsPageComponentModel>) {
-  await this.navigate(fullPath(ZRouteAlerts));
-  this.parameters.page = await this.create(ZAlertsPageComponentModel, ZAlertsPageComponentModel.Selector);
+  await this.open(fullPath(ZRouteAlerts));
+  this.parameters.page = await this.create(ZAlertsPageComponentModel);
 });
 
 Given('I have checked the Immortal switch', async function (this: ZLearnWorld<ZAlertsPageComponentModel>) {

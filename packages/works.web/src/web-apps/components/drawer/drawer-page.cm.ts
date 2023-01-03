@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import {
   ZButtonComponentModel,
   ZChoiceComponentModel,
@@ -20,7 +20,7 @@ export class ZDrawerPageComponentModel extends ZCircusComponentModel {
    *      The opened drawer.
    */
   public drawerButton(): Promise<ZDrawerButtonComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZDrawerButtonComponentModel, ZDrawerButtonComponentModel.Selector);
+    return ZCircusBy.first(this.driver, ZDrawerButtonComponentModel);
   }
 
   /**
@@ -30,11 +30,7 @@ export class ZDrawerPageComponentModel extends ZCircusComponentModel {
    *        The drawer that was opened from the drawerButton.
    */
   public async close(drawer: ZDrawerComponentModel): Promise<void> {
-    const btn = await ZCircusComponentModel.create(
-      drawer.driver,
-      ZButtonComponentModel,
-      ZButtonComponentModel.selector('close')
-    );
+    const btn = await ZCircusBy.named(drawer.driver, ZButtonComponentModel, 'close');
     await btn.click();
     const drawerBtn = await this.drawerButton();
     await this.driver.wait(() => drawerBtn.opened().then((o) => !o));
@@ -47,11 +43,7 @@ export class ZDrawerPageComponentModel extends ZCircusComponentModel {
    *        The position to set.
    */
   public async anchor(position: ZStateAnchor): Promise<void> {
-    const anchor = await ZCircusComponentModel.create(
-      this.driver,
-      ZChoiceComponentModel,
-      ZChoiceComponentModel.selector('anchor')
-    );
+    const anchor = await ZCircusBy.named(this.driver, ZChoiceComponentModel, 'anchor');
     await anchor.select(position);
   }
 }

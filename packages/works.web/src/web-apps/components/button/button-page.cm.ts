@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import {
   ZAlertListComponentModel,
   ZBooleanComponentModel,
@@ -19,7 +19,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The main button component.
    */
   public async button(): Promise<ZButtonComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZButtonComponentModel, ZButtonComponentModel.selector('button'));
+    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'button');
   }
 
   /**
@@ -29,11 +29,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The icon button component.
    */
   public async iconButton(): Promise<ZButtonComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZButtonComponentModel,
-      ZButtonComponentModel.selector('icon-button')
-    );
+    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'icon-button');
   }
 
   /**
@@ -43,11 +39,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The loading option switch.
    */
   public async loading(): Promise<ZBooleanComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('loading')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'loading');
   }
 
   /**
@@ -57,11 +49,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The disabled option switch.
    */
   public async disabled(): Promise<ZBooleanComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('disabled')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'disabled');
   }
 
   /**
@@ -71,11 +59,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The outline option switch.
    */
   public async outline(): Promise<ZBooleanComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('outline')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'outline');
   }
 
   /**
@@ -85,11 +69,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The borderless option switch.
    */
   public async borderless(): Promise<ZBooleanComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('borderless')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'borderless');
   }
 
   /**
@@ -99,7 +79,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The fashion drop down.
    */
   public async fashion(): Promise<ZChoiceComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZChoiceComponentModel, ZChoiceComponentModel.selector('fashion'));
+    return ZCircusBy.named(this.driver, ZChoiceComponentModel, 'fashion');
   }
 
   /**
@@ -109,7 +89,6 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The current alert list.
    */
   public async alerts(): Promise<ZAlertListComponentModel> {
-    const body = await this.driver.body();
-    return ZCircusComponentModel.create(body, ZAlertListComponentModel, ZAlertListComponentModel.Selector);
+    return ZCircusBy.first(await this.driver.body(), ZAlertListComponentModel);
   }
 }

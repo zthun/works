@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZBooleanComponentModel, ZTextComponentModel } from '@zthun/works.react';
 import { trimEnd, trimStart } from 'lodash';
 
@@ -28,7 +28,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The basic text input.
    */
   public text(): Promise<ZTextComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZTextComponentModel, ZTextComponentModel.selector('text'));
+    return ZCircusBy.named(this.driver, ZTextComponentModel, 'text');
   }
 
   /**
@@ -38,7 +38,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The password text input.
    */
   public password(): Promise<ZTextComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZTextComponentModel, ZTextComponentModel.selector('password'));
+    return ZCircusBy.named(this.driver, ZTextComponentModel, 'password');
   }
 
   /**
@@ -48,7 +48,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The reveal text input.
    */
   public reveal(): Promise<ZTextComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZTextComponentModel, ZTextComponentModel.selector('reveal'));
+    return ZCircusBy.named(this.driver, ZTextComponentModel, 'reveal');
   }
 
   /**
@@ -58,7 +58,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The text area input.
    */
   public area(): Promise<ZTextComponentModel> {
-    return ZCircusComponentModel.create(this.driver, ZTextComponentModel, ZTextComponentModel.selector('area'));
+    return ZCircusBy.named(this.driver, ZTextComponentModel, 'area');
   }
 
   /**
@@ -68,11 +68,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The disabled option switch.
    */
   public disabled(): Promise<ZBooleanComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('disabled')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'disabled');
   }
 
   /**
@@ -82,11 +78,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The read only option switch.
    */
   public readOnly(): Promise<ZBooleanComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('read-only')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'read-only');
   }
 
   /**
@@ -96,11 +88,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The required option switch.
    */
   public required(): Promise<ZBooleanComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('required')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'required');
   }
 
   /**
@@ -110,10 +98,6 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The adornments option switch.
    */
   public adornments(): Promise<ZBooleanComponentModel> {
-    return ZCircusComponentModel.create(
-      this.driver,
-      ZBooleanComponentModel,
-      ZBooleanComponentModel.selector('adornments')
-    );
+    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'adornments');
   }
 }

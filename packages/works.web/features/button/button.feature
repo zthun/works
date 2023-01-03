@@ -2,8 +2,7 @@
 Feature: Button Page
 
 Background:
-  Given I open the learn application
-  And I navigate to the button demo page
+  Given I navigate to the button demo page
 
 @ButtonPage-Click
 Scenario: Show show an alert when the demo buttons are clicked

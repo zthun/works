@@ -9,8 +9,8 @@ import { ZLearnWorld } from '../learn-world';
 type CardGetStarted = 'webApps' | 'microservices';
 
 Given('I navigate to the home page', async function (this: ZLearnWorld<ZHomePageComponentModel>) {
-  await this.navigate(fullPath(ZRouteHome));
-  this.parameters.page = await this.first(ZHomePageComponentModel);
+  await this.open(fullPath(ZRouteHome));
+  this.parameters.page = await this.create(ZHomePageComponentModel);
 });
 
 When(
@@ -25,7 +25,7 @@ When(
 Then(
   'I am navigated to the Web Apps page from the home page',
   async function (this: ZLearnWorld<ZHomePageComponentModel>) {
-    const webApps = await this.first(ZWebAppsPageComponentModel);
+    const webApps = await this.create(ZWebAppsPageComponentModel);
     assert.ok(webApps);
   }
 );
@@ -33,7 +33,7 @@ Then(
 Then(
   'I am navigated to the Microservices page from the home page',
   async function (this: ZLearnWorld<ZHomePageComponentModel>) {
-    const microservices = await this.first(ZMicroservicesPageComponentModel);
+    const microservices = await this.create(ZMicroservicesPageComponentModel);
     assert.ok(microservices);
   }
 );

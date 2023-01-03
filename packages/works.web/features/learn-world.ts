@@ -1,11 +1,5 @@
 import { setDefaultTimeout, setWorldConstructor, World } from '@cucumber/cucumber';
-import {
-  IZCircusDriver,
-  ZCircusBy,
-  ZCircusComponentFactory,
-  ZCircusComponentModel,
-  ZCircusComponentModelConstructor
-} from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusBy, ZCircusComponentFactory, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupChrome } from '@zthun/works.cirque-du-selenium';
 import { ZUrlBuilder } from '@zthun/works.url';
 
@@ -38,61 +32,29 @@ export class ZLearnWorld<T extends ZCircusComponentModel | never = never> extend
    *
    * @param model
    *        The model to construct.
-   * @param selector
-   *        The css selector to query for the root element.
-   *
-   * @deprecated Use first instead.
    *
    * @returns
    *        A new component model of type T.
    */
-  public async create<T>(model: ZCircusComponentModelConstructor<T>, selector: string) {
+  public async create<T extends ZCircusComponentModel>(model: ZCircusComponentFactory<T>) {
     const driver = await this.open();
-    return ZCircusComponentModel.create(driver, model, selector);
+    return ZCircusBy.first(driver, model);
   }
 
   /**
-   * Constructs a new page component model from the internal driver.
-   *
-   * @param model
-   *        The model to construct.
-   *
-   * @returns
-   *        A new component model of type T.
-   */
-  public async first<T extends ZCircusComponentModel>(model: ZCircusComponentFactory<T>) {
-    return ZCircusBy.first(await this.open(), model);
-  }
-
-  /**
-   * Navigates to a specific hash route.
+   * Opens the application and navigates to the given route.
    *
    * @param route
-   *        The route to navigate to.
-   *
-   * @returns
-   *        A driver that points to the body element.
-   */
-  public async navigate(route: string): Promise<IZCircusDriver> {
-    const driver = await this.open();
-    const current = await driver.url();
-    const next = new ZUrlBuilder().parse(current).hash(route).build();
-    this._driver = await driver.url(next);
-    return this._driver;
-  }
-
-  /**
-   * Opens the application.
-   *
+   *        The route to open.
    * @returns
    *        The driver that points to the root element.
    */
-  public async open() {
+  public async open(route?: string) {
     if (this._driver != null) {
       return this._driver;
     }
 
-    const url = 'https://local.zthunworks.com';
+    const url = new ZUrlBuilder().parse('https://local.zthunworks.com').hash(route).build();
     this._driver = await new ZCircusSetupChrome(url).setup();
     return this._driver;
   }
