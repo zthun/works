@@ -27,6 +27,8 @@ export abstract class ZCircusComponentModel {
    * @param selector
    *        The css selector to query for the root context of the component model.
    *
+   * @deprecated Use ZCircusBy instead.
+   *
    * @returns
    *        A new instance of the CircusComponentModel once the selector context is ready.
    */
