@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
-import { IZCookie, ZCookieBuilder } from './cookie';
+import { ZCookieBuilder } from './cookie';
 
 describe('ZCookieBuilder', () => {
   function createTestTarget() {
@@ -10,187 +9,97 @@ describe('ZCookieBuilder', () => {
 
   describe('Properties', () => {
     it('should set the name.', () => {
-      assertBuilderSetsProperty(
-        'CookieName',
-        createTestTarget,
-        (t, v) => t.name(v),
-        (c: IZCookie) => c.name
-      );
+      const expected = 'CookieName';
+      expect(createTestTarget().name(expected).build().name).toEqual(expected);
     });
 
     it('should set the value.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.value(v),
-        (c: IZCookie) => c.value
-      );
+      const expected = v4();
+      expect(createTestTarget().value(expected).build().value).toEqual(expected);
     });
 
     it('should set the domain.', () => {
-      assertBuilderSetsProperty(
-        'zthunworks.com',
-        createTestTarget,
-        (t, v) => t.domain(v),
-        (c: IZCookie) => c.domain
-      );
+      const expected = 'zthunworks.com';
+      expect(createTestTarget().domain(expected).build().domain).toEqual(expected);
     });
 
     describe('Secure', () => {
       it('should set the secure flag.', () => {
-        assertBuilderSetsProperty(
-          true,
-          createTestTarget,
-          (t) => t.secure(),
-          (c: IZCookie) => c.secure
-        );
+        expect(createTestTarget().secure().build().secure).toBeTruthy();
       });
 
       it('should turn off the secure flag.', () => {
-        assertBuilderSetsProperty(
-          false,
-          createTestTarget,
-          (t) => t.secure(false),
-          (c: IZCookie) => c.secure
-        );
+        expect(createTestTarget().secure(false).build().secure).toBeFalsy();
       });
     });
 
     describe('Http Only', () => {
       it('should set the http only flag.', () => {
-        assertBuilderSetsProperty(
-          true,
-          createTestTarget,
-          (t) => t.httpOnly(),
-          (c: IZCookie) => c.httpOnly
-        );
+        expect(createTestTarget().httpOnly().build().httpOnly).toBeTruthy();
       });
 
       it('should turn off the secure flag.', () => {
-        assertBuilderSetsProperty(
-          false,
-          createTestTarget,
-          (t) => t.httpOnly(false),
-          (c: IZCookie) => c.httpOnly
-        );
+        expect(createTestTarget().httpOnly(false).build().httpOnly).toBeFalsy();
       });
     });
 
     describe('Expiration', () => {
       it('should set the expiration date.', () => {
-        const expected = new Date(Date.now());
-        assertBuilderSetsProperty(
-          expected.toJSON(),
-          createTestTarget,
-          (t, v) => t.expires(v),
-          (c: IZCookie) => c.expires
-        );
+        const expected = new Date().toJSON();
+        expect(createTestTarget().expires(expected).build().expires).toEqual(expected);
       });
 
       it('should set the expiration date to one day from this moment.', () => {
         const expected = new Date(Date.now() + ZCookieBuilder.MillisecondsOneDay).toJSON();
-        assertBuilderSetsProperty(
-          true,
-          createTestTarget,
-          (t) => t.expiresTomorrow(),
-          (c: IZCookie) => (c.expires as string) >= expected
-        );
+        expect(createTestTarget().expiresTomorrow().build().expires! >= expected).toBeTruthy();
       });
 
       it('should remove the expiration.', () => {
-        assertBuilderSetsProperty(
-          undefined,
-          createTestTarget,
-          (t) => t.expiresTomorrow().immortal(),
-          (c: IZCookie) => c.expires
-        );
+        expect(createTestTarget().expiresTomorrow().immortal().build().expires).toBeUndefined();
       });
     });
 
     describe('Same Site', () => {
       it('should be lax.', () => {
-        assertBuilderSetsProperty(
-          'lax',
-          createTestTarget,
-          (t) => t.lax(),
-          (c: IZCookie) => c.sameSite
-        );
+        expect(createTestTarget().lax().build().sameSite).toEqual('lax');
       });
 
       it('should be be strict.', () => {
-        assertBuilderSetsProperty(
-          'strict',
-          createTestTarget,
-          (t) => t.strict(),
-          (c: IZCookie) => c.sameSite
-        );
+        expect(createTestTarget().strict().build().sameSite).toEqual('strict');
       });
 
       it('should be none.', () => {
-        assertBuilderSetsProperty(
-          'none',
-          createTestTarget,
-          (t) => t.allowCrossSite(),
-          (c: IZCookie) => c.sameSite
-        );
+        expect(createTestTarget().allowCrossSite().build().sameSite).toEqual('none');
       });
 
       it('should set the secure flag if none.', () => {
-        assertBuilderSetsProperty(
-          true,
-          createTestTarget,
-          (t) => t.allowCrossSite(),
-          (c: IZCookie) => c.secure
-        );
+        expect(createTestTarget().allowCrossSite().build().secure).toBeTruthy();
       });
     });
   });
 
   describe('Authentication', () => {
     it('sets the name.', () => {
-      assertBuilderSetsProperty(
-        'Authentication',
-        createTestTarget,
-        (t) => t.authentication(),
-        (c: IZCookie) => c.name
-      );
+      const expected = 'Authentication';
+      expect(createTestTarget().authentication().build().name).toEqual(expected);
     });
 
     it('sets the secure flag.', () => {
-      assertBuilderSetsProperty(
-        true,
-        createTestTarget,
-        (t) => t.authentication(),
-        (c: IZCookie) => c.secure
-      );
+      expect(createTestTarget().authentication().build().secure).toBeTruthy();
     });
 
     it('sets the http only flag.', () => {
-      assertBuilderSetsProperty(
-        true,
-        createTestTarget,
-        (t) => t.authentication(),
-        (c: IZCookie) => c.httpOnly
-      );
+      expect(createTestTarget().authentication().build().httpOnly).toBeTruthy();
     });
 
     it('sets the value.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.authentication(v),
-        (c: IZCookie) => c.value
-      );
+      const expected = v4();
+      expect(createTestTarget().authentication(expected).build().value).toEqual(expected);
     });
 
     it('expires in 24 hours.', () => {
-      const expected = createTestTarget().expiresTomorrow().build().expires as string;
-      assertBuilderSetsProperty(
-        true,
-        createTestTarget,
-        (t) => t.authentication(),
-        (c: IZCookie) => (c.expires as string) >= expected
-      );
+      const expected = createTestTarget().expiresTomorrow().build().expires!;
+      expect(createTestTarget().authentication().build().expires! >= expected).toBeTruthy();
     });
   });
 });
