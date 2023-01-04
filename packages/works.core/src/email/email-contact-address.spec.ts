@@ -31,7 +31,7 @@ describe('ZEmailContactAddressBuilder', () => {
   });
 
   it('should respect the delimiter.', () => {
-    const expected = [gambit, wolverine.address, x].join('; ');
+    const expected = [gambit, wolverine.address, x].join(';');
     expect(createTestTarget().addresses([gambit, wolverine]).address(x).delimiter(';').build()).toEqual(expected);
   });
 
