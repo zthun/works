@@ -1,6 +1,18 @@
 import { IZCircusDriver } from '../driver/circus-driver';
 import { ZCircusComponentConstructor, ZCircusComponentModel } from './circus-component-model';
 
+const _selector = (root: string, name?: string) => {
+  let selector = root;
+
+  if (name != null) {
+    const byNameAttribute = `${root}[name="${name}"]`;
+    const byDataNameAttribute = `${root}[data-name="${name}"]`;
+    selector = `${byNameAttribute},${byDataNameAttribute}`;
+  }
+
+  return selector;
+};
+
 /**
  * Represents a by query language to query the driver by selectors.
  */
@@ -54,14 +66,7 @@ export abstract class ZCircusBy {
     CircusComponentModel: ZCircusComponentConstructor<T>,
     name?: string
   ): Promise<T> {
-    let selector = CircusComponentModel.Selector;
-
-    if (name != null) {
-      const byNameAttribute = `${CircusComponentModel.Selector}[name="${name}"]`;
-      const byDataNameAttribute = `${CircusComponentModel.Selector}[data-name="${name}"]`;
-      selector = `${byNameAttribute},${byDataNameAttribute}`;
-    }
-
+    const selector = _selector(CircusComponentModel.Selector, name);
     return ZCircusBy.css(driver, CircusComponentModel, selector);
   }
 
@@ -73,7 +78,7 @@ export abstract class ZCircusBy {
    * @param CircusComponentModel
    *        The component model to construct.
    * @param name
-   *        The optional name.  If no such
+   *        The optional name.
    * @returns
    *        The first component that matches or null if no such component exists.
    */
@@ -82,10 +87,8 @@ export abstract class ZCircusBy {
     CircusComponentModel: ZCircusComponentConstructor<T>,
     name?: string
   ): Promise<T | null> {
-    try {
-      return await ZCircusBy.first(driver, CircusComponentModel, name);
-    } catch {
-      return null;
-    }
+    const selector = _selector(CircusComponentModel.Selector, name);
+    const [found] = await driver.query(selector);
+    return found ? new CircusComponentModel(driver) : null;
   }
 }
