@@ -1,5 +1,5 @@
 import { ZSizeFixed } from '@zthun/works.chonkify';
-import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 
 /**
  * Represents a component model for suspense.
@@ -18,7 +18,7 @@ export class ZSuspenseComponentModel extends ZCircusComponentModel {
   }
 
   /**
-   * Gets whether there is suspense in a specific container.
+   * Gets whether there is suspense in a specific driver container.
    *
    * @param driver
    *        The driver that can contain the suspense.
@@ -29,9 +29,9 @@ export class ZSuspenseComponentModel extends ZCircusComponentModel {
    *        True if there exists a suspense in the driver.  If the name
    *        is supplied, then a targeted suspense is checked.
    */
-  public static async loading(driver: IZCircusDriver, name?: string) {
-    const query = name ? `${ZSuspenseComponentModel.Selector}[data-name="${name}"]` : ZSuspenseComponentModel.Selector;
-    return driver.peek(query);
+  public static async loading(driver: IZCircusDriver, name?: string): Promise<boolean> {
+    const suspense = await ZCircusBy.optional(driver, ZSuspenseComponentModel, name);
+    return suspense != null;
   }
 
   /**
@@ -43,6 +43,6 @@ export class ZSuspenseComponentModel extends ZCircusComponentModel {
    *        The targeted name of the suspense object.
    */
   public static async load(driver: IZCircusDriver, name?: string): Promise<void> {
-    return driver.wait(() => ZSuspenseComponentModel.loading(driver, name).then((c) => !c));
+    await driver.wait(() => ZSuspenseComponentModel.loading(driver, name).then((c) => !c), 'Loader never became ready');
   }
 }

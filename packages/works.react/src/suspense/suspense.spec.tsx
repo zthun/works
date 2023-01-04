@@ -72,7 +72,7 @@ describe('ZSuspense', () => {
       await shouldDisplayWhenThereIsSuspense(createTestTarget);
     });
 
-    it('should display when the suspense is loading', async () => {
+    it('should hide when the suspense is not loading', async () => {
       await shouldHideWhenThereIsNoSuspense(createTestTarget);
     });
 
