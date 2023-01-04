@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
-import { IZUser, ZUserBuilder } from './user';
+import { ZUserBuilder } from './user';
 
 describe('ZUserBuilder', () => {
   function createTestTarget() {
@@ -10,124 +9,67 @@ describe('ZUserBuilder', () => {
 
   describe('Properties', () => {
     it('sets the id.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.id(v),
-        (u: IZUser) => u._id
-      );
+      const expected = v4();
+      expect(createTestTarget().id(expected).build()._id).toEqual(expected);
     });
 
     it('sets the email.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.email(v),
-        (u: IZUser) => u.email
-      );
+      const expected = 'gambit@marvel.com';
+      expect(createTestTarget().email(expected).build().email).toEqual(expected);
     });
 
     it('sets the display.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.display(v),
-        (u: IZUser) => u.display
-      );
+      const expected = 'Gambit';
+      expect(createTestTarget().display(expected).build().display).toEqual(expected);
     });
 
     it('sets the password.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.password(v),
-        (u: IZUser) => u.password
-      );
+      const expected = 'bad-password';
+      expect(createTestTarget().password(expected).build().password).toEqual(expected);
     });
 
     it('sets the user inactive.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.inactive(v),
-        (u: IZUser) => u.activator?.key
-      );
+      const expected = v4();
+      expect(createTestTarget().inactive(expected).build().activator?.key).toEqual(expected);
     });
 
     it('sets the user inactive activator expiration.', () => {
-      // Arrange
       const time = 2400;
       const expected = new Date().getTime() + time;
-      const target = createTestTarget();
-      // Act
-      const actual = target.inactive(v4(), time).build();
-      // Assert
+      const actual = createTestTarget().inactive(v4(), time).build();
       expect(actual.activator?.exp).toBeGreaterThanOrEqual(expected);
     });
 
     it('sets the user active', () => {
-      assertBuilderSetsProperty(
-        null,
-        createTestTarget,
-        (t) => t.inactive(v4()).active(),
-        (u: IZUser) => u.activator
-      );
+      expect(createTestTarget().inactive(v4()).active().build().activator).toBeNull();
     });
 
     it('sets the user recovery.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.recover(v),
-        (u: IZUser) => u.recovery?.password
-      );
+      const expected = v4();
+      expect(createTestTarget().recover(expected).build().recovery?.password).toEqual(expected);
     });
 
     it('sets the user recovery exp.', () => {
-      // Arrange
       const time = 2400;
       const expected = new Date().getTime() + time;
-      const target = createTestTarget();
-      // Act
-      const actual = target.recover(v4(), time).build();
-      // Assert
-      expect(actual.recovery?.exp).toBeGreaterThanOrEqual(expected);
+      expect(createTestTarget().recover(v4(), time).build().recovery?.exp).toBeGreaterThanOrEqual(expected);
     });
 
     it('sets the the user recovery password to null on login.', () => {
-      assertBuilderSetsProperty(
-        null,
-        createTestTarget,
-        (t) => t.recover(v4()).login(),
-        (u: IZUser) => u.recovery
-      );
+      expect(createTestTarget().recover(v4()).login().build().recovery).toBeNull();
     });
 
     it('sets a timestamp of the last user login.', () => {
-      assertBuilderSetsProperty(
-        true,
-        createTestTarget,
-        (t) => t.recover(v4()).login(),
-        (u: IZUser) => !!u.login
-      );
+      expect(createTestTarget().recover(v4()).login().build().login).toBeTruthy();
     });
 
     it('sets the super flag.', () => {
-      assertBuilderSetsProperty(
-        true,
-        createTestTarget,
-        (t) => t.super(),
-        (u: IZUser) => u.super
-      );
+      expect(createTestTarget().super().build().super).toBeTruthy();
     });
 
     it('sets the avatar.', () => {
-      assertBuilderSetsProperty(
-        'image-data',
-        createTestTarget,
-        (t, v) => t.avatar(v),
-        (u: IZUser) => u.avatar
-      );
+      const expected = 'image-data';
+      expect(createTestTarget().avatar(expected).build().avatar).toEqual(expected);
     });
   });
 
