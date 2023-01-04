@@ -1,8 +1,7 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
 import { IZUser, ZUserBuilder } from '../users/user';
-import { IZProfile, ZProfileBuilder } from './profile';
+import { ZProfileBuilder } from './profile';
 
 describe('ZProfileBuilder', () => {
   function createTestTarget() {
@@ -11,66 +10,37 @@ describe('ZProfileBuilder', () => {
 
   describe('Properties', () => {
     it('sets the email.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.email(v),
-        (u: IZProfile) => u.email
-      );
+      const expected = 'gambit@marvel.com';
+      expect(createTestTarget().email(expected).build().email).toEqual(expected);
     });
 
     it('sets the display.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.display(v),
-        (u: IZProfile) => u.display
-      );
+      const expected = 'Gambit';
+      expect(createTestTarget().display(expected).build().display).toEqual(expected);
     });
 
     it('sets the password.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.password(v),
-        (u: IZProfile) => u.password
-      );
+      const expected = 'bad-password';
+      expect(createTestTarget().password(expected).build().password).toEqual(expected);
     });
 
     it('sets the confirmation.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.confirm(v),
-        (u: IZProfile) => u.confirm
-      );
+      const expected = 'bad-password';
+      expect(createTestTarget().confirm(expected).build().confirm).toEqual(expected);
     });
 
     it('auto confirms to the new password.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.password(v).autoConfirm(),
-        (u: IZProfile) => u.confirm
-      );
+      const expected = 'bad-password';
+      expect(createTestTarget().password(expected).autoConfirm().build().confirm).toEqual(expected);
     });
 
     it('marks the profile as active.', () => {
-      assertBuilderSetsProperty(
-        true,
-        createTestTarget,
-        (t) => t.active(),
-        (u: IZProfile) => u.active
-      );
+      expect(createTestTarget().active().build().active).toBeTruthy();
     });
 
     it('sets the avatar.', () => {
-      assertBuilderSetsProperty(
-        'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
-        createTestTarget,
-        (t, v) => t.avatar(v),
-        (u: IZProfile) => u.avatar
-      );
+      const expected = 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50';
+      expect(createTestTarget().avatar(expected).build().avatar).toEqual(expected);
     });
   });
 
@@ -89,57 +59,30 @@ describe('ZProfileBuilder', () => {
     });
 
     it('copies the email.', () => {
-      assertBuilderSetsProperty(
-        gambit.email,
-        createTestTarget,
-        (t) => t.user(gambit),
-        (u: IZProfile) => u.email
-      );
+      expect(createTestTarget().user(gambit).build().email).toEqual(gambit.email);
     });
 
     it('copies the display.', () => {
-      assertBuilderSetsProperty(
-        gambit.display,
-        createTestTarget,
-        (t) => t.user(gambit),
-        (u: IZProfile) => u.display
-      );
+      expect(createTestTarget().user(gambit).build().display).toEqual(gambit.display);
     });
 
     it('copies the avatar.', () => {
-      assertBuilderSetsProperty(
-        gambit.avatar,
-        createTestTarget,
-        (t) => t.user(gambit),
-        (u: IZProfile) => u.avatar
-      );
+      expect(createTestTarget().user(gambit).build().avatar).toEqual(gambit.avatar);
     });
 
     it('does not copy the password.', () => {
-      assertBuilderSetsProperty(
-        undefined,
-        createTestTarget,
-        (t) => t.user(gambit),
-        (u: IZProfile) => u.password || u.confirm
-      );
+      const profile = createTestTarget().user(gambit).build();
+      const actual = profile.password || profile.confirm;
+      expect(actual).toBeUndefined();
     });
 
     it('marks the profile as active if there is no activator code.', () => {
-      assertBuilderSetsProperty(
-        true,
-        createTestTarget,
-        (t) => t.user(gambit),
-        (u: IZProfile) => u.active
-      );
+      expect(createTestTarget().user(gambit).build().active).toBeTruthy();
     });
 
     it('marks the profile as inactive if there is an activator code.', () => {
-      assertBuilderSetsProperty(
-        false,
-        createTestTarget,
-        (t) => t.user(new ZUserBuilder().copy(gambit).inactive(v4()).build()),
-        (u: IZProfile) => u.active
-      );
+      gambit = new ZUserBuilder().copy(gambit).inactive(v4()).build();
+      expect(createTestTarget().user(gambit).build().active).toBeFalsy();
     });
   });
 
