@@ -45,14 +45,14 @@ export function ZSuspensePage() {
           happening.
         </ZParagraph>
 
-        <ZSuspenseRotate loading={loading} width={width} />
+        <ZSuspenseRotate loading={loading} width={width} name='suspense' />
       </ZPaddedBox>
 
       <ZPaddedBox margin={{ bottom: ZSizeFixed.Large }}>
         <ZH3>Options</ZH3>
 
         <ZGridLayout gap={ZSizeFixed.Medium}>
-          <ZBooleanSwitch value={loading} onValueChange={setLoading} label='Loading' />
+          <ZBooleanSwitch value={loading} onValueChange={setLoading} label='Loading' name='loading' />
           <ZChoiceDropDown
             name='width'
             value={[width]}
