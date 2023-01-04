@@ -30,7 +30,6 @@
   ],
   "devDependencies": {
     "@zthun/spellcraft-jest": "^1.0.4",
-    "@zthun/works.jest": "^4.0.0",
     "jest": "^29.3.1",
     "lodash": "^4.17.21",
     "typedoc": "^0.23.23",
