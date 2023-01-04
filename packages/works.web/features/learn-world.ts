@@ -1,5 +1,5 @@
 import { setDefaultTimeout, setWorldConstructor, World } from '@cucumber/cucumber';
-import { IZCircusDriver, ZCircusBy, ZCircusComponentFactory, ZCircusComponentModel } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusBy, ZCircusComponentConstructor, ZCircusComponentModel } from '@zthun/works.cirque';
 import { ZCircusSetupChrome } from '@zthun/works.cirque-du-selenium';
 import { ZUrlBuilder } from '@zthun/works.url';
 
@@ -36,7 +36,7 @@ export class ZLearnWorld<T extends ZCircusComponentModel | never = never> extend
    * @returns
    *        A new component model of type T.
    */
-  public async create<T extends ZCircusComponentModel>(model: ZCircusComponentFactory<T>) {
+  public async create<T extends ZCircusComponentModel>(model: ZCircusComponentConstructor<T>): Promise<T> {
     const driver = await this.open();
     return ZCircusBy.first(driver, model);
   }
