@@ -42,7 +42,15 @@ export function ZNumberPage() {
 
         <ZPaddedBox padding={ZSizeFixed.Medium}>
           <ZGridLayout columns='1fr 1fr 1fr' gap={ZSizeFixed.ExtraLarge}>
-            <ZNumberSlider step={1} min={1} max={1000} label='Slider' value={value || 1} onValueChange={setValue} />
+            <ZNumberSlider
+              step={1}
+              min={1}
+              max={1000}
+              label='Slider'
+              value={value || 1}
+              onValueChange={setValue}
+              name='slider'
+            />
             <ZNumberInput
               step={1}
               min={-Infinity}
@@ -50,11 +58,12 @@ export function ZNumberPage() {
               label='Input'
               value={value}
               onValueChange={setValue}
+              name='spinner'
             />
           </ZGridLayout>
         </ZPaddedBox>
 
-        <ZCaption>Value: {value}</ZCaption>
+        <ZCaption className='ZNumberPage-value'>Value: {value}</ZCaption>
       </ZPaddedBox>
     </ZCard>
   );
