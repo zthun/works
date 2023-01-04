@@ -89,6 +89,6 @@ export abstract class ZCircusBy {
   ): Promise<T | null> {
     const selector = _selector(CircusComponentModel.Selector, name);
     const [found] = await driver.query(selector);
-    return found ? new CircusComponentModel(driver) : null;
+    return found ? new CircusComponentModel(found) : null;
   }
 }
