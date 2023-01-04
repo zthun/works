@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { IZCollectionFilter, ZCollectionFilterBuilder, ZCollectionOperator } from './collection-filter';
+import { ZCollectionFilterBuilder, ZCollectionOperator } from './collection-filter';
 
 describe('CollectionFilterBuilder', () => {
   function createTestTarget() {
@@ -8,47 +7,25 @@ describe('CollectionFilterBuilder', () => {
   }
 
   it('sets the field.', () => {
-    assertBuilderSetsProperty(
-      'field',
-      createTestTarget,
-      (t, v) => t.field(v),
-      (f: IZCollectionFilter) => f.field
-    );
+    const expected = 'field';
+    expect(createTestTarget().field(expected).build().field).toEqual(expected);
   });
 
   it('sets the values.', () => {
-    assertBuilderSetsProperty(
-      [1, 2, 3, 4],
-      createTestTarget,
-      (t, v) => t.values(v),
-      (f: IZCollectionFilter) => f.values
-    );
+    const expected = [1, 2, 3, 4];
+    expect(createTestTarget().values(expected).build().values).toEqual(expected);
   });
 
   it('incrementally adds values.', () => {
-    assertBuilderSetsProperty(
-      [1, 2, 3, 4],
-      createTestTarget,
-      (t) => t.value(1).value(2).value(3).value(4),
-      (f: IZCollectionFilter) => f.values
-    );
+    const expected = [1, 2, 3, 4];
+    expect(createTestTarget().value(1).value(2).value(3).value(4).build().values).toEqual(expected);
   });
 
   it('sets the operator to in.', () => {
-    assertBuilderSetsProperty(
-      ZCollectionOperator.In,
-      createTestTarget,
-      (t) => t.field('a').in().value(1).value(2),
-      (f: IZCollectionFilter) => f.operator
-    );
+    expect(createTestTarget().in().build().operator).toEqual(ZCollectionOperator.In);
   });
 
   it('sets the operator to not in.', () => {
-    assertBuilderSetsProperty(
-      ZCollectionOperator.NotIn,
-      createTestTarget,
-      (t) => t.field('a').notIn().value(1).value(2),
-      (f: IZCollectionFilter) => f.operator
-    );
+    expect(createTestTarget().notIn().build().operator).toEqual(ZCollectionOperator.NotIn);
   });
 });

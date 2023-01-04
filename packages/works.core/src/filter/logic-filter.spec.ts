@@ -1,9 +1,8 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { ZBinaryFilterBuilder } from './binary-filter';
 import { ZCollectionFilterBuilder } from './collection-filter';
 import { IZFilter } from './filter';
-import { IZLogicFilter, ZLogicFilterBuilder, ZLogicOperator } from './logic-filter';
+import { ZLogicFilterBuilder, ZLogicOperator } from './logic-filter';
 import { ZUnaryFilterBuilder } from './unary-filter';
 
 describe('LogicFilterBuilder', () => {
@@ -24,38 +23,21 @@ describe('LogicFilterBuilder', () => {
   });
 
   it('sets the clauses.', () => {
-    assertBuilderSetsProperty(
-      [clauseA, clauseB, clauseC, clauseD],
-      createTestTarget,
-      (t, v) => t.and().clauses(v),
-      (f: IZLogicFilter) => f.clauses
-    );
+    const expected = [clauseA, clauseB, clauseC, clauseD];
+    expect(createTestTarget().clauses(expected).build().clauses).toEqual(expected);
   });
 
   it('adds clauses.', () => {
-    assertBuilderSetsProperty(
-      [clauseA, clauseB, clauseC, clauseD],
-      createTestTarget,
-      (t) => t.clause(clauseA).clause(clauseB).clause(clauseC).clause(clauseD),
-      (f: IZLogicFilter) => f.clauses
-    );
+    const expected = [clauseA, clauseB, clauseC, clauseD];
+    const actual = createTestTarget().clause(clauseA).clause(clauseB).clause(clauseC).clause(clauseD).build().clauses;
+    expect(actual).toEqual(expected);
   });
 
   it('sets the operator to and.', () => {
-    assertBuilderSetsProperty(
-      ZLogicOperator.And,
-      createTestTarget,
-      (t) => t.and().clause(clauseA).clause(clauseB),
-      (f: IZLogicFilter) => f.operator
-    );
+    expect(createTestTarget().and().clause(clauseA).clause(clauseB).build().operator).toEqual(ZLogicOperator.And);
   });
 
   it('sets the operator to or.', () => {
-    assertBuilderSetsProperty(
-      ZLogicOperator.Or,
-      createTestTarget,
-      (t) => t.or().clause(clauseA).clause(clauseB),
-      (f: IZLogicFilter) => f.operator
-    );
+    expect(createTestTarget().or().clause(clauseA).clause(clauseB).build().operator).toEqual(ZLogicOperator.Or);
   });
 });
