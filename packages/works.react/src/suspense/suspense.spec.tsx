@@ -1,9 +1,10 @@
 /* eslint-disable require-jsdoc */
 
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusBy } from '@zthun/works.cirque';
 import { ZSuspenseRotate } from './suspense-rotate';
 import { ZSuspenseComponentModel } from './suspense.cm';
 
+import { ZSizeFixed } from '@zthun/works.chonkify';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 
@@ -37,6 +38,18 @@ describe('ZSuspense', () => {
     expect(actual).toBeFalsy();
   }
 
+  async function shouldScale(
+    expected: ZSizeFixed,
+    createTestTarget: (size?: ZSizeFixed) => Promise<ZSuspenseComponentModel>
+  ) {
+    // Arrange.
+    const target = await createTestTarget(expected);
+    // Act
+    const actual = await target.width();
+    // Assert.
+    expect(actual).toEqual(expected);
+  }
+
   describe('Rotate', () => {
     function createTestTarget(loading?: boolean) {
       const element = <ZSuspenseRotate loading={loading} />;
@@ -65,6 +78,34 @@ describe('ZSuspense', () => {
 
     it('should wait for load', async () => {
       await shouldWaitToLoad(createNamedTargets);
+    });
+  });
+
+  describe('Width', () => {
+    async function createTestTarget(size?: ZSizeFixed) {
+      const element = <ZSuspenseRotate loading width={size} />;
+      const driver = await new ZCircusSetupRenderer(element).setup();
+      return ZCircusBy.first(driver, ZSuspenseComponentModel);
+    }
+
+    it('should scale xs', async () => {
+      await shouldScale(ZSizeFixed.ExtraSmall, createTestTarget);
+    });
+
+    it('should scale sm', async () => {
+      await shouldScale(ZSizeFixed.Small, createTestTarget);
+    });
+
+    it('should scale md', async () => {
+      await shouldScale(ZSizeFixed.Medium, createTestTarget);
+    });
+
+    it('should scale lg', async () => {
+      await shouldScale(ZSizeFixed.Large, createTestTarget);
+    });
+
+    it('should scale xl', async () => {
+      await shouldScale(ZSizeFixed.ExtraLarge, createTestTarget);
     });
   });
 });

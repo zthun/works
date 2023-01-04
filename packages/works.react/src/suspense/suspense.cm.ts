@@ -1,10 +1,21 @@
-import { IZCircusDriver } from '@zthun/works.cirque';
+import { ZSizeFixed } from '@zthun/works.chonkify';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
 
 /**
  * Represents a component model for suspense.
  */
-export abstract class ZSuspenseComponentModel {
+export class ZSuspenseComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZSuspense-root';
+
+  /**
+   * Gets the size of the suspense.
+   *
+   * @returns
+   *        The size of the suspense.
+   */
+  public width(): Promise<ZSizeFixed> {
+    return this.driver.attribute('data-width', ZSizeFixed.ExtraSmall);
+  }
 
   /**
    * Gets whether there is suspense in a specific container.

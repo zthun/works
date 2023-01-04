@@ -22,5 +22,5 @@ export function ZSuspenseRotate(props: IZSuspense) {
   }
 
   const clasz = cssClass('ZSuspense-root ZSuspense-rotate', className);
-  return <CircularProgress className={clasz} size={size} color='inherit' data-name={name} />;
+  return <CircularProgress className={clasz} size={size} color='inherit' data-name={name} data-width={width} />;
 }
