@@ -124,6 +124,7 @@ export function ZFashionGrid(props: IZFashionGrid) {
       {renderHue(ZHue.Olive)}
       {renderHue(ZHue.Lime)}
       {renderHue(ZHue.Yellow)}
+      {renderHue(ZHue.Orange)}
       {renderHue(ZHue.Persimmon)}
       {renderHue(ZHue.Brown)}
       {renderHue(ZHue.Grey)}
