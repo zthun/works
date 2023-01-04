@@ -6,6 +6,7 @@ import {
   ZCircusActBuilder,
   ZCircusActionType
 } from '@zthun/works.cirque';
+import { snakeCase } from 'lodash';
 import { Actions, Button, Key } from 'selenium-webdriver';
 
 /**
@@ -31,7 +32,7 @@ export function squash(factory: () => Actions, act: IZCircusAct): IZCircusAct {
     performance = performance || factory();
 
     if (isKeyboardAction(action)) {
-      const key = action.context.upper.toUpperCase();
+      const key = snakeCase(action.context.upper).toUpperCase();
       if (action.name === ZCircusActionType.KeyDown && action.context.modifier) {
         performance.keyDown(Key[key]);
       } else if (action.name === ZCircusActionType.KeyUp && action.context.modifier) {
