@@ -1,6 +1,6 @@
 /* eslint-disable valid-jsdoc */
 
-import { fireEvent, RenderResult, waitFor } from '@testing-library/react/pure';
+import { RenderResult, waitFor } from '@testing-library/react/pure';
 import UserEvent from '@testing-library/user-event';
 import { IZCircusAct, IZCircusDriver } from '@zthun/works.cirque';
 import { get, keyBy } from 'lodash';
@@ -83,17 +83,6 @@ export class ZCircusDriver implements IZCircusDriver {
    */
   public value(): Promise<string | null> {
     return Promise.resolve(get(this._element, 'value', null));
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public async input(val?: string): Promise<string | null> {
-    fireEvent.change(this._element, { target: { value: val } });
-    await flush();
-    fireEvent.input(this._element, { target: { value: val } });
-    await flush();
-    return (this._element as any).value;
   }
 
   /**

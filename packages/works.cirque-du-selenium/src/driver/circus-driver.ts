@@ -80,13 +80,6 @@ export class ZCircusDriver implements IZCircusDriver {
   /**
    * @inheritdoc
    */
-  public async input(): Promise<string | null> {
-    return null;
-  }
-
-  /**
-   * @inheritdoc
-   */
   public selected(): Promise<boolean> {
     return this._search.isSelected();
   }
