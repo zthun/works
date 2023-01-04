@@ -1,84 +1,59 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { ZEmailContactBuilder } from './email-contact';
+import { IZEmailContact, ZEmailContactBuilder } from './email-contact';
 import { IZEmailEnvelope, ZEmailEnvelopeBuilder } from './email-envelope';
 
 describe('ZEmailEnvelopeBuilder.', () => {
+  let gambit: string;
+  let psylocke: IZEmailContact;
+
   function createTestTarget() {
     return new ZEmailEnvelopeBuilder();
   }
 
+  beforeEach(() => {
+    gambit = 'gambit@marvel.com';
+    psylocke = new ZEmailContactBuilder().address('psylocke@marvel.com').display('Psylocke').build();
+  });
+
   describe('Properties', () => {
     it('should set the from field as a contact.', () => {
-      assertBuilderSetsProperty(
-        new ZEmailContactBuilder().address('gambit@marvel.com').display('Gambit').type('user').build(),
-        createTestTarget,
-        (t, v) => t.from(v),
-        (c: IZEmailEnvelope) => c.from
-      );
+      const expected = new ZEmailContactBuilder().address('gambit@marvel.com').display('Gambit').type('user').build();
+      expect(createTestTarget().from(expected).build().from).toEqual(expected);
     });
 
     it('should set the from field as a string.', () => {
-      assertBuilderSetsProperty(
-        'gambit@marvel.com',
-        createTestTarget,
-        (t, v) => t.from(v),
-        (c: IZEmailEnvelope) => c.from
-      );
+      const expected = 'gambit@marvel.com';
+      expect(createTestTarget().from(expected).build().from).toEqual(expected);
     });
 
     it('should add a to field.', () => {
-      assertBuilderSetsProperty(
-        ['gambit@marvel.com', new ZEmailContactBuilder().address('psylocke@marvel.com').display('Psylocke').build()],
-        createTestTarget,
-        (t, v) => t.to(v[0]).to(v[1]),
-        (c: IZEmailEnvelope) => c.to
-      );
+      const expected = [gambit, psylocke];
+      expect(createTestTarget().to(gambit).to(psylocke).build().to).toEqual(expected);
     });
 
     it('should set the to field.', () => {
-      assertBuilderSetsProperty(
-        ['gambit@marvel.com', new ZEmailContactBuilder().address('psylocke@marvel.com').display('Psylocke').build()],
-        createTestTarget,
-        (t, v) => t.tos(v),
-        (c: IZEmailEnvelope) => c.to
-      );
+      const expected = [gambit, psylocke];
+      expect(createTestTarget().tos(expected).build().to).toEqual(expected);
     });
 
     it('should add a cc field.', () => {
-      assertBuilderSetsProperty(
-        ['gambit@marvel.com', new ZEmailContactBuilder().address('psylocke@marvel.com').display('Psylocke').build()],
-        createTestTarget,
-        (t, v) => t.cc(v[0]).cc(v[1]),
-        (c: IZEmailEnvelope) => c.cc
-      );
+      const expected = [gambit, psylocke];
+      expect(createTestTarget().cc(gambit).cc(psylocke).build().cc).toEqual(expected);
     });
 
     it('should set the cc field.', () => {
-      assertBuilderSetsProperty(
-        ['gambit@marvel.com', new ZEmailContactBuilder().address('psylocke@marvel.com').display('Psylocke').build()],
-        createTestTarget,
-        (t, v) => t.ccs(v),
-        (c: IZEmailEnvelope) => c.cc
-      );
+      const expected = [gambit, psylocke];
+      expect(createTestTarget().ccs(expected).build().cc).toEqual(expected);
     });
 
     it('should add a bcc field.', () => {
-      assertBuilderSetsProperty(
-        ['gambit@marvel.com', new ZEmailContactBuilder().address('psylocke@marvel.com').display('Psylocke').build()],
-        createTestTarget,
-        (t, v) => t.bcc(v[0]).bcc(v[1]),
-        (c: IZEmailEnvelope) => c.bcc
-      );
+      const expected = [gambit, psylocke];
+      expect(createTestTarget().bcc(gambit).bcc(psylocke).build().bcc).toEqual(expected);
     });
 
     it('should set the bcc field.', () => {
-      assertBuilderSetsProperty(
-        ['gambit@marvel.com', new ZEmailContactBuilder().address('psylocke@marvel.com').display('Psylocke').build()],
-        createTestTarget,
-        (t, v) => t.bccs(v),
-        (c: IZEmailEnvelope) => c.bcc
-      );
+      const expected = [gambit, psylocke];
+      expect(createTestTarget().bccs(expected).build().bcc).toEqual(expected);
     });
   });
 
