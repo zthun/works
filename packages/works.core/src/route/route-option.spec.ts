@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
-import { IZRouteOption, ZRouteOptionBuilder } from './route-option';
+import { ZRouteOptionBuilder } from './route-option';
 
 describe('ZRouteOptionBuilder', () => {
   function createTestTarget() {
@@ -10,111 +9,56 @@ describe('ZRouteOptionBuilder', () => {
 
   describe('Properties', () => {
     it('should set the owner.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.owner(v),
-        (r: IZRouteOption) => r.owner
-      );
+      const expected = v4();
+      expect(createTestTarget().owner(expected).build().owner).toEqual(expected);
     });
 
     it('should set the path.', () => {
-      assertBuilderSetsProperty(
-        '/api/health',
-        createTestTarget,
-        (t, v) => t.path(v),
-        (r: IZRouteOption) => r.path
-      );
+      const expected = '/api/health';
+      expect(createTestTarget().path(expected).build().path).toEqual(expected);
     });
 
     it('should set the name.', () => {
-      assertBuilderSetsProperty(
-        'Information',
-        createTestTarget,
-        (t, v) => t.name(v),
-        (r: IZRouteOption) => r.name
-      );
+      const expected = 'Information';
+      expect(createTestTarget().name(expected).build().name).toEqual(expected);
     });
 
     it('should set the description.', () => {
-      assertBuilderSetsProperty(
-        'Description',
-        createTestTarget,
-        (t, v) => t.description(v),
-        (r: IZRouteOption) => r.description
-      );
+      const expected = v4();
+      expect(createTestTarget().description(expected).build().description).toEqual(expected);
     });
 
     it('should set the avatar.', () => {
-      assertBuilderSetsProperty(
-        '<img src="avatar.png" />',
-        createTestTarget,
-        (t, v) => t.avatar(v),
-        (r: IZRouteOption) => r.avatar
-      );
+      const expected = '<img src="avatar.png" />';
+      expect(createTestTarget().avatar(expected).build().avatar).toEqual(expected);
     });
 
     it('should set the method to get.', () => {
-      assertBuilderSetsProperty(
-        'get',
-        createTestTarget,
-        (t) => t.get(),
-        (r: IZRouteOption) => r.method
-      );
+      expect(createTestTarget().get().build().method).toEqual('get');
     });
 
     it('should set the method to put.', () => {
-      assertBuilderSetsProperty(
-        'put',
-        createTestTarget,
-        (t) => t.put(),
-        (r: IZRouteOption) => r.method
-      );
+      expect(createTestTarget().put().build().method).toEqual('put');
     });
 
     it('should set the method to post.', () => {
-      assertBuilderSetsProperty(
-        'post',
-        createTestTarget,
-        (t) => t.post(),
-        (r: IZRouteOption) => r.method
-      );
+      expect(createTestTarget().post().build().method).toEqual('post');
     });
 
     it('should set the method to delete.', () => {
-      assertBuilderSetsProperty(
-        'delete',
-        createTestTarget,
-        (t) => t.delete(),
-        (r: IZRouteOption) => r.method
-      );
+      expect(createTestTarget().delete().build().method).toEqual('delete');
     });
 
     it('should set the method to patch.', () => {
-      assertBuilderSetsProperty(
-        'patch',
-        createTestTarget,
-        (t) => t.patch(),
-        (r: IZRouteOption) => r.method
-      );
+      expect(createTestTarget().patch().build().method).toEqual('patch');
     });
 
     it('should set the method to head.', () => {
-      assertBuilderSetsProperty(
-        'head',
-        createTestTarget,
-        (t) => t.head(),
-        (r: IZRouteOption) => r.method
-      );
+      expect(createTestTarget().head().build().method).toEqual('head');
     });
 
     it('should set the method to options.', () => {
-      assertBuilderSetsProperty(
-        'options',
-        createTestTarget,
-        (t) => t.options(),
-        (r: IZRouteOption) => r.method
-      );
+      expect(createTestTarget().options().build().method).toEqual('options');
     });
   });
 

@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
-import { IZServer, ZServerBuilder } from './server';
+import { ZServerBuilder } from './server';
 
 describe('ZServerBuilder.', () => {
   function createTestTarget() {
@@ -9,39 +8,23 @@ describe('ZServerBuilder.', () => {
 
   describe('Properties', () => {
     it('should set the address.', () => {
-      assertBuilderSetsProperty(
-        '10.0.0.1',
-        createTestTarget,
-        (t, v) => t.address(v),
-        (c: IZServer) => c.address
-      );
+      const expected = '10.0.0.1';
+      expect(createTestTarget().address(expected).build().address).toEqual(expected);
     });
 
     it('should set the port.', () => {
-      assertBuilderSetsProperty(
-        4096,
-        createTestTarget,
-        (t, v) => t.port(v),
-        (c: IZServer) => c.port
-      );
+      const expected = 4096;
+      expect(createTestTarget().port(expected).build().port).toEqual(expected);
     });
 
     it('should set the username.', () => {
-      assertBuilderSetsProperty(
-        'admin',
-        createTestTarget,
-        (t, v) => t.username(v),
-        (c: IZServer) => c.username
-      );
+      const expected = 'admin';
+      expect(createTestTarget().username(expected).build().username).toEqual(expected);
     });
 
     it('should set the password.', () => {
-      assertBuilderSetsProperty(
-        'secret',
-        createTestTarget,
-        (t, v) => t.password(v),
-        (c: IZServer) => c.password
-      );
+      const expected = 'bad-password';
+      expect(createTestTarget().password(expected).build().password).toEqual(expected);
     });
   });
 
