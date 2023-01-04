@@ -30,19 +30,26 @@ describe('ZNumberPage', () => {
     expect(actual).toEqual(expected);
   }
 
-  describe('Slider', () => {
-    const factory: NumberInputFactory = (t) => t.slider();
-
-    it('should update the value', async () => {
-      await shouldUpdateTheValue(factory);
-    });
-  });
+  async function shouldClearTheValue(factory: NumberInputFactory) {
+    // Arrange
+    const target = await createTestTarget();
+    const num = await factory(target);
+    // Act.
+    await num.clear();
+    const actual = await target.value();
+    // Assert.
+    expect(actual).toBeNull();
+  }
 
   describe('Spinner', () => {
     const factory: NumberInputFactory = (t) => t.spinner();
 
     it('should update the value', async () => {
       await shouldUpdateTheValue(factory);
+    });
+
+    it('should clear the value', async () => {
+      await shouldClearTheValue(factory);
     });
   });
 });

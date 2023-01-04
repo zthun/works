@@ -22,16 +22,6 @@ export class ZNumberPageComponentModel extends ZCircusComponentModel {
   }
 
   /**
-   * Gets the slider component.
-   *
-   * @returns
-   *        The slider component.
-   */
-  public slider(): Promise<ZNumberComponentModel> {
-    return ZCircusBy.named(this.driver, ZNumberComponentModel, 'slider');
-  }
-
-  /**
    * Gets the spinner component.
    *
    * @returns

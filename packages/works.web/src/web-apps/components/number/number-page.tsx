@@ -7,7 +7,6 @@ import {
   ZGridLayout,
   ZH3,
   ZNumberInput,
-  ZNumberSlider,
   ZPaddedBox,
   ZParagraph
 } from '@zthun/works.react';
@@ -40,17 +39,8 @@ export function ZNumberPage() {
           parsing for you.
         </ZParagraph>
 
-        <ZPaddedBox padding={ZSizeFixed.Medium}>
-          <ZGridLayout columns='1fr 1fr 1fr' gap={ZSizeFixed.ExtraLarge}>
-            <ZNumberSlider
-              step={1}
-              min={1}
-              max={1000}
-              label='Slider'
-              value={value || 1}
-              onValueChange={setValue}
-              name='slider'
-            />
+        <ZPaddedBox margin={{ top: ZSizeFixed.ExtraLarge, bottom: ZSizeFixed.ExtraLarge }}>
+          <ZGridLayout columns='1fr 3fr'>
             <ZNumberInput
               step={1}
               min={-Infinity}
