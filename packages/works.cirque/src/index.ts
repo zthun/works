@@ -1,8 +1,8 @@
 /* istanbul ignore file */
 
 // Component
-export { ZCircusBy, ZCircusComponentFactory } from './component/circus-by';
-export { ZCircusComponentModel, ZCircusComponentModelConstructor } from './component/circus-component-model';
+export { ZCircusBy } from './component/circus-by';
+export { ZCircusComponentConstructor, ZCircusComponentModel } from './component/circus-component-model';
 // Driver
 export { IZCircusDriver } from './driver/circus-driver';
 // Keyboard

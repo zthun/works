@@ -1,10 +1,5 @@
 import { IZCircusDriver } from '../driver/circus-driver';
-import { ZCircusComponentModel } from './circus-component-model';
-
-export type ZCircusComponentFactory<T extends ZCircusComponentModel> = {
-  Selector: string;
-  new (driver: IZCircusDriver): T;
-};
+import { ZCircusComponentConstructor, ZCircusComponentModel } from './circus-component-model';
 
 /**
  * Represents a by query language to query the driver by selectors.
@@ -27,7 +22,7 @@ export abstract class ZCircusBy {
    */
   public static async css<T extends ZCircusComponentModel>(
     driver: IZCircusDriver,
-    CircusComponentModel: ZCircusComponentFactory<T>,
+    CircusComponentModel: ZCircusComponentConstructor<T>,
     selector: string
   ): Promise<T> {
     const description = `Searching for a component with selector: ${selector}`;
@@ -50,7 +45,7 @@ export abstract class ZCircusBy {
    */
   public static first<T extends ZCircusComponentModel>(
     driver: IZCircusDriver,
-    CircusComponentModel: ZCircusComponentFactory<T>
+    CircusComponentModel: ZCircusComponentConstructor<T>
   ): Promise<T> {
     return ZCircusBy.css(driver, CircusComponentModel, CircusComponentModel.Selector);
   }
@@ -73,7 +68,7 @@ export abstract class ZCircusBy {
    */
   public static named<T extends ZCircusComponentModel>(
     driver: IZCircusDriver,
-    CircusComponentModel: ZCircusComponentFactory<T>,
+    CircusComponentModel: ZCircusComponentConstructor<T>,
     name: string
   ): Promise<T> {
     const byNameAttribute = `${CircusComponentModel.Selector}[name="${name}"]`;

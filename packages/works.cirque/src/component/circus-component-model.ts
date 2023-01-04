@@ -1,11 +1,6 @@
 import { IZCircusDriver } from '../driver/circus-driver';
 
 /**
- * The standard component model constructor.
- */
-export type ZCircusComponentModelConstructor<T> = new (driver: IZCircusDriver) => T;
-
-/**
  * Represents a helper class to construct component models in a common way.
  */
 export abstract class ZCircusComponentModel {
@@ -17,3 +12,25 @@ export abstract class ZCircusComponentModel {
    */
   public constructor(public readonly driver: IZCircusDriver) {}
 }
+
+/**
+ * Represents the type for a circus component model.
+ */
+export type ZCircusComponentConstructor<T extends ZCircusComponentModel> = {
+  /**
+   * The selector that can be used to query
+   * any of the components on the current driver context.
+   */
+  Selector: string;
+
+  /**
+   * Initializes a new instance of this object.
+   *
+   * @param driver
+   *        The driver that represents the root of the component.
+   *
+   * @returns
+   *        A new instance of the component model.
+   */
+  new (driver: IZCircusDriver): T;
+};
