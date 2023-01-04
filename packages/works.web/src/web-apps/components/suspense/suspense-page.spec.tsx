@@ -20,7 +20,7 @@ describe('ZSuspensePage', () => {
     await loading.toggle(!expected);
     // Act.
     await loading.toggle(expected);
-    const actual = await target.suspense();
+    const actual = await target.rotate();
     // Assert.
     expect(!!actual).toEqual(expected);
   }
@@ -31,7 +31,7 @@ describe('ZSuspensePage', () => {
     const width = await target.width();
     // Act.
     await width.select(expected);
-    const suspense = await target.suspense();
+    const suspense = await target.rotate();
     const actual = await suspense?.width();
     // Assert.
     expect(actual).toEqual(expected);

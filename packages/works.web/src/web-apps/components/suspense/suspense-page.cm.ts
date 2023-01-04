@@ -8,11 +8,11 @@ export class ZSuspensePageComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZSuspensePage-root';
 
   /**
-   * Gets the suspense loader on the page, or null if there is no suspense.
+   * Gets the rotate loader on the page, or null if there is no suspense.
    *
    * @returns The current suspense loader.
    */
-  public suspense(): Promise<ZSuspenseComponentModel | null> {
+  public rotate(): Promise<ZSuspenseComponentModel | null> {
     return ZCircusBy.optional(this.driver, ZSuspenseComponentModel);
   }
 
