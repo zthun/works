@@ -1,7 +1,6 @@
 /* eslint-disable require-jsdoc */
-import { assertBuilderSetsProperty } from '@zthun/works.jest';
 import { v4 } from 'uuid';
-import { IZProfileActivation, ZProfileActivationBuilder } from './profile-activation';
+import { ZProfileActivationBuilder } from './profile-activation';
 
 describe('ZProfileActivationBuilder', () => {
   function createTestTarget() {
@@ -10,21 +9,13 @@ describe('ZProfileActivationBuilder', () => {
 
   describe('Properties', () => {
     it('sets the email.', () => {
-      assertBuilderSetsProperty(
-        'gambit@marvel.com',
-        createTestTarget,
-        (t, v) => t.email(v),
-        (a: IZProfileActivation) => a.email
-      );
+      const expected = 'gambit@marvel.com';
+      expect(createTestTarget().email(expected).build().email).toEqual(expected);
     });
 
     it('sets the key.', () => {
-      assertBuilderSetsProperty(
-        v4(),
-        createTestTarget,
-        (t, v) => t.key(v),
-        (a: IZProfileActivation) => a.key
-      );
+      const expected = v4();
+      expect(createTestTarget().key(expected).build().key).toEqual(expected);
     });
   });
 
