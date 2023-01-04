@@ -93,21 +93,8 @@ export class ZNumberComponentModel extends ZCircusComponentModel {
    *        The input value.
    */
   private async _spinClick(direction: 1 | -1, times: number): Promise<number | null> {
-    const input = await this._input();
-
     const query = direction > 0 ? '.ZNumber-spinner-increment' : '.ZNumber-spinner-decrement';
     const [spinner] = await this.driver.query(query);
-
-    if (!spinner) {
-      // If we can't adjust the number by clicking on increment and decrement
-      // buttons, then we will just set the value directly.  It's the only
-      // option we have.
-      const value = firstDefined(await this.min(), await this.value());
-      const step = await this.step();
-      const jump = value + direction * times * step;
-      await input.input(String(jump));
-      return this.value();
-    }
 
     if (times > 0) {
       await spinner.perform(new ZCircusActBuilder().click().build());

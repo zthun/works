@@ -64,7 +64,6 @@ export { ZChoiceOptionComponentModel } from './form/choice-option.cm';
 export { ZChoiceComponentModel } from './form/choice.cm';
 export { IZNumber } from './form/number';
 export { ZNumberInput } from './form/number-input';
-export { ZNumberSlider } from './form/number-slider';
 export { ZNumberComponentModel } from './form/number.cm';
 export { IZText } from './form/text';
 export { IZTextArea, ZTextArea } from './form/text-area';

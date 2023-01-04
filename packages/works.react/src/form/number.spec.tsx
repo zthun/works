@@ -4,7 +4,6 @@ import { ZCircusBy } from '@zthun/works.cirque';
 import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React, { ReactNode } from 'react';
 import { ZNumberInput } from './number-input';
-import { ZNumberSlider } from './number-slider';
 import { ZNumberComponentModel } from './number.cm';
 
 describe('ZNumber', () => {
@@ -135,75 +134,6 @@ describe('ZNumber', () => {
     // Assert.
     expect(onValueChange).toHaveBeenCalledWith(expected);
   }
-
-  describe('Slider', () => {
-    async function createTestTarget() {
-      const element = (
-        <ZNumberSlider min={min} max={max} step={step} value={value} label={label} onValueChange={onValueChange} />
-      );
-
-      const driver = await new ZCircusSetupRenderer(element).setup();
-      return ZCircusBy.first(driver, ZNumberComponentModel);
-    }
-
-    describe('Value', () => {
-      it('should default to the minimum value.', async () => {
-        // Arrange.
-        min = 5;
-        const target = await createTestTarget();
-        // Act.
-        const actual = await target.value();
-        // Assert.
-        expect(actual).toEqual(5);
-      });
-
-      it('should set the controlled value.', async () => {
-        await shouldSetTheControlledValue(createTestTarget);
-      });
-
-      it('should raise the onValueChange when the number changes.', async () => {
-        await shouldRaiseOnValueChange(createTestTarget);
-      });
-    });
-
-    describe('Label', () => {
-      it('should render the label if set.', async () => {
-        await shouldRenderLabelIfSet(createTestTarget);
-      });
-
-      it('should not render the label if falsy.', async () => {
-        await shouldNotRenderLabelIfFalsy(createTestTarget);
-      });
-    });
-
-    describe('Range', () => {
-      it('should set the min value.', async () => {
-        await shouldSetTheMinValue(createTestTarget);
-      });
-
-      it('should set the max value.', async () => {
-        await shouldSetTheMaxValue(createTestTarget);
-      });
-
-      it('should update to the maximum value when attempting to go one beyond the max.', async () => {
-        await shouldUpdateToMaxWhenGoingOneBeyond(createTestTarget);
-      });
-
-      it('should update to the min value when attempting to go one beyond the min.', async () => {
-        await shouldUpdateToMinWhenGoingOneBefore(createTestTarget);
-      });
-    });
-
-    describe('Step', () => {
-      it('should set the step value.', async () => {
-        await shouldSetTheStepValue(createTestTarget);
-      });
-
-      it('should increment step the appropriate value.', async () => {
-        await shouldIncrementByStep(createTestTarget);
-      });
-    });
-  });
 
   describe('Input', () => {
     async function createTestTarget() {
