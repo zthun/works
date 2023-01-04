@@ -28,7 +28,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The basic text input.
    */
   public text(): Promise<ZTextComponentModel> {
-    return ZCircusBy.named(this.driver, ZTextComponentModel, 'text');
+    return ZCircusBy.first(this.driver, ZTextComponentModel, 'text');
   }
 
   /**
@@ -38,7 +38,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The password text input.
    */
   public password(): Promise<ZTextComponentModel> {
-    return ZCircusBy.named(this.driver, ZTextComponentModel, 'password');
+    return ZCircusBy.first(this.driver, ZTextComponentModel, 'password');
   }
 
   /**
@@ -48,7 +48,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The reveal text input.
    */
   public reveal(): Promise<ZTextComponentModel> {
-    return ZCircusBy.named(this.driver, ZTextComponentModel, 'reveal');
+    return ZCircusBy.first(this.driver, ZTextComponentModel, 'reveal');
   }
 
   /**
@@ -58,7 +58,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The text area input.
    */
   public area(): Promise<ZTextComponentModel> {
-    return ZCircusBy.named(this.driver, ZTextComponentModel, 'area');
+    return ZCircusBy.first(this.driver, ZTextComponentModel, 'area');
   }
 
   /**
@@ -68,7 +68,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The disabled option switch.
    */
   public disabled(): Promise<ZBooleanComponentModel> {
-    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'disabled');
+    return ZCircusBy.first(this.driver, ZBooleanComponentModel, 'disabled');
   }
 
   /**
@@ -78,7 +78,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The read only option switch.
    */
   public readOnly(): Promise<ZBooleanComponentModel> {
-    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'read-only');
+    return ZCircusBy.first(this.driver, ZBooleanComponentModel, 'read-only');
   }
 
   /**
@@ -88,7 +88,7 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The required option switch.
    */
   public required(): Promise<ZBooleanComponentModel> {
-    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'required');
+    return ZCircusBy.first(this.driver, ZBooleanComponentModel, 'required');
   }
 
   /**
@@ -98,6 +98,6 @@ export class ZTextPageComponentModel extends ZCircusComponentModel {
    *        The adornments option switch.
    */
   public adornments(): Promise<ZBooleanComponentModel> {
-    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'adornments');
+    return ZCircusBy.first(this.driver, ZBooleanComponentModel, 'adornments');
   }
 }

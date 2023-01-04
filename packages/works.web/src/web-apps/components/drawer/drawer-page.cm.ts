@@ -30,7 +30,7 @@ export class ZDrawerPageComponentModel extends ZCircusComponentModel {
    *        The drawer that was opened from the drawerButton.
    */
   public async close(drawer: ZDrawerComponentModel): Promise<void> {
-    const btn = await ZCircusBy.named(drawer.driver, ZButtonComponentModel, 'close');
+    const btn = await ZCircusBy.first(drawer.driver, ZButtonComponentModel, 'close');
     await btn.click();
     const drawerBtn = await this.drawerButton();
     await this.driver.wait(() => drawerBtn.opened().then((o) => !o));
@@ -43,7 +43,7 @@ export class ZDrawerPageComponentModel extends ZCircusComponentModel {
    *        The position to set.
    */
   public async anchor(position: ZStateAnchor): Promise<void> {
-    const anchor = await ZCircusBy.named(this.driver, ZChoiceComponentModel, 'anchor');
+    const anchor = await ZCircusBy.first(this.driver, ZChoiceComponentModel, 'anchor');
     await anchor.select(position);
   }
 }

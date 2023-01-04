@@ -19,7 +19,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The main button component.
    */
   public async button(): Promise<ZButtonComponentModel> {
-    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'button');
+    return ZCircusBy.first(this.driver, ZButtonComponentModel, 'button');
   }
 
   /**
@@ -29,7 +29,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The icon button component.
    */
   public async iconButton(): Promise<ZButtonComponentModel> {
-    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'icon-button');
+    return ZCircusBy.first(this.driver, ZButtonComponentModel, 'icon-button');
   }
 
   /**
@@ -39,7 +39,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The loading option switch.
    */
   public async loading(): Promise<ZBooleanComponentModel> {
-    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'loading');
+    return ZCircusBy.first(this.driver, ZBooleanComponentModel, 'loading');
   }
 
   /**
@@ -49,7 +49,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The disabled option switch.
    */
   public async disabled(): Promise<ZBooleanComponentModel> {
-    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'disabled');
+    return ZCircusBy.first(this.driver, ZBooleanComponentModel, 'disabled');
   }
 
   /**
@@ -59,7 +59,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The outline option switch.
    */
   public async outline(): Promise<ZBooleanComponentModel> {
-    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'outline');
+    return ZCircusBy.first(this.driver, ZBooleanComponentModel, 'outline');
   }
 
   /**
@@ -69,7 +69,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The borderless option switch.
    */
   public async borderless(): Promise<ZBooleanComponentModel> {
-    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'borderless');
+    return ZCircusBy.first(this.driver, ZBooleanComponentModel, 'borderless');
   }
 
   /**
@@ -79,7 +79,7 @@ export class ZButtonPageComponentModel extends ZCircusComponentModel {
    *        The fashion drop down.
    */
   public async fashion(): Promise<ZChoiceComponentModel> {
-    return ZCircusBy.named(this.driver, ZChoiceComponentModel, 'fashion');
+    return ZCircusBy.first(this.driver, ZChoiceComponentModel, 'fashion');
   }
 
   /**

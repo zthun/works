@@ -14,7 +14,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The immortal boolean switch.
    */
   public immortal() {
-    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'option-immortal');
+    return ZCircusBy.first(this.driver, ZBooleanComponentModel, 'option-immortal');
   }
 
   /**
@@ -24,7 +24,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The header boolean switch.
    */
   public header() {
-    return ZCircusBy.named(this.driver, ZBooleanComponentModel, 'option-header');
+    return ZCircusBy.first(this.driver, ZBooleanComponentModel, 'option-header');
   }
 
   /**
@@ -34,7 +34,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The success button.
    */
   public success() {
-    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'alert-success');
+    return ZCircusBy.first(this.driver, ZButtonComponentModel, 'alert-success');
   }
 
   /**
@@ -44,7 +44,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The warning button.
    */
   public warning() {
-    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'alert-warning');
+    return ZCircusBy.first(this.driver, ZButtonComponentModel, 'alert-warning');
   }
 
   /**
@@ -54,7 +54,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The error button.
    */
   public error() {
-    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'alert-error');
+    return ZCircusBy.first(this.driver, ZButtonComponentModel, 'alert-error');
   }
 
   /**
@@ -64,7 +64,7 @@ export class ZAlertsPageComponentModel extends ZCircusComponentModel {
    *        The info button.
    */
   public info() {
-    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'alert-info');
+    return ZCircusBy.first(this.driver, ZButtonComponentModel, 'alert-info');
   }
 
   /**

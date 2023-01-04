@@ -38,6 +38,12 @@ export abstract class ZCircusBy {
    *        The driver to query.
    * @param CircusComponentModel
    *        The component model to construct.
+   * @param name
+   *        The optional name.  If this is falsy,
+   *        then the basic selector is used, otherwise
+   *        the first component that matches the selector
+   *        that also has a "name" or "data-name" attribute
+   *        with the matching value.
    *
    * @returns
    *        A new instance of CircusComponentModel.  If no
@@ -45,35 +51,41 @@ export abstract class ZCircusBy {
    */
   public static first<T extends ZCircusComponentModel>(
     driver: IZCircusDriver,
-    CircusComponentModel: ZCircusComponentConstructor<T>
+    CircusComponentModel: ZCircusComponentConstructor<T>,
+    name?: string
   ): Promise<T> {
-    return ZCircusBy.css(driver, CircusComponentModel, CircusComponentModel.Selector);
+    let selector = CircusComponentModel.Selector;
+
+    if (name != null) {
+      const byNameAttribute = `${CircusComponentModel.Selector}[name="${name}"]`;
+      const byDataNameAttribute = `${CircusComponentModel.Selector}[data-name="${name}"]`;
+      selector = `${byNameAttribute},${byDataNameAttribute}`;
+    }
+
+    return ZCircusBy.css(driver, CircusComponentModel, selector);
   }
 
   /**
-   * Returns the first discovered component model that matches the inner Selector
-   * along with a name attribute, or data-name attribute.
+   * Same as first or named, but returns null if no such component exists.
    *
    * @param driver
    *        The driver to query.
    * @param CircusComponentModel
    *        The component model to construct.
    * @param name
-   *        The name or data-name value to query for.  If both name and
-   *        data-name attributes are present, then only one needs to match.
-   *
+   *        The optional name.  If no such
    * @returns
-   *        A new instance of CircusComponentModel.  If no
-   *        target is found, then this method rejects with an Error.
+   *        The first component that matches or null if no such component exists.
    */
-  public static named<T extends ZCircusComponentModel>(
+  public static async optional<T extends ZCircusComponentModel>(
     driver: IZCircusDriver,
     CircusComponentModel: ZCircusComponentConstructor<T>,
-    name: string
-  ): Promise<T> {
-    const byNameAttribute = `${CircusComponentModel.Selector}[name="${name}"]`;
-    const byDataNameAttribute = `${CircusComponentModel.Selector}[data-name="${name}"]`;
-    const selector = `${byNameAttribute},${byDataNameAttribute}`;
-    return ZCircusBy.css(driver, CircusComponentModel, selector);
+    name?: string
+  ): Promise<T | null> {
+    try {
+      return await ZCircusBy.first(driver, CircusComponentModel, name);
+    } catch {
+      return null;
+    }
   }
 }

@@ -28,6 +28,6 @@ export class ZNumberPageComponentModel extends ZCircusComponentModel {
    *        The spinner component.
    */
   public spinner(): Promise<ZNumberComponentModel> {
-    return ZCircusBy.named(this.driver, ZNumberComponentModel, 'spinner');
+    return ZCircusBy.first(this.driver, ZNumberComponentModel, 'spinner');
   }
 }

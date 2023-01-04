@@ -14,7 +14,7 @@ export class ZHomePageComponentModel extends ZCircusComponentModel {
    *        The button component model to open web apps.
    */
   public async webApps(): Promise<ZButtonComponentModel> {
-    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'web-apps-get-started');
+    return ZCircusBy.first(this.driver, ZButtonComponentModel, 'web-apps-get-started');
   }
 
   /**
@@ -24,6 +24,6 @@ export class ZHomePageComponentModel extends ZCircusComponentModel {
    *        The button component to open microservices.
    */
   public async microservices(): Promise<ZButtonComponentModel> {
-    return ZCircusBy.named(this.driver, ZButtonComponentModel, 'microservices-get-started');
+    return ZCircusBy.first(this.driver, ZButtonComponentModel, 'microservices-get-started');
   }
 }
