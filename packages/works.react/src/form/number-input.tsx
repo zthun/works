@@ -55,7 +55,7 @@ export const useNumberInputStyles = makeStyles()(() => {
  *        The JSX responsible for rendering this input.
  */
 export function ZNumberInput(props: IZNumber<number | null>) {
-  const { className, step = 1, min = -Infinity, max = Infinity, value, onValueChange } = props;
+  const { className, step = 1, min = -Infinity, max = Infinity, name, value, onValueChange } = props;
   const clasz = cssClass('ZNumber-root', 'ZNumber-input', className);
   const [_value, _setValue] = useAmbassadorState(value, onValueChange, null);
   const { classes } = useNumberInputStyles();
@@ -114,5 +114,13 @@ export function ZNumberInput(props: IZNumber<number | null>) {
     }
   });
 
-  return <TextField {..._text} className={clasz} onKeyDown={handleKeyDown} inputProps={{ min, max, step }} />;
+  return (
+    <TextField
+      {..._text}
+      className={clasz}
+      onKeyDown={handleKeyDown}
+      inputProps={{ min, max, step }}
+      data-name={name}
+    />
+  );
 }

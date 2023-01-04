@@ -29,7 +29,7 @@ export function ZNumberSlider(props: IZNumber) {
   };
 
   return (
-    <div className={clasz}>
+    <div className={clasz} data-name={name}>
       {renderLabel()}
       <Slider disabled={disabled} value={_value} min={min} max={max} name={name} step={step} onChange={handleCommit} />
     </div>
