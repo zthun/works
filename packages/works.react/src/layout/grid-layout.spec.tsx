@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
+import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import { ZSizeFixed, ZSizeVoid } from '@zthun/works.chonkify';
-import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { Property } from 'csstype';
 import React from 'react';
 import { ZGridLayout } from './grid-layout';

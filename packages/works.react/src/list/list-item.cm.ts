@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/cirque';
 
 /**
  * Represents a component model for a single item underneath a ZList.

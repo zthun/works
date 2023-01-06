@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/cirque';
 import { IZAlert } from '@zthun/works.message';
 import { ZAlertComponentModel } from './alert.cm';
 

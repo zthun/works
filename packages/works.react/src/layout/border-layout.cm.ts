@@ -1,4 +1,4 @@
-import { ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusActBuilder, ZCircusComponentModel } from '@zthun/cirque';
 
 /**
  * The component model for a border layout component.

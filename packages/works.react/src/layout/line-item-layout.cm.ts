@@ -1,4 +1,4 @@
-import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/cirque';
 
 /**
  * A component model for the ZLineItem.

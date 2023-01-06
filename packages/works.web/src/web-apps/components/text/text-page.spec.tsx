@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 
-import { IZCircusKey, ZCircusBy, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
-import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import { IZCircusKey, ZCircusBy, ZCircusKeyboardQwerty } from '@zthun/cirque';
+import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import { ZBooleanComponentModel, ZTextComponentModel } from '@zthun/works.react';
 import React from 'react';
 import { ZTextPage } from './text-page';

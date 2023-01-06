@@ -1,7 +1,7 @@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { TextField } from '@mui/material';
-import { ZCircusKeyboardQwerty } from '@zthun/works.cirque';
+import { ZCircusKeyboardQwerty } from '@zthun/cirque';
 import { cssClass } from '@zthun/works.core';
 import React, { KeyboardEvent } from 'react';
 import { useAmbassadorState } from '../state/use-ambassador-state';

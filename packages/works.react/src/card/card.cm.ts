@@ -1,4 +1,4 @@
-import { IZCircusDriver, ZCircusComponentModel } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusComponentModel } from '@zthun/cirque';
 
 /**
  * Represents a component model for a ZCard component.

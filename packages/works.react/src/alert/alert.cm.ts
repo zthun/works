@@ -1,4 +1,4 @@
-import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusActBuilder } from '@zthun/cirque';
 import { ZAlertSeverity } from '@zthun/works.message';
 import { first } from 'lodash';
 

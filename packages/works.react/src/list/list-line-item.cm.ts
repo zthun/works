@@ -1,4 +1,4 @@
-import { IZCircusDriver, ZCircusActBuilder } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusActBuilder } from '@zthun/cirque';
 import { ZListItemComponentModel } from './list-item.cm';
 
 /**

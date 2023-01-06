@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
-import { ZCircusBy } from '@zthun/works.cirque';
-import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import { ZCircusBy } from '@zthun/cirque';
+import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import React from 'react';
 import { ZButton } from '../buttons/button';
 import { ZToolbarLayout } from './toolbar-layout';

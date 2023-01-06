@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusBy } from '@zthun/works.cirque';
-import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import { ZCircusBy } from '@zthun/cirque';
+import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import { stringify, ZFashionBuilder, ZHue, ZShade } from '@zthun/works.fashion';
 import React from 'react';
 import { ZFashionPage } from './fashion-page';

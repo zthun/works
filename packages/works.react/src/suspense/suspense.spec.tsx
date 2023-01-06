@@ -1,11 +1,11 @@
 /* eslint-disable require-jsdoc */
 
-import { IZCircusDriver, ZCircusBy } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusBy } from '@zthun/cirque';
 import { ZSuspenseRotate } from './suspense-rotate';
 import { ZSuspenseComponentModel } from './suspense.cm';
 
+import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import { ZSizeFixed } from '@zthun/works.chonkify';
-import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 
 describe('ZSuspense', () => {

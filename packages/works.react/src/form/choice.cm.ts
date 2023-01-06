@@ -1,4 +1,4 @@
-import { ZCircusActBuilder, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
+import { ZCircusActBuilder, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/cirque';
 import { findIndex } from 'lodash';
 import { ZChoiceOptionComponentModel } from './choice-option.cm';
 

@@ -1,4 +1,4 @@
-import { ZCircusActBuilder, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/works.cirque';
+import { ZCircusActBuilder, ZCircusComponentModel, ZCircusKeyboardQwerty } from '@zthun/cirque';
 
 /**
  * Represents a component model for a single square in the ZFashionGrid.

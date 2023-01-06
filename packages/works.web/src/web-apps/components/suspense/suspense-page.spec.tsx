@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
+import { ZCircusBy } from '@zthun/cirque';
+import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import { ZSizeFixed } from '@zthun/works.chonkify';
-import { ZCircusBy } from '@zthun/works.cirque';
-import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import React from 'react';
 import { ZSuspensePage } from './suspense-page';
 import { ZSuspensePageComponentModel } from './suspense-page.cm';

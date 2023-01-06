@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/cirque';
 
 /**
  * Represents a choice option or value in the Choice component model.

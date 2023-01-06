@@ -1,4 +1,4 @@
-import { ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusActBuilder, ZCircusComponentModel } from '@zthun/cirque';
 
 /**
  * Represents a component model for a ZLink component.

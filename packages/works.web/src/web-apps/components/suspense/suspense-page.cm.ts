@@ -1,4 +1,4 @@
-import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/cirque';
 import { ZBooleanComponentModel, ZChoiceComponentModel, ZSuspenseComponentModel } from '@zthun/works.react';
 
 /**

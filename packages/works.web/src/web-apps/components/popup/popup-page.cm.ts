@@ -1,4 +1,4 @@
-import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/cirque';
 import { ZPopupButtonComponentModel } from '@zthun/works.react';
 
 /**

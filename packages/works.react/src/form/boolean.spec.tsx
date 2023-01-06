@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusBy } from '@zthun/works.cirque';
-import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import { ZCircusBy } from '@zthun/cirque';
+import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import React, { ReactElement } from 'react';
 import { ZBooleanCheckbox } from './boolean-checkbox';
 import { ZBooleanSwitch } from './boolean-switch';

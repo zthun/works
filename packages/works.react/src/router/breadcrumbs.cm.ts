@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/cirque';
 import { ZLinkComponentModel } from './link.cm';
 
 /**

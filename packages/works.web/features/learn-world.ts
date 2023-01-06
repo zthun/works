@@ -1,6 +1,6 @@
 import { setDefaultTimeout, setWorldConstructor, World } from '@cucumber/cucumber';
-import { IZCircusDriver, ZCircusBy, ZCircusComponentConstructor, ZCircusComponentModel } from '@zthun/works.cirque';
-import { ZCircusSetupChrome } from '@zthun/works.cirque-du-selenium';
+import { IZCircusDriver, ZCircusBy, ZCircusComponentConstructor, ZCircusComponentModel } from '@zthun/cirque';
+import { ZCircusSetupChrome } from '@zthun/cirque-du-selenium';
 import { ZUrlBuilder } from '@zthun/works.url';
 
 /**

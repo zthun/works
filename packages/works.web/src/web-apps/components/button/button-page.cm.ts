@@ -1,4 +1,4 @@
-import { ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/cirque';
 import {
   ZAlertListComponentModel,
   ZBooleanComponentModel,

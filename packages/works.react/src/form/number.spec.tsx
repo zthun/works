@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusBy } from '@zthun/works.cirque';
-import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import { ZCircusBy } from '@zthun/cirque';
+import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import React, { ReactNode } from 'react';
 import { ZNumberInput } from './number-input';
 import { ZNumberComponentModel } from './number.cm';

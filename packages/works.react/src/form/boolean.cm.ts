@@ -1,4 +1,4 @@
-import { IZCircusDriver, ZCircusActBuilder, ZCircusComponentModel } from '@zthun/works.cirque';
+import { IZCircusDriver, ZCircusActBuilder, ZCircusComponentModel } from '@zthun/cirque';
 
 /**
  * Represents a react component model for the ZBoolean component.

@@ -1,5 +1,5 @@
 import { InputAdornment, OutlinedInputProps, TextFieldProps } from '@mui/material';
-import { ZCircusKeyboardQwerty } from '@zthun/works.cirque';
+import { ZCircusKeyboardQwerty } from '@zthun/cirque';
 import { cssClass } from '@zthun/works.core';
 import { get, noop } from 'lodash';
 import React, { KeyboardEvent, ReactNode, useEffect } from 'react';

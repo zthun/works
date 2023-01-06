@@ -1,4 +1,4 @@
-import { ZCircusComponentModel } from '@zthun/works.cirque';
+import { ZCircusComponentModel } from '@zthun/cirque';
 import { ZListItemComponentModel } from './list-item.cm';
 
 export type ZListItemConstructor<T> = new (originator: ZListItemComponentModel) => T;

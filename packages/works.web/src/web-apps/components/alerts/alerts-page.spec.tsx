@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 
-import { ZCircusBy } from '@zthun/works.cirque';
-import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import { ZCircusBy } from '@zthun/cirque';
+import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import { ZAlertSeverity } from '@zthun/works.message';
 import { ZAlertList, ZButtonComponentModel } from '@zthun/works.react';
 import { startCase } from 'lodash';

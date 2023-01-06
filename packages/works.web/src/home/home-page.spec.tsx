@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
 
+import { ZCircusBy } from '@zthun/cirque';
+import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import { createMocked } from '@zthun/spellcraft-jest';
-import { ZCircusBy } from '@zthun/works.cirque';
-import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
 import { IZWebAppService, ZTestRouter, ZWebAppServiceContext } from '@zthun/works.react';
 import { createMemoryHistory, MemoryHistory } from 'history';

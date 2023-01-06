@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { ZCircusSetupRenderer } from '@zthun/works.cirque-du-react';
+import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import React from 'react';
 import {
   IZTypographyProps,

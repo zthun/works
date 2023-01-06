@@ -1,6 +1,6 @@
 /* eslint-disable require-jsdoc */
+import { ZCircusSetupHook } from '@zthun/cirque-du-react';
 import { createMocked } from '@zthun/spellcraft-jest';
-import { ZCircusSetupHook } from '@zthun/works.cirque-du-react';
 import {
   ZHttpCodeServer,
   ZHttpCodeSuccess,

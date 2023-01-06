@@ -1,5 +1,5 @@
+import { IZCircusDriver, ZCircusBy, ZCircusComponentModel } from '@zthun/cirque';
 import { ZSizeFixed } from '@zthun/works.chonkify';
-import { IZCircusDriver, ZCircusBy, ZCircusComponentModel } from '@zthun/works.cirque';
 
 /**
  * Represents a component model for suspense.
@@ -43,6 +43,6 @@ export class ZSuspenseComponentModel extends ZCircusComponentModel {
    *        The targeted name of the suspense object.
    */
   public static async load(driver: IZCircusDriver, name?: string): Promise<void> {
-    await driver.wait(() => ZSuspenseComponentModel.loading(driver, name).then((c) => !c), 'Loader never became ready');
+    await driver.wait(() => ZSuspenseComponentModel.loading(driver, name).then((c) => !c));
   }
 }

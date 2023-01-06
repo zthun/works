@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import { IZCircusReactHook, ZCircusSetupHook } from '@zthun/works.cirque-du-react';
+import { IZCircusReactHook, ZCircusSetupHook } from '@zthun/cirque-du-react';
 import { useAmbassadorState } from './use-ambassador-state';
 
 describe('useAmbassadorState', () => {
