@@ -1,3 +1,4 @@
+import { ZDataUrlBuilder } from '@zthun/webigail-url';
 import {
   createSizeChartFixedCss,
   createSizeChartFixedGeometric,
@@ -6,7 +7,6 @@ import {
   ZSizeVaried
 } from '@zthun/works.chonkify';
 import { cssClass } from '@zthun/works.core';
-import { ZDataUrlBuilder } from '@zthun/works.url';
 import React from 'react';
 import { IZComponentHeight } from '../component/component-height';
 import { IZComponentName } from '../component/component-name';

@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
+import { ZUrlBuilder } from '@zthun/webigail-url';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
 import { ZAppsClient, ZVaultClient } from '@zthun/works.microservices';
-import { ZUrlBuilder } from '@zthun/works.url';
 import { ZConfigEntries } from '../config/config.module';
 
 @Controller()

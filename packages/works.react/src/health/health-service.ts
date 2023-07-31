@@ -1,5 +1,5 @@
 import { IZHttpService, ZHttpRequestBuilder, ZHttpService } from '@zthun/webigail-http';
-import { ZUrlBuilder } from '@zthun/works.url';
+import { ZUrlBuilder } from '@zthun/webigail-url';
 import { createContext, useContext, useEffect } from 'react';
 import { useSafeState } from '../state/use-safe-state';
 

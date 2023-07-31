@@ -2,7 +2,7 @@
 
 import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
-import { ZDataUrlBuilder, ZMimeTypeImage, ZUrlBuilder } from '@zthun/works.url';
+import { ZDataUrlBuilder, ZMimeTypeImage, ZUrlBuilder } from '@zthun/webigail-url';
 import React from 'react';
 import { ZImageSource } from './image-source';
 import { ZImageSourceComponentModel } from './image-source.cm';

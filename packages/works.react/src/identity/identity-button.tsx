@@ -1,6 +1,6 @@
 import PersonIcon from '@mui/icons-material/Person';
+import { ZUrlBuilder } from '@zthun/webigail-url';
 import { cssClass, ZProfileAvatarSize } from '@zthun/works.core';
-import { ZUrlBuilder } from '@zthun/works.url';
 import md5 from 'md5';
 import React from 'react';
 import { useOptionalWebApp } from '../apps/web-app-service';

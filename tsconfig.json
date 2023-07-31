@@ -15,8 +15,7 @@
       "@zthun/works.message": ["works.message/src/index"],
       "@zthun/works.microservices": ["works.microservices/src/index"],
       "@zthun/works.nest": ["works.nest/src/index"],
-      "@zthun/works.react": ["works.react/src/index"],
-      "@zthun/works.url": ["works.url/src/index"]
+      "@zthun/works.react": ["works.react/src/index"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

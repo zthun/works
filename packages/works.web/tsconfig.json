@@ -16,8 +16,7 @@
       "@zthun/works.error": ["../works.error/src/index"],
       "@zthun/works.logger": ["../works.logger/src/index"],
       "@zthun/works.message": ["../works.message/src/index"],
-      "@zthun/works.react": ["../works.react/src/index"],
-      "@zthun/works.url": ["../works.url/src/index"]
+      "@zthun/works.react": ["../works.react/src/index"]
     }
   },
   "include": ["src/**/*.tsx", "src/**/*.ts", "features/**/*.ts"]

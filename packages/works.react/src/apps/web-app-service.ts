@@ -1,6 +1,6 @@
 import { ZHttpRequestBuilder, ZHttpService } from '@zthun/webigail-http';
+import { ZUrlBuilder } from '@zthun/webigail-url';
 import { IZWebApp } from '@zthun/works.core';
-import { ZUrlBuilder } from '@zthun/works.url';
 import { first } from 'lodash';
 import { createContext, useContext } from 'react';
 import { useAsyncState } from '../state/use-async-state';
