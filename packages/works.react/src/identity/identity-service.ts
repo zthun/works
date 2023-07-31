@@ -1,5 +1,5 @@
+import { IZHttpService, ZHttpRequestBuilder, ZHttpService } from '@zthun/webigail-http';
 import { IZProfile } from '@zthun/works.core';
-import { IZHttpService, ZHttpRequestBuilder, ZHttpService } from '@zthun/works.http';
 import { ZUrlBuilder } from '@zthun/works.url';
 import { createContext, useContext } from 'react';
 import { useAsyncState } from '../state/use-async-state';

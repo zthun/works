@@ -1,5 +1,5 @@
 import { ZCircusComponentModel } from '@zthun/cirque';
-import { ZHttpCode, ZHttpCodeCategory } from '@zthun/works.http';
+import { ZHttpCode, ZHttpCodeCategory } from '@zthun/webigail-http';
 
 /**
  * Represents a component model for the ZStatusCode page.

@@ -1,4 +1,4 @@
-import { IZHttpService, ZHttpRequestBuilder, ZHttpService } from '@zthun/works.http';
+import { IZHttpService, ZHttpRequestBuilder, ZHttpService } from '@zthun/webigail-http';
 import { ZUrlBuilder } from '@zthun/works.url';
 import { createContext, useContext, useEffect } from 'react';
 import { useSafeState } from '../state/use-safe-state';

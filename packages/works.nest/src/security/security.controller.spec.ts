@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import { createMocked } from '@zthun/spellcraft-jest';
+import { ZHttpCodeSuccess } from '@zthun/webigail-http';
 import { IZProfile, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
-import { ZHttpCodeSuccess } from '@zthun/works.http';
 import { Request, Response } from 'express';
 import { ZSecurityController } from './security.controller';
 import { ZSecurityService } from './security.service';

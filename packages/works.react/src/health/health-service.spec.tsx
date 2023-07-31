@@ -7,9 +7,9 @@ import {
   ZHttpMethod,
   ZHttpResultBuilder,
   ZHttpServiceMock
-} from '@zthun/works.http';
+} from '@zthun/webigail-http';
 import React from 'react';
-import { IZHealthService, useHealth, ZHealthService, ZHealthServiceContext } from './health-service';
+import { IZHealthService, ZHealthService, ZHealthServiceContext, useHealth } from './health-service';
 
 describe('ZHealthService', () => {
   let http: ZHttpServiceMock;

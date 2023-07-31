@@ -1,6 +1,6 @@
 import { Controller, Get, Req, Res } from '@nestjs/common';
+import { ZHttpCodeSuccess } from '@zthun/webigail-http';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
-import { ZHttpCodeSuccess } from '@zthun/works.http';
 import { Request, Response } from 'express';
 import { ZSecurityService } from './security.service';
 

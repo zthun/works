@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ZHttpService } from '@zthun/works.http';
+import { ZHttpService } from '@zthun/webigail-http';
 
 export const ZHttpServiceToken = 'zthunworks.services.http';
 export const ZHttpServiceProvider = { provide: ZHttpServiceToken, useClass: ZHttpService };

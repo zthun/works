@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable require-jsdoc */
-import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import {
   ZHttpCodeServer,
   ZHttpCodeSuccess,
   ZHttpMethod,
   ZHttpResultBuilder,
   ZHttpServiceMock
-} from '@zthun/works.http';
+} from '@zthun/webigail-http';
+import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
 import { ZIdentityService } from './identity-service';
 
 describe('ZIdentityService', () => {

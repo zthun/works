@@ -10,7 +10,7 @@ import {
   ZHttpCodeRedirection,
   ZHttpCodeServer,
   ZHttpCodeSuccess
-} from '@zthun/works.http';
+} from '@zthun/webigail-http';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
 import { ZRoute, ZRouteMap, ZTestRouter } from '../router/router-dom';
