@@ -1,6 +1,6 @@
-/* eslint-disable require-jsdoc */
 import { IZUser, ZConfigEntryBuilder, ZUserBuilder } from '@zthun/works.core';
 import { v4 } from 'uuid';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { ZCookiesService } from './cookies.service';
 
 describe('ZCookiesService', () => {
