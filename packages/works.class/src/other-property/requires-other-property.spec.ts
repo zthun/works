@@ -1,8 +1,8 @@
-/* eslint-disable require-jsdoc */
 import { registerDecorator, ValidationArguments } from 'class-validator';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { RequiresOtherProperty, RequiresOtherPropertyValidator } from './requires-other-property';
 
-jest.mock('class-validator');
+vi.mock('class-validator');
 
 describe('RequiresOtherProperty', () => {
   describe('Validator', () => {

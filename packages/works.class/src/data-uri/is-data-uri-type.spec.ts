@@ -1,8 +1,8 @@
-/* eslint-disable require-jsdoc */
 import { registerDecorator, ValidationArguments } from 'class-validator';
+import { describe, expect, it, vi } from 'vitest';
 import { IsDataURIType, IsDataURITypeValidator } from './is-data-uri-type';
 
-jest.mock('class-validator');
+vi.mock('class-validator');
 
 describe('IsDataURIType', () => {
   describe('Validator', () => {

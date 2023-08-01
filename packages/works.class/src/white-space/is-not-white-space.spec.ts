@@ -1,8 +1,8 @@
-/* eslint-disable require-jsdoc */
 import { registerDecorator } from 'class-validator';
+import { describe, expect, it, vi } from 'vitest';
 import { IsNotWhiteSpace, IsNotWhiteSpaceValidator } from './is-not-white-space';
 
-jest.mock('class-validator');
+vi.mock('class-validator');
 
 describe('IsNotWhiteSpace', () => {
   describe('Validator', () => {
