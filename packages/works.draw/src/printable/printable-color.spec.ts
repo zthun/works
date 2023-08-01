@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { get2d } from '../canvas/renderer';
 import { ZPrintableColor } from './printable-color';
 
@@ -16,7 +16,7 @@ describe('ZPrintableColor', () => {
     canvas.height = 200;
 
     context = get2d(canvas);
-    jest.spyOn(context, 'fillRect');
+    vi.spyOn(context, 'fillRect');
   });
 
   it('should print color to the entire canvas.', () => {

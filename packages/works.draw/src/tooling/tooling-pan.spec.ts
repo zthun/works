@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { get2d } from '../canvas/renderer';
 import { IZPrintable } from '../printable/printable';
 import { ZPrintableNothing } from '../printable/printable-nothing';
@@ -23,7 +23,7 @@ describe('ZToolingPan', () => {
     transform = new ZPrintableTransform();
     drawing = new ZPrintableNothing();
 
-    jest.spyOn(drawing, 'print');
+    vi.spyOn(drawing, 'print');
   });
 
   afterEach(() => {

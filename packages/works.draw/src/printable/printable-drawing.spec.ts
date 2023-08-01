@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { get2d } from '../canvas/renderer';
 import { IZPrintable } from './printable';
 import { ZPrintableDrawing } from './printable-drawing';
@@ -34,11 +34,11 @@ describe('ZPrintableDrawing', () => {
     bottom = new ZPrintableNothing();
     foreground = new ZPrintableNothing();
 
-    jest.spyOn(background, 'print').mockImplementation(() => printed.push(background));
-    jest.spyOn(top, 'print').mockImplementation(() => printed.push(top));
-    jest.spyOn(middle, 'print').mockImplementation(() => printed.push(middle));
-    jest.spyOn(bottom, 'print').mockImplementation(() => printed.push(bottom));
-    jest.spyOn(foreground, 'print').mockImplementation(() => printed.push(foreground));
+    vi.spyOn(background, 'print').mockImplementation(() => printed.push(background));
+    vi.spyOn(top, 'print').mockImplementation(() => printed.push(top));
+    vi.spyOn(middle, 'print').mockImplementation(() => printed.push(middle));
+    vi.spyOn(bottom, 'print').mockImplementation(() => printed.push(bottom));
+    vi.spyOn(foreground, 'print').mockImplementation(() => printed.push(foreground));
   });
 
   it('should draw the scene in the correct order.', () => {

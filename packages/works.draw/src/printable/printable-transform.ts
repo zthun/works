@@ -55,8 +55,10 @@ export class ZPrintableTransform implements IZPrintable, IZTransformScale, IZTra
   /**
    * Sets the scale on the transformation.
    *
-   * @param sx The x scale.
-   * @param sy The y scale.
+   * @param sx -
+   *        The x scale.
+   * @param sy -
+   *        The y scale.
    *
    * @returns This object.
    */
@@ -69,8 +71,10 @@ export class ZPrintableTransform implements IZPrintable, IZTransformScale, IZTra
   /**
    * Sets the skew.
    *
-   * @param sx The x skew.
-   * @param sy The y skew.
+   * @param sx -
+   *        The x skew.
+   * @param sy -
+   *        The y skew.
    *
    * @returns This object.
    */
@@ -83,8 +87,10 @@ export class ZPrintableTransform implements IZPrintable, IZTransformScale, IZTra
   /**
    * Sets the translation.
    *
-   * @param mx The horizontal translation.
-   * @param my The vertical translation.
+   * @param mx -
+   *        The horizontal translation.
+   * @param my -
+   *        The vertical translation.
    *
    * @returns This object.
    */
@@ -97,7 +103,8 @@ export class ZPrintableTransform implements IZPrintable, IZTransformScale, IZTra
   /**
    * Applies the current transformation matrix to the canvas context.
    *
-   * @param context The context to apply the transformation on.
+   * @param context -
+   *        The context to apply the transformation on.
    */
   public print(context: CanvasRenderingContext2D) {
     // See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/transform for transformation information.

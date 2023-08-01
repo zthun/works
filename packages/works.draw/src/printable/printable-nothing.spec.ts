@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { describe, expect, it } from 'vitest';
 import { ZPrintableNothing } from './printable-nothing';
 
 describe('ZPrintableNothing', () => {

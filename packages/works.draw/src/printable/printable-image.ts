@@ -1,4 +1,3 @@
-/* eslint-disable require-jsdoc */
 import { IZImageReader } from '../image/image-reader';
 import { IZPrintable } from './printable';
 
@@ -25,7 +24,8 @@ export class ZPrintableImage implements IZPrintable {
   /**
    * Initializes a new instance of this object.
    *
-   * @param reader The reader to use to load images.
+   * @param reader -
+   *        The reader to use to load images.
    */
   public constructor(public reader: IZImageReader) {
     this._canvas = document.createElement('canvas');
@@ -37,7 +37,8 @@ export class ZPrintableImage implements IZPrintable {
   /**
    * Imports the image from or url or binary data.
    *
-   * @param urlOrBinary The url or binary date to import from.
+   * @param urlOrBinary -
+   *        The url or binary date to import from.
    *
    * @returns A promise that, when resolved, has loaded the image.
    */

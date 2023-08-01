@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { get2d } from '../canvas/renderer';
 import { ZPrintableTransform } from './printable-transform';
 
@@ -14,7 +14,7 @@ describe('ZPrintableTransform', () => {
     canvas.width = 200;
     canvas.height = 200;
 
-    jest.spyOn(get2d(canvas), 'transform');
+    vi.spyOn(get2d(canvas), 'transform');
   });
 
   it('should apply the identity transformation on reset.', () => {

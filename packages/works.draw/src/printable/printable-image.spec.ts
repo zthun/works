@@ -1,5 +1,5 @@
-/* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/spellcraft-jest';
+import { Mocked, beforeEach, describe, expect, it, vi } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { get2d } from '../canvas/renderer';
 import { IZImageReader } from '../image/image-reader';
 import { ZPrintableImage } from './printable-image';
@@ -7,7 +7,7 @@ import { ZPrintableImage } from './printable-image';
 describe('ZPrintableImage', () => {
   let image: HTMLCanvasElement;
   let canvas: HTMLCanvasElement;
-  let reader: jest.Mocked<IZImageReader>;
+  let reader: Mocked<IZImageReader>;
 
   function createTestTarget() {
     return new ZPrintableImage(reader);
@@ -18,13 +18,13 @@ describe('ZPrintableImage', () => {
     canvas.width = 200;
     canvas.height = 200;
 
-    jest.spyOn(get2d(canvas), 'drawImage');
+    vi.spyOn(get2d(canvas), 'drawImage');
 
     image = document.createElement('canvas');
     image.width = 15;
     image.height = 20;
 
-    reader = createMocked<IZImageReader>(['read']);
+    reader = mock<IZImageReader>();
     reader.read.mockResolvedValue(image);
   });
 

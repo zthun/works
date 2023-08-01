@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { get2d } from '../canvas/renderer';
 import { IZPrintable } from './printable';
 import { ZPrintableGroup } from './printable-group';
@@ -25,9 +25,9 @@ describe('ZPrintableGroup', () => {
     middle = new ZPrintableNothing();
     bottom = new ZPrintableNothing();
 
-    jest.spyOn(top, 'print').mockImplementation(() => printed.push(top));
-    jest.spyOn(middle, 'print').mockImplementation(() => printed.push(middle));
-    jest.spyOn(bottom, 'print').mockImplementation(() => printed.push(bottom));
+    vi.spyOn(top, 'print').mockImplementation(() => printed.push(top));
+    vi.spyOn(middle, 'print').mockImplementation(() => printed.push(middle));
+    vi.spyOn(bottom, 'print').mockImplementation(() => printed.push(bottom));
   });
 
   it('should print no layers if the layers are empty.', () => {
