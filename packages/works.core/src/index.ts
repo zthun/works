@@ -41,9 +41,3 @@ export { IZLogin, ZLoginBuilder } from './users/login';
 export { IZProfile, ZProfileAvatarMaxBytes, ZProfileAvatarSize, ZProfileBuilder } from './users/profile';
 export { IZProfileActivation, ZProfileActivationBuilder } from './users/profile-activation';
 export { IZUser, ZUserBuilder } from './users/user';
-// Util
-export { cssClass } from './util/css-class';
-export { firstDefined } from './util/first-defined';
-export { required } from './util/obligation';
-export { setFirstOrDefault } from './util/set-first-or-default';
-export { sleep } from './util/sleep';
