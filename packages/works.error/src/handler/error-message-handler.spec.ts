@@ -1,22 +1,18 @@
-/* eslint-disable require-jsdoc */
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { IZErrorMessageHandler, ZErrorMessageHandlerComposite } from './error-message-handler';
 
 describe('ZMessageHandler', () => {
-  let alerter: jest.Mocked<IZErrorMessageHandler>;
-  let logger: jest.Mocked<IZErrorMessageHandler>;
+  let alerter: Mocked<IZErrorMessageHandler>;
+  let logger: Mocked<IZErrorMessageHandler>;
 
   function createTestTarget() {
     return new ZErrorMessageHandlerComposite([alerter, logger]);
   }
 
   beforeEach(() => {
-    alerter = jest.mocked({
-      handle: jest.fn()
-    });
-
-    logger = jest.mocked({
-      handle: jest.fn()
-    });
+    alerter = mock<IZErrorMessageHandler>();
+    logger = mock<IZErrorMessageHandler>();
   });
 
   it('should forward the messages to the child handlers.', async () => {

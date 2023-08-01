@@ -1,13 +1,14 @@
-/* eslint-disable require-jsdoc */
 import { ConflictException } from '@nestjs/common';
-import { createMocked } from '@zthun/spellcraft-jest';
 import { ZUserBuilder } from '@zthun/works.core';
 import { v4 } from 'uuid';
+import { describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZRuleCookieRequiresAuthDeactivated } from './rule-cookie-requires-auth-deactivated.guard';
+import { ZSecurityService } from './security.service';
 
 describe('ZRuleCookieRequestAuthAny', () => {
   function createTestTarget() {
-    return new ZRuleCookieRequiresAuthDeactivated(createMocked(['extract']));
+    return new ZRuleCookieRequiresAuthDeactivated(mock<ZSecurityService>());
   }
 
   it('does nothing if all rules pass', () => {

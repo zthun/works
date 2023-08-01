@@ -1,16 +1,16 @@
-/* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/spellcraft-jest';
 import { ZHttpCodeSuccess } from '@zthun/webigail-http';
 import { IZProfile, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
 import { Request, Response } from 'express';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZSecurityController } from './security.controller';
 import { ZSecurityService } from './security.service';
 
 describe('ZSecurityController', () => {
   let gambit: IZProfile;
-  let jwt: jest.Mocked<ZSecurityService>;
-  let req: jest.Mocked<Request>;
-  let res: jest.Mocked<Response>;
+  let jwt: Mocked<ZSecurityService>;
+  let req: Mocked<Request>;
+  let res: Mocked<Response>;
 
   function createTestTarget() {
     return new ZSecurityController(jwt);
@@ -19,12 +19,12 @@ describe('ZSecurityController', () => {
   beforeEach(() => {
     gambit = new ZProfileBuilder().email('gambit@marvel.com').active().build();
 
-    req = createMocked<Request>();
-    res = createMocked<Response>(['status', 'send']);
+    req = mock<Request>();
+    res = mock<Response>();
     res.status.mockReturnValue(res);
     res.send.mockReturnValue(res);
 
-    jwt = createMocked<ZSecurityService>(['extract']);
+    jwt = mock<ZSecurityService>();
     jwt.extract.mockResolvedValue(new ZUserBuilder().email('gambit@marvel.com').super().active().build());
   });
 

@@ -1,5 +1,4 @@
-/* eslint-disable require-jsdoc */
-
+import { describe, expect, it } from 'vitest';
 import { ZFashionBuilder } from '../color/fashion';
 import { ZFashionCoordinationBuilder } from '../color/fashion-coordination';
 import { ZHue } from '../color/hue';

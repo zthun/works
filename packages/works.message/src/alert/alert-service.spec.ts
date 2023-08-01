@@ -1,6 +1,6 @@
-/* eslint-disable require-jsdoc */
 import { unset } from 'lodash';
 import { v4 } from 'uuid';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { IZAlert, ZAlertBuilder } from './alert';
 import { ZAlertService } from './alert-service';
 

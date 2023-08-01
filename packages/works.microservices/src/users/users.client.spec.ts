@@ -1,21 +1,20 @@
-/* eslint-disable require-jsdoc */
-
 import { ClientProxy } from '@nestjs/microservices';
-import { createMocked } from '@zthun/spellcraft-jest';
 import { ZLoginBuilder, ZProfileBuilder, ZUserBuilder } from '@zthun/works.core';
 import { of } from 'rxjs';
 import { v4 } from 'uuid';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZUsersClient } from './users.client';
 
 describe('UsersClient', () => {
-  let proxy: jest.Mocked<ClientProxy>;
+  let proxy: Mocked<ClientProxy>;
 
   function createTestTarget() {
     return new ZUsersClient(proxy);
   }
 
   beforeEach(() => {
-    proxy = createMocked(['send']);
+    proxy = mock<ClientProxy>();
     proxy.send.mockReturnValue(of(null));
   });
 

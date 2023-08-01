@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { describe, expect, it } from 'vitest';
 import { ZHealthController } from './health.controller';
 
 describe('ZHealthController', () => {

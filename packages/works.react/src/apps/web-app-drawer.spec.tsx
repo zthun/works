@@ -1,12 +1,11 @@
-/* eslint-disable require-jsdoc */
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import { ZTestRouter } from '@zthun/fashion-boutique';
-import { createMocked } from '@zthun/spellcraft-jest';
 import { ZUrlBuilder } from '@zthun/webigail-url';
-import { IZWebApp, required, ZWebAppBuilder } from '@zthun/works.core';
-import { createMemoryHistory, MemoryHistory } from 'history';
+import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
+import { MemoryHistory, createMemoryHistory } from 'history';
 import { find, startCase } from 'lodash';
 import React from 'react';
 import { ZWindowServiceContext } from '../window/window-service';

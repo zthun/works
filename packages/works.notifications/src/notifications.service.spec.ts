@@ -1,5 +1,3 @@
-/* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/spellcraft-jest';
 import {
   IZEmail,
   IZEmailEnvelope,
@@ -11,13 +9,15 @@ import {
 import { first } from 'lodash';
 import { createTransport } from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
+import { Mock, Mocked, beforeEach, describe, expect, it, vi } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZNotificationsService } from './notifications.service';
 
-jest.mock('nodemailer');
+vi.mock('nodemailer');
 
 describe('ZNotificationsService', () => {
-  let createTransportSpy: jest.Mock;
-  let mail: jest.Mocked<Mail>;
+  let createTransportSpy: Mock;
+  let mail: Mocked<Mail>;
 
   function createTestTarget() {
     return new ZNotificationsService();
@@ -29,10 +29,10 @@ describe('ZNotificationsService', () => {
     let envelope: IZEmailEnvelope;
 
     beforeEach(() => {
-      mail = createMocked(['sendMail']);
+      mail = mock();
       mail.sendMail.mockReturnValue(Promise.resolve({}));
 
-      createTransportSpy = createTransport as jest.Mock;
+      createTransportSpy = createTransport as Mock;
       createTransportSpy.mockClear();
       createTransportSpy.mockReturnValue(mail);
     });

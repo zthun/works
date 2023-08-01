@@ -35,7 +35,9 @@
   },
   "devDependencies": {
     "typedoc": "^0.24.8",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^0.33.0",
+    "vitest-mock-extended": "^1.1.4"
   },
   "peerDependencies": {
     "@nestjs/common": "^9.0.5",

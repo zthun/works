@@ -1,11 +1,11 @@
-/* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/spellcraft-jest';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZLogEntryBuilder } from '../log/log-entry';
 import { ZLoggerConsole } from './logger-console';
 
 describe('ZLoggerConsole', () => {
   let msg: string;
-  let cons: jest.Mocked<Console>;
+  let cons: Mocked<Console>;
 
   function createTestTarget() {
     return new ZLoggerConsole(cons);
@@ -13,7 +13,7 @@ describe('ZLoggerConsole', () => {
 
   beforeEach(() => {
     msg = 'Something is being logged.';
-    cons = createMocked(['log', 'error', 'warn']);
+    cons = mock<Console>();
   });
 
   describe('Levels', () => {

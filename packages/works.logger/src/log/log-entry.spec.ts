@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { describe, expect, it } from 'vitest';
 import { ZLogEntryBuilder, ZLogLevel } from './log-entry';
 
 describe('ZLogEntryBuilder', () => {

@@ -1,12 +1,12 @@
-/* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/spellcraft-jest';
 import { IZConfigEntry } from '@zthun/works.core';
 import { ZVaultClient } from '@zthun/works.microservices';
 import { flatten } from 'lodash';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZConfigEntries, ZConfigModule } from './config.module';
 
 describe('ZConfigModule', () => {
-  let vault: jest.Mocked<ZVaultClient>;
+  let vault: Mocked<ZVaultClient>;
 
   async function createTestTarget() {
     const target = new ZConfigModule(vault);
@@ -15,7 +15,7 @@ describe('ZConfigModule', () => {
   }
 
   beforeEach(() => {
-    vault = createMocked(['get']);
+    vault = mock<ZVaultClient>();
   });
 
   it('should initialize all of the entries in ZConfigEntries.', async () => {

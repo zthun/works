@@ -1,16 +1,17 @@
-/* eslint-disable require-jsdoc */
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { IZErrorHandler } from '../handler/error-handler';
 import { ZErrorPassThrough } from './error-pass-through';
 
 describe('ZErrorPassThrough', () => {
-  let handler: jest.Mocked<IZErrorHandler>;
+  let handler: Mocked<IZErrorHandler>;
 
   function createTestTarget() {
     return new ZErrorPassThrough(handler);
   }
 
   beforeEach(() => {
-    handler = jest.mocked({ handle: jest.fn() });
+    handler = mock<IZErrorHandler>();
     handler.handle.mockResolvedValue();
   });
 

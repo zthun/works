@@ -1,5 +1,5 @@
-/* eslint-disable require-jsdoc */
 import { ValidationError } from 'class-validator';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { ZExceptionFactory } from './exception-factory.class';
 
 describe('ZExceptionFactory', () => {

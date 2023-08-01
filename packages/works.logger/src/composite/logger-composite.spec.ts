@@ -1,22 +1,22 @@
-/* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/spellcraft-jest';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZLogEntryBuilder } from '../log/log-entry';
 import { IZLogger } from '../log/logger';
 import { ZLoggerComposite } from './logger-composite';
 
 describe('ZLoggerComposite', () => {
-  let loggerA: jest.Mocked<IZLogger>;
-  let loggerB: jest.Mocked<IZLogger>;
-  let loggerC: jest.Mocked<IZLogger>;
+  let loggerA: Mocked<IZLogger>;
+  let loggerB: Mocked<IZLogger>;
+  let loggerC: Mocked<IZLogger>;
 
   function createTestTarget() {
     return new ZLoggerComposite([loggerA, loggerB, loggerC]);
   }
 
   beforeEach(() => {
-    loggerA = createMocked(['log']);
-    loggerB = createMocked(['log']);
-    loggerC = createMocked(['log']);
+    loggerA = mock<IZLogger>();
+    loggerB = mock<IZLogger>();
+    loggerC = mock<IZLogger>();
   });
 
   it('should log to every child logger.', () => {

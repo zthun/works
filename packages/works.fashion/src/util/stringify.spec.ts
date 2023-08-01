@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { describe, expect, it } from 'vitest';
 import { IZFashion, ZFashionBuilder } from '../color/fashion';
 import { stringify } from './stringify';
 

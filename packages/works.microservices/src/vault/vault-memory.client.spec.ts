@@ -1,5 +1,5 @@
-/* eslint-disable require-jsdoc */
 import { ZConfigEntryBuilder } from '@zthun/works.core';
+import { describe, expect, it } from 'vitest';
 import { ZVaultMemoryClient } from './vault-memory.client';
 
 describe('ZVaultMemoryClient', () => {

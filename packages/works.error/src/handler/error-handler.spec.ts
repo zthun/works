@@ -1,18 +1,17 @@
-/* eslint-disable require-jsdoc */
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZErrorHandler } from './error-handler';
 import { IZErrorMessageHandler } from './error-message-handler';
 
 describe('ErrorHandler', () => {
-  let msg: jest.Mocked<IZErrorMessageHandler>;
+  let msg: Mocked<IZErrorMessageHandler>;
 
   function createTestTarget() {
     return new ZErrorHandler(msg);
   }
 
   beforeEach(() => {
-    msg = jest.mocked({
-      handle: jest.fn()
-    });
+    msg = mock<IZErrorMessageHandler>();
   });
 
   async function assertMessageHandlerReceivesMessage(expected: string | string[], err: any) {

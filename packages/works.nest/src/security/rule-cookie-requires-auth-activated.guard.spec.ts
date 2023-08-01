@@ -1,12 +1,13 @@
-/* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/spellcraft-jest';
 import { ZUserBuilder } from '@zthun/works.core';
 import { v4 } from 'uuid';
+import { describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZRuleCookieRequiresAuthActivated } from './rule-cookie-requires-auth-activated.guard';
+import { ZSecurityService } from './security.service';
 
 describe('ZRuleCookieRequestAuthAny', () => {
   function createTestTarget() {
-    return new ZRuleCookieRequiresAuthActivated(createMocked(['extract']));
+    return new ZRuleCookieRequiresAuthActivated(mock<ZSecurityService>());
   }
 
   it('does nothing if all rules pass', () => {

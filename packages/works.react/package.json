@@ -56,7 +56,9 @@
   "devDependencies": {
     "@zthun/cirque-du-react": "^4.3.1",
     "typedoc": "^0.24.8",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^0.33.0",
+    "vitest-mock-extended": "^1.1.4"
   },
   "peerDependencies": {
     "react": "^18.1.0",

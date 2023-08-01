@@ -1,18 +1,18 @@
-/* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/spellcraft-jest';
 import { IZCookie, IZUser, ZCookieBuilder, ZUserBuilder } from '@zthun/works.core';
 import { ZCookiesClient, ZUsersClient, ZVaultClient, ZVaultMemoryClient } from '@zthun/works.microservices';
 import { Request } from 'express';
 import { v4 } from 'uuid';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZConfigEntries } from '../config/config.module';
 import { ZSecurityService } from './security.service';
 
 describe('ZSecurityService', () => {
   let cookie: IZCookie;
-  let users: jest.Mocked<ZUsersClient>;
+  let users: Mocked<ZUsersClient>;
   let user: IZUser;
-  let req: jest.Mocked<Request>;
-  let cookies: jest.Mocked<ZCookiesClient>;
+  let req: Mocked<Request>;
+  let cookies: Mocked<ZCookiesClient>;
   let vault: ZVaultClient;
 
   function createTestTarget() {
@@ -27,12 +27,12 @@ describe('ZSecurityService', () => {
       .httpOnly()
       .build();
 
-    users = createMocked(['findByEmail', 'findById', 'login']);
+    users = mock();
     users.findByEmail.mockReturnValue(Promise.resolve(null));
     users.findById.mockReturnValue(Promise.resolve(null));
     users.login.mockReturnValue(Promise.resolve(null));
 
-    cookies = createMocked(['createAuthentication', 'whoIs']);
+    cookies = mock();
     cookies.createAuthentication.mockResolvedValue(cookie);
     cookies.whoIs.mockResolvedValue(null);
 
@@ -41,7 +41,7 @@ describe('ZSecurityService', () => {
     user = new ZUserBuilder().email('wolverine@marvel.com').password('foo').id('0').super().build();
     users.findById.mockReturnValue(Promise.resolve(user));
     cookies.whoIs.mockResolvedValue(user._id);
-    req = createMocked(['cookies']);
+    req = mock();
   });
 
   it('should extract the user from the auth cookie in the request.', async () => {

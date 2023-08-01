@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { beforeEach, describe, expect, it } from 'vitest';
 import { ZErrorBuilder } from './error';
 
 describe('ZErrorBuilder', () => {

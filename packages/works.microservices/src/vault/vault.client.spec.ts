@@ -1,19 +1,19 @@
 import { ClientProxy } from '@nestjs/microservices';
-import { createMocked } from '@zthun/spellcraft-jest';
 import { ZConfigEntryBuilder } from '@zthun/works.core';
 import { of } from 'rxjs';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZVaultClient } from './vault.client';
 
-/* eslint-disable require-jsdoc */
 describe('VaultClient', () => {
-  let proxy: jest.Mocked<ClientProxy>;
+  let proxy: Mocked<ClientProxy>;
 
   function createTestTarget() {
     return new ZVaultClient(proxy);
   }
 
   beforeEach(() => {
-    proxy = createMocked(['send']);
+    proxy = mock<ClientProxy>();
     proxy.send.mockReturnValue(of(null));
   });
 

@@ -1,6 +1,5 @@
-/* eslint-disable require-jsdoc */
-
 import { keyBy, mapValues } from 'lodash';
+import { describe, expect, it } from 'vitest';
 import { ZFashionBuilder } from './fashion';
 import { ZHue } from './hue';
 import { ZPaletteBuilder } from './palette';
