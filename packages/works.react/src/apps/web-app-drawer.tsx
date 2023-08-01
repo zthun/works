@@ -5,8 +5,8 @@ import ErrorIcon from '@mui/icons-material/Error';
 import GithubIcon from '@mui/icons-material/GitHub';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 import { isStateErrored, isStateLoaded, isStateLoading } from '@zthun/helpful-react';
-import { ZSizeFixed } from '@zthun/works.chonkify';
 import { cssClass } from '@zthun/works.core';
 import { kebabCase, startCase } from 'lodash';
 import React, { ReactNode } from 'react';

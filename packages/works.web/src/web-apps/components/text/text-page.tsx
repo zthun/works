@@ -1,6 +1,6 @@
 import FlagIcon from '@mui/icons-material/Flag';
 import SearchIcon from '@mui/icons-material/Search';
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 import {
   ZBooleanSwitch,
   ZCaption,

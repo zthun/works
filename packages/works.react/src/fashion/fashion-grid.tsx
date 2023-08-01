@@ -1,6 +1,6 @@
 import { ZCircusKeyboardQwerty } from '@zthun/cirque';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 import { useAmbassadorState } from '@zthun/helpful-react';
-import { ZSizeFixed } from '@zthun/works.chonkify';
 import { cssClass } from '@zthun/works.core';
 import { colorify, IZFashion, ZFashionBuilder, ZHue, ZShade, ZShades } from '@zthun/works.fashion';
 import React, { KeyboardEvent, MouseEvent, useMemo } from 'react';

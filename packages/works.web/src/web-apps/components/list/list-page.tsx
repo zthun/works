@@ -1,11 +1,9 @@
 // cspell:disable
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
-  useAlertService,
-  useFashionDesign,
   ZBorderLayout,
   ZCard,
   ZH3,
@@ -14,7 +12,9 @@ import {
   ZListGroup,
   ZListLineItem,
   ZPaddedBox,
-  ZParagraph
+  ZParagraph,
+  useAlertService,
+  useFashionDesign
 } from '@zthun/works.react';
 import React from 'react';
 import { ZRouteList } from '../../../routes';

@@ -4,6 +4,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import ForwardIcon from '@mui/icons-material/Forward';
 import InfoIcon from '@mui/icons-material/Info';
 import WarningIcon from '@mui/icons-material/Warning';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 import {
   getHttpCodeCategory,
   getHttpCodeDescription,
@@ -12,7 +13,6 @@ import {
   ZHttpCodeCategory,
   ZHttpCodeClient
 } from '@zthun/webigail-http';
-import { ZSizeFixed } from '@zthun/works.chonkify';
 import { cssClass } from '@zthun/works.core';
 import { get } from 'lodash';
 import React from 'react';

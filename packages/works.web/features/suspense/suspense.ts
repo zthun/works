@@ -1,7 +1,7 @@
 import { Given, Then, When } from '@cucumber/cucumber';
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 import assert from 'assert';
-import { fullPath, ZRouteSuspense } from '../../src/routes';
+import { ZRouteSuspense, fullPath } from '../../src/routes';
 import { ZSuspensePageComponentModel } from '../../src/web-apps/components/suspense/suspense-page.cm';
 import { ZLearnWorld } from '../learn-world';
 

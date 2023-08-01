@@ -4,7 +4,6 @@
     "baseUrl": "packages",
     "target": "esnext",
     "paths": {
-      "@zthun/works.chonkify": ["works.chonkify/src/index"],
       "@zthun/works.class": ["works.class/src/index"],
       "@zthun/works.core": ["works.core/src/index"],
       "@zthun/works.dal": ["works.dal/src/index"],

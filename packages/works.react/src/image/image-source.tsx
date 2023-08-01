@@ -1,11 +1,11 @@
-import { ZDataUrlBuilder } from '@zthun/webigail-url';
 import {
   createSizeChartFixedCss,
   createSizeChartFixedGeometric,
   createSizeChartVariedCss,
   createSizeChartVoidCss,
   ZSizeVaried
-} from '@zthun/works.chonkify';
+} from '@zthun/fashion-tailor';
+import { ZDataUrlBuilder } from '@zthun/webigail-url';
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
 import { IZComponentHeight } from '../component/component-height';

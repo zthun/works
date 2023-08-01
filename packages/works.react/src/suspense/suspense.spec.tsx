@@ -5,7 +5,7 @@ import { ZSuspenseRotate } from './suspense-rotate';
 import { ZSuspenseComponentModel } from './suspense.cm';
 
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 import React from 'react';
 
 describe('ZSuspense', () => {

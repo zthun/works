@@ -5,7 +5,6 @@
     "sourceMap": true,
     "declarationDir": "dist/types",
     "paths": {
-      "@zthun/works.chonkify": ["../works.chonkify/src/index"],
       "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.draw": ["../works.draw/src/index"],
       "@zthun/works.error": ["../works.error/src/index"],

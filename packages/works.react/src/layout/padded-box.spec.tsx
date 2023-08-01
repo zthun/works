@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
-import { ZSizeFixed, ZSizeVaried } from '@zthun/works.chonkify';
+import { ZSizeFixed, ZSizeVaried } from '@zthun/fashion-tailor';
 import React from 'react';
 import { ZPaddedBox } from './padded-box';
 

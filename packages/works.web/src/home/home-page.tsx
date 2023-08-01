@@ -1,8 +1,8 @@
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import PublicIcon from '@mui/icons-material/Public';
 import Terminal from '@mui/icons-material/Terminal';
+import { ZSizeFixed, ZSizeVaried } from '@zthun/fashion-tailor';
 import { asStateData } from '@zthun/helpful-react';
-import { ZSizeFixed, ZSizeVaried } from '@zthun/works.chonkify';
 import {
   ZButton,
   ZCard,

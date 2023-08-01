@@ -1,5 +1,5 @@
 import { CircularProgress } from '@mui/material';
-import { createSizeChartFixedArithmetic, createSizeChartFixedCss, ZSizeFixed } from '@zthun/works.chonkify';
+import { createSizeChartFixedArithmetic, createSizeChartFixedCss, ZSizeFixed } from '@zthun/fashion-tailor';
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
 import { IZSuspense } from './suspense';

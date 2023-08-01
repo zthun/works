@@ -1,4 +1,4 @@
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 import { useFashionDesign, ZCard, ZH3, ZPaddedBox, ZParagraph, ZPopupButton } from '@zthun/works.react';
 import React, { useMemo } from 'react';
 import { ZRoutePopup } from '../../../routes';

@@ -1,4 +1,4 @@
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 import {
   useFashionDesign,
   useNavigate,

@@ -1,6 +1,6 @@
 import { AppBar } from '@mui/material';
 import { ThemeProvider } from '@mui/system';
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 import React from 'react';
 import { GlobalStyles } from 'tss-react';
 import { ZAlertList } from '../alert/alert-list';

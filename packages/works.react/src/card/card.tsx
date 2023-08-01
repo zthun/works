@@ -1,12 +1,12 @@
 import { Card, CardActions, CardContent, CardHeader, Paper } from '@mui/material';
 import {
+  ZSizeFixed,
+  ZSizeVaried,
   createSizeChartFixedCss,
   createSizeChartFixedGeometric,
   createSizeChartVariedCss,
-  createSizeChartVoidCss,
-  ZSizeFixed,
-  ZSizeVaried
-} from '@zthun/works.chonkify';
+  createSizeChartVoidCss
+} from '@zthun/fashion-tailor';
 import { cssClass } from '@zthun/works.core';
 import React, { ReactNode } from 'react';
 import { IZComponentAvatar } from '../component/component-avatar';

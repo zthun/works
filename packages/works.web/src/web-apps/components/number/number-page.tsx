@@ -1,4 +1,4 @@
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 
 import { ZCaption, ZCard, ZGridLayout, ZH3, ZNumberInput, ZPaddedBox, ZParagraph } from '@zthun/works.react';
 import React, { useState } from 'react';

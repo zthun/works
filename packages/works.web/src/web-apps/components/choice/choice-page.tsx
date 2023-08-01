@@ -1,5 +1,5 @@
 import BalanceIcon from '@mui/icons-material/Balance';
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 
 import {
   ZBooleanSwitch,

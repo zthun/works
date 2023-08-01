@@ -6,7 +6,6 @@
     "declaration": false,
     "sourceMap": true,
     "paths": {
-      "@zthun/works.chonkify": ["../works.chonkify/src/index"],
       "@zthun/cirque": ["../cirque/src/index"],
       "@zthun/cirque-du-react": ["../cirque-du-react/src/index"],
       "@zthun/cirque-du-selenium": ["../cirque-du-selenium/src/index"],

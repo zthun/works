@@ -1,7 +1,7 @@
 import AppsIcon from '@mui/icons-material/Apps';
 import ErrorIcon from '@mui/icons-material/Error';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 import { cssClass } from '@zthun/works.core';
 
 import { asStateData, isStateErrored, isStateLoading } from '@zthun/helpful-react';

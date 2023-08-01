@@ -10,7 +10,7 @@ import SmartButtonIcon from '@mui/icons-material/SmartButton';
 import TitleIcon from '@mui/icons-material/Title';
 import TouchAppIcon from '@mui/icons-material/TouchApp';
 import WarningIcon from '@mui/icons-material/Warning';
-import { ZSizeFixed } from '@zthun/works.chonkify';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
 
 import { IZRouteOption, ZRouteOptionBuilder } from '@zthun/works.core';
 import { ZImageSource } from '@zthun/works.react';

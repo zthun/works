@@ -1,4 +1,4 @@
-import { ZSizeFixed, ZSizeVaried, ZSizeVoid } from '@zthun/works.chonkify';
+import { ZSizeFixed, ZSizeVaried, ZSizeVoid } from '@zthun/fashion-tailor';
 import { cssClass, firstDefined } from '@zthun/works.core';
 import { get } from 'lodash';
 import React from 'react';

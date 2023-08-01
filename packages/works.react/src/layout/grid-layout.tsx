@@ -1,4 +1,4 @@
-import { ZSizeFixed, ZSizeVoid } from '@zthun/works.chonkify';
+import { ZSizeFixed, ZSizeVoid } from '@zthun/fashion-tailor';
 import { cssClass } from '@zthun/works.core';
 import { Property } from 'csstype';
 import React from 'react';
