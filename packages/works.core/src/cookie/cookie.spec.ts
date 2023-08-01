@@ -1,5 +1,5 @@
-/* eslint-disable require-jsdoc */
 import { v4 } from 'uuid';
+import { describe, expect, it } from 'vitest';
 import { ZCookieBuilder } from './cookie';
 
 describe('ZCookieBuilder', () => {

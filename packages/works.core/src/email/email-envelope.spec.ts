@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { beforeEach, describe, expect, it } from 'vitest';
 import { IZEmailContact, ZEmailContactBuilder } from './email-contact';
 import { IZEmailEnvelope, ZEmailEnvelopeBuilder } from './email-envelope';
 

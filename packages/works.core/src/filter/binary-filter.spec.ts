@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { describe, expect, it } from 'vitest';
 import { ZBinaryFilterBuilder, ZBinaryOperator } from './binary-filter';
 
 describe('BinaryFilterBuilder', () => {

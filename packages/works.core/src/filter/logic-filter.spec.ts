@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { beforeEach, describe, expect, it } from 'vitest';
 import { ZBinaryFilterBuilder } from './binary-filter';
 import { ZCollectionFilterBuilder } from './collection-filter';
 import { IZFilter } from './filter';

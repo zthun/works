@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { describe, expect, it } from 'vitest';
 import { ZUnaryFilterBuilder, ZUnaryOperator } from './unary-filter';
 
 describe('UnaryFilterBuilder', () => {

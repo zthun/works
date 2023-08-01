@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { describe, expect, it } from 'vitest';
 import { ZCollectionFilterBuilder, ZCollectionOperator } from './collection-filter';
 
 describe('CollectionFilterBuilder', () => {

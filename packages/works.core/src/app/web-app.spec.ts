@@ -1,4 +1,4 @@
-/* eslint-disable require-jsdoc */
+import { describe, expect, it } from 'vitest';
 import { ZWebAppBuilder } from './web-app';
 
 describe('ZWebAppBuilder', () => {

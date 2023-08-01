@@ -1,5 +1,5 @@
-/* eslint-disable require-jsdoc */
 import { v4 } from 'uuid';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { IZUser, ZUserBuilder } from '../users/user';
 import { ZProfileBuilder } from './profile';
 
