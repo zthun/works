@@ -26,8 +26,8 @@
     "docs/**"
   ],
   "dependencies": {
-    "mongodb": "^4.13.0",
-    "mongodb-memory-server": "^8.10.2",
+    "mongodb": "^5.7.0",
+    "mongodb-memory-server": "^8.13.0",
     "portfinder": "^1.0.32",
     "uuid": "^9.0.0"
   },
