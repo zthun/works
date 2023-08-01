@@ -1,7 +1,7 @@
-/* eslint-disable require-jsdoc */
 import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import React from 'react';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { IZPopupAnchorOrigin } from './popup';
 import { ZPopupButton } from './popup-button';
 import { ZPopupButtonComponentModel } from './popup-button.cm';

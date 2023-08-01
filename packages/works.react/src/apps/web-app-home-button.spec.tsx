@@ -1,14 +1,13 @@
-/* eslint-disable require-jsdoc */
-
 import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import { ZTestRouter } from '@zthun/fashion-boutique';
-import { createMocked } from '@zthun/spellcraft-jest';
 import { ZUrlBuilder } from '@zthun/webigail-url';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
 import { MemoryHistory, createMemoryHistory } from 'history';
 import { noop, startCase } from 'lodash';
 import React from 'react';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZWebAppHomeButton } from './web-app-home-button';
 import { ZWebAppHomeButtonComponentModel } from './web-app-home-button.cm';
 import { IZWebAppService, ZWebAppServiceContext } from './web-app-service';
@@ -18,7 +17,7 @@ describe('ZWebAppHomeButton', () => {
   let whoami: string;
   let route: string | undefined;
   let testApp: IZWebApp;
-  let webAppService: jest.Mocked<IZWebAppService>;
+  let webAppService: Mocked<IZWebAppService>;
 
   async function createTestTarget() {
     const element = (
@@ -48,7 +47,7 @@ describe('ZWebAppHomeButton', () => {
       .domain('test.zthunworks.com')
       .build();
 
-    webAppService = createMocked(['read']);
+    webAppService = mock();
     webAppService.read.mockResolvedValue(testApp);
   });
 

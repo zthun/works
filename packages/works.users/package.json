@@ -37,7 +37,9 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "vitest": "^0.33.0",
+    "vitest-mock-extended": "^1.1.4"
   },
   "sideEffects": false
 }

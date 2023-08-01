@@ -1,4 +1,3 @@
-/* eslint-disable require-jsdoc */
 const path = require('path');
 const pkg = require('./package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');

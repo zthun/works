@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable require-jsdoc */
 import {
   ZHttpCodeServer,
   ZHttpCodeSuccess,
@@ -8,6 +6,7 @@ import {
   ZHttpServiceMock
 } from '@zthun/webigail-http';
 import { IZProfile, ZProfileBuilder } from '@zthun/works.core';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { ZIdentityService } from './identity-service';
 
 describe('ZIdentityService', () => {

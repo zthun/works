@@ -1,17 +1,17 @@
-/* eslint-disable require-jsdoc */
-import { createMocked } from '@zthun/spellcraft-jest';
 import { IZAlertService } from '@zthun/works.message';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZErrorMessageHandlerAlert } from './error-message-handler-alert';
 
 describe('ZErrorMessageHandlerAlert', () => {
-  let alerts: jest.Mocked<IZAlertService>;
+  let alerts: Mocked<IZAlertService>;
 
   function createTestTarget() {
     return new ZErrorMessageHandlerAlert(alerts);
   }
 
   beforeEach(() => {
-    alerts = createMocked(['create']);
+    alerts = mock();
     alerts.create.mockImplementation((a) => Promise.resolve(a));
   });
 

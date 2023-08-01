@@ -2,7 +2,6 @@ import AppsIcon from '@mui/icons-material/Apps';
 import ErrorIcon from '@mui/icons-material/Error';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import { ZSizeFixed } from '@zthun/fashion-tailor';
-import { cssClass } from '@zthun/works.core';
 
 import {
   IZButton,
@@ -15,6 +14,7 @@ import {
   useNavigate
 } from '@zthun/fashion-boutique';
 import { white } from '@zthun/fashion-theme';
+import { cssJoinDefined } from '@zthun/helpful-fn';
 import { asStateData, isStateErrored, isStateLoading } from '@zthun/helpful-react';
 import { startCase } from 'lodash';
 import React from 'react';
@@ -78,11 +78,11 @@ export function ZWebAppHomeButton(props: IZWebAppHomeButton) {
   const [who] = useWebApp(whoami);
   const navigate = useNavigate();
   const { classes } = useWebAppHomeButtonStyles();
-  const _className = cssClass('ZWebAppHomeButton-root', className);
-  const _buttonClassName = cssClass('ZWebAppHomeButton-button', ButtonProps?.className);
+  const _className = cssJoinDefined('ZWebAppHomeButton-root', className);
+  const _buttonClassName = cssJoinDefined('ZWebAppHomeButton-button', ButtonProps?.className);
 
   const renderAvatar = () => {
-    const className = cssClass('ZWebAppHomeButton-avatar', classes.avatar);
+    const className = cssJoinDefined('ZWebAppHomeButton-avatar', classes.avatar);
 
     if (isStateLoading(who)) {
       return <HourglassEmptyIcon className={className} fontSize='inherit' color='info' />;

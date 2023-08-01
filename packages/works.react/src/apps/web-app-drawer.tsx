@@ -20,8 +20,8 @@ import {
   useNavigate
 } from '@zthun/fashion-boutique';
 import { ZSizeFixed } from '@zthun/fashion-tailor';
+import { cssJoinDefined } from '@zthun/helpful-fn';
 import { isStateErrored, isStateLoaded, isStateLoading } from '@zthun/helpful-react';
-import { cssClass } from '@zthun/works.core';
 import { kebabCase, startCase } from 'lodash';
 import React, { ReactNode } from 'react';
 import { useWindowService } from '../window/window-service';
@@ -73,10 +73,10 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
   const [who] = useWebApp(whoami);
   const { classes } = useWebAppDrawerStyles();
 
-  const _className = cssClass('ZWebAppDrawer-root', className);
-  const _drawerButtonClassName = cssClass('ZWebAppDrawer-button', DrawerButtonProps?.className);
+  const _className = cssJoinDefined('ZWebAppDrawer-root', className);
+  const _drawerButtonClassName = cssJoinDefined('ZWebAppDrawer-button', DrawerButtonProps?.className);
 
-  const cssIconClass = (clasz?: string) => cssClass('ZWebAppDrawer-icon', clasz, classes.icon);
+  const cssIconClass = (clasz?: string) => cssJoinDefined('ZWebAppDrawer-icon', clasz, classes.icon);
 
   const openBlank = (url: string) => win.open(url, '_blank');
   const openSelf = (url: string) => win.open(url, '_self');
@@ -100,7 +100,7 @@ export function ZWebAppDrawer(props: IZWebAppDrawer) {
     type: string
   ) => {
     const key = kebabCase(id);
-    const clasz = cssClass('ZWebAppDrawer-item', `ZWebAppDrawer-item-${type}`);
+    const clasz = cssJoinDefined('ZWebAppDrawer-item', `ZWebAppDrawer-item-${type}`);
 
     return (
       <ZListLineItem

@@ -1,6 +1,6 @@
-/* eslint-disable require-jsdoc */
 import { ZCircusSetupHook } from '@zthun/cirque-du-react';
 import { ZErrorHandler } from '@zthun/works.error';
+import { describe, expect, it } from 'vitest';
 import { useErrorHandler } from './error-handler';
 
 describe('useErrorHandler', () => {

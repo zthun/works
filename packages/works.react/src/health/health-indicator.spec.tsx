@@ -1,16 +1,15 @@
-/* eslint-disable require-jsdoc */
-
 import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
-import { createMocked } from '@zthun/spellcraft-jest';
 import { noop } from 'lodash';
 import React from 'react';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZHealthIndicator } from './health-indicator';
 import { ZHealthIndicatorComponentModel } from './health-indicator.cm';
 import { IZHealthService, ZHealthServiceContext } from './health-service';
 
 describe('ZHealthIndicator', () => {
-  let health: jest.Mocked<IZHealthService>;
+  let health: Mocked<IZHealthService>;
 
   async function createTestTarget() {
     const element = (
@@ -24,7 +23,7 @@ describe('ZHealthIndicator', () => {
   }
 
   beforeEach(() => {
-    health = createMocked(['read']);
+    health = mock();
   });
 
   it('should render a loading indicator if the health is loading.', async () => {

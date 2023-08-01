@@ -1,7 +1,7 @@
-/* eslint-disable require-jsdoc */
 import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import React from 'react';
+import { describe, expect, it } from 'vitest';
 import { ZPopupPage } from './popup-page';
 import { ZPopupPageComponentModel } from './popup-page.cm';
 

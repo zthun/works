@@ -38,6 +38,7 @@
     "@types/nodemailer": "^6.4.7",
     "@types/url-parse": "^1.4.8",
     "@types/uuid": "^9.0.0",
+    "@vitest/coverage-istanbul": "^0.33.0",
     "@zthun/lint-janitor": "^14.2.0",
     "@zthun/lint-janitor-config": "^14.2.0",
     "husky": "^8.0.3",

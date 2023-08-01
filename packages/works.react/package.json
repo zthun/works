@@ -36,6 +36,7 @@
     "@zthun/fashion-boutique": "^0.9.0",
     "@zthun/fashion-tailor": "^0.9.0",
     "@zthun/fashion-theme": "^0.9.0",
+    "@zthun/helpful-fn": "^0.20.1",
     "@zthun/helpful-react": "^0.20.1",
     "@zthun/webigail-http": "^0.1.0",
     "@zthun/webigail-url": "^0.1.0",
@@ -55,6 +56,7 @@
   },
   "devDependencies": {
     "@zthun/cirque-du-react": "^4.3.1",
+    "@zthun/helpful-obligation": "^0.20.1",
     "typedoc": "^0.24.8",
     "typescript": "^5.1.6",
     "vitest": "^0.33.0",

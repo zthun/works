@@ -1,9 +1,10 @@
 import PersonIcon from '@mui/icons-material/Person';
 import { IZButton, ZButton, createStyleHook } from '@zthun/fashion-boutique';
 import { white } from '@zthun/fashion-theme';
+import { cssJoinDefined } from '@zthun/helpful-fn';
 import { isStateLoaded, isStateLoading } from '@zthun/helpful-react';
 import { ZUrlBuilder } from '@zthun/webigail-url';
-import { ZProfileAvatarSize, cssClass } from '@zthun/works.core';
+import { ZProfileAvatarSize } from '@zthun/works.core';
 import md5 from 'md5';
 import React from 'react';
 import { useOptionalWebApp } from '../apps/web-app-service';
@@ -83,7 +84,7 @@ export function ZIdentityButton(props: IZIdentityButtonProps) {
       return <PersonIcon />;
     }
 
-    const clasz = cssClass('ZIdentityButton-avatar', classes.avatar);
+    const clasz = cssJoinDefined('ZIdentityButton-avatar', classes.avatar);
 
     const email = profile.email;
     const avatar = profile.avatar || new ZUrlBuilder().gravatar(email ? md5(email) : '', ZProfileAvatarSize).build();

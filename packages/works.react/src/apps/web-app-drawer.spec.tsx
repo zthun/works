@@ -1,13 +1,14 @@
-import { beforeEach, describe, expect, it } from 'vitest';
-
 import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import { ZTestRouter } from '@zthun/fashion-boutique';
+import { required } from '@zthun/helpful-obligation';
 import { ZUrlBuilder } from '@zthun/webigail-url';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
 import { MemoryHistory, createMemoryHistory } from 'history';
 import { find, startCase } from 'lodash';
 import React from 'react';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZWindowServiceContext } from '../window/window-service';
 import { ZWebAppDrawer } from './web-app-drawer';
 import { ZWebAppDrawerComponentModel } from './web-app-drawer.cm';
@@ -21,8 +22,8 @@ describe('ZWebAppDrawer', () => {
   let whoami: string;
   let home: string | undefined;
 
-  let win: jest.Mocked<typeof globalThis>;
-  let webAppService: jest.Mocked<ZWebAppService>;
+  let win: Mocked<typeof globalThis>;
+  let webAppService: Mocked<ZWebAppService>;
   let history: MemoryHistory;
 
   async function createTestTarget() {
@@ -45,7 +46,7 @@ describe('ZWebAppDrawer', () => {
 
     history = createMemoryHistory();
 
-    win = createMocked(['open']);
+    win = mock();
 
     const gravatar = new ZUrlBuilder().gravatar().build();
 
@@ -74,7 +75,7 @@ describe('ZWebAppDrawer', () => {
 
     whoami = webAppLearn._id;
 
-    webAppService = createMocked(['list', 'read']);
+    webAppService = mock();
     webAppService.list.mockResolvedValue(webApps);
     webAppService.read.mockImplementation((id) => {
       const app = find(webApps, (a) => a._id === id);

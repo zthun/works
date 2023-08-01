@@ -1,12 +1,8 @@
-/**
- * @jest-environment node
- */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable require-jsdoc */
 import { IZLogin, IZProfile, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
 import { compare, hash } from 'bcryptjs';
 import { v4 } from 'uuid';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { ZUsersCollections } from './users.database';
 import { ZUsersService } from './users.service';
 

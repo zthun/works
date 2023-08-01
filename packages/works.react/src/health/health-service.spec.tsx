@@ -1,6 +1,4 @@
-/* eslint-disable require-jsdoc */
 import { ZCircusSetupHook } from '@zthun/cirque-du-react';
-import { createMocked } from '@zthun/spellcraft-jest';
 import {
   ZHttpCodeServer,
   ZHttpCodeSuccess,
@@ -9,6 +7,7 @@ import {
   ZHttpServiceMock
 } from '@zthun/webigail-http';
 import React from 'react';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { IZHealthService, ZHealthService, ZHealthServiceContext, useHealth } from './health-service';
 
 describe('ZHealthService', () => {

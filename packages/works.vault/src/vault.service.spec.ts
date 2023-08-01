@@ -1,9 +1,6 @@
-/**
- * @jest-environment node
- */
-/* eslint-disable require-jsdoc */
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
 import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { ZVaultCollections } from './vault.database';
 import { ZVaultService } from './vault.service';
 

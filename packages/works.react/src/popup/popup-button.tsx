@@ -1,5 +1,5 @@
 import { IZButton, IZComponentHierarchy, IZComponentStyle, ZButton } from '@zthun/fashion-boutique';
-import { cssClass } from '@zthun/works.core';
+import { cssJoinDefined } from '@zthun/helpful-fn';
 import React, { useState } from 'react';
 import { IZPopup, ZPopup, ZPopupPosition } from './popup';
 
@@ -31,7 +31,7 @@ export function ZPopupButton(props: IZPopupButton) {
   const [attach, setAttach] = useState<ZPopupPosition>(null);
 
   return (
-    <div className={cssClass('ZPopupButton-root', className)}>
+    <div className={cssJoinDefined('ZPopupButton-root', className)}>
       <ZButton {...ButtonProps} onClick={(e) => setAttach(e.currentTarget)} />
       <ZPopup {...PopupProps} attach={attach} onClose={setAttach.bind(null, null)}>
         {children}

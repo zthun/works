@@ -1,19 +1,19 @@
-/* eslint-disable require-jsdoc */
-
 import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
-import { createMocked } from '@zthun/spellcraft-jest';
+import { ZTestRouter } from '@zthun/fashion-boutique';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
-import { IZWebAppService, ZTestRouter, ZWebAppServiceContext } from '@zthun/works.react';
-import { createMemoryHistory, MemoryHistory } from 'history';
+import { IZWebAppService, ZWebAppServiceContext } from '@zthun/works.react';
+import { MemoryHistory, createMemoryHistory } from 'history';
 import React from 'react';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZHomePage } from './home-page';
 import { ZHomePageComponentModel } from './home-page.cm';
 
 describe('ZHomePage', () => {
   let learn: IZWebApp;
   let history: MemoryHistory;
-  let webApps: jest.Mocked<IZWebAppService>;
+  let webApps: Mocked<IZWebAppService>;
 
   async function createTestTarget() {
     const element = (
@@ -30,7 +30,7 @@ describe('ZHomePage', () => {
   beforeEach(() => {
     history = createMemoryHistory();
     learn = new ZWebAppBuilder().id('learn').name('Learn').build();
-    webApps = createMocked(['read']);
+    webApps = mock();
     webApps.read.mockResolvedValue(learn);
   });
 

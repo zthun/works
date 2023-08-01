@@ -1,6 +1,6 @@
 import { unset } from 'lodash';
 import { v4 } from 'uuid';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { IZAlert, ZAlertBuilder } from './alert';
 import { ZAlertService } from './alert-service';
 
@@ -17,12 +17,12 @@ describe('ZAlertService', () => {
   }
 
   beforeAll(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   afterAll(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
+    vi.runOnlyPendingTimers();
+    vi.useRealTimers();
   });
 
   afterEach(async () => {
@@ -98,7 +98,7 @@ describe('ZAlertService', () => {
     it('streams in the updated list when an item is created.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = jest.fn();
+      const expected = vi.fn();
       info = await target.create(info);
       error = await target.create(error);
       target.watch().subscribe(expected);
@@ -111,7 +111,7 @@ describe('ZAlertService', () => {
     it('streams in the updated list when an item is removed.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = jest.fn();
+      const expected = vi.fn();
       info = await target.create(info);
       error = await target.create(error);
       target.watch().subscribe(expected);
@@ -124,11 +124,11 @@ describe('ZAlertService', () => {
     it('streams in the updated list when an item is auto removed from the list.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = jest.fn();
+      const expected = vi.fn();
       success = await target.create(success);
       target.watch().subscribe(expected);
       // Assert
-      jest.advanceTimersByTime(success.timeToLive + 1);
+      vi.advanceTimersByTime(success.timeToLive + 1);
       // Assert
       expect(expected).toHaveBeenCalledWith([]);
     });
@@ -136,12 +136,12 @@ describe('ZAlertService', () => {
     it('does not stream in anything if a removal is ignored due to an alert already being removed.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = jest.fn();
+      const expected = vi.fn();
       warn = await target.create(warn);
       await target.remove(warn._id);
       target.watch().subscribe(expected);
       // Assert
-      jest.advanceTimersByTime(5);
+      vi.advanceTimersByTime(5);
       // Assert
       expect(expected).not.toHaveBeenCalled();
     });
@@ -149,7 +149,7 @@ describe('ZAlertService', () => {
     it('streams in the updated list when the alerts are cleared.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = jest.fn();
+      const expected = vi.fn();
       await target.create(warn);
       await target.create(success);
       target.watch().subscribe(expected);
@@ -162,7 +162,7 @@ describe('ZAlertService', () => {
     it('streams in no event if the list is empty when cleared.', async () => {
       // Arrange
       const target = createTestTarget();
-      const expected = jest.fn();
+      const expected = vi.fn();
       target.watch().subscribe(expected);
       // Act
       await target.clear();
@@ -211,7 +211,7 @@ describe('ZAlertService', () => {
       const target = createTestTarget();
       success = await target.create(success);
       // Act
-      jest.advanceTimersByTime(success.timeToLive + 1);
+      vi.advanceTimersByTime(success.timeToLive + 1);
       const actual = await target.all();
       // Assert
       expect(actual).toEqual([]);
@@ -223,7 +223,7 @@ describe('ZAlertService', () => {
       warn = await target.create(warn);
       await target.remove(warn._id);
       // Act
-      jest.advanceTimersByTime(5);
+      vi.advanceTimersByTime(5);
       const actual = await target.all();
       // Assert
       expect(actual).toEqual([]);

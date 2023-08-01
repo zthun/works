@@ -1,6 +1,6 @@
 import { Popover } from '@mui/material';
 import { IZComponentHierarchy, IZComponentStyle } from '@zthun/fashion-boutique';
-import { cssClass } from '@zthun/works.core';
+import { cssJoinDefined } from '@zthun/helpful-fn';
 import React from 'react';
 
 /**
@@ -73,7 +73,7 @@ export function ZPopup(props: IZPopup) {
 
   return (
     <Popover
-      className={cssClass('ZPopup-root', className)}
+      className={cssJoinDefined('ZPopup-root', className)}
       anchorEl={attach}
       open={!!attach}
       onClose={onClose}

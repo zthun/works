@@ -1,6 +1,6 @@
-/* eslint-disable require-jsdoc */
 import { ZHttpMethod, ZHttpResultBuilder, ZHttpServiceMock } from '@zthun/webigail-http';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { ZWebAppService } from './web-app-service';
 
 describe('ZWebAppsService', () => {

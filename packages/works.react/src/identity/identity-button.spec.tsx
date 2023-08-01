@@ -1,11 +1,10 @@
-/* eslint-disable require-jsdoc */
-
 import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
-import { createMocked } from '@zthun/spellcraft-jest';
 import { IZProfile, IZWebApp, ZProfileBuilder, ZWebAppBuilder } from '@zthun/works.core';
 import { noop } from 'lodash';
 import React from 'react';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { IZWebAppService, ZWebAppServiceContext } from '../apps/web-app-service';
 import { ZWindowServiceContext } from '../window/window-service';
 import { ZIdentityButton } from './identity-button';
@@ -14,20 +13,20 @@ import { IZIdentityService, ZIdentityServiceContext } from './identity-service';
 
 describe('ZIdentityButton', () => {
   let profileApp: string | undefined;
-  let identityService: jest.Mocked<IZIdentityService>;
-  let webAppService: jest.Mocked<IZWebAppService>;
-  let win: jest.Mocked<typeof globalThis>;
+  let identityService: Mocked<IZIdentityService>;
+  let webAppService: Mocked<IZWebAppService>;
+  let win: Mocked<typeof globalThis>;
 
   beforeEach(() => {
     profileApp = undefined;
 
-    identityService = createMocked(['read']);
+    identityService = mock();
     identityService.read.mockRejectedValue(new Error('Identity not found'));
 
-    webAppService = createMocked(['read']);
+    webAppService = mock();
     webAppService.read.mockRejectedValue(new Error('App not found'));
 
-    win = createMocked(['open']);
+    win = mock();
   });
 
   async function createTestTarget() {

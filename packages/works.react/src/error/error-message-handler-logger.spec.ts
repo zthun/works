@@ -1,18 +1,17 @@
-/* eslint-disable require-jsdoc */
-
-import { createMocked } from '@zthun/spellcraft-jest';
 import { IZLogger, ZLogLevel } from '@zthun/works.logger';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { ZErrorMessageHandlerLogger } from './error-message-handler-logger';
 
 describe('ZErrorMessageHandlerLogger', () => {
-  let logger: jest.Mocked<IZLogger>;
+  let logger: Mocked<IZLogger>;
 
   function createTestTarget() {
     return new ZErrorMessageHandlerLogger(logger);
   }
 
   beforeEach(() => {
-    logger = createMocked(['log']);
+    logger = mock();
   });
 
   it('should log each message individually to the logger as an error.', async () => {
