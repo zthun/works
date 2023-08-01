@@ -1,11 +1,7 @@
-/**
- * @jest-environment node
- */
-
-/* eslint-disable require-jsdoc */
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { getPortPromise } from 'portfinder';
 import { v4 } from 'uuid';
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { IZDatabaseOptions, ZDatabaseOptionsBuilder } from '../options/database-options';
 import { SortAscending } from '../query/database-query';
 import { ZDatabaseMongo } from './database-mongo';

@@ -1,8 +1,5 @@
-/**
- * @jest-environment node
- */
-/* eslint-disable require-jsdoc */
 import { v4 } from 'uuid';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { IZDatabaseOptions, ZDatabaseOptionsBuilder } from '../options/database-options';
 import { ZDatabaseMemory } from './database-memory';
 
