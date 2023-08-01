@@ -1,12 +1,12 @@
 import PersonIcon from '@mui/icons-material/Person';
+import { IZButton, ZButton, createStyleHook } from '@zthun/fashion-boutique';
+import { white } from '@zthun/fashion-theme';
 import { isStateLoaded, isStateLoading } from '@zthun/helpful-react';
 import { ZUrlBuilder } from '@zthun/webigail-url';
-import { cssClass, ZProfileAvatarSize } from '@zthun/works.core';
+import { ZProfileAvatarSize, cssClass } from '@zthun/works.core';
 import md5 from 'md5';
 import React from 'react';
 import { useOptionalWebApp } from '../apps/web-app-service';
-import { IZButton, ZButton } from '../buttons/button';
-import { makeStyles } from '../theme/make-styles';
 import { useWindowService } from '../window/window-service';
 import { useIdentity } from './identity-service';
 
@@ -27,13 +27,13 @@ export interface IZIdentityButtonProps {
   profileApp?: string | null;
 }
 
-const useIdentityButtonStyles = makeStyles()((theme) => ({
+const useIdentityButtonStyles = createStyleHook(({ tailor }) => ({
   avatar: {
     height: '3rem',
     width: '3rem',
     borderRadius: '50%',
-    border: `${theme.thickness()} solid ${theme.palette.grey[400]}`,
-    background: theme.palette.common.white
+    border: `${tailor.thickness()} solid #eee`,
+    background: white()
   }
 }));
 

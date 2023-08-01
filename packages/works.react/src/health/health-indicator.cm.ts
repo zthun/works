@@ -1,5 +1,5 @@
 import { ZCircusActBuilder, ZCircusComponentModel } from '@zthun/cirque';
-import { ZSuspenseComponentModel } from '../suspense/suspense.cm';
+import { ZSuspenseComponentModel } from '@zthun/fashion-boutique';
 
 export type ZHealthIndicatorState = 'loading' | 'healthy' | 'unhealthy';
 

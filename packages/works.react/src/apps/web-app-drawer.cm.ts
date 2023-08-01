@@ -1,10 +1,12 @@
 import { ZCircusBy, ZCircusComponentModel } from '@zthun/cirque';
+import {
+  ZDrawerButtonComponentModel,
+  ZListComponentModel,
+  ZListLineItemComponentModel,
+  ZSuspenseComponentModel
+} from '@zthun/fashion-boutique';
 import { required } from '@zthun/works.core';
 import { first } from 'lodash';
-import { ZDrawerButtonComponentModel } from '../drawer/drawer-button.cm';
-import { ZListLineItemComponentModel } from '../list/list-line-item.cm';
-import { ZListComponentModel } from '../list/list.cm';
-import { ZSuspenseComponentModel } from '../suspense/suspense.cm';
 
 /**
  * The component model for the ZWebAppDrawer

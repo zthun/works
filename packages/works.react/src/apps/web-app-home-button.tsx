@@ -4,15 +4,20 @@ import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import { ZSizeFixed } from '@zthun/fashion-tailor';
 import { cssClass } from '@zthun/works.core';
 
+import {
+  IZButton,
+  IZComponentStyle,
+  ZButton,
+  ZCaption,
+  ZH1,
+  ZImageSource,
+  createStyleHook,
+  useNavigate
+} from '@zthun/fashion-boutique';
+import { white } from '@zthun/fashion-theme';
 import { asStateData, isStateErrored, isStateLoading } from '@zthun/helpful-react';
 import { startCase } from 'lodash';
 import React from 'react';
-import { IZButton, ZButton } from '../buttons/button';
-import { IZComponentStyle } from '../component/component-style';
-import { ZImageSource } from '../image/image-source';
-import { useNavigate } from '../router/router-dom';
-import { makeStyles } from '../theme/make-styles';
-import { ZCaption, ZH1 } from '../typography/typography';
 import { useWebApp } from './web-app-service';
 
 /**
@@ -35,9 +40,9 @@ export interface IZWebAppHomeButton extends IZComponentStyle {
   ButtonProps?: Omit<IZButton, 'avatar' | 'label' | 'loading' | 'onClick'>;
 }
 
-const useWebAppHomeButtonStyles = makeStyles()((theme) => ({
+const useWebAppHomeButtonStyles = createStyleHook(({ device, tailor }) => ({
   title: {
-    [theme.breakpoints.down('sm')]: {
+    [device.break(ZSizeFixed.Small)]: {
       display: 'none'
     },
     textAlign: 'left'
@@ -46,10 +51,10 @@ const useWebAppHomeButtonStyles = makeStyles()((theme) => ({
   avatar: {
     height: '4rem',
     width: '4rem',
-    marginRight: theme.gap(),
+    marginRight: tailor.gap(),
     borderRadius: '50%',
-    border: `${theme.thickness()} solid ${theme.palette.grey[200]}`,
-    background: theme.palette.common.white,
+    border: `${tailor.thickness()} solid #eee`,
+    background: white(),
 
     svg: {
       height: '5rem',

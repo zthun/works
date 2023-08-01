@@ -1,5 +1,5 @@
 import { ZCircusBy, ZCircusComponentModel } from '@zthun/cirque';
-import { ZButtonComponentModel } from '../buttons/button.cm';
+import { ZButtonComponentModel } from '@zthun/fashion-boutique';
 
 export type ZIdentityButtonState = 'authenticated' | 'unauthenticated' | 'loading';
 

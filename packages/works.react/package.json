@@ -35,6 +35,7 @@
     "@zthun/cirque": "^4.1.0",
     "@zthun/fashion-boutique": "^0.9.0",
     "@zthun/fashion-tailor": "^0.9.0",
+    "@zthun/fashion-theme": "^0.9.0",
     "@zthun/helpful-react": "^0.20.1",
     "@zthun/webigail-http": "^0.1.0",
     "@zthun/webigail-url": "^0.1.0",

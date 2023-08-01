@@ -2,13 +2,13 @@
 
 import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
+import { ZTestRouter } from '@zthun/fashion-boutique';
 import { createMocked } from '@zthun/spellcraft-jest';
 import { ZUrlBuilder } from '@zthun/webigail-url';
 import { IZWebApp, required, ZWebAppBuilder } from '@zthun/works.core';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { find, startCase } from 'lodash';
 import React from 'react';
-import { ZTestRouter } from '../router/router-dom';
 import { ZWindowServiceContext } from '../window/window-service';
 import { ZWebAppDrawer } from './web-app-drawer';
 import { ZWebAppDrawerComponentModel } from './web-app-drawer.cm';

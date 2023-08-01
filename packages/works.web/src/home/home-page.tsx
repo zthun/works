@@ -1,36 +1,36 @@
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import PublicIcon from '@mui/icons-material/Public';
 import Terminal from '@mui/icons-material/Terminal';
-import { ZSizeFixed, ZSizeVaried } from '@zthun/fashion-tailor';
-import { asStateData } from '@zthun/helpful-react';
 import {
   ZButton,
   ZCard,
-  ZGridLayout,
+  ZGrid,
   ZImageSource,
   ZParagraph,
   ZSubtitle,
-  makeStyles,
-  useFashionDesign,
-  useNavigate,
-  useWebApp
-} from '@zthun/works.react';
+  createStyleHook,
+  useFashionTheme,
+  useNavigate
+} from '@zthun/fashion-boutique';
+import { ZSizeFixed, ZSizeVaried } from '@zthun/fashion-tailor';
+import { asStateData } from '@zthun/helpful-react';
+import { useWebApp } from '@zthun/works.react';
 import React from 'react';
-import { ZRouteMicroservices, ZRouteWebApps, fullPath } from '../routes';
+import { ZRouteMicroservices, ZRouteWebApps } from '../routes';
 
-const useHomePageStyles = makeStyles()((theme) => ({
+const useHomePageStyles = createStyleHook(({ tailor }) => ({
   section: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: theme.gap()
+    marginBottom: tailor.gap()
   },
   quote: {
     textAlign: 'center',
-    backgroundColor: theme.palette.grey[200],
-    border: `${theme.thickness()} solid ${theme.palette.grey[400]}`,
-    padding: theme.gap(),
-    marginTop: theme.gap(),
-    marginBottom: theme.gap()
+    backgroundColor: '#eee',
+    border: `${tailor.thickness()} solid #aaa`,
+    padding: tailor.gap(),
+    marginTop: tailor.gap(),
+    marginBottom: tailor.gap()
   }
 }));
 
@@ -44,7 +44,7 @@ export function ZHomePage() {
   const { classes } = useHomePageStyles();
   const navigate = useNavigate();
   const learn = asStateData(_learn);
-  const { primary, secondary } = useFashionDesign();
+  const { primary, secondary } = useFashionTheme();
 
   return (
     <div className='ZHomePage-root'>
@@ -55,9 +55,9 @@ export function ZHomePage() {
         heading='The Works System'
         subHeading='Make development easier'
       >
-        <ZGridLayout justifyContent='center'>
+        <ZGrid justifyContent='center'>
           <ZImageSource src={learn?.icon} height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
-        </ZGridLayout>
+        </ZGrid>
 
         <ZSubtitle className={classes.quote}>Users perform at their best when they have absolute focus.</ZSubtitle>
 
@@ -86,7 +86,7 @@ export function ZHomePage() {
         footer={
           <ZButton
             label='Get Started'
-            onClick={() => navigate(fullPath(ZRouteWebApps))}
+            onClick={() => navigate(ZRouteWebApps.path)}
             fashion={primary}
             name='web-apps-get-started'
             outline
@@ -94,9 +94,9 @@ export function ZHomePage() {
           />
         }
       >
-        <ZGridLayout justifyContent='center'>
+        <ZGrid justifyContent='center'>
           <ZImageSource src='images/svg/react.svg' height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
-        </ZGridLayout>
+        </ZGrid>
 
         <ZSubtitle className={classes.quote}>The smaller the better.</ZSubtitle>
 
@@ -122,7 +122,7 @@ export function ZHomePage() {
         footer={
           <ZButton
             label='Get Started'
-            onClick={() => navigate(fullPath(ZRouteMicroservices))}
+            onClick={() => navigate(ZRouteMicroservices.path)}
             fashion={secondary}
             name='microservices-get-started'
             outline
@@ -130,9 +130,9 @@ export function ZHomePage() {
           />
         }
       >
-        <ZGridLayout justifyContent='center'>
+        <ZGrid justifyContent='center'>
           <ZImageSource src='images/svg/nest.svg' height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
-        </ZGridLayout>
+        </ZGrid>
 
         <ZSubtitle className={classes.quote}>SOLID code is best.</ZSubtitle>
 

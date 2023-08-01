@@ -1,5 +1,6 @@
+import { ZBox, ZCard, ZH3, ZParagraph, useFashionTheme } from '@zthun/fashion-boutique';
 import { ZSizeFixed } from '@zthun/fashion-tailor';
-import { useFashionDesign, ZCard, ZH3, ZPaddedBox, ZParagraph, ZPopupButton } from '@zthun/works.react';
+import { ZPopupButton } from '@zthun/works.react';
 import React, { useMemo } from 'react';
 import { ZRoutePopup } from '../../../routes';
 
@@ -10,7 +11,7 @@ import { ZRoutePopup } from '../../../routes';
  *    The JSX to render the popup demo page.
  */
 export function ZPopupPage() {
-  const { success } = useFashionDesign();
+  const { success } = useFashionTheme();
   const PopupButtonProps = useMemo(() => ({ fashion: success, label: 'Open' }), []);
 
   return (
@@ -30,7 +31,7 @@ export function ZPopupPage() {
       </ZParagraph>
 
       <ZPopupButton ButtonProps={PopupButtonProps}>
-        <ZPaddedBox padding={ZSizeFixed.Large}>You can put anything you want in popup content.</ZPaddedBox>
+        <ZBox padding={ZSizeFixed.Large}>You can put anything you want in popup content.</ZBox>
       </ZPopupButton>
     </ZCard>
   );

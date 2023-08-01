@@ -1,8 +1,6 @@
+import { IZButton, IZComponentHierarchy, IZComponentStyle, ZButton } from '@zthun/fashion-boutique';
 import { cssClass } from '@zthun/works.core';
 import React, { useState } from 'react';
-import { IZButton, ZButton } from '../buttons/button';
-import { IZComponentHierarchy } from '../component/component-hierarchy';
-import { IZComponentStyle } from '../component/component-style';
 import { IZPopup, ZPopup, ZPopupPosition } from './popup';
 
 /**

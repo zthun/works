@@ -6869,6 +6869,7 @@ __metadata:
     "@zthun/cirque-du-react": ^4.1.0
     "@zthun/fashion-boutique": ^0.9.0
     "@zthun/fashion-tailor": ^0.9.0
+    "@zthun/fashion-theme": ^0.9.0
     "@zthun/helpful-react": ^0.20.1
     "@zthun/spellcraft-jest": ^1.0.4
     "@zthun/webigail-http": ^0.1.0
@@ -6944,7 +6945,10 @@ __metadata:
     "@zthun/cirque": ^4.1.0
     "@zthun/cirque-du-react": ^4.1.0
     "@zthun/cirque-du-selenium": ^4.1.0
+    "@zthun/fashion-boutique": ^0.9.0
     "@zthun/fashion-tailor": ^0.9.0
+    "@zthun/fashion-theme": ^0.9.0
+    "@zthun/helpful-fn": ^0.20.1
     "@zthun/helpful-react": ^0.20.1
     "@zthun/spellcraft-jest": ^1.0.4
     "@zthun/webigail-url": ^0.1.0

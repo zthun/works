@@ -1,26 +1,27 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReportIcon from '@mui/icons-material/Report';
 import { Button } from '@mui/material';
+import { ZSuspenseRotate, createStyleHook } from '@zthun/fashion-boutique';
+import { white } from '@zthun/fashion-theme';
 import React from 'react';
 import { CSSObject } from 'tss-react';
-import { ZSuspenseRotate } from '../suspense/suspense-rotate';
-import { makeStyles } from '../theme/make-styles';
 import { useHealth } from './health-service';
 
-const useHealthIndicatorStyles = makeStyles()((theme) => {
+const useHealthIndicatorStyles = createStyleHook(({ theme }) => {
+  const { success, error } = theme;
   const icon: CSSObject = {
-    backgroundColor: theme.palette.common.white,
+    backgroundColor: white(),
     borderRadius: '50%'
   };
 
   return {
     ok: {
       ...icon,
-      color: theme.palette.success.light
+      color: success.main
     },
     warn: {
       ...icon,
-      color: theme.palette.error.light
+      color: error.main
     }
   };
 });

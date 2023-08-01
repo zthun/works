@@ -1,5 +1,5 @@
 import { ZCircusBy, ZCircusComponentModel } from '@zthun/cirque';
-import { ZButtonComponentModel } from '../buttons/button.cm';
+import { ZButtonComponentModel } from '@zthun/fashion-boutique';
 
 /**
  * Represents the component model for the ZWebAppHomeButton.
