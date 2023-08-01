@@ -33,6 +33,7 @@
     "@mui/material": "^5.11.3",
     "@mui/system": "^5.11.2",
     "@zthun/cirque": "^4.1.0",
+    "@zthun/helpful-react": "^0.20.1",
     "@zthun/webigail-http": "^0.1.0",
     "@zthun/webigail-url": "^0.1.0",
     "@zthun/works.chonkify": "^4.0.0",

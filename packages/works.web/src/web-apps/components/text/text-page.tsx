@@ -2,7 +2,6 @@ import FlagIcon from '@mui/icons-material/Flag';
 import SearchIcon from '@mui/icons-material/Search';
 import { ZSizeFixed } from '@zthun/works.chonkify';
 import {
-  useSafeState,
   ZBooleanSwitch,
   ZCaption,
   ZCard,
@@ -15,7 +14,7 @@ import {
   ZTextType
 } from '@zthun/works.react';
 import { ZTextArea } from '@zthun/works.react/src';
-import React from 'react';
+import React, { useState } from 'react';
 import { ZRouteText } from '../../../routes';
 
 /**
@@ -24,11 +23,11 @@ import { ZRouteText } from '../../../routes';
  * @returns The JSX to render the text demo page.
  */
 export function ZTextPage() {
-  const [disabled, setDisabled] = useSafeState(false);
-  const [readOnly, setReadOnly] = useSafeState(false);
-  const [required, setRequired] = useSafeState(false);
-  const [adornments, setAdornments] = useSafeState(false);
-  const [value, setValue] = useSafeState('');
+  const [disabled, setDisabled] = useState(false);
+  const [readOnly, setReadOnly] = useState(false);
+  const [required, setRequired] = useState(false);
+  const [adornments, setAdornments] = useState(false);
+  const [value, setValue] = useState('');
 
   return (
     <ZCard

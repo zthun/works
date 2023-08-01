@@ -6084,6 +6084,42 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@zthun/helpful-fn@npm:^0.20.1":
+  version: 0.20.1
+  resolution: "@zthun/helpful-fn@npm:0.20.1"
+  checksum: 3fbf61a2e28538664937ccd5d651c4deab801c4f8723a33c12b458dda56943e57e8c09711bfc542ec06c9849fc2a78ceecf4a5e2a0d1b68bd667f126a69a73d4
+  languageName: node
+  linkType: hard
+
+"@zthun/helpful-query@npm:^0.20.1":
+  version: 0.20.1
+  resolution: "@zthun/helpful-query@npm:0.20.1"
+  dependencies:
+    "@zthun/helpful-fn": ^0.20.1
+    lodash: ^4.17.21
+  checksum: 9a401b79f267f2cad5eca343e0f4af2ca18098762ef4a046eaf71bb9c9bdce48eb434f0d693e513f5495e4d4c700757c90b32f6807c09d431decaa1090bc42c9
+  languageName: node
+  linkType: hard
+
+"@zthun/helpful-react@npm:^0.20.1":
+  version: 0.20.1
+  resolution: "@zthun/helpful-react@npm:0.20.1"
+  dependencies:
+    "@zthun/helpful-fn": ^0.20.1
+    "@zthun/helpful-query": ^0.20.1
+    lodash: ^4.17.21
+    rxjs: ^7.8.1
+  peerDependencies:
+    react: ^18.1.0
+    react-dom: ^18.1.0
+    rxjs: ^7.8.1
+  peerDependenciesMeta:
+    rxjs:
+      optional: true
+  checksum: bacbd85a22dff75cb1751d515979c5214a94b5847a59684b5c02b3e0bc689028bdc381d8b1fd83cb2e82754de679e52b90909f0ee88a6547bdde907a8613b17a
+  languageName: node
+  linkType: hard
+
 "@zthun/htmlhint-config@npm:^13.0.1":
   version: 13.0.1
   resolution: "@zthun/htmlhint-config@npm:13.0.1"
@@ -6443,6 +6479,7 @@ __metadata:
     "@testing-library/react": ^13.4.0
     "@zthun/cirque": ^4.1.0
     "@zthun/cirque-du-react": ^4.1.0
+    "@zthun/helpful-react": ^0.20.1
     "@zthun/spellcraft-jest": ^1.0.4
     "@zthun/webigail-http": ^0.1.0
     "@zthun/webigail-url": ^0.1.0
@@ -6518,6 +6555,7 @@ __metadata:
     "@zthun/cirque": ^4.1.0
     "@zthun/cirque-du-react": ^4.1.0
     "@zthun/cirque-du-selenium": ^4.1.0
+    "@zthun/helpful-react": ^0.20.1
     "@zthun/spellcraft-jest": ^1.0.4
     "@zthun/webigail-url": ^0.1.0
     "@zthun/works.chonkify": ^4.0.0
@@ -16977,6 +17015,15 @@ __metadata:
   dependencies:
     tslib: ^2.1.0
   checksum: 61b4d4fd323c1043d8d6ceb91f24183b28bcf5def4f01ca111511d5c6b66755bc5578587fe714ef5d67cf4c9f2e26f4490d4e1d8cabf9bd5967687835e9866a2
+  languageName: node
+  linkType: hard
+
+"rxjs@npm:^7.8.1":
+  version: 7.8.1
+  resolution: "rxjs@npm:7.8.1"
+  dependencies:
+    tslib: ^2.1.0
+  checksum: de4b53db1063e618ec2eca0f7965d9137cabe98cf6be9272efe6c86b47c17b987383df8574861bcced18ebd590764125a901d5506082be84a8b8e364bf05f119
   languageName: node
   linkType: hard
 

@@ -1,7 +1,6 @@
 import { ZSizeFixed } from '@zthun/works.chonkify';
 import { setFirstOrDefault } from '@zthun/works.core';
 import {
-  useSafeState,
   ZBooleanSwitch,
   ZCard,
   ZChoiceDropDown,
@@ -12,7 +11,7 @@ import {
   ZSuspenseRotate
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
-import React from 'react';
+import React, { useState } from 'react';
 import { ZRouteSuspense } from '../../../routes';
 
 /**
@@ -22,8 +21,8 @@ import { ZRouteSuspense } from '../../../routes';
  *        The JSX to render the suspense page.
  */
 export function ZSuspensePage() {
-  const [width, setWidth] = useSafeState<ZSizeFixed>(ZSizeFixed.ExtraSmall);
-  const [loading, setLoading] = useSafeState<boolean>(true);
+  const [width, setWidth] = useState<ZSizeFixed>(ZSizeFixed.ExtraSmall);
+  const [loading, setLoading] = useState<boolean>(true);
   const sizes = values(ZSizeFixed);
   const _setWidth = setFirstOrDefault.bind(null, setWidth, ZSizeFixed.ExtraSmall);
 

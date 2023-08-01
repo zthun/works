@@ -1,11 +1,11 @@
 import { ZCircusKeyboardQwerty } from '@zthun/cirque';
+import { useAmbassadorState } from '@zthun/helpful-react';
 import { ZSizeFixed } from '@zthun/works.chonkify';
 import { cssClass } from '@zthun/works.core';
 import { colorify, IZFashion, ZFashionBuilder, ZHue, ZShade, ZShades } from '@zthun/works.fashion';
 import React, { KeyboardEvent, MouseEvent, useMemo } from 'react';
 import { IZComponentStyle } from '../component/component-style';
 import { IZComponentValue } from '../component/component-value';
-import { useAmbassadorState } from '../state/use-ambassador-state';
 import { makeStyles } from '../theme/make-styles';
 import { useFashionDesign } from './fashion';
 

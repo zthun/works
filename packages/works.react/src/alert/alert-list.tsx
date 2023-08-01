@@ -1,7 +1,6 @@
 import { Alert, AlertTitle } from '@mui/material';
 import { IZAlert } from '@zthun/works.message';
-import React, { useEffect } from 'react';
-import { useSafeState } from '../state/use-safe-state';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '../theme/make-styles';
 import { useAlertService } from './alert-service';
 
@@ -23,7 +22,7 @@ const useAlertStyles = makeStyles()((theme) => ({
  * @returns The jsx for the alert stack.
  */
 export function ZAlertList() {
-  const [alerts, setAlerts] = useSafeState<IZAlert[]>([]);
+  const [alerts, setAlerts] = useState<IZAlert[]>([]);
   const service = useAlertService();
   const styles = useAlertStyles();
 

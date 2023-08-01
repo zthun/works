@@ -1,6 +1,6 @@
 import { stringify, ZFashionBuilder } from '@zthun/works.fashion';
-import { useSafeState, ZCaption, ZCard, ZFashionGrid, ZH3, ZParagraph } from '@zthun/works.react';
-import React from 'react';
+import { ZCaption, ZCard, ZFashionGrid, ZH3, ZParagraph } from '@zthun/works.react';
+import React, { useState } from 'react';
 import { ZRouteFashion } from '../../../routes';
 
 /**
@@ -10,7 +10,7 @@ import { ZRouteFashion } from '../../../routes';
  *    The JSX to render the fashion demo page.
  */
 export function ZFashionPage() {
-  const [fashion, setFashion] = useSafeState(new ZFashionBuilder().build());
+  const [fashion, setFashion] = useState(new ZFashionBuilder().build());
 
   return (
     <ZCard

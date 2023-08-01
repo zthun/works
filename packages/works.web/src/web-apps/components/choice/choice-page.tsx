@@ -2,7 +2,6 @@ import BalanceIcon from '@mui/icons-material/Balance';
 import { ZSizeFixed } from '@zthun/works.chonkify';
 
 import {
-  useSafeState,
   ZBooleanSwitch,
   ZCaption,
   ZCard,
@@ -14,7 +13,7 @@ import {
   ZPaddedBox,
   ZParagraph
 } from '@zthun/works.react';
-import React from 'react';
+import React, { useState } from 'react';
 import { ZRouteChoice } from '../../../routes';
 
 interface Superhero {
@@ -38,10 +37,10 @@ const Superheroes: Superhero[] = [
  * @returns The JSX to render the alerts demo page.
  */
 export function ZChoicePage() {
-  const [values, setValues] = useSafeState([Superheroes[2].id]);
-  const [disabled, setDisabled] = useSafeState(false);
-  const [multiple, setMultiple] = useSafeState(false);
-  const [indelible, setIndelible] = useSafeState(false);
+  const [values, setValues] = useState([Superheroes[2].id]);
+  const [disabled, setDisabled] = useState(false);
+  const [multiple, setMultiple] = useState(false);
+  const [indelible, setIndelible] = useState(false);
 
   /**
    * Renders the selected items.

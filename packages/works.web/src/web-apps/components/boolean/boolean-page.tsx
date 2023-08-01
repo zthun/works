@@ -4,7 +4,6 @@ import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox
 import { ZSizeFixed } from '@zthun/works.chonkify';
 import {
   useFashionDesign,
-  useSafeState,
   ZBooleanCheckbox,
   ZBooleanSwitch,
   ZButton,
@@ -16,7 +15,7 @@ import {
   ZParagraph,
   ZToolbarLayout
 } from '@zthun/works.react';
-import React from 'react';
+import React, { useState } from 'react';
 import { ZRouteBoolean } from '../../../routes';
 
 /**
@@ -25,8 +24,8 @@ import { ZRouteBoolean } from '../../../routes';
  * @returns The JSX to render the alerts demo page.
  */
 export function ZBooleanPage() {
-  const [disabled, setDisabled] = useSafeState(false);
-  const [value, setValue] = useSafeState<boolean | null>(false);
+  const [disabled, setDisabled] = useState(false);
+  const [value, setValue] = useState<boolean | null>(false);
   const { success, error, warning } = useFashionDesign();
 
   return (

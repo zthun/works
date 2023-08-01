@@ -1,7 +1,7 @@
 import { Checkbox, FormControlLabel } from '@mui/material';
+import { useAmbassadorState } from '@zthun/helpful-react';
 import { cssClass } from '@zthun/works.core';
 import React from 'react';
-import { useAmbassadorState } from '../state/use-ambassador-state';
 import { IZBoolean } from './boolean';
 
 /**

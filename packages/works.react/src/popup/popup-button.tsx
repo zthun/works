@@ -1,9 +1,8 @@
 import { cssClass } from '@zthun/works.core';
-import React from 'react';
+import React, { useState } from 'react';
 import { IZButton, ZButton } from '../buttons/button';
 import { IZComponentHierarchy } from '../component/component-hierarchy';
 import { IZComponentStyle } from '../component/component-style';
-import { useSafeState } from '../state/use-safe-state';
 import { IZPopup, ZPopup, ZPopupPosition } from './popup';
 
 /**
@@ -31,7 +30,7 @@ export interface IZPopupButton extends IZComponentHierarchy, IZComponentStyle {
  */
 export function ZPopupButton(props: IZPopupButton) {
   const { ButtonProps, PopupProps, children, className } = props;
-  const [attach, setAttach] = useSafeState<ZPopupPosition>(null);
+  const [attach, setAttach] = useState<ZPopupPosition>(null);
 
   return (
     <div className={cssClass('ZPopupButton-root', className)}>

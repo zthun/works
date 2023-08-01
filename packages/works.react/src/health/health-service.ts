@@ -1,7 +1,6 @@
 import { IZHttpService, ZHttpRequestBuilder, ZHttpService } from '@zthun/webigail-http';
 import { ZUrlBuilder } from '@zthun/webigail-url';
-import { createContext, useContext, useEffect } from 'react';
-import { useSafeState } from '../state/use-safe-state';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 /**
  * Represents a service that can retrieve the health information for an api.
@@ -69,7 +68,7 @@ export const useHealthService = () => useContext(ZHealthServiceContext);
  *          Returns undefined if the health check is loading.
  */
 export function useHealth(): [boolean | null | undefined, () => Promise<void>] {
-  const [health, setHealth] = useSafeState<boolean | null | undefined>(undefined);
+  const [health, setHealth] = useState<boolean | null | undefined>(undefined);
   const service = useHealthService();
 
   /**

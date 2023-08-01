@@ -1,16 +1,7 @@
 import { ZSizeFixed } from '@zthun/works.chonkify';
 
-import {
-  useSafeState,
-  ZCaption,
-  ZCard,
-  ZGridLayout,
-  ZH3,
-  ZNumberInput,
-  ZPaddedBox,
-  ZParagraph
-} from '@zthun/works.react';
-import React from 'react';
+import { ZCaption, ZCard, ZGridLayout, ZH3, ZNumberInput, ZPaddedBox, ZParagraph } from '@zthun/works.react';
+import React, { useState } from 'react';
 import { ZRouteNumber } from '../../../routes';
 
 /**
@@ -20,7 +11,7 @@ import { ZRouteNumber } from '../../../routes';
  *        The JSX to render the number page.
  */
 export function ZNumberPage() {
-  const [value, setValue] = useSafeState<number | null>(1);
+  const [value, setValue] = useState<number | null>(1);
 
   return (
     <ZCard

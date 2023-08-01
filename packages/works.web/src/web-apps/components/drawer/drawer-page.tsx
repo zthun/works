@@ -3,7 +3,6 @@ import { ZSizeFixed } from '@zthun/works.chonkify';
 import { setFirstOrDefault } from '@zthun/works.core';
 import {
   useFashionDesign,
-  useSafeState,
   ZButton,
   ZCard,
   ZChoiceDropDown,
@@ -15,7 +14,7 @@ import {
   ZStateAnchor
 } from '@zthun/works.react';
 import { identity, startCase, values } from 'lodash';
-import React from 'react';
+import React, { useState } from 'react';
 import { ZRouteDrawer } from '../../../routes';
 
 /**
@@ -24,9 +23,9 @@ import { ZRouteDrawer } from '../../../routes';
  * @returns The JSX to render the page.
  */
 export function ZDrawerPage() {
-  const [anchor, setAnchor] = useSafeState<ZStateAnchor>(ZStateAnchor.Left);
+  const [anchor, setAnchor] = useState<ZStateAnchor>(ZStateAnchor.Left);
   const { primary, success } = useFashionDesign();
-  const [timestamp, setTimestamp] = useSafeState(new Date().getTime());
+  const [timestamp, setTimestamp] = useState(new Date().getTime());
   const anchors = values(ZStateAnchor);
 
   const now = () => setTimestamp(new Date().getTime());

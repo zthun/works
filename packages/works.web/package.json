@@ -30,7 +30,9 @@
     "@zthun/cirque": "^4.1.0",
     "@zthun/cirque-du-react": "^4.1.0",
     "@zthun/cirque-du-selenium": "^4.1.0",
+    "@zthun/helpful-react": "^0.20.1",
     "@zthun/spellcraft-jest": "^1.0.4",
+    "@zthun/webigail-url": "^0.1.0",
     "@zthun/works.chonkify": "^4.0.0",
     "@zthun/works.core": "^4.0.0",
     "@zthun/works.draw": "^4.0.0",
@@ -56,8 +58,5 @@
     "webpack-dev-server": "^4.11.1"
   },
   "sideEffects": false,
-  "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2",
-  "dependencies": {
-    "@zthun/webigail-url": "^0.1.0"
-  }
+  "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
 }

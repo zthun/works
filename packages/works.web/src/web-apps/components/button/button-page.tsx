@@ -6,7 +6,6 @@ import { ZAlertBuilder } from '@zthun/works.message';
 import {
   useAlertService,
   useFashionDesign,
-  useSafeState,
   ZBooleanSwitch,
   ZButton,
   ZCard,
@@ -18,7 +17,7 @@ import {
   ZToolbarLayout
 } from '@zthun/works.react';
 import { identity } from 'lodash';
-import React from 'react';
+import React, { useState } from 'react';
 import { ZRouteButton } from '../../../routes';
 
 /**
@@ -29,11 +28,11 @@ import { ZRouteButton } from '../../../routes';
 export function ZButtonPage() {
   const alerts = useAlertService();
   const theme = useFashionDesign();
-  const [loading, setLoading] = useSafeState(false);
-  const [disabled, setDisabled] = useSafeState(false);
-  const [outline, setOutline] = useSafeState(false);
-  const [borderless, setBorderless] = useSafeState(false);
-  const [fashion, setFashion] = useSafeState<IZFashionCoordination>(theme.primary);
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [outline, setOutline] = useState(false);
+  const [borderless, setBorderless] = useState(false);
+  const [fashion, setFashion] = useState<IZFashionCoordination>(theme.primary);
   const _setFashion = setFirstOrDefault.bind(null, setFashion, theme.primary);
   const designs = [
     theme.primary,

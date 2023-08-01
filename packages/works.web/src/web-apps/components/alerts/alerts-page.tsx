@@ -5,19 +5,18 @@ import WarningIcon from '@mui/icons-material/Warning';
 import { ZSizeFixed } from '@zthun/works.chonkify';
 import { ZAlertBuilder, ZAlertSeverity } from '@zthun/works.message';
 import {
-  useAlertService,
-  useFashionDesign,
-  useSafeState,
   ZBooleanSwitch,
   ZButton,
   ZCard,
   ZGridLayout,
   ZH3,
   ZPaddedBox,
-  ZParagraph
+  ZParagraph,
+  useAlertService,
+  useFashionDesign
 } from '@zthun/works.react';
 import { startCase } from 'lodash';
-import React from 'react';
+import React, { useState } from 'react';
 import { ZRouteAlerts } from '../../../routes';
 
 /**
@@ -26,9 +25,9 @@ import { ZRouteAlerts } from '../../../routes';
  * @returns The JSX to render the alerts demo page.
  */
 export function ZAlertsPage() {
-  const [header, setHeader] = useSafeState(false);
+  const [header, setHeader] = useState(false);
   const { success, warning, error, info } = useFashionDesign();
-  const [immortal, setImmortal] = useSafeState(false);
+  const [immortal, setImmortal] = useState(false);
   const service = useAlertService();
 
   /**
