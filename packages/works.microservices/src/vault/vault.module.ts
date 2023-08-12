@@ -2,7 +2,7 @@
 
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { sleep } from '@zthun/works.core';
+import { sleep } from '@zthun/helpful-fn';
 import { ZLogEntryBuilder, ZLoggerConsole } from '@zthun/works.logger';
 import { ZVaultClient } from './vault.client';
 
