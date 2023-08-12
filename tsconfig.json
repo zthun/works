@@ -6,7 +6,6 @@
     "paths": {
       "@zthun/works.class": ["works.class/src/index"],
       "@zthun/works.core": ["works.core/src/index"],
-      "@zthun/works.dal": ["works.dal/src/index"],
       "@zthun/works.draw": ["works.draw/src/index"],
       "@zthun/works.error": ["works.error/src/index"],
       "@zthun/works.fashion": ["works.fashion/src/index"],

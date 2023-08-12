@@ -33,7 +33,6 @@
     "@zthun/dalmart-mongo": "^0.1.0",
     "@zthun/helpful-query": "^0.20.1",
     "@zthun/works.core": "^4.0.0",
-    "@zthun/works.dal": "^4.0.0",
     "bcryptjs": "^2.4.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
