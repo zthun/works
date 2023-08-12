@@ -4819,10 +4819,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zthun/helpful-obligation@npm:^0.20.1":
-  version: 0.20.1
-  resolution: "@zthun/helpful-obligation@npm:0.20.1"
-  checksum: a20f81812c7386e09174872bea00da54df2ad83543db535f38c668dde3c261574131e05c6bbfb4a844e9510b68d24358789614e2144549f27be384721e3b88af
+"@zthun/helpful-fn@npm:^0.21.1":
+  version: 0.21.1
+  resolution: "@zthun/helpful-fn@npm:0.21.1"
+  checksum: ad4c0b5d7776d546af4317457c19cc632de339395512aa2fda9cf54ca92bacf2ae77ef2e77431c9cf7921a2207b92f333103cda6da28be0d2e7e81f29cc8fe4f
+  languageName: node
+  linkType: hard
+
+"@zthun/helpful-obligation@npm:^0.21.1":
+  version: 0.21.1
+  resolution: "@zthun/helpful-obligation@npm:0.21.1"
+  checksum: 52525a1465a31b3078e22054617bb6e3e526187545f2bca71efed69fb2c7f2bb432586eed822fe2c1169ee3a5a286267d67052be3b70166b793aa95ee55d24f9
   languageName: node
   linkType: hard
 
@@ -4833,6 +4840,16 @@ __metadata:
     "@zthun/helpful-fn": ^0.20.1
     lodash: ^4.17.21
   checksum: 9a401b79f267f2cad5eca343e0f4af2ca18098762ef4a046eaf71bb9c9bdce48eb434f0d693e513f5495e4d4c700757c90b32f6807c09d431decaa1090bc42c9
+  languageName: node
+  linkType: hard
+
+"@zthun/helpful-query@npm:^0.21.1":
+  version: 0.21.1
+  resolution: "@zthun/helpful-query@npm:0.21.1"
+  dependencies:
+    "@zthun/helpful-fn": ^0.21.1
+    lodash: ^4.17.21
+  checksum: 4fa15820089b0d71b71838f57bd20edd7ebf7d20a54e0db3b0af74f80646c5e5c35a36ff53720b98008bc0492fff73c39625f72319935d7209594b7d389669b6
   languageName: node
   linkType: hard
 
@@ -4852,6 +4869,25 @@ __metadata:
     rxjs:
       optional: true
   checksum: bacbd85a22dff75cb1751d515979c5214a94b5847a59684b5c02b3e0bc689028bdc381d8b1fd83cb2e82754de679e52b90909f0ee88a6547bdde907a8613b17a
+  languageName: node
+  linkType: hard
+
+"@zthun/helpful-react@npm:^0.21.1":
+  version: 0.21.1
+  resolution: "@zthun/helpful-react@npm:0.21.1"
+  dependencies:
+    "@zthun/helpful-fn": ^0.21.1
+    "@zthun/helpful-query": ^0.21.1
+    lodash: ^4.17.21
+    rxjs: ^7.8.1
+  peerDependencies:
+    react: ^18.1.0
+    react-dom: ^18.1.0
+    rxjs: ^7.8.1
+  peerDependenciesMeta:
+    rxjs:
+      optional: true
+  checksum: edfe603eef006f381f06671b6a6a4d3f8c431e7fda3786b707619d3fd1448b46e7342971efcf21361dbfce851dcb01cf1e46953448cb208b023d64cc38e91d68
   languageName: node
   linkType: hard
 
@@ -5091,7 +5127,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.microservices@workspace:packages/works.microservices"
   dependencies:
-    "@zthun/helpful-fn": ^0.20.1
+    "@zthun/helpful-fn": ^0.21.1
     "@zthun/works.core": ^4.0.0
     "@zthun/works.logger": ^4.0.0
     lodash: ^4.17.21
@@ -5111,7 +5147,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.nest@workspace:packages/works.nest"
   dependencies:
-    "@zthun/helpful-obligation": ^0.20.1
+    "@zthun/helpful-obligation": ^0.21.1
     "@zthun/webigail-http": ^0.1.0
     "@zthun/webigail-url": ^0.1.0
     "@zthun/works.class": ^4.0.0
@@ -5179,9 +5215,9 @@ __metadata:
     "@zthun/fashion-boutique": ^0.9.1
     "@zthun/fashion-tailor": ^0.9.1
     "@zthun/fashion-theme": ^0.9.1
-    "@zthun/helpful-fn": ^0.20.1
-    "@zthun/helpful-obligation": ^0.20.1
-    "@zthun/helpful-react": ^0.20.1
+    "@zthun/helpful-fn": ^0.21.1
+    "@zthun/helpful-obligation": ^0.21.1
+    "@zthun/helpful-react": ^0.21.1
     "@zthun/webigail-http": ^0.1.0
     "@zthun/webigail-url": ^0.1.0
     "@zthun/works.core": ^4.0.0
@@ -5216,7 +5252,7 @@ __metadata:
     "@zthun/dalmart-db": ^0.1.0
     "@zthun/dalmart-memory": ^0.1.2
     "@zthun/dalmart-mongo": ^0.1.0
-    "@zthun/helpful-query": ^0.20.1
+    "@zthun/helpful-query": ^0.21.1
     "@zthun/works.core": ^4.0.0
     bcryptjs: ^2.4.3
     nodemon: ^3.0.1
@@ -5241,7 +5277,7 @@ __metadata:
     "@zthun/dalmart-db": ^0.1.0
     "@zthun/dalmart-memory": ^0.1.2
     "@zthun/dalmart-mongo": ^0.1.0
-    "@zthun/helpful-query": ^0.20.1
+    "@zthun/helpful-query": ^0.21.1
     "@zthun/works.core": ^4.0.0
     nodemon: ^3.0.1
     reflect-metadata: ^0.1.13
@@ -5267,8 +5303,8 @@ __metadata:
     "@zthun/fashion-boutique": ^0.9.1
     "@zthun/fashion-tailor": ^0.9.1
     "@zthun/fashion-theme": ^0.9.1
-    "@zthun/helpful-fn": ^0.20.1
-    "@zthun/helpful-react": ^0.20.1
+    "@zthun/helpful-fn": ^0.21.1
+    "@zthun/helpful-react": ^0.21.1
     "@zthun/webigail-url": ^0.1.0
     "@zthun/works.core": ^4.0.0
     "@zthun/works.draw": ^4.0.0

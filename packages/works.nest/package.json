@@ -27,7 +27,7 @@
     "docs/**"
   ],
   "dependencies": {
-    "@zthun/helpful-obligation": "^0.20.1",
+    "@zthun/helpful-obligation": "^0.21.1",
     "@zthun/webigail-http": "^0.1.0",
     "@zthun/webigail-url": "^0.1.0",
     "@zthun/works.class": "^4.0.0",

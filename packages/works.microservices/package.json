@@ -27,7 +27,7 @@
     "docs/**"
   ],
   "dependencies": {
-    "@zthun/helpful-fn": "^0.20.1",
+    "@zthun/helpful-fn": "^0.21.1",
     "@zthun/works.core": "^4.0.0",
     "@zthun/works.logger": "^4.0.0",
     "lodash": "^4.17.21",
