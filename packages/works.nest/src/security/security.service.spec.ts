@@ -1,4 +1,5 @@
-import { IZCookie, IZUser, ZCookieBuilder, ZUserBuilder } from '@zthun/works.core';
+import { IZCookie, ZCookieBuilder } from '@zthun/helpful-internet';
+import { IZUser, ZUserBuilder } from '@zthun/works.core';
 import { ZCookiesClient, ZUsersClient, ZVaultClient, ZVaultMemoryClient } from '@zthun/works.microservices';
 import { Request } from 'express';
 import { v4 } from 'uuid';

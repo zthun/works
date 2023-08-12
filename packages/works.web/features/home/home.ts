@@ -2,14 +2,13 @@ import { Given, Then, When } from '@cucumber/cucumber';
 import assert from 'assert';
 import { ZHomePageComponentModel } from '../../src/home/home-page.cm';
 import { ZMicroservicesPageComponentModel } from '../../src/microservices/microservices-page.cm';
-import { fullPath, ZRouteHome } from '../../src/routes';
-import { ZWebAppsPageComponentModel } from '../../src/web-apps/web-apps-page.cm';
+import { ZRouteHome } from '../../src/routes';
 import { ZLearnWorld } from '../learn-world';
 
 type CardGetStarted = 'webApps' | 'microservices';
 
 Given('I navigate to the home page', async function (this: ZLearnWorld<ZHomePageComponentModel>) {
-  await this.open(fullPath(ZRouteHome));
+  await this.open(ZRouteHome.path);
   this.parameters.page = await this.create(ZHomePageComponentModel);
 });
 
@@ -19,14 +18,6 @@ When(
     const { page } = this.parameters;
     const button = await page[section]();
     await button.click();
-  }
-);
-
-Then(
-  'I am navigated to the Web Apps page from the home page',
-  async function (this: ZLearnWorld<ZHomePageComponentModel>) {
-    const webApps = await this.create(ZWebAppsPageComponentModel);
-    assert.ok(webApps);
   }
 );
 

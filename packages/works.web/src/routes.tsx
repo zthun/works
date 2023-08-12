@@ -1,4 +1,3 @@
-import CelebrationIcon from '@mui/icons-material/Celebration';
 import { ZImageSource } from '@zthun/fashion-boutique';
 import { ZSizeFixed } from '@zthun/fashion-tailor';
 
@@ -23,12 +22,3 @@ export const ZRouteWebApps = new ZRouteOptionBuilder()
   .description('Build Something For Users')
   .avatar(<ZImageSource src='images/svg/react.svg' height={ZSizeFixed.Medium} width={ZSizeFixed.Medium} />)
   .build();
-
-export const ZRoutePopup = new ZRouteOptionBuilder()
-  .name('Popup')
-  .path('popup')
-  .description('Pop content in and out')
-  .avatar(<CelebrationIcon fontSize='large' />)
-  .build();
-
-export const ZRouteAllComponents = [ZRoutePopup];

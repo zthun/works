@@ -7,7 +7,8 @@ import {
   ZHttpServiceMock
 } from '@zthun/webigail-http';
 import React from 'react';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { mock } from 'vitest-mock-extended';
 import { IZHealthService, ZHealthService, ZHealthServiceContext, useHealth } from './health-service';
 
 describe('ZHealthService', () => {
@@ -51,7 +52,7 @@ describe('ZHealthService', () => {
 });
 
 describe('useHealth', () => {
-  let health: jest.Mocked<IZHealthService>;
+  let health: Mocked<IZHealthService>;
 
   async function createTestTarget() {
     const wrapper = ({ children }) => (
@@ -61,7 +62,7 @@ describe('useHealth', () => {
   }
 
   beforeEach(() => {
-    health = createMocked(['read']);
+    health = mock<IZHealthService>();
     health.read.mockResolvedValue(true);
   });
 

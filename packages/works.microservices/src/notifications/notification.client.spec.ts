@@ -1,5 +1,5 @@
 import { ClientProxy } from '@nestjs/microservices';
-import { ZEmailBuilder, ZServerBuilder } from '@zthun/works.core';
+import { ZEmailBuilder, ZServerBuilder } from '@zthun/helpful-internet';
 import { of } from 'rxjs';
 import { Mocked, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mock } from 'vitest-mock-extended';

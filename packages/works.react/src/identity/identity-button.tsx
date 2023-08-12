@@ -2,13 +2,12 @@ import PersonIcon from '@mui/icons-material/Person';
 import { IZButton, ZButton, createStyleHook } from '@zthun/fashion-boutique';
 import { white } from '@zthun/fashion-theme';
 import { cssJoinDefined } from '@zthun/helpful-fn';
-import { isStateLoaded, isStateLoading } from '@zthun/helpful-react';
+import { isStateLoaded, isStateLoading, useWindowService } from '@zthun/helpful-react';
 import { ZUrlBuilder } from '@zthun/webigail-url';
 import { ZProfileAvatarSize } from '@zthun/works.core';
 import md5 from 'md5';
 import React from 'react';
 import { useOptionalWebApp } from '../apps/web-app-service';
-import { useWindowService } from '../window/window-service';
 import { useIdentity } from './identity-service';
 
 /**

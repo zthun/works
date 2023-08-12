@@ -28,11 +28,3 @@ export { ZHealthIndicatorComponentModel } from './health/health-indicator.cm';
 export { IZIdentityButtonProps, ZIdentityButton } from './identity/identity-button';
 export { ZIdentityButtonComponentModel } from './identity/identity-button.cm';
 export { IZIdentityService, ZIdentityService, useIdentity, useIdentityService } from './identity/identity-service';
-
-// Popup
-export { IZPopup, IZPopupAnchorOrigin, ZPopup, ZPopupPosition } from './popup/popup';
-export { IZPopupButton, ZPopupButton } from './popup/popup-button';
-export { ZPopupButtonComponentModel } from './popup/popup-button.cm';
-export { ZPopupComponentModel } from './popup/popup.cm';
-// Window
-export { ZWindowServiceContext, useWindowService } from './window/window-service';

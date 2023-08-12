@@ -21,10 +21,9 @@ import {
 } from '@zthun/fashion-boutique';
 import { ZSizeFixed } from '@zthun/fashion-tailor';
 import { cssJoinDefined } from '@zthun/helpful-fn';
-import { isStateErrored, isStateLoaded, isStateLoading } from '@zthun/helpful-react';
+import { isStateErrored, isStateLoaded, isStateLoading, useWindowService } from '@zthun/helpful-react';
 import { kebabCase, startCase } from 'lodash';
 import React, { ReactNode } from 'react';
-import { useWindowService } from '../window/window-service';
 import { useWebApp, useWebApps } from './web-app-service';
 
 export interface IZWebAppDrawer extends IZComponentStyle {

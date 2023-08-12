@@ -1,12 +1,12 @@
 import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
+import { ZWindowServiceContext } from '@zthun/helpful-react';
 import { IZProfile, IZWebApp, ZProfileBuilder, ZWebAppBuilder } from '@zthun/works.core';
 import { noop } from 'lodash';
 import React from 'react';
 import { Mocked, beforeEach, describe, expect, it } from 'vitest';
 import { mock } from 'vitest-mock-extended';
 import { IZWebAppService, ZWebAppServiceContext } from '../apps/web-app-service';
-import { ZWindowServiceContext } from '../window/window-service';
 import { ZIdentityButton } from './identity-button';
 import { ZIdentityButtonComponentModel } from './identity-button.cm';
 import { IZIdentityService, ZIdentityServiceContext } from './identity-service';
