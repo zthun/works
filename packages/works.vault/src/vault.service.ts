@@ -1,7 +1,8 @@
 import { Controller, Inject } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
+import { IZDatabaseDocument } from '@zthun/dalmart-db';
+import { ZDataRequestBuilder, ZFilterBinaryBuilder, ZFilterLogicBuilder } from '@zthun/helpful-query';
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
-import { IZDatabase } from '@zthun/works.dal';
 import { ZVaultCollections, ZVaultDatabase } from './vault.database';
 
 @Controller()
@@ -12,15 +13,15 @@ export class ZVaultService {
   /**
    * Initializes a new instance of this object.
    *
-   * @param _dal
+   * @param _dal -
    *        The data access layer used to communicate with the vault database.
    */
-  public constructor(@Inject(ZVaultDatabase.Token) private readonly _dal: IZDatabase) {}
+  public constructor(@Inject(ZVaultDatabase.Token) private readonly _dal: IZDatabaseDocument) {}
 
   /**
    * Reads a configuration item by scope and key.
    *
-   * @param payload
+   * @param payload -
    *        The data payload that contains the scope and key.
    *
    * @returns
@@ -29,7 +30,11 @@ export class ZVaultService {
    */
   @MessagePattern({ cmd: 'read' })
   public async read<T>({ scope, key }: { scope: string; key: string }): Promise<IZConfigEntry<T>> {
-    const [existing] = await this._dal.read<IZConfigEntry<T>>(ZVaultCollections.Configs).filter({ scope, key }).run();
+    const scopeFilter = new ZFilterBinaryBuilder().subject('scope').equal().value(scope).build();
+    const keyFilter = new ZFilterBinaryBuilder().subject('key').equal().value(key).build();
+    const filter = new ZFilterLogicBuilder().and().clause(scopeFilter).clause(keyFilter).build();
+    const request = new ZDataRequestBuilder().filter(filter).build();
+    const [existing] = await this._dal.read<IZConfigEntry<T>>(ZVaultCollections.Configs, request);
     return existing;
   }
 
@@ -39,7 +44,7 @@ export class ZVaultService {
    * If no config with the given scope and key exists, then the
    * configuration is added with the default value.
    *
-   * @param entry
+   * @param entry -
    *        The current configuration to read.  If the scope and key of the config exists,
    *        then the existing config entity is returned, otherwise, the config value is added.
    *
@@ -54,7 +59,6 @@ export class ZVaultService {
       config = new ZConfigEntryBuilder(entry.value).copy(entry).build();
       [config] = await this._dal
         .create(ZVaultCollections.Configs, [config])
-        .run()
         .catch(() => Promise.all([this.read<T>(entry)]));
     }
 
@@ -67,7 +71,7 @@ export class ZVaultService {
    * Be careful with multiple calls going through all at the same time.
    * This method is a last one in wins system.
    *
-   * @param param0
+   * @param param0 -
    *        The configuration entry to add or update.
    *
    * @returns
@@ -75,11 +79,11 @@ export class ZVaultService {
    */
   @MessagePattern({ cmd: 'put' })
   public async put<T>({ entry }: { entry: IZConfigEntry<T> }): Promise<IZConfigEntry<T>> {
+    const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(entry._id).build();
     const items = [entry];
     const config = await this._dal
       .create<IZConfigEntry<T>>(ZVaultCollections.Configs, items)
-      .run()
-      .catch(() => this._dal.update<IZConfigEntry>(ZVaultCollections.Configs, entry).filter({ _id: entry._id }).run())
+      .catch(() => this._dal.update<IZConfigEntry>(ZVaultCollections.Configs, entry, filter))
       .then(() => this.read<T>(entry));
 
     return config;

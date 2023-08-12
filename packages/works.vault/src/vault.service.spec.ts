@@ -1,12 +1,13 @@
+import { IZDatabaseDocument, ZDatabaseOptionsBuilder } from '@zthun/dalmart-db';
+import { IZDatabaseServer, ZDatabaseServerDocument } from '@zthun/dalmart-memory';
 import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
-import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { ZVaultCollections } from './vault.database';
 import { ZVaultService } from './vault.service';
 
 describe('ZVaultService', () => {
-  let mongo: ZDatabaseMemory;
-  let dal: IZDatabase;
+  let mongo: IZDatabaseServer<IZDatabaseDocument>;
+  let dal: IZDatabaseDocument;
   let configA: IZConfigEntry;
   let configB: IZConfigEntry;
 
@@ -15,24 +16,24 @@ describe('ZVaultService', () => {
   }
 
   beforeAll(async () => {
-    mongo = await ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('vault-service-test').build());
-    await mongo.start();
-    dal = mongo;
+    const options = new ZDatabaseOptionsBuilder().database('vault-service-test').build();
+    mongo = new ZDatabaseServerDocument();
+    dal = await mongo.start(options);
   });
 
   afterAll(async () => {
-    await mongo.kill();
+    await mongo.stop();
   });
 
   beforeEach(async () => {
     configA = new ZConfigEntryBuilder('zthunworks.com').scope('common').key('domain').build();
     configB = new ZConfigEntryBuilder(null).scope('authentication.secrets').key('jwt').generate().build();
 
-    [configA, configB] = await dal.create(ZVaultCollections.Configs, [configA, configB]).run();
+    [configA, configB] = await dal.create(ZVaultCollections.Configs, [configA, configB]);
   });
 
   afterEach(async () => {
-    await dal.delete(ZVaultCollections.Configs).run();
+    await dal.delete(ZVaultCollections.Configs);
   });
 
   describe('Get', () => {
