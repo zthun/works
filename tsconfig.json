@@ -8,7 +8,6 @@
       "@zthun/works.core": ["works.core/src/index"],
       "@zthun/works.draw": ["works.draw/src/index"],
       "@zthun/works.error": ["works.error/src/index"],
-      "@zthun/works.fashion": ["works.fashion/src/index"],
       "@zthun/works.logger": ["works.logger/src/index"],
       "@zthun/works.message": ["works.message/src/index"],
       "@zthun/works.microservices": ["works.microservices/src/index"],

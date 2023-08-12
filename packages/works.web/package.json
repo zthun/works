@@ -36,7 +36,6 @@
     "@zthun/webigail-url": "^0.1.0",
     "@zthun/works.core": "^4.0.0",
     "@zthun/works.draw": "^4.0.0",
-    "@zthun/works.fashion": "^4.0.0",
     "@zthun/works.message": "^4.0.0",
     "@zthun/works.react": "^4.0.0",
     "favicons": "^7.1.4",

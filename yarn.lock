@@ -5062,17 +5062,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.fashion@^4.0.0, @zthun/works.fashion@workspace:packages/works.fashion":
-  version: 0.0.0-use.local
-  resolution: "@zthun/works.fashion@workspace:packages/works.fashion"
-  dependencies:
-    lodash: ^4.17.21
-    typedoc: ^0.24.8
-    typescript: ^5.1.6
-    vitest: ^0.34.1
-  languageName: unknown
-  linkType: soft
-
 "@zthun/works.logger@^4.0.0, @zthun/works.logger@workspace:packages/works.logger":
   version: 0.0.0-use.local
   resolution: "@zthun/works.logger@workspace:packages/works.logger"
@@ -5198,7 +5187,6 @@ __metadata:
     "@zthun/works.core": ^4.0.0
     "@zthun/works.draw": ^4.0.0
     "@zthun/works.error": ^4.0.0
-    "@zthun/works.fashion": ^4.0.0
     "@zthun/works.logger": ^4.0.0
     "@zthun/works.message": ^4.0.0
     csstype: ^3.1.2
@@ -5284,7 +5272,6 @@ __metadata:
     "@zthun/webigail-url": ^0.1.0
     "@zthun/works.core": ^4.0.0
     "@zthun/works.draw": ^4.0.0
-    "@zthun/works.fashion": ^4.0.0
     "@zthun/works.message": ^4.0.0
     "@zthun/works.react": ^4.0.0
     favicons: ^7.1.4
