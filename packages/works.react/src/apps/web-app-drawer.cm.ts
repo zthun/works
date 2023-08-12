@@ -5,7 +5,7 @@ import {
   ZListLineItemComponentModel,
   ZSuspenseComponentModel
 } from '@zthun/fashion-boutique';
-import { required } from '@zthun/works.core';
+import { required } from '@zthun/helpful-obligation';
 import { first } from 'lodash';
 
 /**
