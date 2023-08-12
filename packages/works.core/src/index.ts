@@ -2,8 +2,6 @@
 
 // App
 export { IZWebApp, ZWebAppBuilder } from './app/web-app';
-// Assert
-export { ZAssert } from './assert/assert';
 // Config
 export { IZConfigEntry, ZConfigEntryBuilder } from './configs/config-entry';
 // Cookie
