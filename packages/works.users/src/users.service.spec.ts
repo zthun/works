@@ -1,5 +1,7 @@
+import { IZDatabaseDocument, ZDatabaseOptionsBuilder } from '@zthun/dalmart-db';
+import { IZDatabaseServer, ZDatabaseServerDocument } from '@zthun/dalmart-memory';
+import { ZDataRequestBuilder, ZFilterBinaryBuilder } from '@zthun/helpful-query';
 import { IZLogin, IZProfile, IZUser, ZLoginBuilder, ZUserBuilder } from '@zthun/works.core';
-import { IZDatabase, ZDatabaseMemory, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
 import { compare, hash } from 'bcryptjs';
 import { v4 } from 'uuid';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
@@ -7,21 +9,21 @@ import { ZUsersCollections } from './users.database';
 import { ZUsersService } from './users.service';
 
 describe('ZUsersService', () => {
-  let mongo: ZDatabaseMemory;
-  let dal: IZDatabase;
+  let mongo: IZDatabaseServer<IZDatabaseDocument>;
+  let dal: IZDatabaseDocument;
   let userA: IZUser;
   let userB: IZUser;
   let loginA: IZLogin;
   let loginB: IZLogin;
 
   beforeAll(async () => {
-    mongo = await ZDatabaseMemory.connect(new ZDatabaseOptionsBuilder().database('user-service-test').build());
-    await mongo.start();
-    dal = mongo;
+    const options = new ZDatabaseOptionsBuilder().database('user-service-test').build();
+    mongo = new ZDatabaseServerDocument();
+    dal = await mongo.start(options);
   });
 
   afterAll(async () => {
-    await mongo.kill();
+    await mongo.stop();
   });
 
   beforeEach(async () => {
@@ -36,7 +38,7 @@ describe('ZUsersService', () => {
   });
 
   afterEach(async () => {
-    await dal.delete(ZUsersCollections.Users).run();
+    await dal.delete(ZUsersCollections.Users);
   });
 
   function createTestTarget() {
@@ -45,7 +47,7 @@ describe('ZUsersService', () => {
 
   describe('Create', () => {
     beforeEach(async () => {
-      [userB] = await dal.create(ZUsersCollections.Users, [userB]).run();
+      [userB] = await dal.create(ZUsersCollections.Users, [userB]);
     });
 
     it('creates a user.', async () => {
@@ -53,7 +55,9 @@ describe('ZUsersService', () => {
       const target = createTestTarget();
       // Act
       const created = await target.create({ login: loginA });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(created._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       // Assert
       expect(actual._id).toBeTruthy();
       expect(actual.email).toEqual(loginA.email);
@@ -62,10 +66,12 @@ describe('ZUsersService', () => {
     it('creates the super user if the new user is the first in the system.', async () => {
       // Arrange
       const target = createTestTarget();
-      await dal.delete(ZUsersCollections.Users).run();
+      await dal.delete(ZUsersCollections.Users);
       // Act
       const created = await target.create({ login: loginA });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(created._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       // Assert
       expect(actual.super).toBeTruthy();
     });
@@ -73,10 +79,12 @@ describe('ZUsersService', () => {
     it('always sets the super user to active without having to have them activate their account.', async () => {
       // Arrange
       const target = createTestTarget();
-      await dal.delete(ZUsersCollections.Users).run();
+      await dal.delete(ZUsersCollections.Users);
       // Act
       const created = await target.create({ login: loginA });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(created._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       // Assert
       expect(actual.activator).toBeFalsy();
     });
@@ -86,7 +94,9 @@ describe('ZUsersService', () => {
       const target = createTestTarget();
       // Act
       const created = await target.create({ login: loginA });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(created._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       // Assert
       expect(actual.super).toBeFalsy();
     });
@@ -96,7 +106,9 @@ describe('ZUsersService', () => {
       const target = createTestTarget();
       // Act
       const created = await target.create({ login: loginA });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(created._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       // Assert
       expect(actual.activator).toBeTruthy();
     });
@@ -106,7 +118,9 @@ describe('ZUsersService', () => {
       const target = createTestTarget();
       // Act
       const created = await target.create({ login: loginA });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: created._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(created._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       const same = await compare(loginA.password, actual.password);
       // Assert
       expect(same).toBeTruthy();
@@ -115,7 +129,7 @@ describe('ZUsersService', () => {
 
   describe('Find', () => {
     beforeEach(async () => {
-      [userA, userB] = await dal.create(ZUsersCollections.Users, [userA, userB]).run();
+      [userA, userB] = await dal.create(ZUsersCollections.Users, [userA, userB]);
     });
 
     it('finds a user by id.', async () => {
@@ -157,7 +171,7 @@ describe('ZUsersService', () => {
 
   describe('Update', () => {
     beforeEach(async () => {
-      [userA, userB] = await dal.create<IZUser>(ZUsersCollections.Users, [userA, userB]).run();
+      [userA, userB] = await dal.create<IZUser>(ZUsersCollections.Users, [userA, userB]);
     });
 
     it('updates the user email.', async () => {
@@ -167,7 +181,9 @@ describe('ZUsersService', () => {
       const profile: IZProfile = { email: expected };
       // Act
       await target.update({ id: userA._id, profile });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(userA._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       // Assert
       expect(actual.email).toEqual(expected);
     });
@@ -178,7 +194,9 @@ describe('ZUsersService', () => {
       const profile: IZProfile = { email: 'gambit@marvel.com' };
       // Act
       await target.update({ id: userA._id, profile });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(userA._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       // Assert
       expect(actual.activator).toBeTruthy();
     });
@@ -189,7 +207,9 @@ describe('ZUsersService', () => {
       const profile: IZProfile = { password: 'super-password', confirm: 'super-password' };
       // Act
       await target.update({ id: userA._id, profile });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(userA._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       const same = await compare(profile.password!, actual.password);
       // Assert
       expect(same).toBeTruthy();
@@ -202,7 +222,9 @@ describe('ZUsersService', () => {
       // Act
       await target.recover({ email: userA.email });
       await target.update({ id: userA._id, profile });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(userA._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       // Assert
       expect(actual.recovery).toBeFalsy();
     });
@@ -214,7 +236,9 @@ describe('ZUsersService', () => {
       const profile: IZProfile = { display: expected };
       // Act
       await target.update({ id: userA._id, profile });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(userA._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       // Assert
       expect(actual.display).toEqual(expected);
     });
@@ -226,7 +250,9 @@ describe('ZUsersService', () => {
       const profile: IZProfile = { avatar: expected };
       // Act
       await target.update({ id: userA._id, profile });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(userA._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       // Assert
       expect(actual.avatar).toEqual(expected);
     });
@@ -236,7 +262,9 @@ describe('ZUsersService', () => {
       const target = createTestTarget();
       // Act
       await target.update({ id: userA._id, profile: {} });
-      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(userA._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [actual] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       // Assert
       expect(actual.password).toEqual(userA.password);
     });
@@ -244,7 +272,7 @@ describe('ZUsersService', () => {
     it('activates the user.', async () => {
       // Arrange
       let userC = new ZUserBuilder().email('c@gmail.com').password('whatever').inactive(v4()).build();
-      [userC] = await dal.create<IZUser>(ZUsersCollections.Users, [userC]).run();
+      [userC] = await dal.create<IZUser>(ZUsersCollections.Users, [userC]);
       const target = createTestTarget();
       // Act
       const actual = await target.activate({ user: userC });
@@ -265,7 +293,7 @@ describe('ZUsersService', () => {
 
   describe('Delete', () => {
     beforeEach(async () => {
-      [userA, userB] = await dal.create(ZUsersCollections.Users, [userA, userB]).run();
+      [userA, userB] = await dal.create(ZUsersCollections.Users, [userA, userB]);
     });
 
     it('deletes the user.', async () => {
@@ -273,7 +301,9 @@ describe('ZUsersService', () => {
       const target = createTestTarget();
       // Act
       await target.remove({ id: userA._id });
-      const blobs = await dal.read(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(userA._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const blobs = await dal.read(ZUsersCollections.Users, request);
       // Assert
       expect(blobs.length).toEqual(0);
     });
@@ -281,7 +311,7 @@ describe('ZUsersService', () => {
 
   describe('Authenticate', () => {
     beforeEach(async () => {
-      [userA] = await dal.create(ZUsersCollections.Users, [userA]).run();
+      [userA] = await dal.create(ZUsersCollections.Users, [userA]);
     });
 
     it('returns false if no such user exists.', async () => {
@@ -332,7 +362,8 @@ describe('ZUsersService', () => {
       const pwd = await target.recover({ email: userA.email });
       const user = await target.find({ _id: userA._id });
       user!.recovery!.exp = new Date().getTime();
-      await dal.update(ZUsersCollections.Users, user!).filter({ _id: user!._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(user!._id).build();
+      await dal.update(ZUsersCollections.Users, user!, filter);
       const login = new ZLoginBuilder().copy(loginA).password(pwd!).build();
       // Act
       const actual = await target.compare({ credentials: login });
@@ -354,7 +385,7 @@ describe('ZUsersService', () => {
 
   describe('Login', () => {
     beforeEach(async () => {
-      [userA] = await dal.create(ZUsersCollections.Users, [userA]).run();
+      [userA] = await dal.create(ZUsersCollections.Users, [userA]);
     });
 
     it('should return null if no such user exists.', async () => {
@@ -378,7 +409,7 @@ describe('ZUsersService', () => {
 
   describe('Recover', () => {
     beforeEach(async () => {
-      [userA] = await dal.create(ZUsersCollections.Users, [userA]).run();
+      [userA] = await dal.create(ZUsersCollections.Users, [userA]);
     });
 
     it('returns null if the user email does not exist.', async () => {
@@ -404,7 +435,9 @@ describe('ZUsersService', () => {
       const target = createTestTarget();
       // Act
       const generated = await target.recover({ email: userA.email });
-      const [user] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(userA._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [user] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       const actual = await compare(generated as string, user.recovery?.password as string);
       // Assert
       expect(actual).toBeTruthy();
@@ -416,7 +449,9 @@ describe('ZUsersService', () => {
       // Act
       await target.recover({ email: userA.email });
       await target.login({ id: userA._id });
-      const [user] = await dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: userA._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(userA._id).build();
+      const request = new ZDataRequestBuilder().filter(filter).build();
+      const [user] = await dal.read<IZUser>(ZUsersCollections.Users, request);
       const actual = user.recovery;
       // Assert
       expect(actual).toBeFalsy();

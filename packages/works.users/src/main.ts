@@ -2,7 +2,8 @@
 import { Module } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
-import { ZDatabaseMongo, ZDatabaseOptionsBuilder } from '@zthun/works.dal';
+import { ZDatabaseOptionsBuilder } from '@zthun/dalmart-db';
+import { ZDatabaseMongo } from '@zthun/dalmart-mongo';
 import { env } from 'process';
 import { ZUsersDatabase } from './users.database';
 import { ZUsersService } from './users.service';
@@ -14,7 +15,7 @@ import { ZUsersService } from './users.service';
   providers: [
     {
       provide: ZUsersDatabase.Token,
-      useValue: ZDatabaseMongo.connect(
+      useValue: new ZDatabaseMongo(
         new ZDatabaseOptionsBuilder()
           .database(ZUsersDatabase.Name)
           .url(env.DATABASE_URL || 'database.zthunworks.com')

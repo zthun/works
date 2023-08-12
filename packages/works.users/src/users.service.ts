@@ -1,7 +1,8 @@
 import { Controller, Inject } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
+import { IZDatabaseDocument } from '@zthun/dalmart-db';
+import { ZDataRequestBuilder, ZFilterBinaryBuilder, ZFilterLogicBuilder } from '@zthun/helpful-query';
 import { IZLogin, IZProfile, IZUser, ZUserBuilder } from '@zthun/works.core';
-import { IZDatabase } from '@zthun/works.dal';
 import { compare, hash } from 'bcryptjs';
 import { v4 } from 'uuid';
 import { ZUsersCollections, ZUsersDatabase } from './users.database';
@@ -21,7 +22,7 @@ export class ZUsersService {
    *
    * @param _dal The data access layer.
    */
-  public constructor(@Inject(ZUsersDatabase.Token) private readonly _dal: IZDatabase) {}
+  public constructor(@Inject(ZUsersDatabase.Token) private readonly _dal: IZDatabaseDocument) {}
 
   /**
    * Gets a specific user by their id or email.
@@ -38,7 +39,19 @@ export class ZUsersService {
       return null;
     }
 
-    const [user] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter(filter).run();
+    let _filter = new ZFilterLogicBuilder().and();
+
+    if (filter._id) {
+      _filter = _filter.clause(new ZFilterBinaryBuilder().subject('_id').equal().value(filter._id).build());
+    }
+
+    if (filter.email) {
+      _filter = _filter.clause(new ZFilterBinaryBuilder().subject('email').equal().value(filter.email).build());
+    }
+
+    const request = new ZDataRequestBuilder().filter(_filter.build()).build();
+
+    const [user] = await this._dal.read<IZUser>(ZUsersCollections.Users, request);
     return user || null;
   }
 
@@ -51,14 +64,14 @@ export class ZUsersService {
    */
   @MessagePattern({ cmd: 'create' })
   public async create({ login }: { login: IZLogin }): Promise<IZUser> {
-    const total = await this._dal.count(ZUsersCollections.Users).run();
+    const total = await this._dal.count(ZUsersCollections.Users);
     const password = await hash(login.password, ZUsersService.BcryptRounds);
     const builder = new ZUserBuilder().email(login.email).password(password);
 
     // This just generates a random key of some length up to 120ish
     const activator = v4();
     const create = total === 0 ? builder.super().active().build() : builder.inactive(activator).build();
-    const [created] = await this._dal.create(ZUsersCollections.Users, [create]).run();
+    const [created] = await this._dal.create(ZUsersCollections.Users, [create]);
     return created;
   }
 
@@ -98,8 +111,10 @@ export class ZUsersService {
       return await this.find({ _id: id });
     }
 
-    await this._dal.update<IZUser>(ZUsersCollections.Users, template).filter({ _id: id }).run();
-    const [updated] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: id }).run();
+    const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(id).build();
+    const request = new ZDataRequestBuilder().filter(filter).build();
+    await this._dal.update<IZUser>(ZUsersCollections.Users, template, filter);
+    const [updated] = await this._dal.read<IZUser>(ZUsersCollections.Users, request);
 
     return updated;
   }
@@ -115,8 +130,11 @@ export class ZUsersService {
   public async activate({ user }: { user: IZUser }): Promise<IZUser> {
     const copy = new ZUserBuilder().copy(user).build();
     copy.activator = null;
-    await this._dal.update<IZUser>(ZUsersCollections.Users, copy).filter({ _id: copy._id }).run();
-    const [updated] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: copy._id }).run();
+
+    const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(copy._id).build();
+    const request = new ZDataRequestBuilder().filter(filter).build();
+    await this._dal.update<IZUser>(ZUsersCollections.Users, copy, filter);
+    const [updated] = await this._dal.read<IZUser>(ZUsersCollections.Users, request);
     return updated;
   }
 
@@ -133,8 +151,11 @@ export class ZUsersService {
   @MessagePattern({ cmd: 'deactivate' })
   public async deactivate({ user }: { user: IZUser }): Promise<IZUser> {
     const copy = new ZUserBuilder().copy(user).inactive(v4()).build();
-    await this._dal.update<IZUser>(ZUsersCollections.Users, copy).filter({ _id: copy._id }).run();
-    const [updated] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: copy._id }).run();
+
+    const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(copy._id).build();
+    const request = new ZDataRequestBuilder().filter(filter).build();
+    await this._dal.update<IZUser>(ZUsersCollections.Users, copy, filter);
+    const [updated] = await this._dal.read<IZUser>(ZUsersCollections.Users, request);
     return updated;
   }
 
@@ -153,7 +174,8 @@ export class ZUsersService {
       const generated = this._password();
       const crypt = await hash(generated, ZUsersService.BcryptRounds);
       const updated = new ZUserBuilder().copy(current).recover(crypt).build();
-      await this._dal.update<IZUser>(ZUsersCollections.Users, updated).filter({ _id: updated._id }).run();
+      const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(updated._id).build();
+      await this._dal.update<IZUser>(ZUsersCollections.Users, updated, filter);
       return generated;
     }
 
@@ -177,7 +199,8 @@ export class ZUsersService {
     }
 
     const updated = new ZUserBuilder().copy(current).login().build();
-    await this._dal.update<IZUser>(ZUsersCollections.Users, updated).filter({ _id: updated._id }).run();
+    const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(updated._id).build();
+    await this._dal.update<IZUser>(ZUsersCollections.Users, updated, filter);
     return updated;
   }
 
@@ -212,8 +235,10 @@ export class ZUsersService {
    */
   @MessagePattern({ cmd: 'remove' })
   public async remove({ id }: { id: string }): Promise<IZUser> {
-    const [user] = await this._dal.read<IZUser>(ZUsersCollections.Users).filter({ _id: id }).run();
-    await this._dal.delete(ZUsersCollections.Users).filter({ _id: id }).run();
+    const filter = new ZFilterBinaryBuilder().subject('_id').equal().value(id).build();
+    const request = new ZDataRequestBuilder().filter(filter).build();
+    const [user] = await this._dal.read<IZUser>(ZUsersCollections.Users, request);
+    await this._dal.delete(ZUsersCollections.Users, filter);
     return user;
   }
 
