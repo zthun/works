@@ -64,7 +64,7 @@ describe('ZIdentityButton', () => {
   describe('Loading', () => {
     it('should show the spinner.', async () => {
       // Arrange
-      identityService.read.mockResolvedValue(new Promise(noop));
+      identityService.read.mockReturnValue(new Promise<IZProfile>(noop));
       const target = await createTestTarget();
       // Act
       const actual = await (await target.button()).loading();

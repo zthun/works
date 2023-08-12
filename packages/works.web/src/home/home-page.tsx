@@ -1,5 +1,4 @@
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
-import PublicIcon from '@mui/icons-material/Public';
 import Terminal from '@mui/icons-material/Terminal';
 import {
   ZButton,
@@ -16,7 +15,7 @@ import { ZSizeFixed, ZSizeVaried } from '@zthun/fashion-tailor';
 import { asStateData } from '@zthun/helpful-react';
 import { useWebApp } from '@zthun/works.react';
 import React from 'react';
-import { ZRouteMicroservices, ZRouteWebApps } from '../routes';
+import { ZRouteMicroservices } from '../routes';
 
 const useHomePageStyles = createStyleHook(({ tailor }) => ({
   section: {
@@ -44,7 +43,7 @@ export function ZHomePage() {
   const { classes } = useHomePageStyles();
   const navigate = useNavigate();
   const learn = asStateData(_learn);
-  const { primary, secondary } = useFashionTheme();
+  const { secondary } = useFashionTheme();
 
   return (
     <div className='ZHomePage-root'>
@@ -74,42 +73,6 @@ export function ZHomePage() {
           The works system is built around this philosophy, in that users do their best when they are focused on just a
           single task at a time. Thus, the works system builds tiny subsystems and components to help create a suite of
           applications to do everyday things.
-        </ZParagraph>
-      </ZCard>
-
-      <ZCard
-        className={classes.section}
-        width={ZSizeFixed.Large}
-        avatar={<PublicIcon fontSize='inherit' />}
-        heading={ZRouteWebApps.name}
-        subHeading={ZRouteWebApps.description}
-        footer={
-          <ZButton
-            label='Get Started'
-            onClick={() => navigate(ZRouteWebApps.path)}
-            fashion={primary}
-            name='web-apps-get-started'
-            outline
-            width={ZSizeVaried.Full}
-          />
-        }
-      >
-        <ZGrid justifyContent='center'>
-          <ZImageSource src='images/svg/react.svg' height={ZSizeFixed.ExtraLarge} width={ZSizeFixed.ExtraLarge} />
-        </ZGrid>
-
-        <ZSubtitle className={classes.quote}>The smaller the better.</ZSubtitle>
-
-        <ZParagraph>
-          Web Apps are the front line for users to perform everyday tasks. Zthunworks uses React as its framework of
-          choice. React has a lot of community support, is easy to setup, and it integrates well with other libraries.
-        </ZParagraph>
-
-        <ZParagraph>
-          Web Apps should be small and portable and should do one thing and one thing well. Similar to how microservices
-          operate, a tiny app is easier to maintain and a working application should minimize regressions between
-          versions. The larger the application, the more likely that regressions will be found, so by having apps that
-          are small and focused, you can minimize human error while providing features in a fast feedback loop.
         </ZParagraph>
       </ZCard>
 
