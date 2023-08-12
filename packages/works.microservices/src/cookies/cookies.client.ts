@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { IZCookie, IZUser } from '@zthun/works.core';
+import { IZCookie } from '@zthun/helpful-internet';
+import { IZUser } from '@zthun/works.core';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable()

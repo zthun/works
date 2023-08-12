@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { IZUser, ZCookieBuilder } from '@zthun/works.core';
+import { ZCookieBuilder } from '@zthun/helpful-internet';
+import { IZUser } from '@zthun/works.core';
 import { ZCookiesClient, ZUsersClient, ZVaultClient } from '@zthun/works.microservices';
 import { Request } from 'express';
 import { get } from 'lodash';

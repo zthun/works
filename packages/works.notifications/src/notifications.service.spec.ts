@@ -5,7 +5,7 @@ import {
   ZEmailBuilder,
   ZEmailEnvelopeBuilder,
   ZServerBuilder
-} from '@zthun/works.core';
+} from '@zthun/helpful-internet';
 import { first } from 'lodash';
 import { createTransport } from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';

@@ -1,7 +1,7 @@
 import { Controller, ServiceUnavailableException } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { IZEmail, IZServer, ZEmailContactAddressBuilder } from '@zthun/works.core';
-import { createTransport, SendMailOptions } from 'nodemailer';
+import { IZEmail, IZServer, ZEmailContactAddressBuilder } from '@zthun/helpful-internet';
+import { SendMailOptions, createTransport } from 'nodemailer';
 
 @Controller()
 /**

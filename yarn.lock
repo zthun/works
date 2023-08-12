@@ -4826,6 +4826,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@zthun/helpful-internet@npm:^0.21.1":
+  version: 0.21.1
+  resolution: "@zthun/helpful-internet@npm:0.21.1"
+  checksum: 23a93bbf3d821544f0e467d2c5f2a64d73549b432d9056def65e5ec60568bf5c3d3f5eec903a054a67f6f92688d3429b6f1505538bc0929f573f658cfba2a2a7
+  languageName: node
+  linkType: hard
+
 "@zthun/helpful-obligation@npm:^0.21.1":
   version: 0.21.1
   resolution: "@zthun/helpful-obligation@npm:0.21.1"
@@ -5049,6 +5056,7 @@ __metadata:
     "@nestjs/common": ^10.1.3
     "@nestjs/core": ^10.1.3
     "@nestjs/microservices": ^10.1.3
+    "@zthun/helpful-internet": ^0.21.1
     "@zthun/works.core": ^4.0.0
     jsonwebtoken: ^9.0.1
     nodemon: ^3.0.1
@@ -5128,6 +5136,7 @@ __metadata:
   resolution: "@zthun/works.microservices@workspace:packages/works.microservices"
   dependencies:
     "@zthun/helpful-fn": ^0.21.1
+    "@zthun/helpful-internet": ^0.21.1
     "@zthun/works.core": ^4.0.0
     "@zthun/works.logger": ^4.0.0
     lodash: ^4.17.21
@@ -5147,6 +5156,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works.nest@workspace:packages/works.nest"
   dependencies:
+    "@zthun/helpful-internet": ^0.21.1
     "@zthun/helpful-obligation": ^0.21.1
     "@zthun/webigail-http": ^0.1.0
     "@zthun/webigail-url": ^0.1.0
@@ -5180,6 +5190,7 @@ __metadata:
     "@nestjs/common": ^10.1.3
     "@nestjs/core": ^10.1.3
     "@nestjs/microservices": ^10.1.3
+    "@zthun/helpful-internet": ^0.21.1
     "@zthun/works.core": ^4.0.0
     lodash: ^4.17.21
     nodemailer: ^6.9.4

@@ -1,7 +1,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { IZCookie, IZUser, ZCookieBuilder } from '@zthun/works.core';
-import { sign, SignOptions, verify } from 'jsonwebtoken';
+import { IZCookie, ZCookieBuilder } from '@zthun/helpful-internet';
+import { IZUser } from '@zthun/works.core';
+import { SignOptions, sign, verify } from 'jsonwebtoken';
 
 @Controller()
 /**

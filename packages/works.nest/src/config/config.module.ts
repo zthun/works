@@ -1,7 +1,8 @@
 /* istanbul ignore file */
 
 import { Module } from '@nestjs/common';
-import { IZConfigEntry, IZServer, ZConfigEntryBuilder, ZServerBuilder } from '@zthun/works.core';
+import { IZServer, ZServerBuilder } from '@zthun/helpful-internet';
+import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
 import { ZVaultClient, ZVaultModule } from '@zthun/works.microservices';
 
 export enum ZConfigScope {
