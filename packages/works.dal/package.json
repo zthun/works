@@ -27,14 +27,14 @@
   ],
   "dependencies": {
     "mongodb": "^5.7.0",
-    "mongodb-memory-server": "^8.13.0",
+    "mongodb-memory-server": "^8.14.0",
     "portfinder": "^1.0.32",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "typedoc": "^0.24.8",
     "typescript": "^5.1.6",
-    "vitest": "^0.33.0"
+    "vitest": "^0.34.1"
   },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
