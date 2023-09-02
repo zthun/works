@@ -31,7 +31,6 @@
     "@zthun/helpful-obligation": "^0.21.5",
     "@zthun/webigail-http": "^0.1.0",
     "@zthun/webigail-url": "^0.1.0",
-    "@zthun/works.class": "^4.0.0",
     "@zthun/works.core": "^4.0.0",
     "@zthun/works.microservices": "^4.0.0",
     "class-transformer": "~0.5.1",

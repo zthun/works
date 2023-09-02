@@ -4981,7 +4981,6 @@ __metadata:
     "@nestjs/core": ^10.1.3
     "@nestjs/microservices": ^10.1.3
     "@nestjs/platform-express": ^10.1.3
-    "@zthun/works.class": ^4.0.0
     "@zthun/works.core": ^4.0.0
     "@zthun/works.nest": ^4.0.0
     nodemon: ^3.0.1
@@ -5008,18 +5007,6 @@ __metadata:
     vitest: ^0.34.1
   bin:
     zthun-works-apps: ./bin/main.js
-  languageName: unknown
-  linkType: soft
-
-"@zthun/works.class@^4.0.0, @zthun/works.class@workspace:packages/works.class":
-  version: 0.0.0-use.local
-  resolution: "@zthun/works.class@workspace:packages/works.class"
-  dependencies:
-    class-validator: ~0.14.0
-    lodash: ^4.17.21
-    typedoc: ^0.24.8
-    typescript: ^5.1.6
-    vitest: ^0.34.1
   languageName: unknown
   linkType: soft
 
@@ -5134,7 +5121,6 @@ __metadata:
     "@zthun/helpful-obligation": ^0.21.5
     "@zthun/webigail-http": ^0.1.0
     "@zthun/webigail-url": ^0.1.0
-    "@zthun/works.class": ^4.0.0
     "@zthun/works.core": ^4.0.0
     "@zthun/works.microservices": ^4.0.0
     class-transformer: ~0.5.1
