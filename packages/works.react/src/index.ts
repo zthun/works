@@ -15,11 +15,6 @@ export {
   useWebApps
 } from './apps/web-app-service';
 
-// Error
-export { ZErrorHandlerContext, useErrorHandler } from './error/error-handler';
-export { ZErrorMessageHandlerAlert } from './error/error-message-handler-alert';
-export { ZErrorMessageHandlerLogger } from './error/error-message-handler-logger';
-
 // Health
 export { ZHealthIndicator } from './health/health-indicator';
 export { ZHealthIndicatorComponentModel } from './health/health-indicator.cm';
