@@ -29,8 +29,8 @@
   "dependencies": {
     "@zthun/helpful-fn": "^0.21.5",
     "@zthun/helpful-internet": "^0.21.5",
+    "@zthun/lumberjacky-log": "^1.1.0",
     "@zthun/works.core": "^4.0.0",
-    "@zthun/works.logger": "^4.0.0",
     "lodash": "^4.17.21",
     "rxjs": "^7.8.1",
     "uuid": "^9.0.0"

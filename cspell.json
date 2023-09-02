@@ -30,6 +30,7 @@
     "lessc",
     "listbox",
     "lteq",
+    "lumberjacky",
     "markdownlint",
     "microservices",
     "middleground",
@@ -50,5 +51,10 @@
     "zthun",
     "Zthunworks"
   ],
-  "dictionaries": ["typescript", "node", "npm", "en_US"]
+  "dictionaries": [
+    "typescript",
+    "node",
+    "npm",
+    "en_US"
+  ]
 }

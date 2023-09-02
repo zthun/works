@@ -3,7 +3,7 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { sleep } from '@zthun/helpful-fn';
-import { ZLogEntryBuilder, ZLoggerConsole } from '@zthun/works.logger';
+import { ZLogEntryBuilder, ZLoggerConsole } from '@zthun/lumberjacky-log';
 import { ZVaultClient } from './vault.client';
 
 @Module({

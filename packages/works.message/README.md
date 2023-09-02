@@ -6,9 +6,9 @@ A library that includes loggers and log based service helpers.
 
 ```sh
 # NPM
-npm install @zthun/works.loggers
+npm install @zthun/works.message
 # Yarn
-yarn add @zthun/works.loggers
+yarn add @zthun/works.message
 ```
 
 ### Usage

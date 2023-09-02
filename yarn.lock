@@ -4925,6 +4925,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@zthun/lumberjacky-log@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@zthun/lumberjacky-log@npm:1.1.0"
+  dependencies:
+    lodash: ^4.17.21
+  checksum: ace4165c17f96c6c91fc4f9e4e4b08a8c32c1f3d7577c8794fa0fa6d8bd05513a820f46a5e7126c94f163dc5ecb38760d62894e0ba192d3d5756f9d685d9ee3a
+  languageName: node
+  linkType: hard
+
 "@zthun/markdownlint-config@npm:^14.2.0":
   version: 14.2.0
   resolution: "@zthun/markdownlint-config@npm:14.2.0"
@@ -5063,17 +5072,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zthun/works.logger@^4.0.0, @zthun/works.logger@workspace:packages/works.logger":
-  version: 0.0.0-use.local
-  resolution: "@zthun/works.logger@workspace:packages/works.logger"
-  dependencies:
-    typedoc: ^0.24.8
-    typescript: ^5.1.6
-    vitest: ^0.34.1
-    vitest-mock-extended: ^1.2.0
-  languageName: unknown
-  linkType: soft
-
 "@zthun/works.message@^4.0.0, @zthun/works.message@workspace:packages/works.message":
   version: 0.0.0-use.local
   resolution: "@zthun/works.message@workspace:packages/works.message"
@@ -5094,8 +5092,8 @@ __metadata:
   dependencies:
     "@zthun/helpful-fn": ^0.21.5
     "@zthun/helpful-internet": ^0.21.5
+    "@zthun/lumberjacky-log": ^1.1.0
     "@zthun/works.core": ^4.0.0
-    "@zthun/works.logger": ^4.0.0
     lodash: ^4.17.21
     rxjs: ^7.8.1
     typedoc: ^0.24.8
@@ -5190,7 +5188,6 @@ __metadata:
     "@zthun/works.core": ^4.0.0
     "@zthun/works.draw": ^4.0.0
     "@zthun/works.error": ^4.0.0
-    "@zthun/works.logger": ^4.0.0
     "@zthun/works.message": ^4.0.0
     csstype: ^3.1.2
     history: ^5.3.0

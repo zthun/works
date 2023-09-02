@@ -8,7 +8,6 @@
     "paths": {
       "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.microservices": ["../works.microservices/src/index"],
-      "@zthun/works.logger": ["../works.logger/src/index"],
       "@zthun/works.nest": ["../works.nest/src/index"]
     }
   },
