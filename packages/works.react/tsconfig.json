@@ -7,8 +7,7 @@
     "paths": {
       "@zthun/works.core": ["../works.core/src/index"],
       "@zthun/works.draw": ["../works.draw/src/index"],
-      "@zthun/works.error": ["../works.error/src/index"],
-      "@zthun/works.message": ["../works.message/src/index"]
+      "@zthun/works.error": ["../works.error/src/index"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"]
