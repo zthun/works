@@ -1,4 +1,4 @@
-import { IZUser, ZConfigEntryBuilder, ZUserBuilder } from '@zthun/works.core';
+import { IZUser, ZUserBuilder } from '@zthun/works.core';
 import { v4 } from 'uuid';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { ZCookiesService } from './cookies.service';
@@ -13,7 +13,7 @@ describe('ZCookiesService', () => {
 
   beforeEach(() => {
     user = new ZUserBuilder().id(v4()).email('gambit@marvel.com').build();
-    secret = new ZConfigEntryBuilder(null).generate().build().value as string;
+    secret = v4();
   });
 
   describe('Create Authentication Token', () => {

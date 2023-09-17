@@ -1,12 +1,11 @@
-import { IZConfigEntry } from '@zthun/works.core';
-import { ZVaultClient } from '@zthun/works.microservices';
+import { IZConfigEntry, IZVaultClient } from '@zthun/vault-client';
 import { flatten } from 'lodash';
 import { Mocked, beforeEach, describe, expect, it } from 'vitest';
 import { mock } from 'vitest-mock-extended';
 import { ZConfigEntries, ZConfigModule } from './config.module';
 
 describe('ZConfigModule', () => {
-  let vault: Mocked<ZVaultClient>;
+  let vault: Mocked<IZVaultClient>;
 
   async function createTestTarget() {
     const target = new ZConfigModule(vault);
@@ -15,7 +14,7 @@ describe('ZConfigModule', () => {
   }
 
   beforeEach(() => {
-    vault = mock<ZVaultClient>();
+    vault = mock<IZVaultClient>();
   });
 
   it('should initialize all of the entries in ZConfigEntries.', async () => {

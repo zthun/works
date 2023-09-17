@@ -30,6 +30,7 @@
     "@zthun/helpful-fn": "^2.3.0",
     "@zthun/helpful-internet": "^2.3.0",
     "@zthun/lumberjacky-log": "^1.2.1",
+    "@zthun/vault-client": "^1.1.0",
     "@zthun/works.core": "^4.0.0",
     "lodash": "^4.17.21",
     "rxjs": "^7.8.1",

@@ -1,5 +1,6 @@
-import { IZConfigEntry, IZWebApp, ZConfigEntryBuilder, ZWebAppBuilder } from '@zthun/works.core';
-import { ZAppsClient, ZVaultClient, ZVaultMemoryClient } from '@zthun/works.microservices';
+import { IZConfigEntry, IZVaultClient, ZConfigEntryBuilder, ZVaultClientMemory } from '@zthun/vault-client';
+import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
+import { ZAppsClient } from '@zthun/works.microservices';
 import { Mocked, beforeEach, describe, expect, it } from 'vitest';
 import { mock } from 'vitest-mock-extended';
 import { ZApplicationsController } from './applications.controller';
@@ -8,7 +9,7 @@ describe('ZApplicationsController', () => {
   let apps: IZWebApp[];
   let service: Mocked<ZAppsClient>;
   let domain: IZConfigEntry<string>;
-  let config: ZVaultClient;
+  let config: IZVaultClient;
 
   function createTestTarget() {
     return new ZApplicationsController(service, config);
@@ -21,7 +22,7 @@ describe('ZApplicationsController', () => {
     service.listWebApps.mockResolvedValue(apps);
 
     domain = new ZConfigEntryBuilder<string>('zthunworks.com').scope('common').key('domain').build();
-    config = new ZVaultMemoryClient();
+    config = new ZVaultClientMemory();
     config.put(domain);
   });
 

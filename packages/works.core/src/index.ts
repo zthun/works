@@ -2,8 +2,6 @@
 
 // App
 export { IZWebApp, ZWebAppBuilder } from './app/web-app';
-// Config
-export { IZConfigEntry, ZConfigEntryBuilder } from './configs/config-entry';
 // Route
 export { IZRouteOption, ZRouteOptionBuilder } from './route/route-option';
 // User

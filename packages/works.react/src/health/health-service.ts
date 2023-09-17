@@ -24,7 +24,7 @@ export class ZHealthService implements IZHealthService {
    * @returns The url for the health service.
    */
   public static createHealthUrl(): string {
-    return new ZUrlBuilder().api().append('health').build();
+    return new ZUrlBuilder().api(location).append('health').build();
   }
 
   /**

@@ -57,56 +57,6 @@ type ZBuilder<T> = {
 };
 ```
 
-### Configuration
-
-![Configuration Vault](images/png/works.core.config-entry.png)
-
-A configuration entry in the Zthunworks system is represented by the **IZConfigEntry** interface and uses the
-_ZConfigEntryBuilder_ object to construct them. These come back from the vault database and are used to hold system
-configuration that a normal user will not ever see.
-
-A configuration entry is divided into 3 parts. The configuration scope, the key, and the value. Keys must be unique in
-their given scope, but you can have the same named key in different scopes.
-
-> Best practice: The scope is the system configuration for the application that is currently running and the key is the
-> name of the configuration. There should always be a root scope called default or common which all applications will
-> access for shared configuration.
-
-The following document list is an example of a vault database that may exist with configuration entries:
-
-```json
-[
-  {
-    "scope": "common",
-    "key": "domain",
-    "value": "zthunworks"
-  },
-  {
-    "scope": "common",
-    "key": "log-level",
-    "value": "ERROR"
-  },
-  {
-    "scope": "foo-app",
-    "key": "retries",
-    "value": 5
-  }
-]
-```
-
-Here, the vault has three configurations, with two common scopes and one for foo-app. While any app could access any
-configuration, it would be best for foo-app to only access configurations under common and foo-app. This forces a good
-separation between application configuration, but still provides a central repository for configuration.
-
-```ts
-import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
-
-function createDefaultDomainConfig(): IZConfigEntry {
-  const config: IZConfigEntry = new ZConfigEntryBuilder().scope('common').key('domain').value('zthunworks').build();
-  return config;
-}
-```
-
 ### Email
 
 ![Email Messages](images/png/works.core.email.png)

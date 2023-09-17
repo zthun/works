@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ZAppsModule, ZVaultModule } from '@zthun/works.microservices';
+import { ZVaultModule } from '@zthun/vault-client';
+import { ZAppsModule } from '@zthun/works.microservices';
 import { ZApplicationsController } from './applications.controller';
 
 @Module({

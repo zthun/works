@@ -29,6 +29,7 @@
   "dependencies": {
     "@zthun/helpful-internet": "^2.3.0",
     "@zthun/helpful-obligation": "^2.3.0",
+    "@zthun/vault-client": "^1.1.0",
     "@zthun/webigail-http": "^1.1.0",
     "@zthun/webigail-url": "^1.1.0",
     "@zthun/works.core": "^4.0.0",

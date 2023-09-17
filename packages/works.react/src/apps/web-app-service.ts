@@ -41,7 +41,7 @@ export class ZWebAppService implements IZWebAppService {
    * @returns The url for the apps rest service.
    */
   public static createWebAppsUrl(): string {
-    return new ZUrlBuilder().api().append('web-apps').build();
+    return new ZUrlBuilder().api(location).append('web-apps').build();
   }
 
   /**

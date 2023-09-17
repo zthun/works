@@ -11,7 +11,3 @@ export { ZNotificationsModule } from './notifications/notifications.module';
 // Users
 export { ZUsersClient } from './users/users.client';
 export { ZUsersModule } from './users/users.module';
-// Vault
-export { ZVaultMemoryClient } from './vault/vault-memory.client';
-export { ZVaultClient } from './vault/vault.client';
-export { ZVaultModule } from './vault/vault.module';

@@ -1,5 +1,6 @@
 import { ClientProxy } from '@nestjs/microservices';
-import { ZConfigEntryBuilder, ZUserBuilder } from '@zthun/works.core';
+import { ZConfigEntryBuilder } from '@zthun/vault-client';
+import { ZUserBuilder } from '@zthun/works.core';
 import { of } from 'rxjs';
 import { v4 } from 'uuid';
 import { Mocked, beforeEach, describe, expect, it } from 'vitest';

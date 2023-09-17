@@ -1,9 +1,8 @@
 /* istanbul ignore file */
 
-import { Module } from '@nestjs/common';
+import { Inject, Module } from '@nestjs/common';
 import { IZServer, ZServerBuilder } from '@zthun/helpful-internet';
-import { IZConfigEntry, ZConfigEntryBuilder } from '@zthun/works.core';
-import { ZVaultClient, ZVaultModule } from '@zthun/works.microservices';
+import { IZConfigEntry, IZVaultClient, ZConfigEntryBuilder, ZVaultModule, ZVaultToken } from '@zthun/vault-client';
 
 export enum ZConfigScope {
   Common = 'common',
@@ -44,9 +43,10 @@ export class ZConfigModule {
   /**
    * Initializes a new instance of this object.
    *
-   * @param _vault The client for the vault.
+   * @param _vault -
+   *        The client for the vault.
    */
-  public constructor(private _vault: ZVaultClient) {}
+  public constructor(@Inject(ZVaultToken) private _vault: IZVaultClient) {}
 
   /**
    * Initializes all of the base configuration values in the vault.

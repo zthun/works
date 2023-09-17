@@ -1,6 +1,5 @@
 // PNG
 require('./png/works.core.builders.png');
-require('./png/works.core.config-entry.png');
 require('./png/works.core.email.png');
 require('./png/works.core.error.png');
 require('./png/works.core.users.png');

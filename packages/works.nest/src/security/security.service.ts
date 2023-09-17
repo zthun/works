@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ZCookieBuilder } from '@zthun/helpful-internet';
+import { IZVaultClient, ZVaultToken } from '@zthun/vault-client';
 import { IZUser } from '@zthun/works.core';
-import { ZCookiesClient, ZUsersClient, ZVaultClient } from '@zthun/works.microservices';
+import { ZCookiesClient, ZUsersClient } from '@zthun/works.microservices';
 import { Request } from 'express';
 import { get } from 'lodash';
 import { ZConfigEntries } from '../config/config.module';
@@ -26,7 +27,7 @@ export class ZSecurityService {
   public constructor(
     private readonly _users: ZUsersClient,
     private readonly _cookies: ZCookiesClient,
-    private readonly _vault: ZVaultClient
+    @Inject(ZVaultToken) private readonly _vault: IZVaultClient
   ) {}
 
   /**

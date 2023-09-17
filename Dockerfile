@@ -48,11 +48,6 @@ RUN npm install -g @zthun/works.users
 EXPOSE 4000
 CMD ["zthun-works-users"]
 
-FROM node:17.3.0-alpine as works.vault
-RUN npm install -g @zthun/works.vault
-EXPOSE 4000
-CMD ["zthun-works-vault"]
-
 FROM nginx:1.21.5-alpine as works.proxy
 EXPOSE 8080
 COPY packages/works.proxy/shared /etc/nginx/shared

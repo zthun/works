@@ -26,7 +26,7 @@ export class ZIdentityService implements IZIdentityService {
    * @returns The url for the standard profiles rest api.
    */
   public static createIdentityUrl() {
-    return new ZUrlBuilder().api().append('identity').build();
+    return new ZUrlBuilder().api(location).append('identity').build();
   }
 
   /**

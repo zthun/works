@@ -1,7 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
+import { IZVaultClient, ZVaultToken } from '@zthun/vault-client';
 import { ZUrlBuilder } from '@zthun/webigail-url';
 import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
-import { ZAppsClient, ZVaultClient } from '@zthun/works.microservices';
+import { ZAppsClient } from '@zthun/works.microservices';
 import { ZConfigEntries } from '../config/config.module';
 
 @Controller()
@@ -15,7 +16,10 @@ export class ZApplicationsController {
    * @param _apps The client used to retrieve all apps.
    * @param _vault The client used to retrieve system configuration values.
    */
-  public constructor(private readonly _apps: ZAppsClient, private readonly _vault: ZVaultClient) {}
+  public constructor(
+    private readonly _apps: ZAppsClient,
+    @Inject(ZVaultToken) private readonly _vault: IZVaultClient
+  ) {}
 
   /**
    * Gets the list of all web apps available.

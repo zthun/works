@@ -1,6 +1,7 @@
 import { IZCookie, ZCookieBuilder } from '@zthun/helpful-internet';
+import { IZVaultClient, ZVaultClientMemory } from '@zthun/vault-client';
 import { IZUser, ZUserBuilder } from '@zthun/works.core';
-import { ZCookiesClient, ZUsersClient, ZVaultClient, ZVaultMemoryClient } from '@zthun/works.microservices';
+import { ZCookiesClient, ZUsersClient } from '@zthun/works.microservices';
 import { Request } from 'express';
 import { v4 } from 'uuid';
 import { Mocked, beforeEach, describe, expect, it } from 'vitest';
@@ -14,7 +15,7 @@ describe('ZSecurityService', () => {
   let user: IZUser;
   let req: Mocked<Request>;
   let cookies: Mocked<ZCookiesClient>;
-  let vault: ZVaultClient;
+  let vault: IZVaultClient;
 
   function createTestTarget() {
     return new ZSecurityService(users, cookies, vault);
@@ -37,7 +38,7 @@ describe('ZSecurityService', () => {
     cookies.createAuthentication.mockResolvedValue(cookie);
     cookies.whoIs.mockResolvedValue(null);
 
-    vault = new ZVaultMemoryClient();
+    vault = new ZVaultClientMemory();
 
     user = new ZUserBuilder().email('wolverine@marvel.com').password('foo').id('0').super().build();
     users.findById.mockReturnValue(Promise.resolve(user));
