@@ -1,4 +1,4 @@
-import { ZCircusBy } from '@zthun/cirque';
+import { IZCircusDriver, ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import { ZTestRouter } from '@zthun/fashion-boutique';
 import { required } from '@zthun/helpful-obligation';
@@ -8,7 +8,7 @@ import { IZWebApp, ZWebAppBuilder } from '@zthun/works.core';
 import { MemoryHistory, createMemoryHistory } from 'history';
 import { find, startCase } from 'lodash';
 import React from 'react';
-import { Mocked, beforeEach, describe, expect, it } from 'vitest';
+import { Mocked, afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mock } from 'vitest-mock-extended';
 import { ZWebAppDrawer } from './web-app-drawer';
 import { ZWebAppDrawerComponentModel } from './web-app-drawer.cm';
@@ -25,6 +25,7 @@ describe('ZWebAppDrawer', () => {
   let win: Mocked<typeof globalThis>;
   let webAppService: Mocked<ZWebAppService>;
   let history: MemoryHistory;
+  let _driver: IZCircusDriver;
 
   async function createTestTarget() {
     const element = (
@@ -37,8 +38,8 @@ describe('ZWebAppDrawer', () => {
       </ZWindowServiceContext.Provider>
     );
 
-    const driver = await new ZCircusSetupRenderer(element).setup();
-    return ZCircusBy.first(driver, ZWebAppDrawerComponentModel);
+    _driver = await new ZCircusSetupRenderer(element).setup();
+    return ZCircusBy.first(_driver, ZWebAppDrawerComponentModel);
   }
 
   beforeEach(() => {
@@ -81,6 +82,10 @@ describe('ZWebAppDrawer', () => {
       const app = find(webApps, (a) => a._id === id);
       return app ? Promise.resolve(app) : Promise.reject(new Error('App not found'));
     });
+  });
+
+  afterEach(async () => {
+    await _driver?.destroy();
   });
 
   it('should open the nav drawer with given web apps.', async () => {
