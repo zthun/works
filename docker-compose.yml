@@ -40,15 +40,9 @@ services:
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.users run debug
   zthunworks-services-vault:
-    image: node:17.3.0
-    ports:
-      - 9232:9229
-    volumes:
-      - .:/usr/dev
+    image: zthun/vault-service
     environment:
       - DATABASE_URL=mongodb://zthunworks-databases:27017
-    working_dir: /usr/dev
-    command: npm --workspace @zthun/works.vault run debug
   zthunworks-services-notifications:
     image: node:17.3.0
     ports:
