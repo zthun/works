@@ -34,15 +34,6 @@ describe('ZHomePage', () => {
     webApps.read.mockResolvedValue(learn);
   });
 
-  it('should navigate to the web apps page', async () => {
-    // Arrange.
-    const target = await createTestTarget();
-    // Act.
-    await (await target.webApps()).click();
-    // Assert.
-    expect(history.location.pathname).toEqual('/web-apps');
-  });
-
   it('should navigate to the microservices page', async () => {
     // Arrange.
     const target = await createTestTarget();

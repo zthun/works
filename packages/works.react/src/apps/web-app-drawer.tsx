@@ -34,8 +34,6 @@ export interface IZWebAppDrawer extends IZComponentStyle {
 
   /**
    * The optional route to navigate home.
-   *
-   * @default '/'
    */
   home?: string;
 
@@ -57,7 +55,7 @@ const useWebAppDrawerStyles = createStyleHook(({ tailor }) => ({
 /**
  * A component that renders a navigation drawer for going to the home page, opening web apps, navigating through a site map, and viewing the source code.
  *
- * @param props
+ * @param props -
  *        The properties for this component.
  *
  * @returns
