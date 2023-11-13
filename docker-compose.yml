@@ -10,6 +10,8 @@ services:
     depends_on:
       - zthunworks-services-api
       - zthunworks-services-web
+      - zthunworks-services-database
+      - zthunworks-services-email
 
   # Node Ports
   zthunworks-services-web:
@@ -64,19 +66,17 @@ services:
       - .:/usr/dev
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.apps run debug
-  # Databases
   zthunworks-databases:
     image: mongo:5.0.5
     volumes:
       - zthunworks-databases-data:/data/db
-  # Utilities
-  database.zthunworks.com:
+  zthunworks-services-database:
     image: mongo-express:0.54.0
     depends_on:
       - zthunworks-databases
     environment:
       - ME_CONFIG_MONGODB_SERVER=zthunworks-databases
-  smtp.zthunworks.com:
+  zthunworks-services-email:
     image: rnwood/smtp4dev:v3.1
 volumes:
   zthunworks-databases-data:
