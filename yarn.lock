@@ -5383,12 +5383,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.proxy@workspace:packages/works.proxy":
-  version: 0.0.0-use.local
-  resolution: "@zthun/works.proxy@workspace:packages/works.proxy"
-  languageName: unknown
-  linkType: soft
-
 "@zthun/works.react@^4.0.0, @zthun/works.react@workspace:packages/works.react":
   version: 0.0.0-use.local
   resolution: "@zthun/works.react@workspace:packages/works.react"
