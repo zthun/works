@@ -18,8 +18,7 @@
     "access": "public"
   },
   "files": [
-    "dist/**",
-    "images/**"
+    "dist"
   ],
   "devDependencies": {
     "@cucumber/cucumber": "^9.4.0",

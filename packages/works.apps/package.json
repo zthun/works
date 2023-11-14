@@ -23,8 +23,7 @@
   },
   "files": [
     "assets",
-    "dist",
-    "docs"
+    "dist"
   ],
   "dependencies": {
     "@nestjs/common": "^10.1.3",

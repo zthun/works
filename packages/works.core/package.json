@@ -21,11 +21,7 @@
     "access": "public"
   },
   "files": [
-    "dist/**",
-    "docs/**",
-    "images/**",
-    "PRIVACY.md",
-    "TERMS.md"
+    "dist"
   ],
   "devDependencies": {
     "lodash": "^4.17.21",
