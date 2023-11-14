@@ -8,7 +8,5 @@ export { ZApplicationsController } from './applications/applications.controller'
 export { ZApplicationsModule } from './applications/applications.module';
 // Config
 export { ZConfigEntries, ZConfigModule, ZConfigScope } from './config/config.module';
-// Error
-export { ZExceptionFactory } from './error/exception-factory.class';
 // Http
 export { ZHttpModule, ZHttpServiceProvider, ZHttpServiceToken } from './http/http.module';

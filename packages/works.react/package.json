@@ -13,8 +13,7 @@
   "scripts": {
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:esm": "tsc -p ./tsconfig.esm.json",
-    "build": "yarn build:cjs && yarn build:esm",
-    "doc": "typedoc"
+    "build": "yarn build:cjs && yarn build:esm"
   },
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -54,7 +53,6 @@
   "devDependencies": {
     "@zthun/cirque-du-react": "^4.3.1",
     "@zthun/helpful-obligation": "^2.3.0",
-    "typedoc": "^0.24.8",
     "typescript": "^5.1.6",
     "vitest": "^0.34.1",
     "vitest-mock-extended": "^1.2.0"

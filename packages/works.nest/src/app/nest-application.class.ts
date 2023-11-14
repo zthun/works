@@ -1,11 +1,10 @@
 /* istanbul ignore file */
 
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
 import { json } from 'express';
 import helmet from 'helmet';
-import { ZExceptionFactory } from '../error/exception-factory.class';
 
 /**
  * Represents the root access point to all @zthun based nest applications.
@@ -24,13 +23,6 @@ export abstract class ZNestApplication {
     app.use(json({ limit: '500kb' }));
     app.use(cookieParser());
     app.setGlobalPrefix('api');
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        exceptionFactory: ZExceptionFactory.messageOnly
-      })
-    );
     return app;
   }
 

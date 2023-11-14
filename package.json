@@ -18,8 +18,7 @@
     "e2e": "cucumber-js",
     "lint": "lint-janitor",
     "build": "lerna run build",
-    "doc": "lerna run doc",
-    "make": "yarn clean && yarn lint && yarn test && yarn build && yarn doc",
+    "make": "yarn clean && yarn lint && yarn test && yarn build",
     "postinstall": "husky install"
   },
   "devDependencies": {

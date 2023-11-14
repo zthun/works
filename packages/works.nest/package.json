@@ -15,8 +15,7 @@
   "scripts": {
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:esm": "tsc -p ./tsconfig.esm.json",
-    "build": "yarn build:cjs && yarn build:esm",
-    "doc": "typedoc"
+    "build": "yarn build:cjs && yarn build:esm"
   },
   "publishConfig": {
     "access": "public"
@@ -44,7 +43,6 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "typedoc": "^0.24.8",
     "typescript": "^5.1.6",
     "vitest": "^0.34.1",
     "vitest-mock-extended": "^1.2.0"

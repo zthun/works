@@ -9,13 +9,11 @@ import { resolve } from 'path';
  * Represents a service that manages profiles and users.
  */
 export class ZAppsService {
-  // cspell:disable
   public static IconLearn = 'learn.svg';
   public static IconRoadblock = 'roadblock.svg';
   public static IconSupport = 'support.svg';
   public static IconTerms = 'terms.svg';
   public static IconPrivacy = 'privacy.svg';
-  // cspell:enable
 
   /**
    * Creates an ico file from an svg stream.
