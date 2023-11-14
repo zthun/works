@@ -21,9 +21,7 @@
     "access": "public"
   },
   "files": [
-    "images/**",
-    "dist/**",
-    "docs/**"
+    "dist"
   ],
   "dependencies": {
     "@zthun/helpful-internet": "^2.3.0",
