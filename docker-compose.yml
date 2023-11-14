@@ -32,16 +32,6 @@ services:
     image: zthun/helpful-api
     ports:
       - 3000:3000
-  zthunworks-services-users:
-    image: node:lts
-    ports:
-      - 9231:9229
-    volumes:
-      - .:/usr/dev
-    environment:
-      - DATABASE_URL=mongodb://zthunworks-services-mongo:27017
-    working_dir: /usr/dev
-    command: npm --workspace @zthun/works.users run debug
   zthunworks-services-vault:
     image: zthun/vault-service
     environment:

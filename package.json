@@ -13,7 +13,7 @@
     "packages/*"
   ],
   "scripts": {
-    "clean": "rimraf 'dist' 'docs' 'reports' '*.tgz' '*.log' 'packages/**/dist' 'packages/**/docs' 'packages/**/*.tgz' 'packages/**/*.log'",
+    "clean": "rimraf --glob 'dist' 'docs' 'reports' '*.tgz' '*.log' 'packages/**/dist' 'packages/**/docs' 'packages/**/*.tgz' 'packages/**/*.log'",
     "test": "vitest run --coverage",
     "e2e": "cucumber-js",
     "lint": "lint-janitor",

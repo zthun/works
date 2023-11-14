@@ -19,7 +19,3 @@ export {
 export { ZHealthIndicator } from './health/health-indicator';
 export { ZHealthIndicatorComponentModel } from './health/health-indicator.cm';
 
-// Identity
-export { IZIdentityButtonProps, ZIdentityButton } from './identity/identity-button';
-export { ZIdentityButtonComponentModel } from './identity/identity-button.cm';
-export { IZIdentityService, ZIdentityService, useIdentity, useIdentityService } from './identity/identity-service';

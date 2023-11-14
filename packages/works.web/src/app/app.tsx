@@ -12,7 +12,7 @@ import {
 import { ZSizeFixed } from '@zthun/fashion-tailor';
 import { createLightTheme } from '@zthun/fashion-theme';
 import { ZOrientation } from '@zthun/helpful-fn';
-import { ZHealthIndicator, ZIdentityButton } from '@zthun/works.react';
+import { ZHealthIndicator } from '@zthun/works.react';
 import React from 'react';
 import { ZHomePage } from '../home/home-page';
 import { ZMicroservicesPage } from '../microservices/microservices-page';
@@ -37,7 +37,6 @@ export function ZWorksApp() {
   const suffix = (
     <ZStack orientation={ZOrientation.Horizontal} gap={ZSizeFixed.Small}>
       <ZHealthIndicator />
-      <ZIdentityButton />
     </ZStack>
   );
 
