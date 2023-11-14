@@ -33,16 +33,6 @@ RUN npm install -g @zthun/works.apps
 EXPOSE 4000
 CMD ["zthun-works-apps"]
 
-FROM node:lts-alpine as works.cookies
-RUN npm install -g @zthun/works.cookies
-EXPOSE 4000
-CMD ["zthun-works-cookies"]
-
-FROM node:lts-alpine as works.notifications
-RUN npm install -g @zthun/works.notifications
-EXPOSE 4000
-CMD ["zthun-works-notifications"]
-
 FROM node:lts-alpine as works.api
 RUN npm install -g @zthun/works.api
 EXPOSE 3000

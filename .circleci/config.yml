@@ -56,16 +56,10 @@ jobs:
             export DOCKER_BUILDKIT=1
             docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             docker build . --target works.apps -t zthun/works.apps:latest -t zthun/works.apps:$(npm show @zthun/works.apps version) --progress=plain
-            docker build . --target works.cookies -t zthun/works.cookies:latest -t zthun/works.cookies:$(npm show @zthun/works.cookies version) --progress=plain
-            docker build . --target works.notifications -t zthun/works.notifications:latest -t zthun/works.notifications:$(npm show @zthun/works.notifications version) --progress=plain
             docker build . --target works.api -t zthun/works.api:latest -t zthun/works.api:$(npm show @zthun/works.api version) --progress=plain
             docker build . --target works.web -t zthun/works.web:latest -t zthun/works.web:$(npm show @zthun/works.web version) --progress=plain
             docker push zthun/works.apps:latest
             docker push zthun/works.apps:$(npm show @zthun/works.apps version)
-            docker push zthun/works.cookies:latest
-            docker push zthun/works.cookies:$(npm show @zthun/works.cookies version)
-            docker push zthun/works.notifications:latest
-            docker push zthun/works.notifications:$(npm show @zthun/works.notifications version)
             docker push zthun/works.api:latest
             docker push zthun/works.api:$(npm show @zthun/works.api version)
             docker push zthun/works.web:latest

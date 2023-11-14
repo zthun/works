@@ -36,22 +36,6 @@ services:
     image: zthun/vault-service
     environment:
       - DATABASE_URL=mongodb://zthunworks-services-mongo:27017
-  zthunworks-services-notifications:
-    image: node:lts
-    ports:
-      - 9233:9229
-    volumes:
-      - .:/usr/dev
-    working_dir: /usr/dev
-    command: npm --workspace @zthun/works.notifications run debug
-  zthunworks-services-cookies:
-    image: node:lts
-    ports:
-      - 9234:9229
-    volumes:
-      - .:/usr/dev
-    working_dir: /usr/dev
-    command: npm --workspace @zthun/works.cookies run debug
   zthunworks-services-apps:
     image: node:lts
     ports:
