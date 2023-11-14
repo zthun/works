@@ -1,4 +1,4 @@
-FROM node:17.3.0 as setup
+FROM node:lts as setup
 WORKDIR /usr/dev
 COPY . .
 RUN yarn install
@@ -28,28 +28,28 @@ RUN --mount=type=secret,id=GIT_CREDENTIALS,dst=/root/.git-credentials npx lerna 
     git push --tags
 RUN --mount=type=secret,id=NPM_CREDENTIALS,dst=/root/.npmrc npx lerna publish from-package --yes
 
-FROM node:17.3.0-alpine as works.apps
+FROM node:lts-alpine as works.apps
 RUN npm install -g @zthun/works.apps
 EXPOSE 4000
 CMD ["zthun-works-apps"]
 
-FROM node:17.3.0-alpine as works.cookies
+FROM node:lts-alpine as works.cookies
 RUN npm install -g @zthun/works.cookies
 EXPOSE 4000
 CMD ["zthun-works-cookies"]
 
-FROM node:17.3.0-alpine as works.notifications
+FROM node:lts-alpine as works.notifications
 RUN npm install -g @zthun/works.notifications
 EXPOSE 4000
 CMD ["zthun-works-notifications"]
 
-FROM node:17.3.0-alpine as works.api
+FROM node:lts-alpine as works.api
 RUN npm install -g @zthun/works.api
 EXPOSE 3000
 CMD ["zthun-works-api"]
 
-FROM node:17.3.0-alpine as works.web.install
+FROM node:lts-alpine as works.web.install
 RUN npm install -g @zthun/works.web
 
-FROM nginx:1.21.5-alpine as works.web
+FROM nginx:mainline-alpine as works.web
 COPY --from=works.web.install /usr/local/lib/node_modules/@zthun/works.web/dist/. /usr/share/nginx/html/
