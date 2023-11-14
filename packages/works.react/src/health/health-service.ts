@@ -42,8 +42,8 @@ export class ZHealthService implements IZHealthService {
   public async read(): Promise<boolean> {
     try {
       const request = new ZHttpRequestBuilder().get().url(ZHealthService.createHealthUrl()).build();
-      const { data } = await this._http.request<boolean>(request);
-      return data;
+      await this._http.request<boolean>(request);
+      return true;
     } catch (err) {
       return false;
     }

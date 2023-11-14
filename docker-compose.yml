@@ -28,6 +28,10 @@ services:
       - .:/usr/dev
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.api run debug
+  zthunworks-services-helpful:
+    image: zthun/helpful-api
+    ports:
+      - 3000:3000
   zthunworks-services-users:
     image: node:lts
     ports:
@@ -35,13 +39,13 @@ services:
     volumes:
       - .:/usr/dev
     environment:
-      - DATABASE_URL=mongodb://zthunworks-databases:27017
+      - DATABASE_URL=mongodb://zthunworks-services-mongo:27017
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.users run debug
   zthunworks-services-vault:
     image: zthun/vault-service
     environment:
-      - DATABASE_URL=mongodb://zthunworks-databases:27017
+      - DATABASE_URL=mongodb://zthunworks-services-mongo:27017
   zthunworks-services-notifications:
     image: node:lts
     ports:
@@ -66,17 +70,17 @@ services:
       - .:/usr/dev
     working_dir: /usr/dev
     command: npm --workspace @zthun/works.apps run debug
-  zthunworks-databases:
+  zthunworks-services-mongo:
     image: mongo:5.0.5
     volumes:
-      - zthunworks-databases-data:/data/db
+      - zthunworks-mongo-data:/data/db
   zthunworks-services-database:
     image: mongo-express:0.54.0
     depends_on:
-      - zthunworks-databases
+      - zthunworks-services-mongo
     environment:
-      - ME_CONFIG_MONGODB_SERVER=zthunworks-databases
+      - ME_CONFIG_MONGODB_SERVER=zthunworks-services-mongo
   zthunworks-services-email:
     image: rnwood/smtp4dev:v3.1
 volumes:
-  zthunworks-databases-data:
+  zthunworks-mongo-data:

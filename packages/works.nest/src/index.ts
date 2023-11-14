@@ -10,9 +10,6 @@ export { ZApplicationsModule } from './applications/applications.module';
 export { ZConfigEntries, ZConfigModule, ZConfigScope } from './config/config.module';
 // Error
 export { ZExceptionFactory } from './error/exception-factory.class';
-// Health
-export { ZHealthController } from './health/health.controller';
-export { ZHealthModule } from './health/health.module';
 // Http
 export { ZHttpModule, ZHttpServiceProvider, ZHttpServiceToken } from './http/http.module';
 // Security
