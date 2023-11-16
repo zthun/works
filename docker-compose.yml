@@ -19,7 +19,7 @@ services:
     volumes:
       - .:/usr/dev
     working_dir: /usr/dev
-    command: npm --workspace @zthun/works.web run debug
+    command: npm --workspace @zthun/works-web run debug
   zthunworks-services-api:
     image: node:lts
     ports:

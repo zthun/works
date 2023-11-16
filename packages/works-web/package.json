@@ -1,12 +1,11 @@
 {
-  "name": "@zthun/works.web",
+  "name": "@zthun/works-web",
   "version": "4.0.0",
-  "description": "The application for learning about the building blocks of zthunworks.",
-  "umd": "./dist/works.web.min.js",
+  "description": "Zthunworks entrypoint application.",
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/works",
-    "directory": "packages/works.web"
+    "directory": "packages/works-web"
   },
   "scripts": {
     "build": "vite build",

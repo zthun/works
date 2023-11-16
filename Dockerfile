@@ -38,8 +38,8 @@ RUN npm install -g @zthun/works.api
 EXPOSE 3000
 CMD ["zthun-works-api"]
 
-FROM node:lts-alpine as works.web.install
-RUN npm install -g @zthun/works.web
+FROM node:lts-alpine as works-web-install
+RUN npm install -g @zthun/works-web
 
-FROM nginx:mainline-alpine as works.web
-COPY --from=works.web.install /usr/local/lib/node_modules/@zthun/works.web/dist/. /usr/share/nginx/html/
+FROM nginx:mainline-alpine as works-web
+COPY --from=works-web-install /usr/local/lib/node_modules/@zthun/works-web/dist/. /usr/share/nginx/html/

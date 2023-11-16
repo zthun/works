@@ -1,13 +1,13 @@
 # Description
 
-This is the marketing and learning page for the zthunworks client.
+This is the marketing and front page for the zthunworks web site.
 
 ## Usage
 
 The client is meant to be ran in a docker container.
 
 ```sh
-docker run -p 4200:80 zthun/works.web
+docker run -p 4200:80 zthun/works-web
 ```
 
 You can run it locally, but you will need to set up the appropriate server yourself. It's possible to use nginx, IIS,
@@ -17,7 +17,7 @@ cluster.
 
 ```sh
 # Installs the website to the global npm package repository.
-npm install -g @zthun/works.web
+npm install -g @zthun/works-web
 ```
 
 If you do choose to run it locally, the client assumes that the api server is housed on the same domain as the server
