@@ -9,16 +9,9 @@ const generated = [
 ];
 const partialGenerated = ['cspell.json', 'lerna.json'];
 
-const esFiles = [
-  '*.js',
-  '*.ts',
-  'packages/**/src/**/*.ts',
-  'packages/**/src/**/*.tsx',
-  'packages/*/*.js',
-  '.config/*.js'
-];
+const esFiles = ['*.js', '*.ts', 'packages/**/src/**/*.ts', 'packages/**/src/**/*.tsx', '.config/*.js'];
 
-const htmlFiles = ['packages/**/src/**/*.html'];
+const htmlFiles = ['packages/*/*.html'];
 const markdownFiles = ['*.md', 'packages/**/*.md'];
 const jsonFiles = ['*.json', 'packages/**/*.json'];
 const yamlFiles = ['*.yaml', '*.yml', 'packages/**/*.yaml', 'packages/**/*.yml'];
