@@ -36,14 +36,6 @@ services:
     image: zthun/vault-service
     environment:
       - DATABASE_URL=mongodb://zthunworks-services-mongo:27017
-  zthunworks-services-apps:
-    image: node:lts
-    ports:
-      - 9235:9229
-    volumes:
-      - .:/usr/dev
-    working_dir: /usr/dev
-    command: npm --workspace @zthun/works.apps run debug
   zthunworks-services-mongo:
     image: mongo:5.0.5
     volumes:

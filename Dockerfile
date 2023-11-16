@@ -28,11 +28,6 @@ RUN --mount=type=secret,id=GIT_CREDENTIALS,dst=/root/.git-credentials npx lerna 
     git push --tags
 RUN --mount=type=secret,id=NPM_CREDENTIALS,dst=/root/.npmrc npx lerna publish from-package --yes
 
-FROM node:lts-alpine as works.apps
-RUN npm install -g @zthun/works.apps
-EXPOSE 4000
-CMD ["zthun-works-apps"]
-
 FROM node:lts-alpine as works-api
 RUN npm install -g @zthun/works-api
 EXPOSE 3000
