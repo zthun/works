@@ -57,13 +57,11 @@ jobs:
             docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             docker buildx create --use
             docker buildx build --target works-web -t zthun/works-web:latest -t zthun/works-web:$(npm show @zthun/works-web version) --progress=plain --platform linux/arm64,linux/amd64 --push .
+            docker buildx build --target works-api -t zthun/works-api:latest -t zthun/works-api:$(npm show @zthun/works-api version) --progress=plain --platform linux/arm64,linux/amd64 --push .
 
             docker build . --target works.apps -t zthun/works.apps:latest -t zthun/works.apps:$(npm show @zthun/works.apps version) --progress=plain
-            docker build . --target works.api -t zthun/works.api:latest -t zthun/works.api:$(npm show @zthun/works.api version) --progress=plain
             docker push zthun/works.apps:latest
             docker push zthun/works.apps:$(npm show @zthun/works.apps version)
-            docker push zthun/works.api:latest
-            docker push zthun/works.api:$(npm show @zthun/works.api version)
 
 workflows:
   make:

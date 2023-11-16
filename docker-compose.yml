@@ -27,7 +27,7 @@ services:
     volumes:
       - .:/usr/dev
     working_dir: /usr/dev
-    command: npm --workspace @zthun/works.api run debug
+    command: npm --workspace @zthun/works-api run debug
   zthunworks-services-helpful:
     image: zthun/helpful-api
     ports:
