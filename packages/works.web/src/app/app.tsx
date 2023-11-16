@@ -11,7 +11,6 @@ import {
 import { createLightTheme } from '@zthun/fashion-theme';
 import React from 'react';
 import { ZHomePage } from '../home/home-page';
-import { ZRouteHome } from '../routes';
 
 const theme = createLightTheme();
 
@@ -34,7 +33,7 @@ export function ZWorksApp() {
       <ZFashionThemeContext.Provider value={theme}>
         <ZBannerMain prefix={prefix}>
           <ZRouteMap>
-            <ZRoute path={ZRouteHome.path} element={<ZHomePage />} />
+            <ZRoute path='/' element={<ZHomePage />} />
             <ZRoute path='*' element={<ZNotFound />} />
           </ZRouteMap>
         </ZBannerMain>

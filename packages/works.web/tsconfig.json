@@ -5,15 +5,7 @@
     "outDir": "dist",
     "declaration": false,
     "sourceMap": true,
-    "paths": {
-      "@zthun/cirque": ["../cirque/src/index"],
-      "@zthun/cirque-du-react": ["../cirque-du-react/src/index"],
-      "@zthun/cirque-du-selenium": ["../cirque-du-selenium/src/index"],
-      "@zthun/works.core": ["../works.core/src/index"],
-      "@zthun/works.draw": ["../works.draw/src/index"],
-      "@zthun/works.error": ["../works.error/src/index"],
-      "@zthun/works.react": ["../works.react/src/index"]
-    }
+    "paths": {}
   },
   "include": ["src/**/*.tsx", "src/**/*.ts", "features/**/*.ts"]
 }

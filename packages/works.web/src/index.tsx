@@ -4,8 +4,6 @@ import { createRoot } from 'react-dom/client';
 
 import { ZWorksApp } from './app/app';
 
-require('../images');
-
 const container = createRoot(document.getElementById('zthunworks')!);
 
 container.render(

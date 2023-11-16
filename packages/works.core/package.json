@@ -27,7 +27,7 @@
     "lodash": "^4.17.21",
     "typescript": "^5.1.6",
     "uuid": "^9.0.0",
-    "vitest": "^0.34.1"
+    "vitest": "^0.34.6"
   },
   "sideEffects": false,
   "gitHead": "348545f3f6789c46d0ed41c814d5be22ec8652a2"
