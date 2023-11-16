@@ -3,16 +3,19 @@ import {
   ZCaption,
   ZFashionThemeContext,
   ZH1,
+  ZImageSource,
   ZNotFound,
   ZRoute,
   ZRouteMap,
-  ZRouter
+  ZRouter,
+  ZStack
 } from '@zthun/fashion-boutique';
-import { createLightTheme } from '@zthun/fashion-theme';
+import { ZSizeFixed } from '@zthun/fashion-tailor';
+import { createDarkTheme } from '@zthun/fashion-theme';
 import React from 'react';
 import { ZHomePage } from '../home/home-page';
 
-const theme = createLightTheme();
+const theme = createDarkTheme();
 
 /**
  * Main application.
@@ -22,16 +25,18 @@ const theme = createLightTheme();
  */
 export function ZWorksApp() {
   const prefix = (
-    <div className='ZWorksApp-description'>
+    <ZStack className='ZWorksApp-description'>
       <ZH1 compact>Zthunworks</ZH1>
       <ZCaption compact>Development is Fun!</ZCaption>
-    </div>
+    </ZStack>
   );
+
+  const avatar = <ZImageSource src='/images/svg/learn.svg' width={ZSizeFixed.Medium} />;
 
   return (
     <ZRouter>
       <ZFashionThemeContext.Provider value={theme}>
-        <ZBannerMain prefix={prefix}>
+        <ZBannerMain avatar={avatar} prefix={prefix}>
           <ZRouteMap>
             <ZRoute path='/' element={<ZHomePage />} />
             <ZRoute path='*' element={<ZNotFound />} />
