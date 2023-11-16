@@ -10,12 +10,6 @@ export const ZRouteHome = new ZRouteOptionBuilder()
   .description('Get Started Building Applications')
   .build();
 
-export const ZRouteMicroservices = new ZRouteOptionBuilder()
-  .name('Microservices')
-  .path('microservices')
-  .description('Build Foundations For Application Services')
-  .build();
-
 export const ZRouteWebApps = new ZRouteOptionBuilder()
   .name('WebApps')
   .path('web-apps')

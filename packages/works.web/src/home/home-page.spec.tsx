@@ -34,12 +34,11 @@ describe('ZHomePage', () => {
     webApps.read.mockResolvedValue(learn);
   });
 
-  it('should navigate to the microservices page', async () => {
+  it('should render the page', async () => {
     // Arrange.
-    const target = await createTestTarget();
     // Act.
-    await (await target.microservices()).click();
+    const target = await createTestTarget();
     // Assert.
-    expect(history.location.pathname).toEqual('/microservices');
+    expect(target).toBeTruthy();
   });
 });
