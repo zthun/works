@@ -31,7 +31,7 @@ export function ZWorksApp() {
     </ZStack>
   );
 
-  const avatar = <ZImageSource src='/images/svg/learn.svg' width={ZSizeFixed.Medium} />;
+  const avatar = <ZImageSource src='/images/svg/code.svg' width={ZSizeFixed.Medium} />;
 
   return (
     <ZRouter>
