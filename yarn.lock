@@ -4410,7 +4410,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.react@^4.0.0, @zthun/works.react@workspace:packages/works.react":
+"@zthun/works.react@workspace:packages/works.react":
   version: 0.0.0-use.local
   resolution: "@zthun/works.react@workspace:packages/works.react"
   dependencies:
@@ -4464,9 +4464,6 @@ __metadata:
     "@zthun/helpful-fn": ^2.3.0
     "@zthun/helpful-react": ^2.3.0
     "@zthun/webigail-url": ^1.1.0
-    "@zthun/works.core": ^4.0.0
-    "@zthun/works.draw": ^4.0.0
-    "@zthun/works.react": ^4.0.0
     favicons: ^7.1.4
     favicons-webpack-plugin: ^6.0.0
     file-loader: ^6.2.0
