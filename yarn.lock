@@ -3837,17 +3837,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works.core@workspace:packages/works.core":
-  version: 0.0.0-use.local
-  resolution: "@zthun/works.core@workspace:packages/works.core"
-  dependencies:
-    lodash: ^4.17.21
-    typescript: ^5.1.6
-    uuid: ^9.0.0
-    vitest: ^0.34.6
-  languageName: unknown
-  linkType: soft
-
 "@zthun/works@workspace:.":
   version: 0.0.0-use.local
   resolution: "@zthun/works@workspace:."

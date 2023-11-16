@@ -4,10 +4,7 @@
     "baseUrl": ".",
     "outDir": "dist",
     "sourceMap": true,
-    "module": "commonjs",
-    "paths": {
-      "@zthun/works.core": ["../works.core/src/index"]
-    }
+    "module": "commonjs"
   },
   "include": ["src/**/*.ts"]
 }

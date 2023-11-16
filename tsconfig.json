@@ -2,10 +2,7 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": "packages",
-    "target": "esnext",
-    "paths": {
-      "@zthun/works.core": ["works.core/src/index"]
-    }
+    "target": "esnext"
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["**/node_modules/**"]
