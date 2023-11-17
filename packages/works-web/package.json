@@ -1,17 +1,24 @@
 {
   "name": "@zthun/works-web",
   "version": "4.0.0",
-  "description": "Zthunworks entrypoint application.",
+  "description": "Development is fun!",
   "repository": {
     "type": "git",
     "url": "https://github.com/zthun/works",
     "directory": "packages/works-web"
   },
+  "metadata": {
+    "display": "Zthunworks",
+    "representative": true,
+    "group": "Works"
+  },
   "scripts": {
     "build": "vite build",
     "debug": "vite"
   },
-  "author": "Anthony Bonta",
+  "author": {
+    "name": "Anthony Bonta"
+  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
