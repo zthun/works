@@ -1,5 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
+import { createGuid } from '@zthun/helpful-fn';
 import {
   IZConfigEntry,
   IZVaultClient,
@@ -7,7 +8,7 @@ import {
   ZVaultClientMemory,
   ZVaultToken
 } from '@zthun/vault-client';
-import { ZHttpCodeSuccess } from '@zthun/webigail-http';
+import { ZHttpCodeClient, ZHttpCodeSuccess } from '@zthun/webigail-http';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { ZApplicationsModule } from './applications-module';
@@ -56,6 +57,28 @@ describe('ZApplicationsApi', () => {
       // Assert.
       expect(actual.status).toEqual(ZHttpCodeSuccess.OK);
       expect(actual.body.data.length).toEqual(1);
+    });
+  });
+
+  describe('Get', () => {
+    it('should return a specific application by id', async () => {
+      // Arrange.
+      const expected = 'works';
+      const target = await createTestTarget();
+      // Act.
+      const actual = await request(target.getHttpServer()).get(`/${endpoint}/${expected}`);
+      // Assert.
+      expect(actual.status).toEqual(ZHttpCodeSuccess.OK);
+      expect(actual.body._id).toEqual(expected);
+    });
+
+    it('should return a 404 if the specific application does not exist', async () => {
+      // Arrange.
+      const target = await createTestTarget();
+      // Act.
+      const actual = await request(target.getHttpServer()).get(`/${endpoint}/${createGuid()}`);
+      // Assert
+      expect(actual.status).toEqual(ZHttpCodeClient.NotFound);
     });
   });
 });
