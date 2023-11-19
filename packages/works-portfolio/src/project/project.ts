@@ -16,6 +16,7 @@ export enum ZProjectKind {
 export interface IZProject {
   _id: string;
   name: string;
+  description: string;
   kind: ZProjectKind;
   technology: ZProjectTechnology;
   icon?: string;
@@ -30,6 +31,7 @@ export class ZProjectBuilder {
     this._project = {
       _id: '',
       name: '',
+      description: '',
       kind: ZProjectKind.Other,
       technology: ZProjectTechnology.Other
     };
@@ -42,6 +44,11 @@ export class ZProjectBuilder {
 
   public name(name: string): this {
     this._project.name = name;
+    return this;
+  }
+
+  public description(description: string): this {
+    this._project.description = description;
     return this;
   }
 

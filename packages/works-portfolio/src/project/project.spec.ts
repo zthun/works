@@ -20,6 +20,13 @@ describe('ZProjectBuilder', () => {
     });
   });
 
+  describe('Description', () => {
+    it('should set the value', () => {
+      const expected = 'Portfolio for everything done by zthun';
+      expect(createTestTarget().description(expected).build().description).toEqual(expected);
+    });
+  });
+
   describe('Icon', () => {
     it('should set the value', () => {
       const expected = new ZUrlBuilder().gravatar().build();
