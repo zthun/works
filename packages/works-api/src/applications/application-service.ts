@@ -1,4 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { walk } from '@zthun/helpful-node';
 import {
   IZDataRequest,
   IZDataSource,
@@ -10,6 +11,7 @@ import {
 } from '@zthun/helpful-query';
 import { IZVaultClient, ZVaultToken } from '@zthun/vault-client';
 import { IZProject } from '@zthun/works-portfolio';
+import { glob } from 'glob';
 
 export const ZApplicationsToken = Symbol();
 
@@ -49,12 +51,13 @@ export class ZApplicationsService implements IZApplicationsService {
       return this._source;
     }
 
-    // TODO
-    // const key = new ZConfigEntryBuilder('zthunworks.com').scope('common').key('domain').build();
-    // const domain = await this._vault.get(key);
-    // const url = new ZUrlBuilder().protocol('https').hostname(domain.value).build();
-
-    this._source = new ZDataSourceStatic([]);
+    // TODO - This doesn't scale well.  This will have to do for now as there are higher priority
+    // projects in the works, but there needs to be a way to add projects without having to come
+    // back and change this to make them show up.
+    const assets = await walk('assets', { start: __dirname });
+    const metadata = await glob(`${assets}/*.json`);
+    const apps = metadata.map<IZProject>((json) => require(json));
+    this._source = new ZDataSourceStatic<IZProject>(apps);
     return this._source;
   }
 }

@@ -63,7 +63,7 @@ describe('ZApplicationsApi', () => {
   describe('Get', () => {
     it('should return a specific application by id', async () => {
       // Arrange.
-      const expected = 'works';
+      const expected = 'fashion';
       const target = await createTestTarget();
       // Act.
       const actual = await request(target.getHttpServer()).get(`/${endpoint}/${expected}`);
