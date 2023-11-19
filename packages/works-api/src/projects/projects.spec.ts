@@ -14,7 +14,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { ZProjectsModule } from './projects-module';
 
 describe('ZApplicationsApi', () => {
-  const endpoint = 'applications';
+  const endpoint = 'projects';
 
   let domain: IZConfigEntry<string>;
   let vault: IZVaultClient;
