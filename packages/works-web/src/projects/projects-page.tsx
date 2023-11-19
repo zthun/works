@@ -1,3 +1,4 @@
+import { ZGridView } from '@zthun/fashion-boutique';
 import React from 'react';
 
 /**
@@ -6,5 +7,5 @@ import React from 'react';
  * @returns The jsx that renders the home page.
  */
 export function ZHomePage() {
-  return <div className='ZHomePage-root'>Home</div>;
+  return <ZGridView className='ZHomePage-root'></div>;
 }

@@ -2,8 +2,8 @@ import { ZCircusBy } from '@zthun/cirque';
 import { ZCircusSetupRenderer } from '@zthun/cirque-du-react';
 import React from 'react';
 import { describe, expect, it } from 'vitest';
-import { ZHomePage } from './home-page';
-import { ZHomePageComponentModel } from './home-page.cm';
+import { ZHomePage } from './projects-page';
+import { ZHomePageComponentModel } from './projects-page.cm';
 
 describe('ZHomePage', () => {
   async function createTestTarget() {
