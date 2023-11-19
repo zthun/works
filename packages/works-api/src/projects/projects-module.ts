@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ZVaultModule } from '@zthun/vault-client';
-import { ZApplicationsService, ZApplicationsToken } from './application-service';
-import { ZApplicationsController } from './applications-controller';
+import { ZProjectsController } from './projects-controller';
+import { ZApplicationsService, ZApplicationsToken } from './projects-service';
 
 @Module({
   imports: [ZVaultModule],
-  controllers: [ZApplicationsController],
+  controllers: [ZProjectsController],
   providers: [{ provide: ZApplicationsToken, useClass: ZApplicationsService }]
 })
 /**

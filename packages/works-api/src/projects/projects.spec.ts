@@ -11,7 +11,7 @@ import {
 import { ZHttpCodeClient, ZHttpCodeSuccess } from '@zthun/webigail-http';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { ZApplicationsModule } from './applications-module';
+import { ZApplicationsModule } from './projects-module';
 
 describe('ZApplicationsApi', () => {
   const endpoint = 'applications';
