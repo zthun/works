@@ -5059,6 +5059,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@zthun/helpful-node@npm:^2.7.1":
+  version: 2.7.1
+  resolution: "@zthun/helpful-node@npm:2.7.1"
+  dependencies:
+    "@zthun/helpful-fn": ^2.4.0
+  checksum: b03094c73c1540cb7a31c9ecb91d25ab88d9d47a78bf395f90b04d7c6d47464c3e53336bc9f7165174fbc262f3b25e6de9512924758a15660ff324570541256f
+  languageName: node
+  linkType: hard
+
 "@zthun/helpful-query@npm:^2.1.0, @zthun/helpful-query@npm:^2.3.0":
   version: 2.3.0
   resolution: "@zthun/helpful-query@npm:2.3.0"
@@ -5270,11 +5279,13 @@ __metadata:
     "@nestjs/platform-express": ^10.2.8
     "@nestjs/testing": ^10.2.8
     "@zthun/helpful-fn": ^2.4.0
+    "@zthun/helpful-node": ^2.7.1
     "@zthun/helpful-query": ^2.4.0
     "@zthun/vault-client": ^1.1.0
     "@zthun/webigail-http": ^1.1.0
     "@zthun/webigail-url": ^1.1.0
     "@zthun/works-portfolio": ^4.0.0
+    glob: ^10.3.10
     helmet: ^7.1.0
     nodemon: ^3.0.1
     reflect-metadata: ^0.1.13

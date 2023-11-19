@@ -43,6 +43,7 @@
     "nestjs",
     "octokit",
     "Photoshop",
+    "pokedexii",
     "portfinder",
     "psylocke",
     "rnwood",
@@ -54,5 +55,10 @@
     "zthun",
     "Zthunworks"
   ],
-  "dictionaries": ["typescript", "node", "npm", "en_US"]
+  "dictionaries": [
+    "typescript",
+    "node",
+    "npm",
+    "en_US"
+  ]
 }
