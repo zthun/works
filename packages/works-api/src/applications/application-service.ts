@@ -9,30 +9,29 @@ import {
   ZPageBuilder
 } from '@zthun/helpful-query';
 import { IZVaultClient, ZVaultToken } from '@zthun/vault-client';
-import { IZApplication } from './application';
+import { IZProject } from '@zthun/works-portfolio';
 
 export const ZApplicationsToken = Symbol();
 
 export interface IZApplicationsService {
-  list(request: IZDataRequest): Promise<IZPage<IZApplication>>;
-
-  read(id: string): Promise<IZApplication>;
+  list(request: IZDataRequest): Promise<IZPage<IZProject>>;
+  read(id: string): Promise<IZProject>;
 }
 
 @Injectable()
 export class ZApplicationsService implements IZApplicationsService {
-  private _source: IZDataSource<IZApplication>;
+  private _source: IZDataSource<IZProject>;
 
   public constructor(@Inject(ZVaultToken) private readonly _vault: IZVaultClient) {}
 
-  public async list(request: IZDataRequest): Promise<IZPage<IZApplication>> {
+  public async list(request: IZDataRequest): Promise<IZPage<IZProject>> {
     const source = await this._load();
     const apps = await source.retrieve(request);
     const count = await source.count(request);
-    return new ZPageBuilder<IZApplication>().data(apps).count(count).build();
+    return new ZPageBuilder<IZProject>().data(apps).count(count).build();
   }
 
-  public async read(id: string): Promise<IZApplication> {
+  public async read(id: string): Promise<IZProject> {
     const source = await this._load();
     const byId = new ZFilterBinaryBuilder().subject('_id').equal().value(id).build();
     const request = new ZDataRequestBuilder().filter(byId).page(1).size(1).build();
@@ -45,7 +44,7 @@ export class ZApplicationsService implements IZApplicationsService {
     return application;
   }
 
-  private async _load(): Promise<IZDataSource<IZApplication>> {
+  private async _load(): Promise<IZDataSource<IZProject>> {
     if (this._source) {
       return this._source;
     }
