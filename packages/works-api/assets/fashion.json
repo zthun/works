@@ -1,0 +1,10 @@
+{
+  "_id": "fashion",
+  "name": "Fashion",
+  "description": "Generate user interfaces on the web while using components from various libraries",
+  "kind": "web",
+  "technology": "node",
+  "icon": "https://raw.githubusercontent.com/zthun/fashion/latest/packages/fashion-web/public/images/svg/fashion.svg",
+  "url": "https://fashion.zthunworks.com",
+  "source": "https://github.com/zthun/fashion"
+}

@@ -1,0 +1,10 @@
+{
+  "_id": "pokedexii",
+  "name": "Pokedexii",
+  "description": "Search and find information about Pokémon from all generations.",
+  "kind": "web",
+  "technology": "node",
+  "icon": "https://raw.githubusercontent.com/zthun/pokedexii/latest/packages/pokedex-web/public/png/pokeball-512x512.png",
+  "url": "https://pokedexii.zthunworks.com",
+  "source": "https://github.com/zthun/pokedexii"
+}
