@@ -5,7 +5,9 @@
     "outDir": "dist",
     "declaration": false,
     "sourceMap": true,
-    "paths": {}
+    "paths": {
+      "@zthun/works-portfolio": ["../works-portfolio/src/index"]
+    }
   },
   "include": ["src/**/*.tsx", "src/**/*.ts", "features/**/*.ts"]
 }
