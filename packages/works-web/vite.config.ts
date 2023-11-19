@@ -1,15 +1,10 @@
-import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import tsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  plugins: [
-    tsConfigPaths(),
-    visualizer({
-      filename: 'stats/analysis.html'
-    })
-  ],
+  plugins: [tsConfigPaths()],
   server: {
+    host: '0.0.0.0',
     strictPort: true
   },
   resolve: {
