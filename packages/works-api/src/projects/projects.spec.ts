@@ -11,7 +11,7 @@ import {
 import { ZHttpCodeClient, ZHttpCodeSuccess } from '@zthun/webigail-http';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { ZApplicationsModule } from './projects-module';
+import { ZProjectsModule } from './projects-module';
 
 describe('ZApplicationsApi', () => {
   const endpoint = 'applications';
@@ -21,7 +21,7 @@ describe('ZApplicationsApi', () => {
   let _target: INestApplication<any>;
 
   const createTestTarget = async () => {
-    const module = await Test.createTestingModule({ imports: [ZApplicationsModule] })
+    const module = await Test.createTestingModule({ imports: [ZProjectsModule] })
       .overrideProvider(ZVaultToken)
       .useValue(vault)
       .compile();

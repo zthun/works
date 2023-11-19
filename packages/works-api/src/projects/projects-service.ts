@@ -13,15 +13,15 @@ import { IZVaultClient, ZVaultToken } from '@zthun/vault-client';
 import { IZProject } from '@zthun/works-portfolio';
 import { glob } from 'glob';
 
-export const ZApplicationsToken = Symbol();
+export const ZProjectsToken = Symbol();
 
-export interface IZApplicationsService {
+export interface IZProjectsService {
   list(request: IZDataRequest): Promise<IZPage<IZProject>>;
   read(id: string): Promise<IZProject>;
 }
 
 @Injectable()
-export class ZApplicationsService implements IZApplicationsService {
+export class ZProjectsService implements IZProjectsService {
   private _source: IZDataSource<IZProject>;
 
   public constructor(@Inject(ZVaultToken) private readonly _vault: IZVaultClient) {}

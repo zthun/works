@@ -1,11 +1,11 @@
 import { Controller, Get, Inject, Param, Query } from '@nestjs/common';
 import { IZDataRequestQuery, IZPage, ZDataRequestBuilder } from '@zthun/helpful-query';
 import { IZProject } from '@zthun/works-portfolio';
-import { IZApplicationsService, ZApplicationsToken } from './projects-service';
+import { IZProjectsService, ZProjectsToken } from './projects-service';
 
 @Controller('projects')
 export class ZProjectsController {
-  public constructor(@Inject(ZApplicationsToken) private readonly _apps: IZApplicationsService) {}
+  public constructor(@Inject(ZProjectsToken) private readonly _apps: IZProjectsService) {}
 
   @Get()
   public list(@Query() query: IZDataRequestQuery): Promise<IZPage<IZProject>> {
