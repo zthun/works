@@ -4,7 +4,10 @@
     "baseUrl": ".",
     "outDir": "dist",
     "sourceMap": true,
-    "module": "commonjs"
+    "module": "commonjs",
+    "paths": {
+      "@zthun/works-portfolio": ["../works-portfolio/src/index"]
+    }
   },
   "include": ["src/**/*.ts"]
 }
