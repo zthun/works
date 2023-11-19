@@ -1,0 +1,35 @@
+{
+  "name": "@zthun/works-portfolio",
+  "version": "4.0.0",
+  "description": "Get information about published works",
+  "author": "Anthony Bonta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zthun/helpful",
+    "directory": "packages/helpful-fn"
+  },
+  "main": "./dist/lib/index.js",
+  "module": "./dist/lib/index.esm.js",
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "build": "microbundle --format esm,cjs --tsconfig tsconfig.prod.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@zthun/helpful-fn": "^2.4.0",
+    "@zthun/helpful-query": "^2.4.0",
+    "@zthun/webigail-http": "^1.1.0",
+    "@zthun/webigail-url": "^1.1.0"
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.1",
+    "vitest": "^0.34.6"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false
+}
