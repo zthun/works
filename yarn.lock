@@ -5290,6 +5290,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@zthun/works-portfolio@workspace:packages/works-portfolio"
   dependencies:
+    "@zthun/helpful-fn": ^2.4.0
     "@zthun/helpful-query": ^2.4.0
     "@zthun/webigail-http": ^1.1.0
     "@zthun/webigail-url": ^1.1.0
