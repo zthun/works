@@ -1,8 +1,14 @@
-import { ZCircusComponentModel } from '@zthun/cirque';
+import { ZCircusBy, ZCircusComponentModel } from '@zthun/cirque';
+import { ZCardComponentModel, ZGridViewComponentModel } from '@zthun/fashion-boutique';
 
-/**
- * Represents the component model for the home page.
- */
-export class ZHomePageComponentModel extends ZCircusComponentModel {
-  public static readonly Selector = '.ZHomePage-root';
+export class ZProjectsPageComponentModel extends ZCircusComponentModel {
+  public static readonly Selector = '.ZProjectsPage-root';
+
+  public asGrid(): ZGridViewComponentModel {
+    return new ZGridViewComponentModel(this.driver);
+  }
+
+  public async project(id: string): Promise<ZCardComponentModel | null> {
+    return ZCircusBy.optional(this.driver, ZCardComponentModel, id);
+  }
 }

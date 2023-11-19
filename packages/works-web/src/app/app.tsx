@@ -13,7 +13,7 @@ import {
 import { ZSizeFixed } from '@zthun/fashion-tailor';
 import { createDarkTheme } from '@zthun/fashion-theme';
 import React from 'react';
-import { ZHomePage } from '../home/home-page';
+import { ZProjectsPage } from '../projects/projects-page';
 
 const theme = createDarkTheme();
 
@@ -38,7 +38,7 @@ export function ZWorksApp() {
       <ZFashionThemeContext.Provider value={theme}>
         <ZBannerMain avatar={avatar} prefix={prefix}>
           <ZRouteMap>
-            <ZRoute path='/' element={<ZHomePage />} />
+            <ZRoute path='/' element={<ZProjectsPage />} />
             <ZRoute path='*' element={<ZNotFound />} />
           </ZRouteMap>
         </ZBannerMain>
