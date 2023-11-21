@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.0](https://github.com/zthun/works/compare/v4.0.0...v5.0.0) (2023-11-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove works.core
+* remove works.nest
+* renamed to works-api
+
+### Features
+
+* fashion and pokedexii have been added to the portfolio ([6ada180](https://github.com/zthun/works/commit/6ada180839a2c33152e1e346c397e3e55c16d51e))
+* remove works.core ([0dee346](https://github.com/zthun/works/commit/0dee3468a610fefc47051593a9adffdb4254a1fb))
+* remove works.nest ([0991de9](https://github.com/zthun/works/commit/0991de927535f4dcbd44b31d1f4876c875f712e8))
+* renamed to works-api ([f42c5d4](https://github.com/zthun/works/commit/f42c5d44e9a644eb9669daacf30d78e8cea680e5))
+* searching projects returns projects by name ([c89bc15](https://github.com/zthun/works/commit/c89bc15bc7dbfb861055ac742c5fd162f8161aba))
+
+
+
 ## [4.0.0](https://github.com/zthun/works/compare/v3.1.2...v4.0.0) (2022-05-26)
 
 **Note:** Version bump only for package @zthun/works.api
