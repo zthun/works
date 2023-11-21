@@ -49,6 +49,17 @@ describe('ZApplicationsApi', () => {
       expect(actual.body.data.length).toBeTruthy();
     });
 
+    it('should only return apps that match the search to the name', async () => {
+      // Arrange.
+      const target = await createTestTarget();
+      // Act.
+      const result = await request(target.getHttpServer()).get(`/${endpoint}?search=fasHiOn`);
+      const [actual] = result.body.data;
+      // Assert.
+      expect(result.body.count).toEqual(1);
+      expect(actual.name).toEqual('Fashion');
+    });
+
     it('should return the specific page size', async () => {
       // Arrange.
       const target = await createTestTarget();

@@ -5,7 +5,9 @@ import {
   IZDataSource,
   IZPage,
   ZDataRequestBuilder,
+  ZDataSearchFields,
   ZDataSourceStatic,
+  ZDataSourceStaticOptionsBuilder,
   ZFilterBinaryBuilder,
   ZPageBuilder
 } from '@zthun/helpful-query';
@@ -57,7 +59,8 @@ export class ZProjectsService implements IZProjectsService {
     const assets = await walk('assets', { start: __dirname });
     const metadata = await glob(`${assets}/*.json`);
     const apps = metadata.map<IZProject>((json) => require(json));
-    this._source = new ZDataSourceStatic<IZProject>(apps);
+    const options = new ZDataSourceStaticOptionsBuilder<IZProject>().search(new ZDataSearchFields(['name'])).build();
+    this._source = new ZDataSourceStatic(apps, options);
     return this._source;
   }
 }
