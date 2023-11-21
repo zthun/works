@@ -3,6 +3,307 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.0](https://github.com/zthun/works/compare/v4.0.0...v5.0.0) (2023-11-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove works.core
+* remove works.apps
+* remove works.microservices
+* remove works.nest
+* renamed to works-api
+* rename to works-web
+* remove works.react
+* works.draw has been moved to @zthun/caricature
+* removed works.message as alerts are now in fashion
+* moved works.logger to @zthun/lumberjacky-log
+* removing works.error
+* works.class has been moved to @zthun/helpful-validation
+* migrate internet objects to helpful-internet
+* remove works.fashion in favor of fashion-theme and fashion-boutique
+* remove works.dal in favor of dalmart
+* remove utilities in favor of @zthun/helpful-fn
+* remove components from works.react in favor of @zthun/fashion-boutique
+* remove @zthun/works.chonkify in favor of @zthun/fashion-tailor
+* remove hooks from works.react in favor of @zthun/helpful-react
+* remove works.url in favor of webigail-url
+* remove works.http in favor of webigail-http
+* updating mui
+* transitioning from works.jest to spellcraft-jest
+* remove assert builder copy and assign utils
+* remove assertProxySendsMessage
+* file service is no longer supported in this package
+* menu has been removed
+* replaced circular progress with suspense rotate
+* removed circular backdrop
+* the image source component now standardizes its sizes
+* the ZPaperCard component has been replaced with ZCard
+* remove <ZHttpCodeCard />
+* removed the ZContent component
+* removed ZCardAvatar in favor of ZImageSource
+* removed data state
+* remove shade
+* simplified styling
+* changed dimension 2d to use state sizes
+* updated all dependencies to the latest versions
+* markdown is no longer directly supported by the works system
+* simplified the identity button so it does all the heavy lifting
+* the ZTopBar component has been merged to the web app layout
+* deleting deprecated code
+* update dependencies
+* adding cirque dependencies
+* works.client is now works.web
+* http result now requires the data in the constructor
+* removing deprecated typedoc feature
+* initial value must now be passed to a config entry
+* recovery and activator are now required in a user
+* password is now required in a login
+* alert id, message, and header now default to the empty string
+* http request url now defaults to the empty string
+* username, password, and port now default to undefined
+* filter fields now default to the empty string
+* server address now defaults to empty string
+* id, email, and password now default to empty string
+* email now defaults to the empty string
+* string fields now default to empty string
+* config entry id now defaults to the empty string
+* upgraded nest to 9.0
+
+### Features
+
+* a boolean component can be a named component ([8284e52](https://github.com/zthun/works/commit/8284e52e607a1b2cc92243573fded26914022f27))
+* added a boolean component ([5101282](https://github.com/zthun/works/commit/510128245654db10685a65077c7eb53e9cafd76c))
+* added a boolean component page ([f598a3f](https://github.com/zthun/works/commit/f598a3fc658d9171970fea3ac0f8c264183488c0))
+* added a border layout component model ([6cace5b](https://github.com/zthun/works/commit/6cace5b106e93a5a8b6046888a21a1077e6dd8f4))
+* added a button component ([db36778](https://github.com/zthun/works/commit/db36778a9e17fe1e962bcfa980ec72d06ed3cf46))
+* added a choice demo page ([e4e0910](https://github.com/zthun/works/commit/e4e091064b00e90391e6592688879b907d16cf51))
+* added a component model for alerts ([038798b](https://github.com/zthun/works/commit/038798bd26dac60419d15264d4c5472bcd7dfc0a))
+* added a drawer component ([c8463c6](https://github.com/zthun/works/commit/c8463c698f69b5ef53e6e4a2dc7739636711cf34))
+* added a drawer page ([dc4d462](https://github.com/zthun/works/commit/dc4d462ff52585d03b156b0acf274db2475746dc))
+* added a fashion page ([f1d859b](https://github.com/zthun/works/commit/f1d859b8021d9d201428fd052e5d26fbb11e7e85))
+* added a generic border layout ([e35ca88](https://github.com/zthun/works/commit/e35ca8875268c47df249100ed1f7a9b324399fd8))
+* added a grid layout ([f3c3bb8](https://github.com/zthun/works/commit/f3c3bb8f601b01b810b964732693f7a422cc0937))
+* added a hardened way to get the 2d canvas context ([5d21557](https://github.com/zthun/works/commit/5d21557877e38b4e282ea6ee2715702fa5ce7f22))
+* added a link component ([cfcb67d](https://github.com/zthun/works/commit/cfcb67d569877611a0aa5cf4c1e345081226c140))
+* added a list page ([923245f](https://github.com/zthun/works/commit/923245f4ad9f50f17fa89ebfa13569bd790b69f3))
+* added a menu with menu item support ([7904cb9](https://github.com/zthun/works/commit/7904cb9073c180b9b5b87054458d834799a9470b))
+* added a number slider component ([def9dc1](https://github.com/zthun/works/commit/def9dc108d12733da0f97edcd3ab3aeed128274e))
+* added a padded box layout ([094df1b](https://github.com/zthun/works/commit/094df1be0de486a5d5f5e5c16e802e0a01ca5ef7))
+* added a popup component ([7be0a57](https://github.com/zthun/works/commit/7be0a5704fb5d51b675dbc906a9b7bb1b582ad7f))
+* added a popup page ([4022f98](https://github.com/zthun/works/commit/4022f98a897bb2e0c2fa8ad86aaa1e3565b46135))
+* added a router breadcrumbs component ([6b55fe1](https://github.com/zthun/works/commit/6b55fe192efaaa2611376b939cb0493b74ac890c))
+* added a simpler card component ([5c0593f](https://github.com/zthun/works/commit/5c0593f321ee1b9183b2819a0e990ac00e945164))
+* added a sleep utility ([6ca8cbd](https://github.com/zthun/works/commit/6ca8cbd71e1b57d5cba9f38a83a09f0baa654ad4))
+* added a state anchor enum ([c709eb4](https://github.com/zthun/works/commit/c709eb4cdc6c2e24edce844ec5ccd273ed78a4c2))
+* added a state orientation enum ([1607235](https://github.com/zthun/works/commit/1607235f992cba4acb5c7a9f0454b36df560d116))
+* added a state size enum ([06a836b](https://github.com/zthun/works/commit/06a836be0b43ae2c18ec4f7779bd8df3a36d5a4d))
+* added a suspense page ([a70011f](https://github.com/zthun/works/commit/a70011f1dfba27ffa07032631f260ef5e75be439))
+* added a suspense rotate component ([f377065](https://github.com/zthun/works/commit/f377065bcb522701ea19f63d7e418d25e069a9ad))
+* added a text area component ([4116fab](https://github.com/zthun/works/commit/4116fab3b6eb59e3cddbdb8e198becce5c25fd37))
+* added a text component ([74db312](https://github.com/zthun/works/commit/74db312e1eb9252c73b25d3073bcb14ae2f311fd))
+* added a toolbar button and a toolbar route (button with route change) ([92e6457](https://github.com/zthun/works/commit/92e6457cc28d28c0980a6c9a2266971e61f30d29))
+* added a toolbar component ([77c444c](https://github.com/zthun/works/commit/77c444ce5919240ab9eb8b06d7261e9b833ce34e))
+* added a typography demo page ([15f8484](https://github.com/zthun/works/commit/15f8484c250c0f7e4f1ef8104b9b87d9fde75083))
+* added a WebAppHomeButton component ([61c9aef](https://github.com/zthun/works/commit/61c9aefaee46aa1ccca13de42bc053a8002f1e35))
+* added an adornment component ([40c86b8](https://github.com/zthun/works/commit/40c86b870765ff51e96aacbf3804e1d1a9f460c5))
+* added chip rounding ([cd51706](https://github.com/zthun/works/commit/cd51706c1b9cb091049389d763d0051cbcc7ad9a))
+* added cirque anticipation ([b5edcc9](https://github.com/zthun/works/commit/b5edcc928de9c7bcc57ac7b0dd867d417949c33c))
+* added cirque performance ([b59f2d9](https://github.com/zthun/works/commit/b59f2d9aeb545dcab0cfe42947f4b22a052b94d8))
+* added component label ([9cadfa3](https://github.com/zthun/works/commit/9cadfa362bc7595529fc959d4e5f83ac344e58fb))
+* added component name ([1f77ef0](https://github.com/zthun/works/commit/1f77ef06453a72ebddbd3821a3e7ab8d5f95150d))
+* added descriptions to pages ([5d77189](https://github.com/zthun/works/commit/5d77189bd5d4dc37957cba62131956499aa82420))
+* added heading component ([37e0a3e](https://github.com/zthun/works/commit/37e0a3ec4f1fd1fdb2120cc07f24cbc051456605))
+* added keyboard support ([2327ba6](https://github.com/zthun/works/commit/2327ba6f52b98f954a695b3c23c9927a1b676517))
+* added number input ([f40f38b](https://github.com/zthun/works/commit/f40f38b8d760cd7caf8fbe4a10945399c69ca6b8))
+* added page layout for works.web ([de07a1f](https://github.com/zthun/works/commit/de07a1fbeffeacfad8936d7c48ec0d335caf8ee1))
+* added required and optional ([a30249e](https://github.com/zthun/works/commit/a30249e788a82906abb09a70795561916052a3f0))
+* added state size to core ([37dc0cc](https://github.com/zthun/works/commit/37dc0ccbdf9facbdd8a342cae76559ee551c9dbd))
+* added style coloring mixins ([ffc182f](https://github.com/zthun/works/commit/ffc182f1bba55c7e52b6c5a0208b0277b7abe238))
+* added support for justify content ([d6a6a3e](https://github.com/zthun/works/commit/d6a6a3ee2d0a2ba231333b8ffb3f6c60360af3bf))
+* added support to load an optional web app ([fc7f266](https://github.com/zthun/works/commit/fc7f26694c1f4ba4c79c4f1a021c23f26945be1c))
+* added suspense ([14dde62](https://github.com/zthun/works/commit/14dde629401272959d0ae2ce3e28d1fabc916e75))
+* added the ability to set the alert severity via enum ([c21d706](https://github.com/zthun/works/commit/c21d706aca1ee8554bf6db082f894e0fbb540d97))
+* added the choice autocomplete ([2762a62](https://github.com/zthun/works/commit/2762a6299cfddaec6de3fdcc4076554d9aa65007))
+* added the cirque package ([38d8ccb](https://github.com/zthun/works/commit/38d8ccb09e7d6387d05512c9b58bcee56a99ae6a))
+* added the cirque-du-react package ([0ec6e29](https://github.com/zthun/works/commit/0ec6e29d1fa227d94a65783f8c699df9bef32517))
+* added the cirque-du-selenium package ([7be5ce3](https://github.com/zthun/works/commit/7be5ce317fd06364a885ec0c4000f2df6c5f597e))
+* added the css class function ([229bc9c](https://github.com/zthun/works/commit/229bc9cc3330708836816a64f64c6ffea48af2c1))
+* added the fashion grid component ([3713bda](https://github.com/zthun/works/commit/3713bda6dd89961bdd98a3f208e29c8ff7dad895))
+* added the fashion package ([cb8cc86](https://github.com/zthun/works/commit/cb8cc86931c03883c9bd6a7b47dce9e44b10366b))
+* added the firstDefined utility ([a2e0b82](https://github.com/zthun/works/commit/a2e0b82d24d64ba6ca2a71d6577646d4e6c5aa8f))
+* added the home page ([0bb7238](https://github.com/zthun/works/commit/0bb7238980b01889acb319f47f228dda08be75f3))
+* added the IZComponentValue interface ([0411311](https://github.com/zthun/works/commit/0411311713bee21b8f537e12b4bf9ba6fb07b5d8))
+* added the line item layout ([ffa8e53](https://github.com/zthun/works/commit/ffa8e531c8985460eb3cb9a6f94489bf50153c04))
+* added the list component ([eed100f](https://github.com/zthun/works/commit/eed100f284c2124a4dac216cf05efa50d421c1be))
+* added the range component interface ([9cb22dd](https://github.com/zthun/works/commit/9cb22ddc9f6c8fc35f94f355096846a894740d8c))
+* added the setFirstOrDefault utility ([36a3ce3](https://github.com/zthun/works/commit/36a3ce361933390d999731129d62c6a28b34cf49))
+* added the usePropState hook ([3b03e20](https://github.com/zthun/works/commit/3b03e20e19f7b1f94ab5d24f45b7bb84335f7b1a))
+* added typography components ([e06c7fe](https://github.com/zthun/works/commit/e06c7fe01f99c7a20f4920993696308b3d599fde))
+* added useAsyncState to replace global state ([f4996e2](https://github.com/zthun/works/commit/f4996e276f74ee369ca974785cc57c522c7cce9a))
+* added works.chonky-cat ([cb3ae84](https://github.com/zthun/works/commit/cb3ae842827a2f42645246b34e4454a50f11f995))
+* adding cirque dependencies ([7e11d6c](https://github.com/zthun/works/commit/7e11d6cfd0889cb492b86143e0f73c62daf8fc3a))
+* an entire fashion coordination can be transparent ([f0e41c3](https://github.com/zthun/works/commit/f0e41c375e521036dad60a7327ee01881374d349))
+* attributes can have fallback values ([bc0378f](https://github.com/zthun/works/commit/bc0378feb4a9a3f3fe2ae05d0d2a191a11381d93))
+* boolean can be rendered as a checkbox, radio, inline-radio, or switch ([d41d848](https://github.com/zthun/works/commit/d41d848248aac09960e59967dd4e3c2f04e768ec))
+* border layout backgrounds can use an entire fashion coordination ([4de8f8b](https://github.com/zthun/works/commit/4de8f8bb26d68a2f540b571dc004fd8116c9c11d))
+* border layout supports a click operation ([d88a10c](https://github.com/zthun/works/commit/d88a10c06d2e9889a47a99e797d36ddf3057dd00))
+* button supports tooltips ([faf7a61](https://github.com/zthun/works/commit/faf7a61178e95d2c5b5f849a10ee86c4e6ccc409))
+* buttons can be borderless ([6914378](https://github.com/zthun/works/commit/69143781a492a4e85d05df56f10714305b33085e))
+* buttons can be sized ([0f5fa44](https://github.com/zthun/works/commit/0f5fa44a10819b0efd9b445ebe4d9ecc814f7967))
+* choice can be named ([f7303bd](https://github.com/zthun/works/commit/f7303bd4b7fee459cd48e5debdc1ea7d2b5f4702))
+* circus can now help with construction of component models with appropriate waits ([40e74af](https://github.com/zthun/works/commit/40e74afcd1a5ee0863248bb59b4f3eab75ecbe2e))
+* circus can perform keyboard actions ([d4885bd](https://github.com/zthun/works/commit/d4885bd49d73c806892cb9739258bd237bf41f3b))
+* circus can query by different selectors ([f31892e](https://github.com/zthun/works/commit/f31892e8b1fd76c7b3a23090810a542fbcf0f58c))
+* circus driver can always give the body context ([a6543e3](https://github.com/zthun/works/commit/a6543e3be08cc5d7e8da07d7721d2b568a8addce))
+* circus driver can determine the selected state of an element ([e6ea48d](https://github.com/zthun/works/commit/e6ea48d7a768f67f82cb0a34559058f80a5d9498))
+* circus driver can take a description when waiting ([a3bfc8a](https://github.com/zthun/works/commit/a3bfc8a200c2e251ad2244c11546f94c389f8d31))
+* circus drivers can determine the value and disabled state of a component ([f5ad7c9](https://github.com/zthun/works/commit/f5ad7c9c1022251631dc4a401aea312d2f1569cb))
+* circus drivers can get the current url ([51f2309](https://github.com/zthun/works/commit/51f230907fa2a330ba833abf157583071e8dd534))
+* circus drivers can retrieve focused elements ([2360a2e](https://github.com/zthun/works/commit/2360a2e88b00ae5209c41523710a3fff6c5e5fb0))
+* circus-du-react can now setup a hook test ([6849339](https://github.com/zthun/works/commit/6849339075a358e5ef99390d51ac076632b233f6))
+* colorify will calculate the css color for you for a given palette and fashion ([10a86e4](https://github.com/zthun/works/commit/10a86e48e97ea676ae879190cbf1c8e60e787633))
+* components page can navigate to child pages ([98716d4](https://github.com/zthun/works/commit/98716d4fbbcda9aaedb9bf8bdedd91c2b0d090ec))
+* cookie rules now support null user claims in the signature ([620abb8](https://github.com/zthun/works/commit/620abb8c41e79bed6684cacab44830aa75ee3366))
+* extracted the web app drawer out of the top nav into a separate component ([a32b923](https://github.com/zthun/works/commit/a32b9231e031dc3ae6cbd94d7bcdf585ab6b78d9))
+* fashion and pokedexii have been added to the portfolio ([6ada180](https://github.com/zthun/works/commit/6ada180839a2c33152e1e346c397e3e55c16d51e))
+* fashion can be stringified ([94c450a](https://github.com/zthun/works/commit/94c450a4043ce188af6a05e40ab4f9994e634de0))
+* fashion objects can inherit from the parent container ([8605e30](https://github.com/zthun/works/commit/8605e3038fe4db787a9408c8f0c97ec289786084))
+* fashion provides a default set of design coordinations ([3473f65](https://github.com/zthun/works/commit/3473f65cdbb10f59ab08ce875d919f39f95063a6))
+* grid layout columns can be responsive ([c6aa163](https://github.com/zthun/works/commit/c6aa163494fe064502ec07af24b0cefd118601ef))
+* height and width can now be more restrictive than a ZSize enum ([e63ba74](https://github.com/zthun/works/commit/e63ba74bba58172d1311783053dd44b06316e6f5))
+* home page now uses correct typography ([c0a7823](https://github.com/zthun/works/commit/c0a78234d35908b53bc3355aafc73c2e0ed617ff))
+* image source can now specify a height and width size ([72641f1](https://github.com/zthun/works/commit/72641f18dbcba411e493a9e50a6c8b942136afad))
+* images for nest and react are now available ([8b25bb9](https://github.com/zthun/works/commit/8b25bb9ef019a8f480e22a534ad965e468b0f5cc))
+* list items can be grouped ([c5e319f](https://github.com/zthun/works/commit/c5e319f78e268100f486de8579b08e7c5179bc14))
+* lists can have dividers ([cd6c94f](https://github.com/zthun/works/commit/cd6c94fe3ae1ec09814fc85a8e07eaa730c97fd9))
+* markdown is no longer directly supported by the works system ([4610262](https://github.com/zthun/works/commit/4610262e5c8a96a31faab3387b10a0cf36065993))
+* migrated all security features to roadblock ([7a15a72](https://github.com/zthun/works/commit/7a15a729142c8ba327a8b180fcbc1c13493e5812))
+* portfolio projects describe applications and projects ([9d5b889](https://github.com/zthun/works/commit/9d5b88943428da5dee2842bd471fa14c3a7df6a5))
+* profilee display and avatar can now be reset to undefined in the builder ([3ca2a77](https://github.com/zthun/works/commit/3ca2a77d7822eeca9912abf2e435ec8cd5ed083f))
+* projects can be named with descriptions ([faf73ee](https://github.com/zthun/works/commit/faf73eee715ac9258f08ebdbc73afc90d523726f))
+* projects can be navigated to the url or source code ([d72da29](https://github.com/zthun/works/commit/d72da292450e7721a1ddb4c397ec292745239b92))
+* remove works.apps ([5fdcf3f](https://github.com/zthun/works/commit/5fdcf3fe9cb208131eaccc73d785e92f0f902cf3))
+* remove works.core ([0dee346](https://github.com/zthun/works/commit/0dee3468a610fefc47051593a9adffdb4254a1fb))
+* remove works.dal in favor of dalmart ([3e41c27](https://github.com/zthun/works/commit/3e41c27fc2f094e1ee72c8de6ce3a75c1d7943cc))
+* remove works.fashion in favor of fashion-theme and fashion-boutique ([4bef527](https://github.com/zthun/works/commit/4bef527e1b2db743d1c8f03202de51207647153f))
+* remove works.microservices ([8d4ede4](https://github.com/zthun/works/commit/8d4ede449d5609821cc9da7dccccfeb412b4884b))
+* remove works.nest ([0991de9](https://github.com/zthun/works/commit/0991de927535f4dcbd44b31d1f4876c875f712e8))
+* remove works.react ([cbdffbc](https://github.com/zthun/works/commit/cbdffbc7044bef3ff47f5184b52fcbea50de9ad3))
+* removed privacy.md and terms.md as theyare needed only with legal ([13db061](https://github.com/zthun/works/commit/13db0614dbacbb10f7804f634225c40cafbf7b24))
+* removing deprecated typedoc feature ([7282c3d](https://github.com/zthun/works/commit/7282c3d152edb5c441fb19a3c3f16240d0b4d3cd))
+* removing works.error ([67dbea2](https://github.com/zthun/works/commit/67dbea28464ca16697931be12d35098301d88158))
+* renamed to works-api ([f42c5d4](https://github.com/zthun/works/commit/f42c5d44e9a644eb9669daacf30d78e8cea680e5))
+* result headers now support undefined values ([3476796](https://github.com/zthun/works/commit/34767960810f62ab4e48a8e21dc6f3561c461a99))
+* safe state now supports the functional callback of the setter ([b08946b](https://github.com/zthun/works/commit/b08946b39f067fc12d90a22806c889db64ff582b))
+* searching projects returns projects by name ([c89bc15](https://github.com/zthun/works/commit/c89bc15bc7dbfb861055ac742c5fd162f8161aba))
+* size can be geometric ([578ad49](https://github.com/zthun/works/commit/578ad4991de1f4baf5e6e8bfd1e9fa59f0fca7c5))
+* src is now optional for a source component ([327dca4](https://github.com/zthun/works/commit/327dca42fa9991e9131fcb91bc15c6c34160297d))
+* suspense can notify its size ([14e99d4](https://github.com/zthun/works/commit/14e99d4c0082db995a3184852e5e7a252a337969))
+* text areas can have specific size rows ([ace586b](https://github.com/zthun/works/commit/ace586b751d3de2a34a65027c5a578d5ecd10756))
+* the button component can report which fashion it is using ([bb5acb4](https://github.com/zthun/works/commit/bb5acb4efd652e212d60e092fc2a3a6a8ed58cfc))
+* the choice component model can find options by text as well as value ([7541460](https://github.com/zthun/works/commit/7541460de0998f531e041ca545b099371848482e))
+* the circus driver can retrieve the tag of the driver context ([f946923](https://github.com/zthun/works/commit/f9469235e72c8e618f049284d16eddf1a689dc7f))
+* the list page showcases groups and dividers in addition to line items ([209d856](https://github.com/zthun/works/commit/209d856f3e14a02cfb3112d7e2e27b457dbb145d))
+* the projects page displays the portfolio of projects that have been released ([cb84d1b](https://github.com/zthun/works/commit/cb84d1b9529cd16d5b9167c8db496a38b0a8aac5))
+* the toolbar can be styled ([e6fccca](https://github.com/zthun/works/commit/e6fcccade30e95d323f4e8bea0f9444fdd93e855))
+* the vault service now has a health check ([1180ba2](https://github.com/zthun/works/commit/1180ba25ef6babd9ac21235554c53adbdc0002f8))
+* the web-apps page now shows the boolean and choice demos ([acca362](https://github.com/zthun/works/commit/acca362d57b71dee7375a386b3e7d6e655a3d1ba))
+* typography fonts should now be consistent ([a114f94](https://github.com/zthun/works/commit/a114f94b24b8542e92e1d8afc74c408b2ec9b287))
+* updated mui components ([95b502a](https://github.com/zthun/works/commit/95b502a5a01bbf72f46efdc19671e606c5625a45))
+* upgraded nest to 9.0 ([7cfcd13](https://github.com/zthun/works/commit/7cfcd1342381d60a92f97443ed10cb1ce02e3916))
+* useAmbassadorState can now take an initial value ([535a53d](https://github.com/zthun/works/commit/535a53d2e90defb956c05ff5102472ea7cd91319))
+* waiting can take a promise that returns a boolean as well ([e3a9684](https://github.com/zthun/works/commit/e3a96847106a6ae0dbc96ce9dac37f064d5125e6))
+* web app drawer is divided into groups ([7df9f80](https://github.com/zthun/works/commit/7df9f800366a229d4f7646622ca0f773fe6581b6))
+* web app service can now read an individual web app ([deba0e3](https://github.com/zthun/works/commit/deba0e3992de4d2b198b7f3957f158acd0581f68))
+* web can display the health service ([e8aba23](https://github.com/zthun/works/commit/e8aba23389051096a6579281ee5b4de9975fe565))
+* works portfolio contains models for, and ways to retrieve given projects ([77264db](https://github.com/zthun/works/commit/77264db2a1c2ee31b0c2d752b0b558bb919f70c9))
+* works.class has been moved to @zthun/helpful-validation ([9a4f0a3](https://github.com/zthun/works/commit/9a4f0a3e1b78b2f63cbf8eab099138898b278d9a))
+* works.client is now works.web ([d21c891](https://github.com/zthun/works/commit/d21c891d68c1a148f9de92772b303739f77f4501))
+* works.draw has been moved to @zthun/caricature ([6deda5f](https://github.com/zthun/works/commit/6deda5fffeb338ed1111923dfa429f03c4a37b25))
+* works.microservices now depends on the logger ([7c8855c](https://github.com/zthun/works/commit/7c8855c867d00bb29a1a8dbd411452808aa4c955))
+* you can create a copy of the default fashion theme ([adc1a95](https://github.com/zthun/works/commit/adc1a95a5a2176db89969ff289ed3706db25fa06))
+* you can now assign the severity by variable instead of being forced to invoke a member method ([fb5a804](https://github.com/zthun/works/commit/fb5a80471fcea5b60ec6cb9bf13f999761f40b60))
+* you can now directly get supported fashion designs ([724566c](https://github.com/zthun/works/commit/724566c99a974b33bcbea8b382fcd3968d6730c4))
+* you can now directly set the value of a value supported  driver context ([ff4835c](https://github.com/zthun/works/commit/ff4835c083309ab80d0ac73de49948c04bc171f5))
+* you can query the choice components by name ([0d6623b](https://github.com/zthun/works/commit/0d6623b490fc7f8cd25f88b2823281e94bfd32a5))
+
+
+### Bug Fixes
+
+* buttons should no longer warn about tooltips when disabled ([812bbca](https://github.com/zthun/works/commit/812bbca54d2ff8ea58f65cefe851fcd98449b70e))
+* connect using a default url if the env.DATABASE_URL value is not set ([a6c8902](https://github.com/zthun/works/commit/a6c89026bb14e44beed5c3ab24e7e0dfaf4fd2f1))
+* correct status codes should now be set for more generic errors ([412df12](https://github.com/zthun/works/commit/412df125e5bbcbb13a8e545fbf6d9b39313e00d3))
+* font sizes and typography should now be consistent ([9551a57](https://github.com/zthun/works/commit/9551a570a224e66bc29b1a8fa8c34e9dd1de54c3))
+* images in the top nav should now properly be sized to medium on height and width ([2c9d40d](https://github.com/zthun/works/commit/2c9d40dcd89932d2990a73efadf219c1acbe5515))
+* img and svg should now be uniform dimensions ([275c34d](https://github.com/zthun/works/commit/275c34df03dd73aedab2429384ba0a8527a6ad2a))
+* mui components theme is now set if undefined ([31c3e6a](https://github.com/zthun/works/commit/31c3e6a3ad64c3a1275ef4dcd72378bf0afb2781))
+* rendering a component that immediately changes the state should now be properly wrapped in act ([6dae35a](https://github.com/zthun/works/commit/6dae35ab3fdfe7e5b413b8fb0adae80387bcbd52))
+* setting the dimensions on an image source now properly sets the svg underneath it ([2685303](https://github.com/zthun/works/commit/268530358b95d92d2595bd51bc1c1a0f1b1a4306))
+* svg data urls should have correct dimensions ([4bc5eb3](https://github.com/zthun/works/commit/4bc5eb313fb8a540f21223554e397313a65b0c0f))
+* the code text size is now forced to be 6 rem ([556468b](https://github.com/zthun/works/commit/556468b9120c5ec6c83bcce2214e097e3576a058))
+* the header should no longer render if it is not set ([06df71e](https://github.com/zthun/works/commit/06df71e2897e4040e9ff071841c132a65f1a959f))
+* the vault module will now wait for the actual vault service to become available ([0920508](https://github.com/zthun/works/commit/09205083560ce81e09c2906142233d3a6222b9b7))
+* typo ([d2d96c0](https://github.com/zthun/works/commit/d2d96c02434b4eebe166c9a6347a9055bf1d3a3d))
+* typography and fonts should now be consistent for the paper card ([50d0fac](https://github.com/zthun/works/commit/50d0fac6b4337de49150b1c355d6741f8bb1cc9c))
+* typography and fonts should now be consistent for the top nav ([2c29494](https://github.com/zthun/works/commit/2c294946c9f0ef4f1b948d8b531c1f959a6a44a8))
+* usePropState should allow null as a value ([6821eae](https://github.com/zthun/works/commit/6821eaed6a186735a4c7cea51a35fd9fae46eeb1))
+
+
+### Code Refactoring
+
+* alert id, message, and header now default to the empty string ([5806afd](https://github.com/zthun/works/commit/5806afd3195c83f189ec866a15c4bf9eb28393f7))
+* changed dimension 2d to use state sizes ([7d377df](https://github.com/zthun/works/commit/7d377df14d8f54140b46536964106f25b54039f4))
+* config entry id now defaults to the empty string ([2f2558d](https://github.com/zthun/works/commit/2f2558d99c8f086081f4424a21fd5f6fce18bd78))
+* deleting deprecated code ([9552bf7](https://github.com/zthun/works/commit/9552bf707b66072b565688f5cd274528ab5a799e))
+* email now defaults to the empty string ([9309f38](https://github.com/zthun/works/commit/9309f38212e93ad7c985535ee93fe8802c8f1ed5))
+* file service is no longer supported in this package ([6c3aca1](https://github.com/zthun/works/commit/6c3aca1dffc5daf4dd484e56ab775c148cfd4a25))
+* filter fields now default to the empty string ([c000738](https://github.com/zthun/works/commit/c0007381cb9caee481b1bc78742639e99571964b))
+* http request url now defaults to the empty string ([5aa9e22](https://github.com/zthun/works/commit/5aa9e22a2a1ed92185e6388ae61ca361855f1079))
+* http result now requires the data in the constructor ([2613381](https://github.com/zthun/works/commit/2613381aabf8f1d3fa045091f5677a901c8041c6))
+* id, email, and password now default to empty string ([34a2cb9](https://github.com/zthun/works/commit/34a2cb93fe36d6ab5d4e077ca74dfa7fadbbf277))
+* initial value must now be passed to a config entry ([6b5ea15](https://github.com/zthun/works/commit/6b5ea1563d5eb1c3e87527f9fa3e78d2f837a730))
+* menu has been removed ([87c36e9](https://github.com/zthun/works/commit/87c36e9f1f965b442f20e5cac798ecbc392ca079))
+* migrate internet objects to helpful-internet ([824e4fb](https://github.com/zthun/works/commit/824e4fbd181a081dab95df9d7bef2b1cae987713))
+* moved works.logger to @zthun/lumberjacky-log ([259a8f9](https://github.com/zthun/works/commit/259a8f9d5c7518ae9f3ef62e2ac74966ecd048cf))
+* password is now required in a login ([142d799](https://github.com/zthun/works/commit/142d79993c61a597927d882c2dc789530292f8dc))
+* recovery and activator are now required in a user ([739042b](https://github.com/zthun/works/commit/739042bf2c6ad34102d342e2ed577d8a88dbffcc))
+* remove @zthun/works.chonkify in favor of @zthun/fashion-tailor ([6d1963e](https://github.com/zthun/works/commit/6d1963e0417633dcab2266bd3c5eeb5c0cf99440))
+* remove <ZHttpCodeCard /> ([7a54b4c](https://github.com/zthun/works/commit/7a54b4c2c9cd8f37fb82f17ead75c24ea3092c7b))
+* remove assert builder copy and assign utils ([8c7b044](https://github.com/zthun/works/commit/8c7b0447b570e6b27ed114792d0e418ea0a48957))
+* remove assertProxySendsMessage ([f5ef604](https://github.com/zthun/works/commit/f5ef6040f72e93722bdd61dd623a1f6d2967f0d3))
+* remove components from works.react in favor of @zthun/fashion-boutique ([1da24e6](https://github.com/zthun/works/commit/1da24e60d94d448fdae67087b57c8401b3037cbf))
+* remove hooks from works.react in favor of @zthun/helpful-react ([e0e04a9](https://github.com/zthun/works/commit/e0e04a94af8487d54b4aab581f4e9c7094cf3bc2))
+* remove shade ([733da6d](https://github.com/zthun/works/commit/733da6d541315b21693608f1f9d0648bea4ffe4c))
+* remove utilities in favor of @zthun/helpful-fn ([58a120b](https://github.com/zthun/works/commit/58a120b7a72839129f305d9880091dec8daed8ae))
+* remove works.http in favor of webigail-http ([2a80b2d](https://github.com/zthun/works/commit/2a80b2dbde9ded6a2afc34d12ce41177946947fb))
+* remove works.url in favor of webigail-url ([b1298f8](https://github.com/zthun/works/commit/b1298f85a860b35ef517d78625b427102a28b496))
+* removed circular backdrop ([fdc95b9](https://github.com/zthun/works/commit/fdc95b943970a3de92e778573062a6c06d99424a))
+* removed data state ([11e2784](https://github.com/zthun/works/commit/11e27849b7f7851532897caf4042775fd4297ef5))
+* removed the ZContent component ([301571d](https://github.com/zthun/works/commit/301571df440d6b4259dfef67090d3390a0de1ce7))
+* removed works.message as alerts are now in fashion ([8028621](https://github.com/zthun/works/commit/8028621a56ae24380882af3cbaab7bcec37fa7c1))
+* removed ZCardAvatar in favor of ZImageSource ([fb0deda](https://github.com/zthun/works/commit/fb0dedae3203afd84ac2c07bfe44ba1738256fbe))
+* rename to works-web ([65407b2](https://github.com/zthun/works/commit/65407b2615e2463bc30055d4e2809ba4be1b2aae))
+* replaced circular progress with suspense rotate ([8af0062](https://github.com/zthun/works/commit/8af0062292a4efec3aaeeefadf2a08fee85896f5))
+* server address now defaults to empty string ([e607c11](https://github.com/zthun/works/commit/e607c11e10c4f2fab2e6f9837a6a8b5b16a377b0))
+* simplified styling ([c81e505](https://github.com/zthun/works/commit/c81e5054de1b2b858dc369f8c0da0aa04aeab4d6))
+* simplified the identity button so it does all the heavy lifting ([1e38a68](https://github.com/zthun/works/commit/1e38a688683537f060735efde901e42937f224bc))
+* string fields now default to empty string ([5327351](https://github.com/zthun/works/commit/53273516e862973398a249e8ec323e7ffb66f413))
+* the image source component now standardizes its sizes ([ed068dd](https://github.com/zthun/works/commit/ed068ddbdfa5424d5ac66aa9a0e98da307a5eca4))
+* the ZPaperCard component has been replaced with ZCard ([a9b17c0](https://github.com/zthun/works/commit/a9b17c0bd4d08510e247e2373ec0d190ae6c1b8c))
+* the ZTopBar component has been merged to the web app layout ([f800f9f](https://github.com/zthun/works/commit/f800f9f3aad17a07f7f3b814562368e7da6ba7e0))
+* transitioning from works.jest to spellcraft-jest ([5dea774](https://github.com/zthun/works/commit/5dea7742a4416cf85cb81db2847509ea7b02bbbb))
+* username, password, and port now default to undefined ([0bcdfbd](https://github.com/zthun/works/commit/0bcdfbdd84bfa96bdfedec3e6199d251652bddec))
+
+
+### Build System
+
+* update dependencies ([13584a9](https://github.com/zthun/works/commit/13584a914e9310f43cf9f085a6f1f804f2d49513))
+* updated all dependencies to the latest versions ([381d794](https://github.com/zthun/works/commit/381d7944409e0a89dad64d4105b267c8728205a9))
+* updating mui ([db9a509](https://github.com/zthun/works/commit/db9a509b27194fbf9af2cc6a8f15b3455a11a1ec))
+
+
+
 ## [4.0.0](https://github.com/zthun/works/compare/v3.1.2...v4.0.0) (2022-05-26)
 
 
