@@ -1,17 +1,5 @@
-export enum ZProjectTechnology {
-  Other = 'other',
-  Node = 'node',
-  Java = 'java',
-  DotNet = 'dotnet'
-}
-
-export enum ZProjectKind {
-  Other = 'other',
-  Library = 'library',
-  Web = 'web',
-  Desktop = 'desktop',
-  Console = 'console'
-}
+import { ZProjectKind } from './project-kind';
+import { ZProjectTechnology } from './project-technology';
 
 export interface IZProject {
   _id: string;
