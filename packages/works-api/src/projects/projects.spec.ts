@@ -65,6 +65,7 @@ describe('ZApplicationsApi', () => {
       // Arrange.
       const expected = 'fashion';
       const target = await createTestTarget();
+      await request(target.getHttpServer()).get(`/${endpoint}/${expected}`);
       // Act.
       const actual = await request(target.getHttpServer()).get(`/${endpoint}/${expected}`);
       // Assert.
