@@ -30,7 +30,7 @@ export function ZProjectsPage() {
     const display = ZProjectKindDisplayMap[kind];
 
     const footer = (
-      <ZGrid gap={ZSizeFixed.Small} columns='1fr auto'>
+      <ZGrid gap={ZSizeFixed.Small} columns='1fr auto' width={ZSizeVaried.Full}>
         <ZButton
           label='Check it out'
           avatar={<ZIconFontAwesome name='person-walking-arrow-right' width={ZSizeFixed.Small} />}
