@@ -1,19 +1,69 @@
-import { ZCard, ZGridView, ZImageSource, ZParagraph, ZStack } from '@zthun/fashion-boutique';
-import { ZSizeFixed } from '@zthun/fashion-tailor';
-import { IZProject } from '@zthun/works-portfolio';
+import {
+  ZBox,
+  ZButton,
+  ZCard,
+  ZGrid,
+  ZGridView,
+  ZIconFontAwesome,
+  ZImageSource,
+  ZParagraph,
+  ZStack
+} from '@zthun/fashion-boutique';
+import { ZSizeFixed, ZSizeVaried } from '@zthun/fashion-tailor';
+import { ZHorizontalAnchor } from '@zthun/helpful-fn';
+import { useWindowService } from '@zthun/helpful-react';
+import { IZProject, ZProjectKindDisplayMap, ZProjectKindFontAwesomeIconMap } from '@zthun/works-portfolio';
 import React from 'react';
 import { useProjectsService } from './projects-service';
 
 export function ZProjectsPage() {
   const projects = useProjectsService();
-  const renderProject = (project: IZProject) => (
-    <ZCard className='ZProjectsPage-project' heading={project.name} name={project._id}>
-      <ZStack gap={ZSizeFixed.Small}>
-        <ZImageSource src={project.icon} height={ZSizeFixed.ExtraLarge} />
-        <ZParagraph>{project.description}</ZParagraph>
-      </ZStack>
-    </ZCard>
-  );
+  const window = useWindowService();
+
+  const open = (url: string) => {
+    window.open(url, '_blank');
+  };
+
+  const renderProject = (project: IZProject) => {
+    const { _id, kind, name, url, source } = project;
+    const [icon, family] = ZProjectKindFontAwesomeIconMap[kind];
+    const display = ZProjectKindDisplayMap[kind];
+
+    const footer = (
+      <ZGrid gap={ZSizeFixed.Small} columns='1fr auto'>
+        <ZButton
+          label='Check it out'
+          avatar={<ZIconFontAwesome name='person-walking-arrow-right' width={ZSizeFixed.Small} />}
+          width={ZSizeVaried.Full}
+          onClick={open.bind(null, url)}
+          name='url'
+        />
+        <ZButton
+          label={<ZIconFontAwesome name='github' family='brands' width={ZSizeFixed.Small} />}
+          onClick={open.bind(null, source)}
+          name='source'
+        />
+      </ZGrid>
+    );
+
+    return (
+      <ZCard
+        className='ZProjectsPage-project'
+        avatar={<ZIconFontAwesome name={icon} family={family} width={ZSizeFixed.Small} />}
+        heading={name}
+        subHeading={display}
+        name={_id}
+        footer={footer}
+      >
+        <ZStack gap={ZSizeFixed.Small}>
+          <ZBox width={ZSizeVaried.Full} justification={ZHorizontalAnchor.Center}>
+            <ZImageSource src={project.icon} height={ZSizeFixed.ExtraLarge} />
+          </ZBox>
+          <ZParagraph>{project.description}</ZParagraph>
+        </ZStack>
+      </ZCard>
+    );
+  };
 
   return (
     <ZGridView

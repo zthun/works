@@ -1,5 +1,6 @@
 import { ZCircusBy, ZCircusComponentModel } from '@zthun/cirque';
-import { ZCardComponentModel, ZGridViewComponentModel } from '@zthun/fashion-boutique';
+import { ZGridViewComponentModel } from '@zthun/fashion-boutique';
+import { ZProjectCardComponentModel } from './project-card.cm';
 
 export class ZProjectsPageComponentModel extends ZCircusComponentModel {
   public static readonly Selector = '.ZProjectsPage-root';
@@ -8,7 +9,11 @@ export class ZProjectsPageComponentModel extends ZCircusComponentModel {
     return new ZGridViewComponentModel(this.driver);
   }
 
-  public async project(id: string): Promise<ZCardComponentModel | null> {
-    return ZCircusBy.optional(this.driver, ZCardComponentModel, id);
+  public async projects(): Promise<ZProjectCardComponentModel[]> {
+    return ZCircusBy.all(this.driver, ZProjectCardComponentModel);
+  }
+
+  public async project(id: string): Promise<ZProjectCardComponentModel | null> {
+    return ZCircusBy.optional(this.driver, ZProjectCardComponentModel, id);
   }
 }
