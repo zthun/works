@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.1](https://github.com/zthun/works/compare/v5.0.0...v5.0.1) (2023-11-21)
+
+
+### Bug Fixes
+
+* icons on small devices now scale downward ([e7d3b55](https://github.com/zthun/works/commit/e7d3b55f7fea3b59aba61c7b97dfff76776c0746))
+
+
+
 ## [5.0.0](https://github.com/zthun/works/compare/v4.0.0...v5.0.0) (2023-11-21)
 
 
