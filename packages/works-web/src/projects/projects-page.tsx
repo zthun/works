@@ -57,7 +57,7 @@ export function ZProjectsPage() {
       >
         <ZStack gap={ZSizeFixed.Small}>
           <ZBox width={ZSizeVaried.Full} justification={ZHorizontalAnchor.Center}>
-            <ZImageSource src={project.icon} height={ZSizeFixed.ExtraLarge} />
+            <ZImageSource src={project.icon} height={ZSizeFixed.ExtraLarge} heightSm={ZSizeFixed.Large} />
           </ZBox>
           <ZParagraph>{project.description}</ZParagraph>
         </ZStack>
