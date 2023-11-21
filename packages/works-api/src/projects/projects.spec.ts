@@ -1,41 +1,22 @@
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { createGuid } from '@zthun/helpful-fn';
-import {
-  IZConfigEntry,
-  IZVaultClient,
-  ZConfigEntryBuilder,
-  ZVaultClientMemory,
-  ZVaultToken
-} from '@zthun/vault-client';
 import { ZHttpCodeClient, ZHttpCodeSuccess } from '@zthun/webigail-http';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { ZProjectsModule } from './projects-module';
 
 describe('ZApplicationsApi', () => {
   const endpoint = 'projects';
-
-  let domain: IZConfigEntry<string>;
-  let vault: IZVaultClient;
   let _target: INestApplication<any>;
 
   const createTestTarget = async () => {
-    const module = await Test.createTestingModule({ imports: [ZProjectsModule] })
-      .overrideProvider(ZVaultToken)
-      .useValue(vault)
-      .compile();
+    const module = await Test.createTestingModule({ imports: [ZProjectsModule] }).compile();
 
     _target = module.createNestApplication();
     await _target.init();
     return _target;
   };
-
-  beforeEach(() => {
-    domain = new ZConfigEntryBuilder<string>('test.zthunworks.com').scope('common').key('domain').build();
-    vault = new ZVaultClientMemory();
-    vault.put(domain);
-  });
 
   describe('List', () => {
     it('should return all apps.', async () => {

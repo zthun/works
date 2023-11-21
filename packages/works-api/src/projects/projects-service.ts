@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { walk } from '@zthun/helpful-node';
 import {
   IZDataRequest,
@@ -11,7 +11,6 @@ import {
   ZFilterBinaryBuilder,
   ZPageBuilder
 } from '@zthun/helpful-query';
-import { IZVaultClient, ZVaultToken } from '@zthun/vault-client';
 import { IZProject } from '@zthun/works-portfolio';
 import { glob } from 'glob';
 
@@ -25,8 +24,6 @@ export interface IZProjectsService {
 @Injectable()
 export class ZProjectsService implements IZProjectsService {
   private _source: IZDataSource<IZProject>;
-
-  public constructor(@Inject(ZVaultToken) private readonly _vault: IZVaultClient) {}
 
   public async list(request: IZDataRequest): Promise<IZPage<IZProject>> {
     const source = await this._load();
