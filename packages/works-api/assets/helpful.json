@@ -1,0 +1,10 @@
+{
+  "_id": "helpful",
+  "name": "Helpful",
+  "description": "A set of libraries that contain generic javascript functions and classes.",
+  "kind": "library",
+  "technology": "node",
+  "icon": "https://raw.githubusercontent.com/zthun/helpful/latest/packages/helpful-web/public/images/svg/helpful.svg",
+  "url": "https://helpful.zthunworks.com",
+  "source": "https://github.com/zthun/helpful"
+}
