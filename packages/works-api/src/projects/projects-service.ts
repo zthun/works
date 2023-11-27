@@ -9,7 +9,8 @@ import {
   ZDataSourceStatic,
   ZDataSourceStaticOptionsBuilder,
   ZFilterBinaryBuilder,
-  ZPageBuilder
+  ZPageBuilder,
+  ZSortBuilder
 } from '@zthun/helpful-query';
 import { IZProject } from '@zthun/works-portfolio';
 import { glob } from 'glob';
@@ -26,8 +27,10 @@ export class ZProjectsService implements IZProjectsService {
   private _source: IZDataSource<IZProject>;
 
   public async list(request: IZDataRequest): Promise<IZPage<IZProject>> {
+    const sort = new ZSortBuilder().ascending('name').build();
+    const _request = new ZDataRequestBuilder().copy(request).sort(sort).build();
     const source = await this._load();
-    const apps = await source.retrieve(request);
+    const apps = await source.retrieve(_request);
     const count = await source.count(request);
     return new ZPageBuilder<IZProject>().data(apps).count(count).build();
   }
