@@ -5283,6 +5283,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@zthun/webigail-http@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@zthun/webigail-http@npm:1.2.0"
+  dependencies:
+    axios: ^1.6.2
+  checksum: 8af254ba6ff48b3ed60352dcf862dddb5a84720c0b4c3a9a1ed41e9f63c698fb052f1d664c2ff9e9c8280d7bb45393d15491df0615b50dbdd7ec6c4a976ebbf7
+  languageName: node
+  linkType: hard
+
 "@zthun/webigail-url@npm:^1.1.0":
   version: 1.1.0
   resolution: "@zthun/webigail-url@npm:1.1.0"
@@ -5290,6 +5299,16 @@ __metadata:
     lodash: ^4.17.21
     url-parse: ^1.5.10
   checksum: cd5250c598f5c44a7f24bb9dab76d7fc4ee697825727a76d0a0318354592851985ad37f033b00f50f0a5be2f030360cc0a7198c431b974c41ed2839ae9174c71
+  languageName: node
+  linkType: hard
+
+"@zthun/webigail-url@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@zthun/webigail-url@npm:1.2.0"
+  dependencies:
+    lodash: ^4.17.21
+    url-parse: ^1.5.10
+  checksum: 1c29df35ca9acf1edca29a1b419eafdc35daac10213543e6d24a48f1d53003aeb60a743270752c4b1a40928c018508a496a6c7be02f5d1d0600eacffd5f908df
   languageName: node
   linkType: hard
 
@@ -5304,8 +5323,8 @@ __metadata:
     "@zthun/helpful-fn": ^3.0.0
     "@zthun/helpful-node": ^3.0.0
     "@zthun/helpful-query": ^3.0.0
-    "@zthun/webigail-http": ^1.1.0
-    "@zthun/webigail-url": ^1.1.0
+    "@zthun/webigail-http": ^1.2.0
+    "@zthun/webigail-url": ^1.2.0
     "@zthun/works-portfolio": ^5.0.1
     glob: ^10.3.10
     helmet: ^7.1.0
@@ -5325,8 +5344,8 @@ __metadata:
   dependencies:
     "@zthun/helpful-fn": ^3.0.0
     "@zthun/helpful-query": ^3.0.0
-    "@zthun/webigail-http": ^1.1.0
-    "@zthun/webigail-url": ^1.1.0
+    "@zthun/webigail-http": ^1.2.0
+    "@zthun/webigail-url": ^1.2.0
     microbundle: ^0.15.1
     vitest: ^0.34.6
   languageName: unknown
@@ -5346,8 +5365,8 @@ __metadata:
     "@zthun/helpful-fn": ^3.0.0
     "@zthun/helpful-query": ^3.0.0
     "@zthun/helpful-react": ^3.0.0
-    "@zthun/webigail-http": ^1.1.0
-    "@zthun/webigail-url": ^1.1.0
+    "@zthun/webigail-http": ^1.2.0
+    "@zthun/webigail-url": ^1.2.0
     "@zthun/works-portfolio": ^5.0.1
     lodash: ^4.17.21
     react: ^18.2.0
@@ -6009,7 +6028,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.5.1":
+"axios@npm:^1.5.1, axios@npm:^1.6.2":
   version: 1.6.2
   resolution: "axios@npm:1.6.2"
   dependencies:
