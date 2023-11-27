@@ -35,7 +35,7 @@
     "@zthun/lint-janitor": "^14.4.0",
     "@zthun/lint-janitor-config": "^14.4.0",
     "husky": "^8.0.3",
-    "jsdom": "^22.1.0",
+    "jsdom": "^23.0.0",
     "jsdom-global": "^3.0.2",
     "lerna": "^8.0.0",
     "lodash-es": "^4.17.21",
