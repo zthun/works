@@ -9,6 +9,11 @@
     "type": "git",
     "url": "https://github.com/zthun/works"
   },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
   "workspaces": [
     "packages/*"
   ],
@@ -49,5 +54,5 @@
     "vite-tsconfig-paths": "^4.2.1",
     "vitest": "^0.34.6"
   },
-  "packageManager": "yarn@3.3.1"
+  "packageManager": "yarn@4.0.2"
 }
