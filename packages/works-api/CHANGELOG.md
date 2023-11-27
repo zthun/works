@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.0](https://github.com/zthun/works/compare/v5.1.0...v5.2.0) (2023-11-27)
+
+
+### Features
+
+* add webigail ([3b52b37](https://github.com/zthun/works/commit/3b52b37eb6203096421c667c285659a48dfc6840))
+
+
+### Bug Fixes
+
+* default sort is now by name ([9f9f0a1](https://github.com/zthun/works/commit/9f9f0a18d8a1297f879af250a8e78048adffcf0f))
+
+
+
 ## [5.1.0](https://github.com/zthun/works/compare/v5.0.1...v5.1.0) (2023-11-24)
 
 

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.0](https://github.com/zthun/works/compare/v5.1.0...v5.2.0) (2023-11-27)
+
+
+### Bug Fixes
+
+* projects page should no longer complain about key ([d391e40](https://github.com/zthun/works/commit/d391e403110fd6e6506ae4e3edda5b269c3b30a1))
+
+
+
 ## [5.1.0](https://github.com/zthun/works/compare/v5.0.1...v5.1.0) (2023-11-24)
 
 **Note:** Version bump only for package @zthun/works-web
