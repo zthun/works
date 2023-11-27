@@ -1,0 +1,10 @@
+{
+  "_id": "webigail",
+  "name": "Webigail",
+  "description": "A set of libraries for 'internet things' that help interact with rest services.",
+  "kind": "library",
+  "technology": "node",
+  "icon": "https://raw.githubusercontent.com/zthun/webigail/latest/packages/webigail-web/public/images/svg/webigail.svg",
+  "url": "https://webigail.zthunworks.com",
+  "source": "https://github.com/zthun/webigail"
+}
