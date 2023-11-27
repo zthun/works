@@ -7,11 +7,6 @@
     "url": "https://github.com/zthun/works",
     "directory": "packages/works-web"
   },
-  "metadata": {
-    "display": "Zthunworks",
-    "representative": true,
-    "group": "Works"
-  },
   "scripts": {
     "build": "vite build",
     "debug": "vite"
