@@ -4757,9 +4757,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zthun/eslint-config@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "@zthun/eslint-config@npm:15.1.0"
+"@zthun/eslint-config@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "@zthun/eslint-config@npm:15.1.1"
   dependencies:
     "@typescript-eslint/eslint-plugin": "npm:^6.13.1"
     "@typescript-eslint/parser": "npm:^6.13.1"
@@ -4767,19 +4767,19 @@ __metadata:
     eslint-plugin-tsdoc: "npm:^0.2.17"
   peerDependencies:
     eslint: ^8.5.0
-  checksum: 2dc8836a2079e850ed3339a5b410c4637a45675158e3494c58d18a8c84fb1e99391de7fa584e2251e9a29edc04222589498c758c1575ce7c38074c5ffa63f8b3
+  checksum: 3b38c75a6a5e66d4d0ced3a968608a16b46c1c90e332245fc49002acaf33968ff0c5459e3e9d44623a897ca102ffa61b81740f71b4cb166b18aba213f060b049
   languageName: node
   linkType: hard
 
-"@zthun/eslint-react-config@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "@zthun/eslint-react-config@npm:15.1.0"
+"@zthun/eslint-react-config@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "@zthun/eslint-react-config@npm:15.1.1"
   dependencies:
-    "@zthun/eslint-config": "npm:^15.1.0"
+    "@zthun/eslint-config": "npm:^15.1.1"
     eslint-plugin-react: "npm:^7.33.2"
   peerDependencies:
     eslint: ^8.5.0
-  checksum: 0d76ffffbaf3e8563fcfb6e83bf42aa405b9d11e1531002490140e56c6d488afba16f89b1e2fe6a91744254ff9f9fb8d27bdea27aa7f88503a898d021734b2da
+  checksum: beb3ea78b491d47ed8eecd4eec1b5f549a7d9de3cb75e585cd70d8aa022a4759f421e2a7ae9b2bfe22cfd93337e811b89fbc78311b8dbb863d40524e69918d83
   languageName: node
   linkType: hard
 
@@ -4877,39 +4877,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zthun/htmlhint-config@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "@zthun/htmlhint-config@npm:15.1.0"
+"@zthun/htmlhint-config@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "@zthun/htmlhint-config@npm:15.1.1"
   peerDependencies:
     htmlhint: ^1.0.0
-  checksum: 7b435ecc2ec2bcec0b5bfbe8c43006353e133d1ee880e406c805ec7c03f9bbd030939863caf292659797eaa7fb31cccf7e6ade49182ca8f558b09c6e3bf3da8a
+  checksum: 26bc95af921c37830af65845f8e78287b04c84c74feafe4b792831679f0435c92daa2b96b5eaee56953115aba2854bdef71249643400cc98d036be6096a08799
   languageName: node
   linkType: hard
 
-"@zthun/lint-janitor-config@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "@zthun/lint-janitor-config@npm:15.1.0"
+"@zthun/lint-janitor-config@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "@zthun/lint-janitor-config@npm:15.1.1"
   dependencies:
-    "@zthun/eslint-config": "npm:^15.1.0"
-    "@zthun/eslint-react-config": "npm:^15.1.0"
-    "@zthun/htmlhint-config": "npm:^15.1.0"
-    "@zthun/markdownlint-config": "npm:^15.1.0"
-    "@zthun/prettier-config": "npm:^15.1.0"
-    "@zthun/stylelint-config": "npm:^15.1.0"
+    "@zthun/eslint-config": "npm:^15.1.1"
+    "@zthun/eslint-react-config": "npm:^15.1.1"
+    "@zthun/htmlhint-config": "npm:^15.1.1"
+    "@zthun/markdownlint-config": "npm:^15.1.1"
+    "@zthun/prettier-config": "npm:^15.1.1"
+    "@zthun/stylelint-config": "npm:^15.1.1"
+    "@zthun/stylelint-config-less": "npm:^15.1.1"
+    "@zthun/stylelint-config-sass": "npm:^15.1.1"
     eslint: "npm:^8.54.0"
     htmlhint: "npm:^1.1.4"
     markdownlint: "npm:~0.32.1"
     prettier: "npm:^3.1.0"
     stylelint: "npm:^15.11.0"
   peerDependencies:
-    "@zthun/lint-janitor": ^14.0.0
-  checksum: 96054e313aa8bed3839ee644cb933238a1b6e149ff9b53ebf71e5ef220deb0fe2920a8e5ee7d545117c68972c4354256376bf71da3933a2e9c7910d0da39337b
+    "@zthun/lint-janitor": ^15.0.0
+  checksum: 3b8199f72005020781218651402953227409e45b4e554e1de58469a835bc40175b750c2447eeddcee79786bd54d596dc9f5279393c84f920c694d1309a42328e
   languageName: node
   linkType: hard
 
-"@zthun/lint-janitor@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "@zthun/lint-janitor@npm:15.1.0"
+"@zthun/lint-janitor@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "@zthun/lint-janitor@npm:15.1.1"
   dependencies:
     acorn: "npm:^8.11.2"
     chalk: "npm:^5.3.0"
@@ -4926,36 +4928,60 @@ __metadata:
     yargs: "npm:^17.7.2"
   bin:
     lint-janitor: dist/cli.js
-  checksum: b338ada5f31800147896c74d8cdb5fb9b32fa2886441dfd25f6d6bd221d1f7bdda5d177431d4715501bb00feb974bfb3c70817bbed94e6193b487e17ef82e2ca
+  checksum: 311b6a9b38331e51e0805e16c9f5deb431faf494357896090fccaa65e661ace7c139464e21767f495765111101e7ba74cc123013d326daf1d3f2b5cbf1cd47f7
   languageName: node
   linkType: hard
 
-"@zthun/markdownlint-config@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "@zthun/markdownlint-config@npm:15.1.0"
+"@zthun/markdownlint-config@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "@zthun/markdownlint-config@npm:15.1.1"
   peerDependencies:
     markdownlint: ~0.32.0
-  checksum: 686533f588df54b1e27f583878a11058000b24fc2b6b159d801290c0504d98ffd8c39fc0af860e635c16349b6a4d2ce721a87f1d95da8351a4a4f1f83c263e4e
+  checksum: df5ecee180640d3e00d48123a9f19ee68f8953a299c77ef42ac42c16d9e7607a1f9c1720ea23a83440f2883e83e9d1ec4ed822c134788d91ff55c409a13274f8
   languageName: node
   linkType: hard
 
-"@zthun/prettier-config@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "@zthun/prettier-config@npm:15.1.0"
+"@zthun/prettier-config@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "@zthun/prettier-config@npm:15.1.1"
   peerDependencies:
     prettier: ^3.0.2
-  checksum: f83bae7669df4f390a1773ad2eae869e5352b96a8b5a4ec9756d472d986659f623ccef9cd14acb674c6667279d0be6450c0c7ff48bd4c2dad0c10af228a40b1b
+  checksum: 8428c263f11ffa9071c50ac7742aad166e990980395ac2b06e632a0dca80bfc6af1b7a184af569857d7c6701bb8c53439666440721af92dab59d0929c717bc5d
   languageName: node
   linkType: hard
 
-"@zthun/stylelint-config@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "@zthun/stylelint-config@npm:15.1.0"
+"@zthun/stylelint-config-less@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "@zthun/stylelint-config-less@npm:15.1.1"
+  dependencies:
+    "@zthun/stylelint-config": "npm:^15.1.1"
+    stylelint-config-standard-less: "npm:^2.0.0"
+  peerDependencies:
+    stylelint: ^15.7.0
+  checksum: 1b69ea4b75697f6d9624dca1514d6fd8f181ee7293530e8173adb81f739dda9cb25f2ddf34935a39403a6f3db261b2dc1cfae980dcb835947526111ff62db21f
+  languageName: node
+  linkType: hard
+
+"@zthun/stylelint-config-sass@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "@zthun/stylelint-config-sass@npm:15.1.1"
+  dependencies:
+    "@zthun/stylelint-config": "npm:^15.1.1"
+    stylelint-config-standard-scss: "npm:^11.1.0"
+  peerDependencies:
+    stylelint: ^15.7.0
+  checksum: 60ddc768ef11c70539c45774d08e32874923b1ee29dd13f607519765b013a914974410aab9848b4795df7a4198ec3a859c63c12500e04886672b7ce9e5a0d5ff
+  languageName: node
+  linkType: hard
+
+"@zthun/stylelint-config@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "@zthun/stylelint-config@npm:15.1.1"
   dependencies:
     stylelint-config-standard: "npm:^34.0.0"
   peerDependencies:
     stylelint: ^15.7.0
-  checksum: 738fb55ba27f401acb254d87a6fe759865a00d6e245e60ca41f52b7d7e7516620dd3764a2447ced97b09b99c617b21263a6828b68deb10b80335b58555bc9655
+  checksum: 603687eebdb39daf0dcae49bbdea81bfddba72ed65fe0ee5f10969e2790f4cf53de092a08bc2cc893d2daa5cc33e925bf714014316e4f94dfeda6ea8d540a326
   languageName: node
   linkType: hard
 
@@ -5060,8 +5086,8 @@ __metadata:
     "@types/node": "npm:^20.10.0"
     "@types/supertest": "npm:^2.0.16"
     "@vitest/coverage-istanbul": "npm:^0.34.6"
-    "@zthun/lint-janitor": "npm:^15.1.0"
-    "@zthun/lint-janitor-config": "npm:^15.1.0"
+    "@zthun/lint-janitor": "npm:^15.1.1"
+    "@zthun/lint-janitor-config": "npm:^15.1.1"
     husky: "npm:^8.0.3"
     jsdom: "npm:^23.0.0"
     jsdom-global: "npm:^3.0.2"
@@ -12768,6 +12794,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-less@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "postcss-less@npm:6.0.0"
+  peerDependencies:
+    postcss: ^8.3.5
+  checksum: 75db4ed39d53ff973ef17d7ed9e398f8f1da0fd2b3bc604ea59586a4fd9f7b5364204a5085500e12381326c11488c46c088b269348eb66607509d1a28971d18b
+  languageName: node
+  linkType: hard
+
 "postcss-load-config@npm:^3.0.0":
   version: 3.1.4
   resolution: "postcss-load-config@npm:3.1.4"
@@ -12783,6 +12818,13 @@ __metadata:
     ts-node:
       optional: true
   checksum: 75fa409d77b96e6f53e99f680c550f25ca8922c1150d3d368ded1f6bd8e0d4d67a615fe1f1c5d409aefb6e66fb4b5e48e86856d581329913de84578def078b19
+  languageName: node
+  linkType: hard
+
+"postcss-media-query-parser@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "postcss-media-query-parser@npm:0.2.3"
+  checksum: 39f9e9c383ec98d85103c5f3d1eb5a9088a47357ed26d3c7501aeba1302840521cffa1b851bc2d8146f1ccdef263fe3088f4d435bda1c0dc0b6f9387865574c8
   languageName: node
   linkType: hard
 
@@ -13072,6 +13114,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-scss@npm:^4.0.9":
+  version: 4.0.9
+  resolution: "postcss-scss@npm:4.0.9"
+  peerDependencies:
+    postcss: ^8.4.29
+  checksum: d191c771344357a28995a2f53041ec699070331b8238e076001cedde97215bd3ebf596d0a9882b22c566977c4b72816dafc00028dc09153c6f97f71cd28a70f7
+  languageName: node
+  linkType: hard
+
 "postcss-selector-parser@npm:^6.0.13, postcss-selector-parser@npm:^6.0.2, postcss-selector-parser@npm:^6.0.4, postcss-selector-parser@npm:^6.0.5, postcss-selector-parser@npm:^6.0.9":
   version: 6.0.13
   resolution: "postcss-selector-parser@npm:6.0.13"
@@ -13105,7 +13156,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-value-parser@npm:^4.1.0, postcss-value-parser@npm:^4.2.0":
+"postcss-value-parser@npm:4.2.0, postcss-value-parser@npm:^4.1.0, postcss-value-parser@npm:^4.2.0":
   version: 4.2.0
   resolution: "postcss-value-parser@npm:4.2.0"
   checksum: e4e4486f33b3163a606a6ed94f9c196ab49a37a7a7163abfcd469e5f113210120d70b8dd5e33d64636f41ad52316a3725655421eb9a1094f1bcab1db2f555c62
@@ -14908,12 +14959,78 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stylelint-config-recommended-less@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "stylelint-config-recommended-less@npm:2.0.0"
+  dependencies:
+    postcss-less: "npm:^6.0.0"
+    stylelint-config-recommended: "npm:^13.0.0"
+    stylelint-less: "npm:^2.0.0"
+  peerDependencies:
+    postcss: ^8.3.3
+    stylelint: ^15.10.2
+  peerDependenciesMeta:
+    postcss:
+      optional: true
+  checksum: 87ccdbb8c265cc49d091de6a2e793f0c8fe4e748ba7d5ef6c1b9c4b08cd0ab85114b7c4d22ddb3926f85c0b80ed5024e478e9446bbd92b74786d2d243ff02280
+  languageName: node
+  linkType: hard
+
+"stylelint-config-recommended-scss@npm:^13.1.0":
+  version: 13.1.0
+  resolution: "stylelint-config-recommended-scss@npm:13.1.0"
+  dependencies:
+    postcss-scss: "npm:^4.0.9"
+    stylelint-config-recommended: "npm:^13.0.0"
+    stylelint-scss: "npm:^5.3.0"
+  peerDependencies:
+    postcss: ^8.3.3
+    stylelint: ^15.10.0
+  peerDependenciesMeta:
+    postcss:
+      optional: true
+  checksum: 249cc4705759f779da2be797b2155b05b6d0ce49542b5144634d46295955c32b22734468529c772ba0a926fdf3bd3b0583088a74a0790cfc5e354d09b1f9a8c7
+  languageName: node
+  linkType: hard
+
 "stylelint-config-recommended@npm:^13.0.0":
   version: 13.0.0
   resolution: "stylelint-config-recommended@npm:13.0.0"
   peerDependencies:
     stylelint: ^15.10.0
   checksum: a56eb6d1a7c7f3a7a172b54bc34218859ba22a5a06816fb4d0964f66cb83cf372062f2c97830e994ad68243548e15fc49abf28887c3261ab1b471b3aa69f8e82
+  languageName: node
+  linkType: hard
+
+"stylelint-config-standard-less@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "stylelint-config-standard-less@npm:2.0.0"
+  dependencies:
+    stylelint-config-recommended-less: "npm:^2.0.0"
+    stylelint-config-standard: "npm:^34.0.0"
+  peerDependencies:
+    postcss: ^8.3.3
+    stylelint: ^15.0.0
+  peerDependenciesMeta:
+    postcss:
+      optional: true
+  checksum: 98fbdb3337886c7d349a402da527e55a188025dd8a6f94f6ad6779e60934d1b362acf342a84435057c3c51e227dd0ef5da24e6fee346c366a73573576367e0d9
+  languageName: node
+  linkType: hard
+
+"stylelint-config-standard-scss@npm:^11.1.0":
+  version: 11.1.0
+  resolution: "stylelint-config-standard-scss@npm:11.1.0"
+  dependencies:
+    stylelint-config-recommended-scss: "npm:^13.1.0"
+    stylelint-config-standard: "npm:^34.0.0"
+  peerDependencies:
+    postcss: ^8.3.3
+    stylelint: ^15.10.0
+  peerDependenciesMeta:
+    postcss:
+      optional: true
+  checksum: fdeb533e19230cec6975f18a5ef97252968b4387f385508c7157d8bef42fe75eb9888ff6ce97c8d6fd985fc7d7d28c897732cd3c3285907cb18a9bf8df91a6d2
   languageName: node
   linkType: hard
 
@@ -14925,6 +15042,34 @@ __metadata:
   peerDependencies:
     stylelint: ^15.10.0
   checksum: 536249800c04b48a9c354067765f042713982e8222be17bb897a27d26546e50adfb87e6f1e4541807d720de3554345da99ab470e13e8d7ab0ab326c73ae3df61
+  languageName: node
+  linkType: hard
+
+"stylelint-less@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "stylelint-less@npm:2.0.0"
+  dependencies:
+    postcss-resolve-nested-selector: "npm:^0.1.1"
+    postcss-value-parser: "npm:4.2.0"
+  peerDependencies:
+    postcss: ^8.4.14
+    stylelint: ^15.10.3
+  checksum: 7badd789129618c4a4000f2e969c7c402d968587c34dbeb01c7288b8280ef504bef322c61aa385bf286685bd2bed61fbdf81a4083d6f2821980590d278cc05e0
+  languageName: node
+  linkType: hard
+
+"stylelint-scss@npm:^5.3.0":
+  version: 5.3.1
+  resolution: "stylelint-scss@npm:5.3.1"
+  dependencies:
+    known-css-properties: "npm:^0.29.0"
+    postcss-media-query-parser: "npm:^0.2.3"
+    postcss-resolve-nested-selector: "npm:^0.1.1"
+    postcss-selector-parser: "npm:^6.0.13"
+    postcss-value-parser: "npm:^4.2.0"
+  peerDependencies:
+    stylelint: ^14.5.1 || ^15.0.0
+  checksum: 480d3ed021a8374d34caca96166941249f39cfaffdc70ed2e711d3426b572bc0c3a4bf3f6950ed622df819fdbcb31378f58736c7950f64fa4c986a16f7258f48
   languageName: node
   linkType: hard
 
