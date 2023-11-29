@@ -1,0 +1,10 @@
+{
+  "_id": "janitor",
+  "name": "Janitor",
+  "description": "A console application that helps keep your codebase clean and free of lint.",
+  "kind": "console",
+  "technology": "node",
+  "icon": "https://raw.githubusercontent.com/zthun/janitor/latest/packages/janitor-web/public/images/svg/janitor.svg",
+  "url": "https://janitor.zthunworks.com",
+  "source": "https://github.com/zthun/janitor"
+}
