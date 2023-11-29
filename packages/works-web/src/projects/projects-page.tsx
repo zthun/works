@@ -48,7 +48,7 @@ export function ZProjectsPage() {
 
     return (
       <ZCard
-        key = {_id}
+        key={_id}
         className='ZProjectsPage-project'
         avatar={<ZIconFontAwesome name={icon} family={family} width={ZSizeFixed.Small} />}
         heading={name}
