@@ -4767,7 +4767,6 @@ __metadata:
     ts-node: "npm:^10.9.1"
     tsconfig-paths: "npm:^4.2.0"
     typescript: "npm:^5.3.2"
-    vite: "npm:^5.0.4"
     vite-tsconfig-paths: "npm:^4.2.1"
     vitest: "npm:^0.34.6"
   languageName: unknown
