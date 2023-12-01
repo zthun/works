@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.1](https://github.com/zthun/works/compare/v5.3.0...v5.3.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* workaround for missing linux dependency on multi architecture build ([54371d2](https://github.com/zthun/works/commit/54371d2ad007fd5030c027861f4cd5eb6ab0315e))
+
+
+
 ## [5.3.0](https://github.com/zthun/works/compare/v5.2.0...v5.3.0) (2023-11-29)
 
 
