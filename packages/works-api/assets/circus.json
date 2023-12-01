@@ -1,0 +1,10 @@
+{
+  "_id": "circus",
+  "name": "Circus",
+  "description": "Write better tests for your front end by interacting with components the same way in unit and e2e tests.",
+  "kind": "library",
+  "technology": "node",
+  "icon": "https://raw.githubusercontent.com/zthun/cirque/latest/packages/cirque-web/public/svg/cirque.svg",
+  "url": "https://circus.zthunworks.com",
+  "source": "https://github.com/zthun/cirque"
+}
