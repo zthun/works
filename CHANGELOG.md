@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.4.0](https://github.com/zthun/works/compare/v5.3.1...v5.4.0) (2023-12-01)
+
+
+### Features
+
+* adding circus ([d7d60b6](https://github.com/zthun/works/commit/d7d60b634328760dfba021fb839a56015e5b576b))
+
+
+
 ## [5.3.1](https://github.com/zthun/works/compare/v5.3.0...v5.3.1) (2023-11-29)
 
 
