@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.0](https://github.com/zthun/works/compare/v5.4.0...v6.0.0) (2023-12-04)
+
+**Note:** Version bump only for package @zthun/works-web
+
+
+
+
+
 ## [5.4.0](https://github.com/zthun/works/compare/v5.3.1...v5.4.0) (2023-12-01)
 
 **Note:** Version bump only for package @zthun/works-web

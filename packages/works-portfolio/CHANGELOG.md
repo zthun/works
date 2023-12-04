@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.0](https://github.com/zthun/helpful/compare/v5.4.0...v6.0.0) (2023-12-04)
+
+**Note:** Version bump only for package @zthun/works-portfolio
+
+
+
+
+
 ## [5.2.0](https://github.com/zthun/helpful/compare/v5.1.0...v5.2.0) (2023-11-27)
 
 **Note:** Version bump only for package @zthun/works-portfolio
