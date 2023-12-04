@@ -1,0 +1,10 @@
+{
+  "_id": "lumberjacky",
+  "name": "Lumberjacky",
+  "description": "Logging framework to provide feedback into any system that implements its abstraction.",
+  "kind": "library",
+  "technology": "node",
+  "icon": "https://raw.githubusercontent.com/zthun/lumberjacky/latest/packages/lumberjacky-web/public/svg/lumberjacky.svg",
+  "url": "https://lumberjacky.zthunworks.com",
+  "source": "https://github.com/zthun/lumberjacky"
+}
