@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.1.0](https://github.com/zthun/works/compare/v6.0.0...v6.1.0) (2023-12-06)
+
+
+### Features
+
+* added dalmart ([7427e11](https://github.com/zthun/works/commit/7427e11b9b5566c08e31fb5ca71098b78fe77289))
+
+
+
 ## [6.0.0](https://github.com/zthun/works/compare/v5.4.0...v6.0.0) (2023-12-04)
 
 
