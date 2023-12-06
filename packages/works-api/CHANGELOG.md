@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.0](https://github.com/zthun/works/compare/v5.4.0...v6.0.0) (2023-12-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* added lumberjacky
+
+### Features
+
+* added lumberjacky ([9a062b0](https://github.com/zthun/works/commit/9a062b07ee12ffa600ba055dc58eb633a20726de))
+
+
+
 ## [5.4.0](https://github.com/zthun/works/compare/v5.3.1...v5.4.0) (2023-12-01)
 
 
