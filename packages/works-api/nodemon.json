@@ -1,6 +1,7 @@
 {
+  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/nodemon.json",
   "watch": ["src", "assets"],
-  "ext": "ts",
+  "ext": "ts,json",
   "ignore": ["src/**/*.spec.ts"],
   "exec": "node --inspect=0.0.0.0:9229 -r tsconfig-paths/register -r ts-node/register src/main.ts"
 }
