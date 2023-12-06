@@ -1,0 +1,10 @@
+{
+  "_id": "dalmart",
+  "name": "Dalmart",
+  "description": "A set of libraries that contain database abstractions for vendor-agnostic storage access.",
+  "kind": "library",
+  "technology": "node",
+  "icon": "https://raw.githubusercontent.com/zthun/dalmart/latest/packages/dalmart-web/public/svg/dalmart.svg",
+  "url": "https://dalmart.zthunworks.com",
+  "source": "https://github.com/zthun/dalmart"
+}
