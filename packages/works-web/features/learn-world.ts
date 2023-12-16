@@ -1,5 +1,11 @@
 import { setDefaultTimeout, setWorldConstructor, World } from '@cucumber/cucumber';
-import { IZCircusDriver, ZCircusBy, ZCircusComponentConstructor, ZCircusComponentModel } from '@zthun/cirque';
+import {
+  IZCircusDriver,
+  IZCircusSetup,
+  ZCircusBy,
+  ZCircusComponentConstructor,
+  ZCircusComponentModel
+} from '@zthun/cirque';
 import { ZCircusSetupChrome } from '@zthun/cirque-du-selenium';
 import { ZUrlBuilder } from '@zthun/webigail-url';
 
@@ -17,20 +23,23 @@ export interface IZLearnPage<T extends ZCircusComponentModel | never> {
  * The current world
  */
 export class ZLearnWorld<T extends ZCircusComponentModel | never = never> extends World<IZLearnPage<T>> {
+  private _browser: IZCircusSetup<IZCircusDriver> | null = null;
   private _driver: IZCircusDriver | null = null;
 
   /**
    * Closes the browser if it is open.
    */
   public async close() {
-    await this._driver?.destroy();
+    await this._driver?.destroy?.call(this._driver);
+    await this._browser?.destroy?.call(this._browser);
     this._driver = null;
+    this._browser = null;
   }
 
   /**
    * Constructs a new page component model from the internal driver.
    *
-   * @param model
+   * @param model -
    *        The model to construct.
    *
    * @returns
@@ -44,7 +53,7 @@ export class ZLearnWorld<T extends ZCircusComponentModel | never = never> extend
   /**
    * Opens the application and navigates to the given route.
    *
-   * @param route
+   * @param route -
    *        The route to open.
    * @returns
    *        The driver that points to the root element.
@@ -55,7 +64,8 @@ export class ZLearnWorld<T extends ZCircusComponentModel | never = never> extend
     }
 
     const url = new ZUrlBuilder().parse('https://local.zthunworks.com').hash(route).build();
-    this._driver = await new ZCircusSetupChrome(url).setup();
+    this._browser = new ZCircusSetupChrome(url);
+    this._driver = await this._browser.setup();
     return this._driver;
   }
 }
