@@ -1,0 +1,10 @@
+{
+  "_id": "clocks",
+  "name": "Clocks",
+  "description": "Play with time using different cultures, formats, and time zones.",
+  "kind": "web",
+  "technology": "node",
+  "icon": "https://raw.githubusercontent.com/zthun/clocks/latest/packages/clocks-web/public/svg/clocks.svg",
+  "url": "https://clocks.zthunworks.com",
+  "source": "https://github.com/zthun/clocks"
+}
