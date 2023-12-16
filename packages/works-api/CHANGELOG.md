@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.2.0](https://github.com/zthun/works/compare/v6.1.0...v6.2.0) (2023-12-16)
+
+
+### Features
+
+* adding clocks ([2e265d4](https://github.com/zthun/works/commit/2e265d4ba8c5156d2ab1f208739a9ef9aa61fdb4))
+
+
+
 ## [6.1.0](https://github.com/zthun/works/compare/v6.0.0...v6.1.0) (2023-12-06)
 
 
