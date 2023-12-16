@@ -4692,7 +4692,7 @@ __metadata:
     "@zthun/helpful-query": "npm:^3.0.0"
     "@zthun/webigail-http": "npm:^1.2.0"
     "@zthun/webigail-url": "npm:^1.2.0"
-    "@zthun/works-portfolio": "npm:^6.0.0"
+    "@zthun/works-portfolio": "npm:^6.1.0"
     glob: "npm:^10.3.10"
     helmet: "npm:^7.1.0"
     nodemon: "npm:^3.0.2"
@@ -4705,7 +4705,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works-portfolio@npm:^6.0.0, @zthun/works-portfolio@workspace:packages/works-portfolio":
+"@zthun/works-portfolio@npm:^6.1.0, @zthun/works-portfolio@workspace:packages/works-portfolio":
   version: 0.0.0-use.local
   resolution: "@zthun/works-portfolio@workspace:packages/works-portfolio"
   dependencies:
@@ -4734,7 +4734,7 @@ __metadata:
     "@zthun/helpful-react": "npm:^3.0.0"
     "@zthun/webigail-http": "npm:^1.2.0"
     "@zthun/webigail-url": "npm:^1.2.0"
-    "@zthun/works-portfolio": "npm:^6.0.0"
+    "@zthun/works-portfolio": "npm:^6.1.0"
     lodash: "npm:^4.17.21"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
