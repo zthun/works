@@ -13,6 +13,10 @@ import {
 } from "@zthun/helpful-query";
 import type { IZProject } from "@zthun/works-portfolio";
 import { glob } from "glob";
+import { createRequire } from "node:module";
+
+const __dirname = import.meta.dirname;
+const $require = createRequire(import.meta.url);
 
 export const ZProjectsToken = Symbol();
 
@@ -71,7 +75,7 @@ export class ZProjectsService implements IZProjectsService {
     // back and change this to make them show up.
     const assets = await this._fs.walk("assets", { start: __dirname });
     const metadata = await glob(`${assets}/*.json`);
-    const apps = metadata.map<IZProject>((json) => require(json));
+    const apps = metadata.map<IZProject>((json) => $require(json));
     const options = new ZDataSourceStaticOptionsBuilder<IZProject>()
       .search(new ZDataSearchFields(["name"]))
       .build();

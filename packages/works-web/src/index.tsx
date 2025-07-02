@@ -1,8 +1,7 @@
-/* istanbul ignore file */
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-import { ZWorksApp } from "./app/app";
+import { ZWorksApp } from "./app/app.js";
 
 const container = createRoot(document.getElementById("zthunworks")!);
 

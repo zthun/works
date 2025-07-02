@@ -12,7 +12,7 @@ import {
 } from "@zthun/fashion-boutique";
 import { ZSizeFixed } from "@zthun/fashion-tailor";
 import { createDarkTheme } from "@zthun/fashion-theme";
-import { ZProjectsPage } from "../projects/projects-page";
+import { ZProjectsPage } from "../projects/projects-page.js";
 
 const theme = createDarkTheme();
 
