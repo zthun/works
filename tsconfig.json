@@ -1,9 +1,9 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "./.config/.tsconfig.json",
   "compilerOptions": {
     "baseUrl": "packages",
     "target": "esnext"
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.mts"],
   "exclude": ["**/node_modules/**"]
 }

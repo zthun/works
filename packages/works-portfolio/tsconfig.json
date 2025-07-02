@@ -1,8 +1,8 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../../.config/.tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "declarationDir": "dist/types"
+    "baseUrl": "."
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.mts"]
 }

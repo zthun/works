@@ -19,6 +19,7 @@
   ],
   "scripts": {
     "clean": "rimraf --glob 'dist' 'docs' 'reports' '*.tgz' '*.log' 'packages/**/dist' 'packages/**/docs' 'packages/**/*.tgz' 'packages/**/*.log'",
+    "check": "tsc --noEmit",
     "test": "vitest run --coverage",
     "e2e": "cucumber-js",
     "lint": "lint-janitor",
