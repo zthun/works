@@ -22,7 +22,6 @@
     "clean": "rimraf --glob 'dist' 'docs' 'reports' '*.tgz' '*.log' 'packages/**/dist' 'packages/**/docs' 'packages/**/*.tgz' 'packages/**/*.log'",
     "check": "tsc --noEmit",
     "test": "vitest run --coverage",
-    "e2e": "cucumber-js",
     "lint": "janitor-lint",
     "build": "lerna run build",
     "make": "yarn clean && yarn lint && yarn test && yarn build",
@@ -31,7 +30,6 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@cucumber/cucumber": "^11.3.0",
     "@types/express": "^5.0.3",
     "@types/lodash": "^4.17.20",
     "@types/node": "^24.0.10",
