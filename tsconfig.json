@@ -2,7 +2,10 @@
   "extends": "./.config/.tsconfig.json",
   "compilerOptions": {
     "baseUrl": "packages",
-    "target": "esnext"
+    "target": "esnext",
+    "paths": {
+      "@zthun/works-portfolio": ["works-portfolio/src/index.mts"]
+    }
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.mts"],
   "exclude": ["**/node_modules/**"]
