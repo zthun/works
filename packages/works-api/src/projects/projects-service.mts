@@ -1,5 +1,6 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { walk } from "@zthun/helpful-node";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
+import type { IZFileSystemService } from "@zthun/crumbtrail-fs";
+import { ZFileSystemToken } from "@zthun/crumbtrail-nest";
 import type { IZDataRequest, IZDataSource, IZPage } from "@zthun/helpful-query";
 import {
   ZDataRequestBuilder,
@@ -23,6 +24,10 @@ export interface IZProjectsService {
 @Injectable()
 export class ZProjectsService implements IZProjectsService {
   private _source: IZDataSource<IZProject>;
+
+  public constructor(
+    @Inject(ZFileSystemToken) private _fs: IZFileSystemService,
+  ) {}
 
   public async list(request: IZDataRequest): Promise<IZPage<IZProject>> {
     const sort = new ZSortBuilder().ascending("name").build();
@@ -64,7 +69,7 @@ export class ZProjectsService implements IZProjectsService {
     // TODO - This doesn't scale well.  This will have to do for now as there are higher priority
     // projects in the works, but there needs to be a way to add projects without having to come
     // back and change this to make them show up.
-    const assets = await walk("assets", { start: __dirname });
+    const assets = await this._fs.walk("assets", { start: __dirname });
     const metadata = await glob(`${assets}/*.json`);
     const apps = metadata.map<IZProject>((json) => require(json));
     const options = new ZDataSourceStaticOptionsBuilder<IZProject>()
