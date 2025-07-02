@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
-import { ZProjectsController } from "./projects-controller";
-import { ZProjectsService, ZProjectsToken } from "./projects-service";
+import { ZProjectsController } from "./projects-controller.mjs";
+import { ZProjectsService, ZProjectsToken } from "./projects-service.mjs";
 
 @Module({
   controllers: [ZProjectsController],

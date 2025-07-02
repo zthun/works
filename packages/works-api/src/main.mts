@@ -1,6 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 import helmet from "helmet";
-import { ZWorksModule } from "./app/works-module";
+import { ZWorksModule } from "./app/works-module.mjs";
 
 (async function () {
   const app = await NestFactory.create(ZWorksModule);

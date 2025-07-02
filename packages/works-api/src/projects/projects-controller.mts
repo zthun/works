@@ -2,8 +2,8 @@ import { Controller, Get, Inject, Param, Query } from "@nestjs/common";
 import type { IZDataRequestQuery, IZPage } from "@zthun/helpful-query";
 import { ZDataRequestBuilder } from "@zthun/helpful-query";
 import type { IZProject } from "@zthun/works-portfolio";
-import type { IZProjectsService } from "./projects-service";
-import { ZProjectsToken } from "./projects-service";
+import type { IZProjectsService } from "./projects-service.mjs";
+import { ZProjectsToken } from "./projects-service.mjs";
 
 @Controller("projects")
 export class ZProjectsController {
