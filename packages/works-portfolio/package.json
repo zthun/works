@@ -19,14 +19,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@zthun/helpful-fn": "^3.0.0",
-    "@zthun/helpful-query": "^3.0.0",
-    "@zthun/webigail-http": "^1.2.0",
-    "@zthun/webigail-url": "^1.2.0"
+    "@zthun/helpful-fn": "^9.4.0",
+    "@zthun/helpful-query": "^9.4.0",
+    "@zthun/webigail-http": "^4.0.4",
+    "@zthun/webigail-url": "^4.0.4"
   },
   "devDependencies": {
     "microbundle": "^0.15.1",
-    "vitest": "^1.0.4"
+    "vitest": "^3.2.4"
   },
   "files": [
     "dist"
