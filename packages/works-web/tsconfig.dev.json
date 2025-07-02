@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "exclude": [
-    "src/**/*.spec.tsx",
-    "src/**/*.spec.ts",
-    "src/**/*.cm.ts",
-    "features/**/*.ts"
-  ]
-}

@@ -17,7 +17,7 @@ import {
   ZProjectKindDisplayMap,
   ZProjectKindFontAwesomeIconMap,
 } from "@zthun/works-portfolio";
-import { useProjectsService } from "./projects-service";
+import { useProjectsService } from "./projects-service.mjs";
 
 export function ZProjectsPage() {
   const projects = useProjectsService();
@@ -64,15 +64,17 @@ export function ZProjectsPage() {
       <ZCard
         key={_id}
         className="ZProjectsPage-project"
-        avatar={
-          <ZIconFontAwesome
-            name={icon}
-            family={family}
-            width={ZSizeFixed.Small}
-          />
-        }
-        heading={name}
-        subHeading={display}
+        TitleProps={{
+          avatar: (
+            <ZIconFontAwesome
+              name={icon}
+              family={family}
+              width={ZSizeFixed.Small}
+            />
+          ),
+          heading: name,
+          subHeading: display,
+        }}
         name={_id}
         footer={footer}
       >
@@ -83,8 +85,7 @@ export function ZProjectsPage() {
           >
             <ZImageSource
               src={project.icon}
-              height={ZSizeFixed.ExtraLarge}
-              heightSm={ZSizeFixed.Large}
+              height={{ xl: ZSizeFixed.ExtraLarge, sm: ZSizeFixed.Large }}
             />
           </ZBox>
           <ZParagraph>{project.description}</ZParagraph>
@@ -99,10 +100,12 @@ export function ZProjectsPage() {
       dataSource={projects}
       GridProps={{
         gap: ZSizeFixed.Small,
-        columns: "1fr 1fr 1fr 1fr",
-        columnsLg: "1fr 1fr 1fr",
-        columnsMd: "1fr 1fr",
-        columnsSm: "1fr",
+        columns: {
+          xl: "1fr 1fr 1fr 1fr",
+          lg: "1fr 1fr 1fr",
+          md: "1fr 1fr",
+          sm: "1fr",
+        },
       }}
       renderItem={renderProject}
     />

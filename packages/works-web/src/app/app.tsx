@@ -37,7 +37,7 @@ export function ZWorksApp() {
   return (
     <ZRouter>
       <ZFashionThemeContext.Provider value={theme}>
-        <ZBannerMain avatar={avatar} prefix={prefix}>
+        <ZBannerMain TitleProps={{ avatar, prefix }}>
           <ZRouteMap>
             <ZRoute path="/" element={<ZProjectsPage />} />
             <ZRoute path="*" element={<ZNotFound />} />

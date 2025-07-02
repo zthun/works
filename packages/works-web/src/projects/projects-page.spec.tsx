@@ -8,9 +8,9 @@ import type { Mocked } from "vitest";
 import { beforeEach, describe, expect, it } from "vitest";
 import { mock } from "vitest-mock-extended";
 import { ZProjectsPage } from "./projects-page";
-import { ZProjectsPageComponentModel } from "./projects-page.cm";
-import type { IZProjectsService } from "./projects-service";
-import { ZProjectsServiceContext } from "./projects-service";
+import { ZProjectsPageComponentModel } from "./projects-page.cm.mjs";
+import type { IZProjectsService } from "./projects-service.mjs";
+import { ZProjectsServiceContext } from "./projects-service.mjs";
 
 describe("ZProjectsPage", () => {
   let works: IZProject;

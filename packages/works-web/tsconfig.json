@@ -4,7 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@zthun/works-portfolio": ["../works-portfolio/src/index"]
+      "@zthun/works-portfolio": ["../works-portfolio/src/index.mts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.mts", "src/**/*.tsx"]
