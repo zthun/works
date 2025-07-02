@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.0.0](https://github.com/zthun/works/compare/v6.2.0...v7.0.0) (2025-07-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* convert to use node next signatures
+
+### Features
+
+* convert to use node next signatures ([e627f84](https://github.com/zthun/works/commit/e627f8464b39e215620d0807bbaccc371e06b1af))
+
+
+### Bug Fixes
+
+* icon ([6d7125c](https://github.com/zthun/works/commit/6d7125ca29689ca8d9fa1d869dd02379d05ed43b))
+
+
+
 ## [6.2.0](https://github.com/zthun/works/compare/v6.1.0...v6.2.0) (2023-12-16)
 
 

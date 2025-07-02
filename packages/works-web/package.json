@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works-web",
-  "version": "6.2.0",
+  "version": "7.0.0",
   "description": "Development is fun!",
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "@zthun/helpful-react": "^9.4.1",
     "@zthun/webigail-http": "^4.0.4",
     "@zthun/webigail-url": "^4.0.4",
-    "@zthun/works-portfolio": "^6.2.0",
+    "@zthun/works-portfolio": "^7.0.0",
     "lodash": "^4.17.21",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
