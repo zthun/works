@@ -1,5 +1,5 @@
-import { ZProjectKind } from "./project-kind";
-import { ZProjectTechnology } from "./project-technology";
+import { ZProjectKind } from "./project-kind.mjs";
+import { ZProjectTechnology } from "./project-technology.mjs";
 
 export interface IZProject {
   _id: string;
