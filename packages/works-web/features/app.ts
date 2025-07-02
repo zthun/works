@@ -1,8 +1,8 @@
-import { After, Then } from '@cucumber/cucumber';
-import assert from 'assert';
-import { ZLearnWorld } from './learn-world';
+import { After, Then } from "@cucumber/cucumber";
+import assert from "assert";
+import type { ZLearnWorld } from "./learn-world";
 
-Then('the page loads successfully', async function (this: ZLearnWorld) {
+Then("the page loads successfully", async function (this: ZLearnWorld) {
   assert.ok(true);
 });
 

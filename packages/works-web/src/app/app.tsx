@@ -8,12 +8,11 @@ import {
   ZRoute,
   ZRouteMap,
   ZRouter,
-  ZStack
-} from '@zthun/fashion-boutique';
-import { ZSizeFixed } from '@zthun/fashion-tailor';
-import { createDarkTheme } from '@zthun/fashion-theme';
-import React from 'react';
-import { ZProjectsPage } from '../projects/projects-page';
+  ZStack,
+} from "@zthun/fashion-boutique";
+import { ZSizeFixed } from "@zthun/fashion-tailor";
+import { createDarkTheme } from "@zthun/fashion-theme";
+import { ZProjectsPage } from "../projects/projects-page";
 
 const theme = createDarkTheme();
 
@@ -25,21 +24,23 @@ const theme = createDarkTheme();
  */
 export function ZWorksApp() {
   const prefix = (
-    <ZStack className='ZWorksApp-description'>
+    <ZStack className="ZWorksApp-description">
       <ZH1 compact>Zthunworks</ZH1>
       <ZCaption compact>Development is Fun!</ZCaption>
     </ZStack>
   );
 
-  const avatar = <ZImageSource src='/images/svg/works.svg' width={ZSizeFixed.Medium} />;
+  const avatar = (
+    <ZImageSource src="/images/svg/works.svg" width={ZSizeFixed.Medium} />
+  );
 
   return (
     <ZRouter>
       <ZFashionThemeContext.Provider value={theme}>
         <ZBannerMain avatar={avatar} prefix={prefix}>
           <ZRouteMap>
-            <ZRoute path='/' element={<ZProjectsPage />} />
-            <ZRoute path='*' element={<ZNotFound />} />
+            <ZRoute path="/" element={<ZProjectsPage />} />
+            <ZRoute path="*" element={<ZNotFound />} />
           </ZRouteMap>
         </ZBannerMain>
       </ZFashionThemeContext.Provider>

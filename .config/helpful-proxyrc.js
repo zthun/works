@@ -1,23 +1,23 @@
 module.exports = {
   domains: [
     {
-      name: 'local.zthunworks.com',
+      name: "local.zthunworks.com",
       paths: {
-        '/': 'zthunworks-services-web:5173',
-        '/api': 'zthunworks-services-api:3000/api'
-      }
+        "/": "zthunworks-services-web:5173",
+        "/api": "zthunworks-services-api:3000/api",
+      },
     },
     {
-      name: 'database.local.zthunworks.com',
+      name: "database.local.zthunworks.com",
       paths: {
-        '/': 'zthunworks-services-database:8081'
-      }
+        "/": "zthunworks-services-database:8081",
+      },
     },
     {
-      name: 'email.local.zthunworks.com',
+      name: "email.local.zthunworks.com",
       paths: {
-        '/': 'zthunworks-services-email'
-      }
-    }
-  ]
+        "/": "zthunworks-services-email",
+      },
+    },
+  ],
 };

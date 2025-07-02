@@ -1,9 +1,9 @@
-import { ZCircusBy, ZCircusComponentModel } from '@zthun/cirque';
-import { ZGridViewComponentModel } from '@zthun/fashion-boutique';
-import { ZProjectCardComponentModel } from './project-card.cm';
+import { ZCircusBy, ZCircusComponentModel } from "@zthun/cirque";
+import { ZGridViewComponentModel } from "@zthun/fashion-boutique";
+import { ZProjectCardComponentModel } from "./project-card.cm";
 
 export class ZProjectsPageComponentModel extends ZCircusComponentModel {
-  public static readonly Selector = '.ZProjectsPage-root';
+  public static readonly Selector = ".ZProjectsPage-root";
 
   public asGrid(): ZGridViewComponentModel {
     return new ZGridViewComponentModel(this.driver);

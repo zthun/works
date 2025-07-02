@@ -1,13 +1,17 @@
-import { setDefaultTimeout, setWorldConstructor, World } from '@cucumber/cucumber';
 import {
+  setDefaultTimeout,
+  setWorldConstructor,
+  World,
+} from "@cucumber/cucumber";
+import type {
   IZCircusDriver,
   IZCircusSetup,
-  ZCircusBy,
   ZCircusComponentConstructor,
-  ZCircusComponentModel
-} from '@zthun/cirque';
-import { ZCircusSetupChrome } from '@zthun/cirque-du-selenium';
-import { ZUrlBuilder } from '@zthun/webigail-url';
+  ZCircusComponentModel,
+} from "@zthun/cirque";
+import { ZCircusBy } from "@zthun/cirque";
+import { ZCircusSetupChrome } from "@zthun/cirque-du-selenium";
+import { ZUrlBuilder } from "@zthun/webigail-url";
 
 /**
  * Represents a modifiable set of parameters.
@@ -22,7 +26,9 @@ export interface IZLearnPage<T extends ZCircusComponentModel | never> {
 /**
  * The current world
  */
-export class ZLearnWorld<T extends ZCircusComponentModel | never = never> extends World<IZLearnPage<T>> {
+export class ZLearnWorld<
+  T extends ZCircusComponentModel | never = never,
+> extends World<IZLearnPage<T>> {
   private _browser: IZCircusSetup<IZCircusDriver> | null = null;
   private _driver: IZCircusDriver | null = null;
 
@@ -45,7 +51,9 @@ export class ZLearnWorld<T extends ZCircusComponentModel | never = never> extend
    * @returns
    *        A new component model of type T.
    */
-  public async create<T extends ZCircusComponentModel>(model: ZCircusComponentConstructor<T>): Promise<T> {
+  public async create<T extends ZCircusComponentModel>(
+    model: ZCircusComponentConstructor<T>,
+  ): Promise<T> {
     const driver = await this.open();
     return ZCircusBy.first(driver, model);
   }
@@ -63,7 +71,10 @@ export class ZLearnWorld<T extends ZCircusComponentModel | never = never> extend
       return this._driver;
     }
 
-    const url = new ZUrlBuilder().parse('https://local.zthunworks.com').hash(route).build();
+    const url = new ZUrlBuilder()
+      .parse("https://local.zthunworks.com")
+      .hash(route)
+      .build();
     this._browser = new ZCircusSetupChrome(url);
     this._driver = await this._browser.setup();
     return this._driver;

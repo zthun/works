@@ -1,5 +1,5 @@
-import { ZProjectKind } from './project-kind';
-import { ZProjectTechnology } from './project-technology';
+import { ZProjectKind } from "./project-kind";
+import { ZProjectTechnology } from "./project-technology";
 
 export interface IZProject {
   _id: string;
@@ -17,11 +17,11 @@ export class ZProjectBuilder {
 
   public constructor() {
     this._project = {
-      _id: '',
-      name: '',
-      description: '',
+      _id: "",
+      name: "",
+      description: "",
       kind: ZProjectKind.Other,
-      technology: ZProjectTechnology.Other
+      technology: ZProjectTechnology.Other,
     };
   }
 

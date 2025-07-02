@@ -1,15 +1,15 @@
-import { defineConfig } from 'vite';
-import tsConfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from "vite";
+import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [tsConfigPaths()],
   server: {
-    host: '0.0.0.0',
-    strictPort: true
+    host: "0.0.0.0",
+    strictPort: true,
   },
   resolve: {
     alias: {
-      lodash: 'lodash-es'
-    }
-  }
+      lodash: "lodash-es",
+    },
+  },
 });

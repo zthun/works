@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
-import { ZProjectsModule } from '../projects/projects-module';
+import { Module } from "@nestjs/common";
+import { ZProjectsModule } from "../projects/projects-module";
 
 @Module({
-  imports: [ZProjectsModule]
+  imports: [ZProjectsModule],
 })
 export class ZWorksModule {}
