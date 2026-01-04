@@ -1,10 +1,19 @@
 export default {
-  domains: [
+  servers: [
     {
-      host: "local.zthunworks.com",
-      paths: {
-        "/": "zthunworks-services-web:5173",
-        "/api": "zthunworks-services-api:3000/api",
+      type: "http",
+      handle: "redirect",
+    },
+    {
+      type: "https",
+      security: {
+        domain: "local.zthunworks.com",
+      },
+      domains: {
+        "local.zthunworks.com": {
+          "/": "http://zthunworks-services-web:5173",
+          "/api": "http://zthunworks-services-api:3000",
+        },
       },
     },
   ],
