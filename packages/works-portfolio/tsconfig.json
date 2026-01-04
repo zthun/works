@@ -1,8 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "../../.config/.tsconfig.json",
-  "compilerOptions": {
-    "baseUrl": "."
-  },
+  "extends": ["@zthun/janitor-ts-config/base", "@zthun/janitor-ts-config/node"],
   "include": ["src/**/*.ts", "src/**/*.mts"]
 }
