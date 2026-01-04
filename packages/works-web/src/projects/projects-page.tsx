@@ -86,7 +86,6 @@ export function ZProjectsPage() {
             <ZImage
               src={project.icon}
               height={{ xl: ZSizeFixed.ExtraLarge, sm: ZSizeFixed.Large }}
-              fit="scale-down"
             />
           </ZBox>
           <ZParagraph>{project.description}</ZParagraph>
