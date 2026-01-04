@@ -4417,7 +4417,7 @@ __metadata:
     "@zthun/janitor-ts-config": "npm:^19.5.3"
     "@zthun/webigail-http": "npm:^5.0.3"
     "@zthun/webigail-url": "npm:^5.0.3"
-    "@zthun/works-portfolio": "npm:^7.0.0"
+    "@zthun/works-portfolio": "npm:^7.0.2"
     glob: "npm:^13.0.0"
     helmet: "npm:^8.1.0"
     reflect-metadata: "npm:^0.2.2"
@@ -4432,7 +4432,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works-portfolio@npm:^7.0.0, @zthun/works-portfolio@workspace:packages/works-portfolio":
+"@zthun/works-portfolio@npm:^7.0.2, @zthun/works-portfolio@workspace:packages/works-portfolio":
   version: 0.0.0-use.local
   resolution: "@zthun/works-portfolio@workspace:packages/works-portfolio"
   dependencies:
@@ -4464,7 +4464,7 @@ __metadata:
     "@zthun/janitor-ts-config": "npm:^19.5.3"
     "@zthun/webigail-http": "npm:^5.0.3"
     "@zthun/webigail-url": "npm:^5.0.3"
-    "@zthun/works-portfolio": "npm:^7.0.0"
+    "@zthun/works-portfolio": "npm:^7.0.2"
     lodash: "npm:^4.17.21"
     react: "npm:^19.2.3"
     react-dom: "npm:^19.2.3"
