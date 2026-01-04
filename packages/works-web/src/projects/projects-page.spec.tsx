@@ -31,7 +31,7 @@ describe("ZProjectsPage", () => {
     const driver = await new ZCircusSetupRenderer(element).setup();
     const target = await ZCircusBy.first(driver, ZProjectsPageComponentModel);
     const grid = target.asGrid();
-    await grid.load();
+    await (await grid.suspense()).load();
     return target;
   }
 

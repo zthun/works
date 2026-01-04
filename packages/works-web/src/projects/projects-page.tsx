@@ -5,7 +5,7 @@ import {
   ZGrid,
   ZGridView,
   ZIconFontAwesome,
-  ZImageSource,
+  ZImage,
   ZParagraph,
   ZStack,
 } from "@zthun/fashion-boutique";
@@ -83,9 +83,10 @@ export function ZProjectsPage() {
             width={ZSizeVaried.Full}
             justification={ZHorizontalAnchor.Center}
           >
-            <ZImageSource
+            <ZImage
               src={project.icon}
               height={{ xl: ZSizeFixed.ExtraLarge, sm: ZSizeFixed.Large }}
+              fit="scale-down"
             />
           </ZBox>
           <ZParagraph>{project.description}</ZParagraph>

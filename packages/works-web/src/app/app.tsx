@@ -3,7 +3,7 @@ import {
   ZCaption,
   ZFashionThemeContext,
   ZH1,
-  ZImageSource,
+  ZImage,
   ZNotFound,
   ZRoute,
   ZRouteMap,
@@ -31,7 +31,11 @@ export function ZWorksApp() {
   );
 
   const avatar = (
-    <ZImageSource src="/images/svg/works.svg" width={ZSizeFixed.Medium} />
+    <ZImage
+      src="/images/svg/works.svg"
+      width={ZSizeFixed.Medium}
+      fit="scale-down"
+    />
   );
 
   return (
