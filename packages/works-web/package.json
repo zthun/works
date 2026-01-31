@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works-web",
-  "version": "7.0.2",
+  "version": "7.0.3",
   "description": "Development is fun!",
   "repository": {
     "type": "git",
@@ -35,7 +35,7 @@
     "@zthun/janitor-ts-config": "^19.5.3",
     "@zthun/webigail-http": "^5.0.5",
     "@zthun/webigail-url": "^5.0.5",
-    "@zthun/works-portfolio": "^7.0.2",
+    "@zthun/works-portfolio": "^7.0.3",
     "lodash": "^4.17.23",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

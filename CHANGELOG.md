@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>7.0.3 (2026-01-31)</small>
+
+* build: update outdated packages ([b05b7c3](https://github.com/zthun/works/commit/b05b7c3))
+* chore: update yarn lockfile [skip ci] ([3c4ad64](https://github.com/zthun/works/commit/3c4ad64))
+
+
+
+
+
 ## [7.0.2](https://github.com/zthun/works/compare/v7.0.1...v7.0.2) (2026-01-04)
 
 **Note:** Version bump only for package @zthun/works
