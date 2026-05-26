@@ -6,6 +6,7 @@
     "@zthun/janitor-ts-config/nest-js"
   ],
   "compilerOptions": {
+    "types": ["node"],
     "paths": {
       "@zthun/works-portfolio": ["../works-portfolio/src/index.mts"]
     }

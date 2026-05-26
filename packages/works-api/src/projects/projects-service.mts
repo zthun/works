@@ -1,4 +1,6 @@
 import { createRequire } from "node:module";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import type { IZFileSystemService } from "@zthun/crumbtrail-fs";
@@ -16,7 +18,7 @@ import {
 import type { IZProject } from "@zthun/works-portfolio";
 import { glob } from "glob";
 
-const __dirname = import.meta.dirname;
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const $require = createRequire(import.meta.url);
 
 export const ZProjectsToken = Symbol();

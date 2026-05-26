@@ -80,7 +80,7 @@ export class ZProjectBuilder {
   }
 
   public copy(other: IZProject) {
-    this._project = structuredClone(other);
+    this._project = { ...other };
     return this;
   }
 
