@@ -3,83 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.0.4](https://github.com/zthun/helpful/compare/v7.0.3...v7.0.4) (2026-05-26)
+
+**Note:** Version bump only for package @zthun/works-portfolio
+
 ## <small>7.0.3 (2026-01-31)</small>
 
-* build: update outdated packages ([b05b7c3](https://github.com/zthun/helpful/commit/b05b7c3))
-
-
-
-
+- build: update outdated packages ([b05b7c3](https://github.com/zthun/helpful/commit/b05b7c3))
 
 ## [7.0.2](https://github.com/zthun/helpful/compare/v7.0.1...v7.0.2) (2026-01-04)
 
 **Note:** Version bump only for package @zthun/works-portfolio
 
-
-
-
-
 ## [7.0.0](https://github.com/zthun/helpful/compare/v6.2.0...v7.0.0) (2025-07-02)
 
 **Note:** Version bump only for package @zthun/works-portfolio
-
-
-
-
 
 ## [6.2.0](https://github.com/zthun/helpful/compare/v6.1.0...v6.2.0) (2023-12-16)
 
 **Note:** Version bump only for package @zthun/works-portfolio
 
-
-
-
-
 ## [6.1.0](https://github.com/zthun/helpful/compare/v6.0.0...v6.1.0) (2023-12-06)
 
 **Note:** Version bump only for package @zthun/works-portfolio
-
-
-
-
 
 ## [6.0.0](https://github.com/zthun/helpful/compare/v5.4.0...v6.0.0) (2023-12-04)
 
 **Note:** Version bump only for package @zthun/works-portfolio
 
-
-
-
-
 ## [5.2.0](https://github.com/zthun/helpful/compare/v5.1.0...v5.2.0) (2023-11-27)
 
 **Note:** Version bump only for package @zthun/works-portfolio
-
-
-
-
 
 ## [5.1.0](https://github.com/zthun/helpful/compare/v5.0.1...v5.1.0) (2023-11-24)
 
 **Note:** Version bump only for package @zthun/works-portfolio
 
-
-
-
-
 ## [5.0.1](https://github.com/zthun/helpful/compare/v5.0.0...v5.0.1) (2023-11-21)
 
 **Note:** Version bump only for package @zthun/works-portfolio
 
-
-
-
-
 ## [5.0.0](https://github.com/zthun/helpful/compare/v4.0.0...v5.0.0) (2023-11-21)
-
 
 ### Features
 
-* portfolio projects describe applications and projects ([9d5b889](https://github.com/zthun/helpful/commit/9d5b88943428da5dee2842bd471fa14c3a7df6a5))
-* projects can be named with descriptions ([faf73ee](https://github.com/zthun/helpful/commit/faf73eee715ac9258f08ebdbc73afc90d523726f))
-* works portfolio contains models for, and ways to retrieve given projects ([77264db](https://github.com/zthun/helpful/commit/77264db2a1c2ee31b0c2d752b0b558bb919f70c9))
+- portfolio projects describe applications and projects ([9d5b889](https://github.com/zthun/helpful/commit/9d5b88943428da5dee2842bd471fa14c3a7df6a5))
+- projects can be named with descriptions ([faf73ee](https://github.com/zthun/helpful/commit/faf73eee715ac9258f08ebdbc73afc90d523726f))
+- works portfolio contains models for, and ways to retrieve given projects ([77264db](https://github.com/zthun/helpful/commit/77264db2a1c2ee31b0c2d752b0b558bb919f70c9))
