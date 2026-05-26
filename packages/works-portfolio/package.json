@@ -25,16 +25,16 @@
     "access": "public"
   },
   "dependencies": {
-    "@zthun/helpful-fn": "^9.11.12",
-    "@zthun/helpful-query": "^9.11.12",
-    "@zthun/webigail-http": "^5.0.7",
-    "@zthun/webigail-url": "^5.0.7"
+    "@zthun/helpful-fn": "^9.11.13",
+    "@zthun/helpful-query": "^9.11.13",
+    "@zthun/webigail-http": "^5.0.8",
+    "@zthun/webigail-url": "^5.0.8"
   },
   "devDependencies": {
-    "@zthun/janitor-build-config": "^19.5.6",
-    "@zthun/janitor-ts-config": "^19.5.3",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.3",
+    "@zthun/janitor-build-config": "^20.0.6",
+    "@zthun/janitor-ts-config": "^20.0.4",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.14",
     "vitest": "^4.1.7"
   },
   "files": [
