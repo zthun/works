@@ -1,10 +1,11 @@
 import { createGuid } from "@zthun/helpful-fn";
 import { ZUrlBuilder } from "@zthun/webigail-url";
 import { describe, expect, it } from "vitest";
-import { ZProjectKind } from "./project-kind.mjs";
-import { ZProjectTechnology } from "./project-technology.mjs";
+
 import type { IZProject } from "./project.mjs";
 import { ZProjectBuilder } from "./project.mjs";
+import { ZProjectKind } from "./project-kind.mjs";
+import { ZProjectTechnology } from "./project-technology.mjs";
 
 describe("ZProjectBuilder", () => {
   const createTestTarget = () => new ZProjectBuilder();

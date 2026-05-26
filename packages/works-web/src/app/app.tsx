@@ -11,10 +11,9 @@ import {
   ZStack,
 } from "@zthun/fashion-boutique";
 import { ZSizeFixed } from "@zthun/fashion-tailor";
-import { createDarkTheme } from "@zthun/fashion-theme";
-import { ZProjectsPage } from "../projects/projects-page.js";
+import theme from "@zthun/fashion-theme-dark";
 
-const theme = createDarkTheme();
+import { ZProjectsPage } from "../projects/projects-page.js";
 
 /**
  * Main application.

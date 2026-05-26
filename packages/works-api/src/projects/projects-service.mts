@@ -1,3 +1,5 @@
+import { createRequire } from "node:module";
+
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import type { IZFileSystemService } from "@zthun/crumbtrail-fs";
 import { ZFileSystemToken } from "@zthun/crumbtrail-nest";
@@ -13,7 +15,6 @@ import {
 } from "@zthun/helpful-query";
 import type { IZProject } from "@zthun/works-portfolio";
 import { glob } from "glob";
-import { createRequire } from "node:module";
 
 const __dirname = import.meta.dirname;
 const $require = createRequire(import.meta.url);

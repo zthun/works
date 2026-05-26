@@ -1,5 +1,6 @@
 import { ZCircusBy, ZCircusComponentModel } from "@zthun/cirque";
 import { ZGridViewComponentModel } from "@zthun/fashion-boutique";
+
 import { ZProjectCardComponentModel } from "./project-card.cm.mjs";
 
 export class ZProjectsPageComponentModel extends ZCircusComponentModel {

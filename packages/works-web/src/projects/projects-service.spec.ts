@@ -7,6 +7,7 @@ import {
 import type { IZProject } from "@zthun/works-portfolio";
 import { ZProjectBuilder } from "@zthun/works-portfolio";
 import { beforeEach, describe, expect, it } from "vitest";
+
 import { ZProjectsService } from "./projects-service.mjs";
 
 describe("ZProjectsService", () => {

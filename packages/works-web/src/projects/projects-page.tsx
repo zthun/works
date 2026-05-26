@@ -17,6 +17,7 @@ import {
   ZProjectKindDisplayMap,
   ZProjectKindFontAwesomeIconMap,
 } from "@zthun/works-portfolio";
+
 import { useProjectsService } from "./projects-service.mjs";
 
 export function ZProjectsPage() {
