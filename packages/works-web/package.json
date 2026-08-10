@@ -33,6 +33,7 @@
     "@zthun/helpful-fn": "^10.0.0",
     "@zthun/helpful-query": "^10.0.0",
     "@zthun/helpful-react": "^10.0.0",
+    "@zthun/janitor-build-config": "^21.0.0",
     "@zthun/janitor-ts-config": "^21.0.0",
     "@zthun/webigail-http": "^5.0.9",
     "@zthun/webigail-url": "^5.0.9",
