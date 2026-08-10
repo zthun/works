@@ -24,12 +24,11 @@
     "test": "vitest run --coverage",
     "lint": "eslint",
     "build": "lerna run build",
-    "make": "yarn clean && yarn lint && yarn check && yarn test && yarn build",
-    "postinstall": "husky install"
+    "make": "yarn clean && yarn lint && yarn check && yarn test && yarn build"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.0.1",
-    "@commitlint/config-conventional": "^21.0.1",
+    "@commitlint/config-angular": "^21.0.1",
     "@types/express": "^5.0.6",
     "@types/lodash": "^4.17.24",
     "@types/node": "^25.9.1",
