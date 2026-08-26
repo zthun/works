@@ -23,11 +23,11 @@ describe("ZProjectsPage", () => {
     const win = _window as unknown as typeof globalThis;
 
     const element = (
-      <ZWindowServiceContext.Provider value={win}>
-        <ZProjectsServiceContext.Provider value={projects}>
-          <ZProjectsPage />;
-        </ZProjectsServiceContext.Provider>
-      </ZWindowServiceContext.Provider>
+      <ZWindowServiceContext value={win}>
+        <ZProjectsServiceContext value={projects}>
+          <ZProjectsPage />
+        </ZProjectsServiceContext>
+      </ZWindowServiceContext>
     );
     const driver = await new ZCircusSetupRenderer(element).setup();
     const target = await ZCircusBy.first(driver, ZProjectsPageComponentModel);

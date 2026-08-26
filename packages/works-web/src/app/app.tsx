@@ -39,14 +39,14 @@ export function ZWorksApp() {
 
   return (
     <ZRouter>
-      <ZFashionThemeContext.Provider value={theme}>
+      <ZFashionThemeContext value={theme}>
         <ZBannerMain TitleProps={{ avatar, prefix }}>
           <ZRouteMap>
             <ZRoute path="/" element={<ZProjectsPage />} />
             <ZRoute path="*" element={<ZNotFound />} />
           </ZRouteMap>
         </ZBannerMain>
-      </ZFashionThemeContext.Provider>
+      </ZFashionThemeContext>
     </ZRouter>
   );
 }

@@ -3,7 +3,7 @@ import type { IZHttpService } from "@zthun/webigail-http";
 import { ZHttpRequestBuilder, ZHttpService } from "@zthun/webigail-http";
 import { ZUrlBuilder } from "@zthun/webigail-url";
 import type { IZProject } from "@zthun/works-portfolio";
-import { createContext, useContext } from "react";
+import { createContext, use } from "react";
 
 export interface IZProjectsService extends IZDataSource<IZProject> {}
 
@@ -47,4 +47,4 @@ export const ZProjectsServiceContext = createContext(
   createDefaultProjectsService(),
 );
 
-export const useProjectsService = () => useContext(ZProjectsServiceContext);
+export const useProjectsService = () => use(ZProjectsServiceContext);
