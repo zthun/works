@@ -1,7 +1,7 @@
 services:
   # Load Balancer (Entry Point)
   local.zthunworks.com:
-    image: zthun/bouncer
+    image: zthun/bouncer-cli
     ports:
       - 80:80
       - 443:443
