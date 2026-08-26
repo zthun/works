@@ -1,6 +1,6 @@
 {
   "name": "@zthun/works-api",
-  "version": "7.0.5",
+  "version": "7.0.6",
   "description": "This is an empty application used for mocking applications in other apps.",
   "author": "Anthony Bonta",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "@zthun/helpful-query": "^10.0.1",
     "@zthun/webigail-http": "^5.0.11",
     "@zthun/webigail-url": "^5.0.11",
-    "@zthun/works-portfolio": "^7.0.4",
+    "@zthun/works-portfolio": "^7.0.6",
     "glob": "^13.0.6",
     "helmet": "^8.3.0",
     "reflect-metadata": "^0.2.2",
