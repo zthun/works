@@ -4230,7 +4230,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@zthun/works-portfolio@npm:^7.0.4, @zthun/works-portfolio@workspace:packages/works-portfolio":
+"@zthun/works-portfolio@npm:^7.0.5, @zthun/works-portfolio@workspace:packages/works-portfolio":
   version: 0.0.0-use.local
   resolution: "@zthun/works-portfolio@workspace:packages/works-portfolio"
   dependencies:
