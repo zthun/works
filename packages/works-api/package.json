@@ -22,15 +22,15 @@
     "start": "node ./dist/main.js"
   },
   "dependencies": {
-    "@nestjs/common": "^12.1.2",
-    "@nestjs/core": "^12.1.2",
-    "@nestjs/platform-express": "^12.1.2",
-    "@zthun/crumbtrail-fs": "^3.0.2",
-    "@zthun/crumbtrail-nest": "^3.0.3",
-    "@zthun/helpful-fn": "^10.0.2",
-    "@zthun/helpful-query": "^10.0.2",
-    "@zthun/webigail-http": "^5.0.13",
-    "@zthun/webigail-url": "^5.0.12",
+    "@nestjs/common": "^12.1.3",
+    "@nestjs/core": "^12.1.3",
+    "@nestjs/platform-express": "^12.1.3",
+    "@zthun/crumbtrail-fs": "^3.0.4",
+    "@zthun/crumbtrail-nest": "^3.0.4",
+    "@zthun/helpful-fn": "^11.0.0",
+    "@zthun/helpful-query": "^11.0.0",
+    "@zthun/webigail-http": "^5.0.14",
+    "@zthun/webigail-url": "^5.0.14",
     "@zthun/works-portfolio": "^7.0.7",
     "glob": "^13.0.6",
     "helmet": "^8.3.0",
@@ -38,14 +38,14 @@
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
-    "@nestjs/testing": "^12.1.2",
+    "@nestjs/testing": "^12.1.3",
     "@zthun/janitor-ts-config": "^21.1.3",
-    "@zthun/janitor-vite": "^21.2.4",
-    "supertest": "^7.3.0",
+    "@zthun/janitor-vite": "^21.2.5",
+    "supertest": "^7.3.1",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
-    "vite": "^8.3.1",
-    "vitest": "^5.0.3"
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4"
   },
   "publishConfig": {
     "access": "public"
